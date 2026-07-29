@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verifica di un limite e primi asintoti — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<script>
+  window.MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+<style>
+  .def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:6px;
+    padding:14px 20px;margin:18px 0}
+  .def p{margin:6px 0}
+  .def .etichetta{font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--blu);margin:0 0 6px}
+  .nota{font-size:.95rem;color:#4a5a6d;margin:10px 0}
+  .interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
+  .interattivo h3{margin:0 0 4px;font-size:1.1rem}
+  .controlli{font-family:var(--sans);font-size:.9rem;margin:14px 0 4px;display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+  .controlli label{display:flex;flex-direction:column;gap:4px;min-width:180px}
+  .controlli input[type=range]{width:100%}
+  .valori{font-family:var(--sans);font-size:.92rem;color:var(--inchiostro);margin-top:8px}
+  .valori b{color:var(--blu)}
+  .esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:22px 0}
+  .esempio h3{margin-top:0;font-size:1.05rem}
+  .passo{margin:6px 0}
+  .quesito{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:6px;
+    padding:18px 22px;margin:22px 0}
+  .quesito h3{margin-top:0;font-size:1.05rem}
+  .quesito .etichetta{font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--rosso);margin:0 0 6px}
+  .ricalibrazioni{margin-top:48px;padding-top:20px;border-top:1px solid var(--riga)}
+  .ricalibrazioni h2{margin-top:0;font-size:1.3rem}
+  .ricalibrazioni ul{padding-left:20px}
+  .ricalibrazioni li{margin:8px 0}
+  .fonte-pag{font-family:var(--sans);font-size:.78rem;color:var(--grigio)}
+</style>
+</head>
+<body>
+<div class="foglio">
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Matematica — Quinta · Limiti · Unità 2</p>
+  <h1>Verifica di un limite e primi asintoti</h1>
+  <p class="sommario">Come si dimostra dalla definizione che un limite vale proprio quel valore, e come si
+  leggono gli asintoti verticali e orizzontali come casi particolari di limite.
+  <span class="fonte-pag">Appunti, pagine 7–10.</span></p>
+</header>
+
+<h2>Verifica di un limite infinito</h2>
+<p class="nota">Verificare $\lim_{x\to x_0} f(x)=+\infty$ significa, per la definizione già data,
+esibire per ogni $M>0$ un intorno di $x_0$ in cui $f(x)>M$: si impone la disequazione e si controlla
+che la soluzione contenga sempre un intorno di $x_0$, qualunque sia $M$.</p>
+<div class="esempio">
+  <h3>Esempio svolto: verifica di $\lim_{x\to 1}\dfrac{1}{(x-1)^2}=+\infty$</h3>
+  <p class="passo">Si impone $\dfrac{1}{(x-1)^2}>M$ (con $M>0$) e si risolve in $x$:
+  $$(x-1)^2<\frac{1}{M} \;\Longrightarrow\; |x-1|<\frac{1}{\sqrt M} \;\Longrightarrow\;
+  -\frac{1}{\sqrt M}<x-1<\frac{1}{\sqrt M}$$</p>
+  <p class="passo">cioè $\;1-\dfrac{1}{\sqrt M} < x < 1+\dfrac{1}{\sqrt M}$.</p>
+  <p class="passo">Per ogni $M>0$ questo è un intorno di $1$ (ampiezza $2/\sqrt M$, che si restringe
+  al crescere di $M$): la definizione è soddisfatta per ogni $M$, dunque il limite vale davvero $+\infty$.</p>
+</div>
+
+<h2>Asintoti verticali</h2>
+<div class="def">
+  <p class="etichetta">Definizione</p>
+  <p>Data $y=f(x)$, se si verifica anche uno solo dei quattro limiti
+  $$\lim_{x\to c^+}f(x)=\pm\infty \qquad \lim_{x\to c^-}f(x)=\pm\infty$$
+  la retta $x=c$ è <b>asintoto verticale</b> per il grafico di $f$.</p>
+</div>
+<p class="nota">Basta un solo verso, destro o sinistro: non serve che il limite bilatero esista. È il caso
+tipico dei punti esclusi dal dominio, come gli zeri di un denominatore.</p>
+
+<h2>Asintoti orizzontali</h2>
+<div class="def">
+  <p class="etichetta">Definizione</p>
+  <p>Data $y=f(x)$, se si verifica almeno una delle condizioni
+  $$\lim_{x\to +\infty}f(x)=q \qquad \lim_{x\to -\infty}f(x)=q \qquad (q\in\mathbb R)$$
+  la retta $y=q$ è <b>asintoto orizzontale</b>, rispettivamente destro o sinistro. Se il valore $q$ è lo
+  stesso da entrambe le parti si ha un unico asintoto bilatero; se i due limiti sono finiti ma diversi,
+  la funzione ha due asintoti orizzontali distinti.</p>
+</div>
+<p class="nota">Quando invece $\lim_{x\to\pm\infty}f(x)=\pm\infty$ (limite infinito anziché finito), non c'è
+asintoto orizzontale: il grafico può comunque avvicinarsi a una retta obliqua, caso che si tratterà a parte
+più avanti (asintoto obliquo, unità 11).</p>
+
+<div class="interattivo">
+  <h3>Come i parametri spostano gli asintoti</h3>
+  <p class="nota" style="margin-top:0">Funzione $f(x)=\dfrac{ax+b}{x-c}$: muovi i cursori e osserva come
+  $c$ trascina l'asintoto verticale (retta rossa verticale) e $a$ trascina quello orizzontale (retta rossa
+  orizzontale), mentre $b$ deforma il ramo senza spostare nessuno dei due asintoti.</p>
+  <div class="controlli">
+    <label>a (orizzontale): <span id="a-val">2.0</span>
+      <input type="range" id="a-slider" min="-3" max="3" step="0.5" value="2">
+    </label>
+    <label>b: <span id="b-val">1.0</span>
+      <input type="range" id="b-slider" min="-5" max="5" step="0.5" value="1">
+    </label>
+    <label>c (verticale): <span id="c-val">1.0</span>
+      <input type="range" id="c-slider" min="-4" max="4" step="0.5" value="1">
+    </label>
+  </div>
+  <div id="grafico-asintoti" style="width:100%;max-width:640px;height:420px;margin-top:8px"></div>
+  <p class="valori">$f(x)=\;$<b id="f-val">(2x + 1)/(x − 1)</b> &nbsp;·&nbsp;
+  asintoto verticale: <b id="av-val">x = 1</b> &nbsp;·&nbsp; asintoto orizzontale: <b id="ao-val">y = 2</b></p>
+</div>
+
+<div class="esempio">
+  <h3>Esempio: ricerca degli asintoti di $f(x)=\dfrac{2x-1}{x+3}$</h3>
+  <p class="passo"><b>Dominio:</b> $x\neq -3$.</p>
+  <p class="passo"><b>Asintoto verticale.</b> In $x=-3$ il denominatore si annulla e il numeratore no
+  ($2(-3)-1=-7\neq0$), quindi
+  $$\lim_{x\to -3^-}\frac{2x-1}{x+3}=\frac{-7}{0^-}=+\infty \qquad
+  \lim_{x\to -3^+}\frac{2x-1}{x+3}=\frac{-7}{0^+}=-\infty$$
+  La retta $x=-3$ è asintoto verticale.</p>
+  <p class="passo"><b>Asintoto orizzontale.</b> Dividendo numeratore e denominatore per $x$:
+  $$\lim_{x\to\pm\infty}\frac{2x-1}{x+3}=\lim_{x\to\pm\infty}\frac{2-\frac1x}{1+\frac3x}=2$$
+  Il limite è lo stesso valore finito da entrambe le parti: la retta $y=2$ è asintoto orizzontale bilatero.</p>
+</div>
+
+<div class="quesito">
+  <p class="etichetta">Quesito d'esame — Maturità 2012, sessione ordinaria, liceo scientifico di ordinamento, quesito 2</p>
+  <h3>«Si illustri il significato di asintoto e si fornisca un esempio di funzione $f(x)$ il cui grafico
+  presenti un asintoto orizzontale e due asintoti verticali.»</h3>
+  <p class="passo">Una funzione con queste caratteristiche è
+  $$f(x)=\frac{x^2+1}{(x-1)(x+2)}$$</p>
+  <p class="passo">Il denominatore si annulla in $x=1$ e $x=-2$, dove il numeratore vale rispettivamente
+  $2$ e $5$ (mai zero): quindi
+  $$\lim_{x\to 1}f(x)=\infty \qquad \lim_{x\to -2}f(x)=\infty$$
+  e le rette $x=1$, $x=-2$ sono asintoti verticali.</p>
+  <p class="passo">All'infinito, numeratore e denominatore hanno lo stesso grado ($2$): dividendo per $x^2$,
+  $$\lim_{x\to\pm\infty}\frac{x^2+1}{(x-1)(x+2)}=\lim_{x\to\pm\infty}\frac{1+\frac1{x^2}}{1+\frac1x-\frac2{x^2}}=1$$
+  quindi $y=1$ è asintoto orizzontale bilatero, come richiesto.</p>
+</div>
+
+<div class="ricalibrazioni">
+  <h2>Ricalibrazioni</h2>
+  <ul>
+    <li><b>Ridotta la verifica formale del limite infinito</b> (pagina 7) ai soli passaggi della
+    disequazione, senza commento esteso sul metodo generale: nelle tracce ufficiali degli ultimi anni la
+    verifica $\varepsilon$/$M$ da zero non compare come quesito autonomo, mentre dominio e asintoti sono
+    una richiesta ricorrente (compaiono come primo passo dei problemi di studio di funzione e come quesito
+    dedicato, vedi sotto). Lo spazio recuperato è stato investito lì.</li>
+    <li><b>Aggiunto un esempio numerico completo di ricerca di asintoti</b> ($f(x)=(2x-1)/(x+3)$): gli
+    appunti, in queste pagine, si fermano alle definizioni e agli schizzi qualitativi, senza un calcolo
+    concreto su una funzione assegnata — che è invece esattamente ciò che l'esame chiede.</li>
+    <li><b>Aggiunto l'interattivo con i tre cursori $a,b,c$</b> sulla funzione omografica, al posto di
+    lasciare solo gli schizzi statici delle pagine 8–9: mostra in un colpo solo tutti i casi disegnati a
+    mano (asintoto destro, sinistro, unico, doppio) mentre i parametri variano.</li>
+    <li><b>L'enunciato del teorema di unicità del limite</b>, che negli appunti compare in calce a pagina 10
+    come premessa all'esempio successivo, è stato rimandato per intero all'unità 3 (pagine 11, 18–22), dove
+    il programma lo tratta con dimostrazione e controesempi: qui si è mantenuto solo ciò che riguarda
+    strettamente limiti e asintoti.</li>
+  </ul>
+</div>
+
+</div>
+<script>
+(function(){
+  var Ymax = 10.5, Xmax = 8;
+
+  function f(x,a,b,c){ return (a*x+b)/(x-c); }
+
+  function branch(a,b,c,dir){
+    var k = a*c+b;
+    var d0 = Math.max(0.05, Math.abs(k)/Ymax);
+    var xs = [], ys = [];
+    if (dir==='left'){
+      var x0 = -Xmax, x1 = c-d0;
+      if (x1<=x0) return {x:[],y:[]};
+      for (var i=0;i<=150;i++){ var x=x0+i*(x1-x0)/150; xs.push(x); ys.push(f(x,a,b,c)); }
+    } else {
+      var x0 = c+d0, x1 = Xmax;
+      if (x1<=x0) return {x:[],y:[]};
+      for (var i=0;i<=150;i++){ var x=x0+i*(x1-x0)/150; xs.push(x); ys.push(f(x,a,b,c)); }
+    }
+    return {x:xs,y:ys};
+  }
+
+  function shapes(a,c){
+    return [
+      { type:'line', xref:'x', yref:'paper', x0:c, x1:c, y0:0, y1:1,
+        line:{color:'#b3392f', width:1.5, dash:'dot'} },
+      { type:'line', xref:'paper', yref:'y', x0:0, x1:1, y0:a, y1:a,
+        line:{color:'#b3392f', width:1.5, dash:'dot'} }
+    ];
+  }
+
+  function trace(a,b,c){
+    var L = branch(a,b,c,'left'), R = branch(a,b,c,'right');
+    return [
+      { x:L.x, y:L.y, mode:'lines', line:{color:'#16283d', width:2.5}, hoverinfo:'skip', showlegend:false },
+      { x:R.x, y:R.y, mode:'lines', line:{color:'#16283d', width:2.5}, hoverinfo:'skip', showlegend:false }
+    ];
+  }
+
+  var a=2, b=1, c=1;
+
+  var layout = {
+    xaxis:{ title:'x', range:[-Xmax,Xmax], zeroline:true },
+    yaxis:{ title:'y', range:[-Ymax,Ymax], zeroline:true },
+    shapes: shapes(a,c),
+    showlegend:false,
+    margin:{t:20,r:20,b:40,l:44},
+    font:{family:'Segoe UI, sans-serif', size:12}
+  };
+
+  Plotly.newPlot('grafico-asintoti', trace(a,b,c), layout, {displayModeBar:false, responsive:true});
+
+  function fmt(n){
+    n = Math.round(n*10)/10;
+    return (n===0 ? 0 : n);
+  }
+
+  function aggiorna(){
+    Plotly.react('grafico-asintoti', trace(a,b,c), Object.assign({}, layout, {shapes: shapes(a,c)}));
+    document.getElementById('a-val').textContent = fmt(a).toFixed(1);
+    document.getElementById('b-val').textContent = fmt(b).toFixed(1);
+    document.getElementById('c-val').textContent = fmt(c).toFixed(1);
+    var bsign = b>=0 ? ' + '+fmt(b) : ' − '+Math.abs(fmt(b));
+    var csign = c>=0 ? ' − '+fmt(c) : ' + '+Math.abs(fmt(c));
+    document.getElementById('f-val').textContent = '(' + fmt(a) + 'x' + bsign + ')/(x' + csign + ')';
+    document.getElementById('av-val').textContent = 'x = ' + fmt(c).toFixed(1);
+    document.getElementById('ao-val').textContent = 'y = ' + fmt(a).toFixed(1);
+  }
+
+  document.getElementById('a-slider').addEventListener('input', function(e){ a=parseFloat(e.target.value); aggiorna(); });
+  document.getElementById('b-slider').addEventListener('input', function(e){ b=parseFloat(e.target.value); aggiorna(); });
+  document.getElementById('c-slider').addEventListener('input', function(e){ c=parseFloat(e.target.value); aggiorna(); });
+
+  aggiorna();
+})();
+</script>
+</body>
+</html>
