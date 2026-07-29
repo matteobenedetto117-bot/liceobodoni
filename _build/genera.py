@@ -88,6 +88,7 @@ def indice(dati):
     fatte = sum(1 for a in dati['aree'] for u in a['unita'] if esiste(u, perc))
     pct = round(100 * fatte / tot) if tot else 0
     sez = []
+    stato = {'parte': None}
     for a in dati['aree']:
         righe = []
         for u in a['unita']:
@@ -105,8 +106,14 @@ def indice(dati):
                 '</article>' % (u['n'], tit, u['descrizione'], meta,
                                 slug(u['peso']), u['peso']))
         etichetta = ' <span class="badge-nuovo">nuovo</span>' if a.get('nuovo') else ''
-        sez.append('<h2>%s%s</h2>\n<p class="area-desc">%s</p>\n%s'
+        blocco = ''
+        parte = a.get('parte')
+        if parte and parte != stato['parte']:
+            stato['parte'] = parte
+            blocco += '<h2 class="parte">%s</h2>\n' % parte
+        blocco += ('<h3>%s%s</h3>\n<p class="area-desc">%s</p>\n%s'
                    % (a['nome'], etichetta, a['descrizione'], "\n".join(righe)))
+        sez.append(blocco)
     return """<!DOCTYPE html>
 <html lang="it">
 <head>
