@@ -5,183 +5,450 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Definizioni di limite, intorni, limite destro e sinistro — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
-<script>
-  window.MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] } };
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 <style>
-  .def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:6px;
-    padding:14px 20px;margin:18px 0}
-  .def p{margin:6px 0}
-  .def .etichetta{font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--blu);margin:0 0 6px}
-  .nota{font-size:.95rem;color:#4a5a6d;margin:10px 0}
-  .interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-  .interattivo h3{margin:0 0 4px;font-size:1.1rem}
-  .controlli{font-family:var(--sans);font-size:.9rem;margin:14px 0 4px;display:flex;gap:24px;flex-wrap:wrap;align-items:center}
-  .controlli label{display:flex;flex-direction:column;gap:4px;min-width:220px}
-  .controlli input[type=range]{width:100%}
-  .valori{font-family:var(--sans);font-size:.92rem;color:var(--inchiostro);margin-top:8px}
-  .valori b{color:var(--blu)}
-  .esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:22px 0}
-  .esempio h3{margin-top:0;font-size:1.05rem}
-  .passo{margin:6px 0}
-  .ricalibrazioni{margin-top:48px;padding-top:20px;border-top:1px solid var(--riga)}
-  .ricalibrazioni h2{margin-top:0;font-size:1.3rem}
-  .ricalibrazioni ul{padding-left:20px}
-  .ricalibrazioni li{margin:8px 0}
-  .fonte-pag{font-family:var(--sans);font-size:.78rem;color:var(--grigio)}
+.def,.oss,.nota,.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:26px 0}
+.def{border-left:4px solid var(--blu)}
+.esempio{border-left:4px solid var(--verde)}
+.oss{border-left:4px solid #c9a227;background:#fffdf5}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.oss .et,.nota .et,.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:14px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:220px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:12px;line-height:1.55}
+table.dati{border-collapse:collapse;font-family:var(--sans);font-size:.9rem;margin:18px 0}
+table.dati th,table.dati td{border:1px solid var(--riga);padding:7px 14px;text-align:right}
+table.dati th{background:var(--blu-chiaro);color:var(--blu);font-weight:600}
+.avanti{margin-top:52px;padding-top:22px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.25rem;margin-top:0}
+.passo{margin:14px 0 14px 0;padding-left:16px;border-left:2px solid var(--riga)}
 </style>
 </head>
 <body>
 <div class="foglio">
+
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
-  <p class="occhiello">Matematica — Quinta · Limiti · Unità 1</p>
+  <p class="occhiello">Limiti &middot; Unità 01</p>
   <h1>Definizioni di limite, intorni, limite destro e sinistro</h1>
-  <p class="sommario">Il linguaggio rigoroso con cui si descrive il comportamento di una funzione vicino a un
-  punto: l'intorno, la definizione $\varepsilon$-$\delta$ di limite finito, i casi per eccesso e per difetto,
-  i limiti direzionali e il limite infinito. <span class="fonte-pag">Appunti, pagine 1–6.</span></p>
+  <p class="sommario">Il limite è lo strumento che permette di dire come si comporta una funzione
+  vicino a un punto, anche quando in quel punto la funzione non esiste. In questa unità partiamo
+  dall'idea intuitiva, la traduciamo in parole precise e solo alla fine arriviamo alla definizione
+  rigorosa con $\varepsilon$ e $\delta$.</p>
 </header>
 
-<h2>Intorno di un punto</h2>
-<div class="def">
-  <p class="etichetta">Definizione</p>
-  <p>Dato $x_0 \in \mathbb{R}$, un <b>intorno completo</b> di $x_0$ è un qualunque intervallo aperto contenente $x_0$:
-  $$I(x_0) = \,]x_0-\delta_1,\; x_0+\delta_2[ \qquad \delta_1,\delta_2>0$$
-  $\delta_1$ e $\delta_2$ non devono essere uguali: l'intorno non è necessariamente simmetrico.</p>
-  <p><b>Intorno sinistro</b> $I^-(x_0) = \,]x_0-\delta_1,\;x_0[$ &nbsp;&nbsp; <b>intorno destro</b>
-  $I^+(x_0) = \,]x_0,\;x_0+\delta_1[$.</p>
+<h2>Il problema da cui si parte</h2>
+
+<p>Consideriamo la funzione</p>
+$$f(x)=\frac{2x^2-6x}{x-3}$$
+<p>e proviamo a calcolarla in $x=3$. Il denominatore diventa zero, quindi $f(3)$ <strong>non
+esiste</strong>: il dominio della funzione è $D=\mathbb{R}-\{3\}$, cioè tutti i numeri reali
+tranne il 3.</p>
+
+<p>Fin qui niente di nuovo: sappiamo dalla prima che una frazione con denominatore nullo non ha
+significato. La domanda interessante è un'altra. Se la funzione non esiste in 3, <em>esiste
+qualcosa che possiamo dire su come si comporta accanto al 3?</em></p>
+
+<p>Proviamo a calcolarla in punti sempre più vicini a 3, prima da sinistra e poi da destra:</p>
+
+<table class="dati">
+<tr><th>$x$</th><th>2,9</th><th>2,99</th><th>2,999</th><th>3</th><th>3,001</th><th>3,01</th><th>3,1</th></tr>
+<tr><th>$f(x)$</th><td>5,8</td><td>5,98</td><td>5,998</td><td>—</td><td>6,002</td><td>6,02</td><td>6,2</td></tr>
+</table>
+
+<p>I valori di $f(x)$ si stringono attorno a 6. Più avviciniamo $x$ a 3, più $f(x)$ si avvicina a 6,
+e possiamo arrivare vicini a 6 quanto vogliamo, purché prendiamo $x$ abbastanza vicino a 3. Il
+buco in $x=3$ non impedisce alla funzione di avere una <strong>tendenza</strong> ben precisa
+mentre ci avviciniamo a quel punto.</p>
+
+<div class="oss">
+<span class="et">L'idea di limite, in parole</span>
+<p>Il limite di una funzione per $x$ che tende a $x_0$ è il valore verso cui la funzione
+<em>tende</em> quando $x$ si avvicina a $x_0$, senza mai arrivarci. Non è il valore della funzione
+in $x_0$: è la direzione in cui la funzione sta andando.</p>
 </div>
 
-<h2>Limite finito per x che tende a x&#8320;</h2>
-<div class="def">
-  <p class="etichetta">Definizione</p>
-  <p>$$\lim_{x\to x_0} f(x) = l \iff \forall\,\varepsilon>0\;\; \exists\, I(x_0) \; : \;
-  |f(x)-l|<\varepsilon \quad \forall x \in I(x_0),\, x\neq x_0$$</p>
+<p>Questa tendenza si scrive così:</p>
+$$\lim_{x\to 3}f(x)=6$$
+<p>e si legge «il limite di $f(x)$ per $x$ che tende a 3 è 6».</p>
+
+<div class="nota">
+<span class="et">Attenzione a un errore molto comune</span>
+<p>Non si può scrivere $f(3)=6$. Sarebbe falso, perché $f(3)$ non esiste: il 3 non appartiene al
+dominio. La scrittura del limite serve proprio a dire qualcosa sul comportamento della funzione
+<em>senza</em> parlare del valore nel punto. È una differenza sostanziale, non una sottigliezza di
+notazione: nel limite il punto $x_0$ viene sempre <strong>escluso</strong>.</p>
 </div>
-<p class="nota">La condizione $x\neq x_0$ è essenziale: il limite descrive che cosa fa $f$ <i>vicino</i> a $x_0$,
-non che cosa vale <i>in</i> $x_0$. La funzione può non essere definita nel punto — come nell'esempio più sotto,
-dove $x_0=3$ non appartiene al dominio — e avere comunque limite.</p>
 
-<h2>Limite per eccesso e per difetto</h2>
-<p class="nota">Quando conviene precisare da che parte i valori di $f$ si avvicinano a $l$: $l^+$ se restano
-sempre maggiori di $l$ (per eccesso), $l^-$ se restano sempre minori (per difetto). Non riguarda la direzione
-di $x$, ma il verso da cui $f(x)$ raggiunge $l$.</p>
-
-<h2>Limite destro e limite sinistro</h2>
-<div class="def">
-  <p class="etichetta">Definizione</p>
-  <p><b>Limite sinistro</b>:
-  $\displaystyle\lim_{x\to x_0^-} f(x) = l \iff \forall\varepsilon>0\;\exists\, I^-(x_0)\,:\,|f(x)-l|<\varepsilon\;\;\forall x\in I^-(x_0)$</p>
-  <p><b>Limite destro</b>: definizione analoga, con $I^+(x_0)$ al posto di $I^-(x_0)$.</p>
-</div>
-<p class="nota">Il limite bilatero $\lim_{x\to x_0} f(x)=l$ esiste se e solo se limite destro e sinistro esistono
-ed sono entrambi uguali a $l$. Il valore $f(x_0)$, se esiste, può essere diverso da entrambi: un esempio degli
-appunti ha $\lim_{x\to 5^-}f(x)=2$, $\lim_{x\to 5^+}f(x)=6$ e $f(5)=4$ — tre valori distinti, e in questo caso
-il limite per $x\to5$ non esiste, perché i due limiti direzionali non coincidono.</p>
-
-<h2>Limite infinito per x che tende a un valore finito</h2>
-<div class="def">
-  <p class="etichetta">Definizione</p>
-  <p>$$\lim_{x\to x_0} f(x) = +\infty \iff \forall M>0\;\;\exists\, I(x_0)\;:\; f(x)>M \quad \forall x\in I(x_0),\, x\neq x_0$$</p>
-  <p>Analogamente, $\lim_{x\to x_0} f(x)=-\infty$ se $f(x)<-M$ per ogni $x$ nell'intorno.</p>
-</div>
-<p class="nota">Anche qui vale la distinzione destro/sinistro: una funzione può avere $\lim_{x\to x_0^-}f(x)=+\infty$
-e $\lim_{x\to x_0^+}f(x)=-\infty$ (o viceversa). In tal caso il limite bilatero in $x_0$ non esiste, pur
-esistendo — infiniti — entrambi i limiti direzionali.</p>
-
-<div class="interattivo">
-  <h3>Come la scelta di $\varepsilon$ costringe $\delta$</h3>
-  <p class="nota" style="margin-top:0">Verifica grafica del limite $\lim_{x\to 3}2x=6$: sposta il cursore e osserva
-  come, fissata la fascia $]6-\varepsilon,6+\varepsilon[$ sull'asse $y$, resti determinato un intorno di $x_0=3$
-  che vi corrisponde interamente.</p>
+<div class="widget">
   <div class="controlli">
-    <label>Ampiezza di &epsilon;: <span id="eps-val">1.00</span>
-      <input type="range" id="eps-slider" min="0.1" max="2" step="0.05" value="1">
+    <label>Distanza di $x$ da 3
+      <input type="range" id="s-d" min="-2.7" max="0" step="0.05" value="-0.3">
+      <span>scostamento: <span class="val" id="v-d">0,50</span></span>
     </label>
   </div>
-  <div id="grafico-eps-delta" style="width:100%;max-width:640px;height:420px;margin-top:8px"></div>
-  <p class="valori">&delta; corrispondente: <b id="delta-val">0.500</b> &nbsp;(qui $\delta=\varepsilon/2$, perché
-  la funzione ha pendenza 2 vicino a $x_0=3$)</p>
+  <div id="g-avvicinamento" style="height:340px"></div>
+  <p class="leggenda">Muovi il cursore verso destra per avvicinare i due punti al 3. Guarda due
+  cose: il punto in $x=3$ resta <em>vuoto</em>, perché la funzione lì non è definita; e le altezze
+  dei due punti, a sinistra e a destra, si stringono entrambe verso 6. È questo doppio
+  avvicinamento che il simbolo di limite riassume.</p>
 </div>
+
+<h2>Perché «si avvicina» non basta</h2>
+
+<p>La tabella e il grafico ci convincono, ma non sono una definizione. Frasi come «si avvicina»,
+«diventa quasi uguale», «tende a» descrivono un'impressione, non un fatto verificabile: quanto
+vicino è «vicino»? Se un compagno sostenesse che quel limite vale 6,001 invece di 6, con quale
+argomento potremmo contraddirlo?</p>
+
+<p>Serve un criterio che chiunque possa controllare. La strada che si segue è questa: invece di
+dire «$f(x)$ si avvicina a 6», diciamo <strong>«$f(x)$ finisce dentro una fascia attorno a 6,
+piccola quanto si vuole»</strong>. Il vantaggio è che una fascia si può misurare.</p>
+
+<p>Per scrivere questa idea ci serve prima un attrezzo: un modo per dire «una zona attorno a un
+punto».</p>
+
+<h3>Intorno di un punto</h3>
+
+<div class="def">
+<span class="et">Definizione</span>
+<p>Dato un numero reale $x_0$, un <strong>intorno completo</strong> di $x_0$ è un qualunque
+intervallo aperto $I(x_0)$ che contiene $x_0$:</p>
+$$I(x_0)=\left]\,x_0-\delta_1\;;\;x_0+\delta_2\,\right[ \qquad \text{con } \delta_1,\delta_2
+\text{ reali positivi}$$
+</div>
+
+<p>Vale la pena leggere questa definizione pezzo per pezzo, perché ogni parola ci sarà utile.</p>
+
+<div class="passo">
+<p><strong>Intervallo aperto</strong> significa che gli estremi non sono compresi: le parentesi
+quadre sono rivolte verso l'esterno. Serve perché vogliamo poter parlare dei punti vicini a $x_0$
+senza essere obbligati a includere gli estremi della zona.</p>
+<p><strong>Che contiene $x_0$</strong>: il punto sta dentro, non sul bordo.</p>
+<p><strong>$\delta_1$ e $\delta_2$ possono essere diversi</strong>: l'intorno non è
+necessariamente simmetrico. Può sporgere più a destra che a sinistra. In pratica, nella maggior
+parte dei casi si sceglie $\delta_1=\delta_2=\delta$ e si scrive l'intorno come
+$\left]x_0-\delta;x_0+\delta\right[$, cioè «tutti i punti che distano da $x_0$ meno di
+$\delta$», che si scrive anche $|x-x_0|<\delta$.</p>
+</div>
+
+<h2>Il gioco fra $\varepsilon$ e $\delta$</h2>
+
+<p>Ora possiamo tradurre l'idea della fascia. Torniamo alla nostra funzione, con limite 6 in
+$x_0=3$.</p>
+
+<p>Scegliamo un numero positivo, che chiamiamo $\varepsilon$, e costruiamo attorno a 6 la fascia
+orizzontale che va da $6-\varepsilon$ a $6+\varepsilon$. Dire che $f(x)$ sta dentro questa fascia
+significa</p>
+$$6-\varepsilon<f(x)<6+\varepsilon \qquad\text{ovvero}\qquad |f(x)-6|<\varepsilon$$
+
+<p>Le due scritture sono equivalenti: il valore assoluto $|f(x)-6|$ è la distanza fra $f(x)$ e 6,
+e chiedere che questa distanza sia minore di $\varepsilon$ è esattamente chiedere che $f(x)$ non
+si allontani da 6 più di $\varepsilon$, né verso l'alto né verso il basso.</p>
+
+<p>La domanda diventa allora: <em>riesco a garantire che $f(x)$ stia in quella fascia?</em> Non
+per ogni $x$, ovviamente: per gli $x$ abbastanza vicini a 3. Cioè: <strong>esiste un intorno di 3
+tale che, prendendo $x$ dentro quell'intorno, il valore $f(x)$ cade dentro la fascia?</strong></p>
+
+<div class="oss">
+<span class="et">Come pensarlo</span>
+<p>È utile immaginarlo come una sfida fra due persone. Il primo sceglie $\varepsilon$, cioè decide
+quanto è severo: «voglio che $f(x)$ stia a meno di un centesimo da 6». Il secondo deve rispondere
+esibendo un $\delta$: «allora prendi $x$ a meno di mezzo centesimo da 3, e ti garantisco che ci
+sta». Il limite vale 6 se il secondo riesce a rispondere <strong>sempre</strong>, per qualunque
+$\varepsilon$ gli venga proposto, anche il più severo. Se esistesse un solo $\varepsilon$ a cui non
+si può rispondere, il limite non sarebbe 6.</p>
+<p>Nota bene l'ordine: prima si fissa $\varepsilon$, poi si cerca $\delta$. Il $\delta$ dipende da
+$\varepsilon$, e in generale diventa più piccolo al diminuire di $\varepsilon$. Mai il contrario.</p>
+</div>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Severità richiesta: $\varepsilon$
+      <input type="range" id="s-eps" min="0.1" max="2" step="0.05" value="1">
+      <span>$\varepsilon$ = <span class="val" id="v-eps">1,00</span></span>
+    </label>
+    <label>Posizione di $x$ dentro l'intorno
+      <input type="range" id="s-x" min="-1" max="1" step="0.02" value="0.6">
+      <span>$x$ = <span class="val" id="v-x">3,30</span></span>
+    </label>
+  </div>
+  <div id="g-epsdelta" style="height:400px"></div>
+  <p class="leggenda">
+  La fascia orizzontale verde è l'intervallo $\left]6-\varepsilon;6+\varepsilon\right[$: è la
+  richiesta. La fascia verticale azzurra è l'intorno $\left]3-\delta;3+\delta\right[$ che risponde
+  a quella richiesta, con <span class="val" id="v-delta"></span>. Il punto rosso è
+  $\bigl(x,f(x)\bigr)$: muovendo il secondo cursore lo si sposta dentro l'intorno azzurro, e si
+  vede che resta sempre dentro la fascia verde.<br>
+  Stringi ora $\varepsilon$ col primo cursore: la fascia verde si assottiglia, e per stare dentro
+  serve un intorno azzurro più stretto. Il $\delta$ si rimpicciolisce di conseguenza — qui vale
+  esattamente $\delta=\varepsilon/2$, e fra poco vedremo da dove salta fuori questo mezzo.</p>
+</div>
+
+<h2>La definizione rigorosa</h2>
+
+<p>Quello che abbiamo descritto a parole, scritto in forma di definizione, è il seguente.</p>
+
+<div class="def">
+<span class="et">Definizione &middot; limite finito per $x$ che tende a $x_0$</span>
+<p>La funzione $f(x)$, definita nel dominio $D$, ha per limite il numero reale $\ell$ per $x$ che
+tende a $x_0$ quando, comunque si scelga un numero reale positivo $\varepsilon$, si può
+determinare un intorno $I(x_0)$ tale che</p>
+$$|f(x)-\ell|<\varepsilon \qquad \text{per ogni } x\in I(x_0)-\{x_0\}$$
+<p>e in questo caso si scrive</p>
+$$\lim_{x\to x_0}f(x)=\ell$$
+</div>
+
+<p>In forma compatta, con i quantificatori:</p>
+$$\lim_{x\to x_0}f(x)=\ell \iff \forall\varepsilon>0\;\;\exists\,I(x_0):\;|f(x)-\ell|<\varepsilon
+\quad \forall x\in I(x_0),\;x\neq x_0$$
+
+<p>Rileggiamola confrontandola con il gioco di prima, per riconoscere ogni pezzo.</p>
+
+<div class="passo">
+<p>$\forall\varepsilon>0$ — «comunque si scelga»: è la sfida, e deve funzionare per ogni severità,
+non per una in particolare.</p>
+<p>$\exists\,I(x_0)$ — «si può determinare un intorno»: è la risposta. Basta esibirne uno, non
+serve trovarlo il più grande possibile.</p>
+<p>$|f(x)-\ell|<\varepsilon$ — la funzione sta nella fascia.</p>
+<p>$\forall x\in I(x_0),\;x\neq x_0$ — deve valere per <em>tutti</em> i punti dell'intorno, non
+solo per qualcuno; e il punto $x_0$ è escluso, perché come abbiamo visto la funzione lì può non
+esistere e la cosa non ci riguarda.</p>
+</div>
+
+<h2>Esempio svolto: verifica di un limite tramite la definizione</h2>
 
 <div class="esempio">
-  <h3>Esempio svolto: verifica del limite tramite la definizione</h3>
-  <p class="passo">Verifichiamo che $\displaystyle\lim_{x\to 3}\frac{2x^2-6x}{x-3}=6$ (funzione non definita in
-  $x=3$, dove $2x^2-6x=2x(x-3)$ si annulla insieme al denominatore).</p>
-  <p class="passo">Si impone $|f(x)-6|<\varepsilon$ e si semplifica per $x\neq3$:
-  $$\left|\frac{2x(x-3)}{x-3}-6\right|<\varepsilon \;\Longrightarrow\; |2x-6|<\varepsilon \;\Longrightarrow\; 2|x-3|<\varepsilon$$</p>
-  <p class="passo">Quindi $|x-3|\lt\dfrac{\varepsilon}{2}$, cioè $-\dfrac{\varepsilon}{2}\lt x-3\lt\dfrac{\varepsilon}{2}$, ossia
-  $$3-\frac{\varepsilon}{2} < x < 3+\frac{\varepsilon}{2}$$</p>
-  <p class="passo">L'intorno trovato è $I(3)=\,]3-\delta_1,\,3+\delta_2[$ con $\delta_1=\delta_2=\varepsilon/2$:
-  per ogni $\varepsilon>0$ esiste un intorno di $3$ che soddisfa la definizione, dunque il limite vale davvero $6$.</p>
+<span class="et">Esempio</span>
+<p>Data $f(x)=\dfrac{2x^2-6x}{x-3}$, verifichiamo che $\displaystyle\lim_{x\to 3}f(x)=6$.</p>
+
+<p>Verificare un limite significa partire dal valore che si sospetta e mostrare che soddisfa la
+definizione: fissato un $\varepsilon$ qualunque, troviamo l'intorno di 3 che funziona.
+Scriviamo dunque la condizione della definizione e la risolviamo rispetto a $x$.</p>
+
+$$\left|\frac{2x^2-6x}{x-3}-6\right|<\varepsilon$$
+
+<p>Scomponiamo il numeratore raccogliendo $2x$, e semplifichiamo. La semplificazione è lecita
+perché stiamo lavorando per $x\neq 3$, e questo è proprio ciò che la definizione ci concede:</p>
+
+$$\left|\frac{2x(x-3)}{x-3}-6\right|<\varepsilon \;\longrightarrow\;
+|2x-6|<\varepsilon \;\longrightarrow\; 2|x-3|<\varepsilon \;\longrightarrow\;
+|x-3|<\frac{\varepsilon}{2}$$
+
+<p>L'ultima scrittura si scioglie nella doppia disuguaglianza</p>
+$$-\frac{\varepsilon}{2}<x-3<\frac{\varepsilon}{2}
+\qquad\longrightarrow\qquad
+3-\underbrace{\frac{\varepsilon}{2}}_{\delta_1}<x<3+\underbrace{\frac{\varepsilon}{2}}_{\delta_2}$$
+
+<p>Abbiamo ottenuto proprio un intorno di 3, con $\delta_1=\delta_2=\varepsilon/2$. Qualunque
+$\varepsilon$ ci venga proposto, sappiamo indicare l'intorno che risponde: basta prendere il raggio
+uguale a metà di $\varepsilon$. La definizione è soddisfatta, dunque il limite vale 6.</p>
+
+<p>Ecco da dove viene il mezzo che il cursore mostrava: la funzione, semplificata, si comporta
+come $2x$, e una funzione che cresce con pendenza 2 amplifica di 2 gli scostamenti. Per contenere
+lo scostamento in uscita entro $\varepsilon$ bisogna quindi contenere quello in entrata entro
+$\varepsilon/2$.</p>
 </div>
 
-<div class="ricalibrazioni">
-  <h2>Ricalibrazioni</h2>
-  <ul>
-    <li><b>Nessun ampliamento di contenuto.</b> L'unità ha peso strumentale: è vocabolario di base che si userà
-    per tutto l'anno, non un tema su cui la seconda prova insiste con quesiti dedicati. È rimasta quindi vicina
-    per estensione agli appunti, senza aggiunte di casi o argomenti.</li>
-    <li><b>Le pagine 4–6 (limite per eccesso/difetto, limite destro/sinistro con schizzi separati, limite
-    infinito) sono state condensate in un unico esploratore interattivo epsilon-delta</b>, che mostra in un
-    colpo solo la relazione tra $\varepsilon$ e $\delta$ al posto di più grafici statici separati: lo spazio
-    recuperato ha permesso di mantenere per intero l'esempio numerico svolto (pagine 3–4) senza allungare la
-    pagina complessiva.</li>
-  </ul>
+<h2>Limite per eccesso e per difetto</h2>
+
+<p>Talvolta la funzione si avvicina al proprio limite sempre dallo stesso lato: sempre da sopra,
+oppure sempre da sotto. Quando succede, la cosa si segnala con un piccolo segno a esponente.</p>
+
+<div class="def">
+<span class="et">Notazione</span>
+<p>Si scrive $\displaystyle\lim_{x\to x_0}f(x)=\ell^{+}$ (<strong>limite per eccesso</strong>) se
+la funzione tende a $\ell$ mantenendosi maggiore di $\ell$, e
+$\displaystyle\lim_{x\to x_0}f(x)=\ell^{-}$ (<strong>limite per difetto</strong>) se vi tende
+mantenendosi minore di $\ell$.</p>
 </div>
 
+<p>Negli appunti gli esempi sono due parabole. Una parabola con la concavità verso l'alto e
+vertice in $(4;-1)$ si avvicina a $-1$ sempre da sopra, perché il vertice è il suo punto più
+basso: si scrive $\lim_{x\to 4}f(x)=-1^{+}$. Una parabola con la concavità verso il basso e
+vertice in $(5;7)$ si avvicina a 7 sempre da sotto, perché il vertice è il punto più alto:
+$\lim_{x\to 5}f(x)=7^{-}$.</p>
+
+<p>Si tratta di un'informazione in più sul <em>modo</em> in cui la funzione arriva al limite; il
+valore del limite resta quello, senza il segno.</p>
+
+<h2>Limite destro e limite sinistro</h2>
+
+<p>Finora ci siamo avvicinati a $x_0$ da entrambe le parti insieme. Ma esistono funzioni che, a
+sinistra e a destra dello stesso punto, si comportano in modo completamente diverso.</p>
+
+<p>Negli appunti c'è un esempio di questo tipo: una funzione che, avvicinandosi a 5 da sinistra,
+tende a 2; avvicinandosi da destra tende a 6; e che in 5 vale 4. Tre numeri diversi, tutti e tre
+legittimi, ciascuno che risponde a una domanda diversa:</p>
+
+$$\lim_{x\to 5^{-}}f(x)=2 \qquad \lim_{x\to 5^{+}}f(x)=6 \qquad f(5)=4$$
+
+<p>Per trattare questi casi basta restringere l'intorno a una sola metà.</p>
+
+<div class="def">
+<span class="et">Definizione &middot; intorno destro e intorno sinistro</span>
+<p>Un <strong>intorno sinistro</strong> di $x_0$ è un intervallo del tipo
+$I^{-}(x_0)=\left]x_0-\delta_1;x_0\right[$, cioè fatto dei soli punti che precedono $x_0$.<br>
+Un <strong>intorno destro</strong> è un intervallo del tipo
+$I^{+}(x_0)=\left]x_0;x_0+\delta_1\right[$, fatto dei soli punti che seguono $x_0$.</p>
 </div>
+
+<div class="def">
+<span class="et">Definizione &middot; limite sinistro</span>
+$$\lim_{x\to x_0^{-}}f(x)=\ell \iff \forall\varepsilon>0\;\;\exists\,I^{-}(x_0):\;
+|f(x)-\ell|<\varepsilon \quad\forall x\in I^{-}(x_0),\;x\neq x_0$$
+<p>Per il <strong>limite destro</strong> vale l'analogo, con l'intorno destro $I^{+}(x_0)$ al
+posto di quello sinistro.</p>
+</div>
+
+<p>La definizione è identica alla precedente in ogni sua parte: cambia soltanto il tipo di intorno.
+Questo è il motivo per cui negli appunti l'intorno è stato definito con cura prima del limite:
+definito una volta l'attrezzo, tutte le varianti del limite si ottengono cambiando l'attrezzo e
+lasciando intatto il resto.</p>
+
+<div class="oss">
+<span class="et">Il legame fra i tre limiti</span>
+<p>Il limite «normale» esiste quando destro e sinistro esistono e <strong>coincidono</strong>; in
+quel caso il loro valore comune è il limite. Se destro e sinistro esistono ma sono diversi, come
+nell'esempio del 5, il limite $\lim_{x\to 5}f(x)$ <em>non esiste</em>. Questo non è un difetto
+della teoria: è un'informazione, e ci dirà qualcosa di preciso sul grafico quando studieremo i
+punti di discontinuità.</p>
+</div>
+
+<h2>Limiti infiniti per $x$ che tende a un valore finito</h2>
+
+<p>Un ultimo caso, e siamo al completo. Ci sono funzioni che, avvicinandosi a un punto, non si
+stabilizzano su nessun valore: crescono senza fermarsi. Pensiamo a $\dfrac{1}{x^2}$ vicino a zero,
+oppure a $\dfrac{1}{x-3}$ vicino a 3: più ci si avvicina, più i valori diventano grandi, oltre
+qualunque soglia.</p>
+
+<p>Anche questo è un comportamento regolare e descrivibile, e si scrive</p>
+$$\lim_{x\to x_0}f(x)=+\infty$$
+
+<p>La definizione va però adattata, perché la vecchia non funziona: non esiste nessun numero
+$\ell$ a cui la funzione si avvicini, quindi non ha senso chiedere che $|f(x)-\ell|$ sia piccolo.
+Cambiamo allora la richiesta. Invece di dire «$f(x)$ finisce dentro una fascia attorno a $\ell$»,
+diciamo <strong>«$f(x)$ supera qualunque soglia»</strong>. La soglia la chiamiamo $M$.</p>
+
+<div class="def">
+<span class="et">Definizione &middot; limite $+\infty$ per $x\to x_0$</span>
+$$\lim_{x\to x_0}f(x)=+\infty \iff \forall M>0\;\;\exists\,I(x_0):\;
+f(x)>M \quad\forall x\in I(x_0),\;x\neq x_0$$
+<p>Analogamente $\displaystyle\lim_{x\to x_0}f(x)=-\infty$ se, per ogni $M>0$, si trova un intorno
+di $x_0$ in cui $f(x)<-M$.</p>
+</div>
+
+<p>Il meccanismo è lo stesso di prima, con i ruoli ribaltati: là $\varepsilon$ era piccolo e
+misurava una tolleranza, qui $M$ è grande e misura una soglia. In entrambi i casi la struttura è
+«per ogni richiesta, esiste un intorno che la soddisfa».</p>
+
+<div class="esempio">
+<span class="et">Esempio dagli appunti</span>
+<p>Il secondo grafico della pagina 6 mostra una funzione che, avvicinandosi a 5, cresce
+illimitatamente da sinistra e decresce illimitatamente da destra:</p>
+$$\lim_{x\to 5^{-}}f(x)=+\infty \qquad \lim_{x\to 5^{+}}f(x)=-\infty
+\qquad\Longrightarrow\qquad \lim_{x\to 5}f(x) \text{ non esiste}$$
+<p>Anche qui i due limiti unilaterali esistono, ma non coincidono — e per una ragione ancora più
+netta di prima, dato che vanno in direzioni opposte. Il limite bilaterale quindi non c'è.</p>
+</div>
+
+<div class="avanti">
+<h2>Da riprendere più avanti</h2>
+<ul>
+<li>La <strong>verifica</strong> di un limite infinito, con il metodo della soglia $M$ applicato
+al calcolo, è nell'unità 02.</li>
+<li>Le rette a cui il grafico si avvicina quando il limite è infinito si chiamano
+<strong>asintoti</strong>: li incontreremo qualitativamente nell'unità 02, e impareremo a
+determinarli in modo sistematico nell'unità 11.</li>
+<li>Che il limite, quando esiste, sia <strong>unico</strong> è un teorema, e va dimostrato: è
+nell'unità 03.</li>
+<li>In questa unità abbiamo sempre verificato limiti già noti. <strong>Calcolare</strong> un
+limite di cui non si conosce il valore richiede l'algebra dei limiti, dall'unità 04 in poi.</li>
+</ul>
+</div>
+
+<footer>
+<p>Unità 01 &middot; Matematica quinta &middot; dalle pagine 1–6 degli appunti di classe.
+Formule e passaggi verificati simbolicamente con SymPy.</p>
+</footer>
+
+</div>
+
 <script>
 (function(){
-  var xs = [];
-  for (var i=0;i<=80;i++) xs.push(1 + i*(5-1)/80);
-  var ys = xs.map(function(x){return 2*x;});
+  var f = function(x){ return 2*x; };
 
-  function shapes(eps){
-    var delta = eps/2;
-    return [
-      { type:'rect', xref:'paper', yref:'y', x0:0, x1:1, y0:6-eps, y1:6+eps,
-        fillcolor:'rgba(47,107,79,0.15)', line:{width:0} },
-      { type:'rect', xref:'x', yref:'paper', x0:3-delta, x1:3+delta, y0:0, y1:1,
-        fillcolor:'rgba(31,78,121,0.15)', line:{width:0} },
-      { type:'line', xref:'x', yref:'y', x0:1, x1:5, y0:6, y1:6,
-        line:{color:'#b3392f', width:1, dash:'dot'} },
-      { type:'line', xref:'x', yref:'y', x0:3, x1:3, y0:0, y1:10,
-        line:{color:'#b3392f', width:1, dash:'dot'} }
-    ];
+  // --- widget 1: avvicinamento ---
+  var xs=[], ys=[];
+  for(var i=0;i<=400;i++){ var v=1.2+i*(4.8-1.2)/400; if(Math.abs(v-3)>1e-9){ xs.push(v); ys.push(f(v)); } }
+  function disegnaAvvicinamento(d){
+    var xl=3-d, xr=3+d;
+    Plotly.react('g-avvicinamento',[
+      {x:xs,y:ys,mode:'lines',line:{color:'#1f4e79',width:2.5},name:'f(x)',hoverinfo:'skip'},
+      {x:[3],y:[6],mode:'markers',marker:{size:13,color:'#f7f5ef',line:{color:'#1f4e79',width:2.5}},
+       name:'x = 3: non definita',hovertemplate:'in x = 3 la funzione non esiste<extra></extra>'},
+      {x:[xl,xr],y:[f(xl),f(xr)],mode:'markers+text',
+       marker:{size:11,color:'#b3392f'},
+       text:['x = '+xl.toFixed(2)+'<br>f(x) = '+f(xl).toFixed(3),
+             'x = '+xr.toFixed(2)+'<br>f(x) = '+f(xr).toFixed(3)],
+       textposition:'top left', textfont:{size:11,color:'#b3392f'},
+       name:'punti vicini',hoverinfo:'skip'}
+    ],{
+      margin:{l:44,r:14,t:10,b:40},showlegend:false,
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[1.2,4.8],zeroline:false,gridcolor:'#e6e0d4',dtick:0.5},
+      yaxis:{title:'y',range:[1.5,10.5],zeroline:false,gridcolor:'#e6e0d4'},
+      shapes:[{type:'line',x0:1.2,x1:4.8,y0:6,y1:6,line:{color:'#6d7280',width:1,dash:'dot'}}],
+      annotations:[{x:1.45,y:6,text:'y = 6',showarrow:false,yshift:11,font:{size:12,color:'#6d7280'}}]
+    },{displayModeBar:false,responsive:true});
   }
+  var sd=document.getElementById('s-d'), vd=document.getElementById('v-d');
+  function aggAvv(){ var d=Math.pow(10,parseFloat(sd.value));
+    vd.textContent=d.toFixed(3).replace('.',','); disegnaAvvicinamento(d); }
+  sd.addEventListener('input',aggAvv);
 
-  var data = [
-    { x: xs, y: ys, mode:'lines', line:{color:'#16283d', width:2.5}, name:'f(x) = 2x', hoverinfo:'skip' },
-    { x:[3], y:[6], mode:'markers', marker:{color:'#f7f5ef', size:10, line:{color:'#16283d', width:2}},
-      name:'punto escluso', hoverinfo:'skip' }
-  ];
+  // --- widget 2: epsilon-delta ---
+  var se=document.getElementById('s-eps'), sx=document.getElementById('s-x');
+  var ve=document.getElementById('v-eps'), vx=document.getElementById('v-x'), vdel=document.getElementById('v-delta');
+  function aggEps(){
+    var eps=parseFloat(se.value), del=eps/2;
+    var x=3+parseFloat(sx.value)*del;
+    ve.textContent=eps.toFixed(2).replace('.',',');
+    vx.textContent=x.toFixed(3).replace('.',',');
+    vdel.textContent='δ = '+del.toFixed(3).replace('.',',');
+    Plotly.react('g-epsdelta',[
+      {x:xs,y:ys,mode:'lines',line:{color:'#16283d',width:2.5},hoverinfo:'skip'},
+      {x:[3],y:[6],mode:'markers',marker:{size:13,color:'#f7f5ef',line:{color:'#16283d',width:2.5}},hoverinfo:'skip'},
+      {x:[x],y:[f(x)],mode:'markers',marker:{size:12,color:'#b3392f'},
+       hovertemplate:'x = %{x:.3f}<br>f(x) = %{y:.3f}<extra></extra>'}
+    ],{
+      margin:{l:44,r:14,t:10,b:40},showlegend:false,
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[2,4],zeroline:false,gridcolor:'#e6e0d4',dtick:0.25},
+      yaxis:{title:'y',range:[4,8],zeroline:false,gridcolor:'#e6e0d4',dtick:0.5},
+      shapes:[
+        {type:'rect',x0:2,x1:4,y0:6-eps,y1:6+eps,fillcolor:'rgba(47,107,79,0.13)',line:{width:0},layer:'below'},
+        {type:'rect',x0:3-del,x1:3+del,y0:4,y1:8,fillcolor:'rgba(31,78,121,0.13)',line:{width:0},layer:'below'},
+        {type:'line',x0:2,x1:4,y0:6,y1:6,line:{color:'#2f6b4f',width:1,dash:'dot'}},
+        {type:'line',x0:3,x1:3,y0:4,y1:8,line:{color:'#1f4e79',width:1,dash:'dot'}}
+      ],
+      annotations:[
+        {x:2.06,y:6+eps,text:'6 + ε',showarrow:false,yshift:10,font:{size:11,color:'#2f6b4f'}},
+        {x:2.06,y:6-eps,text:'6 − ε',showarrow:false,yshift:-10,font:{size:11,color:'#2f6b4f'}},
+        {x:3-del,y:4.1,text:'3 − δ',showarrow:false,xshift:-16,font:{size:11,color:'#1f4e79'}},
+        {x:3+del,y:4.1,text:'3 + δ',showarrow:false,xshift:16,font:{size:11,color:'#1f4e79'}}
+      ]
+    },{displayModeBar:false,responsive:true});
+  }
+  se.addEventListener('input',aggEps); sx.addEventListener('input',aggEps);
 
-  var layout = {
-    xaxis:{ title:'x', range:[1,5], zeroline:false },
-    yaxis:{ title:'y', range:[0,10], zeroline:false },
-    shapes: shapes(1),
-    showlegend:false,
-    margin:{t:20,r:20,b:40,l:44},
-    font:{family:'Segoe UI, sans-serif', size:12}
-  };
-
-  Plotly.newPlot('grafico-eps-delta', data, layout, {displayModeBar:false, responsive:true});
-
-  var slider = document.getElementById('eps-slider');
-  var epsLabel = document.getElementById('eps-val');
-  var deltaLabel = document.getElementById('delta-val');
-
-  slider.addEventListener('input', function(){
-    var eps = parseFloat(slider.value);
-    var delta = eps/2;
-    epsLabel.textContent = eps.toFixed(2);
-    deltaLabel.textContent = delta.toFixed(3);
-    Plotly.relayout('grafico-eps-delta', { shapes: shapes(eps) });
-  });
+  aggAvv(); aggEps();
 })();
 </script>
 </body>
