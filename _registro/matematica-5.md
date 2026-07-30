@@ -126,3 +126,16 @@ teorema del confronto, a pagina 21.
 - La figura che nella traccia introduce la definizione di massimo/minimo assoluto e quella che
   illustra il teorema di Weierstrass sono la stessa figura (mostrano lo stesso tipo di curva),
   perciò sono state unificate in un solo grafico invece di duplicarle.
+
+## Unità 10 — Punti di discontinuità e di singolarità
+- Parole: 538 su 5 pagine di traccia (35–39)
+- Rettifica: nella traccia (pag. 39), l'esempio di singolarità eliminabile su
+  $f(x)=(1-x^2)/(x-1)$ assegna il valore $-1$ a $x=1$ nella funzione ridefinita, ma il limite
+  calcolato subito sopra, e verificato con SymPy, vale $-2$ (da $-(x+1)$ per $x\to1$). Corretto
+  silenziosamente a $-2$ nella pagina. Verificati con SymPy anche il salto dell'esempio 1
+  (−6 e 1, salto 7) e i quattro limiti laterali dell'esempio 2 su $5/(x^2-1)$.
+- Aggiunta: nulla di contenuto nuovo. L'unico interattivo riusa la funzione dell'esempio 3
+  (il caso corretto a $-2$), con un cursore sul valore assegnato in $x=1$ per mostrare dal vivo
+  quando il buco viene tappato. Le otto figure statiche in galleria riproducono a coppie
+  (discontinuità/singolarità) i disegni della traccia per le tre specie; la figura a tre rami
+  dopo l'esempio 2 riprende lo stesso disegno con asintoto doppio che compare in testa a pag. 38.
