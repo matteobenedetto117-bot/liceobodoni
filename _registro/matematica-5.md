@@ -46,3 +46,16 @@ teorema del confronto, a pagina 21.
   confronto e l'unico esempio svolto prima di quell'intestazione.
 - Nessuna dimostrazione: la traccia riporta unicità, permanenza del segno e confronto come soli
   enunciati con disegno, senza dimostrarli; restano così anche qui.
+
+## Unità 04 — Calcolo dei limiti e algebra dei limiti
+- Parole: 441 su circa 2,4 pagine di traccia equivalenti (coda di pag. 11 — sezione "Calcolo di
+  limiti / Funzioni continue in x0", mai usata nell'unità 03 — più pagine 12–13).
+- Rettifica: nessuna negli enunciati. Il caso $\lim_{x\to-1}\sqrt{x}$ della traccia è segnato con
+  un simbolo di "non esiste": ho reso esplicito il motivo (−1 fuori dal dominio di $\sqrt{x}$),
+  che nella traccia non è scritto ma è implicito nel simbolo. Verificati con SymPy tutti i 13
+  limiti per sostituzione e i tre esempi di algebra dei limiti (somma 2+7=9, prodotto 3·2=6,
+  potenza (−1)²=1).
+- Aggiunta: nulla di contenuto nuovo. Ho rietichettato con $n$ l'esponente costante nella regola
+  della potenza per evitare la collisione col simbolo $m$ già usato per $\lim g(x)$ — la traccia
+  usa $m$ per entrambi i casi, ambiguità solo notazionale. L'unico interattivo riusa le stesse
+  $f,g$ dell'esempio sulla somma per mostrare in tempo reale anche prodotto e quoziente.

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolo dei limiti e algebra dei limiti — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.tabvals{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px;
+  font-family:var(--sans);font-size:.88rem}
+.tabvals div{background:#f7f5ef;border-radius:8px;padding:8px 10px}
+.tabvals span{display:block;font-size:.72rem;color:var(--grigio);text-transform:uppercase;letter-spacing:.06em}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Limiti &middot; Unità 04</p>
+  <h1>Calcolo dei limiti e algebra dei limiti</h1>
+  <p class="sommario">Verificare un limite con la definizione serve a giustificarlo, ma nella pratica
+  serve un modo più rapido per calcolarlo. Le funzioni elementari offrono una scorciatoia immediata,
+  e poche regole insegnano a combinare fra loro limiti già noti.</p>
+</header>
+
+<h2>Sostituzione nelle funzioni continue</h2>
+
+<p>Per le funzioni elementari — potenze, radici, esponenziali, logaritmi, funzioni goniometriche —
+il limite in un punto del dominio coincide col valore che la funzione assume in quel punto: si dice
+che la funzione è <em>continua</em> lì, un'idea che riprenderemo con precisione nell'unità 8. Per
+ora basta la conseguenza pratica: calcolare il limite si riduce a sostituire.</p>
+
+<div class="def">
+<span class="et">Regola di sostituzione</span>
+<p>Se $f$ è continua in $x_0$, allora</p>
+$$\lim_{x\to x_0}f(x)=f(x_0)$$
+</div>
+
+$$\lim_{x\to -2}x^3=(-2)^3=-8 \qquad\qquad \lim_{x\to -1}\sqrt[3]{x}=\sqrt[3]{-1}=-1$$
+$$\lim_{x\to 4}2^x=2^4=16 \qquad\qquad \lim_{x\to \pi}\cos x=\cos\pi=-1$$
+
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>$\displaystyle\lim_{x\to -1}\sqrt{x}$ non si calcola per sostituzione: il dominio di $\sqrt{x}$
+è $[0,+\infty[$, e $-1$ non ne è né un punto né un punto di frontiera. La regola di sostituzione
+si applica solo se $x_0$ appartiene al dominio di $f$, o ne è punto di accumulazione.</p>
+</div>
+
+<h2>Limiti infiniti delle funzioni elementari</h2>
+
+<p>La stessa sostituzione vale quando il risultato è infinito, o quando è $x$ a tendere
+all'infinito: bastano i comportamenti noti delle funzioni elementari.</p>
+
+$$\lim_{x\to+\infty}x^4=+\infty \qquad\qquad \lim_{x\to+\infty}e^{-x}=0$$
+$$\lim_{x\to-\infty}x^2=+\infty \qquad\qquad \lim_{x\to 0}\frac{1}{x^2}=+\infty$$
+$$\lim_{x\to-\infty}\frac{4}{x}=0 \qquad\qquad \lim_{x\to 0}\left(-\frac{2}{x^2}\right)=-\infty$$
+$$\lim_{x\to 0^{+}}\ln x=-\infty \qquad\qquad \lim_{x\to+\infty}\ln x=+\infty$$
+
+<h2>Algebra dei limiti</h2>
+
+<p>Quando due funzioni hanno ciascuna un proprio limite, la somma, il prodotto, il quoziente e la
+potenza si comportano come ci si aspetterebbe, purché il risultato scritto a destra abbia senso.
+Supponiamo $\displaystyle\lim_{x\to a}f(x)=\ell$ e $\displaystyle\lim_{x\to a}g(x)=m$.</p>
+
+<h3>Somma</h3>
+$$\lim_{x\to a}\big[f(x)+g(x)\big]=\ell+m$$
+<p>Con $f(x)=2x-6$ e $g(x)=x+3$: $\lim_{x\to4}f(x)=2$, $\lim_{x\to4}g(x)=7$, quindi</p>
+$$\lim_{x\to4}\big[f(x)+g(x)\big]=2+7=9$$
+
+<h3>Prodotto</h3>
+$$\lim_{x\to a}\big[f(x)\cdot g(x)\big]=\ell\cdot m$$
+$$\lim_{x\to1}3x(x+1)=\lim_{x\to1}3x\cdot\lim_{x\to1}(x+1)=3\cdot2=6$$
+
+<h3>Quoziente</h3>
+$$\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{\ell}{m} \qquad (m\neq0)$$
+<p>Se $m=0$ il quoziente rientra fra le forme che richiedono un lavoro ulteriore, oggetto
+dell'unità 05.</p>
+
+<h3>Potenza</h3>
+$$\lim_{x\to a}\big[f(x)\big]^{n}=\ell^{\,n} \qquad (n \text{ costante})$$
+$$\lim_{x\to2}(x-3)^2=(-1)^2=1$$
+<p>Se anche l'esponente è una funzione di $x$ con il proprio limite, vale in generale</p>
+$$\lim_{x\to a}\big[f(x)\big]^{g(x)}=\ell^{\,m}$$
+
+<div class="widget">
+  <div class="controlli">
+    <label>Punto $x$
+      <input type="range" id="s-x" min="0" max="8" step="0.05" value="0.5">
+      <span>$x$ = <span class="val" id="v-x"></span> &nbsp;→&nbsp; $x\to4$</span>
+    </label>
+  </div>
+  <div id="g-alg" style="height:320px"></div>
+  <div class="tabvals">
+    <div><span>f(x) = 2x−6</span><b id="v-f"></b></div>
+    <div><span>g(x) = x+3</span><b id="v-g"></b></div>
+    <div><span>f(x) + g(x)</span><b id="v-somma"></b></div>
+    <div><span>f(x) &middot; g(x)</span><b id="v-prod"></b></div>
+    <div><span>f(x) / g(x)</span><b id="v-quo"></b></div>
+  </div>
+  <p class="leggenda">Muovendo il cursore verso $x=4$, ciascuna combinazione si avvicina al valore
+  ottenuto combinando i due limiti separati: $2+7=9$, $2\cdot7=14$, $2/7\approx0{,}286$.</p>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>Quando le regole precedenti non bastano — per esempio $m=0$ nel quoziente, o somme come
+$+\infty-\infty$ — si entra nelle forme indeterminate, nell'unità 05.</li>
+<li>Alcune forme apparentemente indeterminate si risolvono con i limiti notevoli, nell'unità 06.</li>
+<li>La continuità, qui usata in modo informale, avrà la sua definizione precisa nell'unità 08.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Limiti &middot; Unità 04</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var f=function(x){return 2*x-6;}, g=function(x){return x+3;};
+  var xs=[],yf=[],yg=[];
+  for(var i=0;i<=300;i++){var v=i*8/300; xs.push(v); yf.push(f(v)); yg.push(g(v));}
+  var sx=document.getElementById('s-x'), vx=document.getElementById('v-x');
+  var vf=document.getElementById('v-f'), vg=document.getElementById('v-g'),
+      vs=document.getElementById('v-somma'), vp=document.getElementById('v-prod'),
+      vq=document.getElementById('v-quo');
+  function fmt(n){return n.toFixed(3).replace('.',',');}
+  function agg(){
+    var x=parseFloat(sx.value), fx=f(x), gx=g(x);
+    vx.textContent=fmt(x);
+    vf.textContent=fmt(fx); vg.textContent=fmt(gx);
+    vs.textContent=fmt(fx+gx); vp.textContent=fmt(fx*gx); vq.textContent=fmt(fx/gx);
+    Plotly.react('g-alg',[
+      {x:xs,y:yf,mode:'lines',name:'f(x)=2x−6',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
+      {x:xs,y:yg,mode:'lines',name:'g(x)=x+3',line:{color:'#2f6b4f',width:2.2},hoverinfo:'skip'},
+      {x:[x],y:[fx],mode:'markers',marker:{size:10,color:'#1f4e79'},hoverinfo:'skip'},
+      {x:[x],y:[gx],mode:'markers',marker:{size:10,color:'#2f6b4f'},hoverinfo:'skip'}
+    ],{
+      margin:{l:44,r:14,t:10,b:34},showlegend:true,
+      legend:{orientation:'h',y:-0.22,font:{size:11}},
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[0,8],zeroline:false,gridcolor:'#e6e0d4'},
+      yaxis:{title:'y',range:[-8,12],zeroline:true,zerolinecolor:'#16283d',gridcolor:'#e6e0d4'},
+      shapes:[{type:'line',x0:4,x1:4,y0:-8,y1:12,line:{color:'#b3392f',width:1,dash:'dot'}}],
+      annotations:[{x:4,y:12,text:'x = 4',showarrow:false,yshift:-8,xshift:22,font:{size:11,color:'#b3392f'}}]
+    },{displayModeBar:false,responsive:true});
+  }
+  sx.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>
