@@ -154,3 +154,17 @@ teorema del confronto, a pagina 21.
   destro chiudersi verso zero al crescere di $x$.
 - Nessuna dimostrazione: il teorema che dà $m$ e $q$ è riportato in traccia come solo enunciato,
   senza sviluppo; resta così anche qui.
+
+## Unità 12 — Grafico probabile e funzioni con parametri
+- Parole: 417 su 5 pagine di traccia (45–49)
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi di entrambi gli esempi: la disparità
+  di $f(x)=(x^2-1)/x$, gli zeri $\pm1$, il segno $-1<x<0 \lor x>1$, i limiti in $x=0$
+  ($+\infty$ e $-\infty$), $m=1$ e $q=0$ per l'asintoto $y=x$; e per la funzione con parametro
+  $y=(x^3+p)/(x+q)^2$ la soluzione $p=-1$, $q=2$, i due limiti $-\infty$ in $x=-2$ e l'asintoto
+  obliquo $y=x-4$ (con $m=1$, $q=-4$).
+- Aggiunta: nulla di contenuto nuovo. I sei passi dello schema sono ripresi nell'ordine della
+  traccia; l'unico interattivo riusa il primo esempio ($f(x)=(x^2-1)/x$), mostrando la distanza
+  fra la curva e l'asintoto obliquo chiudersi verso zero, sullo stesso modello dell'interattivo
+  dell'unità 11. Nessun quesito di maturità inserito: senza le derivate, disponibili solo
+  dall'unità 13, i quesiti reali sul grafico di una funzione richiedono lo studio del segno della
+  derivata prima, non ancora nel bagaglio a questo punto del percorso.
