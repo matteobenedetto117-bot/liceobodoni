@@ -139,3 +139,18 @@ teorema del confronto, a pagina 21.
   quando il buco viene tappato. Le otto figure statiche in galleria riproducono a coppie
   (discontinuità/singolarità) i disegni della traccia per le tre specie; la figura a tre rami
   dopo l'esempio 2 riprende lo stesso disegno con asintoto doppio che compare in testa a pag. 38.
+
+## Unità 11 — Asintoti verticali, orizzontali e obliqui
+- Parole: 606 su circa 5,5 pagine di traccia equivalenti (coda di pag. 39, dopo l'ultimo esempio
+  dell'unità 10, più le pagine 40–44 intere).
+- Rettifica: nessuna. Verificati con SymPy tutti i limiti dell'esempio verticale/orizzontale su
+  $f(x)=(4x^2+3)/(x^2-1)$ (asintoti $x=1$, $x=-1$, $y=4$) e dell'esempio obliquo su
+  $f(x)=(3x^2-2x+1)/(x-1)$ ($m=3$, $q=1$, $y=3x+1$, e il limite $-\infty$ a sinistra), oltre alla
+  distanza $f(x)-(3x+1)=2/(x-1)$ usata nell'interattivo.
+- Aggiunta: nulla di contenuto nuovo. Solo la frase che distingue quando è l'ascissa e quando è
+  l'ordinata a tendere all'infinito nella definizione generale di asintoto. Le quattro gallerie
+  statiche riproducono le terne e coppie di schizzi della traccia (definizione generale, verticali,
+  orizzontali, obliqui); l'unico interattivo mostra la distanza fra la curva e l'asintoto obliquo
+  destro chiudersi verso zero al crescere di $x$.
+- Nessuna dimostrazione: il teorema che dà $m$ e $q$ è riportato in traccia come solo enunciato,
+  senza sviluppo; resta così anche qui.
