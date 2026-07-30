@@ -59,3 +59,14 @@ teorema del confronto, a pagina 21.
   della potenza per evitare la collisione col simbolo $m$ già usato per $\lim g(x)$ — la traccia
   usa $m$ per entrambi i casi, ambiguità solo notazionale. L'unico interattivo riusa le stesse
   $f,g$ dell'esempio sulla somma per mostrare in tempo reale anche prodotto e quoziente.
+
+## Unità 05 — Forme indeterminate
+- Parole: 523 su 4 pagine di traccia (14–17)
+- Rettifica: nessuna. Verificati con SymPy tutti i sette limiti: $x^4-3x^2+1\to+\infty$,
+  $x-\sqrt{x^2+1}\to0$, $(1-\sin x)\tan x\to0$ in $\pi/2^-$, i tre limiti $\infty/\infty$
+  ($-\infty$, $-2/3$, $0$), il limite $0/0$ in $3$ (fattorizzazione $2x^2-9x+9=(x-3)(2x-3)$
+  confermata) e $x^{1/\ln x}\to e$.
+- Aggiunta: nulla di contenuto nuovo. Ho reso esplicito in una riga il criterio generale che
+  emerge dai tre esempi $\infty/\infty$ già presenti (confronto fra i gradi), senza introdurre
+  esempi ulteriori. L'unico interattivo riusa il secondo esempio $\infty/\infty$ della traccia
+  per mostrare l'avvicinamento all'asintoto $y=-2/3$.
