@@ -32,3 +32,20 @@ pagine del sito.
   un'osservazione sul viceversa (disuguaglianza debole vs stretta, con f(x)=x²), oltre a un
   secondo esempio svolto sul confronto (x²·sin(1/x)) per bilanciare il peso "alto" assegnato
   all'unità nel percorso.
+
+## Unità 04 — Calcolo dei limiti e algebra dei limiti
+- Rettifica: a pagina 11 la traccia riporta $\lim_{x\to -1}\sqrt{x}=7$, ma con $x_0=-1$ la
+  radice non è definita (dominio $x\geq 0$) e $\sqrt{-1}$ non è nemmeno un numero reale.
+  Il valore 7 è compatibile solo con $\sqrt{49}$: ho quindi corretto il punto in $x_0=49$,
+  scrivendo $\lim_{x\to 49}\sqrt{x}=7$, che è l'unica lettura sensata dell'esempio.
+- Confini di pagina: la parte finale di pagina 11 ("Calcolo di limiti", funzioni continue in
+  x0) appartiene a questa unità e non all'unità 03, come già indicato nel registro dell'unità 03
+  stessa. Ho usato la coda della pagina 11 insieme alle pagine 12–13, fermandomi prima di
+  "Forme indeterminate" che apre la pagina 14 (unità 05).
+- Verificati con SymPy tutti i limiti della pagina (funzioni continue, comportamento agli
+  estremi del dominio, i quattro esempi di somma/prodotto/quoziente/potenza) e l'esempio di
+  sintesi aggiunto, $\lim_{x\to2}\left[\frac{x^3+1}{x+3}+\sqrt{x+2}\right]=\frac{19}{5}$.
+- Ricalibrazione: nessuna riduzione. Ho aggiunto un esempio svolto per la regola del quoziente,
+  assente nella traccia (che riporta solo la formula generale), e un esempio di sintesi finale
+  che combina sostituzione, quoziente e somma nello stesso calcolo, per compensare il fatto che
+  gli esempi della traccia sono tutti isolati e su una sola regola alla volta.
