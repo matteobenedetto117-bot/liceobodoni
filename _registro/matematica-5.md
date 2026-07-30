@@ -32,3 +32,17 @@ un disegno, alle pagine 11 e 18–19), esempi motivanti inventati, tabelle riass
 aggiuntivi. Sono state rimosse e verranno riscritte con la calibrazione corretta.
 Nella traccia l'unica dimostrazione sviluppata di questo blocco è quella di sin(x)/x tramite il
 teorema del confronto, a pagina 21.
+
+## Unità 03 — Teoremi sui limiti: unicità, permanenza del segno, confronto
+- Parole: circa 495 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di
+  pag. 18–20 fino all'inizio di "Limiti notevoli").
+- Rettifica: nessuna. Verificato con SymPy che 2/x ≤ (3+cos x)/x ≤ 4/x per x>0 e che entrambi i
+  limiti dei bordi valgono 0 per x→+∞.
+- Aggiunta: nulla di contenuto. Solo le frasi che spiegano il ruolo di ciascuna ipotesi, più
+  un interattivo che mostra la stretta della disequazione 2/x ≤ (3+cos x)/x ≤ 4/x al crescere di M.
+- Nota sul confine: il teorema di unicità è disegnato in coda a pag. 10 (dopo il materiale
+  dell'unità 02, mai usato lì) e la dimostrazione di sin x/x che segue il teorema del confronto a
+  pag. 20–21 appartiene invece all'unità 06 (Limiti notevoli): qui restano solo l'enunciato del
+  confronto e l'unico esempio svolto prima di quell'intestazione.
+- Nessuna dimostrazione: la traccia riporta unicità, permanenza del segno e confronto come soli
+  enunciati con disegno, senza dimostrarli; restano così anche qui.
