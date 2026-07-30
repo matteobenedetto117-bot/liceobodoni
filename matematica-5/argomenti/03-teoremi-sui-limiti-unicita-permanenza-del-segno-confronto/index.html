@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teoremi sui limiti: unicità, permanenza del segno, confronto — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.oss,.nota,.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:26px 0}
+.def{border-left:4px solid var(--blu)}
+.esempio{border-left:4px solid var(--verde)}
+.oss{border-left:4px solid #c9a227;background:#fffdf5}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.oss .et,.nota .et,.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:14px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.controlli select{font-family:var(--sans);font-size:.9rem;padding:5px 8px;border:1px solid var(--riga);border-radius:6px;background:#fff}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:12px;line-height:1.55}
+.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:24px 0}
+.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:12px}
+.galleria figcaption{font-family:var(--sans);font-size:.82rem;color:#4a5a6d;text-align:center;margin-top:8px;line-height:1.45}
+.passo{margin:14px 0;padding-left:16px;border-left:2px solid var(--riga)}
+.avanti{margin-top:52px;padding-top:22px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.25rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Limiti &middot; Unità 03</p>
+  <h1>Teoremi sui limiti: unicità, permanenza del segno, confronto</h1>
+  <p class="sommario">Finora abbiamo verificato i limiti uno per uno, ricostruendo ogni volta
+  l'intorno o la soglia richiesta dalla definizione. Qui dimostriamo tre proprietà che valgono per
+  qualunque limite, una volta per tutte: se un limite esiste è unico, il suo segno si trasmette
+  alla funzione vicino al punto, e una funzione compresa fra altre due che tendono allo stesso
+  valore è costretta a tendere anch'essa a quel valore. Sono, insieme alla definizione
+  dell'unità 01, i risultati che tornano più spesso nei quesiti teorici d'esame.</p>
+</header>
+
+<h2>Perché servono risultati generali</h2>
+
+<p>Fino a questo punto abbiamo lavorato limite per limite: data una funzione e un valore proposto,
+abbiamo verificato con la definizione che il limite fosse proprio quello. È un procedimento che si
+può ripetere ogni volta che serve, ma sarebbe scomodo se non potessimo mai dire nulla senza
+rifarlo da capo. I tre teoremi di questa unità nascono da tre domande che riguardano la
+definizione di limite in sé, non una funzione particolare.</p>
+
+<div class="passo">
+<p>Una funzione può avvicinarsi, per $x\to x_0$, a due valori diversi contemporaneamente?</p>
+<p>Se conosciamo il segno del limite, che cosa possiamo dedurre sul segno della funzione vicino al
+punto — non nel punto, perché lì la funzione magari non è nemmeno definita?</p>
+<p>Se non sappiamo calcolare direttamente il limite di una funzione, ma sappiamo che è sempre
+compresa fra altre due il cui limite conosciamo, che cosa possiamo concludere?</p>
+</div>
+
+<p>Le risposte sono i tre teoremi che seguono: il teorema di <strong>unicità</strong>, quello della
+<strong>permanenza del segno</strong> e quello del <strong>confronto</strong>. Sono conseguenze
+dirette della definizione di limite, e le dimostrazioni si costruiscono con lo stesso linguaggio
+di $\varepsilon$ e intorni già usato nell'unità 01: vale la pena tenerla a mente mentre si legge.</p>
+
+<h2>Teorema di unicità del limite</h2>
+
+<p>Immaginiamo che una funzione, per $x$ che tende a un punto $x_0$, si avvicini indefinitamente
+sia al valore 6 sia al valore 8. È possibile? Proviamo a vedere che cosa succederebbe. Se il
+limite fosse 6, la funzione dovrebbe entrare, per $x$ abbastanza vicino a $x_0$, in una fascia
+stretta attorno a 6: prendendo per esempio $\varepsilon=1$, la fascia sarebbe $]5;7[$. Se il
+limite fosse anche 8, con lo stesso $\varepsilon=1$ la funzione dovrebbe entrare pure nella fascia
+$]7;9[$. Ma queste due fasce non si sovrappongono: uno stesso valore $f(x)$ non può stare, nello
+stesso momento, sia fra 5 e 7 sia fra 7 e 9. La pretesa di due limiti diversi è contraddittoria.</p>
+
+<div class="oss">
+<span class="et">L'idea, in parole</span>
+<p>Il limite descrive dove la funzione si accalca quando $x$ si avvicina a $x_0$. Se ci fossero due
+mete diverse, la funzione dovrebbe avvicinarsi contemporaneamente a due bersagli distinti, il che
+è impossibile: un solo numero non può restare vicino a due punti diversi allo stesso tempo. Il
+limite, se esiste, è uno solo.</p>
+</div>
+
+<div class="def">
+<span class="et">Teorema di unicità del limite</span>
+<p>Se una funzione $f(x)$ ha limite $l$ per $x\to x_0$, tale limite è unico: non può esistere un
+altro numero $l'\neq l$ per cui valga anche $\displaystyle\lim_{x\to x_0}f(x)=l'$.</p>
+</div>
+
+<p>Dimostriamolo, ricalcando in generale il ragionamento appena fatto con i numeri 6 e 8.</p>
+
+<div class="esempio">
+<span class="et">Dimostrazione, per assurdo</span>
+<p>Supponiamo, per assurdo, che esistano due limiti diversi: $\displaystyle\lim_{x\to x_0}f(x)=l_1$
+e $\displaystyle\lim_{x\to x_0}f(x)=l_2$, con $l_1\neq l_2$. Non è restrittivo supporre
+$l_1&lt;l_2$ (altrimenti scambiamo i nomi). Scegliamo come tolleranza</p>
+$$\varepsilon=\frac{l_2-l_1}{2}$$
+<p>che è positiva perché $l_2&gt;l_1$. Applichiamo la definizione di limite al primo valore
+$l_1$: esiste un intorno $I_1(x_0)$ tale che</p>
+$$f(x)\in\left]l_1-\varepsilon;\,l_1+\varepsilon\right[ \qquad\text{per ogni }x\in I_1(x_0),\;x\neq x_0$$
+<p>e applichiamola al secondo valore $l_2$: esiste un intorno $I_2(x_0)$ tale che</p>
+$$f(x)\in\left]l_2-\varepsilon;\,l_2+\varepsilon\right[ \qquad\text{per ogni }x\in I_2(x_0),\;x\neq x_0$$
+<p>Calcoliamo i due estremi che si toccano: $l_1+\varepsilon=l_1+\dfrac{l_2-l_1}{2}=\dfrac{l_1+l_2}{2}$,
+e $l_2-\varepsilon=l_2-\dfrac{l_2-l_1}{2}=\dfrac{l_1+l_2}{2}$. Sono lo stesso numero: i due
+intervalli $\left]l_1-\varepsilon;l_1+\varepsilon\right[$ e $\left]l_2-\varepsilon;l_2+\varepsilon\right[$
+si toccano in quel punto ma, essendo aperti, non hanno nessun punto in comune. Sono disgiunti.</p>
+<p>Prendiamo ora un punto $x$ qualunque nell'intersezione $I_1(x_0)\cap I_2(x_0)$, diverso da
+$x_0$: un tale punto esiste sempre, perché l'intersezione di due intorni di $x_0$ è ancora un
+intorno di $x_0$, quindi non è mai vuota. Per quell'$x$, il valore $f(x)$ dovrebbe appartenere
+contemporaneamente ai due intervalli, che abbiamo appena visto essere disgiunti. È assurdo. La
+contraddizione nasce dall'aver supposto $l_1\neq l_2$: dunque il limite, se esiste, è unico.</p>
+</div>
+
+<p>Un modo utile di leggere questo teorema è al contrario, come criterio per riconoscere quando un
+limite <em>non</em> esiste.</p>
+
+<div class="oss">
+<span class="et">Conseguenza: limite destro diverso dal sinistro</span>
+<p>Se $\displaystyle\lim_{x\to x_0^{-}}f(x)=l_1$ e $\displaystyle\lim_{x\to x_0^{+}}f(x)=l_2$, con
+$l_1\neq l_2$, allora $\displaystyle\lim_{x\to x_0}f(x)$ non esiste.</p>
+<p>Perché: se il limite bilatero esistesse e valesse $l$, restringendo l'intorno alla sola metà
+sinistra otterremmo che anche il limite sinistro vale $l$, e per l'unicità $l=l_1$. Restringendo
+alla metà destra otterremmo allo stesso modo $l=l_2$. Ma un solo numero non può essere
+contemporaneamente uguale a $l_1$ e a $l_2$ se questi sono diversi: il limite bilatero non può
+esistere.</p>
+</div>
+
+<div class="esempio">
+<span class="et">Esempio</span>
+<p>Consideriamo una funzione il cui grafico presenta un salto in $x=2$: avvicinandoci da sinistra
+la curva si accosta al valore 1, avvicinandoci da destra si accosta al valore $-\dfrac{3}{2}$.
+In simboli,</p>
+$$\lim_{x\to 2^{-}}f(x)=1 \qquad\qquad \lim_{x\to 2^{+}}f(x)=-\frac{3}{2}$$
+<p>Poiché $1\neq-\dfrac{3}{2}$, per la conseguenza appena vista il limite bilatero
+$\displaystyle\lim_{x\to 2}f(x)$ non esiste. Non è un'informazione mancante: è un fatto, e sappiamo
+dimostrarlo con un criterio preciso invece di limitarci a dire «il grafico ha un salto».</p>
+</div>
+
+<h2>Teorema della permanenza del segno</h2>
+
+<p>Supponiamo di sapere che $\displaystyle\lim_{x\to x_0}f(x)=3$, un numero positivo. Possiamo
+dedurre qualcosa sul segno di $f(x)$ per gli $x$ vicini a $x_0$? Attenzione: non nel punto $x_0$,
+dove la funzione magari non è nemmeno definita, ma nei punti che gli stanno accanto.</p>
+
+<p>Il limite dice che, avvicinandosi a $x_0$, i valori $f(x)$ si avvicinano indefinitamente a 3.
+Ma se $f(x)$ è vicino a 3 — diciamo a meno di mezza unità — allora $f(x)$ sta senz'altro fra 2,5 e
+3,5: numeri tutti positivi. È impossibile che, restando così vicino a 3, $f(x)$ riesca a essere
+negativo o nullo. Questa è l'idea del teorema.</p>
+
+<div class="oss">
+<span class="et">L'idea, in parole</span>
+<p>Se una funzione si avvicina indefinitamente a un numero diverso da zero, prima o poi deve
+entrare in una fascia che non contiene lo zero. In quella fascia il segno di $f(x)$ è costretto a
+coincidere con il segno del limite.</p>
+</div>
+
+<div class="def">
+<span class="et">Teorema della permanenza del segno</span>
+<p>Se $\displaystyle\lim_{x\to x_0}f(x)=l$ con $l\neq 0$, allora esiste un intorno bucato di
+$x_0$ in cui $f(x)$ ha lo stesso segno di $l$: $f(x)&gt;0$ in tutto l'intorno se $l&gt;0$,
+$f(x)&lt;0$ in tutto l'intorno se $l&lt;0$.</p>
+</div>
+
+<div class="esempio">
+<span class="et">Dimostrazione</span>
+<p>Supponiamo $l&gt;0$ (il caso $l&lt;0$ è identico, con i segni ribaltati). Applichiamo la
+definizione di limite scegliendo come tolleranza proprio</p>
+$$\varepsilon=\frac{l}{2}$$
+<p>che è positiva perché lo è $l$. Per definizione esiste un intorno $I(x_0)$ tale che, per ogni
+$x\in I(x_0)$ con $x\neq x_0$,</p>
+$$|f(x)-l|&lt;\frac{l}{2} \qquad\Longrightarrow\qquad \frac{l}{2}&lt;f(x)&lt;\frac{3l}{2}$$
+<p>In particolare $f(x)&gt;\dfrac{l}{2}$, e $\dfrac{l}{2}&gt;0$ perché $l&gt;0$: dunque $f(x)&gt;0$
+per ogni $x$ dell'intorno (escluso al più $x_0$). La funzione ha lo stesso segno del limite.</p>
+<p>La scelta $\varepsilon=l/2$ non è un'idea fortunata: è la scelta naturale, la più ampia
+tolleranza che tiene tutto l'intervallo $\left]l-\varepsilon;l+\varepsilon\right[$ dallo stesso
+lato dello zero rispetto a $l$.</p>
+</div>
+
+<div class="nota">
+<span class="et">Perché l'ipotesi $l\neq 0$ è necessaria</span>
+<p>Consideriamo $f(x)=x$ e $x_0=0$. Il limite è $\displaystyle\lim_{x\to 0}x=0$, ma la funzione
+non ha segno costante in nessun intorno di 0: è negativa per $x&lt;0$ e positiva per $x&gt;0$. Se
+$l=0$ il teorema semplicemente non si applica, e infatti qui la tesi è falsa. L'ipotesi
+$l\neq 0$ non è un dettaglio tecnico da trascurare: è ciò che rende vera la dimostrazione, perché
+solo se $l\neq 0$ possiamo scegliere $\varepsilon=|l|/2$ restando positivo.</p>
+</div>
+
+<div class="oss">
+<span class="et">Un punto sottile: il viceversa</span>
+<p>Se sappiamo che $f(x)&gt;0$ in un intorno di $x_0$ (escluso al più $x_0$) e che il limite
+esiste, possiamo concludere che il limite è positivo? Consideriamo $f(x)=x^2$ e $x_0=0$: è vero
+che $f(x)&gt;0$ per ogni $x\neq 0$, eppure $\displaystyle\lim_{x\to 0}x^2=0$, che non è positivo.
+Il verso «dal segno della funzione al segno del limite» conserva soltanto la disuguaglianza
+<em>debole</em> ($f(x)&gt;0$ vicino al punto implica $l\geq 0$, non $l&gt;0$), mentre il teorema
+appena dimostrato, nel verso «dal segno del limite al segno della funzione», conserva la
+disuguaglianza <em>stretta</em>. È un'asimmetria che vale la pena ricordare: passando al limite,
+le disuguaglianze strette possono indebolirsi.</p>
+</div>
+
+<div class="galleria">
+  <figure><div id="gal-a" style="height:190px"></div>
+    <figcaption>$l&gt;0$: in un intorno di $x_0$ (punto vuoto) la funzione resta positiva,
+    come il suo limite.</figcaption></figure>
+  <figure><div id="gal-b" style="height:190px"></div>
+    <figcaption>Controesempio con $l=0$: $f(x)=x$ cambia segno in ogni intorno di 0, perché
+    l'ipotesi $l\neq 0$ manca.</figcaption></figure>
+</div>
+
+<h2>Teorema del confronto</h2>
+
+<p>Consideriamo $\displaystyle\lim_{x\to+\infty}\dfrac{3+\cos x}{x}$. Il coseno oscilla per sempre
+fra $-1$ e $1$, senza mai stabilizzarsi: non possiamo calcolare il suo limite per $x\to+\infty$ (e
+infatti non esiste). Eppure il numeratore, per quanto oscilli, resta sempre compreso fra 2 e 4:
+non esplode, non si azzera, resta imbrigliato in una fascia limitata. Dividendo per una $x$ che
+cresce senza limite, ci aspettiamo che l'intera frazione venga schiacciata a zero, qualunque cosa
+faccia il coseno al numeratore. Il teorema del confronto rende precisa questa intuizione.</p>
+
+<div class="oss">
+<span class="et">L'idea, in parole</span>
+<p>Il teorema del confronto — detto anche <em>dei due carabinieri</em> — dice che se una funzione
+$f(x)$ è sempre compresa fra altre due, $h(x)$ e $g(x)$, e queste due funzioni convergono allo
+stesso valore $l$, allora anche $f(x)$ è costretta a raggiungere $l$: schiacciata fra due funzioni
+che vanno nello stesso posto, non ha scampo.</p>
+</div>
+
+<div class="def">
+<span class="et">Teorema del confronto</span>
+<p>Siano $h(x)$, $f(x)$, $g(x)$ tre funzioni definite in uno stesso intorno bucato $H$ di $x_0$.
+Se per ogni $x\in H$, $x\neq x_0$, vale</p>
+$$h(x)\leq f(x)\leq g(x)$$
+<p>e inoltre</p>
+$$\lim_{x\to x_0}h(x)=\lim_{x\to x_0}g(x)=l$$
+<p>allora anche $\displaystyle\lim_{x\to x_0}f(x)=l$.</p>
+</div>
+
+<div class="esempio">
+<span class="et">Dimostrazione</span>
+<p>Fissiamo un $\varepsilon&gt;0$ qualunque. Poiché $\lim h(x)=l$, esiste un intorno $I_1(x_0)$
+tale che, per $x\in I_1(x_0)$, $x\neq x_0$:</p>
+$$l-\varepsilon&lt;h(x)&lt;l+\varepsilon$$
+<p>Poiché $\lim g(x)=l$, esiste un intorno $I_2(x_0)$ tale che, per $x\in I_2(x_0)$, $x\neq x_0$:</p>
+$$l-\varepsilon&lt;g(x)&lt;l+\varepsilon$$
+<p>Prendiamo l'intersezione $I(x_0)=I_1(x_0)\cap I_2(x_0)\cap H$, che è ancora un intorno di
+$x_0$ (intersezione di intorni). Per ogni $x\in I(x_0)$, $x\neq x_0$, valgono insieme la
+disuguaglianza dell'ipotesi e le due appena scritte:</p>
+$$l-\varepsilon&lt;h(x)\leq f(x)\leq g(x)&lt;l+\varepsilon$$
+<p>da cui, guardando solo il primo e l'ultimo membro, $l-\varepsilon&lt;f(x)&lt;l+\varepsilon$,
+cioè $|f(x)-l|&lt;\varepsilon$. Abbiamo trovato, per un $\varepsilon$ arbitrario, un intorno che
+soddisfa la definizione di limite: dunque $\displaystyle\lim_{x\to x_0}f(x)=l$.</p>
+</div>
+
+<p>Il teorema ha due varianti utili, per quando uno dei limiti è infinito. In quel caso basta un
+solo «carabiniere», perché all'infinito non c'è nessun limite superiore da rispettare.</p>
+
+<div class="passo">
+<p><strong>Se $|f(x)|\leq|g(x)|$ in un intorno bucato di $x_0$ e $\displaystyle\lim_{x\to x_0}g(x)=0$,
+allora $\displaystyle\lim_{x\to x_0}f(x)=0$.</strong> Segue dal teorema appena dimostrato: dalla
+disuguaglianza fra valori assoluti si ricava $-|g(x)|\leq f(x)\leq|g(x)|$, e poiché
+$\lim|g(x)|=\lim(-|g(x)|)=0$, la funzione $f(x)$ resta schiacciata fra due funzioni che tendono
+entrambe a 0.</p>
+<p><strong>Se $f(x)\geq g(x)$ in un intorno bucato di $x_0$ e $\displaystyle\lim_{x\to x_0}g(x)=+\infty$,
+allora $\displaystyle\lim_{x\to x_0}f(x)=+\infty$</strong> (e, simmetricamente, se
+$f(x)\leq g(x)$ e $\lim g(x)=-\infty$, allora $\lim f(x)=-\infty$). Qui basta una sola
+disuguaglianza: una funzione che supera sempre un'altra già destinata a superare qualunque soglia
+è a sua volta costretta a superarla.</p>
+</div>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Esempio da osservare
+      <select id="scelta">
+        <option value="0">x² sin(1/x), per x &rarr; 0</option>
+        <option value="1">(3 + cos x)/x, per x &rarr; +&infin;</option>
+      </select>
+    </label>
+    <label id="lab-slider">Ampiezza dell'intervallo
+      <input type="range" id="s-par" min="0" max="100" value="60">
+      <span id="v-par" class="val"></span>
+    </label>
+  </div>
+  <div id="g-confronto" style="height:400px"></div>
+  <p class="leggenda">Le due curve rosse tratteggiate sono i «carabinieri» $h(x)$ e $g(x)$; la
+  banda rosa chiara è la zona in cui $f(x)$ (curva blu) è obbligata a stare. Restringendo il
+  cursore la banda si stringe sempre di più attorno al valore limite, e la curva blu — anche se
+  oscilla in modo complicato, come nel primo esempio — è trascinata con lei. Cambiando esempio si
+  passa dallo schiacciamento attorno a un punto ($x_0=0$) allo schiacciamento all'infinito.</p>
+</div>
+
+<div class="esempio">
+<span class="et">Esempio svolto 1</span>
+<p>Calcoliamo $\displaystyle\lim_{x\to+\infty}\frac{3+\cos x}{x}$. Partiamo da ciò che sappiamo
+sempre su $\cos x$, qualunque sia $x$:</p>
+$$-1\leq\cos x\leq 1$$
+<p>Aggiungiamo 3 a tutti e tre i membri (sommare una costante non cambia il verso delle
+disuguaglianze):</p>
+$$2\leq 3+\cos x\leq 4$$
+<p>Il limite è per $x\to+\infty$, quindi possiamo lavorare con $x$ definitivamente positiva, e
+dividere tutti e tre i membri per $x$ senza cambiare verso:</p>
+$$\frac{2}{x}\leq\frac{3+\cos x}{x}\leq\frac{4}{x}$$
+<p>Le due funzioni ai lati sono del tipo già incontrato parlando di asintoti orizzontali: al
+crescere di $x$ una costante divisa per $x$ si avvicina indefinitamente a 0. Verifichiamolo con la
+definizione, giusto per un caso: fissato $\varepsilon&gt;0$, la richiesta $\left|\frac{k}{x}-0\right|&lt;\varepsilon$
+diventa $\frac{k}{x}&lt;\varepsilon$ (per $x&gt;0$), cioè $x&gt;\frac{k}{\varepsilon}$: basta
+prendere la soglia $c=\frac{k}{\varepsilon}$, quindi</p>
+$$\lim_{x\to+\infty}\frac{2}{x}=0 \qquad\qquad \lim_{x\to+\infty}\frac{4}{x}=0$$
+<p>Le due funzioni che imprigionano $\dfrac{3+\cos x}{x}$ tendono entrambe a 0: per il teorema del
+confronto,</p>
+$$\lim_{x\to+\infty}\frac{3+\cos x}{x}=0$$
+<p>Notiamo che non abbiamo mai avuto bisogno di sapere dove si trovi $\cos x$ in ogni istante:
+il teorema ci ha dispensato dal seguirne l'oscillazione.</p>
+</div>
+
+<div class="esempio">
+<span class="et">Esempio svolto 2</span>
+<p>Calcoliamo $\displaystyle\lim_{x\to 0}x^2\sin\frac{1}{x}$. Il fattore $\sin\frac1x$ non ha
+limite per $x\to 0$: oscilla sempre più velocemente e non si stabilizza mai. Ma non ci serve che
+si stabilizzi: sappiamo solo che, qualunque sia $x\neq 0$,</p>
+$$-1\leq\sin\frac{1}{x}\leq 1$$
+<p>Moltiplichiamo tutti e tre i membri per $x^2$, che non cambia mai segno (è un quadrato, quindi
+$x^2\geq 0$ per ogni $x$): moltiplicare per una quantità non negativa non cambia il verso delle
+disuguaglianze,</p>
+$$-x^2\leq x^2\sin\frac{1}{x}\leq x^2$$
+<p>Le due funzioni ai lati sono elementari, e il loro limite per $x\to 0$ è immediato:</p>
+$$\lim_{x\to 0}(-x^2)=0 \qquad\qquad \lim_{x\to 0}x^2=0$$
+<p>Per il teorema del confronto, la funzione compresa fra loro ha lo stesso limite:</p>
+$$\lim_{x\to 0}x^2\sin\frac{1}{x}=0$$
+<p>Il fattore che oscilla senza sosta viene comunque «trascinato» a 0 dal fattore $x^2$ che lo
+comprime sempre di più. È l'immagine giusta per capire perché il teorema funziona anche quando una
+delle funzioni coinvolte, presa da sola, si comporta in modo complicato.</p>
+</div>
+
+<div class="avanti">
+<h2>Da riprendere più avanti</h2>
+<ul>
+<li>La dimostrazione del limite notevole $\displaystyle\lim_{x\to 0}\frac{\sin x}{x}=1$ userà
+proprio il teorema del confronto, applicato a una disuguaglianza geometrica fra aree: la vedremo
+nell'unità 06.</li>
+<li>Il teorema di Weierstrass e gli altri teoremi sulle funzioni continue (unità 09) userranno un
+ragionamento per assurdo dello stesso tipo di quello visto qui per l'unicità.</li>
+<li>In questa unità non compare nessun quesito di maturità: quelli reali chiedono di solito di
+enunciare e dimostrare uno di questi tre teoremi all'interno di un problema più ampio, oppure ne
+richiedono un uso combinato con il calcolo dei limiti, che affrontiamo a partire dall'unità 04.
+Quesiti di questo tipo torneranno soprattutto dall'unità 20 in poi, con i teoremi del calcolo
+differenziale, dove la dimostrazione per assurdo e gli argomenti di questa unità ricompaiono con
+regolarità.</li>
+</ul>
+</div>
+
+<footer>
+<p>Matematica quinta &middot; Limiti &middot; Unità 03</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var base={margin:{l:38,r:12,t:8,b:32},showlegend:false,
+    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
+
+  // --- galleria permanenza del segno ---
+  function mini(id,tracce,shapes,xr,yr){
+    Plotly.newPlot(id,tracce,Object.assign({},base,{
+      margin:{l:26,r:10,t:8,b:24},
+      xaxis:{range:xr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
+      yaxis:{range:yr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
+      shapes:shapes}),{displayModeBar:false,responsive:true,staticPlot:true});
+  }
+  function ramo(f,a,b,n,color){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n;var w=f(v);
+    if(isFinite(w)&&Math.abs(w)<1e4){x.push(v);y.push(w);}}return {x:x,y:y,mode:'lines',
+    line:{color:color||'#16283d',width:2.2},hoverinfo:'skip'};}
+
+  // gal-a: l>0, segno mantenuto: f(x) = x+2, x0 = -0.4, l = 1.6
+  mini('gal-a',[
+      ramo(function(x){return x+2;},-2.2,1.6,120)
+    ],
+    [{type:'line',x0:-0.4,x1:-0.4,y0:-1,y1:3,line:{color:'#b3392f',width:2,dash:'dash'}},
+     {type:'rect',x0:-1.1,x1:0.3,y0:-1,y1:3,fillcolor:'rgba(47,107,79,0.10)',line:{width:0}}],
+    [-2.2,1.6],[-1,3]);
+
+  // gal-b: controesempio l=0: f(x)=x, x0=0
+  mini('gal-b',[
+      ramo(function(x){return x;},-2,2,120)
+    ],
+    [{type:'line',x0:0,x1:0,y0:-2,y1:2,line:{color:'#b3392f',width:2,dash:'dash'}}],
+    [-2,2],[-2,2]);
+
+  // --- widget principale: teorema del confronto ---
+  function caso0(d){
+    var N=1600, xs=[], yG=[], yH=[], yF=[];
+    for(var i=0;i<=N;i++){
+      var x=-d+i*(2*d)/N;
+      if(Math.abs(x)<1e-6) continue;
+      xs.push(x); yG.push(x*x); yH.push(-x*x); yF.push(x*x*Math.sin(1/x));
+    }
+    return {xs:xs,yG:yG,yH:yH,yF:yF,
+      xr:[-d*1.05,d*1.05], yr:[-d*d*1.25-0.02,d*d*1.25+0.02],
+      titoloAsseX:'x', vShapes:[{type:'line',x0:0,x1:0,y0:-d*d*1.25-0.02,y1:d*d*1.25+0.02,
+        line:{color:'#6d7280',width:1,dash:'dot'}}]};
+  }
+  function caso1(c){
+    var N=900, xMax=c+35, xs=[], yG=[], yH=[], yF=[];
+    for(var i=0;i<=N;i++){
+      var x=c+i*(xMax-c)/N;
+      xs.push(x); yG.push(4/x); yH.push(2/x); yF.push((3+Math.cos(x))/x);
+    }
+    return {xs:xs,yG:yG,yH:yH,yF:yF,
+      xr:[c,xMax], yr:[-0.1,4/c+0.3],
+      vShapes:[{type:'line',x0:c,x1:c,y0:-0.1,y1:4/c+0.3,line:{color:'#6d7280',width:1,dash:'dot'}}]};
+  }
+
+  var sel=document.getElementById('scelta'), sp=document.getElementById('s-par'),
+      vp=document.getElementById('v-par'), lab=document.getElementById('lab-slider');
+
+  function aggiorna(){
+    var k=parseInt(sel.value,10), t=parseFloat(sp.value)/100, dati;
+    if(k===0){
+      var d=1.3-1.22*t; // da 1.3 (largo) a circa 0.08 (stretto)
+      lab.firstChild.textContent='Ampiezza dell\'intervallo attorno a x0 = 0 ';
+      vp.textContent='raggio '+d.toFixed(2).replace('.',',');
+      dati=caso0(d);
+    } else {
+      var c=3+37*t; // da 3 a 40
+      lab.firstChild.textContent='Da dove cominciamo a guardare ';
+      vp.textContent='x > '+c.toFixed(1).replace('.',',');
+      dati=caso1(c);
+    }
+    var traccia_g={x:dati.xs,y:dati.yG,mode:'lines',line:{color:'#b3392f',width:1.8,dash:'dash'},
+      hoverinfo:'skip',name:'g(x)'};
+    var traccia_h={x:dati.xs,y:dati.yH,mode:'lines',line:{color:'#b3392f',width:1.8,dash:'dash'},
+      fill:'tonexty',fillcolor:'rgba(179,57,47,0.10)',hoverinfo:'skip',name:'h(x)'};
+    var traccia_f={x:dati.xs,y:dati.yF,mode:'lines',line:{color:'#1f4e79',width:2.2},
+      hoverinfo:'skip',name:'f(x)'};
+    Plotly.react('g-confronto',[traccia_g,traccia_h,traccia_f],Object.assign({},base,{
+      xaxis:{title:'x',range:dati.xr,zeroline:true,zerolinecolor:'#16283d',gridcolor:'#e6e0d4'},
+      yaxis:{title:'y',range:dati.yr,zeroline:true,zerolinecolor:'#16283d',gridcolor:'#e6e0d4'},
+      shapes:dati.vShapes||[]
+    }),{displayModeBar:false,responsive:true});
+  }
+  sel.addEventListener('change',aggiorna); sp.addEventListener('input',aggiorna);
+  aggiorna();
+})();
+</script>
+</body>
+</html>
