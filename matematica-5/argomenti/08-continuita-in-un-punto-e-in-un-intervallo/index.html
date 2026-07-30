@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Continuità in un punto e in un intervallo — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:22px 0}
+.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
+.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;margin:20px 0}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:8px 10px;text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Continuità &middot; Unità 08</p>
+  <h1>Continuità in un punto e in un intervallo</h1>
+  <p class="sommario">Dire che un grafico "si disegna senza staccare la penna" significa qualcosa
+  di preciso: il valore a cui la funzione si avvicina in un punto deve coincidere con il valore che
+  la funzione assume in quel punto.</p>
+</header>
+
+<h2>Continuità in un punto</h2>
+
+<div class="def"><span class="et">Definizione</span>
+Una funzione $f(x)$ definita in un intervallo $[a,b]$ è <strong>continua</strong> in un punto
+$x_0\in[a,b]$ se esiste $\displaystyle\lim_{x\to x_0}f(x)$ e risulta
+$$\lim_{x\to x_0}f(x)=f(x_0)$$</div>
+
+<p>La richiesta è doppia: il limite deve esistere finito, e deve coincidere proprio con $f(x_0)$,
+non con un valore qualsiasi. Se una delle due condizioni cade, la funzione non è continua in
+$x_0$.</p>
+
+<div class="galleria">
+  <figure><div id="gal-a" style="height:160px"></div><figcaption>continua in $x_0$</figcaption></figure>
+  <figure><div id="gal-b" style="height:160px"></div><figcaption>non continua in $x_0$:<br>il limite esiste ma non vale $f(x_0)$</figcaption></figure>
+</div>
+
+<p>Si dice che $f(x)$ è continua <strong>a destra</strong> in $x_0$ se
+$\displaystyle\lim_{x\to x_0^{+}}f(x)=f(x_0)$, ed è continua <strong>a sinistra</strong> in $x_0$ se
+$\displaystyle\lim_{x\to x_0^{-}}f(x)=f(x_0)$. Come per il limite bilatero, la continuità in $x_0$
+equivale ad avere entrambe le continuità unilaterali.</p>
+
+<div class="galleria">
+  <figure><div id="gal-c" style="height:160px"></div><figcaption>continua a destra in $x_0$</figcaption></figure>
+  <figure><div id="gal-d" style="height:160px"></div><figcaption>continua a sinistra in $x_0$</figcaption></figure>
+</div>
+
+<div class="def"><span class="et">Definizione — continuità in un intervallo</span>
+Una funzione definita in $[a,b]$ si dice continua nell'intervallo $[a,b]$ se è continua in ogni
+punto dell'intervallo.</div>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Scostamento del valore in $x_0=1$: $c$
+      <input type="range" id="s-c" min="-1.5" max="1.5" step="0.05" value="0.6">
+      <span>$c$ = <span class="val" id="v-c"></span></span>
+    </label>
+  </div>
+  <div id="g-cont" style="height:340px"></div>
+  <p class="leggenda">La curva è $f(x)=x^2$, ma in $x_0=1$ il valore è fissato a mano a $1+c$. Il
+  limite per $x\to1$ resta sempre $1$: quando $c=0$ il punto cade sulla curva e la funzione è
+  continua in $1$; per ogni altro $c$ il punto si stacca dalla curva e la funzione, pur avendo
+  limite in $1$, non è continua lì.</p>
+</div>
+
+<h2>Funzioni continue nel loro dominio</h2>
+
+<p>Sono continue in ogni intervallo del proprio dominio le funzioni elementari:</p>
+
+<table class="tabellina">
+<tr><th>Famiglia</th><th>Esempio</th><th>Dominio</th></tr>
+<tr><td>razionali intere</td><td>$f(x)=x^2+3$</td><td>$\mathbb{R}$</td></tr>
+<tr><td>irrazionali intere</td><td>$f(x)=\sqrt{x+2}$</td><td>$x\geq-2$</td></tr>
+<tr><td>esponenziali</td><td>$f(x)=e^{x}$</td><td>$\mathbb{R}$</td></tr>
+<tr><td>logaritmiche</td><td>$f(x)=\ln x$</td><td>$x&gt;0$</td></tr>
+<tr><td>goniometriche $\sin,\cos$</td><td>$f(x)=\sin x$</td><td>$\mathbb{R}$</td></tr>
+</table>
+
+<p>Nel caso di $\sqrt{x+2}$ il dominio è imposto dalla condizione $x+2\geq0$, cioè $x\geq-2$: sotto
+radice non può comparire un numero negativo.</p>
+
+<h2>Proprietà delle funzioni continue</h2>
+
+<p>Se $f(x)$ e $g(x)$ sono continue in un punto o in un intervallo, sono continue anche:</p>
+
+<ul>
+<li>$f(x)\pm g(x)$;</li>
+<li>$k\cdot f(x)$, con $k\in\mathbb{R}$;</li>
+<li>$f(x)\cdot g(x)$;</li>
+<li>$[f(x)]^{n}$, con $n\in\mathbb{N}\setminus\{0\}$;</li>
+<li>$\dfrac{f(x)}{g(x)}$, dove $g(x)\neq0$;</li>
+<li>$f(g(x))$.</li>
+</ul>
+
+<div class="def"><span class="et">Teorema — continuità della funzione inversa</span>
+Se $y=f(x)$ è iniettiva e continua in un intervallo $D$, allora la funzione inversa $f^{-1}$ è
+continua in $f(D)$.</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>I tre teoremi fondamentali sulle funzioni continue — Weierstrass, dei valori intermedi e di
+esistenza degli zeri — sono nell'unità 09.</li>
+<li>Che cosa succede quando la continuità in un punto viene a mancare, e come si classificano i
+diversi casi, è l'oggetto dell'unità 10.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Continuità &middot; Unità 08</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var base={margin:{l:24,r:10,t:8,b:22},showlegend:false,
+    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
+  function mini(id,tracce,xr,yr){
+    Plotly.newPlot(id,tracce,Object.assign({},base,{
+      xaxis:{range:xr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
+      yaxis:{range:yr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}}}),
+      {displayModeBar:false,responsive:true,staticPlot:true});
+  }
+  function ramo(f,a,b,n){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n;x.push(v);y.push(f(v));}
+    return {x:x,y:y,mode:'lines',line:{color:'#16283d',width:2.2},hoverinfo:'skip'};}
+  function punto(x,y,pieno){return {x:[x],y:[y],mode:'markers',
+    marker:pieno?{size:9,color:'#16283d'}:{size:9,color:'#f7f5ef',line:{color:'#16283d',width:2}}};}
+
+  // continua in x0
+  mini('gal-a',[ramo(function(x){return x*x*0.5+0.3;},-1.6,1.6,80),punto(0,0.3,true)],[-1.8,1.8],[-0.3,1.6]);
+  // non continua: limite esiste, valore diverso
+  mini('gal-b',[ramo(function(x){return x*x*0.5+0.3;},-1.6,1.6,80),punto(0,0.3,false),punto(0,1.1,true)],[-1.8,1.8],[-0.3,1.6]);
+  // continua a destra: salto, il punto pieno coincide col ramo destro
+  mini('gal-c',[ramo(function(x){return 0.5*x+0.2;},-1.6,-0.02,60),ramo(function(x){return 0.5*x+1.0;},0.02,1.6,60),
+    punto(0,0.2,false),punto(0,1.0,true)],[-1.8,1.8],[-0.8,1.8]);
+  // continua a sinistra: il punto pieno coincide col ramo sinistro
+  mini('gal-d',[ramo(function(x){return 0.5*x+0.2;},-1.6,-0.02,60),ramo(function(x){return 0.5*x+1.0;},0.02,1.6,60),
+    punto(0,0.2,true),punto(0,1.0,false)],[-1.8,1.8],[-0.8,1.8]);
+
+  var sc=document.getElementById('s-c'), vc=document.getElementById('v-c');
+  function fmt(n){return n.toFixed(2).replace('.',',');}
+  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
+  var xL=xs(-1.2,0.985,150), xR=xs(1.015,3,150);
+  function agg(){
+    var c=parseFloat(sc.value);
+    vc.textContent=fmt(c);
+    Plotly.react('g-cont',[
+      {x:xL,y:xL.map(function(v){return v*v;}),mode:'lines',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
+      {x:xR,y:xR.map(function(v){return v*v;}),mode:'lines',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
+      {x:[1],y:[1],mode:'markers',marker:{size:11,color:'#f7f5ef',line:{color:'#1f4e79',width:2}},hoverinfo:'skip'},
+      {x:[1],y:[1+c],mode:'markers',marker:{size:11,color:'#b3392f'},
+        text:['f(1) = '+fmt(1+c)],hovertemplate:'%{text}<extra></extra>'}
+    ],{
+      margin:{l:44,r:14,t:10,b:34},showlegend:false,
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[-1.2,3],gridcolor:'#e6e0d4'},
+      yaxis:{title:'y',range:[-0.3,4.2],gridcolor:'#e6e0d4'},
+      annotations:[{x:1,y:4.0,text:Math.abs(c)<1e-9?'continua in x₀=1':'non continua in x₀=1',
+        showarrow:false,font:{size:12,color:Math.abs(c)<1e-9?'#2f6b4f':'#b3392f'}}]
+    },{displayModeBar:false,responsive:true});
+  }
+  sc.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>

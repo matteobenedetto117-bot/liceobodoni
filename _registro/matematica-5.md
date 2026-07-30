@@ -98,3 +98,14 @@ teorema del confronto, a pagina 21.
   nella traccia ma necessaria a rendere leggibile la disuguaglianza. Nessun esempio nuovo:
   l'unico interattivo riusa le quattro funzioni della gerarchia (ln x, x², 2^x, x^x) già disegnate
   nella traccia, mostrandone i sorpassi al crescere di x su scala logaritmica.
+
+## Unità 08 — Continuità in un punto e in un intervallo
+- Parole: 413 su 4 pagine di traccia (28–31)
+- Rettifica: nessuna. Verificato con SymPy che il dominio di $\sqrt{x+2}$ è $x\geq-2$ (soluzione di
+  $x+2\geq0$) e che $\lim_{x\to-2^+}\sqrt{x+2}=0$.
+- Aggiunta: una riga che collega la continuità bilatera alle due continuità unilaterali (già
+  disponibile dall'unità 01 sui limiti destro e sinistro, non esplicitata nella traccia in questo
+  punto ma immediata conseguenza di quanto già introdotto). Nessun esempio nuovo: l'unico
+  interattivo mostra $f(x)=x^2$ con il valore in $x_0=1$ spostabile a mano, per far vedere dal vivo
+  quando il punto cade sulla curva (continuità) e quando se ne stacca pur restando il limite
+  invariato.
