@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weierstrass, valori intermedi, esistenza degli zeri — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:22px 0}
+.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
+.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
+.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px;margin:22px 0;max-width:480px}
+.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Continuità &middot; Unità 09</p>
+  <h1>Weierstrass, valori intermedi, esistenza degli zeri</h1>
+  <p class="sommario">Su un intervallo chiuso e limitato una funzione continua si comporta molto
+  bene: raggiunge un valore massimo e un valore minimo, e nel farlo passa per tutti i valori
+  intermedi. Da qui discende anche il modo più usato per dimostrare che un'equazione ha soluzione,
+  senza doverla risolvere esplicitamente.</p>
+</header>
+
+<h2>Massimo e minimo assoluto</h2>
+
+<div class="def"><span class="et">Definizione</span>
+Data una funzione $y=f(x)$ definita in un intervallo $I$, chiamiamo <strong>massimo assoluto</strong>
+di $f(x)$, se esiste, il massimo $M$ dei valori assunti dalla funzione in $I$; chiamiamo
+<strong>minimo assoluto</strong> di $f(x)$, se esiste, il minimo $m$ dei valori assunti dalla
+funzione in $I$.</div>
+
+<figure class="figuraunica">
+  <div id="g-mm" style="height:260px"></div>
+  <figcaption>Il massimo assoluto $M$ è raggiunto qui in un punto interno $\alpha$, il minimo
+  assoluto $m$ nell'estremo $b$: il teorema che segue garantisce che esistano, non dice dove si
+  trovano.</figcaption>
+</figure>
+
+<h2>Teorema di Weierstrass</h2>
+
+<div class="def"><span class="et">Teorema di Weierstrass</span>
+Se $f$ è una funzione continua in un intervallo chiuso e limitato $[a,b]$, allora $f$ assume, in
+tale intervallo, il massimo assoluto e il minimo assoluto.</div>
+
+<p>Ognuna delle tre ipotesi &mdash; intervallo chiuso, intervallo limitato, funzione continua
+&mdash; è indispensabile: togliendone anche una sola, il massimo o il minimo assoluto possono
+sparire.</p>
+
+<div class="galleria">
+  <figure><div id="gal-a" style="height:150px"></div><figcaption>$(a,b)$ aperto:<br>nessun massimo assoluto</figcaption></figure>
+  <figure><div id="gal-b" style="height:150px"></div><figcaption>$]a,b[$ aperto, $f$ decrescente:<br>né massimo né minimo assoluto</figcaption></figure>
+  <figure><div id="gal-c" style="height:150px"></div><figcaption>$[a,b]$ chiuso, $f$ discontinua:<br>massimo sì, minimo no</figcaption></figure>
+  <figure><div id="gal-d" style="height:150px"></div><figcaption>$[a,b]$ chiuso, $f$ continua:<br>massimo e minimo entrambi garantiti</figcaption></figure>
+</div>
+
+<p>Weierstrass è dunque una condizione sufficiente, ma non necessaria: esistono funzioni che non
+rispettano le sue ipotesi e hanno comunque massimo e minimo assoluti.</p>
+
+<h2>Teorema dei valori intermedi</h2>
+
+<div class="def"><span class="et">Teorema dei valori intermedi</span>
+Se $f$ è una funzione continua in un intervallo chiuso e limitato $[a,b]$, allora essa assume,
+almeno una volta, tutti i valori compresi tra il massimo e il minimo.</div>
+
+<p>Il risultato si appoggia su Weierstrass: una volta certi che $M$ e $m$ esistano, la continuità
+impedisce alla funzione di "saltare" un valore intermedio fra i due.</p>
+
+<h2>Teorema di esistenza degli zeri</h2>
+
+<div class="def"><span class="et">Teorema di esistenza degli zeri</span>
+Se $f$ è una funzione continua in un intervallo chiuso e limitato $[a,b]$ e negli estremi
+dell'intervallo assume valori di segno opposto, allora esiste almeno un punto $c\in\,]a,b[\,$ in
+cui $f$ si annulla, cioè $f(c)=0$.</div>
+
+<p>È un caso particolare del teorema dei valori intermedi: se $f(a)$ e $f(b)$ hanno segno opposto,
+lo $0$ è uno dei valori compresi tra il minimo e il massimo, quindi la funzione lo tocca.</p>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Estremo destro dell'intervallo: $b$
+      <input type="range" id="s-b" min="1.05" max="2.0" step="0.05" value="1.2">
+      <span>$b$ = <span class="val" id="v-b"></span></span>
+    </label>
+  </div>
+  <div id="g-zeri" style="height:340px"></div>
+  <p class="leggenda">La curva è $f(x)=x^3-x-1$, con $a=1$ fisso. Sposta $b$ e osserva quando
+  $f(a)$ e $f(b)$ hanno segno opposto: solo allora il teorema garantisce uno zero in $(a,b)$.</p>
+</div>
+
+<p>Verifichiamo il teorema su $f(x)=x^3-x-1$ nell'intervallo $[1,2]$: la funzione è continua su
+tutto $\mathbb{R}$ perché somma di funzioni razionali intere, e agli estremi vale
+$$f(1)=1-1-1=-1&lt;0,\qquad f(2)=8-2-1=5&gt;0.$$
+I due valori hanno segno opposto, quindi esiste almeno un $c\in\,]1,2[\,$ con $f(c)=0$: l'equazione
+$x^3-x-1=0$ ammette una soluzione reale tra $1$ e $2$ (vale circa $1{,}325$, ma il teorema non
+serve a calcolarla: serve solo a garantirne l'esistenza).</p>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>Come si classificano i punti in cui la continuità viene a mancare è l'oggetto dell'unità 10.</li>
+<li>Una volta introdotta la derivata, il segno di $f'$ permetterà di dimostrare anche che uno zero
+trovato con questo teorema è l'unico, non solo che esiste (unità 22).</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Continuità &middot; Unità 09</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var base={margin:{l:24,r:10,t:8,b:22},showlegend:false,
+    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
+  function mini(id,tracce,xr,yr){
+    Plotly.newPlot(id,tracce,Object.assign({},base,{
+      xaxis:{range:xr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
+      yaxis:{range:yr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}}}),
+      {displayModeBar:false,responsive:true,staticPlot:true});
+  }
+  function ramo(f,a,b,n){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n;x.push(v);y.push(f(v));}
+    return {x:x,y:y,mode:'lines',line:{color:'#16283d',width:2.2},hoverinfo:'skip'};}
+  function punto(x,y,pieno){return {x:[x],y:[y],mode:'markers',
+    marker:pieno?{size:9,color:'#16283d'}:{size:9,color:'#f7f5ef',line:{color:'#16283d',width:2}}};}
+
+  // figura unica: massimo interno, minimo all'estremo
+  Plotly.newPlot('g-mm',[
+    ramo(function(x){return 0.9+0.9*Math.sin(1.15*x)*Math.exp(-0.12*x);},0,6.4,140),
+    punto(1.35,1.72,true), punto(6.4,-0.05,true)
+  ],Object.assign({},base,{
+    xaxis:{range:[-0.3,6.8],zeroline:true,zerolinecolor:'#16283d',showgrid:false,
+      tickvals:[1.35,6.4],ticktext:['α','b'],tickfont:{size:11}},
+    yaxis:{range:[-0.9,2.1],zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
+    annotations:[
+      {x:1.35,y:1.98,text:'M',showarrow:false,font:{size:12,color:'#1f4e79'}},
+      {x:6.4,y:-0.32,text:'m',showarrow:false,font:{size:12,color:'#1f4e79'}}]
+  }),{displayModeBar:false,responsive:true,staticPlot:true});
+
+  // (a,b) aperto, crescente: nessun massimo
+  mini('gal-a',[ramo(function(x){return 0.4+0.55*Math.pow(x/2,1.4);},0.02,1.98,60),
+    punto(0.02,0.42,false),punto(1.98,0.94,false)],[-0.15,2.15],[0.1,1.15]);
+  // ]a,b[ aperto, decrescente: né massimo né minimo
+  mini('gal-b',[ramo(function(x){return 1.4-0.5*x;},0.02,1.98,20),
+    punto(0.02,1.39,false),punto(1.98,0.41,false)],[-0.15,2.15],[0.2,1.6]);
+  // [a,b] chiuso, discontinua: massimo sì (nel salto), minimo no
+  mini('gal-c',[ramo(function(x){return 0.4+Math.pow(x-1,2);},0,2,60),
+    punto(0,1.4,true),punto(2,1.4,true),punto(1,0.4,false),punto(1,1.85,true)],[-0.2,2.2],[0.1,2.1]);
+  // [a,b] chiuso, continua: massimo e minimo garantiti
+  mini('gal-d',[ramo(function(x){return 0.4+Math.pow(x-1,2);},0,2,60),
+    punto(0,1.4,true),punto(2,1.4,true),punto(1,0.4,true)],[-0.2,2.2],[0.1,2.1]);
+
+  var sb=document.getElementById('s-b'), vb=document.getElementById('v-b');
+  function fmt(n){return n.toFixed(2).replace('.',',');}
+  function f(x){return x*x*x-x-1;}
+  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
+  var xc=xs(0.85,2.15,150);
+  function agg(){
+    var b=parseFloat(sb.value), fa=f(1), fb=f(b), garantito=fa*fb<0;
+    vb.textContent=fmt(b);
+    Plotly.react('g-zeri',[
+      {x:xc,y:xc.map(f),mode:'lines',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
+      {x:[0.85,2.15],y:[0,0],mode:'lines',line:{color:'#9aa7b5',width:1,dash:'dot'},hoverinfo:'skip'},
+      {x:[1,b],y:[0,0],mode:'lines',line:{color:garantito?'#2f6b4f':'#b3392f',width:5},hoverinfo:'skip'},
+      {x:[1],y:[fa],mode:'markers',marker:{size:10,color:'#16283d'},
+        text:['f(1) = '+fmt(fa)],hovertemplate:'%{text}<extra></extra>'},
+      {x:[b],y:[fb],mode:'markers',marker:{size:10,color:garantito?'#2f6b4f':'#b3392f'},
+        text:['f('+fmt(b)+') = '+fmt(fb)],hovertemplate:'%{text}<extra></extra>'}
+    ],{
+      margin:{l:44,r:14,t:10,b:34},showlegend:false,
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[0.85,2.15],gridcolor:'#e6e0d4'},
+      yaxis:{title:'y',range:[-1.4,5.5],gridcolor:'#e6e0d4'},
+      annotations:[{x:1.5,y:5.0,
+        text:garantito?'segno opposto: zero garantito in (1, '+fmt(b)+')':'stesso segno: il teorema non garantisce nulla qui',
+        showarrow:false,font:{size:12,color:garantito?'#2f6b4f':'#b3392f'}}]
+    },{displayModeBar:false,responsive:true});
+  }
+  sb.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>

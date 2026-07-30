@@ -109,3 +109,20 @@ teorema del confronto, a pagina 21.
   interattivo mostra $f(x)=x^2$ con il valore in $x_0=1$ spostabile a mano, per far vedere dal vivo
   quando il punto cade sulla curva (continuità) e quando se ne stacca pur restando il limite
   invariato.
+
+## Unità 09 — Weierstrass, valori intermedi, esistenza degli zeri
+- Parole: 551 su 3 pagine di traccia (32–34)
+- Rettifica: nessuna. Verificato con SymPy che $f(x)=x^3-x-1$ è continua su $\mathbb{R}$, che
+  $f(1)=-1$, $f(2)=5$ e che l'unica soluzione reale dell'equazione è $\approx1{,}3247$, interna a
+  $(1,2)$ come richiesto dal teorema.
+- Aggiunta: un solo esempio (la traccia non ne contiene alcuno in queste tre pagine), applicando il
+  teorema di esistenza degli zeri a $x^3-x-1=0$ su $[1,2]$; l'unico interattivo riusa la stessa
+  funzione con un cursore sull'estremo $b$, per far vedere dal vivo quando il cambio di segno
+  garantisce lo zero. Nessun quesito di maturità reale inserito: il quesito standard su questo
+  teorema (Maturità 2017, quesito 9, su $\arctan x+x^3+e^x=0$) chiede anche l'unicità della
+  soluzione, che richiede lo studio del segno della derivata prima, non ancora disponibile a
+  questo punto del percorso (arriva nell'unità 22); un rimando in tal senso è stato aggiunto in
+  coda alla pagina al posto del quesito.
+- La figura che nella traccia introduce la definizione di massimo/minimo assoluto e quella che
+  illustra il teorema di Weierstrass sono la stessa figura (mostrano lo stesso tipo di curva),
+  perciò sono state unificate in un solo grafico invece di duplicarle.
