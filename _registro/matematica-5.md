@@ -49,3 +49,30 @@ pagine del sito.
   assente nella traccia (che riporta solo la formula generale), e un esempio di sintesi finale
   che combina sostituzione, quoziente e somma nello stesso calcolo, per compensare il fatto che
   gli esempi della traccia sono tutti isolati e su una sola regola alla volta.
+
+## Unità 05 — Forme indeterminate
+- Nessuna rettifica: tutti i calcoli della traccia (pagine 14–17) sono corretti. Verificati con
+  SymPy: $\lim_{x\to+\infty}(x^4-3x^2+1)=+\infty$;
+  $\lim_{x\to+\infty}(x-\sqrt{x^2+1})=0$;
+  $\lim_{x\to\frac{\pi}{2}^-}(1-\sin x)\tan x=0$;
+  $\lim_{x\to+\infty}\frac{x^5-2x^2+1}{-3x^2-2x+6}=-\infty$;
+  $\lim_{x\to+\infty}\frac{1-2x^2}{3x^2+2x-5}=-\frac23$;
+  $\lim_{x\to-\infty}\frac{2x-1}{x^3+2x}=0$;
+  $\lim_{x\to3}\frac{x^2-2x-3}{2x^2-9x+9}=\frac43$ (con la fattorizzazione
+  $2x^2-9x+9=(x-3)(2x-3)$); $\lim_{x\to+\infty}x^{1/\ln x}=e$.
+- Confini di pagina: usate le pagine 14–17 per intero, che nella traccia sono dedicate
+  esclusivamente alle forme indeterminate; la pagina 18 (teorema del confronto) appartiene
+  all'unità 03, come già segnalato nel registro di quell'unità, e la pagina 18 non è quindi
+  stata toccata qui.
+- Ricalibrazione: nessuna riduzione. Ho aperto l'unità con un esempio motivante costruito da me
+  (tre differenze di funzioni divergenti che danno rispettivamente un numero finito, $+\infty$ e
+  $-\infty$) per mostrare, prima di ogni definizione, perché la sola algebra dei limiti
+  dell'unità 04 non basta più. Ho anche aggiunto una tabella riassuntiva finale che collega ogni
+  forma alla propria tecnica (assente nella traccia, che passa da un esempio all'altro senza una
+  sintesi esplicita) e un widget interattivo con parametro $a$ nella famiglia
+  $x-a\sqrt{x^2+1}$, per far vedere sperimentalmente che la stessa forma $\infty-\infty$ può
+  dare risultati di natura diversa (finito, $+\infty$, $-\infty$) a seconda dei dettagli.
+- Rimandato: un quesito d'esame reale non è stato inserito, perché i quesiti di maturità sui
+  limiti richiedono quasi sempre seno, coseno o esponenziali in forma non riducibile
+  algebricamente (limiti notevoli, unità 06, o De L'Hôpital, unità 24); l'ho segnalato
+  esplicitamente nel testo con un rimando alle unità 06, 07, 11, 12 e 24.
