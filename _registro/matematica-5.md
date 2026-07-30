@@ -70,3 +70,19 @@ teorema del confronto, a pagina 21.
   emerge dai tre esempi $\infty/\infty$ già presenti (confronto fra i gradi), senza introdurre
   esempi ulteriori. L'unico interattivo riusa il secondo esempio $\infty/\infty$ della traccia
   per mostrare l'avvicinamento all'asintoto $y=-2/3$.
+
+## Unità 06 — Limiti notevoli
+- Parole: circa 420 (conteggio totale token, prosa e formule) su 4 pagine di traccia (20–23).
+- Rettifica: nessuna. Verificati con SymPy tutti i sette limiti notevoli (sin x/x, (1-cos x)/x,
+  (1-cos x)/x², (1+1/x)^x → e, ln(1+x)/x, (e^x-1)/x, ((1+x)^k-1)/x), l'identità
+  (1-cos x)/x = sin²x/(x(1+cos x)) e la catena di disuguaglianze sin x < x < tan x per x
+  piccolo positivo con verifica numerica.
+- Confine rispettato: la dimostrazione di sin x/x tramite il teorema del confronto, che nella
+  traccia segue immediatamente l'enunciato del teorema (pag. 18–21), è stata lasciata fuori
+  dall'unità 03 e collocata qui, come da nota già presente nel registro.
+- Aggiunta: nulla di contenuto nuovo. Solo le frasi che spiegano perché la funzione sin x/x è
+  pari, il passaggio ai reciproci che inverte le disuguaglianze, e il cambio di variabile
+  y = 1/x nel quinto limite. L'unico interattivo mostra la stretta cos x < sin x/x < 1
+  chiudersi verso 1 al variare del cursore.
+- Nessuna dimostrazione aggiunta per i limiti notevoli 4, 6 e 7: la traccia li presenta come
+  risultati riquadrati senza sviluppo, così restano anche qui.
