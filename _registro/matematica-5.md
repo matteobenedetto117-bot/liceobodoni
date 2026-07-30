@@ -86,3 +86,15 @@ teorema del confronto, a pagina 21.
   chiudersi verso 1 al variare del cursore.
 - Nessuna dimostrazione aggiunta per i limiti notevoli 4, 6 e 7: la traccia li presenta come
   risultati riquadrati senza sviluppo, così restano anche qui.
+
+## Unità 07 — Infinitesimi e infiniti, gerarchia, principio di sostituzione
+- Parole: 649 su circa 4,5 pagine di traccia equivalenti (coda di pag. 23, dopo il limite notevole
+  n.7 già coperto dall'unità 06, più le pagine 24–27 intere).
+- Rettifica: nessuna. Verificati con SymPy tutti i limiti: ln(1+5x)/sin(2x) → 5/2; (ln x)^3/x^2 → 0;
+  (log_2 x)^100/√x → 0; x^4/2^x → 0; x^x/e^x → +∞; e le cinque equivalenze notevoli per x→0
+  (sin x ~ x, ln(1+x) ~ x, e^x−1 ~ x, 1−cos x ~ x²/2, (1+x)^k−1 ~ kx, quest'ultima con k=3/7).
+- Aggiunta: una riga di chiarimento sul ruolo degli esponenti/basi nella gerarchia
+  (ln x)^a < x^a < a^x < x^x (a>0 per l'esponente, a>1 per la base dell'esponenziale), assente
+  nella traccia ma necessaria a rendere leggibile la disuguaglianza. Nessun esempio nuovo:
+  l'unico interattivo riusa le quattro funzioni della gerarchia (ln x, x², 2^x, x^x) già disegnate
+  nella traccia, mostrandone i sorpassi al crescere di x su scala logaritmica.
