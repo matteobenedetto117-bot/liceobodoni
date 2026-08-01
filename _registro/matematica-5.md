@@ -246,3 +246,19 @@ teorema del confronto, a pagina 21.
   presente in traccia. Nessun quesito di maturità: l'unità introduce solo le equazioni di
   tangente e normale, senza ancora lo studio di funzione completo in cui questi quesiti
   compaiono di solito.
+
+## Unità 18 — Tangenti da un punto esterno e angolo fra due curve
+- Parole: 409 su 3 pagine di traccia (70–72), conteggio del testo visibile incluse le
+  formule inline.
+- Rettifica: la traccia scrive $\gamma=\arctan\frac67=40^\circ$ usando un segno di
+  uguale; verificato con SymPy che $\arctan(6/7)\approx40{,}6^\circ$, quindi nella pagina
+  ho scritto $\approx40^\circ$. Confermati con SymPy anche tutti gli altri passaggi: $c=1$
+  nel primo esempio, la fattorizzazione $(x+1)(x^2-4x+7)$ con discriminante $-12<0$, e i
+  valori $m_1=-1/4$, $m_2=1/2$, $\tan\gamma=6/7$.
+- Aggiunta: nulla di contenuto nuovo. Le due righe introduttive di ciascuna sezione
+  spiegano perché il punto di tangenza è incognito nel primo esempio (il punto dato non
+  sta sul grafico) e perché l'angolo fra due curve si riduce all'angolo fra due rette (le
+  tangenti nel punto comune), idee implicite nei calcoli della traccia ma non scritte a
+  parole. Nessun interattivo: entrambi gli esempi sono casi singoli senza un parametro che
+  la traccia fa variare. Nessun quesito di maturità: l'unità applica la retta tangente già
+  introdotta, senza aggiungere strumenti nuovi verso cui orientare un quesito.
