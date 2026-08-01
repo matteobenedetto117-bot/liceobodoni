@@ -281,3 +281,19 @@ teorema del confronto, a pagina 21.
   parametro che la traccia fa variare. Nessun quesito di maturità: la classificazione dei
   punti di non derivabilità compare di norma dentro uno studio di funzione completo
   (unità 29–30), non come quesito isolato a questo punto del percorso.
+
+## Unità 20 — Teorema di Rolle
+- Parole: 417 su circa 3 pagine di traccia (78–79 intere, più la parte iniziale di 80 e
+  la parte finale di 81, secondo la ripartizione già fissata in `_dati/matematica-5.json`
+  fra questa unità e l'unità 21 sul teorema di Lagrange).
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi dell'esempio: $f(-1)=f(1)=-1$,
+  $f'(x)=4x^3-4x=4x(x+1)(x-1)$, radici $x=-1,0,1$.
+- Aggiunta: un solo riquadro di nota, dopo l'esempio, che distingue i tre punti stazionari
+  trovati algebricamente da quello garantito dal teorema (l'unico interno all'intervallo
+  aperto, $x=0$): la traccia calcola le tre radici senza segnalare che due cadono sugli
+  estremi, distinzione che si presta a un fraintendimento comune sulla portata della tesi.
+  Nessun altro contenuto nuovo: le didascalie delle figure e le due righe sulle ipotesi
+  spiegano a parole ciò che i disegni della traccia mostrano già. Nessun quesito di
+  maturità: il teorema di Rolle isolato non è materia di quesito, e in questo punto del
+  percorso non è ancora disponibile il teorema di Lagrange con cui viene tipicamente
+  intrecciato.
