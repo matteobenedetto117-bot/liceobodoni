@@ -297,3 +297,21 @@ teorema del confronto, a pagina 21.
   maturità: il teorema di Rolle isolato non è materia di quesito, e in questo punto del
   percorso non è ancora disponibile il teorema di Lagrange con cui viene tipicamente
   intrecciato.
+
+## Unità 21 — Teorema di Lagrange e sue conseguenze
+- Parole: 466 su circa 2 pagine di traccia (fondo di 80, i due terzi iniziali di 81, e
+  tutta la 82; il resto di 81 — Teorema 1 — era già stato pubblicato nell'unità 20, e la
+  parte finale di 83 — Teorema III sulla monotonia — apre l'unità 22).
+- Rettifica: nessuna. La sola verifica richiesta era di coerenza logica: derivando
+  entrambi i membri di $f(x)=g(x)+k$ si ottiene $f'(x)=g'(x)$, confermato anche
+  simbolicamente con SymPy (`diff(g(x)+k, x) == diff(g(x), x)`).
+- Aggiunta: nulla di contenuto nuovo. La frase che collega Teorema 1 e Teorema 2 ("Il
+  primo... lo abbiamo già dimostrato") richiama in una riga un risultato già pubblicato
+  nell'unità 20, senza ripeterne il riquadro, così da non duplicare contenuto già
+  presente sul sito. Le quattro figure ridisegnano le quattro immagini della traccia
+  (interpretazione geometrica con uno e con due punti, i due controesempi sulla necessità
+  delle ipotesi, il disegno di $f$ e $g$ traslate di $k$). Nessun interattivo: nessuna
+  delle costruzioni dipende da un parametro che la traccia fa variare. Nessun quesito di
+  maturità: il teorema di Lagrange isolato non è materia di quesito, e il suo uso più
+  frequente (De L'Hôpital, unità 24) non è ancora disponibile a questo punto del
+  percorso.
