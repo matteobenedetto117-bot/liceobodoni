@@ -184,3 +184,17 @@ teorema del confronto, a pagina 21.
 - Nessun quesito di maturità: è la prima unità sulle derivate, limitata alla definizione; i
   quesiti reali su tangenti e derivate richiedono le regole di derivazione dell'unità 14 e
   arriveranno dall'unità 17 in poi.
+
+## Unità 14 — Derivate fondamentali e regole di derivazione
+- Parole: 336 su 4 pagine di traccia (54–57).
+- Rettifica: nessuna. Verificati con SymPy tutte le derivate fondamentali e tutti gli esempi:
+  $D(5x^8)=40x^7$, $D(-3\ln x)=-3/x$, $D(\tfrac{2}{3}\cos x)=-\tfrac{2}{3}\sin x$; le somme
+  $y=x+2\sin x$ e $y=2e^x-3\cos x+1$; i prodotti $y=x\sin x$ e $y=x^3e^x$; i reciproci
+  $y=1/\sin x$ e $y=5/(x^3-2)$; il quoziente $y=(3x^2-1)/(x^2+x)$, che dà $y'=(3x^2+2x+1)/(x^2+x)^2$
+  come in traccia; e le derivate di $\tan x$ e $\cot x$ ($1+\tan^2x$ e $-1-\cot^2x$).
+- Aggiunta: nulla di contenuto nuovo. La dimostrazione della regola del quoziente è quella
+  della traccia (prodotto per il reciproco). L'unico interattivo riusa l'esempio della regola
+  del prodotto, $y=x\sin x$: un cursore sposta il punto $x_0$ e mostra la retta tangente con
+  pendenza uguale al valore di $f'(x_0)=\sin x_0+x_0\cos x_0$ calcolato con la regola, a
+  conferma del significato geometrico visto nell'unità 13. Nessun quesito di maturità: questa
+  unità è solo il repertorio di regole, senza ancora funzioni composte o studio di funzione.
