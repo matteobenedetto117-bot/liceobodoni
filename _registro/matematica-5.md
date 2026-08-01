@@ -230,3 +230,19 @@ teorema del confronto, a pagina 21.
   dinamico che non sia già chiaro dai due esempi statici. Nessun quesito di maturità: come
   l'unità 14, questa è solo un repertorio (domini e notazione delle derivate successive), non
   ancora uno studio di funzione.
+
+## Unità 17 — Retta tangente, retta normale, punti stazionari
+- Parole: 731 su 4 pagine di traccia (66–69), conteggio del testo visibile incluse le
+  formule inline (il solo testo prosastico è nettamente inferiore).
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f(x)=x^2+2x$ dà $f(1)=3$,
+  $f'(x)=2x+2$, $f'(1)=4$, tangente $y=4x-1$ e normale $y=-\frac14x+\frac{13}{4}$; il
+  sistema di tangenza fra $f(x)=x^3-x^2-2x$ e $g(x)=x^3+x^2+\frac12$ ha come unica
+  soluzione $x_0=-\frac12$, con verifica numerica del passaggio di cancellazione dei
+  termini di terzo e secondo grado.
+- Aggiunta: nulla di contenuto nuovo. L'unico interattivo mostra la retta tangente a
+  $f(x)=x^2+2x$ al variare del punto $x_0$, la stessa costruzione appena vista nell'esempio
+  numerico, resa dinamica per far vedere che la pendenza segue $f'(x_0)$. I tre schemi di
+  minimo, massimo e flesso e il disegno delle due curve tangenti ridisegnano quanto già
+  presente in traccia. Nessun quesito di maturità: l'unità introduce solo le equazioni di
+  tangente e normale, senza ancora lo studio di funzione completo in cui questi quesiti
+  compaiono di solito.
