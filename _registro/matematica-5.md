@@ -216,3 +216,17 @@ teorema del confronto, a pagina 21.
   vedere la pendenza crescere senza limite avvicinandosi agli estremi del dominio. Nessun
   quesito di maturità: l'unità è un repertorio di regole di derivazione, senza ancora lo
   studio di funzione in cui questi quesiti compaiono di solito.
+
+## Unità 16 — Domini e derivate di ordine superiore
+- Parole: 201 su 3 pagine di traccia (63–65), conteggio del solo testo prosastico (formule
+  escluse).
+- Rettifica: nessuna. Verificato con SymPy che per $f(x)=x^3-2x+1$ si ha $f'(x)=3x^2-2$,
+  $f''(x)=6x$, $f'''(x)=6$, $f''''(x)=0$, come in traccia.
+- Aggiunta: nulla di contenuto nuovo. Le due righe di commento sulla potenza a esponente
+  variabile e sulla potenza a esponente irrazionale spiegano perché servono due condizioni
+  insieme (lettura come $e^{g(x)\ln f(x)}$) e perché il segno di $\alpha$ cambia la condizione
+  sulla base, cose implicite nella tabella ma non scritte a parole. Nessun interattivo: la
+  pagina è una tabella di riferimento più un unico esempio, senza nulla da far vedere in modo
+  dinamico che non sia già chiaro dai due esempi statici. Nessun quesito di maturità: come
+  l'unità 14, questa è solo un repertorio (domini e notazione delle derivate successive), non
+  ancora uno studio di funzione.
