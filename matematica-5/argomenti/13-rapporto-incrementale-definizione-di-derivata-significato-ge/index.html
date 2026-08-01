@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rapporto incrementale, definizione di derivata, significato geometrico — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Derivate &middot; Unità 13</p>
+  <h1>Rapporto incrementale, definizione di derivata, significato geometrico</h1>
+  <p class="sommario">La derivata misura quanto rapidamente cambia una funzione in un punto, ed è
+  anche la pendenza della retta che meglio approssima il grafico in quel punto. Partiamo dalla
+  pendenza di una retta secante che passa per due punti del grafico, e la seguiamo mentre il
+  secondo punto si avvicina al primo.</p>
+</header>
+
+<h2>Il rapporto incrementale</h2>
+
+<p>Consideriamo una funzione $y=f(x)$ e due punti del suo grafico, $A$ di ascissa $c$ e $B$ di
+ascissa $c+h$, dove $h$ è un incremento (positivo o negativo) della $x$. La retta $AB$ è una
+secante al grafico, e la sua pendenza si chiama <b>rapporto incrementale</b> di $f$ relativo a
+$c$:
+$$\frac{\Delta y}{\Delta x}=\frac{f(c+h)-f(c)}{h}.$$</p>
+
+<p>Verifichiamo che $\Delta y/\Delta x$ è proprio il coefficiente angolare di $AB$. Scriviamo
+l'equazione generica di una retta, $y=mx+q$, per i due punti:
+$$y_A=mx_A+q, \qquad y_B=mx_B+q.$$
+Sottraendo membro a membro la $q$ si elimina:
+$$y_B-y_A=m(x_B-x_A) \;\Longrightarrow\; m=\frac{y_B-y_A}{x_B-x_A}=\frac{\Delta y}{\Delta x}.$$</p>
+
+<p>Quando facciamo tendere $h\to0$, il punto $B$ scorre lungo il grafico verso $A$: la secante
+ruota, e il suo limite è la <b>retta tangente</b> al grafico nel punto di ascissa $c$. Il
+rapporto incrementale tende dunque al coefficiente angolare della tangente.</p>
+
+<h2>Definizione di derivata</h2>
+
+<div class="def"><span class="et">Definizione</span>
+<p>Data una funzione $y=f(x)$ definita in un intervallo $[a,b]$, la <b>derivata</b> di $f$ nel
+punto $c$ interno all'intervallo, indicata con $f'(c)$, è il limite, se esiste ed è finito, per
+$h\to0$ del rapporto incrementale di $f$ relativo a $c$:
+$$f'(c)=\lim_{h\to0}\frac{f(c+h)-f(c)}{h}.$$</p></div>
+
+<p>Calcolata in un punto generico $x$, la derivata si indica in tre modi equivalenti: $f'(x)$,
+$Df(x)$, $y'$.</p>
+
+<p>Una funzione è <b>derivabile</b> in $c$ se esiste $f'(c)$. Questo richiede tre cose: che $f$
+sia definita in un intorno di $c$; che il limite del rapporto incrementale esista, cioè che
+limite destro e sinistro coincidano; che questo limite sia finito.</p>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Incremento $h$ (distanza di $B$ da $A$)
+      <input type="range" id="s-h" min="0.05" max="2.5" step="0.05" value="1.5">
+      <span>$h$ = <span class="val" id="v-h"></span></span>
+    </label>
+  </div>
+  <div id="g-secante" style="height:360px"></div>
+  <p class="leggenda">La curva è $f(x)=x^2-x$; $A$ è il punto fisso di ascissa $c=3$ e $B$ il
+  punto di ascissa $c+h$. La retta blu è la secante $AB$, la retta tratteggiata verde è la
+  tangente in $A$. Sposta il cursore verso valori piccoli di $h$: la secante ruota fino a
+  sovrapporsi alla tangente, e il coefficiente angolare $\dfrac{f(3+h)-f(3)}{h}$ si avvicina a
+  $f'(3)=5$.</p>
+</div>
+
+<h2>Calcolo di derivate</h2>
+
+<p>Calcoliamo la derivata direttamente dalla definizione, applicando il limite del rapporto
+incrementale.</p>
+
+<p><b>In un punto assegnato.</b> Sia $f(x)=x^2-x$; calcoliamo $f'(3)$.
+$$f'(3)=\lim_{h\to0}\frac{f(3+h)-f(3)}{h}=\lim_{h\to0}\frac{(3+h)^2-(3+h)-(9-3)}{h}$$
+$$=\lim_{h\to0}\frac{9+6h+h^2-3-h-9+3}{h}=\lim_{h\to0}\frac{h^2+5h}{h}=\lim_{h\to0}(h+5)=5.$$</p>
+
+<p><b>In un punto generico.</b> Sia $f(x)=4x^2$; calcoliamo la funzione derivata $f'(x)$.
+$$f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}=\lim_{h\to0}\frac{4(x+h)^2-4x^2}{h}
+=\lim_{h\to0}\frac{4x^2+4h^2+8hx-4x^2}{h}$$
+$$=\lim_{h\to0}\frac{h(4h+8x)}{h}=\lim_{h\to0}(4h+8x)=8x.$$</p>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>L'unità 14 raccoglie le derivate delle funzioni elementari e le regole di somma, prodotto e
+quoziente, così da non dover più passare dalla definizione a ogni calcolo.</li>
+<li>Il significato geometrico visto qui, la tangente come limite delle secanti, torna
+nell'unità 17 per scrivere l'equazione della retta tangente in un punto, e nell'unità 19 per i
+casi in cui la derivata non esiste.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Derivate &middot; Unità 13</p></footer>
+
+</div>
+
+<script>
+(function(){
+  function f(x){return x*x-x;}
+  var c=3, fc=f(c), mt=5;
+  var sh=document.getElementById('s-h'), vh=document.getElementById('v-h');
+  function fmt(n){return n.toLocaleString('it-IT',{maximumFractionDigits:3});}
+  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
+  function agg(){
+    var h=parseFloat(sh.value);
+    vh.textContent=fmt(h);
+    var xB=c+h, fxB=f(xB);
+    var ms=(fxB-fc)/h;
+    var lo=0, hi=7;
+    var xc=xs(lo,hi,160);
+    Plotly.react('g-secante',[
+      {x:xc,y:xc.map(f),mode:'lines',line:{color:'#b3392f',width:2.4},hoverinfo:'skip',name:'f(x)'},
+      {x:[lo,hi],y:[fc+ms*(lo-c),fc+ms*(hi-c)],mode:'lines',line:{color:'#1f4e79',width:2},hoverinfo:'skip',name:'secante'},
+      {x:[lo,hi],y:[fc+mt*(lo-c),fc+mt*(hi-c)],mode:'lines',line:{color:'#2f6b4f',width:1.8,dash:'dash'},hoverinfo:'skip',name:'tangente'},
+      {x:[c],y:[fc],mode:'markers',marker:{size:9,color:'#16283d'}},
+      {x:[xB],y:[fxB],mode:'markers',marker:{size:9,color:'#1f4e79'}}
+    ],{
+      margin:{l:44,r:14,t:10,b:34},showlegend:false,
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[lo,hi],gridcolor:'#e6e0d4'},
+      yaxis:{title:'y',range:[-2,44],gridcolor:'#e6e0d4'},
+      annotations:[{x:5.6,y:41,
+        text:'(f(3+h)-f(3))/h = '+fmt(ms),
+        showarrow:false,font:{size:12,color:'#16283d'}}]
+    },{displayModeBar:false,responsive:true});
+  }
+  sh.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>

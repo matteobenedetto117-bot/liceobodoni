@@ -168,3 +168,19 @@ teorema del confronto, a pagina 21.
   dell'unità 11. Nessun quesito di maturità inserito: senza le derivate, disponibili solo
   dall'unità 13, i quesiti reali sul grafico di una funzione richiedono lo studio del segno della
   derivata prima, non ancora nel bagaglio a questo punto del percorso.
+
+## Unità 13 — Rapporto incrementale, definizione di derivata, significato geometrico
+- Parole: 450 su 4 pagine di traccia (50–53), conteggio del solo testo prosastico (formule
+  escluse).
+- Rettifica: nessuna. Verificati con SymPy sia il rapporto incrementale di $f(x)=x^2-x$ in
+  $h+5$ e il limite $f'(3)=5$, sia il rapporto e il limite di $f(x)=4x^2$ in un punto generico,
+  $4h+8x\to8x$: entrambi coincidono con i passaggi della traccia.
+- Aggiunta: nulla di contenuto nuovo. Solo le frasi che spiegano perché $\Delta y/\Delta x$ è il
+  coefficiente angolare della secante (sottrazione delle due equazioni di retta, già presente in
+  traccia) e il collegamento fra il limite del rapporto incrementale e la pendenza della
+  tangente. L'unico interattivo riusa la funzione e il punto $c=3$ del primo esempio, con un
+  cursore su $h$ che fa vedere dal vivo la secante ruotare verso la tangente disegnata nella
+  traccia.
+- Nessun quesito di maturità: è la prima unità sulle derivate, limitata alla definizione; i
+  quesiti reali su tangenti e derivate richiedono le regole di derivazione dell'unità 14 e
+  arriveranno dall'unità 17 in poi.
