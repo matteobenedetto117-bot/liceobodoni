@@ -262,3 +262,22 @@ teorema del confronto, a pagina 21.
   parole. Nessun interattivo: entrambi gli esempi sono casi singoli senza un parametro che
   la traccia fa variare. Nessun quesito di maturità: l'unità applica la retta tangente già
   introdotta, senza aggiungere strumenti nuovi verso cui orientare un quesito.
+
+## Unità 19 — Derivabilità e punti di non derivabilità
+- Parole: 593 su 5 pagine di traccia (73–77), conteggio del testo visibile incluse le
+  formule inline.
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f'_-(0)=-1$, $f'_+(0)=+1$
+  per $f(x)=|x|$; $y'=\frac13(x-1)^{-2/3}$ con limite $+\infty$ da entrambi i lati in
+  $x=1$; nell'esempio $y=|x^2-4|/(x-2)+2x^2$, i due rami semplificati $2x^2-x-2$ e
+  $2x^2+x+2$, il valore comune $8$ in $x=-2$, e le derivate laterali $f'_+(-2)=-9$,
+  $f'_-(-2)=-7$, tutti confermati anche con derivata numerica.
+- Aggiunta: nulla di contenuto nuovo. Le uniche righe oltre al calcolo spiegano perché il
+  limite della derivata di $\sqrt[3]{x-1}$ è $+\infty$ da entrambi i lati (il quadrato al
+  denominatore è sempre positivo) e che cosa mostra l'esempio di $|x|$ (le due derivate
+  laterali non coincidono), passaggi impliciti nella traccia ma non scritti a parole. I
+  tre schemi di classificazione (flesso a tangente verticale, cuspide, punto angoloso)
+  ridisegnano le sei figure già presenti in traccia, con le stesse etichette. Nessun
+  interattivo: la pagina è già densa di schemi statici e nessuno di essi dipende da un
+  parametro che la traccia fa variare. Nessun quesito di maturità: la classificazione dei
+  punti di non derivabilità compare di norma dentro uno studio di funzione completo
+  (unità 29–30), non come quesito isolato a questo punto del percorso.
