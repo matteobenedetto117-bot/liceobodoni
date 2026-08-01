@@ -198,3 +198,21 @@ teorema del confronto, a pagina 21.
   pendenza uguale al valore di $f'(x_0)=\sin x_0+x_0\cos x_0$ calcolato con la regola, a
   conferma del significato geometrico visto nell'unità 13. Nessun quesito di maturità: questa
   unità è solo il repertorio di regole, senza ancora funzioni composte o studio di funzione.
+
+## Unità 15 — Funzioni composte, funzione inversa, goniometriche inverse
+- Parole: 338 su 5 pagine di traccia (58–62).
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi: le tre derivate di funzioni
+  composte ($\ln(x^2+2)$, $(x^3+2x)^3$, $e^{2x+1}$), la potenza di funzione
+  $(x^2+2x+7)^4$, la catena tripla $e^{(2x+1)^2}$, le derivate di arcoseno e arcocoseno
+  ottenute dalla regola della funzione inversa (e il confronto con arctan e arccot della
+  tabella), la derivazione logaritmica di $x^x$ e $x^{2x+1}$, e la derivata del prodotto
+  triplo $x^2\ln x\,e^{2x}$.
+- Aggiunta: nulla di contenuto nuovo. Solo le frasi che spiegano perché nella regola della
+  catena si moltiplicano due derivate valutate in punti diversi, e perché le pendenze di $f$
+  e $f^{-1}$ sono reciproche (simmetria rispetto alla bisettrice, non sviluppata come
+  dimostrazione formale ma solo richiamata come idea, assente anch'essa nella traccia oltre
+  al disegno implicito del ribaltamento). L'unico interattivo mostra la tangente a
+  $y=\arcsin x$ con pendenza $1/\sqrt{1-x_0^2}$, la stessa formula appena derivata, e fa
+  vedere la pendenza crescere senza limite avvicinandosi agli estremi del dominio. Nessun
+  quesito di maturità: l'unità è un repertorio di regole di derivazione, senza ancora lo
+  studio di funzione in cui questi quesiti compaiono di solito.

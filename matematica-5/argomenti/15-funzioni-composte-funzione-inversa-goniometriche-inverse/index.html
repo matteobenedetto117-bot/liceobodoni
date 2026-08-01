@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funzioni composte, funzione inversa, goniometriche inverse — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;margin:20px 0}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:8px 10px;text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Derivate &middot; Unità 15</p>
+  <h1>Funzioni composte, funzione inversa, goniometriche inverse</h1>
+  <p class="sommario">Le regole viste finora derivano somme, prodotti e quozienti, ma non
+  bastano per una funzione come $\ln(x^2+2)$, che è una funzione dentro un'altra. Servono la
+  regola della catena, la derivata della funzione inversa e, di conseguenza, le derivate di
+  arcoseno, arcocoseno, arcotangente e arcocotangente.</p>
+</header>
+
+<h2>La regola della catena</h2>
+
+<p>Quando $y=f(g(x))$, la variabile $x$ agisce su $g$ e il risultato di $g$ agisce su $f$: la
+derivata si ottiene moltiplicando le due derivate, ciascuna calcolata nel punto giusto.</p>
+
+<div class="def"><span class="et">Regola</span>
+$$D\big[f(g(x))\big]=f'(g(x))\cdot g'(x).$$</div>
+
+<p>Per esempio, con $y=\ln(x^2+2)$ la funzione esterna è il logaritmo e quella interna è
+$x^2+2$:
+$$y'=\frac{1}{x^2+2}\cdot 2x.$$
+Con $y=(x^3+2x)^3$: $y'=3(x^3+2x)^2\cdot(3x^2+2)$. Con $y=e^{2x+1}$: $y'=e^{2x+1}\cdot2=2e^{2x+1}$.</p>
+
+<p><b>Caso particolare: potenza di una funzione.</b>
+$$D\big[f(x)\big]^\alpha=\alpha\,f(x)^{\alpha-1}f'(x).$$
+Per $y=(x^2+2x+7)^4$: $y'=4(x^2+2x+7)^3(2x+2)$.</p>
+
+<p><b>Catena di tre funzioni.</b> Se $y=f(g(z(x)))$, si moltiplicano le tre derivate:
+$$D\big[f(g(z(x)))\big]=f'(g(z(x)))\cdot g'(z(x))\cdot z'(x).$$
+Per $y=e^{(2x+1)^2}$, con $f=e^{\,\cdot\,}$, $g=(\,\cdot\,)^2$ e $z=2x+1$:
+$$y'=e^{(2x+1)^2}\cdot 2(2x+1)\cdot 2.$$</p>
+
+<h2>La derivata della funzione inversa</h2>
+
+<p>Se $f$ è invertibile, il grafico di $f^{-1}$ è quello di $f$ ribaltato rispetto alla
+bisettrice: le due tangenti corrispondenti sono simmetriche, e le loro pendenze sono l'una il
+reciproco dell'altra.</p>
+
+<div class="def"><span class="et">Regola</span>
+$$D\big[f^{-1}(y)\big]=\frac{1}{f'(x)}, \qquad \text{con } x=f^{-1}(y).$$</div>
+
+<p>Applichiamola a $y=\arcsin x$, definita per $x\in[-1,1]$ come inversa di $\sin$. Da
+$x=\sin y$:
+$$D\arcsin x=\frac{1}{D\sin y}=\frac{1}{\cos y}=\frac{1}{\sqrt{1-\sin^2y}}=\frac{1}{\sqrt{1-x^2}}.$$
+Allo stesso modo, da $x=\cos y$:
+$$D\arccos x=\frac{1}{D\cos y}=-\frac{1}{\sin y}=-\frac{1}{\sqrt{1-\cos^2y}}=-\frac{1}{\sqrt{1-x^2}}.$$</p>
+
+<table class="tabellina">
+<tr><th>Funzione</th><th>Derivata</th></tr>
+<tr><td>$\arcsin x$</td><td>$\dfrac{1}{\sqrt{1-x^2}}$</td></tr>
+<tr><td>$\arccos x$</td><td>$-\dfrac{1}{\sqrt{1-x^2}}$</td></tr>
+<tr><td>$\arctan x$</td><td>$\dfrac{1}{1+x^2}$</td></tr>
+<tr><td>$\text{arccot}\,x$</td><td>$-\dfrac{1}{1+x^2}$</td></tr>
+</table>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Punto $x_0$
+      <input type="range" id="s-x0" min="-0.9" max="0.9" step="0.02" value="0.5">
+      <span>$x_0$ = <span class="val" id="v-x0"></span></span>
+    </label>
+  </div>
+  <div id="g-arcsin" style="height:380px"></div>
+  <p class="leggenda">La curva è $y=\arcsin x$ sul suo dominio $[-1,1]$. La retta è la tangente
+  in $x_0$, con pendenza uguale a $1/\sqrt{1-x_0^2}$: sposta il cursore verso $\pm1$ e osserva
+  la pendenza crescere senza limite, coerente col fatto che il grafico diventa verticale ai
+  due estremi del dominio.</p>
+</div>
+
+<h2>Derivata di $f(x)^{g(x)}$</h2>
+
+<p>Qui l'esponente non è un numero fisso ma un'altra funzione: la regola della potenza non
+si applica. Si passa al logaritmo di entrambi i membri e si deriva implicitamente.</p>
+
+<div class="def"><span class="et">Derivazione</span>
+<p>Da $y=f(x)^{g(x)}$, con $f(x)>0$: $\ln y=g(x)\ln f(x)$. Derivando entrambi i membri rispetto
+a $x$ (a sinistra compare $y'/y$ per la regola della catena applicata a $\ln y$):
+$$\frac{y'}{y}=g'(x)\ln f(x)+g(x)\frac{f'(x)}{f(x)}
+\;\;\Rightarrow\;\;
+y'=f(x)^{g(x)}\left[g'(x)\ln f(x)+\frac{g(x)f'(x)}{f(x)}\right].$$</p></div>
+
+<p>Per $y=x^x$: $\ln y=x\ln x$, quindi $y'/y=\ln x+1$ e $y'=x^x(\ln x+1)$. Per
+$y=x^{2x+1}$: $\ln y=(2x+1)\ln x$, quindi
+$$y'=x^{2x+1}\left(2\ln x+\frac{2x+1}{x}\right).$$</p>
+
+<h2>Prodotto di tre funzioni</h2>
+
+<p>La regola del prodotto si estende a tre fattori derivando ciascuno a turno e lasciando
+fermi gli altri due:
+$$D\big[f(x)g(x)h(x)\big]=f'(x)g(x)h(x)+f(x)g'(x)h(x)+f(x)g(x)h'(x).$$
+Per $y=x^2\ln x\,e^{2x}$:
+$$y'=2x\ln x\,e^{2x}+x^2\cdot\frac{1}{x}\cdot e^{2x}+x^2\ln x\cdot2e^{2x}.$$</p>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>L'unità 16 raccoglie i domini di derivabilità e le derivate di ordine superiore.</li>
+<li>L'unità 17 usa la regola della catena per scrivere rette tangenti e normali di funzioni
+composte.</li>
+<li>L'unità 19 torna sulla funzione inversa per discutere i punti in cui la derivabilità viene
+meno.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Derivate &middot; Unità 15</p></footer>
+
+</div>
+
+<script>
+(function(){
+  function f(x){return Math.asin(x);}
+  function fp(x){return 1/Math.sqrt(1-x*x);}
+  var sx=document.getElementById('s-x0'), vx=document.getElementById('v-x0');
+  function fmt(n){return n.toLocaleString('it-IT',{maximumFractionDigits:3});}
+  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
+  function agg(){
+    var x0=parseFloat(sx.value);
+    vx.textContent=fmt(x0);
+    var m=fp(x0), y0=f(x0);
+    var lo=-0.98, hi=0.98;
+    var xc=xs(lo,hi,240);
+    var tlo=Math.max(lo,x0-0.5), thi=Math.min(hi,x0+0.5);
+    Plotly.react('g-arcsin',[
+      {x:xc,y:xc.map(f),mode:'lines',line:{color:'#b3392f',width:2.4},hoverinfo:'skip',name:'arcsin x'},
+      {x:[tlo,thi],y:[y0+m*(tlo-x0),y0+m*(thi-x0)],mode:'lines',line:{color:'#1f4e79',width:2},hoverinfo:'skip',name:'tangente'},
+      {x:[x0],y:[y0],mode:'markers',marker:{size:9,color:'#16283d'}}
+    ],{
+      margin:{l:44,r:14,t:10,b:34},showlegend:false,
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[-1.1,1.1],gridcolor:'#e6e0d4'},
+      yaxis:{title:'y',range:[-2.2,2.2],gridcolor:'#e6e0d4'},
+      annotations:[{x:-0.75,y:1.9,
+        text:"pendenza = "+fmt(m),
+        showarrow:false,font:{size:12,color:'#16283d'}}]
+    },{displayModeBar:false,responsive:true});
+  }
+  sx.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>
