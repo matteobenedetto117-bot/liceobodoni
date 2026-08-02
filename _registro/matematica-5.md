@@ -523,3 +523,24 @@ teorema del confronto, a pagina 21.
   Nessun disegno: l'unità è una tavola di formule senza schemi. Nessun interattivo:
   non c'è un parametro naturale da far variare. Nessun quesito di maturità: l'unità è
   strumentale (tavola di consultazione), come già l'unità 14 con le derivate.
+
+## Unità 33 — Integrali di funzioni composte
+- Parole: 243 su 1,4 pagine di traccia (124, e la parte superiore di 125 fino agli esempi
+  di tangente e cotangente incluso).
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $D[(\sin x)^5/5]=(\sin x)^4\cos x$
+  (da cui l'errore evidenziato in rosso nella traccia, dove $(\sin x)^5/5$ viene proposto e
+  poi scartato come primitiva di $(\sin x)^4$ da solo); $\int 3x^2(x^3+2)^2\,dx=(x^3+2)^3/3+C$
+  (derivata verificata uguale a $3x^2(x^3+2)^2$); $\int(2x-3)^2\,dx=(2x-3)^3/6+C$ (derivata
+  uguale a $(2x-3)^2$); $\int\tan x\,dx=-\ln|\cos x|+C$ e $\int\cot x\,dx=\ln|\sin x|+C$
+  (derivate uguali a $\tan x$ e $\cot x$ rispettivamente, fuori dai punti di annullamento
+  di seno e coseno). Tutto coincide con la traccia.
+- Aggiunta: nulla di contenuto nuovo. Il riquadro "Attenzione" ripropone l'errore già
+  presente nella traccia (barrato in rosso) come esempio guida, invece di limitarsi a
+  descriverlo: è lo stesso materiale, solo introdotto per primo perché è il punto di
+  partenza del ragionamento nella traccia stessa. Non ho incluso l'inizio del paragrafo
+  "Integrazione per sostituzione" che compare in fondo a pagina 125: appartiene
+  all'unità 35, che lo tratta per intero. Nessun disegno: la traccia non ne contiene.
+  Nessun interattivo: non c'è un parametro naturale da far variare, sono esempi puntuali
+  di riconoscimento di struttura. Nessun quesito di maturità: l'unità introduce solo la
+  tecnica del riconoscimento $f'(x)\cdot g(f(x))$ su casi elementari, senza un problema
+  autosufficiente a questo livello.
