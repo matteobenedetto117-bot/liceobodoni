@@ -544,3 +544,15 @@ teorema del confronto, a pagina 21.
   di riconoscimento di struttura. Nessun quesito di maturità: l'unità introduce solo la
   tecnica del riconoscimento $f'(x)\cdot g(f(x))$ su casi elementari, senza un problema
   autosufficiente a questo livello.
+
+## Unità 34 — Integrazione per parti
+- Parole: 228 su 2 pagine di traccia (126–127).
+- Rettifica: nessuna. Verificati con SymPy entrambi gli esempi: $D[(x^2/2)\ln x - x^2/4] =
+  x\ln x$ e $D[x\ln x - x] = \ln x$, in accordo con la traccia.
+- Aggiunta: nulla di contenuto nuovo. La derivazione della formula dalla regola del
+  prodotto è quella della traccia, così come i due esempi $\int x\ln x\,dx$ e
+  $\int\ln x\,dx$. Non ho riportato la tabellina f/g/f'/g' della traccia in forma di
+  tabella, ma inline nel testo: stesso contenuto, un formato più compatto. Nessun
+  disegno: la traccia non ne contiene. Nessun interattivo: sono due esempi puntuali
+  di una tecnica, senza un parametro naturale da variare. Nessun quesito di maturità:
+  l'unità introduce solo la tecnica su casi elementari, come già le unità 31-33.
