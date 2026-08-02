@@ -352,3 +352,27 @@ teorema del confronto, a pagina 21.
   degli schizzi a mano libera. Nessun interattivo: l'unico esempio non dipende da un
   parametro variabile. Nessun quesito di maturità: l'invertibilità isolata non compare
   come quesito a sé in questo punto del percorso.
+
+## Unità 24 — Teorema di Cauchy e teorema di De L'Hôpital
+- Parole: 667 su 6 pagine di traccia (89–94).
+- Rettifica: nessuna. Verificati con SymPy tutti e cinque gli esempi: il limite
+  $(4x^2-4)/\ln x$ per $x\to1$ (risultato 8, sia diretto sia via De L'Hôpital); il
+  limite $(3x+\ln x)/(2x+1)$ per $x\to+\infty$ (risultato $3/2$); il limite
+  $(2x+\sin x)/(7x)$ per $x\to\pm\infty$ (risultato $2/7$ per via diretta, mentre il
+  rapporto delle derivate $(2+\cos x)/7$ non ha limite, confermando che De L'Hôpital
+  non è applicabile in quel caso pur non contraddicendo l'esistenza del limite
+  originario); il limite $1/\sin x - 3/x$ per $x\to0^+$ (risultato $-\infty$, con
+  derivata del numeratore che tende a $-2$ e del denominatore a $0^+$); il limite
+  $(e^x-1)^{2x}$ per $x\to0^+$ (risultato 1, verificato anche il doppio passaggio di
+  De L'Hôpital sull'esponente, con il passo intermedio $-4x/e^x\to0$).
+- Aggiunta: due frasi di collegamento, nessuna delle quali introduce contenuto nuovo.
+  La prima osserva che ponendo $g(x)=x$ il teorema di Cauchy si riduce al teorema di
+  Lagrange (unità 21), collegamento già suggerito dalla struttura stessa delle due
+  ipotesi e dalla progressione del percorso; la seconda riformula a parole, in una
+  riga, che cosa fa concretamente De L'Hôpital (sostituire un limite complicato con
+  quello, spesso più semplice, del rapporto delle derivate). La traccia per questa
+  unità non contiene disegni: nessuna figura è stata aggiunta. Nessun interattivo:
+  tutti gli esempi sono calcoli su funzioni singole, senza parametro variabile.
+  Nessun quesito di maturità: i due teoremi isolati non compaiono come quesito a sé,
+  e il loro impiego più ricco (dentro lo studio di funzione completo) non è ancora
+  disponibile a questo punto del percorso.
