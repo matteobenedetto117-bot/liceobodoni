@@ -394,3 +394,18 @@ teorema del confronto, a pagina 21.
   singolo, senza parametro da far variare. Nessun quesito di maturità: è la prima unità
   dell'area massimi-minimi-flessi, e la sua applicazione più ricca è dentro lo studio di
   funzione completo, ancora da venire.
+
+## Unità 26 — Estremi di funzioni non derivabili o discontinue
+- Parole: 515 su 4 pagine di traccia (100–103).
+- Rettifica: nessuna. Verificati con SymPy la derivata di $|x|$ ($+1$ per $x>0$,
+  $-1$ per $x&lt;0$) e i limiti $\lim_{x\to\pm\infty}|x|=+\infty$; verificati per
+  sostituzione diretta (il limite simbolico su Piecewise di SymPy dava un risultato
+  errato per bug noto della libreria) i valori dell'esempio finale: $f(-2)=-2$,
+  $f(x)\to3$ per $x\to2^-$, $f(x)\to0$ per $x\to0^-$, $f(x)\to1$ per $x\to0^+$. Tutto
+  coincide con la traccia.
+- Aggiunta: nessuna. Le quattro figure dei casi di discontinuità e le due figure dei
+  segni generali (estremo / flesso a tangente verticale) ridisegnano in SVG gli schizzi
+  di pagina 101–102, senza aggiungere casi non presenti. Nessun interattivo: il
+  contenuto è qualitativo e non ha un parametro naturale da far variare. Nessun quesito
+  di maturità: gli estremi in punti singolari non compaiono come quesito isolato, e il
+  loro impiego più ricco è dentro lo studio di funzione completo, ancora da venire.
