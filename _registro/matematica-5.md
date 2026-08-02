@@ -333,3 +333,22 @@ teorema del confronto, a pagina 21.
   caso singolo, senza parametro da far variare. Nessun quesito di maturità: un esercizio
   isolato di crescenza e decrescenza non compare come quesito a sé; la sua applicazione
   più ricca è dentro lo studio di funzione completo, ancora da venire.
+
+## Unità 23 — Invertibilità e funzione inversa
+- Parole: 364 su 4 pagine di traccia (85–88).
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f'(x)=1/(2\sqrt{5-x})$,
+  $\lim_{x\to-\infty}f(x)=-\infty$, $\lim_{x\to5^-}f(x)=2$, la costruzione algebrica di
+  $f^{-1}(x)=-x^2+4x+1=-(x-2)^2+5$ (vertice in $(2,5)$), e la verifica incrociata
+  $f(f^{-1}(x))=2-\sqrt{(x-2)^2}=2-|x-2|=x$ per $x\le2$, coerente col dominio trovato
+  tramite i limiti.
+- Aggiunta: un solo riquadro di nota, che ribadisce lo scambio di dominio e codominio
+  fra $f$ e $f^{-1}$ — già presente nella traccia come richiamo esplicito (evidenziato
+  in blu) — senza introdurre contenuto nuovo. La traccia non contiene un enunciato
+  formale del criterio di invertibilità, solo l'elenco puntato delle due condizioni da
+  verificare (continuità e monotonia stretta) applicato all'esempio: il riquadro
+  "Criterio" in apertura formalizza in poche righe quell'elenco, senza aggiungere
+  nulla che l'esempio non usi. I due grafici (di $f$ e di $f^{-1}$) ridisegnano le due
+  figure della traccia con coordinate calcolate esattamente dalla funzione, invece
+  degli schizzi a mano libera. Nessun interattivo: l'unico esempio non dipende da un
+  parametro variabile. Nessun quesito di maturità: l'invertibilità isolata non compare
+  come quesito a sé in questo punto del percorso.
