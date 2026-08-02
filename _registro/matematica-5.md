@@ -505,3 +505,21 @@ teorema del confronto, a pagina 21.
   interattivo: l'unità è fatta di sole definizioni e proprietà, senza un oggetto che
   vari con un parametro. Nessun quesito di maturità: l'unità introduce solo notazione
   e proprietà generali, senza calcolo di un integrale specifico su cui costruirne uno.
+
+## Unità 32 — Integrali immediati
+- Parole: 237 su 3 pagine di traccia (121–123).
+- Rettifica: nessuna. Verificati con SymPy tutti gli integrali della tavola e i sette
+  esempi svolti: $\int\sqrt{x^3}\,dx=\tfrac{2}{5}\sqrt{x^5}+C$, $\int 2x^3\,dx=x^4/2+C$,
+  $\int(3x^2+2)/x\,dx=\tfrac32x^2+2\ln|x|+C$, $\int(2e^x+5^x)\,dx=2e^x+5^x/\ln5+C$,
+  $\int(3\sin x-4/\cos^2x)\,dx=-3\cos x-4\tan x+C$, e
+  $\int(1/(3\sqrt{1-x^2})+7/(1+x^2))\,dx=\tfrac13\arcsin x+7\arctan x+C$: tutti
+  coincidono con la traccia.
+- Aggiunta: nulla di contenuto nuovo. La tavola raccoglie in una sola tabella (stesso
+  formato `.tabellina` già usato nell'unità 14 per le derivate) le dodici formule
+  boxate in verde nella traccia, comprese le due righe di arccos e arccot presentate
+  come "segno opposto" delle righe di arcsin e arctan, così come compaiono affiancate
+  nella traccia. Il riquadro "Attenzione" spiega solo perché arccos e arccot non sono
+  formule indipendenti, un chiarimento implicito nella disposizione della traccia.
+  Nessun disegno: l'unità è una tavola di formule senza schemi. Nessun interattivo:
+  non c'è un parametro naturale da far variare. Nessun quesito di maturità: l'unità è
+  strumentale (tavola di consultazione), come già l'unità 14 con le derivate.
