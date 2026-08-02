@@ -571,3 +571,22 @@ teorema del confronto, a pagina 21.
   disegno: la traccia non ne contiene. Nessun interattivo: un solo esempio puntuale
   non offre un parametro naturale da far variare. Nessun quesito di maturità: l'unità
   è troppo breve e circoscritta a un'unica tecnica su un caso elementare.
+
+## Unità 36 — Integrazione di funzioni razionali fratte
+- Parole: 339 su 5 pagine di traccia (127–131; la parte superiore di pagina 127
+  appartiene ancora all'unità 34, già pubblicata).
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $\int(6x-2)/(3x^2-2x-1)dx
+  =\ln|3x^2-2x-1|+C$; il caso $\Delta>0$ con $(5x-1)/((x-2)(x+1))=2/(x+1)+3/(x-2)$;
+  il caso $\Delta=0$ con $(2x-3)/(x-2)^2=2/(x-2)+1/(x-2)^2$; il caso $\Delta<0$ generale
+  e i tre esempi con arcotangente, incluso l'ultimo con la scomposizione $2x=(2x+4)-4$.
+  Tutti i risultati derivano correttamente all'integranda di partenza; coincide con
+  la traccia.
+- Aggiunta: nulla di contenuto nuovo. Ho premesso all'esempio 1 la riga "Calcoliamo
+  [...]" perché la traccia inizia direttamente dal passaggio con il fattore 1/2, senza
+  scrivere l'integrale di partenza: è il minimo per rendere leggibile da dove si parte,
+  non un esempio nuovo. Non ho incluso nessun quesito di maturità: una ricerca mirata
+  non ha restituito un quesito reale, con anno e sessione, risolubile isolatamente con
+  la sola scomposizione in fratti semplici (il tema compare di solito dentro problemi
+  più ampi di studio di funzione). Nessun disegno: la traccia non ne contiene. Nessun
+  interattivo: sono casi e esempi puntuali di una tecnica, senza un parametro naturale
+  da far variare.
