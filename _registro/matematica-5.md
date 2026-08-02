@@ -491,3 +491,17 @@ teorema del confronto, a pagina 21.
   dell'unità resta quello già disegnato nell'unità 29, qui solo richiamato a parole;
   nessun interattivo, perché la pagina è un elenco di calcoli su un caso già fissato,
   senza un parametro naturale da variare.
+
+## Unità 31 — Primitive, integrale indefinito, proprietà
+- Parole: 306 su 3 pagine di traccia (118–120).
+- Rettifica: nessuna. Verificati con SymPy $D(x^2+C)=2x$, $D(x^2+2)=2x$, $D(x^2+12)=2x$ e
+  $D(\sin x+C)=\cos x$, in accordo con la traccia.
+- Aggiunta: nulla di contenuto nuovo. La figura a tre insiemi annidati (integrabili,
+  continue, derivabili) ridisegna in SVG lo schema di pagina 120, riusando la stessa
+  coppia di ellissi già impiegata per continue/derivabili nell'unità 19, con
+  un'ellisse esterna in più per le integrabili. Il riquadro "Attenzione" riporta le
+  due uguaglianze di prodotto e quoziente barrate in rosso nella traccia, presentate
+  come ciò che NON vale: è materiale già presente, solo reso in prosa. Nessun
+  interattivo: l'unità è fatta di sole definizioni e proprietà, senza un oggetto che
+  vari con un parametro. Nessun quesito di maturità: l'unità introduce solo notazione
+  e proprietà generali, senza calcolo di un integrale specifico su cui costruirne uno.
