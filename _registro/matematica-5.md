@@ -468,3 +468,26 @@ teorema del confronto, a pagina 21.
   $-1,0,1$, punti di massimo e minimo con $y\approx\pm0,4$, schema di segno di $f'$).
   Nessun interattivo: questa unità è un elenco procedurale di controllo, non una
   costruzione che varia con un parametro.
+
+## Unità 30 — Studio completo svolto: f(x) = x − x³
+- Parole: 468 su 3 pagine di traccia (115–117).
+- Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f'(x)=1-3x^2$ con zeri
+  $x=\pm1/\sqrt3$ e $f(\pm1/\sqrt3)=\pm2\sqrt3/9\approx\pm0{,}385$ (arrotondato a
+  $\pm0{,}4$, come in traccia); $f''(x)=-6x$, zero $x=0$, $f'(0)=1$, tangente
+  inflessionale $y=x$; limiti $\lim_{x\to\pm\infty}f(x)=\mp\infty$ e
+  $\lim_{x\to+\infty}f(x)/x=-\infty$, quindi nessun asintoto orizzontale né obliquo,
+  coerente con la traccia. Confermata anche la tabella dei segni di $x(1+x)(1-x)$.
+- Aggiunta: un quesito d'esame (punto 5 della struttura richiesta per la matematica di
+  quinta), rimandato esplicitamente dalle unità 27 e 28 a "quando sarà disponibile lo
+  studio di funzione completo (29–30)". Ho scelto il quesito 1 del questionario di
+  Esame di Stato 2019, sessione ordinaria, liceo scientifico (fonte: testo ufficiale
+  del questionario, riportato anche su matematica.it a cura di L. Tomasi), perché
+  richiede solo strumenti già disponibili a questo punto del percorso: ricostruzione di
+  una funzione razionale da asintoti e intersezioni, derivata con la regola del
+  quoziente, massimi e minimi relativi dal segno di $f'$. Verificato con SymPy:
+  $f(x)=(5x^2-12x)/(x^2-9)$, $f'(x)=6(x-6)(2x-3)/(x^2-9)^2$, massimo relativo in
+  $x=3/2$ con $f(3/2)=1$, minimo relativo in $x=6$ con $f(6)=4$, in accordo con la
+  soluzione ufficiale. Nessuna figura nuova: il grafico completo della funzione
+  dell'unità resta quello già disegnato nell'unità 29, qui solo richiamato a parole;
+  nessun interattivo, perché la pagina è un elenco di calcoli su un caso già fissato,
+  senza un parametro naturale da variare.
