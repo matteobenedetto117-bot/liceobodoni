@@ -433,3 +433,23 @@ teorema del confronto, a pagina 21.
   completo con parametri o altri strumenti) senza trovarne uno adatto al solo bagaglio di
   questa unità; un quesito di questo tipo è più naturale una volta disponibile lo studio di
   funzione completo (unità 29–30).
+
+## Unità 28 — Derivate successive e tangente inflessionale
+- Parole: 356 su circa 2,5 pagine di traccia equivalenti (seconda metà di 108, dove
+  inizia "Ricerca di massimi, minimi e flessi con le derivate successive", più 109 e 110
+  intere, fino alla fine dell'esempio della tangente inflessionale).
+- Rettifica: nessuna. Verificati con SymPy tutti i calcoli: $f(x)=x^8-x^7+x^3$ con
+  $f'=8x^7-7x^6+3x^2$, $f''=56x^6-42x^5+6x$, $f'''=336x^5-210x^4+6$, e
+  $f'(0)=f''(0)=0$, $f'''(0)=6$; $f(x)=4x^3-3x+1$ con $f'(0)=-3$, $f(0)=1$ e tangente
+  inflessionale $y=1-3x$.
+- Aggiunta: nulla di contenuto nuovo. La figura a tre pannelli (massimo, minimo, flesso
+  orizzontale) ridisegna in SVG gli schizzi di pagina 108 con le condizioni su $f'$ e
+  $f''$ già scritte in traccia. Non ho ridisegnato i due pannelli di pagina 109 su flesso
+  verticale e obliquo, perché la loro classificazione (stesse condizioni su $f'$ e $f''$)
+  è già nella figura e nel riquadro "Classificazione" dell'unità 27: ripeterla qui sarebbe
+  stata un'aggiunta di forma, non di contenuto. Nessun interattivo: il criterio delle
+  derivate successive è un procedimento discreto (si deriva finché non si trova un valore
+  non nullo), senza un parametro continuo naturale da mettere su un cursore. Nessun
+  quesito di maturità: l'argomento, isolato dal resto dello studio di funzione, non è
+  materia di un quesito a sé; il suo impiego naturale è dentro lo studio completo delle
+  unità 29–30.
