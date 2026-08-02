@@ -453,3 +453,18 @@ teorema del confronto, a pagina 21.
   quesito di maturità: l'argomento, isolato dal resto dello studio di funzione, non è
   materia di un quesito a sé; il suo impiego naturale è dentro lo studio completo delle
   unità 29–30.
+
+## Unità 29 — Schema generale in otto passi
+- Parole: 408 su 4 pagine di traccia (111–114).
+- Rettifica: nessuna. Verificati con SymPy le derivate e gli zeri dell'esempio
+  $f(x)=x-x^3$: $f'(x)=1-3x^2$, zeri $x=\pm1/\sqrt3$, con $f(\pm1/\sqrt3)=\pm2\sqrt3/9
+  \approx\pm0{,}385$ (arrotondato a $\pm0{,}4$ in traccia); $f''(x)=-6x$, zero $x=0$,
+  segno concorde con lo schizzo (concavità verso l'alto per $x<0$, verso il basso per
+  $x>0$).
+- Aggiunta: nulla di contenuto nuovo. Ho reso la lista degli otto passi con una
+  numerazione a cerchietti invece del semplice "1) 2) 3)..." della traccia, per
+  leggibilità, ma i passi e il loro contenuto sono esattamente quelli della traccia. La
+  figura dell'esempio ridisegna in SVG lo schizzo di pagina 114 (grafico con zeri in
+  $-1,0,1$, punti di massimo e minimo con $y\approx\pm0,4$, schema di segno di $f'$).
+  Nessun interattivo: questa unità è un elenco procedurale di controllo, non una
+  costruzione che varia con un parametro.
