@@ -556,3 +556,18 @@ teorema del confronto, a pagina 21.
   disegno: la traccia non ne contiene. Nessun interattivo: sono due esempi puntuali
   di una tecnica, senza un parametro naturale da variare. Nessun quesito di maturità:
   l'unità introduce solo la tecnica su casi elementari, come già le unità 31-33.
+
+## Unità 35 — Integrazione per sostituzione
+- Parole: circa 100 su 0,5 pagine di traccia (la metà inferiore di pagina 125, dopo
+  gli integrali di tangente e cotangente dell'unità 33 e prima dell'inizio
+  dell'integrazione per parti a pagina 126).
+- Rettifica: nessuna. Verificato con SymPy l'unico esempio della traccia: con la
+  sostituzione $t=\sqrt x$, $x=t^2$, $dx=2t\,dt$, si ha
+  $\int\frac{1}{1+\sqrt x}\,dx=2\sqrt x-2\ln(\sqrt x+1)+C$; la derivata di questa
+  primitiva, semplificata, coincide con $1/(1+\sqrt x)$. Coincide con la traccia.
+- Aggiunta: nulla di contenuto nuovo. La traccia contiene solo il titolo e questo
+  unico esempio svolto, senza una formula generale del cambio di variabile: la pagina
+  segue lo stesso taglio, con il solo esempio commentato passo per passo. Nessun
+  disegno: la traccia non ne contiene. Nessun interattivo: un solo esempio puntuale
+  non offre un parametro naturale da far variare. Nessun quesito di maturità: l'unità
+  è troppo breve e circoscritta a un'unica tecnica su un caso elementare.
