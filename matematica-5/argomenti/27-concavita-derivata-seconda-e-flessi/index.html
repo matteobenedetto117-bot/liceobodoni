@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concavità, derivata seconda e flessi — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+figure.disegno{margin:24px 0;text-align:center}
+figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
+table.segni{border-collapse:collapse;margin:22px auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:6px 16px;text-align:center;border-bottom:1px solid var(--riga)}
+table.segni td.etichetta{text-align:left;color:var(--grigio);font-size:.85rem}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Massimi, minimi e flessi &middot; Unità 27</p>
+  <h1>Concavità, derivata seconda e flessi</h1>
+  <p class="sommario">Una curva può crescere o decrescere piegando verso l'alto o verso il
+  basso: è la concavità, e la derivata seconda ne dà il segno. Nei punti in cui la concavità
+  cambia si trovano i flessi, che a seconda della pendenza della tangente in quel punto
+  possono essere orizzontali, verticali o obliqui.</p>
+</header>
+
+<h2>Concavità di una funzione</h2>
+
+<figure class="disegno">
+<svg viewBox="0 0 420 190" width="100%" style="max-width:460px">
+<g transform="translate(10,10)">
+<line x1="10" y1="150" x2="190" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="100" y1="170" x2="100" y2="10" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<text x="180" y="144" font-size="10" fill="var(--inchiostro)">x</text>
+<text x="91" y="20" font-size="10" fill="var(--inchiostro)">y</text>
+<path d="M 35 40 C 65 110 90 150 100 150 C 110 150 135 110 165 40" fill="none" stroke="var(--rosso)" stroke-width="2.1"/>
+<text x="20" y="175" font-family="var(--sans)" font-size="11">concavità verso l'alto</text>
+<text x="20" y="188" font-family="var(--sans)" font-size="10" fill="var(--grigio)">y = x² + 3x + 4,  f''(x) = 2 &gt; 0</text>
+</g>
+<g transform="translate(220,10)">
+<line x1="10" y1="150" x2="190" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="100" y1="170" x2="100" y2="10" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<text x="180" y="144" font-size="10" fill="var(--inchiostro)">x</text>
+<text x="91" y="20" font-size="10" fill="var(--inchiostro)">y</text>
+<path d="M 35 105 C 65 45 90 25 100 25 C 110 25 135 45 165 105" fill="none" stroke="var(--rosso)" stroke-width="2.1"/>
+<text x="20" y="175" font-family="var(--sans)" font-size="11">concavità verso il basso</text>
+<text x="20" y="188" font-family="var(--sans)" font-size="10" fill="var(--grigio)">y = &minus;x² + 3x + 4,  f''(x) = &minus;2 &lt; 0</text>
+</g>
+</svg>
+<figcaption>Stessa forma di parabola, concavità opposta: il segno della derivata seconda la
+distingue.</figcaption>
+</figure>
+
+<p>Nella prima parabola il coefficiente di $x^2$ è positivo e la curva si apre verso
+l'alto; nella seconda è negativo e la curva si apre verso il basso. In entrambi i casi la
+derivata seconda è costante, e il suo segno coincide con il verso della concavità: $2&gt;0$
+nel primo caso, $-2&lt;0$ nel secondo.</p>
+
+<div class="def"><span class="et">Definizione</span>
+<p>Sia $y=f(x)$ una funzione definita e continua in un intorno completo $I$ di $x_0$. La
+concavità di $f$ in $x_0$ è <b>verso l'alto</b> se $f''(x_0)&gt;0$, è <b>verso il basso</b>
+se $f''(x_0)&lt;0$.</p></div>
+
+<p>Quando la concavità non è costante, come nelle due parabole, ma cambia da un tratto
+all'altro del grafico, il punto in cui avviene il cambio è un <b>punto di flesso</b>.
+Studiare il segno di $f''(x)$, esattamente come si studia il segno di $f'(x)$ per la
+monotonia, individua sia gli intervalli di concavità sia i punti di flesso: sono proprio i
+punti in cui $f''$ cambia segno.</p>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Punto $x_0$
+      <input type="range" id="s-x0" min="-1.3" max="1.3" step="0.02" value="0.8">
+      <span>$x_0$ = <span class="val" id="v-x0"></span>,
+      $f''(x_0)$ = <span class="val" id="v-f2"></span></span>
+    </label>
+  </div>
+  <div id="g-flesso" style="height:340px"></div>
+  <p class="leggenda">La curva è $f(x)=2x^3-5$, con $f'(x)=6x^2$ e $f''(x)=12x$. Sposta il
+  cursore: per $x_0&lt;0$ la tangente (verde) sta sopra il tratto vicino della curva e
+  $f''(x_0)&lt;0$, concavità verso il basso; per $x_0&gt;0$ vale il contrario. In $x_0=0$,
+  dove $f''(x)$ cambia segno, la concavità si inverte: è il punto di flesso.</p>
+</div>
+
+<h2>I tre tipi di flesso</h2>
+
+<figure class="disegno">
+<svg viewBox="0 0 480 190" width="100%" style="max-width:560px">
+<g transform="translate(10,10)">
+<line x1="8" y1="150" x2="148" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<line x1="78" y1="165" x2="78" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<path d="M 20 130 C 45 105 65 92 78 90 C 91 88 115 62 140 25" fill="none" stroke="var(--rosso)" stroke-width="2"/>
+<line x1="55" y1="90" x2="101" y2="90" stroke="var(--verde)" stroke-width="1.3" stroke-dasharray="3 3"/>
+<circle cx="78" cy="90" r="3.4" fill="var(--verde)"/>
+<text x="18" y="180" font-family="var(--sans)" font-size="11">orizzontale</text>
+</g>
+<g transform="translate(175,10)">
+<line x1="8" y1="150" x2="148" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<line x1="78" y1="165" x2="78" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<path d="M 20 20 C 45 45 65 65 78 90 C 91 115 115 135 140 145" fill="none" stroke="var(--rosso)" stroke-width="2"/>
+<line x1="78" y1="115" x2="78" y2="65" stroke="var(--verde)" stroke-width="1.3" stroke-dasharray="3 3"/>
+<circle cx="78" cy="90" r="3.4" fill="var(--verde)"/>
+<text x="24" y="180" font-family="var(--sans)" font-size="11">verticale</text>
+</g>
+<g transform="translate(340,10)">
+<line x1="8" y1="150" x2="148" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<line x1="78" y1="165" x2="78" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<path d="M 20 110 C 40 60 60 60 78 78 C 96 96 116 118 140 55" fill="none" stroke="var(--rosso)" stroke-width="2"/>
+<line x1="52" y1="97" x2="104" y2="59" stroke="var(--verde)" stroke-width="1.3" stroke-dasharray="3 3"/>
+<circle cx="78" cy="78" r="3.4" fill="var(--verde)"/>
+<text x="30" y="180" font-family="var(--sans)" font-size="11">obliquo</text>
+</g>
+</svg>
+<figcaption>I tre tipi di flesso, secondo il valore della tangente nel punto.</figcaption>
+</figure>
+
+<div class="def"><span class="et">Classificazione</span>
+<p><b>Orizzontale:</b> $f'(x_0)=0$ e $f''(x_0)=0$.<br>
+<b>Verticale:</b> $f'(x_0)$ non esiste, con $f'(x)\to+\infty$ o $f'(x)\to-\infty$; anche
+$f''(x_0)$ non esiste.<br>
+<b>Obliquo:</b> $f'(x_0)\ne0$ e $f''(x_0)=0$.</p></div>
+
+<p>In sintesi, per cercare i flessi di una funzione: si calcola $f''(x)$ e se ne
+determina il dominio; si studia il segno di $f''(x)$, individuando i punti in cui la
+concavità cambia; in ciascuno di questi punti $x_0$, se $f'(x_0)=0$ il flesso è
+orizzontale, se $f'(x_0)\ne0$ è obliquo. Se invece $f$ non è derivabile in un punto $x_0$
+dove $f''(x)$ cambia segno, lì c'è un flesso verticale.</p>
+
+<h2>Esempio</h2>
+
+<p>Studiamo la concavità di $f(x)=4x^3-3x+1$:
+$$f'(x)=12x^2-3, \qquad f''(x)=24x.$$
+Il segno di $f''$: $\ 24x&gt;0 \Longleftrightarrow x&gt;0$.</p>
+
+<table class="segni">
+<tr><td class="etichetta">$f''(x)$</td><td class="neg">&minus;</td><td>0</td><td class="pos">+</td></tr>
+<tr><td class="etichetta">$f(x)$</td><td>concava giù</td><td>flesso</td><td>concava su</td></tr>
+</table>
+
+<p>In $x_0=0$ la concavità cambia, quindi è un punto di flesso. Per classificarlo guardiamo
+la derivata prima: $f'(0)=12\cdot0-3=-3\ne0$, dunque il flesso è <b>obliquo</b>.</p>
+
+<h2>Esempio</h2>
+
+<p>Studiamo $y=\sqrt[3]{x-2}=(x-2)^{1/3}$:
+$$y'=\frac13(x-2)^{-2/3}=\frac{1}{3\sqrt[3]{(x-2)^2}}, \qquad
+y''=\frac13\left(-\frac23\right)(x-2)^{-5/3}=-\frac{2}{9\sqrt[3]{(x-2)^5}}, \quad x\ne2.$$
+Il segno di $y''$: scrivendo $-\dfrac{2}{9\sqrt[3]{(x-2)^5}}&gt;0$ come
+$\dfrac{2}{9\sqrt[3]{(2-x)^5}}&gt;0$, la disequazione si riduce a $2-x&gt;0$, cioè
+$x&lt;2$.</p>
+
+<table class="segni">
+<tr><td class="etichetta">$y''(x)$</td><td class="pos">+</td><td>2</td><td class="neg">&minus;</td></tr>
+<tr><td class="etichetta">$y(x)$</td><td>concava su</td><td>flesso</td><td>concava giù</td></tr>
+</table>
+
+<p>In $x_0=2$ la funzione non è derivabile — l'esponente $-2/3$ di $y'$ dà denominatore
+nullo — e $y'(x)\to+\infty$ sia da destra sia da sinistra: il flesso in $x_0=2$ è
+<b>verticale</b>, con tangente verticale al grafico.</p>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>L'unità 28 riprende la ricerca di massimi, minimi e flessi con un criterio basato
+sulle derivate successive, utile quando $f'(x_0)=f''(x_0)=0$ e serve capire di che punto
+si tratta senza studiare il segno; introduce anche la tangente inflessionale, la retta
+tangente nel punto di flesso obliquo.</li>
+<li>Nello studio di funzione completo (unità 29&ndash;30) la concavità e i flessi sono
+uno degli ultimi passi dello schema, dopo il segno della derivata prima.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Massimi, minimi e flessi &middot; Unità 27</p></footer>
+
+</div>
+
+<script>
+(function(){
+  function f(x){return 2*x*x*x-5;}
+  function f1(x){return 6*x*x;}
+  function f2(x){return 12*x;}
+  var sx=document.getElementById('s-x0'), vx=document.getElementById('v-x0'), vf=document.getElementById('v-f2');
+  function fmt(n){return n.toLocaleString('it-IT',{maximumFractionDigits:2});}
+  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
+  function agg(){
+    var x0=parseFloat(sx.value);
+    vx.textContent=fmt(x0);
+    vf.textContent=fmt(f2(x0));
+    var lo=-1.5, hi=1.5;
+    var xc=xs(lo,hi,160);
+    var y0=f(x0), m=f1(x0);
+    Plotly.react('g-flesso',[
+      {x:xc,y:xc.map(f),mode:'lines',line:{color:'#b3392f',width:2.4},hoverinfo:'skip',name:'f(x)'},
+      {x:[lo,hi],y:[y0+m*(lo-x0),y0+m*(hi-x0)],mode:'lines',line:{color:'#2f6b4f',width:1.8,dash:'dash'},hoverinfo:'skip',name:'tangente'},
+      {x:[0],y:[f(0)],mode:'markers',marker:{size:7,color:'#16283d'}},
+      {x:[x0],y:[y0],mode:'markers',marker:{size:9,color:'#1f4e79'}}
+    ],{
+      margin:{l:44,r:14,t:10,b:34},showlegend:false,
+      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+      xaxis:{title:'x',range:[lo,hi],gridcolor:'#e6e0d4'},
+      yaxis:{title:'y',range:[-12,2],gridcolor:'#e6e0d4'},
+      annotations:[{x:-0.85,y:0.4,
+        text:(f2(x0)>0?'concava verso l\'alto':(f2(x0)<0?'concava verso il basso':'flesso')),
+        showarrow:false,font:{size:12,color:'#16283d'}}]
+    },{displayModeBar:false,responsive:true});
+  }
+  sx.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>

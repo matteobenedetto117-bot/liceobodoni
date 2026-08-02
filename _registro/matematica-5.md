@@ -409,3 +409,27 @@ teorema del confronto, a pagina 21.
   contenuto è qualitativo e non ha un parametro naturale da far variare. Nessun quesito
   di maturità: gli estremi in punti singolari non compaiono come quesito isolato, e il
   loro impiego più ricco è dentro lo studio di funzione completo, ancora da venire.
+
+## Unità 27 — Concavità, derivata seconda e flessi
+- Parole: 609 su circa 4,4 pagine di traccia equivalenti (104–107 intere, più la prima metà
+  di 108, fino alla conclusione dell'esempio $\sqrt[3]{x-2}$; la seconda metà di 108, che
+  apre con "Ricerca di massimi, minimi e flessi con le derivate successive", appartiene
+  all'unità 28).
+- Rettifica: nessuna. Verificati con SymPy e per via numerica (radice cubica reale, la
+  potenza frazionaria di SymPy su base negativa segue il ramo principale complesso e non è
+  utilizzabile qui) tutti i passaggi: $f''=2$ e $f''=-2$ per le due paraboie di apertura;
+  $f(x)=2x^3-5$ con $f'=6x^2$, $f''=12x$, flesso in $x=0$; $f(x)=4x^3-3x+1$ con
+  $f'=12x^2-3$, $f''=24x$, $f'(0)=-3$, flesso obliquo; $y=\sqrt[3]{x-2}$ con
+  $y'=1/(3\sqrt[3]{(x-2)^2})$, $y''=-2/(9\sqrt[3]{(x-2)^5})$, $y''>0$ per $x<2$ e $y''<0$
+  per $x>2$ (verificato numericamente con derivate a differenze finite), e
+  $\lim_{x\to2^\pm}y'(x)=+\infty$, che conferma il flesso verticale in $x=2$ scritto in
+  traccia.
+- Aggiunta: nulla di contenuto nuovo. L'unico interattivo riusa l'esempio $f(x)=2x^3-5$
+  della traccia, con un cursore su $x_0$ che mostra la tangente e il valore di $f''(x_0)$
+  cambiare segno attraversando il flesso in $0$, la stessa idea del disegno statico della
+  traccia resa dinamica. La figura dei tre tipi di flesso (orizzontale, verticale, obliquo)
+  ridisegna in SVG i tre schizzi della traccia. Nessun quesito di maturità: ho cercato
+  quesiti reali isolati su concavità e flessi (non innestati in uno studio di funzione
+  completo con parametri o altri strumenti) senza trovarne uno adatto al solo bagaglio di
+  questa unità; un quesito di questo tipo è più naturale una volta disponibile lo studio di
+  funzione completo (unità 29–30).
