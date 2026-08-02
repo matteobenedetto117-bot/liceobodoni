@@ -315,3 +315,21 @@ teorema del confronto, a pagina 21.
   maturità: il teorema di Lagrange isolato non è materia di quesito, e il suo uso più
   frequente (De L'Hôpital, unità 24) non è ancora disponibile a questo punto del
   percorso.
+
+## Unità 22 — Monotonia e segno della derivata prima
+- Parole: 334 su circa 1,7 pagine di traccia (da "Teorema III" a fine pagina 83 fino a
+  circa due terzi di pagina 84; il resto di 83 apparteneva già all'unità 21, e il fondo
+  di 84 con l'invertibilità apre l'unità 23).
+- Rettifica: nessuna. Verificati con SymPy $y'=12x^2-2x=2x(6x-1)$ per $y=4x^3-x^2+1$, gli
+  zeri $x=0,\,x=1/6$ e il segno di $y'$ nei tre intervalli (positivo per $x<0$, negativo
+  per $0<x<1/6$, positivo per $x>1/6$): tutto coincide con la traccia.
+- Aggiunta: nulla di contenuto nuovo. La sola riga oltre l'enunciato e l'esempio spiega
+  a parole che cosa fa il criterio (trasforma un confronto fra valori della funzione in
+  uno studio di segno), idea implicita ma non scritta nella traccia. Un solo riquadro di
+  nota sulla differenza fra disuguaglianza debole e stretta nella monotonia, distinzione
+  che nella traccia compare come tabella ma senza il chiarimento sui punti isolati di
+  annullamento. Nessun disegno: la traccia per questa unità non ne contiene (solo la
+  tabella dei segni, resa come tabella HTML). Nessun interattivo: l'unico esempio è un
+  caso singolo, senza parametro da far variare. Nessun quesito di maturità: un esercizio
+  isolato di crescenza e decrescenza non compare come quesito a sé; la sua applicazione
+  più ricca è dentro lo studio di funzione completo, ancora da venire.
