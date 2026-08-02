@@ -376,3 +376,21 @@ teorema del confronto, a pagina 21.
   Nessun quesito di maturità: i due teoremi isolati non compaiono come quesito a sé,
   e il loro impiego più ricco (dentro lo studio di funzione completo) non è ancora
   disponibile a questo punto del percorso.
+
+## Unità 25 — Definizioni, teorema di Fermat, ricerca di massimi e minimi
+- Parole: 573 su 5 pagine di traccia (95–99).
+- Rettifica: nessuna. Verificati con SymPy la fattorizzazione $f'(x)=3x^2-3=3(x-1)(x+1)$,
+  i punti stazionari $x=\pm1$, il segno di $f'$ sui tre intervalli (positivo per $x<-1$
+  e $x>1$, negativo altrove, confermato numericamente in $x=-2,0,2$), i valori
+  $f(-1)=2$ e $f(1)=-2$, e i limiti $\lim_{x\to-\infty}f(x)=-\infty$,
+  $\lim_{x\to+\infty}f(x)=+\infty$: tutto coincide esattamente con la traccia.
+- Aggiunta: un solo riquadro di nota, sul caso in cui il segno di $f'$ non cambia
+  attorno a un punto stazionario (flesso a tangente orizzontale anziché estremo).
+  Non è contenuto nuovo: la traccia stessa lo mostra a pagina 98 con lo schizzo "se
+  avessi ottenuto..." accanto al segno + | +; il riquadro riformula quello schizzo con
+  una mini-figura SVG e la tabella dei segni corrispondente. La figura d'apertura con i
+  quattro tipi di estremo ridisegna in SVG lo schizzo di pagina 95, con etichette al
+  posto delle frecce a mano libera. Nessun interattivo: l'unico esempio è un caso
+  singolo, senza parametro da far variare. Nessun quesito di maturità: è la prima unità
+  dell'area massimi-minimi-flessi, e la sua applicazione più ricca è dentro lo studio di
+  funzione completo, ancora da venire.
