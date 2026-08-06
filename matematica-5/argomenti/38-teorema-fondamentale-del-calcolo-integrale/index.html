@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teorema fondamentale del calcolo integrale — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px;margin:26px 0;max-width:520px}
+.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Integrale definito e applicazioni &middot; Unità 38</p>
+  <h1>Teorema fondamentale del calcolo integrale</h1>
+  <p class="sommario">Se lasciamo scorrere l'estremo superiore di un integrale definito,
+  otteniamo una funzione che accumula l'area vista finora. Il teorema fondamentale del
+  calcolo integrale dice come cambia questa area: al ritmo dato dalla funzione di partenza.
+  Da qui discende anche il modo pratico di calcolare un integrale definito.</p>
+</header>
+
+<div class="def"><span class="et">Definizione — funzione integrale</span>
+Data $f(x)$ continua in $[a,b]$, per ogni $x\in[a,b]$ chiamiamo
+$$F(x)=\int_a^x f(t)\,dt$$
+<strong>funzione integrale</strong>: è l'area compresa fra il grafico di $f$ e l'asse $x$,
+da $a$ fino al punto variabile $x$.</div>
+
+<figure class="figuraunica">
+<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Area accumulata da a a x sotto il grafico di f">
+<defs>
+<pattern id="tratteggio38" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="8" height="8" fill="#f6e4e2"/>
+  <line x1="0" y1="0" x2="0" y2="8" stroke="#b3392f" stroke-width="1.1"/>
+</pattern>
+<marker id="frecciaS38" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+  <path d="M0,0 L6,3 L0,6 Z" fill="#16283d"/>
+</marker>
+</defs>
+<line x1="50" y1="220" x2="450" y2="220" stroke="#16283d" stroke-width="1.6" marker-end="url(#frecciaS38)"/>
+<line x1="50" y1="220" x2="50" y2="20" stroke="#16283d" stroke-width="1.6" marker-end="url(#frecciaS38)"/>
+<text x="440" y="212" font-size="14" fill="#16283d" font-style="italic">x</text>
+<text x="34" y="30" font-size="14" fill="#16283d" font-style="italic">y</text>
+<path id="area38" fill="url(#tratteggio38)" stroke="none"/>
+<path id="curva38" fill="none" stroke="#16283d" stroke-width="2.4"/>
+<line id="linx38" y1="220" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="88" y="238" font-size="14" fill="#16283d" font-style="italic">a</text>
+<text id="lblx38" font-size="14" fill="#16283d" font-style="italic">x</text>
+</svg>
+<figcaption>La regione tratteggiata è $F(x)=\int_a^x f(t)\,dt$: cresce man mano che $x$ si
+sposta verso destra.</figcaption>
+</figure>
+
+<div class="def"><span class="et">Teorema fondamentale del calcolo integrale</span>
+Se $f(x)$ è continua in $[a,b]$, allora $F(x)$ è derivabile in ogni punto $x$ dell'intervallo
+ed è
+$$F'(x)=f(x).$$
+Cioè $F(x)$ è una primitiva di $f(x)$.</div>
+
+<p>Il significato è tutto nella derivata: la velocità con cui l'area accumulata cresce, in un
+punto $x$, è proprio l'altezza $f(x)$ della curva in quel punto. Dove $f$ è grande l'area
+cresce in fretta, dove $f$ è vicina a zero l'area quasi non cambia.</p>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Estremo $x$ nell'intervallo $[0,5]$
+      <input type="range" id="s-x38" min="0.2" max="5" step="0.05" value="2.5">
+      <span>$x$ = <span class="val" id="v-x38"></span></span>
+    </label>
+  </div>
+  <p class="leggenda">La curva è $f(t)=0{,}15t^2+0{,}5$. Sposta $x$: l'area rossa mostra
+  $F(x)=0{,}05x^3+0{,}5x$, e la sua velocità di crescita in quel punto vale esattamente
+  $f(x)$, il valore indicato dall'altezza della curva.</p>
+  <p class="leggenda">$F(x)=$ <span class="val" id="v-Fx38"></span> &nbsp;&middot;&nbsp;
+  $f(x)=$ <span class="val" id="v-fx38"></span></p>
+</div>
+
+<h2>Calcolo dell'integrale definito</h2>
+
+<p>Il teorema apre la strada al calcolo pratico di un integrale definito: se $F(x)$ è una
+qualunque primitiva di $f(x)$, non necessariamente la funzione integrale da $a$, vale la
+<strong>formula di Newton-Leibniz</strong>
+$$\int_a^b f(x)\,dx = F(b)-F(a).$$
+La costante additiva di una primitiva qualsiasi non conta, perché nella differenza si
+elide: se $F(x)=x^2+c$ è una primitiva di $2x$,
+$$\int_a^b 2x\,dx=\Big[x^2+c\Big]_a^b=(b^2+c)-(a^2+c)=b^2-a^2.$$</p>
+
+<h2>Esempi</h2>
+
+<p>$$\int_1^5 2\,dx=\Big[2x\Big]_1^5=2(5-1)=8$$
+$$\int_3^4 \frac1x\,dx=\Big[\ln x\Big]_3^4=\ln4-\ln3$$
+$$\int_0^1(x^2+2x+1)\,dx=\left[\frac{x^3}{3}+x^2+x\right]_0^1=\frac13+1+1=\frac73$$</p>
+
+<div class="nota"><span class="et">Quesito d'esame — Liceo scientifico, ordinamento, sessione ordinaria 2002, quesito 7</span>
+<p>Calcolare la derivata, rispetto a $x$, della funzione $f(x)$ tale che
+$$f(x)=\int_x^{x+1}\ln t\,dt,\qquad x&gt;0.$$</p>
+<p><em>Svolgimento.</em> Spezziamo l'integrale in un punto fisso, per esempio $t=1$:
+$$f(x)=\int_1^{x+1}\ln t\,dt-\int_1^x\ln t\,dt.$$
+Per il teorema fondamentale, il primo pezzo ha derivata $\ln(x+1)$ rispetto a $x+1$
+moltiplicata per la derivata di $x+1$, cioè $\ln(x+1)\cdot1$; il secondo ha derivata
+$\ln x$. Quindi
+$$f'(x)=\ln(x+1)-\ln x=\ln\frac{x+1}{x}.$$</p>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>Il calcolo delle aree, nell'unità 39, applica direttamente la formula di
+Newton-Leibniz appena vista.</li>
+<li>I volumi dei solidi di rotazione, nell'unità 40, useranno lo stesso strumento su
+integrali di funzioni al quadrato.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Integrale definito e applicazioni &middot; Unità 38</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var x0=50,y0=220,x1=450,y1=20;
+  var a=0,b=5,ymax=4.5;
+  function f(t){return 0.15*t*t+0.5;}
+  function F(x){return 0.05*x*x*x+0.5*x;}
+  function px(t){return x0+(t-a)/(b-a)*(x1-x0);}
+  function py(v){return y0-(v/ymax)*(y0-y1);}
+  function fmt(n){return n.toFixed(2).replace('.',',');}
+
+  var curva=document.getElementById('curva38');
+  var pts=[]; var n=100;
+  for(var i=0;i<=n;i++){var t=a+i*(b-a)/n; pts.push(px(t)+','+py(f(t)));}
+  curva.setAttribute('d','M'+pts.join(' L'));
+
+  var sx=document.getElementById('s-x38'), vx=document.getElementById('v-x38');
+  var vFx=document.getElementById('v-Fx38'), vfx=document.getElementById('v-fx38');
+  var area=document.getElementById('area38'), linx=document.getElementById('linx38');
+  var lblx=document.getElementById('lblx38');
+
+  function agg(){
+    var x=parseFloat(sx.value);
+    vx.textContent=fmt(x);
+    vFx.textContent=fmt(F(x));
+    vfx.textContent=fmt(f(x));
+    var ap=[]; var m=60;
+    for(var i=0;i<=m;i++){var t=a+i*(x-a)/m; ap.push(px(t)+','+py(f(t)));}
+    var d='M'+px(a)+','+py(0)+' L'+ap.join(' L')+' L'+px(x)+','+py(0)+' Z';
+    area.setAttribute('d',d);
+    linx.setAttribute('x1',px(x)); linx.setAttribute('x2',px(x));
+    linx.setAttribute('y2',py(f(x)));
+    lblx.setAttribute('x',px(x)-4); lblx.setAttribute('y',238);
+  }
+  sx.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>

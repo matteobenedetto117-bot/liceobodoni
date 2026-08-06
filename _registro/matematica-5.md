@@ -610,3 +610,25 @@ teorema del confronto, a pagina 21.
   statico, in SVG. Nessun quesito di maturità: il teorema della media, isolato, non è
   materia di quesito a sé; il suo uso più frequente è dentro il calcolo di valori medi
   in problemi di studio di funzione, argomento delle unità successive.
+
+## Unità 38 — Teorema fondamentale del calcolo integrale
+- Parole: 414 su circa 1,85 pagine di traccia equivalenti (metà finale di pag. 135, da
+  "Teorema fondamentale del calcolo integrale" dopo la chiusura dell'unità 37, più tutta la
+  pag. 136, più la parte iniziale di pag. 137 fino ai tre esempi numerici inclusi; il resto
+  di pag. 137, che apre "Calcolo delle aree", appartiene all'unità 39).
+- Rettifica: nessuna. Verificati con SymPy $D(x^2+c)=2x$ e $F(b)-F(a)=b^2-a^2$; i tre esempi
+  numerici $\int_1^5 2\,dx=8$, $\int_3^4 1/x\,dx=\ln4-\ln3$,
+  $\int_0^1(x^2+2x+1)dx=7/3$: tutti coincidono con la traccia.
+- Aggiunta: un quesito d'esame (punto 5 della struttura richiesta per la matematica di
+  quinta). Scelto il quesito 7 del questionario, Esame di Stato di Liceo Scientifico,
+  corso di ordinamento, sessione ordinaria 2002 (fonte: testo ufficiale della prova,
+  www.matematica.it/tomasi/matls/2002/prove2002/ord2002.pdf), perché richiede solo il
+  teorema appena introdotto insieme alla regola della catena (unità 15), già disponibile.
+  Verificato con SymPy: per $f(x)=\int_x^{x+1}\ln t\,dt$ si ha $f'(x)=\ln(x+1)-\ln x$.
+  Nessun altro contenuto nuovo: la frase sul significato della derivata di $F$ (la
+  velocità di crescita dell'area uguale all'altezza della curva) spiega a parole il
+  teorema appena enunciato, senza aggiungere risultati. L'unico interattivo rende
+  dinamica la stessa figura della traccia (area accumulata da $a$ a $x$), con una funzione
+  di prova $f(t)=0{,}15t^2+0{,}5$ non tratta dalla traccia (che non fissa una $f$
+  esplicita per quel disegno), sullo stesso principio già usato nei widget delle unità 08
+  e 37.
