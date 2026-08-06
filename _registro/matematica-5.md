@@ -590,3 +590,23 @@ teorema del confronto, a pagina 21.
   più ampi di studio di funzione). Nessun disegno: la traccia non ne contiene. Nessun
   interattivo: sono casi e esempi puntuali di una tecnica, senza un parametro naturale
   da far variare.
+
+## Unità 37 — Teorema della media e valore medio
+- Parole: 332 su 1,5 pagine di traccia (134 intera, e la parte iniziale di 135 fino a
+  "valore medio della funzione f(x) in [a,b]", prima che inizi il teorema fondamentale
+  del calcolo integrale, che apre l'unità 38).
+- Rettifica: nessuna. Verificato con SymPy, sulla funzione usata nell'interattivo
+  $f(x)=1+0{,}15x^2$ su $[0,4]$: integrale $=36/5$, valor medio $=9/5$, punto
+  $z=4\sqrt3/3\approx2{,}309$, e la funzione differenza
+  $\int_a^b f\,dx-f(z)(b-a)=16/5-3z^2/5$ si annulla esattamente in quel punto e cambia
+  segno lì attorno, coerente con la lettura data dalla traccia (le due aree, rossa e
+  blu, si compensano solo in quel punto).
+- Aggiunta: nulla di contenuto nuovo. La traccia non contiene esempi numerici in queste
+  pagine (solo enunciato e due disegni): l'unico interattivo rende manovrabile proprio
+  il secondo disegno della traccia, quello delle due aree rossa e blu che la traccia
+  stessa descrive come ottenute "facendo scorrere z nell'intervallo" — non è un esempio
+  aggiunto, ma la resa dinamica di un'azione che la traccia descrive già a parole. Il
+  primo disegno (il rettangolo equivalente all'area sotto la curva) resta invece
+  statico, in SVG. Nessun quesito di maturità: il teorema della media, isolato, non è
+  materia di quesito a sé; il suo uso più frequente è dentro il calcolo di valori medi
+  in problemi di studio di funzione, argomento delle unità successive.
