@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcolo delle aree — Matematica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px;margin:26px 0;max-width:520px}
+.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
+.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:22px 0}
+.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
+.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
+  <p class="occhiello">Integrale definito e applicazioni &middot; Unità 39</p>
+  <h1>Calcolo delle aree</h1>
+  <p class="sommario">Sappiamo calcolare un integrale definito; lo usiamo ora per misurare aree
+  vere, quelle che vediamo colorate su un foglio. Il punto delicato è il segno: l'integrale
+  conta con segno negativo la parte di piano sotto l'asse x, mentre un'area è sempre un numero
+  positivo.</p>
+</header>
+
+<p>Prendiamo $f(x)=\sin x$ sull'intervallo $[0,2\pi]$ e chiediamoci quanto vale l'area compresa
+tra la curva e l'asse x. Se calcoliamo l'integrale definito direttamente tra $0$ e $2\pi$:
+$$\int_0^{2\pi}\sin x\,dx=-\cos x\Big|_0^{2\pi}=-\cos2\pi+\cos0=-1+1=0.$$
+Il risultato è nullo perché il tratto sopra l'asse, dove $\sin x$ è positiva, e il tratto
+sotto, dove è negativa, si compensano: l'integrale li somma con segni opposti. Per avere
+l'area dobbiamo invece integrare separatamente sui due tratti e cambiare di segno quello
+negativo:
+$$\int_0^\pi\sin x\,dx-\int_\pi^{2\pi}\sin x\,dx=-\cos x\Big|_0^\pi+\cos x\Big|_\pi^{2\pi}
+=1+1+1+1=4.$$
+L'area vera, quella che vediamo colorata nella figura, vale dunque $4$, non $0$.</p>
+
+<p>La stessa idea vale per qualunque funzione che cambi segno nell'intervallo, non solo per
+il seno. Con $f(x)=x^3$ sull'intervallo $[-1,1]$: negativa a sinistra dello zero, positiva a
+destra. Cambiamo di segno il primo pezzo:
+$$A=-\int_{-1}^0x^3\,dx+\int_0^1x^3\,dx=-\frac{x^4}{4}\bigg|_{-1}^0+\frac{x^4}{4}\bigg|_0^1
+=\frac14+\frac14=\frac12.$$</p>
+
+<div class="galleria">
+<figure>
+<svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico di seno x tra 0 e 2 pi greco, con la parte positiva e la parte negativa">
+<defs>
+<pattern id="hPos39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#f6e4e2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#b3392f" stroke-width="1"/>
+</pattern>
+<pattern id="hNeg39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#e8eff6"/><line x1="0" y1="0" x2="0" y2="7" stroke="#1f4e79" stroke-width="1"/>
+</pattern>
+</defs>
+<line x1="20" y1="90" x2="245" y2="90" stroke="#16283d" stroke-width="1.4"/>
+<line x1="20" y1="150" x2="20" y2="20" stroke="#16283d" stroke-width="1.4"/>
+<path d="M20,90 Q57.5,20 95,90 T170,90" fill="url(#hPos39)" stroke="none"/>
+<path d="M95,90 Q132.5,160 170,90 T245,90" fill="url(#hNeg39)" stroke="none"/>
+<path d="M20,90 Q57.5,20 95,90 T170,90 T245,90" fill="none" stroke="#16283d" stroke-width="2"/>
+<text x="93" y="60" font-size="13" fill="#b3392f">+</text>
+<text x="168" y="122" font-size="13" fill="#1f4e79">&#8722;</text>
+<text x="90" y="104" font-size="12" fill="#16283d" font-style="italic">&#960;</text>
+<text x="228" y="104" font-size="12" fill="#16283d" font-style="italic">2&#960;</text>
+<text x="234" y="84" font-size="12" fill="#16283d" font-style="italic">x</text>
+</svg>
+<figcaption>$f(x)=\sin x$ su $[0,2\pi]$: sopra l'asse l'integrale conta positivo, sotto conta
+negativo.</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico di x al cubo tra meno 1 e 1, con le due regioni tratteggiate in verde">
+<defs>
+<pattern id="hCubo39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
+</pattern>
+</defs>
+<line x1="20" y1="90" x2="245" y2="90" stroke="#16283d" stroke-width="1.4"/>
+<line x1="132" y1="150" x2="132" y2="20" stroke="#16283d" stroke-width="1.4"/>
+<path d="M20,150 C70,150 100,90 132,90 C164,90 194,30 244,30 L244,90 L20,90 Z" fill="url(#hCubo39)" stroke="none"/>
+<path d="M20,150 C70,150 100,90 132,90 C164,90 194,30 244,30" fill="none" stroke="#16283d" stroke-width="2"/>
+<text x="18" y="104" font-size="12" fill="#16283d" font-style="italic">&#8722;1</text>
+<text x="228" y="104" font-size="12" fill="#16283d" font-style="italic">1</text>
+<text x="234" y="84" font-size="12" fill="#16283d" font-style="italic">x</text>
+</svg>
+<figcaption>$f(x)=x^3$ su $[-1,1]$: le due regioni hanno la stessa area, $\tfrac14$ ciascuna.</figcaption>
+</figure>
+</div>
+
+<h2>Area compresa tra due curve</h2>
+
+<p>Immaginiamo due curve, una sopra l'altra su tutto un intervallo: la regione compresa tra
+loro è delimitata dal basso dalla curva inferiore e dall'alto da quella superiore. Per
+misurarla basta togliere, dall'area sotto la curva superiore, l'area sotto quella
+inferiore.</p>
+
+<div class="def"><span class="et">Area tra due curve</span>
+Se $f(x)\ge g(x)$ per ogni $x$ in $[a,b]$, l'area della regione compresa tra le due curve è
+la differenza tra l'area sotto $f$ e quella sotto $g$:
+$$A=\int_a^bf(x)\,dx-\int_a^bg(x)\,dx=\int_a^b\big[f(x)-g(x)\big]\,dx,$$
+dove il secondo passaggio usa la linearità dell'integrale.</div>
+
+<figure class="figuraunica">
+<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Area compresa tra due curve f e g su a b">
+<defs>
+<pattern id="hDue39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
+</pattern>
+</defs>
+<line x1="40" y1="190" x2="450" y2="190" stroke="#16283d" stroke-width="1.4"/>
+<line x1="40" y1="190" x2="40" y2="30" stroke="#16283d" stroke-width="1.4"/>
+<path d="M120,190 C160,60 260,50 380,90 L380,190 Z" fill="url(#hDue39)" stroke="none"/>
+<path d="M60,80 C160,20 260,30 420,70" fill="none" stroke="#b3392f" stroke-width="2.2"/>
+<path d="M60,160 C160,150 260,140 420,150" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
+<line x1="120" y1="190" x2="120" y2="130" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="380" y1="190" x2="380" y2="88" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="113" y="206" font-size="14" fill="#16283d" font-style="italic">a</text>
+<text x="374" y="206" font-size="14" fill="#16283d" font-style="italic">b</text>
+<text x="410" y="62" font-size="14" fill="#b3392f" font-style="italic">f(x)</text>
+<text x="410" y="146" font-size="14" fill="#1f4e79" font-style="italic">g(x)</text>
+</svg>
+<figcaption>La regione verde è $A=\int_a^b[f(x)-g(x)]\,dx$.</figcaption>
+</figure>
+
+<p>La formula resta valida anche se $f$, $g$, o entrambe scendono sotto l'asse x, dove i
+singoli integrali $\int f$ e $\int g$ non sono più aree ma numeri con segno: possiamo sempre
+traslare le due curve verso l'alto di una quantità $h$ abbastanza grande da renderle
+positive, senza che l'area compresa tra loro cambi, perché
+$$\int_a^b\big[f(x)+h\big]-\big[g(x)+h\big]\,dx=\int_a^b\big[f(x)-g(x)\big]\,dx:$$
+la costante $h$ si elide nella differenza.</p>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Traslazione verticale $h$
+      <input type="range" id="s-h39" min="0" max="2.5" step="0.05" value="0">
+      <span>$h$ = <span class="val" id="v-h39"></span></span>
+    </label>
+  </div>
+  <svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le due curve traslate verso l'alto di h, con l'area verde tra loro invariata">
+  <defs>
+  <pattern id="hW39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+    <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
+  </pattern>
+  </defs>
+  <line x1="40" y1="200" x2="450" y2="200" stroke="#16283d" stroke-width="1.4"/>
+  <line x1="40" y1="200" x2="40" y2="20" stroke="#16283d" stroke-width="1.4"/>
+  <path id="areaW39" fill="url(#hW39)" stroke="none"/>
+  <path id="curvaF39" fill="none" stroke="#b3392f" stroke-width="2.2"/>
+  <path id="curvaG39" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
+  <text x="405" y="60" font-size="14" fill="#b3392f" font-style="italic">f(x)+h</text>
+  <text x="405" y="190" font-size="14" fill="#1f4e79" font-style="italic">g(x)+h</text>
+  </svg>
+  <p class="leggenda">$f(x)=0{,}1x^2-1$ (rossa) e $g(x)=-1{,}8$ (blu) su $[0,4]$, traslate di
+  $h$. L'area verde tra le due curve resta $A=$ <span class="val" id="v-A39"></span> per ogni
+  $h$: la traslazione sposta entrambe le curve della stessa quantità, e la differenza
+  $f(x)+h-[g(x)+h]$ non dipende da $h$.</p>
+</div>
+
+<p>Se le due curve si intersecano in un punto interno $c$, scambiano il ruolo di "sopra" e
+"sotto": dobbiamo spezzare l'integrale in $c$ e invertire l'ordine della differenza nel
+secondo tratto:
+$$A=\int_a^c\big[f(x)-g(x)\big]\,dx+\int_c^b\big[g(x)-f(x)\big]\,dx.$$</p>
+
+<figure class="figuraunica">
+<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due curve che si intersecano in un punto interno c, con due regioni tratteggiate">
+<defs>
+<pattern id="hInt39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
+</pattern>
+</defs>
+<line x1="40" y1="190" x2="450" y2="190" stroke="#16283d" stroke-width="1.4"/>
+<line x1="40" y1="190" x2="40" y2="30" stroke="#16283d" stroke-width="1.4"/>
+<path d="M80,150 C160,40 200,40 245,95 C290,150 340,150 400,60 L400,190 L80,190 Z" fill="url(#hInt39)" stroke="none"/>
+<path d="M60,160 C160,40 250,40 300,95 C340,140 380,150 420,60" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
+<path d="M60,60 C120,150 260,150 300,95 C340,50 380,45 420,150" fill="none" stroke="#b3392f" stroke-width="2.2"/>
+<line x1="80" y1="190" x2="80" y2="150" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="245" y1="190" x2="245" y2="95" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
+<line x1="400" y1="190" x2="400" y2="60" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="73" y="206" font-size="14" fill="#16283d" font-style="italic">a</text>
+<text x="239" y="206" font-size="14" fill="#16283d" font-style="italic">c</text>
+<text x="393" y="206" font-size="14" fill="#16283d" font-style="italic">b</text>
+</svg>
+<figcaption>Nel primo tratto $f\ge g$, nel secondo $g\ge f$: l'integrale cambia segno
+in $c$.</figcaption>
+</figure>
+
+<h2>Area compresa tra una curva e l'asse y</h2>
+
+<p>Quando conviene, possiamo leggere l'area anche rispetto all'asse y, esprimendo x in
+funzione di y. Consideriamo $y=\sqrt{2x}$: elevando al quadrato, $y^2=2x$, cioè
+$x=f(y)=\dfrac{y^2}{2}$. L'area compresa tra la curva e l'asse y, per y tra $2$ e $4$, è
+$$A=\int_2^4f(y)\,dy=\int_2^4\frac{y^2}{2}\,dy=\frac{y^3}{6}\bigg|_2^4=\frac{64}{6}-\frac{8}{6}
+=\frac{28}{3}.$$</p>
+
+<figure class="figuraunica">
+<svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Area compresa tra la curva y uguale a radice di 2x e l'asse y, per y tra 2 e 4">
+<defs>
+<pattern id="hY39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
+</pattern>
+</defs>
+<line x1="50" y1="230" x2="270" y2="230" stroke="#16283d" stroke-width="1.4"/>
+<line x1="50" y1="230" x2="50" y2="20" stroke="#16283d" stroke-width="1.4"/>
+<path d="M50,150 C90,140 140,110 172,80 L172,150 L50,150 Z" fill="url(#hY39)" stroke="none"/>
+<path d="M50,230 C110,190 155,120 178,60" fill="none" stroke="#16283d" stroke-width="2.2"/>
+<line x1="50" y1="150" x2="60" y2="150" stroke="#16283d" stroke-width="1.4"/>
+<line x1="50" y1="80" x2="60" y2="80" stroke="#16283d" stroke-width="1.4"/>
+<text x="32" y="154" font-size="13" fill="#16283d" font-style="italic">2</text>
+<text x="32" y="84" font-size="13" fill="#16283d" font-style="italic">4</text>
+<text x="260" y="224" font-size="13" fill="#16283d" font-style="italic">x</text>
+<text x="58" y="30" font-size="13" fill="#16283d" font-style="italic">y</text>
+<text x="100" y="128" font-size="13" fill="#2f6b4f">A</text>
+</svg>
+<figcaption>$x=f(y)=y^2/2$: l'area verde è $\int_2^4f(y)\,dy=28/3$.</figcaption>
+</figure>
+
+<p>In generale, per due curve espresse come $x=f(y)$ e $x=g(y)$, l'area tra loro su $[a,b]$,
+ora intervallo sull'asse y, è
+$$A=\int_a^b\big[f(y)-g(y)\big]\,dy,$$
+esattamente come nel caso orizzontale, con i ruoli di x e y scambiati: ora è $f(y)$ la curva
+più a destra, quella con la x maggiore a parità di y. Se invece la curva
+assume valori negativi, cioè passa a sinistra dell'asse y tra $c$ e $b$, l'integrale va
+spezzato come nel caso di x:
+$$A=\int_a^cf(y)\,dy-\int_c^bf(y)\,dy.$$
+Il principio è sempre lo stesso incontrato per l'asse x: ogni tratto in cui la curva cambia
+segno va isolato e riportato in valore assoluto prima di sommarlo agli altri.</p>
+
+<div class="galleria">
+<figure>
+<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due curve x uguale f di y e x uguale g di y, con l'area tratteggiata tra loro">
+<defs>
+<pattern id="hFG39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#e8eff6"/><line x1="0" y1="0" x2="0" y2="7" stroke="#1f4e79" stroke-width="1"/>
+</pattern>
+</defs>
+<line x1="40" y1="180" x2="230" y2="180" stroke="#16283d" stroke-width="1.4"/>
+<line x1="40" y1="180" x2="40" y2="20" stroke="#16283d" stroke-width="1.4"/>
+<path d="M40,150 C90,130 130,90 150,50 L96,40 C80,80 60,120 40,150 Z" fill="url(#hFG39)" stroke="none"/>
+<path d="M40,150 C90,130 130,90 160,40" fill="none" stroke="#2f6b4f" stroke-width="2.2"/>
+<path d="M40,40 C60,80 80,120 96,150" fill="none" stroke="#b3392f" stroke-width="2.2"/>
+<line x1="40" y1="150" x2="50" y2="150" stroke="#16283d" stroke-width="1.4"/>
+<line x1="40" y1="40" x2="50" y2="40" stroke="#16283d" stroke-width="1.4"/>
+<text x="22" y="154" font-size="12" fill="#16283d" font-style="italic">a</text>
+<text x="22" y="44" font-size="12" fill="#16283d" font-style="italic">b</text>
+<text x="155" y="45" font-size="12" fill="#2f6b4f" font-style="italic">f(y)</text>
+<text x="98" y="165" font-size="12" fill="#b3392f" font-style="italic">g(y)</text>
+</svg>
+<figcaption>Caso generale: $A=\int_a^b[f(y)-g(y)]\,dy$.</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Una curva che diventa negativa in y, a sinistra dell'asse y, con la regione da spezzare in c">
+<defs>
+<pattern id="hNegY39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
+</pattern>
+</defs>
+<line x1="90" y1="180" x2="230" y2="180" stroke="#16283d" stroke-width="1.4"/>
+<line x1="90" y1="180" x2="90" y2="20" stroke="#16283d" stroke-width="1.4"/>
+<path d="M90,150 C70,120 55,90 60,60 L90,60 C88,90 89,120 90,150 Z" fill="url(#hNegY39)" stroke="none"/>
+<path d="M90,150 C70,120 50,80 60,30" fill="none" stroke="#b3392f" stroke-width="2.2"/>
+<line x1="90" y1="150" x2="100" y2="150" stroke="#16283d" stroke-width="1.4"/>
+<line x1="90" y1="60" x2="100" y2="60" stroke="#16283d" stroke-width="1.4"/>
+<line x1="90" y1="60" x2="230" y2="60" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="72" y="154" font-size="12" fill="#16283d" font-style="italic">a</text>
+<text x="72" y="64" font-size="12" fill="#16283d" font-style="italic">c</text>
+<text x="72" y="34" font-size="12" fill="#16283d" font-style="italic">b</text>
+<text x="45" y="42" font-size="12" fill="#b3392f" font-style="italic">f(y)</text>
+</svg>
+<figcaption>Da $c$ a $b$ la curva è negativa: $A=\int_a^cf(y)\,dy-\int_c^bf(y)\,dy$.</figcaption>
+</figure>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>I volumi dei solidi di rotazione, nell'unità 40, useranno lo stesso schema, integrando
+il quadrato di $f(x)$.</li>
+<li>Gli integrali impropri, nell'unità 41, estendono il calcolo dell'area a intervalli
+illimitati.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quinta &middot; Integrale definito e applicazioni &middot; Unità 39</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var x0=40,y0=200,x1=450,y1=20;
+  var a=0,b=4,ymin=-2.2,ymax=3.3;
+  function f(t){return 0.1*t*t-1;}
+  function g(t){return -1.8;}
+  function px(t){return x0+(t-a)/(b-a)*(x1-x0);}
+  function py(v){return y0-(v-ymin)/(ymax-ymin)*(y0-y1);}
+  function fmt(n){return n.toFixed(2).replace('.',',');}
+
+  var A = 16/3;
+  var sh=document.getElementById('s-h39'), vh=document.getElementById('v-h39');
+  var vA=document.getElementById('v-A39');
+  var curvaF=document.getElementById('curvaF39'), curvaG=document.getElementById('curvaG39');
+  var area=document.getElementById('areaW39');
+  vA.textContent=fmt(A);
+
+  function agg(){
+    var h=parseFloat(sh.value);
+    vh.textContent=fmt(h);
+    var n=60, ptsF=[], ptsG=[];
+    for(var i=0;i<=n;i++){
+      var t=a+i*(b-a)/n;
+      ptsF.push(px(t)+','+py(f(t)+h));
+    }
+    for(var i=n;i>=0;i--){
+      var t=a+i*(b-a)/n;
+      ptsG.push(px(t)+','+py(g(t)+h));
+    }
+    curvaF.setAttribute('d','M'+ptsF.join(' L'));
+    var gpts=[]; for(var i=0;i<=n;i++){var t=a+i*(b-a)/n; gpts.push(px(t)+','+py(g(t)+h));}
+    curvaG.setAttribute('d','M'+gpts.join(' L'));
+    area.setAttribute('d','M'+ptsF.join(' L')+' L'+ptsG.join(' L')+' Z');
+  }
+  sh.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>

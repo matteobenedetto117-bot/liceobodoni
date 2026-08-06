@@ -632,3 +632,26 @@ teorema del confronto, a pagina 21.
   di prova $f(t)=0{,}15t^2+0{,}5$ non tratta dalla traccia (che non fissa una $f$
   esplicita per quel disegno), sullo stesso principio già usato nei widget delle unità 08
   e 37.
+
+## Unità 39 — Calcolo delle aree
+- Parole: 598 su circa 4,85 pagine di traccia (dal punto medio di pag. 137, dove inizia
+  "Calcolo delle aree" dopo la chiusura dell'unità 38, fino a fine pag. 141; pag. 142 apre
+  "Calcolo di Volumi", unità 40).
+- Rettifica: nessuna. Verificati con SymPy tutti i calcoli: $\int_0^{2\pi}\sin x\,dx=0$ e,
+  spezzato, $\int_0^\pi\sin x\,dx-\int_\pi^{2\pi}\sin x\,dx=4$; l'esempio $x^3$ su $[-1,1]$
+  con area $1/2$; l'esempio $y=\sqrt{2x}$ con $A=\int_2^4 y^2/2\,dy=28/3$. Tutti coincidono
+  con la traccia.
+- Aggiunta: nessun contenuto nuovo di sostanza. Ho premesso alla sezione "Area compresa tra
+  due curve" due frasi in italiano corrente prima della definizione formale (idea prima della
+  formalizzazione, come richiesto), e due frasi di collegamento minime (dopo l'esempio del
+  seno, e prima dell'esempio di x^3) per rendere esplicito un passaggio che nella traccia è
+  solo implicito nel disegno. Nessun quesito di maturità: ho cercato negli archivi delle
+  prove d'esame (matefilia, eurekamat, matematika.it) un quesito isolato del questionario
+  sul calcolo di un'area, risolubile senza dover riprodurre un problema intero con una f(x)
+  definita altrove; tutti i quesiti trovati sull'argomento sono punti interni a un problema
+  (dipendono da una funzione studiata nei punti precedenti dello stesso problema), quindi non
+  citabili isolatamente con onestà. L'unico strumento interattivo (traslazione verticale di
+  due curve di una quantità h, con l'area verde invariata) rende dinamica esattamente la
+  coppia di disegni della traccia a pag. 139-140 che mostra le curve prima e dopo la
+  traslazione; usa due funzioni di prova non tratte dalla traccia (che lì non fissa una
+  coppia esplicita), sullo stesso principio già impiegato nei widget delle unità 08, 37 e 38.
