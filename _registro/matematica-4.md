@@ -44,3 +44,18 @@
   non viene ripetuta. I due diagrammi di sintesi (il segno del quoziente sulla circonferenza
   e le due intersezioni di sistemi con cerchi concentrici) ridisegnano in SVG esattamente le
   costruzioni grafiche della traccia (pagine 33, 35 e 36); non introducono un metodo nuovo.
+
+## Unità 08 — Triangoli rettangoli: primo e secondo teorema
+- Parole: 369 (prosa, formule e didascalie, SVG esclusi) su 4 pagine di traccia (37–40)
+- Rettifica: nessuna. Le due identità dei teoremi sono state verificate simbolicamente con
+  SymPy sostituendo β=π/2−α (cos β=sin α, sin β=cos α, cot β=tan α, tan β=cot α, tutte
+  identicamente nulle come differenza). I quattro esempi numerici sono stati ricalcolati con
+  Python: Esempio 1 (a=40, b=110) dà α=arctan(40/110)≈19,98°≈20°, β≈70°, c=√(40²+110²)≈117,05;
+  Esempio 2 (a=21,13, c=50) dà α=arcsin(21,13/50)≈25,0°, β≈65°, b=√(50²−21,13²)≈45,32;
+  Esempio 3 (a=8, α=28°) dà β=62°, b=8·tan62°≈15,05, c=√(8²+b²)≈17,04; Esempio 4 (c=28,3,
+  α=58°) dà β=32°, a=28,3·sin58°≈24,00, b=28,3·sin32°≈15,00. Tutto coincide con la traccia.
+- Aggiunta: nessuna. Il commento sotto il primo disegno (le coordinate del punto sulla
+  circonferenza goniometrica) riprende esattamente l'annotazione a lato della traccia a
+  pagina 37 ("c → raggio circonf. gon.", "a e b corrispondono a sin e cos moltiplicati per
+  c"), riformulata in una frase. Le due costruzioni con la tangente per il secondo teorema
+  ridisegnano in SVG i due schemi già presenti a pagina 38.
