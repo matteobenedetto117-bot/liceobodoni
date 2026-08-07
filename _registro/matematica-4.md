@@ -19,3 +19,8 @@
 - Parole: 354 (prosa e formule) su circa 2,5 pagine di traccia (pagina 19 condivisa con la fine dell'unità 03)
 - Rettifica: nessuna. Le uniche informazioni numeriche sono i domini e i codomini di seno, coseno, tangente ristretti e delle loro inverse, e i nove valori usati nello strumento interattivo (sin di -π/2,-π/3,-π/4,-π/6,0,π/6,π/4,π/3,π/2 e il loro ritorno con arcoseno): tutti verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna. Lo strumento interattivo (il punto (x,sin x) che si scambia in (sin x,x)) visualizza esattamente il passaggio "inverto x e y" già scritto nella traccia, non introduce un contenuto nuovo.
+
+## Unità 05 — Equazioni omogenee di secondo grado in seno e coseno
+- Parole: 396 su 4 pagine di traccia
+- Rettifica: nessuna. Tutti i passaggi sono stati verificati con SymPy: le soluzioni di cosx sinx-√3sin²x=0 (x=kπ ∨ x=π/6+kπ, confermate anche per enumerazione in [0,2π)); il discriminante Δ=(1+√3)²-4√3=4-2√3=(1-√3)² dell'equazione tan²x-(1+√3)tanx+√3=0 con radici tanx=1 e tanx=√3; le tre formule di duplicazione finali (sin²x, cos²x, sinx cosx in funzione di 2x). Tutto coincide con la traccia.
+- Aggiunta: nessuna. Il riquadro "errore tipico" riprende il controllo che la traccia stessa mostra passo per passo (verifica che x=π/2+kπ non sia soluzione, prima di dividere per cosx o per cos²x); non introduce un contenuto nuovo.
