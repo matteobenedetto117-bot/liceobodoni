@@ -29,3 +29,18 @@
 - Parole: 541 (prosa e formule, SVG esclusi) su 6 pagine di traccia (26–31)
 - Rettifica: nessuna. Tutte le soluzioni sono state verificate per enumerazione numerica (oltre che a mano) con Python: l'esempio guida sinx<1/2; i quattro esempi elementari (2sinx-√3>0, 2cosx+1≤0, tanx>1, sin(x-π/6)≥0); i quattro esempi non elementari (√2sin²x-sinx≥0, 4cos²x-4cosx-3≤0 con Δ=64 e radici cosx=3/2 impossibile ∨ cosx=-1/2, il sistema -√3/2<cosx<1/2, 3tan²x+√3tanx≥0 con radici tanx=0 ∨ tanx=-√3/3 ed esclusione x≠π/2+kπ). Tutto coincide con la traccia.
 - Aggiunta: nessuna. Lo strumento interattivo (cursore sulla soglia a in sinx<a, con l'arco soluzione ridisegnato) rende dinamico solo l'esempio guida già svolto nella traccia (sinx<1/2); non introduce contenuto nuovo. Il riquadro "un modo più compatto" riprende la nota finale della traccia (pagina 32) sul riscrivere con periodo π invece di 2π.
+
+## Unità 07 — Disequazioni fratte e sistemi di disequazioni
+- Parole: 473 (prosa e formule, SVG esclusi) su 5 pagine di traccia (32–36)
+- Rettifica: nessuna. Tutti i risultati sono stati verificati con SymPy/Python: l'identità
+  tanx-1/(2cosx)=(2sinx-1)/(2cosx); il segno di N=2sinx-1 e D=2cosx per enumerazione numerica
+  su [0,2π] e il quoziente risultante positivo esattamente su [π/6,π/2)∪[5π/6,3π/2); il sistema
+  4sin²x-3≥0 ∧ tanx≥1 (intersezione [π/3,π/2) verificata campionando f e g agli estremi e
+  all'interno); il sistema a tre condizioni cosx>0 ∧ cot²x-3≥0 ∧ 2sinx-1≤0, incluso il
+  controllo numerico punto per punto che l'intersezione finale sia esattamente
+  [-π/6,π/6]\{0}. Tutto coincide con la traccia.
+- Aggiunta: nessuna. La pagina 32 apre con la nota sulla forma compatta di periodo π
+  dell'ultimo esempio dell'unità 06: quella nota è già stata registrata nell'unità 06 e qui
+  non viene ripetuta. I due diagrammi di sintesi (il segno del quoziente sulla circonferenza
+  e le due intersezioni di sistemi con cerchi concentrici) ridisegnano in SVG esattamente le
+  costruzioni grafiche della traccia (pagine 33, 35 e 36); non introducono un metodo nuovo.
