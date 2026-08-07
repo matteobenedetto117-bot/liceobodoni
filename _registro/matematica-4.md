@@ -59,3 +59,8 @@
   pagina 37 ("c → raggio circonf. gon.", "a e b corrispondono a sin e cos moltiplicati per
   c"), riformulata in una frase. Le due costruzioni con la tangente per il secondo teorema
   ridisegnano in SVG i due schemi già presenti a pagina 38.
+
+## Unità 09 — Area di un triangolo e teorema della corda
+- Parole: 331 su 2 pagine di traccia (41–42)
+- Rettifica: nella dimostrazione del teorema della corda, l'angolo retto è in A (D̂AB, angolo alla base sul diametro DB, per il teorema di Talete), non in D come una prima lettura della traccia lasciava intendere: verificato numericamente piazzando i quattro punti su una circonferenza di prova (coordinate polari) e calcolando gli angoli con il prodotto scalare. Con l'angolo retto in D il calcolo non tornava; con l'angolo retto in A, DB=2r come ipotenusa e α come angolo in D, si ottiene esattamente AB=DB sinα=2r sinα, coerente con la formula finale della traccia. Verificata anche l'identità sin(180°-α)=sinα usata per l'altezza nel caso ottuso della formula dell'area (SymPy, semplificazione simbolica a zero).
+- Aggiunta: nessuna. Le due figure per il caso acuto e ottuso dell'altezza ridisegnano le due costruzioni della traccia a pagina 41; le due figure del teorema della corda ridisegnano quelle di pagina 42.
