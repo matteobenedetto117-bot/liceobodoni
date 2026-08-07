@@ -670,3 +670,20 @@ teorema del confronto, a pagina 21.
   esattamente $\frac13\pi h(R^2+r^2+Rr)$. L'unico strumento interattivo mostra, con un
   cursore su $x_0$, il raggio $f(x_0)=e^{x_0}$ e il volume accumulato dell'esempio 1: usa
   gli stessi dati numerici dell'esempio, senza introdurre una funzione nuova.
+
+## Unità 41 — Integrali impropri
+- Parole: 159 su circa 0,55 pagine di traccia (la parte finale di pag. 144, dalla
+  scritta "Integrali impropri" fino in fondo alla pagina, che è anche l'ultima del PDF;
+  la parte iniziale della stessa pagina, esempio 3 dei volumi di rotazione, appartiene
+  all'unità 40 e non è stata toccata).
+- Rettifica: nessuna. Verificato con SymPy: la primitiva di $x^{-2/3}$ è $3\sqrt[3]{x}$
+  (branca reale), $F(z)=3\sqrt[3]{z}+3\sqrt[3]{2}$ con $F(-2)=0$, e
+  $\lim_{z\to0^-}F(z)=3\sqrt[3]{2}\approx3,78$.
+- Aggiunta: il solo passaggio finale del limite $z\to0^-$, che la traccia imposta
+  (l'ultima riga scritta è proprio $F(z)=3\sqrt[3]{z}+3\sqrt[3]{2}$, ultima riga della
+  pagina 144, ultima pagina del PDF) ma non chiude con un valore numerico: ho completato
+  il calcolo già impostato, senza introdurre un metodo nuovo. Nessun esempio aggiunto:
+  l'unico esempio è quello della traccia. Nessun quesito di maturità: l'argomento, isolato
+  e su mezza pagina, non è materia di quesito a sé nel percorso della quinta; la traccia
+  stessa non sviluppa il caso di intervallo illimitato, quindi la pagina resta limitata al
+  solo caso con asintoto verticale che compare nella traccia.
