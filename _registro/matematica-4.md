@@ -103,3 +103,14 @@
   sfasamento, traslazione verticale) applicati insieme a y=A sin(k(x-c))+d: riunisce in un
   solo grafico manovrabile le quattro trasformazioni già presenti separatamente nella
   traccia, senza introdurre alcuna trasformazione o regola che non vi compaia.
+
+## Unità 14 — Simmetrie e funzione inversa
+- Parole: 436 su 2 pagine di traccia (56–57)
+- Rettifica: nessuna. Verificato con SymPy che sin(-x)=-sin(x) e tan(-x)=-tan(x)
+  identicamente (le due simmetrie rispetto all'asse y disegnate nella traccia); verificato
+  numericamente che arcsin(sin(x))=x per x in [-π/2,π/2] (esempio x=0,7) e che
+  √(x²)=x per x≥0 (esempio x=1,3), coerenti con le due coppie funzione/inversa
+  disegnate a pagina 57. Tutto coincide con la traccia.
+- Aggiunta: nessuna in senso stretto. Il riquadro finale sulla biunivocità spiega a parole
+  il motivo delle croci sul ramo escluso della parabola e del tratto ristretto del seno,
+  entrambi già disegnati nella traccia a pagina 57; non introduce un criterio nuovo.
