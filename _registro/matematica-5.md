@@ -728,3 +728,24 @@ teorema del confronto, a pagina 21.
   unità, come già accaduto per le unità 39 e 41. L'unico strumento interattivo mostra
   il fascio di curve y=Ce^(x²) al variare di C, incluso il caso singolare C=0, e il
   punto fisso (0,1) che seleziona la soluzione del problema di Cauchy.
+
+## Unità 44 — Equazioni lineari del primo ordine
+- Parole: 287, unità ex novo (nessuna pagina di traccia: argomento assente dagli
+  appunti manoscritti, come per tutta l'area Equazioni differenziali).
+- Rettifica: nessuna, non essendoci una traccia da cui partire.
+- Aggiunta: l'intera unità è redatta ex novo per costruzione, come da istruzioni per
+  quest'area. Due soli casi trattati, quelli del titolo: l'omogenea y'+a(x)y=0
+  (risolta per separazione, con un solo esempio, y'+3y=0, y=Ce^(-3x)) e la completa
+  con il fattore integrante mu(x)=e^(int a(x)dx) (con un solo esempio, y'+2y=4x,
+  risolto per parti fino a y=2x-1+Ce^(-2x)). Verificato con SymPy: dsolve conferma
+  y=C1*exp(-3x) per l'omogenea e y=C1*exp(-2x)+2x-1 per la completa; l'integrale
+  int(4x e^(2x) dx)=(2x-1)e^(2x)+C e la sostituzione della soluzione nell'equazione
+  danno resto zero. Non ho usato esempi con modelli di decadimento, crescita o moto
+  armonico, per non anticipare l'unità 45 a cui il campo "descrizione" dell'area li
+  assegna esplicitamente. Nessun quesito di maturità: l'argomento richiede tecniche
+  proprie di quest'area e non compare isolato nei quesiti reali senza sconfinare nei
+  modelli dell'unità successiva, come già per le unità 42 e 43. L'unico strumento
+  interattivo mostra il fascio di curve y=2x-1+Ce^(-2x) al variare di C, con
+  l'asintoto obliquo comune y=2x-1 verso cui tutte le curve convergono quando x
+  cresce, per rendere visibile perché l'integrale generale della completa è la somma
+  di una soluzione particolare e dell'integrale generale dell'omogenea.
