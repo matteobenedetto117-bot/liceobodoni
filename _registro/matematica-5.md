@@ -749,3 +749,38 @@ teorema del confronto, a pagina 21.
   l'asintoto obliquo comune y=2x-1 verso cui tutte le curve convergono quando x
   cresce, per rendere visibile perché l'integrale generale della completa è la somma
   di una soluzione particolare e dell'integrale generale dell'omogenea.
+
+## Unità 45 — Secondo ordine a coefficienti costanti e modelli applicativi
+- Parole: 463, unità ex novo (nessuna pagina di traccia: argomento assente dagli
+  appunti manoscritti, come per tutta l'area Equazioni differenziali; è anche
+  l'ultima unità del percorso di matematica quinta).
+- Rettifica: nessuna, non essendoci una traccia da cui partire.
+- Aggiunta: l'intera unità è redatta ex novo per costruzione, come da istruzioni per
+  quest'area. Contenuto limitato a ciò che il campo "descrizione" dell'unità elenca:
+  l'equazione caratteristica nei tre casi del discriminante (con un solo esempio per
+  caso: y''-3y'+2y=0, y''-4y'+4y=0, y''+4y=0) e le tre applicazioni indicate,
+  decadimento, moto armonico e crescita logistica, ciascuna richiamata con la sola
+  formula risolutiva, senza derivazioni nuove oltre a quelle già disponibili
+  dall'unità 43 (variabili separabili). Verificato con SymPy: dsolve conferma le tre
+  famiglie di soluzioni per i tre esempi (y=C1*exp(x)+C2*exp(2x);
+  y=(C1+C2*x)*exp(2*x); y=C1*cos(2x)+C2*sin(2x)), la sostituzione diretta delle tre
+  soluzioni nelle rispettive equazioni dà resto zero, il tempo di dimezzamento
+  ln(2)/k è verificato risolvendo exp(-k*tau)=1/2, la soluzione logistica
+  K/(1+A*exp(-k*t)) soddisfa y'=k*y*(1-y/K) con residuo simmetricamente nullo, e la
+  soluzione del problema di Cauchy sul moto armonico (C1=1, C2=0) è confermata
+  risolvendo il sistema lineare sulle condizioni iniziali. Ho incluso un quesito di
+  maturità: il quesito 10 dell'Esame di Stato 2018 (fonte:
+  online.scuola.zanichelli.it, testo e svolgimento ufficiale), che chiede per quali
+  k la funzione 2e^(kx+2) risolve y''-2y'-3y=0 — risolubile con il solo bagaglio di
+  questa unità (sostituzione diretta e fattorizzazione, senza bisogno esplicito del
+  linguaggio dell'equazione caratteristica, anche se il quesito lo ricalca). Ho
+  verificato con SymPy che k^2-2k-3=0 ha radici k=3 e k=-1 e che 2e^(kx+2) con questi
+  due valori annulla identicamente y''-2y'-3y. L'unico strumento interattivo mostra,
+  a coefficienti a=1 e c=1 fissi, la soluzione numerica (Runge-Kutta 4) di
+  y''+by'+y=0 con y(0)=1, y'(0)=0 al variare di b: rende visibile la transizione fra
+  l'oscillazione pura del moto armonico (b=0), l'oscillazione smorzata, il caso
+  critico e il decadimento monotono (b grande), collegando in un solo disegno la
+  teoria dei tre casi del discriminante appena introdotta e i modelli applicativi
+  della pagina, senza introdurre l'oscillatore smorzato come argomento nuovo a sé.
+  Poiché è l'ultima unità del percorso, la sezione finale non rimanda a unità
+  successive ma segnala la chiusura del programma di analisi di quinta.
