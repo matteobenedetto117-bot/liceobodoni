@@ -64,3 +64,17 @@
 - Parole: 331 su 2 pagine di traccia (41–42)
 - Rettifica: nella dimostrazione del teorema della corda, l'angolo retto è in A (D̂AB, angolo alla base sul diametro DB, per il teorema di Talete), non in D come una prima lettura della traccia lasciava intendere: verificato numericamente piazzando i quattro punti su una circonferenza di prova (coordinate polari) e calcolando gli angoli con il prodotto scalare. Con l'angolo retto in D il calcolo non tornava; con l'angolo retto in A, DB=2r come ipotenusa e α come angolo in D, si ottiene esattamente AB=DB sinα=2r sinα, coerente con la formula finale della traccia. Verificata anche l'identità sin(180°-α)=sinα usata per l'altezza nel caso ottuso della formula dell'area (SymPy, semplificazione simbolica a zero).
 - Aggiunta: nessuna. Le due figure per il caso acuto e ottuso dell'altezza ridisegnano le due costruzioni della traccia a pagina 41; le due figure del teorema della corda ridisegnano quelle di pagina 42.
+
+## Unità 10 — Teorema dei seni e circonferenza circoscritta
+- Parole: 576 (prosa e formule, SVG esclusi) su 4 pagine di traccia (43–46)
+- Rettifica: nessuna. Verificato con Python/SymPy: l'esempio con α=30°, angolo in B=105°,
+  a=6 dà γ=45° e c=6·sin45°/sin30°=6√2≈8,49; l'esempio Terra-Luna con longitudini 30°E e
+  50°W dà angolo al centro 80°, angolo in B=90°+9°=99°, angolo in L=1°, e d=r·sin99°/sin1°
+  ≈360952 km, arrotondato nella traccia a 360000 km; l'esempio della parallasse con
+  1″=1/3600°≈2,78·10⁻⁴°, angolo alla base 90°-1″≈89,9997°, dà D≈3,094·10¹³ km, e con
+  1 anno luce=9,46·10¹² km si ottiene D≈3,27 a.l., coerente con la definizione di parsec
+  richiamata a fine traccia. Tutto coincide con la traccia.
+- Aggiunta: nessuna. I due disegni dell'esempio Terra-Luna (sezione della Terra con A, B,
+  L, e il triangolo estratto per il calcolo) e il disegno della parallasse ridisegnano in
+  SVG esattamente le costruzioni delle pagine 45 e 46; la frase finale sul parsec riprende
+  l'annotazione "1 pc" già scritta a margine della traccia a pagina 46.
