@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funzioni goniometriche inverse — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:22px 0}
+.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
+.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Equazioni e disequazioni goniometriche &middot; Unità 04</p>
+  <h1>Funzioni goniometriche inverse</h1>
+  <p class="sommario">Seno, coseno e tangente ripetono i loro valori a ogni periodo, quindi
+  uno stesso $y$ viene raggiunto da infiniti $x$: così come sono, queste funzioni non hanno
+  un'inversa. Scegliendo però su ciascuna un tratto di grafico in cui la funzione è monotona,
+  e quindi assume ogni valore una sola volta, possiamo invertire quel tratto soltanto. Nascono
+  così arcoseno, arcocoseno e arcotangente.</p>
+</header>
+
+<h2>Perché restringere il dominio</h2>
+
+<p>Una funzione ammette inversa solo se è biunivoca: ogni valore del codominio dev'essere
+raggiunto da un solo punto del dominio. Sull'intero asse reale seno, coseno e tangente non lo
+sono, perché ogni valore si ripete a ogni periodo. Scegliamo allora, per ciascuna, un intervallo
+in cui la funzione è monotona e copre già da sola tutto il codominio: su quel tratto la
+corrispondenza è biunivoca, e possiamo invertirla. Il resto del grafico, fuori da quel tratto,
+non serve più.</p>
+
+<h2>Arcoseno</h2>
+
+<div class="def"><span class="et">Restrizione del seno</span>
+Restringiamo $y=\sin x$ all'intervallo in cui è crescente:
+$$x\in\left[-\frac\pi2,\frac\pi2\right] \qquad y\in[-1,1]$$
+</div>
+
+<p>Su questo tratto il seno è biunivoco: possiamo scambiare $x$ e $y$ nell'equazione $y=\sin x$,
+ottenendo $x=\arcsin y$, e poi rinominare le variabili come si fa per ogni funzione inversa. Si
+ottiene la funzione <strong>arcoseno</strong>:</p>
+
+$$y=\arcsin x \qquad x\in[-1,1] \qquad y\in\left[-\frac\pi2,\frac\pi2\right]$$
+
+<div class="galleria">
+  <figure><div id="g-sin" style="height:190px"></div>
+  <figcaption>$y=\sin x$: in blu il tratto invertito, in grigio il resto del grafico, escluso</figcaption></figure>
+  <figure><div id="g-asin" style="height:190px"></div>
+  <figcaption>$y=\arcsin x$, il grafico simmetrico rispetto alla retta $y=x$</figcaption></figure>
+</div>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Angolo $x$ sul tratto ristretto
+      <input type="range" id="s-x" min="0" max="8" step="1" value="6">
+      <span>$x$ = <span class="val" id="v-x"></span></span>
+    </label>
+  </div>
+  <div class="galleria">
+    <figure><div id="g-sin2" style="height:190px"></div><figcaption>il punto $(x,\sin x)$</figcaption></figure>
+    <figure><div id="g-asin2" style="height:190px"></div><figcaption>il punto scambiato $(\sin x,\,x)$</figcaption></figure>
+  </div>
+  <p class="leggenda" id="v-frase"></p>
+</div>
+
+<div class="nota"><span class="et">Errore tipico</span>
+<p>Sulla calcolatrice l'arcoseno è indicato come $\sin^{-1}x$. Non è il reciproco del seno: quel
+simbolo, in questo contesto, significa solo "funzione inversa del seno", non $\dfrac1{\sin x}$.</p>
+</div>
+
+<h2>Arcocoseno</h2>
+
+<div class="def"><span class="et">Restrizione del coseno</span>
+Restringiamo $y=\cos x$ all'intervallo in cui è decrescente:
+$$x\in[0,\pi] \qquad y\in[-1,1]$$
+</div>
+
+<p>Invertendo allo stesso modo si ottiene l'<strong>arcocoseno</strong>:</p>
+
+$$y=\arccos x \qquad x\in[-1,1] \qquad y\in[0,\pi]$$
+
+<div class="galleria">
+  <figure><div id="g-cos" style="height:190px"></div>
+  <figcaption>$y=\cos x$: in blu il tratto invertito</figcaption></figure>
+  <figure><div id="g-acos" style="height:190px"></div>
+  <figcaption>$y=\arccos x$, decrescente da $\pi$ a $0$</figcaption></figure>
+</div>
+
+<h2>Arcotangente</h2>
+
+<div class="def"><span class="et">Restrizione della tangente</span>
+Restringiamo $y=\tan x$ all'intervallo in cui è definita, continua e crescente:
+$$x\in\left]-\frac\pi2,\frac\pi2\right[ \qquad y\in\,]-\infty,+\infty[$$
+</div>
+
+<p>Qui il codominio è già tutto $\mathbb R$: invertendo si ottiene l'<strong>arcotangente</strong>,
+definita su tutto $\mathbb R$ ma con codominio limitato:</p>
+
+$$y=\arctan x \qquad x\in\,]-\infty,+\infty[ \qquad y\in\left]-\frac\pi2,\frac\pi2\right[$$
+
+<div class="galleria">
+  <figure><div id="g-tan" style="height:190px"></div>
+  <figcaption>$y=\tan x$: in blu il tratto invertito, con i suoi asintoti verticali</figcaption></figure>
+  <figure><div id="g-atan" style="height:190px"></div>
+  <figcaption>$y=\arctan x$, con asintoti orizzontali $y=\pm\frac\pi2$</figcaption></figure>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>Le equazioni omogenee di secondo grado in seno e coseno, unità 05.</li>
+<li>Arcoseno, arcocoseno e arcotangente torneranno più avanti, quando serviranno per costruire e
+derivare funzioni composte.</li>
+</ul>
+</div>
+
+<footer><p>Matematica quarta &middot; Equazioni e disequazioni goniometriche &middot; Unità 04</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var base={margin:{l:30,r:10,t:8,b:24},showlegend:false,
+    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
+  function ramo(f,a,b,n,colore,larg){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n;x.push(v);y.push(f(v));}
+    return {x:x,y:y,mode:'lines',line:{color:colore||'#16283d',width:larg||2.2},hoverinfo:'skip'};}
+  function grigio(f,a,b,n){var t=ramo(f,a,b,n,'#b9b2a0',1.6);t.line.dash='dot';return t;}
+  function punto(x,y,colore){return {x:[x],y:[y],mode:'markers',marker:{size:9,color:colore||'#16283d'},hoverinfo:'skip'};}
+  var assi={xaxis:{zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
+            yaxis:{zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}}};
+  function grafico(id,tracce,xr,yr,extra){
+    Plotly.newPlot(id,tracce,Object.assign({},base,{
+      xaxis:Object.assign({},assi.xaxis,{range:xr}),
+      yaxis:Object.assign({},assi.yaxis,{range:yr})},extra||{}),
+      {displayModeBar:false,responsive:true,staticPlot:true});
+  }
+  var PI=Math.PI;
+
+  // seno: tratto ristretto in blu, resto in grigio tratteggiato
+  grafico('g-sin',[
+    grigio(Math.sin,-PI,-PI/2,40), grigio(Math.sin,PI/2,3*PI/2,60),
+    ramo(Math.sin,-PI/2,PI/2,60,'#1f4e79',2.4)
+  ],[-3.3,4.9],[-1.3,1.3],{xaxis:Object.assign({},assi.xaxis,{range:[-3.3,4.9],
+    tickvals:[-PI/2,0,PI/2],ticktext:['&minus;&pi;/2','0','&pi;/2']})});
+
+  grafico('g-asin',[ramo(Math.asin,-1,1,40,'#1f4e79',2.4),
+    punto(-1,-PI/2,'#1f4e79'),punto(1,PI/2,'#1f4e79')],
+    [-1.3,1.3],[-2,2],{yaxis:Object.assign({},assi.yaxis,{range:[-2,2],
+    tickvals:[-PI/2,0,PI/2],ticktext:['&minus;&pi;/2','0','&pi;/2']})});
+
+  // coseno
+  grafico('g-cos',[
+    grigio(Math.cos,-PI,0,40), grigio(Math.cos,PI,2*PI,60),
+    ramo(Math.cos,0,PI,60,'#1f4e79',2.4)
+  ],[-3.3,6.6],[-1.3,1.3],{xaxis:Object.assign({},assi.xaxis,{range:[-3.3,6.6],
+    tickvals:[0,PI/2,PI],ticktext:['0','&pi;/2','&pi;']})});
+
+  grafico('g-acos',[ramo(Math.acos,-1,1,40,'#1f4e79',2.4),
+    punto(-1,PI,'#1f4e79'),punto(1,0,'#1f4e79')],
+    [-1.3,1.3],[-0.6,3.6],{yaxis:Object.assign({},assi.yaxis,{range:[-0.6,3.6],
+    tickvals:[0,PI/2,PI],ticktext:['0','&pi;/2','&pi;']})});
+
+  // tangente: tre rami separati per non collegare gli asintoti
+  function tanRamo(a,b,colore,larg){return ramo(Math.tan,a,b,70,colore,larg);}
+  grafico('g-tan',[
+    tanRamo(-PI/2+0.06,PI/2-0.06,'#1f4e79',2.4),
+    tanRamo(-PI+0.06,-PI/2-0.06,'#b9b2a0',1.6),
+    tanRamo(PI/2+0.06,PI-0.06,'#b9b2a0',1.6),
+    {x:[-PI/2,-PI/2],y:[-4.5,4.5],mode:'lines',line:{color:'#dfd9cc',width:1,dash:'dash'},hoverinfo:'skip'},
+    {x:[PI/2,PI/2],y:[-4.5,4.5],mode:'lines',line:{color:'#dfd9cc',width:1,dash:'dash'},hoverinfo:'skip'}
+  ],[-3.3,3.3],[-4.5,4.5],{xaxis:Object.assign({},assi.xaxis,{range:[-3.3,3.3],
+    tickvals:[-PI/2,0,PI/2],ticktext:['&minus;&pi;/2','0','&pi;/2']})});
+
+  grafico('g-atan',[
+    ramo(Math.atan,-9,9,80,'#1f4e79',2.4),
+    {x:[-9,9],y:[PI/2,PI/2],mode:'lines',line:{color:'#dfd9cc',width:1,dash:'dash'},hoverinfo:'skip'},
+    {x:[-9,9],y:[-PI/2,-PI/2],mode:'lines',line:{color:'#dfd9cc',width:1,dash:'dash'},hoverinfo:'skip'}
+  ],[-9,9],[-2,2],{yaxis:Object.assign({},assi.yaxis,{range:[-2,2],
+    tickvals:[-PI/2,0,PI/2],ticktext:['&minus;&pi;/2','0','&pi;/2']})});
+
+  // widget interattivo: corrispondenza (x, sin x) <-> (sin x, x)
+  var valori=[-PI/2,-PI/3,-PI/4,-PI/6,0,PI/6,PI/4,PI/3,PI/2];
+  var etichette=['&minus;&pi;/2','&minus;&pi;/3','&minus;&pi;/4','&minus;&pi;/6','0','&pi;/6','&pi;/4','&pi;/3','&pi;/2'];
+  var sx=document.getElementById('s-x'), vx=document.getElementById('v-x'), fr=document.getElementById('v-frase');
+  function fmt(n){return n.toFixed(2).replace('.',',');}
+  function aggWidget(){
+    var i=parseInt(sx.value,10), x=valori[i], y=Math.sin(x);
+    vx.innerHTML=etichette[i];
+    grafico('g-sin2',[ramo(Math.sin,-PI/2,PI/2,50,'#1f4e79',2),punto(x,y,'#b3392f')],
+      [-1.8,1.8],[-1.3,1.3],{xaxis:Object.assign({},assi.xaxis,{range:[-1.8,1.8],
+      tickvals:[-PI/2,0,PI/2],ticktext:['&minus;&pi;/2','0','&pi;/2']})});
+    grafico('g-asin2',[ramo(Math.asin,-1,1,50,'#1f4e79',2),punto(y,x,'#b3392f')],
+      [-1.3,1.3],[-1.8,1.8],{yaxis:Object.assign({},assi.yaxis,{range:[-1.8,1.8],
+      tickvals:[-PI/2,0,PI/2],ticktext:['&minus;&pi;/2','0','&pi;/2']})});
+    fr.innerHTML='sin('+etichette[i]+') = '+fmt(y)+', quindi il punto si scambia: arcsin('+fmt(y)+') = '+etichette[i]+'.';
+  }
+  sx.addEventListener('input',aggWidget); aggWidget();
+})();
+</script>
+</body>
+</html>
