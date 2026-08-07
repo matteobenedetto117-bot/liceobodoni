@@ -88,3 +88,18 @@
 - Parole: 398 su 3 pagine di traccia (50–52)
 - Rettifica: nessuna. Verificato con Python/SymPy: Esempio 4 (c=56,2, a=39, γ=59°) dà sinα=0,5948≈0,59, α=arcsin(0,59)≈36,50°≈36° (soluzione acuta accettata perché γ<90° e c>a); Esempio 5 (a=58,6, b=77, c=70) dà cosβ≈0,2931 → β≈72,95°≈73°, cosα≈0,6860 → α≈46,69°≈47°, γ=180°-α-β≈60,36°≈60°. Tutto coincide con la traccia. Verificata anche la logica geometrica dello schema dei casi (intersezioni di un cerchio di raggio a con la semiretta base) per ricontrollare i confini fra 0, 1 e 2 soluzioni al variare di a rispetto ad altezza b·sinα e al lato b.
 - Aggiunta: nessuna. Lo strumento interattivo (cursore sul lato a) rende dinamico esattamente lo schema dei casi già enumerato nella traccia a pagina 50-51 (le due figure con β₁ e β₂ accettabili/non accettabili); non introduce un criterio nuovo, solo la stessa condizione geometrica resa manovrabile.
+
+## Unità 13 — Traslazioni, dilatazioni e contrazioni
+- Parole: 611 su 3 pagine di traccia (53–55)
+- Rettifica: nessuna. Verificato con SymPy: sin(x-π/4) e sin(x+π/4) sono effettivamente il
+  grafico del seno traslato di π/4 a destra e a sinistra (zero dell'argomento in x=π/4 e
+  x=-π/4); periodicity(sin(2x))=π e periodicity(cos(x/2))=4π, coerenti con "il periodo
+  diventa 2π/k"; sin(2x+π) si semplifica a -sin(2x) (stesso periodo π, sfasato di
+  mezzo periodo rispetto a sin2x, verificato che il grafico tracciato è coerente con
+  questa identità); cot(θ+π/2) si semplifica a -tan(θ), usato solo per controllare che il
+  disegno della cotangente traslata avesse gli asintoti nel posto giusto, non riportato
+  nella pagina. Tutto coincide con la traccia.
+- Aggiunta: lo strumento interattivo con quattro cursori (ampiezza, fattore di periodo,
+  sfasamento, traslazione verticale) applicati insieme a y=A sin(k(x-c))+d: riunisce in un
+  solo grafico manovrabile le quattro trasformazioni già presenti separatamente nella
+  traccia, senza introdurre alcuna trasformazione o regola che non vi compaia.
