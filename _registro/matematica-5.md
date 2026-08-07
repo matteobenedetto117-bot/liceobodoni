@@ -705,3 +705,26 @@ teorema del confronto, a pagina 21.
   interattivo mostra il fascio di parabole $y=x^2+C$ al variare di $C$ e il punto fisso
   $(0,3)$, per rendere visibile che la condizione iniziale seleziona un solo membro
   della famiglia.
+
+## Unità 43 — Primo ordine: y' = f(x) e variabili separabili
+- Parole: 353, unità ex novo (nessuna pagina di traccia: argomento assente dagli
+  appunti manoscritti, come per tutta l'area Equazioni differenziali).
+- Rettifica: nessuna, non essendoci una traccia da cui partire.
+- Aggiunta: l'intera unità è redatta ex novo per costruzione, come da istruzioni per
+  quest'area. Due soli casi trattati, quelli del titolo dell'unità: y'=f(x) (con un
+  solo esempio, y'=3x²-2, la cui primitiva x³-2x è stata verificata con SymPy) ed
+  equazioni a variabili separabili (definizione, metodo, nota sulla soluzione
+  costante da g(y)=0, e un solo esempio completo, y'=2xy, risolto come integrale
+  generale y=Ce^(x²) e poi come problema di Cauchy con y(0)=1, da cui C=1; verificato
+  con SymPy che d/dx(Ce^(x²)) = 2x·Ce^(x²) e che imponendo y(0)=1 si ottiene C=1).
+  Non ho usato l'esempio classico della crescita esponenziale P'=kP per non
+  anticipare i modelli di decadimento e crescita logistica, assegnati esplicitamente
+  all'unità 45 dal campo "descrizione" dell'area. Nessun quesito di maturità: ho
+  cercato online (matefilia, matematicaoltre, matematicaescuola) un quesito isolato
+  su un'equazione a variabili separabili risolvibile senza il fattore integrante
+  dell'unità 44 né i modelli dell'unità 45; le fonti trovate mostrano solo materiale
+  didattico generico o quesiti che fanno parte di un problema più ampio, non citabili
+  isolatamente con onestà, quindi la sezione dei quesiti resta assente in questa
+  unità, come già accaduto per le unità 39 e 41. L'unico strumento interattivo mostra
+  il fascio di curve y=Ce^(x²) al variare di C, incluso il caso singolare C=0, e il
+  punto fisso (0,1) che seleziona la soluzione del problema di Cauchy.
