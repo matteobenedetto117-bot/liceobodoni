@@ -655,3 +655,18 @@ teorema del confronto, a pagina 21.
   coppia di disegni della traccia a pag. 139-140 che mostra le curve prima e dopo la
   traslazione; usa due funzioni di prova non tratte dalla traccia (che lì non fissa una
   coppia esplicita), sullo stesso principio già impiegato nei widget delle unità 08, 37 e 38.
+
+## Unità 40 — Volumi dei solidi di rotazione
+- Parole: 439 su 3 pagine di traccia (pag. 142-144, fino alla fine dell'esempio 3; il resto
+  di pag. 144, "Integrali impropri", appartiene all'unità 41 e non è stato toccato).
+- Rettifica: nessuna. Verificati con SymPy tutti e tre gli esempi: $\pi\int_{-1}^1e^{2x}dx=
+  \pi(e^2-e^{-2})/2$; $\pi\int_1^4 y\,dy=15\pi/2$; con i gusci cilindrici,
+  $2\pi\int_0^2(x^2-x^3/2)dx=4\pi/3$. Tutti coincidono esattamente con la traccia.
+- Aggiunta: nessun contenuto nuovo di sostanza rispetto alla traccia. Ho cercato online
+  (matepratica.it) un quesito isolato e autosufficiente sul volume di un solido di
+  rotazione, trovando il quesito 2 della sessione ordinaria 2015 (dimostrazione della
+  formula del tronco di cono come solido di rotazione), risolubile con la sola formula
+  $V=\pi\int_a^b[f(x)]^2dx$ appena introdotta; verificato con SymPy che l'integrale dà
+  esattamente $\frac13\pi h(R^2+r^2+Rr)$. L'unico strumento interattivo mostra, con un
+  cursore su $x_0$, il raggio $f(x_0)=e^{x_0}$ e il volume accumulato dell'esempio 1: usa
+  gli stessi dati numerici dell'esempio, senza introdurre una funzione nuova.
