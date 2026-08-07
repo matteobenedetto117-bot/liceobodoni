@@ -78,3 +78,8 @@
   L, e il triangolo estratto per il calcolo) e il disegno della parallasse ridisegnano in
   SVG esattamente le costruzioni delle pagine 45 e 46; la frase finale sul parsec riprende
   l'annotazione "1 pc" già scritta a margine della traccia a pagina 46.
+
+## Unità 11 — Teorema del coseno
+- Parole: 332 su 3 pagine di traccia (47–49)
+- Rettifica: nessuna. Verificato con SymPy che la dimostrazione (CH=b sinα, AH=b cosα, HB=c−b cosα, Pitagora nel triangolo CHB) si riduce identicamente a a²=b²+c²−2bc cosα. Verificati con Python tutti i risultati numerici della traccia: Esempio 1 (c²=7, c=√7); Esempio 2 (γ=80°, a≈7,83, b≈10,55); Esempio 3 (a≈24,50, cosβ≈0,77, β≈40°, γ≈120°). Tutto coincide con la traccia.
+- Aggiunta: nessuna. Il riquadro finale "seni o coseno" riprende la nota conclusiva della traccia a pagina 49 ("per cercare lati → seni, per cercare angoli → coseno, il coseno non ha ambiguità sugli angoli, li individua univocamente"), riformulata in una frase.
