@@ -83,3 +83,8 @@
 - Parole: 332 su 3 pagine di traccia (47–49)
 - Rettifica: nessuna. Verificato con SymPy che la dimostrazione (CH=b sinα, AH=b cosα, HB=c−b cosα, Pitagora nel triangolo CHB) si riduce identicamente a a²=b²+c²−2bc cosα. Verificati con Python tutti i risultati numerici della traccia: Esempio 1 (c²=7, c=√7); Esempio 2 (γ=80°, a≈7,83, b≈10,55); Esempio 3 (a≈24,50, cosβ≈0,77, β≈40°, γ≈120°). Tutto coincide con la traccia.
 - Aggiunta: nessuna. Il riquadro finale "seni o coseno" riprende la nota conclusiva della traccia a pagina 49 ("per cercare lati → seni, per cercare angoli → coseno, il coseno non ha ambiguità sugli angoli, li individua univocamente"), riformulata in una frase.
+
+## Unità 12 — Risoluzione dei triangoli e caso ambiguo
+- Parole: 398 su 3 pagine di traccia (50–52)
+- Rettifica: nessuna. Verificato con Python/SymPy: Esempio 4 (c=56,2, a=39, γ=59°) dà sinα=0,5948≈0,59, α=arcsin(0,59)≈36,50°≈36° (soluzione acuta accettata perché γ<90° e c>a); Esempio 5 (a=58,6, b=77, c=70) dà cosβ≈0,2931 → β≈72,95°≈73°, cosα≈0,6860 → α≈46,69°≈47°, γ=180°-α-β≈60,36°≈60°. Tutto coincide con la traccia. Verificata anche la logica geometrica dello schema dei casi (intersezioni di un cerchio di raggio a con la semiretta base) per ricontrollare i confini fra 0, 1 e 2 soluzioni al variare di a rispetto ad altezza b·sinα e al lato b.
+- Aggiunta: nessuna. Lo strumento interattivo (cursore sul lato a) rende dinamico esattamente lo schema dei casi già enumerato nella traccia a pagina 50-51 (le due figure con β₁ e β₂ accettabili/non accettabili); non introduce un criterio nuovo, solo la stessa condizione geometrica resa manovrabile.

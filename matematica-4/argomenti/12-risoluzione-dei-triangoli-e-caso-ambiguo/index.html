@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risoluzione dei triangoli e caso ambiguo — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.def ul{margin:6px 0 0;padding-left:22px}
+.def li{margin:6px 0}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+figure.disegno{margin:24px 0;text-align:center}
+figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto}
+.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
+.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:6px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:260px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.stato{font-family:var(--sans);font-size:.92rem;color:var(--inchiostro);margin:10px 0 4px;min-height:1.4em}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Trigonometria &middot; Unità 12</p>
+  <h1>Risoluzione dei triangoli e caso ambiguo</h1>
+  <p class="sommario">Risolvere un triangolo vuol dire determinarne tutti i lati e tutti
+  gli angoli a partire dai dati noti, combinando teorema dei seni e teorema del coseno.
+  C'è però una combinazione di dati, due lati e l'angolo opposto a uno di essi, per cui
+  i dati non individuano un solo triangolo: è il caso ambiguo del teorema dei seni.</p>
+</header>
+
+<h2>Il caso ambiguo</h2>
+
+<p>Siano noti il lato $a$, l'angolo opposto $\alpha$ e un secondo lato $b$; si cerca
+l'angolo $\beta$ opposto a $b$. Dal teorema dei seni,
+$$\sin\beta=\frac{b}{a}\sin\alpha.$$
+Poiché $\beta$ è un angolo di un triangolo, deve essere $0&lt;\sin\beta\le1$: bisogna
+allora vedere quanti angoli fra $0^\circ$ e $180^\circ$ soddisfano l'equazione, e se sono
+compatibili con il triangolo di partenza.</p>
+
+<div class="def"><span class="et">Casi possibili</span>
+<ul>
+<li>Se $\sin\beta=1$, $\beta=90^\circ$: soluzione unica se $\alpha&lt;90^\circ$; nessuna
+soluzione se $\alpha\ge90^\circ$, perché la somma degli angoli supererebbe $180^\circ$.</li>
+<li>Se $0&lt;\sin\beta&lt;1$, l'equazione ha due soluzioni supplementari, $\beta_1$ acuto
+e $\beta_2=180^\circ-\beta_1$ ottuso. Se $\alpha\ge90^\circ$, $\beta_2$ va scartato e resta
+solo $\beta_1$. Se $\alpha&lt;90^\circ$ si confrontano i lati: con $b&lt;a$ è anche
+$\beta&lt;\alpha$, quindi $\beta_2$ non è accettabile e resta $\beta_1$; con $b&gt;a$
+entrambi gli angoli sono accettabili e il problema ha due soluzioni, a meno che non ne
+escluda una qualche altra informazione.</li>
+</ul>
+</div>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Lato $a$ (l'altro lato noto è $b=6$, con $\alpha=35^\circ$)
+      <input type="range" id="s-a" min="1.5" max="8" step="0.05" value="4.5">
+      <span>$a$ = <span class="val" id="v-a"></span></span>
+    </label>
+  </div>
+  <svg id="svg-amb" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img"
+    aria-label="Triangolo con lato a, lato b e angolo alfa: al variare di a cambia il numero di soluzioni">
+    <defs>
+      <marker id="fA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#16283d"/>
+      </marker>
+    </defs>
+    <line x1="80" y1="260" x2="465" y2="260" stroke="#16283d" stroke-width="1.6" marker-end="url(#fA)"/>
+    <text x="452" y="252" font-size="13" fill="#16283d" font-style="italic">x</text>
+    <line id="lin-AC" x1="80" y1="260" stroke="#16283d" stroke-width="2"/>
+    <path id="arco-alfa" fill="none" stroke="#b3392f" stroke-width="1.3"/>
+    <text x="102" y="248" font-size="12" fill="#b3392f">&alpha;</text>
+    <circle id="cir-a" fill="none" stroke="#6d7280" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <line id="seg-CB1" stroke="#1f4e79" stroke-width="2"/>
+    <line id="seg-AB1" stroke="#1f4e79" stroke-width="2"/>
+    <circle id="pt-B1" r="4" fill="#1f4e79"/>
+    <text id="lab-B1" font-size="12" fill="#1f4e79"></text>
+    <line id="seg-CB2" stroke="#b3392f" stroke-width="2" stroke-dasharray="6,4"/>
+    <line id="seg-AB2" stroke="#b3392f" stroke-width="2" stroke-dasharray="6,4"/>
+    <circle id="pt-B2" r="4" fill="#b3392f"/>
+    <text id="lab-B2" font-size="12" fill="#b3392f"></text>
+    <circle cx="80" cy="260" r="3.2" fill="#16283d"/>
+    <text x="64" y="278" font-size="13" fill="#16283d">A</text>
+    <circle id="pt-C" r="3.2" fill="#16283d"/>
+    <text id="lab-C" font-size="13" fill="#16283d">C</text>
+    <text id="lab-b" font-size="12" fill="#16283d"></text>
+  </svg>
+  <p class="stato" id="stato-amb"></p>
+  <p class="leggenda">Il lato $b$ e l'angolo $\alpha$ restano fissi in $A$ e $C$; il cerchio
+  tratteggiato ha raggio $a$ e centro $C$. Le sue intersezioni con la semiretta base sono le
+  possibili posizioni del vertice $B$: da nessuna (cerchio troppo piccolo) a due (cerchio che
+  taglia la semiretta due volte) a una sola (cerchio grande, $a\ge b$).</p>
+</div>
+
+<h2>Esempi</h2>
+
+<div class="esempio"><span class="et">Esempio 4</span>
+<p>Dati $c=56{,}2$, $a=39$, $\gamma=59^\circ$, si cerca l'angolo $\alpha$ opposto ad $a$
+(stessa situazione di sopra, con $c$ al posto di $a$ e $a$ al posto di $b$):</p>
+$$\sin\alpha=\frac{a}{c}\sin\gamma=\frac{39}{56{,}2}\sin59^\circ\approx0{,}59$$
+<p>Qui $\gamma&lt;90^\circ$ e $c&gt;a$, dunque $\alpha&lt;\gamma$: l'unica soluzione
+accettabile è quella acuta,</p>
+$$\alpha=\arcsin(0{,}59)\approx36^\circ,$$
+<p>mentre l'altra soluzione dell'arcoseno, $180^\circ-36^\circ=144^\circ$, va scartata:
+in questo caso $\alpha$ non può superare $\gamma=59^\circ$.</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio 5</span>
+<p>Dati i tre lati $a=58{,}6$, $b=77$, $c=70$, non c'è ambiguità: il teorema del coseno
+restituisce un solo angolo fra $0^\circ$ e $180^\circ$, perché il coseno individua
+l'angolo univocamente. Si calcolano due angoli con il teorema del coseno e il terzo per
+differenza:</p>
+$$\cos\beta=\frac{a^2+c^2-b^2}{2ac}\approx0{,}293 \ \Rightarrow\ \beta\approx73^\circ$$
+$$\cos\alpha=\frac{b^2+c^2-a^2}{2bc}\approx0{,}686 \ \Rightarrow\ \alpha\approx47^\circ$$
+$$\gamma=180^\circ-\alpha-\beta\approx60^\circ$$
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<p>L'unità 13 lascia la trigonometria e apre le trasformazioni geometriche dei grafici:
+traslazioni, dilatazioni e contrazioni applicate alle funzioni goniometriche già note.</p>
+</div>
+
+<footer><p>Matematica quarta &middot; Trigonometria &middot; Unità 12</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var sa=document.getElementById('s-a'), va=document.getElementById('v-a');
+  var alfa=35*Math.PI/180, b=6, scale=42, Ax=80, Ay=260;
+  var Cx=b*Math.cos(alfa), Cy=b*Math.sin(alfa);
+  var CxS=Ax+scale*Cx, CyS=Ay-scale*Cy;
+  var h=Cy;
+  function fmt(n){return n.toFixed(2).replace('.',',');}
+  function toSvgX(x){return Ax+scale*x;}
+  function ang(P,Q,R){ // angolo in Q fra QP e QR, in gradi
+    var v1x=P.x-Q.x, v1y=P.y-Q.y, v2x=R.x-Q.x, v2y=R.y-Q.y;
+    var dot=v1x*v2x+v1y*v2y, m1=Math.hypot(v1x,v1y), m2=Math.hypot(v2x,v2y);
+    return Math.acos(dot/(m1*m2))*180/Math.PI;
+  }
+  document.getElementById('lin-AC').setAttribute('x2',CxS);
+  document.getElementById('lin-AC').setAttribute('y2',CyS);
+  document.getElementById('pt-C').setAttribute('cx',CxS);
+  document.getElementById('pt-C').setAttribute('cy',CyS);
+  document.getElementById('lab-C').setAttribute('x',CxS-6);
+  document.getElementById('lab-C').setAttribute('y',CyS-10);
+  document.getElementById('lab-b').setAttribute('x',(Ax+CxS)/2-28);
+  document.getElementById('lab-b').setAttribute('y',(Ay+CyS)/2-6);
+  document.getElementById('lab-b').textContent='b = 6';
+  var r0=26;
+  var ax0=Ax+r0, ay0=Ay, ax1=Ax+r0*Math.cos(alfa), ay1=Ay-r0*Math.sin(alfa);
+  document.getElementById('arco-alfa').setAttribute('d','M'+ax0+','+ay0+' A'+r0+','+r0+' 0 0 0 '+ax1+','+ay1);
+
+  function agg(){
+    var a=parseFloat(sa.value);
+    va.textContent=fmt(a);
+    var cir=document.getElementById('cir-a');
+    cir.setAttribute('cx',CxS); cir.setAttribute('cy',CyS); cir.setAttribute('r',scale*a);
+
+    var stato=document.getElementById('stato-amb');
+    var eps=0.02;
+    var ids=['seg-CB1','seg-AB1','pt-B1','lab-B1','seg-CB2','seg-AB2','pt-B2','lab-B2'];
+    ids.forEach(function(id){document.getElementById(id).style.display='none';});
+
+    if(a<h-eps){
+      stato.textContent='a = '+fmt(a)+' < altezza ('+fmt(h)+'): il cerchio non tocca la base, nessuna soluzione.';
+      return;
+    }
+    var dx=Math.sqrt(Math.max(a*a-h*h,0));
+    var candidati=[Cx-dx, Cx+dx];
+    var validi=candidati.filter(function(x){return x>1e-6;});
+
+    if(Math.abs(a-h)<eps){
+      var xB=Cx; var B={x:xB,y:0}, A={x:0,y:0}, C={x:Cx,y:Cy};
+      var beta=ang(A,B,C);
+      disegnaTriangolo(1,xB,beta);
+      stato.textContent='a = '+fmt(a)+' ≈ altezza: soluzione unica, β = 90° (triangolo rettangolo in B).';
+      return;
+    }
+
+    if(validi.length===2){
+      var xB1=Math.min(candidati[0],candidati[1]);
+      var xB2=Math.max(candidati[0],candidati[1]);
+      var beta1=ang({x:0,y:0},{x:xB1,y:0},{x:Cx,y:Cy});
+      var beta2=ang({x:0,y:0},{x:xB2,y:0},{x:Cx,y:Cy});
+      disegnaTriangolo(1,xB2,beta2);
+      disegnaTriangolo(2,xB1,beta1);
+      stato.textContent='a = '+fmt(a)+': due soluzioni, β₁ ≈ '+beta2.toFixed(0)+'° (acuto, blu) e β₂ ≈ '+beta1.toFixed(0)+'° (ottuso, rosso tratteggiato).';
+    } else if(validi.length===1){
+      var xB=validi[0];
+      var beta=ang({x:0,y:0},{x:xB,y:0},{x:Cx,y:Cy});
+      disegnaTriangolo(1,xB,beta);
+      stato.textContent='a = '+fmt(a)+' ≥ b: soluzione unica, β ≈ '+beta.toFixed(0)+'° (l\'altra intersezione cade fuori dalla semiretta).';
+    } else {
+      stato.textContent='a = '+fmt(a)+': nessuna posizione valida per B su questa semiretta.';
+    }
+  }
+
+  function disegnaTriangolo(n,xB,betaDeg){
+    var suf=n; var xS=toSvgX(xB);
+    document.getElementById('seg-CB'+suf).setAttribute('x1',CxS);
+    document.getElementById('seg-CB'+suf).setAttribute('y1',CyS);
+    document.getElementById('seg-CB'+suf).setAttribute('x2',xS);
+    document.getElementById('seg-CB'+suf).setAttribute('y2',Ay);
+    document.getElementById('seg-CB'+suf).style.display='';
+    document.getElementById('seg-AB'+suf).setAttribute('x1',Ax);
+    document.getElementById('seg-AB'+suf).setAttribute('y1',Ay);
+    document.getElementById('seg-AB'+suf).setAttribute('x2',xS);
+    document.getElementById('seg-AB'+suf).setAttribute('y2',Ay);
+    document.getElementById('seg-AB'+suf).style.display='';
+    document.getElementById('pt-B'+suf).setAttribute('cx',xS);
+    document.getElementById('pt-B'+suf).setAttribute('cy',Ay);
+    document.getElementById('pt-B'+suf).style.display='';
+    var lab=document.getElementById('lab-B'+suf);
+    lab.setAttribute('x',xS-6); lab.setAttribute('y',Ay+18);
+    lab.textContent='B'+suf; lab.style.display='';
+  }
+
+  sa.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>
