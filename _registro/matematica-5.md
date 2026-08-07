@@ -687,3 +687,21 @@ teorema del confronto, a pagina 21.
   e su mezza pagina, non è materia di quesito a sé nel percorso della quinta; la traccia
   stessa non sviluppa il caso di intervallo illimitato, quindi la pagina resta limitata al
   solo caso con asintoto verticale che compare nella traccia.
+
+## Unità 42 — Introduzione e problema di Cauchy
+- Parole: 470, unità ex novo (nessuna pagina di traccia: argomento assente dagli
+  appunti manoscritti, come indicato dal campo "nuovo" dell'area Equazioni
+  differenziali).
+- Rettifica: nessuna, non essendoci una traccia da cui partire.
+- Aggiunta: l'intera unità è redatta ex novo per costruzione, come da istruzioni
+  per quest'area. Contenuto limitato al minimo indispensabile per introdurre il
+  linguaggio (equazione differenziale, ordine, integrale generale e particolare,
+  problema di Cauchy), con un solo esempio (y'=2x, con condizione y(0)=3), verificato
+  con SymPy: la derivata di $x^2+C$ è $2x$, e imponendo $y(0)=3$ si ottiene $C=3$.
+  Nessun quesito di maturità: l'unità è puramente introduttiva e non sviluppa ancora
+  alcuna tecnica risolutiva, in linea con la regola per cui nelle unità iniziali di un
+  argomento è normale che non ci sia nessun quesito; i quesiti reali su equazioni
+  differenziali richiedono le tecniche delle unità 43-45. L'unico strumento
+  interattivo mostra il fascio di parabole $y=x^2+C$ al variare di $C$ e il punto fisso
+  $(0,3)$, per rendere visibile che la condizione iniziale seleziona un solo membro
+  della famiglia.
