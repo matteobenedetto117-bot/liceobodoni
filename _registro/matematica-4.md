@@ -144,3 +144,8 @@
 - Parole: 348 su circa 1,5 pagine di traccia reale (87–88, la seconda metà di pagina 87 dopo il baricentro dell'unità 17, fino a prima dell'equazione del piano che apre l'unità 19)
 - Rettifica: nessuna. Verificato con SymPy: dati u(2;1;-2) e v(1;-2;0), u+v=(3;-1;-2), |u|=3, u·v=0 (perpendicolari), coincide con quanto riportato in pagina.
 - Aggiunta: un esempio numerico (somma, modulo, prodotto scalare e verifica di perpendicolarità), perché la traccia in queste pagine definisce le operazioni ma non le applica a numeri.
+
+## Unità 19 — Il piano: equazione generale e casi particolari
+- Parole: 506 su circa 3 pagine di traccia (seconda metà di pagina 88, pagine 89–90, prima metà di pagina 91)
+- Rettifica: nessuna. Verificato con SymPy: il piano per P0(2;-3;1) normale a n(4;1;-1) dà 4x+y-z-4=0; il sistema per il piano passante per A(2;0;0), B(0;1;0), C(0;0;3) dà a=-d/2, b=-d, c=-d/3 e, con d=-6, 3x+6y+2z-6=0 — entrambi coincidono esattamente con quanto scritto in pagina.
+- Aggiunta: nessuna. Lo strumento interattivo (superficie 3D con cursori su a, b, d) rende dinamica esattamente la classificazione dei casi particolari già scritta nella traccia (piano parallelo a un asse quando manca una variabile, piano per l'origine quando d=0); non introduce un esempio o un caso nuovo.

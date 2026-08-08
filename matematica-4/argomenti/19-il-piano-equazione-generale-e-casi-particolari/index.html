@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il piano: equazione generale e casi particolari — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+figure.disegno{margin:26px 0;text-align:center}
+figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
+.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
+.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.pannelli{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:flex-start}
+.pannelli figure{margin:0;text-align:center}
+.pannelli figcaption{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin-top:6px}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:170px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Geometria analitica nello spazio &middot; Unità 19</p>
+  <h1>Il piano: equazione generale e casi particolari</h1>
+  <p class="sommario">Come una retta nel piano resta individuata da un punto e da una direzione,
+  un piano nello spazio resta individuato da un punto e da una direzione perpendicolare ad esso:
+  il vettore normale. Da questa idea nasce un'equazione di primo grado in $x,y,z$ che accompagnerà
+  rette, distanze e sfere in tutta la geometria analitica dello spazio.</p>
+</header>
+
+<h2>Equazione generale del piano</h2>
+
+<div class="def"><span class="et">Piano per un punto, perpendicolare a un vettore</span>
+<p>Fissiamo un punto $P_0(x_0;y_0;z_0)$ e un vettore $\vec n(a;b;c)$ non nullo. Il piano è il
+luogo dei punti $P(x;y;z)$ tali che il vettore $\overrightarrow{P_0P}$ sia perpendicolare a
+$\vec n$.</p>
+</div>
+
+<figure class="disegno">
+<svg viewBox="0 0 360 250" width="100%" style="max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto P0, vettore normale n e punto generico P del piano">
+<defs>
+<marker id="ar19" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
+</marker>
+<marker id="arr19" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
+</marker>
+<marker id="arb19" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
+</marker>
+</defs>
+<!-- assi di riferimento, in un angolo, non in scala -->
+<line x1="50" y1="225" x2="50" y2="150" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#ar19)"/>
+<line x1="50" y1="225" x2="18" y2="245" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#ar19)"/>
+<line x1="50" y1="225" x2="140" y2="213" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#ar19)"/>
+<text x="55" y="150" font-size="12" fill="var(--inchiostro)">z</text>
+<text x="4" y="252" font-size="12" fill="var(--inchiostro)">x</text>
+<text x="145" y="212" font-size="12" fill="var(--inchiostro)">y</text>
+<!-- piano come parallelogramma -->
+<polygon points="120,175 180,140 300,160 240,195" fill="var(--blu-chiaro)" fill-opacity="0.7" stroke="var(--riga)"/>
+<!-- vettore normale -->
+<line x1="180" y1="140" x2="205" y2="58" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#arr19)"/>
+<text x="208" y="55" font-size="13" fill="var(--rosso)">n&#8407;(a;b;c)</text>
+<!-- vettore P0P -->
+<line x1="180" y1="140" x2="300" y2="160" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#arb19)"/>
+<text x="215" y="138" font-size="12" fill="var(--blu)">P&#8320;P&#8407;</text>
+<circle cx="180" cy="140" r="3" fill="var(--inchiostro)"/>
+<text x="150" y="130" font-size="13" fill="var(--inchiostro)">P&#8320;(x&#8320;;y&#8320;;z&#8320;)</text>
+<circle cx="300" cy="160" r="3" fill="var(--inchiostro)"/>
+<text x="305" y="178" font-size="13" fill="var(--inchiostro)">P(x;y;z)</text>
+</svg>
+<figcaption>Il punto $P_0$, il vettore normale $\vec n$ e un generico punto $P$ del piano: il
+vettore $\overrightarrow{P_0P}$ giace nel piano ed è perpendicolare a $\vec n$.</figcaption>
+</figure>
+
+<p>Due vettori perpendicolari hanno prodotto scalare nullo:</p>
+$$\overrightarrow{P_0P}\cdot\vec n = a(x-x_0)+b(y-y_0)+c(z-z_0)=0$$
+<p>Espandendo:</p>
+$$ax+by+cz-(ax_0+by_0+cz_0)=0$$
+<p>Il termine fra parentesi dipende solo dal punto e dal vettore fissati, non da $P$: chiamandolo
+$d=-(ax_0+by_0+cz_0)$ si ottiene la forma generale.</p>
+
+<div class="def"><span class="et">Equazione generale di un piano</span>
+$$ax+by+cz+d=0$$
+<p>$a,b,c$ sono le componenti del vettore normale al piano.</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Piano per $P_0(2;-3;1)$, perpendicolare a $\vec n(4;1;-1)$:</p>
+$$4(x-2)+1\cdot(y+3)-1\cdot(z-1)=0$$
+$$4x-8+y+3-z+1=0 \;\Longrightarrow\; 4x+y-z-4=0$$
+</div>
+
+<h2>Casi particolari</h2>
+
+<ul>
+<li>Se $d=0$, il piano passa per l'origine, che soddisfa sempre l'equazione.</li>
+<li>Se $b=0$ manca la $y$: il piano è parallelo all'asse $y$ e perpendicolare al piano
+individuato dalle altre due variabili.</li>
+<li>Se anche $c=0$, l'equazione si riduce a $ax+d=0$, cioè $x=-\tfrac d a=k$: un piano
+perpendicolare all'asse $x$.</li>
+</ul>
+
+<figure class="disegno">
+<div class="pannelli">
+<figure>
+<svg viewBox="0 0 140 150" width="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Piano con c uguale a zero, esce dal foglio">
+<line x1="30" y1="130" x2="30" y2="18" stroke="var(--inchiostro)" stroke-width="1" marker-end="url(#ar19)"/>
+<line x1="12" y1="110" x2="125" y2="110" stroke="var(--inchiostro)" stroke-width="1" marker-end="url(#ar19)"/>
+<circle cx="30" cy="110" r="4" fill="none" stroke="var(--inchiostro)"/>
+<circle cx="30" cy="110" r="1.3" fill="var(--inchiostro)"/>
+<text x="24" y="22" font-size="11" fill="var(--inchiostro)">y</text>
+<text x="115" y="122" font-size="11" fill="var(--inchiostro)">x</text>
+<text x="38" y="122" font-size="11" fill="var(--inchiostro)">z</text>
+<line x1="18" y1="128" x2="108" y2="42" stroke="var(--rosso)" stroke-width="2"/>
+<line x1="58" y1="90" x2="85" y2="59" stroke="var(--verde)" stroke-width="2" marker-end="url(#ar19)"/>
+<text x="88" y="55" font-size="10" fill="var(--verde)">n&#8407;</text>
+</svg>
+<figcaption>$c=0$</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 140 150" width="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Piano x uguale a k, con b e c uguali a zero">
+<line x1="30" y1="130" x2="30" y2="18" stroke="var(--inchiostro)" stroke-width="1" marker-end="url(#ar19)"/>
+<line x1="12" y1="110" x2="125" y2="110" stroke="var(--inchiostro)" stroke-width="1" marker-end="url(#ar19)"/>
+<circle cx="30" cy="110" r="4" fill="none" stroke="var(--inchiostro)"/>
+<circle cx="30" cy="110" r="1.3" fill="var(--inchiostro)"/>
+<text x="24" y="22" font-size="11" fill="var(--inchiostro)">y</text>
+<text x="115" y="122" font-size="11" fill="var(--inchiostro)">x</text>
+<text x="38" y="122" font-size="11" fill="var(--inchiostro)">z</text>
+<line x1="85" y1="20" x2="85" y2="130" stroke="var(--rosso)" stroke-width="2"/>
+<line x1="85" y1="75" x2="115" y2="75" stroke="var(--verde)" stroke-width="2" marker-end="url(#ar19)"/>
+<text x="100" y="68" font-size="10" fill="var(--verde)">n&#8407;</text>
+</svg>
+<figcaption>$b=0,\ c=0$</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 140 150" width="150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Piano y uguale a zero, con a, c e d uguali a zero">
+<line x1="30" y1="130" x2="30" y2="18" stroke="var(--inchiostro)" stroke-width="1" marker-end="url(#ar19)"/>
+<line x1="12" y1="110" x2="125" y2="110" stroke="var(--inchiostro)" stroke-width="1" marker-end="url(#ar19)"/>
+<circle cx="30" cy="110" r="4" fill="none" stroke="var(--inchiostro)"/>
+<circle cx="30" cy="110" r="1.3" fill="var(--inchiostro)"/>
+<text x="24" y="22" font-size="11" fill="var(--inchiostro)">y</text>
+<text x="115" y="122" font-size="11" fill="var(--inchiostro)">x</text>
+<text x="38" y="122" font-size="11" fill="var(--inchiostro)">z</text>
+<line x1="12" y1="110" x2="120" y2="110" stroke="var(--rosso)" stroke-width="2.4"/>
+<line x1="30" y1="90" x2="30" y2="50" stroke="var(--verde)" stroke-width="2" marker-end="url(#ar19)"/>
+<text x="10" y="46" font-size="10" fill="var(--verde)">n&#8407;</text>
+</svg>
+<figcaption>$a=0,\ c=0,\ d=0$</figcaption>
+</figure>
+</div>
+<figcaption>La retta rossa è la traccia del piano vista lungo l'asse $z$ (cerchio nell'origine);
+$\vec n$ in verde è il vettore normale.</figcaption>
+</figure>
+
+<div class="widget">
+<p>Fissando $c=1$ — sempre possibile quando $c\neq0$ — il piano si scrive $ax+by+z+d=0$: i
+cursori mostrano come ciascun coefficiente lo sposta o lo inclina.</p>
+  <div class="controlli">
+    <label>$a$
+      <input type="range" id="s-a" min="-2" max="2" step="0.1" value="1">
+      <span>$a$ = <span class="val" id="v-a"></span></span>
+    </label>
+    <label>$b$
+      <input type="range" id="s-b" min="-2" max="2" step="0.1" value="1">
+      <span>$b$ = <span class="val" id="v-b"></span></span>
+    </label>
+    <label>$d$
+      <input type="range" id="s-d" min="-3" max="3" step="0.1" value="0">
+      <span>$d$ = <span class="val" id="v-d"></span></span>
+    </label>
+  </div>
+  <div style="max-width:420px;margin:0 auto"><div id="g-widget" style="height:320px"></div></div>
+  <p class="leggenda" id="v-frase"></p>
+</div>
+
+<h2>Piano passante per tre punti</h2>
+<p>Tre punti non allineati determinano un piano: basta sostituire le loro coordinate
+nell'equazione generale per ottenere un sistema lineare nelle incognite $a,b,c,d$.</p>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Con $A(2;0;0)$, $B(0;1;0)$, $C(0;0;3)$ e $ax+by+cz+d=0$:</p>
+$$\begin{cases}2a+d=0\\ b+d=0\\ 3c+d=0\end{cases}
+\;\Longrightarrow\;
+a=-\dfrac d2,\quad b=-d,\quad c=-\dfrac d3$$
+<p>Sostituendo:</p>
+$$-\dfrac d2 x - dy - \dfrac d3 z + d = 0$$
+<p>Deve essere $d\neq0$, altrimenti $a,b,c$ sarebbero tutti nulli e l'equazione non
+rappresenterebbe più un piano. Dividendo per $-d$ e moltiplicando per $6$:</p>
+$$3x+6y+2z-6=0$$
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<p>L'equazione appena scritta è il punto di partenza per confrontare due piani, nell'unità 20,
+e per ricavare le equazioni della retta come intersezione di due piani, nell'unità 21.</p>
+</div>
+
+<footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 19</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var sa=document.getElementById('s-a'), sb=document.getElementById('s-b'), sd=document.getElementById('s-d');
+  var va=document.getElementById('v-a'), vb=document.getElementById('v-b'), vd=document.getElementById('v-d');
+  var fr=document.getElementById('v-frase');
+  function fmt(n){return n.toFixed(1).replace('.',',');}
+  var N=16, xs=[], ys=[];
+  for(var i=0;i<=N;i++){ xs.push(-3+i*6/N); ys.push(-3+i*6/N); }
+  function agg(){
+    var a=parseFloat(sa.value), b=parseFloat(sb.value), d=parseFloat(sd.value);
+    va.innerHTML=fmt(a); vb.innerHTML=fmt(b); vd.innerHTML=fmt(d);
+    var z=[];
+    for(var j=0;j<=N;j++){
+      var row=[];
+      for(var i=0;i<=N;i++){ row.push(-(a*xs[i]+b*ys[j]+d)); }
+      z.push(row);
+    }
+    Plotly.react('g-widget',[{
+      x:xs, y:ys, z:z, type:'surface', showscale:false,
+      colorscale:[[0,'#1f4e79'],[1,'#1f4e79']], opacity:0.85
+    }],{
+      margin:{l:0,r:0,t:0,b:0},
+      scene:{
+        xaxis:{title:'x',range:[-3,3]}, yaxis:{title:'y',range:[-3,3]}, zaxis:{title:'z',range:[-8,8]},
+        aspectmode:'cube'
+      },
+      paper_bgcolor:'rgba(0,0,0,0)'
+    },{displayModeBar:false,responsive:true});
+    var frasi=[];
+    if(Math.abs(a)<1e-9) frasi.push('con a = 0 il piano è parallelo all\'asse x');
+    if(Math.abs(b)<1e-9) frasi.push('con b = 0 è parallelo all\'asse y');
+    if(Math.abs(d)<1e-9) frasi.push('con d = 0 passa per l\'origine');
+    fr.innerHTML = frasi.length ? ('Nota: '+frasi.join('; ')+'.') : 'Il piano ha equazione '+fmt(a)+'x + '+fmt(b)+'y + z + '+fmt(d)+' = 0.';
+  }
+  sa.addEventListener('input',agg); sb.addEventListener('input',agg); sd.addEventListener('input',agg);
+  agg();
+})();
+</script>
+
+</body>
+</html>
