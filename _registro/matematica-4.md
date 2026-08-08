@@ -139,3 +139,8 @@
 - Parole: 269 su circa 1,3 pagine di traccia (86–87, pagina condivisa con l'inizio dell'unità 18)
 - Rettifica: nessuna. Le formule di distanza, punto medio e baricentro (estensione diretta delle formule 2D con l'aggiunta della quota) sono state verificate con SymPy; l'esempio numerico è stato ricalcolato con SymPy: A(1;2;2), B(4;6;2), C(7;4;5) danno AB=5, M=(2,5;4;2), G=(4;4;3), coincide con quanto scritto in pagina.
 - Aggiunta: un esempio numerico (distanza, punto medio, baricentro sugli stessi tre punti), perché la traccia in queste due pagine non contiene alcun esempio numerico, solo le formule.
+
+## Unità 18 — Vettori nello spazio e prodotto scalare
+- Parole: 348 su circa 1,5 pagine di traccia reale (87–88, la seconda metà di pagina 87 dopo il baricentro dell'unità 17, fino a prima dell'equazione del piano che apre l'unità 19)
+- Rettifica: nessuna. Verificato con SymPy: dati u(2;1;-2) e v(1;-2;0), u+v=(3;-1;-2), |u|=3, u·v=0 (perpendicolari), coincide con quanto riportato in pagina.
+- Aggiunta: un esempio numerico (somma, modulo, prodotto scalare e verifica di perpendicolarità), perché la traccia in queste pagine definisce le operazioni ma non le applica a numeri.
