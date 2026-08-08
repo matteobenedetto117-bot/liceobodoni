@@ -114,3 +114,18 @@
 - Aggiunta: nessuna in senso stretto. Il riquadro finale sulla biunivocità spiega a parole
   il motivo delle croci sul ramo escluso della parabola e del tratto ristretto del seno,
   entrambi già disegnati nella traccia a pagina 57; non introduce un criterio nuovo.
+
+## Unità 15 — Valore assoluto nei grafici
+- Parole: 749 su 3 pagine di traccia (58–60)
+- Rettifica: nessuna. Verificato con SymPy tutte le identità usate: cos(-x+π/2) ≡
+  cos(x-π/2) (parità del coseno); sin(-x-π) ≡ -sin(x-π) e sin(x-π) ≡ sin(x+π)
+  (periodicità); continuità in x=0 dei due rami di sin(|x|-π) e di cos(|x|+π/2)
+  (stesso valore da sinistra e da destra). Verificato inoltre che sin(t-π) e
+  cos(t+π/2) coincidono identicamente con -sin(t) per ogni t: i due esempi guidati
+  della traccia (sin(|x|-π) e cos(|x|+π/2)) producono quindi esattamente lo stesso
+  grafico, osservazione riportata in un riquadro perché discende direttamente dai
+  due procedimenti già svolti nella traccia, non da materiale esterno.
+- Aggiunta: nessuna. Lo strumento interattivo (cursore su x) rende dinamica
+  esattamente la costruzione per casi di sin(|x|-π) già scritta nella traccia,
+  mostrando quale dei due rami è attivo e il valore corrispondente; non introduce
+  un esempio o una tecnica nuova.
