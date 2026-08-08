@@ -149,3 +149,8 @@
 - Parole: 506 su circa 3 pagine di traccia (seconda metà di pagina 88, pagine 89–90, prima metà di pagina 91)
 - Rettifica: nessuna. Verificato con SymPy: il piano per P0(2;-3;1) normale a n(4;1;-1) dà 4x+y-z-4=0; il sistema per il piano passante per A(2;0;0), B(0;1;0), C(0;0;3) dà a=-d/2, b=-d, c=-d/3 e, con d=-6, 3x+6y+2z-6=0 — entrambi coincidono esattamente con quanto scritto in pagina.
 - Aggiunta: nessuna. Lo strumento interattivo (superficie 3D con cursori su a, b, d) rende dinamica esattamente la classificazione dei casi particolari già scritta nella traccia (piano parallelo a un asse quando manca una variabile, piano per l'origine quando d=0); non introduce un esempio o un caso nuovo.
+
+## Unità 20 — Posizione reciproca di due piani e distanza punto-piano
+- Parole: 401 su 2 pagine di traccia (92–93)
+- Rettifica: nessuna. Verificato con Python/SymPy: il prodotto scalare dei normali dei piani 2x-y+2z+7=0 e 3x+2y-2z-1=0 dà 6-2-4=0, confermando la perpendicolarità; la distanza di P(0;1;-1) dal piano x-y+2z-1=0 dà |0-1-2-1|/√6 = 4/√6 = (2/3)√6, coincidente con la traccia. Nessun quesito di maturità inserito: le tracce reperite sulla distanza punto-piano richiedono anche la posizione piano-sfera, argomento non ancora disponibile a questo punto del percorso (unità 26-27).
+- Aggiunta: nessuna.
