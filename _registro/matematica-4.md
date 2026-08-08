@@ -134,3 +134,8 @@
 - Parole: 809 su 3 pagine di traccia (61–63)
 - Rettifica: nessuna in senso stretto. Per non appesantire le figure ho unificato due coppie di curve che nella traccia illustrano la stessa trasformazione già mostrata altrove nella stessa unità (la parabola intermedia (x+3)² a pagina 61, assorbita nel disegno finale (x+3)²+2; e (x+2)² a pagina 62, ridondante con la traslazione orizzontale già vista in (x+3)²+2): nessun contenuto è stato tolto, solo una ripetizione grafica dello stesso tipo di spostamento. Verificato con SymPy: (-x+2)²≡(x-2)² (semplificazione scritta anche nella traccia); lo zero di e^x-3 in x=ln3≈1,0986; il minimo ln2 di ln(|x|+2) in x=0; il punto d'incontro (0,4) dei due rami di (|x|+2)².
 - Aggiunta: nessuna.
+
+## Unità 17 — Piano cartesiano nello spazio: distanze, punto medio, baricentro
+- Parole: 269 su circa 1,3 pagine di traccia (86–87, pagina condivisa con l'inizio dell'unità 18)
+- Rettifica: nessuna. Le formule di distanza, punto medio e baricentro (estensione diretta delle formule 2D con l'aggiunta della quota) sono state verificate con SymPy; l'esempio numerico è stato ricalcolato con SymPy: A(1;2;2), B(4;6;2), C(7;4;5) danno AB=5, M=(2,5;4;2), G=(4;4;3), coincide con quanto scritto in pagina.
+- Aggiunta: un esempio numerico (distanza, punto medio, baricentro sugli stessi tre punti), perché la traccia in queste due pagine non contiene alcun esempio numerico, solo le formule.
