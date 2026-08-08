@@ -129,3 +129,8 @@
   esattamente la costruzione per casi di sin(|x|-π) già scritta nella traccia,
   mostrando quale dei due rami è attivo e il valore corrispondente; non introduce
   un esempio o una tecnica nuova.
+
+## Unità 16 — Trasformazioni di retta, parabola, esponenziale e logaritmo
+- Parole: 809 su 3 pagine di traccia (61–63)
+- Rettifica: nessuna in senso stretto. Per non appesantire le figure ho unificato due coppie di curve che nella traccia illustrano la stessa trasformazione già mostrata altrove nella stessa unità (la parabola intermedia (x+3)² a pagina 61, assorbita nel disegno finale (x+3)²+2; e (x+2)² a pagina 62, ridondante con la traslazione orizzontale già vista in (x+3)²+2): nessun contenuto è stato tolto, solo una ripetizione grafica dello stesso tipo di spostamento. Verificato con SymPy: (-x+2)²≡(x-2)² (semplificazione scritta anche nella traccia); lo zero di e^x-3 in x=ln3≈1,0986; il minimo ln2 di ln(|x|+2) in x=0; il punto d'incontro (0,4) dei due rami di (|x|+2)².
+- Aggiunta: nessuna.
