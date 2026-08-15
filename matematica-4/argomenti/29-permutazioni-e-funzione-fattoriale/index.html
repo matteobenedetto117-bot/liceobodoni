@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Permutazioni e funzione fattoriale — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+figure.disegno{margin:26px 0;text-align:center}
+figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
+.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
+.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
+.interattivo label{font-family:var(--sans);font-size:.85rem;display:block;margin:12px 0 4px}
+.interattivo input[type=range]{width:100%}
+.interattivo .esiti{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:flex;gap:28px;flex-wrap:wrap}
+.interattivo .esiti b{color:var(--blu);font-size:1.15rem}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Calcolo combinatorio &middot; Unità 29</p>
+  <h1>Permutazioni e funzione fattoriale</h1>
+  <p class="sommario">Quattro oggetti diversi si possono mettere in fila in molti ordini possibili: le
+  permutazioni contano proprio questi ordinamenti. Sono il caso delle disposizioni in cui si usano tutti gli
+  elementi a disposizione, e portano a una scrittura molto compatta, il fattoriale.</p>
+</header>
+
+<h2>Permutazioni semplici</h2>
+
+<p>Abbiamo quattro penne di colori diversi — bianca, nera, rossa, verde — e vogliamo metterle in fila. Il
+primo posto può andare a una qualsiasi delle quattro; fissato il primo, il secondo si sceglie fra le tre
+rimaste; il terzo fra le due che restano; l'ultimo posto è obbligato. Partendo dalla penna bianca si
+ottengono $3\cdot2\cdot1=6$ file diverse, e lo stesso accade partendo da ciascuna delle altre tre penne:
+$$4\cdot3\cdot2\cdot1=24$$
+raggruppamenti in tutto.</p>
+
+<figure class="disegno">
+<svg viewBox="0 0 460 220" width="100%" style="max-width:460px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle file a partire dalla penna bianca: b-n-r-v, b-n-v-r, b-r-n-v, b-r-v-n, b-v-n-r, b-v-r-n, sei ordini in tutto">
+<text x="12" y="18" font-size="12" fill="var(--grigio)">1&#176;</text>
+<text x="130" y="18" font-size="12" fill="var(--grigio)">2&#176;</text>
+<text x="270" y="18" font-size="12" fill="var(--grigio)">3&#176;&#8211;4&#176;</text>
+<text x="14" y="108" font-size="15" fill="var(--blu)">b</text>
+<line x1="24" y1="102" x2="130" y2="32" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<line x1="24" y1="102" x2="130" y2="107" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<line x1="24" y1="102" x2="130" y2="182" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<text x="136" y="36" font-size="13">n</text>
+<text x="136" y="111" font-size="13">r</text>
+<text x="136" y="186" font-size="13">v</text>
+<line x1="146" y1="32" x2="270" y2="14" stroke="var(--inchiostro)" stroke-width="1"/>
+<line x1="146" y1="32" x2="270" y2="54" stroke="var(--inchiostro)" stroke-width="1"/>
+<text x="276" y="18" font-size="12">r&#8211;v</text><text x="340" y="18" font-size="12" fill="var(--grigio)">bnrv</text>
+<text x="276" y="58" font-size="12">v&#8211;r</text><text x="340" y="58" font-size="12" fill="var(--grigio)">bnvr</text>
+<line x1="146" y1="107" x2="270" y2="89" stroke="var(--inchiostro)" stroke-width="1"/>
+<line x1="146" y1="107" x2="270" y2="129" stroke="var(--inchiostro)" stroke-width="1"/>
+<text x="276" y="93" font-size="12">n&#8211;v</text><text x="340" y="93" font-size="12" fill="var(--grigio)">brnv</text>
+<text x="276" y="133" font-size="12">v&#8211;n</text><text x="340" y="133" font-size="12" fill="var(--grigio)">brvn</text>
+<line x1="146" y1="182" x2="270" y2="164" stroke="var(--inchiostro)" stroke-width="1"/>
+<line x1="146" y1="182" x2="270" y2="204" stroke="var(--inchiostro)" stroke-width="1"/>
+<text x="276" y="168" font-size="12">n&#8211;r</text><text x="340" y="168" font-size="12" fill="var(--grigio)">bvnr</text>
+<text x="276" y="208" font-size="12">r&#8211;n</text><text x="340" y="208" font-size="12" fill="var(--grigio)">bvrn</text>
+</svg>
+<figcaption>Il ramo che parte dalla penna bianca: 3 scelte per il secondo posto, poi 2 per il terzo, 1 per
+l'ultimo. Lo stesso schema, con gli stessi 6 esiti, si ripete partendo da n, da r o da v.</figcaption>
+</figure>
+
+<div class="def"><span class="et">Permutazioni semplici</span>
+<p>Le permutazioni semplici di $n$ elementi distinti sono tutti i gruppi formati dagli $n$ elementi, che
+differiscono soltanto per il loro ordine:
+$$P_n = n\cdot(n-1)\cdot(n-2)\cdots3\cdot2\cdot1$$
+Il prodotto di tutti gli interi da $n$ a $1$ si scrive $n!$ e si legge «$n$ fattoriale»:
+$$P_n=n!$$</p>
+</div>
+
+<p>Per esempio $4!=4\cdot3\cdot2\cdot1=24$ e $7!=7\cdot6\cdot5\cdot4\cdot3\cdot2\cdot1=5040$. Per
+convenzione si pone $0!=1$.</p>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Quante parole, anche senza significato, si possono ottenere mescolando le lettere della parola CANTO?
+Sono cinque lettere tutte diverse, e contano solo gli ordini:
+$$P_5=5!=5\cdot4\cdot3\cdot2\cdot1=120$$</p>
+</div>
+
+<h2>Disposizioni e funzione fattoriale</h2>
+
+<p>Il fattoriale permette di riscrivere anche le disposizioni. Cercando $D_{5,3}$ come nell'unità
+precedente, i tre fattori a partire da 5 si ottengono moltiplicando e dividendo per $2\cdot1$, i fattori
+mancanti fino a 1:
+$$D_{5,3}=\frac{5\cdot4\cdot3\cdot2\cdot1}{2\cdot1}=\frac{5!}{2!}=60$$
+In generale:
+$$D_{n,k}=\frac{n!}{(n-k)!}$$</p>
+
+<h2>Permutazioni con ripetizione</h2>
+
+<p>Se alcuni degli elementi da ordinare sono uguali fra loro, non tutti gli ordinamenti sono
+distinguibili.</p>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Quanti anagrammi, anche senza significato, si possono formare con le lettere della parola TETTO? Sono
+cinque lettere, e calcolando $P_5=5!=120$ contiamo anche gli scambi fra le tre T, che non cambiano la
+parola scritta.</p>
+</div>
+
+<figure class="disegno">
+<svg viewBox="0 0 460 150" width="100%" style="max-width:460px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sei colorazioni delle tre T uguali nella parola EOTTT, tutte la stessa parola scritta">
+<g font-family="var(--sans)" font-weight="700" font-size="19">
+<text x="10" y="28"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--blu)">T</tspan></text>
+<text x="170" y="28"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--verde)">T</tspan></text>
+<text x="330" y="28"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--blu)">T</tspan></text>
+<text x="10" y="108"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--rosso)">T</tspan></text>
+<text x="170" y="108"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--verde)">T</tspan></text>
+<text x="330" y="108"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--rosso)">T</tspan></text>
+</g>
+</svg>
+<figcaption>Le tre T sono uguali: le 6 colorazioni sono $3!$ modi diversi di scambiarle, ma scrivono tutte
+la stessa parola EOTTT.</figcaption>
+</figure>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Ogni parola distinta ha $3!=6$ doppioni di sé stessa, uno per ogni modo di scambiare le tre T fra loro.
+Nel conteggio totale bisogna dividere per il numero di questi doppioni:
+$$P_5^{(3)}=\frac{5!}{3!}=\frac{120}{6}=20$$</p>
+</div>
+
+<p>In generale, se in un gruppo di $n$ elementi $k$ sono uguali fra loro:
+$$P_n^{(k)}=\frac{n!}{k!}$$
+e se vi sono due sottogruppi distinti di elementi ripetuti, di $k$ e di $h$ elementi:
+$$P_n^{(k,h)}=\frac{n!}{k!\,h!}$$</p>
+
+<div class="interattivo">
+<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 4px">Da $P_n$ a $P_n^{(k)}$: quanto pesano gli elementi ripetuti</p>
+<label for="n">elementi totali, $n$ = <span id="nval">5</span></label>
+<input type="range" id="n" min="3" max="9" value="5">
+<label for="k">elementi ripetuti, $k$ = <span id="kval">3</span></label>
+<input type="range" id="k" min="0" max="9" value="3">
+<div class="esiti">
+<div>senza ripetizioni: $P_n=n!=$ <b id="pn">120</b></div>
+<div>con $k$ elementi uguali: $P_n^{(k)}=n!/k!=$ <b id="pnk">20</b></div>
+</div>
+</div>
+<script>
+(function(){
+  var n=document.getElementById('n'), k=document.getElementById('k');
+  var nval=document.getElementById('nval'), kval=document.getElementById('kval');
+  var pn=document.getElementById('pn'), pnk=document.getElementById('pnk');
+  function fatt(x){ var r=1; for(var i=2;i<=x;i++){ r*=i; } return r; }
+  function aggiorna(){
+    var nn=parseInt(n.value), kk=parseInt(k.value);
+    if(kk>nn){ kk=nn; k.value=nn; }
+    nval.textContent=nn; kval.textContent=kk;
+    var f=fatt(nn);
+    pn.textContent=f.toLocaleString('it-IT');
+    pnk.textContent=(f/fatt(kk)).toLocaleString('it-IT');
+  }
+  n.addEventListener('input',aggiorna); k.addEventListener('input',aggiorna);
+  aggiorna();
+})();
+</script>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<p>Dalle permutazioni, dove contano tutti gli elementi e il loro ordine, si passa alle combinazioni, dove
+l'ordine non conta più e si scelgono solo $k$ elementi fra gli $n$ disponibili. Più avanti, disposizioni,
+permutazioni e combinazioni diventano gli strumenti per calcolare le probabilità.</p>
+</div>
+
+<footer><p>Matematica quarta &middot; Calcolo combinatorio &middot; Unità 29</p></footer>
+
+</div>
+</body>
+</html>
