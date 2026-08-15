@@ -174,3 +174,8 @@
 - Parole: 314 su 2 pagine di traccia (105–106)
 - Rettifica: nessuna. Verificato con SymPy: per il piano x-3y-z+2=0 il vettore normale è (1;-3;-1); la retta per A(4;1;0) con v=(1;-3;-1) dà le parametriche x=4+k, y=1-3k, z=-k, coincidenti con la traccia (verificato anche che A si ottiene per k=0).
 - Aggiunta: nessuna.
+
+## Unità 25 — Distanza punto-retta e distanza fra rette sghembe
+- Parole: 460 su 3 pagine di traccia (107–109)
+- Rettifica: nessuna. Verificato con SymPy: il piano per P(9;-3;0) normale a v(-1;4;2) dà -x+4y+2z+21=0; sostituendo le parametriche di r si ottiene 21k+21=0, k=-1, H(3;-4;-1), con PH=√38, coincidente con la traccia. Per le rette sghembe, riscritte r: x=1,y=k,z=2-k e s: x=4+2t,y=t,z=-1, il sistema di perpendicolarità RS·vr=0, RS·vs=0 dà t-2k+3=0 e 5t-k+6=0, con soluzione k=1, t=-1, R(1;1;1), S(2;-1;-1), RS=3: tutto coincidente. Confermato anche con il metodo alternativo del prodotto misto (vr×vs, distanza=9/3=3) che le due rette non si intersecano e la distanza è corretta.
+- Aggiunta: nessuna. Un solo disegno statico (punto, retta, piede della perpendicolare) illustra il concetto di distanza già descritto nel primo esempio; nessun quesito di maturità inserito, in continuità con le unità 17-24 di quest'area, perché entrambi gli esempi della traccia coprono già in modo completo il metodo.
