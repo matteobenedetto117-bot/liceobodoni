@@ -328,3 +328,22 @@
   quesito sicuramente reale e alla portata di questa sola unità (i quesiti trovati su siti didattici non
   erano riconducibili a una sessione ufficiale verificabile); ho preferito ometterlo piuttosto che
   rischiare un'attribuzione scorretta.
+
+## Unità 38 — Definizione statistica e soggettiva
+- Parole: 549 su circa 3,5 pagine di traccia (dalla seconda metà di pagina 146, dove inizia
+  "Definizione statistica di probabilità", fino a pagina 149, dove finisce l'esempio della corsa di
+  cavalli; a pagina 150 comincia il ripasso di esponenziali e logaritmi, escluso perché spostato in
+  terza).
+- Rettifica: a pagina 148 la traccia calcola le tre probabilità implicite nelle quote di scommessa
+  arrotondando quella del PSG a 45% (invece di 45,45%) e poi sommando i tre valori a 106,1%. Ho
+  verificato con SymPy le tre frazioni esatte (1/2,20=45,4545...%; 1/3,30=30,3030...%;
+  1/3,25=30,7692...%): la somma corretta e coerente è 106,53%, non 106,1%. Ho pubblicato i tre valori
+  arrotondati in modo omogeneo a due cifre decimali e la somma corrispondente, senza segnalare la
+  correzione in pagina. Ho verificato anche il resto della traccia con SymPy: la tabella delle
+  frequenze relative (5/80=1/16, 18/80=9/40, 22/80=11/40, 35/80=7/16, somma 1) e l'esempio di Dario
+  (90/120=3/4=75%, 4/5=80%) coincidono con quanto scritto.
+- Aggiunta: nessun esempio nuovo. I due esempi della traccia (la tabella delle palline colorate per
+  la definizione statistica; le quote di scommessa e la corsa di cavalli per quella soggettiva) sono
+  ripresi per intero. Nessuna figura SVG: la traccia in questa unità non contiene diagrammi, solo la
+  tabella dei colori, resa come tabella HTML nello stesso stile già usato altrove nel percorso.
+  Con questa unità si chiude interamente matematica-4 (38 unità su 38 pubblicate).
