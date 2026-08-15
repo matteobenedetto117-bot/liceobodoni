@@ -269,3 +269,21 @@
   Nessun quesito di maturità: i quesiti reali sulla probabilità condizionata compaiono quasi sempre
   insieme al prodotto logico o al teorema di Bayes, argomenti delle unità 35 e 37, quindi non ne ho
   cercato uno per questa unità.
+
+## Unità 35 — Prodotto logico ed eventi indipendenti
+- Parole: 438 su 1,5 pagine di traccia (139 intera, 140 fino a circa metà pagina)
+- Rettifica: nessuna. Verificato con Python/frazioni tutti i calcoli: P(E)=2/52=1/26 per l'esempio delle
+  carte, coincidente con P(E1)·P(E2|E1)=(1/2)·(1/13)=1/26.
+- Aggiunta: nessun esempio nuovo, l'unico esempio della traccia (carta nera e re da un mazzo di 52) è
+  ripreso per intero. Nessuno strumento interattivo: la formula non ha un parametro naturale da far
+  variare al di fuori dei dati fissati dell'esempio. Un solo riquadro di errore tipico (usare il prodotto
+  delle probabilità marginali anche quando gli eventi sono dipendenti), oltre alla definizione: restano
+  entrambi nel limite dei due o tre riquadri consentiti. Ho incluso un quesito di maturità: il quesito 7
+  (prima parte) del questionario della sessione suppletiva 2017, Liceo scientifico (fonte: testo e
+  svolgimento ufficiale online.scuola.zanichelli.it) — la probabilità che, nel gioco dado fra Alberto e
+  Barbara, entrambi segnino almeno un punto — risolubile con il solo bagaglio disponibile a questa unità
+  (prodotto di eventi indipendenti esteso a più lanci, evento contrario dell'unità 32, somma logica di
+  eventi incompatibili dell'unità 33), senza la seconda parte del quesito (punteggio 4 a 4), che richiede
+  il teorema delle prove ripetute dell'unità 36 e non è stata inclusa. Verificato con Python/frazioni:
+  P(Alberto=0)=(1/3)^3=1/27, P(Barbara=0)=(2/3)^6=64/729, la loro somma è 91/729 e il complementare
+  638/729 ≈ 0,875, in accordo con lo svolgimento ufficiale.
