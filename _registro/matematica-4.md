@@ -169,3 +169,8 @@
 - Parole: 364 su 3 pagine di traccia (102–104)
 - Rettifica: nessuna. Verificato con SymPy: per r con v(1;-1;3) e s con w(4;-2;-2), v·w=4+2-6=0 (perpendicolari) e 1/4≠-1/-2 (non parallele); risolvendo il sistema fra le equazioni parametriche di r e s si ottiene k=-4, t=0, verificato in tutte e tre le equazioni, con punto di intersezione P(-3;2;-7): tutto coincidente con la traccia.
 - Aggiunta: nessuna.
+
+## Unità 24 — Posizione reciproca di retta e piano
+- Parole: 314 su 2 pagine di traccia (105–106)
+- Rettifica: nessuna. Verificato con SymPy: per il piano x-3y-z+2=0 il vettore normale è (1;-3;-1); la retta per A(4;1;0) con v=(1;-3;-1) dà le parametriche x=4+k, y=1-3k, z=-k, coincidenti con la traccia (verificato anche che A si ottiene per k=0).
+- Aggiunta: nessuna.
