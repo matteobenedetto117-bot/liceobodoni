@@ -179,3 +179,8 @@
 - Parole: 460 su 3 pagine di traccia (107–109)
 - Rettifica: nessuna. Verificato con SymPy: il piano per P(9;-3;0) normale a v(-1;4;2) dà -x+4y+2z+21=0; sostituendo le parametriche di r si ottiene 21k+21=0, k=-1, H(3;-4;-1), con PH=√38, coincidente con la traccia. Per le rette sghembe, riscritte r: x=1,y=k,z=2-k e s: x=4+2t,y=t,z=-1, il sistema di perpendicolarità RS·vr=0, RS·vs=0 dà t-2k+3=0 e 5t-k+6=0, con soluzione k=1, t=-1, R(1;1;1), S(2;-1;-1), RS=3: tutto coincidente. Confermato anche con il metodo alternativo del prodotto misto (vr×vs, distanza=9/3=3) che le due rette non si intersecano e la distanza è corretta.
 - Aggiunta: nessuna. Un solo disegno statico (punto, retta, piede della perpendicolare) illustra il concetto di distanza già descritto nel primo esempio; nessun quesito di maturità inserito, in continuità con le unità 17-24 di quest'area, perché entrambi gli esempi della traccia coprono già in modo completo il metodo.
+
+## Unità 26 — Superficie sferica
+- Parole: 275 su 2 pagine di traccia (110–111)
+- Rettifica: nessuna. Verificato con SymPy: l'espansione di (x-x0)²+(y-y0)²+(z-z0)²-r² coincide con la forma generale x²+y²+z²+ax+by+cz+d=0 con a=-2x0, b=-2y0, c=-2z0, d=x0²+y0²+z0²-r²; la formula inversa r=√(a²/4+b²/4+c²/4-d) ricostruisce correttamente r. Esempio 1 (centro M(2;-1;1), raggio 3): sviluppo dà x²+y²+z²-4x+2y-2z-3=0, coincidente con la traccia. Esempio 2 (x²+y²+z²+2x-2y+6z=0): centro C(-1;1;-3) e r=√11, coincidenti con la traccia. Nessun quesito di maturità inserito: è la prima unità sulla sola equazione della sfera, senza ancora gli strumenti di posizione sfera-piano (unità 27) con cui i quesiti reali di quest'area combinano sfere e piani.
+- Aggiunta: nessuna.
