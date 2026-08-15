@@ -287,3 +287,22 @@
   il teorema delle prove ripetute dell'unità 36 e non è stata inclusa. Verificato con Python/frazioni:
   P(Alberto=0)=(1/3)^3=1/27, P(Barbara=0)=(2/3)^6=64/729, la loro somma è 91/729 e il complementare
   638/729 ≈ 0,875, in accordo con lo svolgimento ufficiale.
+
+## Unità 36 — Prove ripetute e schema di Bernoulli
+- Parole: 403 su 1,5 pagine di traccia (141 intera, 142 fino alla formula generale, prima di "Teorema
+  di Bayes" che apre l'unità 37).
+- Rettifica: nessuna. Verificato con SymPy tutti i calcoli della traccia: (1/2)^10=1/1024;
+  (1/2)^10·C(10,4)=105/512; C(5,2)·(1/6)^2·(5/6)^3=625/3888, tutti coincidenti con quanto scritto.
+- Aggiunta: nessun esempio nuovo, i tre esempi della traccia (10 teste su 10 lanci, 4 teste e 6 croci,
+  2 sei su 5 lanci di dado) sono ripresi per intero, seguiti dalla formalizzazione generale
+  P(k,n)=C(n,k)p^k q^(n-k) che la traccia stessa scrive subito dopo il terzo esempio, in cima a
+  pagina 142, prima di passare al teorema di Bayes. Un solo riquadro di errore tipico (dimenticare il
+  coefficiente binomiale e calcolare solo p^k q^(n-k)). Ho incluso un quesito di maturità: il quesito 7
+  (seconda parte) del questionario della sessione suppletiva 2017, Liceo scientifico (fonte: testo e
+  svolgimento ufficiale online.scuola.zanichelli.it) — la probabilità che il punteggio del gioco fra
+  Alberto e Barbara, già introdotto nell'unità 35, sia in un certo momento di 4 a 4 — esplicitamente
+  rimandato a questa unità dal registro dell'unità 35, perché richiede lo schema delle prove ripetute.
+  Verificato con SymPy: C(6,4)·(2/3)^4·(1/3)^2=80/243≈0,329. L'unico strumento interattivo mostra
+  l'istogramma di P(k,n) al variare di k, con due cursori per n e p; evidenzia in rosso il valore di k
+  più probabile e permette di verificare a vista i due esempi con moneta (n=10, p=0,5): il massimo cade
+  in k=5 (24,6%), mentre la barra per k=4 riproduce il calcolo dell'esempio, 105/512≈20,5%.

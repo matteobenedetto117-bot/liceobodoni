@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prove ripetute e schema di Bernoulli — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
+.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
+.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
+.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
+.controlli input[type=range]{width:100%}
+.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
+.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Probabilità &middot; Unità 36</p>
+  <h1>Prove ripetute e schema di Bernoulli</h1>
+  <p class="sommario">Ripetiamo più volte lo stesso esperimento, in modo indipendente, e cerchiamo la
+  probabilità che un evento si presenti esattamente un numero fissato di volte: è lo schema delle prove
+  ripetute, o schema di Bernoulli, che in quinta diventa la distribuzione binomiale.</p>
+</header>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Lanciamo una moneta 10 volte: qual è la probabilità che esca testa tutte le 10 volte? Ogni lancio è
+indipendente dagli altri, quindi moltiplichiamo le probabilità:
+$$\frac12\cdot\frac12\cdots\frac12=\left(\frac12\right)^{10}=\frac1{1024}$$
+corrispondente alla sola sequenza TTTTTTTTTT.</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Nella stessa serie di 10 lanci, qual è la probabilità che escano 4 teste e 6 croci, in un ordine
+qualunque? Una singola sequenza come TTTTCCCCCC ha ancora probabilità $(1/2)^{10}$, ma le sequenze con
+esattamente 4 teste su 10 lanci sono tante quante le posizioni in cui possiamo collocare le 4 teste, cioè
+$\binom{10}{4}$:
+$$P=\left(\frac12\right)^{10}\cdot\frac{10!}{6!\,4!}=\frac{105}{512}$$</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Lanciamo un dado 5 volte: qual è la probabilità che il 6 esca esattamente 2 volte? Il 6 ha probabilità
+$1/6$, il suo contrario $5/6$, e le posizioni delle 2 uscite fortunate fra i 5 lanci si scelgono in
+$\binom{5}{2}$ modi:
+$$P=\binom{5}{2}\left(\frac16\right)^2\left(\frac56\right)^3=\frac{5!}{2!\,3!}\cdot\frac1{36}\cdot\frac{125}{216}=\frac{625}{3888}$$</p>
+</div>
+
+<div class="def"><span class="et">Schema delle prove ripetute (Bernoulli)</span>
+<p>Generalizziamo. Un evento $E$ ha probabilità costante $p$ a ogni prova, e il suo contrario $\bar E$ ha
+probabilità $q=1-p$. Ripetendo la prova $n$ volte in modo indipendente, la probabilità che $E$ si
+verifichi esattamente $k$ volte è
+$$P_{k,n}=\binom{n}{k}\,p^k\,q^{\,n-k}$$
+Il coefficiente binomiale conta le sequenze con esattamente $k$ successi; $p^k q^{n-k}$ è la probabilità
+di ciascuna, uguale per tutte perché le prove sono indipendenti.</p>
+</div>
+
+<div class="nota"><span class="et">Errore tipico</span>
+<p>Calcolare solo $p^k q^{n-k}$, dimenticando il coefficiente binomiale: quel prodotto è la probabilità
+di una sola sequenza con $k$ successi in posizioni fissate, non di tutte le sequenze possibili con $k$
+successi in un ordine qualunque.</p>
+</div>
+
+<div class="widget">
+  <div class="controlli">
+    <label>Numero di prove, n
+      <input type="range" id="s-n" min="2" max="20" step="1" value="10">
+      <span>n = <span class="val" id="v-n"></span></span>
+    </label>
+    <label>Probabilità di successo, p
+      <input type="range" id="s-p" min="0.05" max="0.95" step="0.05" value="0.5">
+      <span>p = <span class="val" id="v-p"></span></span>
+    </label>
+  </div>
+  <div style="max-width:560px;margin:0 auto"><div id="g-widget" style="height:260px"></div></div>
+  <p class="leggenda" id="v-frase"></p>
+</div>
+
+<div class="esempio"><span class="et">Quesito d'esame</span>
+<p>Liceo scientifico, sessione suppletiva 2017, questionario, quesito 7 (seconda parte). Nel gioco
+dell'unità precedente, Alberto segna 1 punto con probabilità $p_A=2/3$ e Barbara 2 punti con probabilità
+$p_B=1/3$: qual è la probabilità che il punteggio sia, a un certo punto, di 4 a 4?</p>
+<p>Il 4-4 richiede esattamente 4 vittorie di Alberto e 2 di Barbara: su 6 lanci, Alberto ne deve vincere
+esattamente 4. È lo schema delle prove ripetute con $n=6$, $k=4$, $p=2/3$:
+$$P_{4,6}=\binom{6}{4}\left(\frac23\right)^4\left(\frac13\right)^2=15\cdot\frac{16}{81}\cdot\frac19=\frac{80}{243}\approx0{,}329$$</p>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<p>Il teorema di Bayes, nell'unità 37, userà ancora il prodotto logico per invertire una probabilità
+condizionata con più cause possibili; l'unità 38 chiude l'area con le definizioni statistica e
+soggettiva.</p>
+</div>
+
+<footer><p>Matematica quarta &middot; Probabilità &middot; Unità 36</p></footer>
+
+</div>
+
+<script>
+(function(){
+  var base={margin:{l:34,r:10,t:8,b:30},showlegend:false,
+    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
+  function binom(n,k){
+    if(k<0||k>n) return 0;
+    k=Math.min(k,n-k);
+    var r=1;
+    for(var i=0;i<k;i++){ r=r*(n-i)/(i+1); }
+    return r;
+  }
+  var sn=document.getElementById('s-n'), sp=document.getElementById('s-p'),
+      vn=document.getElementById('v-n'), vp=document.getElementById('v-p'),
+      fr=document.getElementById('v-frase');
+  function fmt(x){ return x.toFixed(2).replace('.',','); }
+  function agg(){
+    var n=parseInt(sn.value,10), p=parseFloat(sp.value);
+    vn.innerHTML=n; vp.innerHTML=fmt(p);
+    var k=[],y=[],kmax=0,ymax=-1;
+    for(var i=0;i<=n;i++){
+      var v=binom(n,i)*Math.pow(p,i)*Math.pow(1-p,n-i);
+      k.push(i); y.push(v);
+      if(v>ymax){ ymax=v; kmax=i; }
+    }
+    var colori=k.map(function(i){ return i===kmax ? '#b3392f' : '#1f4e79'; });
+    Plotly.newPlot('g-widget',[{x:k,y:y,type:'bar',marker:{color:colori}}],
+      Object.assign({},base,{
+        xaxis:{title:{text:'k (numero di successi)',font:{size:10}},tickfont:{size:9},dtick:1},
+        yaxis:{title:{text:'P(k,n)',font:{size:10}},tickfont:{size:9}}
+      }),
+      {displayModeBar:false,responsive:true,staticPlot:true});
+    fr.innerHTML='Con n = '+n+' prove e p = '+fmt(p)+', il numero di successi più probabile è k = '+kmax+
+      ', con probabilità '+(ymax*100).toFixed(1).replace('.',',')+'%.';
+  }
+  sn.addEventListener('input',agg); sp.addEventListener('input',agg); agg();
+})();
+</script>
+</body>
+</html>
