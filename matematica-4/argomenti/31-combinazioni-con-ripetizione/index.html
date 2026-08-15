@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combinazioni con ripetizione — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+figure.disegno{margin:26px 0;text-align:center}
+figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
+.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
+.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
+.interattivo label{font-family:var(--sans);font-size:.85rem;display:block;margin:12px 0 4px}
+.interattivo input[type=range]{width:100%}
+.interattivo .esiti{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:flex;gap:28px;flex-wrap:wrap}
+.interattivo .esiti b{color:var(--blu);font-size:1.15rem}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Calcolo combinatorio &middot; Unità 31</p>
+  <h1>Combinazioni con ripetizione</h1>
+  <p class="sommario">Nelle combinazioni viste finora ogni elemento entrava al più una volta nel gruppo
+  scelto. Qui consideriamo scelte in cui uno stesso elemento può comparire più volte e l'ordine resta
+  irrilevante: è il caso di distribuire oggetti in contenitori o di leggere l'esito del lancio di più
+  dadi uguali.</p>
+</header>
+
+<p>Lanciamo una moneta due volte, senza tenere conto dell'ordine in cui escono testa e croce. Le
+possibilità sono tre: TT, TC, CC. Con tre lanci diventano quattro: TTT, TTC, TCC, CCC. Chiamiamo questi
+raggruppamenti combinazioni con ripetizione: a differenza delle combinazioni semplici, uno stesso
+elemento può comparire più volte nello stesso gruppo, e come in ogni combinazione l'ordine non conta —
+le configurazioni CTC e CCT sono indistinguibili.</p>
+
+<p>In ciascun lancio ci sono $n$ possibilità (qui $n=2$, testa o croce), e ogni elemento può ripetersi
+fino a $k$ volte, dove $k$ è il numero di lanci. Con $n=2$ e $k=3$ si contano $4$ combinazioni, come
+sopra. Cambiando i dati — tre simboli $a,b,c$ presi a due a due, cioè $n=3$ e $k=2$ — le combinazioni
+diventano sei: aa, ab, ac, bb, bc, cc.</p>
+
+<div class="def"><span class="et">Combinazioni con ripetizione</span>
+<p>Le combinazioni con ripetizione di $n$ elementi presi a $k$ a $k$ sono i gruppi di $k$ elementi, non
+necessariamente distinti fra loro, scelti fra gli $n$ dati, che differiscono per la composizione e non
+per l'ordine. Il loro numero è
+$$C'_{n,k}=\binom{n+k-1}{k}=\frac{(n+k-1)!}{k!\,(n-1)!}$$
+dove $n$ è il numero di possibilità disponibili a ogni scelta e $k$ il numero di scelte, sorteggi o
+tentativi effettuati.</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>In quanti modi possiamo distribuire 6 oggetti in 4 scatole, alcune delle quali possono restare vuote?
+Qui $n=4$ (le scatole disponibili per ciascun oggetto) e $k=6$ (gli oggetti da collocare):
+$$C'_{4,6}=\binom{4+6-1}{6}=\binom{9}{6}=\frac{9!}{6!\,3!}=84$$</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio II</span>
+<p>Lanciamo contemporaneamente 4 dadi uguali: con quante combinazioni diverse si può presentare il
+risultato, senza distinguere un dado dall'altro? Qui $n=6$ (le facce del dado) e $k=4$ (i dadi
+lanciati):
+$$C'_{6,4}=\binom{6+4-1}{4}=\binom{9}{4}=\frac{9!}{4!\,5!}=126$$</p>
+</div>
+
+<div class="interattivo">
+<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 4px">Il valore di $C'_{n,k}$ al variare del numero di possibilità $n$ e del numero di scelte $k$</p>
+<label for="n">possibilità a ogni scelta, $n$ = <span id="nval">4</span></label>
+<input type="range" id="n" min="2" max="10" value="4">
+<label for="k">numero di scelte, $k$ = <span id="kval">6</span></label>
+<input type="range" id="k" min="1" max="10" value="6">
+<div class="esiti">
+<div>$C'_{n,k}=\binom{n+k-1}{k}=$ <b id="cnk">84</b></div>
+</div>
+</div>
+<script>
+(function(){
+  var n=document.getElementById('n'), k=document.getElementById('k');
+  var nval=document.getElementById('nval'), kval=document.getElementById('kval');
+  var cnk=document.getElementById('cnk');
+  function fatt(x){ var r=1; for(var i=2;i<=x;i++){ r*=i; } return r; }
+  function comb(nn,kk){ return fatt(nn)/(fatt(kk)*fatt(nn-kk)); }
+  function aggiorna(){
+    var nn=parseInt(n.value), kk=parseInt(k.value);
+    nval.textContent=nn; kval.textContent=kk;
+    cnk.textContent=comb(nn+kk-1,kk).toLocaleString('it-IT');
+  }
+  n.addEventListener('input',aggiorna); k.addEventListener('input',aggiorna);
+  aggiorna();
+})();
+</script>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<p>Con disposizioni, permutazioni e combinazioni disponibili, il calcolo combinatorio entra ora nel
+calcolo delle probabilità, a partire dalla definizione classica di probabilità come rapporto fra casi
+favorevoli e casi possibili.</p>
+</div>
+
+<footer><p>Matematica quarta &middot; Calcolo combinatorio &middot; Unità 31</p></footer>
+
+</div>
+</body>
+</html>

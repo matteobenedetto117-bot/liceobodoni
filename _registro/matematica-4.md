@@ -216,3 +216,15 @@
   a 4 è uguale al numero delle combinazioni degli stessi oggetti a 3 a 3: si trovi n" — risolubile con il
   solo bagaglio di questa unità (definizione di coefficiente binomiale, senza bisogno di probabilità).
   Verificato con SymPy: risolvendo 3!(n-3)!=4!(n-4)! si ottiene n-3=4, cioè n=7, e C(7,4)=C(7,3)=35.
+
+## Unità 31 — Combinazioni con ripetizione
+- Parole: 380 su 3 pagine di traccia (128–130)
+- Rettifica: nessuna. Verificato con SymPy tutti i calcoli della traccia: C(3,2)=3 (TT,TC,CC), C(4,3)=4
+  (TTT,TTC,TCC,CCC), C(4,2)=6 (aa,ab,ac,bb,bc,cc); l'esempio delle 6 scatole in 4 oggetti
+  C'(4,6)=C(9,6)=9!/(6!3!)=84; l'esempio dei 4 dadi C'(6,4)=C(9,4)=9!/(4!5!)=126.
+- Aggiunta: nessun esempio nuovo, i due esempi della traccia (distribuzione di oggetti in scatole, lancio
+  di più dadi uguali) sono entrambi presenti. L'unico strumento interattivo (cursori su n e k) mostra il
+  valore di C'(n,k) al variare dei due parametri, sullo stesso schema già usato nelle unità precedenti
+  dell'area. Nessun quesito di maturità: ho cercato online ma i risultati trovati riguardano le
+  permutazioni con ripetizione (già trattate nell'unità 29), non le combinazioni con ripetizione; il
+  tema specifico di questa unità non compare isolato nei quesiti reali della seconda prova.
