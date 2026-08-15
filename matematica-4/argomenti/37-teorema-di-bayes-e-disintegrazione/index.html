@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teorema di Bayes e disintegrazione — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+figure.disegno{margin:26px 0;text-align:center}
+figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
+.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
+.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Probabilità &middot; Unità 37</p>
+  <h1>Teorema di Bayes e disintegrazione</h1>
+  <p class="sommario">Quando un evento può nascere da più cause possibili, il teorema di Bayes permette
+  di risalire alla probabilità di ciascuna causa una volta che l'evento si è verificato. Lo strumento
+  che rende possibile il calcolo è la legge di disintegrazione, che scompone la probabilità di un
+  evento nella somma dei contributi di ogni causa.</p>
+</header>
+
+<p>Consideriamo due urne. L'urna 1 contiene 3 palline bianche e 2 nere; l'urna 2 ne contiene 4 bianche
+e 5 nere. Scegliamo a caso una delle due urne, con probabilità $1/2$ ciascuna, e da questa estraiamo
+una pallina.</p>
+
+<figure class="disegno">
+<svg viewBox="0 0 640 320" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle probabilità: dalla radice si sceglie l'urna 1 o l'urna 2 con probabilità 1/2 ciascuna; da ogni urna si estrae una pallina bianca o nera con le rispettive probabilità">
+<line x1="50" y1="160" x2="230" y2="70" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<line x1="50" y1="160" x2="230" y2="250" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<line x1="240" y1="65" x2="440" y2="25" stroke="var(--blu)" stroke-width="1.6"/>
+<line x1="240" y1="75" x2="440" y2="110" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<line x1="240" y1="245" x2="440" y2="205" stroke="var(--blu)" stroke-width="1.6"/>
+<line x1="240" y1="255" x2="440" y2="290" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<circle cx="50" cy="160" r="3.5" fill="var(--inchiostro)"/>
+<circle cx="235" cy="70" r="3.5" fill="var(--inchiostro)"/>
+<circle cx="235" cy="250" r="3.5" fill="var(--inchiostro)"/>
+<text x="120" y="100" font-size="14" fill="var(--inchiostro)">1/2</text>
+<text x="120" y="225" font-size="14" fill="var(--inchiostro)">1/2</text>
+<text x="245" y="55" font-size="13" fill="var(--inchiostro)">urna 1</text>
+<text x="245" y="235" font-size="13" fill="var(--inchiostro)">urna 2</text>
+<text x="320" y="35" font-size="13" fill="var(--blu)">3/5</text>
+<text x="320" y="105" font-size="13" fill="var(--inchiostro)">2/5</text>
+<text x="320" y="215" font-size="13" fill="var(--blu)">4/9</text>
+<text x="320" y="285" font-size="13" fill="var(--inchiostro)">5/9</text>
+<text x="450" y="22" font-size="14" fill="var(--blu)">bianca &middot; 1/2&middot;3/5 = 3/10</text>
+<text x="450" y="112" font-size="14" fill="var(--inchiostro)">nera &middot; 1/2&middot;2/5 = 1/5</text>
+<text x="450" y="202" font-size="14" fill="var(--blu)">bianca &middot; 1/2&middot;4/9 = 2/9</text>
+<text x="450" y="292" font-size="14" fill="var(--inchiostro)">nera &middot; 1/2&middot;5/9 = 5/18</text>
+</svg>
+<figcaption>Ogni percorso dalla radice a una foglia ha probabilità pari al prodotto delle probabilità
+incontrate lungo il ramo. I due percorsi evidenziati in blu portano entrambi a «bianca».</figcaption>
+</figure>
+
+<p>Per ottenere la probabilità di estrarre una pallina bianca sommiamo i due percorsi che vi portano,
+uno per ciascuna urna:
+$$P(\text{bianca})=\frac12\cdot\frac35+\frac12\cdot\frac49=\frac{3}{10}+\frac29=\frac{47}{90}$$
+Allo stesso modo, per la pallina nera:
+$$P(\text{nera})=\frac12\cdot\frac25+\frac12\cdot\frac59=\frac15+\frac{5}{18}=\frac{43}{90}$$
+e infatti $47/90+43/90=1$. Sommare, su tutte le cause possibili, il prodotto fra la probabilità della
+causa e la probabilità dell'evento data quella causa è la <strong>legge di disintegrazione</strong>.</p>
+
+<p>Ora rovesciamo la domanda: sapendo che è uscita una pallina bianca, qual è la probabilità che
+provenga proprio dall'urna 1? Fra tutti i percorsi che portano a «bianca» (i casi totali), isoliamo
+quello che passa per l'urna 1 (il caso favorevole):
+$$P(\text{urna 1}\mid\text{bianca})=\frac{P(\text{urna 1 e bianca})}{P(\text{bianca})}
+=\frac{3/10}{3/10+2/9}=\frac{27}{47}$$</p>
+
+<div class="def"><span class="et">Teorema di Bayes</span>
+<p>Se un evento $E$ può verificarsi in seguito a una fra $m$ cause $E_1,E_2,\dots,E_m$ che si escludono
+a vicenda, la probabilità che, essendosi verificato $E$, la causa sia stata proprio $E_i$ è
+$$P(E_i\mid E)=\frac{P(E_i)\cdot P(E\mid E_i)}{P(E)}\qquad\text{con}\qquad
+P(E)=\sum_{i=1}^m P(E_i)\cdot P(E\mid E_i)$$
+Il numeratore è il percorso che porta a $E_i$ e poi a $E$; il denominatore, per la legge di
+disintegrazione, è la somma di tutti i percorsi che portano a $E$, qualunque sia la causa.</p>
+</div>
+
+<div class="nota"><span class="et">Errore tipico</span>
+<p>$P(E_i\mid E)$ e $P(E\mid E_i)$ non sono la stessa cosa: la prima risale dall'effetto alla causa, la
+seconda va dalla causa all'effetto. È proprio perché sono diverse che il teorema di Bayes serve a
+qualcosa.</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Un test diagnostico individua una malattia di cui è affetto lo 0,01% della popolazione. Applicato a
+una persona malata, il test dà esito positivo nel 99,9% dei casi; applicato a una persona sana, dà
+esito negativo nel 99,99% dei casi. Se una persona risulta positiva, qual è la probabilità che sia
+davvero malata?</p>
+
+<figure class="disegno">
+<svg viewBox="0 0 640 320" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle probabilità del test diagnostico: dalla radice si è malati o sani con probabilità 1/10000 e 9999/10000; da ciascuno il test è positivo o negativo con le rispettive probabilità">
+<line x1="50" y1="160" x2="230" y2="70" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<line x1="50" y1="160" x2="230" y2="250" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<line x1="240" y1="65" x2="410" y2="25" stroke="var(--blu)" stroke-width="1.6"/>
+<line x1="240" y1="75" x2="410" y2="110" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<line x1="240" y1="245" x2="410" y2="205" stroke="var(--blu)" stroke-width="1.6"/>
+<line x1="240" y1="255" x2="410" y2="290" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<circle cx="50" cy="160" r="3.5" fill="var(--inchiostro)"/>
+<circle cx="235" cy="70" r="3.5" fill="var(--inchiostro)"/>
+<circle cx="235" cy="250" r="3.5" fill="var(--inchiostro)"/>
+<text x="95" y="100" font-size="13" fill="var(--inchiostro)">1/10000</text>
+<text x="90" y="225" font-size="13" fill="var(--inchiostro)">9999/10000</text>
+<text x="245" y="55" font-size="13" fill="var(--inchiostro)">malato</text>
+<text x="245" y="235" font-size="13" fill="var(--inchiostro)">sano</text>
+<text x="280" y="35" font-size="13" fill="var(--blu)">999/1000</text>
+<text x="280" y="105" font-size="13" fill="var(--inchiostro)">1/1000</text>
+<text x="280" y="215" font-size="13" fill="var(--blu)">1/10000</text>
+<text x="280" y="285" font-size="13" fill="var(--inchiostro)">9999/10000</text>
+<text x="420" y="22" font-size="13" fill="var(--blu)">pos &middot; 999/10&#8311;</text>
+<text x="420" y="112" font-size="13" fill="var(--inchiostro)">neg &middot; 1/10&#8311;</text>
+<text x="420" y="202" font-size="13" fill="var(--blu)">pos &middot; 9999/10&#8312;</text>
+<text x="420" y="292" font-size="13" fill="var(--inchiostro)">neg &middot; 9999&sup2;/10&#8312;</text>
+</svg>
+<figcaption>Come nell'albero delle urne: i due percorsi in blu sono quelli che portano a «test
+positivo», uno per ciascuna causa (malato o sano).</figcaption>
+</figure>
+
+<p>Sommando i due percorsi che portano a «positivo» otteniamo il denominatore, poi applichiamo Bayes
+al percorso «malato»:
+$$P(\text{pos})=\frac{1}{10^4}\cdot\frac{999}{10^3}+\frac{9999}{10^4}\cdot\frac{1}{10^4}
+=\frac{999}{10^7}+\frac{9999}{10^8}$$
+$$P(\text{malato}\mid\text{pos})=\frac{999/10^7}{999/10^7+9999/10^8}\approx0{,}4998=49{,}98\%$$
+Meno della metà delle persone positive è davvero malata: la malattia è così rara che pesa più
+dell'accuratezza del test.</p>
+
+<p>Con lo stesso procedimento, applicato ai due percorsi che portano a «negativo», la probabilità di
+essere davvero sani dato un test negativo è
+$$P(\text{sano}\mid\text{neg})=\frac{9999^2/10^8}{1/10^7+9999^2/10^8}\approx0{,}999999=99{,}9999\%$$
+un test negativo è quasi una garanzia di essere sani.</p>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<p>L'unità 38 chiude l'area della probabilità con la definizione statistica e quella soggettiva, che
+non partono più dal calcolo dei casi ma dall'osservazione ripetuta di un fenomeno.</p>
+</div>
+
+<footer><p>Matematica quarta &middot; Probabilità &middot; Unità 37</p></footer>
+
+</div>
+</body>
+</html>

@@ -306,3 +306,25 @@
   l'istogramma di P(k,n) al variare di k, con due cursori per n e p; evidenzia in rosso il valore di k
   più probabile e permette di verificare a vista i due esempi con moneta (n=10, p=0,5): il massimo cade
   in k=5 (24,6%), mentre la barra per k=4 riproduce il calcolo dell'esempio, 105/512≈20,5%.
+
+## Unità 37 — Teorema di Bayes e disintegrazione
+- Parole: 506 su circa 4 pagine di traccia (142, dalla seconda metà dove inizia "Teorema di Bayes",
+  fino a 146, dove finisce l'esempio del test diagnostico e comincia "Definizione statistica di
+  probabilità" dell'unità 38).
+- Rettifica: a pagina 146 la traccia calcola la probabilità di essere sani dato un test negativo
+  usando per sbaglio, come numeratore della formula di Bayes, il termine 1/10^7 (che è invece
+  P(malato e negativo)) anziché 9999²/10^8 (P(sano e negativo)), ottenendo 0,909 = 90,9%. Il calcolo
+  corretto, verificato con SymPy sulle stesse frazioni scritte nella traccia (P(malato)=1/10^4,
+  P(neg|malato)=1/10^3, P(sano)=9999/10^4, P(neg|sano)=9999/10^4), dà P(sano|neg) = 99980001/99980011
+  ≈ 0,999999 = 99,9999%, coerente con l'intuizione che con una malattia così rara un test negativo
+  è quasi una garanzia. Ho pubblicato il valore corretto senza segnalarlo in pagina. Ho anche verificato
+  con SymPy il resto della traccia (P(bianca)=47/90, P(nera)=43/90, P(urna1|bianca)=27/47 nell'esempio
+  delle urne; P(malato|pos)=1110/2221≈49,98% nell'esempio del test): tutti coincidenti con quanto scritto.
+- Aggiunta: nessun esempio nuovo. I due esempi della traccia (le due urne con disintegrazione e
+  inversione con Bayes; il test diagnostico con le due domande su esito positivo e negativo) sono
+  ripresi per intero, con i due alberi delle probabilità ridisegnati in SVG al posto degli originali
+  a mano libera. Un solo riquadro di errore tipico (confondere P(Ei|E) con P(E|Ei)). Nessun quesito di
+  maturità: le ricerche online per quesiti ufficiali attribuibili con anno e sessione non hanno dato un
+  quesito sicuramente reale e alla portata di questa sola unità (i quesiti trovati su siti didattici non
+  erano riconducibili a una sessione ufficiale verificabile); ho preferito ometterlo piuttosto che
+  rischiare un'attribuzione scorretta.
