@@ -154,3 +154,8 @@
 - Parole: 401 su 2 pagine di traccia (92–93)
 - Rettifica: nessuna. Verificato con Python/SymPy: il prodotto scalare dei normali dei piani 2x-y+2z+7=0 e 3x+2y-2z-1=0 dà 6-2-4=0, confermando la perpendicolarità; la distanza di P(0;1;-1) dal piano x-y+2z-1=0 dà |0-1-2-1|/√6 = 4/√6 = (2/3)√6, coincidente con la traccia. Nessun quesito di maturità inserito: le tracce reperite sulla distanza punto-piano richiedono anche la posizione piano-sfera, argomento non ancora disponibile a questo punto del percorso (unità 26-27).
 - Aggiunta: nessuna.
+
+## Unità 21 — La retta nello spazio: equazioni parametriche e cartesiane
+- Parole: 559 su 6 pagine di traccia (94–99)
+- Rettifica: nessuna. Verificato con SymPy: l'equivalenza algebrica (x-6)/-2 = (6-x)/2 e (x-5)/(0-5) = (5-x)/5 usate nel passaggio a forma con denominatori positivi; la verifica del passaggio di B(0;1;-1) per la retta AB con A(5;0;1) dà 1=1=1; la condizione di allineamento per P(2;-3;2), A(1;0;3), B(-1;6;5) dà -1/2=-1/2=-1/2, tutto coincidente con la traccia. Nessun quesito di maturità inserito: è la prima unità sulla sola equazione della retta, senza ancora gli strumenti di posizione reciproca e distanza (unità 23–25) con cui i quesiti reali di questa area combinano piani, rette e sfere.
+- Aggiunta: nessuna.
