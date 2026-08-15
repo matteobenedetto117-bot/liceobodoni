@@ -164,3 +164,8 @@
 - Parole: 264 su 2 pagine di traccia (100–101)
 - Rettifica: nessuna. Verificato con SymPy: dal sistema x+y-3z=0, x-3y+z+4=0 con z=k si ottiene x=2k-1, y=k+1, coincidente con la traccia; sostituendo k=z si torna a x-2z+1=0, y-z-1=0, anch'esso coincidente. Per l'esempio 6 (x-2y+z-1=0, 2x+y-z+1=0) i rapporti fra coefficienti 1/2, -2, -1 non sono uguali, confermando che i piani non sono paralleli.
 - Aggiunta: nessuna.
+
+## Unità 23 — Posizione reciproca di due rette
+- Parole: 364 su 3 pagine di traccia (102–104)
+- Rettifica: nessuna. Verificato con SymPy: per r con v(1;-1;3) e s con w(4;-2;-2), v·w=4+2-6=0 (perpendicolari) e 1/4≠-1/-2 (non parallele); risolvendo il sistema fra le equazioni parametriche di r e s si ottiene k=-4, t=0, verificato in tutte e tre le equazioni, con punto di intersezione P(-3;2;-7): tutto coincidente con la traccia.
+- Aggiunta: nessuna.
