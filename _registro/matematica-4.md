@@ -159,3 +159,8 @@
 - Parole: 559 su 6 pagine di traccia (94–99)
 - Rettifica: nessuna. Verificato con SymPy: l'equivalenza algebrica (x-6)/-2 = (6-x)/2 e (x-5)/(0-5) = (5-x)/5 usate nel passaggio a forma con denominatori positivi; la verifica del passaggio di B(0;1;-1) per la retta AB con A(5;0;1) dà 1=1=1; la condizione di allineamento per P(2;-3;2), A(1;0;3), B(-1;6;5) dà -1/2=-1/2=-1/2, tutto coincidente con la traccia. Nessun quesito di maturità inserito: è la prima unità sulla sola equazione della retta, senza ancora gli strumenti di posizione reciproca e distanza (unità 23–25) con cui i quesiti reali di questa area combinano piani, rette e sfere.
 - Aggiunta: nessuna.
+
+## Unità 22 — Retta come intersezione di due piani
+- Parole: 264 su 2 pagine di traccia (100–101)
+- Rettifica: nessuna. Verificato con SymPy: dal sistema x+y-3z=0, x-3y+z+4=0 con z=k si ottiene x=2k-1, y=k+1, coincidente con la traccia; sostituendo k=z si torna a x-2z+1=0, y-z-1=0, anch'esso coincidente. Per l'esempio 6 (x-2y+z-1=0, 2x+y-z+1=0) i rapporti fra coefficienti 1/2, -2, -1 non sono uguali, confermando che i piani non sono paralleli.
+- Aggiunta: nessuna.
