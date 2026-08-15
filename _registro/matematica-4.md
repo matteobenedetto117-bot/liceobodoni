@@ -241,3 +241,17 @@
   classica ed evento contrario soltanto), e i quesiti reali trovati richiedono probabilità condizionata
   o eventi composti, argomenti delle unità 33-34; per coerenza con "nelle unità iniziali è normale che
   non ci sia nessun quesito" non ne ho inserito nessuno.
+
+## Unità 33 — Somma logica di eventi
+- Parole: 247 su 1,5 pagine di traccia (134–135, prima metà)
+- Rettifica: nessuna. Verificato con SymPy/frazioni: P(E1)=1/2, P(E2)=1/2, P(E1∩E2)=1/6,
+  P(E1∪E2)=1/2+1/2-1/6=5/6, coincidente con il conteggio diretto |{1,2,3,4,6}|/6=5/6.
+- Aggiunta: nessun esempio nuovo, l'unico esempio della traccia (urna con palline numerate 1-6) è
+  ripreso per intero, incluso il diagramma di Venn con i sei esiti posizionati, ridisegnato in SVG.
+  Ho aggiunto solo l'applicazione numerica della formula ai dati E1, E2 già dati nell'esempio, per
+  mostrare come si usa; non è un esempio nuovo. Nessuno strumento interattivo: la formula non ha un
+  parametro naturale da far variare oltre ai dati già fissati dell'esempio, quindi il diagramma resta
+  statico. Nessun quesito di maturità: è la seconda unità del blocco probabilità e tratta solo la
+  somma logica fra due eventi; i quesiti reali sul tema richiedono quasi sempre probabilità
+  condizionata o eventi indipendenti, argomenti delle unità 34-35, quindi non ne ho cercato uno per
+  questa unità.
