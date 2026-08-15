@@ -255,3 +255,17 @@
   somma logica fra due eventi; i quesiti reali sul tema richiedono quasi sempre probabilità
   condizionata o eventi indipendenti, argomenti delle unità 34-35, quindi non ne ho cercato uno per
   questa unità.
+
+## Unità 34 — Probabilità condizionata
+- Parole: 480 su 4 pagine di traccia (135–138)
+- Rettifica: nell'Esempio II la traccia scrive una volta "4°B" e nel resto del brano "5°B" per la
+  stessa classe (24 alunni, 11 femmine e 13 maschi): uniformato a "5ªB" ovunque, come richiesto dal
+  contesto (istituto con 650 alunni, la classe è la quinta). Verificato con Python/frazioni tutti i
+  calcoli: P(E2|E1) palline = (3/9·4/8)/(3/9) = (1/6)/(1/3) = 1/2, coincidente con 4/8 diretto;
+  P(E2|E1) sondaggio = C(13,2)/C(24,2) = 78/276 = 13/46.
+- Aggiunta: nessun esempio nuovo, entrambi gli esempi della traccia (palline senza reimmissione,
+  sondaggio nella 5ªB) sono ripresi per intero. Nessuno strumento interattivo: il diagramma di Venn
+  che illustra la restrizione dello spazio campione resta statico, in coerenza con l'unità 33.
+  Nessun quesito di maturità: i quesiti reali sulla probabilità condizionata compaiono quasi sempre
+  insieme al prodotto logico o al teorema di Bayes, argomenti delle unità 35 e 37, quindi non ne ho
+  cercato uno per questa unità.
