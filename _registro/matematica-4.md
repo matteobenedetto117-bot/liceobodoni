@@ -228,3 +228,16 @@
   dell'area. Nessun quesito di maturità: ho cercato online ma i risultati trovati riguardano le
   permutazioni con ripetizione (già trattate nell'unità 29), non le combinazioni con ripetizione; il
   tema specifico di questa unità non compare isolato nei quesiti reali della seconda prova.
+
+## Unità 32 — Definizione classica ed eventi contrari
+- Parole: 510 su 3 pagine di traccia (131–133)
+- Rettifica: nessuna. Verificato con SymPy tutti i calcoli della traccia: P(E)=3/6=1/2 per l'esempio del
+  dado; D(10,5)=30240; D(4,2)·D(6,3)=1440 e P(E1)=1440/30240=1/21; per l'evento senza ordine,
+  D(4,2)·D(6,3)·5!/(2!3!)=14400 e P(E2)=14400/30240=10/21, coincidente con C(4,2)·C(6,3)/C(10,5)=6·20/252.
+- Aggiunta: nessun esempio nuovo, i tre esempi della traccia (dado, urna con ordine, urna senza ordine)
+  sono tutti presenti. L'unico strumento interattivo (cursore sul numero di casi favorevoli f) mostra
+  P(E) e P(non E) al variare di f, rendendo visibile la proprietà 0≤P(E)≤1 appena enunciata, senza
+  introdurre altro. Nessun quesito di maturità: è la prima unità del blocco probabilità (definizione
+  classica ed evento contrario soltanto), e i quesiti reali trovati richiedono probabilità condizionata
+  o eventi composti, argomenti delle unità 33-34; per coerenza con "nelle unità iniziali è normale che
+  non ci sia nessun quesito" non ne ho inserito nessuno.
