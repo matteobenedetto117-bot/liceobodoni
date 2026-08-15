@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combinazioni e coefficienti binomiali — Matematica quarta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
+.def{border-left:4px solid var(--blu)}
+.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+figure.disegno{margin:26px 0;text-align:center}
+figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
+.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
+.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
+.interattivo label{font-family:var(--sans);font-size:.85rem;display:block;margin:12px 0 4px}
+.interattivo input[type=range]{width:100%}
+.interattivo .esiti{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:flex;gap:28px;flex-wrap:wrap}
+.interattivo .esiti b{color:var(--blu);font-size:1.15rem}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
+  <p class="occhiello">Calcolo combinatorio &middot; Unità 30</p>
+  <h1>Combinazioni e coefficienti binomiali</h1>
+  <p class="sommario">Nelle disposizioni l'ordine contava: ABC e BAC erano gruppi diversi. Nelle
+  combinazioni no: interessa solo quali elementi si scelgono, non in che ordine. È il caso di ogni scelta
+  di un gruppo — tre punti per un triangolo, due piloti per due auto — e porta a un numero, il coefficiente
+  binomiale, che tornerà più avanti nel calcolo delle probabilità.</p>
+</header>
+
+<h2>Combinazioni semplici</h2>
+
+<p>Consideriamo cinque punti $A,B,C,D,E$ su un piano, a tre a tre non allineati, e chiediamoci quanti
+triangoli si possono disegnare collegando tre di questi punti. Scegliendo il primo vertice fra 5, il
+secondo fra i 4 rimasti, il terzo fra i 3 che restano, si ottengono $5\cdot4\cdot3=60$ terne ordinate. Ma
+il triangolo $ABC$ è lo stesso triangolo di $BAC$, $ACB$, $BCA$, $CAB$, $CBA$: sei terne che disegnano la
+stessa figura, tante quante le permutazioni di 3 elementi, $3!=6$. Il numero dei triangoli distinti è
+allora $60/6=10$.</p>
+
+<figure class="disegno">
+<svg viewBox="0 0 460 220" width="100%" style="max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cinque punti A, B, C, D, E; il triangolo ABC è evidenziato, gli altri due punti D ed E sono isolati">
+<polygon points="90,150 210,60 260,140" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
+<circle cx="90" cy="150" r="4" fill="var(--inchiostro)"/>
+<circle cx="210" cy="60" r="4" fill="var(--inchiostro)"/>
+<circle cx="260" cy="140" r="4" fill="var(--inchiostro)"/>
+<circle cx="330" cy="185" r="4" fill="var(--grigio)"/>
+<circle cx="370" cy="130" r="4" fill="var(--grigio)"/>
+<text x="70" y="170" font-size="15" fill="var(--inchiostro)">A</text>
+<text x="200" y="46" font-size="15" fill="var(--inchiostro)">B</text>
+<text x="270" y="128" font-size="15" fill="var(--inchiostro)">C</text>
+<text x="336" y="205" font-size="15" fill="var(--grigio)">D</text>
+<text x="376" y="118" font-size="15" fill="var(--grigio)">E</text>
+<text x="60" y="30" font-size="13" fill="var(--grigio)">ABC, BAC, ACB, BCA, CAB, CBA &#8594; un solo triangolo</text>
+</svg>
+<figcaption>Le sei terne ordinate che usano A, B, C disegnano tutte lo stesso triangolo: contarle come
+distinte moltiplicherebbe per 6 il numero reale delle figure.</figcaption>
+</figure>
+
+<div class="def"><span class="et">Combinazioni semplici</span>
+<p>Le combinazioni semplici di $n$ elementi distinti presi a $k$ a $k$ sono i gruppi di $k$ elementi che
+differiscono per almeno un elemento, senza che l'ordine conti. Si ottengono dalle disposizioni dividendo
+per le permutazioni dei $k$ elementi scelti, che altrimenti verrebbero contate più volte:
+$$C_{n,k}=\frac{D_{n,k}}{P_k}=\frac{n(n-1)(n-2)\cdots(n-k+1)}{k!}$$
+Moltiplicando numeratore e denominatore per $(n-k)!$, la stessa quantità si scrive anche
+$$C_{n,k}=\frac{n!}{k!\,(n-k)!}$$</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>Una scuderia ha a disposizione 5 vetture da assegnare a 2 piloti. In quanti modi diversi può farlo? Qui
+non conta l'ordine in cui le due auto vengono scelte, solo quali due vengono assegnate:
+$$C_{5,2}=\frac{5\cdot4}{2!}=\frac{5!}{2!\,3!}=10$$</p>
+</div>
+
+<h2>Coefficienti binomiali</h2>
+
+<p>Il numero $C_{n,k}$ si scrive anche con un simbolo a sé, il coefficiente binomiale, che riprenderemo
+studiando il calcolo delle probabilità.</p>
+
+<div class="def"><span class="et">Coefficiente binomiale</span>
+<p>$$\binom{n}{k}=\frac{n!}{k!\,(n-k)!}\qquad n,k\in\mathbb{N},\ k\le n$$</p>
+</div>
+
+<div class="esempio"><span class="et">Esempio</span>
+<p>$$\binom{6}{2}=\frac{6!}{2!\,4!}=15$$</p>
+</div>
+
+<p>Tre casi si calcolano subito dalla definizione: $\binom{n}{0}=\dfrac{n!}{0!\,n!}=1$,
+$\binom{n}{n}=\dfrac{n!}{n!\,0!}=1$, $\binom{0}{0}=\dfrac{0!}{0!\,0!}=1$.</p>
+
+<p>Due proprietà si usano spesso per semplificare i calcoli.</p>
+
+<div class="nota"><span class="et">Legge delle classi complementari</span>
+<p>$$\binom{n}{k}=\binom{n}{n-k}$$
+Scegliere i $k$ elementi da prendere equivale a scegliere gli $n-k$ da lasciare fuori: le due scritture,
+$\dfrac{n!}{k!(n-k)!}$ e $\dfrac{n!}{(n-k)!\,k!}$, sono lo stesso numero.</p>
+</div>
+
+<div class="nota"><span class="et">Formula di ricorrenza</span>
+<p>$$\binom{n}{k+1}=\binom{n}{k}\cdot\frac{n-k}{k+1}$$
+Si verifica scrivendo $\dbinom{n}{k}\cdot\dfrac{n-k}{k+1}=\dfrac{n!\,(n-k)}{k!\,(n-k)!\,(k+1)}
+=\dfrac{n!}{(k+1)!\,(n-k-1)!}=\dbinom{n}{k+1}$, perché $(n-k)$ diviso $(n-k)!$ lascia $(n-k-1)!$.</p>
+</div>
+
+<div class="interattivo">
+<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 4px">La legge delle classi complementari: $\binom{n}{k}$ e $\binom{n}{n-k}$ a confronto</p>
+<label for="n">elementi totali, $n$ = <span id="nval">10</span></label>
+<input type="range" id="n" min="2" max="14" value="10">
+<label for="k">elementi scelti, $k$ = <span id="kval">3</span></label>
+<input type="range" id="k" min="0" max="14" value="3">
+<div class="esiti">
+<div>$\binom{n}{k}=$ <b id="cnk">120</b></div>
+<div>$\binom{n}{n-k}=$ <b id="cnnk">120</b></div>
+</div>
+</div>
+<script>
+(function(){
+  var n=document.getElementById('n'), k=document.getElementById('k');
+  var nval=document.getElementById('nval'), kval=document.getElementById('kval');
+  var cnk=document.getElementById('cnk'), cnnk=document.getElementById('cnnk');
+  function fatt(x){ var r=1; for(var i=2;i<=x;i++){ r*=i; } return r; }
+  function comb(nn,kk){ return fatt(nn)/(fatt(kk)*fatt(nn-kk)); }
+  function aggiorna(){
+    var nn=parseInt(n.value), kk=parseInt(k.value);
+    if(kk>nn){ kk=nn; k.value=nn; }
+    k.max=nn;
+    nval.textContent=nn; kval.textContent=kk;
+    var v=comb(nn,kk);
+    cnk.textContent=v.toLocaleString('it-IT');
+    cnnk.textContent=comb(nn,nn-kk).toLocaleString('it-IT');
+  }
+  n.addEventListener('input',aggiorna); k.addEventListener('input',aggiorna);
+  aggiorna();
+})();
+</script>
+
+<div class="esempio"><span class="et">Quesito d'esame — Liceo scientifico, corso sperimentale P.N.I., sessione ordinaria 2011, quesito 4</span>
+<p>Il numero delle combinazioni di $n$ oggetti a 4 a 4 è uguale al numero delle combinazioni degli stessi
+oggetti a 3 a 3. Si trovi $n$.</p>
+<p>Impostiamo $\binom{n}{4}=\binom{n}{3}$, cioè $\dfrac{n!}{4!\,(n-4)!}=\dfrac{n!}{3!\,(n-3)!}$.
+Semplificando $n!$ da entrambi i membri e invertendo:
+$$3!\,(n-3)!=4!\,(n-4)!\quad\Longrightarrow\quad \frac{(n-3)!}{(n-4)!}=\frac{4!}{3!}=4$$
+Il rapporto $\dfrac{(n-3)!}{(n-4)!}$ vale $n-3$, quindi $n-3=4$, da cui $n=7$. Verifica:
+$\binom{7}{4}=35=\binom{7}{3}$.</p>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<p>Le combinazioni appena viste non ammettono ripetizioni: ogni elemento entra al più una volta nel
+gruppo scelto. L'unità successiva tratta il caso in cui gli elementi si possono ripetere. Più avanti,
+disposizioni, permutazioni e combinazioni diventano gli strumenti per calcolare le probabilità.</p>
+</div>
+
+<footer><p>Matematica quarta &middot; Calcolo combinatorio &middot; Unità 30</p></footer>
+
+</div>
+</body>
+</html>

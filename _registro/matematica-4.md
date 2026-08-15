@@ -199,3 +199,20 @@
 - Parole: 498 su 3 pagine di traccia (121–123)
 - Rettifica: nessuna. Verificato con SymPy tutti i calcoli della traccia: 4!=24, 7!=5040, 0!=1; l'anagramma di CANTO P(5)=5!=120; D(5,3)=5!/2!=60, coincidente con la formula già usata nell'unità 28; l'anagramma di TETTO (non "TETO": la parola ha 5 lettere di cui 3 T ripetute, verificato rileggendo la pagina a 200 dpi) P(5)^(3)=5!/3!=120/6=20.
 - Aggiunta: nessun esempio nuovo. L'unico strumento interattivo (cursori su n e k) mostra il passaggio da $P_n=n!$ a $P_n^{(k)}=n!/k!$ appena introdotto, sullo stesso schema già usato nell'unità 28 per le disposizioni. Nessun quesito di maturità: è la seconda unità dell'area, permutazioni e fattoriale da soli non compaiono isolati nei quesiti reali della seconda prova.
+
+## Unità 30 — Combinazioni e coefficienti binomiali
+- Parole: 523 su 4 pagine di traccia (124–127)
+- Rettifica: nessuna. Verificato con SymPy tutti i calcoli della traccia: D(5,3)/P(3)=60/6=10, coincidente
+  con C(5,3); l'esempio delle 5 vetture e 2 piloti C(5,2)=5·4/2!=5!/(2!3!)=10; il coefficiente binomiale
+  (6 2)=6!/(2!4!)=15; i casi particolari (n 0)=(n n)=(0 0)=1; la legge delle classi complementari
+  verificata numericamente (n=7,k=3: 35=35); la formula di ricorrenza verificata numericamente
+  (n=8,k=3: (8 4)=70=(8 3)·5/4=70).
+- Aggiunta: nessun esempio nuovo, i due esempi della traccia (i 5 punti e i triangoli, le 5 vetture e i 2
+  piloti) sono entrambi presenti. L'unico strumento interattivo (cursori su n e k) mette a confronto in
+  tempo reale (n k) e (n, n-k), rendendo visibile la proprietà 1 appena enunciata (legge delle classi
+  complementari), senza introdurre altro. Ho incluso un quesito di maturità: il quesito 4 dell'Esame di
+  Stato, Liceo scientifico, corso sperimentale P.N.I., sessione ordinaria 2011 (fonte: testo ufficiale
+  online.scuola.zanichelli.it, confermato da matebook.it) — "il numero delle combinazioni di n oggetti a 4
+  a 4 è uguale al numero delle combinazioni degli stessi oggetti a 3 a 3: si trovi n" — risolubile con il
+  solo bagaglio di questa unità (definizione di coefficiente binomiale, senza bisogno di probabilità).
+  Verificato con SymPy: risolvendo 3!(n-3)!=4!(n-4)! si ottiene n-3=4, cioè n=7, e C(7,4)=C(7,3)=35.
