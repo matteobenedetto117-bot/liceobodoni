@@ -70,3 +70,13 @@
   intorno al filo con $B$ tangente, la coppia di fili con correnti concordi che genera forze
   attrattive, e la coppia con correnti discordi che genera forze repulsive) e riportato la
   derivazione così come compare.
+
+## Unità 13 — Campo di una spira circolare e di una bobina
+- Parole: 227 su 2 pagine di traccia (pagina 20 intera più l'inizio di pagina 21, fino al
+  disegno delle tre spire attaccate, prima dell'avvio di "Campo magnetico generato da un
+  SOLENOIDE", che appartiene all'unità 14)
+- Rettifica: nessuna. Verificato con SymPy che $B_{bobina}=N\cdot i\mu_0/(2R)$ è
+  effettivamente $N$ volte $B_{spira}=i\mu_0/(2R)$, coerente con la traccia; verificato anche
+  l'esempio numerico aggiunto ($N=200$, $R=4{,}0$ cm, $i=0{,}50$ A dà $B\approx1{,}6\times10^{-3}$ T).
+- Aggiunta: un esempio numerico, perché in tutta l'unità la traccia non ne contiene nessuno
+  (solo i due schemi di verso della corrente e la formula riquadrata per spira e bobina).
