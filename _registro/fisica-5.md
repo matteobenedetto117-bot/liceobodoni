@@ -103,3 +103,18 @@
   (ferromagnetici $\gg$ paramagnetici $>1>$ diamagnetici) è coerente con i valori numerici
   della tabella.
 - Aggiunta: nessuna.
+
+## Unità 16 — Temperatura di Curie e geomagnetismo
+- Parole: 408 su 2 pagine di traccia (pagine 26–27)
+- Rettifica: nessuna sul contenuto fisico. Ho chiarito la geometria del disegno degli strati
+  terrestri: la traccia disegna due cerchi concentrici con le correnti convettive (a mano libera,
+  due archi ondulati orizzontali) racchiuse quasi interamente nel cerchio più interno; ho spostato
+  le correnti nell'anello del nucleo esterno (fra nucleo interno e mantello), che è dove realmente
+  ha origine il campo magnetico terrestre per effetto dinamo, mantenendo le stesse tre etichette
+  della traccia (nucleo interno, nucleo esterno, mantello). Verificato con SymPy che
+  $B_T=0{,}5\times10^{-4}$ T corrisponde esattamente a $0{,}5$ G, coerente con l'annotazione della
+  traccia ($1$ T $=10^4$ G).
+- Aggiunta: nessuna. Ho ridisegnato in SVG i tre schemi della traccia (la sezione della Terra con
+  nucleo e mantello, l'arrivo del vento solare sul campo magnetico terrestre, e le linee di campo
+  parallele con la traiettoria elicoidale e la forza di Lorentz centripeta) senza introdurre
+  contenuto fisico ulteriore rispetto a quanto scritto ed enunciato nella traccia.
