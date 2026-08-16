@@ -80,3 +80,17 @@
   l'esempio numerico aggiunto ($N=200$, $R=4{,}0$ cm, $i=0{,}50$ A dà $B\approx1{,}6\times10^{-3}$ T).
 - Aggiunta: un esempio numerico, perché in tutta l'unità la traccia non ne contiene nessuno
   (solo i due schemi di verso della corrente e la formula riquadrata per spira e bobina).
+
+## Unità 14 — Campo magnetico di un solenoide
+- Parole: 371 su 1,5 pagine di traccia (la parte finale di pagina 21, dal titolo "Campo
+  magnetico generato da un SOLENOIDE" in poi, più pagina 22 intera, fino a prima dell'avvio
+  di "Magnetismo nella materia" a inizio pagina 23, che appartiene all'unità 15; la formula
+  della bobina a inizio pagina 21 appartiene all'unità 13, già pubblicata).
+- Rettifica: nessuna. Verificato con SymPy che risolvendo $B\cdot L=\mu_0 N i$ rispetto a $B$
+  si ottiene $B=\mu_0 N i/L=\mu_0 n i$ con $n=N/L$, coerente con il passaggio a mano della
+  traccia; verificata anche la coerenza dimensionale ($[\mu_0]=\text{T}\cdot\text{m/A}$) e
+  l'esempio numerico aggiunto ($N=500$, $L=25$ cm, $i=2{,}0$ A dà $n=2000\ \text{m}^{-1}$ e
+  $B\approx5{,}0\times10^{-3}$ T).
+- Aggiunta: un esempio numerico, perché in tutta l'unità la traccia non ne contiene nessuno
+  (solo lo schema del solenoide, il disegno del campo nullo fuori/uniforme dentro, e la
+  derivazione coi quattro tratti del percorso di Ampère).
