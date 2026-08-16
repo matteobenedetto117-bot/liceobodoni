@@ -118,3 +118,11 @@
   nucleo e mantello, l'arrivo del vento solare sul campo magnetico terrestre, e le linee di campo
   parallele con la traiettoria elicoidale e la forza di Lorentz centripeta) senza introdurre
   contenuto fisico ulteriore rispetto a quanto scritto ed enunciato nella traccia.
+
+## Unità 17 — Moto elicoidale
+- Parole: 233 su 1 pagina di traccia (pagina 28)
+- Rettifica: nessuna. Verificate con SymPy le tre formule della traccia: $r=mv_\perp/(qB)$,
+  $T=2\pi r/v_\perp=2\pi m/(qB)$ (la semplificazione di $v_\perp$ è corretta) e
+  $P=v_\parallel\cdot T=2\pi m v_\parallel/(qB)$; tutte confermate identiche a quelle scritte.
+- Aggiunta: nessuna. Un solo disegno SVG, che riprende lo schema della traccia (linee di campo,
+  traiettoria elicoidale, scomposizione di $v$ in $v_\perp$ e $v_\parallel$, passo $P$).
