@@ -28,3 +28,8 @@
   accelerazione/decelerazione per carica positiva e negativa (che per simmetria mostrano la
   stessa fisica) in due soli casi con carica positiva, spiegando a parole che per una carica
   negativa i due casi si scambiano: nessun contenuto nuovo, solo una figura più compatta.
+
+## Unità 06 — Moto circolare e raggio di curvatura
+- Parole: 255 su 1 pagina di traccia (pagina 10)
+- Rettifica: nessuna. Verificato con SymPy che da $qvB=mv^2/r$ segue $r=mv/(qB)$, coerente con la traccia.
+- Aggiunta: una frase che spiega come il raggio dipende da massa, velocità, carica e campo, indispensabile per dare senso alla formula appena ricavata; nessun contenuto fisico ulteriore.
