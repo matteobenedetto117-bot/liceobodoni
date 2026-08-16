@@ -58,3 +58,15 @@
 - Parole: 534 su 3 pagine di traccia (pagine 16–18; l'esempio in cima a pagina 16 appartiene all'unità 10, non contato qui)
 - Rettifica: nessuna. Verificato con SymPy che la somma $\sum B\,\Delta l$ su un percorso circolare con $B=ki/r$ dà $2\pi k i$, coerente con il passaggio a mano della traccia (dove la $r$ si semplifica con la circonferenza $2\pi r$).
 - Aggiunta: nessuna. Ho ridisegnato in SVG i quattro schemi della traccia (percorsi concatenato/non concatenato, il percorso concatenato in un piano qualunque, il percorso circolare con $B$ tangente, la scomposizione di $\vec B$ in $B_\parallel$, e i due esempi con più fili) e riportato la derivazione e la generalizzazione così come compaiono, fermandomi dove si ferma la traccia (senza scrivere $B=\mu_0 i/2\pi r$, che compare solo a inizio pagina 19, già unità 12).
+
+## Unità 12 — Legge di Biot-Savart e forze fra fili paralleli
+- Parole: 416 su 1,4 pagine di traccia (pagina 19 intera più l'inizio di pagina 20, fino a
+  prima dell'avvio di "Campo magnetico generato da una spira circolare", che appartiene
+  all'unità 13)
+- Rettifica: nessuna. Verificato con SymPy: la soluzione di $B\cdot2\pi r=\mu_0 i$ dà
+  $B=\mu_0 i/(2\pi r)$; le due espressioni $F=i_1B_2L$ e $F=i_2B_1L$ si semplificano entrambe
+  a $\mu_0 i_1i_2L/(2\pi d)$, coerenti con la traccia.
+- Aggiunta: nessuna. Ho ridisegnato in SVG i tre schemi della traccia (il percorso circolare
+  intorno al filo con $B$ tangente, la coppia di fili con correnti concordi che genera forze
+  attrattive, e la coppia con correnti discordi che genera forze repulsive) e riportato la
+  derivazione così come compare.
