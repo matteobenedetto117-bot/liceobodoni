@@ -126,3 +126,15 @@
   $P=v_\parallel\cdot T=2\pi m v_\parallel/(qB)$; tutte confermate identiche a quelle scritte.
 - Aggiunta: nessuna. Un solo disegno SVG, che riprende lo schema della traccia (linee di campo,
   traiettoria elicoidale, scomposizione di $v$ in $v_\perp$ e $v_\parallel$, passo $P$).
+
+## Unità 18 — Acceleratori di particelle: ciclotrone e sincrotrone
+- Parole: 442 su 3 pagine di traccia (pagine 29–31)
+- Rettifica: nessuna. Verificate con SymPy: $T=2\pi m/(qB)$ indipendente da $v$; $T/2=\pi m/(qB)$;
+  $\Delta U=2nq\Delta V$ dopo $n$ cicli (coerente con $\Delta U=q\Delta V$ per semiciclo, $2n$
+  semicicli in $n$ cicli); l'esempio numerico (protone, $v_0=500$ m/s, $\Delta V=800$ V, $n=5$)
+  dà $v_f=\sqrt{v_0^2+4nq\Delta V/m}\approx1{,}238\times10^6$ m/s, arrotondato a
+  $1{,}24\times10^6$ m/s come nella traccia. Verificata anche la coerenza dimensionale di
+  $T=2\pi m/(qB)$ (secondi) e di $R=mv/(qB)$ (metri) per il sincrotrone.
+- Aggiunta: nessuna. Due disegni SVG che riprendono gli schemi della traccia (le due D del
+  ciclotrone con la spirale e la fessura, l'anello del sincrotrone con il raggio $R$ fisso e i
+  due punti di accelerazione).
