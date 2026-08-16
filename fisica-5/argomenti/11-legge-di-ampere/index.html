@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legge di Ampère — Fisica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
+.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
+  padding:18px 22px;margin:26px 0;text-align:center}
+.due-fig{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.due-fig .fig{margin:0}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+@media(max-width:640px){.due-fig{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
+  <p class="occhiello">Magnetostatica &middot; Unità 11</p>
+  <h1>Legge di Ampère</h1>
+  <p class="sommario">Fin qui il campo magnetico di un filo percorso da corrente è stato solo
+  descritto, mai calcolato. La legge di Ampère mette in relazione il campo lungo un percorso chiuso
+  con la corrente che quel percorso racchiude, ed è lo strumento che permette di ricavarlo.</p>
+</header>
+
+<h2>Percorsi concatenati e non concatenati</h2>
+
+<p>Preso un filo percorso da corrente $i$, consideriamo un percorso chiuso qualunque $\gamma$
+nello spazio intorno ad esso. Il percorso si dice <strong>concatenato</strong> alla corrente se il
+filo attraversa la superficie che il percorso racchiude; altrimenti si dice <strong>non
+concatenato</strong>.</p>
+
+<div class="due-fig">
+<div class="fig">
+<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f11i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker></defs>
+<line x1="90" y1="200" x2="90" y2="20" stroke="var(--inchiostro)" stroke-width="2"/>
+<line x1="90" y1="55" x2="90" y2="20" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f11i)"/>
+<text x="100" y="30" font-family="var(--sans)" font-size="14" fill="var(--verde)">i</text>
+<path d="M55,80 C35,95 35,120 55,130 C75,142 110,132 120,110 C110,88 75,72 55,80 Z"
+  fill="none" stroke="var(--blu)" stroke-width="2"/>
+<text x="128" y="112" font-family="var(--sans)" font-size="13" fill="var(--blu)">&gamma;&#8321;</text>
+<path d="M120,150 C102,158 102,182 120,190 C138,198 165,190 168,170 C165,150 138,142 120,150 Z"
+  fill="none" stroke="var(--blu)" stroke-width="2"/>
+<text x="176" y="172" font-family="var(--sans)" font-size="13" fill="var(--blu)">&gamma;&#8322;</text>
+</svg>
+<p class="did">$\gamma_1$: percorso concatenato a $i$ (il filo attraversa la superficie racchiusa).
+$\gamma_2$: percorso non concatenato.</p>
+</div>
+<div class="fig">
+<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="f11i2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
+<marker id="f11b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
+</defs>
+<line x1="30" y1="150" x2="140" y2="185" stroke="var(--grigio)" stroke-width="1.3" fill="none"/>
+<line x1="30" y1="150" x2="185" y2="120" stroke="var(--grigio)" stroke-width="1.3" fill="none"/>
+<line x1="140" y1="185" x2="185" y2="120" stroke="var(--grigio)" stroke-width="1.3" fill="none"/>
+<line x1="107" y1="30" x2="107" y2="185" stroke="var(--inchiostro)" stroke-width="2"/>
+<line x1="107" y1="55" x2="107" y2="30" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f11i2)"/>
+<text x="115" y="42" font-family="var(--sans)" font-size="13" fill="var(--verde)">i</text>
+<ellipse cx="107" cy="150" rx="55" ry="20" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
+<line x1="145" y1="140" x2="160" y2="132" stroke="var(--blu)" stroke-width="2" marker-end="url(#f11b)"/>
+<text x="165" y="126" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
+<text x="60" y="205" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&gamma;</text>
+</svg>
+<p class="did">Percorso chiuso $\gamma$ concatenato al filo, appoggiato a un piano qualunque: in
+ogni suo punto il campo $\vec B$ ha, in generale, una direzione diversa da quella del percorso.</p>
+</div>
+</div>
+
+<h2>La circuitazione lungo un percorso circolare</h2>
+
+<p>Su ogni tratto piccolissimo $\Delta l$ del percorso il campo vale $B$; se scegliamo come
+$\gamma$ una circonferenza di raggio $r$ centrata sul filo, per simmetria $B$ ha lo stesso modulo
+in ogni punto della circonferenza ed è sempre parallelo a $\Delta l$. Supponiamo che $B$ dipenda
+da $i$ e da $r$ nella forma $B=k\,\dfrac{i}{r}$, con $k$ costante da determinare, e sommiamo il
+prodotto $B\cdot\Delta l$ su tutti i tratti in cui immaginiamo diviso il percorso:</p>
+
+<div class="fig" style="max-width:320px;margin-left:auto;margin-right:auto">
+<svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f11bt" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker></defs>
+<circle cx="120" cy="100" r="3" fill="var(--verde)"/>
+<circle cx="120" cy="100" r="7" fill="none" stroke="var(--verde)" stroke-width="1.4"/>
+<text x="132" y="94" font-family="var(--sans)" font-size="13" fill="var(--verde)">i</text>
+<circle cx="120" cy="100" r="70" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
+<line x1="120" y1="100" x2="188" y2="100" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
+<text x="150" y="94" font-family="var(--sans)" font-size="12" fill="var(--grigio)">r</text>
+<path d="M180,58 L192,64" stroke="var(--blu)" stroke-width="2" marker-end="url(#f11bt)"/>
+<text x="196" y="58" font-family="var(--sans)" font-size="12" fill="var(--blu)">B</text>
+<text x="182" y="76" font-family="var(--sans)" font-size="11" fill="var(--grigio)">&Delta;l</text>
+</svg>
+<p class="did">Percorso circolare di raggio $r$ intorno al filo: $B$ è tangente e costante in
+modulo su tutta la circonferenza.</p>
+</div>
+
+$$\sum_\gamma B\cdot\Delta l=\sum_\gamma k\,\frac{i}{r}\,\Delta l
+=k\,\frac{i}{r}\sum_\gamma\Delta l=k\,\frac{i}{r}\cdot 2\pi r=2\pi k\,i$$
+
+<p>perché la somma di tutti i $\Delta l$ lungo il giro è la circonferenza $2\pi r$, che si
+semplifica con la $r$ a denominatore. Il risultato non dipende più né da $r$ né dalla forma del
+percorso: chiamiamo $\mu_0=2\pi k$ la <strong>permeabilità magnetica del vuoto</strong>, misurata
+sperimentalmente:</p>
+
+<div class="formula-box">
+$$\mu_0=4\pi\cdot10^{-7}\ \text{T}\cdot\text{m/A}\qquad\qquad \sum_\gamma B\cdot\Delta l=\mu_0\,i$$
+</div>
+
+<h2>Percorsi qualunque e legge di Ampère</h2>
+
+<p>Il risultato vale non solo per la circonferenza ma per <strong>qualunque</strong> percorso
+chiuso concatenato al filo, purché in ogni tratto $\Delta l$ si prenda solo la componente di
+$\vec B$ parallela al percorso, $B_\parallel$: se il percorso non è una circonferenza centrata sul
+filo, $\vec B$ non è più parallelo a $\Delta l$ in ogni punto.</p>
+
+<div class="fig" style="max-width:260px;margin-left:auto;margin-right:auto">
+<svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f11bp" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker><marker id="f11dl" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker></defs>
+<line x1="30" y1="120" x2="55" y2="35" stroke="var(--blu)" stroke-width="2" marker-end="url(#f11bp)"/>
+<text x="18" y="30" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
+<line x1="30" y1="120" x2="150" y2="120" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11dl)"/>
+<text x="155" y="124" font-family="var(--sans)" font-size="13" fill="var(--verde)">&Delta;l</text>
+<line x1="55" y1="35" x2="55" y2="120" stroke="var(--blu)" stroke-width="1.6" stroke-dasharray="3,3"/>
+<text x="40" y="112" font-family="var(--sans)" font-size="12" fill="var(--blu)">B&#8741;</text>
+</svg>
+<p class="did">Solo la componente $B_\parallel$ di $\vec B$ nella direzione di $\Delta l$ entra
+nella somma.</p>
+</div>
+
+<p>Con questa accortezza il risultato ottenuto per la circonferenza è generale:</p>
+
+<div class="formula-box">
+$$\sum_\gamma B_\parallel\,\Delta l=\mu_0\,i_{\text{concatenata}}$$
+</div>
+
+<p>dove $i_{\text{concatenata}}$ è la somma delle correnti che il percorso $\gamma$ racchiude: le
+correnti non concatenate a $\gamma$ non danno alcun contributo alla somma.</p>
+
+<h2>Esempi</h2>
+
+<p>Se il percorso $\gamma$ racchiude due fili percorsi da correnti $i_1$ e $i_2$ nello stesso
+verso, la corrente concatenata è la loro somma:</p>
+
+<div class="due-fig">
+<div class="fig">
+<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="f11e1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker></defs>
+<line x1="40" y1="120" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="40" y1="55" x2="40" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e1)"/>
+<text x="30" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8321;</text>
+<line x1="90" y1="120" x2="90" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="90" y1="55" x2="90" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e1)"/>
+<text x="80" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8322;</text>
+<line x1="160" y1="120" x2="160" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="160" y1="55" x2="160" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e1)"/>
+<text x="150" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8323;</text>
+<ellipse cx="65" cy="85" rx="42" ry="20" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
+<text x="55" y="120" font-family="var(--sans)" font-size="12" fill="var(--blu)">&gamma;</text>
+</svg>
+<p class="did">$\gamma$ racchiude $i_1$ e $i_2$, non $i_3$:</p>
+<p style="font-family:var(--sans);font-size:.92rem">$\displaystyle\sum_\gamma B_\parallel\Delta l=\mu_0(i_1+i_2)$</p>
+</div>
+<div class="fig">
+<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="f11e2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
+<marker id="f11e3" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
+</defs>
+<line x1="40" y1="120" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="40" y1="55" x2="40" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e2)"/>
+<text x="30" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8321;</text>
+<line x1="90" y1="120" x2="90" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="90" y1="55" x2="90" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e2)"/>
+<text x="80" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8322;</text>
+<line x1="160" y1="20" x2="160" y2="120" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="160" y1="85" x2="160" y2="120" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f11e3)"/>
+<text x="150" y="18" font-family="var(--sans)" font-size="12" fill="var(--rosso)">i&#8323;</text>
+<ellipse cx="97" cy="85" rx="80" ry="20" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
+<text x="10" y="100" font-family="var(--sans)" font-size="12" fill="var(--blu)">&gamma;</text>
+</svg>
+<p class="did">$\gamma$ racchiude tutti e tre i fili, ma $i_3$ ha verso opposto:</p>
+<p style="font-family:var(--sans);font-size:.92rem">$\displaystyle\sum_\gamma B_\parallel\Delta l=\mu_0(i_1+i_2-i_3)$</p>
+</div>
+</div>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>Applichiamo la legge di Ampère a un percorso circolare per ricavare l'espressione esplicita
+del campo di un filo rettilineo, e il modulo della forza fra due fili paralleli, nell'unità 12.</li>
+<li>La stessa legge, applicata a un solenoide, dà il campo al suo interno nell'unità 14.</li>
+</ul>
+</div>
+
+<footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 11</p></footer>
+
+</div>
+</body>
+</html>
