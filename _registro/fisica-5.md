@@ -94,3 +94,12 @@
 - Aggiunta: un esempio numerico, perché in tutta l'unità la traccia non ne contiene nessuno
   (solo lo schema del solenoide, il disegno del campo nullo fuori/uniforme dentro, e la
   derivazione coi quattro tratti del percorso di Ampère).
+
+## Unità 15 — Magnetismo nella materia
+- Parole: 411 su 3 pagine di traccia (pagine 23–25; la pagina 26, con la temperatura di Curie e
+  il geomagnetismo, appartiene all'unità 16 e non è stata trattata qui)
+- Rettifica: nessuna. La traccia è qualitativa più una tabella di valori empirici di
+  permeabilità relativa; verificato con SymPy/Python solo che l'ordinamento riportato
+  (ferromagnetici $\gg$ paramagnetici $>1>$ diamagnetici) è coerente con i valori numerici
+  della tabella.
+- Aggiunta: nessuna.
