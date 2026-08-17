@@ -138,3 +138,14 @@
 - Aggiunta: nessuna. Due disegni SVG che riprendono gli schemi della traccia (le due D del
   ciclotrone con la spirale e la fessura, l'anello del sincrotrone con il raggio $R$ fisso e i
   due punti di accelerazione).
+
+## Unità 19 — L'esperienza di Faraday e la forza elettromotrice indotta
+- Parole: 406 su 2 pagine di traccia (pagine 32–33)
+- Rettifica: nessuna. La traccia è interamente qualitativa (nessuna formula né calcolo numerico
+  su queste due pagine): niente da verificare con SymPy. Ho controllato solo la coerenza della
+  notazione, usando $\Delta V$ per la fem indotta come già fatto per la differenza di potenziale
+  nell'unità 18.
+- Aggiunta: nessuna. Due disegni SVG che riprendono gli schemi della traccia (i due circuiti
+  avvolti sullo stesso anello di ferro con batteria, interruttore e amperometro; il magnete in
+  avvicinamento a una bobina collegata a un amperometro), senza introdurre contenuto fisico
+  ulteriore.
