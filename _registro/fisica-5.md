@@ -258,3 +258,19 @@
   colloca dopo l'intestazione "Induttanza di un solenoide" nell'indicizzazione delle pagine
   (unità 28, pagine 46-47), quindi resta di competenza di quell'unità pur non usando la formula
   del solenoide.
+
+## Unità 28 — Induttanza di un solenoide
+- Parole: circa 363 (prosa, didascalie e riquadro compresi, formule incluse nel conteggio) su
+  2 pagine di traccia (pagine 46-47: dall'esempio numerico di richiamo sull'induttanza generica,
+  fino al secondo esempio con i tre calcoli L, A, B_max).
+- Rettifica: nessuna. Verificato con SymPy ogni passaggio numerico: Δt = L·Δi/ε_ind ≈
+  2,2×10⁻³ s (dati L=2,9×10⁻³ H, Δi=5,6 A, ε_ind=7,3 V); nel secondo esempio L = ε·Δt/Δi ≈
+  1,7×10⁻³ H, A = Lℓ/(μ₀N²) ≈ 4,3×10⁻⁴ m², B_max = μ₀(N/ℓ)i_f ≈ 2,0×10⁻² T. Verificata anche
+  l'equivalenza algebrica L = μ₀N²A/ℓ = μ₀n²V con n=N/ℓ e V=ℓA. Tutti i valori della traccia
+  sono confermati entro l'arrotondamento.
+- Aggiunta: un solo riquadro "da non confondere" fra n² (densità di spire al quadrato) e N²
+  (numero di spire al quadrato), indispensabile perché la traccia stessa annota a mano questa
+  distinzione nel passaggio da L = μ₀(N²/ℓ)A a L = μ₀n²ℓA, segno che è un punto in cui si
+  sbaglia facilmente. Ridisegnato in SVG lo schema del solenoide con spire, asse, campo B e
+  sezione A (pagina 46): nessun disegno nuovo rispetto alla traccia. Nessuno strumento
+  interattivo: la pagina è quasi interamente formule ed esempi numerici già risolti a mano.
