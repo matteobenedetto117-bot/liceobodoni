@@ -392,3 +392,17 @@
   scritto in traccia (compresa la semplificazione di $\varepsilon_0$ a pagina 65, corretta).
 - Aggiunta: nessuna. Pagina puramente formulare, nessun disegno nella traccia da ridisegnare,
   nessuno strumento interattivo (non richiesto e non pertinente a un contenuto di sole formule).
+
+## Unità 37 — Intensità e vettore di Poynting
+- Parole: 382 (prosa, didascalie e riquadri compresi) su 2 pagine di traccia (pagine 66-67).
+- Rettifica: nessuna. Verificata con SymPy e numericamente l'intera catena di uguaglianze:
+  partendo da $u=\frac12\varepsilon_0E^2+\frac{1}{2\mu_0}B^2$ con $E=cB$ si ottiene $u=B^2/\mu_0$
+  e quindi $I=uc=cB^2/\mu_0$; lo stesso risultato si ottiene da $S=EB/\mu_0$ con $E=cB$, e da
+  $I=\varepsilon_0E^2c$ con $B=E/c$. Tutte le forme coincidono numericamente (controllo con
+  $\varepsilon_0=8{,}854\times10^{-12}$ F/m, $\mu_0=4\pi\times10^{-7}$ T·m/A): nessun passaggio
+  della traccia era errato.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Ridisegnati
+  in SVG lo schema della torcia con la superficie di area $A$ e la distanza $x=c\,\Delta t$ (pagina
+  66), e lo schema dell'onda con $\vec E$, $\vec B$ e la terna ortogonale $(\vec B,\vec S,\vec E)$
+  (pagina 67); nessuno strumento interattivo, perché la figura è puramente geometrica e non c'è un
+  parametro naturale da far variare.
