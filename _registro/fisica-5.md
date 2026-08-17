@@ -384,3 +384,11 @@
 - Aggiunta: nessuna. Pagina puramente testuale/storica, nessun disegno nella traccia da
   ridisegnare, nessuno strumento interattivo (non richiesto e non pertinente a un contenuto
   storico-concettuale).
+
+## Unità 36 — Campi, densità di energia in un'onda
+- Parole: 251 su 2 pagine di traccia (pagine 64-65).
+- Rettifica: nessuna. Verificato con SymPy l'intero passaggio $u_E=\frac12\varepsilon_0(cB)^2$ con
+  $c^2=1/(\varepsilon_0\mu_0)$: la sostituzione dà $u_E=B^2/(2\mu_0)=u_B$, coerente con quanto
+  scritto in traccia (compresa la semplificazione di $\varepsilon_0$ a pagina 65, corretta).
+- Aggiunta: nessuna. Pagina puramente formulare, nessun disegno nella traccia da ridisegnare,
+  nessuno strumento interattivo (non richiesto e non pertinente a un contenuto di sole formule).
