@@ -149,3 +149,16 @@
   avvolti sullo stesso anello di ferro con batteria, interruttore e amperometro; il magnete in
   avvicinamento a una bobina collegata a un amperometro), senza introdurre contenuto fisico
   ulteriore.
+
+## Unità 20 — Flusso del campo magnetico
+- Parole: 254 su 1 pagina di traccia (pagina 34)
+- Rettifica: nessuna. L'unica formula della traccia, $\Phi(\vec{B})=BA\cos\theta$, e i due casi
+  particolari ($\theta=0\Rightarrow\Phi=BA$; $\theta=90°\Rightarrow\Phi=0$) sono stati verificati
+  con SymPy (cos(0)=1, cos(pi/2)=0): coincidono con quanto scritto. Nessun calcolo numerico da
+  controllare, la traccia non ne contiene.
+- Aggiunta: nessun esempio nuovo (la traccia non ne contiene, e nessuno è stato inserito). Un solo
+  strumento interattivo: uno slider sull'angolo theta che ruota la superficie vista di taglio e il
+  vettore A rispetto a B, mostrando in tempo reale cos(theta) e il flusso corrispondente (con
+  B=1 T e A=1 m² per semplicità di lettura). Mostra concretamente il passaggio continuo fra i due
+  casi limite già presenti nella traccia, senza aggiungere contenuto fisico oltre alla formula
+  della traccia stessa.
