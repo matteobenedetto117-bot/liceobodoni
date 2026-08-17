@@ -326,3 +326,23 @@
   trasformatore (nucleo, avvolgimenti primario e secondario, generatore, resistenza, freccia del
   campo magnetico variabile): nessun disegno nuovo, nessuno strumento interattivo (non richiesto
   dalla traccia).
+
+## Unità 32 — Le prime tre equazioni di Maxwell
+- Parole: circa 542 (prosa, didascalie e riquadri compresi) su 3 pagine di traccia (pagine 56-58).
+- Rettifica: nella derivazione finale della legge di Faraday come circuitazione (pagina 59, che
+  chiude il ragionamento aperto a pagina 57), il segno meno presente nella definizione della fem
+  indotta (ε = -ΔΦ(B)/Δt, pagina 57, coerente con l'unità 21) va perso nei passaggi successivi e
+  il riquadro finale riporta Γ(E) = dΦ(B)/dt senza segno meno. Corretto in pagina come
+  Γ(E) = -dΦ(B)/dt, coerente con la definizione di fem indotta usata poche righe sopra nella
+  stessa traccia e con la legge di Faraday-Neumann-Lenz già stabilita nell'unità 21. Verificato
+  con SymPy che la definizione di derivata rispetto al tempo, su un esempio concreto
+  Φ(t) = B₀A cos(ωt), dà -dΦ/dt = AB₀ω sin(ωt), coerente con il segno mantenuto.
+- Aggiunta: un solo riquadro "Da non confondere" sulla differenza fra circuitazione nulla del
+  campo elettrostatico e circuitazione non nulla del campo indotto, indispensabile perché è
+  esattamente il punto che il passaggio finale della traccia stabilisce (Γ(E) ≠ 0) e che uno
+  studente confonde facilmente con quanto visto sui campi conservativi. Ridisegnati in SVG i tre
+  schemi della traccia (superficie chiusa con carica interna ed esterna per il teorema di Gauss
+  elettrico, superficie chiusa che racchiude linee di campo di un magnete per il teorema di Gauss
+  magnetico, percorso chiuso γ con campo elettrico indotto e spostamento della carica per la
+  circuitazione): nessun disegno nuovo, nessuno strumento interattivo (non richiesto dalla
+  traccia, che qui è puramente concettuale).
