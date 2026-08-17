@@ -312,3 +312,17 @@
   Un solo strumento interattivo, come da regola: uno slider sulla corrente i che sposta un punto
   lungo la curva U(i) = ½Li² e mostra il valore numerico, per rendere visibile la stessa
   dipendenza quadratica già presente nella formula, invece di lasciarla solo scritta.
+
+## Unità 31 — Trasformatori
+- Parole: circa 300 (prosa, didascalie e riquadro compresi) su 2 pagine di traccia (pagine 54-55).
+- Rettifica: nessuna. Verificato con SymPy il passaggio ε_p/N_p = ε_s/N_s ⇒ ε_p/ε_s = N_p/N_s e
+  l'esempio numerico ε_s = ε_p·(N_s/N_p) = 220 V·(20/100) = 44 V (coerente con 44 V scritto a
+  mano); verificato i_p/i_s = ε_s/ε_p = N_s/N_p e l'esempio i_s = i_p·(N_p/N_s) = 16 A·(100/20)
+  = 80 A (coerente con 80 A scritto a mano).
+- Aggiunta: un solo riquadro "Attenzione" sul fatto che il rapporto fra le correnti è l'inverso
+  di quello fra le tensioni, indispensabile perché è l'errore tipico (applicare lo stesso
+  rapporto N_p/N_s anche alle correnti) e la traccia stessa lo evidenzia dedicando un secondo
+  esempio speculare al primo proprio per mostrare l'inversione. Ridisegnato in SVG lo schema del
+  trasformatore (nucleo, avvolgimenti primario e secondario, generatore, resistenza, freccia del
+  campo magnetico variabile): nessun disegno nuovo, nessuno strumento interattivo (non richiesto
+  dalla traccia).
