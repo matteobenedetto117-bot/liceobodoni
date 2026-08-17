@@ -358,3 +358,18 @@
   schema del condensatore in carica con le due superfici S₁ e S₂ che si appoggiano sullo stesso
   contorno γ, come da disegno di pagina 59; nessuno strumento interattivo (figura puramente
   concettuale, non richiesta la manipolazione di un parametro).
+
+## Unità 34 — Come si genera un'onda elettromagnetica
+- Parole: circa 287 (prosa, didascalie e riquadri compresi) su 1 pagina di traccia (pagina 62).
+- Rettifica: nessuna. Verificate le direzioni di campo con la regola della mano destra: corrente
+  verso l'alto nell'antenna, punto di osservazione a lato del filo, campo magnetico entrante nel
+  foglio (coerente con B ∝ (î_corrente × r̂) = −ẑ per r̂ nella direzione +x); campo elettrico del
+  dipolo, nel piano equatoriale, opposto al momento di dipolo e quindi diretto dalla carica
+  positiva verso quella negativa. Entrambe coincidono con quanto disegnato in traccia, nessuna
+  correzione necessaria. La pagina non contiene formule o calcoli numerici da verificare con
+  SymPy: è un'unità puramente qualitativa.
+- Aggiunta: nessuna. Ridisegnati in SVG lo schema dell'antenna con generatore, cariche accumulate
+  e campi $\vec E$, $\vec B$ nel punto a lato (i quattro istantanei della traccia sono resi con un
+  unico cursore di fase, invece di quattro pannelli statici separati, poiché mostrano la stessa
+  alternazione fisica continua descritta dalla traccia) e lo schema dell'onda che si propaga con
+  $\vec E$ e $\vec B$ su piani perpendicolari.
