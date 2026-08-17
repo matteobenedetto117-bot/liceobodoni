@@ -346,3 +346,15 @@
   magnetico, percorso chiuso γ con campo elettrico indotto e spostamento della carica per la
   circuitazione): nessun disegno nuovo, nessuno strumento interattivo (non richiesto dalla
   traccia, che qui è puramente concettuale).
+
+## Unità 33 — Corrente di spostamento e legge di Ampère-Maxwell
+- Parole: circa 499 (prosa, didascalie e riquadri compresi) su 3 pagine di traccia (pagine 59-61).
+- Rettifica: nessuna. Verificato con SymPy il passaggio Q = C·ΔV = (ε₀A/d)·(Ed) = ε₀AE = ε₀Φ(E)
+  di pagina 60: la semplificazione del fattore d è corretta e il risultato coincide con quanto
+  scritto in traccia.
+- Aggiunta: nessuna, a parte la frase di chiusura "il conto torna, e il paradosso si scioglie" per
+  ricollegare esplicitamente il termine correttivo al paradosso posto a pagina 59 (S₁ e S₂ danno
+  ora lo stesso risultato), passaggio lasciato implicito nella traccia. Ridisegnato in SVG lo
+  schema del condensatore in carica con le due superfici S₁ e S₂ che si appoggiano sullo stesso
+  contorno γ, come da disegno di pagina 59; nessuno strumento interattivo (figura puramente
+  concettuale, non richiesta la manipolazione di un parametro).
