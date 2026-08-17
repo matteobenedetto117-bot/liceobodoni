@@ -406,3 +406,14 @@
   66), e lo schema dell'onda con $\vec E$, $\vec B$ e la terna ortogonale $(\vec B,\vec S,\vec E)$
   (pagina 67); nessuno strumento interattivo, perché la figura è puramente geometrica e non c'è un
   parametro naturale da far variare.
+
+## Unità 38 — Quantità di moto e pressione di radiazione
+- Parole: 381 su 2 pagine di traccia (pagine 68-69).
+- Rettifica: nessuna. Verificata algebricamente con SymPy l'intera catena: da $\Delta U=I\,A\,\Delta t$
+  con $I=uc$ si ottiene $\Delta U=ucA\,\Delta t$; dividendo per $c$ come richiesto da $p=U/c$,
+  $\Delta p=uA\,\Delta t$; da cui $F_m=\Delta p/\Delta t=uA$ e $P_R=F_m/A=u=I/c$, coerente con
+  quanto scritto in traccia. Controllate anche le unità di misura di ogni passaggio (energia in
+  joule, quantità di moto in kg·m/s, pressione in pascal): tutte coerenti.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Nessun
+  disegno nella traccia da ridisegnare (pagine puramente formulari) e nessuno strumento
+  interattivo, perché non c'è un parametro naturale da far variare.
