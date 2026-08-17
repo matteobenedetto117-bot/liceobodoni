@@ -245,3 +245,16 @@
   (pagina 44) e i due circuiti con interruttore aperto/chiuso più il grafico $i(t)$ (pagina 44):
   nessuno schema nuovo rispetto a quelli della traccia. Nessuno strumento interattivo: i tre
   pannelli statici bastano a mostrare la sequenza già disegnata a mano.
+
+## Unità 27 — Induttanza
+- Parole: circa 256 (prosa, didascalie e riquadro compresi) su 1 pagina di traccia (pagina 45,
+  interamente dedicata a questa unità: dal circuito con generatore-resistenza-bobina fino alla
+  frase di chiusura sull'induttanza come caratteristica della bobina).
+- Rettifica: nessuna. Verificato con SymPy che $1\,\text{H} = 1\,\text{V}\cdot\text{s}/\text{A}$
+  (coerente con la definizione $L = N|\Delta\Phi(\vec B)/\Delta i|$, dimensionalmente
+  $\text{Wb}/\text{A} = \text{V}\cdot\text{s}/\text{A}$, come scritto nella traccia).
+- Aggiunta: nessuna. L'esempio numerico che compare in cima alla pagina 46 (calcolo di
+  $\Delta t$ da $L$, $\Delta i$ ed $\varepsilon_{ind}$) non è stato incluso: la traccia lo
+  colloca dopo l'intestazione "Induttanza di un solenoide" nell'indicizzazione delle pagine
+  (unità 28, pagine 46-47), quindi resta di competenza di quell'unità pur non usando la formula
+  del solenoide.
