@@ -274,3 +274,25 @@
   sbaglia facilmente. Ridisegnato in SVG lo schema del solenoide con spire, asse, campo B e
   sezione A (pagina 46): nessun disegno nuovo rispetto alla traccia. Nessuno strumento
   interattivo: la pagina è quasi interamente formule ed esempi numerici già risolti a mano.
+
+## Unità 29 — Circuiti RL
+- Parole: circa 418 (prosa, didascalie e riquadro compresi) su 3 pagine di traccia (pagine
+  48-50: dal titolo "Circuiti RL" fino all'esempio numerico con i tre subcalcoli).
+- Rettifica: nella traccia (pagina 50) il secondo passaggio dell'esempio numerico è etichettato
+  "L = ε/R(1-e^{-t/τ}) = ... = 0,34 A", ma la formula usata è quella della corrente di carica
+  i(t), non quella dell'induttanza L (già calcolata al passaggio precedente come L = τR ≈
+  0,26 H): un refuso di etichetta, non di calcolo. Verificato con SymPy: τR = 7,5×10⁻³ s ·
+  35 Ω = 0,2625 H ≈ 0,26 H; i(0,03 s) = (12,2/35)(1-e^(-0,03/0,0075)) ≈ 0,342 A ≈ 0,34 A,
+  entrambi coerenti con i valori scritti a mano. Nella pagina pubblicata il secondo passaggio è
+  etichettato correttamente "i =". Corretta anche l'approssimazione al tempo t=τ: la traccia
+  scrive "≈0,6 ε/R ~ 60%", ma 1-1/e = 0,6321: nella pagina è scritto 63%, coerente con le due
+  percentuali successive (86% e 95%) già esatte nella traccia.
+- Aggiunta: un solo riquadro "Attenzione" sul fatto che ε/R è un asintoto mai raggiunto in un
+  tempo finito, indispensabile perché la traccia stessa lo enuncia esplicitamente con il limite
+  per t→∞ → 100%, ed è un punto che si presta a fraintendimento se letto come "dopo un tempo
+  finito la corrente arriva esattamente al valore di regime". Ridisegnati in SVG il circuito RL
+  con interruttore aperto e le due curve i(t) di carica e scarica (pagine 48 e 50): nessun
+  disegno nuovo. Un solo strumento interattivo, come da regola: uno slider su τ che ridisegna la
+  curva di carica e sposta i marcatori a τ, 2τ, 3τ, per mostrare come la costante di tempo fissi
+  la rapidità di salita — la stessa informazione già presente nella traccia (i tre valori
+  percentuali), resa manipolabile invece che statica.

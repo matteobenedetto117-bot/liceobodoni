@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circuiti RL — Fisica quinta</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
+.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
+  padding:18px 22px;margin:26px 0;text-align:center}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:26px 0}
+.interattivo label{font-family:var(--sans);font-size:.88rem;color:var(--grigio);display:block;margin-bottom:8px}
+.interattivo input[type=range]{width:100%}
+.interattivo .valori{display:flex;justify-content:space-between;font-family:var(--sans);
+  font-size:.84rem;color:var(--blu);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
+  <p class="occhiello">Induzione elettromagnetica &middot; Unità 29</p>
+  <h1>Circuiti RL</h1>
+  <p class="sommario">Un circuito RL è un circuito in cui una resistenza e un'induttanza sono
+  collegate in serie con un generatore di fem. Poiché l'induttanza si oppone alle variazioni di
+  corrente, il passaggio dal circuito aperto a quello chiuso — e viceversa — non è istantaneo: la
+  corrente cresce o decresce con legge esponenziale, in un tempo caratteristico $\tau$.</p>
+</header>
+
+<h2>Fase di carica</h2>
+
+<p>Chiudiamo l'interruttore del circuito in figura, dove la resistenza $R$ e l'induttanza $L$ sono
+in serie con un generatore di fem $\varepsilon$.</p>
+
+<div class="fig">
+<svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg">
+<!-- lato superiore: resistenza e interruttore -->
+<line x1="60" y1="60" x2="150" y2="60" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<path d="M150,60 L160,46 L172,74 L184,46 L196,74 L208,60" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="208" y1="60" x2="340" y2="60" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<circle cx="340" cy="60" r="3.5" fill="var(--inchiostro)"/>
+<line x1="340" y1="60" x2="372" y2="42" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<circle cx="382" cy="60" r="3.5" fill="var(--inchiostro)"/>
+<line x1="382" y1="60" x2="400" y2="60" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<text x="179" y="34" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--rosso)">R</text>
+<text x="361" y="30" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">interruttore</text>
+<!-- lato destro -->
+<line x1="400" y1="60" x2="400" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<!-- lato inferiore: induttanza -->
+<line x1="400" y1="180" x2="300" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<path d="M300,180 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0"
+  fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="190" y1="180" x2="60" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<text x="245" y="207" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--blu)">L</text>
+<!-- lato sinistro: generatore -->
+<line x1="60" y1="60" x2="60" y2="108" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<line x1="45" y1="108" x2="75" y2="108" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="52" y1="116" x2="68" y2="116" stroke="var(--inchiostro)" stroke-width="3"/>
+<line x1="60" y1="116" x2="60" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
+<text x="30" y="108" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">&#8722;</text>
+<text x="30" y="122" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">+</text>
+<text x="20" y="145" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--verde)">&#949;</text>
+</svg>
+<p class="did">Circuito RL: resistenza $R$ e induttanza $L$ in serie con un generatore di fem
+$\varepsilon$ e un interruttore. La figura mostra l'interruttore aperto.</p>
+</div>
+
+<p>Quando l'effetto dell'induttanza è ormai trascurabile, la corrente ha raggiunto il suo valore
+di regime e vale semplicemente $i=\varepsilon/R$, come in un circuito puramente resistivo.
+Nell'istante in cui chiudiamo l'interruttore, invece, l'induttanza si oppone alla variazione, e la
+corrente cresce secondo la legge:</p>
+
+<div class="formula-box">
+$$i(t)=\frac{\varepsilon}{R}\left(1-e^{-t/\tau}\right)\qquad \tau=\frac{L}{R}$$
+</div>
+
+<p>$\tau$ è la costante di tempo del circuito: misura quanto rapidamente la corrente si avvicina
+al valore di regime. Più $\tau$ è grande, più lenta è la salita.</p>
+
+<p>Dopo un tempo $t=\tau$ la corrente ha già raggiunto $i=(\varepsilon/R)(1-1/e)\approx0{,}63\,
+\varepsilon/R$, cioè il 63% del valore finale; dopo $t=2\tau$ è all'86%; dopo $t=3\tau$ al 95%.</p>
+
+<div class="interattivo">
+<label for="slider-tau">Costante di tempo $\tau$: <span id="tau-val">15</span> ms
+(con $R$ fissata, corrisponde a un'induttanza $L=\tau R$ diversa)</label>
+<input type="range" id="slider-tau" min="5" max="30" step="1" value="15">
+<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="50" y1="260" x2="465" y2="260" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="50" y1="260" x2="50" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<text x="465" y="278" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">t (ms)</text>
+<text x="30" y="24" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">i</text>
+<line x1="50" y1="20" x2="460" y2="20" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="465" y="16" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&#949;/R</text>
+<path id="curvaRL" d="" fill="none" stroke="var(--blu)" stroke-width="2.2"/>
+<line id="mline1" x1="0" y1="0" x2="0" y2="0" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3,3"/>
+<line id="mline2" x1="0" y1="0" x2="0" y2="0" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3,3"/>
+<line id="mline3" x1="0" y1="0" x2="0" y2="0" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3,3"/>
+<circle id="mdot1" cx="0" cy="0" r="3.2" fill="var(--rosso)"/>
+<circle id="mdot2" cx="0" cy="0" r="3.2" fill="var(--rosso)"/>
+<circle id="mdot3" cx="0" cy="0" r="3.2" fill="var(--rosso)"/>
+<text id="mlbl1" x="0" y="0" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--rosso)"></text>
+<text id="mlbl2" x="0" y="0" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--rosso)"></text>
+<text id="mlbl3" x="0" y="0" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--rosso)"></text>
+</svg>
+<div class="valori">
+<span>$\tau$: 63% del valore finale</span>
+<span>$2\tau$: 86%</span>
+<span>$3\tau$: 95%</span>
+</div>
+</div>
+
+<script>
+(function(){
+  var slider=document.getElementById('slider-tau');
+  var tauLbl=document.getElementById('tau-val');
+  function tx(tms){return 50+tms*4.1;}
+  function iy(ifr){return 260-ifr*240;}
+  function build(tau){
+    var d='M'+tx(0).toFixed(1)+','+iy(0).toFixed(1);
+    for(var t=2;t<=100;t+=2){
+      var i=1-Math.exp(-t/tau);
+      d+=' L'+tx(t).toFixed(1)+','+iy(i).toFixed(1);
+    }
+    return d;
+  }
+  function agg(){
+    var tau=parseFloat(slider.value);
+    tauLbl.textContent=tau.toFixed(0);
+    document.getElementById('curvaRL').setAttribute('d',build(tau));
+    [1,2,3].forEach(function(k){
+      var tm=k*tau, ifr=1-Math.exp(-k);
+      var x=tx(tm), y=iy(ifr);
+      var line=document.getElementById('mline'+k);
+      line.setAttribute('x1',x);line.setAttribute('x2',x);
+      line.setAttribute('y1',260);line.setAttribute('y2',y);
+      var dot=document.getElementById('mdot'+k);
+      dot.setAttribute('cx',x);dot.setAttribute('cy',y);
+      var lbl=document.getElementById('mlbl'+k);
+      lbl.setAttribute('x',x);lbl.setAttribute('y',274);
+      lbl.textContent=(k===1?'τ':k+'τ');
+    });
+  }
+  slider.addEventListener('input',agg);
+  agg();
+})();
+</script>
+
+<div class="nota">
+<span class="et">Attenzione</span>
+La corrente non raggiunge mai esattamente il valore di regime $\varepsilon/R$: lo raggiunge solo
+nel limite $t\to\infty$. Dopo pochi $\tau$ è già praticamente a regime, ma $\varepsilon/R$ resta un
+asintoto, non un valore toccato in un tempo finito.
+</div>
+
+<h2>Fase di scarica</h2>
+
+<p>Se invece riapriamo il circuito, staccando il generatore ma lasciando resistenza e induttanza
+collegate fra loro, la corrente non si annulla di colpo: l'induttanza mantiene per un istante il
+flusso concatenato, e la corrente decresce con legge esponenziale:</p>
+
+<div class="formula-box">
+$$i(t)=\frac{\varepsilon}{R}\,e^{-t/\tau}$$
+</div>
+
+<div class="fig">
+<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="170" x2="330" y2="170" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="40" y1="170" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<text x="330" y="188" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">t</text>
+<text x="24" y="24" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">i</text>
+<circle cx="40" cy="30" r="3" fill="var(--blu)"/>
+<text x="24" y="34" text-anchor="end" font-family="var(--sans)" font-size="11" fill="var(--grigio)">&#949;/R</text>
+<path d="M40,30 C90,60 120,110 160,138 C200,158 260,167 330,169" fill="none" stroke="var(--blu)" stroke-width="2.2"/>
+</svg>
+<p class="did">Corrente nella fase di scarica: parte dal valore di regime $\varepsilon/R$ e
+decresce esponenzialmente verso zero.</p>
+</div>
+
+<h2>Esempio</h2>
+
+<p>In un circuito RL la resistenza vale $R=35\ \Omega$ e la costante di tempo è
+$\tau=7{,}5\times10^{-3}\ \text{s}$. Calcoliamo l'induttanza $L$ e, sapendo che la fem vale
+$\varepsilon=12{,}2\ \text{V}$, la corrente all'istante $t=0{,}03\ \text{s}$.</p>
+
+<p><strong>a)</strong> Dalla definizione $\tau=L/R$:</p>
+
+$$L=\tau R=7{,}5\times10^{-3}\ \text{s}\cdot35\ \Omega\approx0{,}26\ \text{H}$$
+
+<p><strong>b)</strong> Dalla legge di carica:</p>
+
+$$i=\frac{\varepsilon}{R}\left(1-e^{-t/\tau}\right)=\frac{12{,}2\ \text{V}}{35\ \Omega}
+\left(1-e^{-0{,}03/7{,}5\times10^{-3}}\right)\approx0{,}34\ \text{A}$$
+
+<div class="avanti">
+<h2>Nella prossima unità</h2>
+<ul>
+<li>L'unità 30 riprende proprio questo circuito RL per calcolare l'energia immagazzinata nel
+campo magnetico dell'induttanza durante la fase di carica.</li>
+</ul>
+</div>
+
+<footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 29</p></footer>
+
+</div>
+</body>
+</html>
