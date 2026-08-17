@@ -296,3 +296,19 @@
   curva di carica e sposta i marcatori a τ, 2τ, 3τ, per mostrare come la costante di tempo fissi
   la rapidità di salita — la stessa informazione già presente nella traccia (i tre valori
   percentuali), resa manipolabile invece che statica.
+
+## Unità 30 — Energia immagazzinata in un campo magnetico
+- Parole: circa 447 (prosa, didascalie e riquadro compresi) su 3 pagine di traccia (pagine 51-53).
+- Rettifica: nessuna. Verificato con SymPy sia il passaggio simbolico U = P_m·T = (1/2·Li²/T)·T =
+  1/2 Li² sia la sostituzione B² = μ₀²n²i² → μ₀n²i² = B²/μ₀ che porta a U = B²Aℓ/(2μ₀) e
+  u_B = B²/(2μ₀). Verificato numericamente l'esempio: da U = 3,11×10⁻³ J e L = 75,0×10⁻³ H,
+  i = √(2U/L) ≈ 0,288 A (coerente con 0,288 A scritto a mano); R_tot = ε/i = 36/0,288 ≈ 125,0 Ω,
+  R = R_tot − 92,5 Ω ≈ 32,5 Ω, coerente con la traccia.
+- Aggiunta: un solo riquadro "Attenzione" sulla crescita quadratica (non lineare) dell'energia
+  con la corrente, indispensabile perché è il punto su cui la traccia stessa fa perno passando
+  da U=½Li² al caso del solenoide, e un errore comune è pensare a una proporzionalità diretta.
+  Ridisegnati in SVG il circuito ideale batteria-induttanza, il grafico i(t) lineare, lo schizzo
+  del solenoide per il volume e il circuito dell'esempio (pagine 51-53): nessun disegno nuovo.
+  Un solo strumento interattivo, come da regola: uno slider sulla corrente i che sposta un punto
+  lungo la curva U(i) = ½Li² e mostra il valore numerico, per rendere visibile la stessa
+  dipendenza quadratica già presente nella formula, invece di lasciarla solo scritta.
