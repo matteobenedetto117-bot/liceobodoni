@@ -373,3 +373,14 @@
   unico cursore di fase, invece di quattro pannelli statici separati, poiché mostrano la stessa
   alternazione fisica continua descritta dalla traccia) e lo schema dell'onda che si propaga con
   $\vec E$ e $\vec B$ su piani perpendicolari.
+
+## Unità 35 — Velocità di propagazione delle onde elettromagnetiche
+- Parole: 195 su 1 pagina di traccia (pagina 63)
+- Rettifica: il valore numerico scritto in traccia, $c=2{,}999\times10^8$ m/s, è impreciso;
+  verificato con calcolo diretto $c=1/\sqrt{\varepsilon_0\mu_0}$ con $\varepsilon_0=8{,}854\times10^{-12}$
+  F/m e $\mu_0=4\pi\times10^{-7}$ T·m/A: il risultato è $c=2{,}998\times10^8$ m/s (il valore
+  esatto per definizione, $299\,792\,458$ m/s, arrotonda a $2{,}998\times10^8$, non a
+  $2{,}999\times10^8$). Corretto nella pagina.
+- Aggiunta: nessuna. Pagina puramente testuale/storica, nessun disegno nella traccia da
+  ridisegnare, nessuno strumento interattivo (non richiesto e non pertinente a un contenuto
+  storico-concettuale).
