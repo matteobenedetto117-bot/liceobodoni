@@ -174,3 +174,15 @@
   lo commenta subito, lasciandolo solo alla legge di Lenz qualche riga dopo. I due disegni SVG
   ridisegnano entrambe le coppie magnete-bobina della traccia (avvicinamento e allontanamento),
   senza introdurre schemi nuovi.
+
+## Unità 22 — La barretta in moto: analisi della fem indotta
+- Parole: 362 su 3 pagine di traccia (pagine 37-39)
+- Rettifica: nessuna. Tutte le formule sono state verificate con SymPy: $\varepsilon=Bv\ell$,
+  $i_{ind}=Bv\ell/R$, $F_M=iB\ell=B^2v\ell^2/R$, $P_{elettrica}=i^2R=B^2v^2\ell^2/R$,
+  $P_{meccanica}=F_{est}v=B^2v^2\ell^2/R$, e l'uguaglianza $P_{elettrica}=P_{meccanica}$ è
+  confermata algebricamente. Coerenza dimensionale controllata (T·m/s·m = V; A·T·m = N; A²·Ω = W).
+- Aggiunta: un solo strumento interattivo, uno slider sulla velocità $v$ (con $B$, $\ell$, $R$
+  fissati a valori tipici) che aggiorna in tempo reale i valori numerici di $\varepsilon$, $i$,
+  $F_M$ e $P$ già derivati nella pagina, per mostrare concretamente la dipendenza lineare della
+  fem e quadratica della potenza da $v$. Nessun esempio numerico nuovo oltre a questo; nessuna
+  dimostrazione aggiuntiva.
