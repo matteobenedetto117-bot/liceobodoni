@@ -212,3 +212,15 @@
   muove un punto sulla curva della fem e ruota in sincrono lo schema della spira fra i poli:
   mostra concretamente perché la fem è sinusoidale, senza introdurre nessun esempio numerico
   assente dalla traccia.
+
+## Unità 25 — Motori elettrici in corrente alternata
+- Parole: circa 266 (prosa, didascalie ed etichette comprese) su 1 pagina di traccia (pagine 42-43)
+- Rettifica: nessuna. La pagina non introduce formule nuove (nessun calcolo numerico da
+  verificare con SymPy): si limita a riprendere la forza $F = iLB$ già stabilita nell'unità 9
+  per il filo rettilineo, applicandola concettualmente ai due lati della spira senza rideriva­rla.
+  Coerente con la traccia, che su queste pagine è solo qualitativa (due schemi e un breve testo).
+- Aggiunta: nessuna. Ridisegnati in SVG lo schema spira-fra-i-poli collegata tramite
+  commutatore a un generatore di corrente alternata (pagina 42) e i tre istanti della rotazione
+  con corrente e forza (pagina 43, incluso il terzo con l'inversione di corrente). Nessuno
+  strumento interattivo: i tre pannelli statici bastano a mostrare la sequenza già disegnata
+  nella traccia, e un cursore avrebbe richiesto assunzioni sulla geometria non esplicitate lì.
