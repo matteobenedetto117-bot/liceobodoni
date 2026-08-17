@@ -224,3 +224,24 @@
   con corrente e forza (pagina 43, incluso il terzo con l'inversione di corrente). Nessuno
   strumento interattivo: i tre pannelli statici bastano a mostrare la sequenza già disegnata
   nella traccia, e un cursore avrebbe richiesto assunzioni sulla geometria non esplicitate lì.
+
+## Unità 26 — Mutua induzione e autoinduzione
+- Parole: circa 460 (prosa, didascalie ed etichette comprese) su 2 pagine di traccia (pagine
+  43-44; la pagina 43 è condivisa con l'unità 25, di cui restano solo le ultime righe sulla
+  rotazione del motore, e con l'unità 26 da qui in poi ("Induttanza" / "Mutua induzione")).
+- Rettifica: nessuna. La pagina non contiene formule numeriche da verificare: è interamente
+  qualitativa (nessun calcolo, nessuna definizione quantitativa, che arriva solo nell'unità 27
+  con l'induttanza $L$). L'unico controllo possibile riguarda la coerenza fisica del grafico
+  $i(t)$ disegnato nella traccia dopo la chiusura dell'interruttore: risolvendo con SymPy
+  l'equazione $L\,di/dt + Ri = \varepsilon$ con $i(0)=0$ si ottiene $i(t)=(\varepsilon/R)
+  (1-e^{-Rt/L})$, funzione crescente ($i'>0$) e concava verso il basso ($i''<0$), che tende
+  asintoticamente a $\varepsilon/R$: coerente con la curva disegnata a mano, anche se
+  quest'ultima non compare come formula esplicita nella traccia.
+- Aggiunta: un solo riquadro "da non confondere" fra mutua induzione (fem indotta in un
+  circuito diverso da quello che genera il campo) e autoinduzione (fem indotta nello stesso
+  circuito), indispensabile perché la traccia introduce i due fenomeni uno di seguito
+  all'altro, con lo stesso disegno di bobina, senza mai contrapporli esplicitamente. Ridisegnati
+  in SVG lo schema delle due bobine accoppiate (pagina 43), il solenoide con le spire vicine
+  (pagina 44) e i due circuiti con interruttore aperto/chiuso più il grafico $i(t)$ (pagina 44):
+  nessuno schema nuovo rispetto a quelli della traccia. Nessuno strumento interattivo: i tre
+  pannelli statici bastano a mostrare la sequenza già disegnata a mano.
