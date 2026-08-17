@@ -162,3 +162,15 @@
   B=1 T e A=1 m² per semplicità di lettura). Mostra concretamente il passaggio continuo fra i due
   casi limite già presenti nella traccia, senza aggiungere contenuto fisico oltre alla formula
   della traccia stessa.
+
+## Unità 21 — Legge di Faraday-Neumann-Lenz
+- Parole: 397 su 2 pagine di traccia (pagine 35-36)
+- Rettifica: nessuna. L'unico calcolo numerico della traccia,
+  $\varepsilon = |0{,}110\,\text{Wb} - 0{,}850\,\text{Wb}| / 0{,}5\,\text{s}$, è stato verificato
+  con SymPy: dà 1,48 V, come scritto sul quaderno. Le tre formule boxate (fem con N=1, con segno
+  meno esplicito, e con N avvolgimenti) sono dimensionalmente coerenti: Wb/s = V.
+- Aggiunta: un riquadro "da non confondere" sul significato del segno meno (convenzione di verso,
+  non fem negativa), indispensabile perché la traccia introduce il segno meno nella legge ma non
+  lo commenta subito, lasciandolo solo alla legge di Lenz qualche riga dopo. I due disegni SVG
+  ridisegnano entrambe le coppie magnete-bobina della traccia (avvicinamento e allontanamento),
+  senza introdurre schemi nuovi.
