@@ -186,3 +186,15 @@
   $F_M$ e $P$ già derivati nella pagina, per mostrare concretamente la dipendenza lineare della
   fem e quadratica della potenza da $v$. Nessun esempio numerico nuovo oltre a questo; nessuna
   dimostrazione aggiuntiva.
+
+## Unità 23 — Campo elettrico indotto e generatori di corrente
+- Parole: circa 196 di prosa (sommario, didascalie, paragrafi) su 1 pagina di traccia (pagina 40)
+- Rettifica: nessuna. La formula $E = Bv$ è stata verificata con SymPy a partire da
+  $E\ell = \Delta V = Bv\ell$ (uguaglianza fra ddp lungo la barretta e fem, già ricavata
+  nell'unità 22). Coerenza dimensionale controllata: T·(m/s) = V/m, corretto per un campo
+  elettrico. La frase finale di pagina ("...cambia e si genera corrente") è stata inclusa come
+  chiusura del paragrafo sui generatori, mentre la derivazione quantitativa di $\varepsilon =
+  NBA\omega\sin\omega t$ resta nell'unità 24 come da traccia (pagina 41).
+- Aggiunta: nessuna. Due soli disegni SVG che ridisegnano gli schemi della traccia (il campo
+  elettrico interno alla barretta e il generatore a spira rotante fra due poli); nessun esempio
+  numerico né strumento interattivo, assenti anche nella traccia su questa pagina.
