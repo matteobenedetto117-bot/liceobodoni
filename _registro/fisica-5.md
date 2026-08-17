@@ -198,3 +198,17 @@
 - Aggiunta: nessuna. Due soli disegni SVG che ridisegnano gli schemi della traccia (il campo
   elettrico interno alla barretta e il generatore a spira rotante fra due poli); nessun esempio
   numerico né strumento interattivo, assenti anche nella traccia su questa pagina.
+
+## Unità 24 — L'alternatore
+- Parole: circa 329 (prosa, didascalie ed etichette comprese) su 2 pagine di traccia (pagine 41-42)
+- Rettifica: nessuna. La formula $\varepsilon = NBA\omega\sin(\omega t)$ è verificata con SymPy
+  a partire da $\Phi = NBA\cos(\omega t)$ e $\varepsilon = -d\Phi/dt$, con risultato
+  $NBA\omega\sin(\omega t)$ coerente con la traccia. Il valore massimo $\varepsilon_{max} =
+  NBA\omega$ (per $\sin\omega t = 1$) è riportato come nella traccia. Nessuna incongruenza
+  dimensionale: $[B][A][\omega] = T\cdot m^2\cdot s^{-1} = V$.
+- Aggiunta: un riquadro "da non confondere" fra $N$ come numero di spire e $N$ come polo nord,
+  indispensabile perché la traccia usa la stessa lettera per entrambi nella stessa doppia
+  pagina senza segnalarlo. Un solo strumento interattivo, uno slider sulla fase $\omega t$ che
+  muove un punto sulla curva della fem e ruota in sincrono lo schema della spira fra i poli:
+  mostra concretamente perché la fem è sinusoidale, senza introdurre nessun esempio numerico
+  assente dalla traccia.
