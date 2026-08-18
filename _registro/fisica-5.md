@@ -433,3 +433,16 @@
   frequenza e lunghezza d'onda, e le due onde di confronto lunga/corta (pagina 71); banda
   visibile disegnata volutamente larga per restare leggibile, come già nell'originale. Nessuno
   strumento interattivo: la pagina è già una lettura diretta di un grafico statico.
+
+## Unità 40 — Dalla fisica classica alla fisica moderna
+- Parole: 223 su 1 pagina di traccia (pagina 72; la frase conclusiva di apertura pagina 73,
+  "la relatività ristretta studia i sistemi in cui le velocità sono alte", è stata inclusa perché
+  chiude il ragionamento di pagina 72 prima che inizi, più sotto nella stessa pagina 73, la
+  sezione sui postulati di Einstein che appartiene all'unità 41).
+- Rettifica: nessuna. Il contenuto è puramente qualitativo (nessun calcolo da verificare con
+  SymPy); controllate solo le disuguaglianze $v\ll c$ e $v\sim c$ riportate come nella traccia.
+- Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG lo schema che
+  colloca la meccanica classica come caso particolare di meccanica quantistica (mondo microscopico)
+  e relatività generale (campi forti, alte velocità), con la divisione fisica classica / fisica
+  moderna della traccia. Nessuno strumento interattivo: non c'è un parametro naturale da far
+  variare in uno schema puramente concettuale.
