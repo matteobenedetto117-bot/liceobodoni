@@ -470,3 +470,12 @@
   traccia, mostrando il valore corrente di $\gamma$ e i due limiti per $v\to0$ e $v\to c$: è
   l'unico strumento interattivo dell'unità, e mostra esattamente il grafico già presente sul
   quaderno.
+
+## Unità 43 — Dilatazione dei tempi: esempi numerici
+- Parole: 191 su 1 pagina di traccia (pagina 78).
+- Rettifica: nessuna. I cinque valori del fattore di Lorentz sono stati verificati con SymPy
+  per $v/c=0{,}50;\,0{,}75;\,0{,}90;\,0{,}99;\,0{,}999$: risultano
+  $\gamma\approx1{,}1547,\,1{,}5119,\,2{,}2942,\,7{,}0888,\,22{,}3663$, che arrotondati
+  coincidono con i valori $1{,}155;\,1{,}51;\,2{,}29;\,7{,}09;\,22{,}37$ s della traccia.
+- Aggiunta: nessuna, a parte una riga di commento finale sull'andamento non proporzionale del
+  fattore di Lorentz rispetto a $v$.
