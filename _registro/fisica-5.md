@@ -455,3 +455,18 @@
   postulato. Ridisegnato in SVG lo schema dell'auto ferma e dell'auto in moto della traccia, con
   la composizione classica delle velocità barrata per mostrare perché il risultato v+c è
   sbagliato. Nessuno strumento interattivo: pagina puramente concettuale.
+
+## Unità 42 — Dilatazione dei tempi
+- Parole: 486 su 3 pagine di traccia (pagine 75-77).
+- Rettifica: nessuna. La derivazione geometrica (teorema di Pitagora sul triangolo di lati
+  $v\Delta t/2$, $d$, $c\Delta t/2$) e l'esempio numerico del treno a $v=c/3$ sono stati
+  verificati con SymPy: $\Delta t_0=2d/c=2{,}00\times10^{-8}\,\text{s}$ e
+  $\Delta t=\Delta t_0/\sqrt{1-1/9}\approx2{,}12\times10^{-8}\,\text{s}$ tornano esatti come
+  in traccia.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro.
+  Ridisegnati in SVG l'orologio a luce fermo (fonte, specchio, raggio su e giù) e lo stesso
+  orologio visto in moto (triangolo con cateti $v\Delta t/2$ e $d$, ipotenusa $c\Delta t/2$).
+  Reso interattivo, con un cursore su $v/c$, il grafico di $\gamma(v)$ che compare nella
+  traccia, mostrando il valore corrente di $\gamma$ e i due limiti per $v\to0$ e $v\to c$: è
+  l'unico strumento interattivo dell'unità, e mostra esattamente il grafico già presente sul
+  quaderno.
