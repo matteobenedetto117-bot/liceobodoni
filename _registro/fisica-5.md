@@ -446,3 +446,12 @@
   e relatività generale (campi forti, alte velocità), con la divisione fisica classica / fisica
   moderna della traccia. Nessuno strumento interattivo: non c'è un parametro naturale da far
   variare in uno schema puramente concettuale.
+
+## Unità 41 — I postulati di Einstein e l'esperimento di Michelson-Morley
+- Parole: 359 su 2 pagine di traccia (pagine 73-74).
+- Rettifica: nessuna. Contenuto puramente concettuale (due postulati e un fatto storico), senza
+  calcoli o formule da verificare con SymPy.
+- Aggiunta: nessuna, a parte le poche parole di collegamento e un breve commento al secondo
+  postulato. Ridisegnato in SVG lo schema dell'auto ferma e dell'auto in moto della traccia, con
+  la composizione classica delle velocità barrata per mostrare perché il risultato v+c è
+  sbagliato. Nessuno strumento interattivo: pagina puramente concettuale.
