@@ -493,3 +493,17 @@
   Ridisegnati in SVG lo schema Terra-Vega con la distanza propria e il confronto fra distanza
   a riposo e distanza contratta vista dalla navicella. Nessuno strumento interattivo: la curva
   di γ(v) è già stata resa interattiva nell'unità 42 e qui sarebbe stata ridondante.
+
+## Unità 45 — Il decadimento dei muoni
+- Parole: 443 su 3 pagine di traccia (pagine 81-83).
+- Rettifica: nessuna. Tutti i valori numerici sono stati verificati con SymPy per
+  $v=0{,}995c$: $\gamma\approx10{,}0125$; distanza classica $d=v\Delta t_0\approx656{,}7$ m
+  (traccia: 657 m); tempo dilatato $\Delta t=\gamma\Delta t_0\approx2{,}203\cdot10^{-5}$ s
+  (traccia: $2{,}2\cdot10^{-5}$ s); distanza nel sistema Terra $d=\Delta t\,v\approx6575$ m
+  (traccia: 6570 m, per arrotondamento di $\Delta t$ a due cifre); quota contratta
+  $L=L_0/\gamma\approx499{,}4$ m (traccia: 499 m). Tutti coincidono con la traccia.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro.
+  Ridisegnati in SVG lo schema della pioggia di particelle prodotta dal raggio cosmico in
+  atmosfera (unendo i due schizzi della traccia in un'unica figura) e il confronto fra il
+  sistema Terra (tempo dilatato) e il sistema del muone (quota contratta). Nessuno strumento
+  interattivo: entrambe le figure sono statiche, coerenti con lo stile delle unità vicine.
