@@ -479,3 +479,17 @@
   coincidono con i valori $1{,}155;\,1{,}51;\,2{,}29;\,7{,}09;\,22{,}37$ s della traccia.
 - Aggiunta: nessuna, a parte una riga di commento finale sull'andamento non proporzionale del
   fattore di Lorentz rispetto a $v$.
+
+## Unità 44 — Contrazione delle lunghezze
+- Parole: 395 su 2 pagine di traccia (pagine 79-80).
+- Rettifica: nessuna. Il calcolo finale $L=L_0/\gamma=25{,}3\,\text{a.l.}\cdot
+  \sqrt{1-0{,}99^2}\approx3{,}57\,\text{a.l.}$ è stato verificato con SymPy (γ(0,99c) ≈
+  7,0888, L ≈ 3,569) e coincide con il valore della traccia; a una prima lettura la radice
+  sembrava applicata a 0,999 invece che 0,99, ma il valore v=0,99c è quello scritto in
+  traccia poco sopra ed è quello coerente con il risultato 3,57 a.l.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro e la
+  frase di apertura sul limite invalicabile di c, che chiudeva la pagina 79 prima
+  dell'intestazione "Contrazione delle lunghezze" e non era ancora stata usata nell'unità 43.
+  Ridisegnati in SVG lo schema Terra-Vega con la distanza propria e il confronto fra distanza
+  a riposo e distanza contratta vista dalla navicella. Nessuno strumento interattivo: la curva
+  di γ(v) è già stata resa interattiva nell'unità 42 e qui sarebbe stata ridondante.
