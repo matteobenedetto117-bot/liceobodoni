@@ -417,3 +417,19 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Nessun
   disegno nella traccia da ridisegnare (pagine puramente formulari) e nessuno strumento
   interattivo, perché non c'è un parametro naturale da far variare.
+
+## Unità 39 — Lo spettro elettromagnetico
+- Parole: 286 su 2 pagine di traccia (pagine 70-71).
+- Rettifica: nessuna nel testo. Verificata con SymPy la relazione generale $v=\lambda/T=\lambda f$
+  (sostituendo $T=1/f$) e la sua coerenza dimensionale. Nel disegno dello spettro, per allineare
+  in una sola griglia log-log i sette valori di frequenza della traccia (da $10^8$ a $10^{20}$ Hz)
+  con gli otto valori di lunghezza d'onda che comparivano nell'originale (da $10^2$ a $10^{-12}$ m,
+  un tick in più rispetto alla riga delle frequenze), ho arrotondato $c\approx3\times10^8$ m/s a
+  $10^8$ m/s: ogni tick di frequenza $10^n$ Hz è così abbinato a $\lambda=10^{8-n}$ m, con uno
+  scarto costante di circa mezza decade rispetto al valore vero per ogni valore di $n$ (verificato
+  numericamente), quindi l'ordine di grandezza e il verso della corrispondenza restano corretti.
+- Aggiunta: nessuna. Ridisegnati in SVG lo schizzo dell'onda con la lunghezza d'onda $\lambda$
+  segnata fra due creste (pagina 70) e la barra dello spettro con le sette bande, gli assi di
+  frequenza e lunghezza d'onda, e le due onde di confronto lunga/corta (pagina 71); banda
+  visibile disegnata volutamente larga per restare leggibile, come già nell'originale. Nessuno
+  strumento interattivo: la pagina è già una lettura diretta di un grafico statico.
