@@ -521,3 +521,12 @@
   chiusura di pagina 86). Ridisegnati in SVG i due schemi degli assi $S$/$S'$ che mostrano la
   simmetria del cambio di segno della velocità. Nessuno strumento interattivo: la pagina è
   interamente algebrica, senza un grafico da manovrare.
+
+## Unità 47 — La simultaneità dipende dal sistema di riferimento
+- Parole: 240 su 1 pagina di traccia (pagina 87).
+- Rettifica: nessuna. Verificata con SymPy la sottrazione $t_2'-t_1'=\gamma\frac{v}{c^2}(x_1-x_2)$
+  a partire dalla trasformazione di Lorentz del tempo ricavata nell'unità 46: coincide
+  esattamente con il risultato della traccia.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Nessun
+  disegno nella traccia, quindi nessuno SVG aggiunto; nessuno strumento interattivo, la pagina è
+  interamente algebrica.
