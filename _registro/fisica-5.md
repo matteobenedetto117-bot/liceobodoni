@@ -530,3 +530,18 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Nessun
   disegno nella traccia, quindi nessuno SVG aggiunto; nessuno strumento interattivo, la pagina è
   interamente algebrica.
+
+## Unità 48 — Il cono di luce e gli invarianti relativistici
+- Parole: 472 su 3 pagine di traccia (pagine 88–90, limitatamente alla parte che classifica
+  Δs² prima dell'inizio dell'unità 49 sulla quantità di moto relativistica).
+- Rettifica: nessuna correzione di merito. Sulla pagina 88 la traccia scrive "A può essere
+  causa di B" anche per la coppia A-C (probabile lapsus, dato che la frase riguarda
+  esplicitamente l'invio di un segnale luminoso, cioè il caso luce fra A e C): nella pagina
+  è stato scritto "A può essere causa di C". Verificata con SymPy l'invarianza dell'intervallo
+  spazio-temporale: calcolando $c^2t'^2-x'^2$ a partire da $x'=\gamma(x-vt)$ e
+  $ct'=\gamma(ct-\frac{v}{c}x)$ si ottiene $c^2t^2-x^2$ (differenza simbolica nulla),
+  esattamente come nei passaggi della traccia, doppi prodotti compresi.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro.
+  Ridisegnato in SVG il diagramma di Minkowski con il cono di luce e i quattro punti A, B, C,
+  D della traccia. Nessuno strumento interattivo: la pagina è un diagramma statico e una
+  derivazione algebrica.
