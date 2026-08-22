@@ -507,3 +507,17 @@
   atmosfera (unendo i due schizzi della traccia in un'unica figura) e il confronto fra il
   sistema Terra (tempo dilatato) e il sistema del muone (quota contratta). Nessuno strumento
   interattivo: entrambe le figure sono statiche, coerenti con lo stile delle unità vicine.
+
+## Unità 46 — Le trasformazioni di Lorentz
+- Parole: 410 su 3 pagine di traccia (pagine 84-86).
+- Rettifica: nessuna. Verificata con SymPy l'intera catena algebrica che porta da
+  $x'=\gamma(x-vt)$ e $x=\gamma(x'+vt')$ a $t=\gamma(t'+vx'/c^2)$: sostituendo $x$ nella
+  relazione per $t$ ricavata da $x'$ e usando $1/\gamma^2=1-v^2/c^2$ si ottiene esattamente
+  la formula della traccia (differenza simbolica nulla). Il passaggio analogo per $t'$ è
+  lasciato per simmetria, come in traccia.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio algebrico e
+  l'altro e la tabella finale che raccoglie le quattro equazioni già ricavate (non una
+  sintesi nuova, ma la stessa coppia di sistemi scritta una accanto all'altra come in
+  chiusura di pagina 86). Ridisegnati in SVG i due schemi degli assi $S$/$S'$ che mostrano la
+  simmetria del cambio di segno della velocità. Nessuno strumento interattivo: la pagina è
+  interamente algebrica, senza un grafico da manovrare.
