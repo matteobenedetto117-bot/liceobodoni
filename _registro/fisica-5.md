@@ -723,3 +723,13 @@
 - Aggiunta: nessuna oltre alle poche righe di collegamento fra i passaggi (perché E_c = ½·(Ke²/r_n),
   perché il segno meno indica legame, perché ΔE = hc/λ). Nessun disegno: le pagine 113–114 non ne
   contengono, solo passaggi algebrici.
+
+## Unità 65 — L'interpretazione delle orbite: Schrödinger e De Broglie
+- Parole: circa 320 su 1,2 pagine di traccia (seconda metà di pagina 114 e pagina 115; la prima
+  metà di pagina 114 appartiene già all'unità 64).
+- Rettifica: nessuna. Contenuto puramente qualitativo, nessuna formula da verificare con SymPy.
+- Aggiunta: nessuna oltre alle poche parole di collegamento fra le due interpretazioni e la
+  conclusione comune (stabilità dell'atomo), già presente nella traccia. I due disegni (nube di
+  probabilità di Schrödinger; onda stazionaria/non stazionaria di De Broglie con l'analogia della
+  corda fissata ai due estremi) sono la ridisegnazione in SVG di quelli della traccia, non
+  aggiunte. Con questa unità si completa l'intero percorso di fisica quinta (65/65 unità).
