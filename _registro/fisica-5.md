@@ -555,3 +555,14 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG il grafico
   p-v della traccia (retta classica e curva relativistica con asintoto in v=c). Nessuno
   strumento interattivo: pagina breve, un solo grafico statico.
+
+## Unità 50 — Energia relativistica ed energia a riposo
+- Parole: 186 su 1 pagina di traccia (pagina 91).
+- Rettifica: la traccia calcola correttamente $E_0=mc^2=0{,}12\ \text{kg}\times(3\times10^8\
+  \text{m/s})^2\approx1{,}1\times10^{16}\ \text{J}$ per l'energia a riposo di una mela, ma
+  poi stima che questa energia alimenterebbe una lampadina da 100 W per "50 milioni di anni".
+  Verificato con SymPy: $t=E_0/P=1{,}08\times10^{14}\ \text{s}\approx3{,}4\times10^6$ anni,
+  non 50 milioni. Nella pagina è stato scritto il valore corretto, circa 3,4 milioni di anni.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro.
+  Nessun disegno nella traccia (solo formule racchiuse in riquadro), quindi nessuno SVG
+  aggiunto; nessuno strumento interattivo, la pagina è interamente algebrica.
