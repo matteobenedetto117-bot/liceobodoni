@@ -605,3 +605,11 @@
   f→0 sia per f→∞, coerente con quanto disegnato nel grafico della traccia.
 - Aggiunta: nessuna. Ridisegnato in SVG il grafico delle tre curve (Rayleigh-Jeans, sperimentale,
   Wien) della traccia. Nessuno strumento interattivo: pagina breve, un solo grafico statico.
+
+## Unità 55 — Legge di Stefan-Boltzmann e ipotesi di Planck
+- Parole: 253 su 2 pagine di traccia (pagine 97–98).
+- Rettifica: nessuna. Verificato con SymPy (integrazione numerica di x³/(e^x−1) su [0,∞) = π⁴/15)
+  che σ = 2π⁵k⁴/(15c²h³) = 5,670×10⁻⁸ W m⁻²K⁻⁴ con le costanti CODATA, coerente con il valore
+  scritto nella traccia.
+- Aggiunta: nessuna. Ridisegnato in SVG lo schizzo della traccia con l'area tratteggiata sotto la
+  curva I(f), a illustrare l'integrale A∫I(f)df = P. Nessuno strumento interattivo.
