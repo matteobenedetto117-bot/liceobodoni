@@ -656,3 +656,14 @@
   con rivelatori (elettrone localizzato, cumulo), che nella traccia comparivano come due disegni
   separati. Un riquadro "Da ricordare" per l'enunciato del principio. Nessuno strumento
   interattivo: contenuto concettuale, due schemi statici sufficienti.
+
+## Unità 60 — Modelli atomici: Thomson e Rutherford
+- Parole: 472 su 2 pagine di traccia (pagine 107–108).
+- Rettifica: nessuna, nessuna formula presente in queste pagine.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra le quattro parti (modello di
+  Thomson, esperimento di Rutherford, modello planetario, problema della stabilità). Ridisegnati
+  in SVG i quattro schemi della traccia: la sfera di Thomson con elettroni incastonati,
+  l'apparato dell'esperimento con le tre traiettorie delle particelle alfa, il modello planetario
+  con nucleo e orbite, e il collasso a spirale dell'elettrone con l'emissione di onde
+  elettromagnetiche. Nessuno strumento interattivo: contenuto descrittivo, senza grandezze da far
+  variare.
