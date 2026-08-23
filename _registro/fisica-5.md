@@ -597,3 +597,11 @@
   tre curve di intensità della traccia. Aggiunto un cursore interattivo sulla temperatura che
   applica la legge di Wien già enunciata, spostando un indicatore sul grafico esistente: non
   introduce contenuto nuovo, solo una lettura dinamica della formula.
+
+## Unità 54 — La catastrofe ultravioletta
+- Parole: 218 su 1 pagina di traccia (pagina 96).
+- Rettifica: nessuna. Verificato con SymPy che la legge di Rayleigh-Jeans I(f)=c·f²T diverge per
+  f→∞ (limite infinito), mentre la distribuzione di Wien I(f)=K·f³·e^(-Kf/T) tende a zero sia per
+  f→0 sia per f→∞, coerente con quanto disegnato nel grafico della traccia.
+- Aggiunta: nessuna. Ridisegnato in SVG il grafico delle tre curve (Rayleigh-Jeans, sperimentale,
+  Wien) della traccia. Nessuno strumento interattivo: pagina breve, un solo grafico statico.
