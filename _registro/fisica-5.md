@@ -634,3 +634,13 @@
   singola con fronti d'onda circolari, doppia fenditura, e i due esiti di interferenza
   costruttiva e distruttiva. Nessuno strumento interattivo: pagina di una sola facciata,
   concettuale.
+
+## Unità 58 — L'ipotesi di De Broglie e l'esperimento di Davisson-Germer
+- Parole: 261 su 1 pagina di traccia (pagina 103).
+- Rettifica: nessuna. Unica formula presente, $\lambda = h/p$, verificata dimensionalmente con
+  SymPy (azione/quantità di moto = lunghezza): confermato che il risultato ha le dimensioni di
+  una lunghezza, coerente con l'uso come lunghezza d'onda.
+- Aggiunta: nessuna, a parte le poche parole di collegamento con l'unità precedente sulla doppia
+  fenditura per la luce. Ridisegnato in SVG lo schema della traccia: fascio di elettroni, doppia
+  fenditura, schermo con le bande di interferenza. Nessuno strumento interattivo: pagina di una
+  sola facciata, concettuale.
