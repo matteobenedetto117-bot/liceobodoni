@@ -577,3 +577,13 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG lo schema della
   traccia (neutrone incidente, nucleo di uranio 235, scissione in bario 141 e kripton 92 con tre
   neutroni liberati). Nessuno strumento interattivo: pagina breve, un solo schema statico.
+
+## Unità 52 — Energia cinetica relativistica
+- Parole: 164 su 1 pagina di traccia (pagina 93).
+- Rettifica: nessuna. Verificato con SymPy che K=(γ-1)mc² segue correttamente da E=E₀+K, e che
+  lo sviluppo in serie di Taylor di K per v piccola rispetto a c dà K≈½mv², confermando la
+  sovrapposizione con la curva classica mostrata nel grafico.
+- Aggiunta: una riga che spiega perché le due curve del grafico coincidono per v piccola e
+  divergono vicino a c (il grafico è già nella traccia, la spiega solo a parole). Ridisegnato in
+  SVG il grafico K–v della traccia, con asintoto tratteggiato in v=c. Nessuno strumento
+  interattivo: pagina di una sola facciata, interamente algebrica più un grafico.
