@@ -709,3 +709,17 @@
   altrimenti solo letterale, come richiesto dalla cura delle grandezze per la fisica. Nessun
   disegno: la pagina 112 non ne contiene (lo schema delle forze è già stato incluso in chiusura
   dell'unità 62), quindi nessuno è stato aggiunto qui.
+
+## Unità 64 — L'energia delle orbite e la costante di Rydberg
+- Parole: circa 400 (esclusi i simboli delle formule) su 2 pagine di traccia (pagine 113–114).
+- Rettifica: la traccia usa la lettera K sia per la costante di Coulomb sia, nella stessa riga,
+  come etichetta dell'energia cinetica (E = K + U). Per evitare l'ambiguità con la costante di
+  Coulomb già fissata come K nell'unità 63, ho scritto l'energia cinetica come E_c: è una
+  correzione di notazione, non di sostanza. Verificata con SymPy l'intera catena simbolica: la
+  sostituzione di v_n e r_n in E = ½m_ev² − Ke²/r_n dà E_n = −(2π²m_eK²e⁴/h²)(1/n²); con le
+  costanti standard E_1 = −13,6057 eV (arrotondato a −13,6 eV come nella traccia) e la costante
+  ottenuta R = 2π²m_eK²e⁴/(h³c) = 1,09737×10⁷ m⁻¹, in accordo con il valore 1,097×10⁷ m⁻¹ scritto
+  nella traccia e con la costante di Rydberg misurata. Nessun errore di calcolo nella traccia.
+- Aggiunta: nessuna oltre alle poche righe di collegamento fra i passaggi (perché E_c = ½·(Ke²/r_n),
+  perché il segno meno indica legame, perché ΔE = hc/λ). Nessun disegno: le pagine 113–114 non ne
+  contengono, solo passaggi algebrici.
