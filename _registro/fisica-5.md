@@ -545,3 +545,13 @@
   Ridisegnato in SVG il diagramma di Minkowski con il cono di luce e i quattro punti A, B, C,
   D della traccia. Nessuno strumento interattivo: la pagina è un diagramma statico e una
   derivazione algebrica.
+
+## Unità 49 — Quantità di moto relativistica
+- Parole: 205 su 1 pagina di traccia (pagina 90).
+- Rettifica: nessuna. Verificato con SymPy che $p=\gamma mv$ si riduce a $p\approx mv$ per
+  $v\to0$ (serie di Taylor, termine correttivo di ordine $v^3$) e diverge per $v\to c^-$
+  (controllo numerico), coerente con il grafico della traccia che mostra la curva relativistica
+  staccarsi dalla retta classica e impennarsi verso l'asintoto $v=c$.
+- Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG il grafico
+  p-v della traccia (retta classica e curva relativistica con asintoto in v=c). Nessuno
+  strumento interattivo: pagina breve, un solo grafico statico.
