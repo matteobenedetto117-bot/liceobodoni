@@ -681,3 +681,18 @@
   disperse sullo schermo. Le tre serie (Lyman, Balmer, Paschen) presentate come nella traccia, in
   forma di tabella breve. Nessuno strumento interattivo: pagina di una sola facciata, senza
   grandezze da far variare.
+
+## Unità 62 — Il modello atomico di Bohr
+- Parole: 368 su 2 pagine di traccia (pagine 110–111).
+- Rettifica: nessuna. Verificato con SymPy: la lunghezza d'onda di assorbimento n=1→n=2 dà
+  121,5 nm (traccia: 122 nm, arrotondamento coerente) e quella di emissione n=3→n=2 dà 656,3 nm
+  (traccia: 656 nm), in accordo con i valori di Lyman-alfa e Balmer-alfa già calcolati nel
+  registro dell'unità 61. Verificata la coerenza dimensionale di $L_n = nh/2\pi$ (kg·m²/s, come
+  un momento angolare) e di $|\Delta E| = hf$ (joule).
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra le quattro ipotesi, la
+  condizione di frequenza e i due esempi di salto. Ridisegnati in SVG i due schemi della
+  traccia (assorbimento n=1→n=2 con fotone di 122 nm, emissione n=3→n=2 con fotone di 656 nm).
+  L'equazione di bilancio fra forza centripeta e forza elettrica, presente in fondo a pagina 111,
+  è stata inclusa come chiusura della pagina (senza risolverla per il raggio, che è materia
+  dell'unità 63) per rispettare esattamente il confine fra le due unità. Nessuno strumento
+  interattivo: contenuto concettuale con due sole formule numeriche.
