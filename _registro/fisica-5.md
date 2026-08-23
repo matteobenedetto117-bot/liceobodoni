@@ -696,3 +696,16 @@
   è stata inclusa come chiusura della pagina (senza risolverla per il raggio, che è materia
   dell'unità 63) per rispettare esattamente il confine fra le due unità. Nessuno strumento
   interattivo: contenuto concettuale con due sole formule numeriche.
+
+## Unità 63 — Il raggio delle orbite di Bohr
+- Parole: circa 220 su 1 pagina di traccia (pagina 112).
+- Rettifica: nessuna. Verificata con SymPy l'intera derivazione algebrica (dal sistema
+  {v = nh/(2π m_e r_n); m_e v² = Ke²/r_n} alla formula r_n = h²n²/(4π² m_e K e²)): la soluzione
+  simbolica coincide esattamente con quella della traccia. Verificato numericamente il raggio
+  della prima orbita con le costanti standard (h, m_e, K, e): risultato 5,29×10⁻¹¹ m, in accordo
+  con il valore noto del raggio di Bohr.
+- Aggiunta: un solo esempio numerico, il calcolo di r_1, assente nella traccia per questa unità
+  (che contiene solo la derivazione simbolica) — necessario per dare concretezza a una formula
+  altrimenti solo letterale, come richiesto dalla cura delle grandezze per la fisica. Nessun
+  disegno: la pagina 112 non ne contiene (lo schema delle forze è già stato incluso in chiusura
+  dell'unità 62), quindi nessuno è stato aggiunto qui.
