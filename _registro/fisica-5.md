@@ -623,3 +623,14 @@
   lastra colpita dalla luce con gli elettroni estratti, e il grafico energia cinetica-frequenza
   per sodio e oro. Un riquadro "da non confondere" sull'intensità che non compensa una frequenza
   sotto soglia. Nessuno strumento interattivo: pagina breve, due schemi statici.
+
+## Unità 57 — L'esperimento della doppia fenditura
+- Parole: 256 su 1 pagina di traccia (pagina 102).
+- Rettifica: nessuna. Nessuna formula numerica sulla pagina: contenuto puramente concettuale
+  (esperimento di Young, interferenza costruttiva e distruttiva, contrasto onda-corpuscolo),
+  nulla da verificare con SymPy.
+- Aggiunta: nessuna, a parte le poche parole di collegamento con l'unità precedente
+  sull'effetto fotoelettrico. Ridisegnato in SVG lo schema della traccia: sorgente, fenditura
+  singola con fronti d'onda circolari, doppia fenditura, e i due esiti di interferenza
+  costruttiva e distruttiva. Nessuno strumento interattivo: pagina di una sola facciata,
+  concettuale.
