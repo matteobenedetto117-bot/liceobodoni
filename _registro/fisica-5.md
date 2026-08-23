@@ -587,3 +587,13 @@
   divergono vicino a c (il grafico è già nella traccia, la spiega solo a parole). Ridisegnato in
   SVG il grafico K–v della traccia, con asintoto tratteggiato in v=c. Nessuno strumento
   interattivo: pagina di una sola facciata, interamente algebrica più un grafico.
+
+## Unità 53 — Il corpo nero e la legge di Wien
+- Parole: 396 su 2 pagine di traccia (pagine 94–95).
+- Rettifica: nessuna. Verificato con SymPy il calcolo della legge di Wien alle tre temperature
+  della traccia: f_picco = 1,764×10¹⁴ Hz a 3000 K, 3,528×10¹⁴ Hz a 6000 K, 7,056×10¹⁴ Hz a
+  12000 K, coerente con lo spostamento verso frequenze maggiori mostrato nel grafico.
+- Aggiunta: nessuna. Ridisegnati in SVG lo schema della cavità del corpo nero e il grafico delle
+  tre curve di intensità della traccia. Aggiunto un cursore interattivo sulla temperatura che
+  applica la legge di Wien già enunciata, spostando un indicatore sul grafico esistente: non
+  introduce contenuto nuovo, solo una lettura dinamica della formula.
