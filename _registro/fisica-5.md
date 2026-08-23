@@ -566,3 +566,14 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro.
   Nessun disegno nella traccia (solo formule racchiuse in riquadro), quindi nessuno SVG
   aggiunto; nessuno strumento interattivo, la pagina è interamente algebrica.
+
+## Unità 51 — Fissione nucleare
+- Parole: 227 su 1 pagina di traccia (pagina 92).
+- Rettifica: la traccia indica come prodotto di fissione il bario 142, ma verificato con SymPy
+  il bilancio del numero di massa fra reagenti (U-235 + n, A=236) e prodotti scritti
+  (Ba-142 + Kr-92 + 3n, A=237) non torna. Con Kr-92 e 3 neutroni fissati, il numero di massa
+  del bario che bilancia l'equazione è 141, non 142 (236 = 141 + 92 + 3). Nella pagina è stato
+  scritto bario 141. Il numero atomico invece torna già nella traccia (56 + 36 = 92).
+- Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG lo schema della
+  traccia (neutrone incidente, nucleo di uranio 235, scissione in bario 141 e kripton 92 con tre
+  neutroni liberati). Nessuno strumento interattivo: pagina breve, un solo schema statico.
