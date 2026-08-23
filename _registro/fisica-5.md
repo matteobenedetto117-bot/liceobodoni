@@ -667,3 +667,17 @@
   con nucleo e orbite, e il collasso a spirale dell'elettrone con l'emissione di onde
   elettromagnetiche. Nessuno strumento interattivo: contenuto descrittivo, senza grandezze da far
   variare.
+
+## Unità 61 — Gli spettri a righe
+- Parole: 256 su 1 pagina di traccia (pagina 109).
+- Rettifica: nessuna. Unica formula presente, $1/\lambda = R(1/n'^2 - 1/n^2)$, verificata con
+  SymPy: dimensionalmente coerente ($R$ in m⁻¹, parentesi adimensionale, quindi $1/\lambda$ in
+  m⁻¹), e numericamente corretta calcolando tre righe di riferimento — Balmer-alfa (n'=2, n=3) dà
+  656,3 nm, Lyman-alfa (n'=1, n=2) dà 121,5 nm (UV), Paschen-alfa (n'=3, n=4) dà 1875 nm (IR) —
+  tutte coerenti con i valori noti e con l'attribuzione delle tre serie alle rispettive regioni
+  dello spettro data nella traccia.
+- Aggiunta: nessuna, a parte le poche parole di collegamento fra la descrizione dell'esperimento e
+  la formula. Ridisegnato in SVG lo schema della traccia: tubo a scarica con ΔV, prisma, righe
+  disperse sullo schermo. Le tre serie (Lyman, Balmer, Paschen) presentate come nella traccia, in
+  forma di tabella breve. Nessuno strumento interattivo: pagina di una sola facciata, senza
+  grandezze da far variare.
