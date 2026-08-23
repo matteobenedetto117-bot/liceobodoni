@@ -613,3 +613,13 @@
   scritto nella traccia.
 - Aggiunta: nessuna. Ridisegnato in SVG lo schizzo della traccia con l'area tratteggiata sotto la
   curva I(f), a illustrare l'integrale A∫I(f)df = P. Nessuno strumento interattivo.
+
+## Unità 56 — L'effetto fotoelettrico
+- Parole: 398 su 2-3 pagine di traccia (pagine 99–101, l'ultima molto breve).
+- Rettifica: nessuna. Verificato con SymPy che K = E - L0 = h(f-f0), quindi la pendenza in
+  funzione di f è h per qualunque metallo (dK/df = h), coerente con le due rette parallele a
+  soglie diverse disegnate nel grafico della traccia.
+- Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnati in SVG lo schema della
+  lastra colpita dalla luce con gli elettroni estratti, e il grafico energia cinetica-frequenza
+  per sodio e oro. Un riquadro "da non confondere" sull'intensità che non compensa una frequenza
+  sotto soglia. Nessuno strumento interattivo: pagina breve, due schemi statici.
