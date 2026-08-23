@@ -644,3 +644,15 @@
   fenditura per la luce. Ridisegnato in SVG lo schema della traccia: fascio di elettroni, doppia
   fenditura, schermo con le bande di interferenza. Nessuno strumento interattivo: pagina di una
   sola facciata, concettuale.
+
+## Unità 59 — Il principio di indeterminazione di Heisenberg
+- Parole: 525 su 3 pagine di traccia (pagine 104–106).
+- Rettifica: nessuna. Unica formula presente, $\Delta p \cdot \Delta x \geq h/(4\pi)$, verificata
+  dimensionalmente con SymPy: $\Delta p \cdot \Delta x$ ha le stesse dimensioni di $h$
+  (kg·m²/s), coerente con una relazione di indeterminazione.
+- Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnati in SVG lo schema
+  dell'esperimento ripetuto un elettrone alla volta (stesso esito di interferenza) e un confronto
+  a due pannelli fra il caso senza rivelatori (elettrone delocalizzato, interferenza) e il caso
+  con rivelatori (elettrone localizzato, cumulo), che nella traccia comparivano come due disegni
+  separati. Un riquadro "Da ricordare" per l'enunciato del principio. Nessuno strumento
+  interattivo: contenuto concettuale, due schemi statici sufficienti.
