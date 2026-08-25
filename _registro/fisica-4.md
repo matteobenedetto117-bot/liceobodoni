@@ -24,3 +24,8 @@
 - Parole: 265 su 1,3 pagine di traccia (pagine 10–11: pagina 10 intera più la parte alta di pagina 11, fino al valore della costante di Boltzmann; il resto di pagina 11 — gradi di libertà per tipo di gas e formule dell'energia interna — appartiene già all'unità 06)
 - Rettifica: nessuna. Il valore della costante di Boltzmann (1,38×10⁻²³ J/K) è stato verificato contro il valore CODATA e risulta coerente con la traccia.
 - Aggiunta: nessuna. Il rimando all'unità 06 per il significato di l è l'unica frase che va oltre la semplice riscrittura della traccia, indispensabile perché la formula ⟨Ek⟩ = (l/2)kT introduce il simbolo l senza definirlo compiutamente in questo punto della traccia.
+
+## Unità 06 — Energia interna di un gas: mono-, bi- e poliatomico
+- Parole: 225 su 1,6 pagine di traccia (parte inferiore di pagina 11 — dalla tabella dei gradi di libertà per gas mono-, bi- e poliatomico — più pagina 12 intera, dove si passa dalla costante di Boltzmann alla costante dei gas R)
+- Rettifica: nessuna. Le tre formule dell'energia totale (3/2 NkT, 5/2 NkT, 3NkT e le corrispondenti in nRT) sono state verificate algebricamente con SymPy; il valore R = 8,31 J/(mol·K) è stato controllato contro N_A·k = 6,022×10²³ × 1,38×10⁻²³ ≈ 8,31, coerente con la traccia.
+- Aggiunta: nessuna riga di contenuto nuovo. L'unico scarto dalla traccia è nominare esplicitamente E_tot come "energia interna" nel paragrafo introduttivo, indispensabile perché è il termine usato nel titolo dell'unità e la traccia lo lascia implicito.
