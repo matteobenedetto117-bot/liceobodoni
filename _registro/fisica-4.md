@@ -19,3 +19,8 @@
 - Parole: 399 su 3 pagine di traccia (pagine 7–9: pagina 7 prima legge/isobara, pagine 8–9 seconda legge/isocora con relativo grafico)
 - Rettifica: nessuna. Le due derivazioni (V₁/T₁=V₂/T₂ da P₁=P₂, e P₁/T₁=P₂/T₂ da V₁=V₂, a partire da P₁V₁=nRT₁ e P₂V₂=nRT₂) sono state verificate algebricamente con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna. La traccia non contiene un esempio numerico in questa unità; coerentemente con le unità 01 e 03, già nella stessa condizione, non ne è stato inserito uno nuovo.
+
+## Unità 05 — Energia e temperatura: il gas ideale
+- Parole: 265 su 1,3 pagine di traccia (pagine 10–11: pagina 10 intera più la parte alta di pagina 11, fino al valore della costante di Boltzmann; il resto di pagina 11 — gradi di libertà per tipo di gas e formule dell'energia interna — appartiene già all'unità 06)
+- Rettifica: nessuna. Il valore della costante di Boltzmann (1,38×10⁻²³ J/K) è stato verificato contro il valore CODATA e risulta coerente con la traccia.
+- Aggiunta: nessuna. Il rimando all'unità 06 per il significato di l è l'unica frase che va oltre la semplice riscrittura della traccia, indispensabile perché la formula ⟨Ek⟩ = (l/2)kT introduce il simbolo l senza definirlo compiutamente in questo punto della traccia.
