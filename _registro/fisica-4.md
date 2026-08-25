@@ -54,3 +54,8 @@
 - Parole: 379 su 2 pagine di traccia (pagina 20 intera — diagramma P-V del segmento verticale, L=0, primo principio ΔE=Q, definizione di C_V e derivazione per il gas monoatomico — più la parte alta di pagina 21, fino a C_V=3R per il gas poliatomico e l'esempio numerico con Q_V e Q_P; il resto di pagina 21 è bianco e pagina 22 appartiene già all'unità 12, trasformazione isoterma)
 - Rettifica: nessuna. La derivazione C_V·n·ΔT = (3/2)nRΔT ⟹ C_V=(3/2)R e i valori C_V=(5/2)R per il gas biatomico e C_V=3R per il gas poliatomico sono stati verificati algebricamente con SymPy. L'esempio numerico (n=0,200 mol, ΔT=5 K) dà Q_V=12,465 J e Q_P=20,775 J con R=8,31 J/(mol·K): arrotondati a 12,5 J e 20,8 J, coincidono con la traccia.
 - Aggiunta: nessuna.
+
+## Unità 12 — Trasformazione isoterma
+- Parole: 368 su 1,4 pagine di traccia (pagina 22 intera — diagramma P-V, i due recipienti A e B, ΔE=0, primo principio Q=L, area sotto la curva, formula L=nRT·ln(Vf/Vi), analisi del segno — più la parte alta di pagina 23, fino all'esempio numerico con Q=480 J; il resto di pagina 23 appartiene già all'unità 13, trasformazione adiabatica)
+- Rettifica: nessuna. La formula L=nRT·ln(Vf/Vi) e il calcolo dell'esempio (n=0,50 mol, T=310 K, Vi=0,31 m³, Vf=0,45 m³) sono stati verificati con SymPy: L=480,0 J, coerente con il valore della traccia.
+- Aggiunta: nessuna riga di contenuto nuovo.
