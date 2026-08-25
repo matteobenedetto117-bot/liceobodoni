@@ -39,3 +39,8 @@
 - Parole: 177 su 0,4 pagine di traccia (parte alta di pagina 16, dal titolo "Trasformazioni Termodinamiche" fino a "NON POSSO TORNARE ALLO STATO INIZIALE"; il resto della pagina — trasformazione isobara e diagramma P-V — appartiene già all'unità 09)
 - Rettifica: nessuna. Non ci sono formule o valori numerici da verificare in questa unità.
 - Aggiunta: nessuna riga di contenuto nuovo. Lo schema SVG reversibile/irreversibile ridisegna le due frecce e i due riquadri già presenti nella traccia.
+
+## Unità 09 — Il lavoro di un gas e il diagramma P-V
+- Parole: 382 su 1,6 pagine di traccia (parte bassa di pagina 16 — trasformazione isobara, i due schemi del pistone, la derivazione F=PA, L=PΔV — più pagina 17 intera, dove il riquadro L=PΔV si generalizza all'area sotto la curva e compare la distinzione fra L>0 ed L<0; l'inizio di pagina 18 appartiene già all'unità 10, calore specifico a pressione costante)
+- Rettifica: nessuna. La derivazione L=F·Δh=P·A·Δh=P·ΔV è stata verificata algebricamente con SymPy (sostituendo Δh=ΔV/A si ottiene esattamente P·ΔV) e coincide con la traccia.
+- Aggiunta: nessuna riga di contenuto nuovo. La traccia non contiene un esempio numerico in questa unità; coerentemente con le unità 01, 03 e 04, già nella stessa condizione, non ne è stato inserito uno nuovo.
