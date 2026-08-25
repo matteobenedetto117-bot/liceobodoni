@@ -44,3 +44,8 @@
 - Parole: 382 su 1,6 pagine di traccia (parte bassa di pagina 16 — trasformazione isobara, i due schemi del pistone, la derivazione F=PA, L=PΔV — più pagina 17 intera, dove il riquadro L=PΔV si generalizza all'area sotto la curva e compare la distinzione fra L>0 ed L<0; l'inizio di pagina 18 appartiene già all'unità 10, calore specifico a pressione costante)
 - Rettifica: nessuna. La derivazione L=F·Δh=P·A·Δh=P·ΔV è stata verificata algebricamente con SymPy (sostituendo Δh=ΔV/A si ottiene esattamente P·ΔV) e coincide con la traccia.
 - Aggiunta: nessuna riga di contenuto nuovo. La traccia non contiene un esempio numerico in questa unità; coerentemente con le unità 01, 03 e 04, già nella stessa condizione, non ne è stato inserito uno nuovo.
+
+## Unità 10 — Trasformazione isobara e calore specifico a pressione costante
+- Parole: 342 su 2 pagine di traccia (pagina 18 intera — definizione di c_P in forma di massa e molare, primo principio applicato al gas monoatomico — più la parte alta di pagina 19, fino a C_P=4R per il gas poliatomico; il resto di pagina 19 è bianco e pagina 20 appartiene già all'unità 11, trasformazione isocora)
+- Rettifica: nessuna. La derivazione (3/2)nRΔT = C_P nΔT − nRΔT ⟹ C_P = (5/2)R è stata verificata algebricamente con SymPy, così come i valori C_P=(7/2)R per il gas biatomico e C_P=4R per il gas poliatomico, coerenti con Cv+R.
+- Aggiunta: nessuna.
