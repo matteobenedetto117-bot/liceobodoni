@@ -49,3 +49,8 @@
 - Parole: 342 su 2 pagine di traccia (pagina 18 intera — definizione di c_P in forma di massa e molare, primo principio applicato al gas monoatomico — più la parte alta di pagina 19, fino a C_P=4R per il gas poliatomico; il resto di pagina 19 è bianco e pagina 20 appartiene già all'unità 11, trasformazione isocora)
 - Rettifica: nessuna. La derivazione (3/2)nRΔT = C_P nΔT − nRΔT ⟹ C_P = (5/2)R è stata verificata algebricamente con SymPy, così come i valori C_P=(7/2)R per il gas biatomico e C_P=4R per il gas poliatomico, coerenti con Cv+R.
 - Aggiunta: nessuna.
+
+## Unità 11 — Trasformazione isocora e calore specifico a volume costante
+- Parole: 379 su 2 pagine di traccia (pagina 20 intera — diagramma P-V del segmento verticale, L=0, primo principio ΔE=Q, definizione di C_V e derivazione per il gas monoatomico — più la parte alta di pagina 21, fino a C_V=3R per il gas poliatomico e l'esempio numerico con Q_V e Q_P; il resto di pagina 21 è bianco e pagina 22 appartiene già all'unità 12, trasformazione isoterma)
+- Rettifica: nessuna. La derivazione C_V·n·ΔT = (3/2)nRΔT ⟹ C_V=(3/2)R e i valori C_V=(5/2)R per il gas biatomico e C_V=3R per il gas poliatomico sono stati verificati algebricamente con SymPy. L'esempio numerico (n=0,200 mol, ΔT=5 K) dà Q_V=12,465 J e Q_P=20,775 J con R=8,31 J/(mol·K): arrotondati a 12,5 J e 20,8 J, coincidono con la traccia.
+- Aggiunta: nessuna.
