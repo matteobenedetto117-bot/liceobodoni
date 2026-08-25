@@ -34,3 +34,8 @@
 - Parole: 479 su 3 pagine di traccia (pagine 13–15: principio zero e convenzione dei segni a pagina 13, i due casi limite — scatola sigillata e pistone — a pagina 14, la formula generale e l'esempio numerico a pagina 15; pagina 16 appartiene già all'unità 08, trasformazioni termodinamiche)
 - Rettifica: nessuna. L'energia interna iniziale (13712 J arrotondati), la variazione (-5,0×10³ J), l'energia interna finale (8712 J) e la temperatura finale (210 K) sono state verificate con SymPy usando R = 8,31 J/(mol·K) e coincidono con la traccia.
 - Aggiunta: nessuna riga di contenuto nuovo. L'unico scarto dalla traccia è l'enunciato in prosa del principio zero prima della formulazione ufficiale, indispensabile per rendere leggibile il disegno delle scatole A, B, C a chi non l'ha mai visto.
+
+## Unità 08 — Trasformazioni termodinamiche e funzioni di stato
+- Parole: 177 su 0,4 pagine di traccia (parte alta di pagina 16, dal titolo "Trasformazioni Termodinamiche" fino a "NON POSSO TORNARE ALLO STATO INIZIALE"; il resto della pagina — trasformazione isobara e diagramma P-V — appartiene già all'unità 09)
+- Rettifica: nessuna. Non ci sono formule o valori numerici da verificare in questa unità.
+- Aggiunta: nessuna riga di contenuto nuovo. Lo schema SVG reversibile/irreversibile ridisegna le due frecce e i due riquadri già presenti nella traccia.
