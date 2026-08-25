@@ -14,3 +14,8 @@
 - Parole: 345 su 2 pagine di traccia (pagine 5–6: dalla sezione "Legge di Boyle" a fondo pagina 5 fino alla famiglia di isoterme a fondo pagina 6; l'inizio di pagina 7 appartiene già alle leggi di Gay-Lussac, unità 04)
 - Rettifica: nessuna. La derivazione P₁V₁ = nRT = P₂V₂ ⟹ P₁V₁ = P₂V₂ è stata verificata algebricamente con SymPy e coincide con la traccia (simbolo n usato al posto della μ manoscritta, per coerenza con l'unità 02 già pubblicata).
 - Aggiunta: nessuna. La traccia non contiene un esempio numerico proprio di questa unità (l'unico esempio delle pagine vicine appartiene all'unità 02); non ne è stato inserito uno nuovo, in coerenza con l'unità 01 che si trova nella stessa condizione.
+
+## Unità 04 — Le leggi di Gay-Lussac: isobara e isocora
+- Parole: 399 su 3 pagine di traccia (pagine 7–9: pagina 7 prima legge/isobara, pagine 8–9 seconda legge/isocora con relativo grafico)
+- Rettifica: nessuna. Le due derivazioni (V₁/T₁=V₂/T₂ da P₁=P₂, e P₁/T₁=P₂/T₂ da V₁=V₂, a partire da P₁V₁=nRT₁ e P₂V₂=nRT₂) sono state verificate algebricamente con SymPy e coincidono con la traccia.
+- Aggiunta: nessuna. La traccia non contiene un esempio numerico in questa unità; coerentemente con le unità 01 e 03, già nella stessa condizione, non ne è stato inserito uno nuovo.
