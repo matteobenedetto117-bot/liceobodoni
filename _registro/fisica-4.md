@@ -29,3 +29,8 @@
 - Parole: 225 su 1,6 pagine di traccia (parte inferiore di pagina 11 — dalla tabella dei gradi di libertà per gas mono-, bi- e poliatomico — più pagina 12 intera, dove si passa dalla costante di Boltzmann alla costante dei gas R)
 - Rettifica: nessuna. Le tre formule dell'energia totale (3/2 NkT, 5/2 NkT, 3NkT e le corrispondenti in nRT) sono state verificate algebricamente con SymPy; il valore R = 8,31 J/(mol·K) è stato controllato contro N_A·k = 6,022×10²³ × 1,38×10⁻²³ ≈ 8,31, coerente con la traccia.
 - Aggiunta: nessuna riga di contenuto nuovo. L'unico scarto dalla traccia è nominare esplicitamente E_tot come "energia interna" nel paragrafo introduttivo, indispensabile perché è il termine usato nel titolo dell'unità e la traccia lo lascia implicito.
+
+## Unità 07 — Principio zero e primo principio della termodinamica
+- Parole: 479 su 3 pagine di traccia (pagine 13–15: principio zero e convenzione dei segni a pagina 13, i due casi limite — scatola sigillata e pistone — a pagina 14, la formula generale e l'esempio numerico a pagina 15; pagina 16 appartiene già all'unità 08, trasformazioni termodinamiche)
+- Rettifica: nessuna. L'energia interna iniziale (13712 J arrotondati), la variazione (-5,0×10³ J), l'energia interna finale (8712 J) e la temperatura finale (210 K) sono state verificate con SymPy usando R = 8,31 J/(mol·K) e coincidono con la traccia.
+- Aggiunta: nessuna riga di contenuto nuovo. L'unico scarto dalla traccia è l'enunciato in prosa del principio zero prima della formulazione ufficiale, indispensabile per rendere leggibile il disegno delle scatole A, B, C a chi non l'ha mai visto.
