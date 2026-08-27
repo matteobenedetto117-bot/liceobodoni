@@ -109,3 +109,8 @@
 - Parole: 475 (con simboli delle formule contati come parole) su 3 pagine di traccia (39–41)
 - Rettifica: nessuna, i calcoli della traccia sono stati verificati con SymPy e sono corretti.
 - Aggiunta: nessuna, oltre alle poche righe di collegamento fra un passaggio e il successivo già presenti nella traccia.
+
+## Unità 23 — Esempi di calcolo con la funzione d'onda
+- Parole: 247 su 1 pagina di traccia (pagina 42 intera: terzo punto dell'esempio già avviato nell'unità 22, t=4 s e x=0, con il grafico y-t a mano libera e il calcolo finale v=λ/T)
+- Rettifica: nessuna. Il valore y=-0,20 m è stato riverificato con SymPy usando la stessa funzione d'onda dell'unità 22 (progressiva, verso destra) valutata in x=0, t=4 s: il risultato coincide esattamente con quello scritto in traccia. Anche v=λ/T=3,4/1,6≈2,1 m/s è stato riverificato ed è corretto.
+- Aggiunta: una riga che spiega perché il segno davanti a t non conta in questo calcolo (il coseno è una funzione pari), indispensabile perché la traccia scrive "+2π/T·4s" senza commentare la discrepanza apparente col segno meno della formula generale.
