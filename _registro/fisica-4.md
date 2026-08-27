@@ -129,3 +129,8 @@
 - Parole: 430 su 2 pagine di traccia (pagine 46–47 intere: due esempi sul tempo totale fra caduta del sasso e risalita del suono in un pozzo)
 - Rettifica: sì, nell'esempio 2 (pagina 47). La traccia risolve l'equazione x²/vs + √(2/g)·x − 1,24 = 0 (con x=√d) e scrive come soluzioni x≈2,63 e d≈6,9 m. Verificato con SymPy: il discriminante Δ≈0,2185 è corretto come scritto in traccia, ma la radice va calcolata come x=(−√(2/g)+√Δ)/(2/vs)≈2,698, da cui d=x²≈7,28 m, non 6,9 m. Ho controllato anche per sostituzione diretta: con d=6,9 m si ottiene un tempo totale di 1,21 s, non 1,24 s; con d≈7,3 m il tempo torna 1,24 s. Ho corretto il valore finale a d≈7,3 m (x≈2,70) senza segnalarlo nella pagina.
 - Aggiunta: nessuna riga di contenuto nuovo oltre al collegamento fra i due esempi (la formula comune t_TOT=t_d+t_s) e un riquadro che spiega perché serve la sostituzione x=√d nell'esempio 2, passaggio implicito nella traccia ma non commentato a parole.
+
+## Unità 27 — Intensità del suono e sorgente puntiforme
+- Parole: 365 su 3 pagine di traccia (pagine 48–50 intere: definizione I=E/(A·t) e I=P/A con l'unità di misura W/m², la sorgente puntiforme con I=P/(4πr²), e l'esempio con r1=1 m, r2=4,25 m)
+- Rettifica: nessuna. I quattro valori dell'esempio (P≈3,52×10⁻⁵ W, I2≈1,55×10⁻⁷ W/m², P_ass≈5,58×10⁻¹¹ W, E_ass≈1,12×10⁻⁹ J) sono stati verificati con SymPy e coincidono con la traccia.
+- Aggiunta: nessuna riga di contenuto nuovo.
