@@ -144,3 +144,8 @@
 - Parole: 268 su 2 pagine di traccia (pagine 53–54; la pagina 53 è condivisa con l'unità 28, di cui è stata usata solo la parte superiore fino al calcolo di I_T)
 - Rettifica: nessuna. Le due frequenze dell'esempio (u=32 m/s, f=150 Hz, v_s=343 m/s) sono state verificate con SymPy: f'≈164 Hz in avvicinamento, f'≈136 Hz in allontanamento, coincidono con la traccia.
 - Aggiunta: nessuna riga di contenuto nuovo; ho solo esplicitato a parole perché la lunghezza d'onda resta quella emessa dalla sorgente ferma, passaggio implicito nel calcolo della traccia.
+
+## Unità 30 — Effetto Doppler: sorgente in movimento
+- Parole: 365 su 2 pagine di traccia (pagine 55–56 intere: derivazione di λ'=(v_s−u)T e delle due formule per sorgente in avvicinamento/allontanamento, più la formula compatta generale con osservatore e sorgente entrambi in moto)
+- Rettifica: nessuna. Verificato con SymPy: la derivazione f'=v_s/((v_s−u)T)=f/(1−u/v_s) e la sua analoga per l'allontanamento sono algebricamente corrette; la formula compatta generale si riduce correttamente, per u_oss=0, alla formula qui derivata, e per u_sorg=0, alla formula dell'osservatore in moto dell'unità 29.
+- Aggiunta: un solo esempio numerico, perché le pagine 55–56 non ne contengono nessuno (a differenza dell'unità 29, che condivide con questa lo stesso schema espositivo ma include l'esempio sulla propria pagina). Ho riusato gli stessi dati dell'esempio dell'unità 29 (u=32 m/s, f=150 Hz, v_s=343 m/s) applicati ora al caso della sorgente in moto, ottenendo f'≈165 Hz in avvicinamento e f'≈137 Hz in allontanamento, verificati con SymPy; l'ho scelto apposta uguale per permettere il confronto diretto fra i due meccanismi, osservazione resa in una riga di testo.
