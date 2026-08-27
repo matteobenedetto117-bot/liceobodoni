@@ -119,3 +119,8 @@
 - Parole: 414 su 2 pagine di traccia (pagine 43–44 intere: schema dell'altoparlante con membrana, rarefazioni e compressioni, le tre istantanee dell'onda in avanzamento, le due funzioni d'onda armoniche d(x,t) e p(x,t) con densità e pressione massime, il riquadro vs=343 m/s e le tre grandezze da cui dipende la velocità del suono; pagina 45, con la frequenza udibile e l'indipendenza della velocità dalla frequenza, appartiene già all'unità 25)
 - Rettifica: nessuna. Le due funzioni d'onda hanno la stessa forma "onda progressiva" già stabilita e verificata nell'unità 22 (coerente con la convenzione di segno lì controllata); il valore vs=343 m/s è una costante di riferimento riportata come in traccia, non un calcolo da rifare.
 - Aggiunta: nessuna riga di contenuto nuovo. Ho aggiunto solo la premessa che richiama il confronto con le onde trasversali già viste (onda su una corda) e una riga che nomina esplicitamente la differenza fra direzione di oscillazione delle particelle e direzione di propagazione, già mostrata dai due disegni della traccia ma non detta a parole.
+
+## Unità 25 — Frequenza di un'onda sonora
+- Parole: 275 su 1 pagina di traccia (pag. 45)
+- Rettifica: nessuna, i dati della traccia (55 Hz, 4187 Hz, intervallo 20–20000 Hz) sono coerenti e sono stati verificati con SymPy (v_s = λf, dλ/df < 0).
+- Aggiunta: nessuna aggiunta di contenuto; ho inserito un solo strumento interattivo (cursore di frequenza) che mostra numericamente la relazione v_s = λf e la zona dello spettro già presenti nella traccia, senza introdurre concetti nuovi.
