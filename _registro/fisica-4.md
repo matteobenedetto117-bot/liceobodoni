@@ -154,3 +154,8 @@
 - Parole: 260 su 1 pagina di traccia (pagina 57 intera: lo schema del muro del suono con u=v e le circonferenze tangenti nello stesso punto, e lo schema del cono di Mach con u>v e le circonferenze 1, 2, 3 inviluppate dalla retta tangente comune)
 - Rettifica: nessuna. Ho verificato con SymPy che il limite di f'=f/(1−u/v_s) per u→v_s tende a infinito, coerente con l'osservazione già anticipata nella sezione "Nelle prossime unità" dell'unità 30 e con quanto disegnato in questa pagina.
 - Aggiunta: nessuna riga di contenuto nuovo. La pagina resta ai due schemi concettuali (muro del suono, cono di Mach) senza la formula dell'angolo del cono, che la traccia non scrive.
+
+## Unità 32 — Sovrapposizione e interferenza
+- Parole: 659 su 5 pagine di traccia (pagine 58–62 intere: schema delle due sorgenti S1, S2 e dei cammini L1, L2 verso l'osservatore, le due espressioni delle onde valutate nel punto di arrivo, il caso 1 con derivazione fino a y_TOT=2y1 e il richiamo a pressione/densità, il disegno dell'interferenza costruttiva, il caso 2 con derivazione fino a y_TOT=0, il disegno dell'interferenza distruttiva, e l'esempio numerico con D=4,30 m, f=221 Hz, d1=2,80 m; pagina 63, con il titolo "Onde in una corda fissata agli estremi", appartiene già all'unità 33, onde stazionarie)
+- Rettifica: nessuna. Ho verificato con SymPy le due identità trigonometriche usate nelle derivazioni (cos(θ+2mπ)=cos(θ) e cos(θ+π)=−cos(θ)) e tutti i valori numerici dell'esempio: λ=343/221≈1,55 m, d2=√(2,80²+4,30²)≈5,13 m, d2−d1≈2,33 m, (d2−d1)/λ≈1,50; coincidono tutti con la traccia.
+- Aggiunta: nessuna riga di contenuto nuovo.
