@@ -99,3 +99,8 @@
 - Parole: 260 su 1,5 pagine di traccia (pagina 36 intera — cresta, ventre, ampiezza A, lunghezza d'onda λ con la definizione di punti corrispondenti, il riquadro periodo T e il riquadro f=1/T — più la parte alta di pagina 37, i due riquadri della velocità di propagazione v=λ/T e v=λf; il titolo "ONDE STAZIONARIE" con la sua unica riga di definizione, scritto in fondo a pagina 37 senza alcuno sviluppo, non è stato ripreso: l'argomento ha una trattazione propria più avanti nel percorso, all'unità sulle onde stazionarie su una corda fissata agli estremi)
 - Rettifica: nessuna. Le due relazioni f=1/T e v=λ/T=λf sono state verificate con SymPy: dimensionalmente f è l'inverso di un tempo e v è una lunghezza diviso un tempo, coerenti con le unità di misura scritte in traccia.
 - Aggiunta: nessuna riga di contenuto nuovo. Ho aggiunto solo la frase che spiega perché v=λ/T, cioè che in un periodo l'onda avanza esattamente di una lunghezza d'onda: è il passaggio implicito fra i due riquadri della traccia, che li presenta senza collegarli a parole.
+
+## Unità 21 — Onde su una corda
+- Parole: 226 su 1 pagina di traccia (pagina 38 intera: titolo, disegno della corda con la velocità v, densità lineare μ=m/L con l'unità di misura, il riquadro v=√(F/μ) presentato come risultato sperimentale senza derivazione, la tensione F, e l'esempio numerico)
+- Rettifica: nessuna. Il calcolo dell'esempio (F=0,8 N, μ=0,3 kg/m) è stato verificato con SymPy: v=√(0,8/0,3)≈1,633 m/s, arrotondato a 1,63 m/s come in traccia.
+- Aggiunta: nessuna riga di contenuto nuovo. La formula v=√(F/μ) resta un risultato sperimentale non dimostrato, come nella traccia; il disegno della corda con l'onda in propagazione ridisegna in SVG lo schizzo già presente.
