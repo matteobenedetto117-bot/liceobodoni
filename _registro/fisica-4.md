@@ -134,3 +134,8 @@
 - Parole: 365 su 3 pagine di traccia (pagine 48–50 intere: definizione I=E/(A·t) e I=P/A con l'unità di misura W/m², la sorgente puntiforme con I=P/(4πr²), e l'esempio con r1=1 m, r2=4,25 m)
 - Rettifica: nessuna. I quattro valori dell'esempio (P≈3,52×10⁻⁵ W, I2≈1,55×10⁻⁷ W/m², P_ass≈5,58×10⁻¹¹ W, E_ass≈1,12×10⁻⁹ J) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna riga di contenuto nuovo.
+
+## Unità 28 — Livello di intensità sonora e decibel
+- Parole: 357 su circa 2,5 pagine di traccia (pagine 51–53: la pagina 53 è condivisa con l'unità 29, "Effetto Doppler", di cui è stata usata solo la parte superiore fino al calcolo di I_T)
+- Rettifica: nessuna. Tutti i valori della traccia (β≈66 dB, β≈69 dB per il raddoppio di intensità, +3,01 dB come conseguenza generale del raddoppio, I_D=1 W/m² alla soglia del dolore, I_T=10⁴ W/m² alla rottura del timpano) sono stati verificati con SymPy e coincidono.
+- Aggiunta: nessuna, oltre alla frase che spiega da dove viene il +3 dB generale (passaggio già presente in traccia come calcolo, reso a parole).
