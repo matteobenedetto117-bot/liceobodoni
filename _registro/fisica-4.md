@@ -139,3 +139,8 @@
 - Parole: 357 su circa 2,5 pagine di traccia (pagine 51–53: la pagina 53 è condivisa con l'unità 29, "Effetto Doppler", di cui è stata usata solo la parte superiore fino al calcolo di I_T)
 - Rettifica: nessuna. Tutti i valori della traccia (β≈66 dB, β≈69 dB per il raddoppio di intensità, +3,01 dB come conseguenza generale del raddoppio, I_D=1 W/m² alla soglia del dolore, I_T=10⁴ W/m² alla rottura del timpano) sono stati verificati con SymPy e coincidono.
 - Aggiunta: nessuna, oltre alla frase che spiega da dove viene il +3 dB generale (passaggio già presente in traccia come calcolo, reso a parole).
+
+## Unità 29 — Effetto Doppler: osservatore in movimento
+- Parole: 268 su 2 pagine di traccia (pagine 53–54; la pagina 53 è condivisa con l'unità 28, di cui è stata usata solo la parte superiore fino al calcolo di I_T)
+- Rettifica: nessuna. Le due frequenze dell'esempio (u=32 m/s, f=150 Hz, v_s=343 m/s) sono state verificate con SymPy: f'≈164 Hz in avvicinamento, f'≈136 Hz in allontanamento, coincidono con la traccia.
+- Aggiunta: nessuna riga di contenuto nuovo; ho solo esplicitato a parole perché la lunghezza d'onda resta quella emessa dalla sorgente ferma, passaggio implicito nel calcolo della traccia.
