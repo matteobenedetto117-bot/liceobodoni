@@ -124,3 +124,8 @@
 - Parole: 275 su 1 pagina di traccia (pag. 45)
 - Rettifica: nessuna, i dati della traccia (55 Hz, 4187 Hz, intervallo 20–20000 Hz) sono coerenti e sono stati verificati con SymPy (v_s = λf, dλ/df < 0).
 - Aggiunta: nessuna aggiunta di contenuto; ho inserito un solo strumento interattivo (cursore di frequenza) che mostra numericamente la relazione v_s = λf e la zona dello spettro già presenti nella traccia, senza introdurre concetti nuovi.
+
+## Unità 26 — Esempi: il sasso nel pozzo
+- Parole: 430 su 2 pagine di traccia (pagine 46–47 intere: due esempi sul tempo totale fra caduta del sasso e risalita del suono in un pozzo)
+- Rettifica: sì, nell'esempio 2 (pagina 47). La traccia risolve l'equazione x²/vs + √(2/g)·x − 1,24 = 0 (con x=√d) e scrive come soluzioni x≈2,63 e d≈6,9 m. Verificato con SymPy: il discriminante Δ≈0,2185 è corretto come scritto in traccia, ma la radice va calcolata come x=(−√(2/g)+√Δ)/(2/vs)≈2,698, da cui d=x²≈7,28 m, non 6,9 m. Ho controllato anche per sostituzione diretta: con d=6,9 m si ottiene un tempo totale di 1,21 s, non 1,24 s; con d≈7,3 m il tempo torna 1,24 s. Ho corretto il valore finale a d≈7,3 m (x≈2,70) senza segnalarlo nella pagina.
+- Aggiunta: nessuna riga di contenuto nuovo oltre al collegamento fra i due esempi (la formula comune t_TOT=t_d+t_s) e un riquadro che spiega perché serve la sostituzione x=√d nell'esempio 2, passaggio implicito nella traccia ma non commentato a parole.
