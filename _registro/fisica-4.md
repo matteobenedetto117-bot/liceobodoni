@@ -189,3 +189,8 @@
 - Parole: 254 su 1 pagina di traccia (pagina 73 intera: la definizione contrapposta di conduttore e isolante secondo la libertà di movimento delle cariche, e i due schemi di elettrizzazione di un conduttore — per strofinio con bacchetta e panno, e per contatto fra bacchetta carica e sfera neutra, con la distribuzione delle cariche su tutta la superficie per repulsione reciproca e la variante con sfera più piccola)
 - Rettifica: nessuna. Il contenuto è interamente qualitativo, senza formule o calcoli numerici da verificare.
 - Aggiunta: nessuna riga di contenuto nuovo. Ho ridisegnato in SVG i due schemi della traccia (strofinio di un conduttore, e contatto fra bacchetta carica e sfera neutra con distribuzione delle cariche sulla superficie).
+
+## Unità 39 — Elettrizzazione per induzione e polarizzazione degli isolanti
+- Parole: 422 su 2 pagine di traccia (pagina 74 intera: titolo "Per induzione", i tre schemi della sfera conduttrice avvicinata alla bacchetta carica con separazione delle cariche, il collegamento a terra con deflusso delle cariche negative, e la sfera che resta carica positivamente; pagina 75 intera: titolo "Polarizzazione degli isolanti", lo schema della sfera isolante con i dipoli — i "blocchetti con doppia carica" — orientati a caso, e lo schema della sfera vicino alla bacchetta con i dipoli allineati, polo positivo verso la bacchetta e polo negativo dal lato opposto)
+- Rettifica: nessuna. Il contenuto è interamente qualitativo, senza formule o calcoli numerici da verificare.
+- Aggiunta: nessuna riga di contenuto nuovo. Ho ridisegnato in SVG i tre schemi dell'induzione (separazione delle cariche, scarico a terra, sfera carica) e i due schemi della polarizzazione (dipoli a caso, dipoli allineati vicino alla bacchetta).
