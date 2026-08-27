@@ -104,3 +104,8 @@
 - Parole: 226 su 1 pagina di traccia (pagina 38 intera: titolo, disegno della corda con la velocità v, densità lineare μ=m/L con l'unità di misura, il riquadro v=√(F/μ) presentato come risultato sperimentale senza derivazione, la tensione F, e l'esempio numerico)
 - Rettifica: nessuna. Il calcolo dell'esempio (F=0,8 N, μ=0,3 kg/m) è stato verificato con SymPy: v=√(0,8/0,3)≈1,633 m/s, arrotondato a 1,63 m/s come in traccia.
 - Aggiunta: nessuna riga di contenuto nuovo. La formula v=√(F/μ) resta un risultato sperimentale non dimostrato, come nella traccia; il disegno della corda con l'onda in propagazione ridisegna in SVG lo schizzo già presente.
+
+## Unità 22 — La funzione d'onda armonica
+- Parole: 475 (con simboli delle formule contati come parole) su 3 pagine di traccia (39–41)
+- Rettifica: nessuna, i calcoli della traccia sono stati verificati con SymPy e sono corretti.
+- Aggiunta: nessuna, oltre alle poche righe di collegamento fra un passaggio e il successivo già presenti nella traccia.
