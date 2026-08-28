@@ -224,3 +224,8 @@
 - Parole: 289 su circa 0,7 pagine di traccia (pagina 84 dal punto in cui riprende dopo l'unità 44, da "Flusso del Campo Elettrico" in poi: la superficie piana con il vettore area A perpendicolare ad essa, l'angolo θ fra A e il campo E, e la formula Φ(E) = E·A = EA cosθ; pagina 85 solo l'inizio: i due schemi con θ = 0 (flusso massimo) e θ = 90° (flusso minimo) — mi sono fermato lì perché il resto della pagina 85 apre "Teorema di Gauss", che appartiene all'unità 46)
 - Rettifica: nessuna. Ho verificato con SymPy che EA cos(0) = EA e EA cos(90°) = 0, coerenti con i due casi della traccia.
 - Aggiunta: nessuna riga di contenuto nuovo. Ho sostituito i due schemi statici dei casi limite con un unico cursore interattivo che ruota la superficie da θ = 0 a θ = 90°, mostrando lo stesso contenuto della traccia in forma continua invece che in due disegni separati.
+
+## Unità 46 — Teorema di Gauss
+- Parole: 378 su circa 1,5 pagine di traccia (pagina 85 dal punto in cui riprende dopo l'unità 45, da "Teorema di Gauss" in poi: la superficie sferica con carica q al centro, la derivazione Φ(E) = E·A = [1/(4πε₀)·q/r²]·4πr² = q/ε₀, e la frase che il risultato vale qualunque sia la superficie chiusa e ovunque si trovi la carica all'interno; pagina 86 intera: il riquadro con Φ(E) = q/ε₀ e l'etichetta "carica totale contenuta nella superficie chiusa", il caso della carica esterna con Φ(E) = 0, e i due schemi di superfici irregolari con carica interna ed esterna) — mi sono fermato lì perché pagina 87 apre "Campi generati da distribuzioni di cariche" con il filo infinito, che appartiene all'unità 47
+- Rettifica: nessuna. Ho verificato con SymPy che [1/(4πε₀)·q/r²]·4πr² si semplifica correttamente a q/ε₀.
+- Aggiunta: nessuna riga di contenuto nuovo.
