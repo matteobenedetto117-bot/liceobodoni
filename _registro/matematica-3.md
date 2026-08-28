@@ -13,3 +13,8 @@
 - Parole: 250 su 2 pagine di traccia (pagine 7–8)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che $f(-x)=f(x)$ per $f(x)=x^2$ e che $f(-x)=-f(x)$ per $f(x)=x^3+x$.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+
+## Unità 03 — Funzioni numeriche, campo di esistenza, zeri e intersezioni
+- Parole: 337 su circa 2,3 pagine di traccia (dalla fine di pagina 5, dopo gli esempi di retta e parabola già assorbiti nell'unità 2, a inizio pagina 7, prima che cominci l'unità 4 su funzioni pari e dispari)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che $x^2+3x+2=(x+1)(x+2)$, che gli zeri sono $-2$ e $-1$, e che $f(0)=2$.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
