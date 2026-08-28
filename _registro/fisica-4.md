@@ -274,3 +274,8 @@
 - Parole: 237 su circa 1,5 pagine di traccia (parte finale di pagina 104, dalla ripresa dopo l'unità 54: titolo "Conservazione dell'energia", il disegno del campo uniforme con una carica +q che si muove con velocità v₁ e v₂, l'enunciato "la forza elettrica è una forza conservativa" con K₁+U₁=K₂+U₂, K=½mv² e U=qV; pagina 105 intera: la formula generale ½mv₁²+qV₁=½mv₂²+qV₂ e l'Esempio 1 con ΔV=60,0 V, v₁=0, m=1,75·10⁻⁵ kg, q=5,20·10⁻⁵ C, risolto fino a v₂=18,9 m/s; la pagina 106 inizia "Condensatori", appartenente all'unità 56)
 - Rettifica: nessuna. Ho verificato con SymPy il risultato v₂ = √(2qΔV/m) ≈ 18,9 m/s con i dati della traccia, ed è corretto.
 - Aggiunta: nessuna riga di contenuto nuovo.
+
+## Unità 56 — I condensatori e la capacità
+- Parole: 363 su 2 pagine di traccia (pagina 106 intera: titolo "CONDENSATORI", il disegno del condensatore a facce piane collegato alla batteria con cariche +Q/-Q e campo E, la definizione E = σ/ε₀, l'osservazione che raddoppiando ΔV la carica Q raddoppia, e la definizione di capacità C = Q/ΔV; pagina 107 intera: titolo "Capacità di un condensatore a facce piane parallele", il disegno con area A e distanza d, la derivazione E = σ/ε₀ = Q/(Aε₀), ΔV = Ed = Qd/(Aε₀), C = Q/ΔV = Aε₀/d, e la verifica dimensionale [C] = [Q]/[ΔV] = C/V = F; la pagina 108 prosegue con il dielettrico e l'energia immagazzinata, appartenenti all'unità 57)
+- Rettifica: nessuna. Ho verificato con SymPy che la sostituzione algebrica E = Q/(Aε₀), ΔV = Ed, C = Q/ΔV porta esattamente a C = Aε₀/d.
+- Aggiunta: nessuna riga di contenuto nuovo.
