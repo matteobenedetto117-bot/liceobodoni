@@ -341,3 +341,8 @@
 - Aggiunta: nessuna riga di contenuto nuovo. Il grafico interattivo con cursore per τ visualizza lo stesso confronto fra due costanti di tempo già presente come doppia curva nel disegno della traccia, non un contenuto ulteriore.
 
 Nota tecnica: durante la verifica ho copiato per errore due cartelle di controllo (`unit68check`, `assets_check`) dentro `outputs/_tmp_render/`, oltre ai `pag-NN.png` previsti. Non potendo cancellarle dalla cartella outputs, restano lì; non contengono dati sensibili e le prossime esecuzioni non le toccano.
+
+## Unità 69 — Circuiti RC: la corrente
+- Parole: 293 su 1 pagina di traccia (pagina 126 intera: la verifica delle unità di misura di τ=RC a partire da [R]=ΔV/i e [C]=Q/ΔV, il titolo "Corrente in un circuito RC" con la formula i(t)=(ε/R)e^(−t/τ), il valore i(0)=ε/R come corrente massima appena chiuso l'interruttore, il limite per t→∞=0, il disegno del circuito con la freccia della maglia e l'equazione ε−Ri(t)−ΔV_C=0, la sostituzione ΔV_C=q(t)/C, e la verifica al tempo t=0 con q(0)=0 che dà i(0)=ε/R; pagina 127 bianca, come indicato nelle note della classe)
+- Rettifica: nessuna. Ho verificato con SymPy che i(t)=dq/dt del circuito RC di carica dell'unità precedente coincide esattamente con (ε/R)e^(−t/τ), che i(0)=ε/R e che il limite per t→∞ è zero; ho anche verificato dimensionalmente [R]=V·s/C, [C]=C/V, [RC]=s.
+- Aggiunta: nessuna riga di contenuto nuovo, solo la frase di apertura che lega la corrente decrescente alla carica crescente dell'unità precedente, e la chiusura che segnala la fine del programma di fisica quarta al posto del consueto rimando alla prossima unità (non essendocene una).
