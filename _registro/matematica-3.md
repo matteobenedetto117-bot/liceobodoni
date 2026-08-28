@@ -18,3 +18,8 @@
 - Parole: 337 su circa 2,3 pagine di traccia (dalla fine di pagina 5, dopo gli esempi di retta e parabola già assorbiti nell'unità 2, a inizio pagina 7, prima che cominci l'unità 4 su funzioni pari e dispari)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che $x^2+3x+2=(x+1)(x+2)$, che gli zeri sono $-2$ e $-1$, e che $f(0)=2$.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+
+## Unità 05 — Funzioni definite a tratti
+- Parole: 269 su 1 pagina di traccia (pagina 9)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che la scrittura a tratti di $y=|x|$ coincide con $\text{Abs}(x)$ su vari valori, e che nell'esempio con tre pezzi ($3x$, $x^2$, $\sqrt{x}+8$) i valori non coincidono agli estremi: $3\cdot(-5)=-15\ne(-5)^2=25$ e $7^2=49\ne\sqrt7+8\approx10{,}6$, confermando i due salti mostrati nel grafico della traccia.
+- Aggiunta: la formulazione generale a $n$ pezzi con la notazione $I_1,I_2,\dots$ è solo un'esplicitazione della graffa già usata nella traccia per $|x|$ e per l'esempio a tre pezzi, non un contenuto nuovo.
