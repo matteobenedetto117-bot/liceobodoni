@@ -219,3 +219,8 @@
 - Parole: 266 su 1,3 pagine di traccia (pagine 83–84, fino a "127.")
 - Rettifica: nessuna, le formule con ε₀·εr sono state verificate con SymPy (riduzione a Coulomb nel vuoto per εr=1, coerenza dei rapporti numerici con i valori di carta/vetro/acqua della traccia).
 - Aggiunta: nessuna oltre allo svolgimento in parole della definizione di εr e al disegno delle due cariche immerse nel dielettrico (ripreso dallo schizzo della traccia).
+
+## Unità 45 — Flusso del campo elettrico
+- Parole: 289 su circa 0,7 pagine di traccia (pagina 84 dal punto in cui riprende dopo l'unità 44, da "Flusso del Campo Elettrico" in poi: la superficie piana con il vettore area A perpendicolare ad essa, l'angolo θ fra A e il campo E, e la formula Φ(E) = E·A = EA cosθ; pagina 85 solo l'inizio: i due schemi con θ = 0 (flusso massimo) e θ = 90° (flusso minimo) — mi sono fermato lì perché il resto della pagina 85 apre "Teorema di Gauss", che appartiene all'unità 46)
+- Rettifica: nessuna. Ho verificato con SymPy che EA cos(0) = EA e EA cos(90°) = 0, coerenti con i due casi della traccia.
+- Aggiunta: nessuna riga di contenuto nuovo. Ho sostituito i due schemi statici dei casi limite con un unico cursore interattivo che ruota la superficie da θ = 0 a θ = 90°, mostrando lo stesso contenuto della traccia in forma continua invece che in due disegni separati.
