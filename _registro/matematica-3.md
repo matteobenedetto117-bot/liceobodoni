@@ -23,3 +23,8 @@
 - Parole: 269 su 1 pagina di traccia (pagina 9)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che la scrittura a tratti di $y=|x|$ coincide con $\text{Abs}(x)$ su vari valori, e che nell'esempio con tre pezzi ($3x$, $x^2$, $\sqrt{x}+8$) i valori non coincidono agli estremi: $3\cdot(-5)=-15\ne(-5)^2=25$ e $7^2=49\ne\sqrt7+8\approx10{,}6$, confermando i due salti mostrati nel grafico della traccia.
 - Aggiunta: la formulazione generale a $n$ pezzi con la notazione $I_1,I_2,\dots$ è solo un'esplicitazione della graffa già usata nella traccia per $|x|$ e per l'esempio a tre pezzi, non un contenuto nuovo.
+
+## Unità 06 — Funzioni composte
+- Parole: 301 su 2 pagine di traccia (pagine 10–11)
+- Rettifica: nei due diagrammi a insiemi della traccia (pagina 10) l'arco composito in alto è etichettato seguendo l'ordine di lettura dei passaggi (prima la mappa scritta a sinistra, poi quella a destra) invece della convenzione standard, per cui $(f\circ g)(x)=f(g(x))$ significa applicare prima $g$. Ho ridisegnato un solo diagramma A→B→C con $g$ poi $f$, etichettato $f\circ g$ in modo coerente con le formule della traccia, che sono invece corrette: verificato con SymPy che per $f(x)=2x+3$, $g(x)=1/x$ si ha $(f\circ g)(x)=2/x+3$ e $(g\circ f)(x)=1/(2x+3)$; e che per $f(x)=3x^2-2x$, $g(x)=x-3$ si ha $(f\circ g)(x)=3x^2-20x+33$ e $(g\circ f)(x)=3x^2-2x-3$.
+- Aggiunta: la frase sul dominio della composta ("$x$ deve stare nel dominio di $g$ e $g(x)$ nel dominio di $f$") esplicita una condizione già implicita nel diagramma a insiemi (il percorso $A\to B\to C$ richiede che l'immagine di $g$ ricada nel dominio di $f$); non introduce un contenuto nuovo.
