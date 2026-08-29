@@ -78,3 +78,8 @@
 - Parole: 301 su 2 pagine di traccia (pagine 31–32)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy le identità cos²(α/2)=(1+cosα)/2, sin²(α/2)=(1−cosα)/2, la dimostrazione di tan(α/2)=sinα/(1+cosα) per moltiplicazione e semplificazione, e l'esempio con α=30°: cos15°=(√6+√2)/4 e tan15°=2−√3, entrambi confermati simbolicamente.
 - Aggiunta: un solo esempio numerico (α=30° per calcolare cos15° e tan15°), perché queste due pagine derivano solo le formule senza applicarle a un caso concreto. Aggiunta anche una breve nota sul criterio di scelta del segno ±, indispensabile per capire come si usano le formule della radice.
+
+## Unità 17 — Formule parametriche
+- Parole: 178 su 2 pagine di traccia (pagine 33–34)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'identità sinα = 2t/(1+t²) e cosα = (1−t²)/(1+t²) con t = tan(α/2), per sostituzione simbolica a partire dalle formule di duplicazione, ed è confermato l'esempio con tan(α/2)=2, da cui sinα=4/5 e cosα=−3/5.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La condizione di applicabilità (α ≠ π + 2kπ), scritta in cima a pagina 35 subito prima del titolo dell'unità successiva, è stata inclusa qui perché riguarda esclusivamente le formule parametriche.
