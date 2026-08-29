@@ -43,3 +43,8 @@
 - Parole: 508 su circa 3,3 pagine di traccia (pagine 16–18, più il breve riquadro di sintesi in cima a pagina 19 prima che inizi l'unità 10 sulla prima relazione fondamentale)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy i quattro valori notevoli (sin e cos di 0, π/2, π, 3π/2), l'identità di parità sin(−α)=−sinα, cos(−α)=cosα, e la periodicità sin(α+2π)=sinα, cos(α+2π)=cosα.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Il diagramma dei quattro quadranti unisce in un solo disegno le quattro piccole circonferenze separate della traccia (una per ciascun valore notevole), senza aggiungere informazione.
+
+## Unità 10 — Prima relazione fondamentale
+- Parole: 252 su 1 pagina di traccia (pagina 19)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'esempio: da sinα=7/25 con 0<α<π/2 si ricava cos²α=1-49/625=576/625 e cosα=24/25 (radice positiva, primo quadrante).
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Il disegno rifà il triangolo rettangolo inscritto già presente nella traccia, con le coordinate ricalcolate perché fosse geometricamente coerente (punto B davvero sulla circonferenza).
