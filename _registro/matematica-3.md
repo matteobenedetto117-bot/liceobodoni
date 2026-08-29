@@ -48,3 +48,8 @@
 - Parole: 252 su 1 pagina di traccia (pagina 19)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'esempio: da sinα=7/25 con 0<α<π/2 si ricava cos²α=1-49/625=576/625 e cosα=24/25 (radice positiva, primo quadrante).
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Il disegno rifà il triangolo rettangolo inscritto già presente nella traccia, con le coordinate ricalcolate perché fosse geometricamente coerente (punto B davvero sulla circonferenza).
+
+## Unità 11 — Tangente, cotangente, secante e cosecante
+- Parole: 491 su 3 pagine di traccia (pagine 20–22)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che tan α e 1/cot α coincidono identicamente, che tan(π/6)=√3/3, tan(π/3)=√3, tan(π/4)=1 come nei calcoli della pagina successiva, e che i domini dei quattro reciproci corrispondono agli zeri di seno e coseno.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Lo strumento interattivo unisce in un solo disegno manovrabile i due schizzi separati della traccia (il segmento della tangente a pagina 20 e quello della cotangente a pagina 22), mostrando entrambi insieme al variare dello stesso angolo, senza introdurre informazione nuova.
