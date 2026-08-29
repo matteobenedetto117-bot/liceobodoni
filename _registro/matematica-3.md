@@ -103,3 +103,8 @@
 - Parole: 223 su 1 pagina di traccia (pagina 44; la pagina 43 continua l'unità 20, come già annotato nel registro dell'unità 20, e le pagine 45–46 sono bianche)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy il passaggio y=mx+q, y_P=m x_P+q → y-y_P=m(x-x_P), e l'esempio P(1;2), m=3/4 → y=(3/4)x+(5/4).
 - Aggiunta: le condizioni di parallelismo (m1=m2) e perpendicolarità (m1·m2=-1), enunciate senza dimostrazione in una sola nota. Non compaiono scritte nelle pagine 43–44, ma il titolo dell'unità le nomina esplicitamente e l'unità 20 (già pubblicata) le cita già come contenuto previsto per questa unità ("...e per riconoscere quando due rette sono parallele o perpendicolari"); inoltre servono a breve termine (unità 25, tangenti a una circonferenza). Ho aggiunto solo l'enunciato, senza derivarlo, trattandolo come regola indispensabile e non come dimostrazione mancante.
+
+## Unità 22 — Definizione ed equazione della circonferenza
+- Parole: 317 su 3 pagine di traccia (pagine 47–49; la pagina 46 è bianca, la pagina 50 apre già l'unità 23 "dall'equazione al grafico")
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy la derivazione $x^2+y^2=r^2\cos^2\theta+r^2\sin^2\theta=r^2$, l'esempio $x^2+y^2=25\Rightarrow r=5$, l'esempio $(x+1)^2+(y-3)^2=4\Rightarrow C(-1;3), r=2$, e lo sviluppo di $(x-\alpha)^2+(y-\beta)^2=r^2$ in $x^2+y^2+ax+by+c=0$ con $a=-2\alpha$, $b=-2\beta$, $c=\alpha^2+\beta^2-r^2$.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
