@@ -58,3 +58,8 @@
 - Parole: 193 su circa 1,5 pagine di traccia (dalla seconda metà di pagina 22, dove inizia "Angoli particolari" dopo la cotangente dell'unità 11, a fine pagina 23, prima che inizi l'unità 13 sugli angoli associati a pagina 24).
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutti i dodici valori (sin, cos, tan, cot per π/6, π/4, π/3) e la coerenza di tan=sin/cos, cot=1/tan in ciascun caso, incluso il passaggio di razionalizzazione 1/√3=√3/3.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Per 60° e 45° la traccia dà i quattro valori senza riderivare i passaggi (già fatti per 30°): ho rispettato questa scelta, senza ripetere la derivazione.
+
+## Unità 13 — Angoli associati
+- Parole: 385 su 2 pagine di traccia (pagine 24–25)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutte le otto identità (2π−α, −α, π−α, π+α, π/2−α, π/2+α, 3π/2−α, 3π/2+α) tramite sviluppo simbolico di seno e coseno, confermando che coincidono esattamente con i valori della traccia.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La traccia disegna una figura completa (con segmenti di tangente e cotangente) solo per il primo caso e figure essenziali (solo i due raggi) per gli altri sette; ho reso tutte le otto figure nello stesso stile essenziale già usato nelle unità precedenti (raggio e proiezioni di seno/coseno), per coerenza visiva con il resto del percorso, senza aggiungere contenuto.
