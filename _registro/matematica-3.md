@@ -38,3 +38,8 @@
 - Parole: 352 su 2 pagine di traccia (pagine 14–15)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che $60^\circ$ corrisponde a $\pi/3$ radianti tramite la proporzione $\alpha^\circ/360^\circ=\alpha_{rad}/2\pi$.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+
+## Unità 09 — Seno e coseno: circonferenza goniometrica, grafici, periodicità
+- Parole: 508 su circa 3,3 pagine di traccia (pagine 16–18, più il breve riquadro di sintesi in cima a pagina 19 prima che inizi l'unità 10 sulla prima relazione fondamentale)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy i quattro valori notevoli (sin e cos di 0, π/2, π, 3π/2), l'identità di parità sin(−α)=−sinα, cos(−α)=cosα, e la periodicità sin(α+2π)=sinα, cos(α+2π)=cosα.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Il diagramma dei quattro quadranti unisce in un solo disegno le quattro piccole circonferenze separate della traccia (una per ciascun valore notevole), senza aggiungere informazione.
