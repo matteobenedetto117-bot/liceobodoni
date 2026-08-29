@@ -53,3 +53,8 @@
 - Parole: 491 su 3 pagine di traccia (pagine 20–22)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che tan α e 1/cot α coincidono identicamente, che tan(π/6)=√3/3, tan(π/3)=√3, tan(π/4)=1 come nei calcoli della pagina successiva, e che i domini dei quattro reciproci corrispondono agli zeri di seno e coseno.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Lo strumento interattivo unisce in un solo disegno manovrabile i due schizzi separati della traccia (il segmento della tangente a pagina 20 e quello della cotangente a pagina 22), mostrando entrambi insieme al variare dello stesso angolo, senza introdurre informazione nuova.
+
+## Unità 12 — Angoli particolari
+- Parole: 193 su circa 1,5 pagine di traccia (dalla seconda metà di pagina 22, dove inizia "Angoli particolari" dopo la cotangente dell'unità 11, a fine pagina 23, prima che inizi l'unità 13 sugli angoli associati a pagina 24).
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutti i dodici valori (sin, cos, tan, cot per π/6, π/4, π/3) e la coerenza di tan=sin/cos, cot=1/tan in ciascun caso, incluso il passaggio di razionalizzazione 1/√3=√3/3.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Per 60° e 45° la traccia dà i quattro valori senza riderivare i passaggi (già fatti per 30°): ho rispettato questa scelta, senza ripetere la derivazione.
