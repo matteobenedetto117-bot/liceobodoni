@@ -128,3 +128,8 @@
 - Parole: 283 su 2 pagine di traccia (pagine 61–62; la pagina 60 chiude l'unità 25 con il quarto metodo delle tangenti, e la pagina 63 apre già l'unità 27 "posizione di due circonferenze")
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy entrambi gli esempi: primo esempio, centro C=(4;3) e P=(1;2) → sistema -a/2=4, -b/2=3, 1+4+a+2b+c=0 dà a=-8, b=-6, c=15, con r²=10>0; secondo esempio, A=(-8;18), B=(6;20), centro sull'asse y (a=0) → sistema 18b+c=-388, 20b+c=-436 dà b=-24, c=44, con r²=100>0.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+
+## Unità 27 — Posizione di due circonferenze e asse radicale
+- Parole: 456 su 3 pagine di traccia (pagine 63–65; la pagina 62 chiude l'unità 26 e la pagina 66 apre già l'unità 28 "parabola")
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy: la differenza fra le equazioni generali dà $(a-a')x+(b-b')y+(c-c')=0$; nell'esempio 1, $x^2+y^2+2x-4y-11=0$ e $x^2+y^2+2x-16y+13=0$ danno per sottrazione $12y-24=0\Rightarrow y=2$, e la sostituzione nella prima circonferenza dà $x^2+2x-15=0\Rightarrow x=-5,3$; nell'esempio 2, $x^2+y^2+8x-6y=0$ intersecato con $x=0$ dà $y^2-6y=0\Rightarrow y=0,6$. Tutti i risultati coincidono con la traccia.
+- Aggiunta: una frase di collegamento nell'esempio 2 per chiarire che il metodo di mettere a sistema una retta con una circonferenza si applica anche quando la retta non è un asse radicale ma un asse cartesiano; nessun contenuto matematico nuovo.
