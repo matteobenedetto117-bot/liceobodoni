@@ -88,3 +88,8 @@
 - Parole: 268 su 4 pagine di traccia (pagine 35–38)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutte le quattro identità di prostaferesi ottenute da somma/sottrazione delle formule di addizione, le quattro formule finali dopo la sostituzione p=α+β, q=α−β, l'esempio sin(π/4)−sin(π/12)=2cos(π/6)sin(π/12), e le tre formule di Werner.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+
+## Unità 19 — Distanza fra due punti, punto medio, baricentro
+- Parole: 254 su 1,5 pagine di traccia (pagina 39 e prima metà di pagina 40)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy la distanza AB=2√13 fra A(2;2) e B(8;6), il punto medio M(5;4), e il baricentro D(−1/3;0) del triangolo A(−3;−2), B(4;0), C(−2;2).
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La seconda metà di pagina 40 (equazione generale della retta) è stata lasciata all'unità 20.
