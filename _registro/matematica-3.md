@@ -138,3 +138,8 @@
 - Parole: 251 su 1 pagina di traccia (pagina 66; la pagina 65 chiude l'unità 27 con l'ultimo esempio sull'asse radicale, e la pagina 67 apre già l'unità 29 "parabola con vertice nell'origine" con la derivazione dell'equazione $y=ax^2$)
 - Rettifica: nessuna, il contenuto era corretto così com'era.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Non ho aggiunto esempi numerici: la traccia su questa pagina è puramente definitoria (nessun esempio, nessun calcolo), e l'equazione della parabola non è ancora stata introdotta, quindi non c'era modo di costruirne uno senza anticipare l'unità 29. Verificato con SymPy, solo come controllo di coerenza interna (non pubblicato in pagina), che la relazione di equidistanza $\overline{PF}=\overline{PH}$ enunciata qui è esattamente la condizione che l'unità 29 tradurrà nell'equazione $y=x^2/(4\delta)$.
+
+## Unità 29 — Parabola con vertice nell'origine
+- Parole: 254 su 1,3 pagine di traccia (pagine 67–68; la pagina 66 chiude l'unità 28, la pagina 68 contiene solo la conclusione dell'esempio numerico e la pagina 69 è bianca, la pagina 70 apre già l'unità 30 "rette e parabola")
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'intera derivazione: PF²−PH² = x²−4cy, quindi PF=PH ⇔ x²=4cy ⇔ y=x²/(4c); posto a=1/(4c), per l'esempio y=2x² si ha a=2, c=1/(4·2)=1/8, coerente con fuoco F=(0;1/8) e direttrice y=−1/8 riportati nella traccia.
+- Aggiunta: uno strumento interattivo con cursore su $a$ che mostra come la parabola $y=ax^2$ e la posizione del fuoco/direttrice variano al variare di $a$ — visualizza solo la relazione $c=1/(4a)$ già derivata, nessun contenuto matematico nuovo.
