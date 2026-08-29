@@ -63,3 +63,8 @@
 - Parole: 385 su 2 pagine di traccia (pagine 24–25)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutte le otto identità (2π−α, −α, π−α, π+α, π/2−α, π/2+α, 3π/2−α, 3π/2+α) tramite sviluppo simbolico di seno e coseno, confermando che coincidono esattamente con i valori della traccia.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La traccia disegna una figura completa (con segmenti di tangente e cotangente) solo per il primo caso e figure essenziali (solo i due raggi) per gli altri sette; ho reso tutte le otto figure nello stesso stile essenziale già usato nelle unità precedenti (raggio e proiezioni di seno/coseno), per coerenza visiva con il resto del percorso, senza aggiungere contenuto.
+
+## Unità 14 — Formule di addizione e sottrazione
+- Parole: 332 su 3 pagine di traccia (pagine 26–28)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutte le sei identità (coseno e seno di somma e differenza, tangente di somma e differenza) tramite sviluppo simbolico, e il controesempio numerico cos(π/2−π/6)=1/2 contro cos(π/2)−cos(π/6)=−√3/2.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La formula del coseno della differenza è citata nella traccia con rimando al libro di testo (pag. 787-788) e non dimostrata: l'ho lasciata come enunciato, senza aggiungere una dimostrazione che non compare. Le altre cinque formule seguono invece le derivazioni per sostituzione già presenti nella traccia.
