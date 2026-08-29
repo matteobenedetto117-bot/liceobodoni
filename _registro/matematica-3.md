@@ -83,3 +83,8 @@
 - Parole: 178 su 2 pagine di traccia (pagine 33–34)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'identità sinα = 2t/(1+t²) e cosα = (1−t²)/(1+t²) con t = tan(α/2), per sostituzione simbolica a partire dalle formule di duplicazione, ed è confermato l'esempio con tan(α/2)=2, da cui sinα=4/5 e cosα=−3/5.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La condizione di applicabilità (α ≠ π + 2kπ), scritta in cima a pagina 35 subito prima del titolo dell'unità successiva, è stata inclusa qui perché riguarda esclusivamente le formule parametriche.
+
+## Unità 18 — Formule di prostaferesi e di Werner
+- Parole: 268 su 4 pagine di traccia (pagine 35–38)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutte le quattro identità di prostaferesi ottenute da somma/sottrazione delle formule di addizione, le quattro formule finali dopo la sostituzione p=α+β, q=α−β, l'esempio sin(π/4)−sin(π/12)=2cos(π/6)sin(π/12), e le tre formule di Werner.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
