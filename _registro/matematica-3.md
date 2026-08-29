@@ -73,3 +73,8 @@
 - Parole: 215 su 2 pagine di traccia (pagine 29–30)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy le identità sin 2α = 2 sin α cos α, le tre forme equivalenti di cos 2α, e tan 2α = 2 tan α/(1 − tan²α), tramite sviluppo simbolico e verifica numerica su valori casuali; verificato anche l'esempio con α = π/3 (sin 120° = √3/2, cos 120° = −1/2).
 - Aggiunta: un solo esempio numerico con α = 60°, perché in queste due pagine la traccia deriva solo le tre formule senza applicarle a un caso concreto: la regola consente un esempio quando l'unità non ne contiene nessuno.
+
+## Unità 16 — Formule di bisezione
+- Parole: 301 su 2 pagine di traccia (pagine 31–32)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy le identità cos²(α/2)=(1+cosα)/2, sin²(α/2)=(1−cosα)/2, la dimostrazione di tan(α/2)=sinα/(1+cosα) per moltiplicazione e semplificazione, e l'esempio con α=30°: cos15°=(√6+√2)/4 e tan15°=2−√3, entrambi confermati simbolicamente.
+- Aggiunta: un solo esempio numerico (α=30° per calcolare cos15° e tan15°), perché queste due pagine derivano solo le formule senza applicarle a un caso concreto. Aggiunta anche una breve nota sul criterio di scelta del segno ±, indispensabile per capire come si usano le formule della radice.
