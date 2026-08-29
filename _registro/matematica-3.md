@@ -33,3 +33,8 @@
 - Parole: 394 su 2 pagine di traccia (pagine 12–13)
 - Rettifica: a pagina 12 la formula della traslazione era scritta con il segno sbagliato, $f'(x)=f(x+3)+2$, e verificata con un calcolo numerico ($f'(3)=38$) che in realtà non controlla nulla; a pagina 13 la traccia stessa la corregge in $f'(x)=f(x-3)+2$, la incornicia in rosso e la verifica correttamente mostrando che $f'(3)=2$ è la quota attesa del vertice. Ho scritto solo la versione corretta di pagina 13. Verificato con SymPy che $(x-3)^2+2=x^2-6x+11$, che $f'(3)=2$, e che applicando un'ulteriore traslazione $(2,-2)$ a $f'(x)=x^2-6x+11$ si ottiene $x^2-10x+25=(x-5)^2$.
 - Aggiunta: nessuna oltre alle parole di collegamento. Il piccolo schizzo preliminare della traccia (due punti A,B spostati per rotazione e traslazione, prima di specializzare al caso della traslazione di un grafico) è reso solo a parole nella frase di apertura, non ridisegnato in SVG, perché non aggiunge contenuto oltre all'idea già espressa lì.
+
+## Unità 08 — Angoli in radianti e angoli orientati
+- Parole: 352 su 2 pagine di traccia (pagine 14–15)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy che $60^\circ$ corrisponde a $\pi/3$ radianti tramite la proporzione $\alpha^\circ/360^\circ=\alpha_{rad}/2\pi$.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
