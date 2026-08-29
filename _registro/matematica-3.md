@@ -113,3 +113,8 @@
 - Parole: 221 su 2 pagine di traccia (pagine 50–51; la pagina 49 chiude l'unità 22 e la pagina 52 apre già l'unità 24 "rette e circonferenze")
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'inversione $a=-2\alpha,\,b=-2\beta\Rightarrow \alpha=-a/2,\,\beta=-b/2$, la formula $r=\sqrt{a^2/4+b^2/4-c}$, e l'esempio $x^2+y^2-4x+2y-4=0\Rightarrow a=-4,\,b=2,\,c=-4\Rightarrow C(2;-1),\,r=3$.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Nella traccia l'esercizio numerico precede l'enunciato generale delle formule; nella pagina ho invertito l'ordine (prima le formule, poi l'esempio) per coerenza con il criterio "prima si capisce, poi si formalizza", senza aggiungere alcun contenuto nuovo.
+
+## Unità 24 — Posizione di una retta rispetto a una circonferenza
+- Parole: 337 su 2 pagine di traccia (pagine 52–53; la pagina 51 chiude l'unità 23 con la condizione di realtà, e la pagina 54 apre già l'unità 25 "rette tangenti a una circonferenza")
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'esempio $x^2+y^2+3x-3y-2=0$, $3x-2y+1=0$: la sostituzione $y=\frac32x+\frac12$ dà $\frac{13}{4}x^2-\frac{13}{4}=0\Rightarrow x=\pm1$, con punti $A(1;2)$ e $B(-1;-1)$; verificata anche la coerenza con il confronto $d,r$: $d=\sqrt{13}/2\approx1{,}80 < r=\sqrt{26}/2\approx2{,}55$, secante.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
