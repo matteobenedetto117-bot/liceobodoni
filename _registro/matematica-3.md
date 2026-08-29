@@ -68,3 +68,8 @@
 - Parole: 332 su 3 pagine di traccia (pagine 26–28)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutte le sei identità (coseno e seno di somma e differenza, tangente di somma e differenza) tramite sviluppo simbolico, e il controesempio numerico cos(π/2−π/6)=1/2 contro cos(π/2)−cos(π/6)=−√3/2.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La formula del coseno della differenza è citata nella traccia con rimando al libro di testo (pag. 787-788) e non dimostrata: l'ho lasciata come enunciato, senza aggiungere una dimostrazione che non compare. Le altre cinque formule seguono invece le derivazioni per sostituzione già presenti nella traccia.
+
+## Unità 15 — Formule di duplicazione
+- Parole: 215 su 2 pagine di traccia (pagine 29–30)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy le identità sin 2α = 2 sin α cos α, le tre forme equivalenti di cos 2α, e tan 2α = 2 tan α/(1 − tan²α), tramite sviluppo simbolico e verifica numerica su valori casuali; verificato anche l'esempio con α = π/3 (sin 120° = √3/2, cos 120° = −1/2).
+- Aggiunta: un solo esempio numerico con α = 60°, perché in queste due pagine la traccia deriva solo le tre formule senza applicarle a un caso concreto: la regola consente un esempio quando l'unità non ne contiene nessuno.
