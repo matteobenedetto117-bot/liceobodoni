@@ -93,3 +93,8 @@
 - Parole: 254 su 1,5 pagine di traccia (pagina 39 e prima metà di pagina 40)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy la distanza AB=2√13 fra A(2;2) e B(8;6), il punto medio M(5;4), e il baricentro D(−1/3;0) del triangolo A(−3;−2), B(4;0), C(−2;2).
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La seconda metà di pagina 40 (equazione generale della retta) è stata lasciata all'unità 20.
+
+## Unità 20 — Equazione della retta: forma implicita, esplicita, casi particolari
+- Parole: 581 su 3,5 pagine di traccia (seconda metà di pagina 40, dopo la parte sul baricentro lasciata all'unità 19, più le pagine 41, 42 e 43, fino a dove inizia l'unità 21 a pagina 44 con "equazione di una retta passante per un punto con coefficiente angolare noto")
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy il passaggio da ax+by+c=0 a y=mx+q con m=-a/b, q=-c/b; la disparità di y=mx (f(-x)=-f(x)) e la parità di y=k; e i due esempi di tracciamento y=(3/2)x+1 (da (0;1) a (2;4)) e y=-(1/2)x+3 (da (0;3) a (2;2)).
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Lo strumento interattivo (cursori per m e q sulla retta y=mx+q) riunisce in un solo grafico manovrabile ciò che la traccia mostra in più disegni statici (fascio per l'origine, bisettrici, retta generica, esempi di tracciamento), senza introdurre contenuto nuovo.
