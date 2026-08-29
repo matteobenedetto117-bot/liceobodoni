@@ -143,3 +143,8 @@
 - Parole: 254 su 1,3 pagine di traccia (pagine 67–68; la pagina 66 chiude l'unità 28, la pagina 68 contiene solo la conclusione dell'esempio numerico e la pagina 69 è bianca, la pagina 70 apre già l'unità 30 "rette e parabola")
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'intera derivazione: PF²−PH² = x²−4cy, quindi PF=PH ⇔ x²=4cy ⇔ y=x²/(4c); posto a=1/(4c), per l'esempio y=2x² si ha a=2, c=1/(4·2)=1/8, coerente con fuoco F=(0;1/8) e direttrice y=−1/8 riportati nella traccia.
 - Aggiunta: uno strumento interattivo con cursore su $a$ che mostra come la parabola $y=ax^2$ e la posizione del fuoco/direttrice variano al variare di $a$ — visualizza solo la relazione $c=1/(4a)$ già derivata, nessun contenuto matematico nuovo.
+
+## Unità 30 — Rette e parabola: posizioni reciproche
+- Parole: 310 su 1,4 pagine di traccia (pagina 70 e la prima metà della pagina 71, fino alla fine dell'esempio; la seconda metà della pagina 71 apre già l'unità 31 "rette tangenti a una parabola" con i tre disegni P esterno/sulla parabola/interno, non trattati qui; la pagina 69 è bianca)
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy il sistema fra $y=-\frac12x^2+2x$ e $y=x-4$: sympy.solve conferma le soluzioni $(4;0)$ e $(-2;-6)$, coerenti con la traccia.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Il caso della retta verticale $x=k$ era in figura nella traccia senza commento esplicito sul perché dia un solo punto: ho aggiunto una riga che lo spiega (sostituzione diretta, nessuna equazione di secondo grado).
