@@ -108,3 +108,8 @@
 - Parole: 317 su 3 pagine di traccia (pagine 47–49; la pagina 46 è bianca, la pagina 50 apre già l'unità 23 "dall'equazione al grafico")
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy la derivazione $x^2+y^2=r^2\cos^2\theta+r^2\sin^2\theta=r^2$, l'esempio $x^2+y^2=25\Rightarrow r=5$, l'esempio $(x+1)^2+(y-3)^2=4\Rightarrow C(-1;3), r=2$, e lo sviluppo di $(x-\alpha)^2+(y-\beta)^2=r^2$ in $x^2+y^2+ax+by+c=0$ con $a=-2\alpha$, $b=-2\beta$, $c=\alpha^2+\beta^2-r^2$.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+
+## Unità 23 — Dall'equazione al grafico: centro, raggio, condizione di realtà
+- Parole: 221 su 2 pagine di traccia (pagine 50–51; la pagina 49 chiude l'unità 22 e la pagina 52 apre già l'unità 24 "rette e circonferenze")
+- Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'inversione $a=-2\alpha,\,b=-2\beta\Rightarrow \alpha=-a/2,\,\beta=-b/2$, la formula $r=\sqrt{a^2/4+b^2/4-c}$, e l'esempio $x^2+y^2-4x+2y-4=0\Rightarrow a=-4,\,b=2,\,c=-4\Rightarrow C(2;-1),\,r=3$.
+- Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Nella traccia l'esercizio numerico precede l'enunciato generale delle formule; nella pagina ho invertito l'ordine (prima le formule, poi l'esempio) per coerenza con il criterio "prima si capisce, poi si formalizza", senza aggiungere alcun contenuto nuovo.
