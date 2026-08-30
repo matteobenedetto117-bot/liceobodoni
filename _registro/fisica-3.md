@@ -88,3 +88,8 @@
 - Parole: 457 su 2 pagine di traccia (pagine 34–35: velocità dell'ombra come componente orizzontale di v_T con il grafico velocità-tempo, e accelerazione come componente orizzontale di a_cp con il grafico accelerazione-tempo)
 - Rettifica: nessuna, le relazioni v=-v_T sinθ=-Aω sin(ωt), v_max=Aω, a=-a_cp cosθ=-Aω² cos(ωt), a_max=Aω² sono state verificate con SymPy (derivando x=A cos(ωt) due volte) e coincidono con la traccia
 - Aggiunta: nessuna; i punti numerati ①②③④ sul grafico e nella mini-circonferenza riproducono solo la corrispondenza di fase già presente in pagina 34
+
+## Unità 19 — Dinamica del moto armonico: l'oscillatore
+- Parole: 386 (conteggio grezzo, comprensivo di testata/rimandi) su circa 1,5 pagine di traccia (pagina 36 intera e la parte superiore di pagina 37, fino al box T=2π√(m/k), prima che inizi "Massa verticale")
+- Rettifica: nessuna, la definizione di oscillatore armonico (F=ma, F=-kx), la sostituzione con a=-Aω²cos(ωt) e x=A cos(ωt) [gia note dalle unità 17-18], e le formule ω=√(k/m), T=2π√(m/k) sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: nessuna
