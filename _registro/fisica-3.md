@@ -28,3 +28,8 @@
 - Parole: 318 su 2 pagine di traccia (pagine 11–12)
 - Rettifica: nessuna, entrambe le derivazioni (t di salita = v0y/g, y_max = v0y²/(2g), tv = 2v0y/g) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 07 — Gittata e angolo di gittata massima
+- Parole: 277 su circa 1,5 pagine di traccia (pagina 13, inizio pagina 14 fino alla nota sulla resistenza dell'aria)
+- Rettifica: nessuna, la derivazione (Xg=2v0x·v0y/g, poi Xg=2v0²/g·cosα·sinα) e i valori numerici della tabella (0,32 / 0,43 / 0,50 / 0,43 / 0,32 per 20°,30°,45°,60°,70°) sono stati verificati con SymPy e coincidono con la traccia
+- Aggiunta: nessuna
