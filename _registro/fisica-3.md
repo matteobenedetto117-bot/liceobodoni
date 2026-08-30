@@ -73,3 +73,8 @@
 - Parole: 395 su 2 pagine di traccia (pagine 26–27)
 - Rettifica: nessuna, la scomposizione a=a_cp+a_T e il calcolo dell'esempio (ω1=3 rad/s, ω2=7 rad/s, Δt=8 s → α=0,5 rad/s²) sono stati verificati con SymPy e coincidono con la traccia
 - Aggiunta: nessuna; il secondo disegno con i quattro casi di segno riproduce solo la convenzione già presente in pagina 27
+
+## Unità 16 — Moto circolare uniformemente accelerato
+- Parole: 356 su 4 pagine di traccia (pagine 28–31: definizione e derivazione di a_T=rα, confronto tangenziale/centripeta con l'esempio numerico di pagina 29, legge oraria del MCUA di pagina 30, ed esercizio di riepilogo di pagina 31 prima del titolo "Moto armonico" a pagina 32)
+- Rettifica: nessuna, tutte le derivazioni (a_T=rα da v=rω, ω=ω0+αt, θ=θ0+ω0t+½αt²) e i valori numerici dei due esempi (α=2 rad/s², aT=6,0 m/s², aCP=432 m/s², aTOT≈432 m/s²; e α=12 rad/s², θ=864 rad, aT=84 m/s², aCP(4,2 s)≈1,78×10⁴ m/s²) sono stati verificati con SymPy e coincidono con la traccia
+- Aggiunta: nessuna; l'esercizio di pagina 31 (dati e domande) è della traccia ma privo di soluzione scritta, quindi lo svolgimento numerico è stato calcolato per completarlo, non inventato come nuovo esempio
