@@ -113,3 +113,8 @@
 - Parole: 220 circa (prosa, esclusi titoli, testata e rimandi) su 1 pagina di traccia (pagina 42 intera, da "Principio di relatività galileiano" a "introduciamo le forze apparenti", prima che inizi "Esempio" con l'autobus a pagina 43, già unità 24)
 - Rettifica: nessuna; il contenuto è puramente qualitativo (principio di relatività, definizione di sistema inerziale e non inerziale, validità delle tre leggi), nessuna formula o calcolo da verificare con SymPy
 - Aggiunta: nessuna; avevo inizialmente trasformato in tabella il confronto "I legge non valida / II-III valide con forze apparenti" già presente in forma di elenco nella traccia, poi l'ho tolta perché è uno schema di sintesi che nella traccia non compare in quella forma — resta solo la prosa
+
+## Unità 24 — Forze apparenti
+- Parole: 523 su circa 2,5 pagine di traccia (pagine 43–45: l'esempio dell'autobus a pagina 43 intera, l'esempio dell'ascensore a pagina 44 intera e la parte superiore di pagina 45 con il calcolo numerico, prima che inizi "Forza centripeta" a pagina 46, già unità 25)
+- Rettifica: nessuna; le relazioni N-F_p=F (osservatore a terra) e N-F_app-F_p=0 (osservatore in ascensore) sono state verificate con SymPy, e i valori numerici (m=12 kg, a=0,7 m/s², F_tot=m(g+a)≈126 N, M≈12,8 kg in salita; F_tot=m(g-a)=109,32 N, M≈11,14 kg in discesa, con g=9,81 m/s²) coincidono con la traccia, compresa la sua convenzione di arrotondare F_tot a 126 N prima di dividere per g
+- Aggiunta: nessuna; la sola generalizzazione $F_{app}=F=ma$ prima dell'esempio numerico riprende alla lettera l'uguaglianza già scritta nella traccia accanto al calcolo, non introduce una formula nuova
