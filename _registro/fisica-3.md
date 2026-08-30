@@ -68,3 +68,8 @@
 - Parole: 303 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,6 pagine di traccia (da "Altre grandezze del MCU" a metà pagina 24 fino alla fine di pagina 25)
 - Rettifica: nessuna, le relazioni (f=1/T, T=1/f, ω=2π/T=2πf, [T]=s, [f]=Hz=s⁻¹) e la legge oraria θ=θ₀+ωt, ricavata da ω=(θ-θ₀)/t con t₀=0, sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 15 — Moto circolare non uniforme e accelerazione angolare
+- Parole: 395 su 2 pagine di traccia (pagine 26–27)
+- Rettifica: nessuna, la scomposizione a=a_cp+a_T e il calcolo dell'esempio (ω1=3 rad/s, ω2=7 rad/s, Δt=8 s → α=0,5 rad/s²) sono stati verificati con SymPy e coincidono con la traccia
+- Aggiunta: nessuna; il secondo disegno con i quattro casi di segno riproduce solo la convenzione già presente in pagina 27
