@@ -63,3 +63,8 @@
 - Parole: 345 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,4 pagine di traccia (pagina 23 e la parte iniziale di pagina 24, fino al box a_cp=ω²r prima che inizi "Altre grandezze del MCU")
 - Rettifica: nessuna, la derivazione (similitudine dei triangoli Δs:r=Δv:v, a_cp=v²/r, e la forma equivalente a_cp=ω²r ottenuta sostituendo v=ωr) è stata verificata con SymPy e coincide con la traccia
 - Aggiunta: nessuna
+
+## Unità 14 — Periodo, frequenza e legge oraria del moto circolare uniforme
+- Parole: 303 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,6 pagine di traccia (da "Altre grandezze del MCU" a metà pagina 24 fino alla fine di pagina 25)
+- Rettifica: nessuna, le relazioni (f=1/T, T=1/f, ω=2π/T=2πf, [T]=s, [f]=Hz=s⁻¹) e la legge oraria θ=θ₀+ωt, ricavata da ω=(θ-θ₀)/t con t₀=0, sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: nessuna
