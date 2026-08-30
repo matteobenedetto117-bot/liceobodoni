@@ -78,3 +78,8 @@
 - Parole: 356 su 4 pagine di traccia (pagine 28–31: definizione e derivazione di a_T=rα, confronto tangenziale/centripeta con l'esempio numerico di pagina 29, legge oraria del MCUA di pagina 30, ed esercizio di riepilogo di pagina 31 prima del titolo "Moto armonico" a pagina 32)
 - Rettifica: nessuna, tutte le derivazioni (a_T=rα da v=rω, ω=ω0+αt, θ=θ0+ω0t+½αt²) e i valori numerici dei due esempi (α=2 rad/s², aT=6,0 m/s², aCP=432 m/s², aTOT≈432 m/s²; e α=12 rad/s², θ=864 rad, aT=84 m/s², aCP(4,2 s)≈1,78×10⁴ m/s²) sono stati verificati con SymPy e coincidono con la traccia
 - Aggiunta: nessuna; l'esercizio di pagina 31 (dati e domande) è della traccia ma privo di soluzione scritta, quindi lo svolgimento numerico è stato calcolato per completarlo, non inventato come nuovo esempio
+
+## Unità 17 — Il moto armonico e la sua legge oraria
+- Parole: 373 su 2 pagine di traccia (pagine 32–33: il moto armonico come proiezione del moto circolare uniforme con la lampada, la legge oraria x=A cos(ωt)=A cos(2πt/T), e le definizioni di ampiezza, periodo, pulsazione e frequenza)
+- Rettifica: nessuna, le relazioni x=A cos(ωt), ω=2π/T, f=1/T, ω=2πf, f=ω/2π sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: nessuna; la traccia non contiene esempi svolti in questa unità e non ne è stato aggiunto nessuno
