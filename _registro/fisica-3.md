@@ -38,3 +38,8 @@
 - Parole: 279 su 1 pagina di traccia (pagina 15, più le due righe finali dell'esempio a inizio pagina 16 prima dell'unità 09)
 - Rettifica: nessuna, la derivazione (vfy=v0y-g·tv=-v0y, vf=sqrt(v0x²+v0y²)=v0) e i valori numerici dell'esempio (v0=9,0 m/s, α=32°: ymax≈1,2 m, tv≈0,97 s, XG≈7,4 m, t1≈0,42 s, y1≈1,1 m) sono stati verificati con SymPy/calcolo numerico e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 09 — Lancio orizzontale da un'altezza
+- Parole: 342 su circa 2,5 pagine di traccia (metà pagina 16, pagine 17–18)
+- Rettifica: nessuna, tutte le derivazioni (traiettoria y=h-½g x²/v0², tv=√(2h/g), XG=v0√(2h/g), vfy=-√(2gh), vf=√(v0²+2gh)) sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: un esempio numerico (v0=8,0 m/s, h=5,0 m), indispensabile perché la traccia non ne contiene nessuno per questo caso particolare
