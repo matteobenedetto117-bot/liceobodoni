@@ -33,3 +33,8 @@
 - Parole: 277 su circa 1,5 pagine di traccia (pagina 13, inizio pagina 14 fino alla nota sulla resistenza dell'aria)
 - Rettifica: nessuna, la derivazione (Xg=2v0x·v0y/g, poi Xg=2v0²/g·cosα·sinα) e i valori numerici della tabella (0,32 / 0,43 / 0,50 / 0,43 / 0,32 per 20°,30°,45°,60°,70°) sono stati verificati con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 08 — Velocità finale del proiettile
+- Parole: 279 su 1 pagina di traccia (pagina 15, più le due righe finali dell'esempio a inizio pagina 16 prima dell'unità 09)
+- Rettifica: nessuna, la derivazione (vfy=v0y-g·tv=-v0y, vf=sqrt(v0x²+v0y²)=v0) e i valori numerici dell'esempio (v0=9,0 m/s, α=32°: ymax≈1,2 m, tv≈0,97 s, XG≈7,4 m, t1≈0,42 s, y1≈1,1 m) sono stati verificati con SymPy/calcolo numerico e coincidono con la traccia
+- Aggiunta: nessuna
