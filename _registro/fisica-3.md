@@ -83,3 +83,8 @@
 - Parole: 373 su 2 pagine di traccia (pagine 32–33: il moto armonico come proiezione del moto circolare uniforme con la lampada, la legge oraria x=A cos(ωt)=A cos(2πt/T), e le definizioni di ampiezza, periodo, pulsazione e frequenza)
 - Rettifica: nessuna, le relazioni x=A cos(ωt), ω=2π/T, f=1/T, ω=2πf, f=ω/2π sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna; la traccia non contiene esempi svolti in questa unità e non ne è stato aggiunto nessuno
+
+## Unità 18 — Velocità e accelerazione nel moto armonico
+- Parole: 457 su 2 pagine di traccia (pagine 34–35: velocità dell'ombra come componente orizzontale di v_T con il grafico velocità-tempo, e accelerazione come componente orizzontale di a_cp con il grafico accelerazione-tempo)
+- Rettifica: nessuna, le relazioni v=-v_T sinθ=-Aω sin(ωt), v_max=Aω, a=-a_cp cosθ=-Aω² cos(ωt), a_max=Aω² sono state verificate con SymPy (derivando x=A cos(ωt) due volte) e coincidono con la traccia
+- Aggiunta: nessuna; i punti numerati ①②③④ sul grafico e nella mini-circonferenza riproducono solo la corrispondenza di fase già presente in pagina 34
