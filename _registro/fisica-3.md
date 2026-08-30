@@ -123,3 +123,8 @@
 - Parole: 444 su 2 pagine di traccia (pagine 46–47: la forza centripeta con il disegno del moto circolare uniforme e le due formule F_cp=ma_cp=mv²/r=mω²r, poi il confronto fra osservatore a terra e osservatore in automobile in curva, fino a F_cp=F_cf, prima che inizi "Quantità di moto" a pagina 48, già unità 26)
 - Rettifica: nessuna; le formule F_cp=mv²/r=mω²r (verificata con SymPy sostituendo v=ωr) e le due equazioni di equilibrio F_tot=F_cp (osservatore a terra) e F_tot=F_cf+R_v=0 (osservatore in automobile) coincidono con la traccia. L'etichetta della traccia "MCU (Non accelerato)" è stata resa come "moto circolare uniforme, cioè con il modulo della velocità costante", perché letta alla lettera suggerirebbe l'assenza di accelerazione centripeta, che invece esiste ed è proprio l'oggetto dell'unità.
 - Aggiunta: nessuna; il disegno del moto circolare con v, a_cp e r riprende quanto già introdotto nelle unità 12-13, qui solo richiamato per costruire la forza centripeta.
+
+## Unità 26 — Quantità di moto e seconda legge della dinamica
+- Parole: 378 (conteggio grezzo, comprensivo di formule e rimandi) su 2 pagine di traccia (pagine 48–49: la definizione della quantità di moto p=mv con il vettore e l'analisi dimensionale a pagina 48, e la riscrittura della seconda legge della dinamica come F_tot=Δp/Δt a pagina 49, prima che inizi "Teorema dell'impulso" a pagina 50, già unità 27)
+- Rettifica: nessuna; la catena Δp=m·Δv, Δp/Δt=m·Δv/Δt=ma=F_tot è stata verificata con SymPy (derivata di p=m·v rispetto al tempo a massa costante) e coincide con la traccia
+- Aggiunta: nessuna
