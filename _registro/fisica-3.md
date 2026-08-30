@@ -143,3 +143,8 @@
 - Parole: 310 (prosa nei paragrafi) su 2 pagine di traccia (pagine 55-56: definizione di lavoro L=F·s·cosθ con i tre casi dell'angolo e l'unità di misura, energia cinetica K=½mv² e teorema dell'energia cinetica L=ΔK, fino alla frase su forza peso e forza elastica come forze conservative, prima che inizi "Energia potenziale" a pagina 57, già unità 30)
 - Rettifica: nessuna; le relazioni L=F·s·cosθ (nei tre casi θ=0, 90°, 180°) e L=ΔK=Kf-Ki=½mvf²-½mvi² sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: un esempio numerico (blocco di 2,0 kg spinto da una forza di 10 N per 2,5 m, velocità finale 5,0 m/s), perché la traccia non contiene alcun esempio in queste due pagine e la regola lo consente in questo caso; verificato con SymPy (L=25 J, vf=√(2L/m)=5,0 m/s)
+
+## Unità 30 — Energia potenziale gravitazionale ed elastica
+- Parole: 284 su 1 pagina di traccia (pagina 57: definizione ΔU=-L, energia potenziale gravitazionale con derivazione L=Fp·s·cos180°=-mgh e ΔU=mgh, energia potenziale elastica con la sola formula ΔUel=½kx², prima che inizi "Conservazione dell'energia meccanica" a pagina 58, già unità 31)
+- Rettifica: nessuna; la derivazione ΔU=mgh a partire da L=Fp·s·cos180° è stata verificata simbolicamente con SymPy e coincide con la traccia; la formula elastica ΔUel=½kx² è riportata come nella traccia, senza derivazione perché la traccia stessa non la svolge
+- Aggiunta: nessuna; la nota finale sul valore relativo dell'energia potenziale rispetto a un riferimento riprende un'osservazione implicita nella stessa definizione ΔU=Uf−Ui data in traccia, non introduce un concetto nuovo
