@@ -53,3 +53,8 @@
 - Parole: 242 su 1 pagina di traccia (pagina 21)
 - Rettifica: nessuna, la relazione ω_m=Δθ/Δt e l'esempio numerico (Δθ=3 rad, Δt=5 s → ω_m=0,6 rad/s) sono stati verificati con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 12 — Moto circolare uniforme e velocità tangenziale
+- Parole: 241 su circa 1 pagina di traccia più poche righe iniziali della pagina successiva (pagina 22, e l'annotazione [v]=m/s in cima alla pagina 23 prima dell'inizio dell'unità 13)
+- Rettifica: nessuna, la relazione v=r·ω (da v=Δl/Δt, Δl=rΔθ) e la coerenza dimensionale [ω]=s⁻¹, [v]=m/s sono state verificate algebricamente e coincidono con la traccia
+- Aggiunta: nessuna
