@@ -23,3 +23,8 @@
 - Parole: 239 su 1 pagina di traccia (pagina 10)
 - Rettifica: nessuna, il passaggio algebrico (sostituzione di t=x/v0x nell'equazione di y) è stato verificato con SymPy e coincide con il risultato riquadrato nella traccia
 - Aggiunta: nessuna, solo il richiamo esplicito che l'equazione ottenuta è di secondo grado in x (da cui il nome "moto parabolico"), osservazione già implicita nel titolo dell'unità 04
+
+## Unità 06 — Altezza massima e tempo di volo
+- Parole: 318 su 2 pagine di traccia (pagine 11–12)
+- Rettifica: nessuna, entrambe le derivazioni (t di salita = v0y/g, y_max = v0y²/(2g), tv = 2v0y/g) sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: nessuna
