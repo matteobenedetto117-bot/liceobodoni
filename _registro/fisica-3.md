@@ -48,3 +48,8 @@
 - Parole: 349 su 2 pagine di traccia (pagine 19–20)
 - Rettifica: nessuna, le relazioni (x=r cosθ, y=r sinθ, θ(rad)=l/r, angolo giro=2π rad, θrad=θ°·π/180°) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna; lo strumento interattivo con il cursore per l'angolo visualizza solo relazioni già presenti nella traccia (coordinate del punto e arco percorso)
+
+## Unità 11 — Velocità angolare
+- Parole: 242 su 1 pagina di traccia (pagina 21)
+- Rettifica: nessuna, la relazione ω_m=Δθ/Δt e l'esempio numerico (Δθ=3 rad, Δt=5 s → ω_m=0,6 rad/s) sono stati verificati con SymPy e coincidono con la traccia
+- Aggiunta: nessuna
