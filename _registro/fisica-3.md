@@ -93,3 +93,8 @@
 - Parole: 386 (conteggio grezzo, comprensivo di testata/rimandi) su circa 1,5 pagine di traccia (pagina 36 intera e la parte superiore di pagina 37, fino al box T=2π√(m/k), prima che inizi "Massa verticale")
 - Rettifica: nessuna, la definizione di oscillatore armonico (F=ma, F=-kx), la sostituzione con a=-Aω²cos(ωt) e x=A cos(ωt) [gia note dalle unità 17-18], e le formule ω=√(k/m), T=2π√(m/k) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 20 — Massa appesa a una molla verticale
+- Parole: 282 (conteggio grezzo, comprensivo di testata/rimandi) su circa 1 pagina di traccia (la parte inferiore di pagina 37, da "Massa verticale", e la parte superiore di pagina 38, fino a "le oscillazioni sono uguali a quelle di una molla orizzontale", prima che inizi "Pendolo Semplice")
+- Rettifica: nessuna, l'equazione di equilibrio -ky0=mg e la soluzione y0=-mg/k sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: nessuna
