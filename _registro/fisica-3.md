@@ -98,3 +98,8 @@
 - Parole: 282 (conteggio grezzo, comprensivo di testata/rimandi) su circa 1 pagina di traccia (la parte inferiore di pagina 37, da "Massa verticale", e la parte superiore di pagina 38, fino a "le oscillazioni sono uguali a quelle di una molla orizzontale", prima che inizi "Pendolo Semplice")
 - Rettifica: nessuna, l'equazione di equilibrio -ky0=mg e la soluzione y0=-mg/k sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 21 — Il pendolo semplice
+- Parole: 425 (conteggio grezzo dei paragrafi di prosa) su circa 3 pagine di traccia (parte inferiore di pagina 38 da "Pendolo Semplice", pagina 39 intera con l'approssimazione per piccoli angoli, e la parte superiore di pagina 40 fino al box T=2π√(L/g), prima che inizi "DINAMICA" a pagina 41)
+- Rettifica: nessuna; tutte le relazioni (l=Lθ, T=mg cosθ, F=-mg sinθ, l'approssimazione sinθ≈θ, F=-(mg/L)l, ω=√(g/L), T=2π√(L/g)) sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: nessuna, salvo una riga di nota sul doppio uso del simbolo T (tensione e periodo), che compare letteralmente in due formule consecutive della traccia ed è la classica fonte di confusione da segnalare
