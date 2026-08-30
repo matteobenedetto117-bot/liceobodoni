@@ -43,3 +43,8 @@
 - Parole: 342 su circa 2,5 pagine di traccia (metà pagina 16, pagine 17–18)
 - Rettifica: nessuna, tutte le derivazioni (traiettoria y=h-½g x²/v0², tv=√(2h/g), XG=v0√(2h/g), vfy=-√(2gh), vf=√(v0²+2gh)) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: un esempio numerico (v0=8,0 m/s, h=5,0 m), indispensabile perché la traccia non ne contiene nessuno per questo caso particolare
+
+## Unità 10 — Posizione angolare e angoli in radianti
+- Parole: 349 su 2 pagine di traccia (pagine 19–20)
+- Rettifica: nessuna, le relazioni (x=r cosθ, y=r sinθ, θ(rad)=l/r, angolo giro=2π rad, θrad=θ°·π/180°) sono state verificate con SymPy e coincidono con la traccia
+- Aggiunta: nessuna; lo strumento interattivo con il cursore per l'angolo visualizza solo relazioni già presenti nella traccia (coordinate del punto e arco percorso)
