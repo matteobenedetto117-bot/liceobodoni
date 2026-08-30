@@ -58,3 +58,8 @@
 - Parole: 241 su circa 1 pagina di traccia più poche righe iniziali della pagina successiva (pagina 22, e l'annotazione [v]=m/s in cima alla pagina 23 prima dell'inizio dell'unità 13)
 - Rettifica: nessuna, la relazione v=r·ω (da v=Δl/Δt, Δl=rΔθ) e la coerenza dimensionale [ω]=s⁻¹, [v]=m/s sono state verificate algebricamente e coincidono con la traccia
 - Aggiunta: nessuna
+
+## Unità 13 — Accelerazione centripeta
+- Parole: 345 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,4 pagine di traccia (pagina 23 e la parte iniziale di pagina 24, fino al box a_cp=ω²r prima che inizi "Altre grandezze del MCU")
+- Rettifica: nessuna, la derivazione (similitudine dei triangoli Δs:r=Δv:v, a_cp=v²/r, e la forma equivalente a_cp=ω²r ottenuta sostituendo v=ωr) è stata verificata con SymPy e coincide con la traccia
+- Aggiunta: nessuna
