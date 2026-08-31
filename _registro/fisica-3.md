@@ -223,3 +223,8 @@
 - Parole: 345 su circa 1,4 pagine di traccia (pag. 86 intera + inizio pag. 87)
 - Rettifica: a pag. 87 l'accelerazione della Terra nell'esempio persona/Terra era scritta come 8,01×10⁻⁵ m/s²; il valore corretto, calcolato da F=Gm·mT/rT² e a=F/mT, è 8,6×10⁻²³ m/s². Corretto nella pagina.
 - Aggiunta: nessuna, a parte lo strumento interattivo (cursore sulla distanza) che visualizza la formula F=Gm·mT/r² già presente nella traccia.
+
+## Unità 46 — Accelerazione di gravità e forza peso
+- Parole: 182 (compresa la parte di navigazione/testata; la prosa propria è circa 90) su circa 0,6 pagine di traccia (fondo pagina 87, dal titolo "Accelerazione di gravità g" — l'esempio persona/Terra sopra questo titolo appartiene già all'unità 45 — con "Prendendo in esame l'esempio appena visto", la derivazione F=G·MT·m/RT² → F=m·[G·MT/RT²] → F=mg, "FORZA PESO"; inizio pagina 88, con il calcolo g=G·MT/RT²=9,81 m/s²; il resto della pagina 88, "Forza gravitazionale per una sfera uniforme", è già l'unità 47)
+- Rettifica: nessuna. Verificato con SymPy che F/m−G·MT/RT²=0 (il raccoglimento è corretto) e che g=6,67×10⁻¹¹·5,97×10²⁴/(6,37×10⁶)²≈9,81 m/s², come in traccia.
+- Aggiunta: nessuna oltre a una frase che spiega perché g non dipende dalla massa del corpo che cade; nessun esempio, disegno o tabella nuovi.
