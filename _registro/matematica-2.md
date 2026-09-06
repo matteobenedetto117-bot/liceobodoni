@@ -32,3 +32,8 @@
 - Parole: 326 su 4 pagine di traccia (pagine 12–15)
 - Rettifica: nessuna. Il determinante |2 5;3 7|=-1, il primo esempio {5x+3y=1,2x+y=4} con D=-1, Dx=-11, Dy=18, soluzione (11;-18), e il secondo esempio {7x-y=5,21x-3y=15} con D=Dx=Dy=0 (sistema indeterminato, seconda equazione tripla della prima) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano il ruolo di ciascun elemento nelle formule di D, Dx, Dy già presenti nel quaderno.
+
+## Unità 08 — Determinanti 3×3 e regola di Sarrus
+- Parole: 197 su 2 pagine di traccia (pagine 16–17)
+- Rettifica: nessuna. La formula generale del determinante 3×3 (somma dei tre prodotti discendenti meno la somma dei tre ascendenti) e l'esempio con la matrice [[1,2,1],[1,5,0],[0,3,2]] (A=13, B=4, D=9) sono stati verificati con SymPy e risultano corretti così come nella traccia.
+- Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano che cosa sono le diagonali discendenti e ascendenti nello schema di Sarrus, già disegnato nel quaderno.
