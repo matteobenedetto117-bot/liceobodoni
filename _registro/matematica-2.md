@@ -1,0 +1,4 @@
+## Unità 01 — Concetto di funzione e funzioni numeriche
+- Parole: 493 su 2 pagine di traccia
+- Rettifica: nessuna, i valori numerici degli esempi (y=3x, f(x)=x²+2x+1, y=2x, y=(3/5)x) sono stati verificati con SymPy e risultano corretti così come nella traccia.
+- Aggiunta: nessuna. Le tre coppie di frecce non tracciate verso 7 e 8 nel primo diagramma sono state descritte in una riga di didascalia per chiarire la lettura del disegno, non come contenuto nuovo.
