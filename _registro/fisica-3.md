@@ -278,3 +278,8 @@
 - Parole: 366 su 2 pagine di traccia (pagina 104: il titolo "Fluidodinamica", la distinzione liquidi/gas, la tabella fluidi ideali/reali con le due condizioni incomprimibilità e non viscosità, il disegno del condotto che si restringe con l'osservazione sull'accumulo; pagina 105: la derivazione completa, Δm1=Δm2, Δm=d·ΔV, il caso gas con densità non costante e il caso liquidi con densità costante, fino alle due equazioni di continuità riquadrate; la pagina 106, che apre "Portata di un fluido", è già l'unità 57).
 - Rettifica: nessuna, la derivazione algebrica è stata verificata con SymPy (semplificazione di d·A1·v1·Δt = d·A2·v2·Δt in A1v1=A2v2) ed è dimensionalmente coerente (d·A·v ha le dimensioni di una portata di massa, kg/s).
 - Aggiunta: nessuna oltre al disegno del condotto ridisegnato in SVG a partire da quello della traccia; nessun esempio, tabella riassuntiva o quesito nuovi.
+
+## Unità 57 — Portata di un fluido
+- Parole: 215 su 1 pagina di traccia (pagina 106, prima metà: il titolo "Portata di un fluido", la definizione a parole, la derivazione Q=ΔV/Δt=A·Δx/Δt=A·v riquadrata, e l'unità di misura m³/s; la seconda metà della stessa pagina, che apre "Equazione di BERNOULLI" con lo schema del condotto in salita, è già l'unità 58).
+- Rettifica: nessuna. Verificato con SymPy che il prodotto area per velocità A·v ha le dimensioni di m²·(m/s)=m³/s, coerente con l'unità di misura della traccia.
+- Aggiunta: nessuna oltre al disegno del cilindretto ΔV=A·Δx ridisegnato in SVG a partire da quello della traccia; nessun esempio, tabella o quesito nuovi.
