@@ -22,3 +22,8 @@
 - Parole: 151 su 1 pagina di traccia
 - Rettifica: nessuna. Il sistema {2x-3y=-12, x+4y=5} e i passaggi (x=5-4y, -11y=-22, y=2, x=-3) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Le due frasi introduttive sull'idea del metodo (isolare un'incognita e sostituire) servono solo ad aprire l'unità prima di mostrare l'unico esempio della traccia.
+
+## Unità 06 — Metodo di riduzione
+- Parole: 246 su 1 pagina di traccia (il terzo esempio prosegue per poche righe in cima a pagina 12, prima dell'inizio del metodo di Cramer)
+- Rettifica: nessuna. I tre sistemi {2x-3y=5, 4x+3y=1} → (1;-1), {3x+4y=-1, 4x-8y=7} → (1/2;-5/8), {2x+3y=1, 4x+3y=2} → (1/2;0) sono stati verificati con SymPy e risultano corretti così come nella traccia.
+- Aggiunta: nessuna. Le due frasi introduttive sull'idea del metodo (coefficienti opposti, eventuale moltiplicazione) aprono l'unità prima dei tre esempi della traccia, senza introdurre una formula generale assente dal quaderno.
