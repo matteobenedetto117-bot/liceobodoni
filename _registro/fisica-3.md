@@ -283,3 +283,8 @@
 - Parole: 215 su 1 pagina di traccia (pagina 106, prima metà: il titolo "Portata di un fluido", la definizione a parole, la derivazione Q=ΔV/Δt=A·Δx/Δt=A·v riquadrata, e l'unità di misura m³/s; la seconda metà della stessa pagina, che apre "Equazione di BERNOULLI" con lo schema del condotto in salita, è già l'unità 58).
 - Rettifica: nessuna. Verificato con SymPy che il prodotto area per velocità A·v ha le dimensioni di m²·(m/s)=m³/s, coerente con l'unità di misura della traccia.
 - Aggiunta: nessuna oltre al disegno del cilindretto ΔV=A·Δx ridisegnato in SVG a partire da quello della traccia; nessun esempio, tabella o quesito nuovi.
+
+## Unità 58 — Equazione di Bernoulli
+- Parole: 591 su 3 pagine di traccia (seconda metà di pagina 106, dove finisce "Portata di un fluido" e inizia lo schema del condotto in salita con P1, A1, v1 a sinistra e P2, A2, v2 a destra; pagina 107, il bilancio ΔU+ΔK=L_est con il lavoro della pressione L_p=P1·A1·Δx1-P2·A2·Δx2 e le tre parti numerate ΔU, ΔK, L_p; pagina 108, il calcolo di ΔU=dVg(h2-h1) e ΔK=½dV(v2²-v1²) fino all'equazione di Bernoulli riquadrata; la pagina 109, che apre i casi particolari orizzontale e a sezione costante, è già l'unità 59).
+- Rettifica: nessuna. Verificato con SymPy l'intero passaggio algebrico da V(P1-P2)=dVg(h2-h1)+½dV(v2²-v1²) alla forma riquadrata P1+dgh1+½dv1²=P2+dgh2+½dv2²; verificata anche l'omogeneità dimensionale (ogni termine ha le dimensioni di una pressione, Pa).
+- Aggiunta: nessuna oltre al disegno del condotto in salita ridisegnato in SVG a partire da quello della traccia, con le frecce di pressione P1 e P2 e le due quote h1, h2; nessun esempio, tabella o quesito nuovi.
