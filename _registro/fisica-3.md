@@ -263,3 +263,8 @@
 - Parole: 339 (comprese le formule contate come parole) su circa 1,5 pagine di traccia (seconda metà della pagina 99 del PDF — la prima metà, col grafico di U in funzione di r, è già l'unità 52, come annotato nel suo registro — con il titolo "Conservazione dell'energia nei fenomeni gravitazionali" e la formula E_tot=K+U=½mv²−GMm/r; pagina 100 intera, con l'esempio "Velocità di impatto di un meteorite": il disegno del meteorite fermo a distanza infinita, il bilancio E_tot,i=E_tot,f fra stato iniziale (v=0, r→∞) e stato finale (impatto a r=R_T), fino a v=√(2GM_T/R_T)≈11200 m/s).
 - Rettifica: nessuna. Verificato con SymPy che risolvendo 0=½mv²−GmM_T/R_T rispetto a v si ottiene v=√(2GM_T/R_T); verificato numericamente con G=6,674×10⁻¹¹ N·m²/kg², M_T=5,97×10²⁴ kg, R_T=6,37×10⁶ m che v≈11184,7 m/s≈11200 m/s, coincidente con il risultato della traccia.
 - Aggiunta: nessuna oltre alla frase di rimando finale che segnala la coincidenza numerica con la velocità di fuga trattata nell'unità successiva; nessun esempio, tabella o quesito nuovi.
+
+## Unità 54 — Velocità di fuga
+- Parole: 362 su 2 pagine di traccia
+- Rettifica: nessuna, i valori numerici (11200 m/s per la Terra, 2370 m/s per la Luna) sono stati verificati con SymPy e coincidono con la traccia.
+- Aggiunta: nessuna, oltre alle frasi di collegamento fra passaggi già presenti.
