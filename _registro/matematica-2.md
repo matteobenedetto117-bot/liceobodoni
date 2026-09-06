@@ -12,3 +12,8 @@
 - Parole: 379 su 2 pagine di traccia
 - Rettifica: nessuna. Il grado del sistema {x³+xy=1, x²+y+y²=16} e l'equivalenza fra {7x-y=3, 4(7x-y)=12} e {7x-y=3, 7x-y=3} sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna.
+
+## Unità 04 — Interpretazione grafica di un sistema
+- Parole: 401 su 2 pagine di traccia
+- Rettifica: nessuna. Le tre coppie di rette (caso determinato con soluzione (2;4), caso impossibile y=2x+2/y=2x+6, caso indeterminato y=-x/2+3 su entrambe) sono state verificate con SymPy e risultano corrette così come nella traccia.
+- Aggiunta: nessuna. Il riquadro finale sul ruolo del coefficiente angolare riprende solo ciò che i tre casi della traccia già mostrano singolarmente.
