@@ -268,3 +268,8 @@
 - Parole: 362 su 2 pagine di traccia
 - Rettifica: nessuna, i valori numerici (11200 m/s per la Terra, 2370 m/s per la Luna) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna, oltre alle frasi di collegamento fra passaggi già presenti.
+
+## Unità 55 — Buchi neri
+- Parole: 213 su 1 pagina di traccia (pagina 103 intera: il titolo "Buchi neri", la definizione, il valore di c, la condizione v_f>c, l'esempio sul raggio della Terra fino a R=0,0088 m=8,8 mm; la pagina 102, con l'esempio della velocità di fuga dalla Luna, è già l'unità 54; la pagina 104, che apre "Fluidodinamica", apre già l'unità 56)
+- Rettifica: nessuna. Verificato con SymPy che risolvendo v_f=√(2GM/R) rispetto a R e ponendo v_f=c=3×10⁸ m/s con M=M_T=5,97×10²⁴ kg si ottiene R≈0,00886 m≈8,86 mm, coerente con il valore 0,0088 m=8,8 mm della traccia (differenza dovuta solo all'arrotondamento di G e M_T usati nel calcolo a mano).
+- Aggiunta: un confronto visivo in SVG fra un corpo con v_f<c (la luce fugge) e uno con v_f>c (la luce ricade), a fianco della sola definizione a parole della traccia; nessun esempio, tabella o quesito nuovi.
