@@ -37,3 +37,8 @@
 - Parole: 197 su 2 pagine di traccia (pagine 16–17)
 - Rettifica: nessuna. La formula generale del determinante 3×3 (somma dei tre prodotti discendenti meno la somma dei tre ascendenti) e l'esempio con la matrice [[1,2,1],[1,5,0],[0,3,2]] (A=13, B=4, D=9) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano che cosa sono le diagonali discendenti e ascendenti nello schema di Sarrus, già disegnato nel quaderno.
+
+## Unità 09 — Sistemi di tre equazioni in tre incognite
+- Parole: 508 su 5 pagine di traccia (pagine 18–22)
+- Rettifica: nessuna. Il sistema {5x+4y-z=2, -3x+3y+2z=7, x+y-z=-1}, i tre metodi (sostituzione, riduzione, Cramer) e tutti i valori intermedi (D=-23, Dx=0, Dy=-23, Dz=-46, soluzione (0;1;2)) sono stati verificati con SymPy e risultano corretti così come nella traccia.
+- Aggiunta: nessuna. L'unico testo in più rispetto alla traccia è la formula generale di D, Dx, Dy, Dz per Cramer 3×3 (analoga a quella già data per i sistemi 2×2 nell'unità 07) e una riga che osserva come i tre metodi concordino sullo stesso risultato.
