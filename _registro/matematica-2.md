@@ -17,3 +17,8 @@
 - Parole: 401 su 2 pagine di traccia
 - Rettifica: nessuna. Le tre coppie di rette (caso determinato con soluzione (2;4), caso impossibile y=2x+2/y=2x+6, caso indeterminato y=-x/2+3 su entrambe) sono state verificate con SymPy e risultano corrette così come nella traccia.
 - Aggiunta: nessuna. Il riquadro finale sul ruolo del coefficiente angolare riprende solo ciò che i tre casi della traccia già mostrano singolarmente.
+
+## Unità 05 — Metodo di sostituzione
+- Parole: 151 su 1 pagina di traccia
+- Rettifica: nessuna. Il sistema {2x-3y=-12, x+4y=5} e i passaggi (x=5-4y, -11y=-22, y=2, x=-3) sono stati verificati con SymPy e risultano corretti così come nella traccia.
+- Aggiunta: nessuna. Le due frasi introduttive sull'idea del metodo (isolare un'incognita e sostituire) servono solo ad aprire l'unità prima di mostrare l'unico esempio della traccia.
