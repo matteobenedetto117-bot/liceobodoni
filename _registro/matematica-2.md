@@ -27,3 +27,8 @@
 - Parole: 246 su 1 pagina di traccia (il terzo esempio prosegue per poche righe in cima a pagina 12, prima dell'inizio del metodo di Cramer)
 - Rettifica: nessuna. I tre sistemi {2x-3y=5, 4x+3y=1} → (1;-1), {3x+4y=-1, 4x-8y=7} → (1/2;-5/8), {2x+3y=1, 4x+3y=2} → (1/2;0) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Le due frasi introduttive sull'idea del metodo (coefficienti opposti, eventuale moltiplicazione) aprono l'unità prima dei tre esempi della traccia, senza introdurre una formula generale assente dal quaderno.
+
+## Unità 07 — Matrici, determinanti e regola di Cramer
+- Parole: 326 su 4 pagine di traccia (pagine 12–15)
+- Rettifica: nessuna. Il determinante |2 5;3 7|=-1, il primo esempio {5x+3y=1,2x+y=4} con D=-1, Dx=-11, Dy=18, soluzione (11;-18), e il secondo esempio {7x-y=5,21x-3y=15} con D=Dx=Dy=0 (sistema indeterminato, seconda equazione tripla della prima) sono stati verificati con SymPy e risultano corretti così come nella traccia.
+- Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano il ruolo di ciascun elemento nelle formule di D, Dx, Dy già presenti nel quaderno.
