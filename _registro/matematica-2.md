@@ -137,3 +137,8 @@
 - Parole: 372 su 2 pagine di traccia (pagg. 54–55 di matematica-2.pdf)
 - Rettifica: nessuna, tutta la traccia (forma esplicita y=mx+q, caso y=q, caso x=k, forma implicita ax+by+c=0 e le formule m=-a/b, q=-c/b) è stata verificata con SymPy e risulta corretta.
 - Aggiunta: nessuna oltre a brevi frasi di collegamento fra i passaggi già presenti.
+
+## Unità 29 — Appartenenza di un punto a una retta
+- Parole: 240 su 1 pagina di traccia
+- Rettifica: nessuna, i calcoli della traccia erano corretti (verificati con SymPy)
+- Aggiunta: nessuna
