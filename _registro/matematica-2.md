@@ -162,3 +162,8 @@
 - Parole: 346 su 3 pagine di traccia (pagg. 63–65 di matematica-2.pdf)
 - Rettifica: nessuna. Il metodo geometrico (perpendicolare s: y=-1/2x+11/2, intersezione con r: y=2x+3 nel punto Q(1,5), distanza PQ=√5) e la formula diretta d=|ax0+by0+c|/√(a²+b²) applicata sia all'esempio P(3,4), r: 2x-y+3=0 (d=√5, coerente col metodo geometrico) sia al secondo esempio P(1,3), r: 2x+3y+1=0 (d=12√13/13) sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
 - Aggiunta: nessuna oltre a una frase che spiega il ruolo del valore assoluto al numeratore della formula, idea implicita nella traccia ma non esplicitata a parole.
+
+## Unità 34 — Forma normale e classificazione
+- Parole: 243 su 1 pagina di traccia (pag. 66 di matematica-2.pdf)
+- Rettifica: nessuna. L'identificazione dei coefficienti dell'esempio 6x²-x+2=0 (a=6, b=-1, c=2) è stata verificata con SymPy e coincide con la traccia.
+- Aggiunta: nessuna oltre a una frase finale che annuncia, in modo qualitativo, che il numero di soluzioni dipenderà da un valore ricavato dai coefficienti (senza nominare il discriminante, introdotto solo nella unità 36).
