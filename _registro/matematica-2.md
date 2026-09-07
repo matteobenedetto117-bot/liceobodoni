@@ -47,3 +47,8 @@
 - Parole: 345 su circa 2,3 pagine di traccia (pagina 23, pagina 24 e la parte superiore di pagina 25, prima dell'inizio dei sistemi fratti)
 - Rettifica: nessuna. Il sistema {ax+3ay=18, 2x+ay=a} e tutti i determinanti (D=a²-6a, Dx=18a-3a², Dy=a²-36) e i tre casi (a≠0 e a≠6 → determinato con x=-3, y=(a+6)/a; a=0 → impossibile; a=6 → indeterminato) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Il riquadro con i tre casi generali (D≠0/D=0 con Dx o Dy diverso da zero/D=Dx=Dy=0) riformula per due incognite lo stesso criterio già enunciato per tre incognite nell'unità 09, applicato qui al caso con parametro mostrato in traccia.
+
+## Unità 11 — Sistemi fratti
+- Parole: 297 su circa 1,5 pagine di traccia (parte inferiore di pagina 25, dopo la fine dell'unità 10, e parte superiore di pagina 26, fino a "IMPOSSIBILE")
+- Rettifica: nessuna. Il sistema {(3x-y)/(5x+5y)=1, 3/(y-1)=8+x/(1-y)}, le condizioni di esistenza (x≠-y, y≠1), il sistema lineare risultante {x+3y=0, x-8y=-11} e la soluzione algebrica (x=-3, y=1) sono stati verificati con SymPy: la soluzione trovata cade proprio nel valore escluso dalla CE su y, quindi va scartata e il sistema è impossibile, come indicato in traccia ("NON ACCETTABILE", "IMPOSSIBILE").
+- Aggiunta: nessuna. Il riquadro con i tre passi del metodo (CE, risoluzione, verifica) riformula in poche righe la sola idea già presente nella traccia, cioè porre le condizioni di esistenza prima e controllarle dopo.
