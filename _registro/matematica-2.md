@@ -187,3 +187,8 @@
 - Parole: 180 su circa 1,3 pagine di traccia (pagina 73, più il secondo esempio in cima a pagina 74, prima dell'intestazione "Somma e prodotto delle soluzioni")
 - Rettifica: nessuna. Entrambi gli esempi (x²+2(-√5+1)x-4√5=0 con Δ/4=(√5+1)², x1=2√5, x2=-2; x²+3x+√5=0 con Δ=(√5-2)², x1=(-5+√5)/2, x2=(-1-√5)/2) sono stati verificati con SymPy e risultano corretti così come in traccia.
 - Aggiunta: nessuna oltre a due frasi che spiegano l'idea generale (riconoscere A²+2AB+B² nel valore di Δ o Δ/4) prima dei due esempi, idea che la traccia applica ma non enuncia a parole.
+
+## Unità 39 — Somma e prodotto delle soluzioni
+- Parole: 170 su circa 1,5 pagine di traccia (fine pag. 74, dopo il secondo esempio dell'unità 38, fino a metà pag. 75, prima dell'intestazione "Scomposizione di un trinomio di secondo grado")
+- Rettifica: nessuna. Le due derivazioni (somma = -b/a con cancellazione dei due ±√Δ, prodotto = c/a tramite differenza di quadrati b²-Δ=4ac) sono state verificate con SymPy e coincidono con la traccia.
+- Aggiunta: un esempio numerico (x²-3x+2=0, radici 1 e 2), perché la traccia non ne contiene nessuno in questa unità e la regola lo consente in questo caso.
