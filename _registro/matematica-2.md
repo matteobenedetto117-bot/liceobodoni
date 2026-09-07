@@ -212,3 +212,8 @@
 - Parole: 268 su circa 2,15 pagine di traccia (pagine 81–82, più le prime righe di pag. 83 con la risposta al punto b dell'ultimo esempio, prima dell'intestazione "Sistemi di II grado")
 - Rettifica: nessuna. Verificato con SymPy: esistenza soluzioni reali per kx²-2(k+3)x+k-1=0, Δ=28k+36≥0 ⇒ k≥-9/7 (coincide con la traccia, che riduce a mano -36/28 in -9/7); soluzione assegnata x=-2, 9k+11=0 ⇒ k=-11/9; somma delle soluzioni=3 ⇒ k=6; prodotto delle soluzioni=-1 ⇒ k=1/2. Tutti coincidono con la traccia.
 - Aggiunta: un breve riquadro che ricorda la condizione k≠0 quando si usano le formule di somma e prodotto, perché compare due volte nella traccia (CE: k≠0) ma non è mai spiegata a parole.
+
+## Unità 44 — Sistemi di secondo grado
+- Parole: 181 su 2 pagine di traccia (pagine 83–84, dall'inizio di pag. 83 dopo la fine dell'unità 43, fino alla fine di pag. 84, prima dell'intestazione "Equazioni di grado superiore al secondo" a inizio pag. 85)
+- Rettifica: nessuna. Verificato con SymPy: il sistema {x+y²=2, 3x+y-2=0} risolto per sostituzione dà 9x²-11x+2=0, Δ=49, x1=1 e x2=2/9, con y1=-1 e y2=4/3; le due coppie soluzione (1,-1) e (2/9,4/3) coincidono con la traccia e con il calcolo diretto del sistema.
+- Aggiunta: una frase di interpretazione grafica (parabola e retta che si intersecano nelle coppie soluzione), idea implicita nelle due equazioni ma non esplicitata a parole nella traccia.
