@@ -72,3 +72,8 @@
 - Parole: 289 su circa 1,3 pagine di traccia (parte inferiore di pagina 32, dopo l'esempio finale già assegnato all'unità 14, e parte superiore di pagina 33, fino alla conclusione del CE)
 - Rettifica: nessuna. L'esempio $\sqrt{x/(x-3)}$, lo studio del segno di numeratore ($N=x\geqslant0$ per $x\geqslant0$) e denominatore ($D=x-3>0$ per $x>3$), e la conclusione CE $x\leqslant0\lor x>3$ sono stati verificati con SymPy (`solve_univariate_inequality(x/(x-3)>=0)`) e risultano corretti così come in traccia.
 - Aggiunta: nessuna. La regola generale del segno di un quoziente (concordi/discordi) riformula in poche righe ciò che la traccia stessa applica nell'esempio, senza introdurre casi nuovi; il grafico a segni è la stessa tabella di segno disegnata a mano in traccia, ridisegnata in SVG.
+
+## Unità 16 — Semplificazione e riduzione allo stesso indice
+- Parole: 300 su 2 pagine di traccia (pagine 34–35)
+- Rettifica: nessuna. Gli esempi di semplificazione ($\sqrt[21]{5^{14}}=\sqrt[3]{25}$, $\sqrt{121}=11$, $\sqrt[6]{169}=\sqrt[3]{13}$), l'esempio con radicando negativo ($\sqrt[21]{(-4)^7}=-\sqrt[3]{4}$), il caso letterale ($\sqrt{a^2}=|a|$, con $\sqrt{(-3)^2}=3$), la regola per indice dispari, e i due esempi di riduzione allo stesso indice (indici 2,3,5 → m.c.m. 30, esponenti 15,10,6; indici 4,3,7 → m.c.m. 84, esponenti 21,112,24) sono stati verificati con SymPy e risultano corretti così come in traccia.
+- Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano che la simmetria della proprietà invariantiva (già enunciata nell'unità 14) permette di leggerla anche per abbassare indice ed esponente, e chiariscono il criterio con cui si sceglie il nuovo esponente nella riduzione allo stesso indice.
