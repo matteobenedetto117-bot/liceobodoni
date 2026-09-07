@@ -102,3 +102,8 @@
 - Parole: 249 su 1 pagina di traccia (pagina 43)
 - Rettifica: la traccia riporta $\sqrt{34}\approx5{,}89$; il valore corretto, verificato con SymPy, è $\sqrt{34}\approx5{,}83$. Corretto in pagina senza segnalarlo al lettore. Tutto il resto (l'uguaglianza $\sqrt{25}+\sqrt9=8$, l'esempio $3\sqrt2+5\sqrt2=8\sqrt2$ e l'esempio $4\sqrt3-\sqrt[3]3+6\sqrt3+5\sqrt[3]3=10\sqrt3+4\sqrt[3]3$) è stato verificato con SymPy e risulta corretto così come in traccia.
 - Aggiunta: nessuna. Il riquadro di attenzione riprende l'annotazione "NO!" già presente in rosso nella traccia accanto al conto sbagliato.
+
+## Unità 22 — Razionalizzazione del denominatore
+- Parole: 240 su 2 pagine di traccia (pagine 44–45)
+- Rettifica: nessuna. Gli esempi con denominatore monomio ($6/\sqrt3=2\sqrt3$; $1/\sqrt2=\sqrt2/2$; $1/\sqrt[3]2=\sqrt[3]4/2$), il caso generale con indice $n$ ($1/\sqrt[n]{a}=\sqrt[n]{a^{n-1}}/a$) e gli esempi con denominatore binomio e coniugato ($1/(\sqrt3-\sqrt2)=\sqrt3+\sqrt2$; $2/(\sqrt5+\sqrt3)=\sqrt5-\sqrt3$; $3/(\sqrt{10}-2)=(\sqrt{10}+2)/2$) sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
+- Aggiunta: nessuna. La formula generale per indice $n$ (pagina 44) mette in forma esplicita, con la lettera $a$ al posto del $2$ usato in traccia, lo stesso schema che la traccia applica nei tre casi numerici via via crescenti di indice.
