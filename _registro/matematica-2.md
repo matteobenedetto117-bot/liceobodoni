@@ -172,3 +172,8 @@
 - Parole: 294 su 2 pagine di traccia (67–68)
 - Rettifica: nessuna, la traccia era corretta e completa
 - Aggiunta: nessuna, solo il richiamo al principio di annullamento del prodotto già noto dalle equazioni di primo grado, per spiegare il passaggio del raccoglimento
+
+## Unità 36 — Formula risolutiva e discriminante
+- Parole: 234 su 2 pagine di traccia (69–70, più l'Esempio 3 che nella traccia sconfina all'inizio di pag. 71 prima dell'intestazione "Formula ridotta", riportato qui perché completa la casistica dei tre segni del discriminante)
+- Rettifica: nessuna. Il discriminante e le soluzioni dei tre esempi (3x²-5x-2=0 con Δ=49, x1=2, x2=-1/3; 25x²+20x+4=0 con Δ=0, x=-2/5; 2x²-x+3=0 con Δ=-23, nessuna soluzione reale) sono stati verificati con SymPy e coincidono con la traccia.
+- Aggiunta: nessuna oltre a una frase che spiega il ruolo del doppio segno ± nella formula, idea implicita nella traccia ma non esplicitata a parole.
