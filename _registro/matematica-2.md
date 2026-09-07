@@ -97,3 +97,8 @@
 - Parole: 175 su 1 pagina di traccia (pagina 42)
 - Rettifica: nessuna. La regola della potenza di un radicale ($(\sqrt[n]{a})^p=\sqrt[n]{a^p}$, $a\geqslant0$) con l'esempio $(\sqrt[3]5)^2=\sqrt[3]{25}$, il caso di indice dispari e radicando negativo ($(\sqrt[5]{-2})^4=\sqrt[5]{16}$), la regola della radice di un radicale ($\sqrt[n]{\sqrt[m]a}=\sqrt[nm]a$, $a\geqslant0$) con gli esempi $\sqrt[3]{\sqrt[4]5}=\sqrt[12]5$ e $\sqrt{\sqrt[3]{\sqrt[4]7}}=\sqrt[24]7$, e il caso di indici entrambi dispari ($\sqrt[7]{\sqrt[3]{-2}}=-\sqrt[21]2$) sono stati verificati con SymPy (root reale) e risultano tutti corretti così come in traccia.
 - Aggiunta: nessuna.
+
+## Unità 21 — Addizione e sottrazione di radicali
+- Parole: 249 su 1 pagina di traccia (pagina 43)
+- Rettifica: la traccia riporta $\sqrt{34}\approx5{,}89$; il valore corretto, verificato con SymPy, è $\sqrt{34}\approx5{,}83$. Corretto in pagina senza segnalarlo al lettore. Tutto il resto (l'uguaglianza $\sqrt{25}+\sqrt9=8$, l'esempio $3\sqrt2+5\sqrt2=8\sqrt2$ e l'esempio $4\sqrt3-\sqrt[3]3+6\sqrt3+5\sqrt[3]3=10\sqrt3+4\sqrt[3]3$) è stato verificato con SymPy e risulta corretto così come in traccia.
+- Aggiunta: nessuna. Il riquadro di attenzione riprende l'annotazione "NO!" già presente in rosso nella traccia accanto al conto sbagliato.
