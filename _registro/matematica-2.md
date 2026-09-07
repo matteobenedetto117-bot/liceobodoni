@@ -232,3 +232,8 @@
 - Parole: 180 su 1 pagina di traccia (pagina 88, unico esempio, prima dell'intestazione "Disequazioni di secondo grado" a inizio pag. 89)
 - Rettifica: nessuna. Verificato con SymPy: 6x⁴+3x²-6x³=3x ⇒ 6x⁴-6x³+3x²-3x=0, fattorizzazione 3x(x-1)(2x²+1)=0, soluzioni reali x1=0 e x2=1 (il fattore 2x²+1 non si annulla mai per x reale), coincide con la traccia.
 - Aggiunta: nessuna oltre alla frase introduttiva sulla legge di annullamento del prodotto, che la traccia applica implicitamente senza nominarla.
+
+## Unità 48 — La parabola: vertice, asse, concavità
+- Parole: 299 su circa 1,5 pagine di traccia (pagina 89 per intero, dal titolo "Parabola" dopo l'intestazione d'area "Disequazioni di secondo grado", fino alla parte alta di pag. 90 con "Concavità di una parabola", prima dell'intestazione "Interpretazione grafica eq di II grado" a metà di pag. 90, che apre l'unità 49)
+- Rettifica: la traccia scrive l'ordinata del vertice come V(-b/2a, (b²-4ac)/4a), cioè +Δ/4a. Verificato con SymPy: l'ordinata corretta è -Δ/4a = (4ac-b²)/4a (derivata da y=ax²+bx+c sostituendo x=-b/2a). Corretto nella pagina in V(-b/2a, -Δ/4a).
+- Aggiunta: un esempio numerico (y=2x²-4x+1, vertice, asse, concavità) verificato con SymPy, perché la traccia non contiene alcun esempio svolto per questa unità.
