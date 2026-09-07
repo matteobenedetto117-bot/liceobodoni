@@ -112,3 +112,8 @@
 - Parole: 152 su 1 pagina di traccia (pag. 46)
 - Rettifica: nessuna, il calcolo della traccia è corretto (verificato con SymPy: x = (3√3+1)/4).
 - Aggiunta: nessuna, solo commenti minimi ai passaggi già presenti.
+
+## Unità 24 — Potenze con esponente razionale
+- Parole: 288 su 3 pagine di traccia (pagg. 47–49 di matematica-2.pdf)
+- Rettifica: nessuna, la traccia era corretta (verificato con SymPy ogni esempio delle definizioni e delle cinque proprietà).
+- Aggiunta: nessuna oltre a brevi commenti di collegamento fra numeratore/denominatore dell'esponente e indice/esponente del radicale, già impliciti nella traccia.
