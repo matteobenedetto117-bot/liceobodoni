@@ -207,3 +207,8 @@
 - Parole: 398 su 2 pagine di traccia (pagine 79–80, dal titolo "Equazioni letterali" a inizio pag. 79 fino alla fine di pag. 80, prima dell'intestazione "Equazioni parametriche" a inizio pag. 81)
 - Rettifica: nessuna. Verificato con SymPy: primo esempio ax²+(2-3a²)x-6a=0, Δ=(2-3a²)²+24a²=(3a²+2)² (sempre positivo), soluzioni x1=3a e x2=-2/a, coincide con la traccia; secondo esempio 6x²-ax-a²=0, Δ=25a², soluzioni x1=a/2 e x2=-a/3, coincide con la traccia.
 - Aggiunta: nessuna oltre alle due o tre frasi che spiegano l'idea generale del metodo (perché si controlla per primo il caso che annulla il coefficiente di x², perché si studia poi il segno di Δ), idea che la traccia applica nei due esempi ma non enuncia in generale.
+
+## Unità 43 — Equazioni parametriche
+- Parole: 268 su circa 2,15 pagine di traccia (pagine 81–82, più le prime righe di pag. 83 con la risposta al punto b dell'ultimo esempio, prima dell'intestazione "Sistemi di II grado")
+- Rettifica: nessuna. Verificato con SymPy: esistenza soluzioni reali per kx²-2(k+3)x+k-1=0, Δ=28k+36≥0 ⇒ k≥-9/7 (coincide con la traccia, che riduce a mano -36/28 in -9/7); soluzione assegnata x=-2, 9k+11=0 ⇒ k=-11/9; somma delle soluzioni=3 ⇒ k=6; prodotto delle soluzioni=-1 ⇒ k=1/2. Tutti coincidono con la traccia.
+- Aggiunta: un breve riquadro che ricorda la condizione k≠0 quando si usano le formule di somma e prodotto, perché compare due volte nella traccia (CE: k≠0) ma non è mai spiegata a parole.
