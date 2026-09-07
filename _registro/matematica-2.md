@@ -202,3 +202,8 @@
 - Parole: 229 su 1 pagina di traccia (pagina 78, prima dell'intestazione "Equazioni letterali" a inizio pagina 79)
 - Rettifica: nessuna. L'unico esempio (x/(x-1) + 1/(2x) = 1/(x-1)) è stato verificato con SymPy: numeratore comune 2x²-x-1, radici 1 e -1/2, con x=1 da scartare per le CE (x≠1, x≠0) e soluzione finale x=-1/2, coerente con la traccia.
 - Aggiunta: nessuna oltre a un breve paragrafo introduttivo che spiega perché servono le condizioni di esistenza e il ruolo del denominatore comune, poiché la traccia mostra solo i cinque passi numerati senza motivarli a parole.
+
+## Unità 42 — Equazioni letterali e discussione
+- Parole: 398 su 2 pagine di traccia (pagine 79–80, dal titolo "Equazioni letterali" a inizio pag. 79 fino alla fine di pag. 80, prima dell'intestazione "Equazioni parametriche" a inizio pag. 81)
+- Rettifica: nessuna. Verificato con SymPy: primo esempio ax²+(2-3a²)x-6a=0, Δ=(2-3a²)²+24a²=(3a²+2)² (sempre positivo), soluzioni x1=3a e x2=-2/a, coincide con la traccia; secondo esempio 6x²-ax-a²=0, Δ=25a², soluzioni x1=a/2 e x2=-a/3, coincide con la traccia.
+- Aggiunta: nessuna oltre alle due o tre frasi che spiegano l'idea generale del metodo (perché si controlla per primo il caso che annulla il coefficiente di x², perché si studia poi il segno di Δ), idea che la traccia applica nei due esempi ma non enuncia in generale.
