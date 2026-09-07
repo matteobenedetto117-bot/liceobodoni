@@ -237,3 +237,8 @@
 - Parole: 299 su circa 1,5 pagine di traccia (pagina 89 per intero, dal titolo "Parabola" dopo l'intestazione d'area "Disequazioni di secondo grado", fino alla parte alta di pag. 90 con "Concavità di una parabola", prima dell'intestazione "Interpretazione grafica eq di II grado" a metà di pag. 90, che apre l'unità 49)
 - Rettifica: la traccia scrive l'ordinata del vertice come V(-b/2a, (b²-4ac)/4a), cioè +Δ/4a. Verificato con SymPy: l'ordinata corretta è -Δ/4a = (4ac-b²)/4a (derivata da y=ax²+bx+c sostituendo x=-b/2a). Corretto nella pagina in V(-b/2a, -Δ/4a).
 - Aggiunta: un esempio numerico (y=2x²-4x+1, vertice, asse, concavità) verificato con SymPy, perché la traccia non contiene alcun esempio svolto per questa unità.
+
+## Unità 49 — Interpretazione grafica di equazioni e sistemi di secondo grado
+- Parole: 258 su circa 0,7 pagine di traccia (fondo pag. 90 + inizio pag. 91 di matematica-2.pdf)
+- Rettifica: nessuna, la traccia era corretta.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra i passaggi già presenti.
