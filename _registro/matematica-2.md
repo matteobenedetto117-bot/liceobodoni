@@ -192,3 +192,8 @@
 - Parole: 170 su circa 1,5 pagine di traccia (fine pag. 74, dopo il secondo esempio dell'unità 38, fino a metà pag. 75, prima dell'intestazione "Scomposizione di un trinomio di secondo grado")
 - Rettifica: nessuna. Le due derivazioni (somma = -b/a con cancellazione dei due ±√Δ, prodotto = c/a tramite differenza di quadrati b²-Δ=4ac) sono state verificate con SymPy e coincidono con la traccia.
 - Aggiunta: un esempio numerico (x²-3x+2=0, radici 1 e 2), perché la traccia non ne contiene nessuno in questa unità e la regola lo consente in questo caso.
+
+## Unità 40 — Scomposizione del trinomio di secondo grado
+- Parole: 249 su circa 2,5 pagine di traccia (da metà pag. 75, dopo l'intestazione "Scomposizione di un trinomio di secondo grado", a pag. 77, prima dell'intestazione "Equazioni numeriche fratte" a inizio pag. 78)
+- Rettifica: nessuna. Tutti i calcoli sono stati verificati con SymPy e coincidono con la traccia: x²+5x+6=(x+2)(x+3) con radici -3 e -2; x²-2x+1=(x-1)² con radice doppia 1; x²-3x-4 con Δ=25, radici 4 e -1, fattorizzato (x-4)(x+1); l'identità generale ax²+bx+c=a(x-x1)(x-x2); 9x²-6x+1 con Δ/4=0, radice doppia 1/3, fattorizzato 9(x-1/3)²; 5x²+34x-7 con Δ/4=324, radici -7 e 1/5, fattorizzato 5(x+7)(x-1/5).
+- Aggiunta: nessuna oltre a una frase che spiega perché il fattore a resta davanti al prodotto (x-x1)(x-x2), idea implicita nella traccia ma non esplicitata a parole.
