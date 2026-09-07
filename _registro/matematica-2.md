@@ -62,3 +62,8 @@
 - Parole: 314 su 2 pagine di traccia (pagine 29–30)
 - Rettifica: nessuna. La proprietà $(\sqrt[n]{a})^n=a$, la regola $\sqrt[n]{-a}=-\sqrt[n]{a}$ per $n$ dispari, le condizioni di esistenza (CE $a\geqslant0$ per $n$ pari, CE $\forall a\in\mathbb{R}$ per $n$ dispari) con i tre esempi ($\sqrt[4]{x-1}$ CE $x\geqslant1$; $\sqrt[7]{7-y}$ CE $\forall y$; $\sqrt[8]{(x+7)/2}$ CE $x\geqslant-7$), e la regola di segno con l'esempio su $\sqrt[8]{2-a}$ e $\sqrt[7]{b-3}$ sono stati verificati con SymPy e risultano corretti così come in traccia.
 - Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano perché la condizione di esistenza dipende dalla parità dell'indice e chiariscono il passaggio "moltiplicando per 2" già annotato a margine nell'esempio con la frazione.
+
+## Unità 14 — Proprietà invariantiva
+- Parole: 248 su 1 pagina di traccia (pagina 31, più il solo esempio in cima a pagina 32 prima dell'inizio dell'unità 15)
+- Rettifica: nessuna. L'enunciato della proprietà invariantiva ($\sqrt[n]{a^p}=\sqrt[nm]{a^{pm}}$, $a\geqslant0$), i due esempi ($\sqrt[5]{2}=\sqrt[15]{8}$ e $\sqrt[3]{5^2}=\sqrt[6]{625}$), il caso di indice dispari e radicando negativo ($\sqrt[n]{-a}=-\sqrt[n]{a}=-\sqrt[2n]{a^2}$) e l'esempio finale ($\sqrt{x+6}=\sqrt[6]{(x+6)^3}$, CE $x\geqslant-6$) sono stati verificati con SymPy e risultano corretti così come in traccia.
+- Aggiunta: nessuna. Il breve commento che paragona il cambio di indice al moltiplicare numeratore e denominatore di una frazione riprende un'analogia già implicita nella scrittura dell'esponente come $p/n$ nella traccia, senza introdurre contenuti nuovi.
