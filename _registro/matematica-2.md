@@ -92,3 +92,8 @@
 - Parole: 296 su 3 pagine di traccia (pagine 39–41)
 - Rettifica: nessuna. Il trasporto dentro con indice pari e dispari ($2\sqrt[4]3=\sqrt[4]{2^4\cdot3}$; $3\sqrt5=\sqrt{45}$; $-2\sqrt[6]2=-\sqrt[6]{2^7}$; $-2\sqrt[3]3=-\sqrt[3]{24}=\sqrt[3]{-24}$), il caso letterale ($a^2\sqrt3=\sqrt{3a^4}$; $a\sqrt a=\sqrt{a^3}$ con C.E. $a\geqslant0$), la distinzione di segno per $a\sqrt2$ con $a$ di segno qualunque (compreso l'esempio $a=-3\Rightarrow-3\sqrt2=-\sqrt{18}$), e il trasporto fuori ($\sqrt{63}=3\sqrt7$; $\sqrt{48}=4\sqrt3$; $\sqrt[3]{256}=4\sqrt[3]4$; $\sqrt{3x^2}=|x|\sqrt3$; $\sqrt{3x^4}=x^2\sqrt3$) sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
 - Aggiunta: nessuna. Le sole frasi in più introducono la regola generale prima degli esempi numerici e chiariscono, nel caso $\sqrt{3x^4}=x^2\sqrt3$, perché qui non serve il valore assoluto usato invece in $\sqrt{3x^2}=|x|\sqrt3$.
+
+## Unità 20 — Potenza di un radicale e radice di un radicale
+- Parole: 175 su 1 pagina di traccia (pagina 42)
+- Rettifica: nessuna. La regola della potenza di un radicale ($(\sqrt[n]{a})^p=\sqrt[n]{a^p}$, $a\geqslant0$) con l'esempio $(\sqrt[3]5)^2=\sqrt[3]{25}$, il caso di indice dispari e radicando negativo ($(\sqrt[5]{-2})^4=\sqrt[5]{16}$), la regola della radice di un radicale ($\sqrt[n]{\sqrt[m]a}=\sqrt[nm]a$, $a\geqslant0$) con gli esempi $\sqrt[3]{\sqrt[4]5}=\sqrt[12]5$ e $\sqrt{\sqrt[3]{\sqrt[4]7}}=\sqrt[24]7$, e il caso di indici entrambi dispari ($\sqrt[7]{\sqrt[3]{-2}}=-\sqrt[21]2$) sono stati verificati con SymPy (root reale) e risultano tutti corretti così come in traccia.
+- Aggiunta: nessuna.
