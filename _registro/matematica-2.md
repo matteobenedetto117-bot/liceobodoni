@@ -227,3 +227,8 @@
 - Parole: 203 su circa 1,5 pagine di traccia (dalla parte bassa di pag. 86, dall'intestazione "Equazioni trinomie", fino alla fine di pag. 87, prima dell'intestazione "Equazioni risolubili con scomposizioni" a inizio pag. 88)
 - Rettifica: nessuna. Verificato con SymPy: 5x¹⁸+x⁹-2=0 con t=x⁹, Δ=41, t1=(-1+√41)/10 e t2=(-1-√41)/10, entrambi accettabili perché l'esponente 9 è dispari, coincide con la traccia; x⁴+31x²-32=0 con t=x², Δ=1089=33², t1=1 e t2=-32, da t1 si ottiene x=±1 e da t2 nessuna soluzione reale, coincide con la traccia.
 - Aggiunta: nessuna oltre alla frase che generalizza la condizione di accettabilità di t secondo la parità di m, idea che la traccia applica nei due esempi ma non enuncia in generale prima di svolgerli.
+
+## Unità 47 — Equazioni risolubili con scomposizioni
+- Parole: 180 su 1 pagina di traccia (pagina 88, unico esempio, prima dell'intestazione "Disequazioni di secondo grado" a inizio pag. 89)
+- Rettifica: nessuna. Verificato con SymPy: 6x⁴+3x²-6x³=3x ⇒ 6x⁴-6x³+3x²-3x=0, fattorizzazione 3x(x-1)(2x²+1)=0, soluzioni reali x1=0 e x2=1 (il fattore 2x²+1 non si annulla mai per x reale), coincide con la traccia.
+- Aggiunta: nessuna oltre alla frase introduttiva sulla legge di annullamento del prodotto, che la traccia applica implicitamente senza nominarla.
