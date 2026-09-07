@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Area di un triangolo e metodo delle matrici — Matematica seconda</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
+.regola p{margin:6px 0}
+.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
+.esempio p{margin:6px 0}
+.fig{text-align:center;margin:18px 0}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
+  <p class="occhiello">Piano cartesiano e retta &middot; Unità 26</p>
+  <h1>Area di un triangolo e metodo delle matrici</h1>
+  <p class="sommario">Conosciamo già la distanza fra due punti e il punto medio di un segmento.
+  Con le stesse coordinate possiamo calcolare l'area di un triangolo di cui conosciamo solo i
+  vertici, senza disegnare basi e altezze: una prima volta racchiudendolo in un rettangolo, una
+  seconda con un determinante.</p>
+</header>
+
+<h2>Il rettangolo circoscritto</h2>
+<p>Se i tre vertici hanno coordinate qualsiasi, possiamo racchiuderli in un rettangolo con i lati
+paralleli agli assi. L'area del triangolo si ottiene allora per differenza: l'area del rettangolo
+meno le aree dei triangoli rettangoli che restano tagliati fuori nei suoi angoli.</p>
+
+<div class="fig">
+<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="170" x2="200" y2="170" stroke="#b3392f" stroke-width="1.4"/>
+<line x1="200" y1="170" x2="200" y2="50" stroke="#b3392f" stroke-width="1.4"/>
+<line x1="200" y1="50" x2="40" y2="50" stroke="#b3392f" stroke-width="1.4"/>
+<line x1="40" y1="50" x2="40" y2="170" stroke="#b3392f" stroke-width="1.4"/>
+<polygon points="40,170 40,90 120,170" fill="#e8eff6" opacity="0.9"/>
+<polygon points="200,170 120,170 200,50" fill="#e8eff6" opacity="0.9"/>
+<polygon points="40,50 40,90 200,50" fill="#e8eff6" opacity="0.9"/>
+<polygon points="40,90 200,50 120,170" fill="#2f6b4f" fill-opacity="0.25" stroke="#2f6b4f" stroke-width="2"/>
+<text x="70" y="150" font-family="Segoe UI, sans-serif" font-size="13" fill="#6d7280">1</text>
+<text x="150" y="140" font-family="Segoe UI, sans-serif" font-size="13" fill="#6d7280">2</text>
+<text x="110" y="65" font-family="Segoe UI, sans-serif" font-size="13" fill="#6d7280">3</text>
+<circle cx="40" cy="90" r="4" fill="#1f4e79"/><text x="16" y="86" font-size="13" fill="#1f4e79">A(0,2)</text>
+<circle cx="200" cy="50" r="4" fill="#1f4e79"/><text x="206" y="46" font-size="13" fill="#1f4e79">B(4,3)</text>
+<circle cx="120" cy="170" r="4" fill="#1f4e79"/><text x="108" y="188" font-size="13" fill="#1f4e79">C(2,0)</text>
+</svg>
+</div>
+
+<div class="esempio"><p>$A(0,2)$, $B(4,3)$, $C(2,0)$. Il rettangolo che li contiene ha area
+$A_{rett}=4\cdot3=12$. I tre triangoli tagliati fuori negli angoli hanno cateti
+$(2,2)$, $(2,3)$ e $(1,4)$:
+$$A_1=\frac{2\cdot2}{2}=2,\qquad A_2=\frac{2\cdot3}{2}=3,\qquad A_3=\frac{1\cdot4}{2}=2$$
+$$A_{ABC}=A_{rett}-A_1-A_2-A_3=12-2-3-2=5$$</p></div>
+
+<h2>Il metodo delle matrici</h2>
+<p>Lo stesso risultato si ottiene senza disegnare nulla. Si scrivono le coordinate dei tre
+vertici, con una terza colonna di soli $1$, come righe di una matrice quadrata, e se ne calcola
+il determinante.</p>
+
+<div class="regola"><p>Vertici $A(x_A,y_A)$, $B(x_B,y_B)$, $C(x_C,y_C)$:
+$$D=\begin{vmatrix}x_A & y_A & 1\\ x_B & y_B & 1\\ x_C & y_C & 1\end{vmatrix}
+\qquad\Longrightarrow\qquad A_{ABC}=\frac12\,|D|$$</p></div>
+
+<p>Il determinante si calcola con la regola di Sarrus: si ripetono le prime due colonne a destra
+della matrice, si sommano i tre prodotti sulle diagonali discendenti e si sottraggono i tre
+prodotti sulle diagonali ascendenti.</p>
+
+<div class="fig">
+<svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+<text x="10" y="30" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">0</text>
+<text x="55" y="30" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">2</text>
+<text x="100" y="30" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">1</text>
+<text x="145" y="30" font-family="Segoe UI, sans-serif" font-size="16" fill="#6d7280">0</text>
+<text x="190" y="30" font-family="Segoe UI, sans-serif" font-size="16" fill="#6d7280">2</text>
+<text x="10" y="65" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">4</text>
+<text x="55" y="65" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">3</text>
+<text x="100" y="65" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">1</text>
+<text x="145" y="65" font-family="Segoe UI, sans-serif" font-size="16" fill="#6d7280">4</text>
+<text x="190" y="65" font-family="Segoe UI, sans-serif" font-size="16" fill="#6d7280">3</text>
+<text x="10" y="100" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">2</text>
+<text x="55" y="100" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">0</text>
+<text x="100" y="100" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">1</text>
+<text x="145" y="100" font-family="Segoe UI, sans-serif" font-size="16" fill="#6d7280">2</text>
+<text x="190" y="100" font-family="Segoe UI, sans-serif" font-size="16" fill="#6d7280">0</text>
+<line x1="8" y1="15" x2="150" y2="90" stroke="#2f6b4f" stroke-width="1.6"/>
+<line x1="53" y1="15" x2="195" y2="90" stroke="#2f6b4f" stroke-width="1.6"/>
+<line x1="98" y1="15" x2="240" y2="90" stroke="#2f6b4f" stroke-width="1.6"/>
+<line x1="8" y1="90" x2="150" y2="15" stroke="#b3392f" stroke-width="1.6"/>
+<line x1="53" y1="90" x2="195" y2="15" stroke="#b3392f" stroke-width="1.6"/>
+<line x1="98" y1="90" x2="240" y2="15" stroke="#b3392f" stroke-width="1.6"/>
+<text x="10" y="118" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">discendenti: +</text>
+<text x="150" y="118" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">ascendenti: −</text>
+</svg>
+</div>
+
+<div class="esempio"><p>$A(0,2)$, $B(4,3)$, $C(2,0)$:
+$$D=\begin{vmatrix}0&2&1\\4&3&1\\2&0&1\end{vmatrix}=(0+4+0)-(6+0+8)=4-14=-10$$
+$$A_{ABC}=\frac12\,|-10|=5$$</p></div>
+
+<p>Il valore assoluto è necessario perché il segno del determinante dipende dal verso, orario o
+antiorario, in cui i vertici vengono letti; l'area di un triangolo, invece, è sempre positiva.</p>
+
+<div class="avanti">
+<h2>Nelle prossime unità</h2>
+<ul>
+<li>Fissate le coordinate dei punti, il passo successivo è studiare le rette che li
+congiungono: si comincia dalle rette per l'origine e dal coefficiente angolare.</li>
+</ul>
+</div>
+
+<footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 26</p></footer>
+
+</div>
+</body>
+</html>
