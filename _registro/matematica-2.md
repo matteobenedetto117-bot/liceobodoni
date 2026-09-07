@@ -177,3 +177,8 @@
 - Parole: 234 su 2 pagine di traccia (69–70, più l'Esempio 3 che nella traccia sconfina all'inizio di pag. 71 prima dell'intestazione "Formula ridotta", riportato qui perché completa la casistica dei tre segni del discriminante)
 - Rettifica: nessuna. Il discriminante e le soluzioni dei tre esempi (3x²-5x-2=0 con Δ=49, x1=2, x2=-1/3; 25x²+20x+4=0 con Δ=0, x=-2/5; 2x²-x+3=0 con Δ=-23, nessuna soluzione reale) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna oltre a una frase che spiega il ruolo del doppio segno ± nella formula, idea implicita nella traccia ma non esplicitata a parole.
+
+## Unità 37 — Formula ridotta
+- Parole: 310 su 2 pagine di traccia (71–72)
+- Rettifica: nessuna. Il discriminante ridotto e le soluzioni dell'esempio 3x²-10x+7=0 (β=-5, Δ/4=4, x1=7/3, x2=1, coerenti col calcolo con la formula intera Δ=16) e delle due equazioni con quadrato di binomio ((x+3)²=36 con x1=3, x2=-9; (x-1)²-22=3 con x1=6, x2=-4) sono stati verificati con SymPy e coincidono con la traccia.
+- Aggiunta: nessuna oltre a una frase che spiega che β prende il posto di b nei due passi già visti, per collegare la formula ridotta a quella generale.
