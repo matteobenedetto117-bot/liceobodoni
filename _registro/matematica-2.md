@@ -42,3 +42,8 @@
 - Parole: 508 su 5 pagine di traccia (pagine 18–22)
 - Rettifica: nessuna. Il sistema {5x+4y-z=2, -3x+3y+2z=7, x+y-z=-1}, i tre metodi (sostituzione, riduzione, Cramer) e tutti i valori intermedi (D=-23, Dx=0, Dy=-23, Dz=-46, soluzione (0;1;2)) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. L'unico testo in più rispetto alla traccia è la formula generale di D, Dx, Dy, Dz per Cramer 3×3 (analoga a quella già data per i sistemi 2×2 nell'unità 07) e una riga che osserva come i tre metodi concordino sullo stesso risultato.
+
+## Unità 10 — Sistemi letterali e discussione parametrica
+- Parole: 345 su circa 2,3 pagine di traccia (pagina 23, pagina 24 e la parte superiore di pagina 25, prima dell'inizio dei sistemi fratti)
+- Rettifica: nessuna. Il sistema {ax+3ay=18, 2x+ay=a} e tutti i determinanti (D=a²-6a, Dx=18a-3a², Dy=a²-36) e i tre casi (a≠0 e a≠6 → determinato con x=-3, y=(a+6)/a; a=0 → impossibile; a=6 → indeterminato) sono stati verificati con SymPy e risultano corretti così come nella traccia.
+- Aggiunta: nessuna. Il riquadro con i tre casi generali (D≠0/D=0 con Dx o Dy diverso da zero/D=Dx=Dy=0) riformula per due incognite lo stesso criterio già enunciato per tre incognite nell'unità 09, applicato qui al caso con parametro mostrato in traccia.
