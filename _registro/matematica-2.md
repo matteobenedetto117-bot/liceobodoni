@@ -152,3 +152,8 @@
 - Parole: 306 su 2 pagine di traccia (pagg. 58–59 di matematica-2.pdf)
 - Rettifica: nessuna. La formula del coefficiente angolare come rapporto, l'esempio A(2,2) e B(5,4) con m=2/3, l'equazione y-yA=m(x-xA) con il calcolo y=2/3 x+2/3, l'equazione della retta per due punti e la conversione alla forma implicita 3y-2x-2=0 sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
 - Aggiunta: nessuna oltre a brevi frasi di collegamento fra i tre passaggi (m da due punti, retta per un punto, retta per due punti), già impliciti nella successione degli esempi in traccia.
+
+## Unità 32 — Fasci di rette e intersezione fra due rette
+- Parole: 454 su 3 pagine di traccia (pagg. 60–62 di matematica-2.pdf)
+- Rettifica: nessuna. L'equazione del fascio proprio (y-yA=m(x-xA) ∨ x=xA), quella del fascio improprio (y=m1x+q), l'esempio di intersezione fra y=x+2 e y=-2/3x+5 (soluzione x=9/5, y=19/5) e l'esempio del centro del fascio 3y-mx-4m-6=0 (soluzione A(-4,2), verificata indipendente da m) sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
+- Aggiunta: nessuna oltre a brevi frasi di collegamento (perché l'equazione x=xA va aggiunta a parte, perché il centro non dipende dal valore di m scelto), già implicite nella traccia.
