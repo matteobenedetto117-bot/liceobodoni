@@ -107,3 +107,8 @@
 - Parole: 240 su 2 pagine di traccia (pagine 44–45)
 - Rettifica: nessuna. Gli esempi con denominatore monomio ($6/\sqrt3=2\sqrt3$; $1/\sqrt2=\sqrt2/2$; $1/\sqrt[3]2=\sqrt[3]4/2$), il caso generale con indice $n$ ($1/\sqrt[n]{a}=\sqrt[n]{a^{n-1}}/a$) e gli esempi con denominatore binomio e coniugato ($1/(\sqrt3-\sqrt2)=\sqrt3+\sqrt2$; $2/(\sqrt5+\sqrt3)=\sqrt5-\sqrt3$; $3/(\sqrt{10}-2)=(\sqrt{10}+2)/2$) sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
 - Aggiunta: nessuna. La formula generale per indice $n$ (pagina 44) mette in forma esplicita, con la lettera $a$ al posto del $2$ usato in traccia, lo stesso schema che la traccia applica nei tre casi numerici via via crescenti di indice.
+
+## Unità 23 — Equazioni con i radicali a coefficienti irrazionali
+- Parole: 152 su 1 pagina di traccia (pag. 46)
+- Rettifica: nessuna, il calcolo della traccia è corretto (verificato con SymPy: x = (3√3+1)/4).
+- Aggiunta: nessuna, solo commenti minimi ai passaggi già presenti.
