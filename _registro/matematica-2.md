@@ -222,3 +222,8 @@
 - Parole: 230 su circa 1,3 pagine di traccia (pagina 85 e la parte alta di pag. 86, fino all'esempio 2x³+54=0, prima dell'intestazione "Equazioni trinomie" a metà di pag. 86)
 - Rettifica: nessuna. Verificato con SymPy: x⁶-64=0 ⇒ x=±2 (coincide con la traccia); 2x³+54=0 ⇒ x³=-27 ⇒ x=-3 (coincide con la traccia).
 - Aggiunta: nessuna oltre alla frase che spiega perché le due soluzioni del caso pari sono opposte, idea implicita nella traccia (che scrive x=±ⁿ√(-b/a)) ma non motivata a parole.
+
+## Unità 46 — Equazioni trinomie e biquadratiche
+- Parole: 203 su circa 1,5 pagine di traccia (dalla parte bassa di pag. 86, dall'intestazione "Equazioni trinomie", fino alla fine di pag. 87, prima dell'intestazione "Equazioni risolubili con scomposizioni" a inizio pag. 88)
+- Rettifica: nessuna. Verificato con SymPy: 5x¹⁸+x⁹-2=0 con t=x⁹, Δ=41, t1=(-1+√41)/10 e t2=(-1-√41)/10, entrambi accettabili perché l'esponente 9 è dispari, coincide con la traccia; x⁴+31x²-32=0 con t=x², Δ=1089=33², t1=1 e t2=-32, da t1 si ottiene x=±1 e da t2 nessuna soluzione reale, coincide con la traccia.
+- Aggiunta: nessuna oltre alla frase che generalizza la condizione di accettabilità di t secondo la parità di m, idea che la traccia applica nei due esempi ma non enuncia in generale prima di svolgerli.
