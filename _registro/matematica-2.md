@@ -67,3 +67,8 @@
 - Parole: 248 su 1 pagina di traccia (pagina 31, più il solo esempio in cima a pagina 32 prima dell'inizio dell'unità 15)
 - Rettifica: nessuna. L'enunciato della proprietà invariantiva ($\sqrt[n]{a^p}=\sqrt[nm]{a^{pm}}$, $a\geqslant0$), i due esempi ($\sqrt[5]{2}=\sqrt[15]{8}$ e $\sqrt[3]{5^2}=\sqrt[6]{625}$), il caso di indice dispari e radicando negativo ($\sqrt[n]{-a}=-\sqrt[n]{a}=-\sqrt[2n]{a^2}$) e l'esempio finale ($\sqrt{x+6}=\sqrt[6]{(x+6)^3}$, CE $x\geqslant-6$) sono stati verificati con SymPy e risultano corretti così come in traccia.
 - Aggiunta: nessuna. Il breve commento che paragona il cambio di indice al moltiplicare numeratore e denominatore di una frazione riprende un'analogia già implicita nella scrittura dell'esponente come $p/n$ nella traccia, senza introdurre contenuti nuovi.
+
+## Unità 15 — Condizioni di esistenza di frazioni algebriche sotto radice
+- Parole: 289 su circa 1,3 pagine di traccia (parte inferiore di pagina 32, dopo l'esempio finale già assegnato all'unità 14, e parte superiore di pagina 33, fino alla conclusione del CE)
+- Rettifica: nessuna. L'esempio $\sqrt{x/(x-3)}$, lo studio del segno di numeratore ($N=x\geqslant0$ per $x\geqslant0$) e denominatore ($D=x-3>0$ per $x>3$), e la conclusione CE $x\leqslant0\lor x>3$ sono stati verificati con SymPy (`solve_univariate_inequality(x/(x-3)>=0)`) e risultano corretti così come in traccia.
+- Aggiunta: nessuna. La regola generale del segno di un quoziente (concordi/discordi) riformula in poche righe ciò che la traccia stessa applica nell'esempio, senza introdurre casi nuovi; il grafico a segni è la stessa tabella di segno disegnata a mano in traccia, ridisegnata in SVG.
