@@ -117,3 +117,8 @@
 - Parole: 288 su 3 pagine di traccia (pagg. 47–49 di matematica-2.pdf)
 - Rettifica: nessuna, la traccia era corretta (verificato con SymPy ogni esempio delle definizioni e delle cinque proprietà).
 - Aggiunta: nessuna oltre a brevi commenti di collegamento fra numeratore/denominatore dell'esponente e indice/esponente del radicale, già impliciti nella traccia.
+
+## Unità 25 — Punti nel piano: distanza e punto medio
+- Parole: 282 su 2 pagine di traccia (pagg. 50–51 di matematica-2.pdf)
+- Rettifica: nessuna, tutti gli esempi (distanza fra punti con stessa ordinata, stessa ascissa, generica; punto medio) sono stati verificati con SymPy e coincidono con la traccia.
+- Aggiunta: nessuna oltre a un breve richiamo al teorema di Pitagora per il caso generale della distanza, già suggerito dal disegno del triangolo rettangolo in traccia.
