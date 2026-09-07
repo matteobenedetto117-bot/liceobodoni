@@ -77,3 +77,8 @@
 - Parole: 300 su 2 pagine di traccia (pagine 34–35)
 - Rettifica: nessuna. Gli esempi di semplificazione ($\sqrt[21]{5^{14}}=\sqrt[3]{25}$, $\sqrt{121}=11$, $\sqrt[6]{169}=\sqrt[3]{13}$), l'esempio con radicando negativo ($\sqrt[21]{(-4)^7}=-\sqrt[3]{4}$), il caso letterale ($\sqrt{a^2}=|a|$, con $\sqrt{(-3)^2}=3$), la regola per indice dispari, e i due esempi di riduzione allo stesso indice (indici 2,3,5 → m.c.m. 30, esponenti 15,10,6; indici 4,3,7 → m.c.m. 84, esponenti 21,112,24) sono stati verificati con SymPy e risultano corretti così come in traccia.
 - Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano che la simmetria della proprietà invariantiva (già enunciata nell'unità 14) permette di leggerla anche per abbassare indice ed esponente, e chiariscono il criterio con cui si sceglie il nuovo esponente nella riduzione allo stesso indice.
+
+## Unità 17 — Confronto di radicali
+- Parole: 157 (comprese testata e didascalie) su 1 pagina di traccia (pagina 36)
+- Rettifica: nessuna. La regola per indici uguali ($\sqrt[3]{5}>\sqrt[3]{2}$) e l'esempio con indici diversi (confronto di $\sqrt2$, $\sqrt[3]4$, $\sqrt[4]3$, riduzione all'indice comune 12 con esponenti 6, 8, 3, radicandi 64, 256, 27, conclusione $\sqrt[4]3<\sqrt2<\sqrt[3]4$) sono stati verificati con SymPy e risultano corretti così come in traccia.
+- Aggiunta: nessuna. Il testo si limita a mettere in prosa i due casi (stesso indice / indice diverso) già distinti in traccia e a introdurre l'unico passaggio esplicito, "svolgendo le potenze sotto radice", che in traccia è implicito nel calcolo a mano.
