@@ -142,3 +142,8 @@
 - Parole: 240 su 1 pagina di traccia
 - Rettifica: nessuna, i calcoli della traccia erano corretti (verificati con SymPy)
 - Aggiunta: nessuna
+
+## Unità 30 — Rette parallele e perpendicolari
+- Parole: ~160 di prosa su 1 pagina di traccia (pag. 57 di matematica-2.pdf)
+- Rettifica: nessuna, la condizione di parallelismo (m uguale) e quella di perpendicolarità (m2 = -1/m1) sono state verificate con SymPy, così come gli esempi numerici della traccia (y=1/3x+2 e y=1/3x-1 parallele; y=3x+1 e y=-1/3x+1 perpendicolari, 3·(-1/3)=-1).
+- Aggiunta: nessuna oltre a una frase di collegamento che spiega perché rette con lo stesso m non si incontrano mai.
