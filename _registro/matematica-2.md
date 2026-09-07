@@ -217,3 +217,8 @@
 - Parole: 181 su 2 pagine di traccia (pagine 83–84, dall'inizio di pag. 83 dopo la fine dell'unità 43, fino alla fine di pag. 84, prima dell'intestazione "Equazioni di grado superiore al secondo" a inizio pag. 85)
 - Rettifica: nessuna. Verificato con SymPy: il sistema {x+y²=2, 3x+y-2=0} risolto per sostituzione dà 9x²-11x+2=0, Δ=49, x1=1 e x2=2/9, con y1=-1 e y2=4/3; le due coppie soluzione (1,-1) e (2/9,4/3) coincidono con la traccia e con il calcolo diretto del sistema.
 - Aggiunta: una frase di interpretazione grafica (parabola e retta che si intersecano nelle coppie soluzione), idea implicita nelle due equazioni ma non esplicitata a parole nella traccia.
+
+## Unità 45 — Equazioni binomie
+- Parole: 230 su circa 1,3 pagine di traccia (pagina 85 e la parte alta di pag. 86, fino all'esempio 2x³+54=0, prima dell'intestazione "Equazioni trinomie" a metà di pag. 86)
+- Rettifica: nessuna. Verificato con SymPy: x⁶-64=0 ⇒ x=±2 (coincide con la traccia); 2x³+54=0 ⇒ x³=-27 ⇒ x=-3 (coincide con la traccia).
+- Aggiunta: nessuna oltre alla frase che spiega perché le due soluzioni del caso pari sono opposte, idea implicita nella traccia (che scrive x=±ⁿ√(-b/a)) ma non motivata a parole.
