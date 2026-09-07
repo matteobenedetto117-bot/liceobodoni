@@ -197,3 +197,8 @@
 - Parole: 249 su circa 2,5 pagine di traccia (da metà pag. 75, dopo l'intestazione "Scomposizione di un trinomio di secondo grado", a pag. 77, prima dell'intestazione "Equazioni numeriche fratte" a inizio pag. 78)
 - Rettifica: nessuna. Tutti i calcoli sono stati verificati con SymPy e coincidono con la traccia: x²+5x+6=(x+2)(x+3) con radici -3 e -2; x²-2x+1=(x-1)² con radice doppia 1; x²-3x-4 con Δ=25, radici 4 e -1, fattorizzato (x-4)(x+1); l'identità generale ax²+bx+c=a(x-x1)(x-x2); 9x²-6x+1 con Δ/4=0, radice doppia 1/3, fattorizzato 9(x-1/3)²; 5x²+34x-7 con Δ/4=324, radici -7 e 1/5, fattorizzato 5(x+7)(x-1/5).
 - Aggiunta: nessuna oltre a una frase che spiega perché il fattore a resta davanti al prodotto (x-x1)(x-x2), idea implicita nella traccia ma non esplicitata a parole.
+
+## Unità 41 — Equazioni numeriche fratte
+- Parole: 229 su 1 pagina di traccia (pagina 78, prima dell'intestazione "Equazioni letterali" a inizio pagina 79)
+- Rettifica: nessuna. L'unico esempio (x/(x-1) + 1/(2x) = 1/(x-1)) è stato verificato con SymPy: numeratore comune 2x²-x-1, radici 1 e -1/2, con x=1 da scartare per le CE (x≠1, x≠0) e soluzione finale x=-1/2, coerente con la traccia.
+- Aggiunta: nessuna oltre a un breve paragrafo introduttivo che spiega perché servono le condizioni di esistenza e il ruolo del denominatore comune, poiché la traccia mostra solo i cinque passi numerati senza motivarli a parole.
