@@ -182,3 +182,8 @@
 - Parole: 310 su 2 pagine di traccia (71–72)
 - Rettifica: nessuna. Il discriminante ridotto e le soluzioni dell'esempio 3x²-10x+7=0 (β=-5, Δ/4=4, x1=7/3, x2=1, coerenti col calcolo con la formula intera Δ=16) e delle due equazioni con quadrato di binomio ((x+3)²=36 con x1=3, x2=-9; (x-1)²-22=3 con x1=6, x2=-4) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna oltre a una frase che spiega che β prende il posto di b nei due passi già visti, per collegare la formula ridotta a quella generale.
+
+## Unità 38 — Equazioni con radicali nel discriminante
+- Parole: 180 su circa 1,3 pagine di traccia (pagina 73, più il secondo esempio in cima a pagina 74, prima dell'intestazione "Somma e prodotto delle soluzioni")
+- Rettifica: nessuna. Entrambi gli esempi (x²+2(-√5+1)x-4√5=0 con Δ/4=(√5+1)², x1=2√5, x2=-2; x²+3x+√5=0 con Δ=(√5-2)², x1=(-5+√5)/2, x2=(-1-√5)/2) sono stati verificati con SymPy e risultano corretti così come in traccia.
+- Aggiunta: nessuna oltre a due frasi che spiegano l'idea generale (riconoscere A²+2AB+B² nel valore di Δ o Δ/4) prima dei due esempi, idea che la traccia applica ma non enuncia a parole.
