@@ -157,3 +157,8 @@
 - Parole: 454 su 3 pagine di traccia (pagg. 60–62 di matematica-2.pdf)
 - Rettifica: nessuna. L'equazione del fascio proprio (y-yA=m(x-xA) ∨ x=xA), quella del fascio improprio (y=m1x+q), l'esempio di intersezione fra y=x+2 e y=-2/3x+5 (soluzione x=9/5, y=19/5) e l'esempio del centro del fascio 3y-mx-4m-6=0 (soluzione A(-4,2), verificata indipendente da m) sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
 - Aggiunta: nessuna oltre a brevi frasi di collegamento (perché l'equazione x=xA va aggiunta a parte, perché il centro non dipende dal valore di m scelto), già implicite nella traccia.
+
+## Unità 33 — Distanza di un punto da una retta
+- Parole: 346 su 3 pagine di traccia (pagg. 63–65 di matematica-2.pdf)
+- Rettifica: nessuna. Il metodo geometrico (perpendicolare s: y=-1/2x+11/2, intersezione con r: y=2x+3 nel punto Q(1,5), distanza PQ=√5) e la formula diretta d=|ax0+by0+c|/√(a²+b²) applicata sia all'esempio P(3,4), r: 2x-y+3=0 (d=√5, coerente col metodo geometrico) sia al secondo esempio P(1,3), r: 2x+3y+1=0 (d=12√13/13) sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
+- Aggiunta: nessuna oltre a una frase che spiega il ruolo del valore assoluto al numeratore della formula, idea implicita nella traccia ma non esplicitata a parole.
