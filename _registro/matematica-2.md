@@ -82,3 +82,8 @@
 - Parole: 157 (comprese testata e didascalie) su 1 pagina di traccia (pagina 36)
 - Rettifica: nessuna. La regola per indici uguali ($\sqrt[3]{5}>\sqrt[3]{2}$) e l'esempio con indici diversi (confronto di $\sqrt2$, $\sqrt[3]4$, $\sqrt[4]3$, riduzione all'indice comune 12 con esponenti 6, 8, 3, radicandi 64, 256, 27, conclusione $\sqrt[4]3<\sqrt2<\sqrt[3]4$) sono stati verificati con SymPy e risultano corretti così come in traccia.
 - Aggiunta: nessuna. Il testo si limita a mettere in prosa i due casi (stesso indice / indice diverso) già distinti in traccia e a introdurre l'unico passaggio esplicito, "svolgendo le potenze sotto radice", che in traccia è implicito nel calcolo a mano.
+
+## Unità 18 — Moltiplicazione e divisione di radicali
+- Parole: 217 su 2 pagine di traccia (pagine 37–38)
+- Rettifica: nessuna. La regola del prodotto ($\sqrt[n]{a}\cdot\sqrt[n]{b}=\sqrt[n]{ab}$, $a,b\geqslant0$) con i tre esempi ($\sqrt[5]{3}\cdot\sqrt[5]{2}=\sqrt[5]{6}$; $\sqrt[3]{2}\cdot\sqrt[3]{2}\cdot\sqrt[3]{2}=2$; $\sqrt{32}\cdot\sqrt2=8$), il caso di indice dispari e radicando negativo ($\sqrt[3]{-7}\cdot\sqrt[3]{2}=-\sqrt[3]{14}$), la scomposizione in fattori ($\sqrt[5]{24}=\sqrt[5]{3}\cdot\sqrt[5]{8}$; $\sqrt[3]{-12}=-\sqrt[3]{3}\cdot\sqrt[3]{4}$), il caso letterale a indice pari con valore assoluto, e il quoziente ($\sqrt[7]{42}:\sqrt[7]{2}=\sqrt[7]{21}$) sono stati verificati con SymPy (root reale) e risultano corretti così come in traccia.
+- Aggiunta: nessuna. La sola frase in più spiega perché serve il valore assoluto quando il radicando è letterale e l'indice è pari, riprendendo un'idea già usata nell'unità 16 e applicata qui al nuovo caso del prodotto.
