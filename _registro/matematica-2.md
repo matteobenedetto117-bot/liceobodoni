@@ -167,3 +167,8 @@
 - Parole: 243 su 1 pagina di traccia (pag. 66 di matematica-2.pdf)
 - Rettifica: nessuna. L'identificazione dei coefficienti dell'esempio 6x²-x+2=0 (a=6, b=-1, c=2) è stata verificata con SymPy e coincide con la traccia.
 - Aggiunta: nessuna oltre a una frase finale che annuncia, in modo qualitativo, che il numero di soluzioni dipenderà da un valore ricavato dai coefficienti (senza nominare il discriminante, introdotto solo nella unità 36).
+
+## Unità 35 — Equazioni incomplete: spurie, pure, monomie
+- Parole: 294 su 2 pagine di traccia (67–68)
+- Rettifica: nessuna, la traccia era corretta e completa
+- Aggiunta: nessuna, solo il richiamo al principio di annullamento del prodotto già noto dalle equazioni di primo grado, per spiegare il passaggio del raccoglimento
