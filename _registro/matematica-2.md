@@ -127,3 +127,8 @@
 - Parole: 317 su 2 pagine di traccia (pagg. 51–52 di matematica-2.pdf)
 - Rettifica: nessuna. Il metodo del rettangolo circoscritto (rettangolo 4×3=12, triangoli d'angolo di cateti (2,2), (2,3), (1,4) con aree 2, 3, 2, differenza 12−2−3−2=5) e il metodo delle matrici (determinante di Sarrus D=(0+4+0)−(6+0+8)=−10, area=|D|/2=5) sono stati verificati con SymPy sull'esempio A(0,2), B(4,3), C(2,0) e coincidono esattamente con la traccia.
 - Aggiunta: nessuna oltre a una frase che spiega perché serve il valore assoluto sul determinante (il segno dipende dal verso di lettura dei vertici), idea implicita nella traccia ma non esplicitata a parole.
+
+## Unità 27 — Rette per l'origine e coefficiente angolare
+- Parole: ~250 su 1 pagina di traccia (pag. 53)
+- Rettifica: nessuna, la traccia era corretta
+- Aggiunta: nessuna oltre alle frasi di collegamento fra i passaggi già presenti
