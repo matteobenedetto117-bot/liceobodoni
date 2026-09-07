@@ -147,3 +147,8 @@
 - Parole: ~160 di prosa su 1 pagina di traccia (pag. 57 di matematica-2.pdf)
 - Rettifica: nessuna, la condizione di parallelismo (m uguale) e quella di perpendicolarità (m2 = -1/m1) sono state verificate con SymPy, così come gli esempi numerici della traccia (y=1/3x+2 e y=1/3x-1 parallele; y=3x+1 e y=-1/3x+1 perpendicolari, 3·(-1/3)=-1).
 - Aggiunta: nessuna oltre a una frase di collegamento che spiega perché rette con lo stesso m non si incontrano mai.
+
+## Unità 31 — Retta per un punto e retta per due punti
+- Parole: 306 su 2 pagine di traccia (pagg. 58–59 di matematica-2.pdf)
+- Rettifica: nessuna. La formula del coefficiente angolare come rapporto, l'esempio A(2,2) e B(5,4) con m=2/3, l'equazione y-yA=m(x-xA) con il calcolo y=2/3 x+2/3, l'equazione della retta per due punti e la conversione alla forma implicita 3y-2x-2=0 sono stati verificati con SymPy e risultano tutti corretti così come in traccia.
+- Aggiunta: nessuna oltre a brevi frasi di collegamento fra i tre passaggi (m da due punti, retta per un punto, retta per due punti), già impliciti nella successione degli esempi in traccia.
