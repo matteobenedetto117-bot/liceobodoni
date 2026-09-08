@@ -14,3 +14,19 @@
 - Parole: 243 su 1 pagina di traccia
 - Rettifica: nessuna, la derivazione della traccia era corretta; verificata con SymPy che F₂−F₁ = dgL³.
 - Aggiunta: nessuna oltre a poche parole di collegamento; contenuto e formule sono tutti e soli quelli della traccia (nessun esempio numerico, perché la traccia non ne contiene in questa unità).
+
+## Unità 04 — Relazione di laboratorio: verifica del principio di Archimede
+- Parole: 570 su 3 pagine di traccia (pagine 6-8, come indicato dalla nota della classe).
+- Rettifica: nessuna. Verificato con SymPy: F_A misurata = F_p1 - F_p2 = 0,22 N - 0,18 N = 0,04 N;
+  la propagazione dell'errore su una differenza di due misure dello stesso strumento dà
+  e_FA = 2 e_Fp; la derivata di F_A = d g V rispetto a V è d g, quindi e_FA = d g e_V per il
+  calcolo teorico. d g = 1000 * 9,81 = 9810, coerente con i valori scritti in traccia.
+- Aggiunta: nessuna oltre alle parole di collegamento necessarie a rendere la pagina leggibile
+  come relazione autonoma (titoli di sezione Obiettivo, Strumenti, Procedura, Dati e calcoli,
+  Grafico di compatibilità, Conclusioni, che nella traccia sono gli stessi campi del modulo di
+  laboratorio). Il volume V non ha un valore numerico nella traccia (il disegno mostra solo il
+  dislivello sul cilindro graduato senza una lettura scritta): l'ho lasciato simbolico invece di
+  inventare una misura, così come le due grandezze "portata" e "sensibilità" degli strumenti, che
+  in traccia compaiono come campi da compilare e non come valori dati. Per lo stesso motivo la
+  conclusione resta doppia (compatibile / non compatibile), esattamente come nel modulo originale,
+  invece di affermare un esito che i dati incompleti non permettono di calcolare.
