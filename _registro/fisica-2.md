@@ -55,3 +55,8 @@
 - Parole: 290 su 2 pagine di traccia (18–19)
 - Rettifica: nessuna. Verificato con SymPy che, ponendo x2=2x1: proporzionalità diretta y=kx dà y2/y1=2; inversa y=k/x dà y2/y1=1/2; quadratica y=kx² dà y2/y1=4 — coerenti coi risultati scritti in traccia.
 - Aggiunta: nessuna oltre alla frase introduttiva sul perché distinguere i tre tipi; le tre definizioni, i tre grafici e le tre derivazioni algebriche sono tutti e soli quelli della traccia.
+
+## Unità 10 — Punto materiale e sistemi di riferimento
+- Parole: 286 su circa 1,3 pagine di traccia (pagina 20 intera più la parte iniziale di pagina 21, fino a "misurare il tempo", dove poi inizia l'unità 11 con "Distanza percorsa e spostamento")
+- Rettifica: nessuna. Nessuna formula o calcolo numerico presente in questa unità (solo definizioni), quindi nessuna verifica SymPy necessaria.
+- Aggiunta: nessuna oltre a una breve premessa introduttiva e a un cenno sul perché l'approssimazione a punto materiale è ragionevole; le tre definizioni (punto materiale, traiettoria/moto rettilineo, sistema di riferimento) sono tutte e sole quelle della traccia.
