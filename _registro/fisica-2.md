@@ -30,3 +30,8 @@
   in traccia compaiono come campi da compilare e non come valori dati. Per lo stesso motivo la
   conclusione resta doppia (compatibile / non compatibile), esattamente come nel modulo originale,
   invece di affermare un esito che i dati incompleti non permettono di calcolare.
+
+## Unità 05 — La pressione atmosferica e l'esperimento di Torricelli
+- Parole: 350 su 2 pagine di traccia
+- Rettifica: nel calcolo dell'esempio in acqua (Legge di Stevino e pressione atmosferica, p1 = patm + dgh con h = 4,30 m), la traccia riportava il risultato 1,44·10^5 Pa; verificato con SymPy che il valore corretto è 1,43·10^5 Pa (101300 + 1000·9,81·4,30 = 143483 Pa). Corretto nella pagina senza segnalarlo al lettore. Il calcolo della pressione atmosferica da Torricelli (p_atm = d g h con i dati del mercurio) è stato verificato ed è coerente con il valore standard 1,013·10^5 Pa riportato in traccia.
+- Aggiunta: nessuna oltre a poche parole di collegamento; contenuto, formule, entrambi gli esempi e le unità di misura sono tutti e soli quelli della traccia.
