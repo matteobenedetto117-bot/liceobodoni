@@ -367,3 +367,8 @@
 - Parole: 204 (esclusi tag, svg, formule, script, style, nav, footer) su 1 pagina di traccia (pag. 24 di geometria-2.pdf, per intero: chiude con l'enunciato del secondo teorema di Euclide, la figura con Q e R e la formula BH²=AH·HC; pag. 23 è l'unità 73 "Teorema di Pitagora", consultata solo per l'inquadramento del confine; a pag. 25 apre già "Proporzionalità e similitudine", unità 75, non consultata oltre l'inquadramento)
 - Rettifica: nessuna correzione di merito. Verificato numericamente (Python, triangolo rettangolo di controllo costruito con Talete: A=(0,0), C=(10,0), B sulla semicirconferenza di diametro AC) che l'angolo in B è retto (prodotto scalare ~0) e che BH²=AH·HC coincide a meno di errori di arrotondamento in doppia precisione.
 - Aggiunta: nessuna dimostrazione ed nessun esempio oltre a quanto nella traccia, che riporta solo l'enunciato, la figura con Q, R, i punti D ed E e la congruenza AH≅HD, e la tesi tradotta nella formula finale. Ho aggiunto solo la frase che identifica H come piede dell'altezza e nomina AH, HC come proiezioni — passaggio lasciato implicito nella traccia, che passa dal disegno direttamente alla formula.
+
+## Unità 75 — Triangoli simili e criteri di similitudine
+- Parole: 419 su 3 pagine di traccia (pp. 25–27 di geometria-2.pdf)
+- Rettifica: nessuna
+- Aggiunta: nessuna. La traccia non contiene esempi numerici in queste pagine (solo definizione, tre criteri e un teorema, tutti con diagramma); non ne è stato inserito uno nuovo. Verificato con SymPy che il rapporto fra basi corrispondenti coincide con quello fra le altezze corrispondenti (= k), coerente con quanto enunciato.
