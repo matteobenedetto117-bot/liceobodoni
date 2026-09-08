@@ -302,3 +302,8 @@
 - Parole: 456 su 3 pagine di traccia (pagine 2–4 di geometria-2.pdf)
 - Rettifica: nessuna, la traccia era corretta.
 - Aggiunta: nessuna oltre alle poche righe di collegamento fra le definizioni; nessun calcolo da verificare con SymPy (contenuto puramente definitorio/enunciativo, senza dimostrazioni né esempi numerici nella traccia).
+
+## Unità 62 — Corde: diametro perpendicolare e diametro per il punto medio
+- Parole: 292 (compreso il boilerplate di testata/nota/footer) su 1 pagina di traccia (pag. 5 di geometria-2.pdf; pag. 4 chiude l'unità 61 con la proprietà corde-archi e le definizioni di semicerchio/segmento circolare; pag. 6 apre già "Corde congruenti e distanza dal centro", unità 63, non consultata oltre l'inquadramento)
+- Rettifica: nessuna. Verificati con SymPy entrambi i teoremi per via analitica (circonferenza centrata nell'origine): il diametro perpendicolare a una corda ne biseca il punto medio, e per ogni corda il segmento dal centro al suo punto medio è perpendicolare alla corda stessa (annullamento del prodotto scalare), il che conferma anche la necessità della condizione "corda che non sia un diametro" nel secondo teorema.
+- Aggiunta: nessuna oltre alla frase che spiega perché la condizione "che non sia un diametro" è necessaria nel secondo teorema; concetto implicito nell'ipotesi della traccia, reso esplicito. Nessuna dimostrazione aggiunta: la traccia riporta solo enunciato, ipotesi, tesi e disegno per entrambi i teoremi.
