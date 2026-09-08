@@ -252,3 +252,8 @@
 - Parole: 424 su 3 pagine di traccia (95–97, con la coda a inizio pagina 98)
 - Rettifica: nessuna, tutti i passaggi e i risultati della traccia sono stati verificati con SymPy e sono corretti
 - Aggiunta: nessuna, oltre alle poche righe di commento su come si combinano più fattori nello schema dei segni
+
+## Unità 52 — Disequazioni fratte
+- Parole: 490 su circa 6 pagine di traccia (98–103 di matematica-2.pdf; l'ultimo esempio, con riferimento "esercizio 412 pag. 1111", occupa la prima metà di pag. 103 prima dell'intestazione "Sistemi di disequazioni" che apre l'unità 53 a metà pagina)
+- Rettifica: nessuna. Verificato con SymPy tutti e quattro gli esempi: (x-x³)/(4x²-25x+6)≤0 → [-1,0]∪(1/4,1]∪(6,+∞); (2x²+5√2x+4)/(x²-2)≤0 con radici del numeratore -2√2 e -√2/2 (Δ=18) → [-2√2,-√2)∪[-√2/2,√2); x²/(x-1)≥0 → x=0 ∨ x>1; (x-1)²(x+8)/(x³-16x)≥0 → x≤-8 ∨ -4<x<0 ∨ x=1 ∨ x>4. Tutti coincidono con la traccia.
+- Aggiunta: nessuna oltre alla frase iniziale che enuncia in generale la regola già applicata negli esempi (numeratore con il verso della disequazione, denominatore sempre in senso stretto).
