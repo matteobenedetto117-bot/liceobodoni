@@ -35,3 +35,8 @@
 - Parole: 350 su 2 pagine di traccia
 - Rettifica: nel calcolo dell'esempio in acqua (Legge di Stevino e pressione atmosferica, p1 = patm + dgh con h = 4,30 m), la traccia riportava il risultato 1,44·10^5 Pa; verificato con SymPy che il valore corretto è 1,43·10^5 Pa (101300 + 1000·9,81·4,30 = 143483 Pa). Corretto nella pagina senza segnalarlo al lettore. Il calcolo della pressione atmosferica da Torricelli (p_atm = d g h con i dati del mercurio) è stato verificato ed è coerente con il valore standard 1,013·10^5 Pa riportato in traccia.
 - Aggiunta: nessuna oltre a poche parole di collegamento; contenuto, formule, entrambi gli esempi e le unità di misura sono tutti e soli quelli della traccia.
+
+## Unità 06 — Vasi comunicanti
+- Parole: 355 su 2 pagine di traccia (pagine 11-12; solo la metà superiore di pag. 12, dove inizia il principio di Pascal dell'unità 07)
+- Rettifica: nessuna. Verificato con SymPy l'esempio numerico: h1 = d2*h2/d1 = 920*5,00/1000 = 4,60 cm; x = h2 - h1 = 5,00 - 4,60 = 0,40 cm, coerente con il risultato scritto in traccia.
+- Aggiunta: nessuna oltre alle poche parole di collegamento fra un passaggio e l'altro; enunciato, le due figure (stesso liquido e liquidi diversi), la derivazione di d1h1=d2h2 e l'esempio sono tutti e soli quelli della traccia.
