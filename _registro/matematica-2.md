@@ -297,3 +297,8 @@
 - Parole: 269 (compreso il boilerplate di testata/nota/footer) su 1 pagina di traccia (pag. 1 di geometria-2.pdf; pag. 2 apre già "Archi e angoli al centro", unità 61, non consultata oltre l'inquadramento)
 - Rettifica: nessuna. Nessun calcolo numerico da verificare: la pagina contiene solo le definizioni di circonferenza e cerchio e l'enunciato (senza dimostrazione nella traccia) del teorema di esistenza e unicità della circonferenza per tre punti non allineati.
 - Aggiunta: nessuna oltre alle poche righe che spiegano la differenza fra raggio come segmento e come lunghezza, e fra corda e diametro; tutti concetti già presenti nella traccia con la sola figura.
+
+## Unità 61 — Archi, angoli al centro, settori e segmenti circolari
+- Parole: 456 su 3 pagine di traccia (pagine 2–4 di geometria-2.pdf)
+- Rettifica: nessuna, la traccia era corretta.
+- Aggiunta: nessuna oltre alle poche righe di collegamento fra le definizioni; nessun calcolo da verificare con SymPy (contenuto puramente definitorio/enunciativo, senza dimostrazioni né esempi numerici nella traccia).
