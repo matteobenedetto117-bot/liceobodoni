@@ -40,3 +40,8 @@
 - Parole: 355 su 2 pagine di traccia (pagine 11-12; solo la metà superiore di pag. 12, dove inizia il principio di Pascal dell'unità 07)
 - Rettifica: nessuna. Verificato con SymPy l'esempio numerico: h1 = d2*h2/d1 = 920*5,00/1000 = 4,60 cm; x = h2 - h1 = 5,00 - 4,60 = 0,40 cm, coerente con il risultato scritto in traccia.
 - Aggiunta: nessuna oltre alle poche parole di collegamento fra un passaggio e l'altro; enunciato, le due figure (stesso liquido e liquidi diversi), la derivazione di d1h1=d2h2 e l'esempio sono tutti e soli quelli della traccia.
+
+## Unità 07 — Il principio di Pascal e il torchio idraulico
+- Parole: 453 su 3 pagine di traccia (12–14)
+- Rettifica: nessuna, i calcoli dell'esempio (F2 = 12753 N, F1 = 531 N con g = 9,81 N/kg) sono corretti come in traccia.
+- Aggiunta: nessuna.
