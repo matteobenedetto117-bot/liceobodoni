@@ -60,3 +60,8 @@
 - Parole: 286 su circa 1,3 pagine di traccia (pagina 20 intera più la parte iniziale di pagina 21, fino a "misurare il tempo", dove poi inizia l'unità 11 con "Distanza percorsa e spostamento")
 - Rettifica: nessuna. Nessuna formula o calcolo numerico presente in questa unità (solo definizioni), quindi nessuna verifica SymPy necessaria.
 - Aggiunta: nessuna oltre a una breve premessa introduttiva e a un cenno sul perché l'approssimazione a punto materiale è ragionevole; le tre definizioni (punto materiale, traiettoria/moto rettilineo, sistema di riferimento) sono tutte e sole quelle della traccia.
+
+## Unità 11 — Distanza percorsa e spostamento
+- Parole: 392 su 2 pagine di traccia (21–22)
+- Rettifica: nessuna. Verificato con SymPy: distanza percorsa 1,3 km + 1,8 km = 3,1 km; spostamento come somma dei tratti con segno +1,3 km − 1,8 km = −0,5 km; spostamento come x_f − x_0 = 0 − 0,5 km = −0,5 km. Tutti coerenti con la traccia.
+- Aggiunta: nessuna oltre alla frase introduttiva e al riquadro finale che spiega perché i due modi di calcolare lo spostamento coincidono; l'esempio, le due definizioni e i tre calcoli sono tutti e soli quelli della traccia.
