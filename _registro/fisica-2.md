@@ -50,3 +50,8 @@
 - Parole: 242 su 3 pagine di traccia (15–17)
 - Rettifica: nessuna. Verificato con SymPy entrambi gli esercizi: Fp1 = 800·4,18e-2·9,81 = 328,0 N, Fp2 = 2200·4,18e-2·9,81 = 902,1 N, FA = 1000·4,18e-2·9,81 = 410,1 N (coerenti con 328 N, 902 N, 410 N di traccia); Vimm = 800·0,72/1000 = 0,576 m³, coerente con 0,58 m³ di traccia.
 - Aggiunta: nessuna oltre alla frase che spiega perché V e g si semplificano nel passaggio da forze a densità; contenuto, i tre casi, i due esercizi sono tutti e soli quelli della traccia.
+
+## Unità 09 — Tipi di proporzionalità
+- Parole: 290 su 2 pagine di traccia (18–19)
+- Rettifica: nessuna. Verificato con SymPy che, ponendo x2=2x1: proporzionalità diretta y=kx dà y2/y1=2; inversa y=k/x dà y2/y1=1/2; quadratica y=kx² dà y2/y1=4 — coerenti coi risultati scritti in traccia.
+- Aggiunta: nessuna oltre alla frase introduttiva sul perché distinguere i tre tipi; le tre definizioni, i tre grafici e le tre derivazioni algebriche sono tutti e soli quelli della traccia.
