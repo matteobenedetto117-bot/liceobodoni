@@ -242,3 +242,8 @@
 - Parole: 258 su circa 0,7 pagine di traccia (fondo pag. 90 + inizio pag. 91 di matematica-2.pdf)
 - Rettifica: nessuna, la traccia era corretta.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra i passaggi già presenti.
+
+## Unità 50 — Disequazioni di secondo grado intere
+- Parole: 409 su 3 pagine di traccia (pagine 92–94 di matematica-2.pdf, dall'inizio dell'intestazione "Disequazioni di II grado intere" a pag. 92 fino alla fine di pag. 94, prima dell'intestazione "Disequazioni di grado superiore al II" a inizio pag. 95)
+- Rettifica: nessuna. Verificato con SymPy tutti e quattro gli esempi: x²+5x+6≥0 (Δ=1, radici -3 e -2, soluzione x≤-3 ∨ x≥-2); -4x²-11x+3≥0 (Δ=169, radici -3 e 1/4, soluzione -3≤x≤1/4); x²-6x+9>0 (Δ=0, radice doppia 3, soluzione x≠3); 2x²+x+1<0 (Δ=-7, nessuna radice reale, impossibile). Tutti coincidono con la traccia.
+- Aggiunta: una frase che generalizza il caso Δ<0 con concavità verso il basso (parabola sempre negativa, disequazione con verso <0 sempre vera), perché la traccia disegna questo caso mirror in un piccolo schizzo ma non lo scrive a parole.
