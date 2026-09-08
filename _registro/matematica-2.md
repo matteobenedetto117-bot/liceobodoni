@@ -262,3 +262,8 @@
 - Parole: 366 su 3 pagine di traccia (104–106 di matematica-2.pdf; l'intestazione "Sistemi di disequazioni" apre pag. 104, il secondo esempio si chiude a pag. 106 prima del ripasso di disequazioni di II grado che apre l'unità 54 a pag. 107)
 - Rettifica: nessuna. Verificato con SymPy entrambi i sistemi: {x²-5<0, x²-4x+4>0, 3x+1≥0} → -1/3≤x<√5 ∧ x≠2; {x²+2x-3<0, 1-2x≥0} → -3<x≤1/2. Entrambi coincidono con la traccia.
 - Aggiunta: nessuna oltre alla frase introduttiva sul metodo (risolvere singolarmente, poi intersecare) e alla riga sulla convenzione grafica, già presenti nella traccia ma qui messe in prosa continua.
+
+## Unità 54 — Sistemi fratti e riepilogo del metodo
+- Parole: 598 su 4 pagine di traccia (107–110 di matematica-2.pdf; il ripasso "Ripasso diseq. II grado" apre pag. 107, la coda dell'esempio del sistema non fratto a inizio pag. 106 appartiene ancora all'unità 53 e si chiude lì, come già annotato; a pag. 111 si apre "Applicazioni delle disequazioni — Equazioni irrazionali", inizio dell'unità 55)
+- Rettifica: nessuna. Verificato con SymPy tutti i passaggi: x²-2x-3≥0 (Δ=16, radici -1 e 3, soluzione x≤-1 ∨ x≥3); x²-4≥0 (radici ±2, soluzione x≤-2 ∨ x≥2); x²-2x-3<0 (stesse radici, soluzione -1<x<3); sistema {1/(x-2)≥0, 3x²-11x-42>0} con Δ=625, radici -7/3 e 6, intersezione x>2 con (x<-7/3 ∨ x>6) → x>6. Tutti coincidono con la traccia.
+- Aggiunta: nessuna oltre alla frase di collegamento fra il primo e il terzo esempio (stessa parabola, verso opposto) e alla spiegazione del caso con numeratore costante negativo nella nota finale, entrambe presenti già come passaggi nella traccia.
