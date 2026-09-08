@@ -257,3 +257,8 @@
 - Parole: 490 su circa 6 pagine di traccia (98–103 di matematica-2.pdf; l'ultimo esempio, con riferimento "esercizio 412 pag. 1111", occupa la prima metà di pag. 103 prima dell'intestazione "Sistemi di disequazioni" che apre l'unità 53 a metà pagina)
 - Rettifica: nessuna. Verificato con SymPy tutti e quattro gli esempi: (x-x³)/(4x²-25x+6)≤0 → [-1,0]∪(1/4,1]∪(6,+∞); (2x²+5√2x+4)/(x²-2)≤0 con radici del numeratore -2√2 e -√2/2 (Δ=18) → [-2√2,-√2)∪[-√2/2,√2); x²/(x-1)≥0 → x=0 ∨ x>1; (x-1)²(x+8)/(x³-16x)≥0 → x≤-8 ∨ -4<x<0 ∨ x=1 ∨ x>4. Tutti coincidono con la traccia.
 - Aggiunta: nessuna oltre alla frase iniziale che enuncia in generale la regola già applicata negli esempi (numeratore con il verso della disequazione, denominatore sempre in senso stretto).
+
+## Unità 53 — Sistemi di disequazioni
+- Parole: 366 su 3 pagine di traccia (104–106 di matematica-2.pdf; l'intestazione "Sistemi di disequazioni" apre pag. 104, il secondo esempio si chiude a pag. 106 prima del ripasso di disequazioni di II grado che apre l'unità 54 a pag. 107)
+- Rettifica: nessuna. Verificato con SymPy entrambi i sistemi: {x²-5<0, x²-4x+4>0, 3x+1≥0} → -1/3≤x<√5 ∧ x≠2; {x²+2x-3<0, 1-2x≥0} → -3<x≤1/2. Entrambi coincidono con la traccia.
+- Aggiunta: nessuna oltre alla frase introduttiva sul metodo (risolvere singolarmente, poi intersecare) e alla riga sulla convenzione grafica, già presenti nella traccia ma qui messe in prosa continua.
