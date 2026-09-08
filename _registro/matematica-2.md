@@ -292,3 +292,8 @@
 - Parole: 419 (compreso il boilerplate di testata/nota/footer) su 3 pagine di traccia con contenuto (125–127 di matematica-2.pdf; pag. 125 apre "Disequazioni con i valori assoluti" subito dopo la chiusura dell'unità 58 a pag. 124; pag. 127 chiude con l'esempio sull'unione di due insiemi di soluzioni; pag. 128 è bianca, ultima pagina del PDF)
 - Rettifica: nessuna. Verificato con SymPy l'unico esempio, x+|2x²+4x|≥3. Caso (a) 2x²+4x≥0 (x≤-2∨x≥0) intersecato con 2x²+5x-3≥0 (Δ=49, radici -3 e 1/2, x≤-3∨x≥1/2) dà x≤-3∨x≥1/2. Caso (b) 2x²+4x<0 (-2<x<0) intersecato con 2x²+3x+3≤0 (Δ=-15<0, coefficiente positivo, mai ≤0) dà insieme vuoto. Unione finale x≤-3∨x≥1/2, coincide con la traccia. Verificata anche la seconda parte, l'unione di x<-1∨x>3 con x≤-4∨x≥2, che dà x<-1∨x≥2 come mostrato nel disegno.
 - Aggiunta: nessuna oltre alla frase che introduce il paragrafo finale sulla tecnica di unire due insiemi di soluzioni sulla stessa retta, tecnica già mostrata graficamente nella traccia con le due coppie di rette numeriche.
+
+## Unità 60 — Circonferenza e cerchio: definizioni e prime proprietà
+- Parole: 269 (compreso il boilerplate di testata/nota/footer) su 1 pagina di traccia (pag. 1 di geometria-2.pdf; pag. 2 apre già "Archi e angoli al centro", unità 61, non consultata oltre l'inquadramento)
+- Rettifica: nessuna. Nessun calcolo numerico da verificare: la pagina contiene solo le definizioni di circonferenza e cerchio e l'enunciato (senza dimostrazione nella traccia) del teorema di esistenza e unicità della circonferenza per tre punti non allineati.
+- Aggiunta: nessuna oltre alle poche righe che spiegano la differenza fra raggio come segmento e come lunghezza, e fra corda e diametro; tutti concetti già presenti nella traccia con la sola figura.
