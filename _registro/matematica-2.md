@@ -372,3 +372,8 @@
 - Parole: 419 su 3 pagine di traccia (pp. 25–27 di geometria-2.pdf)
 - Rettifica: nessuna
 - Aggiunta: nessuna. La traccia non contiene esempi numerici in queste pagine (solo definizione, tre criteri e un teorema, tutti con diagramma); non ne è stato inserito uno nuovo. Verificato con SymPy che il rapporto fra basi corrispondenti coincide con quello fra le altezze corrispondenti (= k), coerente con quanto enunciato.
+
+## Unità 76 — Rapporto fra perimetri e aree di figure simili
+- Parole: 230 su 1 pagina di traccia (pag. 28 di geometria-2.pdf, per intero: enunciato del teorema sul rapporto delle aree con la figura; pag. 27 è l'unità 75 "Triangoli simili e criteri di similitudine", consultata solo per l'inquadramento del confine; a pag. 29 apre già "Sezione aurea", unità 77, non consultata oltre l'inquadramento)
+- Rettifica: nessuna correzione di merito. Verificato con SymPy in forma simbolica che, per un triangolo di base b e altezza h scalate di k, il rapporto delle aree (1/2·kb·kh)/(1/2·bh) si semplifica esattamente a k², e che il rapporto fra due perimetri con lati tutti moltiplicati per k è k.
+- Aggiunta: la traccia riporta solo l'enunciato del teorema sulle aree (con figura e la formula a/a'=k²), senza il passaggio sul perimetro e senza dimostrazione. Ho aggiunto la frase sul rapporto fra i perimetri (conseguenza immediata della proporzionalità dei lati già stabilita nell'unità precedente, non un teorema nuovo) perché il titolo dell'unità la richiede esplicitamente, e una riga di intuizione sul perché l'area scala col quadrato (prodotto di due lunghezze), con l'unico esempio concesso quando la traccia non ne contiene (l'analogia della fotografia ingrandita al 200%).
