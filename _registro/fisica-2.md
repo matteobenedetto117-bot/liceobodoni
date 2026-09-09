@@ -248,3 +248,8 @@
 - Parole: circa 217 (testo effettivo, comprese testata e occhiello) su 1 pagina di traccia (pagina 82)
 - Rettifica: nessuna. Calcolo verificato con SymPy: β=3α=3,6×10⁻⁵ K⁻¹; ΔV=β·V₀·ΔT=3,6×10⁻⁵·4,7·27=0,0045684 m³≈4,57×10⁻³ m³, coerente con la traccia. Formula dimensionalmente coerente (K⁻¹·m³·K = m³).
 - Aggiunta: nessuna oltre alla frase che spiega perché β=3α (dilatazione lungo le tre dimensioni dello spazio anziché una sola), già implicita nella traccia con l'annotazione a margine "coefficiente lineare".
+
+## Unità 48 — Calore e lavoro meccanico: l'esperimento di Joule
+- Parole: 315 su circa 1,3 pagine di traccia (pagina 83 intera più la parte iniziale di pagina 84, fino alla riga "1 kcal = 4186 J", prima che inizi il paragrafo su capacità termica che apre l'unità 49)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: da ΔU=-2mgh segue L=-ΔU=2mgh; verificata anche la conversione 1 kcal = 1000 cal = 4186 J.
+- Aggiunta: nessuna oltre a poche parole di collegamento che spiegano il fattore 2 in ΔU (le masse sono due) e il perché L=Q (l'acqua si scalda per attrito con le pale, non per contatto con una sorgente calda), entrambi impliciti nel disegno e nei passaggi della traccia; l'apparato (calorimetro, carrucole, pesetti, albero con pale, termometro) è stato ridisegnato in SVG seguendo lo schema della traccia.
