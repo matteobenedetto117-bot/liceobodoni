@@ -145,3 +145,11 @@
 - Parole: 148 su circa 0,45 pagine di traccia (parte superiore di pagina 50, dalla titolazione "Applicazioni delle leggi della dinamica" fino al riquadro a=-g; il resto della pagina appartiene all'unità 28 sul piano inclinato)
 - Rettifica: nessuna. Verificato con SymPy la derivazione: da F_TOT=F_p=ma con F_p=mg e segno negativo lungo y (verso l'alto positivo) si ottiene -mg=ma, quindi a=-g, coerente con la traccia; dimensionalmente [m/s²] corretto; valore numerico -9,81 m/s² coerente con quello già usato nell'unità 21.
 - Aggiunta: nessuna oltre alle frasi di collegamento; il concetto di diagramma di corpo libero, i due disegni (oggetto isolato con il peso, e la stessa forza proiettata sugli assi) e la derivazione di a=-g dalla seconda legge sono tutti e soli quelli della traccia.
+
+## Unità 28 — Piano inclinato con attrito
+- Parole: 233 su circa 1 pagina di traccia (fine pag. 50 – inizio pag. 51)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti.
+- Aggiunta: nessuna oltre a poche parole di collegamento fra un passaggio e l'altro
+  (perché l'attrito si oppone allo scivolamento, perché la normale eguaglia F_py).
+  Nessun esempio numerico, nessuna tabella: la traccia stessa ne è priva. Verificato
+  con SymPy che a = g(sinα - μcosα) risolve correttamente mg·sinα - μmg·cosα = ma.
