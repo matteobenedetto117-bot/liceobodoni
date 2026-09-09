@@ -110,3 +110,8 @@
 - Parole: 236 su 1 pagina di traccia (39, con l'avvio a fondo pagina 38 già segnalato nella voce dell'unità 19)
 - Rettifica: nessuna. Verificato con SymPy la derivazione completa: da x = x0 + v0 t + (1/2)a t², v = v0 + at, eliminando t si ottiene x - x0 = (v²-v0²)/(2a), quindi v² = v0² + 2aΔx, coerente con la traccia in ogni passaggio.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; la derivazione algebrica, il grafico spazio-velocità con le due parabole (a>0, a<0) e il riquadro riassuntivo delle tre leggi del MRUA sono tutti e soli quelli della traccia. Nessun esempio: la traccia non ne contiene per questa unità, e non ne ho aggiunti data la brevità della pagina.
+
+## Unità 21 — Caduta libera
+- Parole: 236 su 2 pagine di traccia (40-41)
+- Rettifica: nessuna. Verificato con SymPy la derivazione completa: da x = h - (1/2)g t² con x=0 si ricava t_v = sqrt(2h/g); sostituendo in v = -gt si ottiene v_f = -sqrt(2gh), coerente con la traccia in ogni passaggio.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; la definizione, il valore di g, il sistema di riferimento con le tre equazioni riscritte, la derivazione del tempo di volo e quella della velocità finale sono tutti e soli quelli della traccia. Nessun esempio numerico: la traccia non ne contiene per questa unità.
