@@ -95,3 +95,8 @@
 - Parole: 347 su 2 pagine di traccia (32-33)
 - Rettifica: nessuna. Verificato con SymPy: 100 km/h = 100000/3600 = 27,78 m/s; a_M = 27,8/3 = 9,27 m/s² (usando il valore già arrotondato di v come nella traccia), coerente con il risultato scritto in traccia.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; la formula dell'accelerazione media per analogia con la velocità media, l'unico esempio numerico, il diagramma dei quattro casi di segno (accelerazione/decelerazione) e il grafico velocità-tempo con i punti A-I e la regola sui massimi e minimi sono tutti e soli quelli della traccia.
+
+## Unità 18 — Moto rettilineo uniformemente accelerato
+- Parole: 317 su 2 pagine di traccia (34-35)
+- Rettifica: nessuna. Verificato con SymPy: dalla definizione a=(v-v0)/t si ricava v=v0+at; sostituendo in x=x0+((v+v0)/2)t si ottiene x=x0+v0t+(1/2)at², coerente con la traccia.
+- Aggiunta: la traccia non contiene alcun esempio numerico per questa unità, quindi ne ho aggiunto uno solo (ciclista con v0=2 m/s, a=0,5 m/s², t=10 s), verificato con SymPy: v=7 m/s, x=45 m. Nessun'altra aggiunta oltre alle frasi di collegamento; la derivazione di v=v0+at, i due grafici v-t (MRU e MRUA) e la derivazione della legge oraria tramite la velocità media sono tutti e soli quelli della traccia.
