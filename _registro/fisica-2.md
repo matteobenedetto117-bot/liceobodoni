@@ -140,3 +140,8 @@
 - Parole: 261 su 1 pagina di traccia (49, parte bassa)
 - Rettifica: nessuna. Nessuna formula numerica da verificare con SymPy: l'unità contiene solo l'enunciato del principio di azione e reazione (F e -F, stessa intensità, verso opposto, applicate a corpi diversi), riportato fedelmente; la coerenza del segno e del modulo è verifica puramente concettuale.
 - Aggiunta: nessuna oltre alle frasi di collegamento e al breve chiarimento, presente in forma diversa anche nella traccia stessa (attraverso il disegno dei due blocchi a contatto), sul fatto che le due forze si applicano a corpi diversi e quindi non si annullano nella somma delle forze su un singolo oggetto. Nessun esempio numerico né disegno oltre a quello dei due blocchi: la traccia non ne contiene altri per questa unità.
+
+## Unità 27 — Diagramma di corpo libero e caduta libera
+- Parole: 148 su circa 0,45 pagine di traccia (parte superiore di pagina 50, dalla titolazione "Applicazioni delle leggi della dinamica" fino al riquadro a=-g; il resto della pagina appartiene all'unità 28 sul piano inclinato)
+- Rettifica: nessuna. Verificato con SymPy la derivazione: da F_TOT=F_p=ma con F_p=mg e segno negativo lungo y (verso l'alto positivo) si ottiene -mg=ma, quindi a=-g, coerente con la traccia; dimensionalmente [m/s²] corretto; valore numerico -9,81 m/s² coerente con quello già usato nell'unità 21.
+- Aggiunta: nessuna oltre alle frasi di collegamento; il concetto di diagramma di corpo libero, i due disegni (oggetto isolato con il peso, e la stessa forza proiettata sugli assi) e la derivazione di a=-g dalla seconda legge sono tutti e soli quelli della traccia.
