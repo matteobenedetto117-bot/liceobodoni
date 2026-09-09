@@ -153,3 +153,8 @@
   (perché l'attrito si oppone allo scivolamento, perché la normale eguaglia F_py).
   Nessun esempio numerico, nessuna tabella: la traccia stessa ne è priva. Verificato
   con SymPy che a = g(sinα - μcosα) risolve correttamente mg·sinα - μmg·cosα = ma.
+
+## Unità 29 — Oggetti a contatto
+- Parole: 472 su circa 2,5 pagine di traccia (fine pag. 51 – pag. 53)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: dal sistema {a=F/(m1+m2), F-F21=m1·a, F12=m2·a} si ottiene F12=F21=m2/(m1+m2)·F, e scambiando quale scatola riceve la forza esterna si ottiene m1/(m1+m2)·F, maggiore perché m1>m2; entrambe le derivazioni coincidono con la traccia.
+- Aggiunta: nessuna oltre a poche parole di collegamento fra un passaggio e l'altro, e un riquadro "da non confondere" che ribadisce la differenza fra accelerazione (invariata) e forza di contatto (che cambia scambiando l'ordine) — distinzione già presente nella traccia attraverso il secondo disegno e il commento finale, qui solo reso esplicito.
