@@ -193,3 +193,8 @@
 - Parole: 236 su 1 pagina di traccia (pag. 64)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: integrando F=-kx da 0 a x si ottiene L=-kx²/2, e con k=300 N/m e x=0,03 m il risultato numerico è -0,135 J, coerente con la traccia.
 - Aggiunta: nessuna oltre a poche parole che collegano il grafico F-x della molla al metodo dell'area già introdotto nell'unità precedente, spiegando perché l'area risulta negativa (forza di richiamo opposta allo spostamento).
+
+## Unità 37 — Energia cinetica e teorema del lavoro
+- Parole: 318 su 3 pagine di traccia (pag. 65–67)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: K=1/2·3700·15²=416250 J≈4,2·10⁵ J; L=1/2·60·5²-1/2·60·3²=480 J; vf²=8²+2·(-35)/27=61,4→vf≈7,8 m/s, tutti coerenti con la traccia.
+- Aggiunta: nessuna oltre a poche parole che collegano i passaggi della derivazione (sostituzione di a=F/m nella terza equazione cinematica) e il commento sul segno di L nell'ultimo esempio, già implicito nel calcolo della traccia.
