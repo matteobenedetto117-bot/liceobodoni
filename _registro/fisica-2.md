@@ -100,3 +100,8 @@
 - Parole: 317 su 2 pagine di traccia (34-35)
 - Rettifica: nessuna. Verificato con SymPy: dalla definizione a=(v-v0)/t si ricava v=v0+at; sostituendo in x=x0+((v+v0)/2)t si ottiene x=x0+v0t+(1/2)at², coerente con la traccia.
 - Aggiunta: la traccia non contiene alcun esempio numerico per questa unità, quindi ne ho aggiunto uno solo (ciclista con v0=2 m/s, a=0,5 m/s², t=10 s), verificato con SymPy: v=7 m/s, x=45 m. Nessun'altra aggiunta oltre alle frasi di collegamento; la derivazione di v=v0+at, i due grafici v-t (MRU e MRUA) e la derivazione della legge oraria tramite la velocità media sono tutti e soli quelli della traccia.
+
+## Unità 19 — Distanza percorsa nel diagramma velocità-tempo
+- Parole: 597 su 3 pagine di traccia (36-38)
+- Rettifica: nessuna. Verificato con SymPy: la formula generale A_TOT = v0 t + 1/2 a t^2 coincide con la legge oraria; nell'esempio A1B=12 m, A1A=6 m, A1=18 m, A2=9 m, A3=3 m, Δx=18+9-3=24 m, confermato anche calcolando lo spostamento segmento per segmento con le accelerazioni dei tre tratti (a1=0,75 m/s², a2=-2 m/s², a3=-2/3 m/s²): dx1=18 m, dx2=9 m, dx3=-3 m, somma 24 m.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; il breve richiamo ai grafici spazio-tempo (MRU/MRUA) in apertura di pagina 36, la derivazione generale dell'area sotto il grafico v-t, l'enunciato della regola e l'unico esempio numerico sono tutti e soli quelli della traccia. Non ho anticipato la sezione "Relazione velocità-spostamento" che inizia a fondo pagina 38 e appartiene all'unità 20.
