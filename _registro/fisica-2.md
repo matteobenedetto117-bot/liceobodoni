@@ -85,3 +85,8 @@
 - Parole: 289 su 2 pagine di traccia (28-29, senza l'"Esempio 2" a fondo pagina 29, che è l'inizio dell'unità 16 sui problemi di incontro)
 - Rettifica: nessuna. Verificato con SymPy l'esempio numerico: x = x0 + vt = 3 m + 1,3 m/s · 2,7 s = 6,51 m, coerente con la traccia.
 - Aggiunta: nessuna oltre a poche parole di collegamento; definizione del MRU, il grafico spazio-tempo lineare, la derivazione della legge oraria da v = Δx/Δt e l'unico esempio sono tutti e soli quelli della traccia.
+
+## Unità 16 — Problemi di incontro
+- Parole: 444 su 2 pagine di traccia (30-31, più l'"Esempio 2" a fondo pagina 29 che introduce il caso e appartiene a questa unità)
+- Rettifica: sì, a pagina 31. Il secondo esempio (incontro fra A e C distanti 1600 m) nella traccia arrotonda v_A = 55 km/h a 15,3 m/s prima di moltiplicare, ottenendo x_A = 1377 m mentre x_C = 1375 m: i due valori dovrebbero coincidere. Verificato con SymPy usando il valore esatto v_A = 55000/3600 m/s: t = 90,0 s esatti e x_A = x_C = 1375,0 m esatti. Nella pagina ho mantenuto v_A = 15,3 m/s in vista del calcolo ma riportato il risultato coerente x_A ≈ x_C ≈ 1375 m.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro e alla frase che introduce il caso dei versi opposti; la derivazione generale della condizione d'incontro, i due esempi numerici (stesso verso e versi opposti) e i due disegni sono tutti e soli quelli della traccia.
