@@ -243,3 +243,8 @@
 - Parole: circa 294 (testo effettivo, esclusi occhiello e testata) su 1 pagina di traccia (pagina 81)
 - Rettifica: nessuna. Calcolo dell'esempio verificato con SymPy: ΔL = α·L₀·ΔT = 1,2·10⁻⁵·301·22 = 0,079464 m ≈ 8 cm, coerente con la traccia. Formula dimensionalmente coerente (K⁻¹·m·K = m).
 - Aggiunta: nessuna oltre alla frase che ricorda, già stabilita nell'unità 45, che ΔT vale lo stesso in kelvin e in gradi Celsius; la sbarra a tre temperature crescenti è stata ridisegnata in SVG con la stessa progressione ΔL, 2ΔL già presente nella traccia.
+
+## Unità 47 — Dilatazione termica volumica
+- Parole: circa 217 (testo effettivo, comprese testata e occhiello) su 1 pagina di traccia (pagina 82)
+- Rettifica: nessuna. Calcolo verificato con SymPy: β=3α=3,6×10⁻⁵ K⁻¹; ΔV=β·V₀·ΔT=3,6×10⁻⁵·4,7·27=0,0045684 m³≈4,57×10⁻³ m³, coerente con la traccia. Formula dimensionalmente coerente (K⁻¹·m³·K = m³).
+- Aggiunta: nessuna oltre alla frase che spiega perché β=3α (dilatazione lungo le tre dimensioni dello spazio anziché una sola), già implicita nella traccia con l'annotazione a margine "coefficiente lineare".
