@@ -238,3 +238,8 @@
 - Parole: 222 su 1 pagina di traccia (pagina 80)
 - Rettifica: nessuna. Le formule di conversione T(K)=T(°C)+273,15 e T(°C)=T(K)−273,15 sono state verificate con SymPy (round-trip C→K→C = identità; 0°C=273,15 K; 100°C=373,15 K; 0 K=−273,15°C), coerenti con la traccia.
 - Aggiunta: nessuna oltre a una frase che chiarisce che le due scale sono legate da una traslazione di 273,15; il termometro con le tre colonne (Kelvin, mercurio, Celsius) è stato ridisegnato in SVG con le stesse due corrispondenze di fase (ebollizione dell'acqua, equilibrio ghiaccio-acqua) presenti nella traccia, più l'etichetta "mercurio" sul bulbo del termometro.
+
+## Unità 46 — Dilatazione termica lineare
+- Parole: circa 294 (testo effettivo, esclusi occhiello e testata) su 1 pagina di traccia (pagina 81)
+- Rettifica: nessuna. Calcolo dell'esempio verificato con SymPy: ΔL = α·L₀·ΔT = 1,2·10⁻⁵·301·22 = 0,079464 m ≈ 8 cm, coerente con la traccia. Formula dimensionalmente coerente (K⁻¹·m·K = m).
+- Aggiunta: nessuna oltre alla frase che ricorda, già stabilita nell'unità 45, che ΔT vale lo stesso in kelvin e in gradi Celsius; la sbarra a tre temperature crescenti è stata ridisegnata in SVG con la stessa progressione ΔL, 2ΔL già presente nella traccia.
