@@ -223,3 +223,8 @@
 - Parole: 235 su 2 pagine di traccia (74–75)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: da mgh1=(1/2)mv2² si ottiene v2=sqrt(2gh1) e h1=v2²/(2g), coerenti in ogni passaggio con la traccia.
 - Aggiunta: nessuna oltre a poche parole di collegamento che spiegano perché nei due istanti manca un termine (v1=0 in alto, h2=0 al suolo); enunciato, formula E_TOT=U+K, il caso della forza peso e le due derivazioni (velocità finale, altezza di partenza) sono tutti e soli quelli della traccia.
+
+## Unità 43 — Conservazione dell'energia con la forza elastica
+- Parole: 674 (comprese formule e didascalie) su 3 pagine di traccia (76–78)
+- Rettifica: nessuna, tutti i calcoli sono stati verificati con SymPy e coincidono con i risultati della traccia: Esempio 1 x≈0,049 m; Esempio 2 v2≈3,87 m/s e x≈2,24 m (calcolato direttamente da 1 a 3, come fa la traccia); Esempio 3 x≈1,73 m.
+- Aggiunta: una frase di collegamento che spiega perché nell'Esempio 2 conviene confrontare gli istanti 1 e 3 direttamente invece di passare per il 2, e il richiamo esplicito a $E_{TOT}=U+K$ già introdotto nell'unità 42, applicato ora al caso elastico.
