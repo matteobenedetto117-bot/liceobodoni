@@ -178,3 +178,8 @@
 - Parole: 335 su 2 pagine di traccia (pag. 60–61)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: cos(0)=1, cos(90°)=0, cos(180°)=-1, quindi L=FS, L=0, L=-FS nei tre casi limite; verificata anche l'equivalenza dimensionale 1 J = 1 N·m = 1 kg·m²/s².
 - Aggiunta: nessuna oltre a poche parole di collegamento fra un passaggio e l'altro. Lo strumento interattivo (cursore sull'angolo θ che mostra la freccia della forza ruotare e il valore di cosθ) illustra solo i tre casi limite già presenti nella traccia, senza introdurre contenuto nuovo.
+
+## Unità 34 — Lavoro della forza peso
+- Parole: 150 su 1 pagina di traccia (pag. 62)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: con F_p=mg, L=F_p·s·cosθ dà mgs per θ=0, 0 per θ=90°, -mgs per θ=180°, coerenti in ogni caso con la traccia.
+- Aggiunta: nessuna oltre a poche parole di collegamento fra un caso e l'altro. Nessuno strumento interattivo: i tre casi sono già mostrati per intero dalle tre figure statiche, come nella traccia.
