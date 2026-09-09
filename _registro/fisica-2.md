@@ -80,3 +80,8 @@
 - Parole: 412 su 2 pagine di traccia (26-27)
 - Rettifica: nessuna. Verificato con SymPy: v_A = (9-6)/(4-1) = 1 m/s, coerente con la traccia; conversione 88 km/h = 88·1000/3600 = 24,44... m/s ≈ 24,4 m/s, coerente; conversione 31 m/s = 31·3600/1000 = 111,6 km/h ≈ 112 km/h, coerente.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; il processo di limite della secante, la definizione tramite tangente, l'esempio numerico, il grafico dei segni e le due conversioni sono tutti e soli quelli della traccia.
+
+## Unità 15 — Moto rettilineo uniforme
+- Parole: 289 su 2 pagine di traccia (28-29, senza l'"Esempio 2" a fondo pagina 29, che è l'inizio dell'unità 16 sui problemi di incontro)
+- Rettifica: nessuna. Verificato con SymPy l'esempio numerico: x = x0 + vt = 3 m + 1,3 m/s · 2,7 s = 6,51 m, coerente con la traccia.
+- Aggiunta: nessuna oltre a poche parole di collegamento; definizione del MRU, il grafico spazio-tempo lineare, la derivazione della legge oraria da v = Δx/Δt e l'unico esempio sono tutti e soli quelli della traccia.
