@@ -65,3 +65,8 @@
 - Parole: 392 su 2 pagine di traccia (21–22)
 - Rettifica: nessuna. Verificato con SymPy: distanza percorsa 1,3 km + 1,8 km = 3,1 km; spostamento come somma dei tratti con segno +1,3 km − 1,8 km = −0,5 km; spostamento come x_f − x_0 = 0 − 0,5 km = −0,5 km. Tutti coerenti con la traccia.
 - Aggiunta: nessuna oltre alla frase introduttiva e al riquadro finale che spiega perché i due modi di calcolare lo spostamento coincidono; l'esempio, le due definizioni e i tre calcoli sono tutti e soli quelli della traccia.
+
+## Unità 12 — Legge oraria e diagrammi spazio-tempo
+- Parole: 262 su 1 pagina di traccia (pagina 23)
+- Rettifica: nessuna. Nessun calcolo numerico presente (solo lettura di un grafico); verificate con Python le coordinate usate per ridisegnare in SVG il diagramma spazio-tempo (le quattro fasi 0→8, 8→18, 18→25, 25→45 min mappate rispettivamente su x=0, 0,5, 1,8, 1,8, 0,5 km), coerenti con la traccia.
+- Aggiunta: nessuna oltre a una frase di raccordo nella premessa e alla frase finale che nota qualitativamente come la pendenza del grafico indichi la rapidità del cambiamento di posizione, in preparazione all'unità successiva sulla velocità; definizione di legge oraria, il numero di linee delle quattro fasi e il grafico x(t) sono tutti e soli quelli della traccia.
