@@ -120,3 +120,8 @@
 - Parole: 234 su 1 pagina di traccia (42)
 - Rettifica: nessuna. Verificato con SymPy la derivazione: partendo da v = -v0 - gt, x = h - v0 t - (1/2)g t², v² = v0² - 2g(x-h) e ponendo x=0 si ottiene v² = v0² + 2gh, coerente con la traccia in ogni passaggio.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; l'impostazione del sistema di riferimento, il sistema di equazioni riscritto per questo caso e la derivazione della velocità finale sono tutti e soli quelli della traccia. Nessun esempio numerico: la traccia non ne contiene per questa unità.
+
+## Unità 23 — Lancio verso l'alto
+- Parole: 372 su 3 pagine di traccia (43-45)
+- Rettifica: nessuna. Verificato con SymPy l'intera catena: da v=v0-gt e x=v0t-(1/2)gt² con v=0 si ottiene t_s=v0/g e h=v0²/(2g); il tempo di discesa riscritto come caduta libera t_d=sqrt(2h/g) si semplifica in v0/g, uguale a t_s; il tempo di volo totale è t_v=2v0/g; la velocità finale riscritta come caduta libera v_f=-sqrt(2gh) si semplifica in -v0. Tutti i passaggi della traccia sono confermati esatti.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; l'impostazione del sistema di riferimento, il sistema di equazioni, la derivazione di altezza massima, tempo di salita, tempo di discesa (riscritto come caduta libera), tempo di volo totale e velocità finale sono tutti e soli quelli della traccia. Nessun esempio numerico: la traccia non ne contiene per questa unità.
