@@ -203,3 +203,8 @@
 - Parole: 228 su 2 pagine di traccia (pag. 68–69)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: P=2150/4=537,5 W≈538 W e P=2150/10=215 W, coerenti con la traccia; la derivazione P=(F·s)/t=F·(s/t)=F·v è algebricamente corretta.
 - Aggiunta: nessuna oltre a poche parole di collegamento fra la definizione P=L/t e il caso della forza su un corpo in moto a velocità costante, già impliciti nel confronto fra le due parti della traccia.
+
+## Unità 39 — Forze conservative ed energia potenziale
+- Parole: 255 su 1,3 pagine di traccia (pag. 70, più la definizione generale in testa a pag. 71 prima della sezione sull'energia potenziale gravitazionale, che apre l'unità 40)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti.
+- Aggiunta: nessuna oltre a poche parole di collegamento fra i due esempi (forza peso conservativa, attrito non conservativo) e la definizione generale di energia potenziale.
