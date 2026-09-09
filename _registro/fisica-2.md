@@ -168,3 +168,8 @@
 - Parole: 270 su 2 pagine di traccia (57–58)
 - Rettifica: nessuna. Verificato con SymPy l'intera derivazione: dal sistema {F_TOT=(m1-m2)g, F_TOT=(m1+m2)a} si ottiene a=(m1-m2)g/(m1+m2); sostituendo in T=m1g-m1a si ottiene T=2·m1·m2·g/(m1+m2), coerente con la traccia in ogni passaggio.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro e a un breve riquadro "Da notare" sul caso m1=m2 (accelerazione nulla, T=m1g), che è una conseguenza immediata della formula già derivata e non un contenuto nuovo. Nessun esempio numerico: la traccia non ne contiene per questa unità.
+
+## Unità 32 — Blocchi e carrucole
+- Parole: 248 su 1 pagina di traccia (pag. 59)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: dal sistema {m2·g=(m1+m2)·a, T=m1·a} si ottiene a=m2·g/(m1+m2) e T=m1·m2·g/(m1+m2), coerenti in ogni passaggio con la traccia.
+- Aggiunta: nessuna oltre a una frase che spiega perché nella somma delle forze compare solo il peso di m2 (il peso di m1 è perpendicolare al moto ed è bilanciato dal piano). Nessun esempio numerico: la traccia non ne contiene per questa unità.
