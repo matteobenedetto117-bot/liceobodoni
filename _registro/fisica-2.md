@@ -163,3 +163,8 @@
 - Parole: 409 su circa 3 pagine di traccia (pag. 54–56)
 - Rettifica: corretti due arrotondamenti intermedi propagati nella traccia. Nell'esempio di ripasso sul contatto (F=20 N, m1=10 kg, m2=5 kg) la traccia scrive F12=6,65 N; con SymPy (frazioni esatte) risulta F12=m2·a=5·(4/3)=20/3≈6,67 N. Nell'esempio della corda (F=420 N, m1=50 kg, m2=40 kg) la traccia arrotonda a=4,7 m/s² e ne deriva T=235 N; con SymPy a=420/90=14/3≈4,67 m/s² e T=m1·a=50·(14/3)=700/3≈233 N. In entrambi i casi l'errore nasce dall'usare il valore di a già arrotondato invece del valore esatto nel passaggio successivo; la pagina riporta i valori corretti.
 - Aggiunta: nessuna oltre a poche parole di collegamento. La struttura ricalca l'unità 29 (sistema intero, poi isolamento dei singoli oggetti) perché è lo stesso metodo applicato a un vincolo diverso, come indicato dalla traccia stessa; incluso l'esempio numerico di ripasso sul contatto che compare a pagina 55 prima del vero esempio con la corda, perché presente nell'intervallo di pagine assegnato.
+
+## Unità 31 — Macchina di Atwood
+- Parole: 270 su 2 pagine di traccia (57–58)
+- Rettifica: nessuna. Verificato con SymPy l'intera derivazione: dal sistema {F_TOT=(m1-m2)g, F_TOT=(m1+m2)a} si ottiene a=(m1-m2)g/(m1+m2); sostituendo in T=m1g-m1a si ottiene T=2·m1·m2·g/(m1+m2), coerente con la traccia in ogni passaggio.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro e a un breve riquadro "Da notare" sul caso m1=m2 (accelerazione nulla, T=m1g), che è una conseguenza immediata della formula già derivata e non un contenuto nuovo. Nessun esempio numerico: la traccia non ne contiene per questa unità.
