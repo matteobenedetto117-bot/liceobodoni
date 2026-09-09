@@ -75,3 +75,8 @@
 - Parole: 478 su 2 pagine di traccia (24–25)
 - Rettifica: nessuna. Verificato con SymPy: v_sm = 160 km / 2 h = 80 km/h; v_AB = (6−2)/(3−0) = 4/3 ≈ 1,33 m/s; v_BC = (6−6)/3 = 0; v_CE = (0−6)/(12−6) = −1 m/s. Tutti coerenti con la traccia.
 - Aggiunta: nessuna oltre alla frase introduttiva e alla frase di raccordo su come il segno della pendenza della secante corrisponda al segno di v_m; le due definizioni, l'esempio numerico e i tre calcoli sul diagramma spazio-tempo (tratti AB, BC, CE) sono tutti e soli quelli della traccia.
+
+## Unità 14 — Velocità istantanea
+- Parole: 412 su 2 pagine di traccia (26-27)
+- Rettifica: nessuna. Verificato con SymPy: v_A = (9-6)/(4-1) = 1 m/s, coerente con la traccia; conversione 88 km/h = 88·1000/3600 = 24,44... m/s ≈ 24,4 m/s, coerente; conversione 31 m/s = 31·3600/1000 = 111,6 km/h ≈ 112 km/h, coerente.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; il processo di limite della secante, la definizione tramite tangente, l'esempio numerico, il grafico dei segni e le due conversioni sono tutti e soli quelli della traccia.
