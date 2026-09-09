@@ -228,3 +228,8 @@
 - Parole: 674 (comprese formule e didascalie) su 3 pagine di traccia (76–78)
 - Rettifica: nessuna, tutti i calcoli sono stati verificati con SymPy e coincidono con i risultati della traccia: Esempio 1 x≈0,049 m; Esempio 2 v2≈3,87 m/s e x≈2,24 m (calcolato direttamente da 1 a 3, come fa la traccia); Esempio 3 x≈1,73 m.
 - Aggiunta: una frase di collegamento che spiega perché nell'Esempio 2 conviene confrontare gli istanti 1 e 3 direttamente invece di passare per il 2, e il richiamo esplicito a $E_{TOT}=U+K$ già introdotto nell'unità 42, applicato ora al caso elastico.
+
+## Unità 44 — Calore, temperatura ed equilibrio termico
+- Parole: circa 210 (testo effettivo, esclusi occhiello e testata) su 1 pagina di traccia (pagina 79)
+- Rettifica: nessuna, le definizioni di calore e temperatura sono corrette così come scritte, verificate contro la definizione standard (calore come energia trasferita per differenza di temperatura; temperatura come grandezza che determina l'equilibrio termico). Nessun calcolo numerico da verificare in questa unità.
+- Aggiunta: una frase che chiarisce che il calore non è una proprietà posseduta da un corpo ma energia in transito, resa esplicita perché la traccia lo lascia implicito nella definizione; il diagramma dei due blocchi A e B è stato ridisegnato in SVG con le due situazioni (scambio in corso ed equilibrio raggiunto) già presenti nella traccia.
