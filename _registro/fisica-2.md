@@ -183,3 +183,8 @@
 - Parole: 150 su 1 pagina di traccia (pag. 62)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: con F_p=mg, L=F_p·s·cosθ dà mgs per θ=0, 0 per θ=90°, -mgs per θ=180°, coerenti in ogni caso con la traccia.
 - Aggiunta: nessuna oltre a poche parole di collegamento fra un caso e l'altro. Nessuno strumento interattivo: i tre casi sono già mostrati per intero dalle tre figure statiche, come nella traccia.
+
+## Unità 35 — Lavoro di una forza variabile
+- Parole: 295 su 1 pagina di traccia (pag. 63)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: L_A=3·5/2=7,5 J, L_B=4·5=20 J, L_C=2·5/2=5 J, somma=32,5 J, coerenti in ogni cifra con la traccia.
+- Aggiunta: nessuna oltre a poche parole di collegamento fra il caso della forza costante (area del rettangolo) e quello generale (area sotto la curva), già impliciti nel confronto fra le due figure della traccia.
