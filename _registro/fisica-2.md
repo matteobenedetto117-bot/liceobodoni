@@ -130,3 +130,8 @@
 - Parole: 287 su 2 pagine di traccia (46-47)
 - Rettifica: nessuna. Nessuna formula numerica o derivazione da verificare con SymPy: la traccia contiene solo enunciati qualitativi (principio d'inerzia, definizione di sistema inerziale e non inerziale, principio di relatività galileiano), riportati fedelmente.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un enunciato e l'altro; il principio d'inerzia, la definizione di sistema di riferimento inerziale con la sua estensione, la definizione di sistema non inerziale e le due formulazioni equivalenti del principio di relatività galileiano sono tutti e soli quelli della traccia. Nessun esempio né disegno: la traccia non ne contiene per questa unità.
+
+## Unità 25 — Seconda legge della dinamica
+- Parole: 312 su circa 1,3 pagine di traccia (48, più la parte alta di 49)
+- Rettifica: nessuna. Verificato con SymPy la coerenza dimensionale F=ma e la derivazione 1 N = 1 kg·1 m/s² = 1 kg·m/s²; verificato che il caso F_tot=0 dà a=0 in accordo con la traccia.
+- Aggiunta: nessuna oltre alle frasi di collegamento; i tre casi del blocco (forza e accelerazione, forza doppia, massa dimezzata), la legge F_tot=m·a, la derivazione dell'unità newton, la sua definizione e il caso particolare F_tot=0 che riconduce alla prima legge sono tutti e soli quelli della traccia. Nessun esempio numerico: la traccia non ne contiene per questa unità.
