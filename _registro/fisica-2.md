@@ -90,3 +90,8 @@
 - Parole: 444 su 2 pagine di traccia (30-31, più l'"Esempio 2" a fondo pagina 29 che introduce il caso e appartiene a questa unità)
 - Rettifica: sì, a pagina 31. Il secondo esempio (incontro fra A e C distanti 1600 m) nella traccia arrotonda v_A = 55 km/h a 15,3 m/s prima di moltiplicare, ottenendo x_A = 1377 m mentre x_C = 1375 m: i due valori dovrebbero coincidere. Verificato con SymPy usando il valore esatto v_A = 55000/3600 m/s: t = 90,0 s esatti e x_A = x_C = 1375,0 m esatti. Nella pagina ho mantenuto v_A = 15,3 m/s in vista del calcolo ma riportato il risultato coerente x_A ≈ x_C ≈ 1375 m.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro e alla frase che introduce il caso dei versi opposti; la derivazione generale della condizione d'incontro, i due esempi numerici (stesso verso e versi opposti) e i due disegni sono tutti e soli quelli della traccia.
+
+## Unità 17 — L'accelerazione
+- Parole: 347 su 2 pagine di traccia (32-33)
+- Rettifica: nessuna. Verificato con SymPy: 100 km/h = 100000/3600 = 27,78 m/s; a_M = 27,8/3 = 9,27 m/s² (usando il valore già arrotondato di v come nella traccia), coerente con il risultato scritto in traccia.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; la formula dell'accelerazione media per analogia con la velocità media, l'unico esempio numerico, il diagramma dei quattro casi di segno (accelerazione/decelerazione) e il grafico velocità-tempo con i punti A-I e la regola sui massimi e minimi sono tutti e soli quelli della traccia.
