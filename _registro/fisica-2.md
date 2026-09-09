@@ -70,3 +70,8 @@
 - Parole: 262 su 1 pagina di traccia (pagina 23)
 - Rettifica: nessuna. Nessun calcolo numerico presente (solo lettura di un grafico); verificate con Python le coordinate usate per ridisegnare in SVG il diagramma spazio-tempo (le quattro fasi 0→8, 8→18, 18→25, 25→45 min mappate rispettivamente su x=0, 0,5, 1,8, 1,8, 0,5 km), coerenti con la traccia.
 - Aggiunta: nessuna oltre a una frase di raccordo nella premessa e alla frase finale che nota qualitativamente come la pendenza del grafico indichi la rapidità del cambiamento di posizione, in preparazione all'unità successiva sulla velocità; definizione di legge oraria, il numero di linee delle quattro fasi e il grafico x(t) sono tutti e soli quelli della traccia.
+
+## Unità 13 — Velocità scalare media e velocità media
+- Parole: 478 su 2 pagine di traccia (24–25)
+- Rettifica: nessuna. Verificato con SymPy: v_sm = 160 km / 2 h = 80 km/h; v_AB = (6−2)/(3−0) = 4/3 ≈ 1,33 m/s; v_BC = (6−6)/3 = 0; v_CE = (0−6)/(12−6) = −1 m/s. Tutti coerenti con la traccia.
+- Aggiunta: nessuna oltre alla frase introduttiva e alla frase di raccordo su come il segno della pendenza della secante corrisponda al segno di v_m; le due definizioni, l'esempio numerico e i tre calcoli sul diagramma spazio-tempo (tratti AB, BC, CE) sono tutti e soli quelli della traccia.
