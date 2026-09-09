@@ -115,3 +115,8 @@
 - Parole: 236 su 2 pagine di traccia (40-41)
 - Rettifica: nessuna. Verificato con SymPy la derivazione completa: da x = h - (1/2)g t² con x=0 si ricava t_v = sqrt(2h/g); sostituendo in v = -gt si ottiene v_f = -sqrt(2gh), coerente con la traccia in ogni passaggio.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; la definizione, il valore di g, il sistema di riferimento con le tre equazioni riscritte, la derivazione del tempo di volo e quella della velocità finale sono tutti e soli quelli della traccia. Nessun esempio numerico: la traccia non ne contiene per questa unità.
+
+## Unità 22 — Lancio verso il basso
+- Parole: 234 su 1 pagina di traccia (42)
+- Rettifica: nessuna. Verificato con SymPy la derivazione: partendo da v = -v0 - gt, x = h - v0 t - (1/2)g t², v² = v0² - 2g(x-h) e ponendo x=0 si ottiene v² = v0² + 2gh, coerente con la traccia in ogni passaggio.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; l'impostazione del sistema di riferimento, il sistema di equazioni riscritto per questo caso e la derivazione della velocità finale sono tutti e soli quelli della traccia. Nessun esempio numerico: la traccia non ne contiene per questa unità.
