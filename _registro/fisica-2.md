@@ -218,3 +218,8 @@
 - Parole: 178 su 1 pagina di traccia (pagina 73)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: ΔU_el = 1/2·150·(2,2)² = 363 J, coerente con la traccia.
 - Aggiunta: nessuna oltre a poche parole di collegamento fra la relazione generale ΔU=−L, già usata nell'unità 40, e la sua applicazione al lavoro della forza elastica visto nell'unità 36; il disegno della molla è stato ridisegnato in SVG per mostrare l'allungamento x rispetto alla posizione di riposo, coerentemente con lo schema già usato nell'unità 36.
+
+## Unità 42 — Conservazione dell'energia meccanica
+- Parole: 235 su 2 pagine di traccia (74–75)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: da mgh1=(1/2)mv2² si ottiene v2=sqrt(2gh1) e h1=v2²/(2g), coerenti in ogni passaggio con la traccia.
+- Aggiunta: nessuna oltre a poche parole di collegamento che spiegano perché nei due istanti manca un termine (v1=0 in alto, h2=0 al suolo); enunciato, formula E_TOT=U+K, il caso della forza peso e le due derivazioni (velocità finale, altezza di partenza) sono tutti e soli quelli della traccia.
