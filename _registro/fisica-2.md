@@ -213,3 +213,8 @@
 - Parole: 254 (comprese voci di navigazione/testata) su 1,3 pagine di traccia (metà pagina 71, dopo la definizione generale già usata nell'unità 39, più tutta la pagina 72)
 - Rettifica: nell'Esempio 2 la traccia arrotonda i due valori intermedi a 158,9 J e 79,5 J e poi li sottrae ottenendo 79,4 J; il calcolo esatto (2,7·9,81·6 − 2,7·9,81·3 = 79,461 J) arrotonda invece a 79,5 J. Verificato con SymPy. Ho scritto il risultato finale come 79,5 J per coerenza interna.
 - Aggiunta: nessuna oltre alle poche parole che spiegano il segno del prodotto scalare (forza e spostamento opposti) e il richiamo alla convenzione U_i=0 alla quota di partenza, entrambi impliciti nei passaggi della traccia.
+
+## Unità 41 — Energia potenziale elastica
+- Parole: 178 su 1 pagina di traccia (pagina 73)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: ΔU_el = 1/2·150·(2,2)² = 363 J, coerente con la traccia.
+- Aggiunta: nessuna oltre a poche parole di collegamento fra la relazione generale ΔU=−L, già usata nell'unità 40, e la sua applicazione al lavoro della forza elastica visto nell'unità 36; il disegno della molla è stato ridisegnato in SVG per mostrare l'allungamento x rispetto alla posizione di riposo, coerentemente con lo schema già usato nell'unità 36.
