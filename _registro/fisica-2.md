@@ -188,3 +188,8 @@
 - Parole: 295 su 1 pagina di traccia (pag. 63)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: L_A=3·5/2=7,5 J, L_B=4·5=20 J, L_C=2·5/2=5 J, somma=32,5 J, coerenti in ogni cifra con la traccia.
 - Aggiunta: nessuna oltre a poche parole di collegamento fra il caso della forza costante (area del rettangolo) e quello generale (area sotto la curva), già impliciti nel confronto fra le due figure della traccia.
+
+## Unità 36 — Lavoro della forza elastica
+- Parole: 236 su 1 pagina di traccia (pag. 64)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: integrando F=-kx da 0 a x si ottiene L=-kx²/2, e con k=300 N/m e x=0,03 m il risultato numerico è -0,135 J, coerente con la traccia.
+- Aggiunta: nessuna oltre a poche parole che collegano il grafico F-x della molla al metodo dell'area già introdotto nell'unità precedente, spiegando perché l'area risulta negativa (forza di richiamo opposta allo spostamento).
