@@ -233,3 +233,8 @@
 - Parole: circa 210 (testo effettivo, esclusi occhiello e testata) su 1 pagina di traccia (pagina 79)
 - Rettifica: nessuna, le definizioni di calore e temperatura sono corrette così come scritte, verificate contro la definizione standard (calore come energia trasferita per differenza di temperatura; temperatura come grandezza che determina l'equilibrio termico). Nessun calcolo numerico da verificare in questa unità.
 - Aggiunta: una frase che chiarisce che il calore non è una proprietà posseduta da un corpo ma energia in transito, resa esplicita perché la traccia lo lascia implicito nella definizione; il diagramma dei due blocchi A e B è stato ridisegnato in SVG con le due situazioni (scambio in corso ed equilibrio raggiunto) già presenti nella traccia.
+
+## Unità 45 — Scale di temperatura
+- Parole: 222 su 1 pagina di traccia (pagina 80)
+- Rettifica: nessuna. Le formule di conversione T(K)=T(°C)+273,15 e T(°C)=T(K)−273,15 sono state verificate con SymPy (round-trip C→K→C = identità; 0°C=273,15 K; 100°C=373,15 K; 0 K=−273,15°C), coerenti con la traccia.
+- Aggiunta: nessuna oltre a una frase che chiarisce che le due scale sono legate da una traslazione di 273,15; il termometro con le tre colonne (Kelvin, mercurio, Celsius) è stato ridisegnato in SVG con le stesse due corrispondenze di fase (ebollizione dell'acqua, equilibrio ghiaccio-acqua) presenti nella traccia, più l'etichetta "mercurio" sul bulbo del termometro.
