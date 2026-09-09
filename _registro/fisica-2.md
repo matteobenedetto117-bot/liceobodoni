@@ -105,3 +105,8 @@
 - Parole: 597 su 3 pagine di traccia (36-38)
 - Rettifica: nessuna. Verificato con SymPy: la formula generale A_TOT = v0 t + 1/2 a t^2 coincide con la legge oraria; nell'esempio A1B=12 m, A1A=6 m, A1=18 m, A2=9 m, A3=3 m, Δx=18+9-3=24 m, confermato anche calcolando lo spostamento segmento per segmento con le accelerazioni dei tre tratti (a1=0,75 m/s², a2=-2 m/s², a3=-2/3 m/s²): dx1=18 m, dx2=9 m, dx3=-3 m, somma 24 m.
 - Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; il breve richiamo ai grafici spazio-tempo (MRU/MRUA) in apertura di pagina 36, la derivazione generale dell'area sotto il grafico v-t, l'enunciato della regola e l'unico esempio numerico sono tutti e soli quelli della traccia. Non ho anticipato la sezione "Relazione velocità-spostamento" che inizia a fondo pagina 38 e appartiene all'unità 20.
+
+## Unità 20 — Relazione velocità-spostamento
+- Parole: 236 su 1 pagina di traccia (39, con l'avvio a fondo pagina 38 già segnalato nella voce dell'unità 19)
+- Rettifica: nessuna. Verificato con SymPy la derivazione completa: da x = x0 + v0 t + (1/2)a t², v = v0 + at, eliminando t si ottiene x - x0 = (v²-v0²)/(2a), quindi v² = v0² + 2aΔx, coerente con la traccia in ogni passaggio.
+- Aggiunta: nessuna oltre alle frasi di collegamento fra un passaggio e l'altro; la derivazione algebrica, il grafico spazio-velocità con le due parabole (a>0, a<0) e il riquadro riassuntivo delle tre leggi del MRUA sono tutti e soli quelli della traccia. Nessun esempio: la traccia non ne contiene per questa unità, e non ne ho aggiunti data la brevità della pagina.
