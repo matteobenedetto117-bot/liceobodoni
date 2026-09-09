@@ -208,3 +208,8 @@
 - Parole: 255 su 1,3 pagine di traccia (pag. 70, più la definizione generale in testa a pag. 71 prima della sezione sull'energia potenziale gravitazionale, che apre l'unità 40)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti.
 - Aggiunta: nessuna oltre a poche parole di collegamento fra i due esempi (forza peso conservativa, attrito non conservativo) e la definizione generale di energia potenziale.
+
+## Unità 40 — Energia potenziale gravitazionale
+- Parole: 254 (comprese voci di navigazione/testata) su 1,3 pagine di traccia (metà pagina 71, dopo la definizione generale già usata nell'unità 39, più tutta la pagina 72)
+- Rettifica: nell'Esempio 2 la traccia arrotonda i due valori intermedi a 158,9 J e 79,5 J e poi li sottrae ottenendo 79,4 J; il calcolo esatto (2,7·9,81·6 − 2,7·9,81·3 = 79,461 J) arrotonda invece a 79,5 J. Verificato con SymPy. Ho scritto il risultato finale come 79,5 J per coerenza interna.
+- Aggiunta: nessuna oltre alle poche parole che spiegano il segno del prodotto scalare (forza e spostamento opposti) e il richiamo alla convenzione U_i=0 alla quota di partenza, entrambi impliciti nei passaggi della traccia.
