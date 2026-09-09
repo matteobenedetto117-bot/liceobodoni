@@ -135,3 +135,8 @@
 - Parole: 312 su circa 1,3 pagine di traccia (48, più la parte alta di 49)
 - Rettifica: nessuna. Verificato con SymPy la coerenza dimensionale F=ma e la derivazione 1 N = 1 kg·1 m/s² = 1 kg·m/s²; verificato che il caso F_tot=0 dà a=0 in accordo con la traccia.
 - Aggiunta: nessuna oltre alle frasi di collegamento; i tre casi del blocco (forza e accelerazione, forza doppia, massa dimezzata), la legge F_tot=m·a, la derivazione dell'unità newton, la sua definizione e il caso particolare F_tot=0 che riconduce alla prima legge sono tutti e soli quelli della traccia. Nessun esempio numerico: la traccia non ne contiene per questa unità.
+
+## Unità 26 — Terza legge della dinamica
+- Parole: 261 su 1 pagina di traccia (49, parte bassa)
+- Rettifica: nessuna. Nessuna formula numerica da verificare con SymPy: l'unità contiene solo l'enunciato del principio di azione e reazione (F e -F, stessa intensità, verso opposto, applicate a corpi diversi), riportato fedelmente; la coerenza del segno e del modulo è verifica puramente concettuale.
+- Aggiunta: nessuna oltre alle frasi di collegamento e al breve chiarimento, presente in forma diversa anche nella traccia stessa (attraverso il disegno dei due blocchi a contatto), sul fatto che le due forze si applicano a corpi diversi e quindi non si annullano nella somma delle forze su un singolo oggetto. Nessun esempio numerico né disegno oltre a quello dei due blocchi: la traccia non ne contiene altri per questa unità.
