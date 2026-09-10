@@ -56,3 +56,10 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con Python: (-2)^5=-32, (-2)^4=+16, 5-2=5+(-2)=3,
   +5:(-5)=-1, +6:(+2)=+3, -2·(-7)=+14, -3·(+5)=-15, tutti conformi alla traccia.
 - Aggiunta: nessuna.
+
+## Unità 08 — Numeri razionali: frazioni, riduzione, denominatore comune
+- Parole: 390 (incl. titolo/nav/footer) su 2 pagine di traccia (pag. 17–18 di matematica-1.pdf;
+  pag. 19, con l'intestazione "Confronto di numeri razionali", apre già l'unità 09).
+- Rettifica: nessuna. Verificato con SymPy: 10/8 = 5/4, 11/6 = 55/30, 4/15 = 8/30, mcm(6,15)=30,
+  tutti conformi alla traccia.
+- Aggiunta: nessuna.
