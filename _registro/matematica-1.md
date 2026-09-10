@@ -18,3 +18,10 @@ questo sul sito pubblico.
 - Parole: 156 su 1,5 pagine di traccia (pag. 3–4)
 - Rettifica: nessuna, l'esempio numerico è corretto (verificato con SymPy: risultato 51)
 - Aggiunta: nessuna
+
+## Unità 03 — Espressioni letterali
+- Parole: 224 su circa 1,3 pagine di traccia (pag. 4 intera più il primo blocco di pag. 5, fino
+  al calcolo 3+4=7; il resto di pag. 5 appartiene già all'unità 04).
+- Rettifica: nessuna. Verificato con SymPy: 3(2n+5)+6-4n/2 si semplifica in 4n+21, e 3a+b con
+  a=1, b=4 vale 7, come nella traccia.
+- Aggiunta: nessuna.
