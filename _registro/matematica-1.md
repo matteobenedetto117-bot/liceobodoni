@@ -25,3 +25,13 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 3(2n+5)+6-4n/2 si semplifica in 4n+21, e 3a+b con
   a=1, b=4 vale 7, come nella traccia.
 - Aggiunta: nessuna.
+
+## Unità 04 — Proprietà delle operazioni e proprietà invariantiva
+- Parole: 218 su 2 pagine di traccia (dal blocco "Proprietà delle operazioni in N" a pag. 5,
+  fino alla proprietà invariantiva della divisione a pag. 6; l'intestazione "Potenze" a fine
+  pag. 6 apre già l'unità 05).
+- Rettifica: nessuna. Verificato con SymPy: (a+c)-(b+c)=a-b e (a·c)/(b·c)=a/b sono identità;
+  l'esempio numerico 17-7=(17+3)-(7+3)=10 è corretto.
+- Aggiunta: nessuna. Il riquadro sul verso della proprietà distributiva della divisione riprende
+  la correzione già presente nella traccia stessa (la formula sbagliata è barrata in rosso con
+  "NO!").
