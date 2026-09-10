@@ -85,3 +85,12 @@ questo sul sito pubblico.
   con periodo 8; 421/99 = 4,252525... = 4 con periodo 25; 3808/990 = 3,846464... = 3,8 con periodo
   46 — tutti conformi alla traccia.
 - Aggiunta: nessuna.
+
+## Unità 11 — Proporzioni e loro proprietà
+- Parole: 322 (incl. titolo/nav/footer) su 3 pagine di traccia (pag. 26–28 di matematica-1.pdf;
+  pag. 25, ultima riga, chiude già l'unità 10; pag. 29, con l'intestazione "Percentuali", apre già
+  l'unità 12).
+- Rettifica: nessuna. Verificato con SymPy: comporre e scomporre su 2:5=4:10 e 5:2=10:4, scambio
+  di estremi e di medi, inversione su 3:2=6:4, e i tre esempi finali (8:x=15:225 → x=120;
+  5:14=x:63 → x=45/2; (x+2):12=10:6 → x=18) — tutti conformi alla traccia.
+- Aggiunta: nessuna.
