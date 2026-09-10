@@ -94,3 +94,11 @@ questo sul sito pubblico.
   di estremi e di medi, inversione su 3:2=6:4, e i tre esempi finali (8:x=15:225 → x=120;
   5:14=x:63 → x=45/2; (x+2):12=10:6 → x=18) — tutti conformi alla traccia.
 - Aggiunta: nessuna.
+
+## Unità 12 — Percentuali
+- Parole: 224 (incl. titolo/nav/footer) su 2 pagine di traccia (pag. 29–30 di matematica-1.pdf;
+  pag. 28 chiude già gli esempi dell'unità 11; pag. 30, in fondo, con l'intestazione "Numeri Reali
+  R", apre già l'unità 13).
+- Rettifica: nessuna. Verificato con SymPy: 20% di 3600 = 720; 15% di A = 180 → A = 1200; 621 è il
+  27% di 2300 — tutti conformi alla traccia.
+- Aggiunta: nessuna.
