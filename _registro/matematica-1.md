@@ -63,3 +63,16 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 10/8 = 5/4, 11/6 = 55/30, 4/15 = 8/30, mcm(6,15)=30,
   tutti conformi alla traccia.
 - Aggiunta: nessuna.
+
+## Unità 09 — Operazioni con le frazioni
+- Parole: 649 (incl. titolo/nav/footer) su 6 pagine di traccia (pag. 19–24 di matematica-1.pdf;
+  pag. 25, con l'intestazione "Decimale periodico", apre già l'unità 10).
+- Rettifica: a pag. 24 l'ultimo esempio scrive 7,3482 = 73482/1000, ma un numero con quattro cifre
+  decimali richiede denominatore 10000, non 1000 (73482/1000 = 73,482, non 7,3482). Corretto in
+  73482/10000 = 36741/5000. Corretta anche l'etichetta "-1" sulla retta numerica dell'esempio di
+  ordinamento (pag. 20): l'elenco dei numeri da ordinare include -1/2, non -1, e -1/2 è la
+  posizione mostrata nel disegno; la retta SVG riporta -1/2. Verificato tutto con Python
+  (fractions.Fraction): addizioni, sottrazioni, moltiplicazioni, divisioni, potenze con esponente
+  positivo, nullo e negativo, confronti fra frazioni discordi e concordi, conversioni
+  decimale-frazione, tutti conformi alla traccia (a parte le due correzioni sopra).
+- Aggiunta: nessuna.
