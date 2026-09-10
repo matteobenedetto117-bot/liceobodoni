@@ -258,3 +258,8 @@
 - Parole: 270 su circa 2,6 pagine di traccia (dalla riga "Capacità termica e calore specifico" a metà pagina 84, fino a fine pagina 86, prima che inizi a pagina 87 la legge fondamentale della termologia dell'unità 50)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: c·m − C = 0 partendo da C=Q/ΔT e c=C/m; controllo dimensionale C in J/K e c in J/(kg·K).
 - Aggiunta: nessuna oltre alla frase iniziale che introduce il confronto fra corpi diversi a parità di calore fornito (già implicita nella distinzione capacità termica/calore specifico della traccia); non riportato il rimando della traccia alla "tabella a pagina 418", riferimento a un libro di testo esterno non disponibile qui.
+
+## Unità 50 — Legge fondamentale della termologia
+- Parole: 241 su 1 pagina di traccia (pagina 87)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: ΔT = Q/(c·m) = 586/(448×3,6) ≈ 0,3633 K ≈ 0,36 K, coerente con la traccia. Formula dimensionalmente coerente (J/(kg·K)·kg·K = J).
+- Aggiunta: nessuna oltre alla riga di verifica dimensionale delle unità di misura, aggiunta per rendere esplicito perché il prodotto c·m·ΔT dà un risultato in joule.
