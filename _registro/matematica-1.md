@@ -119,3 +119,11 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: la riduzione $a^2\cdot\frac12\cdot b\cdot 3a^3=\frac32a^5b$
   e il calcolo del grado complessivo $3+1+2=6$ tornano entrambi.
 - Aggiunta: nessuna.
+
+## Unità 15 — Monomi simili, opposti e uguali
+- Parole: 171 (incl. titolo/nav/footer) su 1 pagina di traccia (pag. 36 di matematica-1.pdf;
+  le due righe iniziali di pagina, "i numeri sono monomi di grado 0" e "0 non ha grado", erano
+  già state assorbite nell'unità 14; pag. 37 apre già l'unità 16, "Operazioni con i monomi").
+- Rettifica: nessuna. Verificato con SymPy: 9/3 = 3, quindi $3xy^2$ e $\frac93xy^2$ hanno
+  davvero lo stesso coefficiente e sono monomi uguali, come nella traccia.
+- Aggiunta: nessuna.
