@@ -102,3 +102,13 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 20% di 3600 = 720; 15% di A = 180 → A = 1200; 621 è il
   27% di 2300 — tutti conformi alla traccia.
 - Aggiunta: nessuna.
+
+## Unità 13 — Numeri irrazionali e numeri reali
+- Parole: 353 (incl. titolo/nav/footer) su 3 pagine di traccia (pag. 30–32 di matematica-1.pdf;
+  la parte alta di pag. 30, con le percentuali, era già assorbita nell'unità 12 — l'unità 13
+  inizia dalla sezione "Numeri Reali R" in fondo alla pagina; pag. 33, con l'intestazione
+  "Monomi", apre già l'unità 14).
+- Rettifica: nessuna. Verificato con SymPy: $\sqrt2$ non è razionale (sympy.sqrt(2).is_rational
+  = False), e il passaggio $a=2m \Rightarrow 4m^2=2b^2 \Rightarrow 2m^2=b^2$ della dimostrazione
+  per assurdo torna algebricamente.
+- Aggiunta: nessuna.
