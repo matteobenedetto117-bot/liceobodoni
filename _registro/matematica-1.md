@@ -13,3 +13,8 @@ questo sul sito pubblico.
   negli esempi scelti nel disegno stesso; l'ho resa esplicita in una riga per rendere leggibile il
   perché della catena di inclusioni. Verificato con SymPy: sqrt(2) e pi hanno is_rational=False,
   -2/5 e 7/4 hanno is_rational=True.
+
+## Unità 02 — Espressioni numeriche e ordine delle operazioni
+- Parole: 156 su 1,5 pagine di traccia (pag. 3–4)
+- Rettifica: nessuna, l'esempio numerico è corretto (verificato con SymPy: risultato 51)
+- Aggiunta: nessuna
