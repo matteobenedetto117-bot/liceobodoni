@@ -268,3 +268,8 @@
 - Parole: circa 330 su 3 pagine di traccia
 - Rettifica: nessuna. Il primo esempio usa T_eq arrotondato a 329,3 K prima di convertire in gradi (56,15 °C); il valore non arrotondato darebbe 56,13 °C, differenza trascurabile dovuta all'arrotondamento intermedio già presente nella traccia.
 - Aggiunta: nessuna, oltre alle poche righe di commento su segno di Q_blocco/Q_acqua e sul significato di T_eq come media pesata da c·m.
+
+## Unità 52 — Calore latente e passaggi di stato
+- Parole: 372 su 2 pagine di traccia (pagine 91–92; pagina 90 apparteneva già interamente all'unità 51, con lo stesso esempio del blocco metallico in acqua)
+- Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Non ci sono calcoli numerici da verificare: la traccia presenta solo la definizione L=Q/m e il grafico T-Q qualitativo, senza valori numerici assegnati.
+- Aggiunta: nessuna oltre alla frase di raccordo fra i due tratti inclinati e i due tratti orizzontali del grafico; non riportata la "tabella dei calori latenti a pagina 442" della traccia, riferimento a un libro di testo esterno non disponibile qui. Con questa unità si chiude il percorso di fisica di seconda (52 unità totali): la nota di chiusura sulla pagina segue lo stesso schema già usato per la chiusura di altri percorsi completi nel repository.
