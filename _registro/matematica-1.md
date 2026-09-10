@@ -35,3 +35,8 @@ questo sul sito pubblico.
 - Aggiunta: nessuna. Il riquadro sul verso della proprietà distributiva della divisione riprende
   la correzione già presente nella traccia stessa (la formula sbagliata è barrata in rosso con
   "NO!").
+
+## Unità 05 — Potenze e loro proprietà
+- Parole: circa 610 su 7 pagine di traccia (pagine 6–12)
+- Rettifica: nessuna, i calcoli della traccia (potenze, scomposizioni, MCD/mcm, criteri di divisibilità) sono risultati corretti, verificati con SymPy/Python.
+- Aggiunta: nessuna. La pagina contiene solo le regole delle potenze, la definizione di numero primo, scomposizione in fattori primi, MCD/mcm e i criteri di divisibilità presenti nelle pagine 6–12, organizzati con brevi frasi di raccordo. Il titolo dell'unità copre solo le potenze, ma la traccia in quell'intervallo di pagine include anche numeri primi, MCD/mcm e criteri di divisibilità (non trattati in nessun'altra unità del percorso): sono stati inclusi perché appartengono a quelle pagine.
