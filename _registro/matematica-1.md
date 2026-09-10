@@ -40,3 +40,11 @@ questo sul sito pubblico.
 - Parole: circa 610 su 7 pagine di traccia (pagine 6–12)
 - Rettifica: nessuna, i calcoli della traccia (potenze, scomposizioni, MCD/mcm, criteri di divisibilità) sono risultati corretti, verificati con SymPy/Python.
 - Aggiunta: nessuna. La pagina contiene solo le regole delle potenze, la definizione di numero primo, scomposizione in fattori primi, MCD/mcm e i criteri di divisibilità presenti nelle pagine 6–12, organizzati con brevi frasi di raccordo. Il titolo dell'unità copre solo le potenze, ma la traccia in quell'intervallo di pagine include anche numeri primi, MCD/mcm e criteri di divisibilità (non trattati in nessun'altra unità del percorso): sono stati inclusi perché appartengono a quelle pagine.
+
+## Unità 06 — Numeri interi: opposti, concordi e discordi, valore assoluto
+- Parole: 261 (incl. titolo/nav/footer) su circa 1,5 pagine di traccia (pag. 13 intera più la
+  sola sezione "Valore assoluto o modulo" a inizio pag. 14; il resto di pag. 14, con l'intestazione
+  "Operazioni in Z", appartiene già all'unità 07).
+- Rettifica: nessuna. Verificato con Python: |5|=5, |-2|=2, |-156|=156, |0|=0; +8 e +7 concordi
+  (stesso segno), -5 e +3 discordi (segno opposto), come nella traccia.
+- Aggiunta: nessuna.
