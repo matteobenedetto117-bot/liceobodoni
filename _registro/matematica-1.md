@@ -112,3 +112,10 @@ questo sul sito pubblico.
   = False), e il passaggio $a=2m \Rightarrow 4m^2=2b^2 \Rightarrow 2m^2=b^2$ della dimostrazione
   per assurdo torna algebricamente.
 - Aggiunta: nessuna.
+
+## Unità 14 — Monomi: definizione, forma normale, grado
+- Parole: 317 (incl. titolo/nav/footer) su 3 pagine di traccia (pag. 33–35 di matematica-1.pdf;
+  pag. 36, con l'intestazione "Monomi simili, opposti e uguali", apre già l'unità 15).
+- Rettifica: nessuna. Verificato con SymPy: la riduzione $a^2\cdot\frac12\cdot b\cdot 3a^3=\frac32a^5b$
+  e il calcolo del grado complessivo $3+1+2=6$ tornano entrambi.
+- Aggiunta: nessuna.
