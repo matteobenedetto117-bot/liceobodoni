@@ -48,3 +48,11 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con Python: |5|=5, |-2|=2, |-156|=156, |0|=0; +8 e +7 concordi
   (stesso segno), -5 e +3 discordi (segno opposto), come nella traccia.
 - Aggiunta: nessuna.
+
+## Unità 07 — Operazioni in Z e potenze con base negativa
+- Parole: 320 (incl. titolo/nav/footer) su circa 2,5 pagine di traccia (la sezione "Operazioni
+  in Z" a fine pag. 14, tutta pag. 15, tutta pag. 16; pag. 17 apre già l'unità 08 con i numeri
+  razionali).
+- Rettifica: nessuna. Verificato con Python: (-2)^5=-32, (-2)^4=+16, 5-2=5+(-2)=3,
+  +5:(-5)=-1, +6:(+2)=+3, -2·(-7)=+14, -3·(+5)=-15, tutti conformi alla traccia.
+- Aggiunta: nessuna.
