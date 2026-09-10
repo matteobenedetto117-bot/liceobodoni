@@ -263,3 +263,8 @@
 - Parole: 241 su 1 pagina di traccia (pagina 87)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: ΔT = Q/(c·m) = 586/(448×3,6) ≈ 0,3633 K ≈ 0,36 K, coerente con la traccia. Formula dimensionalmente coerente (J/(kg·K)·kg·K = J).
 - Aggiunta: nessuna oltre alla riga di verifica dimensionale delle unità di misura, aggiunta per rendere esplicito perché il prodotto c·m·ΔT dà un risultato in joule.
+
+## Unità 51 — Calorimetria e temperatura di equilibrio
+- Parole: circa 330 su 3 pagine di traccia
+- Rettifica: nessuna. Il primo esempio usa T_eq arrotondato a 329,3 K prima di convertire in gradi (56,15 °C); il valore non arrotondato darebbe 56,13 °C, differenza trascurabile dovuta all'arrotondamento intermedio già presente nella traccia.
+- Aggiunta: nessuna, oltre alle poche righe di commento su segno di Q_blocco/Q_acqua e sul significato di T_eq come media pesata da c·m.
