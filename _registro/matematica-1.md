@@ -76,3 +76,12 @@ questo sul sito pubblico.
   positivo, nullo e negativo, confronti fra frazioni discordi e concordi, conversioni
   decimale-frazione, tutti conformi alla traccia (a parte le due correzioni sopra).
 - Aggiunta: nessuna.
+
+## Unità 10 — Frazioni generatrici dei numeri decimali periodici
+- Parole: 172 (incl. titolo/nav/footer) su 1 pagina di traccia (pag. 25 di matematica-1.pdf; pag.
+  24, con la classificazione dei decimali e il passaggio da decimale finito a frazione, era già
+  stata assorbita nell'unità 09; pag. 26, con l'intestazione "Proporzioni", apre già l'unità 11).
+- Rettifica: nessuna. Verificato con Python (fractions.Fraction): 233/900 = 0,25888... = 0,25
+  con periodo 8; 421/99 = 4,252525... = 4 con periodo 25; 3808/990 = 3,846464... = 3,8 con periodo
+  46 — tutti conformi alla traccia.
+- Aggiunta: nessuna.
