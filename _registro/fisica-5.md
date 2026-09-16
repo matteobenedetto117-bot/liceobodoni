@@ -28,6 +28,7 @@
 - Parole: 357 su 1,7 pagine di traccia (seconda metà di pagina 7, dalla sezione "Forza di Lorentz" in poi, più pagina 8 intera)
 - Rettifica: nessuna. Il modulo F = qvB sinθ è stato verificato con SymPy come coerente con |q v × B| e con la relazione F = qv⊥B già vista nell'unità 03.
 - Aggiunta: nessuna.
+- Revisione: corretto il modulo in F = |q|vB sinθ (θ fra 0° e 180°); regola della mano destra precisata (medio perpendicolare a pollice e indice); per le cariche negative spiegato che il verso si inverte perché cambia il segno di q. Rifatti i disegni, che mostravano F nello stesso piano di v e B (errato) e, nel secondo, non mostravano F: ora vista in prospettiva con il piano di v e B e F perpendicolare. Tolti sottotitolo e simboli di riquadro, formule in display, impaginazione a quaderno come l'unità 03. Figura 1 interattiva con cursore su θ (0°–180°) e barra dell'intensità; figura 2 animata (F cresce verso l'alto per la carica positiva e verso il basso per la negativa), didascalie divise.
 
 ## Unità 05 — Moto di particelle cariche in campo elettrico e magnetico uniforme
 - Parole: 240 su 1 pagina di traccia (pagina 9)

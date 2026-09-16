@@ -5,16 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La forza di Lorentz — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -24,110 +54,191 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 04</p>
   <h1>La forza di Lorentz</h1>
-  <p class="sommario">Raccogliamo in un'unica espressione vettoriale la forza che un campo
-  magnetico esercita su una carica in moto, fissandone anche la direzione e il verso.</p>
 </header>
 
 <h2>Definizione</h2>
 
 <p>Abbiamo visto che la forza su una carica in moto dipende dalla carica stessa, dalla componente
 della velocità perpendicolare al campo e dall'intensità del campo. La <strong>forza di
-Lorentz</strong> è la forza che si genera nell'interazione tra una carica in movimento e un campo
-magnetico $\vec B$:</p>
+Lorentz</strong> è la forza che un campo magnetico $\vec B$ esercita su una carica $q$ che si muove
+con velocità $\vec v$:</p>
 
-<div class="formula-box">
-$$\vec F = q\,\vec v \wedge \vec B$$
-</div>
+<p class="eq">$$\vec F = q\,\vec v \wedge \vec B$$</p>
 
-<p>dove $q$ è la carica, $\vec v$ la velocità della particella, $\vec B$ il campo magnetico e
-$\wedge$ indica il prodotto vettoriale: il risultato $\vec F$ è quindi sempre perpendicolare sia a
-$\vec v$ sia a $\vec B$.</p>
+<p>dove $\wedge$ indica il prodotto vettoriale: il risultato $\vec F$ è quindi sempre perpendicolare
+sia a $\vec v$ sia a $\vec B$.</p>
 
 <p>Il modulo della forza è</p>
 
-$$F = q\,v\,B\,\sin\theta$$
+<p class="eq">$$F = |q|\,v\,B\,\sin\theta$$</p>
 
-<p>dove $\theta$ è l'angolo fra $\vec v$ e $\vec B$: ritroviamo così la stessa relazione già vista,
-perché $v\sin\theta$ è proprio la componente di $v$ perpendicolare al campo.</p>
+<p>dove $\theta$ è l'angolo fra $\vec v$ e $\vec B$, compreso fra $0°$ e $180°$; il valore assoluto
+della carica serve perché il modulo di un vettore non è mai negativo. Ritroviamo così la stessa
+relazione già vista, perché $v\sin\theta$ è proprio la componente $v_\perp$ della velocità
+perpendicolare al campo.</p>
 
 <h2>Direzione e verso: regola della mano destra</h2>
 
 <p>La direzione di $\vec F$ è perpendicolare al piano individuato da $\vec v$ e $\vec B$. Per una
 carica <strong>positiva</strong>, il verso si trova con la regola della mano destra: il pollice
-indica la velocità, l'indice il campo magnetico, il medio la forza.</p>
+lungo la velocità, l'indice lungo il campo magnetico; il medio, tenuto perpendicolare a entrambi,
+indica il verso della forza.</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+<svg id="anim-lorentz" viewBox="0 30 670 260" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <marker id="fb4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
 <marker id="fv4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
 <marker id="ff4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
 </defs>
-<line x1="110" y1="190" x2="196" y2="190" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv4a)"/>
-<text x="204" y="194" font-family="var(--sans)" font-size="14" fill="var(--verde)">v</text>
-<line x1="110" y1="190" x2="184" y2="138" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#fb4a)"/>
-<text x="190" y="130" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<line x1="110" y1="190" x2="50" y2="120" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#ff4a)"/>
-<text x="34" y="112" font-family="var(--sans)" font-size="14" fill="var(--rosso)">F</text>
-<path d="M132,190 A22,22 0 0 1 128,177" fill="none" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="140" y="172" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&theta;</text>
-<circle cx="110" cy="190" r="9" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="110" y="194" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">+</text>
-
-<line x1="400" y1="190" x2="370" y2="100" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv4a)"/>
-<text x="358" y="92" font-family="var(--sans)" font-size="14" fill="var(--verde)">v</text>
-<line x1="400" y1="190" x2="520" y2="190" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#fb4a)"/>
-<text x="528" y="194" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<line x1="400" y1="190" x2="345" y2="270" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#ff4a)"/>
-<text x="325" y="284" font-family="var(--sans)" font-size="14" fill="var(--rosso)">F</text>
-<path d="M425,190 A25,25 0 0 1 392,166" fill="none" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="404" y="182" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&theta;</text>
-<circle cx="400" cy="190" r="9" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="394" y1="184" x2="406" y2="196" stroke="var(--rosso)" stroke-width="1.3"/>
-<line x1="406" y1="184" x2="394" y2="196" stroke="var(--rosso)" stroke-width="1.3"/>
-<text x="380" y="175" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">+</text>
+<polygon class="piano" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1" stroke-opacity=".35"/>
+<polyline class="arco" fill="none" stroke="var(--grigio)" stroke-width="1.3"/>
+<text class="t-theta" font-family="var(--sans)" font-size="12" fill="var(--grigio)">θ</text>
+<line class="vB" stroke="var(--blu)" stroke-width="2.4" marker-end="url(#fb4a)"/>
+<line class="vv" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#fv4a)"/>
+<polyline class="angr" fill="none" stroke="var(--grigio)" stroke-width="1.1"/>
+<line class="vF" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#ff4a)"/>
+<text class="t-v" font-family="var(--sans)" font-size="13" fill="var(--verde)"><tspan font-weight="700">v</tspan> (pollice)</text>
+<text class="t-B" font-family="var(--sans)" font-size="13" fill="var(--blu)"><tspan font-weight="700">B</tspan> (indice)</text>
+<text class="t-F" font-family="var(--sans)" font-size="13" fill="var(--rosso)"><tspan font-weight="700">F</tspan> (medio)</text>
+<circle class="car" r="8" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
+<text class="car-s" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">+</text>
+<text x="505" y="70" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">intensità della forza</text>
+<rect x="505" y="84" width="150" height="18" fill="none" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect class="barra" x="505" y="84" width="0" height="18" fill="var(--rosso)" opacity=".85"/>
+<text class="t-ang" x="505" y="140" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">θ = 60°</text>
+<text class="t-f" x="505" y="164" font-family="var(--sans)" font-size="13" fill="var(--rosso)"></text>
 </svg>
-<p class="did">Due esempi, con orientazioni diverse di $\vec v$ e $\vec B$: in entrambi $\vec F$ si
-ottiene con pollice lungo $\vec v$, indice lungo $\vec B$, medio lungo $\vec F$. La forza è
-perpendicolare al piano in cui si trovano $\vec B$ e $\vec v$.</p>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-lorentz" aria-label="Avvia">&#9654;</button>
+<label for="cur-lorentz">θ</label><input id="cur-lorentz" type="range" min="0" max="180" step="1" value="60"></div>
+<p class="did">$\vec v$ e $\vec B$ stanno nel piano azzurro; la forza su una carica positiva è
+perpendicolare a quel piano, diretta verso l'alto. Il suo modulo dipende dall'angolo $\theta$: è
+nullo per $\theta = 0°$ e $\theta = 180°$, massimo per $\theta = 90°$.</p>
 </div>
 
-<p>Nel caso di cariche <strong>negative</strong> il verso è opposto: si usa la regola della mano
-sinistra.</p>
+<p>Se la carica è <strong>negativa</strong>, il prodotto $q\,\vec v \wedge \vec B$ cambia segno: la
+forza ha la stessa direzione ma verso opposto. Il verso si può trovare nello stesso modo usando la
+mano sinistra.</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+<svg id="anim-segno" viewBox="0 50 640 260" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <marker id="fb4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
 <marker id="fv4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
+<marker id="ff4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
 </defs>
-<line x1="110" y1="190" x2="110" y2="100" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#fb4b)"/>
-<text x="98" y="92" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<line x1="110" y1="190" x2="220" y2="190" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv4b)"/>
-<text x="228" y="194" font-family="var(--sans)" font-size="14" fill="var(--verde)">v</text>
-<path d="M110,168 A22,22 0 0 0 132,190" fill="none" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="122" y="180" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&theta;</text>
-<circle cx="110" cy="190" r="9" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="110" y="215" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">&minus;</text>
-
-<line x1="400" y1="190" x2="400" y2="100" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv4b)"/>
-<text x="388" y="92" font-family="var(--sans)" font-size="14" fill="var(--verde)">v</text>
-<line x1="400" y1="190" x2="510" y2="190" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#fb4b)"/>
-<text x="518" y="194" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<path d="M400,168 A22,22 0 0 1 422,190" fill="none" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="410" y="180" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&theta;</text>
-<circle cx="400" cy="190" r="9" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="400" y="215" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">&minus;</text>
+<g class="pann"></g>
 </svg>
-<p class="did">Stessi orientamenti di $\vec v$ e $\vec B$ del caso precedente, ma con carica negativa:
-il verso di $\vec F$ si ottiene ora con la mano sinistra ed è opposto a quello che si avrebbe con la
-mano destra.</p>
+<button type="button" class="btn-anim" id="btn-segno" aria-label="Avvia">&#9654;</button>
+<div class="did-parti" style="--n:2">
+<p class="did">Carica positiva: con $\vec v$ e $\vec B$ perpendicolari, la forza è diretta verso l'alto.</p>
+<p class="did">Carica negativa, stessi $\vec v$ e $\vec B$: la forza ha verso opposto, verso il basso.</p>
 </div>
-
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../03-interazione-fra-campo-magnetico-e-carica-elettrica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Interazione fra campo magnetico e carica elettrica</span></a><a class="successiva" href="../05-moto-di-particelle-cariche-in-campo-elettrico-e-magnetico-un/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Moto di particelle cariche in campo elettrico e magnetico uniforme</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 04</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  function cl(u){return Math.max(0,Math.min(1,u));}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);}
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS='http://www.w3.org/2000/svg';
+  /* proiezione obliqua: x verso destra, y dentro il foglio (in alto a destra), z verso l'alto; terna destrorsa */
+  var CA=Math.cos(35*Math.PI/180)*0.6, SA=Math.sin(35*Math.PI/180)*0.6;
+  function P(O,x,y,z){return [O[0]+x+y*CA, O[1]-z-y*SA];}
+  function f(n){return n.toFixed(1);}
+  function pts(a){return a.map(function(p){return f(p[0])+','+f(p[1]);}).join(' ');}
+  function bottone(b,avvia,reset){
+    var stato='fermo';
+    b.addEventListener('click',function(){
+      if(stato==='fine'){reset();stato='fermo';b.innerHTML='&#9654;';b.setAttribute('aria-label','Avvia');return;}
+      if(stato!=='fermo')return;
+      stato='corsa';b.disabled=true;
+      avvia(function(){stato='fine';b.disabled=false;b.innerHTML='&#8634;';b.setAttribute('aria-label','Ricomincia');});
+    });
+  }
+  function corri(D,dis,fine){var t0=null;(function passo(t){if(t0===null)t0=t;var dt=ridotto?D:t-t0;dis(Math.min(dt,D));if(dt>=D)fine();else requestAnimationFrame(passo);})(performance.now());}
+
+  /* --- figura 1: forza perpendicolare al piano di v e B, cursore su θ --- */
+  var G=document.getElementById('anim-lorentz'), bG=document.getElementById('btn-lorentz'), cur=document.getElementById('cur-lorentz');
+  if(G&&bG&&cur){
+    var O=[210,215], L=130, LF=120, q=function(c){return G.querySelector('.'+c);};
+    set(q('piano'),{points:pts([P(O,-60,-90,0),P(O,175,-90,0),P(O,175,175,0),P(O,-60,175,0)])});
+    var tv=P(O,L,0,0); set(q('vv'),{x1:O[0],y1:O[1],x2:f(tv[0]),y2:f(tv[1])});
+    set(q('t-v'),{x:f(tv[0]-30),y:f(tv[1]+22)});
+    set(q('car'),{cx:O[0],cy:O[1]}); set(q('car-s'),{x:O[0],y:O[1]+4});
+    function dis(deg){
+      var th=deg*Math.PI/180, s=Math.sin(th), c=Math.cos(th);
+      var tb=P(O,L*c,L*s,0); set(q('vB'),{x1:O[0],y1:O[1],x2:f(tb[0]),y2:f(tb[1])});
+      var lb=P(O,(L+22)*c,(L+22)*s,0);
+      set(q('t-B'),{x:f(lb[0]-(c<-0.3?40:(c>0.3?0:30))),y:f(lb[1]+(s<0.35?-12:0))});
+      var a=[],r=38,n=Math.max(2,Math.ceil(deg/4));
+      for(var i=0;i<=n;i++){var u=th*i/n;a.push(P(O,r*Math.cos(u),r*Math.sin(u),0));}
+      set(q('arco'),{points:pts(a),opacity:deg>3?1:0});
+      var m=P(O,(r+16)*Math.cos(th/2),(r+16)*Math.sin(th/2),0);
+      set(q('t-theta'),{x:f(m[0]-4),y:f(m[1]+5),opacity:deg>12?1:0});
+      var tf=P(O,0,0,LF*s); set(q('vF'),{x1:O[0],y1:O[1],x2:f(tf[0]),y2:f(tf[1]),opacity:s>0.06?1:0});
+      set(q('t-F'),{x:O[0]+10,y:f(tf[1]+6),opacity:s>0.25?1:0});
+      set(q('angr'),{points:pts([P(O,0,0,13),P(O,13,0,13),P(O,13,0,0)]),opacity:s>0.3?1:0});
+      set(q('barra'),{width:f(150*s)});
+      q('t-ang').textContent='θ = '+Math.round(deg)+'°';
+      q('t-f').textContent=s<0.005?'forza nulla':(Math.round(deg)===90?'forza massima':'');
+    }
+    cur.addEventListener('input',function(){dis(+cur.value);});
+    bottone(bG,function(fine){cur.disabled=true;corri(6000,function(t){var d=180*t/6000;cur.value=d;dis(d);},function(){cur.disabled=false;fine();});},
+      function(){cur.value=60;dis(60);});
+    dis(60);
+  }
+
+  /* --- figura 2: carica positiva e negativa --- */
+  var S=document.getElementById('anim-segno'), bS=document.getElementById('btn-segno');
+  if(S&&bS){
+    var g=S.querySelector('.pann'), frecce=[], scritte=[];
+    function el(t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
+    [[120,165,1,'fb4b','fv4b','ff4b'],[400,165,-1,'fb4b','fv4b','ff4b']].forEach(function(d){
+      var O=[d[0],d[1]], sg=d[2], L=100;
+      el('polygon',{points:pts([P(O,-50,-70,0),P(O,140,-70,0),P(O,140,140,0),P(O,-50,140,0)]),fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1,'stroke-opacity':.35});
+      var tb=P(O,0,L,0), tv=P(O,L,0,0);
+      el('line',{x1:O[0],y1:O[1],x2:f(tb[0]),y2:f(tb[1]),stroke:'var(--blu)','stroke-width':2.4,'marker-end':'url(#fb4b)'});
+      el('text',{x:f(tb[0]+8),y:f(tb[1]-4),'font-family':'var(--sans)','font-size':13,'font-weight':700,fill:'var(--blu)'},'B');
+      el('line',{x1:O[0],y1:O[1],x2:f(tv[0]),y2:f(tv[1]),stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#fv4b)'});
+      el('text',{x:f(tv[0]-4),y:f(tv[1]+22),'font-family':'var(--sans)','font-size':13,'font-weight':700,fill:'var(--verde)'},'v');
+      var fr=el('line',{x1:O[0],y1:O[1],x2:O[0],y2:O[1],stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#ff4b)'});
+      var tF=el('text',{x:O[0]+10,y:f(O[1]-sg*96+(sg>0?6:4)),'font-family':'var(--sans)','font-size':13,'font-weight':700,fill:'var(--rosso)',opacity:0},'F');
+      frecce.push([fr,O,sg,tF]);
+      el('circle',{cx:O[0],cy:O[1],r:8,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.6});
+      el('text',{x:O[0],y:O[1]+(sg>0?4:4),'text-anchor':'middle','font-family':'var(--sans)','font-size':sg>0?12:14,fill:'var(--rosso)'},sg>0?'+':'−');
+      scritte.push(el('text',{x:O[0]+45,y:290,'text-anchor':'middle','font-family':'var(--sans)','font-size':13,fill:'var(--grigio)',opacity:0},sg>0?'mano destra':'mano sinistra'));
+    });
+    function dis(t){
+      var u=cl(t/900), e=1-Math.pow(1-u,3);
+      frecce.forEach(function(a){set(a[0],{y2:f(a[1][1]-a[2]*90*e),opacity:u>0.02?1:0});a[3].setAttribute('opacity',cl((t-700)/300));});
+      scritte.forEach(function(s){s.setAttribute('opacity',cl((t-1000)/500));});
+    }
+    bottone(bS,function(fine){corri(1600,dis,fine);},function(){dis(0);});
+    dis(0);
+  }
+})();
+</script>
 </body>
 </html>
