@@ -7,6 +7,8 @@
 - Animazione: la prima figura (magnetite e ferro) è animata; con il pulsante play i pezzi di ferro si muovono accelerando fino ad attaccarsi alla magnetite.
 - Animazione: la seconda figura mostra l'ago strofinato sulla magnetite che si magnetizza; poi la limatura di ferro si raccoglie ai due estremi (poli) e quasi non si muove al centro.
 - Animazione: la terza figura mostra, vista dall'alto, l'ago su un galleggiante in una bacinella che oscilla e si ferma lungo nord–sud; poi compaiono polo nord e polo sud. Ricominciando, l'ago parte ogni volta da una posizione diversa.
+- Animazione: la quarta figura mostra un magnete che si avvicina a un altro: con poli uguali affacciati viene respinto, con poli opposti viene attirato fino al contatto.
+- Animazione: la quinta figura mostra il magnete tagliato due volte (1 → 2 → 4 pezzi); a ogni taglio compaiono i nuovi poli e ogni pezzo resta un magnete completo.
 - Aggiunta: nessuna. Nessuna formula presente nella traccia, quindi nessuna verifica SymPy necessaria.
 
 ## Unità 02 — Il campo magnetico e le linee di campo
