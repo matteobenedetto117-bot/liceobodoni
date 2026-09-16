@@ -139,3 +139,8 @@ questo sul sito pubblico.
   traccia segna con due cerchiature in rosso e un "NO" i due casi non divisibili senza
   dire che cosa vada guardato, ed è la distinzione su cui si sbaglia. Nessun esempio,
   nessuna dimostrazione, nessuna tabella di sintesi aggiunti.
+
+## Unità 17 — MCD e mcm fra monomi
+- Parole: 619 su 3 pagine di traccia (40–42), pari a 206 parole per pagina
+- Rettifica: nessuna. I due calcoli della traccia (MCD = 2ab², mcm = 12a³b⁴c²) sono stati verificati con SymPy e sono corretti.
+- Aggiunta: nessuna. Lo schema per colonne della traccia è stato ridisegnato in SVG e riprodotto due volte, una per il MCD e una per il mcm, perché nella traccia il secondo schema è ricopiato per esteso. La verifica delle tre divisioni per il MCD (3a²bc², 2ab²c, 6) è un controllo sui dati già presenti, non un esempio nuovo.
