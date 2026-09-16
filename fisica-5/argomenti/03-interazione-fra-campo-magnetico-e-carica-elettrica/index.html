@@ -5,14 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interazione fra campo magnetico e carica elettrica — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.sommario{font-size:1.1rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
 </style>
 </head>
 <body>
@@ -22,51 +56,31 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 03</p>
   <h1>Interazione fra campo magnetico e carica elettrica</h1>
-  <p class="sommario">Una carica risente del campo magnetico solo se si muove, e solo per la parte
-  della sua velocità che è perpendicolare al campo: da qui nasce il modo di misurare $B$.</p>
 </header>
-
-<h2>Carica ferma, carica in moto</h2>
 
 <p>Poniamo una particella di carica $q$ in una regione dove è presente un campo magnetico uniforme
 $\vec B$, diretto verso l'alto, e osserviamo in quali condizioni la particella risente di una
 forza.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fb1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="fv1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="70" y1="190" x2="70" y2="40" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb1)"/>
-<line x1="115" y1="190" x2="115" y2="40" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb1)"/>
-<line x1="160" y1="190" x2="160" y2="40" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb1)"/>
-<text x="115" y="30" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-<circle cx="115" cy="120" r="9" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="115" y="125" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">+</text>
-<line x1="115" y1="120" x2="115" y2="80" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv1)"/>
-<text x="132" y="90" font-family="var(--sans)" font-size="13" fill="var(--verde)">v</text>
-<text x="115" y="215" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">v parallela a B: nessuna interazione</text>
-<line x1="330" y1="190" x2="330" y2="40" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb1)"/>
-<line x1="375" y1="190" x2="375" y2="40" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb1)"/>
-<line x1="420" y1="190" x2="420" y2="40" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb1)"/>
-<text x="375" y="30" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-<circle cx="375" cy="130" r="9" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="375" y="135" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">+</text>
-<line x1="375" y1="130" x2="435" y2="130" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv1)"/>
-<text x="440" y="126" font-family="var(--sans)" font-size="13" fill="var(--verde)">v</text>
-<circle cx="375" cy="95" r="7" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<circle cx="375" cy="95" r="2" fill="var(--rosso)"/>
-<text x="392" y="99" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F</text>
-<text x="375" y="215" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">v perpendicolare a B: forza perpendicolare a v e a B</text>
+<svg id="anim-casi" viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="fb1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker><marker id="fv1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker></defs>
+<g><line x1="40" y1="200" x2="40" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><line x1="95" y1="200" x2="95" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><line x1="150" y1="200" x2="150" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><text x="163" y="46" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
+<text x="95" y="228" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">carica ferma</text>
+<text class="esito" x="95" y="250" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="700" fill="var(--rosso)" opacity="0">F = 0</text></g><g><line x1="225" y1="200" x2="225" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><line x1="280" y1="200" x2="280" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><line x1="335" y1="200" x2="335" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><text x="348" y="46" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
+<text x="280" y="228" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">v parallela a B</text>
+<text class="esito" x="280" y="250" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="700" fill="var(--rosso)" opacity="0">F = 0</text></g><g><line x1="410" y1="200" x2="410" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><line x1="465" y1="200" x2="465" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><line x1="520" y1="200" x2="520" y2="40" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fb1)"/><text x="533" y="46" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
+<text x="465" y="228" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">v perpendicolare a B</text>
+<text class="esito" x="465" y="250" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="700" fill="var(--rosso)" opacity="0">F ≠ 0</text></g>
+<g class="q0" transform="translate(95,150)"><circle r="9" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/><text y="5" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">+</text></g>
+<g class="q1" transform="translate(280,170)"><line x1="0" y1="-10" x2="0" y2="-42" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv1)"/><text x="10" y="-30" font-family="var(--sans)" font-size="13" fill="var(--verde)">v</text><circle r="9" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/><text y="5" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">+</text></g>
+<g class="q2" transform="translate(395,150)"><line x1="10" y1="0" x2="44" y2="0" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv1)"/><text x="30" y="-8" font-family="var(--sans)" font-size="13" fill="var(--verde)">v</text><circle r="9" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/><text y="5" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">+</text>
+<g class="forza" opacity="0"><circle cx="0" cy="-30" r="8" fill="#fff" stroke="var(--rosso)" stroke-width="1.8"/><circle cx="0" cy="-30" r="2.4" fill="var(--rosso)"/><text x="12" y="-26" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--rosso)">F</text></g></g>
 </svg>
+<button type="button" class="btn-anim" id="btn-casi" aria-label="Avvia">&#9654;</button>
 <p class="did">Se la carica è ferma, o si muove parallelamente al campo, non risente di alcuna
-forza. Se si muove perpendicolarmente al campo, risente di una forza $F$ diretta perpendicolarmente
-sia a $\vec v$ sia a $\vec B$ (il cerchietto indica una direzione uscente dal foglio).</p>
+forza. Se si muove perpendicolarmente al campo, risente di una forza $F$ perpendicolare
+sia a $\vec v$ sia a $\vec B$ (il cerchietto con il punto indica una forza uscente dal foglio).</p>
 </div>
 
 <p>Se la particella è ferma non risente di alcuna forza: il campo magnetico non interagisce con una
@@ -75,70 +89,145 @@ di nuovo non si osserva alcuna interazione. Muovendola invece con velocità $\ve
 <strong>perpendicolare</strong> al campo, la particella risente di una forza $F$, perpendicolare
 sia al campo $\vec B$ sia alla velocità $\vec v$.</p>
 
-<h2>Da che cosa dipende la forza</h2>
-
 <p>Nel caso generale la velocità forma un angolo $\theta$ con il campo. Scomponendo $\vec v$ in una
 componente parallela $v_\parallel$ e una componente perpendicolare $v_\perp$ al campo, solo
-$v_\perp$ produce interazione: la forza è proporzionale a essa, cioè $F\propto v\sin\theta$.</p>
+$v_\perp$ produce interazione: la forza è direttamente proporzionale a $v_\perp = v\sin\theta$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fb2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="fv2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="90" y1="230" x2="90" y2="20" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb2)"/>
-<line x1="150" y1="230" x2="150" y2="20" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb2)"/>
-<line x1="230" y1="230" x2="230" y2="20" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#fb2)"/>
-<text x="230" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-<line x1="150" y1="230" x2="207" y2="138" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fv2)"/>
-<text x="218" y="138" font-family="var(--sans)" font-size="13" fill="var(--verde)">v</text>
-<line x1="150" y1="230" x2="150" y2="138" stroke="var(--verde)" stroke-width="1.6" stroke-dasharray="4,3"/>
-<text x="128" y="180" font-family="var(--sans)" font-size="12" fill="var(--verde)">v&#8741;</text>
-<line x1="150" y1="138" x2="207" y2="138" stroke="var(--rosso)" stroke-width="1.6" stroke-dasharray="4,3"/>
-<text x="172" y="130" font-family="var(--sans)" font-size="12" fill="var(--rosso)">v&perp;</text>
-<path d="M150,205 A 35 35 0 0 1 172,213" fill="none" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="163" y="200" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&theta;</text>
-<text x="190" y="245" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F &prop; v&perp; = v sin&theta;</text>
+<svg id="anim-angolo" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="fb2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker><marker id="fv2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker><marker id="fp2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker><marker id="fq2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--grigio)"/></marker></defs>
+<line x1="60" y1="260" x2="60" y2="24" stroke="var(--riga)" stroke-width="1.5"/><line x1="300" y1="260" x2="300" y2="24" stroke="var(--riga)" stroke-width="1.5"/>
+<line x1="180" y1="260" x2="180" y2="24" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fb2)"/>
+<text x="190" y="32" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
+<path class="arco" d="" fill="none" stroke="var(--grigio)" stroke-width="1.3"/>
+<text class="t-theta" x="0" y="0" font-family="var(--sans)" font-size="12" fill="var(--grigio)">θ</text>
+<line class="vpar" x1="180" y1="145" x2="180" y2="145" stroke="var(--grigio)" stroke-width="2" stroke-dasharray="5,4"/>
+<line class="vperp" x1="180" y1="145" x2="180" y2="145" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#fp2)"/>
+<line class="vvec" x1="180" y1="145" x2="180" y2="145" stroke="var(--verde)" stroke-width="2.6" marker-end="url(#fv2)"/>
+<text class="t-v" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--verde)">v</text>
+<text class="t-vperp" font-family="var(--sans)" font-size="12" fill="var(--rosso)">v⊥</text>
+<text class="t-vpar" font-family="var(--sans)" font-size="12" fill="var(--grigio)">v∥</text>
+<circle cx="180" cy="145" r="7" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
+<text x="180" y="149" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--rosso)">+</text>
+<text x="380" y="70" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">intensità della forza</text>
+<rect x="380" y="84" width="150" height="18" fill="none" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect class="barra" x="380" y="84" width="0" height="18" fill="var(--rosso)" opacity=".85"/>
+<text class="t-ang" x="380" y="140" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">θ = 60°</text>
+<text class="t-f" x="380" y="164" font-family="var(--sans)" font-size="13" fill="var(--rosso)"></text>
 </svg>
-<p class="did">Solo la componente $v_\perp$ della velocità, perpendicolare al campo, contribuisce alla
-forza: $F\propto v_\perp = v\sin\theta$.</p>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-angolo" aria-label="Avvia">&#9654;</button>
+<label for="cur-angolo">θ</label><input id="cur-angolo" type="range" min="0" max="180" step="1" value="60"></div>
+<p class="did">Solo la componente $v_\perp = v\sin\theta$ della velocità, perpendicolare al campo, contribuisce alla
+forza: con $\vec v$ parallela a $\vec B$ ($\theta = 0°$ o $180°$) la forza è nulla, con $\vec v$ perpendicolare ($\theta = 90°$) è massima.</p>
 </div>
 
-<p>Variando invece l'intensità della carica, la forza cresce proporzionalmente a essa: $F\propto
-q$. La forza di interazione fra campo magnetico e carica elettrica dipende dunque da tre fattori:
+<p>Variando invece l'intensità della carica, la forza risulta direttamente proporzionale anche a
+$q$. La forza di interazione fra campo magnetico e carica elettrica dipende dunque da tre fattori:
 l'intensità del campo, la componente della velocità perpendicolare al campo, e la carica elettrica.
-Riassumiamo queste tre proporzionalità in un'unica relazione, che allo stesso tempo definisce
+Riassumiamo queste tre dipendenze in un'unica relazione, che allo stesso tempo definisce
 l'intensità del campo magnetico $B$:</p>
 
-$$F = q\,v_\perp\,B$$
+<p class="eq">$$F = q\,v_\perp\,B$$</p>
 
 <p>Invertendo l'equazione otteniamo un modo per misurare $B$ a partire da grandezze note:</p>
 
-$$B = \frac{F}{q\,v_\perp}$$
+<p class="eq">$$B = \frac{F}{q\,v_\perp}$$</p>
 
-<h2>Un esempio numerico</h2>
+<h2>Esempio</h2>
 
 <p>Una carica $q = 7{,}2\times10^{-6}\ \text{C}$ si muove con una componente di velocità
 perpendicolare al campo $v_\perp = 100\ \text{m/s}$ e risente di una forza $F =
 3{,}8\times10^{-6}\ \text{N}$. Il campo magnetico vale allora</p>
 
-$$B = \frac{3{,}8\times10^{-6}\ \text{N}}{7{,}2\times10^{-6}\ \text{C}\cdot 100\ \text{m/s}}
-= 5{,}28\times10^{-3}\ \frac{\text{N}\cdot\text{s}}{\text{C}\cdot\text{m}}$$
+<p class="eq">$$B = \frac{3{,}8\times10^{-6}\ \text{N}}{7{,}2\times10^{-6}\ \text{C}\cdot 100\ \text{m/s}}
+= 5{,}28\times10^{-3}\ \frac{\text{N}\cdot\text{s}}{\text{C}\cdot\text{m}}$$</p>
 
 <p>Verifichiamo l'unità di misura ottenuta: poiché $\text{N} = \text{kg}\cdot\text{m/s}^2$, si ha
 $\dfrac{\text{N}\cdot\text{s}}{\text{C}\cdot\text{m}} = \dfrac{\text{kg}}{\text{C}\cdot\text{s}}$,
 che è per definizione il <strong>tesla</strong> (T), l'unità di misura del campo magnetico. Quindi
 $B = 5{,}28\times10^{-3}\ \text{T}$.</p>
 
-
 <nav class="nav-unita"><a class="precedente" href="../02-il-campo-magnetico-e-le-linee-di-campo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il campo magnetico</span></a><a class="successiva" href="../04-la-forza-di-lorentz/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La forza di Lorentz</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 03</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  function cl(u){return Math.max(0,Math.min(1,u));}
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* --- tre casi --- */
+  var A=document.getElementById('anim-casi'), bA=document.getElementById('btn-casi');
+  if(A&&bA){
+    var q1=A.querySelector('.q1'), q2=A.querySelector('.q2'), fz=A.querySelector('.forza'), es=[].slice.call(A.querySelectorAll('.esito'));
+    var D=3000, raf=null, stato='fermo';
+    function dis(t){
+      var u=cl(t/2600);
+      q1.setAttribute('transform','translate(280,'+(170-100*u).toFixed(1)+')');
+      q2.setAttribute('transform','translate('+(395+80*u).toFixed(1)+',150)');
+      fz.setAttribute('opacity',cl((t-300)/300));
+      es.forEach(function(e){e.setAttribute('opacity',cl((t-600)/400));});
+    }
+    bA.addEventListener('click',function(){
+      if(stato==='fine'){cancelAnimationFrame(raf);dis(0);stato='fermo';bA.innerHTML='&#9654;';bA.setAttribute('aria-label','Avvia');return;}
+      if(stato!=='fermo')return;
+      stato='corsa';bA.disabled=true;var t0=null;
+      (function passo(t){if(t0===null)t0=t;var dt=ridotto?D:t-t0;dis(Math.min(dt,D));
+        if(dt>=D){stato='fine';bA.disabled=false;bA.innerHTML='&#8634;';bA.setAttribute('aria-label','Ricomincia');}
+        else raf=requestAnimationFrame(passo);})(performance.now());
+    });
+    dis(0);
+  }
+  /* --- angolo fra v e B --- */
+  var G=document.getElementById('anim-angolo'), bG=document.getElementById('btn-angolo'), cur=document.getElementById('cur-angolo');
+  if(G&&bG&&cur){
+    var O={x:180,y:145}, V=100, q=function(c){return G.querySelector('.'+c);};
+    function set(e,a){for(var k in a)e.setAttribute(k,a[k]);}
+    function dis(deg){
+      var th=deg*Math.PI/180, s=Math.sin(th), c=Math.cos(th);
+      var vx=O.x+V*s, vy=O.y-V*c, px=O.x+V*s, py=O.y-V*c;
+      set(q('vvec'),{x2:vx.toFixed(1),y2:vy.toFixed(1)});
+      set(q('vpar'),{x2:O.x,y2:(O.y-V*c).toFixed(1)});
+      set(q('vperp'),{x1:O.x,y1:(O.y-V*c).toFixed(1),x2:px.toFixed(1),y2:py.toFixed(1),opacity:s>0.03?1:0});
+      set(q('t-v'),{x:(vx+8).toFixed(1),y:(vy-4).toFixed(1)});
+      set(q('t-vperp'),{x:(O.x+V*s/2-8).toFixed(1),y:(O.y-V*c+(c>=0?-8:18)).toFixed(1),opacity:s>0.15?1:0});
+      set(q('t-vpar'),{x:(O.x-26).toFixed(1),y:(O.y-V*c/2+4).toFixed(1),opacity:Math.abs(c)>0.15?1:0});
+      var r=34, ax=O.x+r*s, ay=O.y-r*c;
+      set(q('arco'),{d:'M'+O.x+','+(O.y-r)+' A'+r+' '+r+' 0 0 1 '+ax.toFixed(1)+','+ay.toFixed(1)});
+      var h=th/2; set(q('t-theta'),{x:(O.x+(r+10)*Math.sin(h)-3).toFixed(1),y:(O.y-(r+10)*Math.cos(h)+4).toFixed(1),opacity:deg>8?1:0});
+      set(q('barra'),{width:(150*s).toFixed(1)});
+      q('t-ang').textContent='θ = '+Math.round(deg)+'°';
+      q('t-f').textContent= s<0.005?'forza nulla':(Math.round(deg)===90?'forza massima':'');
+    }
+    cur.addEventListener('input',function(){dis(+cur.value);});
+    var raf=null, stato='fermo';
+    bG.addEventListener('click',function(){
+      if(stato==='fine'){cur.value=60;dis(60);stato='fermo';bG.innerHTML='&#9654;';bG.setAttribute('aria-label','Avvia');return;}
+      if(stato!=='fermo')return;
+      stato='corsa';bG.disabled=true;cur.disabled=true;var t0=null,D=6000;
+      (function passo(t){if(t0===null)t0=t;var u=ridotto?1:cl((t-t0)/D);var d=180*u;cur.value=d;dis(d);
+        if(u>=1){stato='fine';bG.disabled=false;cur.disabled=false;bG.innerHTML='&#8634;';bG.setAttribute('aria-label','Ricomincia');}
+        else raf=requestAnimationFrame(passo);})(performance.now());
+    });
+    dis(60);
+  }
+})();
+</script>
 </body>
 </html>

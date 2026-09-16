@@ -21,6 +21,7 @@
 - Parole: 473 su 2,3 pagine di traccia (pagine 5–6 intere, più l'esempio numerico in cima a pagina 7, prima dell'inizio della sezione "Forza di Lorentz" che appartiene all'unità 04)
 - Rettifica: nessuna. Il calcolo numerico di B = F/(q·v⊥) e la verifica dimensionale che porta al tesla sono stati controllati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna.
+- Revisione: tolti sottotitolo e titoletti (resta «Esempio»); tolti i simboli di proporzionalità, sostituiti da «direttamente proporzionale»; impaginazione a quaderno come le unità 01–02. Figura dei tre casi animata (carica ferma, v parallela, v perpendicolare con comparsa di F uscente); figura dell'angolo resa interattiva con cursore e animazione su θ da 0° a 180°, con componenti di v e barra dell'intensità della forza.
 
 ## Unità 04 — La forza di Lorentz
 - Parole: 357 su 1,7 pagine di traccia (seconda metà di pagina 7, dalla sezione "Forza di Lorentz" in poi, più pagina 8 intera)
