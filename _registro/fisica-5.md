@@ -3,7 +3,7 @@
 ## Unità 01 — Magneti, poli e assenza di monopoli
 - Parole: 436 su 3 pagine di traccia
 - Rettifica (revisione concettuale): l'ago libero si allinea solo approssimativamente lungo nord–sud geografico; specificato che il polo nord è l'estremità rivolta al Nord geografico; aggiunto nel testo che vicino al Polo Nord geografico c'è un polo sud magnetico; i monopoli "non sono mai stati osservati" e la fisica classica ne assume l'assenza (prima: "non esistono"); la magnetizzazione avviene per contatto o strofinio.
-- Grafica: testo della pagina ingrandito per la lettura alla lavagna (scritte dei disegni alla dimensione originale); resi visibili i nomi dei poli nella figura "poli uguali / poli opposti" e frecce orizzontali.
+- Grafica: testo della pagina ingrandito per la lettura alla lavagna e allineato alle righe di sfondo come su un quaderno (scritte dei disegni alla dimensione originale); resi visibili i nomi dei poli nella figura "poli uguali / poli opposti" e frecce orizzontali.
 - Aggiunta: nessuna. Nessuna formula presente nella traccia, quindi nessuna verifica SymPy necessaria.
 
 ## Unità 02 — Il campo magnetico e le linee di campo
