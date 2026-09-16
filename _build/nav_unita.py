@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Inserisce, in fondo a ogni unità pubblicata di una classe, i due bottoni
-di navigazione: unità precedente e unità successiva (quest'ultima sostituita
-dal link all'indice della classe, per l'ultima unità)."""
+di navigazione: unità precedente e unità successiva. Sulla prima unità il
+bottone precedente diventa un link all'indice della classe; sull'ultima
+diventa il bottone successiva."""
 import json, os, re, sys
 
 RAD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +40,9 @@ def inserisci(percorso):
             cart_prec = cartelle[i - 1]
             bottoni.append(bottone('precedente', '&larr; Precedente', titoli.get(n - 1, ''),
                                     '../%s/index.html' % cart_prec))
+        else:
+            bottoni.append(bottone('precedente', '&larr; Indice', dati['classe'],
+                                    '../../index.html'))
         if i + 1 < len(cartelle):
             cart_succ = cartelle[i + 1]
             bottoni.append(bottone('successiva', 'Successiva &rarr;', titoli.get(n + 1, ''),
