@@ -127,3 +127,15 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 9/3 = 3, quindi $3xy^2$ e $\frac93xy^2$ hanno
   davvero lo stesso coefficiente e sono monomi uguali, come nella traccia.
 - Aggiunta: nessuna.
+
+## Unità 16 — Operazioni con i monomi
+- Parole: 472 su 3 pagine di traccia (pagg. 37–39 di matematica-1.pdf; pag. 40 apre
+  già l'unità 17, "MCD e mcm").
+- Rettifica: nessuna. Verificati con SymPy tutti i conti della traccia: il prodotto
+  $\frac45a^2b\cdot(-\frac18bc^2)\cdot(-10a)=a^3b^2c^2$ (i coefficienti danno 40/40 = 1),
+  le sei divisioni della pagina 38, le due non eseguibili comprese, e le quattro potenze
+  di pagina 39, incluso $(-2x^4y^2)^3=-8x^{12}y^6$.
+- Aggiunta: un solo riquadro "Errore da evitare" sulla condizione di divisibilità — la
+  traccia segna con due cerchiature in rosso e un "NO" i due casi non divisibili senza
+  dire che cosa vada guardato, ed è la distinzione su cui si sbaglia. Nessun esempio,
+  nessuna dimostrazione, nessuna tabella di sintesi aggiunti.
