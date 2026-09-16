@@ -15,6 +15,7 @@
 - Parole: 172 su 1 pagina di traccia
 - Rettifica: a pagina 4 la traccia afferma che l'intensità del campo "diminuisce linearmente con la distanza dal magnete". Non è corretto (il campo di un dipolo decresce con una potenza della distanza, non linearmente): nella pagina ho tolto "linearmente", lasciando solo che il campo diminuisce allontanandosi dal magnete.
 - Aggiunta: nessuna. Nessuna formula quantitativa presente, quindi nessuna verifica SymPy necessaria.
+- Revisione: testo impaginato come un quaderno (righe) e ingrandito per la lavagna. Figura del campo rifatta con linee calcolate numericamente per un magnete a barra (modello a cariche magnetiche sulle facce): linee chiuse, uscenti da N ed entranti in S all'esterno, da S a N all'interno, più fitte vicino ai poli. Nell'elenco precisato «all'esterno del magnete».
 
 ## Unità 03 — Interazione fra campo magnetico e carica elettrica
 - Parole: 473 su 2,3 pagine di traccia (pagine 5–6 intere, più l'esempio numerico in cima a pagina 7, prima dell'inizio della sezione "Forza di Lorentz" che appartiene all'unità 04)
