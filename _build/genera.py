@@ -11,7 +11,8 @@ def slug(t):
     return re.sub(r'-+', '-', t)[:60]
 
 def cartella_unita(u):
-    return "%02d-%s" % (u['n'], slug(u['titolo']))
+    # "cartella" permette di cambiare il titolo senza cambiare l'indirizzo della pagina
+    return u.get('cartella') or "%02d-%s" % (u['n'], slug(u['titolo']))
 
 def esiste(u, percorso):
     return os.path.isfile(os.path.join(RAD, percorso, 'argomenti', cartella_unita(u), 'index.html'))
