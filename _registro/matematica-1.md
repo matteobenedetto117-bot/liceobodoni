@@ -453,3 +453,8 @@ questo sul sito pubblico.
 - Parole: 405 su 2 pagine di traccia
 - Rettifica: a pagina 89 la traccia scrive che per determinare le condizioni di esistenza «troviamo i valori che annullano la frazione e li scartiamo»; i valori da scartare sono quelli che annullano il *denominatore*. Corretto nella pagina senza segnalarlo al lettore (la formulazione giusta compare del resto già nella riga precedente della traccia stessa).
 - Aggiunta: nessuna. Enunciati, esempi e riquadro d'avvertenza corrispondono al contenuto della traccia; il riquadro «Attenzione» esplicita in parole la cancellatura in rosso con cui la traccia scarta x=3 dagli zeri.
+
+## Unità 39 — Semplificazione di frazioni algebriche
+- Parole: 247 su 1 pagina di traccia (p. 91)
+- Rettifica: nessun errore di contenuto. Il file di classe assegna a questa unità le pagine 91–93, ma il quaderno dedica alla semplificazione la sola p. 91: p. 92 apre già "Riduzione allo stesso denominatore", che è l'unità 40. Ho lavorato sulla sola p. 91 e tarato la lunghezza su una pagina di traccia. Verificati con SymPy entrambi gli esempi: $1-4a^2=(1-2a)(1+2a)$, $a-2a^2+a^3-2a^4=a(1-2a)(a^2+1)$ con C.E. $a\neq0\wedge a\neq 1/2$ e risultato $(1+2a)/(a(a^2+1))$; $(x^2-6x+9)/(x^2-9)=(x-3)/(x+3)$.
+- Aggiunta: il solo risultato finale dell'esempio 2, che nella traccia si interrompe dopo la scomposizione perché finisce la pagina. Nessun esempio nuovo, nessuna dimostrazione, nessuna tabella. Un solo riquadro di avvertenza, sulla differenza fra cancellare un fattore e cancellare un addendo: è l'errore tipico del capitolo.
