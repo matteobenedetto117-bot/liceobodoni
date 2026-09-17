@@ -195,3 +195,15 @@ questo sul sito pubblico.
   dimostrazione in più, nessuna tabella di sintesi. Conservate entrambe le derivazioni per
   moltiplicazione diretta che la traccia svolge.
 - Nota: aggiornato il link "successiva" dell'unità 20, che puntava all'indice.
+
+## Unità 22 — Insiemi: definizione e rappresentazioni
+- Parole: 476 su 2 pagine di traccia (pp. 52–53), circa 238 parole per pagina.
+- Rettifica: nessuna. Il contenuto della traccia è corretto così com'è; nessun calcolo da
+  verificare in questa unità.
+- Aggiunta: un solo riquadro "Da tenere presente" che distingue fra criterio difficile da
+  verificare e criterio non oggettivo, perché la traccia presenta il controesempio dei
+  cinque film senza chiarire dove stia esattamente il difetto. Ridisegnato in SVG il
+  diagramma di Eulero-Venn delle vocali che la traccia disegna a mano. Nessun esempio
+  nuovo: restano quelli della traccia (naturali fra 2 e 7, lettere dell'alfabeto, i cinque
+  film, $-15 \in \mathbb{Z}$, $\sqrt{3} \notin \mathbb{Q}$, le vocali, i naturali maggiori
+  di 3). Nessuna tabella di sintesi, nessuna proprietà anticipata.
