@@ -158,3 +158,19 @@ questo sul sito pubblico.
   nella traccia. Nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi.
   I due schemi della traccia (il monomio più il monomio nullo, e le graffe sui gradi dei
   tre termini) sono stati ridisegnati in SVG.
+
+## Unità 19 — Operazioni con i polinomi
+- Parole: 257 su 2 pagine di traccia (47 e prima metà di 48), pari a circa 170 parole per
+  pagina effettiva. Il JSON assegna all'unità le pagine 45–46, ma quelle pagine chiudono la
+  trattazione del grado (unità 18): le operazioni cominciano a pagina 47 e si fermano dove
+  a pagina 48 si apre il titolo «Prodotti notevoli», che è l'unità 20. La pagina è stata
+  costruita su quell'intervallo. La traccia è quasi tutta formule, quindi il conteggio è
+  basso in valore assoluto ma il rapporto è in linea con le unità vicine.
+- Rettifica: nessuna. Verificati con SymPy i tre esempi della traccia:
+  $(\tfrac12 y+x^2)+(-x^2+1+y)=\tfrac32 y+1$;
+  $(a^4-3a^2)-(2a-a^2+\tfrac34 a^4)=\tfrac14 a^4-2a^2-2a$;
+  $(-8ax)(9a-\tfrac34 x^3)=-72a^2x+6ax^4$; $(3x+y)(x-2y)=3x^2-5xy-2y^2$.
+- Aggiunta: un solo riquadro "Errore da evitare" sul segno meno davanti a una parentesi,
+  costruito sul secondo esempio della traccia, e lo schema SVG dei quattro prodotti
+  $ac,ad,bc,bd$, che rende visibile la regola già scritta nella traccia. Nessun esempio
+  nuovo, nessuna dimostrazione, nessuna tabella di sintesi.
