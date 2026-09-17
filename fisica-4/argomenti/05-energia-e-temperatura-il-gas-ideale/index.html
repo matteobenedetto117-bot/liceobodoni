@@ -3,14 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Energia e temperatura: il gas ideale — Fisica quarta</title>
+<title>Relazione tra energia e temperatura di un gas ideale — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -18,71 +52,71 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 05</p>
-  <h1>Energia e temperatura: il gas ideale</h1>
-  <p class="sommario">Conosciamo gi&agrave; l'equazione di stato del gas ideale; ora vogliamo capire
-  che cosa succede a livello microscopico, cio&egrave; come si lega l'energia delle particelle di un
-  gas alla sua temperatura.</p>
+  <p class="occhiello">Termodinamica &middot; Unità 05</p>
+  <h1>Relazione tra energia e temperatura di un gas ideale</h1>
 </header>
 
 <h2>Il gas ideale</h2>
 
 <p>Per un gas ideale vale l'equazione di stato</p>
 
-<div class="formula-box">
-$$PV = nRT$$
-</div>
+<p class="eq">$$PV = nRT$$</p>
 
-<p>gi&agrave; incontrata nelle trasformazioni precedenti. Un gas si dice <strong>ideale</strong>
-quando l'interazione fra le sue molecole &egrave; trascurabile: gli urti fra le particelle
-restano elastici, ma le forze gravitazionali ed elettriche fra di esse si trascurano.</p>
+<p>già incontrata nelle unità precedenti. Un gas si dice <strong>ideale</strong> (o perfetto) quando
+le sue particelle hanno dimensioni trascurabili e non interagiscono fra loro, se non negli urti:
+gli urti fra le particelle sono elastici, mentre le forze elettriche e gravitazionali fra di esse si
+trascurano.</p>
 
 <h2>Energia cinetica totale</h2>
 
-<p>Vogliamo capire quanto vale l'energia totale di una certa quantit&agrave; di particelle.
-Poich&eacute; non c'&egrave; interazione fra le molecole, non c'&egrave; energia potenziale:
-l'unica energia in gioco &egrave; quella cinetica. L'energia totale del sistema &egrave;
-quindi</p>
+<p>Vogliamo capire quanto vale l'energia totale di una certa quantità di particelle. Poiché le
+molecole non interagiscono fra loro, non c'è energia potenziale di interazione: l'unica energia in
+gioco è quella cinetica. L'energia totale del sistema è quindi</p>
 
-<div class="formula-box">
-$$E_k = N\langle E_k\rangle$$
-</div>
+<p class="eq">$$E_{\text{tot}} = N\,\langle E_k\rangle$$</p>
 
-<p>dove $N$ &egrave; il numero di particelle ed $\langle E_k\rangle$ &egrave; l'energia
-cinetica media di una singola particella.</p>
+<p>dove $N$ è il numero di particelle e $\langle E_k\rangle$ è l'energia cinetica media di una
+singola particella.</p>
 
 <h2>Energia e temperatura</h2>
 
-<p>L'energia cinetica media di una particella &egrave; legata alla temperatura assoluta del gas
-dalla relazione</p>
+<p>L'energia cinetica media di una particella è legata alla temperatura assoluta del gas dalla
+relazione</p>
 
-<div class="formula-box">
-$$\langle E_k\rangle = \frac{l}{2}kT$$
-</div>
+<p class="eq">$$\langle E_k\rangle = \frac{l}{2}\,kT$$</p>
 
-<p>dove $T$ &egrave; la temperatura misurata in kelvin, $k$ &egrave; la <strong>costante di
-Boltzmann</strong>,</p>
+<p>dove $T$ è la temperatura misurata in kelvin, $k$ è la <strong>costante di Boltzmann</strong>,</p>
 
-<div class="formula-box">
-$$k = 1{,}38\times10^{-23}\ \text{J/K}$$
-</div>
+<p class="eq">$$k \approx 1{,}38\times10^{-23}\ \text{J/K}$$</p>
 
-<p>ed $l$ &egrave; il numero di <strong>gradi di libert&agrave;</strong> della particella,
-cio&egrave; in quanti modi indipendenti essa pu&ograve; muoversi cambiando la propria
-configurazione: il suo valore dipende dal tipo di molecola, e lo vedremo caso per caso nella
-prossima unit&agrave;.</p>
+<p>ed $l$ è il numero di <strong>gradi di libertà</strong> della particella, cioè il numero di modi
+indipendenti in cui essa può muoversi (spostarsi nelle tre direzioni dello spazio, ruotare). Ogni
+grado di libertà contribuisce all'energia cinetica media con $\tfrac{1}{2}kT$. Il valore di $l$
+dipende dal tipo di molecola e lo vedremo caso per caso nell'unità successiva.</p>
 
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Il numero di gradi di libert&agrave; per un gas mono-, bi- e poliatomico, e le formule
-dell'energia interna, nell'unit&agrave; 06.</li>
-</ul>
-</div>
+<p>La relazione dice che l'energia cinetica media delle particelle è direttamente proporzionale alla
+temperatura assoluta: più il gas è caldo, più velocemente si muovono le sue particelle.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../04-le-leggi-di-gay-lussac-isobara-e-isocora/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Le leggi di Gay-Lussac</span></a><a class="successiva" href="../06-energia-interna-di-un-gas-mono-bi-e-poliatomico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia interna di un gas: mono-, bi- e poliatomico</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 05</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 05</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
