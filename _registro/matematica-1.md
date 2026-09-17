@@ -463,3 +463,8 @@ questo sul sito pubblico.
 - Parole: 582 su 5 pagine di traccia (pp. 92–96, fino all'inizio della moltiplicazione)
 - Rettifica: il file di classe assegna a questa unità le pp. 94–96, ma la trattazione comincia a p. 92 con «Riduzione allo stesso denominatore» e l'esempio di p. 93; l'unità 39, come già annotato, copre la sola p. 91. Ho quindi lavorato su pp. 92–96 e tarato la lunghezza su cinque pagine. A p. 96 la traccia si interrompe all'inizio della moltiplicazione, che resta all'unità 41. Verificati con SymPy tutti e sette gli esempi. Nell'esempio con 3/(x²−9) − 1/(2x−6) la traccia si ferma a (6−x−3)/(2(x+3)(x−3)) senza raccogliere: nella pagina il passaggio è portato a termine fino a −1/(2(x+3)), usando la semplificazione dell'unità 39.
 - Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella riassuntiva. Un solo riquadro di avvertenza, sul segno meno che va distribuito su tutto il numeratore della frazione sottratta: è l'errore che la traccia stessa evidenzia in rosso a p. 94.
+
+## Unità 41 — Moltiplicazione, divisione e potenza
+- Parole: 499 su 3,5 pagine di traccia (pp. 96 in fondo – 99)
+- Rettifica: nessuna. Tutti e tre gli esempi verificati con SymPy: 5y/(y⁴−y³)·(y²−1)/(10y+10)=1/(2y²); il prodotto triplo di p. 97 dà −3x/((3x−1)(x+2)); (x−2)/(x²+x):(x²−4)/(x+1)=1/(x(x+2)). Confermata anche la scomposizione 8−12x+6x²−x³=(2−x)³.
+- Aggiunta: nessun esempio e nessuna dimostrazione aggiunti. L'unico riquadro di commento è quello sugli opposti (2−x) e (x−2), che nella traccia compare come annotazione a margine in fondo a p. 97 ed è stato reso esplicito perché è l'errore tipico del passaggio.
