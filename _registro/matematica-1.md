@@ -395,3 +395,8 @@ questo sul sito pubblico.
   rettifica: spiega perché lo schema restituisce 5/9 e perché va rimoltiplicato per 3.
   Una riga sul coefficiente 0 da scrivere al posto del termine mancante, che nella traccia
   compare nello schema ma non è commentata.
+
+## Unità 33 — Teorema del resto e teorema di Ruffini
+- Parole: 399 su 2 pagine di traccia (77–78)
+- Rettifica: nessuna. Entrambi gli esempi verificati con SymPy: (3x²−7x−10):(x−2) dà quoziente 3x−1 e resto −12, e P(2)=−12; (x⁴−2x³):(x−2) dà resto 0 con P(2)=0.
+- Aggiunta: nulla di contenuto. Un solo riquadro di attenzione sul segno di a (x+3 significa a=−3), che è l'errore tipico su questo passaggio. La traccia enuncia entrambi i teoremi senza dimostrazione e la pagina li lascia così.
