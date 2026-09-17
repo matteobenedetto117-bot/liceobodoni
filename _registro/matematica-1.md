@@ -448,3 +448,8 @@ questo sul sito pubblico.
 - Parole: 363 su 2 pagine di traccia (87–88; la sezione comincia a metà della 87)
 - Rettifica: nessuna. Tutti i passaggi della traccia verificati con SymPy: la scomposizione di $x^3-8$, le due formule generali, i quattro esempi e la riduzione finale dell'esempio 4 a $9x(x^2-x+1)$ sono corretti.
 - Aggiunta: nessuna. Nessuna dimostrazione, nessun esempio e nessuna tabella oltre a quanto presente nella traccia; l'unico riquadro di avvertenza riguarda la confusione fra $A^2-AB+B^2$ e il quadrato di binomio.
+
+## Unità 38 — Frazioni algebriche: definizione, condizioni di esistenza, zeri
+- Parole: 405 su 2 pagine di traccia
+- Rettifica: a pagina 89 la traccia scrive che per determinare le condizioni di esistenza «troviamo i valori che annullano la frazione e li scartiamo»; i valori da scartare sono quelli che annullano il *denominatore*. Corretto nella pagina senza segnalarlo al lettore (la formulazione giusta compare del resto già nella riga precedente della traccia stessa).
+- Aggiunta: nessuna. Enunciati, esempi e riquadro d'avvertenza corrispondono al contenuto della traccia; il riquadro «Attenzione» esplicita in parole la cancellatura in rosso con cui la traccia scarta x=3 dagli zeri.
