@@ -400,3 +400,21 @@ questo sul sito pubblico.
 - Parole: 399 su 2 pagine di traccia (77–78)
 - Rettifica: nessuna. Entrambi gli esempi verificati con SymPy: (3x²−7x−10):(x−2) dà quoziente 3x−1 e resto −12, e P(2)=−12; (x⁴−2x³):(x−2) dà resto 0 con P(2)=0.
 - Aggiunta: nulla di contenuto. Un solo riquadro di attenzione sul segno di a (x+3 significa a=−3), che è l'errore tipico su questo passaggio. La traccia enuncia entrambi i teoremi senza dimostrazione e la pagina li lascia così.
+
+## Unità 34 — Raccoglimento totale e parziale
+- Parole: 656 su 3 pagine di traccia dichiarate (79–81 di _fonti/matematica-1.pdf), 219 per pagina.
+  In pratica le pagine coperte sono 79 e 80: pagina 81 apre il trinomio speciale, che
+  prosegue a pagina 82 e che il file di classe assegna anche all'unità 35 (81–84). Per non
+  spezzarlo a metà l'ho lasciato per intero all'unità 35, lasciandone qui solo un rimando.
+- Contenuto della traccia riportato per intero e nel suo ordine: la scomposizione in fattori
+  con l'esempio x³−7x+6, riducibile e irriducibile con l'esempio y³+2y²−9y−18 e il fattore
+  y²−9 da scomporre ancora; il raccoglimento totale con tutti e cinque gli esempi, compreso
+  quello a coefficienti frazionari; il raccoglimento parziale con i tre esempi, nei due
+  raggruppamenti alternativi dello stesso polinomio 3ax+3bx+ay+by.
+- Rettifica: nessuna. Tutte e nove le identità della traccia verificate con SymPy.
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi, nessuno
+  strumento interattivo, nessun disegno (la traccia non ne contiene). Un solo riquadro di
+  attenzione, sull'1 che resta in parentesi quando si raccoglie un termine per intero, che è
+  l'errore tipico del raccoglimento totale. Poche righe di commento dove la traccia scrive
+  solo il risultato: come si sceglie il fattore da raccogliere (MCD, minimo esponente) e
+  perché nell'ultimo esempio va raccolto −3x e non 3x.
