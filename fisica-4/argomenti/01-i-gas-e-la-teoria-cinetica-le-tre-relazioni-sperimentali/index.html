@@ -78,7 +78,8 @@ diminuisce insieme alla temperatura.</p>
 <text class="lett" x="120" y="270" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">t = 200 °C</text>
 <g class="graf"></g>
 </svg>
-<button type="button" class="btn-anim" id="btn-vt" aria-label="Avvia">&#9654;</button>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-vt" aria-label="Avvia">&#9654;</button>
+<label for="cur-vt">t</label><input id="cur-vt" type="range" min="0" max="200" step="1" value="200"></div>
 <div class="did-parti" style="--n:2">
 <p class="did">Il pistone scorre libero, quindi la pressione resta costante: raffreddando il gas da
 200&nbsp;°C a 0&nbsp;°C il volume diminuisce e le particelle si muovono più lentamente.</p>
@@ -119,7 +120,8 @@ manometro segna pressioni via via minori.</p>
 <text class="lett" x="120" y="270" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">t = 200 °C</text>
 <g class="graf"></g>
 </svg>
-<button type="button" class="btn-anim" id="btn-pt" aria-label="Avvia">&#9654;</button>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-pt" aria-label="Avvia">&#9654;</button>
+<label for="cur-pt">t</label><input id="cur-pt" type="range" min="0" max="200" step="1" value="200"></div>
 <div class="did-parti" style="--n:2">
 <p class="did">Contenitore rigido, volume costante: raffreddando il gas le particelle urtano le
 pareti più lentamente e il manometro indica una pressione minore.</p>
@@ -154,7 +156,8 @@ pressione è direttamente proporzionale a $N$.</p>
 <text class="fin" x="430" y="180" font-family="var(--sans)" font-size="13" fill="var(--rosso)" opacity="0">N raddoppiato:</text>
 <text class="fin" x="430" y="198" font-family="var(--sans)" font-size="13" fill="var(--rosso)" opacity="0">la pressione raddoppia</text>
 </svg>
-<button type="button" class="btn-anim" id="btn-n" aria-label="Avvia">&#9654;</button>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-n" aria-label="Avvia">&#9654;</button>
+<label for="cur-n">N</label><input id="cur-n" type="range" min="6" max="12" step="1" value="6"></div>
 <p class="did">A volume e temperatura costanti, immettendo altre particelle aumentano gli urti sulle
 pareti: con il doppio delle particelle il manometro segna il doppio della pressione.</p>
 </div>
@@ -295,13 +298,12 @@ Boltzmann</strong> e vale $k \approx 1{,}38\times10^{-23}\ \text{J/K}$.</p>
     o.zero=el(g,'circle',{cx:f(X(-TK)),cy:230,r:4,fill:'var(--rosso)',opacity:0});
     o.p=[200,100,0].map(function(t){return el(g,'circle',{cx:f(X(t)),cy:f(Y(t)),r:4,fill:'var(--verde)'});});
     o.cur=el(g,'circle',{r:5,fill:'#fff',stroke:'var(--verde)','stroke-width':2});
-    o.dis=function(ms){
-      var t=tempo2temp(ms);
-      set(o.scia,{x2:f(X(t)),y2:f(Y(t))}); set(o.cur,{cx:f(X(t)),cy:f(Y(t)),opacity:ms<3900?1:0});
-      o.p[1].setAttribute('opacity',ms>=1800?1:0); o.p[2].setAttribute('opacity',ms>=3900?1:0);
-      var te=-TK*liscio((ms-4000)/900);
-      set(o.est,{x2:f(X(te)),y2:f(Y(te)),opacity:ms>4000?1:0});
-      var a=cl((ms-4900)/500); o.zero.setAttribute('opacity',a); o.k.forEach(function(k){k.setAttribute('opacity',a);});
+    o.dis=function(t,e,a){
+      set(o.scia,{x2:f(X(t)),y2:f(Y(t))}); set(o.cur,{cx:f(X(t)),cy:f(Y(t)),opacity:t>0.5?1:0});
+      o.p[1].setAttribute('opacity',t<=100.5?1:0); o.p[2].setAttribute('opacity',t<=0.5?1:0);
+      var te=-TK*e;
+      set(o.est,{x2:f(X(te)),y2:f(Y(te)),opacity:e>0?1:0});
+      o.zero.setAttribute('opacity',a); o.k.forEach(function(k){k.setAttribute('opacity',a);});
     };
     return o;
   }
@@ -314,16 +316,21 @@ Boltzmann</strong> e vale $k \approx 1{,}38\times10^{-23}\ \text{J/K}$.</p>
     var LA=particelle(qa('part'),14,7), GA=grafico(qa('graf'),'V','ax1');
     var hA=function(t){return 176*(t+TK)/(200+TK);};
     set(qa('fantasma'),{y1:248-hA(200),y2:248-hA(200)}); set(qa('t-fant'),{y:248-hA(200)+4});
-    function disA(ms){
-      var t=tempo2temp(ms), top=248-hA(t);
+    var cA=document.getElementById('cur-vt'), fA=0;
+    function statoA(t,e,a,g){
+      var top=248-hA(t);
       set(qa('gas'),{y:f(top),height:f(hA(t))}); set(qa('pist'),{y:f(top-10)}); set(qa('asta'),{y1:f(top-10),y2:f(top-48)});
-      muovi(LA,{x:62,y:top,w:116,h:hA(t)},faseT(ms,0.0006));
+      muovi(LA,{x:62,y:top,w:116,h:hA(t)},fA);
       qa('lett').textContent='t = '+Math.round(t)+' °C';
-      var a=cl((ms-4000)/500); qa('fantasma').setAttribute('opacity',a); qa('t-fant').setAttribute('opacity',a);
-      GA.dis(ms);
+      qa('fantasma').setAttribute('opacity',g); qa('t-fant').setAttribute('opacity',g);
+      GA.dis(t,e,a);
     }
-    bottone(bA,function(fine){corri(DT,disA,fine);},function(){disA(0);});
-    disA(0);
+    function manA(){var t=+cA.value,z=t<=0?1:0;statoA(t,z,z,t<199.5?1:0);}
+    cA.addEventListener('input',manA);
+    bottone(bA,function(fine){cA.disabled=true;corri(DT,function(ms){var t=tempo2temp(ms);fA=faseT(ms,0.0006);cA.value=t;
+        statoA(t,liscio((ms-4000)/900),cl((ms-4900)/500),cl((ms-4000)/500));},function(){cA.disabled=false;fine();});},
+      function(){fA=0;cA.value=200;manA();});
+    manA();
   }
 
   /* --- figura 2: volume costante, manometro e grafico P-t --- */
@@ -331,15 +338,19 @@ Boltzmann</strong> e vale $k \approx 1{,}38\times10^{-23}\ \text{J/K}$.</p>
   if(B&&bB){
     var qb=function(c){return B.querySelector('.'+c);};
     var LB=particelle(qb('part'),14,11), GB=grafico(qb('graf'),'P','ax2'), agoB=manometro(qb('dial'),120,48,30);
-    function disB(ms){
-      var t=tempo2temp(ms);
-      muovi(LB,{x:60,y:100,w:120,h:150},faseT(ms,0.0006));
+    var cB=document.getElementById('cur-pt'), fB=0;
+    function statoB(t,e,a){
+      muovi(LB,{x:60,y:100,w:120,h:150},fB);
       agoB(0.85*(t+TK)/(200+TK));
       qb('lett').textContent='t = '+Math.round(t)+' °C';
-      GB.dis(ms);
+      GB.dis(t,e,a);
     }
-    bottone(bB,function(fine){corri(DT,disB,fine);},function(){disB(0);});
-    disB(0);
+    function manB(){var t=+cB.value,z=t<=0?1:0;statoB(t,z,z);}
+    cB.addEventListener('input',manB);
+    bottone(bB,function(fine){cB.disabled=true;corri(DT,function(ms){var t=tempo2temp(ms);fB=faseT(ms,0.0006);cB.value=t;
+        statoB(t,liscio((ms-4000)/900),cl((ms-4900)/500));},function(){cB.disabled=false;fine();});},
+      function(){fB=0;cB.value=200;manB();});
+    manB();
   }
 
   /* --- figura 3: si immettono particelle a volume costante --- */
@@ -359,7 +370,17 @@ Boltzmann</strong> e vale $k \approx 1{,}38\times10^{-23}\ \text{J/K}$.</p>
       qc('t-n').textContent='N = '+Math.round(n);
       [].forEach.call(C.querySelectorAll('.fin'),function(e){e.setAttribute('opacity',cl((ms-3200)/500));});
     }
-    bottone(bC,function(fine){corri(3900,disC,fine);},function(){disC(0);});
+    var cC=document.getElementById('cur-n');
+    function manC(){
+      var N=+cC.value;
+      LC.forEach(function(p,i){ if(p.nasce!==undefined){p.fase=W*1800;p.c.setAttribute('opacity',i<N?1:0);} });
+      muovi(LC,{x:200,y:90,w:180,h:150});
+      agoC(0.38*N/6); qc('t-n').textContent='N = '+N;
+      [].forEach.call(C.querySelectorAll('.fin'),function(e){e.setAttribute('opacity',N===12?1:0);});
+    }
+    cC.addEventListener('input',manC);
+    bottone(bC,function(fine){cC.disabled=true;corri(3900,function(ms){disC(ms);cC.value=Math.min(12,6+LC.filter(function(p){return p.nasce!==undefined&&ms>=p.nasce+150;}).length);},function(){cC.disabled=false;fine();});},
+      function(){cC.value=6;disC(0);});
     disC(0);
   }
 
