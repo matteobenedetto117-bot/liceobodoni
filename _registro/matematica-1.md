@@ -281,3 +281,25 @@ questo sul sito pubblico.
   dell'unità 27, ma completano la definizione di grado e sono stati inclusi qui. L'unità
   27 parte dal titolo "Risoluzione di equazioni numeriche intere di I grado", più sotto
   nella stessa pagina.
+
+## Unità 27 — Risoluzione di equazioni numeriche intere di primo grado
+- Parole: 312 su 2 pagine di traccia nominali (pp. 65–66), in pratica circa 1,2 pagine:
+  la parte alta di p. 65 (i tre esempi di I, II e III grado) è già stata usata
+  nell'unità 26, e la parte bassa di p. 66 apre le "Proprietà", cioè i principi di
+  equivalenza dell'unità 28. Rapporto effettivo circa 260 parole per pagina.
+- Contenuto della traccia, per intero e nel suo ordine: la frase di metodo (si svolgono i
+  calcoli da entrambi i lati dell'uguale come se fossero una coppia di espressioni);
+  l'unico esempio, 1/3x + 2x − 1 = 4x − 6x + 1/3x + 7/3x + 6, con le due righe di
+  riduzione fino a 7/3x − 1 = 2/3x + 6; la regola del trasporto con cambio di segno e il
+  disegno delle due frecce sopra e sotto l'uguale, ridisegnato in SVG; le righe
+  7/3x − 2/3x = 1 + 6 e 5/3x = 7; la frase sulla moltiplicazione per opportuni valori
+  numerici, con 3·(5/3)x = 7·3, 5x = 21 e x = 21/5.
+- Rettifica: nessuna. Verificati con SymPy: il primo membro si riduce a 7/3x − 1 e il
+  secondo a 2/3x + 6 come nella traccia; l'unica soluzione è x = 21/5, e sostituendola
+  entrambi i membri valgono 44/5.
+- Aggiunta: nessun esempio, nessuna dimostrazione, nessuna tabella di sintesi, nessuno
+  strumento interattivo. Un solo riquadro "Errore da evitare" sul fatto che il fattore
+  moltiplicativo va applicato a tutti i termini di entrambi i membri, e non al solo
+  termine da eliminare; formulato senza introdurre esempi nuovi. Aggiunta anche, in una
+  riga, la divisione finale per 5 come passaggio esplicito: nella traccia il passaggio
+  da 5x = 21 a x = 21/5 è indicato solo dalle cancellature a margine.
