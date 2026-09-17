@@ -77,8 +77,7 @@ il pistone lo comprime. Una trasformazione in cui la temperatura del gas resta c
 <text class="l-p" x="340" y="140" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">P = 83 kPa</text>
 <text x="340" y="175" font-family="var(--sans)" font-size="13" fill="var(--rosso)">P · V = 831 kPa · L</text>
 </svg>
-<div class="cursore"><button type="button" class="btn-anim" id="btn-iso" aria-label="Avvia">&#9654;</button>
-<label for="cur-iso">V</label><input id="cur-iso" type="range" min="5" max="10" step="0.1" value="10"></div>
+<div class="cursore"><label for="cur-iso">V</label><input id="cur-iso" type="range" min="5" max="10" step="0.1" value="10"></div>
 <p class="did">A temperatura costante e con lo stesso gas, dallo stato 1 allo stato 2 il pistone
 comprime il gas: il volume diminuisce, la pressione aumenta e il loro prodotto resta invariato.</p>
 </div>
@@ -108,12 +107,17 @@ punto 1, con volume maggiore e pressione minore, al punto 2, con volume minore e
 maggiore.</p>
 
 <div class="fig">
-<svg id="anim-clap" viewBox="0 0 440 270" xmlns="http://www.w3.org/2000/svg">
+<svg id="anim-clap" viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg">
 <defs><marker id="ax4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
 <g class="graf"></g>
+<rect class="gas" x="492" width="116" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<path d="M490,40 L490,250 L610,250 L610,40" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<g class="rif"></g>
+<line class="asta" x1="550" x2="550" stroke="var(--inchiostro)" stroke-width="3"/>
+<rect class="pist" x="492" width="116" height="10" fill="var(--blu)"/>
 </svg>
-<div class="cursore"><button type="button" class="btn-anim" id="btn-clap" aria-label="Avvia">&#9654;</button>
-<label for="cur-clap">V</label><input id="cur-clap" type="range" min="5" max="10" step="0.1" value="10"></div>
+<div class="cursore"><label for="cur-clap">V</label><input id="cur-clap" type="range" min="5" max="10" step="0.1" value="10"></div>
 <p class="did">Isoterma nel piano di Clapeyron: passando dal punto 1 al punto 2 il volume
 diminuisce ($V_2 &lt; V_1$) e la pressione aumenta ($P_2 &gt; P_1$), con $P_1V_1=P_2V_2$.</p>
 </div>
@@ -209,6 +213,7 @@ curva più in alto corrisponde alla temperatura più alta.</p>
   }
   function tratt(g){return el(g,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});}
   function guide(lv,lp,A,V,P){set(lv,{x1:f(A.X(V)),y1:f(A.Y(P)),x2:f(A.X(V)),y2:230});set(lp,{x1:f(A.X(V)),y1:f(A.Y(P)),x2:60,y2:f(A.Y(P))});}
+  function continuo(fn){if(ridotto)return;var t0=null;(function passo(t){if(t0===null)t0=t;fn(0.0006*(t-t0));requestAnimationFrame(passo);})(performance.now());}
   function scorri(b,cur,da,a,D,dis,reset){
     bottone(b,function(fine){cur.disabled=true;corri(D,function(ms){var v=da+(a-da)*liscio(ms/(D-300));cur.value=v;dis(v,ms);},function(){cur.disabled=false;fine();});},
       function(){cur.value=da;reset();});
@@ -216,13 +221,12 @@ curva più in alto corrisponde alla temperatura più alta.</p>
   }
 
   /* --- figura 1: compressione isoterma --- */
-  var I=document.getElementById('anim-iso'), bI=document.getElementById('btn-iso'), cI=document.getElementById('cur-iso');
-  if(I&&bI&&cI){
+  var I=document.getElementById('anim-iso'), cI=document.getElementById('cur-iso');
+  if(I&&cI){
     var qi=function(c){return I.querySelector('.'+c);};
     var LI=particelle(qi('part'),14,9), fI=0, hI=function(V){return V*17.6;};
     set(qi('fantasma'),{y1:248-hI(10),y2:248-hI(10)}); set(qi('t-fant'),{y:248-hI(10)+4});
-    function disI(V,ms){
-      if(ms!==undefined)fI=0.0006*ms;
+    function disI(V){
       var h=hI(V), top=248-h;
       set(qi('gas'),{y:f(top),height:f(h)}); set(qi('pist'),{y:f(top-10)}); set(qi('asta'),{y1:f(top-10),y2:f(top-45)});
       muovi(LI,{x:122,y:top,w:136,h:h},fI);
@@ -230,13 +234,14 @@ curva più in alto corrisponde alla temperatura più alta.</p>
       var s=qi('stato'); s.textContent=V>9.95?'1':(V<5.05?'2':''); set(s,{y:f(top+22)});
       var g=V<9.95?1:0; qi('fantasma').setAttribute('opacity',g); qi('t-fant').setAttribute('opacity',g);
     }
-    scorri(bI,cI,10,5,4300,disI,function(){fI=0;disI(10);});
+    cI.addEventListener('input',function(){disI(+cI.value);});
     disI(10);
+    continuo(function(fase){fI=fase;muovi(LI,{x:122,y:248-hI(+cI.value),w:136,h:hI(+cI.value)},fI);});
   }
 
   /* --- figura 2: isoterma nel piano di Clapeyron --- */
-  var K=document.getElementById('anim-clap'), bK=document.getElementById('btn-clap'), cK=document.getElementById('cur-clap');
-  if(K&&bK&&cK){
+  var K=document.getElementById('anim-clap'), cK=document.getElementById('cur-clap');
+  if(K&&cK){
     var g2=K.querySelector('.graf'), A2=assi(g2,'ax4',200,1,[83,166]);
     curva(g2,A2,100,200,{stroke:'var(--inchiostro)','stroke-width':2.2});
     [[10,'1',8,-8],[5,'2',-16,-8]].forEach(function(d){
@@ -251,14 +256,23 @@ curva più in alto corrisponde alla temperatura più alta.</p>
     var scia=el(g2,'polyline',{fill:'none',stroke:'var(--rosso)','stroke-width':3.2,opacity:.8});
     var p2=el(g2,'circle',{r:5.5,fill:'#fff',stroke:'var(--rosso)','stroke-width':2});
     var tpv=el(g2,'text',{x:300,y:60,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'});
+    var qk=function(c){return K.querySelector('.'+c);}, LK=particelle(qk('part'),10,4), fK=0, hK=function(V){return V*17;};
+    [[10,'1'],[5,'2']].forEach(function(d){var y=248-hK(d[0]);
+      el(qk('rif'),'line',{x1:484,x2:616,y1:y,y2:y,stroke:'var(--verde)','stroke-width':1.2,'stroke-dasharray':'4,3'});
+      el(qk('rif'),'text',{x:622,y:y+5,'font-family':'var(--sans)','font-size':13,'font-weight':700,fill:'var(--verde)'},d[1]);});
+    function pistK(V){var h=hK(V),top=248-h;
+      set(qk('gas'),{y:f(top),height:f(h)}); set(qk('pist'),{y:f(top-10)}); set(qk('asta'),{y1:f(top-10),y2:f(top-40)});
+      muovi(LK,{x:492,y:top,w:116,h:h},fK);}
     function disK(V){
+      pistK(V);
       var c=[];for(var v=10;v>=V-1e-9;v-=0.05)c.push(f(A2.X(v))+','+f(A2.Y(NRT*100/v)));
       c.push(f(A2.X(V))+','+f(A2.Y(NRT*100/V))); set(scia,{points:c.join(' ')});
       set(p2,{cx:f(A2.X(V)),cy:f(A2.Y(NRT*100/V))});
       tpv.textContent='V = '+virg(V,1)+' L,  P = '+Math.round(NRT*100/V)+' kPa';
     }
-    scorri(bK,cK,10,5,4300,disK,function(){disK(10);});
+    cK.addEventListener('input',function(){disK(+cK.value);});
     disK(10);
+    continuo(function(fase){fK=fase;pistK(+cK.value);});
   }
 
   /* --- figura 3: famiglia di isoterme --- */
