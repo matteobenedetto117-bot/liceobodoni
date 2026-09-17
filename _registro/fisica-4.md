@@ -6,10 +6,11 @@
 - Aggiunta: nessuna. Il valore della costante di Boltzmann (1,38×10⁻²³ J/K) è stato verificato contro il valore CODATA e risulta coerente con la traccia.
 - Revisione: titolo «Le tre leggi dei gas» (cartella invariata); tolto il sottotitolo; «barometro» → «manometro»; aggiunti la condizione di gas rarefatto, la liquefazione prima di 0 K, T = t + 273,15, la proporzionalità diretta con la temperatura assoluta, la temperatura costante nelle relazioni con N e V e l'uso dei kelvin in P = kNT/V; k ≈ 1,38×10⁻²³ J/K. Impaginazione a quaderno. Figure ridisegnate in scala e animate: pistone libero con grafico V–t prolungato fino a 0 K, contenitore rigido con manometro e grafico P–t, immissione di particelle con pressione che raddoppia, siringa con cursore sul volume e iperbole P–V (P·V costante). Cursori in tutte le figure: temperatura (0–200 °C) nelle prime due, numero di particelle (6–12) nella terza, volume nella quarta.
 
-## Unità 02 — La mole, il numero di Avogadro e l'equazione di stato
+## Unità 02 — L'equazione di stato
 - Parole: 287 su 1,3 pagine di traccia (fondo pagina 3 — sezione "La mole e il numero di Avogadro" — più pagina 4 intera e la parte alta di pagina 5, fino all'esempio numerico; oltre inizia la legge di Boyle, unità 03)
 - Rettifica: nessuna. Il calcolo k·N_A = 8,31 J/(mol·K) e il risultato dell'esempio V ≈ 0,045 m³ sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna.
+- Revisione: titolo «L'equazione di stato» (cartella invariata); tolti sottotitolo e sezione «Nelle prossime unità»; titoletto «Esempio». Unità di N_A: «molecole/mol» → mol⁻¹ (particelle per mole); «molecole» → «particelle (atomi o molecole)»; aggiunte le unità SI dell'equazione di stato e la validità del modello per i gas rarefatti; unità di misura nel calcolo dell'esempio e risultato anche in litri (verificati k·N_A = 8,31 J/(mol·K) e V ≈ 0,045 m³). Impaginazione a quaderno. Nuova figura animata: cilindro a pressione costante con cursori su n (0,5–2 mol) e T (200–400 K) e volume V = nRT/P in litri; ▶ porta n da 1 a 2 mol e poi T da 273 a 373 K.
 
 ## Unità 03 — Legge di Boyle e trasformazione isoterma
 - Parole: 345 su 2 pagine di traccia (pagine 5–6: dalla sezione "Legge di Boyle" a fondo pagina 5 fino alla famiglia di isoterme a fondo pagina 6; l'inizio di pagina 7 appartiene già alle leggi di Gay-Lussac, unità 04)

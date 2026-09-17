@@ -3,21 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La mole, il numero di Avogadro e l'equazione di stato — Fisica quarta</title>
+<title>L'equazione di stato — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -25,77 +52,156 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 02</p>
-  <h1>La mole, il numero di Avogadro e l'equazione di stato</h1>
-  <p class="sommario">Contare le particelle di un gas una a una &egrave; impossibile: la mole
-  &egrave; l'unit&agrave; che permette di collegare quel numero enorme a grandezze che si
-  misurano davvero, pressione, volume e temperatura.</p>
+  <p class="occhiello">Termodinamica &middot; Unità 02</p>
+  <h1>L'equazione di stato</h1>
 </header>
 
 <h2>Il numero di Avogadro e la mole</h2>
 
-<p>Definiamo il <strong>numero di Avogadro</strong>:</p>
+<p>Le particelle contenute anche in un piccolo volume di gas sono moltissime, impossibili da
+contare una a una. Per questo si usa un'unità di misura adatta. Definiamo il <strong>numero di
+Avogadro</strong>:</p>
 
-<div class="formula-box">
-$$N_A = 6{,}022\times10^{23}\ \text{molecole/mol}$$
-</div>
+<p class="eq">$$N_A = 6{,}022\times10^{23}\ \text{mol}^{-1}$$</p>
 
-<p>Una <strong>mole</strong> &egrave; la quantit&agrave; di sostanza che contiene un numero di
-Avogadro di molecole. Il numero di moli n contenute in un campione con N particelle si trova
-dividendo N per $N_A$:</p>
+<p>cioè $6{,}022\times10^{23}$ particelle per mole. Una <strong>mole</strong> è la quantità di
+sostanza che contiene un numero di Avogadro di particelle (atomi o molecole). Il numero di moli
+$n$ contenute in un campione con $N$ particelle si trova dividendo $N$ per $N_A$:</p>
 
-<div class="formula-box">
-$$n = \dfrac{N}{N_A}$$
-</div>
+<p class="eq">$$n = \dfrac{N}{N_A}$$</p>
 
-<p>dove N &egrave; il numero di particelle e $N_A$ il numero di Avogadro; equivalentemente,
-$N = n\,N_A$.</p>
+<p>e, viceversa, $N = n\,N_A$.</p>
 
 <h2>L'equazione di stato dei gas perfetti</h2>
 
-<p>Nell'unit&agrave; precedente abbiamo scritto $P = k\,NT/V$. Sostituendo $N = n\,N_A$:</p>
+<p>Nell'unità precedente abbiamo scritto $P = k\,NT/V$. Sostituendo $N = n\,N_A$:</p>
 
-<div class="formula-box">
-$$P = k\,\dfrac{n\,N_A\,T}{V} = (k\,N_A)\,\dfrac{n\,T}{V}$$
+<p class="eq">$$P = k\,\dfrac{n\,N_A\,T}{V} = (k\,N_A)\,\dfrac{n\,T}{V}$$</p>
+
+<p>Il prodotto $k\,N_A$ è una nuova costante, che si calcola:</p>
+
+<p class="eq">$$k\,N_A = 1{,}38\times10^{-23}\ \tfrac{\text{J}}{\text{K}}\cdot 6{,}022\times10^{23}\
+\text{mol}^{-1} = 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}} = R$$</p>
+
+<p>$R$ è la <strong>costante universale dei gas</strong>. La legge diventa $P = RnT/V$, cioè:</p>
+
+<p class="eq">$$PV = nRT$$</p>
+
+<p>Questa è l'<strong>equazione di stato dei gas perfetti</strong>: $P$ è la pressione in pascal,
+$V$ il volume in metri cubi, $n$ il numero di moli e $T$ la temperatura assoluta in kelvin. Il gas
+perfetto è un modello: i gas reali lo seguono bene quando sono rarefatti.</p>
+
+<div class="fig">
+<svg id="anim-stato" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
+<rect class="gas" x="92" width="136" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<path d="M90,20 L90,250 L230,250 L230,20" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<line class="asta" x1="160" x2="160" stroke="var(--inchiostro)" stroke-width="3"/>
+<rect class="pist" x="92" width="136" height="10" fill="var(--blu)"/>
+<text x="300" y="70" font-family="var(--sans)" font-size="13" fill="var(--grigio)">P = 101,3 kPa (costante)</text>
+<text class="l-n" x="300" y="105" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">n = 1,0 mol</text>
+<text class="l-t" x="300" y="130" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 273 K</text>
+<text class="l-v" x="300" y="170" font-family="var(--sans)" font-size="15" font-weight="700" fill="var(--rosso)">V = 22,4 L</text>
+<text x="300" y="195" font-family="var(--sans)" font-size="12" fill="var(--grigio)">V = nRT / P</text>
+</svg>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-stato" aria-label="Avvia">&#9654;</button>
+<label for="cur-n2">n</label><input id="cur-n2" type="range" min="0.5" max="2" step="0.1" value="1" style="width:min(220px,30%)">
+<label for="cur-t2">T</label><input id="cur-t2" type="range" min="200" max="400" step="1" value="273" style="width:min(220px,30%)"></div>
+<p class="did">A pressione costante il volume del gas è direttamente proporzionale al numero di moli e
+alla temperatura assoluta: una mole a 273&nbsp;K e 101,3&nbsp;kPa occupa circa 22,4&nbsp;litri.</p>
 </div>
 
-<p>Il prodotto $k\,N_A$ &egrave; una nuova costante, che si calcola:</p>
+<h2>Esempio</h2>
 
-<div class="formula-box">
-$$k\,N_A = 1{,}38\times10^{-23}\ \tfrac{\text{J}}{\text{K}}\cdot 6{,}022\times10^{23}\
-\tfrac{\text{molecole}}{\text{mol}} = 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}} = R$$
-</div>
-
-<p>R &egrave; la <strong>costante universale dei gas</strong>. La legge diventa $P = RnT/V$,
-cio&egrave;:</p>
-
-<div class="formula-box">
-$$PV = nRT$$
-</div>
-
-<p>questa &egrave; l'<strong>equazione di stato dei gas perfetti</strong>: P &egrave; la
-pressione, V il volume, n il numero di moli, T la temperatura assoluta in kelvin.</p>
-
-<div class="esempio">
-<span class="et">Esempio</span>
 <p>Un gas ha pressione $P = 3{,}7\times10^{5}\ \text{Pa}$, temperatura $T = 415\ \text{K}$ e
 contiene $n = 4{,}8\ \text{mol}$. Quanto vale il volume?</p>
-<p>Dall'equazione di stato, $V = \dfrac{nRT}{P}$:</p>
-<div class="formula-box">
-$$V = \dfrac{4{,}8 \cdot 8{,}31 \cdot 415}{3{,}7\times10^{5}} \approx 0{,}045\ \text{m}^3$$
-</div>
-</div>
 
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Come si comporta un gas quando la temperatura resta costante: la legge di Boyle, nell'unit&agrave; 03.</li>
-</ul>
-</div>
+<p>Dall'equazione di stato ricaviamo $V = \dfrac{nRT}{P}$:</p>
+
+<p class="eq">$$V = \dfrac{4{,}8\ \text{mol} \cdot 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}} \cdot 415\ \text{K}}{3{,}7\times10^{5}\ \text{Pa}} \approx 0{,}045\ \text{m}^3$$</p>
+
+<p>cioè circa 45 litri.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../01-i-gas-e-la-teoria-cinetica-le-tre-relazioni-sperimentali/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Le tre leggi dei gas</span></a><a class="successiva" href="../03-legge-di-boyle-e-trasformazione-isoterma/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Legge di Boyle e trasformazione isoterma</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 02</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 02</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cl(u){return Math.max(0,Math.min(1,u));}
+  function liscio(u){u=cl(u);return u*u*(3-2*u);}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(g,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
+  function f(n){return n.toFixed(1);}
+  function bottone(b,avvia,reset){
+    var stato='fermo';
+    b.addEventListener('click',function(){
+      if(stato==='fine'){reset();stato='fermo';b.innerHTML='&#9654;';b.setAttribute('aria-label','Avvia');return;}
+      if(stato!=='fermo')return;
+      stato='corsa';b.disabled=true;
+      avvia(function(){stato='fine';b.disabled=false;b.innerHTML='&#8634;';b.setAttribute('aria-label','Ricomincia');});
+    });
+  }
+  function corri(D,dis,fine){var t0=null;(function passo(t){if(t0===null)t0=t;var dt=ridotto?D:t-t0;dis(Math.min(dt,D));if(dt>=D)fine();else requestAnimationFrame(passo);})(performance.now());}
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  /* moto rettilineo con urti elastici sulle pareti: onda triangolare in [0,1] */
+  function tri(x){x=((x%2)+2)%2;return x>1?2-x:x;}
+  function particelle(g,n,seme){
+    var R=rng(seme),L=[];
+    for(var i=0;i<n;i++){var a=R()*2*Math.PI;L.push({u:R(),v:R(),cx:Math.cos(a),cy:Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
+    return L;
+  }
+  /* fase = cammino percorso (in "scatole"), box = {x,y,w,h} */
+  function muovi(L,box,fase){
+    L.forEach(function(p){
+      var fx=p.fase!==undefined?p.fase:fase;
+      set(p.c,{cx:f(box.x+4+tri(p.u+p.cx*fx)*(box.w-8)),cy:f(box.y+4+tri(p.v+p.cy*fx*1.3)*(box.h-8))});
+    });
+  }
+
+  var S=document.getElementById('anim-stato'), b=document.getElementById('btn-stato'), cn=document.getElementById('cur-n2'), ct=document.getElementById('cur-t2');
+  if(S&&b&&cn&&ct){
+    var q=function(c){return S.querySelector('.'+c);};
+    var L=particelle(q('part'),16,3), fase=0;
+    function virg(x,d){return x.toFixed(d).replace('.',',');}
+    function stato(n,T){
+      var V=n*8.31*T/101300*1000, h=V*2.85, top=248-h;
+      set(q('gas'),{y:f(top),height:f(h)}); set(q('pist'),{y:f(top-10)}); set(q('asta'),{y1:f(top-10),y2:f(top-40)});
+      var k=Math.round(8*n);
+      L.forEach(function(p,i){p.c.setAttribute('opacity',i<k?1:0);});
+      muovi(L,{x:92,y:top,w:136,h:h},fase);
+      q('l-n').textContent='n = '+virg(n,1)+' mol'; q('l-t').textContent='T = '+Math.round(T)+' K';
+      q('l-v').textContent='V = '+virg(V,1)+' L';
+    }
+    function man(){stato(+cn.value,+ct.value);}
+    cn.addEventListener('input',man); ct.addEventListener('input',man);
+    function tra(ms){return ms<2200?[1+liscio(ms/2000),273]:[2,273+100*liscio((ms-2400)/2000)];}
+    bottone(b,function(fine){cn.disabled=ct.disabled=true;
+      corri(4600,function(ms){var s=0;for(var x=0;x<ms;x+=20)s+=Math.sqrt(tra(x)[1]/273)*Math.min(20,ms-x);fase=0.0006*s;
+        var v=tra(ms);cn.value=v[0];ct.value=v[1];stato(v[0],v[1]);},function(){cn.disabled=ct.disabled=false;fine();});},
+      function(){fase=0;cn.value=1;ct.value=273;man();});
+    man();
+  }
+})();
+</script>
 </body>
 </html>
