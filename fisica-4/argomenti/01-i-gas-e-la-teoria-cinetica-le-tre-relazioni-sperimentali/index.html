@@ -3,19 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>I gas e la teoria cinetica: le tre relazioni sperimentali — Fisica quarta</title>
+<title>Le tre leggi dei gas — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -24,177 +53,348 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
   <p class="occhiello">Termodinamica &middot; Unità 01</p>
-  <h1>I gas e la teoria cinetica: le tre relazioni sperimentali</h1>
-  <p class="sommario">La pressione di un gas dipende dalla sua temperatura, dal volume che occupa
-  e dal numero di particelle che contiene. Isoliamo queste tre dipendenze una alla volta e le
-  mettiamo insieme in un'unica legge.</p>
+  <h1>Le tre leggi dei gas</h1>
 </header>
 
 <h2>Relazione temperatura-volume</h2>
 
 <p>Consideriamo un gas chiuso in un cilindro da un pistone libero di scorrere, così che il gas
-resti sempre alla stessa pressione. Partiamo da una temperatura di 200&nbsp;&deg;C e la
-abbassiamo di 100&nbsp;&deg;C alla volta, fino a 0&nbsp;&deg;C: il pistone scende via via, cio&egrave;
-il volume del gas diminuisce insieme alla temperatura.</p>
+resti sempre alla stessa pressione. Partiamo da una temperatura di 200&nbsp;°C e la abbassiamo di
+100&nbsp;°C alla volta, fino a 0&nbsp;°C: il pistone scende via via, cioè il volume del gas
+diminuisce insieme alla temperatura.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg">
+<svg id="anim-vt" viewBox="0 0 640 275" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<marker id="fr1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
+<marker id="ax1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
 </defs>
-<rect x="40" y="20" width="90" height="150" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="44" y="52" width="82" height="10" fill="var(--blu)" opacity="0.85"/>
-<line x1="85" y1="52" x2="85" y2="8" stroke="var(--inchiostro)" stroke-width="3"/>
-<circle cx="60" cy="95" r="2.6" fill="var(--inchiostro)"/><circle cx="80" cy="110" r="2.6" fill="var(--inchiostro)"/>
-<circle cx="100" cy="90" r="2.6" fill="var(--inchiostro)"/><circle cx="70" cy="130" r="2.6" fill="var(--inchiostro)"/>
-<circle cx="105" cy="140" r="2.6" fill="var(--inchiostro)"/><circle cx="55" cy="150" r="2.6" fill="var(--inchiostro)"/>
-<text x="85" y="184" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 200 &deg;C</text>
-<text x="260" y="100" text-anchor="middle" font-family="var(--sans)" font-size="26" fill="var(--blu)">&#8658;</text>
-<text x="260" y="122" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">raffreddo</text>
-<rect x="330" y="20" width="90" height="150" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="334" y="112" width="82" height="10" fill="var(--blu)" opacity="0.85"/>
-<line x1="375" y1="112" x2="375" y2="8" stroke="var(--inchiostro)" stroke-width="3"/>
-<circle cx="350" cy="135" r="2.6" fill="var(--inchiostro)"/><circle cx="370" cy="150" r="2.6" fill="var(--inchiostro)"/>
-<circle cx="390" cy="130" r="2.6" fill="var(--inchiostro)"/><circle cx="360" cy="158" r="2.6" fill="var(--inchiostro)"/>
-<text x="375" y="184" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 0 &deg;C</text>
+<rect class="gas" x="62" width="116" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<path d="M60,24 L60,250 L180,250 L180,24" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<line class="fantasma" x1="62" x2="178" stroke="var(--grigio)" stroke-width="1.3" stroke-dasharray="5,4" opacity="0"/>
+<text class="t-fant" x="186" font-family="var(--sans)" font-size="11" fill="var(--grigio)" opacity="0">prima</text>
+<line class="asta" x1="120" x2="120" stroke="var(--inchiostro)" stroke-width="3"/>
+<rect class="pist" x="62" width="116" height="10" fill="var(--blu)"/>
+<text class="lett" x="120" y="270" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">t = 200 °C</text>
+<g class="graf"></g>
 </svg>
-<p class="did">Il pistone scorre libero: raffreddando il gas da 200&nbsp;&deg;C a 0&nbsp;&deg;C il
-volume occupato diminuisce.</p>
+<button type="button" class="btn-anim" id="btn-vt" aria-label="Avvia">&#9654;</button>
+<div class="did-parti" style="--n:2">
+<p class="did">Il pistone scorre libero, quindi la pressione resta costante: raffreddando il gas da
+200&nbsp;°C a 0&nbsp;°C il volume diminuisce e le particelle si muovono più lentamente.</p>
+<p class="did">I punti del grafico volume–temperatura stanno su una retta che, prolungata, incontra
+l'asse delle temperature a −273,15&nbsp;°C, cioè 0&nbsp;K.</p>
+</div>
 </div>
 
-<p>Riportando il volume V in funzione della temperatura T si ottiene una retta. Prolungandola fino
-a incontrare l'asse delle temperature (dove V si annullerebbe), si arriva sempre allo stesso
-punto, qualunque sia il gas: &minus;273,15&nbsp;&deg;C. Questa temperatura segna l'inizio della
-scala assoluta, misurata in kelvin (K): si pone 0&nbsp;K = &minus;273,15&nbsp;&deg;C.</p>
+<p>Riportando in un grafico il volume $V$ in funzione della temperatura $t$ in gradi Celsius, i
+punti si dispongono su una retta. Prolungandola fino all'asse delle temperature, dove il volume si
+annullerebbe, si arriva sempre allo stesso punto, qualunque sia il gas, purché rarefatto:
+−273,15&nbsp;°C. Nessun gas raggiunge davvero volume nullo, perché prima diventa liquido; quel
+valore segna però l'inizio della scala assoluta delle temperature, misurata in kelvin (K). Si pone
+0&nbsp;K = −273,15&nbsp;°C e un kelvin è ampio quanto un grado Celsius, quindi</p>
 
-<div class="fig">
-<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="60" y1="220" x2="400" y2="220" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="60" y1="220" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="404" y="224" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T</text>
-<text x="50" y="16" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V</text>
-<line x1="80" y1="200" x2="360" y2="60" stroke="var(--rosso)" stroke-width="2.2"/>
-<line x1="80" y1="200" x2="60" y2="220" stroke="var(--rosso)" stroke-width="2.2" stroke-dasharray="4,4"/>
-<circle cx="80" cy="200" r="3.6" fill="var(--verde)"/>
-<circle cx="220" cy="130" r="3.6" fill="var(--verde)"/>
-<circle cx="360" cy="60" r="3.6" fill="var(--verde)"/>
-<circle cx="60" cy="220" r="3.6" fill="var(--inchiostro)"/>
-<text x="360" y="48" text-anchor="middle" font-family="var(--sans)" font-size="11.5" fill="var(--inchiostro)">200 &deg;C</text>
-<text x="220" y="118" text-anchor="middle" font-family="var(--sans)" font-size="11.5" fill="var(--inchiostro)">100 &deg;C</text>
-<text x="80" y="240" text-anchor="middle" font-family="var(--sans)" font-size="11.5" fill="var(--inchiostro)">0 &deg;C</text>
-<text x="60" y="240" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">&minus;273,15 &deg;C</text>
-<text x="60" y="255" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">0 K</text>
-</svg>
-<p class="did">Il grafico V-T &egrave; una retta: prolungata all'indietro incontra l'asse T sempre
-nello stesso punto, &minus;273,15&nbsp;&deg;C, cio&egrave; 0&nbsp;K.</p>
-</div>
+<p class="eq">$$T = t + 273{,}15$$</p>
+
+<p>Misurando la temperatura in kelvin, la retta passa per l'origine: a pressione costante il volume
+è direttamente proporzionale alla temperatura assoluta $T$.</p>
 
 <h2>Relazione temperatura-pressione</h2>
 
-<p>Ripetiamo l'esperimento con un contenitore dal coperchio sigillato, quindi a volume fisso,
-collegato a un barometro. Alle stesse tre temperature (200&nbsp;&deg;C, 100&nbsp;&deg;C,
-0&nbsp;&deg;C) il barometro segna pressioni via via minori.</p>
+<p>Ripetiamo l'esperimento con un contenitore rigido e sigillato, quindi a volume costante,
+collegato a un manometro. Alle stesse tre temperature (200&nbsp;°C, 100&nbsp;°C, 0&nbsp;°C) il
+manometro segna pressioni via via minori.</p>
 
 <div class="fig">
-<svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
-<rect x="30" y="30" width="110" height="130" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="30" y="26" width="110" height="10" fill="var(--inchiostro)"/>
-<line x1="85" y1="26" x2="85" y2="6" stroke="var(--inchiostro)" stroke-width="2.2"/>
-<circle cx="85" cy="0" r="16" fill="none" stroke="var(--verde)" stroke-width="2.2"/>
-<line x1="85" y1="0" x2="93" y2="-8" stroke="var(--rosso)" stroke-width="2.2"/>
-<circle cx="55" cy="90" r="2.6" fill="var(--inchiostro)"/><circle cx="80" cy="110" r="2.6" fill="var(--inchiostro)"/>
-<circle cx="105" cy="85" r="2.6" fill="var(--inchiostro)"/><circle cx="70" cy="130" r="2.6" fill="var(--inchiostro)"/>
-<text x="85" y="178" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 200 &deg;C</text>
-<text x="220" y="95" text-anchor="middle" font-family="var(--sans)" font-size="26" fill="var(--blu)">&#8658;</text>
-<text x="220" y="117" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">raffreddo</text>
-<rect x="320" y="30" width="110" height="130" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="320" y="26" width="110" height="10" fill="var(--inchiostro)"/>
-<line x1="375" y1="26" x2="375" y2="6" stroke="var(--inchiostro)" stroke-width="2.2"/>
-<circle cx="375" cy="0" r="16" fill="none" stroke="var(--verde)" stroke-width="2.2"/>
-<line x1="375" y1="0" x2="368" y2="-14" stroke="var(--rosso)" stroke-width="2.2"/>
-<circle cx="345" cy="95" r="2.6" fill="var(--inchiostro)"/><circle cx="370" cy="115" r="2.6" fill="var(--inchiostro)"/>
-<circle cx="395" cy="90" r="2.6" fill="var(--inchiostro)"/>
-<text x="375" y="178" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 0 &deg;C</text>
+<svg id="anim-pt" viewBox="0 0 640 275" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="ax2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
+</defs>
+<rect x="60" y="100" width="120" height="150" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<rect x="60" y="100" width="120" height="150" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<rect x="56" y="94" width="128" height="8" fill="var(--inchiostro)"/>
+<line x1="120" y1="94" x2="120" y2="78" stroke="var(--inchiostro)" stroke-width="3"/>
+<g class="dial"></g>
+<text class="lett" x="120" y="270" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">t = 200 °C</text>
+<g class="graf"></g>
 </svg>
-<p class="did">Volume fisso, coperchio sigillato: raffreddando il gas l'ago del barometro (in
-rosso) indica una pressione minore.</p>
+<button type="button" class="btn-anim" id="btn-pt" aria-label="Avvia">&#9654;</button>
+<div class="did-parti" style="--n:2">
+<p class="did">Contenitore rigido, volume costante: raffreddando il gas le particelle urtano le
+pareti più lentamente e il manometro indica una pressione minore.</p>
+<p class="did">Anche il grafico pressione–temperatura è una retta, che incontra l'asse delle
+temperature nello stesso punto: −273,15&nbsp;°C.</p>
+</div>
 </div>
 
-<p>Anche il grafico di P in funzione di T &egrave; una retta, con lo stesso identico punto di
-incontro sull'asse delle temperature: &minus;273,15&nbsp;&deg;C. A quella temperatura, se il gas
-si comportasse ancora così, la pressione si annullerebbe.</p>
+<p>Anche il grafico della pressione in funzione della temperatura è una retta e, prolungato,
+incontra l'asse delle temperature nello stesso identico punto, −273,15&nbsp;°C, dove la pressione si
+annullerebbe. A volume costante, quindi, la pressione è direttamente proporzionale alla
+temperatura assoluta $T$.</p>
 
 <h2>Relazione pressione-volume (e col numero di particelle)</h2>
 
-<p>Con una siringa chiusa a tenuta osserviamo due cose distinte. Primo: se aumentiamo il numero
-N di particelle contenute, a parit&agrave; di volume, la pressione aumenta &mdash; una prima
-relazione, P proporzionale a N, con una costante che a questo punto non conosciamo ancora.
-Secondo: se comprimiamo il pistone il volume diminuisce e la pressione aumenta, e viceversa se lo
-lasciamo espandere: pressione e volume sono legati da una proporzionalit&agrave; inversa,
-$P = \text{cost}/V$.</p>
+<p>Mantenendo costante la temperatura osserviamo due cose distinte. Primo: se in un contenitore
+rigido immettiamo altre particelle, la pressione aumenta, perché gli urti sulle pareti sono più
+numerosi. Raddoppiando il numero $N$ di particelle, la pressione raddoppia: a parità di volume, la
+pressione è direttamente proporzionale a $N$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<circle cx="90" cy="90" r="55" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="140" y="82" width="34" height="16" fill="var(--inchiostro)"/>
-<circle cx="65" cy="75" r="2.4" fill="var(--inchiostro)"/><circle cx="100" cy="65" r="2.4" fill="var(--inchiostro)"/>
-<circle cx="80" cy="100" r="2.4" fill="var(--inchiostro)"/><circle cx="110" cy="105" r="2.4" fill="var(--inchiostro)"/>
-<text x="90" y="165" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">N poche particelle</text>
-<text x="90" y="182" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">pressione minore</text>
-<circle cx="330" cy="90" r="55" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="380" y="82" width="34" height="16" fill="var(--inchiostro)"/>
-<circle cx="300" cy="65" r="2.4" fill="var(--inchiostro)"/><circle cx="320" cy="55" r="2.4" fill="var(--inchiostro)"/>
-<circle cx="345" cy="70" r="2.4" fill="var(--inchiostro)"/><circle cx="310" cy="95" r="2.4" fill="var(--inchiostro)"/>
-<circle cx="335" cy="100" r="2.4" fill="var(--inchiostro)"/><circle cx="355" cy="90" r="2.4" fill="var(--inchiostro)"/>
-<circle cx="300" cy="115" r="2.4" fill="var(--inchiostro)"/><circle cx="350" cy="115" r="2.4" fill="var(--inchiostro)"/>
-<text x="330" y="165" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">N molte particelle</text>
-<text x="330" y="182" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">pressione maggiore</text>
+<svg id="anim-n" viewBox="0 0 640 255" xmlns="http://www.w3.org/2000/svg">
+<rect x="200" y="90" width="180" height="150" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<path d="M200,158 L200,90 L380,90 L380,240 L200,240 L200,172" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<rect x="196" y="84" width="188" height="8" fill="var(--inchiostro)"/>
+<path d="M130,158 L200,158 M130,172 L200,172" stroke="var(--inchiostro)" stroke-width="2"/>
+<rect x="150" y="150" width="10" height="30" rx="2" fill="var(--grigio)"/>
+<line x1="290" y1="84" x2="290" y2="78" stroke="var(--inchiostro)" stroke-width="3"/>
+<g class="dial"></g>
+<text class="t-n" x="430" y="140" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">N = 6</text>
+<text class="fin" x="430" y="180" font-family="var(--sans)" font-size="13" fill="var(--rosso)" opacity="0">N raddoppiato:</text>
+<text class="fin" x="430" y="198" font-family="var(--sans)" font-size="13" fill="var(--rosso)" opacity="0">la pressione raddoppia</text>
 </svg>
-<p class="did">A parit&agrave; di volume, più particelle nel contenitore significano più urti
-sulle pareti: la pressione &egrave; maggiore.</p>
+<button type="button" class="btn-anim" id="btn-n" aria-label="Avvia">&#9654;</button>
+<p class="did">A volume e temperatura costanti, immettendo altre particelle aumentano gli urti sulle
+pareti: con il doppio delle particelle il manometro segna il doppio della pressione.</p>
 </div>
 
+<p>Secondo: se, con lo stesso numero di particelle, spingiamo il pistone di una siringa chiusa, il
+volume diminuisce e la pressione aumenta; se lasciamo espandere il gas accade il contrario.
+Dimezzando il volume la pressione raddoppia: pressione e volume sono inversamente proporzionali,</p>
+
+<p class="eq">$$P = \dfrac{\text{cost}}{V}$$</p>
+
 <div class="fig">
-<svg viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg">
+<svg id="anim-pv" viewBox="0 0 650 250" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<marker id="fr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
+<marker id="ax3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
 </defs>
-<path d="M120,95 C120,55 300,55 300,95 C300,135 120,135 120,95 Z" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<path d="M60,95 L118,95" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#fr3)"/>
-<path d="M360,95 L302,95" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#fr3)"/>
-<text x="60" y="80" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F</text>
-<text x="360" y="80" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F</text>
-<text x="210" y="170" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">comprimo: V diminuisce, P aumenta</text>
+<rect class="gas" x="42" y="82" height="76" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<path d="M290,80 L40,80 L40,160 L290,160" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<rect x="26" y="112" width="14" height="16" fill="var(--inchiostro)"/>
+<rect class="pist" y="82" width="10" height="76" fill="var(--blu)"/>
+<rect class="asta" y="115" width="80" height="10" fill="var(--inchiostro)"/>
+<rect class="man" y="92" width="10" height="56" rx="3" fill="var(--inchiostro)"/>
+<text class="l-v" x="40" y="195" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V = 50 cm³</text>
+<text class="l-p" x="40" y="215" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">P = 100 kPa</text>
+<text class="l-pv" x="40" y="235" font-family="var(--sans)" font-size="13" fill="var(--grigio)">P · V = 5000 kPa · cm³</text>
+<g class="graf"></g>
 </svg>
-<p class="did">Comprimendo il gas il volume diminuisce e la pressione aumenta; allargando il
-contenitore accade il contrario.</p>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-pv" aria-label="Avvia">&#9654;</button>
+<label for="cur-pv">V</label><input id="cur-pv" type="range" min="20" max="50" step="0.5" value="50"></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Spingendo il pistone il gas occupa un volume minore: le particelle urtano più spesso
+le pareti e la pressione aumenta, mentre il prodotto P · V resta lo stesso.</p>
+<p class="did">Nel grafico pressione–volume gli stati del gas stanno su un'iperbole: da 50&nbsp;cm³
+a 25&nbsp;cm³ la pressione passa da 100&nbsp;kPa a 200&nbsp;kPa.</p>
+</div>
 </div>
 
 <h2>Le tre relazioni in una sola legge</h2>
 
-<p>Mettiamo insieme le tre osservazioni prendendo la pressione come riferimento: P dipende
-contemporaneamente dal numero di particelle N, dalla temperatura T e dal volume V.</p>
+<p>Mettiamo insieme le tre osservazioni prendendo la pressione come riferimento: $P$ è
+direttamente proporzionale al numero di particelle $N$ e alla temperatura assoluta $T$, ed è
+inversamente proporzionale al volume $V$. Le tre relazioni si riassumono in un'unica legge:</p>
 
-<div class="formula-box">
-$$P = k\,\dfrac{N\,T}{V}$$
-</div>
+<p class="eq">$$P = k\,\dfrac{N\,T}{V}$$</p>
 
-<p>La costante k, misurata sperimentalmente, vale $k = 1{,}38\times10^{-23}\ \text{J/K}$ ed
-&egrave; nota come <strong>costante di Boltzmann</strong>.</p>
+<p>dove la temperatura $T$ va espressa in kelvin. La costante $k$ si chiama <strong>costante di
+Boltzmann</strong> e vale $k \approx 1{,}38\times10^{-23}\ \text{J/K}$.</p>
 
 
 <nav class="nav-unita"><a class="precedente" href="../../index.html"><span class="dir">&larr; Indice</span><span class="tit">Fisica — Quarta</span></a><a class="successiva" href="../02-la-mole-il-numero-di-avogadro-e-l-equazione-di-stato/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La mole, il numero di Avogadro e l'equazione di stato</span></a></nav>
 <footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 01</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cl(u){return Math.max(0,Math.min(1,u));}
+  function liscio(u){u=cl(u);return u*u*(3-2*u);}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(g,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
+  function f(n){return n.toFixed(1);}
+  function bottone(b,avvia,reset){
+    var stato='fermo';
+    b.addEventListener('click',function(){
+      if(stato==='fine'){reset();stato='fermo';b.innerHTML='&#9654;';b.setAttribute('aria-label','Avvia');return;}
+      if(stato!=='fermo')return;
+      stato='corsa';b.disabled=true;
+      avvia(function(){stato='fine';b.disabled=false;b.innerHTML='&#8634;';b.setAttribute('aria-label','Ricomincia');});
+    });
+  }
+  function corri(D,dis,fine){var t0=null;(function passo(t){if(t0===null)t0=t;var dt=ridotto?D:t-t0;dis(Math.min(dt,D));if(dt>=D)fine();else requestAnimationFrame(passo);})(performance.now());}
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  /* moto rettilineo con urti elastici sulle pareti: onda triangolare in [0,1] */
+  function tri(x){x=((x%2)+2)%2;return x>1?2-x:x;}
+  function particelle(g,n,seme){
+    var R=rng(seme),L=[];
+    for(var i=0;i<n;i++){var a=R()*2*Math.PI;L.push({u:R(),v:R(),cx:Math.cos(a),cy:Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
+    return L;
+  }
+  /* fase = cammino percorso (in "scatole"), box = {x,y,w,h} */
+  function muovi(L,box,fase){
+    L.forEach(function(p){
+      var fx=p.fase!==undefined?p.fase:fase;
+      set(p.c,{cx:f(box.x+4+tri(p.u+p.cx*fx)*(box.w-8)),cy:f(box.y+4+tri(p.v+p.cy*fx*1.3)*(box.h-8))});
+    });
+  }
+  function manometro(g,cx,cy,r){
+    el(g,'circle',{cx:cx,cy:cy,r:r,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2.2});
+    for(var i=0;i<=8;i++){var a=(-120+30*i)*Math.PI/180;
+      el(g,'line',{x1:f(cx+Math.sin(a)*(r-3)),y1:f(cy-Math.cos(a)*(r-3)),x2:f(cx+Math.sin(a)*(r-(i%2?7:10))),y2:f(cy-Math.cos(a)*(r-(i%2?7:10))),stroke:'var(--inchiostro)','stroke-width':1.2});}
+    el(g,'text',{x:cx,y:cy+r-8,'text-anchor':'middle','font-family':'var(--sans)','font-size':11,fill:'var(--grigio)'},'P');
+    var ago=el(g,'line',{x1:cx,y1:cy,x2:cx,y2:cy-r+9,stroke:'var(--rosso)','stroke-width':2.4,'stroke-linecap':'round'});
+    el(g,'circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'});
+    return function(fr){ago.setAttribute('transform','rotate('+f(-120+240*fr)+' '+cx+' '+cy+')');};
+  }
+  var TK=273.15;
+  function tempo2temp(ms){
+    if(ms<300)return 200; if(ms<1800)return 200-100*liscio((ms-300)/1500);
+    if(ms<2400)return 100; if(ms<3900)return 100-100*liscio((ms-2400)/1500); return 0;
+  }
+  function faseT(ms,w){var s=0;for(var x=0;x<ms;x+=20)s+=Math.sqrt((tempo2temp(x)+TK)/(200+TK))*Math.min(20,ms-x);return s*w;}
+  /* grafico grandezza-temperatura con prolungamento fino a 0 K */
+  function grafico(g,nome,mk){
+    var X=function(t){return 280+(t+280)*0.6;}, Y=function(t){return 230-(t+TK)*0.38;};
+    var o={X:X,Y:Y};
+    el(g,'line',{x1:270,y1:230,x2:622,y2:230,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    el(g,'line',{x1:f(X(-TK)),y1:236,x2:f(X(-TK)),y2:22,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    el(g,'text',{x:f(X(-TK)+10),y:30,'font-family':'var(--sans)','font-size':13,'font-style':'italic',fill:'var(--inchiostro)'},nome);
+    el(g,'text',{x:626,y:220,'text-anchor':'end','font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},'t (°C)');
+    o.k=[];
+    [0,100,200].forEach(function(t){
+      el(g,'line',{x1:f(X(t)),y1:226,x2:f(X(t)),y2:234,stroke:'var(--inchiostro)','stroke-width':1.2});
+      el(g,'text',{x:f(X(t)),y:248,'text-anchor':'middle','font-family':'var(--sans)','font-size':11.5,fill:'var(--inchiostro)'},t+' °C');
+      o.k.push(el(g,'text',{x:f(X(t)),y:264,'text-anchor':'middle','font-family':'var(--sans)','font-size':11,fill:'var(--grigio)',opacity:0},(t+273)+' K'));
+    });
+    o.k.push(el(g,'text',{x:f(X(-TK)),y:248,'text-anchor':'middle','font-family':'var(--sans)','font-size':11.5,fill:'var(--rosso)',opacity:0},'−273,15 °C'));
+    o.k.push(el(g,'text',{x:f(X(-TK)),y:264,'text-anchor':'middle','font-family':'var(--sans)','font-size':11,fill:'var(--grigio)',opacity:0},'0 K'));
+    o.est=el(g,'line',{x1:f(X(0)),y1:f(Y(0)),stroke:'var(--rosso)','stroke-width':2,'stroke-dasharray':'5,4'});
+    o.scia=el(g,'line',{x1:f(X(200)),y1:f(Y(200)),stroke:'var(--rosso)','stroke-width':2.2});
+    o.zero=el(g,'circle',{cx:f(X(-TK)),cy:230,r:4,fill:'var(--rosso)',opacity:0});
+    o.p=[200,100,0].map(function(t){return el(g,'circle',{cx:f(X(t)),cy:f(Y(t)),r:4,fill:'var(--verde)'});});
+    o.cur=el(g,'circle',{r:5,fill:'#fff',stroke:'var(--verde)','stroke-width':2});
+    o.dis=function(ms){
+      var t=tempo2temp(ms);
+      set(o.scia,{x2:f(X(t)),y2:f(Y(t))}); set(o.cur,{cx:f(X(t)),cy:f(Y(t)),opacity:ms<3900?1:0});
+      o.p[1].setAttribute('opacity',ms>=1800?1:0); o.p[2].setAttribute('opacity',ms>=3900?1:0);
+      var te=-TK*liscio((ms-4000)/900);
+      set(o.est,{x2:f(X(te)),y2:f(Y(te)),opacity:ms>4000?1:0});
+      var a=cl((ms-4900)/500); o.zero.setAttribute('opacity',a); o.k.forEach(function(k){k.setAttribute('opacity',a);});
+    };
+    return o;
+  }
+  var DT=5600;
+
+  /* --- figura 1: pistone libero e grafico V-t --- */
+  var A=document.getElementById('anim-vt'), bA=document.getElementById('btn-vt');
+  if(A&&bA){
+    var qa=function(c){return A.querySelector('.'+c);};
+    var LA=particelle(qa('part'),14,7), GA=grafico(qa('graf'),'V','ax1');
+    var hA=function(t){return 176*(t+TK)/(200+TK);};
+    set(qa('fantasma'),{y1:248-hA(200),y2:248-hA(200)}); set(qa('t-fant'),{y:248-hA(200)+4});
+    function disA(ms){
+      var t=tempo2temp(ms), top=248-hA(t);
+      set(qa('gas'),{y:f(top),height:f(hA(t))}); set(qa('pist'),{y:f(top-10)}); set(qa('asta'),{y1:f(top-10),y2:f(top-48)});
+      muovi(LA,{x:62,y:top,w:116,h:hA(t)},faseT(ms,0.0006));
+      qa('lett').textContent='t = '+Math.round(t)+' °C';
+      var a=cl((ms-4000)/500); qa('fantasma').setAttribute('opacity',a); qa('t-fant').setAttribute('opacity',a);
+      GA.dis(ms);
+    }
+    bottone(bA,function(fine){corri(DT,disA,fine);},function(){disA(0);});
+    disA(0);
+  }
+
+  /* --- figura 2: volume costante, manometro e grafico P-t --- */
+  var B=document.getElementById('anim-pt'), bB=document.getElementById('btn-pt');
+  if(B&&bB){
+    var qb=function(c){return B.querySelector('.'+c);};
+    var LB=particelle(qb('part'),14,11), GB=grafico(qb('graf'),'P','ax2'), agoB=manometro(qb('dial'),120,48,30);
+    function disB(ms){
+      var t=tempo2temp(ms);
+      muovi(LB,{x:60,y:100,w:120,h:150},faseT(ms,0.0006));
+      agoB(0.85*(t+TK)/(200+TK));
+      qb('lett').textContent='t = '+Math.round(t)+' °C';
+      GB.dis(ms);
+    }
+    bottone(bB,function(fine){corri(DT,disB,fine);},function(){disB(0);});
+    disB(0);
+  }
+
+  /* --- figura 3: si immettono particelle a volume costante --- */
+  var C=document.getElementById('anim-n'), bC=document.getElementById('btn-n');
+  if(C&&bC){
+    var qc=function(c){return C.querySelector('.'+c);};
+    var LC=particelle(qc('part'),12,23), agoC=manometro(qc('dial'),290,48,30), W=0.0006;
+    LC.forEach(function(p,i){ if(i>=6){p.nasce=600+(i-6)*400;p.u=0;p.v=0.5;var a=(Math.random()-.5)*1.6;p.cx=Math.cos(a);p.cy=Math.sin(a);} });
+    function disC(ms){
+      var n=0;
+      LC.forEach(function(p){
+        if(p.nasce===undefined){p.fase=W*(ms+800);n+=1;}
+        else{p.fase=W*Math.max(0,ms-p.nasce);var a=cl((ms-p.nasce)/150);p.c.setAttribute('opacity',ms>=p.nasce?1:0);n+=liscio((ms-p.nasce)/300)*(ms>=p.nasce?1:0);}
+      });
+      muovi(LC,{x:200,y:90,w:180,h:150});
+      agoC(0.38*n/6);
+      qc('t-n').textContent='N = '+Math.round(n);
+      [].forEach.call(C.querySelectorAll('.fin'),function(e){e.setAttribute('opacity',cl((ms-3200)/500));});
+    }
+    bottone(bC,function(fine){corri(3900,disC,fine);},function(){disC(0);});
+    disC(0);
+  }
+
+  /* --- figura 4: siringa, cursore sul volume e grafico P-V --- */
+  var S=document.getElementById('anim-pv'), bS=document.getElementById('btn-pv'), cur=document.getElementById('cur-pv');
+  if(S&&bS&&cur){
+    var qs=function(c){return S.querySelector('.'+c);};
+    var LS=particelle(qs('part'),14,5), g=qs('graf'), faseS=0;
+    var PX=function(V){return 420+V*3.5;}, PY=function(P){return 220-P*0.6;};
+    el(g,'line',{x1:410,y1:220,x2:640,y2:220,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#ax3)'});
+    el(g,'line',{x1:420,y1:228,x2:420,y2:20,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#ax3)'});
+    el(g,'text',{x:428,y:28,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},'P (kPa)');
+    el(g,'text',{x:644,y:210,'text-anchor':'end','font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},'V (cm³)');
+    [25,50].forEach(function(V){el(g,'line',{x1:f(PX(V)),y1:216,x2:f(PX(V)),y2:224,stroke:'var(--inchiostro)','stroke-width':1.2});
+      el(g,'text',{x:f(PX(V)),y:238,'text-anchor':'middle','font-family':'var(--sans)','font-size':11.5,fill:'var(--inchiostro)'},V);});
+    [100,200].forEach(function(P){el(g,'line',{x1:416,y1:f(PY(P)),x2:424,y2:f(PY(P)),stroke:'var(--inchiostro)','stroke-width':1.2});
+      el(g,'text',{x:412,y:f(PY(P)+4),'text-anchor':'end','font-family':'var(--sans)','font-size':11.5,fill:'var(--inchiostro)'},P);});
+    var cv=[];for(var V=17;V<=60;V+=0.5)cv.push(f(PX(V))+','+f(PY(5000/V)));
+    el(g,'polyline',{points:cv.join(' '),fill:'none',stroke:'var(--rosso)','stroke-width':2.2});
+    var gv=el(g,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'}), gp=el(g,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+    var pt=el(g,'circle',{r:5,fill:'#fff',stroke:'var(--verde)','stroke-width':2});
+    function disS(V){
+      var P=5000/V, xp=40+4.8*V;
+      set(qs('gas'),{width:f(xp-42)}); set(qs('pist'),{x:f(xp)}); set(qs('asta'),{x:f(xp+10)}); set(qs('man'),{x:f(xp+90)});
+      muovi(LS,{x:42,y:82,w:xp-42,h:76},faseS);
+      qs('l-v').textContent='V = '+V.toFixed(0)+' cm³'; qs('l-p').textContent='P = '+P.toFixed(0)+' kPa';
+      set(pt,{cx:f(PX(V)),cy:f(PY(P))}); set(gv,{x1:f(PX(V)),y1:f(PY(P)),x2:f(PX(V)),y2:220}); set(gp,{x1:f(PX(V)),y1:f(PY(P)),x2:420,y2:f(PY(P))});
+    }
+    cur.addEventListener('input',function(){disS(+cur.value);});
+    bottone(bS,function(fine){cur.disabled=true;
+      corri(5000,function(t){var V=50-30*liscio(t/4500);faseS=0.0006*t;cur.value=V;disS(V);},function(){cur.disabled=false;fine();});},
+      function(){faseS=0;cur.value=50;disS(50);});
+    disS(50);
+  }
+})();
+</script>
 </body>
 </html>
