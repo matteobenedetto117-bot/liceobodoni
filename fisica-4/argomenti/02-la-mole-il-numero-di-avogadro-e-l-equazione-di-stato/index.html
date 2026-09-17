@@ -91,26 +91,6 @@ $n$ contenute in un campione con $N$ particelle si trova dividendo $N$ per $N_A$
 $V$ il volume in metri cubi, $n$ il numero di moli e $T$ la temperatura assoluta in kelvin. Il gas
 perfetto è un modello: i gas reali lo seguono bene quando sono rarefatti.</p>
 
-<div class="fig">
-<svg id="anim-stato" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
-<rect class="gas" x="92" width="136" fill="var(--blu-chiaro)"/>
-<g class="part"></g>
-<path d="M90,20 L90,250 L230,250 L230,20" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<line class="asta" x1="160" x2="160" stroke="var(--inchiostro)" stroke-width="3"/>
-<rect class="pist" x="92" width="136" height="10" fill="var(--blu)"/>
-<text x="300" y="70" font-family="var(--sans)" font-size="13" fill="var(--grigio)">P = 101,3 kPa (costante)</text>
-<text class="l-n" x="300" y="105" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">n = 1,0 mol</text>
-<text class="l-t" x="300" y="130" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 273 K</text>
-<text class="l-v" x="300" y="170" font-family="var(--sans)" font-size="15" font-weight="700" fill="var(--rosso)">V = 22,4 L</text>
-<text x="300" y="195" font-family="var(--sans)" font-size="12" fill="var(--grigio)">V = nRT / P</text>
-</svg>
-<div class="cursore"><button type="button" class="btn-anim" id="btn-stato" aria-label="Avvia">&#9654;</button>
-<label for="cur-n2">n</label><input id="cur-n2" type="range" min="0.5" max="2" step="0.1" value="1" style="width:min(220px,30%)">
-<label for="cur-t2">T</label><input id="cur-t2" type="range" min="200" max="400" step="1" value="273" style="width:min(220px,30%)"></div>
-<p class="did">A pressione costante il volume del gas è direttamente proporzionale al numero di moli e
-alla temperatura assoluta: una mole a 273&nbsp;K e 101,3&nbsp;kPa occupa circa 22,4&nbsp;litri.</p>
-</div>
-
 <h2>Esempio</h2>
 
 <p>Un gas ha pressione $P = 3{,}7\times10^{5}\ \text{Pa}$, temperatura $T = 415\ \text{K}$ e
@@ -141,66 +121,6 @@ contiene $n = 4{,}8\ \text{mol}$. Quanto vale il volume?</p>
   window.allineaQuaderno=allinea;
   window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
-})();
-</script>
-<script>
-(function(){
-  var NS='http://www.w3.org/2000/svg';
-  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function cl(u){return Math.max(0,Math.min(1,u));}
-  function liscio(u){u=cl(u);return u*u*(3-2*u);}
-  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
-  function el(g,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
-  function f(n){return n.toFixed(1);}
-  function bottone(b,avvia,reset){
-    var stato='fermo';
-    b.addEventListener('click',function(){
-      if(stato==='fine'){reset();stato='fermo';b.innerHTML='&#9654;';b.setAttribute('aria-label','Avvia');return;}
-      if(stato!=='fermo')return;
-      stato='corsa';b.disabled=true;
-      avvia(function(){stato='fine';b.disabled=false;b.innerHTML='&#8634;';b.setAttribute('aria-label','Ricomincia');});
-    });
-  }
-  function corri(D,dis,fine){var t0=null;(function passo(t){if(t0===null)t0=t;var dt=ridotto?D:t-t0;dis(Math.min(dt,D));if(dt>=D)fine();else requestAnimationFrame(passo);})(performance.now());}
-  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-  /* moto rettilineo con urti elastici sulle pareti: onda triangolare in [0,1] */
-  function tri(x){x=((x%2)+2)%2;return x>1?2-x:x;}
-  function particelle(g,n,seme){
-    var R=rng(seme),L=[];
-    for(var i=0;i<n;i++){var a=R()*2*Math.PI;L.push({u:R(),v:R(),cx:Math.cos(a),cy:Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
-    return L;
-  }
-  /* fase = cammino percorso (in "scatole"), box = {x,y,w,h} */
-  function muovi(L,box,fase){
-    L.forEach(function(p){
-      var fx=p.fase!==undefined?p.fase:fase;
-      set(p.c,{cx:f(box.x+4+tri(p.u+p.cx*fx)*(box.w-8)),cy:f(box.y+4+tri(p.v+p.cy*fx*1.3)*(box.h-8))});
-    });
-  }
-
-  var S=document.getElementById('anim-stato'), b=document.getElementById('btn-stato'), cn=document.getElementById('cur-n2'), ct=document.getElementById('cur-t2');
-  if(S&&b&&cn&&ct){
-    var q=function(c){return S.querySelector('.'+c);};
-    var L=particelle(q('part'),16,3), fase=0;
-    function virg(x,d){return x.toFixed(d).replace('.',',');}
-    function stato(n,T){
-      var V=n*8.31*T/101300*1000, h=V*2.85, top=248-h;
-      set(q('gas'),{y:f(top),height:f(h)}); set(q('pist'),{y:f(top-10)}); set(q('asta'),{y1:f(top-10),y2:f(top-40)});
-      var k=Math.round(8*n);
-      L.forEach(function(p,i){p.c.setAttribute('opacity',i<k?1:0);});
-      muovi(L,{x:92,y:top,w:136,h:h},fase);
-      q('l-n').textContent='n = '+virg(n,1)+' mol'; q('l-t').textContent='T = '+Math.round(T)+' K';
-      q('l-v').textContent='V = '+virg(V,1)+' L';
-    }
-    function man(){stato(+cn.value,+ct.value);}
-    cn.addEventListener('input',man); ct.addEventListener('input',man);
-    function tra(ms){return ms<2200?[1+liscio(ms/2000),273]:[2,273+100*liscio((ms-2400)/2000)];}
-    bottone(b,function(fine){cn.disabled=ct.disabled=true;
-      corri(4600,function(ms){var s=0;for(var x=0;x<ms;x+=20)s+=Math.sqrt(tra(x)[1]/273)*Math.min(20,ms-x);fase=0.0006*s;
-        var v=tra(ms);cn.value=v[0];ct.value=v[1];stato(v[0],v[1]);},function(){cn.disabled=ct.disabled=false;fine();});},
-      function(){fase=0;cn.value=1;ct.value=273;man();});
-    man();
-  }
 })();
 </script>
 </body>
