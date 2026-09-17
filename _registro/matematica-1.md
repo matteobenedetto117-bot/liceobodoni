@@ -546,3 +546,18 @@ questo sul sito pubblico.
   ma ciò che il disegno del triangolo ottusangolo della traccia mostra. Nei disegni il vertice di
   partenza delle tre cevriane è B anziché A come nel manoscritto, così che i tre piedi H, P e M
   cadano in punti visibilmente distinti sulla base: è una scelta di leggibilità, non di contenuto.
+
+## Unità 55 — Primo criterio di congruenza
+- Parole: 358 su 2 pagine di traccia (pagine 20 e 21 del PDF di geometria). Il file di classe
+  indicava 20–22, ma a pagina 22 comincia già il secondo criterio, che è l'unità 56: l'unità si
+  ferma dunque a pagina 21.
+- Rettifica: nell'esempio 2 la traccia conclude «AV̂C ≅ BV̂C per I criterio» usando la notazione
+  dell'angolo dove servono i triangoli; il criterio dà la congruenza dei triangoli AVC e BVC, e solo
+  in seguito, come conseguenza, quella degli angoli in C. Nella pagina la riga è scritta come
+  congruenza di triangoli. Sempre nell'esempio 2 il punto sulla bisettrice è etichettato «c»
+  minuscolo nel disegno, in collisione con i nomi dei lati a e b: rinominato C.
+- Aggiunta: nessuna. Il criterio resta col solo enunciato, come nella traccia, che non lo dimostra.
+  I due esempi sono quelli della traccia, con le stesse ipotesi e la stessa struttura di
+  dimostrazione. Nessun terzo esempio, nessuna tabella di confronto fra i criteri, nessuno strumento
+  interattivo. L'unico riquadro di avvertenza segnala la confusione fra tesi sui triangoli e tesi su
+  un singolo angolo, che è esattamente il punto su cui la traccia dell'esempio 2 scivola.
