@@ -339,3 +339,24 @@ questo sul sito pubblico.
   nessuno strumento interattivo, nessun disegno (la traccia non ne ha). Un solo riquadro
   "Errore da evitare", sulla confusione fra 0 = 0 e x = 0, che è lo sbaglio tipico di
   questo punto del programma.
+
+## Unità 30 — Polinomi come funzioni e zeri di un polinomio
+- Parole: 546 su 2 pagine di traccia (pp. 69–70 di matematica-1.pdf), cioè 273 per
+  pagina. La pagina 69 è per metà occupata da due diagrammi a frecce, che qui sono
+  ridisegnati in SVG e richiedono ciascuno una didascalia.
+- Contenuto della traccia, per intero e nel suo ordine: il diagramma di una relazione
+  generica fra A e B; la definizione di funzione come relazione che a ogni elemento di A
+  associa un solo elemento di B; P(x) = x² con lo schema x ∈ A → P(x) ∈ B e il secondo
+  diagramma (A = {−1, 1, 2, 3} → B = {1, 4, 5, 9, 12}); P(x) = x³ − 4x con P(2) = 0, la
+  definizione di zero, P(0) = 0, P(−2) = 0, la conclusione che −2, 0, 2 sono zeri, e
+  P(1) = −3.
+- Rettifica: nessuna. Verificati con SymPy tutti i valori: per x³ − 4x si ha P(2) = 0,
+  P(0) = 0, P(−2) = 0, P(1) = −3, e l'insieme completo degli zeri è {−2, 0, 2}; per x²
+  le immagini di −1, 1, 2, 3 sono 1, 1, 4, 9, coerenti con le frecce del quaderno.
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi,
+  nessuno strumento interattivo. Due righe di commento non presenti nella traccia: che
+  due frecce possono arrivare nello stesso elemento di B mentre non ne possono partire
+  due dallo stesso elemento di A (il secondo diagramma lo mostra ma non lo dice), e che
+  in P(−2) la potenza dispari conserva il segno — rimando all'unità 7, dove la regola è
+  stata introdotta. Un solo riquadro, sulla confusione fra il valore provato e il
+  risultato del calcolo.
