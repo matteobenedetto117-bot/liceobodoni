@@ -533,3 +533,16 @@ questo sul sito pubblico.
   angoli e per lati) sono state tenute separate come nel manoscritto. Non è stato detto che la
   somma degli angoli interni è un angolo piatto, né che un triangolo non può avere due angoli
   retti: dipendono dall'unità 63 e qui non sono disponibili.
+
+## Unità 54 — Bisettrici, mediane e altezze
+- Parole: 305 su circa mezza pagina di traccia (seconda fascia della pagina 18 del PDF, numerata 19
+  nel quaderno). Il rapporto è largo rispetto alla mezza pagina, ma la traccia è quasi interamente
+  grafica: quattro disegni con le sole etichette BISETTRICE, MEDIANA, ALTEZZA e nessuna frase. Le
+  definizioni scritte per esteso sono la trascrizione in parole di quei disegni.
+- Rettifica: nessuna. I disegni della traccia sono corretti, compreso il caso ottusangolo con i due
+  piedi sui prolungamenti.
+- Aggiunta: nessun contenuto nuovo. Nessun esempio svolto, nessuno strumento interattivo, nessuna
+  tabella. La precisazione «retta del lato, non lato» nella definizione di altezza non è un'aggiunta
+  ma ciò che il disegno del triangolo ottusangolo della traccia mostra. Nei disegni il vertice di
+  partenza delle tre cevriane è B anziché A come nel manoscritto, così che i tre piedi H, P e M
+  cadano in punti visibilmente distinti sulla base: è una scelta di leggibilità, non di contenuto.
