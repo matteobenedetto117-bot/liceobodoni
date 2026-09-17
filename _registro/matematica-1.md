@@ -561,3 +561,15 @@ questo sul sito pubblico.
   dimostrazione. Nessun terzo esempio, nessuna tabella di confronto fra i criteri, nessuno strumento
   interattivo. L'unico riquadro di avvertenza segnala la confusione fra tesi sui triangoli e tesi su
   un singolo angolo, che è esattamente il punto su cui la traccia dell'esempio 2 scivola.
+
+## Unità 56 — Secondo criterio di congruenza
+- Parole: 399 su 2 pagine di traccia (pagine 22–23 del PDF geometria-1; il campo `pagine`
+  del file di classe indica 23–24, sfasato di uno rispetto alla numerazione del PDF).
+- Rettifica: nell'esempio la traccia elenca fra le ipotesi «PÔD ≅ PÔC per ipotesi» senza dire
+  da dove venga; la congruenza discende dal fatto che P sta sulla bisettrice di AÔB, e nella
+  pagina la giustificazione è esplicitata. Nessun altro errore nella traccia.
+- Aggiunta: nessuna. Il criterio resta col solo enunciato, come nella traccia, che non lo
+  dimostra. L'unico esempio è quello della traccia, con le stesse ipotesi e gli stessi passaggi.
+  Nessuna tabella di confronto fra i criteri, nessuno strumento interattivo. L'unico riquadro di
+  avvertenza riguarda il significato di «adiacenti al lato», che è il punto su cui il criterio
+  viene applicato a sproposito.
