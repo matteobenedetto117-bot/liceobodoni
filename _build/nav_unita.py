@@ -7,9 +7,25 @@ import json, os, re, sys
 
 RAD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-def cartelle_ordinate(percorso):
+def cartella_unita(u):
+    # come in genera.py: "cartella" permette di cambiare titolo o numero senza cambiare l'indirizzo
+    import unicodedata
+    if u.get('cartella'):
+        return u['cartella']
+    t = unicodedata.normalize('NFKD', u['titolo']).encode('ascii', 'ignore').decode()
+    t = re.sub(r'-+', '-', re.sub(r'[^a-zA-Z0-9]+', '-', t).strip('-').lower())[:60]
+    return "%02d-%s" % (u['n'], t)
+
+def unita_pubblicate(percorso, dati):
+    """(numero, cartella, titolo) delle unità presenti su disco, nell'ordine di _dati."""
     base = os.path.join(RAD, percorso, 'argomenti')
-    return sorted(d for d in os.listdir(base) if os.path.isdir(os.path.join(base, d)))
+    out = []
+    for area in dati['aree']:
+        for u in area['unita']:
+            c = cartella_unita(u)
+            if os.path.isdir(os.path.join(base, c)):
+                out.append((u['n'], c, u['titolo']))
+    return out
 
 def dati_classe(percorso):
     return json.load(open(os.path.join(RAD, '_dati', percorso + '.json'), encoding='utf-8'))
@@ -26,27 +42,23 @@ def bottone(classe, direzione, titolo, href):
             % (classe, href, direzione, titolo))
 
 def inserisci(percorso):
-    cartelle = cartelle_ordinate(percorso)
     dati = dati_classe(percorso)
-    titoli = titoli_per_numero(dati)
+    unita = unita_pubblicate(percorso, dati)
     modificati = 0
-    for i, cart in enumerate(cartelle):
+    for i, (n, cart, _) in enumerate(unita):
         fp = os.path.join(RAD, percorso, 'argomenti', cart, 'index.html')
         html = open(fp, encoding='utf-8').read()
-        n = int(cart.split('-', 1)[0])
 
         bottoni = []
         if i > 0:
-            cart_prec = cartelle[i - 1]
-            bottoni.append(bottone('precedente', '&larr; Precedente', titoli.get(n - 1, ''),
-                                    '../%s/index.html' % cart_prec))
+            bottoni.append(bottone('precedente', '&larr; Precedente', unita[i - 1][2],
+                                    '../%s/index.html' % unita[i - 1][1]))
         else:
             bottoni.append(bottone('precedente', '&larr; Indice', dati['classe'],
                                     '../../index.html'))
-        if i + 1 < len(cartelle):
-            cart_succ = cartelle[i + 1]
-            bottoni.append(bottone('successiva', 'Successiva &rarr;', titoli.get(n + 1, ''),
-                                    '../%s/index.html' % cart_succ))
+        if i + 1 < len(unita):
+            bottoni.append(bottone('successiva', 'Successiva &rarr;', unita[i + 1][2],
+                                    '../%s/index.html' % unita[i + 1][1]))
         else:
             bottoni.append(bottone('successiva', 'Indice &rarr;', dati['classe'],
                                     '../../index.html'))
@@ -62,7 +74,7 @@ def inserisci(percorso):
             continue
         open(fp, 'w', encoding='utf-8').write(nuovo_html)
         modificati += 1
-    print("%s: %d file modificati su %d" % (percorso, modificati, len(cartelle)))
+    print("%s: %d file modificati su %d" % (percorso, modificati, len(unita)))
 
 if __name__ == '__main__':
     for percorso in sys.argv[1:]:
