@@ -12,10 +12,11 @@
 - Aggiunta: nessuna.
 - Revisione: titolo «L'equazione di stato» (cartella invariata); tolti sottotitolo e sezione «Nelle prossime unità»; titoletto «Esempio». Unità di N_A: «molecole/mol» → mol⁻¹ (particelle per mole); «molecole» → «particelle (atomi o molecole)»; aggiunte le unità SI dell'equazione di stato e la validità del modello per i gas rarefatti; unità di misura nel calcolo dell'esempio e risultato anche in litri (verificati k·N_A = 8,31 J/(mol·K) e V ≈ 0,045 m³). Impaginazione a quaderno. Nessuna figura (la traccia non ne ha).
 
-## Unità 03 — Legge di Boyle e trasformazione isoterma
+## Unità 03 — La legge di Boyle
 - Parole: 345 su 2 pagine di traccia (pagine 5–6: dalla sezione "Legge di Boyle" a fondo pagina 5 fino alla famiglia di isoterme a fondo pagina 6; l'inizio di pagina 7 appartiene già alle leggi di Gay-Lussac, unità 04)
 - Rettifica: nessuna. La derivazione P₁V₁ = nRT = P₂V₂ ⟹ P₁V₁ = P₂V₂ è stata verificata algebricamente con SymPy e coincide con la traccia (simbolo n usato al posto della μ manoscritta, per coerenza con l'unità 02 già pubblicata).
 - Aggiunta: nessuna. La traccia non contiene un esempio numerico proprio di questa unità (l'unico esempio delle pagine vicine appartiene all'unità 02); non ne è stato inserito uno nuovo, in coerenza con l'unità 01 che si trova nella stessa condizione.
+- Revisione: titolo «La legge di Boyle» (cartella invariata); tolti sottotitolo e sezione «Nelle prossime unità». «in cui varia T = costante» → «in cui la temperatura resta costante»; specificata una data quantità di gas (n costante); PV = costante come proporzionalità inversa; l'isoterma è un ramo di iperbole equilatera; «richiede» → «corrisponde» per la pressione a temperatura maggiore. Impaginazione a quaderno. Figure: nella prima i due stati avevano un numero diverso di particelle (corretto) e i volumi non erano in scala; isoterme prima tracciate a occhio, ora calcolate (n = 1 mol, P = nRT/V). Tutte animate con cursore: volume del pistone (10 → 5 L, P e P·V = 831 kPa·L), punto che scorre sull'isoterma da 1 a 2, temperatura (100–300 K) con isoterma mobile e pressione a V = 6 L.
 
 ## Unità 04 — Le leggi di Gay-Lussac: isobara e isocora
 - Parole: 399 su 3 pagine di traccia (pagine 7–9: pagina 7 prima legge/isobara, pagine 8–9 seconda legge/isocora con relativo grafico)
