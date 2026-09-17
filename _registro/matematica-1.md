@@ -180,3 +180,18 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Tutti i risultati della traccia verificati con SymPy: $(3x^2+5y)^2$, $(2z-a)^2$, $(x+7y)(x-7y)$, $(x+2)(-x+2)$, $(-3+x)(-3-x)$ sono corretti così come scritti.
 - Aggiunta: nessuna. Conservati i due prodotti notevoli, la derivazione per moltiplicazione diretta che la traccia svolge, l'avvertenza "$(A+B)^2 \neq A^2+B^2$" e tutti e cinque gli esempi, nessuno di più.
 - Nota: aggiornato il link "successiva" dell'unità 19, che puntava all'indice.
+
+## Unità 21 — Cubo di binomio e quadrato di trinomio
+- Parole: 429 su 1,5 pagine di traccia (PDF 50, metà inferiore, e 51), pari a circa 286
+  parole per pagina effettiva.
+- Rettifica: nessuna. Verificati con SymPy tutti e cinque i risultati della traccia:
+  $(2a+y)^3=8a^3+12a^2y+6ay^2+y^3$; $(x^2-2)^3=x^6-6x^4+12x^2-8$;
+  $(2x+y+3z)^2=4x^2+y^2+9z^2+4xy+12xz+6yz$;
+  $(3a+b-2x)^2=9a^2+b^2+4x^2+6ab-12ax-4bx$;
+  $(-c+2x-5z)^2=c^2+4x^2+25z^2-4cx+10cz-20xz$.
+- Aggiunta: un solo riquadro "Errore da evitare" sui tre doppi prodotti del trinomio, e lo
+  schema SVG della griglia tre per tre dei nove prodotti, che ridisegna le sottolineature
+  colorate con cui la traccia raggruppa i termini uguali. Nessun esempio nuovo, nessuna
+  dimostrazione in più, nessuna tabella di sintesi. Conservate entrambe le derivazioni per
+  moltiplicazione diretta che la traccia svolge.
+- Nota: aggiornato il link "successiva" dell'unità 20, che puntava all'indice.
