@@ -360,3 +360,20 @@ questo sul sito pubblico.
   in P(−2) la potenza dispari conserva il segno — rimando all'unità 7, dove la regola è
   stata introdotta. Un solo riquadro, sulla confusione fra il valore provato e il
   risultato del calcolo.
+
+## Unità 31 — Divisione fra polinomi
+- Parole: 858 su 4 pagine di traccia (pagine 71–74 di _fonti/matematica-1.pdf), 215 per pagina.
+- Contenuto della traccia riportato per intero e nel suo ordine: le tre domande di
+  divisibilità (24 per 8, x²+x per x, x²+x per x²), la definizione di divisibilità con
+  A:B=Q e B·Q=A, i due esempi di divisione per un monomio, la divisione in colonna
+  (8x³+6x²−5x−3):(2x²+x−1) con le etichette dividendo/divisore/quoziente/resto, i quattro
+  passi del procedimento, l'esempio (8x⁴+6x³+1):(x²+x) con i termini nulli di posto, la
+  verifica delle due divisioni e il teorema A = B·Q + R.
+- Rettifica: nessuna. Verificati con SymPy entrambi i quozienti e i resti — (4x+1, −2x−2)
+  e (8x²−2x+2, −2x+1) — le due divisioni per monomio e le due moltiplicazioni di verifica,
+  che restituiscono esattamente i dividendi.
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi,
+  nessuno strumento interattivo. Un solo riquadro, sul cambio di segno del passo 2, che è
+  l'errore che fa fallire la divisione; nella traccia il cambio di segno è scritto ma non
+  motivato. Una riga per dire perché ci si ferma (grado del resto minore del grado del
+  divisore), esplicitando il criterio già enunciato al passo 4.
