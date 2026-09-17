@@ -53,6 +53,7 @@
 - Parole: 177 su 0,4 pagine di traccia (parte alta di pagina 16, dal titolo "Trasformazioni Termodinamiche" fino a "NON POSSO TORNARE ALLO STATO INIZIALE"; il resto della pagina — trasformazione isobara e diagramma P-V — appartiene già all'unità 08)
 - Rettifica: nessuna. Non ci sono formule o valori numerici da verificare in questa unità.
 - Aggiunta: nessuna riga di contenuto nuovo. Lo schema SVG reversibile/irreversibile ridisegna le due frecce e i due riquadri già presenti nella traccia.
+- Revisione: titolo e titoletti invariati; tolti sottotitolo e sezione «Nelle prossime unità». Rettifica della definizione di trasformazione reversibile: non basta che il sistema possa tornare allo stato iniziale (può farlo sempre), deve poter essere percorsa al contrario riportando sistema e ambiente allo stato iniziale; condizioni (lenta, stati di equilibrio, senza attriti), esempi di irreversibilità, trasformazioni reali irreversibili. Aggiunti: energia interna come funzione di stato, calore e lavoro che non lo sono. Impaginazione a quaderno; etichette dello schema corrette di conseguenza.
 
 ## Unità 08 — Il lavoro di un gas e il diagramma P-V
 - Parole: 382 su 1,6 pagine di traccia (parte bassa di pagina 16 — trasformazione isobara, i due schemi del pistone, la derivazione F=PA, L=PΔV — più pagina 17 intera, dove il riquadro L=PΔV si generalizza all'area sotto la curva e compare la distinzione fra L>0 ed L<0; l'inizio di pagina 18 appartiene già all'unità 09, calore specifico a pressione costante)

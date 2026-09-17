@@ -5,12 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trasformazioni termodinamiche e funzioni di stato — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+table.gradi{border-collapse:collapse;margin:var(--r) auto 0;font-family:var(--sans);font-size:.9rem;line-height:var(--r)}
+table.gradi th{text-align:left;font-weight:600;color:var(--blu);padding:0 18px;border-bottom:1px solid var(--inchiostro)}
+table.gradi td{padding:0 18px}
+table.gradi td.l{font-family:var(--serif);font-size:1rem;text-align:center;font-weight:700}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -18,27 +58,31 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 07</p>
+  <p class="occhiello">Termodinamica &middot; Unità 07</p>
   <h1>Trasformazioni termodinamiche e funzioni di stato</h1>
-  <p class="sommario">Prima di calcolare il lavoro scambiato da un gas serve un vocabolario
-  preciso per descrivere come cambia il suo stato: quali grandezze contano davvero e come si
-  distinguono le trasformazioni che un sistema pu&ograve; compiere.</p>
 </header>
 
 <h2>Funzione di stato</h2>
 
-<p>Una grandezza &egrave; una <strong>funzione di stato</strong> se dipende solo dallo stato in
-cui si trova il sistema in quel momento, e non dal modo in cui il sistema lo ha raggiunto.
-Pressione, volume e temperatura sono funzioni di stato: conoscere i loro valori basta a
-descrivere il sistema, senza bisogno di sapere come ci si &egrave; arrivati.</p>
+<p>Una grandezza è una <strong>funzione di stato</strong> se dipende solo dallo stato in cui si
+trova il sistema in quel momento, e non dal modo in cui il sistema lo ha raggiunto. Pressione,
+volume e temperatura descrivono lo stato di un gas: conoscere i loro valori basta a descrivere il
+sistema, senza bisogno di sapere come ci si è arrivati. Anche l'energia interna è una funzione di
+stato: per un gas ideale dipende solo dalla temperatura. Calore e lavoro, invece, non lo sono,
+perché dipendono dalla trasformazione con cui il sistema passa da uno stato all'altro.</p>
 
 <h2>Trasformazioni reversibili e irreversibili</h2>
 
-<p>Una trasformazione si dice <strong>reversibile</strong> se il sistema pu&ograve; tornare al
-proprio stato iniziale; si dice <strong>irreversibile</strong> se non pu&ograve;.</p>
+<p>Una trasformazione si dice <strong>reversibile</strong> se si può percorrere anche al contrario,
+riportando sia il sistema sia l'ambiente circostante esattamente allo stato iniziale. Perché questo
+accada, la trasformazione deve avvenire molto lentamente, passando per stati di equilibrio, e senza
+attriti. Si dice <strong>irreversibile</strong> se non è possibile tornare indietro senza lasciare
+qualche cambiamento nell'ambiente: sono irreversibili, per esempio, un'espansione rapida di un gas o
+un passaggio di calore fra corpi a temperature diverse. Le trasformazioni reali sono tutte, almeno
+in parte, irreversibili; quelle reversibili sono un caso ideale.</p>
 
 <div class="fig">
-<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px">
 <defs>
 <marker id="fr8" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
 <path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
@@ -46,29 +90,40 @@ proprio stato iniziale; si dice <strong>irreversibile</strong> se non pu&ograve;
 </defs>
 <rect x="180" y="14" width="120" height="40" rx="8" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="2"/>
 <text x="240" y="39" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--blu)">trasformazione</text>
-<path d="M210,54 L110,120" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#fr8)"/>
-<path d="M270,54 L370,120" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#fr8)"/>
-<rect x="30" y="122" width="160" height="50" rx="8" fill="#fff" stroke="var(--verde)" stroke-width="2.2"/>
-<text x="110" y="145" text-anchor="middle" font-family="var(--sans)" font-size="13.5" fill="var(--verde)">reversibile</text>
-<text x="110" y="162" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">torna allo stato iniziale</text>
-<rect x="290" y="122" width="160" height="50" rx="8" fill="#fff" stroke="var(--rosso)" stroke-width="2.2"/>
-<text x="370" y="145" text-anchor="middle" font-family="var(--sans)" font-size="13.5" fill="var(--rosso)">irreversibile</text>
-<text x="370" y="162" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">non torna allo stato iniziale</text>
+<path d="M210,54 L110,112" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#fr8)"/>
+<path d="M270,54 L370,112" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#fr8)"/>
+<rect x="20" y="114" width="180" height="70" rx="8" fill="#fff" stroke="var(--verde)" stroke-width="2.2"/>
+<text x="110" y="136" text-anchor="middle" font-family="var(--sans)" font-size="13.5" fill="var(--verde)">reversibile</text>
+<text x="110" y="155" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">si può invertire: sistema</text>
+<text x="110" y="171" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">e ambiente tornano come prima</text>
+<rect x="280" y="114" width="180" height="70" rx="8" fill="#fff" stroke="var(--rosso)" stroke-width="2.2"/>
+<text x="370" y="136" text-anchor="middle" font-family="var(--sans)" font-size="13.5" fill="var(--rosso)">irreversibile</text>
+<text x="370" y="155" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">non si può invertire senza</text>
+<text x="370" y="171" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">cambiamenti nell'ambiente</text>
 </svg>
 <p class="did">Le due classi in cui si dividono le trasformazioni di un sistema termodinamico.</p>
 </div>
 
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Il lavoro di un gas letto come area nel diagramma P-V, con il caso dell'isobara,
-nell'unit&agrave; 08.</li>
-</ul>
-</div>
-
 <nav class="nav-unita"><a class="precedente" href="../07-principio-zero-e-primo-principio-della-termodinamica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Principio zero e primo principio della termodinamica</span></a><a class="successiva" href="../09-il-lavoro-di-un-gas-e-il-diagramma-p-v/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il lavoro di un gas e il diagramma P-V</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 07</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 07</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
