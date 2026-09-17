@@ -438,3 +438,8 @@ questo sul sito pubblico.
   tipico del trinomio speciale. Per il resto solo righe di commento su passaggi già presenti:
   come si controlla il doppio prodotto, perché la somma di quadrati non rientra nella
   formula, e perché le due formule del cubo sono la stessa con −B al posto di B.
+
+## Unità 36 — Come scegliere il metodo di scomposizione
+- Parole: 455 su 2 pagine di traccia (85–86)
+- Rettifica: nessuna. Verificati con SymPy entrambi gli schemi di Ruffini: (x³+4x²−3):(x+1) dà quoziente x²+3x−3 e resto 0; (a³−3a²+2a−6):(a−3) dà a²+2 e resto 0.
+- Aggiunta: nessuna. L'esempio a³−3a²+2a−6 sta in cima a p. 87 ma chiude la trattazione di Ruffini, non apre l'unità 37 (che parte dal titolo "Somma e differenza di cubi"): è stato incluso qui. Il riquadro "Attenzione" sul conteggio dei termini è l'unico commento non presente nella traccia.
