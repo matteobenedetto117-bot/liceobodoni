@@ -6,12 +6,14 @@
 - Aggiunta: nessuna. Il valore della costante di Boltzmann (1,38×10⁻²³ J/K) è stato verificato contro il valore CODATA e risulta coerente con la traccia.
 - Revisione: titolo «Le tre leggi dei gas» (cartella invariata); tolto il sottotitolo; «barometro» → «manometro»; aggiunti la condizione di gas rarefatto, la liquefazione prima di 0 K, T = t + 273,15, la proporzionalità diretta con la temperatura assoluta, la temperatura costante nelle relazioni con N e V e l'uso dei kelvin in P = kNT/V; k ≈ 1,38×10⁻²³ J/K. Impaginazione a quaderno. Figure ridisegnate in scala e animate: pistone libero con grafico V–t prolungato fino a 0 K, contenitore rigido con manometro e grafico P–t, immissione di particelle con pressione che raddoppia, siringa con cursore sul volume e iperbole P–V (P·V costante). Cursori in tutte le figure: temperatura (0–200 °C) nelle prime due, numero di particelle (6–12) nella terza, volume nella quarta.
 - Volumi nelle figure espressi in metri cubi (prima cm³).
+- Ripristinati i riquadri azzurri attorno alle formule in evidenza.
 
 ## Unità 02 — L'equazione di stato
 - Parole: 287 su 1,3 pagine di traccia (fondo pagina 3 — sezione "La mole e il numero di Avogadro" — più pagina 4 intera e la parte alta di pagina 5, fino all'esempio numerico; oltre inizia la legge di Boyle, unità 03)
 - Rettifica: nessuna. Il calcolo k·N_A = 8,31 J/(mol·K) e il risultato dell'esempio V ≈ 0,045 m³ sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna.
 - Revisione: titolo «L'equazione di stato» (cartella invariata); tolti sottotitolo e sezione «Nelle prossime unità»; titoletto «Esempio». Unità di N_A: «molecole/mol» → mol⁻¹ (particelle per mole); «molecole» → «particelle (atomi o molecole)»; aggiunte le unità SI dell'equazione di stato e la validità del modello per i gas rarefatti; unità di misura nel calcolo dell'esempio (verificati k·N_A = 8,31 J/(mol·K) e V ≈ 0,045 m³). Impaginazione a quaderno. Nessuna figura (la traccia non ne ha).
+- Ripristinati i riquadri azzurri attorno alle formule in evidenza.
 
 ## Unità 03 — La legge di Boyle
 - Parole: 345 su 2 pagine di traccia (pagine 5–6: dalla sezione "Legge di Boyle" a fondo pagina 5 fino alla famiglia di isoterme a fondo pagina 6; l'inizio di pagina 7 appartiene già alle leggi di Gay-Lussac, unità 04)
@@ -19,12 +21,14 @@
 - Aggiunta: nessuna. La traccia non contiene un esempio numerico proprio di questa unità (l'unico esempio delle pagine vicine appartiene all'unità 02); non ne è stato inserito uno nuovo, in coerenza con l'unità 01 che si trova nella stessa condizione.
 - Revisione: titolo «La legge di Boyle» (cartella invariata); tolti sottotitolo e sezione «Nelle prossime unità». «in cui varia T = costante» → «in cui la temperatura resta costante»; specificata una data quantità di gas (n costante); PV = costante come proporzionalità inversa; l'isoterma è un ramo di iperbole equilatera; «richiede» → «corrisponde» per la pressione a temperatura maggiore. Impaginazione a quaderno. Figure: nella prima i due stati avevano un numero diverso di particelle (corretto) e i volumi non erano in scala; isoterme prima tracciate a occhio, ora calcolate (n = 1 mol, P = nRT/V). Tutte animate con cursore: volume del pistone (da 0,010 a 0,005 m³, P e P·V = 831 J), punto che scorre sull'isoterma da 1 a 2, temperatura (100–300 K) con isoterma mobile e pressione a V fisso. Poi: nelle prime due figure tolto il pulsante ▶, resta solo il cursore sul volume e le particelle si muovono di continuo; accanto all'isoterma un piccolo pistone con le posizioni 1 e 2 segnate. Particelle simulate con velocità costante in modulo (prima rallentavano col volume); aggiunta la spiegazione della pressione con gli urti; terza figura solo con cursore e isoterma mobile, senza punto né linea verticale.
 - Volumi nelle figure espressi in metri cubi (prima litri).
+- Ripristinati i riquadri azzurri attorno alle formule in evidenza.
 
 ## Unità 04 — Le leggi di Gay-Lussac
 - Parole: 399 su 3 pagine di traccia (pagine 7–9: pagina 7 prima legge/isobara, pagine 8–9 seconda legge/isocora con relativo grafico)
 - Rettifica: nessuna. Le due derivazioni (V₁/T₁=V₂/T₂ da P₁=P₂, e P₁/T₁=P₂/T₂ da V₁=V₂, a partire da P₁V₁=nRT₁ e P₂V₂=nRT₂) sono state verificate algebricamente con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna. La traccia non contiene un esempio numerico in questa unità; coerentemente con le unità 01 e 03, già nella stessa condizione, non ne è stato inserito uno nuovo.
 - Revisione: titolo «Le leggi di Gay-Lussac» (cartella invariata); tolti sottotitolo e sezione «Nelle prossime unità». Precisati «data quantità di gas» e la proporzionalità diretta di V e di P con la temperatura assoluta. Impaginazione a quaderno. Figure: nei disegni dei due stati il numero di particelle cambiava (4→5 e 5→7), corretto; isoterme prima a occhio, ora calcolate (n = 1 mol, volumi in m³). Tutte con cursore sulla temperatura (100–200 K), senza pulsante: pistone con peso e posizioni 1–2 (V/T costante), segmento orizzontale fra le isoterme a 100 e 200 K, recipiente rigido con manometro (P/T costante), segmento verticale. Particelle sempre in moto, con velocità che cresce con la temperatura (accentuata rispetto alla radice di T per rendere visibile l'effetto). Tolte le scritte con i valori accanto al pistone e al recipiente. Aggiunte due frasi sugli urti: nell'isobara più urti ma il pistone si solleva e la pressione resta costante; nell'isocora più urti e la pressione aumenta.
+- Ripristinati i riquadri azzurri attorno alle formule in evidenza.
 
 ## Unità 05 — Relazione tra energia e temperatura di un gas ideale
 - Parole: 265 su 1,3 pagine di traccia (pagine 10–11: pagina 10 intera più la parte alta di pagina 11, fino al valore della costante di Boltzmann; il resto di pagina 11 — gradi di libertà per tipo di gas e formule dell'energia interna — appartiene già all'unità 05)
@@ -36,12 +40,14 @@
   - Parole: 225 su 1,6 pagine di traccia (parte inferiore di pagina 11 — dalla tabella dei gradi di libertà per gas mono-, bi- e poliatomico — più pagina 12 intera, dove si passa dalla costante di Boltzmann alla costante dei gas R)
   - Rettifica: nessuna. Le tre formule dell'energia totale (3/2 NkT, 5/2 NkT, 3NkT e le corrispondenti in nRT) sono state verificate algebricamente con SymPy; il valore R = 8,31 J/(mol·K) è stato controllato contro N_A·k = 6,022×10²³ × 1,38×10⁻²³ ≈ 8,31, coerente con la traccia.
   - Aggiunta: nessuna riga di contenuto nuovo. L'unico scarto dalla traccia è nominare esplicitamente E_tot come "energia interna" nel paragrafo introduttivo, indispensabile perché è il termine usato nel titolo dell'unità e la traccia lo lascia implicito.
+- Ripristinati i riquadri azzurri attorno alle formule in evidenza.
 
 ## Unità 06 — Principio zero e primo principio della termodinamica
 - Parole: 479 su 3 pagine di traccia (pagine 13–15: principio zero e convenzione dei segni a pagina 13, i due casi limite — scatola sigillata e pistone — a pagina 14, la formula generale e l'esempio numerico a pagina 15; pagina 16 appartiene già all'unità 07, trasformazioni termodinamiche)
 - Rettifica: nessuna. L'energia interna iniziale (13712 J arrotondati), la variazione (-5,0×10³ J), l'energia interna finale (8712 J) e la temperatura finale (210 K) sono state verificate con SymPy usando R = 8,31 J/(mol·K) e coincidono con la traccia.
 - Aggiunta: nessuna riga di contenuto nuovo. L'unico scarto dalla traccia è l'enunciato in prosa del principio zero prima della formulazione ufficiale, indispensabile per rendere leggibile il disegno delle scatole A, B, C a chi non l'ha mai visto.
 - Revisione: titolo invariato; tolti sottotitolo e sezione «Nelle prossime unità»; titoletti «Principio zero», «Primo principio della termodinamica», «Esempio». Precisato che il calore passa dal corpo più caldo al più freddo; termometro come oggetto B; primo caso con «un gas» in recipiente rigido (non solo monoatomico); frase sul primo principio come conservazione dell'energia; E_int con pedice in tondo; unità di misura nei calcoli dell'esempio e motivo del segno di ΔE_int (ricalcolati: E_i ≈ 13 712 J, E_f ≈ 8712 J, T_f ≈ 209,7 K ≈ 210 K). Impaginazione a quaderno, primo principio in riquadro. Figure: principio zero ridisegnato in tre pannelli con termometri e didascalie separate; convenzione dei segni con didascalie per ogni freccia.
+- Ripristinati i riquadri azzurri attorno alle formule in evidenza (primo principio in riquadro rosso).
 
 ## Unità 07 — Trasformazioni termodinamiche e funzioni di stato
 - Parole: 177 su 0,4 pagine di traccia (parte alta di pagina 16, dal titolo "Trasformazioni Termodinamiche" fino a "NON POSSO TORNARE ALLO STATO INIZIALE"; il resto della pagina — trasformazione isobara e diagramma P-V — appartiene già all'unità 08)
