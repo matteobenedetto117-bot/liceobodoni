@@ -242,3 +242,20 @@ questo sul sito pubblico.
   come nella traccia. Nessuna tabella di sintesi.
 - Non trattato qui, perché ricade nelle pagine dell'unità 25: le proprietà della
   differenza per insiemi disgiunti (A − B = A) e per A ⊆ B (A − B = ∅), a p. 61.
+
+## Unità 25 — Complementare e prodotto cartesiano
+- Parole: 558 su 2 pagine di traccia (pp. 61–62), 279 per pagina.
+- Contenuto della traccia, per intero e nel suo ordine: i due casi particolari della
+  differenza rimasti in sospeso dall'unità 24 (A − B = A per insiemi disgiunti,
+  A − B = ∅ per A ⊆ B, p. 61) con i due diagrammi; la definizione di complementare
+  B̄_A con il diagramma tratteggiato; la definizione di prodotto cartesiano con la
+  scrittura per caratteristica; l'esempio A = {4;5;6}, B = {1;2}; le due proprietà
+  A × B ≠ B × A e |A × B| = |A| · |B| con il conto 3 · 2 = 6.
+- Rettifica: nessuna. Le sei coppie dell'esempio e il conto della cardinalità sono stati
+  verificati e corrispondono alla traccia.
+- Aggiunta: un riquadro "Errore da evitare" sulla condizione B ⊆ A, necessaria perché la
+  scrittura B̄_A abbia senso — la traccia pone la condizione nella definizione ma non
+  segnala il caso in cui cade. Uno strumento interattivo (due cursori per |A| e |B| che
+  ridisegnano la griglia delle coppie) per la sola proprietà |A × B| = |A| · |B|, che
+  nella traccia è enunciata senza figura. Nessun esempio nuovo, nessuna dimostrazione
+  aggiunta, nessuna tabella di sintesi.
