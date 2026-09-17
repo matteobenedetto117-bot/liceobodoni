@@ -5,16 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Principio zero e primo principio della termodinamica — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+table.gradi{border-collapse:collapse;margin:var(--r) auto 0;font-family:var(--sans);font-size:.9rem;line-height:var(--r)}
+table.gradi th{text-align:left;font-weight:600;color:var(--blu);padding:0 18px;border-bottom:1px solid var(--inchiostro)}
+table.gradi td{padding:0 18px}
+table.gradi td.l{font-family:var(--serif);font-size:1rem;text-align:center;font-weight:700}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -22,143 +56,158 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 06</p>
+  <p class="occhiello">Termodinamica &middot; Unità 06</p>
   <h1>Principio zero e primo principio della termodinamica</h1>
-  <p class="sommario">Abbiamo scritto l'energia interna di un gas in funzione della sua
-  temperatura. Vediamo ora come questa energia cambia quando il sistema scambia energia con
-  l'esterno, sotto forma di calore o di lavoro, partendo dal principio che stabilisce quando due
-  corpi si dicono alla stessa temperatura.</p>
 </header>
 
 <h2>Principio zero</h2>
 
-<p>Se mettiamo a contatto due oggetti a temperature diverse, si scambiano calore finch&eacute;
-non raggiungono la stessa temperatura: si dice allora che sono in <strong>equilibrio
-termico</strong>. Il principio zero afferma che questo equilibrio si trasmette da un oggetto
-all'altro.</p>
+<p>Se mettiamo a contatto due oggetti a temperature diverse, il calore passa dal più caldo al più
+freddo finché i due oggetti non raggiungono la stessa temperatura: si dice allora che sono in
+<strong>equilibrio termico</strong>. Il principio zero afferma che l'equilibrio termico si trasmette
+da un oggetto all'altro.</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="frq" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-</defs>
-<rect x="40" y="140" width="50" height="70" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="90" y="90" width="60" height="120" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<text x="65" y="180" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">A</text>
-<text x="120" y="155" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">B</text>
-<text x="95" y="228" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">equilibrio termico</text>
-<text x="200" y="150" text-anchor="middle" font-family="var(--sans)" font-size="24" fill="var(--blu)">&#8594;</text>
-<rect x="370" y="90" width="60" height="120" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="430" y="110" width="60" height="100" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<text x="400" y="155" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">B</text>
-<text x="460" y="165" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">C</text>
-<text x="430" y="228" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">equilibrio termico</text>
-<path d="M320,232 L320,250" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#frq)"/>
-<text x="320" y="252" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)" dy="14">A e C sono in equilibrio termico</text>
+<svg viewBox="0 0 660 220" xmlns="http://www.w3.org/2000/svg">
+<rect x="40" y="140" width="70" height="70" fill="#f3e3d3" stroke="var(--inchiostro)" stroke-width="2.2"/>
+<text x="75.0" y="181.0" text-anchor="middle" font-family="var(--sans)" font-size="16" font-weight="700" fill="var(--inchiostro)">A</text>
+<rect x="71.0" y="66" width="8" height="54" rx="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<rect x="73.0" y="90" width="4" height="34" fill="var(--rosso)"/>
+<circle cx="75.0" cy="126" r="7" fill="var(--rosso)" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="75.0" y1="133" x2="75.0" y2="140" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect x="110" y="110" width="70" height="100" fill="#f3e3d3" stroke="var(--inchiostro)" stroke-width="2.2"/>
+<text x="145.0" y="166.0" text-anchor="middle" font-family="var(--sans)" font-size="16" font-weight="700" fill="var(--inchiostro)">B</text>
+<rect x="141.0" y="36" width="8" height="54" rx="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<rect x="143.0" y="60" width="4" height="34" fill="var(--rosso)"/>
+<circle cx="145.0" cy="96" r="7" fill="var(--rosso)" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="145.0" y1="103" x2="145.0" y2="110" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect x="260" y="110" width="70" height="100" fill="#f3e3d3" stroke="var(--inchiostro)" stroke-width="2.2"/>
+<text x="295.0" y="166.0" text-anchor="middle" font-family="var(--sans)" font-size="16" font-weight="700" fill="var(--inchiostro)">B</text>
+<rect x="291.0" y="36" width="8" height="54" rx="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<rect x="293.0" y="60" width="4" height="34" fill="var(--rosso)"/>
+<circle cx="295.0" cy="96" r="7" fill="var(--rosso)" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="295.0" y1="103" x2="295.0" y2="110" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect x="330" y="130" width="80" height="80" fill="#f3e3d3" stroke="var(--inchiostro)" stroke-width="2.2"/>
+<text x="370.0" y="176.0" text-anchor="middle" font-family="var(--sans)" font-size="16" font-weight="700" fill="var(--inchiostro)">C</text>
+<rect x="366.0" y="56" width="8" height="54" rx="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<rect x="368.0" y="80" width="4" height="34" fill="var(--rosso)"/>
+<circle cx="370.0" cy="116" r="7" fill="var(--rosso)" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="370.0" y1="123" x2="370.0" y2="130" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect x="475" y="140" width="70" height="70" fill="#f3e3d3" stroke="var(--inchiostro)" stroke-width="2.2"/>
+<text x="510.0" y="181.0" text-anchor="middle" font-family="var(--sans)" font-size="16" font-weight="700" fill="var(--inchiostro)">A</text>
+<rect x="506.0" y="66" width="8" height="54" rx="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<rect x="508.0" y="90" width="4" height="34" fill="var(--rosso)"/>
+<circle cx="510.0" cy="126" r="7" fill="var(--rosso)" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="510.0" y1="133" x2="510.0" y2="140" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect x="545" y="130" width="80" height="80" fill="#f3e3d3" stroke="var(--inchiostro)" stroke-width="2.2"/>
+<text x="585.0" y="176.0" text-anchor="middle" font-family="var(--sans)" font-size="16" font-weight="700" fill="var(--inchiostro)">C</text>
+<rect x="581.0" y="56" width="8" height="54" rx="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<rect x="583.0" y="80" width="4" height="34" fill="var(--rosso)"/>
+<circle cx="585.0" cy="116" r="7" fill="var(--rosso)" stroke="var(--inchiostro)" stroke-width="1.4"/>
+<line x1="585.0" y1="123" x2="585.0" y2="130" stroke="var(--inchiostro)" stroke-width="1.2"/>
 </svg>
-<p class="did">B &egrave; in equilibrio termico sia con A sia con C: allora, posti in contatto,
-anche A e C risultano in equilibrio termico fra loro.</p>
+<div class="did-parti" style="--n:3">
+<p class="did">A e B sono in equilibrio termico: i termometri segnano la stessa temperatura.</p>
+<p class="did">Anche B e C sono in equilibrio termico.</p>
+<p class="did">Allora A e C, posti a contatto, sono in equilibrio termico: non si scambiano calore.</p>
+</div>
 </div>
 
-<p>Con l'enunciato completo: se un oggetto B &egrave; in equilibrio termico sia con un oggetto A
-sia con un oggetto C, allora A e C posti in contatto termico si trovano in equilibrio termico.
-Questo &egrave; ci&ograve; che rende sensato parlare di una temperatura comune a pi&ugrave;
-corpi, ed &egrave; il principio su cui si basa il funzionamento di un termometro.</p>
+<p>L'enunciato completo è: se un oggetto B è in equilibrio termico sia con un oggetto A sia con un
+oggetto C, allora A e C, posti a contatto, sono in equilibrio termico fra loro. Questo principio
+permette di parlare di una temperatura comune a più corpi ed è alla base del funzionamento del
+termometro, che fa la parte dell'oggetto B.</p>
 
 <h2>Primo principio della termodinamica</h2>
 
-<p>Un sistema pu&ograve; scambiare energia con l'esterno in due modi distinti: come calore $Q$ o
-come lavoro $L$. Occorre una convenzione di segno per sapere se l'energia sta entrando o
-uscendo dal sistema.</p>
+<p>Un sistema può scambiare energia con l'esterno in due modi distinti: come calore $Q$ o come
+lavoro $L$. Serve una convenzione sui segni per sapere se l'energia entra nel sistema o ne esce.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px">
 <defs>
-<marker id="frq2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="frl2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
+<marker id="frq2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
+<marker id="frl2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
 </defs>
-<rect x="170" y="100" width="120" height="70" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<text x="230" y="140" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">sistema</text>
-<path d="M230,40 L230,98" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#frq2)"/>
-<text x="255" y="55" font-family="var(--sans)" font-size="13" fill="var(--rosso)">Q &gt; 0</text>
-<path d="M230,172 L230,225" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#frq2)"/>
-<text x="255" y="215" font-family="var(--sans)" font-size="13" fill="var(--rosso)">Q &lt; 0</text>
-<path d="M40,135 L168,135" stroke="var(--blu)" stroke-width="2.6" marker-end="url(#frl2)"/>
-<text x="105" y="185" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">L &lt; 0</text>
-<text x="105" y="200" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--grigio)">lavoro compiuto sul sistema</text>
-<path d="M292,135 L420,135" stroke="var(--blu)" stroke-width="2.6" marker-end="url(#frl2)"/>
-<text x="355" y="185" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">L &gt; 0</text>
-<text x="355" y="200" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--grigio)">lavoro compiuto dal sistema</text>
+<rect x="170" y="95" width="120" height="70" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<text x="230" y="135" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">sistema</text>
+<path d="M210,30 L210,92" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#frq2)"/>
+<text x="200" y="45" text-anchor="end" font-family="var(--sans)" font-size="13" fill="var(--rosso)">Q &gt; 0</text>
+<text x="200" y="61" text-anchor="end" font-family="var(--sans)" font-size="11" fill="var(--grigio)">calore assorbito</text>
+<path d="M250,168 L250,228" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#frq2)"/>
+<text x="260" y="203" font-family="var(--sans)" font-size="13" fill="var(--rosso)">Q &lt; 0</text>
+<text x="260" y="219" font-family="var(--sans)" font-size="11" fill="var(--grigio)">calore ceduto</text>
+<path d="M40,130 L167,130" stroke="var(--blu)" stroke-width="2.6" marker-end="url(#frl2)"/>
+<text x="100" y="118" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">L &lt; 0</text>
+<text x="100" y="150" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">lavoro fatto sul sistema</text>
+<path d="M293,130 L420,130" stroke="var(--blu)" stroke-width="2.6" marker-end="url(#frl2)"/>
+<text x="360" y="118" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">L &gt; 0</text>
+<text x="360" y="150" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">lavoro fatto dal sistema</text>
 </svg>
-<p class="did">Convenzione di segno: il calore &egrave; positivo quando entra nel sistema, il
-lavoro &egrave; positivo quando &egrave; il sistema a compierlo verso l'esterno.</p>
+<p class="did">Convenzione sui segni: il calore è positivo quando entra nel sistema, il lavoro è
+positivo quando è il sistema a compierlo sull'esterno.</p>
 </div>
 
-<p>Consideriamo due situazioni estreme. Nella prima, un gas monoatomico chiuso in una scatola
-sigillata (nessun pistone, quindi nessun lavoro) riceve del calore: tutto quel calore va ad
-aumentare l'energia interna,</p>
+<p>Consideriamo due situazioni estreme. Nella prima, un gas chiuso in un recipiente rigido e
+sigillato (senza pistone, quindi senza lavoro) riceve del calore: tutto il calore va ad aumentare
+l'energia interna,</p>
 
-<div class="formula-box">
-$$Q=\Delta E_{int}$$
-</div>
+<p class="eq">$$Q = \Delta E_{\text{int}}$$</p>
 
 <p>Nella seconda, lo stesso gas si espande spingendo un pistone senza scambiare calore con
-l'esterno: il sistema compie un lavoro $L$ a spese della propria energia interna, che quindi
+l'esterno: il gas compie il lavoro $L$ a spese della propria energia interna, che quindi
 diminuisce,</p>
 
-<div class="formula-box">
-$$\Delta E_{int}=-L$$
-</div>
+<p class="eq">$$\Delta E_{\text{int}} = -L$$</p>
 
-<p>Mettendo insieme i due casi &mdash; un sistema che in generale scambia sia calore sia lavoro
-&mdash; si ottiene il primo principio della termodinamica:</p>
+<p>In generale un sistema scambia sia calore sia lavoro. Mettendo insieme i due casi si ottiene il
+<strong>primo principio della termodinamica</strong>:</p>
 
-<div class="riquadro">
-$$\Delta E_{int}=Q-L$$
-</div>
+<p class="eq">$$\boxed{\Delta E_{\text{int}} = Q - L}$$</p>
+
+<p>La variazione di energia interna di un sistema è uguale al calore assorbito meno il lavoro
+compiuto: è la conservazione dell'energia applicata agli scambi di calore e lavoro.</p>
 
 <h2>Esempio</h2>
 
-<p>Due moli di gas biatomico si trovano alla temperatura $T=330$ K. Il sistema compie un lavoro
-$L=4{,}3\times10^4$ J e riceve un calore $Q=3{,}8\times10^4$ J. Quanto vale la temperatura
-finale?</p>
+<p>Due moli di gas biatomico si trovano alla temperatura $T_i = 330\ \text{K}$. Il gas riceve il
+calore $Q = 3{,}8\times10^4\ \text{J}$ e compie il lavoro $L = 4{,}3\times10^4\ \text{J}$. Quanto
+vale la temperatura finale?</p>
 
-<p>L'energia interna iniziale, per un gas biatomico, &egrave;</p>
+<p>L'energia interna iniziale di un gas biatomico è</p>
 
-<div class="formula-box">
-$$E_{int,i}=\frac{5}{2}nRT=\frac{5}{2}\cdot2\cdot8{,}31\cdot330\approx1{,}371\times10^4\ \text{J}$$
-</div>
+<p class="eq">$$E_{\text{int},i} = \frac{5}{2}\,nRT_i = \frac{5}{2}\cdot 2\ \text{mol}\cdot 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}}\cdot 330\ \text{K} \approx 1{,}371\times10^4\ \text{J}$$</p>
 
-<p>La variazione di energia interna segue dal primo principio:</p>
+<p>La variazione di energia interna si ricava dal primo principio:</p>
 
-<div class="formula-box">
-$$\Delta E_{int}=Q-L=3{,}8\times10^4-4{,}3\times10^4=-5{,}0\times10^3\ \text{J}$$
-</div>
+<p class="eq">$$\Delta E_{\text{int}} = Q - L = 3{,}8\times10^4\ \text{J} - 4{,}3\times10^4\ \text{J} = -5{,}0\times10^3\ \text{J}$$</p>
 
-<p>quindi l'energia interna finale &egrave; $E_{int,f}=E_{int,i}+\Delta E_{int}\approx
-8{,}71\times10^3$ J, e dalla stessa relazione $E_{int,f}=\frac{5}{2}nRT_f$ ricaviamo</p>
+<p>L'energia interna diminuisce, perché il gas cede come lavoro più energia di quanta ne riceve come
+calore. L'energia interna finale è $E_{\text{int},f} = E_{\text{int},i} + \Delta E_{\text{int}}
+\approx 8{,}71\times10^3\ \text{J}$ e, da $E_{\text{int},f} = \frac{5}{2}\,nRT_f$,</p>
 
-<div class="formula-box">
-$$T_f=\frac{E_{int,f}}{\frac{5}{2}nR}\approx210\ \text{K}$$
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Le funzioni di stato e le trasformazioni termodinamiche, con il lavoro nel diagramma P-V,
-nell'unit&agrave; 07.</li>
-</ul>
-</div>
+<p class="eq">$$T_f = \frac{E_{\text{int},f}}{\frac{5}{2}\,nR} = \frac{8{,}71\times10^3\ \text{J}}{\frac{5}{2}\cdot 2\ \text{mol}\cdot 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}}} \approx 210\ \text{K}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../05-energia-e-temperatura-il-gas-ideale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Relazione tra energia e temperatura di un gas ideale</span></a><a class="successiva" href="../08-trasformazioni-termodinamiche-e-funzioni-di-stato/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Trasformazioni termodinamiche e funzioni di stato</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 06</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 06</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
