@@ -73,9 +73,9 @@ il pistone lo comprime. Una trasformazione in cui la temperatura del gas resta c
 <rect class="pist" x="122" width="136" height="10" fill="var(--blu)"/>
 <text class="stato" x="190" y="240" text-anchor="middle" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--verde)">1</text>
 <text x="340" y="80" font-family="var(--sans)" font-size="13" fill="var(--grigio)">T = 100 K (costante)</text>
-<text class="l-v" x="340" y="115" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V = 10,0 L</text>
+<text class="l-v" x="340" y="115" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V = 0,0100 m³</text>
 <text class="l-p" x="340" y="140" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">P = 83 kPa</text>
-<text x="340" y="175" font-family="var(--sans)" font-size="13" fill="var(--rosso)">P · V = 831 kPa · L</text>
+<text x="340" y="175" font-family="var(--sans)" font-size="13" fill="var(--rosso)">P · V = 831 J</text>
 </svg>
 <div class="cursore"><label for="cur-iso">V</label><input id="cur-iso" type="range" min="5" max="10" step="0.1" value="10"></div>
 <p class="did">A temperatura costante e con lo stesso gas, dallo stato 1 allo stato 2 il pistone
@@ -204,9 +204,9 @@ curva più in alto corrisponde alla temperatura più alta.</p>
     el(g,'line',{x1:50,y1:230,x2:430,y2:230,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
     el(g,'line',{x1:60,y1:240,x2:60,y2:18,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
     el(g,'text',{x:68,y:26,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},'P (kPa)');
-    el(g,'text',{x:432,y:220,'text-anchor':'end','font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},'V (L)');
+    el(g,'text',{x:432,y:220,'text-anchor':'end','font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},'V (m³)');
     [5,10].forEach(function(V){el(g,'line',{x1:X(V),y1:226,x2:X(V),y2:234,stroke:'var(--inchiostro)','stroke-width':1.2});
-      el(g,'text',{x:X(V),y:248,'text-anchor':'middle','font-family':'var(--sans)','font-size':11.5,fill:'var(--inchiostro)'},V);});
+      el(g,'text',{x:X(V),y:248,'text-anchor':'middle','font-family':'var(--sans)','font-size':11.5,fill:'var(--inchiostro)'},virg(V/1000,3));});
     ticksP.forEach(function(P){el(g,'line',{x1:56,y1:f(Y(P)),x2:64,y2:f(Y(P)),stroke:'var(--inchiostro)','stroke-width':1.2});
       el(g,'text',{x:52,y:f(Y(P)+4),'text-anchor':'end','font-family':'var(--sans)','font-size':11.5,fill:'var(--inchiostro)'},P);});
     return {X:X,Y:Y};
@@ -248,7 +248,7 @@ curva più in alto corrisponde alla temperatura più alta.</p>
       var h=hI(V), top=248-h;
       set(qi('gas'),{y:f(top),height:f(h)}); set(qi('pist'),{y:f(top-10)}); set(qi('asta'),{y1:f(top-10),y2:f(top-45)});
       GI({x:122,y:top,w:136,h:h},0);
-      qi('l-v').textContent='V = '+virg(V,1)+' L'; qi('l-p').textContent='P = '+Math.round(NRT*100/V)+' kPa';
+      qi('l-v').textContent='V = '+virg(V/1000,4)+' m³'; qi('l-p').textContent='P = '+Math.round(NRT*100/V)+' kPa';
       var s=qi('stato'); s.textContent=V>9.95?'1':(V<5.05?'2':''); set(s,{y:f(top+22)});
       var g=V<9.95?1:0; qi('fantasma').setAttribute('opacity',g); qi('t-fant').setAttribute('opacity',g);
     }
@@ -286,7 +286,7 @@ curva più in alto corrisponde alla temperatura più alta.</p>
       var c=[];for(var v=10;v>=V-1e-9;v-=0.05)c.push(f(A2.X(v))+','+f(A2.Y(NRT*100/v)));
       c.push(f(A2.X(V))+','+f(A2.Y(NRT*100/V))); set(scia,{points:c.join(' ')});
       set(p2,{cx:f(A2.X(V)),cy:f(A2.Y(NRT*100/V))});
-      tpv.textContent='V = '+virg(V,1)+' L,  P = '+Math.round(NRT*100/V)+' kPa';
+      tpv.textContent='V = '+virg(V/1000,4)+' m³,  P = '+Math.round(NRT*100/V)+' kPa';
     }
     cK.addEventListener('input',function(){disK(+cK.value);});
     disK(10);
