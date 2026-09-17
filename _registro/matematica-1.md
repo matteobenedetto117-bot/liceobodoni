@@ -377,3 +377,21 @@ questo sul sito pubblico.
   l'errore che fa fallire la divisione; nella traccia il cambio di segno è scritto ma non
   motivato. Una riga per dire perché ci si ferma (grado del resto minore del grado del
   divisore), esplicitando il criterio già enunciato al passo 4.
+
+## Unità 32 — Regola di Ruffini
+- Parole: 494 su 2 pagine di traccia (pagine 75–76 di _fonti/matematica-1.pdf), 247 per pagina.
+- Contenuto della traccia riportato per intero e nel suo ordine: l'esempio guida
+  (1−5x²−6x+3x³):(x−2) con il riordino dei monomi e lo schema completo, la condizione sul
+  divisore x±a, il grado del quoziente inferiore di uno, il resto come numero, l'esempio
+  (3x³+7x²−8):(x+2) con lo zero di posto, e il caso del divisore ax+b con
+  (3x³−2x²+2):(3x+1). I tre schemi di Ruffini sono ridisegnati in SVG inline.
+- Rettifica: nell'ultimo esempio la traccia dà come resto 5/9, che è il resto della
+  divisione ridotta (x³−⅔x²+⅔):(x+⅓) e non di quella di partenza. Il resto corretto di
+  (3x³−2x²+2):(3x+1) è 5/3 — verificato con SymPy, insieme ai quozienti e ai resti degli
+  altri due esempi (3x²+x−4, R=−7 e 3x²+x−2, R=−4). Nella pagina compare 5/3, senza
+  segnalazione al lettore.
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi,
+  nessuno strumento interattivo. Un solo riquadro di attenzione, che è la sede della
+  rettifica: spiega perché lo schema restituisce 5/9 e perché va rimoltiplicato per 3.
+  Una riga sul coefficiente 0 da scrivere al posto del termine mancante, che nella traccia
+  compare nello schema ma non è commentata.
