@@ -468,3 +468,8 @@ questo sul sito pubblico.
 - Parole: 499 su 3,5 pagine di traccia (pp. 96 in fondo – 99)
 - Rettifica: nessuna. Tutti e tre gli esempi verificati con SymPy: 5y/(y⁴−y³)·(y²−1)/(10y+10)=1/(2y²); il prodotto triplo di p. 97 dà −3x/((3x−1)(x+2)); (x−2)/(x²+x):(x²−4)/(x+1)=1/(x(x+2)). Confermata anche la scomposizione 8−12x+6x²−x³=(2−x)³.
 - Aggiunta: nessun esempio e nessuna dimostrazione aggiunti. L'unico riquadro di commento è quello sugli opposti (2−x) e (x−2), che nella traccia compare come annotazione a margine in fondo a p. 97 ed è stato reso esplicito perché è l'errore tipico del passaggio.
+
+## Unità 42 — Equazioni numeriche fratte
+- Parole: 438 su 2,5 pagine di traccia (pp. 100–102, fino all'inizio delle disequazioni lineari)
+- Rettifica: nessuna. Verificati con SymPy entrambi gli esempi: 9/(x²+3x) − 1/x = 2/(x+3) ha soluzione x=2, accettabile perché diversa da 0 e da −3; 4/x + x/(x+1) = x²/(x(x+1)) porta a x=−1, escluso dalle C.E., quindi nessuna soluzione (SymPy restituisce l'insieme vuoto, in accordo con la conclusione «impossibile» della traccia). Confermata anche la riduzione 9/(x(x+3)) − 1/x = (6−x)/(x(x+3)).
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella. Le uniche righe non presenti nella traccia sono il breve elenco dei passaggi del metodo, che riordina in parole ciò che i due svolgimenti fanno, e un solo riquadro di avvertenza sul confronto con le C.E., che è l'errore tipico del capitolo. La chiusura su 0 = 0 e sul caso indeterminato è la nota che apre p. 102 nella traccia.
