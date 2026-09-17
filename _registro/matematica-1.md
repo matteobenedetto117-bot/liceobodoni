@@ -259,3 +259,25 @@ questo sul sito pubblico.
   ridisegnano la griglia delle coppie) per la sola proprietà |A × B| = |A| · |B|, che
   nella traccia è enunciata senza figura. Nessun esempio nuovo, nessuna dimostrazione
   aggiunta, nessuna tabella di sintesi.
+
+## Unità 26 — Equazioni: definizioni, forma normale, grado
+- Parole: 552 su 2 pagine di traccia (pp. 63–64), 276 per pagina.
+- Contenuto della traccia, per intero e nel suo ordine: la definizione di equazione come
+  uguaglianza fra espressioni letterali con le incognite; l'esempio 4x − 1 = 3x + 1 con
+  la risoluzione per trasporto e cambio di segno fino a x = 2; lo schema algebriche /
+  trascendenti e intere / fratte con i sei esempi della traccia; la forma normale
+  P(x) = 0 con l'esempio 3x³ + 2x + 1 = 0; la definizione di grado; i tre esempi di
+  I, II e III grado.
+- Rettifica: nessuna. Verificati con SymPy: x = 2 risolve 4x − 1 = 3x + 1 (entrambi i
+  membri valgono 7); i gradi dei tre esempi finali sono 1, 2, 3; il grado di
+  3x³ + 2x + 1 è 3.
+- Aggiunta: la verifica per sostituzione della soluzione x = 2 (due righe, il valore era
+  ricavato nella traccia senza controllo) e un riquadro "Errore da evitare" sul fatto che
+  il grado si legge solo dopo la riduzione in forma normale — la traccia dice "ridotto in
+  forma normale" ma non segnala il caso in cui i termini di grado massimo si elidono.
+  Formulato senza introdurre esempi nuovi. Nessuna dimostrazione aggiunta, nessuno
+  strumento interattivo, nessuna tabella di sintesi.
+- Nota: i tre esempi di I, II e III grado stanno in cima a p. 65, cioè nelle pagine
+  dell'unità 27, ma completano la definizione di grado e sono stati inclusi qui. L'unità
+  27 parte dal titolo "Risoluzione di equazioni numeriche intere di I grado", più sotto
+  nella stessa pagina.
