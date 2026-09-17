@@ -324,3 +324,18 @@ questo sul sito pubblico.
   sommano — e uno sul perché il fattore moltiplicativo deve essere diverso da zero.
   Aggiunta anche una riga che collega la prima proprietà al trasporto con cambio di
   segno già usato nell'unità 27: nella traccia il legame è implicito.
+
+## Unità 29 — Equazione determinata, impossibile, indeterminata
+- Parole: 278 su 1 pagina di traccia (p. 68). Rapporto 278 parole per pagina: la pagina
+  manoscritta è quasi tutta simboli, tre righe di esempi e tre etichette, quindi le
+  parole di spiegazione pesano più del solito rispetto alla traccia.
+- Contenuto della traccia, per intero e nel suo ordine: i tre risultati possibili con i
+  soli esempi presenti — x = 7/3 determinata; x + 2 = x + 3 → 2 = 3, cioè 0 = 1,
+  impossibile; 2x + 2 = 2x + 6 − 4 → 2x + 2 = 2x + 2 → 0 = 0, indeterminata. Le
+  cancellature colorate del quaderno sono rese come passaggi scritti.
+- Rettifica: nessuna. Verificati con SymPy: x + 2 = x + 3 non ha soluzioni;
+  2x + 2 = 2x + 6 − 4 si riduce all'identità 0 = 0 ed è soddisfatta da ogni x.
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi,
+  nessuno strumento interattivo, nessun disegno (la traccia non ne ha). Un solo riquadro
+  "Errore da evitare", sulla confusione fra 0 = 0 e x = 0, che è lo sbaglio tipico di
+  questo punto del programma.
