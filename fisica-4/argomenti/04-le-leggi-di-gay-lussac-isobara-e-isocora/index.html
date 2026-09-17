@@ -63,17 +63,13 @@ peso: mentre il gas viene riscaldato, il pistone sale ma la pressione del gas re
 trasformazione in cui la pressione resta costante si chiama <strong>isobara</strong>.</p>
 
 <div class="fig">
-<svg id="fig-isobara" viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg">
+<svg id="fig-isobara" viewBox="50 0 280 270" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg">
 <rect class="gas" x="122" width="136" fill="var(--blu-chiaro)"/>
 <g class="part"></g>
 <path d="M120,20 L120,250 L260,250 L260,20" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
 <g class="rif"></g>
 <rect class="peso" x="160" width="60" height="26" rx="3" fill="var(--grigio)"/>
 <rect class="pist" x="122" width="136" height="10" fill="var(--blu)"/>
-<text x="340" y="80" font-family="var(--sans)" font-size="13" fill="var(--grigio)">P = 83,1 kPa (costante)</text>
-<text class="l-t" x="340" y="115" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 100 K</text>
-<text class="l-v" x="340" y="140" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V = 0,0100 m³</text>
-<text class="l-r" x="340" y="175" font-family="var(--sans)" font-size="13" fill="var(--rosso)">V / T = 1,00 × 10⁻⁴ m³/K</text>
 </svg>
 <div class="cursore"><label for="cur-isobara">T</label><input id="cur-isobara" type="range" min="100" max="200" step="1" value="100"></div>
 <p class="did">Lo stesso peso preme sul pistone in tutti gli stati: la pressione resta invariata
@@ -95,6 +91,10 @@ data quantità di gas il rapporto fra volume e temperatura assoluta resta costan
 
 <p>cioè il volume è direttamente proporzionale alla temperatura assoluta.</p>
 
+<p>Se la temperatura aumenta, le particelle si muovono più velocemente e gli urti contro il pistone
+sono più numerosi, quindi la pressione dovrebbe aumentare. Il pistone però si solleva: il volume
+aumenta, gli urti diminuiscono e la pressione resta la stessa.</p>
+
 <div class="fig">
 <svg id="fig-isobara-pv" viewBox="0 0 440 270" xmlns="http://www.w3.org/2000/svg">
 <defs><marker id="ax6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
@@ -112,17 +112,13 @@ temperatura $T_1$ a una temperatura $T_2$ maggiore. Una trasformazione in cui il
 costante si chiama <strong>isocora</strong>.</p>
 
 <div class="fig">
-<svg id="fig-isocora" viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg">
+<svg id="fig-isocora" viewBox="50 0 280 270" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg">
 <rect x="120" y="100" width="140" height="150" fill="var(--blu-chiaro)"/>
 <g class="part"></g>
 <rect x="120" y="100" width="140" height="150" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
 <rect x="116" y="94" width="148" height="8" fill="var(--inchiostro)"/>
 <line x1="190" y1="94" x2="190" y2="78" stroke="var(--inchiostro)" stroke-width="3"/>
 <g class="dial"></g>
-<text x="340" y="80" font-family="var(--sans)" font-size="13" fill="var(--grigio)">V = 0,0100 m³ (costante)</text>
-<text class="l-t" x="340" y="115" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">T = 100 K</text>
-<text class="l-p" x="340" y="140" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">P = 83 kPa</text>
-<text x="340" y="175" font-family="var(--sans)" font-size="13" fill="var(--rosso)">P / T = 0,831 kPa/K</text>
 </svg>
 <div class="cursore"><label for="cur-isocora">T</label><input id="cur-isocora" type="range" min="100" max="200" step="1" value="100"></div>
 <p class="did">Il recipiente non cambia forma e il volume resta lo stesso: riscaldando il gas le
@@ -143,6 +139,9 @@ data quantità di gas il rapporto fra pressione e temperatura assoluta resta cos
 <p class="eq">$$\frac{P}{T} = \text{costante}$$</p>
 
 <p>cioè la pressione è direttamente proporzionale alla temperatura assoluta.</p>
+
+<p>Qui il volume non può cambiare: se la temperatura aumenta, le particelle si muovono più
+velocemente, gli urti contro le pareti sono più numerosi e la pressione aumenta.</p>
 
 <div class="fig">
 <svg id="fig-isocora-pv" viewBox="0 0 440 270" xmlns="http://www.w3.org/2000/svg">
@@ -214,7 +213,7 @@ pressione.</p>
       });
     };
   }
-  function vel(T){return 70*Math.sqrt(T/100);}
+  function vel(T){return 55*Math.pow(T/100,1.8);} /* velocità accentuata per rendere visibile l'effetto */
   function testo(g,x,y,t,att){att=att||{};att.x=x;att.y=y;att['font-family']='var(--sans)';if(!att['font-size'])att['font-size']=11.5;if(!att.fill)att.fill='var(--inchiostro)';return el(g,'text',att,t);}
   /* piano di Clapeyron: V in m³, P in kPa */
   function piano(g,mk){
@@ -262,8 +261,7 @@ pressione.</p>
       testo(qb('rif'),272,y+5,d[1],{'font-size':13,'font-weight':700,fill:'var(--verde)'});});
     function disB(dt){var T=+cB.value, V=R*T/(PISO*1000), h=hB(V), top=248-h;
       set(qb('gas'),{y:f(top),height:f(h)}); set(qb('pist'),{y:f(top-10)}); set(qb('peso'),{y:f(top-36)});
-      GB({x:122,y:top,w:136,h:h},dt,vel(T));
-      qb('l-t').textContent='T = '+T+' K'; qb('l-v').textContent='V = '+virg(V,4)+' m³';}
+      GB({x:122,y:top,w:136,h:h},dt,vel(T));}
     cB.addEventListener('input',function(){disB(0);}); disB(0); continuo(disB);
   }
 
@@ -277,8 +275,7 @@ pressione.</p>
     var qc=function(c){return C.querySelector('.'+c);}, ago=manometro(qc('dial'),190,48,30);
     var GC=gas(qc('part'),12,21,{x:120,y:100,w:140,h:150});
     function disC(dt){var T=+cC.value, P=R*T/VISO/1000;
-      GC({x:120,y:100,w:140,h:150},dt,vel(T)); ago(P/250);
-      qc('l-t').textContent='T = '+T+' K'; qc('l-p').textContent='P = '+Math.round(P)+' kPa';}
+      GC({x:120,y:100,w:140,h:150},dt,vel(T)); ago(P/250);}
     cC.addEventListener('input',function(){disC(0);}); disC(0); continuo(disC);
   }
 
