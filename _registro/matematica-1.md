@@ -174,3 +174,9 @@ questo sul sito pubblico.
   costruito sul secondo esempio della traccia, e lo schema SVG dei quattro prodotti
   $ac,ad,bc,bd$, che rende visibile la regola già scritta nella traccia. Nessun esempio
   nuovo, nessuna dimostrazione, nessuna tabella di sintesi.
+
+## Unità 20 — Quadrato di binomio e somma per differenza
+- Parole: 437 su 2,5 pagine di traccia (PDF 48–50, metà)
+- Rettifica: nessuna. Tutti i risultati della traccia verificati con SymPy: $(3x^2+5y)^2$, $(2z-a)^2$, $(x+7y)(x-7y)$, $(x+2)(-x+2)$, $(-3+x)(-3-x)$ sono corretti così come scritti.
+- Aggiunta: nessuna. Conservati i due prodotti notevoli, la derivazione per moltiplicazione diretta che la traccia svolge, l'avvertenza "$(A+B)^2 \neq A^2+B^2$" e tutti e cinque gli esempi, nessuno di più.
+- Nota: aggiornato il link "successiva" dell'unità 19, che puntava all'indice.
