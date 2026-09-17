@@ -523,3 +523,13 @@ questo sul sito pubblico.
 - Parole: 254 su 1 pagina di traccia
 - Rettifica: nessuna; la traccia è corretta.
 - Aggiunta: un esempio numerico (α = 35°) e uno strumento interattivo con le tre relazioni, perché la traccia non contiene nessun esempio e la regola consente di aggiungerne uno solo in questo caso.
+
+## Unità 53 — Triangoli: definizioni e classificazioni
+- Parole: 466 su 1,5 pagine di traccia (pagina 17 intera e la prima fascia della 18)
+- Rettifica: nessuna. La traccia è corretta in ogni sua parte.
+- Aggiunta: nessun contenuto nuovo. La traccia non contiene esempi svolti e non ne è stato
+  inserito nessuno: al loro posto c'è lo strumento interattivo, che non introduce contenuto ma fa
+  variare i disegni di classificazione già presenti. Le due classificazioni della traccia (per
+  angoli e per lati) sono state tenute separate come nel manoscritto. Non è stato detto che la
+  somma degli angoli interni è un angolo piatto, né che un triangolo non può avere due angoli
+  retti: dipendono dall'unità 63 e qui non sono disponibili.
