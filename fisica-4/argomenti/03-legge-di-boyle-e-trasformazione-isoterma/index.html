@@ -98,6 +98,11 @@ di gas il prodotto della pressione per il volume resta costante,</p>
 
 <p>cioè pressione e volume sono inversamente proporzionali.</p>
 
+<p>La pressione del gas è dovuta agli urti delle particelle contro le pareti e contro il pistone. A
+temperatura costante le particelle si muovono sempre con la stessa velocità: se il volume
+diminuisce urtano il pistone più spesso e la pressione aumenta; se il volume aumenta gli urti sono
+meno frequenti e la pressione diminuisce.</p>
+
 <h2>Il piano di Clapeyron</h2>
 
 <p>Riportiamo la trasformazione sul piano P-V, detto <strong>piano di Clapeyron</strong>. A
@@ -131,8 +136,7 @@ corrisponde una pressione maggiore.</p>
 <defs><marker id="ax5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
 <g class="graf"></g>
 </svg>
-<div class="cursore"><button type="button" class="btn-anim" id="btn-fam" aria-label="Avvia">&#9654;</button>
-<label for="cur-fam">T</label><input id="cur-fam" type="range" min="100" max="300" step="1" value="100"></div>
+<div class="cursore"><label for="cur-fam">T</label><input id="cur-fam" type="range" min="100" max="300" step="1" value="100"></div>
 <p class="did">Famiglia di isoterme a 100&nbsp;K, 200&nbsp;K e 300&nbsp;K: a parità di volume, la
 curva più in alto corrisponde alla temperatura più alta.</p>
 </div>
@@ -213,7 +217,21 @@ curva più in alto corrisponde alla temperatura più alta.</p>
   }
   function tratt(g){return el(g,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});}
   function guide(lv,lp,A,V,P){set(lv,{x1:f(A.X(V)),y1:f(A.Y(P)),x2:f(A.X(V)),y2:230});set(lp,{x1:f(A.X(V)),y1:f(A.Y(P)),x2:60,y2:f(A.Y(P))});}
-  function continuo(fn){if(ridotto)return;var t0=null;(function passo(t){if(t0===null)t0=t;fn(0.0006*(t-t0));requestAnimationFrame(passo);})(performance.now());}
+  function continuo(fn){if(ridotto)return;var t0=null;(function passo(t){var dt=t0===null?0:Math.min(0.05,(t-t0)/1000);t0=t;fn(dt);requestAnimationFrame(passo);})(performance.now());}
+  /* particelle con velocità costante in modulo: urti elastici su pareti e pistone */
+  function gas(g,n,seme,box,vel){
+    var R=rng(seme),L=[];
+    for(var i=0;i<n;i++){var a=R()*2*Math.PI;L.push({x:box.x+4+R()*(box.w-8),y:box.y+4+R()*(box.h-8),vx:vel*Math.cos(a),vy:vel*Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
+    return function(box,dt){
+      var x0=box.x+4,x1=box.x+box.w-4,y0=box.y+4,y1=box.y+box.h-4;
+      L.forEach(function(p){
+        p.x+=p.vx*dt; p.y+=p.vy*dt;
+        if(p.x<x0){p.x=2*x0-p.x;p.vx=Math.abs(p.vx);} if(p.x>x1){p.x=2*x1-p.x;p.vx=-Math.abs(p.vx);}
+        if(p.y<y0){p.y=y0+(y0-p.y)%Math.max(1,y1-y0);p.vy=Math.abs(p.vy);} if(p.y>y1){p.y=Math.max(y0,2*y1-p.y);p.vy=-Math.abs(p.vy);}
+        set(p.c,{cx:f(p.x),cy:f(p.y)});
+      });
+    };
+  }
   function scorri(b,cur,da,a,D,dis,reset){
     bottone(b,function(fine){cur.disabled=true;corri(D,function(ms){var v=da+(a-da)*liscio(ms/(D-300));cur.value=v;dis(v,ms);},function(){cur.disabled=false;fine();});},
       function(){cur.value=da;reset();});
@@ -224,19 +242,19 @@ curva più in alto corrisponde alla temperatura più alta.</p>
   var I=document.getElementById('anim-iso'), cI=document.getElementById('cur-iso');
   if(I&&cI){
     var qi=function(c){return I.querySelector('.'+c);};
-    var LI=particelle(qi('part'),14,9), fI=0, hI=function(V){return V*17.6;};
+    var hI=function(V){return V*17.6;}, GI=gas(qi('part'),14,9,{x:122,y:248-hI(10),w:136,h:hI(10)},80);
     set(qi('fantasma'),{y1:248-hI(10),y2:248-hI(10)}); set(qi('t-fant'),{y:248-hI(10)+4});
     function disI(V){
       var h=hI(V), top=248-h;
       set(qi('gas'),{y:f(top),height:f(h)}); set(qi('pist'),{y:f(top-10)}); set(qi('asta'),{y1:f(top-10),y2:f(top-45)});
-      muovi(LI,{x:122,y:top,w:136,h:h},fI);
+      GI({x:122,y:top,w:136,h:h},0);
       qi('l-v').textContent='V = '+virg(V,1)+' L'; qi('l-p').textContent='P = '+Math.round(NRT*100/V)+' kPa';
       var s=qi('stato'); s.textContent=V>9.95?'1':(V<5.05?'2':''); set(s,{y:f(top+22)});
       var g=V<9.95?1:0; qi('fantasma').setAttribute('opacity',g); qi('t-fant').setAttribute('opacity',g);
     }
     cI.addEventListener('input',function(){disI(+cI.value);});
     disI(10);
-    continuo(function(fase){fI=fase;muovi(LI,{x:122,y:248-hI(+cI.value),w:136,h:hI(+cI.value)},fI);});
+    continuo(function(dt){var h=hI(+cI.value);GI({x:122,y:248-h,w:136,h:h},dt);});
   }
 
   /* --- figura 2: isoterma nel piano di Clapeyron --- */
@@ -256,13 +274,13 @@ curva più in alto corrisponde alla temperatura più alta.</p>
     var scia=el(g2,'polyline',{fill:'none',stroke:'var(--rosso)','stroke-width':3.2,opacity:.8});
     var p2=el(g2,'circle',{r:5.5,fill:'#fff',stroke:'var(--rosso)','stroke-width':2});
     var tpv=el(g2,'text',{x:300,y:60,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'});
-    var qk=function(c){return K.querySelector('.'+c);}, LK=particelle(qk('part'),10,4), fK=0, hK=function(V){return V*17;};
+    var qk=function(c){return K.querySelector('.'+c);}, hK=function(V){return V*17;}, GK=gas(qk('part'),10,4,{x:492,y:248-hK(10),w:116,h:hK(10)},70), dtK=0;
     [[10,'1'],[5,'2']].forEach(function(d){var y=248-hK(d[0]);
       el(qk('rif'),'line',{x1:484,x2:616,y1:y,y2:y,stroke:'var(--verde)','stroke-width':1.2,'stroke-dasharray':'4,3'});
       el(qk('rif'),'text',{x:622,y:y+5,'font-family':'var(--sans)','font-size':13,'font-weight':700,fill:'var(--verde)'},d[1]);});
     function pistK(V){var h=hK(V),top=248-h;
       set(qk('gas'),{y:f(top),height:f(h)}); set(qk('pist'),{y:f(top-10)}); set(qk('asta'),{y1:f(top-10),y2:f(top-40)});
-      muovi(LK,{x:492,y:top,w:116,h:h},fK);}
+      GK({x:492,y:top,w:116,h:h},dtK);}
     function disK(V){
       pistK(V);
       var c=[];for(var v=10;v>=V-1e-9;v-=0.05)c.push(f(A2.X(v))+','+f(A2.Y(NRT*100/v)));
@@ -272,30 +290,25 @@ curva più in alto corrisponde alla temperatura più alta.</p>
     }
     cK.addEventListener('input',function(){disK(+cK.value);});
     disK(10);
-    continuo(function(fase){fK=fase;pistK(+cK.value);});
+    continuo(function(dt){dtK=dt;pistK(+cK.value);dtK=0;});
   }
 
   /* --- figura 3: famiglia di isoterme --- */
-  var F=document.getElementById('anim-fam'), bF=document.getElementById('btn-fam'), cF=document.getElementById('cur-fam');
-  if(F&&bF&&cF){
+  var F=document.getElementById('anim-fam'), cF=document.getElementById('cur-fam');
+  if(F&&cF){
     var g3=F.querySelector('.graf'), A3=assi(g3,'ax5',500,0.4,[100,200,300,400]);
     [[100,'var(--inchiostro)'],[200,'var(--rosso)'],[300,'var(--verde)']].forEach(function(d){
       curva(g3,A3,d[0],500,{stroke:d[1],'stroke-width':1.8,opacity:.55});
       el(g3,'text',{x:f(A3.X(12.2)),y:f(A3.Y(NRT*d[0]/12)-5),'font-family':'var(--sans)','font-size':11,fill:d[1]},d[0]+' K');
     });
-    var V0=6, lv=el(g3,'line',{x1:f(A3.X(V0)),y1:230,x2:f(A3.X(V0)),y2:30,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
-    el(g3,'text',{x:f(A3.X(V0)),y:248,'text-anchor':'middle','font-family':'var(--sans)','font-size':11.5,fill:'var(--grigio)'},'6');
     var mob=el(g3,'polyline',{fill:'none',stroke:'var(--blu)','stroke-width':3});
-    var pt3=el(g3,'circle',{r:5,fill:'#fff',stroke:'var(--blu)','stroke-width':2}), lp3=tratt(g3);
     var t3=el(g3,'text',{x:250,y:50,'font-family':'var(--sans)','font-size':12,fill:'var(--blu)'});
-    var t4=el(g3,'text',{x:250,y:68,'font-family':'var(--sans)','font-size':12,fill:'var(--blu)'});
     function disF(T){
       var c=[];for(var V=NRT*T/500;V<=12.5;V+=0.05)c.push(f(A3.X(V))+','+f(A3.Y(NRT*T/V)));
       set(mob,{points:c.join(' ')});
-      var P=NRT*T/V0; set(pt3,{cx:f(A3.X(V0)),cy:f(A3.Y(P))}); set(lp3,{x1:f(A3.X(V0)),y1:f(A3.Y(P)),x2:60,y2:f(A3.Y(P))});
-      t3.textContent='T = '+Math.round(T)+' K'; t4.textContent='a V = 6 L:  P = '+Math.round(P)+' kPa';
+      t3.textContent='T = '+Math.round(T)+' K';
     }
-    scorri(bF,cF,100,300,4300,disF,function(){disF(100);});
+    cF.addEventListener('input',function(){disF(+cF.value);});
     disF(100);
   }
 })();
