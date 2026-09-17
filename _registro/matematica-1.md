@@ -144,3 +144,17 @@ questo sul sito pubblico.
 - Parole: 619 su 3 pagine di traccia (40–42), pari a 206 parole per pagina
 - Rettifica: nessuna. I due calcoli della traccia (MCD = 2ab², mcm = 12a³b⁴c²) sono stati verificati con SymPy e sono corretti.
 - Aggiunta: nessuna. Lo schema per colonne della traccia è stato ridisegnato in SVG e riprodotto due volte, una per il MCD e una per il mcm, perché nella traccia il secondo schema è ricopiato per esteso. La verifica delle tre divisioni per il MCD (3a²bc², 2ab²c, 6) è un controllo sui dati già presenti, non un esempio nuovo.
+
+## Unità 18 — Polinomi: definizione, forma normale, grado
+- Parole: 682 su 4 pagine di traccia (43–46), pari a 171 parole per pagina. Il JSON assegna
+  all'unità le pagine 43–45, ma la trattazione del grado prosegue senza stacco fino a fine
+  pagina 46, e le operazioni cominciano a pagina 47: l'unità è stata chiusa a pagina 46.
+- Rettifica: nessuna. Verificati con SymPy la riduzione $6y^4-2y+y^4=7y^4-2y$, le forme
+  normali $3aba^2+4a^2b=3a^3b+4a^2b$ e $7a^2ba+ab^2=7a^3b+ab^2$, i gradi rispetto ad $a$ e
+  a $b$ di $2a^3b^2+3ab^5$ (3 e 5), il grado complessivo 6 di $9x^4y-x^2+2x^3y^3$ e
+  l'omogeneità di $3x^3y-x^2y^2$ (4 e 4) contro $a^3b^2-7a^2b$ (5 e 3).
+- Aggiunta: un solo riquadro "Errore da evitare", che ricorda di ridurre in forma normale
+  prima di contare i termini e calcolare il grado; usa l'esempio $6y^4-2y+y^4$ già presente
+  nella traccia. Nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi.
+  I due schemi della traccia (il monomio più il monomio nullo, e le graffe sui gradi dei
+  tre termini) sono stati ridisegnati in SVG.
