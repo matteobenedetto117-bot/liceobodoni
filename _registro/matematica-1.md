@@ -418,3 +418,23 @@ questo sul sito pubblico.
   l'errore tipico del raccoglimento totale. Poche righe di commento dove la traccia scrive
   solo il risultato: come si sceglie il fattore da raccogliere (MCD, minimo esponente) e
   perché nell'ultimo esempio va raccolto −3x e non 3x.
+
+## Unità 35 — Scomposizione con i prodotti notevoli
+- Parole: 614 su 4 pagine di traccia (81–84 di _fonti/matematica-1.pdf), 154 per pagina.
+  Le pagine 81–82 sono il trinomio speciale, che l'unità 34 aveva lasciato per intero qui
+  per non spezzarlo; le pagine 83–84 sono i prodotti notevoli letti al contrario.
+- Contenuto della traccia riportato per intero e nel suo ordine: il trinomio speciale
+  ricavato da x²+5x+6 con il raccoglimento parziale, la scrittura generale (x+a)(x+b) da cui
+  nascono S e P, i quattro esempi (x²−5x+6, y²−8y+15, x²+5x−24, b²+5b−14) e il caso con
+  coefficiente davanti a x² (3x²−10x+8); quadrato di binomio con i tre esempi; differenza di
+  quadrati con i quattro esempi; quadrato di trinomio con i quattro esempi, compresi quelli a
+  coefficienti frazionari; cubo di binomio con le due formule e i quattro esempi.
+- Rettifica: nessuna. Tutte e ventuno le identità della traccia verificate con SymPy,
+  compresi i due esempi con i termini in ordine sparso (1+12x⁶−8x⁹−6x³ e a³−8b³−6a²b+12ab²).
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi, nessuno
+  strumento interattivo, nessun disegno (la traccia non ne contiene). Lo schema riassuntivo
+  di pagina 85 non è stato anticipato: appartiene all'unità 36. Un solo riquadro di
+  attenzione, sul modo di leggere i segni di a e b dal segno di P e di S, che è l'errore
+  tipico del trinomio speciale. Per il resto solo righe di commento su passaggi già presenti:
+  come si controlla il doppio prodotto, perché la somma di quadrati non rientra nella
+  formula, e perché le due formule del cubo sono la stessa con −B al posto di B.
