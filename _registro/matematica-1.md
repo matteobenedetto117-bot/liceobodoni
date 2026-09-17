@@ -207,3 +207,16 @@ questo sul sito pubblico.
   nuovo: restano quelli della traccia (naturali fra 2 e 7, lettere dell'alfabeto, i cinque
   film, $-15 \in \mathbb{Z}$, $\sqrt{3} \notin \mathbb{Q}$, le vocali, i naturali maggiori
   di 3). Nessuna tabella di sintesi, nessuna proprietà anticipata.
+
+## Unità 23 — Insieme vuoto, cardinalità, sottoinsiemi
+- Parole: 417 su 2 pagine di traccia (pp. 54–55), circa 209 parole per pagina.
+- Rettifica: nessuna. Il contenuto della traccia è corretto; l'unico dato numerico
+  presente, $|V|=5$ per le vocali dell'alfabeto italiano, è verificato.
+- Aggiunta: un solo riquadro "Errore da evitare" sulla differenza fra $\subseteq$ e
+  $\subset$, perché la traccia introduce i due simboli di seguito senza dire esplicitamente
+  che $A \subset A$ è scorretto. Ridisegnato in SVG il diagramma koala–mammiferi–animali.
+  Nessun esempio nuovo: restano quelli della traccia (lettere dell'alfabeto, numeri pari,
+  vocali, koala–mammiferi–animali). Nessuna dimostrazione aggiunta: in particolare non è
+  giustificato perché l'insieme vuoto sia sottoinsieme di qualsiasi insieme, come nella
+  traccia. Nessuna tabella di sintesi.
+- Nota: aggiornato il link "successiva" dell'unità 22, che puntava all'indice.
