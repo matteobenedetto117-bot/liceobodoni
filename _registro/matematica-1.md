@@ -303,3 +303,24 @@ questo sul sito pubblico.
   termine da eliminare; formulato senza introdurre esempi nuovi. Aggiunta anche, in una
   riga, la divisione finale per 5 come passaggio esplicito: nella traccia il passaggio
   da 5x = 21 a x = 21/5 è indicato solo dalle cancellature a margine.
+
+## Unità 28 — Principi di equivalenza
+- Parole: 383 su 2 pagine di traccia nominali (pp. 66–67); in pratica circa 1,5 pagine,
+  perché la parte alta di p. 66 (isolamento della x nell'esempio con i denominatori) è
+  già stata usata nell'unità 27. Rapporto effettivo circa 255 parole per pagina.
+- Contenuto della traccia, per intero e nel suo ordine: le tre proprietà — sommare e
+  sottrarre uno stesso termine da entrambi i lati, eliminare termini uguali a lati
+  opposti, moltiplicare tutti i termini per un numero diverso da zero — ciascuna con i
+  soli esempi della traccia: 2x + 3x + 3 = 6x + 8 + 2x → 5x + 3 = 8x + 8;
+  7x + 12 − 3x − 6 = 12 + 8x − 3x + 14 → 7x − 6 = 8x + 14 (le cancellature colorate a
+  margine sono state ridisegnate in SVG); 2·(3x + 1/2 + x − 2 = −3/2x + 7/2) →
+  6x + 1 + 2x − 4 = −3x + 7; 1/2·(4x + 6 = −8x + 2) → 2x + 3 = −4x + 1.
+- Rettifica: nessuna. Verificati con SymPy: in tutti e quattro gli esempi l'insieme
+  delle soluzioni non cambia fra la riga di partenza e quella di arrivo (x = −5/3,
+  x = −20, x = 10/11, x = −1/3), e ogni riduzione dei termini simili è esatta.
+- Aggiunta: nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi,
+  nessuno strumento interattivo. Due riquadri "Errore da evitare": uno sul fatto che
+  termini uguali si cancellano solo se stanno a lati opposti — nello stesso membro si
+  sommano — e uno sul perché il fattore moltiplicativo deve essere diverso da zero.
+  Aggiunta anche una riga che collega la prima proprietà al trasporto con cambio di
+  segno già usato nell'unità 27: nella traccia il legame è implicito.
