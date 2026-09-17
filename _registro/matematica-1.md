@@ -220,3 +220,25 @@ questo sul sito pubblico.
   giustificato perché l'insieme vuoto sia sottoinsieme di qualsiasi insieme, come nella
   traccia. Nessuna tabella di sintesi.
 - Nota: aggiornato il link "successiva" dell'unità 22, che puntava all'indice.
+
+## Unità 24 — Unione, intersezione e differenza
+- Parole: 842 su 5 pagine di traccia (pp. 56–60), circa 168 parole per pagina.
+- Contenuto: il titolo dell'unità nomina le tre operazioni, ma l'intervallo di pagine
+  assegnato dal file di classe comprende anche "Insiemi uguali" e "Insieme delle parti"
+  (pp. 56–57), che l'unità 23 non tratta e l'unità 25 (pp. 61–62, complementare e
+  prodotto cartesiano) non raggiunge. Sono quindi stati inclusi qui, per non perderli.
+- Rettifica: nessuna. Verificati con SymPy i dati numerici della traccia: con i naturali
+  compresi fra 0 e 10 esclusi, A = {2;4;6;8}, B = {3;6;9}, A∪B = {2;3;4;6;8;9},
+  A∩B = {6}; l'insieme delle parti di {a;b;c} ha effettivamente 8 elementi e quello di
+  {0;1;2;3} ne ha 2⁴ = 16.
+- Aggiunta: un riquadro "Errore da evitare" sulla non simmetria della differenza, con
+  B − A = {3;9} calcolato sugli stessi due insiemi dell'esempio della traccia — la
+  traccia definisce A − B ma non mette in guardia sull'inversione. Uno strumento
+  interattivo (tre pulsanti che evidenziano a turno unione, intersezione e differenza
+  sullo stesso diagramma), che mostra le tre zone già disegnate separatamente nella
+  traccia. Nessun esempio nuovo: restano quelli della traccia (a;b;c, {0;1;2;3},
+  multipli di 2 e di 3, B ⊆ A, animali vertebrati e invertebrati). Nessuna dimostrazione
+  aggiunta: in particolare la regola |P(A)| = 2ⁿ resta enunciata e non giustificata,
+  come nella traccia. Nessuna tabella di sintesi.
+- Non trattato qui, perché ricade nelle pagine dell'unità 25: le proprietà della
+  differenza per insiemi disgiunti (A − B = A) e per A ⊆ B (A − B = ∅), a p. 61.
