@@ -115,3 +115,22 @@
 - Parole: 480 su 2 pagine di traccia (pag. 24–25)
 - Rettifica: nessuna. Gli intervalli della traccia sono corretti: 3,462 ± 0,001 dà [3,461; 3,463] e 3,46 ± 0,01 dà [3,45; 3,47], verificati con SymPy; il primo è contenuto nel secondo, coerentemente con il disegno sull'asse cartesiano.
 - Aggiunta: nessun contenuto nuovo. Aggiunte solo le poche righe che spiegano il senso del doppio segno e il motivo della regola sulla cifra decimale, e un riquadro di avvertenza sul fatto che errore piccolo non è errore assente. Nessun esempio nuovo: sono quelli della traccia (lato della stanza con metro a nastro e con rotella metrica, e il tempo 0,748 / 0,75 s).
+
+## Unità 18 — Misure ripetute: media e semidispersione
+- Parole: 451 su 2 pagine di traccia (p. 26 e la parte alta di p. 27; a metà di p. 27
+  comincia «Accordo teoria-esperimento», che è l'unità 19).
+- Rettifica: nessuna. Verificato con SymPy in aritmetica esatta sulle dieci letture della
+  traccia: la media vale 451/200 = 2,255 s, gli estremi sono 2,23 s e 2,28 s e la
+  semidispersione 1/40 = 0,025 s, che arrotondata a una cifra significativa dà 0,03 s.
+  Coerente anche la scrittura finale (2,26 ± 0,03) s, ottenuta portando la media alla
+  stessa cifra decimale dell'errore secondo la regola dell'unità 17.
+- Aggiunta: nessun contenuto nuovo. L'inventario della traccia (le dieci letture, le due
+  regole con le rispettive formule, la clausola sulla sensibilità e lo svolgimento numerico
+  con la correzione della scrittura) è riportato per intero e nient'altro. L'unica cosa non
+  presente nella traccia è il disegno: la pagina 26 non ne ha, e ho ridisegnato in SVG le
+  dieci letture come dot plot sull'asse dei tempi, con le palline impilate sui valori
+  ripetuti, gli estremi evidenziati e la media tratteggiata. Non introduce contenuto: mostra
+  soltanto i dati già elencati, e rende visibile perché la semidispersione dipenda dai soli
+  due valori estremi. Un solo riquadro di attenzione, sull'errore tipico di calcolare la
+  semidispersione «su tutte le misure». Nessuno strumento interattivo. Come da note della
+  classe, nessuna ricerca su tracce d'esame.
