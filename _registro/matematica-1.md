@@ -573,3 +573,8 @@ questo sul sito pubblico.
   Nessuna tabella di confronto fra i criteri, nessuno strumento interattivo. L'unico riquadro di
   avvertenza riguarda il significato di «adiacenti al lato», che è il punto su cui il criterio
   viene applicato a sproposito.
+
+## Unità 57 — Triangolo isoscele: proprietà e teorema diretto
+- Parole: 498 su 2 pagine di traccia (24–25 di geometria-1.pdf)
+- Rettifica: a pagina 24 la giustificazione del passaggio «A B̂ P ≅ P B̂ C» è scritta «per ipotesi», con «per costruzione» aggiunto a lato fra parentesi. Nella pagina resta solo «per costruzione», che è la giustificazione corretta: la bisettrice è una linea ausiliaria tracciata da noi, non un dato dell'ipotesi.
+- Aggiunta: nessuna. Enunciati, figure ed esempio sono quelli della traccia; l'unico riquadro di commento chiarisce la distinzione fra «per ipotesi» e «per costruzione», che è il punto su cui la traccia stessa si corregge.
