@@ -85,6 +85,11 @@ teorema del confronto, a pagina 21.
 - Un solo esempio è illustrato: quello grafico usa una funzione non oscillante, così il corridoio
   fra le due parabole si legge a colpo d'occhio; l'esempio con la funzione oscillante è svolto per
   iscritto, senza figura.
+- Passaggi a comparsa: in tutti e due gli esempi i passaggi matematici sono scritti uno per riga,
+  ciascuno con la frase che dice che cosa si sta facendo (limitare il coseno, aggiungere 3,
+  dividere per x positiva, leggere i limiti dei due carabinieri, concludere). Il tasto "passo
+  successivo" ne scopre uno per volta e ↺ riporta la sequenza all'inizio; all'apertura della
+  pagina non se ne vede nessuno.
 - Impaginazione: riscritta a quaderno come l'unità 01 e come le unità 01–03 di fisica-5; formule in
   display in <p class="eq">.
 - Rettifica: nel disegno dell'unicità il ramo destro era −1,5 + 0,5·ln(x−1,6), che per x→2⁺ tende a

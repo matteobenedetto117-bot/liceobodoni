@@ -53,6 +53,19 @@ h1{position:relative;top:.5rem}
 .did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
 .did-parti .did{margin:0}
 @media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -137,16 +150,33 @@ $\ell$, e non ha scampo dal seguirle.</p>
 <h2>Esempio 1</h2>
 
 <p>Di una funzione $f$ non si conosce l'espressione: si sa soltanto che, per ogni $x\neq0$ di un
-intorno di 0, i suoi valori stanno fra quelli di due parabole,</p>
+intorno di 0, i suoi valori stanno fra quelli di due parabole. Il tasto scopre un passaggio per
+volta.</p>
 
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg">Ipotesi: la doppia disuguaglianza vale in tutto un intorno di 0, tranne al più in 0.</p>
 <p class="eq">$$2-x^2\le f(x)\le 2+x^2$$</p>
-
-<p>Le due parabole valgono entrambe 2 in $x=0$, quindi tendono entrambe a 2 per $x\to0$: sono i due
-carabinieri. Per il teorema del confronto</p>
-
+</div>
+<div class="passo" hidden>
+<p class="spieg">I due carabinieri sono funzioni continue: il loro limite in 0 si calcola sostituendo.</p>
+<p class="eq">$$\lim_{x\to 0}(2-x^2)=2 \qquad \lim_{x\to 0}(2+x^2)=2$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">I due limiti coincidono: sono lo stesso numero $\ell=2$. Sono le ipotesi del teorema.</p>
+<p class="eq">$$\ell=2$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Il teorema del confronto dà la conclusione, senza calcolare nulla di $f$: basta sapere dove sta.</p>
 <p class="eq">$$\lim_{x\to 0}f(x)=2$$</p>
+</div>
+</div>
 
-<p>e il risultato si ottiene senza calcolare nulla di $f$: basta sapere dove sta.</p>
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
+
 
 <div class="fig">
 <svg id="g-par" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -170,18 +200,39 @@ confronto invece di due:</p>
 
 <h2>Esempio 2</h2>
 
-<p>Calcoliamo $\displaystyle\lim_{x\to+\infty}\frac{3+\cos x}{x}$. Poiché $-1\le\cos x\le1$,
-aggiungendo 3 a ogni membro si ottiene $2\le\cos x+3\le4$; dividendo per $x$, positivo perché
-$x\to+\infty$, il verso delle disuguaglianze non cambia:</p>
+<p>Calcoliamo $\displaystyle\lim_{x\to+\infty}\frac{3+\cos x}{x}$. Qui la funzione oscilla, e
+un'oscillazione non ha limite: il confronto serve proprio a togliere di mezzo il coseno. Anche qui
+il tasto scopre un passaggio per volta.</p>
 
+<div class="passi" id="passi2">
+<div class="passo" hidden>
+<p class="spieg">Il coseno, qualunque sia $x$, resta fra $-1$ e 1. È l'unica cosa che serve sapere di lui.</p>
+<p class="eq">$$-1\le\cos x\le 1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Aggiungo 3 a ogni membro: la somma non cambia il verso delle disuguaglianze.</p>
+<p class="eq">$$2\le 3+\cos x\le 4$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Divido ogni membro per $x$. Poiché $x\to+\infty$, la $x$ è positiva e il verso resta lo stesso.</p>
 <p class="eq">$$\frac{2}{x}\le\frac{3+\cos x}{x}\le\frac{4}{x}$$</p>
-
-<p>Le due funzioni ai lati tendono entrambe a 0 per $x\to+\infty$, quindi per il teorema del
-confronto</p>
-
+</div>
+<div class="passo" hidden>
+<p class="spieg">Ecco i due carabinieri: $2/x$ e $4/x$. Tendono entrambi allo stesso numero, 0.</p>
+<p class="eq">$$\lim_{x\to+\infty}\frac{2}{x}=0 \qquad \lim_{x\to+\infty}\frac{4}{x}=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">La funzione in mezzo è costretta a seguirli: il coseno è sparito dal conto.</p>
 <p class="eq">$$\lim_{x\to+\infty}\frac{3+\cos x}{x}=0$$</p>
+</div>
+</div>
 
-<nav class="nav-unita"><a class="precedente" href="../04-calcolo-dei-limiti-e-algebra-dei-limiti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il calcolo dei limiti</span></a><a class="successiva" href="../05-forme-indeterminate/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forme indeterminate</span></a></nav>
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi2">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi2" hidden>&#8634;</button>
+</div>
+
+<nav class="nav-unita"><a class="precedente" href="../01-definizioni-di-limite-intorni-limite-destro-e-sinistro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il concetto di limite</span></a><a class="successiva" href="../05-forme-indeterminate/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forme indeterminate</span></a></nav>
 <footer><p>Matematica quinta &middot; Limiti &middot; Unità 03</p></footer>
 
 </div>
@@ -200,6 +251,29 @@ confronto</p>
   window.allineaQuaderno=allinea;
   window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
 })();
 </script>
 <script>
