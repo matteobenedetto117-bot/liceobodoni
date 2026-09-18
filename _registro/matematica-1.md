@@ -611,3 +611,9 @@ questo sul sito pubblico.
 - Rettifica: nella dimostrazione della somma degli angoli interni la traccia, dopo aver scritto correttamente δ + β = 180° e δ ≅ α + γ, conclude «α + γ + β = 189°». È un lapsus di scrittura: nella pagina compare 180°, coerente con le due righe precedenti e con la frase finale della traccia stessa, che dice 180°. Verificato con SymPy.
 - Rettifica: nella dimostrazione del teorema dell'angolo esterno la traccia scrive «γ ≅ δ₁ perché angoli alterni di rette parallele». Nella pagina è precisato «alterni interni», che è la coppia effettivamente in gioco fra r e AC tagliate da BC; la sostanza del passaggio non cambia.
 - Aggiunta: un solo esempio numerico (α = 42°, γ = 63°, da cui δ = 105° e β = 75°, con verifica della somma). La traccia di questa unità non contiene nessun esempio e i due teoremi restano altrimenti solo simbolici. Nessun'altra aggiunta: entrambe le dimostrazioni sono quelle della traccia, passaggio per passaggio, senza generalizzazioni né varianti. Un solo riquadro di avvertenza, sul significato di «interni non adiacenti», che è il punto su cui l'enunciato viene applicato male. I tre disegni sono quelli della traccia, ridisegnati in SVG con le ampiezze calcolate: α = 51,29°, γ = 70,38°, β = 58,32°, δ = 121,68° = α + γ, somma dei tre interni 180,00°; parallelismo di r e AC verificato (coefficiente angolare 1,692 per entrambe). Nessuno strumento interattivo: le due dimostrazioni sono statiche e non c'è una grandezza da far variare.
+
+## Unità 64 — Somma degli angoli di un poligono convesso
+- Parole: 263 su 1 pagina di traccia (p. 36 di geometria-1.pdf)
+- Rettifica: nessuna; la catena di uguaglianze della traccia è corretta, verificata con SymPy.
+- Aggiunta: la sola verifica numerica della formula (n = 5 dà 540°, n = 3 restituisce 180°),
+  perché nell'unità la traccia non contiene alcun esempio svolto.
