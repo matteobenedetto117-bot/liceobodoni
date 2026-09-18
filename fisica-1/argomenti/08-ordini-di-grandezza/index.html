@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordini di grandezza — Fisica prima</title>
+<link rel="stylesheet" href="../../../assets/stile.css">
+<style>
+.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
+  font-size:.96rem}
+.nota strong{color:var(--blu)}
+.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
+.regole{margin:22px 0;padding:14px 18px;background:#fff;border:1px solid var(--riga);
+  border-radius:10px}
+.strumento{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:16px 18px;margin:26px 0;text-align:center}
+.strumento input[type=range]{width:min(420px,90%)}
+.strumento .out{font-family:var(--sans);font-size:1.05rem;margin-top:10px}
+.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
+.avanti h2{font-size:1.2rem;margin-top:0}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="foglio">
+
+<header class="testata">
+  <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
+  <p class="occhiello">Grandezze fisiche e strumenti matematici &middot; Unità 08</p>
+  <h1>Ordini di grandezza</h1>
+  <p class="sommario">La potenza di dieci più vicina a una misura: una stima delle sue
+  dimensioni, non il suo valore preciso.</p>
+</header>
+
+<p>Spesso di una misura non interessa il valore esatto, ma soltanto quanto è grande
+all'ingrosso: se siamo nell'ordine dei metri o dei chilometri, dei secondi o dei
+miliardi di secondi. A questa domanda risponde l'ordine di grandezza.</p>
+
+<div class="regole">
+<p>L'<strong>ordine di grandezza</strong> di una misura è la potenza di $10$ più vicina
+al valore della misura.</p>
+</div>
+
+<p>Il risultato è dunque una potenza di dieci soltanto, con l'unità di misura: non un
+numero qualunque. Per individuarlo occorre prima trasformare la misura in notazione
+scientifica.</p>
+
+<div class="esempi">
+<p>$$m = 4800\ \mathrm{kg} = 4{,}8 \cdot 10^{3}\ \mathrm{kg}$$</p>
+</div>
+
+<p>A questo punto occorre osservare il numero davanti alla potenza di $10$, cioè il
+$4{,}8$: è lui a dire se la misura sta più vicino a $10^{3}$ oppure al gradino
+successivo $10^{4}$.</p>
+
+<div class="regole">
+<ul>
+<li>Se è minore di $5$, si prende la potenza così com'è.</li>
+<li>Se è maggiore o uguale a $5$, si arrotonda all'esponente successivo.</li>
+</ul>
+</div>
+
+<div class="esempi">
+<p>$$4{,}8 \cdot 10^{3}\ \mathrm{kg} \;\longrightarrow\; \text{o.d.g.} = 10^{3}\ \mathrm{kg}
+\qquad (4{,}8 &lt; 5)$$</p>
+<p>$$7{,}8 \cdot 10^{3}\ \mathrm{m} \;\longrightarrow\; \text{o.d.g.} = 10^{4}\ \mathrm{m}
+\qquad (7{,}8 &gt; 5)$$</p>
+<p>$$5{,}0 \cdot 10^{8}\ \mathrm{s} \;\longrightarrow\; \text{o.d.g.} = 10^{9}\ \mathrm{s}$$</p>
+</div>
+
+<div class="strumento">
+  <label for="coef">primo fattore: <output id="vcoef">4,8</output></label><br>
+  <input type="range" id="coef" min="10" max="99" step="1" value="48">
+  <div class="out" id="esito"></div>
+</div>
+<p style="font-size:.9rem;color:var(--grigio);text-align:center;margin-top:-14px">
+L'esponente della misura resta $10^{3}$, ma l'ordine di grandezza scatta al gradino
+successivo appena il primo fattore raggiunge $5$.</p>
+
+<div class="nota">
+<strong>Una stima, non una misura.</strong> L'ordine di grandezza serve per avere
+un'idea delle dimensioni di una misura. Non si usa per conoscere con precisione la
+misura stessa: due corpi da $4800\ \mathrm{kg}$ e da $1200\ \mathrm{kg}$ hanno lo stesso
+ordine di grandezza, pur essendo molto diversi.
+</div>
+
+<div class="avanti">
+<h2>Dove si riprende</h2>
+<p>Nell'unità 09 la notazione scientifica viene usata per eseguire le equivalenze, e da
+lì in poi ogni risultato numerico si accompagna alle cifre significative, di cui si
+occupano le unità 11 e 12.</p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var s = document.getElementById('coef'),
+      v = document.getElementById('vcoef'),
+      o = document.getElementById('esito');
+  function agg(){
+    var k = parseInt(s.value, 10), c = k / 10;
+    var testo = c.toFixed(1).replace('.', ',');
+    var esp = (c < 5) ? 3 : 4;
+    v.textContent = testo;
+    o.innerHTML = testo + ' &middot; 10<sup>3</sup> kg &nbsp;&rarr;&nbsp; o.d.g. = 10<sup>'
+      + esp + '</sup> kg';
+  }
+  s.addEventListener('input', agg);
+  agg();
+})();
+</script>
+</body>
+</html>

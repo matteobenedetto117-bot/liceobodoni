@@ -35,3 +35,8 @@
 - Parole: 399 su 2 pagine di traccia (pagg. 8–9 del quaderno = pagg. 9 e prima metà di 10 del PDF, dal titolo «Notazione scientifica» fino a m_S = 1,989·10³⁰ kg escluso il titolo «Ordini di grandezza», che apre l'unità 08). La traccia contiene: le due masse scritte per esteso, la definizione in due punti, la regola del segno dell'esponente, due esempi annotati (0,00438 kg e 324 000 kg) e i due risultati finali. Nessun disegno.
 - Rettifica: nessuna. Verificati con SymPy 0,00438 = 4,38·10⁻³ e 324 000 = 3,24·10⁵; i due valori m_e = 9,11·10⁻³¹ kg e m_S = 1,989·10³⁰ kg corrispondono ai valori accettati.
 - Aggiunta: nessun esempio nuovo. Gli unici elementi non presenti alla lettera nella traccia sono: le due righe che dicono come si individuano i due fattori (la traccia lo mostra solo con le annotazioni a margine sugli esempi); il cursore che, spostando la virgola da −6 a +6 posizioni sulle stesse cifre 438, fa vedere il legame fra verso dello spostamento e segno dell'esponente; il riquadro sul primo fattore compreso fra 1 e 10, che è l'errore tipico dell'argomento e nasce direttamente dalla definizione della traccia. Nessuna tabella riassuntiva.
+
+## Unità 08 — Ordini di grandezza
+- Parole: 323 su circa 1,5 pagine di traccia
+- Rettifica: nessuna. Il contenuto della traccia (definizione, procedura, regola del primo fattore rispetto a 5, tre esempi) è corretto e verificato.
+- Aggiunta: nessun contenuto nuovo. È stato aggiunto solo il cursore interattivo sul primo fattore, che mostra la soglia del 5 già enunciata nella traccia, e una frase di confronto (4800 kg e 1200 kg) per chiarire l'osservazione della traccia secondo cui l'o.d.g. non serve a conoscere la misura con precisione.
