@@ -595,3 +595,8 @@ questo sul sito pubblico.
 - Parole: 508 su 2 pagine di traccia (p. 28–29 del PDF geometria-1.pdf, più le tre righe di coda in cima a p. 30; il campo «pagine» del JSON dice 29–30 perché segue la numerazione scritta sul quaderno, sfalsata di una pagina rispetto al PDF)
 - Rettifica: nessuna. I tre enunciati — teorema dell'angolo esterno, lato maggiore/angolo maggiore, disuguaglianze triangolari — compaiono nella traccia senza dimostrazione, e la pagina li lascia senza dimostrazione. Le tre equivalenze fra lati e angoli opposti della figura di p. 29 sono state ricontrollate contro la posizione delle lettere nel disegno e sono corrette.
 - Aggiunta: un solo esempio numerico (due lati 7 e 4, terzo lato fra 3 e 11, con i due valori fuori intervallo). La traccia dell'unità non contiene nessun esempio, e la sua ultima riga annuncia esplicitamente «le condizioni che devono avere i lati per poter costruire un triangolo» senza mostrarle in un caso concreto. Intervallo verificato con SymPy. Un solo riquadro di avvertenza, sulla distinzione fra angoli interni adiacenti e non adiacenti all'angolo esterno, che è il punto su cui l'enunciato viene applicato male.
+
+## Unità 61 — Rette perpendicolari, asse di un segmento, proiezioni e distanza
+- Parole: 433 su 2 pagine di traccia (pp. 30–31 di geometria-1.pdf)
+- Rettifica: nessuna. La traccia contiene solo definizioni e disegni, nessun enunciato da dimostrare e nessun calcolo da verificare.
+- Aggiunta: nessuna. La traccia non contiene esempi e non ne sono stati inseriti; l'unico riquadro di commento distingue la proiezione (un punto o un segmento) dalla distanza (una lunghezza), confusione frequente. I quattro disegni sono quelli della traccia, ridisegnati in SVG con perpendicolarità verificate numericamente.
