@@ -114,14 +114,35 @@ teorema del confronto, a pagina 21.
 
 ## Unità 04 — Forme indeterminate
 - Parole: 523 su 4 pagine di traccia (14–17)
-- Rettifica: nessuna. Verificati con SymPy tutti i sette limiti: $x^4-3x^2+1\to+\infty$,
+- Rettifica: nessuna sui limiti. Verificati con SymPy tutti i sette limiti: $x^4-3x^2+1\to+\infty$,
   $x-\sqrt{x^2+1}\to0$, $(1-\sin x)\tan x\to0$ in $\pi/2^-$, i tre limiti $\infty/\infty$
   ($-\infty$, $-2/3$, $0$), il limite $0/0$ in $3$ (fattorizzazione $2x^2-9x+9=(x-3)(2x-3)$
   confermata) e $x^{1/\ln x}\to e$.
-- Aggiunta: nulla di contenuto nuovo. Ho reso esplicito in una riga il criterio generale che
-  emerge dai tre esempi $\infty/\infty$ già presenti (confronto fra i gradi), senza introdurre
-  esempi ulteriori. L'unico interattivo riusa il secondo esempio $\infty/\infty$ della traccia
-  per mostrare l'avvicinamento all'asintoto $y=-2/3$.
+- Revisione (18/09/2026): titolo confermato "Forme indeterminate"; tenuti tutti e cinque i
+  titoletti (le quattro forme algebriche più quella delle forme esponenziali). Tolto il
+  sottotitolo dell'intestazione.
+- Rettifiche di testo: nella forma $\infty/\infty$ si diceva che, dopo il raccoglimento, "quel che
+  resta tende a 1 in ciascuna parentesi", ma negli esempi le parentesi tendono ai coefficienti
+  direttivi ($-2$ e $3$): ora si dice che tende a un numero finito diverso da zero. Nelle forme
+  esponenziali la riscrittura $f^g=e^{g\ln f}$ è stata condizionata alla positività della base.
+- Impaginazione: riscritta a quaderno come le unità 01–03; formule in display in <p class="eq">
+  dentro i riquadri azzurri.
+- Esercizi a comparsa: gli otto limiti svolti sono diventati quesiti nel riquadro azzurro con il
+  tasto "risultato" accanto e il risultato in verde chiaro, più il tasto generale "Mostra tutti i
+  risultati" a inizio pagina. Nessun risultato è visibile all'apertura.
+- Passaggi a comparsa: due catene, il coniugato di $x-\sqrt{x^2+1}$ (4 passaggi) e la forma
+  $\infty\cdot0$ di $(1-\sin x)\tan x$ (5 passaggi), ciascuno con la riga in grigetto che dice
+  che cosa si sta facendo; "passo successivo" ne scopre uno per volta, ↺ riporta all'inizio.
+- Figura: il widget Plotly è stato sostituito da un SVG disegnato da uno script interno (nessuna
+  dipendenza da CDN). Mostra per intero $\frac{1-2x^2}{3x^2+2x-5}$ da $x=2$ a $x=60$ — l'intervallo
+  parte da 2 perché in $x=1$ c'è un asintoto verticale — con la retta verde tratteggiata $y=-2/3$
+  (valore del limite). Il cursore muove un punto rosso sulla curva e mostra $f(x)$ e la sua distanza
+  da $-2/3$, con il segmento tratteggiato che la misura. Sull'asse $y$, che non parte da zero, c'è
+  il segno di interruzione. La figura è stata spostata dalla fine della pagina alla sezione
+  $\infty/\infty$, cioè accanto all'esempio che illustra.
+- Comandi: solo cursore, nessun pulsante ▶.
+- Aggiunta: nulla di contenuto nuovo. Resta la riga che esplicita il criterio del confronto fra i
+  gradi, già presente dalla prima stesura.
 
 ## Unità 05 — Limiti notevoli
 - Parole: circa 420 (conteggio totale token, prosa e formule) su 4 pagine di traccia (20–23).
