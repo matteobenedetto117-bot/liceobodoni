@@ -39,7 +39,34 @@ aggiuntivi. Sono state rimosse e verranno riscritte con la calibrazione corretta
 Nella traccia l'unica dimostrazione sviluppata di questo blocco è quella di sin(x)/x tramite il
 teorema del confronto, a pagina 21.
 
-## Unità 02 — Teoremi sui limiti
+## Unità 02 — Il calcolo dei limiti
+- Parole: 441 su circa 2,4 pagine di traccia equivalenti (coda di pag. 11 — sezione "Calcolo di
+  limiti / Funzioni continue in x0" — più pagine 12–13).
+- Spostata prima dei teoremi sui limiti, su richiesta dell'insegnante: ora è l'unità 02 e i teoremi
+  sono l'unità 03. Le due pagine si scambiano solo il numero; gli indirizzi restano quelli di
+  prima, perché il campo "cartella" in _dati/matematica-5.json li tiene fermi.
+- Titolo accorciato da "Calcolo dei limiti e algebra dei limiti"; l'algebra resta un titoletto.
+- Titoletti tenuti: sostituzione nelle funzioni continue, limiti infiniti delle funzioni
+  elementari, algebra dei limiti; dentro l'ultimo restano i quattro sotto-titoli somma, prodotto,
+  quoziente, potenza. Tolto il sottotitolo dell'intestazione.
+- Impaginazione: riscritta a quaderno come le unità 01 e 03 di fisica-5; formule in display in
+  <p class="eq">.
+- Rettifica: nessuna negli enunciati. Il caso $\lim_{x\to-1}\sqrt{x}$ della traccia è segnato con
+  un simbolo di "non esiste": il motivo (−1 fuori dal dominio di $\sqrt{x}$) è reso esplicito nel
+  testo e ora anche nel disegno. Verificati con SymPy i limiti per sostituzione e i tre esempi di
+  algebra dei limiti (somma 2+7=9, prodotto 3·2=6, potenza (−1)²=1).
+- Aggiunta: nulla di contenuto nuovo. Resta la rietichettatura con $n$ dell'esponente costante
+  nella regola della potenza, per evitare la collisione col simbolo $m$ già usato per $\lim g(x)$.
+- Figure: sostituito il widget Plotly con SVG disegnati da uno script interno. Tre figure: i due
+  pannelli della sostituzione ($2^x$ in 4, dove il limite si legge sostituendo, e $\sqrt{x}$, dove
+  il punto si ferma in 0 e a sinistra non c'è funzione), la galleria delle quattro funzioni
+  elementari con limite infinito, e le curve $f$, $g$ e $f+g$ dell'algebra dei limiti.
+- Animazioni: il pulsante ▶ fa scorrere il punto lungo tutta la curva disegnata, ↺ lo riporta
+  all'inizio. Nella sostituzione i due pannelli condividono la stessa $x$ e il pannello della
+  radice scrive "y non definita" finché $x<0$; nell'algebra scorrono insieme i valori di $f$, $g$,
+  $f+g$, $f\cdot g$ e $f/g$.
+
+## Unità 03 — Teoremi sui limiti
 - Parole: circa 500 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di
   pag. 18–20 fino all'inizio di "Limiti notevoli").
 - Titolo accorciato da "Teoremi sui limiti: unicità, permanenza del segno, confronto"; l'elenco dei
@@ -67,19 +94,6 @@ teorema del confronto, a pagina 21.
   intestazione.
 - Nessuna dimostrazione: la traccia riporta unicità, permanenza del segno e confronto come soli
   enunciati con disegno, senza dimostrarli; restano così anche qui.
-
-## Unità 03 — Calcolo dei limiti e algebra dei limiti
-- Parole: 441 su circa 2,4 pagine di traccia equivalenti (coda di pag. 11 — sezione "Calcolo di
-  limiti / Funzioni continue in x0", mai usata nell'unità 03 — più pagine 12–13).
-- Rettifica: nessuna negli enunciati. Il caso $\lim_{x\to-1}\sqrt{x}$ della traccia è segnato con
-  un simbolo di "non esiste": ho reso esplicito il motivo (−1 fuori dal dominio di $\sqrt{x}$),
-  che nella traccia non è scritto ma è implicito nel simbolo. Verificati con SymPy tutti i 13
-  limiti per sostituzione e i tre esempi di algebra dei limiti (somma 2+7=9, prodotto 3·2=6,
-  potenza (−1)²=1).
-- Aggiunta: nulla di contenuto nuovo. Ho rietichettato con $n$ l'esponente costante nella regola
-  della potenza per evitare la collisione col simbolo $m$ già usato per $\lim g(x)$ — la traccia
-  usa $m$ per entrambi i casi, ambiguità solo notazionale. L'unico interattivo riusa le stesse
-  $f,g$ dell'esempio sulla somma per mostrare in tempo reale anche prodotto e quoziente.
 
 ## Unità 04 — Forme indeterminate
 - Parole: 523 su 4 pagine di traccia (14–17)

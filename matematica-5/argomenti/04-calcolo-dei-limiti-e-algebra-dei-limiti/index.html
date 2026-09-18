@@ -3,29 +3,58 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calcolo dei limiti e algebra dei limiti — Matematica quinta</title>
+<title>Il calcolo dei limiti — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.tabvals{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:14px;
-  font-family:var(--sans);font-size:.88rem}
-.tabvals div{background:#f7f5ef;border-radius:8px;padding:8px 10px}
-.tabvals span{display:block;font-size:.72rem;color:var(--grigio);text-transform:uppercase;letter-spacing:.06em}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(320px,55%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -33,12 +62,13 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
-  <p class="occhiello">Limiti &middot; Unità 03</p>
-  <h1>Calcolo dei limiti e algebra dei limiti</h1>
-  <p class="sommario">Verificare un limite con la definizione serve a giustificarlo, ma nella pratica
-  serve un modo più rapido per calcolarlo. Le funzioni elementari offrono una scorciatoia immediata,
-  e poche regole insegnano a combinare fra loro limiti già noti.</p>
+  <p class="occhiello">Limiti &middot; Unità 02</p>
+  <h1>Il calcolo dei limiti</h1>
 </header>
+
+<p>Verificare un limite con la definizione serve a giustificarlo, ma nella pratica serve un modo
+più rapido per calcolarlo. Le funzioni elementari offrono una scorciatoia immediata, e poche regole
+insegnano a combinare fra loro limiti già noti.</p>
 
 <h2>Sostituzione nelle funzioni continue</h2>
 
@@ -50,11 +80,26 @@ ora basta la conseguenza pratica: calcolare il limite si riduce a sostituire.</p
 <div class="def">
 <span class="et">Regola di sostituzione</span>
 <p>Se $f$ è continua in $x_0$, allora</p>
-$$\lim_{x\to x_0}f(x)=f(x_0)$$
+<p class="eq">$$\lim_{x\to x_0}f(x)=f(x_0)$$</p>
 </div>
 
-$$\lim_{x\to -2}x^3=(-2)^3=-8 \qquad\qquad \lim_{x\to -1}\sqrt[3]{x}=\sqrt[3]{-1}=-1$$
-$$\lim_{x\to 4}2^x=2^4=16 \qquad\qquad \lim_{x\to \pi}\cos x=\cos\pi=-1$$
+<p class="eq">$$\lim_{x\to -2}x^3=(-2)^3=-8 \qquad\qquad \lim_{x\to -1}\sqrt[3]{x}=\sqrt[3]{-1}=-1$$</p>
+
+<p class="eq">$$\lim_{x\to 4}2^x=2^4=16 \qquad\qquad \lim_{x\to \pi}\cos x=\cos\pi=-1$$</p>
+
+<div class="fig">
+<svg id="g-sost" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-sost" aria-label="Avvia">&#9654;</button>
+<label for="c-sost">punto $x$</label>
+<input id="c-sost" type="range" min="0" max="1" step="0.002" value="0">
+<span class="val" id="v-sost"></span></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Su $y=2^x$ il punto può arrivare a 4 da entrambe le parti e la quota si avvicina a
+$2^4=16$: il limite si legge sostituendo.</p>
+<p class="did">Su $y=\sqrt{x}$ il punto si ferma in 0: a sinistra la funzione non esiste, e in $-1$
+non c'è nulla a cui avvicinarsi.</p>
+</div>
+</div>
 
 <div class="nota">
 <span class="et">Attenzione</span>
@@ -68,10 +113,23 @@ si applica solo se $x_0$ appartiene al dominio di $f$, o ne è punto di accumula
 <p>La stessa sostituzione vale quando il risultato è infinito, o quando è $x$ a tendere
 all'infinito: bastano i comportamenti noti delle funzioni elementari.</p>
 
-$$\lim_{x\to+\infty}x^4=+\infty \qquad\qquad \lim_{x\to+\infty}e^{-x}=0$$
-$$\lim_{x\to-\infty}x^2=+\infty \qquad\qquad \lim_{x\to 0}\frac{1}{x^2}=+\infty$$
-$$\lim_{x\to-\infty}\frac{4}{x}=0 \qquad\qquad \lim_{x\to 0}\left(-\frac{2}{x^2}\right)=-\infty$$
-$$\lim_{x\to 0^{+}}\ln x=-\infty \qquad\qquad \lim_{x\to+\infty}\ln x=+\infty$$
+<p class="eq">$$\lim_{x\to+\infty}x^4=+\infty \qquad\qquad \lim_{x\to+\infty}e^{-x}=0$$</p>
+
+<p class="eq">$$\lim_{x\to-\infty}x^2=+\infty \qquad\qquad \lim_{x\to 0}\frac{1}{x^2}=+\infty$$</p>
+
+<p class="eq">$$\lim_{x\to-\infty}\frac{4}{x}=0 \qquad\qquad \lim_{x\to 0}\left(-\frac{2}{x^2}\right)=-\infty$$</p>
+
+<p class="eq">$$\lim_{x\to 0^{+}}\ln x=-\infty \qquad\qquad \lim_{x\to+\infty}\ln x=+\infty$$</p>
+
+<div class="fig">
+<svg id="gal-el" viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="did-parti" style="--n:4">
+<p class="did">$x^4$: cresce oltre ogni soglia da entrambe le parti.</p>
+<p class="did">$e^{-x}$: si appiattisce su 0 verso destra.</p>
+<p class="did">$\dfrac{1}{x^2}$: esplode a $+\infty$ avvicinandosi a 0.</p>
+<p class="did">$\ln x$: sprofonda a $-\infty$ verso $0^{+}$.</p>
+</div>
+</div>
 
 <h2>Algebra dei limiti</h2>
 
@@ -80,81 +138,252 @@ potenza si comportano come ci si aspetterebbe, purché il risultato scritto a de
 Supponiamo $\displaystyle\lim_{x\to a}f(x)=\ell$ e $\displaystyle\lim_{x\to a}g(x)=m$.</p>
 
 <h3>Somma</h3>
-$$\lim_{x\to a}\big[f(x)+g(x)\big]=\ell+m$$
+
+<p class="eq">$$\lim_{x\to a}\big[f(x)+g(x)\big]=\ell+m$$</p>
+
 <p>Con $f(x)=2x-6$ e $g(x)=x+3$: $\lim_{x\to4}f(x)=2$, $\lim_{x\to4}g(x)=7$, quindi</p>
-$$\lim_{x\to4}\big[f(x)+g(x)\big]=2+7=9$$
+
+<p class="eq">$$\lim_{x\to4}\big[f(x)+g(x)\big]=2+7=9$$</p>
 
 <h3>Prodotto</h3>
-$$\lim_{x\to a}\big[f(x)\cdot g(x)\big]=\ell\cdot m$$
-$$\lim_{x\to1}3x(x+1)=\lim_{x\to1}3x\cdot\lim_{x\to1}(x+1)=3\cdot2=6$$
+
+<p class="eq">$$\lim_{x\to a}\big[f(x)\cdot g(x)\big]=\ell\cdot m$$</p>
+
+<p class="eq">$$\lim_{x\to1}3x(x+1)=\lim_{x\to1}3x\cdot\lim_{x\to1}(x+1)=3\cdot2=6$$</p>
 
 <h3>Quoziente</h3>
-$$\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{\ell}{m} \qquad (m\neq0)$$
+
+<p class="eq">$$\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{\ell}{m} \qquad (m\neq0)$$</p>
+
 <p>Se $m=0$ il quoziente rientra fra le forme che richiedono un lavoro ulteriore, oggetto
 dell'unità 04.</p>
 
 <h3>Potenza</h3>
-$$\lim_{x\to a}\big[f(x)\big]^{n}=\ell^{\,n} \qquad (n \text{ costante})$$
-$$\lim_{x\to2}(x-3)^2=(-1)^2=1$$
+
+<p class="eq">$$\lim_{x\to a}\big[f(x)\big]^{n}=\ell^{\,n} \qquad (n \text{ costante})$$</p>
+
+<p class="eq">$$\lim_{x\to2}(x-3)^2=(-1)^2=1$$</p>
+
 <p>Se anche l'esponente è una funzione di $x$ con il proprio limite, vale in generale</p>
-$$\lim_{x\to a}\big[f(x)\big]^{g(x)}=\ell^{\,m}$$
 
-<div class="widget">
-  <div class="controlli">
-    <label>Punto $x$
-      <input type="range" id="s-x" min="0" max="8" step="0.05" value="0.5">
-      <span>$x$ = <span class="val" id="v-x"></span> &nbsp;→&nbsp; $x\to4$</span>
-    </label>
-  </div>
-  <div id="g-alg" style="height:320px"></div>
-  <div class="tabvals">
-    <div><span>f(x) = 2x−6</span><b id="v-f"></b></div>
-    <div><span>g(x) = x+3</span><b id="v-g"></b></div>
-    <div><span>f(x) + g(x)</span><b id="v-somma"></b></div>
-    <div><span>f(x) &middot; g(x)</span><b id="v-prod"></b></div>
-    <div><span>f(x) / g(x)</span><b id="v-quo"></b></div>
-  </div>
-  <p class="leggenda">Muovendo il cursore verso $x=4$, ciascuna combinazione si avvicina al valore
-  ottenuto combinando i due limiti separati: $2+7=9$, $2\cdot7=14$, $2/7\approx0{,}286$.</p>
+<p class="eq">$$\lim_{x\to a}\big[f(x)\big]^{g(x)}=\ell^{\,m}$$</p>
+
+<div class="fig">
+<svg id="g-alg" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-alg" aria-label="Avvia">&#9654;</button>
+<label for="c-alg">punto $x$</label>
+<input id="c-alg" type="range" min="0" max="1" step="0.002" value="0.08">
+<span class="val" id="v-alg"></span></div>
+<p class="did">Le tre curve sono $f(x)=2x-6$, $g(x)=x+3$ e la loro somma. Portando il punto verso
+$x=4$ ciascuna combinazione si avvicina al valore ottenuto combinando i due limiti separati:
+$2+7=9$ per la somma, $2\cdot7=14$ per il prodotto, $2/7$ per il quoziente.</p>
 </div>
 
-
-<nav class="nav-unita"><a class="precedente" href="../03-teoremi-sui-limiti-unicita-permanenza-del-segno-confronto/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teoremi sui limiti</span></a><a class="successiva" href="../05-forme-indeterminate/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forme indeterminate</span></a></nav>
-<footer><p>Matematica quinta &middot; Limiti &middot; Unità 03</p></footer>
+<nav class="nav-unita"><a class="precedente" href="../01-definizioni-di-limite-intorni-limite-destro-e-sinistro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il concetto di limite</span></a><a class="successiva" href="../03-teoremi-sui-limiti-unicita-permanenza-del-segno-confronto/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teoremi sui limiti</span></a></nav>
+<footer><p>Matematica quinta &middot; Limiti &middot; Unità 02</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var f=function(x){return 2*x-6;}, g=function(x){return x+3;};
-  var xs=[],yf=[],yg=[];
-  for(var i=0;i<=300;i++){var v=i*8/300; xs.push(v); yf.push(f(v)); yg.push(g(v));}
-  var sx=document.getElementById('s-x'), vx=document.getElementById('v-x');
-  var vf=document.getElementById('v-f'), vg=document.getElementById('v-g'),
-      vs=document.getElementById('v-somma'), vp=document.getElementById('v-prod'),
-      vq=document.getElementById('v-quo');
-  function fmt(n){return n.toFixed(3).replace('.',',');}
-  function agg(){
-    var x=parseFloat(sx.value), fx=f(x), gx=g(x);
-    vx.textContent=fmt(x);
-    vf.textContent=fmt(fx); vg.textContent=fmt(gx);
-    vs.textContent=fmt(fx+gx); vp.textContent=fmt(fx*gx); vq.textContent=fmt(fx/gx);
-    Plotly.react('g-alg',[
-      {x:xs,y:yf,mode:'lines',name:'f(x)=2x−6',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
-      {x:xs,y:yg,mode:'lines',name:'g(x)=x+3',line:{color:'#2f6b4f',width:2.2},hoverinfo:'skip'},
-      {x:[x],y:[fx],mode:'markers',marker:{size:10,color:'#1f4e79'},hoverinfo:'skip'},
-      {x:[x],y:[gx],mode:'markers',marker:{size:10,color:'#2f6b4f'},hoverinfo:'skip'}
-    ],{
-      margin:{l:44,r:14,t:10,b:34},showlegend:true,
-      legend:{orientation:'h',y:-0.22,font:{size:11}},
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[0,8],zeroline:false,gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[-8,12],zeroline:true,zerolinecolor:'#16283d',gridcolor:'#e6e0d4'},
-      shapes:[{type:'line',x0:4,x1:4,y0:-8,y1:12,line:{color:'#b3392f',width:1,dash:'dot'}}],
-      annotations:[{x:4,y:12,text:'x = 4',showarrow:false,yshift:-8,xshift:22,font:{size:11,color:'#b3392f'}}]
-    },{displayModeBar:false,responsive:true});
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  sx.addEventListener('input',agg); agg();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+
+function anima(btn,inp,dur,dopo){
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var v0=inp.value, stato='fermo', raf=null;
+  function ev(){inp.dispatchEvent(new Event('input',{bubbles:true}));}
+  btn.addEventListener('click',function(){
+    if(stato==='fine'){cancelAnimationFrame(raf);inp.value=v0;ev();stato='fermo';
+      btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');return;}
+    if(stato!=='fermo')return;
+    var a=parseFloat(inp.min), b=parseFloat(inp.max), t0=null;
+    stato='corsa'; btn.disabled=true;
+    function fine(){stato='fine';btn.disabled=false;btn.innerHTML='&#8634;';
+      btn.setAttribute('aria-label','Ricomincia');if(dopo)dopo();}
+    if(ridotto){inp.value=b;ev();fine();return;}
+    (function passo(t){if(t0===null)t0=t;var u=Math.min((t-t0)/dur,1);
+      inp.value=a+(b-a)*u;ev();
+      if(u>=1)fine(); else raf=requestAnimationFrame(passo);})(performance.now());
+  });
+}
+
+
+/* ---------- 1. sostituzione: 2^x e radice di x ---------- */
+(function(){
+  var svg=document.getElementById('g-sost'); if(!svg)return;
+  var punti=[];
+  var casi=[
+    {f:function(x){return Math.pow(2,x);}, xr:[-2.2,5.2], yr:[-2,20], x0:4,
+     tx:[-2,-1,1,2,3,4,5], ty:[5,10,16], eti:'2ˣ', dom:[-2.2,5.2], val:16},
+    {f:function(x){return Math.sqrt(x);},  xr:[-2.2,5.2], yr:[-0.8,3], x0:-1,
+     tx:[-2,-1,1,2,3,4,5], ty:[1,2], eti:'√x', dom:[0,5.2], val:null}
+  ];
+  casi.forEach(function(c,i){
+    var g=el('g',{transform:'translate('+(i*280)+',0)'}); svg.appendChild(g);
+    var sub=el('svg',{viewBox:'0 0 280 300',width:280,height:300}); g.appendChild(sub);
+    var P=new Piano(sub,c.xr,c.yr,{l:26,r:16,t:20,b:26});
+    P.assi(c.tx,c.ty);
+    P.add(el('line',{x1:P.X(c.x0),y1:P.m.t,x2:P.X(c.x0),y2:P.H-P.m.b,
+      stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
+    if(c.val!==null){
+      P.add(el('line',{x1:P.X(0),y1:P.Y(c.val),x2:P.W-P.m.r,y2:P.Y(c.val),
+        stroke:'var(--verde)','stroke-width':1,'stroke-dasharray':'5,4'}),'sotto');
+    } else {
+      P.add(txt(P.m.l+2,P.H-P.m.b-8,'qui la funzione non esiste',{fill:'var(--rosso)','font-size':11}),'testo');
+    }
+    P.curva(c.f,c.dom[0],c.dom[1],300,null,2.2);
+    if(i===1)P.add(el('circle',{cx:P.X(0),cy:P.Y(0),r:4.5,fill:'var(--inchiostro)'}));
+    P.add(txt(P.W-P.m.r-2,P.m.t+12,c.eti,{'text-anchor':'end',fill:'var(--inchiostro)','font-size':13}),'testo');
+    punti.push({P:P,c:c,pt:P.add(el('circle',{r:5.5,fill:'var(--rosso)'})),
+      st:P.add(txt(P.m.l+2,P.H-P.m.b+20,'',{'font-size':12}),'testo')});
+  });
+  var c=document.getElementById('c-sost'), v=document.getElementById('v-sost');
+  function agg(){
+    var x=-2.2+parseFloat(c.value)*7.4;
+    punti.forEach(function(o){
+      var vale=x>=o.c.dom[0], y=o.c.f(x);
+      o.pt.setAttribute('opacity',vale?1:0);
+      if(vale){o.pt.setAttribute('cx',o.P.X(x)); o.pt.setAttribute('cy',o.P.Y(y));}
+      o.st.textContent=vale?('x = '+num(x,2)+'  ·  y = '+num(y,2))
+                           :('x = '+num(x,2)+'  ·  y non definita');
+      o.st.setAttribute('fill',vale?'var(--grigio)':'var(--rosso)');
+    });
+    v.textContent='x = '+num(x,2);
+  }
+  c.addEventListener('input',agg); anima(document.getElementById('b-sost'),c,6000); agg();
+})();
+
+/* ---------- 2. galleria delle funzioni elementari ---------- */
+(function(){
+  var svg=document.getElementById('gal-el'); if(!svg)return;
+  var casi=[
+    {f:function(x){return Math.pow(x,4);}, xr:[-2.2,2.2], yr:[-3,20], d:[-2.2,2.2]},
+    {f:function(x){return Math.exp(-x);},  xr:[-1.6,4.2], yr:[-1,5],  d:[-1.6,4.2]},
+    {f:function(x){return 1/(x*x);},       xr:[-2.2,2.2], yr:[-2,10], d:null},
+    {f:function(x){return Math.log(x);},   xr:[-0.6,5.2], yr:[-4,2],  d:[0.012,5.2]}
+  ];
+  casi.forEach(function(c,i){
+    var g=el('g',{transform:'translate('+(i*140)+',0)'}); svg.appendChild(g);
+    var sub=el('svg',{viewBox:'0 0 140 190',width:140,height:190}); g.appendChild(sub);
+    var P=new Piano(sub,c.xr,c.yr,{l:12,r:10,t:12,b:12});
+    P.assi([],[],'','');
+    if(c.d)P.curva(c.f,c.d[0],c.d[1],260,null,2);
+    else {P.curva(c.f,-2.2,-0.02,200,null,2);P.curva(c.f,0.02,2.2,200,null,2);}
+  });
+})();
+
+/* ---------- 3. algebra dei limiti ---------- */
+(function(){
+  var svg=document.getElementById('g-alg'); if(!svg)return;
+  var P=new Piano(svg,[0,6],[-7,16],{l:36,r:150,t:18,b:30});
+  var f=function(x){return 2*x-6;}, g=function(x){return x+3;}, s=function(x){return f(x)+g(x);};
+  P.assi([1,2,3,4,5],[-5,5,10,15]);
+  P.add(el('line',{x1:P.X(4),y1:P.m.t,x2:P.X(4),y2:P.H-P.m.b,stroke:'var(--rosso)',
+    'stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
+  P.add(txt(P.X(4)+6,P.m.t+12,'x = 4',{fill:'var(--rosso)'}),'testo');
+  P.curva(f,0,6,200,'var(--blu)',2.2);
+  P.curva(g,0,6,200,'var(--verde)',2.2);
+  P.curva(s,0,6,200,'var(--grigio)',1.8,'7,4');
+  P.add(txt(P.X(5.6),P.Y(f(5.6))-8,'f',{fill:'var(--blu)','font-size':13}),'testo');
+  P.add(txt(P.X(5.6),P.Y(g(5.6))-8,'g',{fill:'var(--verde)','font-size':13}),'testo');
+  P.add(txt(P.X(4.6),P.Y(s(4.6))-8,'f + g',{fill:'var(--grigio)','font-size':13}),'testo');
+  var pf=P.add(el('circle',{r:5.5,fill:'var(--blu)'})),
+      pg=P.add(el('circle',{r:5.5,fill:'var(--verde)'})),
+      ps=P.add(el('circle',{r:5,fill:'var(--grigio)'}));
+  var righe=[];
+  ['f(x)','g(x)','f(x) + g(x)','f(x) · g(x)','f(x) / g(x)'].forEach(function(e,i){
+    righe.push(P.add(txt(P.W-P.m.r+10,P.m.t+18+i*26,'',{'font-size':13,
+      fill:i===0?'var(--blu)':i===1?'var(--verde)':'var(--inchiostro)'}),'testo'));
+  });
+  var c=document.getElementById('c-alg'), v=document.getElementById('v-alg');
+  function agg(){
+    var x=parseFloat(c.value)*6, F=f(x), G=g(x);
+    pf.setAttribute('cx',P.X(x)); pf.setAttribute('cy',P.Y(F));
+    pg.setAttribute('cx',P.X(x)); pg.setAttribute('cy',P.Y(G));
+    ps.setAttribute('cx',P.X(x)); ps.setAttribute('cy',P.Y(F+G));
+    righe[0].textContent='f = '+num(F,2);
+    righe[1].textContent='g = '+num(G,2);
+    righe[2].textContent='f + g = '+num(F+G,2);
+    righe[3].textContent='f · g = '+num(F*G,2);
+    righe[4].textContent='f / g = '+num(F/G,3);
+    v.textContent='x = '+num(x,2);
+  }
+  c.addEventListener('input',agg); anima(document.getElementById('b-alg'),c,6000); agg();
+})();
 })();
 </script>
 </body>
