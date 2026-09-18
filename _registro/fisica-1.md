@@ -76,3 +76,18 @@
   densità); l'unico elemento non presente nel quaderno è il disegno del metro quadro
   suddiviso in millimetri quadrati, aggiunto perché il punto dell'unità — il fattore che
   agisce due volte — non ha nella traccia alcun supporto visivo.
+
+## Unità 15 — Strumenti di misura: portata e sensibilità
+- Parole: 269 su 1 pagina di traccia (p. 22 del PDF, di cui l'unità occupa in realtà solo
+  la metà superiore: la metà inferiore, con lo schema errori casuali/sistematici, è
+  l'unità 16). Inventario della traccia: due definizioni (portata, sensibilità), nessun
+  esempio, nessun disegno, nessuna dimostrazione.
+- Rettifica: nessuna. Le due definizioni della traccia sono corrette e sono state
+  riportate alla lettera. Verificato con SymPy il solo conto presente nella pagina:
+  20 cm con tacche al millimetro danno 200 intervalli, e 1 mm = 0,1 cm.
+- Aggiunta: un solo esempio, il righello da 20 cm con sensibilità 1 mm, aggiunto perché
+  la traccia non ne contiene nessuno in tutta l'unità. Oltre a quello: il disegno SVG
+  della scala graduata, che mostra la portata come intera scala e la sensibilità come
+  singolo intervallo, e il riquadro «Da non confondere» sull'indipendenza fra le due
+  caratteristiche, che è l'errore tipico dell'argomento. Nessuna tabella riassuntiva,
+  nessuno strumento interattivo.
