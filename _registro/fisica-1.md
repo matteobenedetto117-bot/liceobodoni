@@ -91,3 +91,22 @@
   singolo intervallo, e il riquadro «Da non confondere» sull'indipendenza fra le due
   caratteristiche, che è l'errore tipico dell'argomento. Nessuna tabella riassuntiva,
   nessuno strumento interattivo.
+
+## Unità 16 — Errori casuali e sistematici
+- Parole: 345 su 2 pagine di traccia (pagine 22–23 del PDF; della pagina 22 appartiene
+  a questa unità solo la metà inferiore, da «Errori di misura» in giù: la metà superiore
+  con portata e sensibilità è l'unità 15). Inventario della traccia: la frase «ogni misura
+  è affetta da errore» con la precisazione che in fisica l'errore è l'incertezza, lo
+  schema ad albero ERRORI → casuali / sistematici, la tabella di confronto su tre righe
+  (origine, evitabilità, verso dello sbaglio) e la griglia 2×2 dei quattro bersagli.
+  Nessun esempio, nessuna dimostrazione.
+- Rettifica: nessuna. Le tre righe di confronto sono state riportate alla lettera. Nessuna
+  formula né calcolo numerico nella pagina, quindi nulla da verificare con SymPy.
+- Aggiunta: un solo esempio, la misura del banco con il metro a nastro (nastro appoggiato
+  ogni volta un po' diversamente = casuale; nastro allungato dal tiraggio = sistematico),
+  aggiunto perché la traccia non contiene nessun esempio in tutta l'unità. Oltre a quello:
+  i due disegni SVG, che sono entrambi ridisegni di schemi presenti nella traccia (albero
+  delle due famiglie, griglia dei bersagli), e il riquadro «Da non confondere» sul fatto
+  che misure concordi non sono per questo corrette — è l'errore tipico che la griglia dei
+  bersagli serve a smontare. Nessuna tabella riassuntiva oltre a quella della traccia,
+  nessuno strumento interattivo.
