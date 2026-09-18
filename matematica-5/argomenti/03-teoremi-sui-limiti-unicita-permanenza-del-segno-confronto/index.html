@@ -60,7 +60,7 @@ h1{position:relative;top:.5rem}
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
-  <p class="occhiello">Limiti &middot; Unità 03</p>
+  <p class="occhiello">Limiti &middot; Unità 02</p>
   <h1>Teoremi sui limiti</h1>
 </header>
 
@@ -132,8 +132,36 @@ più il punto $x_0$. Se in ogni punto di $H$ (tranne eventualmente $x_0$) risult
 </div>
 
 <p>Il nome informale rende l'idea: $f$ è scortata da $h$ e $g$, che convergono allo stesso valore
-$\ell$, e non ha scampo dal seguirle. Il teorema vale anche quando $x_0$ è $+\infty$ o $-\infty$, e
-in tre varianti che chiedono un solo confronto invece di due:</p>
+$\ell$, e non ha scampo dal seguirle.</p>
+
+<h2>Esempio 1</h2>
+
+<p>Calcoliamo $\displaystyle\lim_{x\to 0}x\sin\frac{1}{x}$. In 0 la funzione non è definita, e il
+fattore $\sin\frac1x$ non ha limite: più ci si avvicina a 0, più fitte diventano le sue oscillazioni
+fra $-1$ e 1. Proprio per questo il teorema è lo strumento adatto. Qualunque sia $x\neq0$ vale
+$-1\le\sin\frac1x\le1$; moltiplicando per $|x|$, che è positivo, il verso non cambia e si ottiene</p>
+
+<p class="eq">$$-|x|\le x\sin\frac{1}{x}\le|x|$$</p>
+
+<p>Le due funzioni ai lati sono i carabinieri, e tendono entrambe a 0 per $x\to0$. La funzione in
+mezzo non ha scampo:</p>
+
+<p class="eq">$$\lim_{x\to 0}x\sin\frac{1}{x}=0$$</p>
+
+<div class="fig">
+<svg id="g-zero" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-zero" aria-label="Avvia">&#9654;</button>
+<label for="c-zero">punto $x$</label>
+<input id="c-zero" type="range" min="-1" max="1" step="0.002" value="-1">
+<span class="val" id="v-zero"></span></div>
+<p class="did">Le due rette tratteggiate sono $y=|x|$ e $y=-|x|$: formano un corridoio che si
+chiude a punta nell'origine. La curva oscilla sempre più in fretta, ma resta dentro il corridoio,
+e il corridoio la schiaccia su 0. Il punto percorre prima il ramo di sinistra verso l'origine, poi
+riparte dal ramo di destra.</p>
+</div>
+
+<p>Il teorema vale anche quando $x_0$ è $+\infty$ o $-\infty$, e in tre varianti che chiedono un solo
+confronto invece di due:</p>
 
 <ul>
 <li>se $|f(x)|\le|g(x)|$ e $\lim g(x)=0$, allora $\lim f(x)=0$;</li>
@@ -141,7 +169,7 @@ in tre varianti che chiedono un solo confronto invece di due:</p>
 <li>se $f(x)\le g(x)$ e $\lim g(x)=-\infty$, allora $\lim f(x)=-\infty$.</li>
 </ul>
 
-<h2>Esempio</h2>
+<h2>Esempio 2</h2>
 
 <p>Calcoliamo $\displaystyle\lim_{x\to+\infty}\frac{3+\cos x}{x}$. Poiché $-1\le\cos x\le1$,
 aggiungendo 3 a ogni membro si ottiene $2\le\cos x+3\le4$; dividendo per $x$, positivo perché
@@ -166,8 +194,8 @@ numeri a destra sono le tre quote nel punto scelto: la distanza fra la prima e l
 assottiglia mentre il punto avanza.</p>
 </div>
 
-<nav class="nav-unita"><a class="precedente" href="../01-definizioni-di-limite-intorni-limite-destro-e-sinistro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il concetto di limite</span></a><a class="successiva" href="../05-forme-indeterminate/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forme indeterminate</span></a></nav>
-<footer><p>Matematica quinta &middot; Limiti &middot; Unità 03</p></footer>
+<nav class="nav-unita"><a class="precedente" href="../01-definizioni-di-limite-intorni-limite-destro-e-sinistro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il concetto di limite</span></a><a class="successiva" href="../04-calcolo-dei-limiti-e-algebra-dei-limiti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Calcolo dei limiti e algebra dei limiti</span></a></nav>
+<footer><p>Matematica quinta &middot; Limiti &middot; Unità 02</p></footer>
 
 </div>
 <script>
@@ -336,6 +364,43 @@ function anima(btn,inp,dur,dopo){
     v.textContent='x = '+num(x,2);
   }
   c.addEventListener('input',agg); anima(document.getElementById('b-segno'),c,6000); agg();
+})();
+
+
+/* ---------- 3bis. confronto in un punto finito: x sin(1/x) ---------- */
+(function(){
+  var svg=document.getElementById('g-zero'); if(!svg)return;
+  var A=0.55, U0=1/A, U1=60;
+  var P=new Piano(svg,[-A,A],[-0.62,0.62],{l:44,r:26,t:18,b:34});
+  var f=function(x){return x*Math.sin(1/x);};
+  P.assi([-0.5,-0.25,0.25,0.5],[-0.5,-0.25,0.25,0.5]);
+  [1,-1].forEach(function(sg){
+    P.add(el('path',{d:'M'+P.X(-A)+' '+P.Y(sg*A)+' L'+P.X(0)+' '+P.Y(0)+' L'+P.X(A)+' '+P.Y(sg*A),
+      fill:'none',stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'6,4'}),'sotto');
+  });
+  /* campionamento uniforme in u = 1/x: il passo segue le oscillazioni */
+  function ramo(sg){
+    var d='',n=1400;
+    for(var i=0;i<=n;i++){
+      var u=U0+i*(U1-U0)/n, x=sg/u, y=f(x);
+      d+=(i?'L':'M')+P.X(x).toFixed(2)+' '+P.Y(y).toFixed(2)+' ';
+    }
+    P.add(el('path',{d:d,fill:'none',stroke:'var(--blu)','stroke-width':1.6,'stroke-linejoin':'round'}));
+  }
+  ramo(-1); ramo(1);
+  P.add(txt(P.X(0.33),P.Y(0.33)-9,'y = |x|',{fill:'var(--rosso)','text-anchor':'end'}),'testo');
+  P.add(txt(P.X(0.33),P.Y(-0.33)+18,'y = \u2212|x|',{fill:'var(--rosso)','text-anchor':'end'}),'testo');
+  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
+  var st=P.add(txt(P.m.l+4,P.m.t+14,'',{'font-size':13,fill:'var(--grigio)'}),'testo');
+  var c=document.getElementById('c-zero'), v=document.getElementById('v-zero');
+  function agg(){
+    var t=parseFloat(c.value), sg=t<0?-1:1;
+    var u=U0+(1-Math.abs(t))*(U1-U0), x=sg/u, y=f(x);
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    st.textContent='x = '+num(x,4)+'  \u00b7  f(x) = '+num(y,4)+'  \u00b7  corridoio: \u00b1'+num(Math.abs(x),4);
+    v.textContent='x = '+num(x,4);
+  }
+  c.addEventListener('input',agg); anima(document.getElementById('b-zero'),c,7000); agg();
 })();
 
 /* ---------- 3. confronto: 2/x, (3+cos x)/x, 4/x ---------- */

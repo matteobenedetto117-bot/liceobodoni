@@ -76,8 +76,14 @@ teorema del confronto, a pagina 21.
   tre teoremi resta nei titoletti. In _dati/matematica-5.json il campo "cartella" tiene fermo
   l'indirizzo della pagina.
 - Titoletti: teorema di unicità del limite, teorema della permanenza del segno, teorema del
-  confronto, Esempio (il calcolo di (3+cos x)/x, che prima non aveva titoletto). Tolto il
-  sottotitolo dell'intestazione.
+  confronto, Esempio 1 ed Esempio 2. Tolto il sottotitolo dell'intestazione.
+- Aggiunta su richiesta dell'insegnante: un secondo esempio del teorema del confronto con x che
+  tende a un punto finito, lim(x→0) x·sin(1/x) = 0, stretto fra −|x| e |x|. Non è nella traccia,
+  che per il confronto porta solo l'esempio all'infinito; è stato messo come Esempio 1, prima
+  dell'osservazione che il teorema vale anche per x→±∞, e l'esempio (3+cos x)/x della traccia è
+  diventato l'Esempio 2. Verificato con SymPy che il limite vale 0 e che entrambi i bordi tendono
+  a 0. La figura relativa disegna il corridoio y = ±|x| e la curva campionata uniformemente in
+  u = 1/x, così il passo segue le oscillazioni e non si creano falsi disegni vicino allo zero.
 - Impaginazione: riscritta a quaderno come l'unità 01 e come le unità 01–03 di fisica-5; formule in
   display in <p class="eq">.
 - Rettifica: nel disegno dell'unicità il ramo destro era −1,5 + 0,5·ln(x−1,6), che per x→2⁺ tende a
@@ -85,7 +91,7 @@ teorema del confronto, a pagina 21.
   esattamente da −3/2. Verificato con SymPy: limite sinistro 1, limite destro −3/2, e
   2/x ≤ (3+cos x)/x ≤ 4/x con entrambi i bordi che tendono a 0 per x→+∞.
 - Figure: sostituiti i widget Plotly con SVG disegnati da uno script interno (nessuna dipendenza da
-  CDN). Tre figure: il salto in 2 per l'unicità, i due casi della permanenza del segno affiancati
+  CDN). Quattro figure, contando quella dell'Esempio 1: il salto in 2 per l'unicità, i due casi della permanenza del segno affiancati
   (ℓ > 0 e ℓ < 0) con l'intorno I(x₀) evidenziato, e le tre curve del confronto.
 - Animazioni: il pulsante ▶ fa scorrere il punto lungo tutta la curva disegnata, ↺ lo riporta
   all'inizio. Nella permanenza del segno i due pannelli si muovono insieme e la scritta dice se la
