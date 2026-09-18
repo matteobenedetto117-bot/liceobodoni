@@ -258,17 +258,6 @@ dell'unità 04.</p>
 
 <p class="eq">$$\lim_{x\to a}\big[f(x)\big]^{g(x)}=\ell^{\,m}$$</p>
 
-<div class="fig">
-<svg id="g-alg" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="cursore"><button type="button" class="btn-anim" id="b-alg" aria-label="Avvia">&#9654;</button>
-<label for="c-alg">punto $x$</label>
-<input id="c-alg" type="range" min="0" max="1" step="0.002" value="0.08">
-<span class="val" id="v-alg"></span></div>
-<p class="did">Le tre curve sono $f(x)=2x-6$, $g(x)=x+3$ e la loro somma. Portando il punto verso
-$x=4$ ciascuna combinazione si avvicina al valore ottenuto combinando i due limiti separati:
-$2+7=9$ per la somma, $2\cdot7=14$ per il prodotto, $2/7$ per il quoziente.</p>
-</div>
-
 <nav class="nav-unita"><a class="precedente" href="../01-definizioni-di-limite-intorni-limite-destro-e-sinistro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il concetto di limite</span></a><a class="successiva" href="../03-teoremi-sui-limiti-unicita-permanenza-del-segno-confronto/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teoremi sui limiti</span></a></nav>
 <footer><p>Matematica quinta &middot; Limiti &middot; Unità 02</p></footer>
 
@@ -430,44 +419,6 @@ function anima(btn,inp,dur,dopo){
   });
 })();
 
-/* ---------- 3. algebra dei limiti ---------- */
-(function(){
-  var svg=document.getElementById('g-alg'); if(!svg)return;
-  var P=new Piano(svg,[0,6],[-7,16],{l:36,r:150,t:18,b:30});
-  var f=function(x){return 2*x-6;}, g=function(x){return x+3;}, s=function(x){return f(x)+g(x);};
-  P.assi([1,2,3,4,5],[-5,5,10,15]);
-  P.add(el('line',{x1:P.X(4),y1:P.m.t,x2:P.X(4),y2:P.H-P.m.b,stroke:'var(--rosso)',
-    'stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
-  P.add(txt(P.X(4)+6,P.m.t+12,'x = 4',{fill:'var(--rosso)'}),'testo');
-  P.curva(f,0,6,200,'var(--blu)',2.2);
-  P.curva(g,0,6,200,'var(--verde)',2.2);
-  P.curva(s,0,6,200,'var(--grigio)',1.8,'7,4');
-  P.add(txt(P.X(5.6),P.Y(f(5.6))-8,'f',{fill:'var(--blu)','font-size':13}),'testo');
-  P.add(txt(P.X(5.6),P.Y(g(5.6))-8,'g',{fill:'var(--verde)','font-size':13}),'testo');
-  P.add(txt(P.X(4.6),P.Y(s(4.6))-8,'f + g',{fill:'var(--grigio)','font-size':13}),'testo');
-  var pf=P.add(el('circle',{r:5.5,fill:'var(--blu)'})),
-      pg=P.add(el('circle',{r:5.5,fill:'var(--verde)'})),
-      ps=P.add(el('circle',{r:5,fill:'var(--grigio)'}));
-  var righe=[];
-  ['f(x)','g(x)','f(x) + g(x)','f(x) · g(x)','f(x) / g(x)'].forEach(function(e,i){
-    righe.push(P.add(txt(P.W-P.m.r+10,P.m.t+18+i*26,'',{'font-size':13,
-      fill:i===0?'var(--blu)':i===1?'var(--verde)':'var(--inchiostro)'}),'testo'));
-  });
-  var c=document.getElementById('c-alg'), v=document.getElementById('v-alg');
-  function agg(){
-    var x=parseFloat(c.value)*6, F=f(x), G=g(x);
-    pf.setAttribute('cx',P.X(x)); pf.setAttribute('cy',P.Y(F));
-    pg.setAttribute('cx',P.X(x)); pg.setAttribute('cy',P.Y(G));
-    ps.setAttribute('cx',P.X(x)); ps.setAttribute('cy',P.Y(F+G));
-    righe[0].textContent='f = '+num(F,2);
-    righe[1].textContent='g = '+num(G,2);
-    righe[2].textContent='f + g = '+num(F+G,2);
-    righe[3].textContent='f · g = '+num(F*G,2);
-    righe[4].textContent='f / g = '+num(F/G,3);
-    v.textContent='x = '+num(x,2);
-  }
-  c.addEventListener('input',agg); anima(document.getElementById('b-alg'),c,6000); agg();
-})();
 })();
 </script>
 </body>

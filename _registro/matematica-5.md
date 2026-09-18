@@ -65,12 +65,9 @@ teorema del confronto, a pagina 21.
   delle funzioni elementari. Gli otto limiti infiniti sono ora su righe successive, ognuna con il
   grafico della propria funzione a fianco: il tratto rosso segna la parte di curva che si percorre
   mentre $x$ va dove chiede il limite, così il risultato si legge guardando dove finisce. Le due
-  righe del logaritmo usano lo stesso grafico con il tratto rosso in punti diversi. Resta la figura
-  delle curve $f$, $g$ e $f+g$ dell'algebra dei limiti, disegnata in SVG interno al posto del
-  widget Plotly.
-- Animazioni: nella figura dell'algebra il pulsante ▶ fa scorrere il punto lungo tutta la curva
-  disegnata e ↺ lo riporta all'inizio, mentre scorrono insieme i valori di $f$, $g$, $f+g$,
-  $f\cdot g$ e $f/g$.
+  righe del logaritmo usano lo stesso grafico con il tratto rosso in punti diversi. Tolta anche la
+  figura finale con le curve $f$, $g$ e $f+g$ dell'algebra dei limiti: l'unità non ha più figure
+  oltre a quelle a fianco dei limiti infiniti.
 
 ## Unità 03 — Teoremi sui limiti
 - Parole: circa 500 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di
