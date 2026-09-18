@@ -4,28 +4,34 @@ File per l'insegnante: raccoglie correzioni e aggiunte rispetto alla traccia man
 Non è visibile agli studenti e non è collegato dalle pagine del sito.
 
 ## Calibrazione di riferimento
-Circa 200 parole per pagina di traccia manoscritta. Le unità 01 e 02 sono lo standard
-approvato: rispettivamente 1124 parole su 6 pagine (187/pagina) e 632 su 4 pagine (158/pagina).
+Circa 200 parole per pagina di traccia manoscritta. L'unità 01 è lo standard approvato:
+1460 parole su 10 pagine di traccia (146/pagina).
 
-## Unità 01 — Definizioni di limite, intorni, limite destro e sinistro
-- Parole: 1124 su 6 pagine di traccia (1–6)
-- Rettifica: nessuna. Verificati con SymPy la semplificazione di (2x²−6x)/(x−3), il limite in 3
-  e l'equivalenza |2x−6|<ε ⟺ |x−3|<ε/2.
-- Aggiunta: nulla di contenuto. Solo le frasi di spiegazione dei passaggi già presenti, più un
-  interattivo epsilon-delta.
-- Rimosso in revisione: tabella di valori attorno a 3, secondo widget di avvicinamento, e i
-  paragrafi di commento eccedenti (versione precedente 2248 parole).
+## Unità 01 — Il concetto di limite
+Nasce dall'accorpamento delle vecchie unità 01 e 02 (pagine 1–10 della traccia). Tutte le unità
+successive sono state rinumerate di conseguenza (vecchia 03 → 02, e così via fino alla 44); gli
+indirizzi delle pagine non cambiano, perché in _dati/matematica-5.json ogni unità porta ora il
+campo "cartella" con il nome originale.
+- Parole: 1460 su 10 pagine di traccia (1–10)
+- Titolo: "Il concetto di limite", scelto dall'insegnante.
+- Revisione: tolte le due verifiche di limite tramite la definizione (quella di (2x²−6x)/(x−3) in 3 e
+  quella di 1/(x−1)² in 1) e la sezione sul limite per eccesso e per difetto.
+- Titoletti tenuti: limite finito per x→x₀, limite destro e sinistro, limiti infiniti per x→x₀,
+  asintoti verticali, limite finito e infinito per x→±∞, asintoti orizzontali.
+- Impaginazione: riscritta a quaderno come le unità 01–03 di fisica-5 (html 165%, righe ogni 1,8rem,
+  script di allineamento rilanciato da MathJax); le formule in display sono in <p class="eq">.
+- Rettifica: la definizione di asintoto verticale elencava i quattro limiti unilaterali uno per uno;
+  ora è scritta in forma compatta con ±∞, e il testo chiarisce che basta che uno dei quattro casi
+  si verifichi.
+- Figure: sostituiti i widget Plotly con SVG disegnati da uno script interno (nessuna dipendenza da
+  CDN). Sette figure: epsilon-delta in 3, salto in 5, 1/(x−1)² con soglia M, galleria dei tre
+  asintoti verticali, 2 + 4·sin(x)/x con fascia e soglia c, x²/10 con soglia M e c, galleria dei tre
+  asintoti orizzontali.
+- Animazioni: in ogni figura interattiva il pulsante ▶ fa scorrere il punto lungo tutta la curva
+  disegnata, ↺ lo riporta all'inizio; i cursori regolano ε (con δ = ε/2 mostrato), M (con
+  δ = 1/√M) e la soglia c, calcolata numericamente sulla funzione oscillante.
 
-## Unità 02 — Verifica di un limite e primo sguardo agli asintoti
-- Parole: 632 su 4 pagine di traccia (7–10)
-- Rettifica: nessuna. Verificati con SymPy il limite di 1/(x−1)² in 1 e la soglia δ = 1/√M.
-- Titolo modificato da "Verifica di un limite e primi asintoti" per rendere esplicito che gli
-  asintoti sono qui trattati solo qualitativamente.
-- Aggiunta: nulla di contenuto. Le due gallerie di grafici riproducono i disegni della traccia.
-- Rimosso in revisione: la sezione di sintesi "Uno schema per orientarsi", assente dalla
-  traccia, e i riquadri di commento in eccesso (versione precedente 1479 parole).
-
-## Unità 03, 04, 05 — annullate e da rifare
+## Unità 03, 04, 05 — annullate e da rifare (numerazione precedente)
 Le prime versioni contenevano materiale non presente nella traccia: dimostrazioni complete dei
 teoremi di unicità, permanenza del segno e confronto (la traccia riporta solo gli enunciati con
 un disegno, alle pagine 11 e 18–19), esempi motivanti inventati, tabelle riassuntive e widget
@@ -33,7 +39,7 @@ aggiuntivi. Sono state rimosse e verranno riscritte con la calibrazione corretta
 Nella traccia l'unica dimostrazione sviluppata di questo blocco è quella di sin(x)/x tramite il
 teorema del confronto, a pagina 21.
 
-## Unità 03 — Teoremi sui limiti: unicità, permanenza del segno, confronto
+## Unità 02 — Teoremi sui limiti: unicità, permanenza del segno, confronto
 - Parole: circa 495 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di
   pag. 18–20 fino all'inizio di "Limiti notevoli").
 - Rettifica: nessuna. Verificato con SymPy che 2/x ≤ (3+cos x)/x ≤ 4/x per x>0 e che entrambi i
@@ -47,7 +53,7 @@ teorema del confronto, a pagina 21.
 - Nessuna dimostrazione: la traccia riporta unicità, permanenza del segno e confronto come soli
   enunciati con disegno, senza dimostrarli; restano così anche qui.
 
-## Unità 04 — Calcolo dei limiti e algebra dei limiti
+## Unità 03 — Calcolo dei limiti e algebra dei limiti
 - Parole: 441 su circa 2,4 pagine di traccia equivalenti (coda di pag. 11 — sezione "Calcolo di
   limiti / Funzioni continue in x0", mai usata nell'unità 03 — più pagine 12–13).
 - Rettifica: nessuna negli enunciati. Il caso $\lim_{x\to-1}\sqrt{x}$ della traccia è segnato con
@@ -60,7 +66,7 @@ teorema del confronto, a pagina 21.
   usa $m$ per entrambi i casi, ambiguità solo notazionale. L'unico interattivo riusa le stesse
   $f,g$ dell'esempio sulla somma per mostrare in tempo reale anche prodotto e quoziente.
 
-## Unità 05 — Forme indeterminate
+## Unità 04 — Forme indeterminate
 - Parole: 523 su 4 pagine di traccia (14–17)
 - Rettifica: nessuna. Verificati con SymPy tutti i sette limiti: $x^4-3x^2+1\to+\infty$,
   $x-\sqrt{x^2+1}\to0$, $(1-\sin x)\tan x\to0$ in $\pi/2^-$, i tre limiti $\infty/\infty$
@@ -71,7 +77,7 @@ teorema del confronto, a pagina 21.
   esempi ulteriori. L'unico interattivo riusa il secondo esempio $\infty/\infty$ della traccia
   per mostrare l'avvicinamento all'asintoto $y=-2/3$.
 
-## Unità 06 — Limiti notevoli
+## Unità 05 — Limiti notevoli
 - Parole: circa 420 (conteggio totale token, prosa e formule) su 4 pagine di traccia (20–23).
 - Rettifica: nessuna. Verificati con SymPy tutti i sette limiti notevoli (sin x/x, (1-cos x)/x,
   (1-cos x)/x², (1+1/x)^x → e, ln(1+x)/x, (e^x-1)/x, ((1+x)^k-1)/x), l'identità
@@ -87,7 +93,7 @@ teorema del confronto, a pagina 21.
 - Nessuna dimostrazione aggiunta per i limiti notevoli 4, 6 e 7: la traccia li presenta come
   risultati riquadrati senza sviluppo, così restano anche qui.
 
-## Unità 07 — Infinitesimi e infiniti, gerarchia, principio di sostituzione
+## Unità 06 — Infinitesimi e infiniti, gerarchia, principio di sostituzione
 - Parole: 649 su circa 4,5 pagine di traccia equivalenti (coda di pag. 23, dopo il limite notevole
   n.7 già coperto dall'unità 06, più le pagine 24–27 intere).
 - Rettifica: nessuna. Verificati con SymPy tutti i limiti: ln(1+5x)/sin(2x) → 5/2; (ln x)^3/x^2 → 0;
@@ -99,7 +105,7 @@ teorema del confronto, a pagina 21.
   l'unico interattivo riusa le quattro funzioni della gerarchia (ln x, x², 2^x, x^x) già disegnate
   nella traccia, mostrandone i sorpassi al crescere di x su scala logaritmica.
 
-## Unità 08 — Continuità in un punto e in un intervallo
+## Unità 07 — Continuità in un punto e in un intervallo
 - Parole: 413 su 4 pagine di traccia (28–31)
 - Rettifica: nessuna. Verificato con SymPy che il dominio di $\sqrt{x+2}$ è $x\geq-2$ (soluzione di
   $x+2\geq0$) e che $\lim_{x\to-2^+}\sqrt{x+2}=0$.
@@ -110,7 +116,7 @@ teorema del confronto, a pagina 21.
   quando il punto cade sulla curva (continuità) e quando se ne stacca pur restando il limite
   invariato.
 
-## Unità 09 — Weierstrass, valori intermedi, esistenza degli zeri
+## Unità 08 — Weierstrass, valori intermedi, esistenza degli zeri
 - Parole: 551 su 3 pagine di traccia (32–34)
 - Rettifica: nessuna. Verificato con SymPy che $f(x)=x^3-x-1$ è continua su $\mathbb{R}$, che
   $f(1)=-1$, $f(2)=5$ e che l'unica soluzione reale dell'equazione è $\approx1{,}3247$, interna a
@@ -127,7 +133,7 @@ teorema del confronto, a pagina 21.
   illustra il teorema di Weierstrass sono la stessa figura (mostrano lo stesso tipo di curva),
   perciò sono state unificate in un solo grafico invece di duplicarle.
 
-## Unità 10 — Punti di discontinuità e di singolarità
+## Unità 09 — Punti di discontinuità e di singolarità
 - Parole: 538 su 5 pagine di traccia (35–39)
 - Rettifica: nella traccia (pag. 39), l'esempio di singolarità eliminabile su
   $f(x)=(1-x^2)/(x-1)$ assegna il valore $-1$ a $x=1$ nella funzione ridefinita, ma il limite
@@ -140,7 +146,7 @@ teorema del confronto, a pagina 21.
   (discontinuità/singolarità) i disegni della traccia per le tre specie; la figura a tre rami
   dopo l'esempio 2 riprende lo stesso disegno con asintoto doppio che compare in testa a pag. 38.
 
-## Unità 11 — Asintoti verticali, orizzontali e obliqui
+## Unità 10 — Asintoti verticali, orizzontali e obliqui
 - Parole: 606 su circa 5,5 pagine di traccia equivalenti (coda di pag. 39, dopo l'ultimo esempio
   dell'unità 10, più le pagine 40–44 intere).
 - Rettifica: nessuna. Verificati con SymPy tutti i limiti dell'esempio verticale/orizzontale su
@@ -155,7 +161,7 @@ teorema del confronto, a pagina 21.
 - Nessuna dimostrazione: il teorema che dà $m$ e $q$ è riportato in traccia come solo enunciato,
   senza sviluppo; resta così anche qui.
 
-## Unità 12 — Grafico probabile e funzioni con parametri
+## Unità 11 — Grafico probabile e funzioni con parametri
 - Parole: 417 su 5 pagine di traccia (45–49)
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi di entrambi gli esempi: la disparità
   di $f(x)=(x^2-1)/x$, gli zeri $\pm1$, il segno $-1<x<0 \lor x>1$, i limiti in $x=0$
@@ -169,7 +175,7 @@ teorema del confronto, a pagina 21.
   dall'unità 13, i quesiti reali sul grafico di una funzione richiedono lo studio del segno della
   derivata prima, non ancora nel bagaglio a questo punto del percorso.
 
-## Unità 13 — Rapporto incrementale, definizione di derivata, significato geometrico
+## Unità 12 — Rapporto incrementale, definizione di derivata, significato geometrico
 - Parole: 450 su 4 pagine di traccia (50–53), conteggio del solo testo prosastico (formule
   escluse).
 - Rettifica: nessuna. Verificati con SymPy sia il rapporto incrementale di $f(x)=x^2-x$ in
@@ -185,7 +191,7 @@ teorema del confronto, a pagina 21.
   quesiti reali su tangenti e derivate richiedono le regole di derivazione dell'unità 14 e
   arriveranno dall'unità 17 in poi.
 
-## Unità 14 — Derivate fondamentali e regole di derivazione
+## Unità 13 — Derivate fondamentali e regole di derivazione
 - Parole: 336 su 4 pagine di traccia (54–57).
 - Rettifica: nessuna. Verificati con SymPy tutte le derivate fondamentali e tutti gli esempi:
   $D(5x^8)=40x^7$, $D(-3\ln x)=-3/x$, $D(\tfrac{2}{3}\cos x)=-\tfrac{2}{3}\sin x$; le somme
@@ -199,7 +205,7 @@ teorema del confronto, a pagina 21.
   conferma del significato geometrico visto nell'unità 13. Nessun quesito di maturità: questa
   unità è solo il repertorio di regole, senza ancora funzioni composte o studio di funzione.
 
-## Unità 15 — Funzioni composte, funzione inversa, goniometriche inverse
+## Unità 14 — Funzioni composte, funzione inversa, goniometriche inverse
 - Parole: 338 su 5 pagine di traccia (58–62).
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi: le tre derivate di funzioni
   composte ($\ln(x^2+2)$, $(x^3+2x)^3$, $e^{2x+1}$), la potenza di funzione
@@ -217,7 +223,7 @@ teorema del confronto, a pagina 21.
   quesito di maturità: l'unità è un repertorio di regole di derivazione, senza ancora lo
   studio di funzione in cui questi quesiti compaiono di solito.
 
-## Unità 16 — Domini e derivate di ordine superiore
+## Unità 15 — Domini e derivate di ordine superiore
 - Parole: 201 su 3 pagine di traccia (63–65), conteggio del solo testo prosastico (formule
   escluse).
 - Rettifica: nessuna. Verificato con SymPy che per $f(x)=x^3-2x+1$ si ha $f'(x)=3x^2-2$,
@@ -231,7 +237,7 @@ teorema del confronto, a pagina 21.
   l'unità 14, questa è solo un repertorio (domini e notazione delle derivate successive), non
   ancora uno studio di funzione.
 
-## Unità 17 — Retta tangente, retta normale, punti stazionari
+## Unità 16 — Retta tangente, retta normale, punti stazionari
 - Parole: 731 su 4 pagine di traccia (66–69), conteggio del testo visibile incluse le
   formule inline (il solo testo prosastico è nettamente inferiore).
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f(x)=x^2+2x$ dà $f(1)=3$,
@@ -247,7 +253,7 @@ teorema del confronto, a pagina 21.
   tangente e normale, senza ancora lo studio di funzione completo in cui questi quesiti
   compaiono di solito.
 
-## Unità 18 — Tangenti da un punto esterno e angolo fra due curve
+## Unità 17 — Tangenti da un punto esterno e angolo fra due curve
 - Parole: 409 su 3 pagine di traccia (70–72), conteggio del testo visibile incluse le
   formule inline.
 - Rettifica: la traccia scrive $\gamma=\arctan\frac67=40^\circ$ usando un segno di
@@ -263,7 +269,7 @@ teorema del confronto, a pagina 21.
   la traccia fa variare. Nessun quesito di maturità: l'unità applica la retta tangente già
   introdotta, senza aggiungere strumenti nuovi verso cui orientare un quesito.
 
-## Unità 19 — Derivabilità e punti di non derivabilità
+## Unità 18 — Derivabilità e punti di non derivabilità
 - Parole: 593 su 5 pagine di traccia (73–77), conteggio del testo visibile incluse le
   formule inline.
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f'_-(0)=-1$, $f'_+(0)=+1$
@@ -282,7 +288,7 @@ teorema del confronto, a pagina 21.
   punti di non derivabilità compare di norma dentro uno studio di funzione completo
   (unità 29–30), non come quesito isolato a questo punto del percorso.
 
-## Unità 20 — Teorema di Rolle
+## Unità 19 — Teorema di Rolle
 - Parole: 417 su circa 3 pagine di traccia (78–79 intere, più la parte iniziale di 80 e
   la parte finale di 81, secondo la ripartizione già fissata in `_dati/matematica-5.json`
   fra questa unità e l'unità 21 sul teorema di Lagrange).
@@ -298,7 +304,7 @@ teorema del confronto, a pagina 21.
   percorso non è ancora disponibile il teorema di Lagrange con cui viene tipicamente
   intrecciato.
 
-## Unità 21 — Teorema di Lagrange e sue conseguenze
+## Unità 20 — Teorema di Lagrange e sue conseguenze
 - Parole: 466 su circa 2 pagine di traccia (fondo di 80, i due terzi iniziali di 81, e
   tutta la 82; il resto di 81 — Teorema 1 — era già stato pubblicato nell'unità 20, e la
   parte finale di 83 — Teorema III sulla monotonia — apre l'unità 22).
@@ -316,7 +322,7 @@ teorema del confronto, a pagina 21.
   frequente (De L'Hôpital, unità 24) non è ancora disponibile a questo punto del
   percorso.
 
-## Unità 22 — Monotonia e segno della derivata prima
+## Unità 21 — Monotonia e segno della derivata prima
 - Parole: 334 su circa 1,7 pagine di traccia (da "Teorema III" a fine pagina 83 fino a
   circa due terzi di pagina 84; il resto di 83 apparteneva già all'unità 21, e il fondo
   di 84 con l'invertibilità apre l'unità 23).
@@ -334,7 +340,7 @@ teorema del confronto, a pagina 21.
   isolato di crescenza e decrescenza non compare come quesito a sé; la sua applicazione
   più ricca è dentro lo studio di funzione completo, ancora da venire.
 
-## Unità 23 — Invertibilità e funzione inversa
+## Unità 22 — Invertibilità e funzione inversa
 - Parole: 364 su 4 pagine di traccia (85–88).
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f'(x)=1/(2\sqrt{5-x})$,
   $\lim_{x\to-\infty}f(x)=-\infty$, $\lim_{x\to5^-}f(x)=2$, la costruzione algebrica di
@@ -353,7 +359,7 @@ teorema del confronto, a pagina 21.
   parametro variabile. Nessun quesito di maturità: l'invertibilità isolata non compare
   come quesito a sé in questo punto del percorso.
 
-## Unità 24 — Teorema di Cauchy e teorema di De L'Hôpital
+## Unità 23 — Teorema di Cauchy e teorema di De L'Hôpital
 - Parole: 667 su 6 pagine di traccia (89–94).
 - Rettifica: nessuna. Verificati con SymPy tutti e cinque gli esempi: il limite
   $(4x^2-4)/\ln x$ per $x\to1$ (risultato 8, sia diretto sia via De L'Hôpital); il
@@ -377,7 +383,7 @@ teorema del confronto, a pagina 21.
   e il loro impiego più ricco (dentro lo studio di funzione completo) non è ancora
   disponibile a questo punto del percorso.
 
-## Unità 25 — Definizioni, teorema di Fermat, ricerca di massimi e minimi
+## Unità 24 — Definizioni, teorema di Fermat, ricerca di massimi e minimi
 - Parole: 573 su 5 pagine di traccia (95–99).
 - Rettifica: nessuna. Verificati con SymPy la fattorizzazione $f'(x)=3x^2-3=3(x-1)(x+1)$,
   i punti stazionari $x=\pm1$, il segno di $f'$ sui tre intervalli (positivo per $x<-1$
@@ -395,7 +401,7 @@ teorema del confronto, a pagina 21.
   dell'area massimi-minimi-flessi, e la sua applicazione più ricca è dentro lo studio di
   funzione completo, ancora da venire.
 
-## Unità 26 — Estremi di funzioni non derivabili o discontinue
+## Unità 25 — Estremi di funzioni non derivabili o discontinue
 - Parole: 515 su 4 pagine di traccia (100–103).
 - Rettifica: nessuna. Verificati con SymPy la derivata di $|x|$ ($+1$ per $x>0$,
   $-1$ per $x&lt;0$) e i limiti $\lim_{x\to\pm\infty}|x|=+\infty$; verificati per
@@ -410,7 +416,7 @@ teorema del confronto, a pagina 21.
   di maturità: gli estremi in punti singolari non compaiono come quesito isolato, e il
   loro impiego più ricco è dentro lo studio di funzione completo, ancora da venire.
 
-## Unità 27 — Concavità, derivata seconda e flessi
+## Unità 26 — Concavità, derivata seconda e flessi
 - Parole: 609 su circa 4,4 pagine di traccia equivalenti (104–107 intere, più la prima metà
   di 108, fino alla conclusione dell'esempio $\sqrt[3]{x-2}$; la seconda metà di 108, che
   apre con "Ricerca di massimi, minimi e flessi con le derivate successive", appartiene
@@ -434,7 +440,7 @@ teorema del confronto, a pagina 21.
   questa unità; un quesito di questo tipo è più naturale una volta disponibile lo studio di
   funzione completo (unità 29–30).
 
-## Unità 28 — Derivate successive e tangente inflessionale
+## Unità 27 — Derivate successive e tangente inflessionale
 - Parole: 356 su circa 2,5 pagine di traccia equivalenti (seconda metà di 108, dove
   inizia "Ricerca di massimi, minimi e flessi con le derivate successive", più 109 e 110
   intere, fino alla fine dell'esempio della tangente inflessionale).
@@ -454,7 +460,7 @@ teorema del confronto, a pagina 21.
   materia di un quesito a sé; il suo impiego naturale è dentro lo studio completo delle
   unità 29–30.
 
-## Unità 29 — Schema generale in otto passi
+## Unità 28 — Schema generale in otto passi
 - Parole: 408 su 4 pagine di traccia (111–114).
 - Rettifica: nessuna. Verificati con SymPy le derivate e gli zeri dell'esempio
   $f(x)=x-x^3$: $f'(x)=1-3x^2$, zeri $x=\pm1/\sqrt3$, con $f(\pm1/\sqrt3)=\pm2\sqrt3/9
@@ -469,7 +475,7 @@ teorema del confronto, a pagina 21.
   Nessun interattivo: questa unità è un elenco procedurale di controllo, non una
   costruzione che varia con un parametro.
 
-## Unità 30 — Studio completo svolto: f(x) = x − x³
+## Unità 29 — Studio completo svolto: f(x) = x − x³
 - Parole: 468 su 3 pagine di traccia (115–117).
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $f'(x)=1-3x^2$ con zeri
   $x=\pm1/\sqrt3$ e $f(\pm1/\sqrt3)=\pm2\sqrt3/9\approx\pm0{,}385$ (arrotondato a
@@ -492,7 +498,7 @@ teorema del confronto, a pagina 21.
   nessun interattivo, perché la pagina è un elenco di calcoli su un caso già fissato,
   senza un parametro naturale da variare.
 
-## Unità 31 — Primitive, integrale indefinito, proprietà
+## Unità 30 — Primitive, integrale indefinito, proprietà
 - Parole: 306 su 3 pagine di traccia (118–120).
 - Rettifica: nessuna. Verificati con SymPy $D(x^2+C)=2x$, $D(x^2+2)=2x$, $D(x^2+12)=2x$ e
   $D(\sin x+C)=\cos x$, in accordo con la traccia.
@@ -506,7 +512,7 @@ teorema del confronto, a pagina 21.
   vari con un parametro. Nessun quesito di maturità: l'unità introduce solo notazione
   e proprietà generali, senza calcolo di un integrale specifico su cui costruirne uno.
 
-## Unità 32 — Integrali immediati
+## Unità 31 — Integrali immediati
 - Parole: 237 su 3 pagine di traccia (121–123).
 - Rettifica: nessuna. Verificati con SymPy tutti gli integrali della tavola e i sette
   esempi svolti: $\int\sqrt{x^3}\,dx=\tfrac{2}{5}\sqrt{x^5}+C$, $\int 2x^3\,dx=x^4/2+C$,
@@ -524,7 +530,7 @@ teorema del confronto, a pagina 21.
   non c'è un parametro naturale da far variare. Nessun quesito di maturità: l'unità è
   strumentale (tavola di consultazione), come già l'unità 14 con le derivate.
 
-## Unità 33 — Integrali di funzioni composte
+## Unità 32 — Integrali di funzioni composte
 - Parole: 243 su 1,4 pagine di traccia (124, e la parte superiore di 125 fino agli esempi
   di tangente e cotangente incluso).
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $D[(\sin x)^5/5]=(\sin x)^4\cos x$
@@ -545,7 +551,7 @@ teorema del confronto, a pagina 21.
   tecnica del riconoscimento $f'(x)\cdot g(f(x))$ su casi elementari, senza un problema
   autosufficiente a questo livello.
 
-## Unità 34 — Integrazione per parti
+## Unità 33 — Integrazione per parti
 - Parole: 228 su 2 pagine di traccia (126–127).
 - Rettifica: nessuna. Verificati con SymPy entrambi gli esempi: $D[(x^2/2)\ln x - x^2/4] =
   x\ln x$ e $D[x\ln x - x] = \ln x$, in accordo con la traccia.
@@ -557,7 +563,7 @@ teorema del confronto, a pagina 21.
   di una tecnica, senza un parametro naturale da variare. Nessun quesito di maturità:
   l'unità introduce solo la tecnica su casi elementari, come già le unità 31-33.
 
-## Unità 35 — Integrazione per sostituzione
+## Unità 34 — Integrazione per sostituzione
 - Parole: circa 100 su 0,5 pagine di traccia (la metà inferiore di pagina 125, dopo
   gli integrali di tangente e cotangente dell'unità 33 e prima dell'inizio
   dell'integrazione per parti a pagina 126).
@@ -572,7 +578,7 @@ teorema del confronto, a pagina 21.
   non offre un parametro naturale da far variare. Nessun quesito di maturità: l'unità
   è troppo breve e circoscritta a un'unica tecnica su un caso elementare.
 
-## Unità 36 — Integrazione di funzioni razionali fratte
+## Unità 35 — Integrazione di funzioni razionali fratte
 - Parole: 339 su 5 pagine di traccia (127–131; la parte superiore di pagina 127
   appartiene ancora all'unità 34, già pubblicata).
 - Rettifica: nessuna. Verificati con SymPy tutti i passaggi: $\int(6x-2)/(3x^2-2x-1)dx
@@ -591,7 +597,7 @@ teorema del confronto, a pagina 21.
   interattivo: sono casi e esempi puntuali di una tecnica, senza un parametro naturale
   da far variare.
 
-## Unità 37 — Teorema della media e valore medio
+## Unità 36 — Teorema della media e valore medio
 - Parole: 332 su 1,5 pagine di traccia (134 intera, e la parte iniziale di 135 fino a
   "valore medio della funzione f(x) in [a,b]", prima che inizi il teorema fondamentale
   del calcolo integrale, che apre l'unità 38).
@@ -611,7 +617,7 @@ teorema del confronto, a pagina 21.
   materia di quesito a sé; il suo uso più frequente è dentro il calcolo di valori medi
   in problemi di studio di funzione, argomento delle unità successive.
 
-## Unità 38 — Teorema fondamentale del calcolo integrale
+## Unità 37 — Teorema fondamentale del calcolo integrale
 - Parole: 414 su circa 1,85 pagine di traccia equivalenti (metà finale di pag. 135, da
   "Teorema fondamentale del calcolo integrale" dopo la chiusura dell'unità 37, più tutta la
   pag. 136, più la parte iniziale di pag. 137 fino ai tre esempi numerici inclusi; il resto
@@ -633,7 +639,7 @@ teorema del confronto, a pagina 21.
   esplicita per quel disegno), sullo stesso principio già usato nei widget delle unità 08
   e 37.
 
-## Unità 39 — Calcolo delle aree
+## Unità 38 — Calcolo delle aree
 - Parole: 598 su circa 4,85 pagine di traccia (dal punto medio di pag. 137, dove inizia
   "Calcolo delle aree" dopo la chiusura dell'unità 38, fino a fine pag. 141; pag. 142 apre
   "Calcolo di Volumi", unità 40).
@@ -656,7 +662,7 @@ teorema del confronto, a pagina 21.
   traslazione; usa due funzioni di prova non tratte dalla traccia (che lì non fissa una
   coppia esplicita), sullo stesso principio già impiegato nei widget delle unità 08, 37 e 38.
 
-## Unità 40 — Volumi dei solidi di rotazione
+## Unità 39 — Volumi dei solidi di rotazione
 - Parole: 439 su 3 pagine di traccia (pag. 142-144, fino alla fine dell'esempio 3; il resto
   di pag. 144, "Integrali impropri", appartiene all'unità 41 e non è stato toccato).
 - Rettifica: nessuna. Verificati con SymPy tutti e tre gli esempi: $\pi\int_{-1}^1e^{2x}dx=
@@ -671,7 +677,7 @@ teorema del confronto, a pagina 21.
   cursore su $x_0$, il raggio $f(x_0)=e^{x_0}$ e il volume accumulato dell'esempio 1: usa
   gli stessi dati numerici dell'esempio, senza introdurre una funzione nuova.
 
-## Unità 41 — Integrali impropri
+## Unità 40 — Integrali impropri
 - Parole: 159 su circa 0,55 pagine di traccia (la parte finale di pag. 144, dalla
   scritta "Integrali impropri" fino in fondo alla pagina, che è anche l'ultima del PDF;
   la parte iniziale della stessa pagina, esempio 3 dei volumi di rotazione, appartiene
@@ -688,7 +694,7 @@ teorema del confronto, a pagina 21.
   stessa non sviluppa il caso di intervallo illimitato, quindi la pagina resta limitata al
   solo caso con asintoto verticale che compare nella traccia.
 
-## Unità 42 — Introduzione e problema di Cauchy
+## Unità 41 — Introduzione e problema di Cauchy
 - Parole: 470, unità ex novo (nessuna pagina di traccia: argomento assente dagli
   appunti manoscritti, come indicato dal campo "nuovo" dell'area Equazioni
   differenziali).
@@ -706,7 +712,7 @@ teorema del confronto, a pagina 21.
   $(0,3)$, per rendere visibile che la condizione iniziale seleziona un solo membro
   della famiglia.
 
-## Unità 43 — Primo ordine: y' = f(x) e variabili separabili
+## Unità 42 — Primo ordine: y' = f(x) e variabili separabili
 - Parole: 353, unità ex novo (nessuna pagina di traccia: argomento assente dagli
   appunti manoscritti, come per tutta l'area Equazioni differenziali).
 - Rettifica: nessuna, non essendoci una traccia da cui partire.
@@ -729,7 +735,7 @@ teorema del confronto, a pagina 21.
   il fascio di curve y=Ce^(x²) al variare di C, incluso il caso singolare C=0, e il
   punto fisso (0,1) che seleziona la soluzione del problema di Cauchy.
 
-## Unità 44 — Equazioni lineari del primo ordine
+## Unità 43 — Equazioni lineari del primo ordine
 - Parole: 287, unità ex novo (nessuna pagina di traccia: argomento assente dagli
   appunti manoscritti, come per tutta l'area Equazioni differenziali).
 - Rettifica: nessuna, non essendoci una traccia da cui partire.
@@ -750,7 +756,7 @@ teorema del confronto, a pagina 21.
   cresce, per rendere visibile perché l'integrale generale della completa è la somma
   di una soluzione particolare e dell'integrale generale dell'omogenea.
 
-## Unità 45 — Secondo ordine a coefficienti costanti e modelli applicativi
+## Unità 44 — Secondo ordine a coefficienti costanti e modelli applicativi
 - Parole: 463, unità ex novo (nessuna pagina di traccia: argomento assente dagli
   appunti manoscritti, come per tutta l'area Equazioni differenziali; è anche
   l'ultima unità del percorso di matematica quinta).

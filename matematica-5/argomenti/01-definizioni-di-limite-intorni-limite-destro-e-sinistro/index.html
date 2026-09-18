@@ -3,25 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Definizioni di limite, intorni, limite destro e sinistro — Matematica quinta</title>
+<title>Il concetto di limite — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:220px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(320px,55%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -30,10 +61,11 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Limiti &middot; Unità 01</p>
-  <h1>Definizioni di limite, intorni, limite destro e sinistro</h1>
-  <p class="sommario">Il limite serve a dire come si comporta una funzione vicino a un punto, anche
-  quando in quel punto la funzione non esiste.</p>
+  <h1>Il concetto di limite</h1>
 </header>
+
+<p>Il limite serve a dire come si comporta una funzione vicino a un punto, anche quando in quel
+punto la funzione non esiste, e come si comporta quando la variabile cresce oltre ogni valore.</p>
 
 <h2>Limite finito per $x$ che tende a $x_0$</h2>
 
@@ -42,7 +74,7 @@ non esiste. Il grafico però mostra che, avvicinandosi a 3 sia da sinistra sia d
 della funzione si stringono attorno a 6. Il buco in $x=3$ non impedisce alla funzione di avere una
 <strong>tendenza</strong> precisa mentre ci avviciniamo a quel punto, e questa tendenza si scrive</p>
 
-$$\lim_{x\to 3}f(x)=6$$
+<p class="eq">$$\lim_{x\to 3}f(x)=6$$</p>
 
 <div class="nota">
 <span class="et">Attenzione</span>
@@ -60,8 +92,8 @@ un punto».</p>
 <span class="et">Definizione &middot; intorno di un punto</span>
 <p>Dato un numero reale $x_0$, un <strong>intorno completo</strong> di $x_0$ è un qualunque
 intervallo aperto $I(x_0)$ che contiene $x_0$:</p>
-$$I(x_0)=\left]\,x_0-\delta_1\;;\;x_0+\delta_2\,\right[ \qquad \text{con } \delta_1,\delta_2
-\text{ reali positivi}$$
+<p class="eq">$$I(x_0)=\left]\,x_0-\delta_1\;;\;x_0+\delta_2\,\right[ \qquad \text{con }
+\delta_1,\delta_2 \text{ reali positivi}$$</p>
 </div>
 
 <p>Le parentesi rivolte all'esterno indicano che gli estremi sono esclusi. I due raggi $\delta_1$ e
@@ -72,7 +104,8 @@ di $\delta$, e si scrive $|x-x_0|&lt;\delta$.</p>
 <p>Fissiamo ora un numero positivo $\varepsilon$ e costruiamo attorno a 6 la fascia da
 $6-\varepsilon$ a $6+\varepsilon$. Dire che $f(x)$ sta in quella fascia significa</p>
 
-$$6-\varepsilon&lt;f(x)&lt;6+\varepsilon \qquad\text{ovvero}\qquad |f(x)-6|&lt;\varepsilon$$
+<p class="eq">$$6-\varepsilon&lt;f(x)&lt;6+\varepsilon \qquad\text{ovvero}\qquad
+|f(x)-6|&lt;\varepsilon$$</p>
 
 <p>perché $|f(x)-6|$ è la distanza fra $f(x)$ e 6. Se partiamo da un $x$ che sta in un opportuno
 intorno di 3, allora il corrispondente $f(x)$ cade dentro la fascia. È utile pensarlo come una
@@ -81,21 +114,19 @@ rispondere esibendo un intorno di 3 che garantisca la richiesta. Il limite vale 
 riesce a rispondere sempre, per ogni $\varepsilon$. Nota l'ordine: prima si fissa $\varepsilon$,
 poi si cerca l'intorno, e in generale l'intorno si stringe al diminuire di $\varepsilon$.</p>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Severità richiesta: $\varepsilon$
-      <input type="range" id="s-eps" min="0.1" max="2" step="0.05" value="1">
-      <span>$\varepsilon$ = <span class="val" id="v-eps">1,00</span> &nbsp;→&nbsp; <span class="val" id="v-delta"></span></span>
-    </label>
-    <label>Posizione di $x$ dentro l'intorno
-      <input type="range" id="s-x" min="-1" max="1" step="0.02" value="0.6">
-      <span>$x$ = <span class="val" id="v-x">3,30</span></span>
-    </label>
-  </div>
-  <div id="g-epsdelta" style="height:380px"></div>
-  <p class="leggenda">La fascia verde è la richiesta, la fascia azzurra è l'intorno che le
-  risponde. Muovendo il secondo cursore il punto resta dentro la fascia verde; stringendo
-  $\varepsilon$ col primo, l'intorno azzurro deve stringersi di conseguenza.</p>
+<div class="fig">
+<svg id="g-eps" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="c-eps">severità $\varepsilon$</label>
+<input id="c-eps" type="range" min="0.1" max="2" step="0.02" value="1">
+<span class="val" id="v-eps"></span></div>
+<div class="cursore"><button type="button" class="btn-anim" id="b-eps" aria-label="Avvia">&#9654;</button>
+<label for="c-epsx">punto $x$</label>
+<input id="c-epsx" type="range" min="0" max="1" step="0.002" value="0.12">
+<span class="val" id="v-epsx"></span></div>
+<p class="did">Muovendo il secondo cursore il punto rosso percorre tutta la curva: finisce dentro
+la fascia verde, quella della richiesta, esattamente quando $x$ entra nella fascia azzurra, cioè
+nell'intorno di 3 che risponde. Stringendo $\varepsilon$ col primo cursore, l'intorno azzurro si
+stringe di conseguenza.</p>
 </div>
 
 <div class="def">
@@ -103,49 +134,15 @@ poi si cerca l'intorno, e in generale l'intorno si stringe al diminuire di $\var
 <p>La funzione $f(x)$, definita nel dominio $D$, ha per limite il numero reale $\ell$ per $x$ che
 tende a $x_0$ quando, comunque si scelga un numero reale positivo $\varepsilon$, si può determinare
 un intorno $I(x_0)$ tale che</p>
-$$|f(x)-\ell|&lt;\varepsilon \qquad \text{per ogni } x\in I(x_0)-\{x_0\}$$
+<p class="eq">$$|f(x)-\ell|&lt;\varepsilon \qquad \text{per ogni } x\in I(x_0)-\{x_0\}$$</p>
 <p>In forma compatta:</p>
-$$\lim_{x\to x_0}f(x)=\ell \iff \forall\varepsilon&gt;0\;\;\exists\,I(x_0):\;
-|f(x)-\ell|&lt;\varepsilon \quad \forall x\in I(x_0),\;x\neq x_0$$
+<p class="eq">$$\lim_{x\to x_0}f(x)=\ell \iff \forall\varepsilon&gt;0\;\;\exists\,I(x_0):\;
+|f(x)-\ell|&lt;\varepsilon \quad \forall x\in I(x_0),\;x\neq x_0$$</p>
 </div>
 
 <p>Il $\forall\varepsilon$ è la sfida e deve valere per ogni severità; l'$\exists\,I(x_0)$ è la
 risposta, e basta esibirne un intorno qualsiasi; la condizione deve valere per <em>tutti</em> i
 punti dell'intorno, escluso $x_0$.</p>
-
-<h3>Verifica di un limite tramite la definizione</h3>
-
-<p>Data $f(x)=\dfrac{2x^2-6x}{x-3}$, verifichiamo che $\displaystyle\lim_{x\to 3}f(x)=6$. Si parte
-dalla condizione della definizione e la si risolve rispetto a $x$:</p>
-
-$$\left|\frac{2x^2-6x}{x-3}-6\right|&lt;\varepsilon
-\;\longrightarrow\;
-\left|\frac{2x(x-3)}{x-3}-6\right|&lt;\varepsilon
-\;\longrightarrow\;
-|2x-6|&lt;\varepsilon$$
-
-<p>La semplificazione è lecita perché lavoriamo per $x\neq 3$, ed è esattamente ciò che la
-definizione concede. Raccogliendo il 2 e dividendo:</p>
-
-$$2|x-3|&lt;\varepsilon \;\longrightarrow\; |x-3|&lt;\frac{\varepsilon}{2}
-\;\longrightarrow\;
-3-\underbrace{\frac{\varepsilon}{2}}_{\delta_1}&lt;x&lt;3+\underbrace{\frac{\varepsilon}{2}}_{\delta_2}$$
-
-<p>Abbiamo ottenuto un intorno di 3 con $\delta_1=\delta_2=\varepsilon/2$: qualunque $\varepsilon$
-venga proposto, l'intorno che risponde ha raggio metà di $\varepsilon$. Il limite vale 6. Il mezzo
-viene dal fatto che la funzione, semplificata, si comporta come $2x$: una pendenza 2 raddoppia gli
-scostamenti, quindi per contenere l'uscita entro $\varepsilon$ bisogna contenere l'entrata entro
-$\varepsilon/2$.</p>
-
-<h2>Limite per eccesso e per difetto</h2>
-
-<p>Quando la funzione si avvicina al proprio limite sempre dallo stesso lato, lo si segnala con un
-segno a esponente: $\ell^{+}$ se vi tende mantenendosi maggiore di $\ell$ (<strong>per
-eccesso</strong>), $\ell^{-}$ se mantenendosi minore (<strong>per difetto</strong>). Una parabola
-con concavità verso l'alto e vertice in $(4;-1)$ dà $\lim_{x\to 4}f(x)=-1^{+}$, perché il vertice è
-il suo punto più basso; una con concavità verso il basso e vertice in $(5;7)$ dà
-$\lim_{x\to 5}f(x)=7^{-}$. È un'informazione sul modo in cui la funzione arriva al limite, non sul
-valore del limite.</p>
 
 <h2>Limite destro e limite sinistro</h2>
 
@@ -153,14 +150,25 @@ valore del limite.</p>
 avvicinandosi a 5 da sinistra tende a 2, da destra tende a 6, e in 5 vale 4, i tre numeri sono
 tutti legittimi e rispondono a domande diverse:</p>
 
-$$\lim_{x\to 5^{-}}f(x)=2 \qquad \lim_{x\to 5^{+}}f(x)=6 \qquad f(5)=4$$
+<p class="eq">$$\lim_{x\to 5^{-}}f(x)=2 \qquad \lim_{x\to 5^{+}}f(x)=6 \qquad f(5)=4$$</p>
+
+<div class="fig">
+<svg id="g-lat" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-lat" aria-label="Avvia">&#9654;</button>
+<label for="c-lat">punto $x$</label>
+<input id="c-lat" type="range" min="0" max="1" step="0.002" value="0">
+<span class="val" id="v-lat"></span></div>
+<p class="did">Il punto percorre tutto il grafico: arrivando a 5 da sinistra la sua quota sale
+verso 2, ripartendo da destra la quota parte da 6. Nel punto 5 la funzione vale 4, segnato a parte.</p>
+</div>
 
 <div class="def">
 <span class="et">Definizione &middot; intorni unilaterali e limite sinistro</span>
-<p>Un <strong>intorno sinistro</strong> di $x_0$ è un intervallo $I^{-}(x_0)=\left]x_0-\delta_1;x_0\right[$,
-un <strong>intorno destro</strong> è $I^{+}(x_0)=\left]x_0;x_0+\delta_1\right[$.</p>
-$$\lim_{x\to x_0^{-}}f(x)=\ell \iff \forall\varepsilon&gt;0\;\;\exists\,I^{-}(x_0):\;
-|f(x)-\ell|&lt;\varepsilon \quad\forall x\in I^{-}(x_0),\;x\neq x_0$$
+<p>Un <strong>intorno sinistro</strong> di $x_0$ è un intervallo
+$I^{-}(x_0)=\left]x_0-\delta_1;x_0\right[$, un <strong>intorno destro</strong> è
+$I^{+}(x_0)=\left]x_0;x_0+\delta_1\right[$.</p>
+<p class="eq">$$\lim_{x\to x_0^{-}}f(x)=\ell \iff \forall\varepsilon&gt;0\;\;\exists\,I^{-}(x_0):\;
+|f(x)-\ell|&lt;\varepsilon \quad\forall x\in I^{-}(x_0),\;x\neq x_0$$</p>
 <p>Per il limite destro vale l'analogo, con $I^{+}(x_0)$.</p>
 </div>
 
@@ -177,63 +185,450 @@ avvicinarsi, al posto della fascia si chiede il superamento di una soglia, che c
 
 <div class="def">
 <span class="et">Definizione &middot; limite infinito per $x\to x_0$</span>
-$$\lim_{x\to x_0}f(x)=+\infty \iff \forall M&gt;0\;\;\exists\,I(x_0):\;
-f(x)&gt;M \quad\forall x\in I(x_0),\;x\neq x_0$$
+<p class="eq">$$\lim_{x\to x_0}f(x)=+\infty \iff \forall M&gt;0\;\;\exists\,I(x_0):\;
+f(x)&gt;M \quad\forall x\in I(x_0),\;x\neq x_0$$</p>
 <p>Analogamente il limite vale $-\infty$ se, per ogni $M&gt;0$, si trova un intorno in cui
 $f(x)&lt;-M$.</p>
 </div>
 
+<div class="fig">
+<svg id="g-inf" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="c-M">soglia $M$</label>
+<input id="c-M" type="range" min="2" max="20" step="0.5" value="9">
+<span class="val" id="v-M"></span></div>
+<div class="cursore"><button type="button" class="btn-anim" id="b-inf" aria-label="Avvia">&#9654;</button>
+<label for="c-infx">punto $x$</label>
+<input id="c-infx" type="range" min="-1" max="1" step="0.002" value="-1">
+<span class="val" id="v-infx"></span></div>
+<p class="did">La funzione è $f(x)=\dfrac{1}{(x-1)^2}$. Il punto percorre prima il ramo di
+sinistra, poi quello di destra: in entrambi, entrando nella fascia azzurra attorno a 1, la quota
+supera la soglia $M$ e continua a crescere. Alzando $M$ la fascia si stringe, ma non si svuota mai.</p>
+</div>
+
 <p>La struttura è la stessa di prima con i ruoli ribaltati: là $\varepsilon$ era piccolo e misurava
-una tolleranza, qui $M$ è grande e misura una soglia. Se poi una funzione cresce illimitatamente da
-sinistra e decresce illimitatamente da destra, come accade avvicinandosi a 5 nel secondo grafico, i
-due limiti unilaterali esistono ma vanno in direzioni opposte:</p>
+una tolleranza, qui $M$ è grande e misura una soglia. Se una funzione cresce illimitatamente da
+sinistra e decresce illimitatamente da destra, i due limiti unilaterali esistono ma vanno in
+direzioni opposte, e il limite bilaterale non esiste:</p>
 
-$$\lim_{x\to 5^{-}}f(x)=+\infty \qquad \lim_{x\to 5^{+}}f(x)=-\infty
-\qquad\Longrightarrow\qquad \lim_{x\to 5}f(x) \text{ non esiste}$$
+<p class="eq">$$\lim_{x\to 5^{-}}f(x)=+\infty \qquad \lim_{x\to 5^{+}}f(x)=-\infty
+\qquad\Longrightarrow\qquad \lim_{x\to 5}f(x) \text{ non esiste}$$</p>
 
+<h2>Asintoti verticali</h2>
 
-<nav class="nav-unita"><a class="precedente" href="../../index.html"><span class="dir">&larr; Indice</span><span class="tit">Matematica — Quinta</span></a><a class="successiva" href="../02-verifica-di-un-limite-e-primo-sguardo-agli-asintoti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Verifica di un limite e primo sguardo agli asintoti</span></a></nav>
+<p>Nel grafico appena visto la curva, salendo, si accosta sempre di più alla retta verticale $x=1$
+senza toccarla mai: la distanza fra le due diventa piccola quanto si vuole ma non si annulla. Una
+retta con questa proprietà si chiama <strong>asintoto</strong>, e i limiti rendono precisa la
+descrizione visiva.</p>
+
+<div class="def">
+<span class="et">Definizione &middot; asintoto verticale</span>
+<p>Data la funzione $y=f(x)$, se si verifica uno dei seguenti limiti</p>
+<p class="eq">$$\lim_{x\to c^{+}}f(x)=\pm\infty \qquad\text{oppure}\qquad
+\lim_{x\to c^{-}}f(x)=\pm\infty$$</p>
+<p>la retta di equazione $x=c$ è <strong>asintoto verticale</strong> per il grafico della funzione.</p>
+</div>
+
+<div class="fig">
+<svg id="gal-v" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="did-parti" style="--n:3">
+<p class="did">La funzione cresce oltre ogni soglia da entrambi i lati: $\lim\limits_{x\to
+c}f(x)=+\infty$.</p>
+<p class="did">La funzione decresce oltre ogni soglia da entrambi i lati: $\lim\limits_{x\to
+c}f(x)=-\infty$.</p>
+<p class="did">Solo il ramo sinistro esplode: la retta è asintoto verticale sinistro.</p>
+</div>
+</div>
+
+<p>Basta che uno dei quattro casi si verifichi: non serve che la funzione esploda da entrambi i
+lati né nella stessa direzione, e se accade da una parte sola si parla di asintoto verticale destro
+o sinistro. Il punto $c$ non appartiene al dominio, perché se la funzione fosse definita e finita
+in $c$ il limite non potrebbe essere infinito.</p>
+
+<h2>Limite finito e limite infinito per $x$ che tende a $\pm\infty$</h2>
+
+<p>Facciamo ora crescere $x$ senza limite. Può succedere che la funzione si stabilizzi attorno a un
+valore $\ell$: la richiesta è la stessa fascia di prima, ma la condizione che la fa valere non è
+più «$x$ vicino a $x_0$», bensì «$x$ abbastanza grande».</p>
+
+<div class="def">
+<span class="et">Definizione &middot; limite finito per $x\to+\infty$</span>
+<p class="eq">$$\lim_{x\to+\infty}f(x)=\ell \iff \forall\varepsilon&gt;0\;\;\exists\,c&gt;0:\;
+|f(x)-\ell|&lt;\varepsilon \quad\forall x&gt;c$$</p>
+<p>Per $x\to-\infty$ vale l'analogo con la condizione $x&lt;-c$.</p>
+</div>
+
+<div class="fig">
+<svg id="g-orb" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="c-eps2">tolleranza $\varepsilon$</label>
+<input id="c-eps2" type="range" min="0.1" max="2" step="0.02" value="0.8">
+<span class="val" id="v-eps2"></span></div>
+<div class="cursore"><button type="button" class="btn-anim" id="b-orb" aria-label="Avvia">&#9654;</button>
+<label for="c-orbx">punto $x$</label>
+<input id="c-orbx" type="range" min="0" max="1" step="0.002" value="0">
+<span class="val" id="v-orbx"></span></div>
+<p class="did">La funzione oscilla con oscillazioni che si smorzano attorno a $\ell=2$. Scelto
+$\varepsilon$, la retta verticale segna la soglia $c$: superata quella, il punto non esce più dalla
+fascia verde, per quanto lontano lo si porti. Chiedendo un $\varepsilon$ più piccolo la soglia $c$
+si sposta a destra.</p>
+</div>
+
+<p>La soglia $c$ gioca per l'infinito lo stesso ruolo che l'intorno giocava per il punto: è la
+risposta alla sfida di $\varepsilon$. Resta il caso in cui $x$ va all'infinito e anche la funzione
+cresce senza limite: qui non c'è nessun valore a cui la funzione si stabilizza, e la fascia va di
+nuovo sostituita da una soglia da superare.</p>
+
+<div class="def">
+<span class="et">Definizione &middot; limite infinito per $x\to+\infty$</span>
+<p class="eq">$$\lim_{x\to+\infty}f(x)=+\infty \iff \forall M&gt;0\;\;\exists\,c&gt;0:\;
+f(x)&gt;M \quad\forall x&gt;c$$</p>
+<p>Le altre tre combinazioni si scrivono in modo analogo, cambiando i versi.</p>
+</div>
+
+<div class="fig">
+<svg id="g-inb" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="c-M2">soglia $M$</label>
+<input id="c-M2" type="range" min="4" max="34" step="0.5" value="16">
+<span class="val" id="v-M2"></span></div>
+<div class="cursore"><button type="button" class="btn-anim" id="b-inb" aria-label="Avvia">&#9654;</button>
+<label for="c-inbx">punto $x$</label>
+<input id="c-inbx" type="range" min="0" max="1" step="0.002" value="0">
+<span class="val" id="v-inbx"></span></div>
+<p class="did">Qui la funzione è $f(x)=\dfrac{x^2}{10}$. Fissata la soglia $M$, la retta verticale
+segna il valore $c$ oltre il quale la curva resta sopra la soglia; alzando $M$ la soglia $c$ si
+sposta a destra, ma esiste sempre.</p>
+</div>
+
+<h2>Asintoti orizzontali</h2>
+
+<p>Quando il limite all'infinito è finito, il grafico si appiattisce su una retta orizzontale: è
+l'analogo, per i rami che si allontanano, di quanto accadeva vicino a un punto.</p>
+
+<div class="def">
+<span class="et">Definizione &middot; asintoto orizzontale</span>
+<p>Data la funzione $y=f(x)$, se si verifica almeno una delle condizioni</p>
+<p class="eq">$$\lim_{x\to+\infty}f(x)=q \qquad\text{oppure}\qquad \lim_{x\to-\infty}f(x)=q$$</p>
+<p>la retta $y=q$ è <strong>asintoto orizzontale</strong> per il grafico della funzione.</p>
+</div>
+
+<div class="fig">
+<svg id="gal-o" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="did-parti" style="--n:3">
+<p class="did">Il ramo destro si appiattisce sulla retta: asintoto orizzontale destro.</p>
+<p class="did">La curva attraversa la retta e poi vi si accosta: l'asintoto può essere attraversato.</p>
+<p class="did">I due rami tendono a valori diversi: due asintoti orizzontali.</p>
+</div>
+</div>
+
+<p>Come mostra il disegno centrale, un asintoto orizzontale può essere attraversato dalla curva: la
+definizione chiede che la funzione vi si avvicini indefinitamente allontanandosi lungo il ramo, non
+che non lo incontri mai. Una funzione può avere due asintoti orizzontali distinti, uno per ciascun
+ramo, oppure uno solo, oppure nessuno.</p>
+
+<nav class="nav-unita"><a class="precedente" href="../../index.html"><span class="dir">&larr; Indice</span><span class="tit">Matematica — Quinta</span></a><a class="successiva" href="../03-teoremi-sui-limiti-unicita-permanenza-del-segno-confronto/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teoremi sui limiti: unicità, permanenza del segno, confronto</span></a></nav>
 <footer><p>Matematica quinta &middot; Limiti &middot; Unità 01</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var f=function(x){return 2*x;};
-  var xs=[],ys=[];
-  for(var i=0;i<=400;i++){var v=2+i*2/400; if(Math.abs(v-3)>1e-9){xs.push(v);ys.push(f(v));}}
-  var se=document.getElementById('s-eps'), sx=document.getElementById('s-x');
-  var ve=document.getElementById('v-eps'), vx=document.getElementById('v-x'), vdel=document.getElementById('v-delta');
-  function agg(){
-    var eps=parseFloat(se.value), del=eps/2, x=3+parseFloat(sx.value)*del;
-    ve.textContent=eps.toFixed(2).replace('.',',');
-    vx.textContent=x.toFixed(3).replace('.',',');
-    vdel.textContent='δ = '+del.toFixed(3).replace('.',',');
-    Plotly.react('g-epsdelta',[
-      {x:xs,y:ys,mode:'lines',line:{color:'#16283d',width:2.5},hoverinfo:'skip'},
-      {x:[3],y:[6],mode:'markers',marker:{size:13,color:'#f7f5ef',line:{color:'#16283d',width:2.5}},hoverinfo:'skip'},
-      {x:[x],y:[f(x)],mode:'markers',marker:{size:12,color:'#b3392f'},
-       hovertemplate:'x = %{x:.3f}<br>f(x) = %{y:.3f}<extra></extra>'}
-    ],{
-      margin:{l:44,r:14,t:10,b:40},showlegend:false,
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[2,4],zeroline:false,gridcolor:'#e6e0d4',dtick:0.25},
-      yaxis:{title:'y',range:[4,8],zeroline:false,gridcolor:'#e6e0d4',dtick:0.5},
-      shapes:[
-        {type:'rect',x0:2,x1:4,y0:6-eps,y1:6+eps,fillcolor:'rgba(47,107,79,0.13)',line:{width:0},layer:'below'},
-        {type:'rect',x0:3-del,x1:3+del,y0:4,y1:8,fillcolor:'rgba(31,78,121,0.13)',line:{width:0},layer:'below'},
-        {type:'line',x0:2,x1:4,y0:6,y1:6,line:{color:'#2f6b4f',width:1,dash:'dot'}},
-        {type:'line',x0:3,x1:3,y0:4,y1:8,line:{color:'#1f4e79',width:1,dash:'dot'}}
-      ],
-      annotations:[
-        {x:2.06,y:6+eps,text:'6 + ε',showarrow:false,yshift:10,font:{size:11,color:'#2f6b4f'}},
-        {x:2.06,y:6-eps,text:'6 − ε',showarrow:false,yshift:-10,font:{size:11,color:'#2f6b4f'}},
-        {x:3-del,y:4.1,text:'3 − δ',showarrow:false,xshift:-16,font:{size:11,color:'#1f4e79'}},
-        {x:3+del,y:4.1,text:'3 + δ',showarrow:false,xshift:16,font:{size:11,color:'#1f4e79'}}
-      ]
-    },{displayModeBar:false,responsive:true});
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  se.addEventListener('input',agg); sx.addEventListener('input',agg); agg();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','\u2212');}
+
+/* piano cartesiano su un viewBox 0 0 W H */
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+/* path della funzione, spezzato dove esce dal riquadro o non è definita */
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w){
+  var p=el('path',{d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'});
+  this.sopra.appendChild(p);return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+
+function anima(btn,inp,dur,dopo){
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var v0=inp.value, stato='fermo', raf=null;
+  function ev(){inp.dispatchEvent(new Event('input',{bubbles:true}));}
+  btn.addEventListener('click',function(){
+    if(stato==='fine'){cancelAnimationFrame(raf);inp.value=v0;ev();stato='fermo';
+      btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');return;}
+    if(stato!=='fermo')return;
+    var a=parseFloat(inp.min), b=parseFloat(inp.max), t0=null;
+    stato='corsa'; btn.disabled=true;
+    function fine(){stato='fine';btn.disabled=false;btn.innerHTML='&#8634;';
+      btn.setAttribute('aria-label','Ricomincia');if(dopo)dopo();}
+    if(ridotto){inp.value=b;ev();fine();return;}
+    (function passo(t){if(t0===null)t0=t;var u=Math.min((t-t0)/dur,1);
+      inp.value=a+(b-a)*u;ev();
+      if(u>=1)fine(); else raf=requestAnimationFrame(passo);})(performance.now());
+  });
+}
+
+/* ---------- 1. epsilon-delta attorno a x0 = 3 ---------- */
+(function(){
+  var svg=document.getElementById('g-eps'); if(!svg)return;
+  var P=new Piano(svg,[1.4,4.6],[2.6,9.4],{l:46,r:26,t:18,b:34});
+  var f=function(x){return 2*x;};
+  var fe=P.add(el('rect',{x:P.m.l,width:P.W-P.m.l-P.m.r,fill:'var(--verde)','fill-opacity':.14}),'sotto');
+  var fd=P.add(el('rect',{y:P.m.t,height:P.H-P.m.t-P.m.b,fill:'var(--blu)','fill-opacity':.14}),'sotto');
+  P.assi([2,3,4],[4,6,8]);
+  P.add(el('line',{x1:P.m.l,y1:P.Y(6),x2:P.W-P.m.r,y2:P.Y(6),stroke:'var(--verde)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  P.add(el('line',{x1:P.X(3),y1:P.m.t,x2:P.X(3),y2:P.H-P.m.b,stroke:'var(--blu)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  P.curva(f,1.4,2.99,140); P.curva(f,3.01,4.6,140);
+  P.add(el('circle',{cx:P.X(3),cy:P.Y(6),r:5,fill:'var(--carta)',stroke:'var(--inchiostro)','stroke-width':2}));
+  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
+  var te=P.add(txt(P.X(1.45),0,'6 + ε',{fill:'var(--verde)'}),'testo');
+  var tf=P.add(txt(P.X(1.45),0,'6 − ε',{fill:'var(--verde)'}),'testo');
+  var td=P.add(txt(0,P.H-P.m.b-8,'δ',{fill:'var(--blu)','text-anchor':'middle'}),'testo');
+  var st=P.add(txt(P.m.l+4,P.m.t+14,'',{'font-size':13}),'testo');
+  var ce=document.getElementById('c-eps'), cx=document.getElementById('c-epsx'),
+      ve=document.getElementById('v-eps'), vx=document.getElementById('v-epsx');
+  function agg(){
+    var eps=parseFloat(ce.value), del=eps/2, x=1.4+parseFloat(cx.value)*3.2, y=f(x);
+    fe.setAttribute('y',P.Y(6+eps)); fe.setAttribute('height',Math.abs(P.Y(6-eps)-P.Y(6+eps)));
+    fd.setAttribute('x',P.X(3-del)); fd.setAttribute('width',P.X(3+del)-P.X(3-del));
+    te.setAttribute('y',P.Y(6+eps)-5); tf.setAttribute('y',P.Y(6-eps)+15);
+    td.setAttribute('x',(P.X(3)+P.X(3+del))/2);
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    var dentro=Math.abs(x-3)<del&&Math.abs(x-3)>1e-9;
+    pt.setAttribute('opacity',Math.abs(x-3)<1e-9?0:1);
+    st.textContent='x = '+num(x,2)+'  \u00b7  f(x) = '+num(y,2)+(dentro?'  \u00b7  dentro la fascia':'');
+    st.setAttribute('fill',dentro?'var(--verde)':'var(--grigio)');
+    ve.textContent=num(eps)+'  →  δ = '+num(del);
+    vx.textContent='x = '+num(x,2);
+  }
+  ce.addEventListener('input',agg); cx.addEventListener('input',agg);
+  anima(document.getElementById('b-eps'),cx,5000); agg();
+})();
+
+/* ---------- 2. limite destro e sinistro in 5 ---------- */
+(function(){
+  var svg=document.getElementById('g-lat'); if(!svg)return;
+  var P=new Piano(svg,[0.6,9.4],[-0.6,9],{l:40,r:26,t:18,b:34});
+  var fs=function(x){return 2-Math.pow(5-x,2)/8;}, fd=function(x){return 6+(x-5)/2;};
+  P.assi([1,3,5,7,9],[2,4,6,8]);
+  P.add(el('line',{x1:P.X(5),y1:P.m.t,x2:P.X(5),y2:P.H-P.m.b,stroke:'var(--riga)','stroke-width':1.4}),'sotto');
+  P.curva(fs,0.6,5,220); P.curva(fd,5,9.4,120);
+  [[5,2],[5,6]].forEach(function(q){P.add(el('circle',{cx:P.X(q[0]),cy:P.Y(q[1]),r:5,
+    fill:'var(--carta)',stroke:'var(--inchiostro)','stroke-width':2}));});
+  P.add(el('circle',{cx:P.X(5),cy:P.Y(4),r:5,fill:'var(--inchiostro)'}));
+  P.add(txt(P.X(5)+10,P.Y(4)+4,'f(5) = 4',{fill:'var(--inchiostro)'}),'testo');
+  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
+  var st=P.add(txt(P.W-P.m.r-4,P.m.t+14,'',{'text-anchor':'end','font-size':13,fill:'var(--grigio)'}),'testo');
+  var c=document.getElementById('c-lat'), v=document.getElementById('v-lat');
+  function agg(){
+    var u=parseFloat(c.value), x, y;
+    if(u<0.5){x=0.6+(u/0.5)*(5-0.6)-1e-4;y=fs(x);} else {x=5+((u-0.5)/0.5)*(9.4-5)+1e-4;y=fd(x);}
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    st.textContent='x = '+num(x,2)+'  \u00b7  f(x) = '+num(y,2);
+    v.textContent='x = '+num(x,2);
+  }
+  c.addEventListener('input',agg); anima(document.getElementById('b-lat'),c,6000); agg();
+})();
+
+/* ---------- 3. limite infinito in un punto ---------- */
+(function(){
+  var svg=document.getElementById('g-inf'); if(!svg)return;
+  var P=new Piano(svg,[-1.4,3.4],[-1.5,26],{l:44,r:26,t:18,b:34});
+  var f=function(x){return 1/Math.pow(x-1,2);};
+  var fd=P.add(el('rect',{y:P.m.t,height:P.H-P.m.t-P.m.b,fill:'var(--blu)','fill-opacity':.14}),'sotto');
+  P.assi([-1,0,1,2,3],[5,10,15,20,25]);
+  var lM=P.add(el('line',{x1:P.m.l,x2:P.W-P.m.r,stroke:'var(--verde)','stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
+  P.add(el('line',{x1:P.X(1),y1:P.m.t,x2:P.X(1),y2:P.H-P.m.b,stroke:'var(--rosso)','stroke-width':1.8,'stroke-dasharray':'6,4'}),'sotto');
+  P.add(txt(P.X(1)+8,P.m.t+12,'x = 1',{fill:'var(--rosso)'}),'testo');
+  P.curva(f,-1.4,0.999,300); P.curva(f,1.001,3.4,300);
+  var tM=P.add(txt(P.m.l+4,0,'M',{fill:'var(--verde)'}),'testo');
+  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
+  var st=P.add(txt(P.W-P.m.r-4,P.m.t+14,'',{'text-anchor':'end','font-size':13,fill:'var(--grigio)'}),'testo');
+  var cM=document.getElementById('c-M'), cx=document.getElementById('c-infx'),
+      vM=document.getElementById('v-M'), vx=document.getElementById('v-infx');
+  function agg(){
+    var M=parseFloat(cM.value), del=1/Math.sqrt(M), u=parseFloat(cx.value);
+    var d=0.2+u*u*2.2, x=u<0?1-d:1+d, y=f(x);
+    fd.setAttribute('x',P.X(1-del)); fd.setAttribute('width',P.X(1+del)-P.X(1-del));
+    lM.setAttribute('y1',P.Y(M)); lM.setAttribute('y2',P.Y(M));
+    tM.setAttribute('y',P.Y(M)-5);
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    var sopra=y>M;
+    st.textContent='x = '+num(x,3)+'  \u00b7  f(x) = '+num(y,1)+(sopra?'  \u00b7  sopra la soglia':'');
+    st.setAttribute('fill',sopra?'var(--verde)':'var(--grigio)');
+    vM.textContent=num(M,1)+'  \u2192  \u03b4 = '+num(del,3); vx.textContent='x = '+num(x,3);
+  }
+  cM.addEventListener('input',agg); cx.addEventListener('input',agg);
+  anima(document.getElementById('b-inf'),cx,6000); agg();
+})();
+
+/* ---------- 4. galleria asintoti verticali ---------- */
+(function(){
+  var svg=document.getElementById('gal-v'); if(!svg)return;
+  var casi=[
+    {f:function(x){return 1/Math.pow(x-1,2);},due:true,yr:[-2,9]},
+    {f:function(x){return -1/Math.pow(x-1,2);},due:true,yr:[-9,2]},
+    {f:function(x){return 1/(1-x);},due:false,yr:[-2,9],destra:function(x){return 1.5+Math.sqrt(Math.max(x-1,0));}}
+  ];
+  casi.forEach(function(c,i){
+    var g=el('g',{transform:'translate('+(i*186)+',0)'}); svg.appendChild(g);
+    var sub=el('svg',{viewBox:'0 0 186 200',width:186,height:200}); g.appendChild(sub);
+    var P=new Piano(sub,[-1.4,3.4],c.yr,{l:16,r:12,t:12,b:16});
+    P.assi([],[],'','');
+    P.add(el('line',{x1:P.X(1),y1:P.m.t,x2:P.X(1),y2:P.H-P.m.b,stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5,4'}),'sotto');
+    P.curva(c.f,-1.4,0.99,200,null,2);
+    P.curva(c.due?c.f:c.destra,1.01,3.4,200,null,2);
+    P.add(txt(P.X(1)+6,P.H-P.m.b-6,'x = c',{fill:'var(--rosso)'}),'testo');
+  });
+})();
+
+/* ---------- 5. limite finito per x che tende a +infinito ---------- */
+(function(){
+  var svg=document.getElementById('g-orb'); if(!svg)return;
+  var P=new Piano(svg,[0.8,40],[-0.5,6.4],{l:40,r:26,t:18,b:34});
+  var f=function(x){return 2+4*Math.sin(x)/x;};
+  var fe=P.add(el('rect',{x:P.m.l,width:P.W-P.m.l-P.m.r,fill:'var(--verde)','fill-opacity':.14}),'sotto');
+  P.assi([10,20,30],[2,4,6]);
+  P.add(el('line',{x1:P.m.l,y1:P.Y(2),x2:P.W-P.m.r,y2:P.Y(2),stroke:'var(--verde)','stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
+  P.add(txt(P.W-P.m.r-4,P.Y(2)-6,'ℓ = 2',{fill:'var(--verde)','text-anchor':'end'}),'testo');
+  P.curva(f,0.8,40,900);
+  var lc=P.add(el('line',{y1:P.m.t,y2:P.H-P.m.b,stroke:'var(--blu)','stroke-width':1.6,'stroke-dasharray':'6,4'}),'sotto');
+  var tc=P.add(txt(0,P.m.t+12,'c',{fill:'var(--blu)'}),'testo');
+  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
+  var st=P.add(txt(P.W-P.m.r-4,P.m.t+14,'',{'text-anchor':'end','font-size':13,fill:'var(--grigio)'}),'testo');
+  var ce=document.getElementById('c-eps2'), cx=document.getElementById('c-orbx'),
+      ve=document.getElementById('v-eps2'), vx=document.getElementById('v-orbx');
+  function soglia(eps){ // ultimo x in cui la funzione tocca il bordo della fascia
+    for(var x=40;x>0.8;x-=0.01){ if(Math.abs(f(x)-2)>=eps) return x; }
+    return 0.8;
+  }
+  function agg(){
+    var eps=parseFloat(ce.value), c=soglia(eps), x=0.8+parseFloat(cx.value)*39.2, y=f(x);
+    fe.setAttribute('y',P.Y(2+eps)); fe.setAttribute('height',Math.abs(P.Y(2-eps)-P.Y(2+eps)));
+    lc.setAttribute('x1',P.X(c)); lc.setAttribute('x2',P.X(c));
+    tc.setAttribute('x',P.X(c)+6);
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    var dentro=x>c;
+    st.textContent='x = '+num(x,1)+'  \u00b7  f(x) = '+num(y,2)+(dentro?'  \u00b7  dentro la fascia':'');
+    st.setAttribute('fill',dentro?'var(--verde)':'var(--grigio)');
+    ve.textContent=num(eps)+'  →  c = '+num(c,1);
+    vx.textContent='x = '+num(x,1);
+  }
+  ce.addEventListener('input',agg); cx.addEventListener('input',agg);
+  anima(document.getElementById('b-orb'),cx,6000); agg();
+})();
+
+/* ---------- 6. limite infinito per x che tende a +infinito ---------- */
+(function(){
+  var svg=document.getElementById('g-inb'); if(!svg)return;
+  var P=new Piano(svg,[0,20],[-2,40],{l:40,r:26,t:18,b:34});
+  var f=function(x){return x*x/10;};
+  P.assi([5,10,15],[10,20,30,40]);
+  var fM=P.add(el('rect',{y:P.m.t,height:P.H-P.m.t-P.m.b,fill:'var(--verde)','fill-opacity':.12}),'sotto');
+  var lM=P.add(el('line',{x1:P.m.l,x2:P.W-P.m.r,stroke:'var(--verde)','stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
+  var tM=P.add(txt(P.m.l+4,0,'M',{fill:'var(--verde)'}),'testo');
+  P.curva(f,0,20,300);
+  var lc=P.add(el('line',{y1:P.m.t,y2:P.H-P.m.b,stroke:'var(--blu)','stroke-width':1.6,'stroke-dasharray':'6,4'}),'sotto');
+  var tc=P.add(txt(0,P.m.t+12,'c',{fill:'var(--blu)'}),'testo');
+  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
+  var st=P.add(txt(P.m.l+4,P.m.t+14,'',{'font-size':13,fill:'var(--grigio)'}),'testo');
+  var cM=document.getElementById('c-M2'), cx=document.getElementById('c-inbx'),
+      vM=document.getElementById('v-M2'), vx=document.getElementById('v-inbx');
+  function agg(){
+    var M=parseFloat(cM.value), c=Math.sqrt(10*M), x=parseFloat(cx.value)*20, y=f(x);
+    lM.setAttribute('y1',P.Y(M)); lM.setAttribute('y2',P.Y(M));
+    fM.setAttribute('x',P.X(c)); fM.setAttribute('width',Math.max(0,P.W-P.m.r-P.X(c)));
+    tM.setAttribute('y',P.Y(M)-5);
+    lc.setAttribute('x1',P.X(c)); lc.setAttribute('x2',P.X(c)); tc.setAttribute('x',P.X(c)+6);
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    var sopra=y>M;
+    st.textContent='x = '+num(x,1)+'  \u00b7  f(x) = '+num(y,1)+(sopra?'  \u00b7  sopra la soglia':'');
+    st.setAttribute('fill',sopra?'var(--verde)':'var(--grigio)');
+    vM.textContent=num(M,1)+'  →  c = '+num(c,1); vx.textContent='x = '+num(x,1);
+  }
+  cM.addEventListener('input',agg); cx.addEventListener('input',agg);
+  anima(document.getElementById('b-inb'),cx,6000); agg();
+})();
+
+/* ---------- 7. galleria asintoti orizzontali ---------- */
+(function(){
+  var svg=document.getElementById('gal-o'); if(!svg)return;
+  var casi=[
+    {f:function(x){return 1+3/(x+2.4);},xr:[-1.8,6],yr:[-0.5,5.5],q:[1]},
+    {f:function(x){return 1+2.6*Math.exp(-0.25*x)*Math.cos(1.1*x);},xr:[-1,10],yr:[-1.6,4.2],q:[1]},
+    {f:function(x){return 1.5*Math.tanh(0.9*x)+2;},xr:[-6,6],yr:[-0.6,4.4],q:[0.5,3.5]}
+  ];
+  casi.forEach(function(c,i){
+    var g=el('g',{transform:'translate('+(i*186)+',0)'}); svg.appendChild(g);
+    var sub=el('svg',{viewBox:'0 0 186 200',width:186,height:200}); g.appendChild(sub);
+    var P=new Piano(sub,c.xr,c.yr,{l:16,r:12,t:12,b:16});
+    P.assi([],[],'','');
+    c.q.forEach(function(q){
+      P.add(el('line',{x1:P.m.l,y1:P.Y(q),x2:P.W-P.m.r,y2:P.Y(q),stroke:'var(--rosso)',
+        'stroke-width':1.6,'stroke-dasharray':'5,4'}),'sotto');
+    });
+    P.curva(c.f,c.xr[0],c.xr[1],300,null,2);
+  });
+})();
 })();
 </script>
 </body>
