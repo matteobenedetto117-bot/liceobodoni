@@ -578,3 +578,8 @@ questo sul sito pubblico.
 - Parole: 498 su 2 pagine di traccia (24–25 di geometria-1.pdf)
 - Rettifica: a pagina 24 la giustificazione del passaggio «A B̂ P ≅ P B̂ C» è scritta «per ipotesi», con «per costruzione» aggiunto a lato fra parentesi. Nella pagina resta solo «per costruzione», che è la giustificazione corretta: la bisettrice è una linea ausiliaria tracciata da noi, non un dato dell'ipotesi.
 - Aggiunta: nessuna. Enunciati, figure ed esempio sono quelli della traccia; l'unico riquadro di commento chiarisce la distinzione fra «per ipotesi» e «per costruzione», che è il punto su cui la traccia stessa si corregge.
+
+## Unità 58 — Teorema inverso del triangolo isoscele e la bisettrice come mediana e altezza
+- Parole: 305 su 1,2 pagine di traccia (metà inferiore di p. 25 e terzo superiore di p. 26 di geometria-1.pdf)
+- Rettifica: nessuna. La traccia enuncia il teorema inverso con ipotesi e tesi e non lo dimostra: la pagina lascia l'enunciato senza dimostrazione, come a lezione.
+- Aggiunta: nessun contenuto nuovo. Un solo riquadro di avvertenza, sulla differenza fra un teorema e il suo inverso: serve perché la traccia mette l'inverso subito dopo il diretto senza dire che sono due risultati distinti, ed è l'errore tipico su cui si inciampa qui.
