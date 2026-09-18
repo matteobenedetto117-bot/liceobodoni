@@ -40,3 +40,8 @@
 - Parole: 323 su circa 1,5 pagine di traccia
 - Rettifica: nessuna. Il contenuto della traccia (definizione, procedura, regola del primo fattore rispetto a 5, tre esempi) è corretto e verificato.
 - Aggiunta: nessun contenuto nuovo. È stato aggiunto solo il cursore interattivo sul primo fattore, che mostra la soglia del 5 già enunciata nella traccia, e una frase di confronto (4800 kg e 1200 kg) per chiarire l'osservazione della traccia secondo cui l'o.d.g. non serve a conoscere la misura con precisione.
+
+## Unità 09 — Equivalenze in notazione scientifica
+- Parole: 255 su 1 pagina di traccia (pag. 11 del quaderno = pag. 12 del PDF, dal titolo fino in fondo; la pagina successiva apre «Formule inverse», unità 10).
+- Rettifica: nessuna. I quattro esempi della traccia sono corretti e verificati con SymPy: 5,18·10⁻¹²·10⁹/10⁻³ = 5,18 mm (gli esponenti −12 + 9 + 3 danno 10⁰); 6,44·10⁴·10⁻³/10⁻⁶ = 6,44·10⁷ µg; 1640·10²/1852 = 88,5529… arrotondato a 88,55 mi; 3,8/1,50 = 2,5333… arrotondato a 2,53 U.A. Nella traccia l'esponente della prima misura è scritto «10⁺⁴» per il secondo esempio: nella pagina è reso semplicemente 10⁴.
+- Aggiunta: nessun esempio nuovo, sono i quattro della traccia. Gli unici elementi non presenti alla lettera sono: il disegno SVG, che è la resa pulita delle cancellature a matita già fatte sulla traccia, con in basso la riga delle potenze superstiti; la frase sul fatto che miglio marino e unità astronomica non sono legati a potenze di dieci (la traccia lo mostra senza dirlo); il riquadro «Da non fare» sul fattore capovolto. Nessuna tabella riassuntiva, nessuno strumento interattivo.
