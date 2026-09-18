@@ -154,3 +154,8 @@
 - Parole: 314 su 2 pagine di traccia
 - Rettifica: nessuna. La traccia è corretta.
 - Aggiunta: nessun contenuto nuovo. Unica scelta di confine: il disegno della scatola dentro la stanza, che nella traccia sta in cima a pagina 33, è stato tenuto in questa unità perché chiude l'argomento di pagina 32 (modulo, direzione e verso danno tutte le informazioni necessarie); l'unità 23 comincia comunque da "Grandezze scalari e vettoriali", più sotto nella stessa pagina.
+
+## Unità 23 — Grandezze scalari e vettoriali
+- Parole: 286 su 1 pagina di traccia (p. 33)
+- Rettifica: nessuna, la traccia è corretta.
+- Aggiunta: nessuna. Il riquadro sulla scrittura $\vec{F} = 120$ N riprende il passaggio barrato in rosso della traccia, non aggiunge contenuto.
