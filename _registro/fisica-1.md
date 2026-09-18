@@ -149,3 +149,8 @@
 - Parole: 384 su 1,5 pagine di traccia (pagina 30 intera e la prima metà di pagina 31, dove comincia il blocco «Forze e vettori»)
 - Rettifica: nessuna. I due rapporti della traccia sono corretti, verificati con SymPy: 1/247 = 0,004049 → 0,0040 e 0,1/21,3 = 0,004695 → 0,0047, entrambi arrotondati bene a due cifre significative; 0,0040 · 100 % = 0,40 %.
 - Aggiunta: una sola riga di conclusione all'esempio — «l'errore relativo dell'autostrada è più piccolo, quindi è la misura più precisa». La traccia pone la domanda «qual è la più precisa?» e calcola i due errori relativi senza scrivere la risposta: senza quella riga l'esempio resta sospeso. Nessun esempio nuovo, nessuna dimostrazione aggiunta. Il disegno (le due misure portate allo stesso ingombro, con la fetta d'errore a confronto) non è nella traccia, che su queste pagine non ha figure: serve a rendere visibile il confronto fra 0,40 % e 0,47 %, che è il punto dell'unità. Un solo riquadro di attenzione, sull'errore di giudicare la precisione dall'errore assoluto. Nessuno strumento interattivo. Come da note della classe, nessuna ricerca su tracce d'esame.
+
+## Unità 22 — Forza e vettore
+- Parole: 314 su 2 pagine di traccia
+- Rettifica: nessuna. La traccia è corretta.
+- Aggiunta: nessun contenuto nuovo. Unica scelta di confine: il disegno della scatola dentro la stanza, che nella traccia sta in cima a pagina 33, è stato tenuto in questa unità perché chiude l'argomento di pagina 32 (modulo, direzione e verso danno tutte le informazioni necessarie); l'unità 23 comincia comunque da "Grandezze scalari e vettoriali", più sotto nella stessa pagina.
