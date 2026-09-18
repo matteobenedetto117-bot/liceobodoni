@@ -133,14 +133,17 @@ teorema del confronto, a pagina 21.
 - Passaggi a comparsa: due catene, il coniugato di $x-\sqrt{x^2+1}$ (4 passaggi) e la forma
   $\infty\cdot0$ di $(1-\sin x)\tan x$ (5 passaggi), ciascuno con la riga in grigetto che dice
   che cosa si sta facendo; "passo successivo" ne scopre uno per volta, ↺ riporta all'inizio.
-- Figura: il widget Plotly è stato sostituito da un SVG disegnato da uno script interno (nessuna
-  dipendenza da CDN). Mostra per intero $\frac{1-2x^2}{3x^2+2x-5}$ da $x=2$ a $x=60$ — l'intervallo
-  parte da 2 perché in $x=1$ c'è un asintoto verticale — con la retta verde tratteggiata $y=-2/3$
-  (valore del limite). Il cursore muove un punto rosso sulla curva e mostra $f(x)$ e la sua distanza
-  da $-2/3$, con il segmento tratteggiato che la misura. Sull'asse $y$, che non parte da zero, c'è
-  il segno di interruzione. La figura è stata spostata dalla fine della pagina alla sezione
-  $\infty/\infty$, cioè accanto all'esempio che illustra.
-- Comandi: solo cursore, nessun pulsante ▶.
+- Figura: tolta su richiesta dell'insegnante. La pagina non ha più disegni: il grafico
+  dell'avvicinamento a $y=-2/3$ (che aveva sostituito il vecchio widget Plotly) era decorativo,
+  perché il risultato si legge dal confronto fra i gradi e non dal disegno.
+- Passaggi a comparsa su tutti gli otto limiti (seconda revisione, 18/09/2026): ogni esercizio ha
+  ora la propria catena di passaggi numerati, uno per riga, con la frase in grigetto che dice che
+  cosa si sta facendo e la formula in un riquadro bianco, distinto dall'azzurro del quesito;
+  "primo passaggio"/"passo successivo" ne scoprono uno per volta, ↺ riporta all'inizio. In più
+  rispetto a prima: il raccoglimento di $x^4$, i tre casi $\infty/\infty$ (dove si vede la
+  semplificazione delle potenze e il rapporto dei coefficienti direttivi), la scomposizione del
+  caso $0/0$ con la verifica che $3$ annulla entrambi i trinomi, e la riscrittura esponenziale di
+  $x^{1/\ln x}$.
 - Aggiunta: nulla di contenuto nuovo. Resta la riga che esplicita il criterio del confronto fra i
   gradi, già presente dalla prima stesura.
 
