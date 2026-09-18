@@ -139,3 +139,8 @@
 - Parole: 332 su 2 pagine di traccia
 - Rettifica: nessuna. I dati della traccia sono corretti: 7,97 − 0,07 = 7,90 e 7,97 + 0,07 = 8,04, e il valore teorico 8,02 g/cm³ cade dentro l'intervallo (verificato con SymPy).
 - Aggiunta: nessuna. Unico esempio quello della traccia (densità dell'acciaio inox); il secondo disegno riprende lo schema compatibili / non compatibili già presente a pagina 28.
+
+## Unità 20 — Compatibilità fra due misure
+- Parole: 294 su 1 pagina di traccia (pagina 29, più il paragrafo «Accordo tra due esperimenti» che apre in fondo a pagina 28)
+- Rettifica: nessuna. Gli estremi della traccia sono corretti, verificati con SymPy: 7,97 ± 0,07 dà [7,90; 8,04], 8,06 ± 0,05 dà [8,01; 8,11], e la parte comune è [8,01; 8,04], quindi le due misure sono compatibili.
+- Aggiunta: nessuna. Unico esempio quello della traccia; i due disegni sono i due della traccia (l'asse con i due intervalli e lo schema compatibili / non compatibili), ridisegnati in SVG in scala coerente con i numeri. Un solo riquadro di attenzione, sull'errore di decidere la compatibilità confrontando i valori attendibili invece degli intervalli. Nessuno strumento interattivo. Come da note della classe, nessuna ricerca su tracce d'esame.
