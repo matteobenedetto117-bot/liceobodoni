@@ -110,3 +110,8 @@
   che misure concordi non sono per questo corrette — è l'errore tipico che la griglia dei
   bersagli serve a smontare. Nessuna tabella riassuntiva oltre a quella della traccia,
   nessuno strumento interattivo.
+
+## Unità 17 — Il risultato di una misura
+- Parole: 480 su 2 pagine di traccia (pag. 24–25)
+- Rettifica: nessuna. Gli intervalli della traccia sono corretti: 3,462 ± 0,001 dà [3,461; 3,463] e 3,46 ± 0,01 dà [3,45; 3,47], verificati con SymPy; il primo è contenuto nel secondo, coerentemente con il disegno sull'asse cartesiano.
+- Aggiunta: nessun contenuto nuovo. Aggiunte solo le poche righe che spiegano il senso del doppio segno e il motivo della regola sulla cifra decimale, e un riquadro di avvertenza sul fatto che errore piccolo non è errore assente. Nessun esempio nuovo: sono quelli della traccia (lato della stanza con metro a nastro e con rotella metrica, e il tempo 0,748 / 0,75 s).
