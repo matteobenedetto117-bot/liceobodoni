@@ -583,3 +583,10 @@ questo sul sito pubblico.
 - Parole: 305 su 1,2 pagine di traccia (metà inferiore di p. 25 e terzo superiore di p. 26 di geometria-1.pdf)
 - Rettifica: nessuna. La traccia enuncia il teorema inverso con ipotesi e tesi e non lo dimostra: la pagina lascia l'enunciato senza dimostrazione, come a lezione.
 - Aggiunta: nessun contenuto nuovo. Un solo riquadro di avvertenza, sulla differenza fra un teorema e il suo inverso: serve perché la traccia mette l'inverso subito dopo il diretto senza dire che sono due risultati distinti, ed è l'errore tipico su cui si inciampa qui.
+
+## Unità 59 — Terzo criterio di congruenza
+- Parole: 359 su 2 pagine di traccia (27–28 di geometria-1.pdf)
+- Rettifica: nella dimostrazione dell'esempio la traccia scrive «B Â D ≅ D Â C per III criterio» e poi «in particolare: B Â D ≅ D Â C». Il terzo criterio dà la congruenza dei due triangoli, non direttamente quella degli angoli: nella pagina il passaggio è scritto «ABD ≅ ADC per il terzo criterio», e la congruenza degli angoli in A segue come conseguenza.
+- Rettifica: la tesi del criterio, scritta nella traccia come «A B̂ C ≅ A' B̂' C'» (una congruenza fra angoli), è riportata come congruenza fra i triangoli, che è ciò che il criterio afferma.
+- Aggiunta: nessun contenuto nuovo. La traccia enuncia il criterio senza dimostrarlo e la pagina fa lo stesso. Un solo riquadro di avvertenza, sul fatto che qui non c'è nessuna posizione dell'angolo da controllare come nei primi due criteri.
+- Nota per l'insegnante: l'unità 58 risultava non pubblicata perché la cartella esistente ha il nome per esteso, mentre il generatore tronca lo slug a 60 caratteri e cercava «58-teorema-inverso-del-triangolo-isoscele-e-la-bisettrice-come-». Aggiunto il campo «cartella» in _dati/matematica-1.json, così l'indice punta alla pagina già pubblicata. Nessun file cancellato.
