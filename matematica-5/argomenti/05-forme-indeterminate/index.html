@@ -25,27 +25,20 @@ header.testata{padding:0;margin:0;border-bottom:0}
 .nota,.def{display:flow-root}
 header.testata{padding-top:var(--r)}
 h1{position:relative;top:.5rem}
-.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
-.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
 .nota,.def{padding:0 18px}
 .nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
-.fig .did{line-height:1.4}
 .foglio>ul{margin:var(--r) 0 0}
 .foglio li{line-height:var(--r)}
 .nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
 .def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
-.fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .foglio>.eq{margin-top:var(--r);text-align:center}
 .eq mjx-container{margin:0!important}
 .foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
 .def .eq,.nota .eq{text-align:center;margin:0}
-.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
-.cursore input[type=range]{width:min(320px,55%)}
-.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
 
 .barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
 .btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
@@ -65,10 +58,11 @@ h1{position:relative;top:.5rem}
 .foglio .es .ris{margin-top:calc(var(--r)*.5)}
 .ris[hidden]{display:none}
 .passo[hidden]{display:none}
-.foglio .passo .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
-  font-size:1.1rem;text-align:center;margin-top:0}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0}
 .foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
   line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
 .comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
 .btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
   border-radius:8px;padding:6px 16px;cursor:pointer}
@@ -93,6 +87,9 @@ certi casi il risultato non dipende solo dai due valori separati: dipende da com
 tendono ai propri estremi. Sono le forme indeterminate, e ognuna richiede un piccolo lavoro
 algebrico prima di poter tornare alle regole già viste.</p>
 
+<p>Ogni limite qui sotto è un esercizio: il tasto <em>risultato</em> scopre la risposta, il tasto
+<em>primo passaggio</em> apre il calcolo una riga per volta.</p>
+
 <div class="barra-ris">
 <button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button>
 </div>
@@ -116,7 +113,27 @@ $1$, e il prodotto si calcola con l'algebra dei limiti già nota.</p>
 <div class="es">
 <p class="eq quesito">$$\lim_{x\to+\infty}(x^4-3x^2+1)$$</p>
 <button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
-<p class="eq ris" id="r1" hidden>$$\lim_{x\to+\infty}x^4\Big(1-\frac{3}{x^2}+\frac{1}{x^4}\Big)=+\infty$$</p>
+<p class="eq ris" id="r1" hidden>$$\lim_{x\to+\infty}(x^4-3x^2+1)=+\infty$$</p>
+</div>
+
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Raccolgo la potenza di grado più alto, $x^4$: ogni termine si divide per essa.</p>
+<p class="eq">$$x^4-3x^2+1=x^4\Big(1-\frac{3}{x^2}+\frac{1}{x^4}\Big)$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Dentro la parentesi le due frazioni tendono a zero: resta $1$.</p>
+<p class="eq">$$\lim_{x\to+\infty}\Big(1-\frac{3}{x^2}+\frac{1}{x^4}\Big)=1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Resta il prodotto di un infinito per un numero diverso da zero: non è più indeterminato.</p>
+<p class="eq">$$\lim_{x\to+\infty}x^4\cdot 1=+\infty$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
 </div>
 
 <p>Con le radici il raccoglimento non basta: si moltiplica e si divide per il coniugato, così che
@@ -128,28 +145,28 @@ al numeratore compaia il prodotto notevole $a^2-b^2$ e la radice sparisca.</p>
 <p class="eq ris" id="r2" hidden>$$\lim_{x\to+\infty}\big(x-\sqrt{x^2+1}\big)=0$$</p>
 </div>
 
-<div class="passi" id="passi1">
+<div class="passi" id="passi2">
 <div class="passo" hidden>
-<p class="spieg">Moltiplico e divido per il coniugato $x+\sqrt{x^2+1}$, che per $x$ grande è positivo e non si annulla.</p>
+<p class="spieg"><span class="num">1.</span> Moltiplico e divido per il coniugato $x+\sqrt{x^2+1}$, che per $x$ grande è positivo e non si annulla.</p>
 <p class="eq">$$\big(x-\sqrt{x^2+1}\big)\cdot\frac{x+\sqrt{x^2+1}}{x+\sqrt{x^2+1}}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Al numeratore compare il prodotto notevole $a^2-b^2$: la radice sparisce.</p>
-<p class="eq">$$\frac{x^2-(x^2+1)}{x+\sqrt{x^2+1}}$$</p>
+<p class="spieg"><span class="num">2.</span> Al numeratore compare il prodotto notevole $a^2-b^2$: la radice sparisce.</p>
+<p class="eq">$$\frac{x^2-\big(\sqrt{x^2+1}\big)^2}{x+\sqrt{x^2+1}}=\frac{x^2-(x^2+1)}{x+\sqrt{x^2+1}}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Il numeratore si riduce a una costante, il denominatore diverge.</p>
+<p class="spieg"><span class="num">3.</span> Al numeratore i due $x^2$ si elidono: resta una costante.</p>
 <p class="eq">$$\frac{-1}{x+\sqrt{x^2+1}}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Costante fratto infinito: il rapporto tende a zero, e la forma è sciolta.</p>
+<p class="spieg"><span class="num">4.</span> Numeratore costante e denominatore che diverge: il rapporto tende a zero.</p>
 <p class="eq">$$\lim_{x\to+\infty}\frac{-1}{x+\sqrt{x^2+1}}=0$$</p>
 </div>
 </div>
 
 <div class="comandi">
-<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
-<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+<button type="button" class="btn-passo" data-passi="passi2">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi2" hidden>&#8634;</button>
 </div>
 
 <h2>Forma $\infty\cdot 0$</h2>
@@ -163,33 +180,36 @@ funzione finché i due limiti tornano calcolabili separatamente.</p>
 <p class="eq ris" id="r3" hidden>$$\lim_{x\to \frac{\pi}{2}^{-}}(1-\sin x)\tan x=0$$</p>
 </div>
 
-<div class="passi" id="passi2">
+<div class="passi" id="passi3">
 <div class="passo" hidden>
-<p class="spieg">Guardo i due fattori separatamente: il primo tende a zero, il secondo diverge.</p>
+<p class="spieg"><span class="num">1.</span> Guardo i due fattori separatamente: il primo tende a zero, il secondo diverge.</p>
 <p class="eq">$$\lim_{x\to \frac{\pi}{2}^{-}}(1-\sin x)=0, \qquad \lim_{x\to \frac{\pi}{2}^{-}}\tan x=+\infty$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Scrivo la tangente come rapporto: così il fattore che diverge diventa un denominatore che si annulla.</p>
+<p class="spieg"><span class="num">2.</span> Scrivo la tangente come rapporto: il fattore che diverge diventa un denominatore che si annulla.</p>
 <p class="eq">$$(1-\sin x)\tan x=(1-\sin x)\cdot\frac{\sin x}{\cos x}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Moltiplico e divido per il coniugato $1+\sin x$, per far comparire $1-\sin^2x=\cos^2x$.</p>
-<p class="eq">$$\frac{(1-\sin x)(1+\sin x)}{1+\sin x}\cdot\frac{\sin x}{\cos x}
-=\frac{\cos^2x}{1+\sin x}\cdot\frac{\sin x}{\cos x}$$</p>
+<p class="spieg"><span class="num">3.</span> Moltiplico e divido per il coniugato $1+\sin x$, per far comparire $1-\sin^2x$.</p>
+<p class="eq">$$\frac{(1-\sin x)(1+\sin x)}{1+\sin x}\cdot\frac{\sin x}{\cos x}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Semplifico un $\cos x$: sparisce il denominatore che si annullava.</p>
+<p class="spieg"><span class="num">4.</span> Al numeratore $1-\sin^2x=\cos^2x$: ora compare un $\cos x$ anche sopra.</p>
+<p class="eq">$$\frac{\cos^2x}{1+\sin x}\cdot\frac{\sin x}{\cos x}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">5.</span> Semplifico un $\cos x$: sparisce il denominatore che si annullava.</p>
 <p class="eq">$$\frac{\cos x\sin x}{1+\sin x}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Ora tutti i limiti esistono e sono finiti: basta sostituire.</p>
-<p class="eq">$$\lim_{x\to \frac{\pi}{2}^{-}}\frac{\cos x\sin x}{1+\sin x}=\frac{0\cdot1}{2}=0$$</p>
+<p class="spieg"><span class="num">6.</span> Tutti i limiti ora esistono e sono finiti, e il denominatore non si annulla: basta sostituire.</p>
+<p class="eq">$$\lim_{x\to \frac{\pi}{2}^{-}}\frac{\cos x\sin x}{1+\sin x}=\frac{0\cdot1}{1+1}=0$$</p>
 </div>
 </div>
 
 <div class="comandi">
-<button type="button" class="btn-passo" data-passi="passi2">passo successivo</button>
-<button type="button" class="btn-passo chiaro" data-ricomincia="passi2" hidden>&#8634;</button>
+<button type="button" class="btn-passo" data-passi="passi3">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi3" hidden>&#8634;</button>
 </div>
 
 <h2>Forma $\dfrac{\infty}{\infty}$</h2>
@@ -201,35 +221,87 @@ fra i due gradi.</p>
 <div class="es">
 <p class="eq quesito">$$\lim_{x\to+\infty}\frac{x^5-2x^2+1}{-3x^2-2x+6}$$</p>
 <button type="button" class="btn-ris" aria-expanded="false" aria-controls="r4">risultato</button>
-<p class="eq ris" id="r4" hidden>$$\lim_{x\to+\infty}x^3\cdot\frac{1-\frac{2}{x^3}+\frac{1}{x^5}}{-3-\frac{2}{x}+\frac{6}{x^2}}=-\infty$$</p>
+<p class="eq ris" id="r4" hidden>$$\lim_{x\to+\infty}\frac{x^5-2x^2+1}{-3x^2-2x+6}=-\infty$$</p>
+</div>
+
+<div class="passi" id="passi4">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Raccolgo $x^5$ al numeratore e $x^2$ al denominatore.</p>
+<p class="eq">$$\frac{x^5\Big(1-\frac{2}{x^3}+\frac{1}{x^5}\Big)}{x^2\Big(-3-\frac{2}{x}+\frac{6}{x^2}\Big)}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Semplifico le potenze: $x^5:x^2=x^3$, la differenza fra i due gradi.</p>
+<p class="eq">$$x^3\cdot\frac{1-\frac{2}{x^3}+\frac{1}{x^5}}{-3-\frac{2}{x}+\frac{6}{x^2}}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Tutte le frazioni tendono a zero: la frazione tende al rapporto dei coefficienti direttivi.</p>
+<p class="eq">$$\lim_{x\to+\infty}\frac{1-\frac{2}{x^3}+\frac{1}{x^5}}{-3-\frac{2}{x}+\frac{6}{x^2}}=-\frac{1}{3}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> Resta $x^3$, che diverge, moltiplicato per un numero negativo.</p>
+<p class="eq">$$\lim_{x\to+\infty}x^3\cdot\Big(-\frac{1}{3}\Big)=-\infty$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi4">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi4" hidden>&#8634;</button>
 </div>
 
 <div class="es">
 <p class="eq quesito">$$\lim_{x\to+\infty}\frac{1-2x^2}{3x^2+2x-5}$$</p>
 <button type="button" class="btn-ris" aria-expanded="false" aria-controls="r5">risultato</button>
-<p class="eq ris" id="r5" hidden>$$\lim_{x\to+\infty}\frac{x^2\big(-2+\frac{1}{x^2}\big)}{x^2\big(3+\frac{2}{x}-\frac{5}{x^2}\big)}=-\frac{2}{3}$$</p>
+<p class="eq ris" id="r5" hidden>$$\lim_{x\to+\infty}\frac{1-2x^2}{3x^2+2x-5}=-\frac{2}{3}$$</p>
+</div>
+
+<div class="passi" id="passi5">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> I due gradi sono uguali: raccolgo $x^2$ sopra e sotto.</p>
+<p class="eq">$$\frac{x^2\Big(-2+\frac{1}{x^2}\Big)}{x^2\Big(3+\frac{2}{x}-\frac{5}{x^2}\Big)}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Per $x\neq0$ semplifico $x^2$: l'indeterminazione è sciolta.</p>
+<p class="eq">$$\frac{-2+\frac{1}{x^2}}{3+\frac{2}{x}-\frac{5}{x^2}}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Tutte le frazioni tendono a zero: restano i soli coefficienti direttivi.</p>
+<p class="eq">$$\lim_{x\to+\infty}\frac{-2+\frac{1}{x^2}}{3+\frac{2}{x}-\frac{5}{x^2}}=\frac{-2}{3}$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi5">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi5" hidden>&#8634;</button>
 </div>
 
 <div class="es">
 <p class="eq quesito">$$\lim_{x\to-\infty}\frac{2x-1}{x^3+2x}$$</p>
 <button type="button" class="btn-ris" aria-expanded="false" aria-controls="r6">risultato</button>
-<p class="eq ris" id="r6" hidden>$$\lim_{x\to-\infty}\frac{x\big(2-\frac{1}{x}\big)}{x^3\big(1+\frac{2}{x^2}\big)}
-=\lim_{x\to-\infty}\frac{1}{x^2}\cdot\frac{2}{1}=0$$</p>
+<p class="eq ris" id="r6" hidden>$$\lim_{x\to-\infty}\frac{2x-1}{x^3+2x}=0$$</p>
+</div>
+
+<div class="passi" id="passi6">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Raccolgo $x$ al numeratore e $x^3$ al denominatore.</p>
+<p class="eq">$$\frac{x\Big(2-\frac{1}{x}\Big)}{x^3\Big(1+\frac{2}{x^2}\Big)}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Semplifico: $x:x^3=\dfrac{1}{x^2}$, perché il grado più alto è al denominatore.</p>
+<p class="eq">$$\frac{1}{x^2}\cdot\frac{2-\frac{1}{x}}{1+\frac{2}{x^2}}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> La frazione tende a $2$, mentre $\dfrac{1}{x^2}$ tende a zero: il prodotto tende a zero.</p>
+<p class="eq">$$\lim_{x\to-\infty}\frac{1}{x^2}\cdot 2=0$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi6">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi6" hidden>&#8634;</button>
 </div>
 
 <p>Il grado più alto vince: se è al numeratore il limite è infinito, se i gradi sono uguali resta
 il rapporto dei coefficienti direttivi, se è al denominatore il limite è $0$.</p>
-
-<div class="fig">
-<svg id="g-inf" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="cursore"><label for="c-inf">valore di $x$</label>
-<input id="c-inf" type="range" min="2" max="60" step="0.1" value="2">
-<span class="val" id="v-inf"></span></div>
-<p class="did">Il secondo esempio, $\dfrac{1-2x^2}{3x^2+2x-5}$, disegnato per intero da $x=2$ a
-$x=60$. Il punto rosso percorre la curva al muovere del cursore: accanto compaiono il valore della
-funzione e la sua distanza dalla retta tratteggiata verde $y=-\frac{2}{3}$, il rapporto dei
-coefficienti direttivi. La distanza si assottiglia, ma non si annulla mai.</p>
-</div>
 
 <h2>Forma $\dfrac{0}{0}$</h2>
 
@@ -239,8 +311,31 @@ scompone e si semplifica.</p>
 <div class="es">
 <p class="eq quesito">$$\lim_{x\to3}\frac{x^2-2x-3}{2x^2-9x+9}$$</p>
 <button type="button" class="btn-ris" aria-expanded="false" aria-controls="r7">risultato</button>
-<p class="eq ris" id="r7" hidden>$$\lim_{x\to3}\frac{(x-3)(x+1)}{(x-3)(2x-3)}
-=\lim_{x\to3}\frac{x+1}{2x-3}=\frac{4}{3}$$</p>
+<p class="eq ris" id="r7" hidden>$$\lim_{x\to3}\frac{x^2-2x-3}{2x^2-9x+9}=\frac{4}{3}$$</p>
+</div>
+
+<div class="passi" id="passi7">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Sostituendo $3$ si annullano sia il numeratore sia il denominatore: entrambi hanno la radice $3$.</p>
+<p class="eq">$$3^2-2\cdot3-3=0, \qquad 2\cdot3^2-9\cdot3+9=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Avere la radice $3$ significa contenere il fattore $(x-3)$: scompongo i due trinomi.</p>
+<p class="eq">$$\frac{(x-3)(x+1)}{(x-3)(2x-3)}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Nel limite $x$ tende a $3$ ma resta diverso da $3$: posso semplificare il fattore comune.</p>
+<p class="eq">$$\frac{x+1}{2x-3}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> La funzione ottenuta è continua in $3$, dove il denominatore vale $3\neq0$: basta sostituire.</p>
+<p class="eq">$$\lim_{x\to3}\frac{x+1}{2x-3}=\frac{4}{3}$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi7">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi7" hidden>&#8634;</button>
 </div>
 
 <h2>Forme $0^0,\ \infty^0,\ 1^{\infty}$</h2>
@@ -256,7 +351,31 @@ vista sopra.</p>
 <div class="es">
 <p class="eq quesito">$$\lim_{x\to+\infty}x^{\frac{1}{\ln x}}$$</p>
 <button type="button" class="btn-ris" aria-expanded="false" aria-controls="r8">risultato</button>
-<p class="eq ris" id="r8" hidden>$$\lim_{x\to+\infty}e^{\frac{1}{\ln x}\cdot\ln x}=\lim_{x\to+\infty}e^{1}=e$$</p>
+<p class="eq ris" id="r8" hidden>$$\lim_{x\to+\infty}x^{\frac{1}{\ln x}}=e$$</p>
+</div>
+
+<div class="passi" id="passi8">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> La base è $x\to+\infty$ e l'esponente tende a zero: è la forma $\infty^0$.</p>
+<p class="eq">$$\lim_{x\to+\infty}x=+\infty, \qquad \lim_{x\to+\infty}\frac{1}{\ln x}=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> La base è positiva: la scrivo come potenza di $e$.</p>
+<p class="eq">$$x^{\frac{1}{\ln x}}=\big(e^{\ln x}\big)^{\frac{1}{\ln x}}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Potenza di potenza: gli esponenti si moltiplicano.</p>
+<p class="eq">$$e^{\frac{1}{\ln x}\cdot\ln x}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> Per $x>1$ l'esponente vale esattamente $1$: la funzione è costante, e il limite è quella costante.</p>
+<p class="eq">$$\lim_{x\to+\infty}e^{1}=e$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi8">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi8" hidden>&#8634;</button>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../03-teoremi-sui-limiti-unicita-permanenza-del-segno-confronto/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teoremi sui limiti</span></a><a class="successiva" href="../06-limiti-notevoli/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Limiti notevoli</span></a></nav>
@@ -265,10 +384,10 @@ vista sopra.</p>
 </div>
 <script>
 (function(){
-  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.nota,.def,nav.nav-unita';
   function allinea(){
     var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
-    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    var els=[].slice.call(document.querySelectorAll(sel));
     els.forEach(function(e){e.style.marginTop='';});
     els.forEach(function(e){
       var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
@@ -333,109 +452,6 @@ vista sopra.</p>
     if(re) re.addEventListener('click',function(){mostra(0);});
     mostra(0);
   });
-})();
-</script>
-<script>
-(function(){
-var NS='http://www.w3.org/2000/svg', nid=0;
-function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
-function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
-  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
-function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
-
-function Piano(svg,xr,yr,m){
-  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
-  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
-  var W=this.W,H=this.H;
-  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
-  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
-  this.clip='clip'+(++nid);
-  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
-  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
-  d.appendChild(cp);
-  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
-  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
-  d.appendChild(mk); this.mark='url(#fr'+nid+')';
-  svg.appendChild(d);
-  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
-  this.assiG=el('g',{}); svg.appendChild(this.assiG);
-  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
-  this.testo=el('g',{}); svg.appendChild(this.testo);
-}
-Piano.prototype.assi=function(tx,ty,etx,ety){
-  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
-  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
-  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
-  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
-  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
-  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
-  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
-  (tx||[]).forEach(function(v){
-    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
-    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
-  });
-  (ty||[]).forEach(function(v){
-    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
-    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
-  });
-  return this;
-};
-Piano.prototype.d=function(f,a,b,n){
-  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
-  for(var i=0;i<=n;i++){
-    var x=a+i*(b-a)/n, y=f(x);
-    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
-    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
-  }
-  return s;
-};
-Piano.prototype.curva=function(f,a,b,n,col,w,dash){
-  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
-    'stroke-width':w||2.2,'stroke-linejoin':'round'};
-  if(dash)o['stroke-dasharray']=dash;
-  var p=el('path',o); this.sopra.appendChild(p); return p;
-};
-Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
-
-/* ---------- avvicinamento a y = −2/3 ---------- */
-(function(){
-  var svg=document.getElementById('g-inf'); if(!svg)return;
-  var f=function(x){return (1-2*x*x)/(3*x*x+2*x-5);};
-  var L=-2/3;
-  var P=new Piano(svg,[0,64],[-0.74,-0.54],{l:52,r:22,t:26,b:34});
-  P.assi([10,20,30,40,50,60],[],'x','y');
-  /* segno di interruzione: l'asse y non parte da zero */
-  [0,5].forEach(function(dy){
-    P.assiG.appendChild(el('line',{x1:P.m.l-5,y1:P.H-P.m.b-16-dy,x2:P.m.l+5,y2:P.H-P.m.b-24-dy,
-      stroke:'var(--inchiostro)','stroke-width':1.2}));
-  });
-  P.testo.appendChild(txt(46,P.Y(L)+4,'−2/3',{'text-anchor':'end',fill:'var(--verde)'}));
-  P.testo.appendChild(txt(46,P.Y(-0.60)+4,'−0,60',{'text-anchor':'end'}));
-  P.assiG.appendChild(el('line',{x1:P.m.l-4,y1:P.Y(-0.60),x2:P.m.l+4,y2:P.Y(-0.60),
-    stroke:'var(--inchiostro)','stroke-width':1}));
-  /* retta del valore del limite */
-  P.add(el('line',{x1:P.m.l,y1:P.Y(L),x2:P.W-P.m.r,y2:P.Y(L),stroke:'var(--verde)',
-    'stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
-  /* curva intera */
-  P.curva(f,2,60,600,'var(--blu)',2.2);
-  /* segmento della distanza e punto mobile */
-  var seg=P.add(el('line',{x1:0,y1:0,x2:0,y2:0,stroke:'var(--rosso)','stroke-width':1.2,
-    'stroke-dasharray':'3,3'}));
-  var pt=P.add(el('circle',{r:4.5,fill:'var(--rosso)'}));
-  var et=txt(P.W-P.m.r,P.m.t-8,'',{'text-anchor':'end',fill:'var(--rosso)','font-size':13});
-  P.testo.appendChild(et);
-  var inp=document.getElementById('c-inf'), val=document.getElementById('v-inf');
-  function agg(){
-    var x=parseFloat(inp.value), y=f(x);
-    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
-    seg.setAttribute('x1',P.X(x)); seg.setAttribute('y1',P.Y(y));
-    seg.setAttribute('x2',P.X(x)); seg.setAttribute('y2',P.Y(L));
-    et.textContent='f(x) = '+num(y,4)+'   distanza da −2/3: '+num(Math.abs(y-L),4);
-    val.textContent='x = '+num(x,1);
-  }
-  inp.addEventListener('input',agg); agg();
-})();
-
 })();
 </script>
 </body>
