@@ -134,3 +134,8 @@
   due valori estremi. Un solo riquadro di attenzione, sull'errore tipico di calcolare la
   semidispersione «su tutte le misure». Nessuno strumento interattivo. Come da note della
   classe, nessuna ricerca su tracce d'esame.
+
+## Unità 19 — Compatibilità fra misura e valore teorico
+- Parole: 332 su 2 pagine di traccia
+- Rettifica: nessuna. I dati della traccia sono corretti: 7,97 − 0,07 = 7,90 e 7,97 + 0,07 = 8,04, e il valore teorico 8,02 g/cm³ cade dentro l'intervallo (verificato con SymPy).
+- Aggiunta: nessuna. Unico esempio quello della traccia (densità dell'acciaio inox); il secondo disegno riprende lo schema compatibili / non compatibili già presente a pagina 28.
