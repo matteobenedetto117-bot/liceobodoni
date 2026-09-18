@@ -65,3 +65,14 @@
 - Parole: 373 di prosa (468 contando anche i token delle formule) su circa 1,5 pagine effettive di traccia. Il JSON indica 16–20 del PDF, ma su quelle pagine il materiale è interlacciato con quello dell'unità 12: l'unità 13 occupa la seconda metà di pag. 17 (titolo «Alcune grandezze derivate», poi «Area»: A = ℓ·ℓ, [A] = m·m = m², disegno del rettangolo con b e h, esempio b = 3,71 m, h = 1,02741 m), la parte centrale di pag. 18 («Volume»: V = ℓ·ℓ·ℓ, [V] = m³, disegno del parallelepipedo con spigoli a, b, c, esempio 7,2 · 7,2 · 4,18) e la parte alta di pag. 20 («Densità»: d = m/V, [d] = kg/m³, esempio m = 174 kg, V = 1,6 m³). Da pag. 20 a metà comincia «Equivalenze di grandezze derivate», unità 14. Inventario: tre definizioni con la relativa unità di misura, due disegni, tre esempi numerici, nessuna dimostrazione.
 - Rettifica: nell'esempio dell'area la traccia scrive «= 3,8116711 m²». Il prodotto esatto, verificato con SymPy, è 3,71 · 1,02741 = 3,8116911 m²: la quinta cifra decimale è 9, non 7. Nella pagina è scritto 3,8116911 m². L'arrotondamento a tre cifre significative non cambia, resta 3,81 m², quindi la conclusione della traccia è corretta e la correzione non è segnalata al lettore. Verificati con SymPy anche gli altri due conti: 7,2 · 7,2 · 4,18 = 216,6912 m³ → 220 m³ (2 c.s., il fattore più povero è 7,2); 174 / 1,6 = 108,75 kg/m³ → 110 kg/m³ (2 c.s., il divisore ha due cifre).
 - Aggiunta: nessun esempio nuovo, sono i tre della traccia. Gli unici elementi non presenti alla lettera sono: le tre frasi di apertura che dicono che cosa distingue una grandezza derivata da una fondamentale e che cosa significa la notazione [·], che nella traccia è usata senza essere spiegata; la frase che introduce la densità dicendo che è ciò che distingue due blocchi uguali di materiali diversi; il riquadro «Attenzione all'unità» sul fatto che l'unità si ricava e non si sceglie. I due disegni SVG sono la resa pulita dello schizzo del rettangolo e del cubo già presenti sulla traccia. Nessuna tabella riassuntiva, nessuno strumento interattivo.
+
+## Unità 14 — Equivalenze di grandezze derivate
+- Parole: 380 su 1,3 pagine di traccia (fine p. 20 e p. 21)
+- Rettifica: a pagina 21, nel secondo passaggio della conversione del volume, il dato è
+  riscritto come 3,12·10⁻⁶ cm³ mentre la riga precedente e il risultato finale dicono
+  3,12·10⁻⁸ cm³. Nella pagina l'esponente è −8 in tutti i passaggi; il risultato
+  3,12·10⁻¹⁴ m³ della traccia è corretto ed è stato mantenuto.
+- Aggiunta: nessuna. Gli esempi sono i quattro della traccia (area, volume, velocità,
+  densità); l'unico elemento non presente nel quaderno è il disegno del metro quadro
+  suddiviso in millimetri quadrati, aggiunto perché il punto dell'unità — il fattore che
+  agisce due volte — non ha nella traccia alcun supporto visivo.
