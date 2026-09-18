@@ -57,14 +57,20 @@ teorema del confronto, a pagina 21.
   algebra dei limiti (somma 2+7=9, prodotto 3·2=6, potenza (−1)²=1).
 - Aggiunta: nulla di contenuto nuovo. Resta la rietichettatura con $n$ dell'esponente costante
   nella regola della potenza, per evitare la collisione col simbolo $m$ già usato per $\lim g(x)$.
-- Figure: sostituito il widget Plotly con SVG disegnati da uno script interno. Tre figure: i due
-  pannelli della sostituzione ($2^x$ in 4, dove il limite si legge sostituendo, e $\sqrt{x}$, dove
-  il punto si ferma in 0 e a sinistra non c'è funzione), la galleria delle quattro funzioni
-  elementari con limite infinito, e le curve $f$, $g$ e $f+g$ dell'algebra dei limiti.
-- Animazioni: il pulsante ▶ fa scorrere il punto lungo tutta la curva disegnata, ↺ lo riporta
-  all'inizio. Nella sostituzione i due pannelli condividono la stessa $x$ e il pannello della
-  radice scrive "y non definita" finché $x<0$; nell'algebra scorrono insieme i valori di $f$, $g$,
-  $f+g$, $f\cdot g$ e $f/g$.
+- Esercizi a risultato nascosto: i quattro limiti per sostituzione e gli otto limiti infiniti
+  compaiono come soli quesiti, ciascuno con un tasto "risultato" che scopre la soluzione; un tasto
+  a inizio pagina mostra o nasconde tutti e dodici i risultati insieme. Nessun risultato è visibile
+  all'apertura della pagina.
+- Figure: tolto il disegno che stava sotto i primi limiti per sostituzione e tolta la galleria
+  delle funzioni elementari. Gli otto limiti infiniti sono ora su righe successive, ognuna con il
+  grafico della propria funzione a fianco: il tratto rosso segna la parte di curva che si percorre
+  mentre $x$ va dove chiede il limite, così il risultato si legge guardando dove finisce. Le due
+  righe del logaritmo usano lo stesso grafico con il tratto rosso in punti diversi. Resta la figura
+  delle curve $f$, $g$ e $f+g$ dell'algebra dei limiti, disegnata in SVG interno al posto del
+  widget Plotly.
+- Animazioni: nella figura dell'algebra il pulsante ▶ fa scorrere il punto lungo tutta la curva
+  disegnata e ↺ lo riporta all'inizio, mentre scorrono insieme i valori di $f$, $g$, $f+g$,
+  $f\cdot g$ e $f/g$.
 
 ## Unità 03 — Teoremi sui limiti
 - Parole: circa 500 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di

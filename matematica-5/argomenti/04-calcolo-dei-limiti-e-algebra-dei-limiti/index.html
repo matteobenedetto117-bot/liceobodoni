@@ -55,6 +55,28 @@ h1{position:relative;top:.5rem}
 .did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
 .did-parti .did{margin:0}
 @media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.es-fig{display:grid;grid-template-columns:1fr 250px;gap:0 18px;align-items:center;margin-top:var(--r)}
+.es-fig .es{margin-top:0}
+.es-fig svg{width:250px;height:auto;background:#fff;border:1px solid var(--riga);border-radius:10px}
+@media(max-width:700px){.es-fig{grid-template-columns:1fr}.es-fig svg{width:100%}}
 </style>
 </head>
 <body>
@@ -70,6 +92,10 @@ h1{position:relative;top:.5rem}
 più rapido per calcolarlo. Le funzioni elementari offrono una scorciatoia immediata, e poche regole
 insegnano a combinare fra loro limiti già noti.</p>
 
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button>
+</div>
+
 <h2>Sostituzione nelle funzioni continue</h2>
 
 <p>Per le funzioni elementari — potenze, radici, esponenziali, logaritmi, funzioni goniometriche —
@@ -83,23 +109,30 @@ ora basta la conseguenza pratica: calcolare il limite si riduce a sostituire.</p
 <p class="eq">$$\lim_{x\to x_0}f(x)=f(x_0)$$</p>
 </div>
 
-<p class="eq">$$\lim_{x\to -2}x^3=(-2)^3=-8 \qquad\qquad \lim_{x\to -1}\sqrt[3]{x}=\sqrt[3]{-1}=-1$$</p>
-
-<p class="eq">$$\lim_{x\to 4}2^x=2^4=16 \qquad\qquad \lim_{x\to \pi}\cos x=\cos\pi=-1$$</p>
-
-<div class="fig">
-<svg id="g-sost" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="cursore"><button type="button" class="btn-anim" id="b-sost" aria-label="Avvia">&#9654;</button>
-<label for="c-sost">punto $x$</label>
-<input id="c-sost" type="range" min="0" max="1" step="0.002" value="0">
-<span class="val" id="v-sost"></span></div>
-<div class="did-parti" style="--n:2">
-<p class="did">Su $y=2^x$ il punto può arrivare a 4 da entrambe le parti e la quota si avvicina a
-$2^4=16$: il limite si legge sostituendo.</p>
-<p class="did">Su $y=\sqrt{x}$ il punto si ferma in 0: a sinistra la funzione non esiste, e in $-1$
-non c'è nulla a cui avvicinarsi.</p>
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to -2}x^3$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="rs0">risultato</button>
+<p class="eq ris" id="rs0" hidden>$$\lim_{x\to -2}x^3=(-2)^3=-8$$</p>
 </div>
+
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to -1}\sqrt[3]{x}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="rs1">risultato</button>
+<p class="eq ris" id="rs1" hidden>$$\lim_{x\to -1}\sqrt[3]{x}=\sqrt[3]{-1}=-1$$</p>
 </div>
+
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to 4}2^x$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="rs2">risultato</button>
+<p class="eq ris" id="rs2" hidden>$$\lim_{x\to 4}2^x=2^4=16$$</p>
+</div>
+
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to \pi}\cos x$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="rs3">risultato</button>
+<p class="eq ris" id="rs3" hidden>$$\lim_{x\to \pi}\cos x=\cos\pi=-1$$</p>
+</div>
+
 
 <div class="nota">
 <span class="et">Attenzione</span>
@@ -111,25 +144,82 @@ si applica solo se $x_0$ appartiene al dominio di $f$, o ne è punto di accumula
 <h2>Limiti infiniti delle funzioni elementari</h2>
 
 <p>La stessa sostituzione vale quando il risultato è infinito, o quando è $x$ a tendere
-all'infinito: bastano i comportamenti noti delle funzioni elementari.</p>
+all'infinito: bastano i comportamenti noti delle funzioni elementari. In ogni riga il tratto rosso
+del grafico è la parte di curva che si percorre mentre $x$ va dove chiede il limite: basta guardare
+dove finisce per leggere il risultato.</p>
 
-<p class="eq">$$\lim_{x\to+\infty}x^4=+\infty \qquad\qquad \lim_{x\to+\infty}e^{-x}=0$$</p>
-
-<p class="eq">$$\lim_{x\to-\infty}x^2=+\infty \qquad\qquad \lim_{x\to 0}\frac{1}{x^2}=+\infty$$</p>
-
-<p class="eq">$$\lim_{x\to-\infty}\frac{4}{x}=0 \qquad\qquad \lim_{x\to 0}\left(-\frac{2}{x^2}\right)=-\infty$$</p>
-
-<p class="eq">$$\lim_{x\to 0^{+}}\ln x=-\infty \qquad\qquad \lim_{x\to+\infty}\ln x=+\infty$$</p>
-
-<div class="fig">
-<svg id="gal-el" viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="did-parti" style="--n:4">
-<p class="did">$x^4$: cresce oltre ogni soglia da entrambe le parti.</p>
-<p class="did">$e^{-x}$: si appiattisce su 0 verso destra.</p>
-<p class="did">$\dfrac{1}{x^2}$: esplode a $+\infty$ avvicinandosi a 0.</p>
-<p class="did">$\ln x$: sprofonda a $-\infty$ verso $0^{+}$.</p>
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to+\infty}x^4$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri0">risultato</button>
+<p class="eq ris" id="ri0" hidden>$$\lim_{x\to+\infty}x^4=+\infty$$</p>
 </div>
+<svg id="mini0" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
+
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to+\infty}e^{-x}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri1">risultato</button>
+<p class="eq ris" id="ri1" hidden>$$\lim_{x\to+\infty}e^{-x}=0$$</p>
+</div>
+<svg id="mini1" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to-\infty}x^2$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri2">risultato</button>
+<p class="eq ris" id="ri2" hidden>$$\lim_{x\to-\infty}x^2=+\infty$$</p>
+</div>
+<svg id="mini2" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to 0}\frac{1}{x^2}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri3">risultato</button>
+<p class="eq ris" id="ri3" hidden>$$\lim_{x\to 0}\frac{1}{x^2}=+\infty$$</p>
+</div>
+<svg id="mini3" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to-\infty}\frac{4}{x}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri4">risultato</button>
+<p class="eq ris" id="ri4" hidden>$$\lim_{x\to-\infty}\frac{4}{x}=0$$</p>
+</div>
+<svg id="mini4" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to 0}\left(-\frac{2}{x^2}\right)$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri5">risultato</button>
+<p class="eq ris" id="ri5" hidden>$$\lim_{x\to 0}\left(-\frac{2}{x^2}\right)=-\infty$$</p>
+</div>
+<svg id="mini5" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to 0^{+}}\ln x$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri6">risultato</button>
+<p class="eq ris" id="ri6" hidden>$$\lim_{x\to 0^{+}}\ln x=-\infty$$</p>
+</div>
+<svg id="mini6" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div class="es-fig">
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to+\infty}\ln x$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="ri7">risultato</button>
+<p class="eq ris" id="ri7" hidden>$$\lim_{x\to+\infty}\ln x=+\infty$$</p>
+</div>
+<svg id="mini7" viewBox="0 0 250 155" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
 
 <h2>Algebra dei limiti</h2>
 
@@ -198,6 +288,38 @@ $2+7=9$ per la somma, $2\cdot7=14$ per il prodotto, $2/7$ per il quoziente.</p>
   window.allineaQuaderno=allinea;
   window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
 })();
 </script>
 <script>
@@ -282,67 +404,29 @@ function anima(btn,inp,dur,dopo){
 }
 
 
-/* ---------- 1. sostituzione: 2^x e radice di x ---------- */
-(function(){
-  var svg=document.getElementById('g-sost'); if(!svg)return;
-  var punti=[];
-  var casi=[
-    {f:function(x){return Math.pow(2,x);}, xr:[-2.2,5.2], yr:[-2,20], x0:4,
-     tx:[-2,-1,1,2,3,4,5], ty:[5,10,16], eti:'2ˣ', dom:[-2.2,5.2], val:16},
-    {f:function(x){return Math.sqrt(x);},  xr:[-2.2,5.2], yr:[-0.8,3], x0:-1,
-     tx:[-2,-1,1,2,3,4,5], ty:[1,2], eti:'√x', dom:[0,5.2], val:null}
-  ];
-  casi.forEach(function(c,i){
-    var g=el('g',{transform:'translate('+(i*280)+',0)'}); svg.appendChild(g);
-    var sub=el('svg',{viewBox:'0 0 280 300',width:280,height:300}); g.appendChild(sub);
-    var P=new Piano(sub,c.xr,c.yr,{l:26,r:16,t:20,b:26});
-    P.assi(c.tx,c.ty);
-    P.add(el('line',{x1:P.X(c.x0),y1:P.m.t,x2:P.X(c.x0),y2:P.H-P.m.b,
-      stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'5,4'}),'sotto');
-    if(c.val!==null){
-      P.add(el('line',{x1:P.X(0),y1:P.Y(c.val),x2:P.W-P.m.r,y2:P.Y(c.val),
-        stroke:'var(--verde)','stroke-width':1,'stroke-dasharray':'5,4'}),'sotto');
-    } else {
-      P.add(txt(P.m.l+2,P.H-P.m.b-8,'qui la funzione non esiste',{fill:'var(--rosso)','font-size':11}),'testo');
-    }
-    P.curva(c.f,c.dom[0],c.dom[1],300,null,2.2);
-    if(i===1)P.add(el('circle',{cx:P.X(0),cy:P.Y(0),r:4.5,fill:'var(--inchiostro)'}));
-    P.add(txt(P.W-P.m.r-2,P.m.t+12,c.eti,{'text-anchor':'end',fill:'var(--inchiostro)','font-size':13}),'testo');
-    punti.push({P:P,c:c,pt:P.add(el('circle',{r:5.5,fill:'var(--rosso)'})),
-      st:P.add(txt(P.m.l+2,P.H-P.m.b+20,'',{'font-size':12}),'testo')});
-  });
-  var c=document.getElementById('c-sost'), v=document.getElementById('v-sost');
-  function agg(){
-    var x=-2.2+parseFloat(c.value)*7.4;
-    punti.forEach(function(o){
-      var vale=x>=o.c.dom[0], y=o.c.f(x);
-      o.pt.setAttribute('opacity',vale?1:0);
-      if(vale){o.pt.setAttribute('cx',o.P.X(x)); o.pt.setAttribute('cy',o.P.Y(y));}
-      o.st.textContent=vale?('x = '+num(x,2)+'  ·  y = '+num(y,2))
-                           :('x = '+num(x,2)+'  ·  y non definita');
-      o.st.setAttribute('fill',vale?'var(--grigio)':'var(--rosso)');
-    });
-    v.textContent='x = '+num(x,2);
-  }
-  c.addEventListener('input',agg); anima(document.getElementById('b-sost'),c,6000); agg();
-})();
 
-/* ---------- 2. galleria delle funzioni elementari ---------- */
+/* ---------- grafici a lato dei limiti infiniti ---------- */
 (function(){
-  var svg=document.getElementById('gal-el'); if(!svg)return;
   var casi=[
-    {f:function(x){return Math.pow(x,4);}, xr:[-2.2,2.2], yr:[-3,20], d:[-2.2,2.2]},
-    {f:function(x){return Math.exp(-x);},  xr:[-1.6,4.2], yr:[-1,5],  d:[-1.6,4.2]},
-    {f:function(x){return 1/(x*x);},       xr:[-2.2,2.2], yr:[-2,10], d:null},
-    {f:function(x){return Math.log(x);},   xr:[-0.6,5.2], yr:[-4,2],  d:[0.012,5.2]}
+    {f:function(x){return Math.pow(x,4);},xr:[-2.4,2.4],yr:[-3,20],rami:[[-2.4,2.4]],ev:[[1.25,2.4]]},
+    {f:function(x){return Math.exp(-x);},xr:[-1.6,4.6],yr:[-1.2,6],rami:[[-1.6,4.6]],ev:[[2.2,4.6]]},
+    {f:function(x){return x*x;},xr:[-3.2,3.2],yr:[-1.6,9],rami:[[-3.2,3.2]],ev:[[-3.2,-1.7]]},
+    {f:function(x){return 1/(x*x);},xr:[-2.4,2.4],yr:[-2,12],rami:[[-2.4,-0.28],[0.28,2.4]],ev:[[-0.75,-0.29],[0.29,0.75]]},
+    {f:function(x){return 4/x;},xr:[-6,6],yr:[-6,6],rami:[[-6,-0.66],[0.66,6]],ev:[[-6,-3]]},
+    {f:function(x){return -2/(x*x);},xr:[-2.4,2.4],yr:[-12,2],rami:[[-2.4,-0.4],[0.4,2.4]],ev:[[-1.05,-0.41],[0.41,1.05]]},
+    {f:function(x){return Math.log(x);},xr:[-0.6,5.2],yr:[-4,2],rami:[[0.013,5.2]],ev:[[0.013,0.45]]},
+    {f:function(x){return Math.log(x);},xr:[-0.6,5.2],yr:[-4,2],rami:[[0.013,5.2]],ev:[[2.6,5.2]]}
   ];
   casi.forEach(function(c,i){
-    var g=el('g',{transform:'translate('+(i*140)+',0)'}); svg.appendChild(g);
-    var sub=el('svg',{viewBox:'0 0 140 190',width:140,height:190}); g.appendChild(sub);
-    var P=new Piano(sub,c.xr,c.yr,{l:12,r:10,t:12,b:12});
+    var svg=document.getElementById('mini'+i); if(!svg)return;
+    var P=new Piano(svg,c.xr,c.yr,{l:14,r:12,t:12,b:12});
     P.assi([],[],'','');
-    if(c.d)P.curva(c.f,c.d[0],c.d[1],260,null,2);
-    else {P.curva(c.f,-2.2,-0.02,200,null,2);P.curva(c.f,0.02,2.2,200,null,2);}
+    if(c.q!==undefined){
+      P.add(el('line',{x1:P.m.l,y1:P.Y(c.q),x2:P.W-P.m.r,y2:P.Y(c.q),
+        stroke:'var(--verde)','stroke-width':1,'stroke-dasharray':'4,3'}),'sotto');
+    }
+    c.rami.forEach(function(r){P.curva(c.f,r[0],r[1],220,null,1.8);});
+    c.ev.forEach(function(r){P.curva(c.f,r[0],r[1],160,'var(--rosso)',3);});
   });
 })();
 
