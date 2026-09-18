@@ -3,28 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Teoremi sui limiti: unicità, permanenza del segno, confronto — Matematica quinta</title>
+<title>Teoremi sui limiti — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:22px 0}
-.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
-.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(320px,55%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -33,12 +61,12 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Limiti &middot; Unità 02</p>
-  <h1>Teoremi sui limiti: unicità, permanenza del segno, confronto</h1>
-  <p class="sommario">Tre proprietà generali che ogni limite, quando esiste, deve rispettare: essere
-  unico, ereditare il segno del valore a cui tende, e restare intrappolato fra due funzioni che
-  vanno nello stesso posto. Sono gli strumenti a cui i quesiti teorici d'esame fanno ricorso più
-  spesso.</p>
+  <h1>Teoremi sui limiti</h1>
 </header>
+
+<p>Tre proprietà generali che ogni limite, quando esiste, deve rispettare: essere unico, ereditare
+il segno del valore a cui tende, e restare intrappolato fra due funzioni che vanno nello stesso
+posto.</p>
 
 <h2>Teorema di unicità del limite</h2>
 
@@ -52,10 +80,15 @@ teorema si vede all'opera ogni volta che si confrontano limite destro e limite s
 diversi, il limite bilatero in quel punto non esiste, perché non ci sarebbe un unico valore a cui
 la funzione tende.</p>
 
-<div class="galleria">
-  <figure><div id="gal-u" style="height:190px"></div>
-    <figcaption>$\lim\limits_{x\to 2^{-}}f(x)=1$, $\lim\limits_{x\to 2^{+}}f(x)=-\dfrac32$: i due
-    valori non coincidono, quindi $\lim\limits_{x\to2}f(x)$ non esiste.</figcaption></figure>
+<div class="fig">
+<svg id="g-unic" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-unic" aria-label="Avvia">&#9654;</button>
+<label for="c-unic">punto $x$</label>
+<input id="c-unic" type="range" min="0" max="1" step="0.002" value="0">
+<span class="val" id="v-unic"></span></div>
+<p class="did">Avvicinandosi a 2 da sinistra la quota del punto sale verso 1, ripartendo da destra
+parte da $-\tfrac32$: i due valori non coincidono, quindi $\lim\limits_{x\to2}f(x)$ non esiste. Se
+esistesse, il teorema di unicità obbligherebbe i due rami ad arrivare allo stesso numero.</p>
 </div>
 
 <h2>Teorema della permanenza del segno</h2>
@@ -71,11 +104,18 @@ negativi.</p>
 per sapere che, vicino a $x_0$, ha lo stesso segno di $\ell$. L'intorno può essere piccolo quanto si
 vuole, ma esiste sempre.</p>
 
-<div class="galleria">
-  <figure><div id="gal-p" style="height:180px"></div>
-    <figcaption>$f(x)$ ed $\ell$ entrambi positivi</figcaption></figure>
-  <figure><div id="gal-n" style="height:180px"></div>
-    <figcaption>$f(x)$ ed $\ell$ entrambi negativi</figcaption></figure>
+<div class="fig">
+<svg id="g-segno" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-segno" aria-label="Avvia">&#9654;</button>
+<label for="c-segno">punto $x$</label>
+<input id="c-segno" type="range" min="0" max="1" step="0.002" value="0">
+<span class="val" id="v-segno"></span></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Con $\ell&gt;0$ il punto resta sopra l'asse per tutta la fascia azzurra attorno a
+$x_0$, e diventa negativo solo uscendone.</p>
+<p class="did">Con $\ell&lt;0$ accade il contrario: dentro la fascia la funzione è negativa come il
+suo limite.</p>
+</div>
 </div>
 
 <h2>Teorema del confronto</h2>
@@ -84,11 +124,11 @@ vuole, ma esiste sempre.</p>
 <span class="et">Teorema &middot; detto anche "dei due carabinieri"</span>
 <p>Siano $h(x)$, $f(x)$, $g(x)$ tre funzioni definite in uno stesso intorno $H$ di $x_0$, escluso al
 più il punto $x_0$. Se in ogni punto di $H$ (tranne eventualmente $x_0$) risulta</p>
-$$h(x)\le f(x)\le g(x)$$
+<p class="eq">$$h(x)\le f(x)\le g(x)$$</p>
 <p>e risulta inoltre che</p>
-$$\lim_{x\to x_0}h(x)=\ell \qquad \lim_{x\to x_0}g(x)=\ell$$
+<p class="eq">$$\lim_{x\to x_0}h(x)=\ell \qquad \lim_{x\to x_0}g(x)=\ell$$</p>
 <p>allora sicuramente</p>
-$$\lim_{x\to x_0}f(x)=\ell$$
+<p class="eq">$$\lim_{x\to x_0}f(x)=\ell$$</p>
 </div>
 
 <p>Il nome informale rende l'idea: $f$ è scortata da $h$ e $g$, che convergono allo stesso valore
@@ -101,94 +141,235 @@ in tre varianti che chiedono un solo confronto invece di due:</p>
 <li>se $f(x)\le g(x)$ e $\lim g(x)=-\infty$, allora $\lim f(x)=-\infty$.</li>
 </ul>
 
+<h2>Esempio</h2>
+
 <p>Calcoliamo $\displaystyle\lim_{x\to+\infty}\frac{3+\cos x}{x}$. Poiché $-1\le\cos x\le1$,
 aggiungendo 3 a ogni membro si ottiene $2\le\cos x+3\le4$; dividendo per $x$, positivo perché
 $x\to+\infty$, il verso delle disuguaglianze non cambia:</p>
 
-$$\frac{2}{x}\le\frac{3+\cos x}{x}\le\frac{4}{x}$$
+<p class="eq">$$\frac{2}{x}\le\frac{3+\cos x}{x}\le\frac{4}{x}$$</p>
 
 <p>Le due funzioni ai lati tendono entrambe a 0 per $x\to+\infty$, quindi per il teorema del
 confronto</p>
 
-$$\lim_{x\to+\infty}\frac{3+\cos x}{x}=0$$
+<p class="eq">$$\lim_{x\to+\infty}\frac{3+\cos x}{x}=0$$</p>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Punto osservato $x=M$
-      <input type="range" id="s-x0" min="1" max="24" step="0.5" value="1.5">
-      <span><span class="val" id="v-x0"></span></span>
-    </label>
-  </div>
-  <div id="g-confronto" style="height:340px"></div>
-  <p class="leggenda">Le due curve tratteggiate sono $2/x$ e $4/x$: al crescere di $x$ si stringono
-  attorno a 0, e la curva $(3+\cos x)/x$, intrappolata fra loro, è costretta a fare lo stesso.</p>
+<div class="fig">
+<svg id="g-conf" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-conf" aria-label="Avvia">&#9654;</button>
+<label for="c-conf">punto $x$</label>
+<input id="c-conf" type="range" min="0" max="1" step="0.002" value="0.04">
+<span class="val" id="v-conf"></span></div>
+<p class="did">Le due curve tratteggiate sono $2/x$ e $4/x$: al crescere di $x$ si stringono
+attorno a 0, e la curva $(3+\cos x)/x$, intrappolata fra loro, è costretta a fare lo stesso. I tre
+numeri a destra sono le tre quote nel punto scelto: la distanza fra la prima e l'ultima si
+assottiglia mentre il punto avanza.</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../01-definizioni-di-limite-intorni-limite-destro-e-sinistro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il concetto di limite</span></a><a class="successiva" href="../04-calcolo-dei-limiti-e-algebra-dei-limiti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Calcolo dei limiti e algebra dei limiti</span></a></nav>
 <footer><p>Matematica quinta &middot; Limiti &middot; Unità 02</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var base={margin:{l:24,r:10,t:8,b:22},showlegend:false,
-    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
-  function mini(id,tracce,shapes,xr,yr){
-    Plotly.newPlot(id,tracce,Object.assign({},base,{
-      xaxis:{range:xr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
-      yaxis:{range:yr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
-      shapes:shapes}),{displayModeBar:false,responsive:true,staticPlot:true});
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.avanti ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  function ramo(f,a,b,n){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n,w=f(v);
-    if(isFinite(w)&&Math.abs(w)<1e4){x.push(v);y.push(w);}}return {x:x,y:y,mode:'lines',
-    line:{color:'#16283d',width:2.2},hoverinfo:'skip'};}
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
 
-  // unicità: salto in x=2, sinistro 1, destro -1.5
-  mini('gal-u',[
-      ramo(function(x){return 1-0.3*Math.pow(2-x,2);},-0.5,2,150),
-      ramo(function(x){return -1.5+0.5*Math.log(x-1.6);},2.05,4.5,150)
-    ],
-    [{type:'circle',x0:1.95,x1:2.05,y0:0.93,y1:1.07,line:{color:'#16283d',width:2},fillcolor:'#16283d'},
-     {type:'circle',x0:1.95,x1:2.05,y0:-1.57,y1:-1.43,line:{color:'#16283d',width:2},fillcolor:'#f7f5ef'}],
-    [-0.5,4.5],[-2,2]);
-
-  // permanenza del segno: l positivo / l negativo
-  mini('gal-p',[ramo(function(x){return 0.3+0.6*Math.tanh(x);},-3,3,200)],
-    [{type:'line',x0:-3,x1:3,y0:0.9,y1:0.9,line:{color:'#b3392f',width:1,dash:'dot'}}],
-    [-3,3],[-1,1.4]);
-  mini('gal-n',[ramo(function(x){return -0.3-0.6*Math.tanh(x);},-3,3,200)],
-    [{type:'line',x0:-3,x1:3,y0:-0.9,y1:-0.9,line:{color:'#2f6b4f',width:1,dash:'dot'}}],
-    [-3,3],[-1.4,1]);
-
-  // teorema del confronto
-  function curva(f,a,b,n,color,dash){
-    var x=[],y=[];
-    for(var i=0;i<=n;i++){var v=a+i*(b-a)/n; x.push(v); y.push(f(v));}
-    return {x:x,y:y,mode:'lines',line:{color:color,width:dash?1.6:2.4,dash:dash||'solid'},hoverinfo:'skip'};
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
   }
-  var xMin=0.6, xMax=26;
-  var basso=curva(function(x){return 2/x;},xMin,xMax,320,'#8a1f18','dash');
-  var alto =curva(function(x){return 4/x;},xMin,xMax,320,'#8a1f18','dash');
-  var fCur =curva(function(x){return (3+Math.cos(x))/x;},xMin,xMax,500,'#1c3f66','solid');
-  var slider=document.getElementById('s-x0'), val=document.getElementById('v-x0');
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+
+function anima(btn,inp,dur,dopo){
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var v0=inp.value, stato='fermo', raf=null;
+  function ev(){inp.dispatchEvent(new Event('input',{bubbles:true}));}
+  btn.addEventListener('click',function(){
+    if(stato==='fine'){cancelAnimationFrame(raf);inp.value=v0;ev();stato='fermo';
+      btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');return;}
+    if(stato!=='fermo')return;
+    var a=parseFloat(inp.min), b=parseFloat(inp.max), t0=null;
+    stato='corsa'; btn.disabled=true;
+    function fine(){stato='fine';btn.disabled=false;btn.innerHTML='&#8634;';
+      btn.setAttribute('aria-label','Ricomincia');if(dopo)dopo();}
+    if(ridotto){inp.value=b;ev();fine();return;}
+    (function passo(t){if(t0===null)t0=t;var u=Math.min((t-t0)/dur,1);
+      inp.value=a+(b-a)*u;ev();
+      if(u>=1)fine(); else raf=requestAnimationFrame(passo);})(performance.now());
+  });
+}
+
+/* ---------- 1. unicità: salto in x = 2 ---------- */
+(function(){
+  var svg=document.getElementById('g-unic'); if(!svg)return;
+  var P=new Piano(svg,[-0.6,4.6],[-2.4,2.2],{l:42,r:26,t:18,b:34});
+  var fs=function(x){return 1-0.3*Math.pow(2-x,2);}, fd=function(x){return -1.5+1.2*Math.sqrt(x-2);};
+  P.assi([-0,1,2,3,4],[-2,-1,1,2]);
+  P.add(el('line',{x1:P.X(2),y1:P.m.t,x2:P.X(2),y2:P.H-P.m.b,stroke:'var(--riga)','stroke-width':1.4}),'sotto');
+  [[1,'var(--verde)'],[-1.5,'var(--rosso)']].forEach(function(q){
+    P.add(el('line',{x1:P.m.l,y1:P.Y(q[0]),x2:P.W-P.m.r,y2:P.Y(q[0]),stroke:q[1],
+      'stroke-width':1,'stroke-dasharray':'5,4'}),'sotto');
+  });
+  P.curva(fs,-0.6,2,220); P.curva(fd,2,4.6,220);
+  P.add(el('circle',{cx:P.X(2),cy:P.Y(1),r:5,fill:'var(--inchiostro)'}));
+  P.add(el('circle',{cx:P.X(2),cy:P.Y(-1.5),r:5,fill:'var(--carta)',stroke:'var(--inchiostro)','stroke-width':2}));
+  P.add(txt(P.W-P.m.r-4,P.Y(1)-6,'limite sinistro: 1',{fill:'var(--verde)','text-anchor':'end'}),'testo');
+  P.add(txt(P.W-P.m.r-4,P.Y(-1.5)+16,'limite destro: −3/2',{fill:'var(--rosso)','text-anchor':'end'}),'testo');
+  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
+  var st=P.add(txt(P.W-P.m.r-4,P.m.t+14,'',{'text-anchor':'end','font-size':13,fill:'var(--grigio)'}),'testo');
+  var c=document.getElementById('c-unic'), v=document.getElementById('v-unic');
   function agg(){
-    var M=parseFloat(slider.value);
-    val.textContent='M = '+M.toFixed(1).replace('.',',');
-    var marker={x:[M,M,M],y:[2/M,(3+Math.cos(M))/M,4/M],mode:'markers',
-      marker:{size:9,color:['#8a1f18','#1c3f66','#8a1f18']},
-      text:['2/x = '+(2/M).toFixed(3),'(3+cos x)/x = '+((3+Math.cos(M))/M).toFixed(3),
-            '4/x = '+(4/M).toFixed(3)],
-      hovertemplate:'%{text}<extra></extra>'};
-    Plotly.react('g-confronto',[basso,alto,fCur,marker],{
-      margin:{l:44,r:14,t:10,b:34},showlegend:false,
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[xMin,xMax],zeroline:true,zerolinecolor:'#16283d',gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[-0.3,5.2],zeroline:true,zerolinecolor:'#16283d',gridcolor:'#e6e0d4'},
-      shapes:[{type:'line',x0:M,x1:M,y0:-0.3,y1:5.2,line:{color:'#4a5a6d',width:1,dash:'dot'}}]
-    },{displayModeBar:false,responsive:true});
+    var u=parseFloat(c.value), x, y;
+    if(u<0.5){x=-0.6+(u/0.5)*2.6-1e-4;y=fs(x);} else {x=2+((u-0.5)/0.5)*2.6+1e-4;y=fd(x);}
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    st.textContent='x = '+num(x,2)+'  ·  f(x) = '+num(y,2);
+    v.textContent='x = '+num(x,2);
   }
-  slider.addEventListener('input',agg); agg();
+  c.addEventListener('input',agg); anima(document.getElementById('b-unic'),c,6000); agg();
+})();
+
+/* ---------- 2. permanenza del segno ---------- */
+(function(){
+  var svg=document.getElementById('g-segno'); if(!svg)return;
+  var Z0=0.5, Z1=0.5+Math.PI, x0=2;
+  var casi=[
+    {s:1, f:function(x){return 1.2*Math.sin(x-Z0);}},
+    {s:-1,f:function(x){return -1.2*Math.sin(x-Z0);}}
+  ];
+  var punti=[];
+  casi.forEach(function(c,i){
+    var g=el('g',{transform:'translate('+(i*280)+',0)'}); svg.appendChild(g);
+    var sub=el('svg',{viewBox:'0 0 280 300',width:280,height:300}); g.appendChild(sub);
+    var P=new Piano(sub,[-0.4,4.8],[-1.6,1.6],{l:22,r:16,t:20,b:26});
+    P.add(el('rect',{x:P.X(Z0),width:P.X(Z1)-P.X(Z0),y:P.m.t,height:P.H-P.m.t-P.m.b,
+      fill:'var(--blu)','fill-opacity':.12}),'sotto');
+    P.assi([1,2,3,4],[]);
+    var l=c.s*1.2*Math.sin(x0-Z0);
+    P.add(el('line',{x1:P.m.l,y1:P.Y(l),x2:P.W-P.m.r,y2:P.Y(l),
+      stroke:c.s>0?'var(--verde)':'var(--rosso)','stroke-width':1,'stroke-dasharray':'5,4'}),'sotto');
+    P.add(el('line',{x1:P.X(x0),y1:P.m.t,x2:P.X(x0),y2:P.H-P.m.b,stroke:'var(--riga)','stroke-width':1.4}),'sotto');
+    P.add(txt(P.W-P.m.r-2,P.Y(l)+(c.s>0?-6:16),'ℓ',{fill:c.s>0?'var(--verde)':'var(--rosso)','text-anchor':'end'}),'testo');
+    P.curva(c.f,-0.4,4.8,300,null,2.2);
+    P.add(txt(P.X((Z0+Z1)/2),P.m.t+12,'I(x₀)',{fill:'var(--blu)','text-anchor':'middle'}),'testo');
+    punti.push({P:P,f:c.f,pt:P.add(el('circle',{r:5.5,fill:'var(--rosso)'})),
+      st:P.add(txt(P.m.l+2,P.H-P.m.b+20,'',{'font-size':12}),'testo')});
+  });
+  var c=document.getElementById('c-segno'), v=document.getElementById('v-segno');
+  function agg(){
+    var x=-0.4+parseFloat(c.value)*5.2;
+    punti.forEach(function(o){
+      var y=o.f(x);
+      o.pt.setAttribute('cx',o.P.X(x)); o.pt.setAttribute('cy',o.P.Y(y));
+      var dentro=x>Z0&&x<Z1;
+      o.st.textContent='f(x) = '+num(y,2)+(dentro?(y>0?'  ·  positiva':'  ·  negativa'):'');
+      o.st.setAttribute('fill',dentro?(y>0?'var(--verde)':'var(--rosso)'):'var(--grigio)');
+    });
+    v.textContent='x = '+num(x,2);
+  }
+  c.addEventListener('input',agg); anima(document.getElementById('b-segno'),c,6000); agg();
+})();
+
+/* ---------- 3. confronto: 2/x, (3+cos x)/x, 4/x ---------- */
+(function(){
+  var svg=document.getElementById('g-conf'); if(!svg)return;
+  var P=new Piano(svg,[0.6,26],[-0.4,5.2],{l:40,r:150,t:18,b:34});
+  var h=function(x){return 2/x;}, g=function(x){return 4/x;},
+      f=function(x){return (3+Math.cos(x))/x;};
+  P.assi([5,10,15,20,25],[1,2,3,4,5]);
+  P.curva(h,0.6,26,400,'var(--rosso)',1.6,'6,4');
+  P.curva(g,0.6,26,400,'var(--rosso)',1.6,'6,4');
+  P.curva(f,0.6,26,700,'var(--blu)',2.4);
+  var lv=P.add(el('line',{y1:P.m.t,y2:P.H-P.m.b,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  var pg=P.add(el('circle',{r:5,fill:'var(--rosso)'})), ph=P.add(el('circle',{r:5,fill:'var(--rosso)'})),
+      pf=P.add(el('circle',{r:6,fill:'var(--blu)'}));
+  var t1=P.add(txt(P.W-P.m.r+14,P.m.t+16,'',{'font-size':13,fill:'var(--rosso)'}),'testo');
+  var t2=P.add(txt(P.W-P.m.r+14,P.m.t+40,'',{'font-size':13,fill:'var(--blu)'}),'testo');
+  var t3=P.add(txt(P.W-P.m.r+14,P.m.t+64,'',{'font-size':13,fill:'var(--rosso)'}),'testo');
+  var t4=P.add(txt(P.W-P.m.r+14,P.m.t+94,'',{'font-size':13,fill:'var(--grigio)'}),'testo');
+  var c=document.getElementById('c-conf'), v=document.getElementById('v-conf');
+  function agg(){
+    var x=0.6+parseFloat(c.value)*25.4;
+    lv.setAttribute('x1',P.X(x)); lv.setAttribute('x2',P.X(x));
+    pg.setAttribute('cx',P.X(x)); pg.setAttribute('cy',P.Y(g(x)));
+    ph.setAttribute('cx',P.X(x)); ph.setAttribute('cy',P.Y(h(x)));
+    pf.setAttribute('cx',P.X(x)); pf.setAttribute('cy',P.Y(f(x)));
+    t1.textContent='4/x = '+num(g(x),3);
+    t2.textContent='f(x) = '+num(f(x),3);
+    t3.textContent='2/x = '+num(h(x),3);
+    t4.textContent='distanza: '+num(g(x)-h(x),3);
+    v.textContent='x = '+num(x,1);
+  }
+  c.addEventListener('input',agg); anima(document.getElementById('b-conf'),c,6000); agg();
+})();
 })();
 </script>
 </body>

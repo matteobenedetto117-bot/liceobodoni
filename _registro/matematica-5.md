@@ -39,17 +39,32 @@ aggiuntivi. Sono state rimosse e verranno riscritte con la calibrazione corretta
 Nella traccia l'unica dimostrazione sviluppata di questo blocco è quella di sin(x)/x tramite il
 teorema del confronto, a pagina 21.
 
-## Unità 02 — Teoremi sui limiti: unicità, permanenza del segno, confronto
-- Parole: circa 495 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di
+## Unità 02 — Teoremi sui limiti
+- Parole: circa 500 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di
   pag. 18–20 fino all'inizio di "Limiti notevoli").
-- Rettifica: nessuna. Verificato con SymPy che 2/x ≤ (3+cos x)/x ≤ 4/x per x>0 e che entrambi i
-  limiti dei bordi valgono 0 per x→+∞.
-- Aggiunta: nulla di contenuto. Solo le frasi che spiegano il ruolo di ciascuna ipotesi, più
-  un interattivo che mostra la stretta della disequazione 2/x ≤ (3+cos x)/x ≤ 4/x al crescere di M.
-- Nota sul confine: il teorema di unicità è disegnato in coda a pag. 10 (dopo il materiale
-  dell'unità 02, mai usato lì) e la dimostrazione di sin x/x che segue il teorema del confronto a
-  pag. 20–21 appartiene invece all'unità 06 (Limiti notevoli): qui restano solo l'enunciato del
-  confronto e l'unico esempio svolto prima di quell'intestazione.
+- Titolo accorciato da "Teoremi sui limiti: unicità, permanenza del segno, confronto"; l'elenco dei
+  tre teoremi resta nei titoletti. In _dati/matematica-5.json il campo "cartella" tiene fermo
+  l'indirizzo della pagina.
+- Titoletti: teorema di unicità del limite, teorema della permanenza del segno, teorema del
+  confronto, Esempio (il calcolo di (3+cos x)/x, che prima non aveva titoletto). Tolto il
+  sottotitolo dell'intestazione.
+- Impaginazione: riscritta a quaderno come l'unità 01 e come le unità 01–03 di fisica-5; formule in
+  display in <p class="eq">.
+- Rettifica: nel disegno dell'unicità il ramo destro era −1,5 + 0,5·ln(x−1,6), che per x→2⁺ tende a
+  −1,96 e non al −3/2 segnato dal pallino vuoto; sostituito con −3/2 + 1,2·√(x−2), che parte
+  esattamente da −3/2. Verificato con SymPy: limite sinistro 1, limite destro −3/2, e
+  2/x ≤ (3+cos x)/x ≤ 4/x con entrambi i bordi che tendono a 0 per x→+∞.
+- Figure: sostituiti i widget Plotly con SVG disegnati da uno script interno (nessuna dipendenza da
+  CDN). Tre figure: il salto in 2 per l'unicità, i due casi della permanenza del segno affiancati
+  (ℓ > 0 e ℓ < 0) con l'intorno I(x₀) evidenziato, e le tre curve del confronto.
+- Animazioni: il pulsante ▶ fa scorrere il punto lungo tutta la curva disegnata, ↺ lo riporta
+  all'inizio. Nella permanenza del segno i due pannelli si muovono insieme e la scritta dice se la
+  funzione è positiva o negativa dentro l'intorno; nel confronto scorrono le tre quote e la loro
+  distanza, che si assottiglia al crescere di x.
+- Nota sul confine: il teorema di unicità è disegnato in coda a pag. 10 e la dimostrazione di
+  sin x/x che segue il teorema del confronto a pag. 20–21 appartiene all'unità 05 (Limiti
+  notevoli): qui restano solo l'enunciato del confronto e l'unico esempio svolto prima di quella
+  intestazione.
 - Nessuna dimostrazione: la traccia riporta unicità, permanenza del segno e confronto come soli
   enunciati con disegno, senza dimostrarli; restano così anche qui.
 
