@@ -20,3 +20,8 @@
 - Parole: 407 su 2 pagine di traccia (pagg. 4–5 del quaderno = pagg. 5–6 del PDF; in realtà la mezza pagina finale della 5 e il terzo alto della 6, il resto appartiene alle unità 03 e 05).
 - Rettifica: nessuna. La tabella dei prefissi è riportata identica alla traccia, compresi i due esempi 1 cm = 1/100 m = 10⁻² m e 1 km = 1000 m = 10³ m. Valori delle potenze verificati con SymPy.
 - Aggiunta: nessun contenuto nuovo. Gli unici elementi non presenti alla lettera nella traccia sono il disegno SVG (la retta degli esponenti, che è la resa grafica della tabella già scritta) e il riquadro «Da non fare» sulla distinzione fra M di mega e m di milli, errore ricorrente in prima.
+
+## Unità 05 — Operazioni con le potenze di dieci
+- Parole: 335 su 2 pagine di traccia (pagg. 5–6 del quaderno = pagg. 6–7 del PDF, più il primo esempio in cima alla pag. 8 del PDF, che chiude l'argomento prima di «Equivalenze semplici»). Conteggio basso rispetto al parametro perché la traccia è quasi interamente formule: il testo aggiunto è solo il commento alle tre proprietà.
+- Rettifica: nessuna. Tutti i calcoli della traccia sono corretti e sono stati verificati con SymPy: 10⁴·10⁻³ = 10, 10⁵/10⁷ = 1/100, (10⁵)²:10³ = 10⁷ = 10 000 000, (3·10⁶)(5·10⁴) = 15·10¹⁰ = 150 000 000 000, 3·10⁴ + 6·10⁴ = 9·10⁴, 5·10⁴ + 3·10³ = 53·10³.
+- Aggiunta: nessun contenuto nuovo. Gli unici elementi non presenti alla lettera nella traccia sono il cursore interattivo che scrive per esteso 10ⁿ al variare di n da −6 a 6 (resa dinamica della definizione già scritta, senza nuovi contenuti) e il riquadro «Da non fare» sull'errore di sommare gli esponenti nelle addizioni, che è l'errore tipico su questo argomento e nasce direttamente dalla prima proprietà.
