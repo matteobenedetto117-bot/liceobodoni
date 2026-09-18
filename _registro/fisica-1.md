@@ -159,3 +159,8 @@
 - Parole: 286 su 1 pagina di traccia (p. 33)
 - Rettifica: nessuna, la traccia è corretta.
 - Aggiunta: nessuna. Il riquadro sulla scrittura $\vec{F} = 120$ N riprende il passaggio barrato in rosso della traccia, non aggiunge contenuto.
+
+## Unità 24 — Somma di vettori: il metodo punta-coda
+- Parole: 332 su 2 pagine di traccia (34–35)
+- Rettifica: nessuna. I due esempi con vettori paralleli della traccia (3 N + 5 N concordi → 8 N; 3 N e 5 N discordi → 2 N nel verso della maggiore) sono corretti.
+- Aggiunta: nessuna. Nessun esempio nuovo, nessuna dimostrazione: la traccia sviluppa il metodo per via grafica e la pagina resta grafica. I disegni della traccia sono stati ridisegnati in SVG; la sequenza in tre fasi del punta-coda per due vettori è stata resa in un'unica figura con il punto di giunzione evidenziato, senza aggiungere contenuto.
