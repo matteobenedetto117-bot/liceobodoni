@@ -617,3 +617,8 @@ questo sul sito pubblico.
 - Rettifica: nessuna; la catena di uguaglianze della traccia è corretta, verificata con SymPy.
 - Aggiunta: la sola verifica numerica della formula (n = 5 dà 540°, n = 3 restituisce 180°),
   perché nell'unità la traccia non contiene alcun esempio svolto.
+
+## Unità 65 — Teorema di Talete
+- Parole: 457 su 1,5 pagine di traccia (p. 37 di geometria-1.pdf per intero e il quarto superiore di p. 38, dove la dimostrazione si chiude)
+- Rettifica: nessuna. La catena della dimostrazione è quella della traccia; le congruenze sono state verificate simbolicamente con SymPy su un fascio di quattro parallele non equidistanti tagliate da due trasversali generiche: AB ≅ CD e A'B' ≅ C'D' per ogni inclinazione della seconda trasversale, e AB'' ≅ CD'' ≅ A'B' per le parallele ausiliarie. Nella traccia il passaggio sui due angoli corrispondenti e quello sul secondo criterio sono scritti sulla stessa riga: nella pagina sono separati in due punti distinti, senza aggiungere contenuto.
+- Aggiunta: nessuna. La traccia non contiene esempi e non ne sono stati inseriti; nessuna dimostrazione oltre a quella della traccia. Un solo riquadro di avvertenza, sul fatto che le rette del fascio non devono essere equidistanti — è la condizione che si aggiunge per errore all'ipotesi. I due disegni sono quelli della traccia, ridisegnati in SVG con le intersezioni calcolate. Un solo strumento interattivo: il cursore inclina la seconda trasversale e mostra che le due lunghezze su di essa cambiano insieme e restano uguali, cioè che la tesi non dipende dall'inclinazione.
