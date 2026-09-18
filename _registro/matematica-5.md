@@ -100,8 +100,9 @@ teorema del confronto, a pagina 21.
   CDN). Tre figure: il salto in 2 per l'unicità, i due casi della permanenza del segno affiancati
   (ℓ > 0 e ℓ < 0) con l'intorno I(x₀) evidenziato, e il corridoio fra le due parabole dell'Esempio 1.
   La figura con le tre curve 2/x, (3+cos x)/x, 4/x è stata tolta.
-- Animazioni: il pulsante ▶ fa scorrere il punto lungo tutta la curva disegnata, ↺ lo riporta
-  all'inizio. Nella permanenza del segno i due pannelli si muovono insieme e la scritta dice se la
+- Comandi delle figure: solo cursori, nessun pulsante ▶. Regola stabilita dall'insegnante: in una
+  figura ci va o il pulsante di avvio o il cursore, mai tutti e due. Qui il punto si muove
+  trascinando il cursore. Nella permanenza del segno i due pannelli si muovono insieme e la scritta dice se la
   funzione è positiva o negativa dentro l'intorno; nel confronto scorrono le tre quote e la loro
   distanza, che si assottiglia al crescere di x.
 - Nota sul confine: il teorema di unicità è disegnato in coda a pag. 10 e la dimostrazione di

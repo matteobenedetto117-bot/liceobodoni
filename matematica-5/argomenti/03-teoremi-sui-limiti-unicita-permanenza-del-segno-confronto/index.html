@@ -43,10 +43,6 @@ h1{position:relative;top:.5rem}
 .eq mjx-container{margin:0!important}
 .foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
 .def .eq,.nota .eq{text-align:center;margin:0}
-.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
-.btn-anim:hover{background:#163a5b}
-.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
-.btn-anim:disabled{opacity:.5;cursor:default}
 .cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
 .cursore input[type=range]{width:min(320px,55%)}
 .cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
@@ -95,8 +91,7 @@ la funzione tende.</p>
 
 <div class="fig">
 <svg id="g-unic" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="cursore"><button type="button" class="btn-anim" id="b-unic" aria-label="Avvia">&#9654;</button>
-<label for="c-unic">punto $x$</label>
+<div class="cursore"><label for="c-unic">punto $x$</label>
 <input id="c-unic" type="range" min="0" max="1" step="0.002" value="0">
 <span class="val" id="v-unic"></span></div>
 <p class="did">Avvicinandosi a 2 da sinistra la quota del punto sale verso 1, ripartendo da destra
@@ -119,8 +114,7 @@ vuole, ma esiste sempre.</p>
 
 <div class="fig">
 <svg id="g-segno" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="cursore"><button type="button" class="btn-anim" id="b-segno" aria-label="Avvia">&#9654;</button>
-<label for="c-segno">punto $x$</label>
+<div class="cursore"><label for="c-segno">punto $x$</label>
 <input id="c-segno" type="range" min="0" max="1" step="0.002" value="0">
 <span class="val" id="v-segno"></span></div>
 <div class="did-parti" style="--n:2">
@@ -180,8 +174,7 @@ volta.</p>
 
 <div class="fig">
 <svg id="g-par" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="cursore"><button type="button" class="btn-anim" id="b-par" aria-label="Avvia">&#9654;</button>
-<label for="c-par">punto $x$</label>
+<div class="cursore"><label for="c-par">punto $x$</label>
 <input id="c-par" type="range" min="0" max="1" step="0.002" value="0">
 <span class="val" id="v-par"></span></div>
 <p class="did">Le due parabole tratteggiate si toccano in $(0;2)$: fra loro resta un corridoio che
@@ -338,24 +331,6 @@ Piano.prototype.curva=function(f,a,b,n,col,w,dash){
 };
 Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
 
-function anima(btn,inp,dur,dopo){
-  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var v0=inp.value, stato='fermo', raf=null;
-  function ev(){inp.dispatchEvent(new Event('input',{bubbles:true}));}
-  btn.addEventListener('click',function(){
-    if(stato==='fine'){cancelAnimationFrame(raf);inp.value=v0;ev();stato='fermo';
-      btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');return;}
-    if(stato!=='fermo')return;
-    var a=parseFloat(inp.min), b=parseFloat(inp.max), t0=null;
-    stato='corsa'; btn.disabled=true;
-    function fine(){stato='fine';btn.disabled=false;btn.innerHTML='&#8634;';
-      btn.setAttribute('aria-label','Ricomincia');if(dopo)dopo();}
-    if(ridotto){inp.value=b;ev();fine();return;}
-    (function passo(t){if(t0===null)t0=t;var u=Math.min((t-t0)/dur,1);
-      inp.value=a+(b-a)*u;ev();
-      if(u>=1)fine(); else raf=requestAnimationFrame(passo);})(performance.now());
-  });
-}
 
 /* ---------- 1. unicità: salto in x = 2 ---------- */
 (function(){
@@ -383,7 +358,7 @@ function anima(btn,inp,dur,dopo){
     st.textContent='x = '+num(x,2)+'  ·  f(x) = '+num(y,2);
     v.textContent='x = '+num(x,2);
   }
-  c.addEventListener('input',agg); anima(document.getElementById('b-unic'),c,6000); agg();
+  c.addEventListener('input',agg); agg();
 })();
 
 /* ---------- 2. permanenza del segno ---------- */
@@ -424,7 +399,7 @@ function anima(btn,inp,dur,dopo){
     });
     v.textContent='x = '+num(x,2);
   }
-  c.addEventListener('input',agg); anima(document.getElementById('b-segno'),c,6000); agg();
+  c.addEventListener('input',agg); agg();
 })();
 
 
@@ -455,7 +430,7 @@ function anima(btn,inp,dur,dopo){
     st.textContent='x = '+num(x,3)+'  \u00b7  f(x) = '+num(y,3)+'  \u00b7  corridoio: 2 \u00b1 '+num(x*x,3);
     v.textContent='x = '+num(x,3);
   }
-  c.addEventListener('input',agg); anima(document.getElementById('b-par'),c,6000); agg();
+  c.addEventListener('input',agg); agg();
 })();
 
 })();
