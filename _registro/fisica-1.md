@@ -360,3 +360,8 @@
 - Parole: 418 su 2 pagine di traccia (78–79)
 - Rettifica: nessuna. I passaggi della traccia (P = F⊥/A = mg/A, m = dV, V = Ah, semplificazione di A) e il valore P_atm = 1,013·10⁵ Pa sono corretti; il conto di verifica con d = 1000 kg/m³, g = 9,81 N/kg, h = 2 m dà 1,962·10⁴ Pa, arrotondato a 1,96·10⁴ Pa.
 - Aggiunta: un solo esempio numerico (acqua a 2 m di profondità), perché la traccia dell'unità non ne contiene nessuno. Nessun'altra aggiunta: nessuna dimostrazione, nessuna tabella, nessun confronto non presente nella traccia.
+
+## Unità 57 — Galleggiamento di un corpo
+- Parole: 416 su 2 pagine di traccia (81 dalla metà, "Condizione di galleggiamento", e 82 fino al titolo "Pressione atmosferica")
+- Rettifica: nessuna. I passaggi della traccia sono corretti: F_P = mg = d_B V g, F_A = d_F g V, e la semplificazione di g e V nel confronto è lecita perché entrambi positivi (verificato con SymPy: d_B g V > d_F g V equivale a d_B > d_F). I tre casi con i versi delle disuguaglianze corrispondono ai tre disegni.
+- Aggiunta: un solo esempio numerico (blocco di legno, V = 2,0·10⁻³ m³, d_B = 600 kg/m³ in acqua: F_P = 11,8 N, F_A = 19,6 N), perché la traccia dell'unità non contiene alcun esempio. Aggiunto inoltre un riquadro sulla distinzione fra densità del blocco e densità del fluido, con il ferro che affonda in acqua e galleggia nel mercurio. Il disegno dei tre casi è la trasposizione in SVG di quello manoscritto, con le lunghezze delle frecce proporzionate al caso. Nessuno strumento interattivo, nessuna tabella riassuntiva, nessuna dimostrazione assente dalla traccia.
