@@ -189,3 +189,8 @@
 - Parole: 527 su 2 pagine di traccia (pp. 40–41), cioè 264 per pagina
 - Rettifica: nessuna. Verificati con SymPy tutti i valori della traccia: 170·cos32° = 144,2 N e 170·sin32° = 90,1 N; 316·sin40° = 203,1 N e 316·cos40° = 242,1 N; 38·sin27° = 17,3 N e 38·cos27° = 33,9 N. Gli arrotondamenti della traccia (144, 90, 203, 242, 17, 34) sono corretti a due o tre cifre significative.
 - Aggiunta: nessun esempio nuovo. Sono usati tutti e soli i tre esempi della traccia. Un solo riquadro di nota, sul fatto che il coseno va con il lato vicino all'angolo: è l'errore tipico quando l'angolo è dato dall'asse y invece che dall'asse x, e la traccia stessa presenta le due coppie di formule affiancate senza commentarle. Aggiunta una riga finale che precisa che seno e coseno danno la lunghezza della componente e il segno si legge dal disegno: serve a raccordare il terzo esempio della traccia (che introduce il segno meno senza spiegarlo) all'unità 30, dove la regola dei segni viene trattata. I tre disegni della traccia sono ridisegnati in SVG.
+
+## Unità 30 — Segno delle componenti
+- Parole: 467 su 2 pagine di traccia (42–43)
+- Rettifica: a pagina 43 le componenti di F₂ erano arrotondate in modo incoerente con le altre (3 N e 5 N); i valori corretti a una cifra decimale sono 2,9 N e 5,2 N. Sempre a pagina 43, F₃y era scritta 2,9 N mentre 8 N · cos 68° = 3,0 N. Entrambe corrette nella pagina senza segnalarlo al lettore; tutti gli altri valori verificati con SymPy risultano esatti.
+- Aggiunta: nessuna. Il solo riquadro di avvertenza riguarda l'errore di mettere il segno dentro il seno o il coseno, e non introduce contenuto nuovo.
