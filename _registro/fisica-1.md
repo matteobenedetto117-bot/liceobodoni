@@ -305,3 +305,8 @@
 - Parole: 377 su 2 pagine di traccia (pp. 62–63)
 - Rettifica: nessuna. I valori numerici della traccia sono corretti (Fs = 98 N, FN = 135 N, μs = tan 36° = 0,73), verificati con calcolo.
 - Aggiunta: nessuna. Un solo riquadro di nota, sull'indipendenza del risultato dalla massa, che è una lettura del risultato già presente e non contenuto nuovo.
+
+## Unità 45 — Equilibrio di un corpo appeso e carrucola
+- Parole: 265 su 1 pagina di traccia (pag. 64, più il disegno della carrucola in testa a pag. 65)
+- Rettifica: nessuna, la traccia è corretta
+- Aggiunta: un solo esempio numerico (m = 4,50 kg, T ≈ 44,1 N), perché in tutta l'unità la traccia non ne contiene nessuno; l'esempio del vaso appeso di pag. 65 appartiene all'unità 46
