@@ -300,3 +300,8 @@
 - Parole: 544 su 2 pagine di traccia
 - Rettifica: a pagina 62 il coefficiente di attrito statico minimo dell'Esempio 3 è calcolato come F_N/F_S = 52/113 = 0,46, cioè con numeratore e denominatore invertiti rispetto alla relazione F_S = μ_S·F_⊥ scritta due righe sopra. Nella pagina il calcolo è μ_S = F_S/F_N = 113/52 ≈ 2,2. Verificato con SymPy. I valori di F_N (179 N e 52 N) e F_S (113 N) della traccia sono corretti; sono riportati con g = 9,8 N/kg, come nelle unità precedenti, invece di 9,81.
 - Aggiunta: nessuna. Il riquadro "Da non sbagliare" segnala l'ordine del rapporto nel coefficiente di attrito, che è la rettifica di cui sopra e non un contenuto nuovo.
+
+## Unità 44 — Equilibrio sul piano inclinato
+- Parole: 377 su 2 pagine di traccia (pp. 62–63)
+- Rettifica: nessuna. I valori numerici della traccia sono corretti (Fs = 98 N, FN = 135 N, μs = tan 36° = 0,73), verificati con calcolo.
+- Aggiunta: nessuna. Un solo riquadro di nota, sull'indipendenza del risultato dalla massa, che è una lettura del risultato già presente e non contenuto nuovo.
