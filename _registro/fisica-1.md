@@ -174,3 +174,8 @@
 - Parole: 249 su 1 pagina di traccia (p. 37)
 - Rettifica: nessuna. I valori della traccia tornano: con $|\vec{F_1}| = 30$ N si ha $|3\vec{F_1}| = 90$ N e $|-2\vec{F_1}| = 60$ N, coerenti con la regola del valore assoluto.
 - Aggiunta: nessun esempio e nessuna dimostrazione nuovi. Si usano soltanto i tre vettori della traccia ($\vec{F_1}$, $3\vec{F_1}$, $-2\vec{F_1}$) e la coppia $\vec{F_1}$, $-\vec{F_1}$. L'unico riquadro ricorda che il modulo non è mai negativo perché nel prodotto entra il valore assoluto: è l'errore tipico su questa regola, non contenuto aggiuntivo. I due disegni della traccia sono stati ridisegnati in SVG.
+
+## Unità 27 — Differenza fra vettori
+- Parole: 229 su 1 pagina di traccia (p. 38)
+- Rettifica: nessuna, la traccia è corretta.
+- Aggiunta: un solo riquadro di nota sulla non commutatività della differenza ($\vec{F_2}-\vec{F_1}$ è l'opposto di $\vec{F_1}-\vec{F_2}$), perché è l'errore tipico quando si passa dalla somma alla differenza. Nessun esempio, nessuna dimostrazione, nessuna tabella aggiunti: la traccia non ne contiene.
