@@ -219,3 +219,8 @@
 - Parole: 270 circa su 1 pagina di traccia (fondo p. 51 e prime tre righe di p. 52)
 - Rettifica: nessuna. Verificato con SymPy che 0,102 kg · 9,81 N/kg = 1,00062 N, cioè 1 N con tre cifre significative, e che a 1 N corrisponde una massa di 101,94 g (i 102 g della traccia). Verificata la coerenza dimensionale kg · N/kg = N. Il disegno della traccia (astuccio, molla, dischetto, gancio, massa appesa, tacca) è ridisegnato in SVG nei due stati, a riposo e sotto carico, con il dischetto abbassato e la molla più distesa nel secondo.
 - Aggiunta: nessun esempio nuovo. La traccia non spiega da dove venga il numero 102, e la pagina lo ricava applicando F_p = m·g, formula già introdotta nell'unità 33: è il passaggio che rende la definizione comprensibile invece che arbitraria. Un solo riquadro di avvertenza, sul fatto che lo strumento misura una forza e che la taratura si fa una volta sola: riprende la distinzione massa/peso dell'unità 34 senza introdurre contenuto nuovo.
+
+## Unità 36 — La forza elastica e la legge di Hooke
+- Parole: 437 su 2 pagine di traccia (pagg. 52–53 del PDF)
+- Rettifica: nessuna. I contenuti della traccia (definizione, costante elastica e sua unità N/m, modulo F_el = kx, forma vettoriale F_el = −k x) sono corretti; verificata con SymPy la coerenza dimensionale (N/m · m = N).
+- Aggiunta: nessun contenuto nuovo. La traccia non contiene esempi numerici in queste due pagine, ma non ne ho inserito alcuno perché l'unità 37 è dedicata proprio agli esempi con la forza elastica: aggiungerne uno qui avrebbe anticipato quella unità. È presente un solo strumento interattivo (cursori su k e x) che mostra la proporzionalità fra allungamento e modulo della forza, già affermata dalla traccia.
