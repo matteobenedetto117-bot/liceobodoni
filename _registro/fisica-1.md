@@ -209,3 +209,8 @@
 - Parole: 371 su 2 pagine di traccia
 - Rettifica: nessuna. I contenuti della traccia (definizione, modulo con F_p = m·g, g = 9,81 N/kg, dipendenza da altitudine e latitudine, direzione e verso) sono corretti; verificata la coerenza dimensionale kg · N/kg = N.
 - Aggiunta: un solo valore numerico di esempio (m = 60 kg → F_p = 588,6 N), perché la traccia dell'unità non contiene alcun esempio e la formula resterebbe senza applicazione. Aggiunto inoltre un riquadro di avvertenza sul fatto che la direzione resta verticale anche sul piano inclinato: il disegno del piano inclinato è nella traccia, ma la confusione con la perpendicolare al piano è l'errore tipico che quel disegno previene.
+
+## Unità 34 — Differenza fra massa e peso
+- Parole: 318 su 2 pagine di traccia (pp. 50–51, in realtà mezza pagina ciascuna: il confronto massa/peso e la tabella dei pesi nel sistema solare)
+- Rettifica: nessuna. Verificati con SymPy tutti i nove prodotti della traccia con m = 50 kg: Mercurio 185,0 N; Venere 442,5 N (443 N); Terra 490,5 N (491 N); Marte 185,5 N (186 N); Giove 1239,5 N (1240 N); Saturno 522,0 N; Urano 434,5 N (435 N); Nettuno 557,5 N; Luna 81,0 N. Gli arrotondamenti della traccia sono tutti per eccesso sul mezzo e risultano coerenti fra loro; verificata anche la coerenza dimensionale kg · N/kg = N.
+- Aggiunta: nessun esempio nuovo e nessun disegno (la traccia di questa unità non ne contiene: sono due tabelle). Un solo riquadro di avvertenza, sulla bilancia domestica che misura una forza e la converte in massa con il g terrestre: è il punto in cui la distinzione fra le due grandezze si perde più facilmente, e non introduce contenuto nuovo.
