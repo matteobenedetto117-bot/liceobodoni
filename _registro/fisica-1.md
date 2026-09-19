@@ -310,3 +310,8 @@
 - Parole: 265 su 1 pagina di traccia (pag. 64, più il disegno della carrucola in testa a pag. 65)
 - Rettifica: nessuna, la traccia è corretta
 - Aggiunta: un solo esempio numerico (m = 4,50 kg, T ≈ 44,1 N), perché in tutta l'unità la traccia non ne contiene nessuno; l'esempio del vaso appeso di pag. 65 appartiene all'unità 46
+
+## Unità 46 — Corpo sospeso a due funi
+- Parole: 590 su 2 pagine di traccia (pp. 65–66), di cui 473 di prosa e il resto formule
+- Rettifica: nessuna. I due esempi della traccia sono corretti e sono stati riverificati con SymPy: vaso appeso T₂ = 94,62 N e T₁ = 72,48 N (arrotondati a 94,6 e 72,5 N come nella traccia); esempio 2 T₂ = 23,75 N e T₁ = 19,39 N (23,8 e 19,4 N). Anche i coefficienti intermedi 0,408 e 0,707, e la loro somma 1,115, sono esatti.
+- Aggiunta: nessun contenuto nuovo. I due esempi sono quelli della traccia, i due disegni (schema e diagramma delle componenti) sono la trasposizione in SVG di quelli manoscritti. È stato reso esplicito che nel primo esempio l'angolo è misurato dall'orizzontale e nel secondo dalla verticale — nella traccia lo si deduce solo dal disegno e dalle formule — e questa distinzione è l'oggetto dell'unico riquadro di nota. L'unico strumento interattivo è un cursore sull'angolo del primo esempio, che mostra la crescita delle due tensioni quando la fune obliqua si avvicina all'orizzontale: fa vedere una lettura del risultato già presente, non introduce contenuto.
