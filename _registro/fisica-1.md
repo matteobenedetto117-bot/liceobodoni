@@ -330,3 +330,8 @@
 - Parole: 240 su 1 pagina di traccia
 - Rettifica: nessuna. La traccia descrive le due forze come "concordi": nella pagina è resa come concordanza dei momenti (le forze sono antiparallele, come nel disegno della traccia), senza segnalare nulla al lettore.
 - Aggiunta: un solo esempio numerico (d = 0,80 m, F = 25 N, α = 60°, M = 17 N·m), perché la traccia dell'unità non contiene alcun esempio.
+
+## Unità 50 — Condizioni di equilibrio di un corpo rigido
+- Parole: 430 su 2 pagine di traccia
+- Rettifica: nessuna. Verificati con SymPy F₂ = r₁F₁/r₂ = 140 N e F_N = F₁ + F₂ = 240 N, e i segni dei momenti (M₁ = +70 N·m, M₂ = −70 N·m) con la convenzione antioraria positiva dell'unità 48.
+- Aggiunta: nessun contenuto nuovo. Sono state esplicitate solo due cose già implicite nella traccia: che la somma vettoriale delle forze va fatta componente per componente, e che il momento di F_N è nullo perché il braccio è zero.
