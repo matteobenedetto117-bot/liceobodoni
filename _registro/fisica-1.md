@@ -325,3 +325,8 @@
 - Parole: 459 su 2 pagine di traccia (pp. 68–69: la seconda metà di p. 68, da "Segno del momento torcente", e tutta p. 69)
 - Rettifica: nessuna. L'esempio del timone è stato riverificato con SymPy: M₁ = 0,74·72·sin 50° = 40,81 N·m (41 N·m nella traccia), M₂ = −0,74·58·1 = −42,92 N·m (−43 N·m), M_TOT = −2,11 N·m, arrotondato a −2 N·m come nella traccia; il verso orario che ne segue è corretto. Tutti i momenti sono in N·m, coerenti dimensionalmente.
 - Aggiunta: nessun contenuto nuovo. I tre disegni sono la trasposizione in SVG di quelli manoscritti (barra con F₁ e F₂ ai due lati del perno; il richiamo sull'angolo da usare, con il raggio prolungato oltre il punto di applicazione; il timone con il verso positivo indicato). Un solo riquadro di nota, sul fatto che il segno dipende dal verso di rotazione e non dalla direzione della forza. L'unico interattivo è un cursore sull'angolo di F₁ nell'esempio del timone, che fa vedere il cambio di segno di M_TOT e quindi del verso: è la lettura della regola dei segni già presente, non contenuto nuovo.
+
+## Unità 49 — Momento di una coppia di forze
+- Parole: 240 su 1 pagina di traccia
+- Rettifica: nessuna. La traccia descrive le due forze come "concordi": nella pagina è resa come concordanza dei momenti (le forze sono antiparallele, come nel disegno della traccia), senza segnalare nulla al lettore.
+- Aggiunta: un solo esempio numerico (d = 0,80 m, F = 25 N, α = 60°, M = 17 N·m), perché la traccia dell'unità non contiene alcun esempio.
