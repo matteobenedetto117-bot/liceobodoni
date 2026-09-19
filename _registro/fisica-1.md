@@ -169,3 +169,8 @@
 - Parole: 277 su 1 pagina di traccia (p. 36)
 - Rettifica: nessuna. La costruzione della traccia è corretta, compreso il procedimento in due tempi per tre vettori (prima $\vec{F_{12}} = \vec{F_1} + \vec{F_2}$, poi $\vec{R} = \vec{F_{12}} + \vec{F_3}$).
 - Aggiunta: nessun esempio e nessuna dimostrazione. La traccia non contiene esempi numerici e non se ne è aggiunto uno: il modulo della risultante di due vettori obliqui richiede strumenti che arrivano più avanti (Pitagora per il caso perpendicolare, unità 28, e le componenti, unità 29-31), quindi qui l'argomento resta grafico come nella traccia. Unico riquadro: l'avvertenza che la risultante è la diagonale uscente dalle code unite e non l'altra, errore tipico su questa costruzione. I tre disegni della traccia sono stati ridisegnati in SVG, accorpando i due schemi del caso a tre vettori in un'unica figura a due pannelli.
+
+## Unità 26 — Prodotto di un vettore per un numero e vettore opposto
+- Parole: 249 su 1 pagina di traccia (p. 37)
+- Rettifica: nessuna. I valori della traccia tornano: con $|\vec{F_1}| = 30$ N si ha $|3\vec{F_1}| = 90$ N e $|-2\vec{F_1}| = 60$ N, coerenti con la regola del valore assoluto.
+- Aggiunta: nessun esempio e nessuna dimostrazione nuovi. Si usano soltanto i tre vettori della traccia ($\vec{F_1}$, $3\vec{F_1}$, $-2\vec{F_1}$) e la coppia $\vec{F_1}$, $-\vec{F_1}$. L'unico riquadro ricorda che il modulo non è mai negativo perché nel prodotto entra il valore assoluto: è l'errore tipico su questa regola, non contenuto aggiuntivo. I due disegni della traccia sono stati ridisegnati in SVG.
