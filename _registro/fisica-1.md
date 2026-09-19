@@ -238,3 +238,17 @@
   pagina 56, cioè nell'unità successiva. Lo schema ad albero ATTRITO →
   radente / volvente / viscoso e il dettaglio della zona di contatto sono i due
   disegni della traccia, ridisegnati in SVG.
+
+## Unità 39 — Attrito statico e dinamico
+- Parole: 549 su 2 pagine di traccia (pagg. 56–57)
+- Rettifica: nessuna. La traccia è corretta; verificato con SymPy che il
+  coefficiente di attrito è adimensionale (rapporto fra due forze) e che
+  μ · F_⊥ è dimensionalmente un newton, come la traccia afferma.
+- Aggiunta: un solo esempio numerico (cassa da 25 kg, μ_d = 0,30 → F_⊥ = 245 N,
+  F_d = 73,5 N ≈ 74 N, verificato con SymPy). Le due pagine di traccia non
+  contengono alcun esempio, e senza un numero la formula F_at = μ F_⊥ resta
+  astratta; ho scelto di proposito il caso dinamico per non anticipare l'unità
+  40, che è costruita interamente sull'esempio statico dei quattro tentativi.
+  Nessuno strumento interattivo. Un solo riquadro, sull'errore tipico di
+  identificare sempre la forza premente con il peso. I due schemi della traccia
+  (blocco con F_⊥, e i due casi di forza premente) sono ridisegnati in SVG.
