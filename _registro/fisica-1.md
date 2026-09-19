@@ -252,3 +252,18 @@
   Nessuno strumento interattivo. Un solo riquadro, sull'errore tipico di
   identificare sempre la forza premente con il peso. I due schemi della traccia
   (blocco con F_⊥, e i due casi di forza premente) sono ridisegnati in SVG.
+
+## Unità 40 — Forza di attrito statico massima
+- Parole: 297 su 1 pagina di traccia (pag. 58), comprese intestazione,
+  didascalie e celle della tabella; il testo corrente è circa 240.
+- Rettifica: nessuna. Verificato con SymPy: μ_s · F_⊥ = 0,4 · 100 N = 40 N, e i
+  quattro tentativi della traccia (F = 10, 30, 40, 50 N → F_s = 10, 30, 40,
+  40 N) sono tutti coerenti con F_s = min(F, 40 N).
+- Aggiunta: nessun contenuto nuovo. Nella colonna "Il corpo" della tabella ho
+  esplicitato ciò che la traccia lascia implicito — che a 40 N il corpo è sul
+  punto di partire e a 50 N si mette in moto — perché altrimenti le ultime due
+  righe, con lo stesso valore di F_s, sembrerebbero dire la stessa cosa. Un solo
+  riquadro, sull'errore di usare μ_s F_⊥ come valore dell'attrito in ogni
+  situazione. Nessuno strumento interattivo. I due schemi della pagina (forza
+  esterna inclinata con le sue componenti, e blocco con F, F_s e F_p = F_⊥)
+  sono ridisegnati in SVG.
