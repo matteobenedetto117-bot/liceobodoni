@@ -184,3 +184,8 @@
 - Parole: 267 su 1 pagina di traccia (pag. 39)
 - Rettifica: nessuna. Il calcolo della traccia, R = √(40² + 30²) N = 50 N, è corretto (verificato con SymPy).
 - Aggiunta: nessuna. Il riquadro "Solo se l'angolo è retto" non aggiunge contenuto nuovo, usa i dati dell'unico esempio della traccia per segnalare l'errore tipico di sommare i moduli.
+
+## Unità 29 — Componenti cartesiane di un vettore
+- Parole: 527 su 2 pagine di traccia (pp. 40–41), cioè 264 per pagina
+- Rettifica: nessuna. Verificati con SymPy tutti i valori della traccia: 170·cos32° = 144,2 N e 170·sin32° = 90,1 N; 316·sin40° = 203,1 N e 316·cos40° = 242,1 N; 38·sin27° = 17,3 N e 38·cos27° = 33,9 N. Gli arrotondamenti della traccia (144, 90, 203, 242, 17, 34) sono corretti a due o tre cifre significative.
+- Aggiunta: nessun esempio nuovo. Sono usati tutti e soli i tre esempi della traccia. Un solo riquadro di nota, sul fatto che il coseno va con il lato vicino all'angolo: è l'errore tipico quando l'angolo è dato dall'asse y invece che dall'asse x, e la traccia stessa presenta le due coppie di formule affiancate senza commentarle. Aggiunta una riga finale che precisa che seno e coseno danno la lunghezza della componente e il segno si legge dal disegno: serve a raccordare il terzo esempio della traccia (che introduce il segno meno senza spiegarlo) all'unità 30, dove la regola dei segni viene trattata. I tre disegni della traccia sono ridisegnati in SVG.
