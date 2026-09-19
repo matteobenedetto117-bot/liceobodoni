@@ -282,3 +282,16 @@
   parole richiedeva molte più righe di quante il vincolo ne conceda. Un solo
   riquadro, sull'errore di leggere «punto materiale» come «corpo piccolo».
   Nessuno strumento interattivo.
+
+## Unità 42 — Condizione di equilibrio e reazione vincolare
+- Parole: 259 su 1 pagina di traccia (pag. 60), esclusi i blocchi di formula.
+- Rettifica: nella traccia l'esempio 1 conclude con F_N = mg = 117 N per
+  m = 12 kg. Il prodotto 12 · 9,8 vale 117,6 N: nella pagina è scritto
+  117,6 N ≈ 1,2 · 10² N. Nessun'altra modifica.
+- Aggiunta: nessun contenuto nuovo. La traccia ha un solo enunciato (R = 0),
+  la definizione di vincolo e reazione vincolare, un disegno e un esempio
+  numerico: la pagina ha esattamente questi. Il disegno della traccia (blocco
+  appoggiato con F_N verso l'alto e F_p verso il basso) è ridisegnato in SVG,
+  e quello dell'esempio, identico al primo, non è ripetuto. Un solo riquadro,
+  sull'errore di credere che F_N valga sempre mg. Nessuno strumento
+  interattivo.
