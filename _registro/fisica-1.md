@@ -194,3 +194,8 @@
 - Parole: 467 su 2 pagine di traccia (42–43)
 - Rettifica: a pagina 43 le componenti di F₂ erano arrotondate in modo incoerente con le altre (3 N e 5 N); i valori corretti a una cifra decimale sono 2,9 N e 5,2 N. Sempre a pagina 43, F₃y era scritta 2,9 N mentre 8 N · cos 68° = 3,0 N. Entrambe corrette nella pagina senza segnalarlo al lettore; tutti gli altri valori verificati con SymPy risultano esatti.
 - Aggiunta: nessuna. Il solo riquadro di avvertenza riguarda l'errore di mettere il segno dentro il seno o il coseno, e non introduce contenuto nuovo.
+
+## Unità 31 — Somma di vettori per componenti
+- Parole: 464 su 2 pagine di traccia (pp. 44–45), cioè 232 per pagina
+- Rettifica: nessuna. Verificati con SymPy tutti i valori della traccia: 140·cos28° = 123,6 N (arrotondato a 124 N) e 140·sin28° = 65,7 N (arrotondato a 66 N); Rx = 120 + 124 = 244 N; R = √(244² + 66²) N = 252,8 N, arrotondato a 253 N come nella traccia. Corretti anche i rapporti dei due disegni, ridisegnati in SVG in scala: nel primo la stessa scala px/N vale per F₁ e per F₂ e le sue componenti, nel secondo l'inclinazione di R corrisponde davvero a 15° (arctan 66/244).
+- Aggiunta: nessun esempio nuovo, la pagina svolge il solo esempio della traccia (F₁ = 120 N, F₂ = 140 N a 28°). Un solo riquadro di avvertenza, sul fatto che si sommano le componenti e non i moduli (R ≠ 260 N): è l'errore tipico in questo passaggio e non introduce contenuto nuovo. Aggiunte due righe di commento sul perché F₁y sia nulla, perché la traccia scrive quel valore senza spiegarlo. L'angolo α resta soltanto segnato nel disegno, come nella traccia: il suo calcolo è l'unità 32.
