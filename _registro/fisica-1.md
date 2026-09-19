@@ -224,3 +224,8 @@
 - Parole: 437 su 2 pagine di traccia (pagg. 52–53 del PDF)
 - Rettifica: nessuna. I contenuti della traccia (definizione, costante elastica e sua unità N/m, modulo F_el = kx, forma vettoriale F_el = −k x) sono corretti; verificata con SymPy la coerenza dimensionale (N/m · m = N).
 - Aggiunta: nessun contenuto nuovo. La traccia non contiene esempi numerici in queste due pagine, ma non ne ho inserito alcuno perché l'unità 37 è dedicata proprio agli esempi con la forza elastica: aggiungerne uno qui avrebbe anticipato quella unità. È presente un solo strumento interattivo (cursori su k e x) che mostra la proporzionalità fra allungamento e modulo della forza, già affermata dalla traccia.
+
+## Unità 37 — Esempi con la forza elastica
+- Parole: 246 su 1 pagina di traccia (pag. 54 del PDF)
+- Rettifica: nessuna. Verificati con SymPy entrambi i risultati della traccia: 150 N/m · 0,03 m = 4,5 N esatti; 0,71 kg · 9,81 N/kg / 360 N/m = 0,0193475 m, cioè 0,019 m = 1,9 cm con due cifre significative, come scritto a mano. Verificata la coerenza dimensionale in entrambi i casi (N/m · m = N; kg · N/kg / (N/m) = m). Lo schizzo della traccia (molla appesa al soffitto, blocchetto, vettori F_el verso l'alto e F_P verso il basso) è ridisegnato in SVG con le etichette dei dati.
+- Aggiunta: nessun esempio nuovo, nessuno strumento interattivo. Un solo riquadro di avvertenza, sull'errore di sostituire 3 invece di 0,03: è l'errore tipico che la conversione esplicita della traccia serve proprio a evitare.
