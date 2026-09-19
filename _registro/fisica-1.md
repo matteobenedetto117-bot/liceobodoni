@@ -179,3 +179,8 @@
 - Parole: 229 su 1 pagina di traccia (p. 38)
 - Rettifica: nessuna, la traccia è corretta.
 - Aggiunta: un solo riquadro di nota sulla non commutatività della differenza ($\vec{F_2}-\vec{F_1}$ è l'opposto di $\vec{F_1}-\vec{F_2}$), perché è l'errore tipico quando si passa dalla somma alla differenza. Nessun esempio, nessuna dimostrazione, nessuna tabella aggiunti: la traccia non ne contiene.
+
+## Unità 28 — Somma di vettori perpendicolari
+- Parole: 267 su 1 pagina di traccia (pag. 39)
+- Rettifica: nessuna. Il calcolo della traccia, R = √(40² + 30²) N = 50 N, è corretto (verificato con SymPy).
+- Aggiunta: nessuna. Il riquadro "Solo se l'angolo è retto" non aggiunge contenuto nuovo, usa i dati dell'unico esempio della traccia per segnalare l'errore tipico di sommare i moduli.
