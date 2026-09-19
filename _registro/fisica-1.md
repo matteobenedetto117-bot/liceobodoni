@@ -335,3 +335,8 @@
 - Parole: 430 su 2 pagine di traccia
 - Rettifica: nessuna. Verificati con SymPy F₂ = r₁F₁/r₂ = 140 N e F_N = F₁ + F₂ = 240 N, e i segni dei momenti (M₁ = +70 N·m, M₂ = −70 N·m) con la convenzione antioraria positiva dell'unità 48.
 - Aggiunta: nessun contenuto nuovo. Sono state esplicitate solo due cose già implicite nella traccia: che la somma vettoriale delle forze va fatta componente per componente, e che il momento di F_N è nullo perché il braccio è zero.
+
+## Unità 51 — Le leve
+- Parole: 508 su 2 pagine di traccia (pag. 73–74)
+- Rettifica: nessuna. I passaggi della traccia (F_N = F_R + F_M, −F_M·b_M·sin90 + F_R·b_R·sin90 = 0 → F_R·b_R = F_M·b_M) sono corretti e verificati.
+- Aggiunta: un solo esempio numerico (F_R = 300 N, b_R = 0,20 m, b_M = 0,80 m → F_M = 75 N, F_N = 375 N), perché la traccia dell'unità non ne contiene nessuno. Aggiunto anche un riquadro sul fatto che il vantaggio è sulla forza e non sul lavoro.
