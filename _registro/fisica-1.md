@@ -340,3 +340,8 @@
 - Parole: 508 su 2 pagine di traccia (pag. 73–74)
 - Rettifica: nessuna. I passaggi della traccia (F_N = F_R + F_M, −F_M·b_M·sin90 + F_R·b_R·sin90 = 0 → F_R·b_R = F_M·b_M) sono corretti e verificati.
 - Aggiunta: un solo esempio numerico (F_R = 300 N, b_R = 0,20 m, b_M = 0,80 m → F_M = 75 N, F_N = 375 N), perché la traccia dell'unità non ne contiene nessuno. Aggiunto anche un riquadro sul fatto che il vantaggio è sulla forza e non sul lavoro.
+
+## Unità 52 — Leve di primo, secondo e terzo genere
+- Parole: 426 su 2 pagine di traccia (pag. 74–75: la seconda metà di p. 74, da "Leve di I genere", e la parte scritta di p. 75)
+- Rettifica: nessuna. Verificati con SymPy i due casi limite della classificazione: nel secondo genere b_R = t e b_M = L con 0 < t < L, quindi F_M/F_R = t/L < 1 sempre (vantaggiosa); nel terzo genere b_M = t e b_R = L, quindi F_M/F_R = L/t > 1 sempre (svantaggiosa). Nel primo genere il rapporto attraversa 1 quando il fulcro è a metà, coerentemente con la possibilità dei tre esiti indicata nella traccia.
+- Aggiunta: nessun esempio numerico e nessun strumento reale citato (la traccia non ne nomina). I tre disegni sono la trasposizione in SVG di quelli manoscritti, con l'aggiunta delle sole quote dei bracci, che rendono leggibile il confronto già affermato a parole ("sempre vantaggiose", "sempre svantaggiosa"). Un solo riquadro di nota, sulla distinzione fra genere (posizione dei punti) e vantaggio (confronto fra bracci), che è l'errore tipico qui. L'unico interattivo mostra la stessa cosa: scelto il genere, un cursore muove il punto centrale e riporta b_R/b_M, facendo vedere che nel primo genere il rapporto attraversa 1 e negli altri due no.
