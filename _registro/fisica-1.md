@@ -355,3 +355,8 @@
 - Parole: 258 su 1 pagina di traccia (la metà inferiore di p. 77, dal titolo "Pressione nei fluidi"; la metà superiore appartiene all'unità 53)
 - Rettifica: nessuna. La traccia di questa unità non contiene calcoli numerici: l'unica relazione è F = F⊥, coerente con la definizione P = F⊥/A già introdotta, e dimensionalmente N/m² = Pa.
 - Aggiunta: nessun contenuto nuovo. Gli unici elementi non presenti alla lettera sono una riga che spiega la conseguenza di F = F⊥ (non c'è componente da scartare, la forza contribuisce per intero) e un riquadro sull'errore tipico qui, cioè leggere "perpendicolare" come "verso il basso" dimenticando pareti laterali e spinta verso l'alto. Il disegno dei due barattoli, a fondo piatto e a fondo ondulato con le frecce normali alla superficie, è la trasposizione in SVG di quello manoscritto. Nessuno strumento interattivo: il disegno mostra già per intero l'unica cosa che l'unità afferma. Il principio di Pascal resta il solo nome, come nella traccia; la trattazione quantitativa è nell'unità 60.
+
+## Unità 55 — Legge di Stevino
+- Parole: 418 su 2 pagine di traccia (78–79)
+- Rettifica: nessuna. I passaggi della traccia (P = F⊥/A = mg/A, m = dV, V = Ah, semplificazione di A) e il valore P_atm = 1,013·10⁵ Pa sono corretti; il conto di verifica con d = 1000 kg/m³, g = 9,81 N/kg, h = 2 m dà 1,962·10⁴ Pa, arrotondato a 1,96·10⁴ Pa.
+- Aggiunta: un solo esempio numerico (acqua a 2 m di profondità), perché la traccia dell'unità non ne contiene nessuno. Nessun'altra aggiunta: nessuna dimostrazione, nessuna tabella, nessun confronto non presente nella traccia.
