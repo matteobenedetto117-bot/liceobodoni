@@ -229,3 +229,12 @@
 - Parole: 246 su 1 pagina di traccia (pag. 54 del PDF)
 - Rettifica: nessuna. Verificati con SymPy entrambi i risultati della traccia: 150 N/m · 0,03 m = 4,5 N esatti; 0,71 kg · 9,81 N/kg / 360 N/m = 0,0193475 m, cioè 0,019 m = 1,9 cm con due cifre significative, come scritto a mano. Verificata la coerenza dimensionale in entrambi i casi (N/m · m = N; kg · N/kg / (N/m) = m). Lo schizzo della traccia (molla appesa al soffitto, blocchetto, vettori F_el verso l'alto e F_P verso il basso) è ridisegnato in SVG con le etichette dei dati.
 - Aggiunta: nessun esempio nuovo, nessuno strumento interattivo. Un solo riquadro di avvertenza, sull'errore di sostituire 3 invece di 0,03: è l'errore tipico che la conversione esplicita della traccia serve proprio a evitare.
+
+## Unità 38 — Le forze di attrito: radente, volvente, viscoso
+- Parole: 229 su 1 pagina di traccia (pag. 55)
+- Rettifica: nessuna. La traccia di pagina 55 è corretta così com'è.
+- Aggiunta: nessuna. Nessun esempio numerico, perché la traccia della pagina è
+  interamente qualitativa e il modulo della forza di attrito compare solo a
+  pagina 56, cioè nell'unità successiva. Lo schema ad albero ATTRITO →
+  radente / volvente / viscoso e il dettaglio della zona di contatto sono i due
+  disegni della traccia, ridisegnati in SVG.
