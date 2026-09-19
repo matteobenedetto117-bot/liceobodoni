@@ -267,3 +267,18 @@
   situazione. Nessuno strumento interattivo. I due schemi della pagina (forza
   esterna inclinata con le sue componenti, e blocco con F, F_s e F_p = F_⊥)
   sono ridisegnati in SVG.
+
+## Unità 41 — Equilibrio statico, punto materiale e corpo esteso
+- Parole: 267 su 1 pagina di traccia (pag. 59), comprese intestazione, sommario
+  e didascalia; il testo corrente è circa 230.
+- Rettifica: nessuna. La pagina non contiene formule né dati numerici: niente da
+  verificare con SymPy.
+- Aggiunta: due sole cose. (1) L'esempio del sasso nel punto più alto della
+  traiettoria: la traccia non contiene alcun esempio, e senza di esso la
+  differenza fra «in quiete» e «vi rimane permanentemente» — le due condizioni
+  che la definizione mette in fila — resta una sfumatura verbale. (2) Uno schema
+  SVG che affianca i due modelli: la pagina di traccia non ha disegni, ma la
+  distinzione punto materiale / corpo esteso è per sua natura geometrica e in
+  parole richiedeva molte più righe di quante il vincolo ne conceda. Un solo
+  riquadro, sull'errore di leggere «punto materiale» come «corpo piccolo».
+  Nessuno strumento interattivo.
