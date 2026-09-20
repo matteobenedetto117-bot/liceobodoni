@@ -3,18 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sistemi di equazioni: definizioni, grado, forma normale — Matematica seconda</title>
+<title>Sistemi e loro grado — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.due{display:flex;gap:24px;flex-wrap:wrap;margin:20px 0}
-.due>div{flex:1;min-width:220px}
-.due p{margin:4px 0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
 </style>
 </head>
 <body>
@@ -23,11 +48,7 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Sistemi lineari di equazioni &middot; Unità 03</p>
-  <h1>Sistemi di equazioni: definizioni, grado, forma normale</h1>
-  <p class="sommario">Un sistema mette insieme più equazioni e cerca i valori che le
-  soddisfano tutte insieme: qui vediamo come si classifica un sistema in base alle sue
-  soluzioni e in base al suo grado, e come si scrive nella forma normale che useremo per
-  risolverlo.</p>
+  <h1>Sistemi e loro grado</h1>
 </header>
 
 <div class="def">
@@ -38,8 +59,10 @@ cerchiamo le soluzioni comuni, ossia i valori da attribuire alle incognite che v
 </div>
 
 <p>Per esempio, il sistema</p>
-$$\begin{cases}3x+2y=1\\x+3y=4\end{cases}$$
-<p>chiede una coppia $(x,y)$ che renda vere entrambe le equazioni insieme, non una alla volta.
+
+<p class="eq">$$\begin{cases}3x+2y=1\\x+3y=4\end{cases}$$</p>
+
+<p>chiede una coppia $(x;y)$ che renda vere entrambe le equazioni insieme, non una alla volta.
 Due sistemi sono <strong>equivalenti</strong> se hanno le stesse soluzioni.</p>
 
 <h2>Determinato, impossibile, indeterminato</h2>
@@ -47,17 +70,21 @@ Due sistemi sono <strong>equivalenti</strong> se hanno le stesse soluzioni.</p>
 <p>Come per una singola equazione, anche per un sistema le soluzioni possono essere in numero
 finito, assenti, o infinite. Un sistema è:</p>
 
-<div class="due">
-<div><p><strong>determinato</strong> se ha un numero finito di soluzioni;</p></div>
-<div><p><strong>impossibile</strong> se non ha soluzioni;</p></div>
-<div><p><strong>indeterminato</strong> se ha infinite soluzioni.</p></div>
-</div>
+<ul>
+<li><strong>determinato</strong> se ha un numero finito di soluzioni;</li>
+<li><strong>impossibile</strong> se non ha soluzioni;</li>
+<li><strong>indeterminato</strong> se ha infinite soluzioni.</li>
+</ul>
 
 <p>Un sistema è impossibile quando le equazioni si contraddicono: in</p>
-$$\begin{cases}7x-y=3\\7x-y=8\end{cases}$$
+
+<p class="eq">$$\begin{cases}7x-y=3\\7x-y=8\end{cases}$$</p>
+
 <p>la stessa espressione $7x-y$ dovrebbe valere sia $3$ sia $8$, il che è impossibile. È invece
 indeterminato quando una equazione è conseguenza dell'altra, come in</p>
-$$\begin{cases}7x-y=3\\4(7x-y)=12\end{cases}$$
+
+<p class="eq">$$\begin{cases}7x-y=3\\4(7x-y)=12\end{cases}$$</p>
+
 <p>perché la seconda equazione, divisa per $4$, è $7x-y=3$: è la stessa equazione scritta in
 un altro modo, quindi ogni soluzione della prima va bene anche per la seconda.</p>
 
@@ -70,7 +97,9 @@ equazioni.</p>
 </div>
 
 <p>Nel sistema</p>
-$$\begin{cases}x^3+xy=1\\x^2+y+y^2=16\end{cases}$$
+
+<p class="eq">$$\begin{cases}x^3+xy=1\\x^2+y+y^2=16\end{cases}$$</p>
+
 <p>la prima equazione ha grado $3$ (per il termine $x^3$), la seconda ha grado $2$: il sistema
 ha quindi grado $3\cdot 2=6$.</p>
 
@@ -81,10 +110,14 @@ limitandoci a sistemi lineari in due incognite.</p>
 
 <p>Così come un'equazione lineare in forma normale si scrive $ax+by=c$, un sistema lineare in
 due incognite in forma normale si scrive</p>
-$$\begin{cases}ax+by=c\\a'x+b'y=c'\end{cases}$$
-<p>dove $a,b,a',b'$ sono i <strong>coefficienti</strong> delle incognite e $c,c'$ sono i
-<strong>termini noti</strong>. Per esempio, il sistema</p>
-$$\begin{cases}5x+2y=6\\2x-y=8\end{cases}$$
+
+<p class="eq">$$\begin{cases}ax+by=c\\a'x+b'y=c'\end{cases}$$</p>
+
+<p>dove $a$, $b$, $a'$, $b'$ sono i <strong>coefficienti</strong> delle incognite e $c$, $c'$
+sono i <strong>termini noti</strong>. Per esempio, il sistema</p>
+
+<p class="eq">$$\begin{cases}5x+2y=6\\2x-y=8\end{cases}$$</p>
+
 <p>è già scritto in questa forma, pronto per essere risolto.</p>
 
 
@@ -92,5 +125,22 @@ $$\begin{cases}5x+2y=6\\2x-y=8\end{cases}$$
 <footer><p>Matematica seconda &middot; Sistemi lineari di equazioni &middot; Unità 03</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

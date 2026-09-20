@@ -22,10 +22,15 @@
 - Revisione, figure interattive: nel fascio y = mx un cursore muove la retta evidenziata fra m = −4 e m = 4, con il colore che segue il segno (rosso se sale, verde se scende, blu nel caso escluso m = 0); nella figura delle funzioni lineari un cursore cambia q fra −3 e 3 e fa scorrere in verticale la retta di coefficiente angolare 3/2, con il pallino sull'intercetta, la retta y = (3/2)x + 1 tratteggiata come riferimento e la segnalazione dei due casi notevoli (q = −1/2, parallela per (1; 1), e q = 0, caso escluso).
 - Revisione, aggiunta: il cursore su q mostra anche valori diversi dai due della traccia; serve a far vedere la traslazione verticale, non aggiunge contenuto.
 
-## Unità 03 — Sistemi di equazioni: definizioni, grado, forma normale
+## Unità 03 — Sistemi e loro grado
 - Parole: 379 su 2 pagine di traccia
 - Rettifica: nessuna. Il grado del sistema {x³+xy=1, x²+y+y²=16} e l'equivalenza fra {7x-y=3, 4(7x-y)=12} e {7x-y=3, 7x-y=3} sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna.
+
+- Revisione (20/09/2026): titolo scelto dall'utente «Sistemi e loro grado», come sulla traccia (in `_dati` la cartella resta `03-sistemi-di-equazioni-definizioni-grado-forma-normale`, l'indirizzo non cambia); titoletti tenuti tutti e tre; tolto il sottotitolo dell'intestazione.
+- Revisione, impaginazione: passata all'impaginazione «a quaderno» per la LIM; tutti i sistemi in display sono ora in riquadro azzurro; i tre casi (determinato, impossibile, indeterminato), prima su tre colonne affiancate, sono un elenco puntato, come sulla traccia.
+- Revisione, contenuto: nessuna rettifica. Rilette le pagine 6–7 della traccia; ricontrollati i gradi del sistema {x³+xy=1, x²+y+y²=16} (3 e 2, grado 6) e l'equivalenza fra 4(7x−y)=12 e 7x−y=3.
+- Revisione, figure: nessuna. La traccia di questa unità non ha disegni e non ne sono stati aggiunti; l'interpretazione grafica dei tre casi è l'oggetto dell'unità 04.
 
 ## Unità 04 — Interpretazione grafica di un sistema
 - Parole: 401 su 2 pagine di traccia
