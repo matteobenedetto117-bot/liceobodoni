@@ -37,6 +37,13 @@
 - Rettifica: nessuna. Le tre coppie di rette (caso determinato con soluzione (2;4), caso impossibile y=2x+2/y=2x+6, caso indeterminato y=-x/2+3 su entrambe) sono state verificate con SymPy e risultano corrette così come nella traccia.
 - Aggiunta: nessuna. Il riquadro finale sul ruolo del coefficiente angolare riprende solo ciò che i tre casi della traccia già mostrano singolarmente.
 
+- Revisione (20/09/2026): titolo confermato dall'utente «Interpretazione grafica di un sistema»; i tre titoletti dei casi, prima `h3` dentro tre riquadri, sono ora `h2` normali; tolto il sottotitolo dell'intestazione; il riquadro finale di sintesi è diventato una nota rossa «Da ricordare».
+- Revisione, impaginazione: passata all'impaginazione «a quaderno» per la LIM, con i sistemi e i passaggi in display nei riquadri azzurri.
+- Revisione, contenuto: nessuna rettifica concettuale. Rilette le pagine 8–9 della traccia; ricontrollate le tre coppie di rette (y=3/2x+1 e y=−x+6 con soluzione (2; 4), y=2x+2 e y=2x+6, y=−1/2x+3 due volte). Corretta una parola: nel caso impossibile si diceva «le intercette sono diverse», ora «i termini noti sono diversi», il termine usato nell'unità 03.
+- Revisione, figure: le tre figure ridisegnate in SVG calcolato dalle equazioni (prima erano rette tracciate a occhio, con pendenze e intersezione non corrispondenti ai valori scritti); colori della traccia, rossa la prima equazione e verde la seconda.
+- Revisione, figure interattive: nelle tre figure lo stesso cursore su x segna il punto corrispondente su ciascuna retta e misura con un tratteggio la differenza fra le due y, scritta accanto al cursore. Nel primo caso la differenza si annulla solo in x = 2 e compare in verde «stessa y: è la soluzione (2; 4)»; nel secondo resta 4 per ogni x; nel terzo è sempre zero.
+- Revisione, aggiunta: la lettura «differenza fra le due y» non è sulla traccia; è il modo in cui il cursore rende visibile perché i tre casi sono diversi.
+
 ## Unità 05 — Metodo di sostituzione
 - Parole: 151 su 1 pagina di traccia
 - Rettifica: nessuna. Il sistema {2x-3y=-12, x+4y=5} e i passaggi (x=5-4y, -11y=-22, y=2, x=-3) sono stati verificati con SymPy e risultano corretti così come nella traccia.

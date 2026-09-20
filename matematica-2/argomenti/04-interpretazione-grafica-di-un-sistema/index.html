@@ -5,19 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interpretazione grafica di un sistema — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.caso h3{margin:0 0 10px;font-size:1.15rem}
-.figura{text-align:center;margin:16px 0}
-.figura svg{max-width:280px;width:100%;height:auto}
-.figura figcaption{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin-top:6px}
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:14px 18px;margin:20px 0;font-size:.96rem}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(300px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:7.5rem;text-align:left}
 </style>
 </head>
 <body>
@@ -27,93 +56,100 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Sistemi lineari di equazioni &middot; Unità 04</p>
   <h1>Interpretazione grafica di un sistema</h1>
-  <p class="sommario">Ogni equazione lineare in due incognite è una retta nel piano cartesiano:
-  risolvere un sistema di due equazioni vuol dire allora trovare i punti che stanno su entrambe
-  le rette insieme, cioè i loro punti di intersezione. Da come si dispongono due rette nascono i
-  tre casi possibili per un sistema.</p>
 </header>
 
-<div class="caso">
-<h3>Sistema determinato: rette incidenti</h3>
+<p>Ogni equazione lineare in due incognite è una retta nel piano cartesiano: risolvere un sistema
+di due equazioni vuol dire allora cercare i punti che stanno su entrambe le rette. Da come si
+dispongono le due rette nascono i tre casi possibili per un sistema.</p>
+
+<h2>Sistema determinato: rette incidenti</h2>
+
 <p>Nel sistema</p>
-$$\begin{cases}3x-2y=-2\\x+y=6\end{cases}$$
+
+<p class="eq">$$\begin{cases}3x-2y=-2\\x+y=6\end{cases}$$</p>
+
 <p>scriviamo entrambe le equazioni in forma esplicita, così da leggerne subito il coefficiente
 angolare:</p>
-$$3x-2y=-2 \;\Rightarrow\; y=\tfrac{3}{2}x+1 \qquad\qquad x+y=6 \;\Rightarrow\; y=-x+6$$
-<p>I coefficienti angolari, $\tfrac{3}{2}$ e $-1$, sono diversi: le due rette non sono
-parallele e quindi si incontrano in un solo punto. Risolvendo si trova $x=2$, $y=4$: il sistema
-è <strong>determinato</strong>, con l'unica soluzione $(2;4)$, il punto in cui le due rette si
+
+<p class="eq">$$3x-2y=-2 \;\Rightarrow\; y=\tfrac{3}{2}x+1 \qquad\qquad x+y=6 \;\Rightarrow\; y=-x+6$$</p>
+
+<p>I coefficienti angolari, $\tfrac{3}{2}$ e $-1$, sono diversi: le due rette non sono parallele e
+quindi si incontrano in un solo punto. Risolvendo si trova $x=2$, $y=4$: il sistema è
+<strong>determinato</strong>, con l'unica soluzione $(2;4)$, il punto in cui le due rette si
 tagliano.</p>
-<figure class="figura">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="fr4a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="20" y1="190" x2="280" y2="190" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fr4a)"/>
-<line x1="60" y1="210" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fr4a)"/>
-<text x="270" y="205" font-size="12" font-family="sans-serif">x</text>
-<text x="42" y="30" font-size="12" font-family="sans-serif">y</text>
-<line x1="30" y1="215" x2="230" y2="35" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="30" y1="70" x2="245" y2="215" stroke="var(--verde)" stroke-width="2"/>
-<circle cx="140" cy="110" r="4" fill="var(--blu)"/>
-<line x1="140" y1="110" x2="140" y2="190" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-<line x1="60" y1="110" x2="140" y2="110" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-<text x="146" y="105" font-size="12" font-family="sans-serif">(2; 4)</text>
-</svg>
-<figcaption>Le rette $y=\tfrac32x+1$ e $y=-x+6$ si incontrano in un solo punto.</figcaption>
-</figure>
+
+<div class="fig">
+<svg id="fig1" viewBox="0 0 340 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px"></svg>
+<div class="cursore">
+<label for="c1">$x$</label>
+<input id="c1" type="range" min="-2" max="6" step="0.1" value="-1" aria-label="Valore di x">
+<span class="val" id="v1"></span>
+</div>
+<p class="did">In rosso $y=\frac{3}{2}x+1$, in verde $y=-x+6$. Il cursore fissa un valore di $x$ e
+segna il punto di ciascuna retta: il tratteggio fra i due misura la differenza fra le due $y$.
+La differenza si annulla una volta sola, in $x=2$, e lì le due rette si toccano: quel punto,
+$(2;4)$, è la soluzione del sistema.</p>
 </div>
 
-<div class="caso">
-<h3>Sistema impossibile: rette parallele</h3>
+<h2>Sistema impossibile: rette parallele</h2>
+
 <p>Nel sistema</p>
-$$\begin{cases}2x-y=-2\\2x-y=-6\end{cases}$$
+
+<p class="eq">$$\begin{cases}2x-y=-2\\2x-y=-6\end{cases}$$</p>
+
 <p>la forma esplicita è</p>
-$$y=2x+2 \qquad\qquad y=2x+6$$
-<p>Il coefficiente angolare è lo stesso, $2$, ma le intercette sono diverse: le due rette sono
+
+<p class="eq">$$y=2x+2 \qquad\qquad y=2x+6$$</p>
+
+<p>Il coefficiente angolare è lo stesso, $2$, ma i termini noti sono diversi: le due rette sono
 <strong>parallele e distinte</strong>, quindi non hanno nessun punto in comune. Il sistema è
-<strong>impossibile</strong>: non esiste nessuna coppia $(x,y)$ che soddisfi entrambe le
+<strong>impossibile</strong>: non esiste nessuna coppia $(x;y)$ che soddisfi entrambe le
 equazioni.</p>
-<figure class="figura">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="fr4b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="20" y1="190" x2="280" y2="190" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fr4b)"/>
-<line x1="60" y1="210" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fr4b)"/>
-<text x="270" y="205" font-size="12" font-family="sans-serif">x</text>
-<text x="42" y="30" font-size="12" font-family="sans-serif">y</text>
-<line x1="30" y1="210" x2="200" y2="30" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="70" y1="210" x2="240" y2="30" stroke="var(--verde)" stroke-width="2"/>
-</svg>
-<figcaption>Le rette $y=2x+2$ e $y=2x+6$ non si incontrano mai.</figcaption>
-</figure>
+
+<div class="fig">
+<svg id="fig2" viewBox="0 0 340 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px"></svg>
+<div class="cursore">
+<label for="c2">$x$</label>
+<input id="c2" type="range" min="-4" max="2" step="0.1" value="-1" aria-label="Valore di x">
+<span class="val" id="v2"></span>
+</div>
+<p class="did">In rosso $y=2x+2$, in verde $y=2x+6$. Muovendo il cursore la differenza fra le due
+$y$ resta $4$ per ogni valore di $x$: le rette salgono con la stessa pendenza e non si
+raggiungono mai.</p>
 </div>
 
-<div class="caso">
-<h3>Sistema indeterminato: rette coincidenti</h3>
+<h2>Sistema indeterminato: rette coincidenti</h2>
+
 <p>Nel sistema</p>
-$$\begin{cases}x+2y=6\\3x+6y=18\end{cases}$$
+
+<p class="eq">$$\begin{cases}x+2y=6\\3x+6y=18\end{cases}$$</p>
+
 <p>portando entrambe le equazioni in forma esplicita:</p>
-$$x+2y=6 \;\Rightarrow\; y=-\tfrac{1}{2}x+3 \qquad\qquad 3x+6y=18 \;\Rightarrow\; y=-\tfrac{1}{2}x+3$$
+
+<p class="eq">$$x+2y=6 \;\Rightarrow\; y=-\tfrac{1}{2}x+3 \qquad\qquad 3x+6y=18 \;\Rightarrow\; y=-\tfrac{1}{2}x+3$$</p>
+
 <p>Le due equazioni, una volta semplificate, sono la stessa retta: la seconda equazione è la
 prima moltiplicata per $3$. Le rette sono <strong>coincidenti</strong>, quindi hanno infiniti
 punti in comune. Il sistema è <strong>indeterminato</strong>: ogni punto della retta
 $y=-\tfrac12x+3$ è soluzione.</p>
-<figure class="figura">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="fr4c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="20" y1="190" x2="280" y2="190" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fr4c)"/>
-<line x1="60" y1="210" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.5" marker-end="url(#fr4c)"/>
-<text x="270" y="205" font-size="12" font-family="sans-serif">x</text>
-<text x="42" y="30" font-size="12" font-family="sans-serif">y</text>
-<line x1="30" y1="100" x2="260" y2="205" stroke="var(--rosso)" stroke-width="2.5"/>
-<line x1="30" y1="97" x2="260" y2="202" stroke="var(--verde)" stroke-width="1.2" stroke-dasharray="6,4"/>
-</svg>
-<figcaption>Le due equazioni descrivono la stessa retta.</figcaption>
-</figure>
+
+<div class="fig">
+<svg id="fig3" viewBox="0 0 340 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px"></svg>
+<div class="cursore">
+<label for="c3">$x$</label>
+<input id="c3" type="range" min="-2" max="8" step="0.1" value="0" aria-label="Valore di x">
+<span class="val" id="v3"></span>
+</div>
+<p class="did">La prima equazione è disegnata in rosso, la seconda in verde tratteggiato sopra di
+essa: sono la stessa retta. Qualunque valore prenda il cursore, i due punti restano sovrapposti e
+la differenza fra le $y$ è sempre zero: ogni punto della retta risolve il sistema.</p>
 </div>
 
 <div class="nota">
-Il coefficiente angolare decide subito il caso: rette con coefficienti angolari diversi si
+<span class="et">Da ricordare</span>
+<p>Il coefficiente angolare decide subito il caso: rette con coefficienti angolari diversi si
 incontrano sempre in un punto solo; con lo stesso coefficiente angolare, o sono parallele
-distinte (sistema impossibile) o sono la stessa retta (sistema indeterminato).
+distinte (sistema impossibile) o sono la stessa retta (sistema indeterminato).</p>
 </div>
 
 
@@ -121,5 +157,121 @@ distinte (sistema impossibile) o sono la stessa retta (sistema indeterminato).
 <footer><p>Matematica seconda &middot; Sistemi lineari di equazioni &middot; Unità 04</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?1:d).replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+4,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.retta=function(mm,qq,o,dove){
+  var X=this.X,Y=this.Y,xr=this.xr,yr=this.yr,pt=[[xr[0],mm*xr[0]+qq],[xr[1],mm*xr[1]+qq]];
+  if(mm!==0){[yr[0],yr[1]].forEach(function(y){var x=(y-qq)/mm; if(x>xr[0]&&x<xr[1])pt.push([x,y]);});}
+  pt=pt.filter(function(p){return p[1]>=yr[0]-1e-9&&p[1]<=yr[1]+1e-9;});
+  pt.sort(function(a,b){return a[0]-b[0];});
+  var a=pt[0], b=pt[pt.length-1];
+  var e=el('line',Object.assign({x1:X(a[0]),y1:Y(a[1]),x2:X(b[0]),y2:Y(b[1]),'stroke-linecap':'round'},o||{}));
+  (dove==='sotto'?this.sotto:this.sopra).appendChild(e);
+  return e;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+
+/* ---------- i tre casi: due rette e un valore di x ---------- */
+function caso(o){
+  var svg=document.getElementById(o.svg); if(!svg)return;
+  var P=new Piano(svg,o.xr,o.yr,{l:30,r:18,t:16,b:34});
+  P.assi(o.tx,o.ty);
+  P.retta(o.m1,o.q1,{stroke:'var(--rosso)','stroke-width':2.4});
+  P.retta(o.m2,o.q2,Object.assign({stroke:'var(--verde)','stroke-width':o.coincidenti?2:2.4},
+    o.coincidenti?{'stroke-dasharray':'9,7'}:{}));
+  if(o.punto){
+    P.add(el('circle',{cx:P.X(o.punto[0]),cy:P.Y(o.punto[1]),r:4,fill:'var(--blu)'}));
+    P.add(txt(P.X(o.punto[0])+10,P.Y(o.punto[1])-11,'(2; 4)',{fill:'var(--blu)','font-size':12}),'testo');
+  }
+  var seg=P.add(el('line',{stroke:'var(--inchiostro)','stroke-width':1.4,'stroke-dasharray':'4,3'}));
+  var p1=P.add(el('circle',{r:5,fill:'var(--rosso)'}));
+  var p2=P.add(el('circle',{r:o.coincidenti?3.2:5,fill:'var(--verde)'}));
+  var eti=P.add(txt(P.W/2,P.H-8,'',{'text-anchor':'middle','font-size':13}),'testo');
+  var cur=document.getElementById(o.cur), val=document.getElementById(o.val);
+  function dis(){
+    var x=parseFloat(cur.value), y1=o.m1*x+o.q1, y2=o.m2*x+o.q2, d=Math.abs(y1-y2);
+    p1.setAttribute('cx',P.X(x)); p1.setAttribute('cy',P.Y(y1));
+    p2.setAttribute('cx',P.X(x)); p2.setAttribute('cy',P.Y(y2));
+    seg.setAttribute('x1',P.X(x)); seg.setAttribute('y1',P.Y(y1));
+    seg.setAttribute('x2',P.X(x)); seg.setAttribute('y2',P.Y(y2));
+    seg.setAttribute('opacity',d<0.05?0:1);
+    val.textContent='x = '+num(x)+' differenza = '+num(d);
+    if(d<0.06){eti.textContent=o.uguali;eti.setAttribute('fill','var(--verde)');}
+    else{eti.textContent=o.diversi;eti.setAttribute('fill','var(--grigio)');}
+  }
+  cur.addEventListener('input',dis); dis();
+}
+
+caso({svg:'fig1',cur:'c1',val:'v1',xr:[-2.4,6.4],yr:[-2.6,9],tx:[2],ty:[4],
+  m1:1.5,q1:1,m2:-1,q2:6,punto:[2,4],
+  uguali:'stessa y: è la soluzione (2; 4)',diversi:'le due y sono diverse'});
+caso({svg:'fig2',cur:'c2',val:'v2',xr:[-4.4,2.4],yr:[-6.4,10.4],tx:[],ty:[2,6],
+  m1:2,q1:2,m2:2,q2:6,
+  uguali:'—',diversi:'la differenza resta 4: non si incontrano mai'});
+caso({svg:'fig3',cur:'c3',val:'v3',xr:[-2.4,8.4],yr:[-2.4,5],tx:[],ty:[3],
+  m1:-0.5,q1:3,m2:-0.5,q2:3,coincidenti:true,
+  uguali:'stessa y per ogni x: infinite soluzioni',diversi:''});
+
+})();
+</script>
 </body>
 </html>
