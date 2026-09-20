@@ -47,6 +47,17 @@ definizione formale.
   4. tre pannelli per il limite infinito in un punto: 1/(x−1)², −1/(x−1)², 1/(x−1);
   5. tre pannelli per il limite finito all'infinito: 2 + 3/(1+x²), arctan x, 1 + e^(−x);
   6. tre pannelli per il limite infinito all'infinito: x²/10, x³/60, sin x (limite inesistente).
+- Seconda passata, su richiesta dell'insegnante, per l'uso alla lavagna:
+  le didascalie sotto i pannelli sono ora sole formule, senza parole: la funzione resta in chiaro e
+  i valori dei limiti stanno in un riquadro verde nascosto, che si scopre con il tasto "risultato"
+  della figura o con il tasto "Mostra tutti i risultati" a inizio pagina (come nelle unità 02 e 03).
+  Tolti tutti i testi che precedevano le figure dei casi: le sezioni sui limiti infiniti in un punto
+  e sui limiti per x→±∞ sono ora solo titoletto e figura, e il commento che seguiva l'ultima figura
+  è stato tolto. Tolto anche il commento dopo il riquadro della definizione. La definizione di
+  intorno (simmetrico, di raggio δ) è stata reintrodotta nel passaggio in cui servono le due zone
+  misurabili, prima della fascia ε. Nella figura della definizione il δ è ora evidenziato: due
+  segmenti con freccia da 3−δ a 3 e da 3 a 3+δ, con le ascisse 3−δ e 3+δ marcate sull'asse quando
+  c'è spazio.
 - Impaginazione a quaderno invariata (html 165%, righe ogni 1,8rem, script di allineamento
   rilanciato da MathJax); formule in display in <p class="eq"> con riquadro azzurro.
 

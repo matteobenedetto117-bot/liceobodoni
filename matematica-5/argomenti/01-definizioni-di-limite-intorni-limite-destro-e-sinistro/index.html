@@ -44,7 +44,18 @@ h1{position:relative;top:.5rem}
 .foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
 .def .eq,.nota .eq{text-align:center;margin:0}
 .did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
-.did-parti .did{margin:0}
+.did-parti .did{margin:0;overflow-wrap:anywhere}
+.did-parti.ris .did{background:#eaf1ea;border-radius:8px;padding:6px 8px;color:var(--inchiostro)}
+.ris[hidden]{display:none}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;
+  white-space:nowrap;margin-top:10px}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
 .pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
 @media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
 </style>
@@ -62,26 +73,28 @@ h1{position:relative;top:.5rem}
 punto la funzione non esiste, e come si comporta quando la variabile cresce oltre ogni valore. In
 questa unità l'idea si costruisce guardando i grafici; il calcolo vero e proprio arriva dopo.</p>
 
+<div class="barra-ris"><button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i
+risultati</button></div>
+
 <h2>Limite finito per $x$ che tende a $x_0$</h2>
 
-<p>Consideriamo la funzione</p>
-
-<p class="eq">$$f(x)=\frac{(x^2+9)(x-3)}{3(x-3)}$$</p>
+<div class="fig">
+<svg id="g-buco" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="did-parti" style="--n:1">
+<p class="did">$f(x)=\dfrac{(x^2+9)(x-3)}{3(x-3)}$</p>
+</div>
+<div class="did-parti ris" style="--n:1" id="r-buco" hidden>
+<p class="did">$\lim\limits_{x\to 3}f(x)=6 \qquad f(3) \text{ non esiste}$</p>
+</div>
+<button type="button" class="btn-ris" aria-controls="r-buco" aria-expanded="false">risultato</button>
+</div>
 
 <p>Il denominatore si annulla in $x=3$, quindi il dominio è $\mathbb{R}-\{3\}$ e $f(3)$ non esiste.
 Per ogni altro valore si può semplificare il fattore $(x-3)$ e resta $f(x)=\dfrac{x^2+9}{3}$: il
 grafico è quello di una parabola a cui è stato tolto un punto. Avvicinandoci a 3, sia da sinistra
-sia da destra, i valori della funzione si stringono attorno a 6.</p>
-
-<div class="fig">
-<svg id="g-buco" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg"></svg>
-<p class="did">Le frecce indicano il verso in cui ci muoviamo sulla curva. Da qualunque parte
-arriviamo, la quota del punto si avvicina a 6, mentre il cerchietto vuoto ricorda che in $x=3$ la
-funzione non è definita.</p>
-</div>
-
-<p>Il buco in $x=3$ non impedisce alla funzione di avere una <strong>tendenza</strong> precisa
-mentre ci avviciniamo a quel punto, e questa tendenza si scrive</p>
+sia da destra, i valori della funzione si stringono attorno a 6. Il buco in $x=3$ non impedisce
+alla funzione di avere una <strong>tendenza</strong> precisa mentre ci avviciniamo a quel punto, e
+questa tendenza si scrive</p>
 
 <p class="eq">$$\lim_{x\to 3}f(x)=6$$</p>
 
@@ -92,21 +105,31 @@ comportamento della funzione <em>senza</em> parlare del valore nel punto: nel li
 $x_0$ è sempre escluso.</p>
 </div>
 
-<p>Frasi come «si avvicina» però non bastano a definire niente: quanto vicino è vicino? Per rendere
-l'idea verificabile la si riformula così: $f(x)$ finisce dentro una fascia attorno a 6, stretta
-quanto si vuole. Una fascia si può misurare. Fissiamo allora un numero positivo $\varepsilon$ e
-costruiamo attorno a 6 la fascia che va da $6-\varepsilon$ a $6+\varepsilon$: dire che $f(x)$ sta
-in quella fascia significa</p>
+<p>Frasi come «si avvicina» però non bastano a definire niente: quanto vicino è vicino? Servono due
+zone misurabili, una attorno al punto e una attorno al valore. La prima si chiama intorno.</p>
+
+<div class="def">
+<span class="et">Definizione &middot; intorno di un punto</span>
+<p>Dato un numero reale $x_0$ e un numero reale positivo $\delta$, si chiama
+<strong>intorno</strong> di $x_0$ di raggio $\delta$ l'insieme dei punti che distano da $x_0$ meno
+di $\delta$:</p>
+<p class="eq">$$I_\delta(x_0)=\left]\,x_0-\delta\;;\;x_0+\delta\,\right[ \qquad\text{ovvero}\qquad
+|x-x_0|&lt;\delta$$</p>
+<p>Le parentesi rivolte all'esterno indicano che gli estremi sono esclusi.</p>
+</div>
+
+<p>Per la seconda zona si fa la stessa cosa attorno al valore: si fissa un numero positivo
+$\varepsilon$ e si costruisce attorno a 6 la fascia che va da $6-\varepsilon$ a $6+\varepsilon$.
+Dire che $f(x)$ sta in quella fascia significa</p>
 
 <p class="eq">$$6-\varepsilon&lt;f(x)&lt;6+\varepsilon \qquad\text{ovvero}\qquad
 |f(x)-6|&lt;\varepsilon$$</p>
 
 <p>perché $|f(x)-6|$ è la distanza fra $f(x)$ e 6. Il limite vale 6 se, per quanto stretta sia la
-fascia richiesta, riusciamo a trovare attorno a 3 un intervallo &mdash; lo chiamiamo
-<strong>intorno</strong> di 3, e lo scriviamo $|x-3|&lt;\delta$ &mdash; in cui tutti i valori della
-funzione ci cadano dentro. È utile pensarlo come una sfida a due: il primo fissa $\varepsilon$,
-cioè decide quanto essere severo; il secondo deve rispondere esibendo il $\delta$. Nota l'ordine:
-prima si fissa $\varepsilon$, poi si cerca $\delta$, e più stretta è la fascia più piccolo va preso
+fascia richiesta, riusciamo a trovare un intorno di 3 in cui tutti i valori della funzione ci
+cadano dentro. È utile pensarlo come una sfida a due: il primo fissa $\varepsilon$, cioè decide
+quanto essere severo; il secondo deve rispondere esibendo il raggio $\delta$. Nota l'ordine: prima
+si fissa $\varepsilon$, poi si cerca $\delta$, e più stretta è la fascia più piccolo va preso
 l'intorno.</p>
 
 <div class="fig">
@@ -115,18 +138,16 @@ l'intorno.</p>
 <svg id="g-eps1" viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
 <div class="did-parti" style="--n:2">
-<p class="did">Con $\varepsilon=1{,}5$ la fascia verde è larga e l'intorno azzurro che risponde
-alla richiesta è ampio.</p>
-<p class="did">Con $\varepsilon=0{,}5$ la fascia si stringe, e si stringe di conseguenza anche
-l'intorno di 3: la risposta però esiste ancora.</p>
+<p class="did">$\varepsilon=0{,}9 \qquad \delta=0{,}42$</p>
+<p class="did">$\varepsilon=0{,}3 \qquad \delta=0{,}15$</p>
 </div>
 </div>
 
 <div class="def">
 <span class="et">Definizione &middot; limite finito per $x$ che tende a $x_0$</span>
 <p>La funzione $f(x)$ ha per limite il numero reale $\ell$ per $x$ che tende a $x_0$ quando,
-comunque si scelga un numero reale positivo $\varepsilon$, si può determinare un numero positivo
-$\delta$ tale che</p>
+comunque si scelga un numero reale positivo $\varepsilon$, si può determinare un intorno di $x_0$
+di raggio $\delta$ tale che</p>
 <p class="eq">$$|f(x)-\ell|&lt;\varepsilon \qquad \text{per ogni } x \text{ con }
 0&lt;|x-x_0|&lt;\delta$$</p>
 <p>In forma compatta:</p>
@@ -134,48 +155,30 @@ $\delta$ tale che</p>
 |f(x)-\ell|&lt;\varepsilon \quad \forall x:\,0&lt;|x-x_0|&lt;\delta$$</p>
 </div>
 
-<p>Il $\forall\varepsilon$ è la sfida e deve valere per ogni severità; l'$\exists\,\delta$ è la
-risposta, e basta esibirne uno qualsiasi che funzioni. La condizione $0&lt;|x-x_0|$ dice che il
-punto $x_0$ resta escluso, come già osservato. È l'unica definizione formale di questa unità: tutti
-gli altri casi si ottengono da questa cambiando che cosa si chiede e dove lo si chiede.</p>
-
 <h2>Limite destro e limite sinistro</h2>
-
-<p>Una funzione può comportarsi in modo diverso a sinistra e a destra dello stesso punto. Per
-descriverla servono due limiti separati: il <strong>limite sinistro</strong>, che si scrive
-$\lim\limits_{x\to x_0^{-}}f(x)$ e si calcola avvicinandosi solo da sinistra, e il
-<strong>limite destro</strong> $\lim\limits_{x\to x_0^{+}}f(x)$, avvicinandosi solo da destra.</p>
 
 <div class="fig">
 <div class="pannelli" style="--n:2">
 <svg id="g-lat0" viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg"></svg>
 <svg id="g-lat1" viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
-<div class="did-parti" style="--n:2">
-<p class="did">Da sinistra la quota sale verso 2, da destra scende verso 6: i due limiti
-unilaterali esistono ma sono diversi, quindi il limite per $x\to 5$ non esiste. Il valore
-$f(5)=4$, segnato dal punto pieno, non c'entra con nessuno dei due.</p>
-<p class="did">Qui i due lati portano allo stesso numero: il limite per $x\to 5$ esiste e vale 2,
-anche se la funzione in 5 vale 4. Il limite non guarda il valore nel punto.</p>
+<div class="did-parti ris" style="--n:2" id="r-lat" hidden>
+<p class="did">$\lim\limits_{x\to 5^{-}}f(x)=2$<br>$\lim\limits_{x\to 5^{+}}f(x)=6$<br>$f(5)=4$
+<br>$\nexists\;\lim\limits_{x\to 5}f(x)$</p>
+<p class="did">$\lim\limits_{x\to 5^{-}}f(x)=2$<br>$\lim\limits_{x\to 5^{+}}f(x)=2$<br>$f(5)=4$
+<br>$\lim\limits_{x\to 5}f(x)=2$</p>
 </div>
+<button type="button" class="btn-ris" aria-controls="r-lat" aria-expanded="false">risultato</button>
 </div>
 
-<p>Il limite (quello senza segni, detto anche bilaterale) esiste quando il limite destro e il
-limite sinistro esistono entrambi <em>e</em> sono uguali; in tal caso il loro valore comune è il
-limite. Se uno dei due manca, oppure se sono diversi, il limite non esiste. Nel pannello di
-sinistra, per esempio:</p>
-
-<p class="eq">$$\lim_{x\to 5^{-}}f(x)=2 \qquad \lim_{x\to 5^{+}}f(x)=6 \qquad f(5)=4
-\qquad\Longrightarrow\qquad \lim_{x\to 5}f(x) \text{ non esiste}$$</p>
+<p>Quando i due lati si comportano in modo diverso servono due limiti separati: il <strong>limite
+sinistro</strong> $\lim\limits_{x\to x_0^{-}}f(x)$, che si calcola avvicinandosi solo da sinistra,
+e il <strong>limite destro</strong> $\lim\limits_{x\to x_0^{+}}f(x)$, avvicinandosi solo da destra.
+Il limite senza segni, detto anche bilaterale, esiste quando il limite destro e il limite sinistro
+esistono entrambi <em>e</em> sono uguali; in tal caso il loro valore comune è il limite. Se uno dei
+due manca, oppure se sono diversi, il limite non esiste.</p>
 
 <h2>Limite infinito per $x$ che tende a $x_0$</h2>
-
-<p>Ci sono funzioni che, avvicinandosi a un punto, non si stabilizzano su nessun valore ma crescono
-oltre qualunque soglia, o calano sotto qualunque soglia. Anche questo è un comportamento regolare,
-e si dice che il limite è $+\infty$ oppure $-\infty$: al posto della fascia attorno a un numero si
-chiede il superamento di una soglia, grande quanto si vuole. Attenzione: $+\infty$ e $-\infty$ non
-sono numeri, e scrivere che il limite è infinito è un modo per dire che un limite finito non c'è, e
-per dire in che modo non c'è.</p>
 
 <div class="fig">
 <div class="pannelli" style="--n:3">
@@ -184,23 +187,22 @@ per dire in che modo non c'è.</p>
 <svg id="g-inf2" viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
 <div class="did-parti" style="--n:3">
-<p class="did">$f(x)=\dfrac{1}{(x-1)^2}$: da entrambi i lati la curva sale oltre ogni soglia. I due
-limiti unilaterali valgono $+\infty$, quindi $\lim\limits_{x\to 1}f(x)=+\infty$.</p>
-<p class="did">$f(x)=-\dfrac{1}{(x-1)^2}$: il caso opposto. Da entrambi i lati si scende oltre ogni
-soglia e $\lim\limits_{x\to 1}f(x)=-\infty$.</p>
-<p class="did">$f(x)=\dfrac{1}{x-1}$: da sinistra si scende a $-\infty$, da destra si sale a
-$+\infty$. I due limiti unilaterali sono diversi, quindi il limite per $x\to 1$ non esiste.</p>
+<p class="did">$f(x)=\dfrac{1}{(x-1)^2}$</p>
+<p class="did">$f(x)=-\dfrac{1}{(x-1)^2}$</p>
+<p class="did">$f(x)=\dfrac{1}{x-1}$</p>
 </div>
+<div class="did-parti ris" style="--n:3" id="r-inf" hidden>
+<p class="did">$\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{+}}f(x)=+\infty$
+<br>$\lim\limits_{x\to 1}f(x)=+\infty$</p>
+<p class="did">$\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{+}}f(x)=-\infty$
+<br>$\lim\limits_{x\to 1}f(x)=-\infty$</p>
+<p class="did">$\lim\limits_{x\to 1^{-}}f(x)=-\infty$<br>$\lim\limits_{x\to 1^{+}}f(x)=+\infty$
+<br>$\nexists\;\lim\limits_{x\to 1}f(x)$</p>
+</div>
+<button type="button" class="btn-ris" aria-controls="r-inf" aria-expanded="false">risultato</button>
 </div>
 
 <h2>Limite finito per $x$ che tende a $\pm\infty$</h2>
-
-<p>Cambiamo domanda: non più che cosa succede vicino a un punto, ma che cosa succede quando $x$
-cresce senza limite, o decresce senza limite. La richiesta è la stessa fascia di prima attorno a un
-numero $\ell$; quel che cambia è la condizione che la fa valere, che non è più «$x$ vicino a
-$x_0$», bensì «$x$ abbastanza grande» (oppure abbastanza grande in valore assoluto e negativo). Qui
-non ha senso parlare di limite destro e sinistro: le due direzioni sono $x\to+\infty$ e
-$x\to-\infty$, e vanno studiate separatamente perché possono dare risultati diversi.</p>
 
 <div class="fig">
 <div class="pannelli" style="--n:3">
@@ -209,20 +211,20 @@ $x\to-\infty$, e vanno studiate separatamente perché possono dare risultati div
 <svg id="g-fin2" viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
 <div class="did-parti" style="--n:3">
-<p class="did">Allontanandosi in tutte e due le direzioni la curva si appiattisce sulla stessa
-quota: $\lim\limits_{x\to+\infty}f(x)=\lim\limits_{x\to-\infty}f(x)=2$.</p>
-<p class="did">$f(x)=\arctan x$: le due direzioni danno numeri diversi, $\frac{\pi}{2}$ a destra e
-$-\frac{\pi}{2}$ a sinistra. Entrambi i limiti esistono e sono finiti.</p>
-<p class="did">$f(x)=1+e^{-x}$: verso destra il limite è finito e vale 1, verso sinistra la curva
-cresce oltre ogni soglia e il limite è $+\infty$.</p>
+<p class="did">$f(x)=2+\dfrac{3}{1+x^2}$</p>
+<p class="did">$f(x)=\arctan x$</p>
+<p class="did">$f(x)=1+e^{-x}$</p>
 </div>
+<div class="did-parti ris" style="--n:3" id="r-fin" hidden>
+<p class="did">$\lim\limits_{x\to-\infty}f(x)=2$<br>$\lim\limits_{x\to+\infty}f(x)=2$</p>
+<p class="did">$\lim\limits_{x\to-\infty}f(x)=-\dfrac{\pi}{2}$
+<br>$\lim\limits_{x\to+\infty}f(x)=\dfrac{\pi}{2}$</p>
+<p class="did">$\lim\limits_{x\to-\infty}f(x)=+\infty$<br>$\lim\limits_{x\to+\infty}f(x)=1$</p>
+</div>
+<button type="button" class="btn-ris" aria-controls="r-fin" aria-expanded="false">risultato</button>
 </div>
 
 <h2>Limite infinito per $x$ che tende a $\pm\infty$</h2>
-
-<p>Resta il caso in cui $x$ va all'infinito e anche la funzione cresce, o cala, senza limite: non
-c'è nessun valore su cui si stabilizza, e la fascia va di nuovo sostituita da una soglia da
-superare. Come nel caso precedente le due direzioni si studiano una per volta.</p>
 
 <div class="fig">
 <div class="pannelli" style="--n:3">
@@ -231,18 +233,17 @@ superare. Come nel caso precedente le due direzioni si studiano una per volta.</
 <svg id="g-inb2" viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
 <div class="did-parti" style="--n:3">
-<p class="did">$f(x)=\dfrac{x^2}{10}$: in tutte e due le direzioni la curva supera ogni soglia, e
-tutti e due i limiti valgono $+\infty$.</p>
-<p class="did">$f(x)=\dfrac{x^3}{60}$: verso destra il limite è $+\infty$, verso sinistra è
-$-\infty$. Le due direzioni possono dare segni opposti.</p>
-<p class="did">$f(x)=\sin x$: la curva continua a oscillare fra $-1$ e 1 senza stabilizzarsi e
-senza superare alcuna soglia. Qui il limite non esiste, né finito né infinito.</p>
+<p class="did">$f(x)=\dfrac{x^2}{10}$</p>
+<p class="did">$f(x)=\dfrac{x^3}{60}$</p>
+<p class="did">$f(x)=\sin x$</p>
 </div>
+<div class="did-parti ris" style="--n:3" id="r-inb" hidden>
+<p class="did">$\lim\limits_{x\to-\infty}f(x)=+\infty$<br>$\lim\limits_{x\to+\infty}f(x)=+\infty$</p>
+<p class="did">$\lim\limits_{x\to-\infty}f(x)=-\infty$<br>$\lim\limits_{x\to+\infty}f(x)=+\infty$</p>
+<p class="did">$\nexists\;\lim\limits_{x\to-\infty}f(x)$<br>$\nexists\;\lim\limits_{x\to+\infty}f(x)$</p>
 </div>
-
-<p>L'ultimo pannello mostra un fatto da tenere presente: un limite può semplicemente non esistere.
-Le tre possibilità, per ciascuna delle direzioni studiate, sono che il limite sia un numero, che
-sia $+\infty$ o $-\infty$, oppure che non esista.</p>
+<button type="button" class="btn-ris" aria-controls="r-inb" aria-expanded="false">risultato</button>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../../index.html"><span class="dir">&larr; Indice</span><span class="tit">Matematica — Quinta</span></a><a class="successiva" href="../04-calcolo-dei-limiti-e-algebra-dei-limiti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il calcolo dei limiti</span></a></nav>
 <footer><p>Matematica quinta &middot; Limiti &middot; Unità 01</p></footer>
@@ -264,6 +265,40 @@ sia $+\infty$ o $-\infty$, oppure che non esista.</p>
   window.allineaQuaderno=allinea;
   window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    if(!tutti)return;
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
 })();
 </script>
 
@@ -390,6 +425,21 @@ Piano.prototype.tratteggio=function(x1,y1,x2,y2,col){
   P.add(alone(txt(P.m.l+5,P.Y(6+eps)-5,'6 + ε',{fill:'var(--verde)'})),'testo');
   P.add(alone(txt(P.m.l+5,P.Y(6-eps)+13,'6 − ε',{fill:'var(--verde)'})),'testo');
   P.add(alone(txt(P.X(3),P.m.t-4,'intorno di 3',{fill:'var(--blu)','text-anchor':'middle'})),'testo');
+  /* misura del raggio δ, da 3−δ a 3 e da 3 a 3+δ */
+  var ym=P.H-P.m.b-22, mk2=el('marker',{id:'db'+c[0],markerWidth:7,markerHeight:7,refX:6,refY:3,orient:'auto'});
+  mk2.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--blu)'}));
+  P.svg.appendChild(el('defs',{})).appendChild(mk2);
+  [[3-del,3,'end',-9],[3,3+del,'start',9]].forEach(function(s,k){
+    var g=el('line',{x1:P.X(s[0]),y1:ym,x2:P.X(s[1]),y2:ym,stroke:'var(--blu)','stroke-width':1.2,
+      'marker-end':'url(#db'+c[0]+')'});
+    if(k===0){g.setAttribute('x1',P.X(s[1]));g.setAttribute('x2',P.X(s[0]));}
+    P.add(g,'testo');
+    P.add(alone(txt(P.X(k===0?s[0]:s[1])+s[3],ym+4,'δ',{fill:'var(--blu)','text-anchor':s[2]})),'testo');
+  });
+  if(del>0.3){
+    P.add(alone(txt(P.X(3-del),P.y0+18,'3 − δ',{fill:'var(--blu)','text-anchor':'middle'})),'testo');
+    P.add(alone(txt(P.X(3+del),P.y0+18,'3 + δ',{fill:'var(--blu)','text-anchor':'middle'})),'testo');
+  }
 });
 
 /* ---------- 3. limite destro e sinistro ---------- */
