@@ -5,23 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Limiti notevoli — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def,.notevole,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.notevole{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p,.foglio>.notevole+p{margin-top:var(--r)}
+.nota,.def,.notevole{padding:0 18px}
+.nota p,.def p,.notevole p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et,.notevole .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq,.notevole .eq{text-align:center;margin:0}
+/* riquadro dei limiti notevoli: verde, come nella traccia */
+.notevole{background:#eef5ee;border:2px solid var(--verde);border-radius:10px}
+.notevole .et{color:var(--verde);font-weight:700}
+.notevole .eq{font-size:1.2rem}
+.riepilogo{background:#eef5ee;border:2px solid var(--verde);border-radius:10px;padding:0 18px;display:flow-root;margin-top:var(--r)}
+.riepilogo .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--verde);font-weight:700;display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.riepilogo ol{margin:0;padding:0 0 calc(var(--r)*.5) 1.6rem}
+.riepilogo li{line-height:calc(var(--r)*1.6);font-size:1.05rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(320px,55%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -31,118 +67,336 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Limiti &middot; Unità 05</p>
   <h1>Limiti notevoli</h1>
-  <p class="sommario">Alcuni limiti in forma indeterminata ricorrono così spesso, legati a seno,
-  coseno, esponenziali e logaritmi, che conviene calcolarli una volta per tutte e tenerli pronti
-  come formule. Il primo si dimostra per via geometrica col teorema del confronto, gli altri si
-  ottengono da manipolazioni algebriche o da sostituzioni che li riconducono al primo.</p>
 </header>
 
-<h2>Il limite di $\dfrac{\sin x}{x}$</h2>
+<p>Alcune forme indeterminate ricorrono così spesso, legate a seno, coseno, esponenziali e
+logaritmi, che conviene scioglierle una volta per tutte e tenere il risultato pronto come formula.
+Sono sette, e ciascuno sta qui nel suo riquadro verde. Il primo si dimostra per via geometrica col
+teorema del confronto; gli altri si ottengono da manipolazioni algebriche o da sostituzioni che li
+riconducono a uno già noto.</p>
 
-<p>Studiare $\displaystyle\lim_{x\to x_0}\frac{\sin x}{x}$ per un punto $x_0$ qualsiasi si riduce a
-studiarlo per $x_0=0$, dove si presenta nella forma indeterminata $\frac{0}{0}$. La funzione
-$f(x)=\dfrac{\sin x}{x}$ è pari: $f(-x)=\dfrac{\sin(-x)}{-x}=\dfrac{-\sin x}{-x}=\dfrac{\sin
-x}{x}=f(x)$, quindi il suo grafico è simmetrico rispetto all'asse $y$ e limite destro e sinistro in
-$0$ coincidono. Basta calcolare</p>
+<h2>1. Il limite di $\dfrac{\sin x}{x}$</h2>
 
-$$\lim_{x\to 0^{+}}\frac{\sin x}{x}$$
+<p>Studiare $\displaystyle\lim_{x\to x_0}\frac{\sin x}{x}$ in un punto $x_0$ qualsiasi non pone
+problemi, perché fuori dall'origine basta sostituire: il caso interessante è $x_0=0$, dove il
+limite si presenta nella forma indeterminata $\frac{0}{0}$. La funzione
+$f(x)=\dfrac{\sin x}{x}$ è pari:</p>
 
-<p>Per $0&lt;x&lt;\dfrac{\pi}{2}$, confrontando sul cerchio goniometrico il segmento $\sin x$, l'arco
-$x$ e il segmento $\tan x$ si ottiene $\sin x&lt;x&lt;\tan x$. Dividendo per $\sin x$, positivo in questo
-intervallo, il verso delle disuguaglianze non cambia:</p>
+<p class="eq">$$f(-x)=\frac{\sin(-x)}{-x}=\frac{-\sin x}{-x}=\frac{\sin x}{x}=f(x)$$</p>
 
-$$1&lt;\frac{x}{\sin x}&lt;\frac{1}{\cos x}$$
+<p>Il suo grafico è quindi simmetrico rispetto all'asse $y$, e limite destro e limite sinistro in
+$0$ coincidono. Basta allora calcolare $\displaystyle\lim_{x\to 0^{+}}\frac{\sin x}{x}$.</p>
+
+<div class="fig">
+  <svg id="f-cerchio" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:460px"></svg>
+  <div class="cursore">
+    <label for="s-ang">angolo $x$ (rad)</label>
+    <input type="range" id="s-ang" min="0.12" max="0.90" step="0.005" value="0.70">
+    <span class="val" id="v-ang"></span>
+  </div>
+  <p class="did">Sul cerchio goniometrico di raggio $1$, per $0&lt;x&lt;\dfrac{\pi}{2}$, il segmento
+  $\sin x$ è più corto dell'arco $x$, che a sua volta è più corto del segmento $\tan x$. Muovendo il
+  cursore i tre valori cambiano, ma l'ordine no.</p>
+</div>
+
+<p>Dalla figura, per $0&lt;x&lt;\dfrac{\pi}{2}$, si legge la catena di disuguaglianze</p>
+
+<p class="eq">$$\sin x&lt;x&lt;\tan x=\frac{\sin x}{\cos x}$$</p>
+
+<p>In questo intervallo $\sin x$ è positivo, quindi dividendo per $\sin x$ il verso non cambia:</p>
+
+<p class="eq">$$1&lt;\frac{x}{\sin x}&lt;\frac{1}{\cos x}$$</p>
 
 <p>Passando ai reciproci le disuguaglianze si invertono:</p>
 
-$$\cos x&lt;\frac{\sin x}{x}&lt;1$$
+<p class="eq">$$\cos x&lt;\frac{\sin x}{x}&lt;1$$</p>
 
-<p>Poiché $\displaystyle\lim_{x\to0}\cos x=1$ e $\displaystyle\lim_{x\to0}1=1$, per il teorema del
-confronto la funzione intrappolata tra loro ha lo stesso limite:</p>
+<p>Poiché $\displaystyle\lim_{x\to0}\cos x=1$ e $\displaystyle\lim_{x\to0}1=1$, la funzione
+intrappolata fra i due ha lo stesso limite per il teorema del confronto.</p>
 
-$$\lim_{x\to 0}\frac{\sin x}{x}=1$$
-
-<div class="widget">
-  <div class="controlli">
-    <label>Distanza da 0: $x$
-      <input type="range" id="s-x" min="0.02" max="1.4" step="0.01" value="1.2">
-      <span>$x$ = <span class="val" id="v-x"></span></span>
-    </label>
+<div class="fig">
+  <svg id="f-stretta" viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px"></svg>
+  <div class="cursore">
+    <label for="s-x">distanza da $0$: $x$</label>
+    <input type="range" id="s-x" min="0.03" max="1.25" step="0.005" value="1.05">
+    <span class="val" id="v-x"></span>
   </div>
-  <div id="g-sinx" style="height:320px"></div>
-  <p class="leggenda">Le curve tratteggiate sono $\cos x$ e la retta $y=1$; la curva piena è
-  $\sin x/x$. Portando il cursore verso $x=0$ si vede la stretta $\cos x<\sin x/x<1$ chiudersi sul
-  valore $1$.</p>
+  <p class="did">La curva piena è $\dfrac{\sin x}{x}$, quelle tratteggiate sono $\cos x$ (in rosso) e
+  la retta $y=1$ (in verde). Portando il cursore verso $0$ la stretta
+  $\cos x&lt;\dfrac{\sin x}{x}&lt;1$ si chiude sul valore $1$.</p>
 </div>
 
-<h2>Altri limiti che ne derivano</h2>
+<div class="notevole">
+<span class="et">Limite notevole n. 1</span>
+<p class="eq">$$\lim_{x\to 0}\frac{\sin x}{x}=1$$</p>
+</div>
 
-<p>Il limite $\displaystyle\lim_{x\to0}\dfrac{1-\cos x}{x}$, forma $\frac{0}{0}$, si risolve
-moltiplicando per il coniugato $1+\cos x$:</p>
+<h2>2. Il limite di $\dfrac{1-\cos x}{x}$</h2>
 
-$$\frac{1-\cos x}{x}\cdot\frac{1+\cos x}{1+\cos x}=\frac{1-\cos^2x}{x(1+\cos x)}
-=\frac{\sin^2x}{x(1+\cos x)}=\frac{\sin x}{x}\cdot\sin x\cdot\frac{1}{1+\cos x}$$
+<p>Anche questo è una forma $\frac{0}{0}$. Si moltiplica numeratore e denominatore per il coniugato
+$1+\cos x$, che vicino a $0$ non si annulla:</p>
 
-<p>Per $x\to0$ il primo fattore tende a $1$ (il limite appena trovato), il secondo a $0$, il terzo a
-$\dfrac12$, quindi</p>
+<p class="eq">$$\frac{1-\cos x}{x}\cdot\frac{1+\cos x}{1+\cos x}=\frac{1-\cos^2x}{x(1+\cos x)}
+=\frac{\sin^2x}{x(1+\cos x)}=\frac{\sin x}{x}\cdot\sin x\cdot\frac{1}{1+\cos x}$$</p>
 
-$$\lim_{x\to0}\frac{1-\cos x}{x}=0$$
+<p>Per $x\to0$ il primo fattore tende a $1$ per il limite notevole n. 1, il secondo a $0$ e il terzo
+a $\dfrac12$: il prodotto tende a zero.</p>
 
-<p>La stessa scomposizione, dividendo per $x^2$ invece che per $x$, dà $\left(\dfrac{\sin
-x}{x}\right)^2\cdot\dfrac{1}{1+\cos x}\to1^2\cdot\dfrac12$, quindi</p>
+<div class="notevole">
+<span class="et">Limite notevole n. 2</span>
+<p class="eq">$$\lim_{x\to0}\frac{1-\cos x}{x}=0$$</p>
+</div>
 
-$$\lim_{x\to0}\frac{1-\cos x}{x^2}=\frac12$$
+<h2>3. Il limite di $\dfrac{1-\cos x}{x^2}$</h2>
 
-<p>Il numero $e$ è definito come il limite</p>
+<p>La stessa scomposizione, con $x^2$ al denominatore invece di $x$, raggruppa i fattori in modo
+diverso:</p>
 
-$$\lim_{x\to\pm\infty}\left(1+\frac1x\right)^{x}=e=2{,}71828\ldots$$
+<p class="eq">$$\frac{1-\cos x}{x^{2}}=\frac{\sin^2x}{x^{2}(1+\cos x)}
+=\left(\frac{\sin x}{x}\right)^{2}\cdot\frac{1}{1+\cos x}$$</p>
 
-<p>Da questo si ricava $\displaystyle\lim_{x\to0}\dfrac{\ln(1+x)}{x}$, forma $\frac00$: si scrive
-$\dfrac{\ln(1+x)}{x}=\dfrac1x\ln(1+x)=\ln(1+x)^{\frac1x}$ e si cambia variabile con $y=\dfrac1x$, per
-cui $x\to0$ corrisponde a $y\to\pm\infty$:</p>
+<p>Il primo fattore tende a $1^2=1$ e il secondo a $\dfrac12$.</p>
 
-$$\lim_{x\to0}\ln(1+x)^{\frac1x}=\lim_{y\to\pm\infty}\ln\left(1+\frac1y\right)^{y}
-=\ln e=1$$
+<div class="notevole">
+<span class="et">Limite notevole n. 3</span>
+<p class="eq">$$\lim_{x\to0}\frac{1-\cos x}{x^{2}}=\frac12$$</p>
+</div>
 
-<p>Infine, senza bisogno di ulteriori passaggi, valgono anche</p>
+<h2>4. Il numero $e$: $\left(1+\dfrac1x\right)^{x}$</h2>
 
-$$\lim_{x\to0}\frac{e^x-1}{x}=1 \qquad\qquad \lim_{x\to0}\frac{(1+x)^k-1}{x}=k$$
+<p>Il numero di Nepero $e$ è definito proprio da un limite, che si presenta nella forma
+indeterminata $1^{\infty}$.</p>
 
+<div class="notevole">
+<span class="et">Limite notevole n. 4</span>
+<p class="eq">$$\lim_{x\to\pm\infty}\left(1+\frac1x\right)^{x}=e=2{,}71828\ldots$$</p>
+</div>
+
+<h2>5. Il limite di $\dfrac{\ln(1+x)}{x}$</h2>
+
+<p>Forma $\frac{0}{0}$. Il fattore $\dfrac1x$ si porta all'esponente per la proprietà dei logaritmi:</p>
+
+<p class="eq">$$\frac{\ln(1+x)}{x}=\frac1x\ln(1+x)=\ln(1+x)^{\frac1x}$$</p>
+
+<p>Con il cambio di variabile $y=\dfrac1x$, a $x\to0$ corrisponde $y\to\pm\infty$, e dentro il
+logaritmo ricompare il limite notevole n. 4:</p>
+
+<p class="eq">$$\lim_{x\to0}\ln(1+x)^{\frac1x}=\lim_{y\to\pm\infty}\ln\left(1+\frac1y\right)^{y}
+=\ln e=1$$</p>
+
+<div class="notevole">
+<span class="et">Limite notevole n. 5</span>
+<p class="eq">$$\lim_{x\to0}\frac{\ln(1+x)}{x}=1$$</p>
+</div>
+
+<h2>6. Il limite di $\dfrac{e^{x}-1}{x}$</h2>
+
+<p>È la forma $\frac{0}{0}$ speculare alla precedente: si ottiene dalla n. 5 ponendo
+$t=e^{x}-1$, cioè $x=\ln(1+t)$, perché il rapporto diventa il reciproco di
+$\dfrac{\ln(1+t)}{t}$.</p>
+
+<div class="notevole">
+<span class="et">Limite notevole n. 6</span>
+<p class="eq">$$\lim_{x\to0}\frac{e^{x}-1}{x}=1$$</p>
+</div>
+
+<h2>7. Il limite di $\dfrac{(1+x)^{k}-1}{x}$</h2>
+
+<p>Vale per ogni esponente reale $k$, e per $k=1$ si riduce all'identità $\dfrac{x}{x}=1$.</p>
+
+<div class="notevole">
+<span class="et">Limite notevole n. 7</span>
+<p class="eq">$$\lim_{x\to0}\frac{(1+x)^{k}-1}{x}=k$$</p>
+</div>
+
+<h2>Riepilogo: i sette limiti notevoli</h2>
+
+<div class="riepilogo">
+<span class="et">Da tenere a memoria</span>
+<ol>
+<li>$\displaystyle\lim_{x\to0}\frac{\sin x}{x}=1$</li>
+<li>$\displaystyle\lim_{x\to0}\frac{1-\cos x}{x}=0$</li>
+<li>$\displaystyle\lim_{x\to0}\frac{1-\cos x}{x^{2}}=\frac12$</li>
+<li>$\displaystyle\lim_{x\to\pm\infty}\left(1+\frac1x\right)^{x}=e$</li>
+<li>$\displaystyle\lim_{x\to0}\frac{\ln(1+x)}{x}=1$</li>
+<li>$\displaystyle\lim_{x\to0}\frac{e^{x}-1}{x}=1$</li>
+<li>$\displaystyle\lim_{x\to0}\frac{(1+x)^{k}-1}{x}=k$</li>
+</ol>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../05-forme-indeterminate/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Forme indeterminate</span></a><a class="successiva" href="../07-infinitesimi-e-infiniti-gerarchia-principio-di-sostituzione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Infinitesimi e infiniti, gerarchia, principio di sostituzione</span></a></nav>
 <footer><p>Matematica quinta &middot; Limiti &middot; Unità 05</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var cosx=function(x){return Math.cos(x);};
-  var sinc=function(x){return Math.sin(x)/x;};
-  var xs=[],yc=[],ys=[],yu=[];
-  for(var i=0;i<=400;i++){var v=0.02+i*(1.5-0.02)/400; xs.push(v); yc.push(cosx(v)); ys.push(sinc(v)); yu.push(1);}
-  var sx=document.getElementById('s-x'), vx=document.getElementById('v-x');
-  function fmt(n){return n.toFixed(3).replace('.',',');}
-  function agg(){
-    var x=parseFloat(sx.value);
-    vx.textContent=fmt(x);
-    Plotly.react('g-sinx',[
-      {x:xs,y:yu,mode:'lines',name:'y = 1',line:{color:'#2f6b4f',width:1.6,dash:'dot'},hoverinfo:'skip'},
-      {x:xs,y:yc,mode:'lines',name:'y = cos x',line:{color:'#b3392f',width:1.6,dash:'dot'},hoverinfo:'skip'},
-      {x:xs,y:ys,mode:'lines',name:'y = sin x / x',line:{color:'#1f4e79',width:2.4},hoverinfo:'skip'},
-      {x:[x,x,x],y:[1,cosx(x),sinc(x)],mode:'markers',
-        marker:{size:9,color:['#2f6b4f','#b3392f','#1f4e79']},
-        text:['1','cos x = '+fmt(cosx(x)),'sin x / x = '+fmt(sinc(x))],
-        hovertemplate:'%{text}<extra></extra>'}
-    ],{
-      margin:{l:44,r:14,t:10,b:34},showlegend:true,
-      legend:{orientation:'h',y:-0.22,font:{size:11}},
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[0,1.5],zeroline:true,zerolinecolor:'#16283d',gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[0.5,1.05],zeroline:false,gridcolor:'#e6e0d4'},
-      shapes:[{type:'line',x0:x,x1:x,y0:0.5,y1:1.05,line:{color:'#4a5a6d',width:1,dash:'dot'}}]
-    },{displayModeBar:false,responsive:true});
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.notevole .et,.riepilogo .et,.fig,.nota,.def,.notevole,.riepilogo,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  sx.addEventListener('input',agg); agg();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+
+/* ---------- figura 1: cerchio goniometrico, sin x < x < tan x ---------- */
+(function(){
+  var svg=document.getElementById('f-cerchio'); if(!svg)return;
+  var Ox=120, Oy=150, R=95;
+  var g=el('g',{}); svg.appendChild(g);
+  // assi
+  g.appendChild(el('line',{x1:Ox-R-16,y1:Oy,x2:Ox+R+30,y2:Oy,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:Ox,y1:Oy+R+14,x2:Ox,y2:Oy-R-28,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  // cerchio goniometrico
+  g.appendChild(el('circle',{cx:Ox,cy:Oy,r:R,fill:'none',stroke:'var(--grigio)','stroke-width':1.2}));
+  // retta tangente x = 1
+  g.appendChild(el('line',{x1:Ox+R,y1:Oy+14,x2:Ox+R,y2:Oy-R-26,stroke:'var(--riga)','stroke-width':1}));
+  g.appendChild(txt(Ox+R+4,Oy+26,'1',{'text-anchor':'middle'}));
+  var raggio=el('line',{stroke:'var(--inchiostro)','stroke-width':1.4}); g.appendChild(raggio);
+  var arco=el('path',{fill:'none',stroke:'var(--verde)','stroke-width':3.4}); g.appendChild(arco);
+  var seno=el('line',{stroke:'var(--rosso)','stroke-width':3.4}); g.appendChild(seno);
+  var tang=el('line',{stroke:'var(--blu)','stroke-width':3.4}); g.appendChild(tang);
+  var punto=el('circle',{r:3.2,fill:'var(--inchiostro)'}); g.appendChild(punto);
+  var lSin=txt(0,0,'',{fill:'var(--rosso)','text-anchor':'end','font-size':13});
+  var lArc=txt(0,0,'',{fill:'var(--verde)','font-size':13});
+  var lTan=txt(0,0,'',{fill:'var(--blu)','font-size':13});
+  g.appendChild(lSin); g.appendChild(lArc); g.appendChild(lTan);
+  var box=el('g',{}); svg.appendChild(box);
+  var r1=txt(262,74,'',{fill:'var(--rosso)','font-size':14});
+  var r2=txt(262,100,'',{fill:'var(--verde)','font-size':14});
+  var r3=txt(262,126,'',{fill:'var(--blu)','font-size':14});
+  var r4=txt(262,160,'',{fill:'var(--inchiostro)','font-size':14,'font-weight':600});
+  box.appendChild(r1);box.appendChild(r2);box.appendChild(r3);box.appendChild(r4);
+  var sl=document.getElementById('s-ang'), vv=document.getElementById('v-ang');
+  function agg(){
+    var a=parseFloat(sl.value), c=Math.cos(a), s=Math.sin(a), t=Math.tan(a);
+    var Px=Ox+R*c, Py=Oy-R*s;
+    raggio.setAttribute('x1',Ox);raggio.setAttribute('y1',Oy);
+    raggio.setAttribute('x2',Px);raggio.setAttribute('y2',Py);
+    punto.setAttribute('cx',Px);punto.setAttribute('cy',Py);
+    arco.setAttribute('d','M '+(Ox+R)+' '+Oy+' A '+R+' '+R+' 0 0 1 '+Px.toFixed(1)+' '+Py.toFixed(1));
+    seno.setAttribute('x1',Px);seno.setAttribute('y1',Oy);
+    seno.setAttribute('x2',Px);seno.setAttribute('y2',Py);
+    tang.setAttribute('x1',Ox+R);tang.setAttribute('y1',Oy);
+    tang.setAttribute('x2',Ox+R);tang.setAttribute('y2',Oy-R*t);
+    lSin.setAttribute('x',Px-7);lSin.setAttribute('y',(Oy+Py)/2+4);lSin.textContent='sin x';
+    lArc.setAttribute('x',Ox+(R-8)*Math.cos(a*0.4));lArc.setAttribute('y',Oy-(R-8)*Math.sin(a*0.4)+4);
+    lArc.textContent='x';
+    lTan.setAttribute('x',Ox+R+8);lTan.setAttribute('y',Oy-R*t/2+4);lTan.textContent='tan x';
+    vv.textContent=num(a,2);
+    r1.textContent='sin x = '+num(s,3);
+    r2.textContent='x = '+num(a,3);
+    r3.textContent='tan x = '+num(t,3);
+    r4.textContent='sin x < x < tan x';
+  }
+  sl.addEventListener('input',agg); agg();
+})();
+
+/* ---------- figura 2: la stretta cos x < sin x / x < 1 ---------- */
+(function(){
+  var svg=document.getElementById('f-stretta'); if(!svg)return;
+  var P=new Piano(svg,[0,1.28],[0.26,1.12],{l:46,r:86,t:18,b:90});
+  P.assi([0.5,1],[0.4,0.6,0.8,1]);
+  var sinc=function(x){return Math.sin(x)/x;}, cosx=function(x){return Math.cos(x);};
+  P.add(el('line',{x1:P.X(0),y1:P.Y(1),x2:P.X(1.28),y2:P.Y(1),stroke:'var(--verde)',
+    'stroke-width':1.8,'stroke-dasharray':'6,4'}),'sotto');
+  P.curva(cosx,0.001,1.28,300,'var(--rosso)',1.8,'6,4');
+  P.curva(sinc,0.001,1.28,400,'var(--inchiostro)',2.4);
+  P.testo.appendChild(txt(P.X(1.28)+6,P.Y(1)+4,'y = 1',{fill:'var(--verde)'}));
+  P.testo.appendChild(txt(P.X(1.28)+6,P.Y(sinc(1.28))+4,'sin x / x',{fill:'var(--inchiostro)'}));
+  P.testo.appendChild(txt(P.X(1.28)+6,P.Y(cosx(1.28))+4,'cos x',{fill:'var(--rosso)'}));
+  var vert=P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'}),'sotto');
+  var fascia=P.add(el('line',{stroke:'var(--blu)','stroke-width':6,'stroke-linecap':'round',opacity:.28}),'sotto');
+  var p1=P.add(el('circle',{r:4,fill:'var(--inchiostro)'}));
+  var p2=P.add(el('circle',{r:3.4,fill:'var(--rosso)'}));
+  var p3=P.add(el('circle',{r:3.4,fill:'var(--verde)'}));
+  var e1=txt(46,282,'',{fill:'var(--inchiostro)','font-size':13});
+  var e2=txt(46,304,'',{fill:'var(--blu)','font-size':13});
+  svg.appendChild(e1); svg.appendChild(e2);
+  var sl=document.getElementById('s-x'), vv=document.getElementById('v-x');
+  function agg(){
+    var x=parseFloat(sl.value), s=sinc(x), c=cosx(x);
+    vert.setAttribute('x1',P.X(x));vert.setAttribute('x2',P.X(x));
+    vert.setAttribute('y1',P.Y(0.26));vert.setAttribute('y2',P.Y(1.12));
+    fascia.setAttribute('x1',P.X(x));fascia.setAttribute('x2',P.X(x));
+    fascia.setAttribute('y1',P.Y(c));fascia.setAttribute('y2',P.Y(1));
+    p1.setAttribute('cx',P.X(x));p1.setAttribute('cy',P.Y(s));
+    p2.setAttribute('cx',P.X(x));p2.setAttribute('cy',P.Y(c));
+    p3.setAttribute('cx',P.X(x));p3.setAttribute('cy',P.Y(1));
+    vv.textContent=num(x,2);
+    e1.textContent='sin x / x = '+num(s,4);
+    e2.textContent='larghezza della stretta: '+num(1-c,4);
+  }
+  sl.addEventListener('input',agg); agg();
+})();
 })();
 </script>
 </body>

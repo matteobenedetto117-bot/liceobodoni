@@ -193,6 +193,34 @@ teorema del confronto, a pagina 21.
 - Nessuna dimostrazione aggiunta per i limiti notevoli 4, 6 e 7: la traccia li presenta come
   risultati riquadrati senza sviluppo, così restano anche qui.
 
+### Revisione (20/09/2026)
+- Titolo confermato "Limiti notevoli". Tolto il sottotitolo dell'intestazione.
+- Titoletti rifatti su richiesta dell'insegnante: uno per ogni limite notevole, numerato e con la
+  formula nel titoletto stesso (1. sin x/x, 2. (1−cos x)/x, 3. (1−cos x)/x², 4. il numero e,
+  5. ln(1+x)/x, 6. (e^x−1)/x, 7. ((1+x)^k−1)/x), più un titoletto finale "Riepilogo: i sette limiti
+  notevoli". Spariti i due titoletti precedenti ("Il limite di sin x/x", "Altri limiti che ne
+  derivano").
+- Riquadri: ogni limite notevole chiude la propria sezione in un riquadro verde bordato
+  (classe .notevole) con l'etichetta "Limite notevole n. N", come i riquadri verdi della traccia;
+  in fondo il riquadro di riepilogo con tutte e sette le formule numerate. I passaggi intermedi
+  restano nei riquadri azzurri .eq.
+- Aggiunta rispetto alla versione precedente: la breve giustificazione del limite n. 6 per
+  sostituzione t = e^x − 1 (dalla n. 5). Nella traccia il n. 6 è un risultato riquadrato senza
+  sviluppo; è stata aggiunta una sola riga perché il titoletto dedicato lasciava la sezione priva
+  di testo. I limiti n. 4 e n. 7 restano senza dimostrazione, come nella traccia.
+- Impaginazione: riscritta a quaderno come le unità 01–04 (html 165%, righe ogni 1,8rem, script di
+  allineamento rilanciato da MathJax e esteso ai nuovi riquadri .notevole e .riepilogo).
+- Figure: tolto il widget Plotly (nessuna dipendenza da CDN), sostituito da due SVG disegnati da
+  uno script interno, entrambi con cursore e nessun pulsante ▶.
+  1. Cerchio goniometrico (figura presente nella traccia a pag. 20 e finora mancante nella pagina):
+     muovendo il cursore sull'angolo x si vedono il segmento sin x (rosso), l'arco x (verde) e il
+     segmento tan x (blu) con i tre valori numerici e la catena sin x < x < tan x.
+  2. La stretta cos x < sin x/x < 1: curva completa di sin x/x, cos x tratteggiata in rosso e la
+     retta y = 1 tratteggiata in verde; il cursore porta un punto su ciascuna delle tre curve e
+     mostra il valore di sin x/x e la larghezza della stretta, che si annulla avvicinandosi a 0.
+- Verifica con SymPy dei sette limiti e dell'identità (1−cos x)/x = sin²x/(x(1+cos x)); controllo
+  numerico di sin x < x < tan x per x = 0,05 · 0,3 · 0,7 · 0,9 · 1,4.
+
 ## Unità 06 — Infinitesimi e infiniti, gerarchia, principio di sostituzione
 - Parole: 649 su circa 4,5 pagine di traccia equivalenti (coda di pag. 23, dopo il limite notevole
   n.7 già coperto dall'unità 06, più le pagine 24–27 intere).
