@@ -193,8 +193,6 @@ ma su un sistema determinato arrivano sempre alla stessa terna.</p>
 <p>Anche la regola di Cramer si estende ai sistemi di tre equazioni, ma prima serve saper
 calcolare il determinante di una matrice $3\times3$: si ottiene con la regola di Sarrus.</p>
 
-<h3>La regola di Sarrus</h3>
-
 <div class="def">
 <span class="et">Regola di Sarrus</span>
 <p>Data una matrice $3\times3$, si riscrivono accanto, a destra, le prime due colonne. Si
@@ -204,37 +202,8 @@ in alto. Sommando i tre prodotti discendenti si ottiene $A$, sommando i tre asce
 $B$: il determinante è la differenza $D=A-B$.</p>
 </div>
 
-<div class="fig">
-<svg id="fig1" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px"></svg>
-<div class="cursore">
-<label for="c1">diagonale</label>
-<input id="c1" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale">
-<span class="val" id="v1"></span>
-</div>
-<p class="did">Le due colonne grigie sono la copia delle prime due. Il cursore percorre le sei
-diagonali: prima le tre discendenti, in verde, i cui prodotti si sommano in $A$, poi le tre
-ascendenti, in rosso, che danno $B$.</p>
-</div>
-
 <p class="eq">$$D=\begin{vmatrix}a_1&b_1&c_1\\a_2&b_2&c_2\\a_3&b_3&c_3\end{vmatrix}
 =\underbrace{a_1b_2c_3+b_1c_2a_3+c_1a_2b_3}_{A}-\underbrace{(a_3b_2c_1+b_3c_2a_1+c_3a_2b_1)}_{B}$$</p>
-
-<h3>Un esempio numerico</h3>
-
-<p>Calcoliamo il determinante della matrice</p>
-
-<p class="eq">$$\begin{pmatrix}1&2&1\\1&5&0\\0&3&2\end{pmatrix}$$</p>
-
-<div class="fig">
-<svg id="fig2" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px"></svg>
-<div class="cursore">
-<label for="c2">diagonale</label>
-<input id="c2" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale">
-<span class="val" id="v2"></span>
-</div>
-<p class="did">Lo stesso schema sui numeri: i tre prodotti discendenti danno $A=13$, i tre
-ascendenti danno $B=4$, quindi $D=13-4=9$.</p>
-</div>
 
 <p>Dato un sistema di tre equazioni in forma normale</p>
 
@@ -268,7 +237,8 @@ $x=\dfrac{D_x}{D}$, $y=\dfrac{D_y}{D}$, $z=\dfrac{D_z}{D}$;</li>
 <h3>Esempio: lo stesso sistema con Cramer</h3>
 
 <p>Riprendiamo il sistema di prima. Il determinante del sistema si calcola con lo schema di
-Sarrus, esattamente come nell'esempio numerico di apertura:</p>
+Sarrus: accanto alla matrice dei coefficienti si ricopiano le prime due colonne, e il cursore
+percorre le sei diagonali una per volta.</p>
 
 <div class="fig">
 <svg id="fig3" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px"></svg>
@@ -277,9 +247,10 @@ Sarrus, esattamente come nell'esempio numerico di apertura:</p>
 <input id="c3" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale">
 <span class="val" id="v3"></span>
 </div>
-<p class="did">Il determinante $D$ del sistema: le tre diagonali discendenti danno
-$A=-15+8+3=-4$, le tre ascendenti $B=-3+10+12=19$, quindi $D=-4-19=-23$. Non è zero, dunque il
-sistema è determinato.</p>
+<p class="did">Le due colonne grigie sono la copia delle prime due. Le tre diagonali discendenti,
+in verde, danno $A=-15+8+3=-4$; le tre ascendenti, in rosso, danno $B=-3+10+12=19$. Il
+determinante del sistema è la differenza: $D=-4-19=-23$. Non è zero, dunque il sistema è
+determinato.</p>
 </div>
 
 <div class="es">
@@ -400,14 +371,6 @@ function sarrus(o){
   cur.addEventListener('input',dis); dis();
 }
 
-sarrus({svg:'fig1',cur:'c1',val:'v1',
-  M:[['a1','b1','c1'],['a2','b2','c2'],['a3','b3','c3']],
-  prod:['a₁b₂c₃','b₁c₂a₃','c₁a₂b₃','a₃b₂c₁','b₃c₂a₁','c₃a₂b₁'],
-  somme:{A:['a₁b₂c₃','b₁c₂a₃','c₁a₂b₃'],Atot:'',B:['a₃b₂c₁','b₃c₂a₁','c₃a₂b₁'],Btot:'',D:'il determinante'}});
-sarrus({svg:'fig2',cur:'c2',val:'v2',
-  M:[['1','2','1'],['1','5','0'],['0','3','2']],
-  prod:['1 · 5 · 2 = 10','2 · 0 · 0 = 0','1 · 1 · 3 = 3','0 · 5 · 1 = 0','3 · 0 · 1 = 0','2 · 1 · 2 = 4'],
-  somme:{A:['10','0','3'],Atot:'13',B:['0','0','4'],Btot:'4',D:'13 − 4 = 9'}});
 sarrus({svg:'fig3',cur:'c3',val:'v3',
   M:[['5','4','−1'],['−3','3','2'],['1','1','−1']],
   prod:['5 · 3 · (−1) = −15','4 · 2 · 1 = 8','(−1) · (−3) · 1 = 3',
