@@ -3,20 +3,51 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Concetto di funzione e funzioni numeriche — Matematica seconda</title>
+<title>Funzioni e funzioni numeriche — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.tabella{border-collapse:collapse;margin:12px auto;font-family:var(--sans);font-size:.95rem}
-.tabella th,.tabella td{border:1px solid var(--riga);padding:5px 18px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(320px,55%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;font-family:var(--sans);font-size:.95rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:4px 20px;background:#fff}
 </style>
 </head>
 <body>
@@ -25,10 +56,7 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Funzioni &middot; Unità 01</p>
-  <h1>Concetto di funzione e funzioni numeriche</h1>
-  <p class="sommario">Una funzione è la regola che lega ogni elemento di un insieme a uno solo di
-  un secondo insieme: è il concetto su cui si appoggerà, negli anni successivi, tutto lo studio
-  delle funzioni.</p>
+  <h1>Funzioni e funzioni numeriche</h1>
 </header>
 
 <h2>Che cos'è una funzione</h2>
@@ -38,37 +66,7 @@ elemento di $Y$. Se ogni elemento di partenza ha una e una sola immagine, quella
 funzione.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="#b3392f"/>
-</marker>
-</defs>
-<ellipse cx="110" cy="130" rx="85" ry="105" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<ellipse cx="410" cy="130" rx="90" ry="105" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<text x="55" y="30" font-family="Segoe UI, sans-serif" font-size="19" fill="#16283d">X</text>
-<text x="470" y="30" font-family="Segoe UI, sans-serif" font-size="19" fill="#16283d">Y</text>
-<circle cx="110" cy="80" r="4" fill="#16283d"/>
-<text x="90" y="72" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">1</text>
-<circle cx="110" cy="130" r="4" fill="#16283d"/>
-<text x="90" y="122" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">2</text>
-<circle cx="110" cy="180" r="4" fill="#16283d"/>
-<text x="90" y="172" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">3</text>
-<circle cx="405" cy="65" r="4" fill="#16283d"/>
-<text x="420" y="70" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">3</text>
-<circle cx="405" cy="105" r="4" fill="#16283d"/>
-<text x="420" y="110" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">6</text>
-<circle cx="405" cy="145" r="4" fill="#16283d"/>
-<text x="420" y="150" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">7</text>
-<circle cx="405" cy="185" r="4" fill="#16283d"/>
-<text x="420" y="190" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">8</text>
-<circle cx="405" cy="225" r="4" fill="#16283d"/>
-<text x="420" y="230" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">9</text>
-<line x1="114" y1="79" x2="398" y2="65" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f1)"/>
-<line x1="114" y1="130" x2="398" y2="106" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f1)"/>
-<line x1="114" y1="180" x2="398" y2="222" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f1)"/>
-<text x="150" y="255" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">y = 3x</text>
-</svg>
+<svg id="fig1" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px"></svg>
 <p class="did">La regola $y=3x$ associa a $1$, $2$, $3$ rispettivamente $3$, $6$, $9$: ogni elemento
 di $X$ ha una e una sola immagine in $Y$. Gli elementi $7$ e $8$ di $Y$ restano senza
 controimmagine, e questo non crea nessun problema.</p>
@@ -85,59 +83,84 @@ sola. Non importa invece se due elementi diversi di $A$ finiscono sullo stesso e
 non importa se qualche elemento di $B$ resta senza controimmagine.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px">
 <defs>
-<marker id="f2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="#b3392f"/>
+<marker id="mg2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="#b9bcc2"/>
+</marker>
+<marker id="mr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
 </marker>
 </defs>
-<ellipse cx="110" cy="115" rx="85" ry="95" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<ellipse cx="410" cy="115" rx="90" ry="95" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<text x="55" y="25" font-family="Segoe UI, sans-serif" font-size="19" fill="#16283d">A</text>
-<text x="470" y="25" font-family="Segoe UI, sans-serif" font-size="19" fill="#16283d">B</text>
-<circle cx="110" cy="80" r="5" fill="none" stroke="#2f6b4f" stroke-width="2"/>
-<circle cx="110" cy="150" r="4" fill="#16283d"/>
-<circle cx="405" cy="55" r="4" fill="#16283d"/>
-<circle cx="405" cy="100" r="5" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="405" cy="150" r="4" fill="#16283d"/>
-<line x1="114" y1="80" x2="398" y2="55" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f2)"/>
-<line x1="114" y1="80" x2="398" y2="100" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f2)"/>
-<line x1="114" y1="150" x2="398" y2="100" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f2)"/>
-<text x="10" y="205" font-family="Segoe UI, sans-serif" font-size="14" fill="#2f6b4f">non è una funzione</text>
-<text x="330" y="205" font-family="Segoe UI, sans-serif" font-size="14" fill="#1f4e79">non è un problema</text>
+<ellipse cx="110" cy="115" rx="78" ry="92" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
+<ellipse cx="400" cy="115" rx="78" ry="92" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
+<text x="35" y="32" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">A</text>
+<text x="462" y="32" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">B</text>
+<g class="frecce2">
+<line data-a="0" x1="117" y1="70" x2="392" y2="70" stroke="#b9bcc2" stroke-width="1.8" marker-end="url(#mg2)"/>
+<line data-a="0" x1="117" y1="72" x2="392" y2="113" stroke="#b9bcc2" stroke-width="1.8" marker-end="url(#mg2)"/>
+<line data-a="1" x1="117" y1="115" x2="392" y2="117" stroke="#b9bcc2" stroke-width="1.8" marker-end="url(#mg2)"/>
+<line data-a="2" x1="117" y1="160" x2="392" y2="160" stroke="#b9bcc2" stroke-width="1.8" marker-end="url(#mg2)"/>
+</g>
+<circle cx="400" cy="115" r="11" fill="none" stroke="var(--blu)" stroke-width="2"/>
+<circle class="pa2" data-a="0" cx="110" cy="70" r="4.5" fill="var(--inchiostro)"/>
+<circle class="pa2" data-a="1" cx="110" cy="115" r="4.5" fill="var(--inchiostro)"/>
+<circle class="pa2" data-a="2" cx="110" cy="160" r="4.5" fill="var(--inchiostro)"/>
+<circle cx="400" cy="70" r="4.5" fill="var(--inchiostro)"/>
+<circle cx="400" cy="115" r="4.5" fill="var(--inchiostro)"/>
+<circle cx="400" cy="160" r="4.5" fill="var(--inchiostro)"/>
+<text id="verdetto2" x="110" y="235" font-family="var(--sans)" font-size="13" text-anchor="middle" fill="var(--rosso)">due immagini: non è una funzione</text>
+<text x="400" y="235" font-family="var(--sans)" font-size="13" text-anchor="middle" fill="var(--blu)">non è un problema</text>
 </svg>
-<p class="did">A sinistra, l'elemento cerchiato di $A$ manda due frecce: ha due immagini, e questo
-viola la definizione. A destra, due elementi diversi di $A$ arrivano sullo stesso elemento di
-$B$ (cerchiato): ogni elemento di $A$ ha comunque una sola immagine, quindi va bene.</p>
+<div class="cursore">
+<label for="c2">elemento di $A$</label>
+<input id="c2" type="range" min="0" max="2" step="1" value="0" aria-label="Elemento di A">
+<span class="val" id="v2">il primo</span>
+</div>
+<p class="did">Il cursore controlla un elemento di $A$ alla volta e conta le frecce che ne partono.
+Dal primo elemento ne partono due: ha due immagini, e la definizione è violata. Gli altri due hanno
+una sola immagine, anche se arrivano sullo stesso elemento di $B$ (cerchiato in blu): questo non è
+un problema.</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 520 255" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px">
 <defs>
-<marker id="f3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="#b3392f"/>
+<marker id="mg3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="#b9bcc2"/>
+</marker>
+<marker id="mr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
 </marker>
 </defs>
-<ellipse cx="120" cy="110" rx="95" ry="90" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<ellipse cx="85" cy="95" rx="45" ry="65" fill="none" stroke="#2f6b4f" stroke-width="2" stroke-dasharray="6,5"/>
-<ellipse cx="410" cy="110" rx="90" ry="90" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<text x="15" y="205" font-family="Segoe UI, sans-serif" font-size="16" fill="#16283d">A</text>
-<text x="65" y="45" font-family="Segoe UI, sans-serif" font-size="15" fill="#2f6b4f">C</text>
-<text x="470" y="25" font-family="Segoe UI, sans-serif" font-size="19" fill="#16283d">B</text>
-<circle cx="80" cy="65" r="4" fill="#16283d"/>
-<circle cx="80" cy="100" r="4" fill="#16283d"/>
-<circle cx="95" cy="135" r="4" fill="#16283d"/>
-<circle cx="185" cy="150" r="4" fill="#16283d"/>
-<circle cx="405" cy="60" r="4" fill="#16283d"/>
-<circle cx="405" cy="110" r="4" fill="#16283d"/>
-<circle cx="405" cy="160" r="4" fill="#16283d"/>
-<line x1="84" y1="65" x2="398" y2="60" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f3)"/>
-<line x1="84" y1="100" x2="398" y2="110" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f3)"/>
-<line x1="99" y1="135" x2="398" y2="160" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f3)"/>
+<ellipse cx="120" cy="115" rx="92" ry="100" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
+<ellipse cx="100" cy="100" rx="50" ry="70" fill="none" stroke="var(--verde)" stroke-width="2" stroke-dasharray="6,5"/>
+<ellipse cx="405" cy="115" rx="78" ry="95" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
+<text x="30" y="212" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">A</text>
+<text x="78" y="53" font-family="var(--sans)" font-size="16" fill="var(--verde)">C</text>
+<text x="466" y="32" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">B</text>
+<g class="frecce3">
+<line data-a="0" x1="102" y1="60" x2="398" y2="65" stroke="#b9bcc2" stroke-width="1.8" marker-end="url(#mg3)"/>
+<line data-a="1" x1="102" y1="105" x2="398" y2="115" stroke="#b9bcc2" stroke-width="1.8" marker-end="url(#mg3)"/>
+<line data-a="2" x1="112" y1="150" x2="398" y2="165" stroke="#b9bcc2" stroke-width="1.8" marker-end="url(#mg3)"/>
+</g>
+<circle class="pa3" data-a="0" cx="95" cy="60" r="4.5" fill="var(--inchiostro)"/>
+<circle class="pa3" data-a="1" cx="95" cy="105" r="4.5" fill="var(--inchiostro)"/>
+<circle class="pa3" data-a="2" cx="105" cy="150" r="4.5" fill="var(--inchiostro)"/>
+<circle class="pa3" data-a="3" cx="185" cy="175" r="4.5" fill="var(--inchiostro)"/>
+<circle cx="405" cy="65" r="4.5" fill="var(--inchiostro)"/>
+<circle cx="405" cy="115" r="4.5" fill="var(--inchiostro)"/>
+<circle cx="405" cy="165" r="4.5" fill="var(--inchiostro)"/>
+<text id="verdetto3" x="260" y="243" font-family="var(--sans)" font-size="13" text-anchor="middle" fill="var(--verde)">una sola immagine</text>
 </svg>
-<p class="did">Il punto in basso a destra di $A$, fuori dal sottoinsieme $C$, non manda nessuna
-freccia: la relazione $A\to B$ non è una funzione. Ristretta a $C$, dove ogni elemento ha la sua
-immagine, la relazione $C\to B$ è invece una funzione.</p>
+<div class="cursore">
+<label for="c3">elemento di $A$</label>
+<input id="c3" type="range" min="0" max="3" step="1" value="0" aria-label="Elemento di A">
+<span class="val" id="v3">il primo</span>
+</div>
+<p class="did">L'ultimo elemento di $A$, fuori dal sottoinsieme $C$, non manda nessuna freccia: la
+relazione $A\to B$ non è una funzione. Ristretta a $C$, dove ogni elemento ha la sua immagine, la
+relazione $C\to B$ è invece una funzione.</p>
 </div>
 
 <h2>Funzioni numeriche</h2>
@@ -154,33 +177,33 @@ numerici.</p>
 
 <p>Per esempio, con $f(x)=x^2+2x+1$:</p>
 
-$$f(0)=0^2+2\cdot 0+1=1 \qquad f(1)=1^2+2\cdot 1+1=4$$
+<p class="eq">$$f(0)=0^2+2\cdot 0+1=1 \qquad f(1)=1^2+2\cdot 1+1=4$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 190" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 460 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px">
 <defs>
-<marker id="f4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="#b3392f"/>
+<marker id="m4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
 </marker>
 </defs>
-<ellipse cx="100" cy="95" rx="75" ry="80" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<ellipse cx="360" cy="95" rx="80" ry="80" fill="none" stroke="#16283d" stroke-width="2.5"/>
-<text x="55" y="25" font-family="Segoe UI, sans-serif" font-size="18" fill="#16283d">X</text>
-<text x="415" y="25" font-family="Segoe UI, sans-serif" font-size="18" fill="#16283d">Y</text>
-<circle cx="100" cy="65" r="4" fill="#16283d"/>
-<text x="80" y="58" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">0</text>
-<circle cx="100" cy="125" r="4" fill="#16283d"/>
-<text x="80" y="118" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">1</text>
-<circle cx="355" cy="45" r="4" fill="#16283d"/>
-<text x="370" y="50" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">1</text>
-<circle cx="355" cy="85" r="4" fill="#16283d"/>
-<text x="370" y="90" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">2</text>
-<circle cx="355" cy="125" r="4" fill="#16283d"/>
-<text x="370" y="130" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">3</text>
-<circle cx="355" cy="150" r="4" fill="#16283d"/>
-<text x="370" y="155" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">4</text>
-<line x1="104" y1="65" x2="348" y2="45" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f4)"/>
-<line x1="104" y1="125" x2="348" y2="150" stroke="#b3392f" stroke-width="1.8" marker-end="url(#f4)"/>
+<ellipse cx="100" cy="95" rx="72" ry="80" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
+<ellipse cx="360" cy="95" rx="78" ry="80" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
+<text x="45" y="28" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">X</text>
+<text x="420" y="28" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">Y</text>
+<circle cx="100" cy="65" r="4.5" fill="var(--inchiostro)"/>
+<text x="78" y="70" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">0</text>
+<circle cx="100" cy="125" r="4.5" fill="var(--inchiostro)"/>
+<text x="78" y="130" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">1</text>
+<circle cx="355" cy="45" r="4.5" fill="var(--inchiostro)"/>
+<text x="368" y="50" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">1</text>
+<circle cx="355" cy="80" r="4.5" fill="var(--inchiostro)"/>
+<text x="368" y="85" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">2</text>
+<circle cx="355" cy="115" r="4.5" fill="var(--inchiostro)"/>
+<text x="368" y="120" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">3</text>
+<circle cx="355" cy="150" r="4.5" fill="var(--inchiostro)"/>
+<text x="368" y="155" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">4</text>
+<line x1="107" y1="64" x2="347" y2="45" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#m4)"/>
+<line x1="107" y1="126" x2="347" y2="149" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#m4)"/>
 </svg>
 <p class="did">$f(0)=1$ e $f(1)=4$: a ciascuno dei due valori scelti in $X$ corrisponde una sola
 immagine in $Y$.</p>
@@ -197,25 +220,15 @@ della variabile indipendente $x$ e in ordinata i corrispondenti valori di $y$. C
 </table>
 
 <div class="fig">
-<svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fx" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="#16283d"/>
-</marker>
-</defs>
-<line x1="30" y1="130" x2="310" y2="130" stroke="#16283d" stroke-width="1.6" marker-end="url(#fx)"/>
-<line x1="170" y1="250" x2="170" y2="20" stroke="#16283d" stroke-width="1.6" marker-end="url(#fx)"/>
-<text x="298" y="122" font-family="Segoe UI, sans-serif" font-size="15" fill="#16283d">x</text>
-<text x="178" y="32" font-family="Segoe UI, sans-serif" font-size="15" fill="#16283d">y</text>
-<line x1="90" y1="210" x2="250" y2="50" stroke="#b3392f" stroke-width="2"/>
-<circle cx="90" cy="210" r="4" fill="#b3392f"/>
-<circle cx="170" cy="130" r="4" fill="#b3392f"/>
-<circle cx="250" cy="50" r="4" fill="#b3392f"/>
-<text x="60" y="230" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">(-1,-2)</text>
-<text x="255" y="45" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">(1,2)</text>
-</svg>
+<svg id="fig5" viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px"></svg>
+<div class="cursore">
+<label for="c5">$x$</label>
+<input id="c5" type="range" min="-3" max="3" step="0.1" value="1" aria-label="Valore di x">
+<span class="val" id="v5"></span>
+</div>
 <p class="did">I tre punti della tabella sono allineati: il grafico di $y=2x$ è una retta passante
-per l'origine.</p>
+per l'origine. Muovendo il cursore il punto rosso percorre la retta e le sue due coordinate
+restano sempre una il doppio dell'altra.</p>
 </div>
 
 
@@ -223,5 +236,135 @@ per l'origine.</p>
 <footer><p>Matematica seconda &middot; Funzioni &middot; Unità 01</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio>.tabella,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?1:d).replace('.',',').replace('-','−');}
+
+/* ---------- figura 1: y = 3x ---------- */
+(function(){
+  var svg=document.getElementById('fig1'); if(!svg)return;
+  var d=el('defs',{}), mk=el('marker',{id:'m1',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--rosso)'}));
+  d.appendChild(mk); svg.appendChild(d);
+  svg.appendChild(el('ellipse',{cx:110,cy:130,rx:80,ry:100,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.5}));
+  svg.appendChild(el('ellipse',{cx:405,cy:130,rx:80,ry:100,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.5}));
+  svg.appendChild(txt(38,32,'X',{'font-size':18,fill:'var(--inchiostro)'}));
+  svg.appendChild(txt(470,32,'Y',{'font-size':18,fill:'var(--inchiostro)'}));
+  var ys=[80,130,180], im=[70,105,210], et=['3','6','9'];
+  var altri=[140,175];
+  ys.forEach(function(y,i){
+    svg.appendChild(el('circle',{cx:110,cy:y,r:4.5,fill:'var(--inchiostro)'}));
+    svg.appendChild(txt(88,y+5,String(i+1),{'font-size':14,fill:'var(--inchiostro)','text-anchor':'middle'}));
+    svg.appendChild(el('line',{x1:117,y1:y,x2:397,y2:im[i],stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#m1)'}));
+    svg.appendChild(el('circle',{cx:405,cy:im[i],r:4.5,fill:'var(--inchiostro)'}));
+    svg.appendChild(txt(420,im[i]+5,et[i],{'font-size':14,fill:'var(--inchiostro)'}));
+  });
+  ['7','8'].forEach(function(s,i){
+    svg.appendChild(el('circle',{cx:405,cy:altri[i],r:4.5,fill:'var(--inchiostro)'}));
+    svg.appendChild(txt(420,altri[i]+5,s,{'font-size':14,fill:'var(--inchiostro)'}));
+  });
+  svg.appendChild(txt(150,250,'y = 3x',{'font-size':16,fill:'var(--inchiostro)'}));
+})();
+
+/* ---------- figure 2 e 3: un elemento di A alla volta ---------- */
+function walker(idCur,idVal,idVerd,clPunti,clFrecce,nomi,verdetti,colori){
+  var cur=document.getElementById(idCur); if(!cur)return;
+  var val=document.getElementById(idVal), verd=document.getElementById(idVerd);
+  var punti=[].slice.call(document.querySelectorAll(clPunti));
+  var frecce=[].slice.call(document.querySelectorAll(clFrecce));
+  var mark=clFrecce.indexOf('2')>0?'url(#mr2)':'url(#mr3)';
+  var grigio=clFrecce.indexOf('2')>0?'url(#mg2)':'url(#mg3)';
+  function dis(){
+    var k=parseInt(cur.value,10);
+    punti.forEach(function(p){
+      var sel=parseInt(p.getAttribute('data-a'),10)===k;
+      p.setAttribute('r',sel?7:4.5);
+      p.setAttribute('fill',sel?'var(--rosso)':'var(--inchiostro)');
+    });
+    frecce.forEach(function(f){
+      var sel=parseInt(f.getAttribute('data-a'),10)===k;
+      f.setAttribute('stroke',sel?'var(--rosso)':'#b9bcc2');
+      f.setAttribute('stroke-width',sel?2.6:1.8);
+      f.setAttribute('marker-end',sel?mark:grigio);
+    });
+    val.textContent=nomi[k];
+    verd.textContent=verdetti[k];
+    verd.setAttribute('fill',colori[k]);
+  }
+  cur.addEventListener('input',dis); dis();
+}
+walker('c2','v2','verdetto2','.pa2','.frecce2 line',
+  ['il primo','il secondo','il terzo'],
+  ['due immagini: non è una funzione','una sola immagine','una sola immagine'],
+  ['var(--rosso)','var(--verde)','var(--verde)']);
+walker('c3','v3','verdetto3','.pa3','.frecce3 line',
+  ['il primo','il secondo','il terzo','il quarto'],
+  ['una sola immagine','una sola immagine','una sola immagine','nessuna immagine: A → B non è una funzione'],
+  ['var(--verde)','var(--verde)','var(--verde)','var(--rosso)']);
+
+/* ---------- figura 5: la retta y = 2x ---------- */
+(function(){
+  var svg=document.getElementById('fig5'); if(!svg)return;
+  var W=360,H=300,m={l:34,r:22,t:22,b:30};
+  var xr=[-3.6,3.6], yr=[-7.6,7.6];
+  function X(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);}
+  function Y(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);}
+  var d=el('defs',{}), mk=el('marker',{id:'m5',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); svg.appendChild(d);
+  svg.appendChild(el('line',{x1:m.l-6,y1:Y(0),x2:W-m.r+6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#m5)'}));
+  svg.appendChild(el('line',{x1:X(0),y1:H-m.b+6,x2:X(0),y2:m.t-6,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#m5)'}));
+  svg.appendChild(txt(W-m.r+2,Y(0)+18,'x',{fill:'var(--inchiostro)'}));
+  svg.appendChild(txt(X(0)+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  [-3,-2,-1,1,2,3].forEach(function(v){
+    svg.appendChild(el('line',{x1:X(v),y1:Y(0)-4,x2:X(v),y2:Y(0)+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    svg.appendChild(txt(X(v),Y(0)+17,String(v).replace('-','−'),{'text-anchor':'middle','font-size':11}));
+  });
+  [-6,-4,-2,2,4,6].forEach(function(v){
+    svg.appendChild(el('line',{x1:X(0)-4,y1:Y(v),x2:X(0)+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    svg.appendChild(txt(X(0)-8,Y(v)+4,String(v).replace('-','−'),{'text-anchor':'end','font-size':11}));
+  });
+  svg.appendChild(el('line',{x1:X(-3.6),y1:Y(-7.2),x2:X(3.6),y2:Y(7.2),stroke:'var(--blu)','stroke-width':2.2}));
+  [[-1,-2],[0,0],[1,2]].forEach(function(p){
+    svg.appendChild(el('circle',{cx:X(p[0]),cy:Y(p[1]),r:3.6,fill:'var(--blu)'}));
+  });
+  var gx=el('line',{x1:0,y1:0,x2:0,y2:0,stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'4,3'});
+  var gy=el('line',{x1:0,y1:0,x2:0,y2:0,stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'4,3'});
+  svg.appendChild(gx); svg.appendChild(gy);
+  var pt=el('circle',{cx:0,cy:0,r:5.5,fill:'var(--rosso)'}); svg.appendChild(pt);
+  var cur=document.getElementById('c5'), val=document.getElementById('v5');
+  function dis(){
+    var x=parseFloat(cur.value), y=2*x;
+    pt.setAttribute('cx',X(x)); pt.setAttribute('cy',Y(y));
+    gx.setAttribute('x1',X(x)); gx.setAttribute('y1',Y(y)); gx.setAttribute('x2',X(x)); gx.setAttribute('y2',Y(0));
+    gy.setAttribute('x1',X(x)); gy.setAttribute('y1',Y(y)); gy.setAttribute('x2',X(0)); gy.setAttribute('y2',Y(y));
+    val.textContent='x = '+num(x)+' y = '+num(y);
+  }
+  cur.addEventListener('input',dis); dis();
+})();
+
+})();
+</script>
 </body>
 </html>

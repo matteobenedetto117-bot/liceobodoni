@@ -1,7 +1,13 @@
-## Unità 01 — Concetto di funzione e funzioni numeriche
+## Unità 01 — Funzioni e funzioni numeriche
 - Parole: 493 su 2 pagine di traccia
 - Rettifica: nessuna, i valori numerici degli esempi (y=3x, f(x)=x²+2x+1, y=2x, y=(3/5)x) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Le tre coppie di frecce non tracciate verso 7 e 8 nel primo diagramma sono state descritte in una riga di didascalia per chiarire la lettura del disegno, non come contenuto nuovo.
+- Revisione (20/09/2026): titolo scelto dall'utente «Funzioni e funzioni numeriche» (in `_dati` la cartella resta `01-concetto-di-funzione-e-funzioni-numeriche`, l'indirizzo non cambia); titoletti tenuti tutti e tre («Che cos'è una funzione», «Funzioni numeriche», «Rappresentazione nel piano cartesiano»); tolto il sottotitolo dell'intestazione.
+- Revisione, impaginazione: passata all'impaginazione «a quaderno» per la LIM (testo al 165%, righe ogni 1,8rem, script di allineamento, formule in display nel riquadro azzurro).
+- Revisione, figure: tutti e cinque i disegni ridisegnati in SVG con le variabili di colore del sito. Nessuna figura aggiunta o tolta rispetto alla traccia.
+- Revisione, figure interattive: nei due diagrammi degli esempi (il secondo e il terzo) un cursore percorre gli elementi dell'insieme di partenza, evidenzia le frecce che ne partono e scrive il verdetto (due immagini / una sola immagine / nessuna immagine); nel piano cartesiano un cursore muove il punto sulla retta y = 2x fra x = −3 e x = 3 mostrando le due coordinate.
+- Revisione, contenuto: nessuna rettifica concettuale. Rilette le due pagine di traccia: definizione, esempi, notazione y = f(x), f(0) = 1 e f(1) = 4 per f(x) = x²+2x+1 e la tabella di y = 2x corrispondono alla traccia.
+- Revisione, aggiunta: nel secondo diagramma l'insieme di partenza ha tre elementi invece dei due disegnati in precedenza, per far vedere accanto al caso vietato (un elemento con due immagini) due casi leciti; è un'aggiunta di disegno, non di contenuto, e serve al cursore che scorre gli elementi.
 
 ## Unità 02 — Proporzionalità diretta e funzioni lineari
 - Parole: 389 su 2 pagine di traccia
