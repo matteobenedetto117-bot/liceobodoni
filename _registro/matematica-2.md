@@ -9,10 +9,18 @@
 - Revisione, contenuto: nessuna rettifica concettuale. Rilette le due pagine di traccia: definizione, esempi, notazione y = f(x), f(0) = 1 e f(1) = 4 per f(x) = x²+2x+1 e la tabella di y = 2x corrispondono alla traccia.
 - Revisione, aggiunta: nel secondo diagramma l'insieme di partenza ha tre elementi invece dei due disegnati in precedenza, per far vedere accanto al caso vietato (un elemento con due immagini) due casi leciti; è un'aggiunta di disegno, non di contenuto, e serve al cursore che scorre gli elementi.
 
-## Unità 02 — Proporzionalità diretta e funzioni lineari
+## Unità 02 — Le funzioni lineari
 - Parole: 389 su 2 pagine di traccia
 - Rettifica: nessuna. Il passaggio y=(3/2)(x-1)+1 = (3/2)x-1/2 e i valori della tabella per y=(3/5)x sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Il fascio di rette per l'origine al variare del segno di m è lo stesso disegno della traccia, solo ridisegnato in SVG.
+
+- Revisione (20/09/2026): titolo scelto dall'utente «Le funzioni lineari» (in `_dati` la cartella resta `02-proporzionalita-diretta-e-funzioni-lineari`, l'indirizzo non cambia); titoletti tenuti tutti e due («Proporzionalità diretta», «Funzioni lineari»); tolto il sottotitolo dell'intestazione.
+- Revisione, impaginazione: passata all'impaginazione «a quaderno» per la LIM, con le formule in display nei riquadri.
+- Revisione, rettifica: nel disegno delle funzioni lineari il punto etichettato (1; 1) era disegnato in una posizione che non corrispondeva alle sue coordinate, e le due rette non avevano il coefficiente angolare 3/2; le figure sono ora calcolate dalle equazioni, quindi pendenze, intercette e punti corrispondono ai valori scritti.
+- Revisione, contenuto: riscritto il commento sul segno di m (prima diceva che al diminuire di m «la retta si avvicina all'asse y dal lato opposto»): ora dice che a valore assoluto grande la retta è ripida e a valore assoluto piccolo si appiattisce sull'asse x. Rilette le pagine 4–5 della traccia: definizioni, tabella di y = (3/5)x e il passaggio y = (3/2)(x−1)+1 = (3/2)x − 1/2 corrispondono.
+- Revisione, figure: le tre figure ridisegnate in SVG calcolato. Nella prima i due passi (+5 con +3 a destra, −5 con −3 a sinistra) come nella traccia.
+- Revisione, figure interattive: nel fascio y = mx un cursore muove la retta evidenziata fra m = −4 e m = 4, con il colore che segue il segno (rosso se sale, verde se scende, blu nel caso escluso m = 0); nella figura delle funzioni lineari un cursore cambia q fra −3 e 3 e fa scorrere in verticale la retta di coefficiente angolare 3/2, con il pallino sull'intercetta, la retta y = (3/2)x + 1 tratteggiata come riferimento e la segnalazione dei due casi notevoli (q = −1/2, parallela per (1; 1), e q = 0, caso escluso).
+- Revisione, aggiunta: il cursore su q mostra anche valori diversi dai due della traccia; serve a far vedere la traslazione verticale, non aggiunge contenuto.
 
 ## Unità 03 — Sistemi di equazioni: definizioni, grado, forma normale
 - Parole: 379 su 2 pagine di traccia
