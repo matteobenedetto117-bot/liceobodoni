@@ -3,19 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Matrici, determinanti e regola di Cramer — Matematica seconda</title>
+<title>La regola di Cramer — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.caso h3{margin:0 0 10px;font-size:1.15rem}
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.def .eq+p,.nota .eq+p{padding-top:calc(var(--r)*.5)}
+/* esercizi svolti con i passaggi a comparsa */
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-passo,.btn-reset{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-passo:hover,.btn-reset:hover{background:var(--blu-chiaro)}
+.btn-passo:disabled{opacity:.45;cursor:default}
+.btn-reset{width:2.4rem;padding:4px 0;font-size:.95rem;line-height:1}
+.btn-tutti:focus-visible,.btn-passo:focus-visible,.btn-reset:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{margin-top:var(--r)}
+.es .quesito{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin:0}
+.es .passo{display:block}
+.es .passo[hidden]{display:none}
+.es .spieg{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;
+  margin-top:calc(var(--r)*.5);line-height:var(--r)}
+.es .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.25) 20px;font-size:1.05rem;text-align:center;margin:0}
+.es .passo.finale .eq{background:#eaf1ea;border-color:#cfe0cf}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:calc(var(--r)*.5)}
 </style>
 </head>
 <body>
@@ -24,73 +71,156 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Sistemi lineari di equazioni &middot; Unità 06</p>
-  <h1>Matrici, determinanti e regola di Cramer</h1>
-  <p class="sommario">Accanto a sostituzione e riduzione, un sistema di due equazioni si può
-  risolvere anche calcolando tre numeri, i determinanti, ottenuti dai soli coefficienti. Il
-  vantaggio è che lo stesso schema, una volta imparato, funziona per qualunque sistema lineare,
-  anche con più di due incognite.</p>
+  <h1>La regola di Cramer</h1>
 </header>
+
+<p>Accanto a sostituzione e riduzione, un sistema di due equazioni si può risolvere anche
+calcolando tre numeri, i determinanti, ottenuti dai soli coefficienti. Il vantaggio è che lo
+stesso schema, una volta imparato, funziona per qualunque sistema lineare, anche con più di due
+incognite.</p>
+
+<h2>Matrici e determinanti</h2>
 
 <div class="def">
 <span class="et">Definizione</span>
 <p>Una <strong>matrice $2\times2$</strong> è una tabella di quattro numeri disposti su due righe
 e due colonne:</p>
-$$\begin{pmatrix}a_1 & b_1\\a_2 & b_2\end{pmatrix}$$
+<p class="eq">$$\begin{pmatrix}a_1 & b_1\\a_2 & b_2\end{pmatrix}$$</p>
 <p>I due elementi $a_1,\,b_2$ formano la <strong>diagonale principale</strong>, i due elementi
-$a_2,\,b_1$ la <strong>diagonale secondaria</strong>. Per esempio $\begin{pmatrix}5&1\\-3&4\end{pmatrix}$
-è una matrice $2\times2$ con diagonale principale $5,\,4$.</p>
+$a_2,\,b_1$ la <strong>diagonale secondaria</strong>.</p>
 </div>
+
+<p>Per esempio $\begin{pmatrix}5&1\\-3&4\end{pmatrix}$ è una matrice $2\times2$ con diagonale
+principale $5,\,4$ e diagonale secondaria $-3,\,1$.</p>
 
 <div class="def">
 <span class="et">Definizione</span>
 <p>Il <strong>determinante</strong> di una matrice $2\times2$ è il numero che si ottiene
 sottraendo dal prodotto della diagonale principale il prodotto della diagonale secondaria:</p>
-$$\begin{vmatrix}a_1 & b_1\\a_2 & b_2\end{vmatrix}=a_1b_2-a_2b_1$$
-<p>Per esempio $\begin{vmatrix}2&5\\3&7\end{vmatrix}=2\cdot7-3\cdot5=14-15=-1$.</p>
+<p class="eq">$$\begin{vmatrix}a_1 & b_1\\a_2 & b_2\end{vmatrix}=a_1b_2-a_2b_1$$</p>
 </div>
 
+<p>Per esempio:</p>
+
+<p class="eq">$$\begin{vmatrix}2&5\\3&7\end{vmatrix}=2\cdot7-3\cdot5=14-15=-1$$</p>
+
 <h2>Applicazione ai sistemi</h2>
+
 <p>Dato un sistema di due equazioni in forma normale</p>
-$$\begin{cases}ax+by=c\\a'x+b'y=c'\end{cases}$$
+
+<p class="eq">$$\begin{cases}ax+by=c\\a'x+b'y=c'\end{cases}$$</p>
+
 <p>chiamiamo <strong>determinante del sistema</strong> il numero $D$ costruito con i soli
 coefficienti delle incognite, e $D_x$, $D_y$ i determinanti ottenuti sostituendo, in $D$,
 rispettivamente la colonna di $x$ o quella di $y$ con la colonna dei termini noti:</p>
-$$D=\begin{vmatrix}a&b\\a'&b'\end{vmatrix}=ab'-a'b \qquad
+
+<p class="eq">$$D=\begin{vmatrix}a&b\\a'&b'\end{vmatrix}=ab'-a'b \qquad
 D_x=\begin{vmatrix}c&b\\c'&b'\end{vmatrix}=cb'-c'b \qquad
-D_y=\begin{vmatrix}a&c\\a'&c'\end{vmatrix}=ac'-a'c$$
+D_y=\begin{vmatrix}a&c\\a'&c'\end{vmatrix}=ac'-a'c$$</p>
 
 <h2>Regola di Cramer</h2>
-<div class="regola">
-<p>Se $D\neq0$ il sistema è <strong>determinato</strong> e l'unica soluzione è</p>
-$$x=\frac{D_x}{D} \qquad y=\frac{D_y}{D}$$
-<p>Se $D=0$ e almeno uno fra $D_x$, $D_y$ è diverso da zero, il sistema è
-<strong>impossibile</strong>.</p>
-<p>Se $D=0$ e anche $D_x=0$, $D_y=0$, il sistema è <strong>indeterminato</strong>.</p>
+
+<p>Nel sistema qui sopra, con $a$, $b$, $a'$, $b'$ non tutti nulli:</p>
+
+<ul>
+<li>se $D\neq0$ il sistema è <strong>determinato</strong>, con l'unica soluzione
+$x=\dfrac{D_x}{D}$ e $y=\dfrac{D_y}{D}$;</li>
+<li>se $D=0$ e almeno uno fra $D_x$ e $D_y$ è diverso da zero, il sistema è
+<strong>impossibile</strong>;</li>
+<li>se $D=0$ e anche $D_x=0$ e $D_y=0$, il sistema è <strong>indeterminato</strong>.</li>
+</ul>
+
+<p>I tre casi sono gli stessi visti sul grafico: rette incidenti, rette parallele distinte,
+rette coincidenti.</p>
+
+<h2>Esempi</h2>
+
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i passaggi</button>
 </div>
 
-<div class="caso">
 <h3>Primo esempio</h3>
-<p>Nel sistema</p>
-$$\begin{cases}5x+3y=1\\2x+y=4\end{cases}$$
-<p>calcoliamo i tre determinanti:</p>
-$$D=\begin{vmatrix}5&3\\2&1\end{vmatrix}=5-6=-1 \qquad
-D_x=\begin{vmatrix}1&3\\4&1\end{vmatrix}=1-12=-11 \qquad
-D_y=\begin{vmatrix}5&1\\2&4\end{vmatrix}=20-2=18$$
-<p>Poiché $D\neq0$ il sistema è determinato:</p>
-$$x=\frac{D_x}{D}=\frac{-11}{-1}=11 \qquad y=\frac{D_y}{D}=\frac{18}{-1}=-18$$
-<p>La soluzione è $(11;\,-18)$.</p>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}5x+3y=1\\2x+y=4\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Calcolo il determinante del sistema con i coefficienti delle incognite.</p>
+<p class="eq">$$D=\begin{vmatrix}5&3\\2&1\end{vmatrix}=5\cdot1-2\cdot3=5-6=-1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sostituisco la colonna di $x$ con quella dei termini noti.</p>
+<p class="eq">$$D_x=\begin{vmatrix}1&3\\4&1\end{vmatrix}=1\cdot1-4\cdot3=1-12=-11$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sostituisco la colonna di $y$ con quella dei termini noti.</p>
+<p class="eq">$$D_y=\begin{vmatrix}5&1\\2&4\end{vmatrix}=5\cdot4-2\cdot1=20-2=18$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">$D$ non è zero: il sistema è determinato e applico le due formule.</p>
+<p class="eq">$$x=\frac{D_x}{D}=\frac{-11}{-1}=11 \qquad y=\frac{D_y}{D}=\frac{18}{-1}=-18$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">La soluzione del sistema.</p>
+<p class="eq">$$(x;y)=(11;\,-18)$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
 </div>
 
-<div class="caso">
 <h3>Secondo esempio</h3>
-<p>Nel sistema</p>
-$$\begin{cases}7x-y=5\\21x-3y=15\end{cases}$$
-<p>la seconda equazione è la prima moltiplicata per $3$: i tre determinanti valgono tutti zero.</p>
-$$D=\begin{vmatrix}7&-1\\21&-3\end{vmatrix}=-21+21=0 \qquad
-D_x=\begin{vmatrix}5&-1\\15&-3\end{vmatrix}=-15+15=0 \qquad
-D_y=\begin{vmatrix}7&5\\21&15\end{vmatrix}=105-105=0$$
-<p>Il sistema è indeterminato: le due equazioni descrivono la stessa retta, e ogni punto di
-quella retta è soluzione.</p>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}2x-y=-2\\2x-y=-6\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Calcolo il determinante del sistema.</p>
+<p class="eq">$$D=\begin{vmatrix}2&-1\\2&-1\end{vmatrix}=2\cdot(-1)-2\cdot(-1)=-2+2=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">$D$ è zero: per decidere fra impossibile e indeterminato calcolo $D_x$.</p>
+<p class="eq">$$D_x=\begin{vmatrix}-2&-1\\-6&-1\end{vmatrix}=(-2)\cdot(-1)-(-6)\cdot(-1)=2-6=-4$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">$D_x$ è diverso da zero, e tanto basta: non serve calcolare anche $D_y$.</p>
+<p class="eq">$$D=0 \qquad D_x=-4\neq0$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">Il sistema è impossibile: le due rette hanno lo stesso coefficiente angolare
+ma termini noti diversi, sono parallele e distinte.</p>
+<p class="eq">$$\text{nessuna soluzione}$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
+</div>
+
+<h3>Terzo esempio</h3>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}7x-y=5\\21x-3y=15\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">La seconda equazione è la prima moltiplicata per $3$. Calcolo $D$.</p>
+<p class="eq">$$D=\begin{vmatrix}7&-1\\21&-3\end{vmatrix}=7\cdot(-3)-21\cdot(-1)=-21+21=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">$D$ è zero: calcolo $D_x$.</p>
+<p class="eq">$$D_x=\begin{vmatrix}5&-1\\15&-3\end{vmatrix}=5\cdot(-3)-15\cdot(-1)=-15+15=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Anche $D_x$ è zero: devo calcolare pure $D_y$.</p>
+<p class="eq">$$D_y=\begin{vmatrix}7&5\\21&15\end{vmatrix}=7\cdot15-21\cdot5=105-105=0$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">Tutti e tre i determinanti sono nulli: il sistema è indeterminato, le due
+equazioni descrivono la stessa retta e ogni suo punto è soluzione.</p>
+<p class="eq">$$D=D_x=D_y=0$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
 </div>
 
 
@@ -98,5 +228,61 @@ quella retta è soluzione.</p>
 <footer><p>Matematica seconda &middot; Sistemi lineari di equazioni &middot; Unità 06</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did):not(.spieg),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,.es .spieg,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- passaggi a comparsa, uno per volta --- */
+(function(){
+  var esercizi=[].slice.call(document.querySelectorAll('.es')).map(function(es){
+    return {passi:[].slice.call(es.querySelectorAll('.passo')),
+            avanti:es.querySelector('.btn-passo'),
+            reset:es.querySelector('.btn-reset')};
+  });
+  var tutti=document.getElementById('b-tutti');
+  function visibili(e){return e.passi.filter(function(p){return !p.hidden;}).length;}
+  function aggiorna(e){e.avanti.disabled=visibili(e)>=e.passi.length;}
+  function aggiornaTutti(){
+    var chiusi=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    tutti.textContent=chiusi?'Mostra tutti i passaggi':'Nascondi tutti i passaggi';
+  }
+  function mostra(e,n){
+    e.passi.forEach(function(p,i){p.hidden=i>=n;});
+    aggiorna(e);
+  }
+  esercizi.forEach(function(e){
+    e.avanti.addEventListener('click',function(){
+      mostra(e,visibili(e)+1); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    e.reset.addEventListener('click',function(){
+      mostra(e,0); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    aggiorna(e);
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var apri=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    esercizi.forEach(function(e){mostra(e,apri?e.passi.length:0);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
 </body>
 </html>

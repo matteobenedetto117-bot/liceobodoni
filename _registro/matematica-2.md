@@ -58,10 +58,17 @@
 - Revisione, contenuto: nessuna rettifica. Le quattro soluzioni ((−3; 2), (1; −1), (1/2; −5/8), (1/2; 0)) sono state riverificate con SymPy. Aggiunte due frasi che spiegano l'idea dei due metodi prima degli esempi, e la precisazione che moltiplicare i due membri per un numero diverso da zero non cambia le soluzioni.
 - Revisione, figure: nessuna; la traccia di queste due unità non ha disegni.
 
-## Unità 06 — Matrici, determinanti e regola di Cramer
+## Unità 06 — La regola di Cramer
 - Parole: 326 su 4 pagine di traccia (pagine 12–15)
 - Rettifica: nessuna. Il determinante |2 5;3 7|=-1, il primo esempio {5x+3y=1,2x+y=4} con D=-1, Dx=-11, Dy=18, soluzione (11;-18), e il secondo esempio {7x-y=5,21x-3y=15} con D=Dx=Dy=0 (sistema indeterminato, seconda equazione tripla della prima) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Le uniche parole in più rispetto alla traccia spiegano il ruolo di ciascun elemento nelle formule di D, Dx, Dy già presenti nel quaderno.
+
+- Revisione (20/09/2026): titolo scelto dall'utente «La regola di Cramer» (cartella invariata, `07-matrici-determinanti-e-regola-di-cramer`); titoletti tenuti «Applicazione ai sistemi», «Regola di Cramer» ed «Esempi», più «Matrici e determinanti» in apertura, aggiunto su richiesta dell'utente; tolto il sottotitolo dell'intestazione.
+- Revisione, impaginazione: impaginazione «a quaderno» per la LIM; tolti i riquadri `.caso` e `.regola`; i tre casi della regola sono un elenco puntato, le formule in display nei riquadri azzurri.
+- Revisione, esercizi: i tre esempi sono esercizi con i passaggi a comparsa (tasto «passo successivo», ↺ per ricominciare, «Mostra tutti i passaggi» in cima alla sezione), sullo schema dell'unità 05.
+- Revisione, aggiunta: su richiesta dell'utente è stato aggiunto un esempio di sistema impossibile, che nella traccia manca (la traccia ha solo il caso determinato e quello indeterminato). È il sistema {2x−y=−2, 2x−y=−6}, lo stesso già visto per via grafica nell'unità dell'interpretazione grafica: D = 0 e D_x = −4 ≠ 0, quindi impossibile. È messo per secondo, prima dell'indeterminato, per seguire l'ordine dei tre casi della regola, come chiesto dall'utente. Nell'esempio si fa notare che basta uno fra D_x e D_y diverso da zero e non serve calcolare l'altro.
+- Revisione, contenuto: nessuna rettifica. Ricontrollati tutti i determinanti dei tre esempi (D = −1, D_x = −11, D_y = 18; D = 0, D_x = −4; D = D_x = D_y = 0). Aggiunta una riga che collega i tre casi della regola ai tre casi visti sul grafico, senza rimandi numerati.
+- Revisione, figure: nessuna; la traccia di questa unità non ha disegni.
 
 ## Unità 07 — Determinanti 3×3 e regola di Sarrus
 - Parole: 197 su 2 pagine di traccia (pagine 16–17)
