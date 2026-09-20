@@ -88,10 +88,17 @@
 - Revisione, colori: nel sistema generale e nei quattro determinanti i coefficienti di x sono blu, quelli di y verdi, quelli di z viola e i termini noti rossi, con una riga di legenda; nei determinanti D_x, D_y, D_z dell'esempio la colonna sostituita è in rosso. Il viola è un colore in più rispetto alla tavolozza del sito, serve per la terza incognita.
 - Revisione, contenuto: nessuna rettifica. Riverificati con SymPy il determinante dell'esempio (D = 9), i quattro determinanti del sistema (D = −23, D_x = 0, D_y = −23, D_z = −46) e la terna (0; 1; 2), che i tre metodi ritrovano.
 
-## Unità 08 — Sistemi letterali e discussione parametrica
+## Unità 08 — Sistemi letterali
 - Parole: 345 su circa 2,3 pagine di traccia (pagina 23, pagina 24 e la parte superiore di pagina 25, prima dell'inizio dei sistemi fratti)
 - Rettifica: nessuna. Il sistema {ax+3ay=18, 2x+ay=a} e tutti i determinanti (D=a²-6a, Dx=18a-3a², Dy=a²-36) e i tre casi (a≠0 e a≠6 → determinato con x=-3, y=(a+6)/a; a=0 → impossibile; a=6 → indeterminato) sono stati verificati con SymPy e risultano corretti così come nella traccia.
 - Aggiunta: nessuna. Il riquadro con i tre casi generali (D≠0/D=0 con Dx o Dy diverso da zero/D=Dx=Dy=0) riformula per due incognite lo stesso criterio già enunciato per tre incognite nell'unità 09, applicato qui al caso con parametro mostrato in traccia.
+
+- Revisione (20/09/2026): titolo scelto dall'utente «Sistemi letterali»; cartella invariata, `10-sistemi-letterali-e-discussione-parametrica`; tolto il sottotitolo; impaginazione «a quaderno».
+- Revisione, scelta didattica (richiesta dell'utente): l'unità **non usa la regola di Cramer**, che invece la traccia usa («i sistemi letterali si risolvono con Cramer»). Lo scopo dichiarato dall'utente è che la classe impari a ragionare sul parametro invece di applicare una regola a memoria. Il sistema {ax+3ay=18, 2x+ay=a} è quindi risolto per riduzione: moltiplicando per 2 e per a si arriva a a(6−a)y = (6−a)(6+a), e il punto dell'esercizio diventa la domanda «posso dividere?». I due valori critici, a = 0 e a = 6, nascono dall'annullarsi di quel fattore e vengono poi sostituiti nel sistema di partenza: con a = 0 la prima equazione diventa 0 = 18 (impossibile), con a = 6 le due equazioni diventano entrambe x + 3y = 3 (indeterminato). Il risultato finale è lo stesso della traccia (determinato con x = −3 e y = (a+6)/a fuori dai due valori), ma la strada è diversa: se si vuole tornare alla versione con i determinanti, la traccia è alle pagine 23–25.
+- Revisione, aggiunta: due riquadri di avvertenza non presenti nella traccia, sulla regola «si divide per un'espressione col parametro solo dopo aver escluso che sia nulla» e sul fatto che i valori critici si scoprono dai conti e non guardando il sistema; e un riepilogo finale in tre righe (quello che la traccia scrive a pagina 25).
+- Revisione, esercizi: tre esercizi con i passaggi a comparsa — la discussione generale, il caso a = 0 e il caso a = 6 — con il passaggio del «bivio» su fondo lilla. Il parametro è scritto in viola in tutta la pagina, così si distingue a colpo d'occhio dalle incognite.
+- Revisione, contenuto: verificati con SymPy il passaggio a(6−a)y = (6−a)(6+a), la soluzione (−3; (a+6)/a) e i due casi particolari.
+- Revisione, figure: nessuna; la traccia non ne ha e l'utente ha scelto di non aggiungerne.
 
 ## Unità 09 — Sistemi fratti
 - Parole: 297 su circa 1,5 pagine di traccia (parte inferiore di pagina 25, dopo la fine dell'unità 10, e parte superiore di pagina 26, fino a "IMPOSSIBILE")

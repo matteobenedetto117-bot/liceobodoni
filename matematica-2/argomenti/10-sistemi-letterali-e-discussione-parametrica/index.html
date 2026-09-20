@@ -3,18 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sistemi letterali e discussione parametrica — Matematica seconda</title>
+<title>Sistemi letterali — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],macros:{cp:['\\textcolor[RGB]{122,79,163}{#1}',1]}},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.caso h3{margin:24px 0 8px;font-size:1.1rem}
-.caso h3:first-child{margin-top:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem;--viola:#7a4fa3}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.def .eq+p,.nota .eq+p{padding-top:calc(var(--r)*.5)}
+/* esercizi svolti con i passaggi a comparsa */
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-passo,.btn-reset{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-passo:hover,.btn-reset:hover{background:var(--blu-chiaro)}
+.btn-passo:disabled{opacity:.45;cursor:default}
+.btn-reset{width:2.4rem;padding:4px 0;font-size:.95rem;line-height:1}
+.btn-tutti:focus-visible,.btn-passo:focus-visible,.btn-reset:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{margin-top:var(--r)}
+.es .quesito{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin:0}
+.es .passo{display:block}
+.es .passo[hidden]{display:none}
+.es .spieg{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;
+  margin-top:calc(var(--r)*.5);line-height:var(--r)}
+.es .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.25) 20px;font-size:1.05rem;text-align:center;margin:0}
+.es .passo.finale .eq{background:#eaf1ea;border-color:#cfe0cf}
+.es .passo.bivio .eq{background:#f6f1fb;border-color:#ddd0ea}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:calc(var(--r)*.5)}
 </style>
 </head>
 <body>
@@ -23,48 +72,142 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Sistemi lineari di equazioni &middot; Unità 08</p>
-  <h1>Sistemi letterali e discussione parametrica</h1>
-  <p class="sommario">In un sistema letterale uno dei coefficienti non è un numero fisso ma una
-  lettera, detta parametro. Il sistema si risolve ancora con la regola di Cramer, ma la natura
-  della soluzione &mdash; determinata, impossibile o indeterminata &mdash; dipende dal valore che
-  il parametro assume: discuterla vuol dire separare i casi in cui il determinante si annulla da
-  quelli in cui non si annulla.</p>
+  <h1>Sistemi letterali</h1>
 </header>
 
-<h2>Discussione di un sistema con parametro</h2>
-<p>Consideriamo il sistema letterale, nell'incognita $x$, $y$ e nel parametro $a$:</p>
-$$\begin{cases}ax+3ay=18\\2x+ay=a\end{cases}$$
-<p>Calcoliamo il determinante del sistema e i due determinanti $D_x$, $D_y$, esattamente come
-nella regola di Cramer già vista:</p>
-$$D=\begin{vmatrix}a&3a\\2&a\end{vmatrix}=a^2-6a=a(a-6)$$
-$$D_x=\begin{vmatrix}18&3a\\a&a\end{vmatrix}=18a-3a^2=-3a(a-6)\qquad\quad
-D_y=\begin{vmatrix}a&18\\2&a\end{vmatrix}=a^2-36=(a-6)(a+6)$$
-<p>Ogni determinante è un polinomio in $a$: quello del sistema, $D$, si annulla per $a=0$ oppure
-$a=6$. Questi due valori vanno trattati a parte dal resto dei casi.</p>
+<p>In un sistema letterale accanto alle incognite compare una lettera in più, il
+<strong>parametro</strong>: non è un'incognita da trovare, ma un numero che non sappiamo quale
+sia. Risolvere il sistema vuol dire allora rispondere per tutti i suoi valori possibili, e la
+risposta non è sempre la stessa: per certi valori del parametro il sistema è determinato, per
+altri può diventare impossibile o indeterminato.</p>
 
-<div class="regola">
-<p>Se $D\neq0$ (qui: $a\neq0$ e $a\neq6$), il sistema è <strong>determinato</strong> e l'unica
-soluzione è $x=D_x/D$, $y=D_y/D$.</p>
-<p>Se $D=0$ e almeno uno fra $D_x$, $D_y$ è diverso da zero, il sistema è
-<strong>impossibile</strong>.</p>
-<p>Se $D=0$ insieme a $D_x=0$ e $D_y=0$, il sistema è <strong>indeterminato</strong>.</p>
+<p>I metodi non cambiano: sostituzione e riduzione funzionano come sempre. Cambia una cosa sola,
+ed è quella che rende l'esercizio interessante.</p>
+
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>Si può dividere per un'espressione che contiene il parametro solo dopo aver stabilito che
+quell'espressione non è nulla. I valori del parametro che la annullano vanno messi da parte e
+discussi uno per uno, sostituendoli nel sistema di partenza.</p>
 </div>
 
-<div class="caso">
-<h3>Se $a\neq0$ e $a\neq6$: sistema determinato</h3>
-<p>Il fattore $a(a-6)$ è comune a numeratore e denominatore e si semplifica:</p>
-$$x=\frac{D_x}{D}=\frac{-3a(a-6)}{a(a-6)}=-3\qquad\quad
-y=\frac{D_y}{D}=\frac{(a-6)(a+6)}{a(a-6)}=\frac{a+6}{a}$$
-<p>La $x$ non dipende da $a$: fuori dai due valori esclusi vale sempre $-3$, qualunque sia il
-parametro. Solo la $y$ cambia al variare di $a$.</p>
+<h2>Discussione di un sistema con parametro</h2>
 
-<h3>Se $a=0$: sistema impossibile</h3>
-<p>Per $a=0$ si ha $D=0$ e $D_x=0$, ma $D_y=-36\neq0$: basta un determinante diverso da zero
-perché il sistema non ammetta soluzione.</p>
+<p>Risolviamo con il metodo di riduzione, nelle incognite $x$ e $y$, con parametro $\cp{a}$:</p>
 
-<h3>Se $a=6$: sistema indeterminato</h3>
-<p>Per $a=6$ si ha $D=0$, $D_x=0$ e $D_y=0$: annullandosi tutti e tre, il sistema ammette
-infinite soluzioni.</p>
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i passaggi</button>
+</div>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}\cp{a}x+3\cp{a}y=18\\2x+\cp{a}y=\cp{a}\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Per eliminare la $x$ moltiplico la prima equazione per $2$ e la seconda per
+$\cp{a}$: in tutte e due il coefficiente di $x$ diventa $2\cp{a}$.</p>
+<p class="eq">$$\begin{cases}2\cp{a}x+6\cp{a}y=36\\2\cp{a}x+\cp{a}^2y=\cp{a}^2\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sottraggo la seconda dalla prima: la $x$ sparisce.</p>
+<p class="eq">$$(6\cp{a}-\cp{a}^2)\,y=36-\cp{a}^2$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Raccolgo a sinistra e scompongo a destra, così si vede meglio che cosa può
+annullarsi.</p>
+<p class="eq">$$\cp{a}(6-\cp{a})\,y=(6-\cp{a})(6+\cp{a})$$</p>
+</div>
+<div class="passo bivio" hidden>
+<p class="spieg">Qui viene il punto: per ricavare $y$ dovrei dividere per $\cp{a}(6-\cp{a})$, e
+posso farlo solo se non è zero. Si annulla per $\cp{a}=0$ e per $\cp{a}=6$: questi due valori li
+metto da parte e li discuto dopo.</p>
+<p class="eq">$$\cp{a}(6-\cp{a})=0 \;\Longleftrightarrow\; \cp{a}=0 \ \text{ oppure } \ \cp{a}=6$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Con $\cp{a}\neq0$ e $\cp{a}\neq6$ la divisione è lecita, e il fattore
+$(6-\cp{a})$ si semplifica.</p>
+<p class="eq">$$y=\frac{(6-\cp{a})(6+\cp{a})}{\cp{a}(6-\cp{a})}=\frac{\cp{a}+6}{\cp{a}}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sostituisco questa $y$ nella seconda equazione di partenza: il parametro si
+semplifica e resta un'equazione in $x$ soltanto.</p>
+<p class="eq">$$2x+\cp{a}\cdot\frac{\cp{a}+6}{\cp{a}}=\cp{a} \;\Rightarrow\;
+2x+\cp{a}+6=\cp{a} \;\Rightarrow\; 2x=-6$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">Per ogni valore di $\cp{a}$ diverso da $0$ e da $6$ il sistema è determinato.
+Si noti che $x$ non dipende dal parametro.</p>
+<p class="eq">$$x=-3 \qquad y=\frac{\cp{a}+6}{\cp{a}}$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
+</div>
+
+<p>Restano i due valori messi da parte. Non serve nessuna regola nuova: basta sostituirli nel
+sistema di partenza e guardare che cosa diventa.</p>
+
+<h3>Il caso $a=0$</h3>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}0\cdot x+0\cdot y=18\\2x+0\cdot y=0\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Con $\cp{a}=0$ la prima equazione perde tutte e due le incognite.</p>
+<p class="eq">$$0=18$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">Una uguaglianza falsa, che nessuna coppia $(x;y)$ può rendere vera.</p>
+<p class="eq">$$\text{sistema impossibile}$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
+</div>
+
+<h3>Il caso $a=6$</h3>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}6x+18y=18\\2x+6y=6\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Divido la prima equazione per $6$ e la seconda per $2$.</p>
+<p class="eq">$$\begin{cases}x+3y=3\\x+3y=3\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Le due equazioni sono diventate la stessa: la seconda non aggiunge niente alla
+prima.</p>
+<p class="eq">$$x+3y=3 \;\Rightarrow\; x=3-3y$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">Ogni valore di $y$ dà una coppia che risolve il sistema: sono infinite, tutti i
+punti di una retta.</p>
+<p class="eq">$$\text{sistema indeterminato}$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
+</div>
+
+<h2>Riepilogo</h2>
+
+<p>La discussione si riassume in tre righe, e sono le tre righe che vanno scritte sul compito:</p>
+
+<ul>
+<li>se $a\neq0$ e $a\neq6$: sistema <strong>determinato</strong>, con $x=-3$ e
+$y=\dfrac{a+6}{a}$;</li>
+<li>se $a=0$: sistema <strong>impossibile</strong>;</li>
+<li>se $a=6$: sistema <strong>indeterminato</strong>.</li>
+</ul>
+
+<p>Il filo del ragionamento è sempre lo stesso: si procede con i conti di sempre finché non
+serve dividere per qualcosa che contiene il parametro; lì ci si ferma, si cercano i valori che
+annullano quel fattore e li si sostituisce nel sistema, uno alla volta.</p>
+
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>I due valori da discutere non si indovinano guardando il sistema di partenza: saltano fuori
+dai conti, ed è per questo che la discussione si fa alla fine e non all'inizio. Con un altro
+sistema i valori critici sarebbero altri, e potrebbero anche non essercene.</p>
 </div>
 
 
@@ -72,5 +215,58 @@ infinite soluzioni.</p>
 <footer><p>Matematica seconda &middot; Sistemi lineari di equazioni &middot; Unità 08</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did):not(.spieg),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.nota,.def,.es .spieg,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- passaggi a comparsa, uno per volta --- */
+(function(){
+  var esercizi=[].slice.call(document.querySelectorAll('.es')).map(function(es){
+    return {passi:[].slice.call(es.querySelectorAll('.passo')),
+            avanti:es.querySelector('.btn-passo'),
+            reset:es.querySelector('.btn-reset')};
+  });
+  var tutti=document.getElementById('b-tutti');
+  function visibili(e){return e.passi.filter(function(p){return !p.hidden;}).length;}
+  function aggiorna(e){e.avanti.disabled=visibili(e)>=e.passi.length;}
+  function aggiornaTutti(){
+    var chiusi=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    tutti.textContent=chiusi?'Mostra tutti i passaggi':'Nascondi tutti i passaggi';
+  }
+  function mostra(e,n){e.passi.forEach(function(p,i){p.hidden=i>=n;});aggiorna(e);}
+  esercizi.forEach(function(e){
+    e.avanti.addEventListener('click',function(){
+      mostra(e,visibili(e)+1); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    e.reset.addEventListener('click',function(){
+      mostra(e,0); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    aggiorna(e);
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var apri=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    esercizi.forEach(function(e){mostra(e,apri?e.passi.length:0);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
 </body>
 </html>
