@@ -5,14 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistemi fratti — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],macros:{ce:['\\textcolor[RGB]{179,57,47}{#1}',1]}},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ol,.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ol+p,.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.def .eq+p,.nota .eq+p{padding-top:calc(var(--r)*.5)}
+/* esercizi svolti con i passaggi a comparsa */
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-passo,.btn-reset{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-passo:hover,.btn-reset:hover{background:var(--blu-chiaro)}
+.btn-passo:disabled{opacity:.45;cursor:default}
+.btn-reset{width:2.4rem;padding:4px 0;font-size:.95rem;line-height:1}
+.btn-tutti:focus-visible,.btn-passo:focus-visible,.btn-reset:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{margin-top:var(--r)}
+.es .quesito{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin:0}
+.es .passo{display:block}
+.es .passo[hidden]{display:none}
+.es .spieg{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;
+  margin-top:calc(var(--r)*.5);line-height:var(--r)}
+.es .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.25) 20px;font-size:1.05rem;text-align:center;margin:0}
+.es .passo.condizioni .eq{background:#fdf1f0;border-color:#efd6d3}
+.es .passo.finale .eq{background:#eaf1ea;border-color:#cfe0cf}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:calc(var(--r)*.5)}
 </style>
 </head>
 <body>
@@ -22,53 +73,146 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Sistemi lineari di equazioni &middot; Unità 09</p>
   <h1>Sistemi fratti</h1>
-  <p class="sommario">Un sistema fratto è un sistema in cui l'incognita compare anche al
-  denominatore di qualche equazione. Prima di risolverlo dobbiamo escludere i valori che
-  annullano un denominatore; dopo averlo risolto con i metodi già visti, dobbiamo controllare
-  che la soluzione trovata rispetti quelle esclusioni.</p>
 </header>
 
-<h2>Il metodo</h2>
-<p>Le condizioni di esistenza (CE) si scrivono imponendo che ogni denominatore sia diverso da
-zero, prima ancora di iniziare a risolvere. Il sistema si risolve poi normalmente, eliminando i
-denominatori. Solo alla fine si confronta la soluzione trovata con le CE: se la rispetta è
-accettabile, altrimenti va scartata, e il sistema risulta impossibile anche se il calcolo
-algebrico aveva dato un risultato.</p>
+<p>Un sistema è fratto quando in qualche equazione le incognite compaiono anche al denominatore.
+Un denominatore però non può valere zero: prima ancora di cominciare a risolvere bisogna dire
+quali valori sono vietati, e alla fine bisogna controllare che la soluzione trovata non sia
+proprio uno di quelli.</p>
 
-<div class="regola">
-<p>1. Si pongono le CE: ogni denominatore diverso da zero.</p>
-<p>2. Si elimina il denominatore da ciascuna equazione e si risolve il sistema con i metodi
-noti.</p>
-<p>3. Si verifica che la soluzione soddisfi le CE. Se non le soddisfa, va rifiutata.</p>
+<h2>Il metodo</h2>
+
+<ol>
+<li>Si pongono le <strong>condizioni di esistenza</strong>: ogni denominatore diverso da zero.</li>
+<li>Si eliminano i denominatori e si risolve il sistema con i metodi già noti.</li>
+<li>Si confronta la soluzione con le condizioni: se le rispetta è accettabile, altrimenti va
+scartata.</li>
+</ol>
+
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>Il terzo passo non è una formalità. Quando la soluzione trovata cade in un valore vietato non
+si può tenerla lo stesso: quella coppia non rende vere le equazioni di partenza, perché in esse
+non è nemmeno calcolabile. Il sistema è allora impossibile, anche se i conti avevano dato un
+risultato.</p>
 </div>
 
 <h2>Un esempio</h2>
-<p>Consideriamo il sistema:</p>
-$$\begin{cases}\dfrac{3x-y}{5x+5y}=1\\[6pt]\dfrac{3}{y-1}=8+\dfrac{x}{1-y}\end{cases}$$
 
-<div class="caso">
-<p><strong>Condizioni di esistenza.</strong> Scomponiamo $5x+5y=5(x+y)$: il primo denominatore
-si annulla per $x=-y$. Nella seconda equazione $1-y=-(y-1)$, quindi il denominatore si annulla
-per $y=1$. Le CE sono $x\neq-y$ e $y\neq1$.</p>
-
-<p><strong>Risoluzione.</strong> Poiché $\dfrac{x}{1-y}=-\dfrac{x}{y-1}$, la seconda equazione
-diventa $\dfrac{3}{y-1}=8-\dfrac{x}{y-1}$, cioè $\dfrac{3+x}{y-1}=8$. Eliminando i denominatori
-in entrambe le equazioni:</p>
-$$\begin{cases}3x-y=5(x+y)\\3+x=8(y-1)\end{cases}\ \Longrightarrow\
-\begin{cases}-2x-6y=0\\x-8y=-11\end{cases}\ \Longrightarrow\
-\begin{cases}x+3y=0\\x-8y=-11\end{cases}$$
-<p>Per sostituzione, dalla prima equazione $x=-3y$; sostituendo nella seconda,
-$-3y-8y=-11$, da cui $y=1$ e quindi $x=-3$.</p>
-
-<p><strong>Verifica.</strong> La soluzione $y=1$ non rispetta la CE $y\neq1$: va scartata.
-Il sistema, pur avendo un determinante non nullo, è dunque <strong>impossibile</strong>, perché
-l'unica soluzione algebrica cade proprio nel valore escluso dal dominio.</p>
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i passaggi</button>
 </div>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}\dfrac{3x-y}{5x+5y}=1\\[8pt]\dfrac{3}{y-1}=8+\dfrac{x}{1-y}\end{cases}$$</p>
+<div class="passo condizioni" hidden>
+<p class="spieg">Scompongo il primo denominatore, $5x+5y=5(x+y)$, e impongo che i denominatori
+non siano nulli. Nella seconda equazione i denominatori sono $y-1$ e $1-y$, che si annullano
+insieme.</p>
+<p class="eq">$$\ce{x+y\neq0} \qquad \ce{y\neq1}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Nella seconda equazione porto i due denominatori allo stesso: poiché
+$1-y=-(y-1)$, la frazione cambia segno.</p>
+<p class="eq">$$\frac{3}{y-1}=8-\frac{x}{y-1} \;\Rightarrow\; \frac{3+x}{y-1}=8$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Ora che i denominatori non sono nulli posso moltiplicare per eliminarli, in
+tutte e due le equazioni.</p>
+<p class="eq">$$\begin{cases}3x-y=5(x+y)\\3+x=8(y-1)\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Svolgo i calcoli e porto le equazioni in forma normale; la prima si semplifica
+dividendo per $-2$.</p>
+<p class="eq">$$\begin{cases}-2x-6y=0\\x-8y=-11\end{cases} \;\Rightarrow\;
+\begin{cases}x+3y=0\\x-8y=-11\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Risolvo per sostituzione: dalla prima $x=-3y$.</p>
+<p class="eq">$$-3y-8y=-11 \;\Rightarrow\; -11y=-11 \;\Rightarrow\; y=1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">E dalla prima equazione ricavo anche $x$.</p>
+<p class="eq">$$x=-3\cdot 1=-3$$</p>
+</div>
+<div class="passo condizioni" hidden>
+<p class="spieg">Confronto con le condizioni di esistenza: il valore $y=1$ è proprio quello
+vietato.</p>
+<p class="eq">$$y=1 \quad\text{contro}\quad \ce{y\neq1}$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">La coppia $(-3;1)$ non è accettabile, e altre soluzioni non ce ne sono.</p>
+<p class="eq">$$\text{sistema impossibile}$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
+</div>
+
+<p>Vale la pena guardare che cosa succede alla coppia $(-3;1)$ nel sistema di partenza: il
+secondo denominatore, $y-1$, diventa $0$, e la seconda equazione perde ogni significato. Il
+calcolo algebrico l'aveva prodotta perché, moltiplicando per $y-1$, abbiamo trattato quel
+fattore come se non fosse nullo — e proprio per questo le condizioni vanno scritte prima e
+verificate dopo.</p>
 
 
 <nav class="nav-unita"><a class="precedente" href="../10-sistemi-letterali-e-discussione-parametrica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Sistemi letterali</span></a><a class="successiva" href="../12-radici-quadrate-cubiche-e-n-esime/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Radici quadrate, cubiche e n-esime</span></a></nav>
 <footer><p>Matematica seconda &middot; Sistemi lineari di equazioni &middot; Unità 09</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did):not(.spieg),.foglio>ol,.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.nota,.def,.es .spieg,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- passaggi a comparsa, uno per volta --- */
+(function(){
+  var esercizi=[].slice.call(document.querySelectorAll('.es')).map(function(es){
+    return {passi:[].slice.call(es.querySelectorAll('.passo')),
+            avanti:es.querySelector('.btn-passo'),
+            reset:es.querySelector('.btn-reset')};
+  });
+  var tutti=document.getElementById('b-tutti');
+  function visibili(e){return e.passi.filter(function(p){return !p.hidden;}).length;}
+  function aggiorna(e){e.avanti.disabled=visibili(e)>=e.passi.length;}
+  function aggiornaTutti(){
+    var chiusi=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    tutti.textContent=chiusi?'Mostra tutti i passaggi':'Nascondi tutti i passaggi';
+  }
+  function mostra(e,n){e.passi.forEach(function(p,i){p.hidden=i>=n;});aggiorna(e);}
+  esercizi.forEach(function(e){
+    e.avanti.addEventListener('click',function(){
+      mostra(e,visibili(e)+1); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    e.reset.addEventListener('click',function(){
+      mostra(e,0); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    aggiorna(e);
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var apri=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    esercizi.forEach(function(e){mostra(e,apri?e.passi.length:0);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
 </body>
 </html>
