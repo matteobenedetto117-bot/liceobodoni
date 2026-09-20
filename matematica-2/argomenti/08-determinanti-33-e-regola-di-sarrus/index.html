@@ -3,18 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Determinanti 3×3 e regola di Sarrus — Matematica seconda</title>
+<title>Sistemi di tre equazioni in tre incognite — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],macros:{cx:['\\textcolor[RGB]{31,78,121}{#1}',1],cy:['\\textcolor[RGB]{47,107,79}{#1}',1],cz:['\\textcolor[RGB]{122,79,163}{#1}',1],ct:['\\textcolor[RGB]{179,57,47}{#1}',1]}},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.caso h3{margin:0 0 10px;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.schema{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px;margin:20px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem;--viola:#7a4fa3}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.def .eq+p,.nota .eq+p{padding-top:calc(var(--r)*.5)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(280px,45%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:7rem;text-align:left}
+/* esercizi svolti con i passaggi a comparsa */
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-passo,.btn-reset{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-passo:hover,.btn-reset:hover{background:var(--blu-chiaro)}
+.btn-passo:disabled{opacity:.45;cursor:default}
+.btn-reset{width:2.4rem;padding:4px 0;font-size:.95rem;line-height:1}
+.btn-tutti:focus-visible,.btn-passo:focus-visible,.btn-reset:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{margin-top:var(--r)}
+.es .quesito{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin:0}
+.es .passo{display:block}
+.es .passo[hidden]{display:none}
+.es .spieg{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;
+  margin-top:calc(var(--r)*.5);line-height:var(--r)}
+.es .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.25) 20px;font-size:1.05rem;text-align:center;margin:0}
+.es .passo.finale .eq{background:#eaf1ea;border-color:#cfe0cf}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:calc(var(--r)*.5)}
+.legenda{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;margin-top:calc(var(--r)*.5)}
+.legenda .cx{color:var(--blu);font-weight:600}
+.legenda .cy{color:var(--verde);font-weight:600}
+.legenda .cz{color:var(--viola);font-weight:600}
+.legenda .ct{color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -23,46 +83,370 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Sistemi lineari di equazioni &middot; Unità 07</p>
-  <h1>Determinanti 3×3 e regola di Sarrus</h1>
-  <p class="sommario">La stessa idea di determinante vista per le matrici $2\times2$ si estende
-  a tre righe e tre colonne: cambia solo lo schema per calcolarlo, con sei prodotti invece di due.</p>
+  <h1>Sistemi di tre equazioni in tre incognite</h1>
 </header>
+
+<p>I tre metodi già visti per due equazioni in due incognite — sostituzione, riduzione e regola di
+Cramer — funzionano allo stesso modo con tre equazioni in tre incognite: cambia solo la quantità
+di conti da tenere in ordine. Per usare Cramer serve però il determinante di una matrice
+$3\times3$, e per calcolarlo si usa la regola di Sarrus: cominciamo da lì.</p>
+
+<h2>Determinante di una matrice 3×3: la regola di Sarrus</h2>
 
 <div class="def">
 <span class="et">Regola di Sarrus</span>
-<p>Data una matrice $3\times3$</p>
-$$\begin{pmatrix}a_1 & b_1 & c_1\\a_2 & b_2 & c_2\\a_3 & b_3 & c_3\end{pmatrix}$$
-<p>si riscrivono accanto, a destra, le prime due colonne. Si ottengono così sei diagonali di tre
-elementi: tre <strong>discendenti</strong> (da sinistra in alto verso destra in basso) e tre
-<strong>ascendenti</strong> (da sinistra in basso verso destra in alto).</p>
+<p>Data una matrice $3\times3$, si riscrivono accanto, a destra, le prime due colonne. Si
+ottengono così sei diagonali di tre elementi: tre <strong>discendenti</strong>, da sinistra in
+alto verso destra in basso, e tre <strong>ascendenti</strong>, da sinistra in basso verso destra
+in alto. Sommando i tre prodotti discendenti si ottiene $A$, sommando i tre ascendenti si ottiene
+$B$: il determinante è la differenza $D=A-B$.</p>
 </div>
 
-<div class="schema">
-$$\begin{array}{ccc|cc}a_1&b_1&c_1&a_1&b_1\\a_2&b_2&c_2&a_2&b_2\\a_3&b_3&c_3&a_3&b_3\end{array}$$
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:10px">
-discendenti: $a_1b_2c_3,\ b_1c_2a_3,\ c_1a_2b_3$ &nbsp;&mdash;&nbsp; ascendenti: $a_3b_2c_1,\ b_3c_2a_1,\ c_3a_2b_1$</p>
+<div class="fig">
+<svg id="fig1" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px"></svg>
+<div class="cursore">
+<label for="c1">diagonale</label>
+<input id="c1" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale">
+<span class="val" id="v1"></span>
+</div>
+<p class="did">Le due colonne grigie sono la copia delle prime due. Il cursore percorre le sei
+diagonali: prima le tre discendenti, in verde, i cui prodotti si sommano in $A$, poi le tre
+ascendenti, in rosso, che danno $B$.</p>
 </div>
 
-<p>Sommando i tre prodotti discendenti si ottiene un numero $A$, sommando i tre ascendenti un
-numero $B$. Il determinante è la differenza $D=A-B$:</p>
-$$D=\begin{vmatrix}a_1&b_1&c_1\\a_2&b_2&c_2\\a_3&b_3&c_3\end{vmatrix}
-=\underbrace{a_1b_2c_3+b_1c_2a_3+c_1a_2b_3}_{A}-\underbrace{(a_3b_2c_1+b_3c_2a_1+c_3a_2b_1)}_{B}$$
+<p class="eq">$$D=\begin{vmatrix}a_1&b_1&c_1\\a_2&b_2&c_2\\a_3&b_3&c_3\end{vmatrix}
+=\underbrace{a_1b_2c_3+b_1c_2a_3+c_1a_2b_3}_{A}-\underbrace{(a_3b_2c_1+b_3c_2a_1+c_3a_2b_1)}_{B}$$</p>
 
-<div class="caso">
 <h3>Esempio</h3>
-<p>Calcoliamo il determinante di</p>
-$$\begin{pmatrix}1&2&1\\1&5&0\\0&3&2\end{pmatrix}$$
-<p>I tre prodotti discendenti danno</p>
-$$A=1\cdot5\cdot2+2\cdot0\cdot0+1\cdot1\cdot3=10+0+3=13$$
-<p>i tre ascendenti danno</p>
-$$B=0\cdot5\cdot1+3\cdot0\cdot1+2\cdot1\cdot2=0+0+4=4$$
-<p>quindi $D=A-B=13-4=9$.</p>
+
+<p>Calcoliamo il determinante della matrice</p>
+
+<p class="eq">$$\begin{pmatrix}1&2&1\\1&5&0\\0&3&2\end{pmatrix}$$</p>
+
+<div class="fig">
+<svg id="fig2" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px"></svg>
+<div class="cursore">
+<label for="c2">diagonale</label>
+<input id="c2" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale">
+<span class="val" id="v2"></span>
+</div>
+<p class="did">Lo stesso schema sui numeri: i tre prodotti discendenti danno $A=13$, i tre
+ascendenti danno $B=4$, quindi $D=13-4=9$.</p>
+</div>
+
+<h2>Metodo di sostituzione</h2>
+
+<p>Si isola un'incognita in una delle tre equazioni, la si sostituisce nelle altre due e ci si
+ritrova con un sistema di due equazioni in due incognite, già noto. Conviene partire
+dall'equazione in cui un'incognita ha il coefficiente più semplice.</p>
+
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i passaggi</button>
+</div>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}5x+4y-z=2\\-3x+3y+2z=7\\x+y-z=-1\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Nella terza equazione $x$ ha coefficiente $1$: isolo $x$.</p>
+<p class="eq">$$x=-y+z-1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sostituisco questa espressione nella prima e nella seconda equazione.</p>
+<p class="eq">$$\begin{cases}5(-y+z-1)+4y-z=2\\-3(-y+z-1)+3y+2z=7\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Svolgo i prodotti e sommo i termini simili: resta un sistema di due equazioni
+in due incognite.</p>
+<p class="eq">$$\begin{cases}-y+4z=7\\6y-z=4\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Dalla prima ricavo $y$ e sostituisco nella seconda.</p>
+<p class="eq">$$y=4z-7 \;\Rightarrow\; 6(4z-7)-z=4$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Svolgo e risolvo in $z$.</p>
+<p class="eq">$$24z-42-z=4 \;\Rightarrow\; 23z=46 \;\Rightarrow\; z=2$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Risalgo: prima $y$, poi $x$.</p>
+<p class="eq">$$y=4\cdot2-7=1 \qquad x=-1+2-1=0$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">La soluzione è una terna ordinata.</p>
+<p class="eq">$$(x;y;z)=(0;\,1;\,2)$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
+</div>
+
+<h2>Metodo di riduzione</h2>
+
+<p>Si combinano le equazioni a due a due in modo da far sparire ogni volta la stessa incognita:
+da tre equazioni se ne ottengono due, in due incognite. Riprendiamo lo stesso sistema, così alla
+fine possiamo confrontare i risultati.</p>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}5x+4y-z=2\\-3x+3y+2z=7\\x+y-z=-1\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Moltiplico per $2$ la prima e la terza equazione, così il coefficiente di $z$
+diventa opposto a quello della seconda.</p>
+<p class="eq">$$\begin{cases}10x+8y-2z=4 &(1)\\-3x+3y+2z=7 &(2)\\2x+2y-2z=-2 &(3)\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sommo $(1)$ e $(2)$: la $z$ si elide.</p>
+<p class="eq">$$7x+11y=11$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sommo $(2)$ e $(3)$: la $z$ si elide di nuovo.</p>
+<p class="eq">$$-x+5y=5$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Resta un sistema di due equazioni in due incognite: moltiplico la seconda per
+$7$ e sommo, così sparisce anche la $x$.</p>
+<p class="eq">$$\begin{cases}7x+11y=11\\-7x+35y=35\end{cases} \;\Rightarrow\; 46y=46 \;\Rightarrow\; y=1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sostituisco $y=1$ in $7x+11y=11$.</p>
+<p class="eq">$$7x+11=11 \;\Rightarrow\; x=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Metto $x=0$ e $y=1$ nella terza equazione di partenza, $x+y-z=-1$.</p>
+<p class="eq">$$0+1-z=-1 \;\Rightarrow\; z=2$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">La stessa terna trovata con la sostituzione.</p>
+<p class="eq">$$(x;y;z)=(0;\,1;\,2)$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
+</div>
+
+<div class="nota">
+<span class="et">Da ricordare</span>
+<p>I due metodi partono da scelte diverse — quale incognita isolare, quali equazioni combinare —
+ma su un sistema determinato arrivano sempre alla stessa terna.</p>
+</div>
+
+<h2>Regola di Cramer per i sistemi 3×3</h2>
+
+<p>Dato un sistema di tre equazioni in forma normale</p>
+
+<p class="eq">$$\begin{cases}\cx{a_1x}+\cy{b_1y}+\cz{c_1z}=\ct{d_1}\\
+\cx{a_2x}+\cy{b_2y}+\cz{c_2z}=\ct{d_2}\\
+\cx{a_3x}+\cy{b_3y}+\cz{c_3z}=\ct{d_3}\end{cases}$$</p>
+
+<p>il <strong>determinante del sistema</strong> $D$ è quello dei coefficienti delle incognite;
+$D_x$, $D_y$, $D_z$ si ottengono sostituendo, in $D$, la colonna di $x$, di $y$ o di $z$ con la
+colonna dei termini noti. Tutti e quattro si calcolano con la regola di Sarrus.</p>
+
+<p class="eq">$$D=\begin{vmatrix}\cx{a_1}&\cy{b_1}&\cz{c_1}\\\cx{a_2}&\cy{b_2}&\cz{c_2}\\\cx{a_3}&\cy{b_3}&\cz{c_3}\end{vmatrix}\quad
+D_x=\begin{vmatrix}\ct{d_1}&\cy{b_1}&\cz{c_1}\\\ct{d_2}&\cy{b_2}&\cz{c_2}\\\ct{d_3}&\cy{b_3}&\cz{c_3}\end{vmatrix}\quad
+D_y=\begin{vmatrix}\cx{a_1}&\ct{d_1}&\cz{c_1}\\\cx{a_2}&\ct{d_2}&\cz{c_2}\\\cx{a_3}&\ct{d_3}&\cz{c_3}\end{vmatrix}\quad
+D_z=\begin{vmatrix}\cx{a_1}&\cy{b_1}&\ct{d_1}\\\cx{a_2}&\cy{b_2}&\ct{d_2}\\\cx{a_3}&\cy{b_3}&\ct{d_3}\end{vmatrix}$$</p>
+
+<p class="legenda"><span class="cx">coefficienti di $x$</span> &middot;
+<span class="cy">coefficienti di $y$</span> &middot;
+<span class="cz">coefficienti di $z$</span> &middot;
+<span class="ct">termini noti</span>: in ogni determinante una colonna viene sostituita da
+quella rossa.</p>
+
+<ul>
+<li>se $D\neq0$ il sistema è <strong>determinato</strong>, con l'unica soluzione
+$x=\dfrac{D_x}{D}$, $y=\dfrac{D_y}{D}$, $z=\dfrac{D_z}{D}$;</li>
+<li>se $D=0$ e almeno uno fra $D_x$, $D_y$, $D_z$ è diverso da zero, il sistema è
+<strong>impossibile</strong>;</li>
+<li>se $D=0$ e anche $D_x=0$, $D_y=0$, $D_z=0$, il sistema è <strong>indeterminato</strong>.</li>
+</ul>
+
+<h3>Esempio: lo stesso sistema con Cramer</h3>
+
+<p>Riprendiamo il sistema di prima. Il determinante del sistema si calcola con lo schema di
+Sarrus, esattamente come nell'esempio numerico di apertura:</p>
+
+<div class="fig">
+<svg id="fig3" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px"></svg>
+<div class="cursore">
+<label for="c3">diagonale</label>
+<input id="c3" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale">
+<span class="val" id="v3"></span>
+</div>
+<p class="did">Il determinante $D$ del sistema: le tre diagonali discendenti danno
+$A=-15+8+3=-4$, le tre ascendenti $B=-3+10+12=19$, quindi $D=-4-19=-23$. Non è zero, dunque il
+sistema è determinato.</p>
+</div>
+
+<div class="es">
+<p class="eq quesito">$$\begin{cases}5x+4y-z=2\\-3x+3y+2z=7\\x+y-z=-1\end{cases}$$</p>
+<div class="passo" hidden>
+<p class="spieg">Il determinante del sistema, calcolato qui sopra con Sarrus.</p>
+<p class="eq">$$D=\begin{vmatrix}5&4&-1\\-3&3&2\\1&1&-1\end{vmatrix}=-4-19=-23$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Sostituisco la colonna di $x$ con quella dei termini noti.</p>
+<p class="eq">$$D_x=\begin{vmatrix}\ct{2}&4&-1\\\ct{7}&3&2\\\ct{-1}&1&-1\end{vmatrix}
+=(-6-8-7)-(3+4-28)=-21+21=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Poi la colonna di $y$.</p>
+<p class="eq">$$D_y=\begin{vmatrix}5&\ct{2}&-1\\-3&\ct{7}&2\\1&\ct{-1}&-1\end{vmatrix}
+=(-35+4-3)-(-7-10+6)=-34+11=-23$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">Infine la colonna di $z$.</p>
+<p class="eq">$$D_z=\begin{vmatrix}5&4&\ct{2}\\-3&3&\ct{7}\\1&1&\ct{-1}\end{vmatrix}
+=(-15+28-6)-(6+35+12)=7-53=-46$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg">$D$ non è zero: applico le tre formule.</p>
+<p class="eq">$$x=\frac{0}{-23}=0 \qquad y=\frac{-23}{-23}=1 \qquad z=\frac{-46}{-23}=2$$</p>
+</div>
+<div class="passo finale" hidden>
+<p class="spieg">Ancora la stessa terna: i tre metodi, sullo stesso sistema, non possono che
+concordare.</p>
+<p class="eq">$$(x;y;z)=(0;\,1;\,2)$$</p>
+</div>
+<div class="comandi">
+<button type="button" class="btn-passo">passo successivo</button>
+<button type="button" class="btn-reset" aria-label="Ricomincia">&#8634;</button>
+</div>
 </div>
 
 
-<nav class="nav-unita"><a class="precedente" href="../07-matrici-determinanti-e-regola-di-cramer/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La regola di Cramer</span></a><a class="successiva" href="../09-sistemi-di-tre-equazioni-in-tre-incognite/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sistemi di tre equazioni in tre incognite</span></a></nav>
+<nav class="nav-unita"><a class="precedente" href="../07-matrici-determinanti-e-regola-di-cramer/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La regola di Cramer</span></a><a class="successiva" href="../10-sistemi-letterali-e-discussione-parametrica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sistemi letterali e discussione parametrica</span></a></nav>
 <footer><p>Matematica seconda &middot; Sistemi lineari di equazioni &middot; Unità 07</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did):not(.spieg):not(.legenda),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,.es .spieg,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- lo schema di Sarrus, una diagonale per volta --- */
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)','text-anchor':'middle'},a||{}));if(s!==null)e.textContent=s;return e;}
+/* scrive "a1" come a con pedice */
+function cella(x,y,s,col){
+  var e=el('text',{x:x,y:y,'font-family':'var(--sans)','font-size':17,fill:col,'text-anchor':'middle'});
+  var m=/^([a-z])(\d)$/.exec(s);
+  if(m){
+    var t1=el('tspan',{}); t1.textContent=m[1]; e.appendChild(t1);
+    var t2=el('tspan',{'font-size':11,dy:4}); t2.textContent=m[2]; e.appendChild(t2);
+  } else e.textContent=s;
+  return e;
+}
+
+function sarrus(o){
+  var svg=document.getElementById(o.svg); if(!svg)return;
+  var cur=document.getElementById(o.cur), val=document.getElementById(o.val);
+  var W=66,H=42,x0=40,y0=22;
+  function cx(c){return x0+c*W+W/2;}
+  function cy(r){return y0+r*H+H/2;}
+  /* barre del determinante e separatore delle colonne copiate */
+  svg.appendChild(el('path',{d:'M'+(x0+4)+' '+y0+' L'+x0+' '+y0+' L'+x0+' '+(y0+3*H)+' L'+(x0+4)+' '+(y0+3*H),
+    fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6}));
+  svg.appendChild(el('path',{d:'M'+(x0+3*W-4)+' '+y0+' L'+(x0+3*W)+' '+y0+' L'+(x0+3*W)+' '+(y0+3*H)+' L'+(x0+3*W-4)+' '+(y0+3*H),
+    fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6}));
+  var gEvid=el('g',{}); svg.appendChild(gEvid);
+  for(var r=0;r<3;r++)for(var c=0;c<5;c++){
+    svg.appendChild(cella(cx(c),cy(r)+6,o.M[r][c%3],c<3?'var(--inchiostro)':'#9aa1ab'));
+  }
+  var linea=el('polyline',{fill:'none','stroke-width':16,'stroke-linecap':'round',
+    'stroke-linejoin':'round',opacity:.22});
+  gEvid.appendChild(linea);
+  var tProd=txt(200,y0+3*H+26,'',{'font-size':14});
+  var tA=txt(200,y0+3*H+50,'',{'font-size':13,fill:'var(--verde)'});
+  var tB=txt(200,y0+3*H+70,'',{'font-size':13,fill:'var(--rosso)'});
+  var tD=txt(200,y0+3*H+92,'',{'font-size':14,fill:'var(--inchiostro)','font-weight':600});
+  [tProd,tA,tB,tD].forEach(function(t){svg.appendChild(t);});
+  function dis(){
+    var k=parseInt(cur.value,10), giu=k<=3, i=giu?k-1:k-4;
+    var pts=[];
+    for(var j=0;j<3;j++){
+      var r=giu?j:2-j, c=i+j;
+      pts.push(cx(c)+','+cy(r));
+    }
+    linea.setAttribute('points',pts.join(' '));
+    linea.setAttribute('stroke',giu?'var(--verde)':'var(--rosso)');
+    tProd.setAttribute('fill',giu?'var(--verde)':'var(--rosso)');
+    tProd.textContent=(giu?'discendente ':'ascendente ')+(i+1)+':  '+o.prod[k-1];
+    tA.textContent='A = '+o.somme.A.slice(0,giu?k:3).join(' + ')+(k>=3&&o.somme.Atot?' = '+o.somme.Atot:'');
+    tB.textContent=k<4?'':'B = '+o.somme.B.slice(0,k-3).join(' + ')+(k>=6&&o.somme.Btot?' = '+o.somme.Btot:'');
+    tD.textContent=k>=6?'D = A − B = '+o.somme.D:'';
+    val.textContent=k+' di 6';
+  }
+  cur.addEventListener('input',dis); dis();
+}
+
+sarrus({svg:'fig1',cur:'c1',val:'v1',
+  M:[['a1','b1','c1'],['a2','b2','c2'],['a3','b3','c3']],
+  prod:['a₁b₂c₃','b₁c₂a₃','c₁a₂b₃','a₃b₂c₁','b₃c₂a₁','c₃a₂b₁'],
+  somme:{A:['a₁b₂c₃','b₁c₂a₃','c₁a₂b₃'],Atot:'',B:['a₃b₂c₁','b₃c₂a₁','c₃a₂b₁'],Btot:'',D:'il determinante'}});
+sarrus({svg:'fig2',cur:'c2',val:'v2',
+  M:[['1','2','1'],['1','5','0'],['0','3','2']],
+  prod:['1 · 5 · 2 = 10','2 · 0 · 0 = 0','1 · 1 · 3 = 3','0 · 5 · 1 = 0','3 · 0 · 1 = 0','2 · 1 · 2 = 4'],
+  somme:{A:['10','0','3'],Atot:'13',B:['0','0','4'],Btot:'4',D:'13 − 4 = 9'}});
+sarrus({svg:'fig3',cur:'c3',val:'v3',
+  M:[['5','4','−1'],['−3','3','2'],['1','1','−1']],
+  prod:['5 · 3 · (−1) = −15','4 · 2 · 1 = 8','(−1) · (−3) · 1 = 3',
+        '1 · 3 · (−1) = −3','1 · 2 · 5 = 10','(−1) · (−3) · 4 = 12'],
+  somme:{A:['−15','8','3'],Atot:'−4',B:['−3','10','12'],Btot:'19',D:'−4 − 19 = −23'}});
+})();
+</script>
+<script>
+/* --- passaggi a comparsa, uno per volta --- */
+(function(){
+  var esercizi=[].slice.call(document.querySelectorAll('.es')).map(function(es){
+    return {passi:[].slice.call(es.querySelectorAll('.passo')),
+            avanti:es.querySelector('.btn-passo'),
+            reset:es.querySelector('.btn-reset')};
+  });
+  var tutti=document.getElementById('b-tutti');
+  function visibili(e){return e.passi.filter(function(p){return !p.hidden;}).length;}
+  function aggiorna(e){e.avanti.disabled=visibili(e)>=e.passi.length;}
+  function aggiornaTutti(){
+    var chiusi=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    tutti.textContent=chiusi?'Mostra tutti i passaggi':'Nascondi tutti i passaggi';
+  }
+  function mostra(e,n){e.passi.forEach(function(p,i){p.hidden=i>=n;});aggiorna(e);}
+  esercizi.forEach(function(e){
+    e.avanti.addEventListener('click',function(){
+      mostra(e,visibili(e)+1); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    e.reset.addEventListener('click',function(){
+      mostra(e,0); aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+    aggiorna(e);
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var apri=esercizi.some(function(e){return visibili(e)<e.passi.length;});
+    esercizi.forEach(function(e){mostra(e,apri?e.passi.length:0);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
 </body>
 </html>
