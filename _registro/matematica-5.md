@@ -7,29 +7,48 @@ Non è visibile agli studenti e non è collegato dalle pagine del sito.
 Circa 200 parole per pagina di traccia manoscritta. L'unità 01 è lo standard approvato:
 1460 parole su 10 pagine di traccia (146/pagina).
 
-## Unità 01 — Il concetto di limite
+## Unità 01 — Introduzione ai limiti
 Nasce dall'accorpamento delle vecchie unità 01 e 02 (pagine 1–10 della traccia). Tutte le unità
 successive sono state rinumerate di conseguenza (vecchia 03 → 02, e così via fino alla 44); gli
 indirizzi delle pagine non cambiano, perché in _dati/matematica-5.json ogni unità porta ora il
 campo "cartella" con il nome originale.
 - Parole: 1460 su 10 pagine di traccia (1–10)
-- Titolo: "Il concetto di limite", scelto dall'insegnante.
+- Titolo: "Introduzione ai limiti", scelto dall'insegnante (era "Il concetto di limite").
 - Revisione: tolte le due verifiche di limite tramite la definizione (quella di (2x²−6x)/(x−3) in 3 e
   quella di 1/(x−1)² in 1) e la sezione sul limite per eccesso e per difetto.
-- Titoletti tenuti: limite finito per x→x₀, limite destro e sinistro, limiti infiniti per x→x₀,
-  asintoti verticali, limite finito e infinito per x→±∞, asintoti orizzontali.
-- Impaginazione: riscritta a quaderno come le unità 01–03 di fisica-5 (html 165%, righe ogni 1,8rem,
-  script di allineamento rilanciato da MathJax); le formule in display sono in <p class="eq">.
-- Rettifica: la definizione di asintoto verticale elencava i quattro limiti unilaterali uno per uno;
-  ora è scritta in forma compatta con ±∞, e il testo chiarisce che basta che uno dei quattro casi
-  si verifichi.
-- Figure: sostituiti i widget Plotly con SVG disegnati da uno script interno (nessuna dipendenza da
-  CDN). Sette figure: epsilon-delta in 3, salto in 5, 1/(x−1)² con soglia M, galleria dei tre
-  asintoti verticali, 2 + 4·sin(x)/x con fascia e soglia c, x²/10 con soglia M e c, galleria dei tre
-  asintoti orizzontali.
-- Animazioni: in ogni figura interattiva il pulsante ▶ fa scorrere il punto lungo tutta la curva
-  disegnata, ↺ lo riporta all'inizio; i cursori regolano ε (con δ = ε/2 mostrato), M (con
-  δ = 1/√M) e la soglia c, calcolata numericamente sulla funzione oscillante.
+
+### Riscrittura in chiave intuitiva (settembre 2026)
+Su richiesta dell'insegnante, che giudicava l'unità ostica come primo argomento dell'anno,
+l'impianto è stato alleggerito: l'unità ora costruisce l'idea di limite sui grafici e tiene una sola
+definizione formale.
+- Titoletti tenuti: limite finito per x→x₀, limite destro e limite sinistro, limite infinito per
+  x→x₀, limite finito per x→±∞, limite infinito per x→±∞ (uno per ogni combinazione di
+  finito/infinito, come chiesto).
+- Tolte tutte le definizioni formali tranne quella del limite finito per x→x₀, che resta perché
+  serve alle dimostrazioni dell'unità 03 (unicità, permanenza del segno, confronto) e perché può
+  essere chiesta come quesito teorico. Tolte anche le definizioni di intorno completo, intorno
+  destro e intorno sinistro: la definizione superstite è scritta con δ e la condizione
+  0 < |x − x₀| < δ, senza l'intorno asimmetrico con δ₁ e δ₂ che non serve nel resto del programma.
+- Tolte le due sezioni sugli asintoti (verticali e orizzontali) con le relative gallerie: l'argomento
+  è trattato per intero nell'unità 10, dove si impara anche a calcolarne l'equazione. Aggiornata di
+  conseguenza la descrizione dell'unità in _dati/matematica-5.json.
+- Aggiunta non presente nella traccia: la funzione di partenza è ora esplicita,
+  f(x) = (x²+9)(x−3) / (3(x−3)), cioè la parabola (x²+9)/3 priva del punto x = 3, con limite 6.
+  Serviva un esempio calcolabile per il primo grafico, che l'insegnante ha chiesto di aggiungere.
+- Aggiunta: il pannello con sin x nell'ultima figura, per dire che un limite può anche non esistere.
+- Figure: sei figure, tutte statiche (su richiesta sono stati tolti tutti i cursori e i pulsanti ▶
+  presenti nella versione precedente). Il verso di avvicinamento è indicato da piccole frecce rosse
+  appoggiate alla curva e orientate sulla tangente, calcolata numericamente.
+  1. la parabola col buco in x = 3, frecce da entrambi i lati;
+  2. due pannelli affiancati con ε = 0,9 e ε = 0,3: fascia verde attorno a 6 e intorno azzurro di 3,
+     con δ calcolato esattamente come min(3 − √(9−3ε), √(9+3ε) − 3);
+  3. due pannelli: salto in 5 (limiti unilaterali 2 e 6, f(5) = 4, limite inesistente) e stessa
+     funzione con i due lati che portano entrambi a 2 pur essendo f(5) = 4;
+  4. tre pannelli per il limite infinito in un punto: 1/(x−1)², −1/(x−1)², 1/(x−1);
+  5. tre pannelli per il limite finito all'infinito: 2 + 3/(1+x²), arctan x, 1 + e^(−x);
+  6. tre pannelli per il limite infinito all'infinito: x²/10, x³/60, sin x (limite inesistente).
+- Impaginazione a quaderno invariata (html 165%, righe ogni 1,8rem, script di allineamento
+  rilanciato da MathJax); formule in display in <p class="eq"> con riquadro azzurro.
 
 ## Unità 03, 04, 05 — annullate e da rifare (numerazione precedente)
 Le prime versioni contenevano materiale non presente nella traccia: dimostrazioni complete dei
