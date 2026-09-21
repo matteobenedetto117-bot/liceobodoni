@@ -4,7 +4,7 @@
 - Parole: 214 su 1 pagina di traccia (pag. 3 del PDF)
 - Rettifica: nessuna. La traccia è corretta; la sola sistemazione è di forma, con gli ambiti resi come voci separate invece che come elenco puntato continuo.
 - Aggiunta: una frase sulla statica come caso limite della meccanica, quello in cui le forze si fanno equilibrio e il movimento non c'è. Serviva perché l'elenco colloca la statica in prima senza dire che cosa sia, e l'intero anno parte da lì. Nessun disegno nella traccia, quindi nessun SVG.
-- Revisione: titolo e schede invariati; tolti sottotitolo e riquadro «Dove si riprende» (unico titoletto). Anni corretti su indicazione dell'autore: termodinamica III–IV (era III), ottica II–IV (era II–III); «Relatività generale» lasciata come nella traccia. Impaginazione a quaderno per la LIM (testo 165%, righe ogni 1,8rem, script di allineamento). Nessuna figura.
+- Revisione: titolo e schede invariati; tolti sottotitolo e riquadro «Dove si riprende» (unico titoletto). Anni corretti su indicazione dell'autore: termodinamica III–IV (era III), ottica II–IV (era II–III); «Relatività generale» lasciata come nella traccia. Su richiesta dell'autore tolti anche il paragrafo introduttivo e la frase aggiunta sulla statica: restano solo le schede degli ambiti. Impaginazione a quaderno per la LIM (testo 165%, righe ogni 1,8rem, script di allineamento). Nessuna figura.
 - Nota per le prossime unità di questa classe: i numeri di pagina del JSON sono sfalsati di uno rispetto al PDF (pagina JSON N = pagina PDF N+1); il programma occupa le pagine PDF 1-2.
 
 ## Unità 02 — Grandezze fisiche e misura
