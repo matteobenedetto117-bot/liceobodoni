@@ -64,13 +64,19 @@ def inserisci(percorso):
                                     '../../index.html'))
         nav = '<nav class="nav-unita">%s</nav>\n' % ''.join(bottoni)
 
-        # rimuovo un'eventuale versione precedente (vecchio link singolo, o nav-unita già inserita)
+        # sostituisco la barra esistente al suo posto; altrimenti prima di <footer>
+        # o, in mancanza, prima dell'ultimo </div>
         html, _ = re.subn(r'<nav class="prossima">.*?</nav>\n', '', html)
-        html, _ = re.subn(r'<nav class="nav-unita">.*?</nav>\n', '', html)
-
-        nuovo_html, n_sost = re.subn(r'<footer>', nav + '<footer>', html, count=1)
+        nuovo_html, n_sost = re.subn(r'<nav class="nav-unita">.*?</nav>\n?', lambda m: nav, html, count=1)
         if n_sost != 1:
-            print("ATTENZIONE: nessun <footer> trovato in", fp)
+            nuovo_html, n_sost = re.subn(r'<footer>', lambda m: nav + '<footer>', html, count=1)
+        if n_sost != 1:
+            k = html.rfind('</div>')
+            if k < 0:
+                print("ATTENZIONE: nessun punto di inserimento in", fp)
+                continue
+            nuovo_html = html[:k] + nav + html[k:]
+        if nuovo_html == html:
             continue
         open(fp, 'w', encoding='utf-8').write(nuovo_html)
         modificati += 1
