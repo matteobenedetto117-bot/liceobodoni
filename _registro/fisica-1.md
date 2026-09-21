@@ -11,6 +11,7 @@
 - Parole: 267 su 1 pagina di traccia (pag. 3).
 - Rettifica: nessuna, la traccia è corretta.
 - Aggiunta: nessun contenuto nuovo. Gli unici elementi non presenti alla lettera nella traccia sono il disegno SVG (la tenda confrontata con i sette bastoni), che è la resa grafica del primo esempio già scritto, e il riquadro «Da non fare» sul numero senza unità.
+- Revisione: titolo invariato; su scelta dell'autore resta solo il testo della traccia (tolti sottotitolo, frasi di commento, riquadro «Da non fare» e «Dove si riprende»). Definizioni nei riquadri .def. Disegno della tenda ridisegnato in scala (i sette bastoni coprono esattamente la tenda) e reso interattivo: cursore da 0 a 7 bastoni, numerati, con la misura L = 7 bastoni in verde alla fine. Impaginazione a quaderno per la LIM.
 
 ## Unità 03 — Il Sistema Internazionale
 - Parole: 237 su 1 pagina di traccia (pag. 4 del quaderno = pag. 5 del PDF; la parte alta della pagina, fino a «Multipli e sottomultipli», che appartiene all'unità 04).
