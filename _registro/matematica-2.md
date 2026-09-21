@@ -9,6 +9,7 @@
 - Revisione, contenuto: nessuna rettifica concettuale. Rilette le due pagine di traccia: definizione, esempi, notazione y = f(x), f(0) = 1 e f(1) = 4 per f(x) = x²+2x+1 e la tabella di y = 2x corrispondono alla traccia.
 - Revisione, aggiunta: nel secondo diagramma l'insieme di partenza ha tre elementi invece dei due disegnati in precedenza, per far vedere accanto al caso vietato (un elemento con due immagini) due casi leciti; è un'aggiunta di disegno, non di contenuto, e serve al cursore che scorre gli elementi.
 
+- Revisione successiva (richiesta dell'autore): tolti tutti i cursori. Figura 1: controimmagini (1, 2, 3) in blu e immagini (3, 6, 9) in rosso, con le due etichette sotto gli insiemi. Figura 2 statica, ridisegnata perché le due situazioni siano separate: dal primo elemento di A partono due frecce rosse («no»), in un elemento di B arrivano due frecce blu («sì»); didascalia accorciata. Figura 3 statica, con l'elemento senza immagine in rosso. Grafico di y = 2x statico, senza punto mobile.
 ## Unità 02 — Le funzioni lineari
 - Parole: 389 su 2 pagine di traccia
 - Rettifica: nessuna. Il passaggio y=(3/2)(x-1)+1 = (3/2)x-1/2 e i valori della tabella per y=(3/5)x sono stati verificati con SymPy e risultano corretti così come nella traccia.
