@@ -38,6 +38,7 @@
   accelerazione/decelerazione per carica positiva e negativa (che per simmetria mostrano la
   stessa fisica) in due soli casi con carica positiva, spiegando a parole che per una carica
   negativa i due casi si scambiano: nessun contenuto nuovo, solo una figura più compatta.
+- Revisione: titolo e titoletti invariati (scelta dell'utente). Corretto il primo disegno, che mostrava la forza perpendicolare al campo elettrico: ora $\vec F$ è parallela a $\vec E$ (verso del campo per la carica positiva). Corretta la parabola, che era tracciata a occhio e nel tratto finale tornava indietro contro $\vec v_0$: ora è calcolata ($x=at^2/2$, $y=v_0t$). Precisati: modulo $a=|q|E/m$, verso della forza per cariche positive e negative, moto rettilineo uniformemente accelerato solo con velocità iniziale parallela al campo, forza magnetica nulla anche per $\theta=180°$ ($F=|q|vB\sin\theta$). Tolto il sottotitolo, formule in riquadro azzurro, impaginazione a quaderno come l'unità 04. Tre figure interattive con cursore sul tempo e posizioni a intervalli uguali: carica che accelera e carica che rallenta, si ferma e torna indietro (didascalie per riga); moto parabolico con $\vec v$ tangente e $\vec F$ costante; moto rettilineo uniforme parallelo a $\vec B$.
 
 ## Unità 06 — Moto circolare e raggio di curvatura
 - Parole: 255 su 1 pagina di traccia (pagina 10)
