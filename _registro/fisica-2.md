@@ -6,7 +6,7 @@ La statica dei fluidi (unità 01–08, pagine 1–17 degli appunti) è stata spo
 - Parole: 290 su 2 pagine di traccia (18–19)
 - Rettifica: nessuna. Verificato con SymPy che, ponendo x2=2x1: proporzionalità diretta y=kx dà y2/y1=2; inversa y=k/x dà y2/y1=1/2; quadratica y=kx² dà y2/y1=4 — coerenti coi risultati scritti in traccia.
 - Aggiunta: nessuna oltre alla frase introduttiva sul perché distinguere i tre tipi; le tre definizioni, i tre grafici e le tre derivazioni algebriche sono tutti e soli quelli della traccia.
-- Spostamento (22/09/2026): era l'unità 09 nella statica dei fluidi; con il passaggio di tutta la statica dei fluidi in fisica prima diventa l'unità 01 e apre l'area Cinematica. Tutte le unità successive sono scalate di 8 (gli indirizzi delle pagine non cambiano). Tolte da tutte le pagine della classe le sezioni «Nella prossima unità», i cui rimandi numerici non valevano più.
+- Spostamento (22/09/2026): era l'unità 09 nella statica dei fluidi; con il passaggio di tutta la statica dei fluidi in fisica prima diventa l'unità 01, in un'area a sé («Proporzionalità») prima della Cinematica. Tutte le unità successive sono scalate di 8 (gli indirizzi delle pagine non cambiano). Tolte da tutte le pagine della classe le sezioni «Nella prossima unità», i cui rimandi numerici non valevano più.
 
 ## Unità 02 — Punto materiale e sistemi di riferimento
 - Parole: 286 su circa 1,3 pagine di traccia (pagina 20 intera più la parte iniziale di pagina 21, fino a "misurare il tempo", dove poi inizia l'unità 11 con "Distanza percorsa e spostamento")
