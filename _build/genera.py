@@ -70,9 +70,6 @@ def hub(classi):
 <header class="testata">
   <p class="occhiello">Liceo scientifico Bodoni</p>
   <h1>Materiali di matematica e fisica</h1>
-  <p class="sommario">Appunti riorganizzati, verificati e resi interattivi, raccolti per materia e per anno di corso.
-  Ogni classe apre sul proprio indice degli argomenti; da lì si raggiungono le singole unità, con teoria,
-  grafici manovrabili tramite cursori, esempi svolti e quesiti d'esame commentati.</p>
 </header>
 %s
 <footer>
@@ -103,17 +100,15 @@ def indice(dati):
                 '<article class="unita">'
                 '<div class="numero">%02d</div>'
                 '<div><p class="titolo">%s</p><p class="testo">%s</p><p class="meta">%s</p></div>'
-                '<span class="peso %s">%s</span>'
-                '</article>' % (u['n'], tit, u['descrizione'], meta,
-                                slug(u['peso']), u['peso']))
+                '</article>' % (u['n'], tit, u['descrizione'], meta))
         etichetta = ' <span class="badge-nuovo">nuovo</span>' if a.get('nuovo') else ''
         blocco = ''
         parte = a.get('parte')
         if parte and parte != stato['parte']:
             stato['parte'] = parte
             blocco += '<h2 class="parte">%s</h2>\n' % parte
-        blocco += ('<h3>%s%s</h3>\n<p class="area-desc">%s</p>\n%s'
-                   % (a['nome'], etichetta, a['descrizione'], "\n".join(righe)))
+        blocco += ('<h3>%s%s</h3>\n%s'
+                   % (a['nome'], etichetta, "\n".join(righe)))
         sez.append(blocco)
     return """<!DOCTYPE html>
 <html lang="it">
@@ -132,7 +127,7 @@ def indice(dati):
 </header>
 %s
 <footer>
-  <p>Fonte: appunti manoscritti della classe, %s. Le equazioni differenziali sono state redatte ex novo.
+  <p>Fonte: appunti manoscritti della classe, %s.
   Ultimo aggiornamento: %s.</p>
 </footer>
 </div>
