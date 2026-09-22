@@ -3,17 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Corde: diametro perpendicolare e diametro per il punto medio — Matematica seconda</title>
+<title>Corde — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(300px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:7.5rem;text-align:left}
 </style>
 </head>
 <body>
@@ -22,86 +55,120 @@
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Circonferenza e cerchio &middot; Unità 60</p>
-  <h1>Corde: diametro perpendicolare e diametro per il punto medio</h1>
-  <p class="sommario">Un diametro che incontra una corda ad angolo retto la taglia esattamente
-  a metà, e con essa dimezza anche l'arco e l'angolo al centro corrispondenti. Vale anche il
-  percorso inverso, con un'avvertenza sulla corda scelta.</p>
+  <h1>Corde</h1>
 </header>
 
 <h2>Diametro perpendicolare a una corda</h2>
 
-<div class="regola">
-<p><strong>Teorema.</strong> In una circonferenza, se un diametro e una corda sono
-perpendicolari, il diametro divide a metà la corda, l'arco e l'angolo al centro che la corda
-individua.</p>
+<div class="def">
+<span class="et">Teorema</span>
+<p>In una circonferenza, se un diametro e una corda sono perpendicolari, il diametro divide a metà
+la corda, l'arco e l'angolo al centro che le corrispondono.</p>
 <p>Ipotesi: $AB \perp CD$</p>
 <p>Tesi: $CM \cong DM$, &nbsp; $C\hat{O}B \cong D\hat{O}B$, &nbsp;
 $\overset{\frown}{CB} \cong \overset{\frown}{BD}$</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="110" cy="100" r="70" fill="none" stroke="#16283d" stroke-width="2"/>
-<line x1="40" y1="100" x2="180" y2="100" stroke="#c9821f" stroke-width="2"/>
-<line x1="140" y1="37" x2="140" y2="163" stroke="#1f4e79" stroke-width="2.5"/>
-<rect x="132" y="92" width="8" height="8" fill="none" stroke="#b3392f" stroke-width="1.4"/>
-<circle cx="110" cy="100" r="2.5" fill="#16283d"/><text x="98" y="94" font-size="12">O</text>
-<circle cx="140" cy="100" r="2.5" fill="#16283d"/><text x="146" y="112" font-size="12">M</text>
-<circle cx="40" cy="100" r="3" fill="#16283d"/><text x="24" y="96" font-size="13">A</text>
-<circle cx="180" cy="100" r="3" fill="#16283d"/><text x="186" y="104" font-size="13">B</text>
-<circle cx="140" cy="37" r="3" fill="#16283d"/><text x="146" y="30" font-size="13">C</text>
-<circle cx="140" cy="163" r="3" fill="#16283d"/><text x="146" y="178" font-size="13">D</text>
-</svg>
-<figcaption>diametro AB &perp; corda CD in M: allora CM &cong; MD</figcaption>
+<svg id="f-perp" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Diametro AB perpendicolare alla corda CD nel punto M"></svg>
 </div>
 
-<p>M è il punto in cui il diametro incontra la corda: la tesi dice che M è il punto medio di
-CD, e che i due archi e i due angoli al centro in cui AB divide la figura sono a loro volta
+<p>$M$ è il punto in cui il diametro incontra la corda: la tesi dice che $M$ è il punto medio di
+$CD$, e che i due archi e i due angoli al centro in cui $AB$ divide la figura sono a loro volta
 congruenti.</p>
 
 <h2>Diametro per il punto medio di una corda</h2>
 
-<div class="regola">
-<p><strong>Teorema.</strong> Se il diametro passa per il punto medio di una corda che non sia
-essa stessa un diametro, allora la corda e il diametro sono perpendicolari.</p>
+<div class="def">
+<span class="et">Teorema</span>
+<p>Se un diametro passa per il punto medio di una corda che non sia essa stessa un diametro,
+allora la corda e il diametro sono perpendicolari.</p>
 <p>Ipotesi: $CM \cong DM$</p>
 <p>Tesi: $AB \perp CD$</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="110" cy="100" r="70" fill="none" stroke="#16283d" stroke-width="2"/>
-<line x1="40" y1="100" x2="180" y2="100" stroke="#c9821f" stroke-width="2"/>
-<line x1="140" y1="37" x2="140" y2="163" stroke="#1f4e79" stroke-width="2.5"/>
-<rect x="132" y="92" width="8" height="8" fill="none" stroke="#b3392f" stroke-width="1.4"/>
-<circle cx="110" cy="100" r="2.5" fill="#16283d"/><text x="98" y="94" font-size="12">O</text>
-<circle cx="140" cy="100" r="2.5" fill="#16283d"/><text x="146" y="112" font-size="12">M</text>
-<circle cx="40" cy="100" r="3" fill="#16283d"/><text x="24" y="96" font-size="13">A</text>
-<circle cx="180" cy="100" r="3" fill="#16283d"/><text x="186" y="104" font-size="13">B</text>
-<circle cx="140" cy="37" r="3" fill="#16283d"/><text x="146" y="30" font-size="13">C</text>
-<circle cx="140" cy="163" r="3" fill="#16283d"/><text x="146" y="178" font-size="13">D</text>
-<text x="128" y="70" font-size="13" fill="#b3392f">&times;</text>
-<text x="128" y="138" font-size="13" fill="#b3392f">&times;</text>
-</svg>
-<figcaption>M punto medio di CD: allora AB &perp; CD</figcaption>
+<svg id="f-medio" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Diametro AB per il punto medio M della corda CD, con i raggi OC e OD"></svg>
 </div>
 
-<p>La condizione «che non sia essa stessa un diametro» è necessaria: se CD fosse un diametro,
-il suo punto medio sarebbe il centro O, e per O passano infiniti diametri, non tutti
-perpendicolari a CD. Serve una corda vera e propria perché il punto medio individui una sola
-direzione.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Confrontiamo corde diverse della stessa circonferenza attraverso la loro distanza dal
-centro.</li>
-</ul>
-</div>
+<p>La condizione «che non sia essa stessa un diametro» è necessaria: se $CD$ fosse un diametro,
+il suo punto medio sarebbe il centro $O$, e per $O$ passano infiniti diametri, non tutti
+perpendicolari a $CD$. Quando invece $CD$ non è un diametro, il punto medio $M$ è diverso da $O$
+e c'è un solo diametro che passa per $M$.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../61-archi-angoli-al-centro-settori-e-segmenti-circolari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Archi e angoli al centro</span></a><a class="successiva" href="../63-corde-congruenti-e-distanza-dal-centro/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Corde congruenti e distanza dal centro</span></a></nav>
 <footer><p>Matematica seconda &middot; Circonferenza e cerchio &middot; Unità 60</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function rad(g){return g*Math.PI/180;}
+/* cerchio di centro (cx,cy) e raggio R; angoli in gradi, verso antiorario */
+function C(s,cx,cy,R){
+  var o={
+    P:function(g,k){k=k===undefined?R:k;return [cx+k*Math.cos(rad(g)),cy-k*Math.sin(rad(g))];},
+    arco:function(a,b,k){k=k||R;var p=o.P(a,k),q=o.P(b,k),d=((b-a)%360+360)%360;
+      return 'M'+p[0]+' '+p[1]+' A'+k+' '+k+' 0 '+(d>180?1:0)+' 0 '+q[0]+' '+q[1];},
+    pezzo:function(a,b,k){k=k||R;var q=o.P(b,k),d=((b-a)%360+360)%360;return ' A'+k+' '+k+' 0 '+(d>180?1:0)+' 0 '+q[0]+' '+q[1];},
+    bordo:function(a){el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2},s);},
+    punto:function(g,nome,col,k){var p=o.P(g);el('circle',{cx:p[0],cy:p[1],r:3.5,fill:col||'var(--inchiostro)'},s);
+      if(nome){var q=o.P(g,R+(k||15));txt(s,q[0],q[1],nome,{fill:col||'var(--inchiostro)','font-size':14});}},
+    seg:function(p,q,a){return el('line',Object.assign({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':1.8},a||{}),s);},
+    centro:function(nome,g){el('circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'},s);if(nome){var q=o.P(g,14);txt(s,q[0],q[1],nome,{'font-size':14});}},
+    cx:cx,cy:cy,R:R};
+  return o;
+}
+
+function tacca(s,p,q,n){ /* segni di congruenza sul segmento pq */
+  var mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2,dx=q[0]-p[0],dy=q[1]-p[1],l=Math.hypot(dx,dy),ux=dx/l,uy=dy/l,nx=-uy*6,ny=ux*6;
+  for(var i=0;i<n;i++){var o=(i-(n-1)/2)*4;
+    el('line',{x1:mx+ux*o-nx,y1:my+uy*o-ny,x2:mx+ux*o+nx,y2:my+uy*o+ny,stroke:'var(--verde)','stroke-width':2},s);}
+}
+function base(id,perp){
+  var s=document.getElementById(id), c=C(s,150,120,95), a=60;
+  var Cp=c.P(a), Dp=c.P(-a), M=[c.cx+c.R*Math.cos(rad(a)),c.cy], O=[c.cx,c.cy];
+  c.bordo();
+  if(perp){
+    el('path',{d:c.arco(-a,a),fill:'none',stroke:'var(--rosso)','stroke-width':4},s);
+    el('path',{d:c.arco(0,a,22),fill:'none',stroke:'var(--verde)','stroke-width':1.8},s);
+    el('path',{d:c.arco(-a,0,22),fill:'none',stroke:'var(--verde)','stroke-width':1.8},s);
+    [a/2,-a/2].forEach(function(g){ /* segni di congruenza su angoli e archi */
+      [[22,5],[c.R,7]].forEach(function(u){var p=c.P(g,u[0]-u[1]),q=c.P(g,u[0]+u[1]);
+        el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--verde)','stroke-width':2},s);});
+    });
+  }
+  c.seg(c.P(180),c.P(0),{'stroke-width':2});
+  c.seg(O,Cp,{stroke:'var(--rosso)','stroke-width':1.6});c.seg(O,Dp,{stroke:'var(--rosso)','stroke-width':1.6});
+  c.seg(Cp,Dp,{stroke:'var(--blu)','stroke-width':2.6});
+  if(perp){el('path',{d:'M'+(M[0]-9)+' '+M[1]+' L'+(M[0]-9)+' '+(M[1]-9)+' L'+M[0]+' '+(M[1]-9),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4},s);}
+  else{tacca(s,Cp,M,1);tacca(s,M,Dp,1);}
+  c.centro();txt(s,c.cx-12,c.cy-12,'O',{'font-size':14});
+  el('circle',{cx:M[0],cy:M[1],r:3,fill:'var(--inchiostro)'},s);txt(s,M[0]+12,M[1]+13,'M',{'font-size':14});
+  c.punto(180,'A');c.punto(0,'B');c.punto(a,'C');c.punto(-a,'D');
+}
+base('f-perp',true);
+base('f-medio',false);
+})();
+</script>
 </body>
 </html>
