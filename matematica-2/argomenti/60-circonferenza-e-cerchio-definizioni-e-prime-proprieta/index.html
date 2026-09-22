@@ -47,9 +47,6 @@ h1{position:relative;top:.5rem}
 .cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
 .cursore input[type=range]{width:min(300px,50%)}
 .cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:7.5rem;text-align:left}
-.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
-.did-parti .did{margin:0}
-@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -72,10 +69,6 @@ meno.</p>
 
 <div class="fig">
 <svg id="fig-circ" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Circonferenza di centro O con raggio, diametro e corda"></svg>
-<div class="cursore"><label for="cur-p">posizione di $P$</label><input id="cur-p" type="range" min="0" max="360" step="1" value="60"><span class="val" id="val-p">$OP=r$</span></div>
-<p class="did">Muovendo il cursore il punto $P$ percorre la circonferenza e il raggio $OP$ resta
-sempre lungo $r$. Il diametro è una corda che passa per il centro ed è lungo $2r$; la corda
-unisce due punti qualsiasi della circonferenza.</p>
 </div>
 
 <p>Il raggio è il segmento che unisce il centro a un punto della circonferenza, e per estensione
@@ -92,12 +85,7 @@ circonferenza; quando passa per il centro si chiama diametro ed è lunga $2r$.</
 <p>La circonferenza è dunque solo il bordo: il cerchio comprende anche l'interno.</p>
 
 <div class="fig">
-<svg id="fig-cerchio" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px" role="img" aria-label="Circonferenza e cerchio affiancati con un punto Q"></svg>
-<div class="cursore"><label for="cur-q">distanza $OQ$</label><input id="cur-q" type="range" min="0" max="1.5" step="0.05" value="0.6"><span class="val" id="val-q"></span></div>
-<div class="did-parti" style="--n:2">
-<p class="did">La circonferenza: $Q$ le appartiene solo quando $OQ$ è esattamente uguale a $r$.</p>
-<p class="did">Il cerchio: $Q$ gli appartiene quando $OQ$ è minore o uguale a $r$.</p>
-</div>
+<svg id="fig-cerchio" viewBox="0 0 440 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px" role="img" aria-label="Circonferenza e cerchio affiancati"></svg>
 </div>
 
 <h2>Circonferenza per tre punti</h2>
@@ -157,9 +145,8 @@ function rad(g){return g*Math.PI/180;}
   var lp=txt(s,0,0,'P',{fill:'var(--rosso)','font-size':14,'text-anchor':'middle','dominant-baseline':'central'});
   el('circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'},s);
   var lo=txt(s,cx,cy,'O',{'font-size':14,'text-anchor':'middle','dominant-baseline':'central'});
-  var cur=document.getElementById('cur-p');
   function draw(){
-    var g=+cur.value, p=pt(g), q=pt(g,R+15), m=pt(g,R/2);
+    var g=60, p=pt(g), q=pt(g,R+15), m=pt(g,R/2);
     rag.setAttribute('x1',cx);rag.setAttribute('y1',cy);rag.setAttribute('x2',p[0]);rag.setAttribute('y2',p[1]);
     P.setAttribute('cx',p[0]);P.setAttribute('cy',p[1]);
     lp.setAttribute('x',q[0]);lp.setAttribute('y',q[1]);
@@ -177,44 +164,20 @@ function rad(g){return g*Math.PI/180;}
     if(dA>dB){lc.setAttribute('x',A[0]-8);lc.setAttribute('y',A[1]+14);lc.setAttribute('text-anchor','end');}
     else{lc.setAttribute('x',B[0]+8);lc.setAttribute('y',B[1]+14);lc.setAttribute('text-anchor','start');}
   }
-  cur.addEventListener('input',draw);draw();
+  draw();
 })();
 
 /* figura 2: circonferenza e cerchio, con il punto Q */
 (function(){
-  var s=document.getElementById('fig-cerchio'), R=70, cy=105, ang=rad(30), pan=[110,330];
+  var s=document.getElementById('fig-cerchio'), R=70, cy=105, pan=[110,330];
   txt(s,110,20,'circonferenza',{'text-anchor':'middle',fill:'var(--grigio)'});
   txt(s,330,20,'cerchio',{'text-anchor':'middle',fill:'var(--grigio)'});
   el('circle',{cx:110,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.6},s);
   el('circle',{cx:330,cy:cy,r:R,fill:'var(--verde)','fill-opacity':.28,stroke:'var(--inchiostro)','stroke-width':2.6},s);
-  var seg=[],Q=[],lq=[],st=[];
   pan.forEach(function(cx){
-    seg.push(el('line',{x1:cx,y1:cy,stroke:'var(--rosso)','stroke-width':1.8,'stroke-dasharray':'5 4'},s));
     el('circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'},s);
-    txt(s,cx-6,cy+16,'O',{'font-size':14,'text-anchor':'middle'});
-    Q.push(el('circle',{r:4.5,fill:'var(--rosso)'},s));
-    lq.push(txt(s,0,0,'Q',{fill:'var(--rosso)','font-size':14}));
-    st.push(txt(s,cx,200,'',{'text-anchor':'middle','font-size':13}));
+    txt(s,cx,cy+16,'O',{'font-size':14,'text-anchor':'middle'});
   });
-  var cur=document.getElementById('cur-q'), val=document.getElementById('val-q');
-  function draw(){
-    var t=+cur.value, d=t*R, dx=d*Math.cos(ang), dy=-d*Math.sin(ang);
-    pan.forEach(function(cx,i){
-      seg[i].setAttribute('x2',cx+dx);seg[i].setAttribute('y2',cy+dy);
-      Q[i].setAttribute('cx',cx+dx);Q[i].setAttribute('cy',cy+dy);
-      lq[i].setAttribute('x',cx+dx+7);lq[i].setAttribute('y',cy+dy-7);
-    });
-    var bordo=Math.abs(t-1)<1e-9, dentro=t<1-1e-9;
-    st[0].textContent=bordo?'Q è sulla circonferenza':'Q non è sulla circonferenza';
-    st[0].setAttribute('fill',bordo?'var(--verde)':'var(--grigio)');
-    st[0].setAttribute('font-weight',bordo?600:400);
-    var nel=bordo||dentro;
-    st[1].textContent=nel?(bordo?'Q è nel cerchio (sul bordo)':'Q è nel cerchio (interno)'):'Q non è nel cerchio';
-    st[1].setAttribute('fill',nel?'var(--verde)':'var(--grigio)');
-    st[1].setAttribute('font-weight',nel?600:400);
-    val.textContent='OQ = '+(t===0?'0':bordo?'r':it(t,2)+' r');
-  }
-  cur.addEventListener('input',draw);draw();
 })();
 })();
 </script>
