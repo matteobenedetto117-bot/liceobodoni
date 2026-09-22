@@ -354,33 +354,61 @@
 - Parole: 372 su 2 pagine di traccia (pag. 76 e la prima metà di p. 77, fino al calcolo dei due blocchi e all'equazione dimensionale; il resto di p. 77, "Pressione nei fluidi", appartiene all'unità 53 e non è stato toccato)
 - Rettifica: nessuna sostanziale. La traccia scrive la seconda pressione come "147 N/m²": il valore esatto è 29,43 N / 0,2 m² = 147,15 N/m², verificato con SymPy insieme a F_p = 3 kg · 9,81 N/kg = 29,43 N e a P₁ = 29,43 N/m². Nella pagina è riportato 147 N/m², coerente con le tre cifre significative dei dati, senza segnalare nulla al lettore.
 - Aggiunta: nessun contenuto nuovo. Gli unici elementi non presenti alla lettera nella traccia sono: una riga che spiega il significato del pedice ⊥ (la componente parallela non contribuisce), una riga che osserva che l'area cinque volte minore dà una pressione cinque volte maggiore — cioè la lettura del confronto che la traccia imposta ma non commenta — e un riquadro sulla distinzione fra forza e pressione, che è l'errore tipico all'inizio dell'argomento. Il disegno dei due blocchi è la trasposizione in SVG di quello manoscritto, con le sole quote dell'area. L'unico interattivo mostra la stessa cosa del disegno con un grado di libertà in più: a forza premente fissa, il cursore cambia l'area e riporta la pressione, rendendo visibile la proporzionalità inversa. La definizione di equilibrio del fluido è resa richiamando in una frase l'equilibrio dei corpi rigidi già visto (unità 40), senza introdurre nulla.
+- Spostamento da fisica seconda (22/09/2026): aggiunta la frase sul pascal (1 N su 1 m²) e sulla distinzione fra manometro e barometro, che era nell'unità 01 di seconda. Tolta la sezione «Dove si continua».
 
 ## Unità 53 — La pressione nei fluidi
 - Parole: 258 su 1 pagina di traccia (la metà inferiore di p. 77, dal titolo "Pressione nei fluidi"; la metà superiore appartiene all'unità 52)
 - Rettifica: nessuna. La traccia di questa unità non contiene calcoli numerici: l'unica relazione è F = F⊥, coerente con la definizione P = F⊥/A già introdotta, e dimensionalmente N/m² = Pa.
-- Aggiunta: nessun contenuto nuovo. Gli unici elementi non presenti alla lettera sono una riga che spiega la conseguenza di F = F⊥ (non c'è componente da scartare, la forza contribuisce per intero) e un riquadro sull'errore tipico qui, cioè leggere "perpendicolare" come "verso il basso" dimenticando pareti laterali e spinta verso l'alto. Il disegno dei due barattoli, a fondo piatto e a fondo ondulato con le frecce normali alla superficie, è la trasposizione in SVG di quello manoscritto. Nessuno strumento interattivo: il disegno mostra già per intero l'unica cosa che l'unità afferma. Il principio di Pascal resta il solo nome, come nella traccia; la trattazione quantitativa è nell'unità 59.
+- Aggiunta: nessun contenuto nuovo. Gli unici elementi non presenti alla lettera sono una riga che spiega la conseguenza di F = F⊥ (non c'è componente da scartare, la forza contribuisce per intero) e un riquadro sull'errore tipico qui, cioè leggere "perpendicolare" come "verso il basso" dimenticando pareti laterali e spinta verso l'alto. Il disegno dei due barattoli, a fondo piatto e a fondo ondulato con le frecce normali alla superficie, è la trasposizione in SVG di quello manoscritto. Nessuno strumento interattivo: il disegno mostra già per intero l'unica cosa che l'unità afferma. Il principio di Pascal resta il solo nome, come nella traccia; la trattazione quantitativa è nell'unità 60.
+- Spostamento da fisica seconda (22/09/2026): nessuna aggiunta, il contenuto dell'unità di seconda era già tutto qui. Tolta la sezione «Dove si continua».
 
 ## Unità 54 — Legge di Stevino
 - Parole: 418 su 2 pagine di traccia (78–79)
 - Rettifica: nessuna. I passaggi della traccia (P = F⊥/A = mg/A, m = dV, V = Ah, semplificazione di A) e il valore P_atm = 1,013·10⁵ Pa sono corretti; il conto di verifica con d = 1000 kg/m³, g = 9,81 N/kg, h = 2 m dà 1,962·10⁴ Pa, arrotondato a 1,96·10⁴ Pa.
 - Aggiunta: un solo esempio numerico (acqua a 2 m di profondità), perché la traccia dell'unità non ne contiene nessuno. Nessun'altra aggiunta: nessuna dimostrazione, nessuna tabella, nessun confronto non presente nella traccia.
+- Spostamento da fisica seconda (22/09/2026): aggiunte dall'unità 02 di seconda la differenza di pressione fra due punti (Δp = d g Δh) con il suo disegno e l'esempio del cubetto di lato 20 cm (Δp = 1962 Pa). L'esempio a 4,30 m di profondità dell'unità 05 di seconda non è stato ripreso: ripeteva il conto a 2 m già presente. Tolta la sezione «Dove si continua».
 
-## Unità 56 — Galleggiamento di un corpo
+## Unità 55 — Principio di Archimede
+- Spostamento da fisica seconda (22/09/2026): aggiunta dall'unità 03 di seconda la lettura della spinta come peso del fluido spostato e la validità per corpi di forma qualunque. Tolta la sezione «Dove si continua».
+
+## Unità 56 — Relazione di laboratorio: verifica del principio di Archimede
+- Parole: 570 su 3 pagine di traccia (pagine 6-8, come indicato dalla nota della classe).
+- Rettifica: nessuna. Verificato con SymPy: F_A misurata = F_p1 - F_p2 = 0,22 N - 0,18 N = 0,04 N;
+  la propagazione dell'errore su una differenza di due misure dello stesso strumento dà
+  e_FA = 2 e_Fp; la derivata di F_A = d g V rispetto a V è d g, quindi e_FA = d g e_V per il
+  calcolo teorico. d g = 1000 * 9,81 = 9810, coerente con i valori scritti in traccia.
+- Aggiunta: nessuna oltre alle parole di collegamento necessarie a rendere la pagina leggibile
+  come relazione autonoma (titoli di sezione Obiettivo, Strumenti, Procedura, Dati e calcoli,
+  Grafico di compatibilità, Conclusioni, che nella traccia sono gli stessi campi del modulo di
+  laboratorio). Il volume V non ha un valore numerico nella traccia (il disegno mostra solo il
+  dislivello sul cilindro graduato senza una lettura scritta): l'ho lasciato simbolico invece di
+  inventare una misura, così come le due grandezze "portata" e "sensibilità" degli strumenti, che
+  in traccia compaiono come campi da compilare e non come valori dati. Per lo stesso motivo la
+  conclusione resta doppia (compatibile / non compatibile), esattamente come nel modulo originale,
+  invece di affermare un esito che i dati incompleti non permettono di calcolare.
+- Spostamento da fisica seconda (22/09/2026): era l'unità 04 di seconda (pagine 6–8 del quaderno di seconda). Tolta la sezione «Nella prossima unità».
+
+## Unità 57 — Galleggiamento di un corpo
 - Parole: 416 su 2 pagine di traccia (81 dalla metà, "Condizione di galleggiamento", e 82 fino al titolo "Pressione atmosferica")
 - Rettifica: nessuna. I passaggi della traccia sono corretti: F_P = mg = d_B V g, F_A = d_F g V, e la semplificazione di g e V nel confronto è lecita perché entrambi positivi (verificato con SymPy: d_B g V > d_F g V equivale a d_B > d_F). I tre casi con i versi delle disuguaglianze corrispondono ai tre disegni.
 - Aggiunta: un solo esempio numerico (blocco di legno, V = 2,0·10⁻³ m³, d_B = 600 kg/m³ in acqua: F_P = 11,8 N, F_A = 19,6 N), perché la traccia dell'unità non contiene alcun esempio. Aggiunto inoltre un riquadro sulla distinzione fra densità del blocco e densità del fluido, con il ferro che affonda in acqua e galleggia nel mercurio. Il disegno dei tre casi è la trasposizione in SVG di quello manoscritto, con le lunghezze delle frecce proporzionate al caso. Nessuno strumento interattivo, nessuna tabella riassuntiva, nessuna dimostrazione assente dalla traccia.
+- Spostamento da fisica seconda (22/09/2026): aggiunti dall'unità 08 di seconda il caso del corpo che galleggia con una parte sola immersa e i due esercizi (legno e vetro; volume immerso). Rettifica: nel disegno del volume immerso il cubo era immerso per il 40%, mentre i dati danno 0,58/0,72 ≈ 80%; ridisegnato. Tolta la sezione «Dove si continua».
 
-## Unità 57 — Pressione atmosferica ed esperimento di Torricelli
+## Unità 58 — Pressione atmosferica ed esperimento di Torricelli
 - Parole: 397 su 2 pagine di traccia (82 dal titolo "Pressione atmosferica" e 83)
 - Rettifica: il conto finale della traccia. Con i dati scritti a pagina 83 (d = 1,36·10⁴ kg/m³, g = 9,81 N/kg, h = 0,760 m) il prodotto vale 101 396 Pa, non 101 300 Pa come annotato: verificato con SymPy. Nella pagina il risultato del conto è scritto come 1,01·10⁵ Pa, e il valore convenzionale p_atm = 1,013·10⁵ Pa è riportato a parte come valore assunto al livello del mare, non come esito dell'operazione. Lo scarto è dovuto all'arrotondamento della densità del mercurio: con d = 1,3595·10⁴ kg/m³ e h = 0,7595 m si ottengono i 101 325 Pa convenzionali.
 - Aggiunta: un riquadro sul perché si usa proprio il mercurio (liquido più denso di uso comune, quindi colonna sotto il metro; con l'acqua servirebbero oltre dieci metri), perché il dato serve a capire l'esperimento e non compare altrove nel percorso. Aggiunta anche una riga sul fatto che sopra la colonna c'è il vuoto e quindi non preme, che rende leggibile l'equilibrio disegnato nella traccia, e una riga di controllo dimensionale (kg/m³ · N/kg · m = N/m² = Pa). Nessun esempio numerico oltre a quello della traccia, nessuna tabella, nessuna dimostrazione assente. Il disegno della provetta rovesciata nel piatto, con il vuoto in alto, la quota h e le frecce di p_atm sul piatto, è la trasposizione in SVG di quello manoscritto. Nessuno strumento interattivo.
+- Spostamento da fisica seconda (22/09/2026): aggiunte dall'unità 05 di seconda le unità di misura atm, bar, mmHg e torr. Tolta la sezione «Dove si continua».
 
-## Unità 58 — Vasi comunicanti
+## Unità 59 — Vasi comunicanti
 - Parole: 308 su 1 pagina di traccia (p. 84)
 - Rettifica: nessuna. La derivazione della traccia è corretta e verificata con SymPy: da p_A = p_atm + d₁gh₁ + d₁gh e p_B = p_atm + d₂gh₂ + d₁gh, imponendo p_A = p_B si semplificano p_atm, il termine comune d₁gh e g, e resta d₁h₁ = d₂h₂ (SymPy risolve h₁ = d₂h₂/d₁). Dimensionalmente kg/m³ · N/kg · m = Pa in ogni termine.
 - Aggiunta: un riquadro che precisa da dove si misurano h₁ e h₂, cioè dal livello in cui i due liquidi si toccano e non dal fondo, perché è la condizione che rende lecita la semplificazione del termine comune e nella traccia resta implicita nel disegno. Aggiunta anche mezza riga sul fatto che non contano forma e ampiezza dei vasi, che è la conclusione operativa dell'uguaglianza p_A = p_B. Nessun esempio numerico (la traccia non ne contiene, e la relazione finale è già l'esito del solo esempio presente), nessuna tabella, nessuna dimostrazione assente dalla traccia, nessuno strumento interattivo. I due disegni sono la trasposizione in SVG di quelli manoscritti; nel secondo le altezze sono proporzionate in modo che h₁ < h₂, coerentemente con d₁ > d₂.
+- Spostamento da fisica seconda (22/09/2026): aggiunto dall'unità 06 di seconda l'esempio dell'olio (d₂ = 920 kg/m³, h₂ = 5,00 cm → h₁ = 4,60 cm, dislivello 0,40 cm). Tolta la sezione «Dove si continua».
 
-## Unità 59 — Principio di Pascal e torchio idraulico
+## Unità 60 — Principio di Pascal e torchio idraulico
 - Parole: 551 su 2 pagine e mezza di traccia (85, 86 e la prima metà di 87)
 - Rettifica: nessuna. I dati e i conti della traccia sono corretti e verificati con SymPy: F_P = mg = 1300 kg · 9,81 N/kg = 12 753 N esatti; da F₁/A₁ = F₂/A₂ con F₂ = F_P, A₁ = 0,5 m² e A₂ = 12 m² si ottiene F₁ = A₁F₂/A₂ = 531,375 N, arrotondato a 531 N come nella traccia. Il rapporto di amplificazione A₂/A₁ vale esattamente 24, e il controllo inverso 531,375 N · 24 restituisce i 12 753 N di partenza. Dimensionalmente N/m² = Pa in entrambi i membri della condizione di equilibrio.
 - Aggiunta: un riquadro che precisa che ciò che resta uguale è la pressione e non la forza, e che la forza cresce solo perché cresce l'area su cui agisce: è l'errore tipico su questo argomento e nella traccia resta implicito nel passaggio F₂ = (A₂/A₁)F₁. Aggiunta inoltre la riga finale che lega il fattore 24 al rapporto delle aree, che rende leggibile il risultato numerico. Nessun esempio numerico oltre a quello della traccia, nessuna dimostrazione assente, nessuna tabella riassuntiva, nessuno strumento interattivo. I due disegni (la palla schiacciata e il torchio con le due pedane, F₁, F₂ e F_P) sono la trasposizione in SVG di quelli manoscritti.
+- Spostamento da fisica seconda (22/09/2026): nessuna aggiunta, l'unità di seconda aveva lo stesso contenuto e lo stesso esempio. Tolta la sezione «Dove si continua».
+
