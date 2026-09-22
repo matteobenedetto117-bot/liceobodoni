@@ -49,6 +49,7 @@
 - Parole: 155 su 1 pagina di traccia (pagina 11)
 - Rettifica: nessuna. Verificato con SymPy che da $r=mv/(qB)$ segue $m=qBr/v$, coerente con la traccia.
 - Aggiunta: nessuna. La traccia contiene solo titolo, la definizione "strumento che serve per misurare la massa di particelle cariche" e uno schema incompleto (un riquadro con una velocità entrante); ho ridisegnato lo schema in modo leggibile e collegato la definizione alla formula del raggio di curvatura già ricavata nell'unità 05, risolta rispetto a m, che è esattamente ciò che la descrizione dell'unità nel file di classe indica come contenuto ("misurare la massa sfruttando il raggio di curvatura"). Nessun esempio numerico presente nella traccia, quindi nessuno aggiunto.
+- Revisione: titolo invariato (scelta dell'utente), nessun titoletto. Precisati $r=mv/(|q|B)$ e $m=|q|Br/v$, e che la velocità è perpendicolare al campo. Aggiunta: la frase sulla distanza $2r$ dall'ingresso e quella sul raggio direttamente proporzionale alla massa a parità di carica e velocità, necessarie per leggere la figura. Rifatto lo schema (un riquadro con una velocità entrante): regione con B entrante, lastra, semicirconferenza calcolata, punto d'arrivo e quota 2r; cursore sulla massa, con raggio e punto d'arrivo che si spostano, v tangente e F verso il centro. Tolto il sottotitolo, formule in riquadro azzurro, impaginazione a quaderno.
 
 ## Unità 07 — Campo magnetico generato da un filo percorso da corrente
 - Parole: 240 su 1 pagina di traccia (pagina 12)

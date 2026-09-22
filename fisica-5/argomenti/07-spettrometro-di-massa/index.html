@@ -5,16 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Spettrometro di massa — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
 </style>
 </head>
 <body>
@@ -24,39 +42,136 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 06</p>
   <h1>Spettrometro di massa</h1>
-  <p class="sommario">Il raggio di curvatura appena trovato non è solo geometria: misurandolo si
-  risale alla massa della particella che lo percorre. È il principio dello spettrometro di massa.</p>
 </header>
 
 <p>Uno <strong>spettrometro di massa</strong> è uno strumento che misura la massa di particelle
-cariche facendole entrare, con velocità nota $v$, in una regione di campo magnetico uniforme
-$\vec B$.</p>
+cariche. Le particelle entrano con velocità nota $\vec v$, perpendicolare al campo, in una regione
+di campo magnetico uniforme $\vec B$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f7v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<rect x="70" y="30" width="220" height="150" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="130" y1="230" x2="130" y2="182" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f7v)"/>
-<text x="140" y="215" font-family="var(--sans)" font-size="15" fill="var(--verde)">v</text>
-<text x="290" y="20" font-family="var(--sans)" font-size="14" fill="var(--blu)">campo B nella regione</text>
+<svg id="fig-s" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px">
+<g class="din"></g>
 </svg>
-<p class="did">La particella entra con velocità $v$ nella regione di campo magnetico $\vec B$.</p>
+<div class="cursore"><label for="cur-s">massa</label><input id="cur-s" type="range" min="120" max="400" step="1" value="200"></div>
+<p class="did">Campo $\vec B$ entrante nel foglio ($\otimes$). La particella positiva entra dal basso,
+percorre mezza circonferenza e colpisce la lastra a distanza $2r$ dall'ingresso. Aumentando la massa
+cresce il raggio e il punto d'arrivo si allontana.</p>
 </div>
 
-<p>Dentro il campo la particella percorre, come si è visto nell'unità precedente, una traiettoria
-circolare di raggio $r=\dfrac{mv}{qB}$. Se carica $q$, campo $B$ e velocità $v$ sono note, misurare
-il raggio $r$ della traiettoria equivale a misurare la massa:</p>
+<p>Dentro il campo la particella percorre, come si è visto nell'unità precedente, un arco di
+circonferenza di raggio</p>
 
-<div class="formula-box">
-$$r=\frac{mv}{qB} \qquad\Longrightarrow\qquad m=\frac{qBr}{v}$$
-</div>
+<p class="eq">$$r=\frac{m\,v}{|q|\,B}$$</p>
 
+<p>e dopo mezzo giro colpisce la lastra a distanza $2r$ dal punto di ingresso. Se carica, campo e
+velocità sono noti, misurare il raggio della traiettoria equivale a misurare la massa:</p>
+
+<p class="eq">$$m=\frac{|q|\,B\,r}{v}$$</p>
+
+<p>A parità di carica e di velocità il raggio è direttamente proporzionale alla massa: le
+particelle più pesanti arrivano sulla lastra più lontano dall'ingresso.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../05-moto-di-particelle-cariche-in-campo-elettrico-e-magnetico-un/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Moto di particelle cariche in campo elettrico e magnetico uniforme</span></a><a class="successiva" href="../08-campo-magnetico-generato-da-un-filo-percorso-da-corrente/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Campo magnetico generato da un filo percorso da corrente</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 06</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function campo(p,x1,x2,y,mk,col){el(p,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:col,'stroke-width':1.4,'stroke-opacity':.7,'marker-end':'url(#'+mk+')'});}
+  function carica(p){
+    var c=el(p,'circle',{r:10,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.6});
+    var s=T(p,0,0,'+',{'text-anchor':'middle',fill:'var(--rosso)'});
+    return function(x,y){set(c,{cx:f(x),cy:f(y)});set(s,{x:f(x),y:f(y+4.5)});};
+  }
+  /* vettore che parte dal bordo della carica; etichetta oltre la punta */
+  function vettore(p,col,mk,nome){
+    var l=el(p,'line',{stroke:col,'stroke-width':2.4,'marker-end':'url(#'+mk+')'});
+    var t=T(p,0,0,nome,{fill:col,'font-weight':700,'text-anchor':'middle'});
+    return function(x,y,dx,dy){
+      var L=Math.hypot(dx,dy);
+      if(L<6){l.setAttribute('opacity',0);t.setAttribute('opacity',0);return;}
+      var ux=dx/L,uy=dy/L,x0=x+ux*12,y0=y+uy*12;
+      set(l,{x1:f(x0),y1:f(y0),x2:f(x0+dx),y2:f(y0+dy),opacity:1});
+      set(t,{x:f(x0+dx+ux*14),y:f(y0+dy+uy*14+4.5),opacity:1});
+    };
+  }
+  function tracce(g,pos,t){
+    while(g.firstChild)g.removeChild(g.firstChild);
+    for(var k=0;k<=10;k++){var s=k/10;if(s>t+1e-9)break;var q=pos(s);el(g,'circle',{cx:f(q[0]),cy:f(q[1]),r:3,fill:'var(--grigio)','fill-opacity':.55});}
+  }
+
+  /* --- spettrometro: cursore sulla massa, raggio proporzionale a m --- */
+  var S=document.getElementById('fig-s'), cs=document.getElementById('cur-s');
+  if(S&&cs){
+    var g=S.querySelector('.din'), d=el(g,'defs',{});
+    [['m6v','var(--verde)'],['m6f','var(--rosso)'],['m6q','var(--grigio)']].forEach(function(m){
+      var k=el(d,'marker',{id:m[0],markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+      el(k,'path',{d:'M0,0 L6,3 L0,6 Z',fill:m[1]});
+    });
+    var X0=50,X1=510,Y0=30,YB=240,ENT=470;
+    el(g,'rect',{x:X0,y:Y0,width:X1-X0,height:YB-Y0,fill:'var(--blu-chiaro)','fill-opacity':.45,stroke:'var(--blu)','stroke-width':1,'stroke-opacity':.5});
+    for(var x=X0+30;x<X1;x+=60)for(var y=Y0+30;y<YB;y+=60){
+      el(g,'circle',{cx:x,cy:y,r:7,fill:'none',stroke:'var(--blu)','stroke-width':1.1,'stroke-opacity':.4});
+      el(g,'path',{d:'M'+(x-5)+','+(y-5)+' L'+(x+5)+','+(y+5)+' M'+(x+5)+','+(y-5)+' L'+(x-5)+','+(y+5),stroke:'var(--blu)','stroke-width':1.1,'stroke-opacity':.4});
+    }
+    T(g,X1,20,'B entrante',{fill:'var(--blu)','text-anchor':'end','font-size':14});
+    /* lastra lungo il bordo inferiore, a sinistra dell'ingresso */
+    el(g,'line',{x1:X0,y1:YB,x2:ENT-18,y2:YB,stroke:'var(--inchiostro)','stroke-width':5});
+    T(g,X0,YB+22,'lastra',{fill:'var(--inchiostro)'});
+    /* particella in arrivo dal basso */
+    el(g,'line',{x1:ENT,y1:YB+75,x2:ENT,y2:YB,stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-dasharray':'5 4'});
+    var vin=el(g,'line',{x1:ENT+16,y1:YB+62,x2:ENT+16,y2:YB+22,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m6v)'});
+    T(g,ENT+26,YB+46,'v',{fill:'var(--verde)','font-weight':700});
+    var arco=el(g,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8,'stroke-dasharray':'6 4'});
+    var cen=el(g,'circle',{r:3,fill:'var(--grigio)'});
+    var rag=el(g,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    var tR=T(g,0,0,'r',{fill:'var(--grigio)','font-style':'italic','text-anchor':'middle'});
+    var imp=el(g,'circle',{r:6,fill:'var(--rosso)'});
+    var quota=el(g,'line',{stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#m6q)','marker-start':'url(#m6q)'});
+    var tQ=T(g,0,0,'2r',{fill:'var(--grigio)','text-anchor':'middle','font-style':'italic'});
+    var fv=vettore(g,'var(--verde)','m6v','v'), ff=el(g,'line',{stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m6f)'}), tF=T(g,0,0,'F',{fill:'var(--rosso)','font-weight':700}), car=carica(g);
+    function dis(m){
+      var r=0.45*m, cx=ENT-r, cy=YB;
+      set(arco,{d:'M'+ENT+','+YB+' A'+f(r)+','+f(r)+' 0 0 0 '+f(ENT-2*r)+','+YB});
+      set(cen,{cx:f(cx),cy:cy});
+      set(rag,{x1:f(cx),y1:cy,x2:f(cx),y2:f(cy-r)});
+      set(tR,{x:f(cx-10),y:f(cy-Math.min(r*.25,30)+4)});
+      set(imp,{cx:f(ENT-2*r),cy:YB});
+      set(quota,{x1:f(ENT-2*r+4),y1:YB+44,x2:ENT-4,y2:YB+44});
+      set(tQ,{x:f(ENT-r),y:YB+38});
+      var LF=Math.min(38,.45*r); car(cx,cy-r); fv(cx,cy-r,-55,0);
+      set(ff,{x1:f(cx),y1:f(cy-r+12),x2:f(cx),y2:f(cy-r+12+LF)}); set(tF,{x:f(cx+9),y:f(cy-r+12+LF*.5+5)});
+    }
+    /* marker all'inizio della quota: uso lo stesso triangolo, orientato automaticamente */
+    quota.setAttribute('marker-start','url(#m6qs)');
+    var ks=el(d,'marker',{id:'m6qs',markerWidth:8,markerHeight:8,refX:0,refY:3,orient:'auto'});
+    el(ks,'path',{d:'M6,0 L0,3 L6,6 Z',fill:'var(--grigio)'});
+    cs.addEventListener('input',function(){dis(+cs.value);});
+    dis(+cs.value);
+  }
+})();
+</script>
 </body>
 </html>
