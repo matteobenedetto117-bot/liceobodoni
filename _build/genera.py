@@ -129,15 +129,7 @@ def indice(dati):
   <nav class="briciole"><a href="../index.html">&larr; Tutte le classi</a></nav>
   <p class="occhiello">Indice degli argomenti</p>
   <h1>%s</h1>
-  <p class="sommario">%s. Il percorso segue l'ordine degli appunti di classe: si parte dai limiti e si arriva
-  agli integrali e alle equazioni differenziali, passando per i teoremi che ogni anno tornano fra i quesiti.
-  L'indicazione a destra di ciascuna unità segnala quanto quell'argomento pesa nella prova, ed è la misura
-  con cui è stato calibrato l'approfondimento.</p>
 </header>
-<div class="avanzamento">
-  <strong>%d unità pubblicate su %d.</strong>
-  <div class="barra"><span style="width:%d%%"></span></div>
-</div>
 %s
 <footer>
   <p>Fonte: appunti manoscritti della classe, %s. Le equazioni differenziali sono state redatte ex novo.
@@ -146,7 +138,7 @@ def indice(dati):
 </div>
 </body>
 </html>
-""" % (dati['classe'], dati['classe'], dati['sottotitolo'], fatte, tot, pct,
+""" % (dati['classe'], dati['classe'],
        "\n".join(sez), dati['fonte'], datetime.date.today().strftime("%d/%m/%Y"))
 
 if __name__ == '__main__':
