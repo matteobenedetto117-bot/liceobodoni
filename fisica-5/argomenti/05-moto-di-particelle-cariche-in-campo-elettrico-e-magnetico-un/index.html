@@ -105,7 +105,45 @@ verso opposto ($\theta=180°$), la forza di Lorentz è nulla:</p>
 tempi uguali senza deviare.</p>
 </div>
 
-<nav class="nav-unita"><a class="precedente" href="../04-la-forza-di-lorentz/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La forza di Lorentz</span></a><a class="successiva" href="../06-moto-circolare-e-raggio-di-curvatura/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Moto circolare e raggio di curvatura</span></a></nav>
+<h2>Velocità perpendicolare al campo</h2>
+
+<p>Se $\vec v$ è perpendicolare a $\vec B$, la forza di Lorentz ha modulo massimo, $|q|vB$, ed è
+perpendicolare alla velocità in ogni istante. Una forza di modulo costante, sempre perpendicolare
+alla velocità, è esattamente ciò che serve per un <strong>moto circolare uniforme</strong>: la
+particella percorre una circonferenza e la forza di Lorentz, sempre diretta verso il centro, agisce
+come forza centripeta.</p>
+
+<div class="fig">
+<svg id="fig-c" viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px">
+<g class="din"></g>
+</svg>
+<div class="cursore"><label for="cur-c">tempo</label><input id="cur-c" type="range" min="0" max="100" step="1" value="0"></div>
+<p class="did">Campo $\vec B$ entrante nel foglio ($\otimes$). Su una carica positiva la forza punta
+sempre verso il centro e la circonferenza è percorsa in verso antiorario; per una carica negativa il
+verso si inverte. I pallini, a intervalli di tempo uguali, sono equidistanti: il modulo della
+velocità non cambia.</p>
+</div>
+
+<p>Due conseguenze seguono subito dal fatto che $\vec F$ è sempre perpendicolare a $\vec v$:
+l'accelerazione non ha mai una componente lungo il moto, quindi il <strong>modulo della
+velocità non cambia</strong>, e la forza di Lorentz, essendo perpendicolare allo spostamento in
+ogni istante, <strong>non compie lavoro</strong>.</p>
+
+<h2>Il raggio di curvatura</h2>
+
+<p>Con $\theta=90°$ la forza di Lorentz ha modulo $|q|vB$; uguagliandolo a quello della forza
+centripeta si ricava il raggio $r$ della traiettoria:</p>
+
+<p class="eq">$$|q|\,v\,B=m\,\frac{v^2}{r}$$</p>
+
+<p>da cui</p>
+
+<p class="eq">$$r=\frac{m\,v}{|q|\,B}$$</p>
+
+<p>Il raggio è direttamente proporzionale alla quantità di moto $mv$ e inversamente
+proporzionale alla carica e all'intensità del campo.</p>
+
+<nav class="nav-unita"><a class="precedente" href="../04-la-forza-di-lorentz/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La forza di Lorentz</span></a><a class="successiva" href="../07-spettrometro-di-massa/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Spettrometro di massa</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 05</p></footer>
 
 </div>
@@ -240,6 +278,44 @@ tempi uguali senza deviare.</p>
     function dis3(t){var q=pos3(t);tracce(tr3,pos3,t);car3(q[0],q[1]);fv3(q[0],q[1],50,0);}
     c3.addEventListener('input',function(){dis3(c3.value/100);});
     dis3(0);
+  }
+  /* --- figura 4: velocità perpendicolare a B, moto circolare --- */
+  var S4=document.getElementById('fig-c'), c4=document.getElementById('cur-c');
+  if(S4&&c4){
+    var g4=S4.querySelector('.din'), d4=el(g4,'defs',{});
+    [['m5v4','var(--verde)'],['m5f4','var(--rosso)']].forEach(function(m){
+      var k=el(d4,'marker',{id:m[0],markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+      el(k,'path',{d:'M0,0 L6,3 L0,6 Z',fill:m[1]});
+    });
+    var CX=260, CY=170, RR=105;
+    for(var ix=-3;ix<=3;ix++)for(var iy=-2;iy<=2;iy++){
+      var x=CX+ix*80, y=CY+iy*65, dd=Math.hypot(x-CX,y-CY);
+      if(!(dd>RR+24||(dd<RR-34&&dd>30)))continue;
+      if(x<15||x>505||y<15||y>320)continue;
+      el(g4,'circle',{cx:x,cy:y,r:8,fill:'none',stroke:'var(--blu)','stroke-width':1.3});
+      el(g4,'path',{d:'M'+(x-5.5)+','+(y-5.5)+' L'+(x+5.5)+','+(y+5.5)+' M'+(x+5.5)+','+(y-5.5)+' L'+(x-5.5)+','+(y+5.5),stroke:'var(--blu)','stroke-width':1.3});
+    }
+    T(g4,515,20,'B entrante',{fill:'var(--blu)','text-anchor':'end','font-size':14});
+    el(g4,'circle',{cx:CX,cy:CY,r:RR,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-dasharray':'6 5'});
+    el(g4,'circle',{cx:CX,cy:CY,r:3,fill:'var(--grigio)'});
+    var rag=el(g4,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    var tr4=el(g4,'g',{});
+    var tR=T(g4,0,0,'r',{fill:'var(--grigio)','text-anchor':'middle','font-style':'italic'});
+    var fv4=vettore(g4,'var(--verde)','m5v4','v'), ff4=vettore(g4,'var(--rosso)','m5f4','F'), car4=carica(g4);
+    function pos4(t){var a=2*Math.PI*t;return [CX+RR*Math.cos(a),CY-RR*Math.sin(a)];}
+    function dis4(t){
+      var a=2*Math.PI*t, q=pos4(t), ca=Math.cos(a), sa=Math.sin(a);
+      while(tr4.firstChild)tr4.removeChild(tr4.firstChild);
+      for(var k=0;k<12;k++){var s=k/12;if(s>t+1e-9)break;var p=pos4(s);el(tr4,'circle',{cx:f(p[0]),cy:f(p[1]),r:3,fill:'var(--grigio)','fill-opacity':.55});}
+      set(rag,{x1:CX,y1:CY,x2:f(q[0]),y2:f(q[1])});
+      /* etichetta r a metà raggio, spostata di lato */
+      set(tR,{x:f(CX+RR*.22*ca+16*sa),y:f(CY-RR*.22*sa+16*ca+4)});
+      car4(q[0],q[1]);
+      fv4(q[0],q[1],-60*sa,-60*ca);
+      ff4(q[0],q[1],-40*ca,40*sa);
+    }
+    c4.addEventListener('input',function(){dis4(c4.value/100);});
+    dis4(0);
   }
 })();
 </script>

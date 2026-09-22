@@ -39,41 +39,41 @@
   stessa fisica) in due soli casi con carica positiva, spiegando a parole che per una carica
   negativa i due casi si scambiano: nessun contenuto nuovo, solo una figura più compatta.
 - Revisione: titolo e titoletti invariati (scelta dell'utente). Corretto il primo disegno, che mostrava la forza perpendicolare al campo elettrico: ora $\vec F$ è parallela a $\vec E$ (verso del campo per la carica positiva). Corretta la parabola, che era tracciata a occhio e nel tratto finale tornava indietro contro $\vec v_0$: ora è calcolata ($x=at^2/2$, $y=v_0t$). Precisati: modulo $a=|q|E/m$, verso della forza per cariche positive e negative, moto rettilineo uniformemente accelerato solo con velocità iniziale parallela al campo, forza magnetica nulla anche per $\theta=180°$ ($F=|q|vB\sin\theta$). Tolto il sottotitolo, formule in riquadro azzurro, impaginazione a quaderno come l'unità 04. Tre figure interattive con cursore sul tempo e posizioni a intervalli uguali: carica che accelera e carica che rallenta, si ferma e torna indietro (didascalie per riga); moto parabolico con $\vec v$ tangente e $\vec F$ costante; moto rettilineo uniforme parallelo a $\vec B$.
+- Dall'ex unità 06 "Moto circolare e raggio di curvatura" (pagina 10), accorpata:
+  - Parole: 255 su 1 pagina di traccia (pagina 10)
+  - Rettifica: nessuna. Verificato con SymPy che da $qvB=mv^2/r$ segue $r=mv/(qB)$, coerente con la traccia.
+  - Aggiunta: una frase che spiega come il raggio dipende da massa, velocità, carica e campo, indispensabile per dare senso alla formula appena ricavata; nessun contenuto fisico ulteriore.
+- Revisione dell'accorpamento: titolo invariato, titoletti "Velocità perpendicolare al campo" e "Il raggio di curvatura" mantenuti (scelta dell'utente), unità successive rinumerate. Corretto il disegno del moto circolare: con B entrante e carica positiva la forza era disegnata verso il centro ma con v orientata in modo da dare una forza verso l'esterno, e il verso di percorrenza era indicato come orario; ora la carica gira in verso antiorario con F verso il centro. Precisato r = mv/(|q|B) e il modulo |q|vB. Figura interattiva con cursore sul tempo: la carica percorre la circonferenza con v tangente, F verso il centro, raggio tratteggiato e posizioni a intervalli uguali.
 
-## Unità 06 — Moto circolare e raggio di curvatura
-- Parole: 255 su 1 pagina di traccia (pagina 10)
-- Rettifica: nessuna. Verificato con SymPy che da $qvB=mv^2/r$ segue $r=mv/(qB)$, coerente con la traccia.
-- Aggiunta: una frase che spiega come il raggio dipende da massa, velocità, carica e campo, indispensabile per dare senso alla formula appena ricavata; nessun contenuto fisico ulteriore.
-
-## Unità 07 — Spettrometro di massa
+## Unità 06 — Spettrometro di massa
 - Parole: 155 su 1 pagina di traccia (pagina 11)
 - Rettifica: nessuna. Verificato con SymPy che da $r=mv/(qB)$ segue $m=qBr/v$, coerente con la traccia.
-- Aggiunta: nessuna. La traccia contiene solo titolo, la definizione "strumento che serve per misurare la massa di particelle cariche" e uno schema incompleto (un riquadro con una velocità entrante); ho ridisegnato lo schema in modo leggibile e collegato la definizione alla formula del raggio di curvatura già ricavata nell'unità 06, risolta rispetto a m, che è esattamente ciò che la descrizione dell'unità nel file di classe indica come contenuto ("misurare la massa sfruttando il raggio di curvatura"). Nessun esempio numerico presente nella traccia, quindi nessuno aggiunto.
+- Aggiunta: nessuna. La traccia contiene solo titolo, la definizione "strumento che serve per misurare la massa di particelle cariche" e uno schema incompleto (un riquadro con una velocità entrante); ho ridisegnato lo schema in modo leggibile e collegato la definizione alla formula del raggio di curvatura già ricavata nell'unità 05, risolta rispetto a m, che è esattamente ciò che la descrizione dell'unità nel file di classe indica come contenuto ("misurare la massa sfruttando il raggio di curvatura"). Nessun esempio numerico presente nella traccia, quindi nessuno aggiunto.
 
-## Unità 08 — Campo magnetico generato da un filo percorso da corrente
+## Unità 07 — Campo magnetico generato da un filo percorso da corrente
 - Parole: 240 su 1 pagina di traccia (pagina 12)
-- Rettifica: nessuna. La traccia è puramente qualitativa (nessuna formula quantitativa: la legge di Biot-Savart arriva solo nell'unità 12), quindi nessuna verifica SymPy necessaria; ho verificato solo la coerenza fisica del verso di circolazione del campo nei due disegni (corrente verso l'alto → campo antiorario, corrente verso il basso → campo orario), coerente con la regola della mano destra.
+- Rettifica: nessuna. La traccia è puramente qualitativa (nessuna formula quantitativa: la legge di Biot-Savart arriva solo nell'unità 11), quindi nessuna verifica SymPy necessaria; ho verificato solo la coerenza fisica del verso di circolazione del campo nei due disegni (corrente verso l'alto → campo antiorario, corrente verso il basso → campo orario), coerente con la regola della mano destra.
 - Aggiunta: nessuna. Ho ridisegnato in SVG i due schemi della traccia (il filo con la linea di campo circolare e l'ago magnetico, e la coppia di fili con corrente invertita) e riportato la regola della mano destra così com'è enunciata nella traccia.
 
-## Unità 09 — Forza su un filo percorso da corrente
+## Unità 08 — Forza su un filo percorso da corrente
 - Parole: 248 su 1 pagina di traccia (pagina 13)
 - Rettifica: nessuna. Verificato con SymPy che sostituendo $q=iL/v$ in $F=qvB\sin\theta$ la velocità di deriva si semplifica e si ottiene esattamente $F=BiL\sin\theta$, coerente con la traccia (dove il passaggio è annotato a mano con le stesse cancellazioni).
 - Aggiunta: nessuna. Ho ridisegnato in SVG i due schemi della traccia: la coppia di fili con corrente invertita (con la convenzione entrante/uscente già usata nelle unità precedenti al posto della freccia F nel piano, per coerenza con il resto del percorso) e lo schema generale del filo di lunghezza L nel campo B con angolo θ usato per la derivazione.
 
-## Unità 10 — Spire di corrente e momento torcente magnetico
-- Parole: 411 su 2,7 pagine di traccia (pagina 14 intera, pagina 15 intera, la sezione "Esempio" in cima a pagina 16, prima dell'inizio di "Legge di Ampère" che appartiene all'unità 11)
+## Unità 09 — Spire di corrente e momento torcente magnetico
+- Parole: 411 su 2,7 pagine di traccia (pagina 14 intera, pagina 15 intera, la sezione "Esempio" in cima a pagina 16, prima dell'inizio di "Legge di Ampère" che appartiene all'unità 10)
 - Rettifica: nessuna. Verificato con SymPy: la derivazione $M_{TOT}=2\cdot ihB\cdot(d/2)=ihBd=iAB$ è algebricamente esatta; l'esempio numerico $M_{max}=Ni\pi r^2B$ con $N=200$, $r=3{,}0\cdot10^{-2}$ m, $i=1{,}6$ A, $B=0{,}35$ T dà $0{,}3167$ N·m, coerente con lo $0{,}32$ N·m arrotondato della traccia.
 - Aggiunta: nessuna. Ho ridisegnato in SVG i tre schemi della traccia (la spira rettangolare vista di fronte con le forze entrante/uscente, e le due posizioni estreme di momento massimo e minimo) e riportato la spiegazione già presente sul perché compare $\sin\theta$ e su quando la spira raggiunge l'equilibrio.
 
-## Unità 11 — Legge di Ampère
-- Parole: 534 su 3 pagine di traccia (pagine 16–18; l'esempio in cima a pagina 16 appartiene all'unità 10, non contato qui)
+## Unità 10 — Legge di Ampère
+- Parole: 534 su 3 pagine di traccia (pagine 16–18; l'esempio in cima a pagina 16 appartiene all'unità 09, non contato qui)
 - Rettifica: nessuna. Verificato con SymPy che la somma $\sum B\,\Delta l$ su un percorso circolare con $B=ki/r$ dà $2\pi k i$, coerente con il passaggio a mano della traccia (dove la $r$ si semplifica con la circonferenza $2\pi r$).
-- Aggiunta: nessuna. Ho ridisegnato in SVG i quattro schemi della traccia (percorsi concatenato/non concatenato, il percorso concatenato in un piano qualunque, il percorso circolare con $B$ tangente, la scomposizione di $\vec B$ in $B_\parallel$, e i due esempi con più fili) e riportato la derivazione e la generalizzazione così come compaiono, fermandomi dove si ferma la traccia (senza scrivere $B=\mu_0 i/2\pi r$, che compare solo a inizio pagina 19, già unità 12).
+- Aggiunta: nessuna. Ho ridisegnato in SVG i quattro schemi della traccia (percorsi concatenato/non concatenato, il percorso concatenato in un piano qualunque, il percorso circolare con $B$ tangente, la scomposizione di $\vec B$ in $B_\parallel$, e i due esempi con più fili) e riportato la derivazione e la generalizzazione così come compaiono, fermandomi dove si ferma la traccia (senza scrivere $B=\mu_0 i/2\pi r$, che compare solo a inizio pagina 19, già unità 11).
 
-## Unità 12 — Legge di Biot-Savart e forze fra fili paralleli
+## Unità 11 — Legge di Biot-Savart e forze fra fili paralleli
 - Parole: 416 su 1,4 pagine di traccia (pagina 19 intera più l'inizio di pagina 20, fino a
   prima dell'avvio di "Campo magnetico generato da una spira circolare", che appartiene
-  all'unità 13)
+  all'unità 12)
 - Rettifica: nessuna. Verificato con SymPy: la soluzione di $B\cdot2\pi r=\mu_0 i$ dà
   $B=\mu_0 i/(2\pi r)$; le due espressioni $F=i_1B_2L$ e $F=i_2B_1L$ si semplificano entrambe
   a $\mu_0 i_1i_2L/(2\pi d)$, coerenti con la traccia.
@@ -82,21 +82,21 @@
   attrattive, e la coppia con correnti discordi che genera forze repulsive) e riportato la
   derivazione così come compare.
 
-## Unità 13 — Campo di una spira circolare e di una bobina
+## Unità 12 — Campo di una spira circolare e di una bobina
 - Parole: 227 su 2 pagine di traccia (pagina 20 intera più l'inizio di pagina 21, fino al
   disegno delle tre spire attaccate, prima dell'avvio di "Campo magnetico generato da un
-  SOLENOIDE", che appartiene all'unità 14)
+  SOLENOIDE", che appartiene all'unità 13)
 - Rettifica: nessuna. Verificato con SymPy che $B_{bobina}=N\cdot i\mu_0/(2R)$ è
   effettivamente $N$ volte $B_{spira}=i\mu_0/(2R)$, coerente con la traccia; verificato anche
   l'esempio numerico aggiunto ($N=200$, $R=4{,}0$ cm, $i=0{,}50$ A dà $B\approx1{,}6\times10^{-3}$ T).
 - Aggiunta: un esempio numerico, perché in tutta l'unità la traccia non ne contiene nessuno
   (solo i due schemi di verso della corrente e la formula riquadrata per spira e bobina).
 
-## Unità 14 — Campo magnetico di un solenoide
+## Unità 13 — Campo magnetico di un solenoide
 - Parole: 371 su 1,5 pagine di traccia (la parte finale di pagina 21, dal titolo "Campo
   magnetico generato da un SOLENOIDE" in poi, più pagina 22 intera, fino a prima dell'avvio
-  di "Magnetismo nella materia" a inizio pagina 23, che appartiene all'unità 15; la formula
-  della bobina a inizio pagina 21 appartiene all'unità 13, già pubblicata).
+  di "Magnetismo nella materia" a inizio pagina 23, che appartiene all'unità 14; la formula
+  della bobina a inizio pagina 21 appartiene all'unità 12, già pubblicata).
 - Rettifica: nessuna. Verificato con SymPy che risolvendo $B\cdot L=\mu_0 N i$ rispetto a $B$
   si ottiene $B=\mu_0 N i/L=\mu_0 n i$ con $n=N/L$, coerente con il passaggio a mano della
   traccia; verificata anche la coerenza dimensionale ($[\mu_0]=\text{T}\cdot\text{m/A}$) e
@@ -106,16 +106,16 @@
   (solo lo schema del solenoide, il disegno del campo nullo fuori/uniforme dentro, e la
   derivazione coi quattro tratti del percorso di Ampère).
 
-## Unità 15 — Magnetismo nella materia
+## Unità 14 — Magnetismo nella materia
 - Parole: 411 su 3 pagine di traccia (pagine 23–25; la pagina 26, con la temperatura di Curie e
-  il geomagnetismo, appartiene all'unità 16 e non è stata trattata qui)
+  il geomagnetismo, appartiene all'unità 15 e non è stata trattata qui)
 - Rettifica: nessuna. La traccia è qualitativa più una tabella di valori empirici di
   permeabilità relativa; verificato con SymPy/Python solo che l'ordinamento riportato
   (ferromagnetici $\gg$ paramagnetici $>1>$ diamagnetici) è coerente con i valori numerici
   della tabella.
 - Aggiunta: nessuna.
 
-## Unità 16 — Temperatura di Curie e geomagnetismo
+## Unità 15 — Temperatura di Curie e geomagnetismo
 - Parole: 408 su 2 pagine di traccia (pagine 26–27)
 - Rettifica: nessuna sul contenuto fisico. Ho chiarito la geometria del disegno degli strati
   terrestri: la traccia disegna due cerchi concentrici con le correnti convettive (a mano libera,
@@ -130,7 +130,7 @@
   parallele con la traiettoria elicoidale e la forza di Lorentz centripeta) senza introdurre
   contenuto fisico ulteriore rispetto a quanto scritto ed enunciato nella traccia.
 
-## Unità 17 — Moto elicoidale
+## Unità 16 — Moto elicoidale
 - Parole: 233 su 1 pagina di traccia (pagina 28)
 - Rettifica: nessuna. Verificate con SymPy le tre formule della traccia: $r=mv_\perp/(qB)$,
   $T=2\pi r/v_\perp=2\pi m/(qB)$ (la semplificazione di $v_\perp$ è corretta) e
@@ -138,7 +138,7 @@
 - Aggiunta: nessuna. Un solo disegno SVG, che riprende lo schema della traccia (linee di campo,
   traiettoria elicoidale, scomposizione di $v$ in $v_\perp$ e $v_\parallel$, passo $P$).
 
-## Unità 18 — Acceleratori di particelle: ciclotrone e sincrotrone
+## Unità 17 — Acceleratori di particelle: ciclotrone e sincrotrone
 - Parole: 442 su 3 pagine di traccia (pagine 29–31)
 - Rettifica: nessuna. Verificate con SymPy: $T=2\pi m/(qB)$ indipendente da $v$; $T/2=\pi m/(qB)$;
   $\Delta U=2nq\Delta V$ dopo $n$ cicli (coerente con $\Delta U=q\Delta V$ per semiciclo, $2n$
@@ -150,18 +150,18 @@
   ciclotrone con la spirale e la fessura, l'anello del sincrotrone con il raggio $R$ fisso e i
   due punti di accelerazione).
 
-## Unità 19 — L'esperienza di Faraday e la forza elettromotrice indotta
+## Unità 18 — L'esperienza di Faraday e la forza elettromotrice indotta
 - Parole: 406 su 2 pagine di traccia (pagine 32–33)
 - Rettifica: nessuna. La traccia è interamente qualitativa (nessuna formula né calcolo numerico
   su queste due pagine): niente da verificare con SymPy. Ho controllato solo la coerenza della
   notazione, usando $\Delta V$ per la fem indotta come già fatto per la differenza di potenziale
-  nell'unità 18.
+  nell'unità 17.
 - Aggiunta: nessuna. Due disegni SVG che riprendono gli schemi della traccia (i due circuiti
   avvolti sullo stesso anello di ferro con batteria, interruttore e amperometro; il magnete in
   avvicinamento a una bobina collegata a un amperometro), senza introdurre contenuto fisico
   ulteriore.
 
-## Unità 20 — Flusso del campo magnetico
+## Unità 19 — Flusso del campo magnetico
 - Parole: 254 su 1 pagina di traccia (pagina 34)
 - Rettifica: nessuna. L'unica formula della traccia, $\Phi(\vec{B})=BA\cos\theta$, e i due casi
   particolari ($\theta=0\Rightarrow\Phi=BA$; $\theta=90°\Rightarrow\Phi=0$) sono stati verificati
@@ -174,7 +174,7 @@
   casi limite già presenti nella traccia, senza aggiungere contenuto fisico oltre alla formula
   della traccia stessa.
 
-## Unità 21 — Legge di Faraday-Neumann-Lenz
+## Unità 20 — Legge di Faraday-Neumann-Lenz
 - Parole: 397 su 2 pagine di traccia (pagine 35-36)
 - Rettifica: nessuna. L'unico calcolo numerico della traccia,
   $\varepsilon = |0{,}110\,\text{Wb} - 0{,}850\,\text{Wb}| / 0{,}5\,\text{s}$, è stato verificato
@@ -186,7 +186,7 @@
   ridisegnano entrambe le coppie magnete-bobina della traccia (avvicinamento e allontanamento),
   senza introdurre schemi nuovi.
 
-## Unità 22 — La barretta in moto: analisi della fem indotta
+## Unità 21 — La barretta in moto: analisi della fem indotta
 - Parole: 362 su 3 pagine di traccia (pagine 37-39)
 - Rettifica: nessuna. Tutte le formule sono state verificate con SymPy: $\varepsilon=Bv\ell$,
   $i_{ind}=Bv\ell/R$, $F_M=iB\ell=B^2v\ell^2/R$, $P_{elettrica}=i^2R=B^2v^2\ell^2/R$,
@@ -198,19 +198,19 @@
   fem e quadratica della potenza da $v$. Nessun esempio numerico nuovo oltre a questo; nessuna
   dimostrazione aggiuntiva.
 
-## Unità 23 — Campo elettrico indotto e generatori di corrente
+## Unità 22 — Campo elettrico indotto e generatori di corrente
 - Parole: circa 196 di prosa (sommario, didascalie, paragrafi) su 1 pagina di traccia (pagina 40)
 - Rettifica: nessuna. La formula $E = Bv$ è stata verificata con SymPy a partire da
   $E\ell = \Delta V = Bv\ell$ (uguaglianza fra ddp lungo la barretta e fem, già ricavata
-  nell'unità 22). Coerenza dimensionale controllata: T·(m/s) = V/m, corretto per un campo
+  nell'unità 21). Coerenza dimensionale controllata: T·(m/s) = V/m, corretto per un campo
   elettrico. La frase finale di pagina ("...cambia e si genera corrente") è stata inclusa come
   chiusura del paragrafo sui generatori, mentre la derivazione quantitativa di $\varepsilon =
-  NBA\omega\sin\omega t$ resta nell'unità 24 come da traccia (pagina 41).
+  NBA\omega\sin\omega t$ resta nell'unità 23 come da traccia (pagina 41).
 - Aggiunta: nessuna. Due soli disegni SVG che ridisegnano gli schemi della traccia (il campo
   elettrico interno alla barretta e il generatore a spira rotante fra due poli); nessun esempio
   numerico né strumento interattivo, assenti anche nella traccia su questa pagina.
 
-## Unità 24 — L'alternatore
+## Unità 23 — L'alternatore
 - Parole: circa 329 (prosa, didascalie ed etichette comprese) su 2 pagine di traccia (pagine 41-42)
 - Rettifica: nessuna. La formula $\varepsilon = NBA\omega\sin(\omega t)$ è verificata con SymPy
   a partire da $\Phi = NBA\cos(\omega t)$ e $\varepsilon = -d\Phi/dt$, con risultato
@@ -224,10 +224,10 @@
   mostra concretamente perché la fem è sinusoidale, senza introdurre nessun esempio numerico
   assente dalla traccia.
 
-## Unità 25 — Motori elettrici in corrente alternata
+## Unità 24 — Motori elettrici in corrente alternata
 - Parole: circa 266 (prosa, didascalie ed etichette comprese) su 1 pagina di traccia (pagine 42-43)
 - Rettifica: nessuna. La pagina non introduce formule nuove (nessun calcolo numerico da
-  verificare con SymPy): si limita a riprendere la forza $F = iLB$ già stabilita nell'unità 9
+  verificare con SymPy): si limita a riprendere la forza $F = iLB$ già stabilita nell'unità 8
   per il filo rettilineo, applicandola concettualmente ai due lati della spira senza rideriva­rla.
   Coerente con la traccia, che su queste pagine è solo qualitativa (due schemi e un breve testo).
 - Aggiunta: nessuna. Ridisegnati in SVG lo schema spira-fra-i-poli collegata tramite
@@ -236,12 +236,12 @@
   strumento interattivo: i tre pannelli statici bastano a mostrare la sequenza già disegnata
   nella traccia, e un cursore avrebbe richiesto assunzioni sulla geometria non esplicitate lì.
 
-## Unità 26 — Mutua induzione e autoinduzione
+## Unità 25 — Mutua induzione e autoinduzione
 - Parole: circa 460 (prosa, didascalie ed etichette comprese) su 2 pagine di traccia (pagine
-  43-44; la pagina 43 è condivisa con l'unità 25, di cui restano solo le ultime righe sulla
-  rotazione del motore, e con l'unità 26 da qui in poi ("Induttanza" / "Mutua induzione")).
+  43-44; la pagina 43 è condivisa con l'unità 24, di cui restano solo le ultime righe sulla
+  rotazione del motore, e con l'unità 25 da qui in poi ("Induttanza" / "Mutua induzione")).
 - Rettifica: nessuna. La pagina non contiene formule numeriche da verificare: è interamente
-  qualitativa (nessun calcolo, nessuna definizione quantitativa, che arriva solo nell'unità 27
+  qualitativa (nessun calcolo, nessuna definizione quantitativa, che arriva solo nell'unità 26
   con l'induttanza $L$). L'unico controllo possibile riguarda la coerenza fisica del grafico
   $i(t)$ disegnato nella traccia dopo la chiusura dell'interruttore: risolvendo con SymPy
   l'equazione $L\,di/dt + Ri = \varepsilon$ con $i(0)=0$ si ottiene $i(t)=(\varepsilon/R)
@@ -257,7 +257,7 @@
   nessuno schema nuovo rispetto a quelli della traccia. Nessuno strumento interattivo: i tre
   pannelli statici bastano a mostrare la sequenza già disegnata a mano.
 
-## Unità 27 — Induttanza
+## Unità 26 — Induttanza
 - Parole: circa 256 (prosa, didascalie e riquadro compresi) su 1 pagina di traccia (pagina 45,
   interamente dedicata a questa unità: dal circuito con generatore-resistenza-bobina fino alla
   frase di chiusura sull'induttanza come caratteristica della bobina).
@@ -267,10 +267,10 @@
 - Aggiunta: nessuna. L'esempio numerico che compare in cima alla pagina 46 (calcolo di
   $\Delta t$ da $L$, $\Delta i$ ed $\varepsilon_{ind}$) non è stato incluso: la traccia lo
   colloca dopo l'intestazione "Induttanza di un solenoide" nell'indicizzazione delle pagine
-  (unità 28, pagine 46-47), quindi resta di competenza di quell'unità pur non usando la formula
+  (unità 27, pagine 46-47), quindi resta di competenza di quell'unità pur non usando la formula
   del solenoide.
 
-## Unità 28 — Induttanza di un solenoide
+## Unità 27 — Induttanza di un solenoide
 - Parole: circa 363 (prosa, didascalie e riquadro compresi, formule incluse nel conteggio) su
   2 pagine di traccia (pagine 46-47: dall'esempio numerico di richiamo sull'induttanza generica,
   fino al secondo esempio con i tre calcoli L, A, B_max).
@@ -286,7 +286,7 @@
   sezione A (pagina 46): nessun disegno nuovo rispetto alla traccia. Nessuno strumento
   interattivo: la pagina è quasi interamente formule ed esempi numerici già risolti a mano.
 
-## Unità 29 — Circuiti RL
+## Unità 28 — Circuiti RL
 - Parole: circa 418 (prosa, didascalie e riquadro compresi) su 3 pagine di traccia (pagine
   48-50: dal titolo "Circuiti RL" fino all'esempio numerico con i tre subcalcoli).
 - Rettifica: nella traccia (pagina 50) il secondo passaggio dell'esempio numerico è etichettato
@@ -308,7 +308,7 @@
   la rapidità di salita — la stessa informazione già presente nella traccia (i tre valori
   percentuali), resa manipolabile invece che statica.
 
-## Unità 30 — Energia immagazzinata in un campo magnetico
+## Unità 29 — Energia immagazzinata in un campo magnetico
 - Parole: circa 447 (prosa, didascalie e riquadro compresi) su 3 pagine di traccia (pagine 51-53).
 - Rettifica: nessuna. Verificato con SymPy sia il passaggio simbolico U = P_m·T = (1/2·Li²/T)·T =
   1/2 Li² sia la sostituzione B² = μ₀²n²i² → μ₀n²i² = B²/μ₀ che porta a U = B²Aℓ/(2μ₀) e
@@ -324,7 +324,7 @@
   lungo la curva U(i) = ½Li² e mostra il valore numerico, per rendere visibile la stessa
   dipendenza quadratica già presente nella formula, invece di lasciarla solo scritta.
 
-## Unità 31 — Trasformatori
+## Unità 30 — Trasformatori
 - Parole: circa 300 (prosa, didascalie e riquadro compresi) su 2 pagine di traccia (pagine 54-55).
 - Rettifica: nessuna. Verificato con SymPy il passaggio ε_p/N_p = ε_s/N_s ⇒ ε_p/ε_s = N_p/N_s e
   l'esempio numerico ε_s = ε_p·(N_s/N_p) = 220 V·(20/100) = 44 V (coerente con 44 V scritto a
@@ -338,14 +338,14 @@
   campo magnetico variabile): nessun disegno nuovo, nessuno strumento interattivo (non richiesto
   dalla traccia).
 
-## Unità 32 — Le prime tre equazioni di Maxwell
+## Unità 31 — Le prime tre equazioni di Maxwell
 - Parole: circa 542 (prosa, didascalie e riquadri compresi) su 3 pagine di traccia (pagine 56-58).
 - Rettifica: nella derivazione finale della legge di Faraday come circuitazione (pagina 59, che
   chiude il ragionamento aperto a pagina 57), il segno meno presente nella definizione della fem
-  indotta (ε = -ΔΦ(B)/Δt, pagina 57, coerente con l'unità 21) va perso nei passaggi successivi e
+  indotta (ε = -ΔΦ(B)/Δt, pagina 57, coerente con l'unità 20) va perso nei passaggi successivi e
   il riquadro finale riporta Γ(E) = dΦ(B)/dt senza segno meno. Corretto in pagina come
   Γ(E) = -dΦ(B)/dt, coerente con la definizione di fem indotta usata poche righe sopra nella
-  stessa traccia e con la legge di Faraday-Neumann-Lenz già stabilita nell'unità 21. Verificato
+  stessa traccia e con la legge di Faraday-Neumann-Lenz già stabilita nell'unità 20. Verificato
   con SymPy che la definizione di derivata rispetto al tempo, su un esempio concreto
   Φ(t) = B₀A cos(ωt), dà -dΦ/dt = AB₀ω sin(ωt), coerente con il segno mantenuto.
 - Aggiunta: un solo riquadro "Da non confondere" sulla differenza fra circuitazione nulla del
@@ -358,7 +358,7 @@
   circuitazione): nessun disegno nuovo, nessuno strumento interattivo (non richiesto dalla
   traccia, che qui è puramente concettuale).
 
-## Unità 33 — Corrente di spostamento e legge di Ampère-Maxwell
+## Unità 32 — Corrente di spostamento e legge di Ampère-Maxwell
 - Parole: circa 499 (prosa, didascalie e riquadri compresi) su 3 pagine di traccia (pagine 59-61).
 - Rettifica: nessuna. Verificato con SymPy il passaggio Q = C·ΔV = (ε₀A/d)·(Ed) = ε₀AE = ε₀Φ(E)
   di pagina 60: la semplificazione del fattore d è corretta e il risultato coincide con quanto
@@ -370,7 +370,7 @@
   contorno γ, come da disegno di pagina 59; nessuno strumento interattivo (figura puramente
   concettuale, non richiesta la manipolazione di un parametro).
 
-## Unità 34 — Come si genera un'onda elettromagnetica
+## Unità 33 — Come si genera un'onda elettromagnetica
 - Parole: circa 287 (prosa, didascalie e riquadri compresi) su 1 pagina di traccia (pagina 62).
 - Rettifica: nessuna. Verificate le direzioni di campo con la regola della mano destra: corrente
   verso l'alto nell'antenna, punto di osservazione a lato del filo, campo magnetico entrante nel
@@ -385,7 +385,7 @@
   alternazione fisica continua descritta dalla traccia) e lo schema dell'onda che si propaga con
   $\vec E$ e $\vec B$ su piani perpendicolari.
 
-## Unità 35 — Velocità di propagazione delle onde elettromagnetiche
+## Unità 34 — Velocità di propagazione delle onde elettromagnetiche
 - Parole: 195 su 1 pagina di traccia (pagina 63)
 - Rettifica: il valore numerico scritto in traccia, $c=2{,}999\times10^8$ m/s, è impreciso;
   verificato con calcolo diretto $c=1/\sqrt{\varepsilon_0\mu_0}$ con $\varepsilon_0=8{,}854\times10^{-12}$
@@ -396,7 +396,7 @@
   ridisegnare, nessuno strumento interattivo (non richiesto e non pertinente a un contenuto
   storico-concettuale).
 
-## Unità 36 — Campi, densità di energia in un'onda
+## Unità 35 — Campi, densità di energia in un'onda
 - Parole: 251 su 2 pagine di traccia (pagine 64-65).
 - Rettifica: nessuna. Verificato con SymPy l'intero passaggio $u_E=\frac12\varepsilon_0(cB)^2$ con
   $c^2=1/(\varepsilon_0\mu_0)$: la sostituzione dà $u_E=B^2/(2\mu_0)=u_B$, coerente con quanto
@@ -404,7 +404,7 @@
 - Aggiunta: nessuna. Pagina puramente formulare, nessun disegno nella traccia da ridisegnare,
   nessuno strumento interattivo (non richiesto e non pertinente a un contenuto di sole formule).
 
-## Unità 37 — Intensità e vettore di Poynting
+## Unità 36 — Intensità e vettore di Poynting
 - Parole: 382 (prosa, didascalie e riquadri compresi) su 2 pagine di traccia (pagine 66-67).
 - Rettifica: nessuna. Verificata con SymPy e numericamente l'intera catena di uguaglianze:
   partendo da $u=\frac12\varepsilon_0E^2+\frac{1}{2\mu_0}B^2$ con $E=cB$ si ottiene $u=B^2/\mu_0$
@@ -418,7 +418,7 @@
   (pagina 67); nessuno strumento interattivo, perché la figura è puramente geometrica e non c'è un
   parametro naturale da far variare.
 
-## Unità 38 — Quantità di moto e pressione di radiazione
+## Unità 37 — Quantità di moto e pressione di radiazione
 - Parole: 381 su 2 pagine di traccia (pagine 68-69).
 - Rettifica: nessuna. Verificata algebricamente con SymPy l'intera catena: da $\Delta U=I\,A\,\Delta t$
   con $I=uc$ si ottiene $\Delta U=ucA\,\Delta t$; dividendo per $c$ come richiesto da $p=U/c$,
@@ -429,7 +429,7 @@
   disegno nella traccia da ridisegnare (pagine puramente formulari) e nessuno strumento
   interattivo, perché non c'è un parametro naturale da far variare.
 
-## Unità 39 — Lo spettro elettromagnetico
+## Unità 38 — Lo spettro elettromagnetico
 - Parole: 286 su 2 pagine di traccia (pagine 70-71).
 - Rettifica: nessuna nel testo. Verificata con SymPy la relazione generale $v=\lambda/T=\lambda f$
   (sostituendo $T=1/f$) e la sua coerenza dimensionale. Nel disegno dello spettro, per allineare
@@ -445,11 +445,11 @@
   visibile disegnata volutamente larga per restare leggibile, come già nell'originale. Nessuno
   strumento interattivo: la pagina è già una lettura diretta di un grafico statico.
 
-## Unità 40 — Dalla fisica classica alla fisica moderna
+## Unità 39 — Dalla fisica classica alla fisica moderna
 - Parole: 223 su 1 pagina di traccia (pagina 72; la frase conclusiva di apertura pagina 73,
   "la relatività ristretta studia i sistemi in cui le velocità sono alte", è stata inclusa perché
   chiude il ragionamento di pagina 72 prima che inizi, più sotto nella stessa pagina 73, la
-  sezione sui postulati di Einstein che appartiene all'unità 41).
+  sezione sui postulati di Einstein che appartiene all'unità 40).
 - Rettifica: nessuna. Il contenuto è puramente qualitativo (nessun calcolo da verificare con
   SymPy); controllate solo le disuguaglianze $v\ll c$ e $v\sim c$ riportate come nella traccia.
 - Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG lo schema che
@@ -458,7 +458,7 @@
   moderna della traccia. Nessuno strumento interattivo: non c'è un parametro naturale da far
   variare in uno schema puramente concettuale.
 
-## Unità 41 — I postulati di Einstein e l'esperimento di Michelson-Morley
+## Unità 40 — I postulati di Einstein e l'esperimento di Michelson-Morley
 - Parole: 359 su 2 pagine di traccia (pagine 73-74).
 - Rettifica: nessuna. Contenuto puramente concettuale (due postulati e un fatto storico), senza
   calcoli o formule da verificare con SymPy.
@@ -467,7 +467,7 @@
   la composizione classica delle velocità barrata per mostrare perché il risultato v+c è
   sbagliato. Nessuno strumento interattivo: pagina puramente concettuale.
 
-## Unità 42 — Dilatazione dei tempi
+## Unità 41 — Dilatazione dei tempi
 - Parole: 486 su 3 pagine di traccia (pagine 75-77).
 - Rettifica: nessuna. La derivazione geometrica (teorema di Pitagora sul triangolo di lati
   $v\Delta t/2$, $d$, $c\Delta t/2$) e l'esempio numerico del treno a $v=c/3$ sono stati
@@ -482,7 +482,7 @@
   l'unico strumento interattivo dell'unità, e mostra esattamente il grafico già presente sul
   quaderno.
 
-## Unità 43 — Dilatazione dei tempi: esempi numerici
+## Unità 42 — Dilatazione dei tempi: esempi numerici
 - Parole: 191 su 1 pagina di traccia (pagina 78).
 - Rettifica: nessuna. I cinque valori del fattore di Lorentz sono stati verificati con SymPy
   per $v/c=0{,}50;\,0{,}75;\,0{,}90;\,0{,}99;\,0{,}999$: risultano
@@ -491,7 +491,7 @@
 - Aggiunta: nessuna, a parte una riga di commento finale sull'andamento non proporzionale del
   fattore di Lorentz rispetto a $v$.
 
-## Unità 44 — Contrazione delle lunghezze
+## Unità 43 — Contrazione delle lunghezze
 - Parole: 395 su 2 pagine di traccia (pagine 79-80).
 - Rettifica: nessuna. Il calcolo finale $L=L_0/\gamma=25{,}3\,\text{a.l.}\cdot
   \sqrt{1-0{,}99^2}\approx3{,}57\,\text{a.l.}$ è stato verificato con SymPy (γ(0,99c) ≈
@@ -500,12 +500,12 @@
   traccia poco sopra ed è quello coerente con il risultato 3,57 a.l.
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro e la
   frase di apertura sul limite invalicabile di c, che chiudeva la pagina 79 prima
-  dell'intestazione "Contrazione delle lunghezze" e non era ancora stata usata nell'unità 43.
+  dell'intestazione "Contrazione delle lunghezze" e non era ancora stata usata nell'unità 42.
   Ridisegnati in SVG lo schema Terra-Vega con la distanza propria e il confronto fra distanza
   a riposo e distanza contratta vista dalla navicella. Nessuno strumento interattivo: la curva
-  di γ(v) è già stata resa interattiva nell'unità 42 e qui sarebbe stata ridondante.
+  di γ(v) è già stata resa interattiva nell'unità 41 e qui sarebbe stata ridondante.
 
-## Unità 45 — Il decadimento dei muoni
+## Unità 44 — Il decadimento dei muoni
 - Parole: 443 su 3 pagine di traccia (pagine 81-83).
 - Rettifica: nessuna. Tutti i valori numerici sono stati verificati con SymPy per
   $v=0{,}995c$: $\gamma\approx10{,}0125$; distanza classica $d=v\Delta t_0\approx656{,}7$ m
@@ -519,7 +519,7 @@
   sistema Terra (tempo dilatato) e il sistema del muone (quota contratta). Nessuno strumento
   interattivo: entrambe le figure sono statiche, coerenti con lo stile delle unità vicine.
 
-## Unità 46 — Le trasformazioni di Lorentz
+## Unità 45 — Le trasformazioni di Lorentz
 - Parole: 410 su 3 pagine di traccia (pagine 84-86).
 - Rettifica: nessuna. Verificata con SymPy l'intera catena algebrica che porta da
   $x'=\gamma(x-vt)$ e $x=\gamma(x'+vt')$ a $t=\gamma(t'+vx'/c^2)$: sostituendo $x$ nella
@@ -533,18 +533,18 @@
   simmetria del cambio di segno della velocità. Nessuno strumento interattivo: la pagina è
   interamente algebrica, senza un grafico da manovrare.
 
-## Unità 47 — La simultaneità dipende dal sistema di riferimento
+## Unità 46 — La simultaneità dipende dal sistema di riferimento
 - Parole: 240 su 1 pagina di traccia (pagina 87).
 - Rettifica: nessuna. Verificata con SymPy la sottrazione $t_2'-t_1'=\gamma\frac{v}{c^2}(x_1-x_2)$
-  a partire dalla trasformazione di Lorentz del tempo ricavata nell'unità 46: coincide
+  a partire dalla trasformazione di Lorentz del tempo ricavata nell'unità 45: coincide
   esattamente con il risultato della traccia.
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Nessun
   disegno nella traccia, quindi nessuno SVG aggiunto; nessuno strumento interattivo, la pagina è
   interamente algebrica.
 
-## Unità 48 — Il cono di luce e gli invarianti relativistici
+## Unità 47 — Il cono di luce e gli invarianti relativistici
 - Parole: 472 su 3 pagine di traccia (pagine 88–90, limitatamente alla parte che classifica
-  Δs² prima dell'inizio dell'unità 49 sulla quantità di moto relativistica).
+  Δs² prima dell'inizio dell'unità 48 sulla quantità di moto relativistica).
 - Rettifica: nessuna correzione di merito. Sulla pagina 88 la traccia scrive "A può essere
   causa di B" anche per la coppia A-C (probabile lapsus, dato che la frase riguarda
   esplicitamente l'invio di un segnale luminoso, cioè il caso luce fra A e C): nella pagina
@@ -557,7 +557,7 @@
   D della traccia. Nessuno strumento interattivo: la pagina è un diagramma statico e una
   derivazione algebrica.
 
-## Unità 49 — Quantità di moto relativistica
+## Unità 48 — Quantità di moto relativistica
 - Parole: 205 su 1 pagina di traccia (pagina 90).
 - Rettifica: nessuna. Verificato con SymPy che $p=\gamma mv$ si riduce a $p\approx mv$ per
   $v\to0$ (serie di Taylor, termine correttivo di ordine $v^3$) e diverge per $v\to c^-$
@@ -567,7 +567,7 @@
   p-v della traccia (retta classica e curva relativistica con asintoto in v=c). Nessuno
   strumento interattivo: pagina breve, un solo grafico statico.
 
-## Unità 50 — Energia relativistica ed energia a riposo
+## Unità 49 — Energia relativistica ed energia a riposo
 - Parole: 186 su 1 pagina di traccia (pagina 91).
 - Rettifica: la traccia calcola correttamente $E_0=mc^2=0{,}12\ \text{kg}\times(3\times10^8\
   \text{m/s})^2\approx1{,}1\times10^{16}\ \text{J}$ per l'energia a riposo di una mela, ma
@@ -578,7 +578,7 @@
   Nessun disegno nella traccia (solo formule racchiuse in riquadro), quindi nessuno SVG
   aggiunto; nessuno strumento interattivo, la pagina è interamente algebrica.
 
-## Unità 51 — Fissione nucleare
+## Unità 50 — Fissione nucleare
 - Parole: 227 su 1 pagina di traccia (pagina 92).
 - Rettifica: la traccia indica come prodotto di fissione il bario 142, ma verificato con SymPy
   il bilancio del numero di massa fra reagenti (U-235 + n, A=236) e prodotti scritti
@@ -589,7 +589,7 @@
   traccia (neutrone incidente, nucleo di uranio 235, scissione in bario 141 e kripton 92 con tre
   neutroni liberati). Nessuno strumento interattivo: pagina breve, un solo schema statico.
 
-## Unità 52 — Energia cinetica relativistica
+## Unità 51 — Energia cinetica relativistica
 - Parole: 164 su 1 pagina di traccia (pagina 93).
 - Rettifica: nessuna. Verificato con SymPy che K=(γ-1)mc² segue correttamente da E=E₀+K, e che
   lo sviluppo in serie di Taylor di K per v piccola rispetto a c dà K≈½mv², confermando la
@@ -599,7 +599,7 @@
   SVG il grafico K–v della traccia, con asintoto tratteggiato in v=c. Nessuno strumento
   interattivo: pagina di una sola facciata, interamente algebrica più un grafico.
 
-## Unità 53 — Il corpo nero e la legge di Wien
+## Unità 52 — Il corpo nero e la legge di Wien
 - Parole: 396 su 2 pagine di traccia (pagine 94–95).
 - Rettifica: nessuna. Verificato con SymPy il calcolo della legge di Wien alle tre temperature
   della traccia: f_picco = 1,764×10¹⁴ Hz a 3000 K, 3,528×10¹⁴ Hz a 6000 K, 7,056×10¹⁴ Hz a
@@ -609,7 +609,7 @@
   applica la legge di Wien già enunciata, spostando un indicatore sul grafico esistente: non
   introduce contenuto nuovo, solo una lettura dinamica della formula.
 
-## Unità 54 — La catastrofe ultravioletta
+## Unità 53 — La catastrofe ultravioletta
 - Parole: 218 su 1 pagina di traccia (pagina 96).
 - Rettifica: nessuna. Verificato con SymPy che la legge di Rayleigh-Jeans I(f)=c·f²T diverge per
   f→∞ (limite infinito), mentre la distribuzione di Wien I(f)=K·f³·e^(-Kf/T) tende a zero sia per
@@ -617,7 +617,7 @@
 - Aggiunta: nessuna. Ridisegnato in SVG il grafico delle tre curve (Rayleigh-Jeans, sperimentale,
   Wien) della traccia. Nessuno strumento interattivo: pagina breve, un solo grafico statico.
 
-## Unità 55 — Legge di Stefan-Boltzmann e ipotesi di Planck
+## Unità 54 — Legge di Stefan-Boltzmann e ipotesi di Planck
 - Parole: 253 su 2 pagine di traccia (pagine 97–98).
 - Rettifica: nessuna. Verificato con SymPy (integrazione numerica di x³/(e^x−1) su [0,∞) = π⁴/15)
   che σ = 2π⁵k⁴/(15c²h³) = 5,670×10⁻⁸ W m⁻²K⁻⁴ con le costanti CODATA, coerente con il valore
@@ -625,7 +625,7 @@
 - Aggiunta: nessuna. Ridisegnato in SVG lo schizzo della traccia con l'area tratteggiata sotto la
   curva I(f), a illustrare l'integrale A∫I(f)df = P. Nessuno strumento interattivo.
 
-## Unità 56 — L'effetto fotoelettrico
+## Unità 55 — L'effetto fotoelettrico
 - Parole: 398 su 2-3 pagine di traccia (pagine 99–101, l'ultima molto breve).
 - Rettifica: nessuna. Verificato con SymPy che K = E - L0 = h(f-f0), quindi la pendenza in
   funzione di f è h per qualunque metallo (dK/df = h), coerente con le due rette parallele a
@@ -635,7 +635,7 @@
   per sodio e oro. Un riquadro "da non confondere" sull'intensità che non compensa una frequenza
   sotto soglia. Nessuno strumento interattivo: pagina breve, due schemi statici.
 
-## Unità 57 — L'esperimento della doppia fenditura
+## Unità 56 — L'esperimento della doppia fenditura
 - Parole: 256 su 1 pagina di traccia (pagina 102).
 - Rettifica: nessuna. Nessuna formula numerica sulla pagina: contenuto puramente concettuale
   (esperimento di Young, interferenza costruttiva e distruttiva, contrasto onda-corpuscolo),
@@ -646,7 +646,7 @@
   costruttiva e distruttiva. Nessuno strumento interattivo: pagina di una sola facciata,
   concettuale.
 
-## Unità 58 — L'ipotesi di De Broglie e l'esperimento di Davisson-Germer
+## Unità 57 — L'ipotesi di De Broglie e l'esperimento di Davisson-Germer
 - Parole: 261 su 1 pagina di traccia (pagina 103).
 - Rettifica: nessuna. Unica formula presente, $\lambda = h/p$, verificata dimensionalmente con
   SymPy (azione/quantità di moto = lunghezza): confermato che il risultato ha le dimensioni di
@@ -656,7 +656,7 @@
   fenditura, schermo con le bande di interferenza. Nessuno strumento interattivo: pagina di una
   sola facciata, concettuale.
 
-## Unità 59 — Il principio di indeterminazione di Heisenberg
+## Unità 58 — Il principio di indeterminazione di Heisenberg
 - Parole: 525 su 3 pagine di traccia (pagine 104–106).
 - Rettifica: nessuna. Unica formula presente, $\Delta p \cdot \Delta x \geq h/(4\pi)$, verificata
   dimensionalmente con SymPy: $\Delta p \cdot \Delta x$ ha le stesse dimensioni di $h$
@@ -668,7 +668,7 @@
   separati. Un riquadro "Da ricordare" per l'enunciato del principio. Nessuno strumento
   interattivo: contenuto concettuale, due schemi statici sufficienti.
 
-## Unità 60 — Modelli atomici: Thomson e Rutherford
+## Unità 59 — Modelli atomici: Thomson e Rutherford
 - Parole: 472 su 2 pagine di traccia (pagine 107–108).
 - Rettifica: nessuna, nessuna formula presente in queste pagine.
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra le quattro parti (modello di
@@ -679,7 +679,7 @@
   elettromagnetiche. Nessuno strumento interattivo: contenuto descrittivo, senza grandezze da far
   variare.
 
-## Unità 61 — Gli spettri a righe
+## Unità 60 — Gli spettri a righe
 - Parole: 256 su 1 pagina di traccia (pagina 109).
 - Rettifica: nessuna. Unica formula presente, $1/\lambda = R(1/n'^2 - 1/n^2)$, verificata con
   SymPy: dimensionalmente coerente ($R$ in m⁻¹, parentesi adimensionale, quindi $1/\lambda$ in
@@ -693,22 +693,22 @@
   forma di tabella breve. Nessuno strumento interattivo: pagina di una sola facciata, senza
   grandezze da far variare.
 
-## Unità 62 — Il modello atomico di Bohr
+## Unità 61 — Il modello atomico di Bohr
 - Parole: 368 su 2 pagine di traccia (pagine 110–111).
 - Rettifica: nessuna. Verificato con SymPy: la lunghezza d'onda di assorbimento n=1→n=2 dà
   121,5 nm (traccia: 122 nm, arrotondamento coerente) e quella di emissione n=3→n=2 dà 656,3 nm
   (traccia: 656 nm), in accordo con i valori di Lyman-alfa e Balmer-alfa già calcolati nel
-  registro dell'unità 61. Verificata la coerenza dimensionale di $L_n = nh/2\pi$ (kg·m²/s, come
+  registro dell'unità 60. Verificata la coerenza dimensionale di $L_n = nh/2\pi$ (kg·m²/s, come
   un momento angolare) e di $|\Delta E| = hf$ (joule).
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra le quattro ipotesi, la
   condizione di frequenza e i due esempi di salto. Ridisegnati in SVG i due schemi della
   traccia (assorbimento n=1→n=2 con fotone di 122 nm, emissione n=3→n=2 con fotone di 656 nm).
   L'equazione di bilancio fra forza centripeta e forza elettrica, presente in fondo a pagina 111,
   è stata inclusa come chiusura della pagina (senza risolverla per il raggio, che è materia
-  dell'unità 63) per rispettare esattamente il confine fra le due unità. Nessuno strumento
+  dell'unità 62) per rispettare esattamente il confine fra le due unità. Nessuno strumento
   interattivo: contenuto concettuale con due sole formule numeriche.
 
-## Unità 63 — Il raggio delle orbite di Bohr
+## Unità 62 — Il raggio delle orbite di Bohr
 - Parole: circa 220 su 1 pagina di traccia (pagina 112).
 - Rettifica: nessuna. Verificata con SymPy l'intera derivazione algebrica (dal sistema
   {v = nh/(2π m_e r_n); m_e v² = Ke²/r_n} alla formula r_n = h²n²/(4π² m_e K e²)): la soluzione
@@ -719,13 +719,13 @@
   (che contiene solo la derivazione simbolica) — necessario per dare concretezza a una formula
   altrimenti solo letterale, come richiesto dalla cura delle grandezze per la fisica. Nessun
   disegno: la pagina 112 non ne contiene (lo schema delle forze è già stato incluso in chiusura
-  dell'unità 62), quindi nessuno è stato aggiunto qui.
+  dell'unità 61), quindi nessuno è stato aggiunto qui.
 
-## Unità 64 — L'energia delle orbite e la costante di Rydberg
+## Unità 63 — L'energia delle orbite e la costante di Rydberg
 - Parole: circa 400 (esclusi i simboli delle formule) su 2 pagine di traccia (pagine 113–114).
 - Rettifica: la traccia usa la lettera K sia per la costante di Coulomb sia, nella stessa riga,
   come etichetta dell'energia cinetica (E = K + U). Per evitare l'ambiguità con la costante di
-  Coulomb già fissata come K nell'unità 63, ho scritto l'energia cinetica come E_c: è una
+  Coulomb già fissata come K nell'unità 62, ho scritto l'energia cinetica come E_c: è una
   correzione di notazione, non di sostanza. Verificata con SymPy l'intera catena simbolica: la
   sostituzione di v_n e r_n in E = ½m_ev² − Ke²/r_n dà E_n = −(2π²m_eK²e⁴/h²)(1/n²); con le
   costanti standard E_1 = −13,6057 eV (arrotondato a −13,6 eV come nella traccia) e la costante
@@ -735,9 +735,9 @@
   perché il segno meno indica legame, perché ΔE = hc/λ). Nessun disegno: le pagine 113–114 non ne
   contengono, solo passaggi algebrici.
 
-## Unità 65 — L'interpretazione delle orbite: Schrödinger e De Broglie
+## Unità 64 — L'interpretazione delle orbite: Schrödinger e De Broglie
 - Parole: circa 320 su 1,2 pagine di traccia (seconda metà di pagina 114 e pagina 115; la prima
-  metà di pagina 114 appartiene già all'unità 64).
+  metà di pagina 114 appartiene già all'unità 63).
 - Rettifica: nessuna. Contenuto puramente qualitativo, nessuna formula da verificare con SymPy.
 - Aggiunta: nessuna oltre alle poche parole di collegamento fra le due interpretazioni e la
   conclusione comune (stabilità dell'atomo), già presente nella traccia. I due disegni (nube di
