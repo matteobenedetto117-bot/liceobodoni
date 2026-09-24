@@ -35,6 +35,7 @@
 - Revisione, contenuto: nessuna rettifica. Le quattro soluzioni ((−3; 2), (1; −1), (1/2; −5/8), (1/2; 0)) sono state riverificate con SymPy. Aggiunte due frasi che spiegano l'idea dei due metodi prima degli esempi, e la precisazione che moltiplicare i due membri per un numero diverso da zero non cambia le soluzioni.
 - Revisione, figure: nessuna; la traccia di queste due unità non ha disegni.
 - Riordino (21/09/2026): era l'unità 05 e diventa la 03, prima dell'interpretazione grafica.
+- Revisione (24/09/2026): tolto il paragrafo sotto il titolo e i paragrafi introduttivi dei due metodi, sostituiti da un elenco numerato dei passi di ciascun metodo; nei passaggi degli esempi un pallino numerato richiama il passo del metodo, l'incognita isolata è in blu, i termini che si eliminano in rosso, i valori trovati in verde; nella riduzione la somma membro a membro è scritta in colonna con la riga di somma e la moltiplicazione è indicata accanto all'equazione. Nessun esempio aggiunto.
 
 ## Unità 04 — Interpretazione grafica di un sistema
 - Parole: 401 su 2 pagine di traccia
