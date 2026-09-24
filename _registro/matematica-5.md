@@ -98,6 +98,7 @@ teorema del confronto, a pagina 21.
   righe del logaritmo usano lo stesso grafico con il tratto rosso in punti diversi. Tolta anche la
   figura finale con le curve $f$, $g$ e $f+g$ dell'algebra dei limiti: l'unità non ha più figure
   oltre a quelle a fianco dei limiti infiniti.
+- Tolti su richiesta il paragrafo introduttivo, il titoletto «Sostituzione nelle funzioni continue» e il testo che lo seguiva: la pagina comincia con il riquadro «Regola di sostituzione», seguito dal tasto «Mostra tutti i risultati». Tolleranza dello script di allineamento portata a 0,05 righe (il bordo di 1px del riquadro faceva scendere l'etichetta di una riga).
 
 ## Unità 03 — Teoremi sui limiti
 - Parole: circa 500 su 3 pagine di traccia equivalenti (coda di pag. 10, pag. 11 intera, testa di
