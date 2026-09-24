@@ -3,19 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Il lavoro di un gas e il diagramma P-V — Fisica quarta</title>
+<title>Trasformazione isobara e primo principio — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+table.gradi{border-collapse:collapse;margin:var(--r) auto 0;font-family:var(--sans);font-size:.9rem;line-height:var(--r)}
+table.gradi th{text-align:left;font-weight:600;color:var(--blu);padding:0 18px;border-bottom:1px solid var(--inchiostro)}
+table.gradi td{padding:0 18px}
+table.gradi td.l{font-family:var(--serif);font-size:1rem;text-align:center;font-weight:700}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul{padding-left:1.4em}
+.fig .val{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -23,166 +60,230 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 08</p>
-  <h1>Il lavoro di un gas e il diagramma P-V</h1>
-  <p class="sommario">Un gas racchiuso in un cilindro pu&ograve; spingere un pistone e compiere
-  lavoro sull'esterno. Ricaviamo la formula di questo lavoro nel caso pi&ugrave; semplice, la
-  trasformazione a pressione costante, e vediamo come si legge direttamente su un grafico
-  pressione-volume.</p>
+  <p class="occhiello">Termodinamica &middot; Unità 08</p>
+  <h1>Trasformazione isobara e primo principio</h1>
 </header>
 
 <h2>Trasformazione isobara</h2>
 
-<p>Consideriamo un gas chiuso in un cilindro da un pistone mobile, mantenuto a pressione
-costante $P$ mentre il volume passa da $V_1$ a $V_2$ e il pistone si alza di $\Delta h$.</p>
+<p>Gas in un cilindro con un pistone mobile, a pressione costante $P$: il volume passa da $V_1$ a
+$V_2$ e il pistone sale di $\Delta h$.</p>
 
-<div class="fig">
-<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f9a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="f9r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<path d="M60,220 L250,220" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f9a)"/>
-<path d="M60,220 L60,36" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f9a)"/>
-<text x="255" y="224" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">V</text>
-<text x="48" y="36" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">P</text>
-<path d="M100,90 L200,90" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#f9r)"/>
-<path d="M100,90 L100,220" stroke="var(--inchiostro)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<path d="M200,90 L200,220" stroke="var(--inchiostro)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<path d="M60,90 L100,90" stroke="var(--inchiostro)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="52" y="94" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">P</text>
-<text x="100" y="236" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">V&#8321;</text>
-<text x="200" y="236" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">V&#8322;</text>
-<rect x="340" y="150" width="80" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="2.2"/>
-<rect x="336" y="146" width="88" height="8" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="360" cy="180" r="2.6" fill="var(--blu)"/><circle cx="380" cy="190" r="2.6" fill="var(--blu)"/>
-<circle cx="400" cy="175" r="2.6" fill="var(--blu)"/><circle cx="370" cy="195" r="2.6" fill="var(--blu)"/>
-<text x="380" y="228" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#9312;</text>
-<rect x="510" y="90" width="80" height="120" fill="none" stroke="var(--inchiostro)" stroke-width="2.2"/>
-<rect x="506" y="86" width="88" height="8" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="530" cy="140" r="2.6" fill="var(--blu)"/><circle cx="550" cy="160" r="2.6" fill="var(--blu)"/>
-<circle cx="570" cy="130" r="2.6" fill="var(--blu)"/><circle cx="540" cy="180" r="2.6" fill="var(--blu)"/>
-<circle cx="565" cy="185" r="2.6" fill="var(--blu)"/>
-<text x="550" y="228" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#9313;</text>
-<path d="M460,150 L460,90" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#f9r)"/>
-<path d="M460,150 L460,148" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="472" y="122" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&#916;h</text>
-<text x="460" y="240" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">pressione costante</text>
-</svg>
-<p class="did">Il pistone sale di &Delta;h a pressione costante: il volume passa da V&#8321; a
-V&#8322;, e nel diagramma P-V la trasformazione &egrave; il segmento rosso a quota P.</p>
-</div>
-
-<p>La forza che il gas esercita sul pistone dipende dalla pressione e dall'area $A$ del pistone,
-$F=P\cdot A$. Il lavoro compiuto nello spostamento $\Delta h$ &egrave; allora</p>
-
-<div class="formula-box">
-$$L=F\cdot\Delta h=P\cdot A\cdot\Delta h$$
-</div>
-
-<p>Il prodotto $A\cdot\Delta h$ &egrave; il volume spazzato dal pistone, cio&egrave; proprio
-$\Delta V=V_2-V_1$. Si ottiene cos&igrave; il lavoro di una trasformazione isobara:</p>
-
-<div class="riquadro">
-<span class="etichetta">Lavoro in una trasformazione isobara</span>
-$$L=P\,\Delta V$$
-</div>
-
-<h2>Il lavoro come area nel diagramma P-V</h2>
-
-<p>Nel diagramma P-V la trasformazione isobara &egrave; il segmento orizzontale a quota $P$ fra
-$V_1$ e $V_2$, e il prodotto $P\,\Delta V$ &egrave; esattamente l'area del rettangolo compreso
-fra quel segmento e l'asse $V$. Questo fatto vale in generale, anche quando la pressione non
-&egrave; costante: il lavoro scambiato dal gas &egrave; sempre uguale all'area sottesa dalla
-curva che rappresenta la trasformazione nel diagramma P-V.</p>
-
-<div class="fig">
-<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f9b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="f9c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<pattern id="tratteggio9" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-<line x1="0" y1="0" x2="0" y2="7" stroke="var(--verde)" stroke-width="1.2"/>
-</pattern>
-</defs>
-<path d="M40,190 L230,190" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<path d="M40,190 L40,30" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<text x="234" y="194" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V</text>
-<text x="30" y="30" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">P</text>
-<rect x="90" y="80" width="90" height="110" fill="url(#tratteggio9)" opacity=".55"/>
-<path d="M90,80 L180,80" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#f9c)"/>
-<path d="M90,80 L90,190" stroke="var(--inchiostro)" stroke-width="1.1" stroke-dasharray="3 3"/>
-<path d="M180,80 L180,190" stroke="var(--inchiostro)" stroke-width="1.1" stroke-dasharray="3 3"/>
-<text x="135" y="140" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">P&#916;V</text>
-<text x="135" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">isobara</text>
-<path d="M330,190 L520,190" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<path d="M330,190 L330,30" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<text x="524" y="194" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V</text>
-<text x="320" y="30" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">P</text>
-<path d="M370,55 C 410,75 450,110 470,150 L470,190 L370,190 Z" fill="url(#tratteggio9)" opacity=".55"/>
-<path d="M370,55 C 410,75 450,110 470,150" fill="none" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#f9c)"/>
-<text x="420" y="150" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">L</text>
-<text x="420" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">trasformazione generica</text>
-</svg>
-<p class="did">A sinistra, il lavoro dell'isobara &egrave; l'area del rettangolo P&Delta;V. A
-destra, lo stesso principio per una trasformazione qualsiasi: l'area sotto la curva.</p>
-</div>
-
-<h2>Il segno del lavoro</h2>
-
-<p>Il segno dell'area, e quindi del lavoro, dipende dal verso in cui si percorre la
-trasformazione: se il gas si espande, il volume aumenta e il lavoro &egrave; positivo; se il gas
-viene compresso, il volume diminuisce e il lavoro &egrave; negativo.</p>
-
-<div class="fig">
-<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f9d" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="f9e" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<pattern id="tratteggio9b" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-<line x1="0" y1="0" x2="0" y2="7" stroke="var(--verde)" stroke-width="1.2"/>
-</pattern>
-</defs>
-<path d="M40,170 L230,170" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9d)"/>
-<path d="M40,170 L40,30" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9d)"/>
-<text x="234" y="174" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V</text>
-<path d="M80,120 C 110,100 150,80 190,60 L190,170 L80,170 Z" fill="url(#tratteggio9b)" opacity=".55"/>
-<path d="M80,120 C 110,100 150,80 190,60" fill="none" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#f9e)"/>
-<text x="130" y="185" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">L &gt; 0, espansione</text>
-<path d="M330,170 L520,170" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9d)"/>
-<path d="M330,170 L330,30" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f9d)"/>
-<text x="524" y="174" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">V</text>
-<path d="M480,60 C 450,80 410,100 380,120 L380,170 L480,170 Z" fill="url(#tratteggio9b)" opacity=".55"/>
-<path d="M480,60 C 450,80 410,100 380,120" fill="none" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#f9e)"/>
-<text x="430" y="185" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">L &lt; 0, compressione</text>
-</svg>
-<p class="did">A parit&agrave; di stati attraversati, il verso del percorso decide il segno del
-lavoro: la freccia indica il senso in cui la trasformazione viene percorsa.</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Il calore scambiato in una trasformazione isobara e il calore specifico a pressione
-costante, nell'unit&agrave; 09.</li>
+<li>Forza del gas sul pistone di area $A$: $F=P\,A$.</li>
+<li>Lavoro del gas: $L=F\,\Delta h=P\,A\,\Delta h$.</li>
+<li>Volume spazzato dal pistone: $A\,\Delta h=\Delta V$.</li>
 </ul>
+
+<p class="eq principio">$$L=P\,\Delta V$$</p>
+
+<div class="fig">
+<svg id="fig-lavoro" viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="m8a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
+<marker id="m8r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
+</defs>
+<g class="graf"></g>
+<rect class="gas" x="432" width="136" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<path d="M430,40 L430,250 L570,250 L570,40" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<g class="rif"></g>
+<rect class="peso" x="470" width="60" height="24" rx="3" fill="var(--grigio)"/>
+<rect class="pist" x="432" width="136" height="10" fill="var(--blu)"/>
+<g class="dh"></g>
+</svg>
+<div class="cursore"><label for="cur-lavoro">V</label><input id="cur-lavoro" type="range" min="2" max="4" step="0.02" value="2"></div>
+<p class="did">Il gas si espande a pressione costante: il pistone sale di &Delta;h e nel diagramma
+P-V il lavoro P&Delta;V è l'area verde del rettangolo sotto il segmento.</p>
 </div>
 
-<nav class="nav-unita"><a class="precedente" href="../08-trasformazioni-termodinamiche-e-funzioni-di-stato/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Trasformazioni termodinamiche e funzioni di stato</span></a><a class="successiva" href="../10-trasformazione-isobara-e-calore-specifico-a-pressione-costan/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Trasformazione isobara e calore specifico a pressione costante</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 08</p></footer>
+<p>Nel diagramma P-V il lavoro è l'area sotto la curva della trasformazione, anche quando la
+pressione non è costante.</p>
+
+<ul>
+<li>Espansione ($\Delta V&gt;0$): $L&gt;0$, il gas compie lavoro sull'ambiente.</li>
+<li>Compressione ($\Delta V&lt;0$): $L&lt;0$, l'ambiente compie lavoro sul gas.</li>
+</ul>
+
+<div class="fig">
+<svg id="fig-segno" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="m8b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
+<marker id="m8v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
+<marker id="m8s" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
+</defs>
+<g class="graf"></g>
+<rect class="gas" x="462" width="66" fill="var(--blu-chiaro)"/>
+<path d="M460,40 L460,250 L530,250 L530,40" fill="none" stroke="var(--inchiostro)" stroke-width="2.2"/>
+<g class="rif"></g>
+<rect class="pist" x="462" width="66" height="8" fill="var(--blu)"/>
+</svg>
+<div class="cursore"><label for="cur-segno">V</label><input id="cur-segno" type="range" min="2" max="7" step="0.05" value="4"></div>
+<p class="did">Una trasformazione in cui la pressione cambia, a partire dallo stato 1: verso
+destra il gas si espande e il lavoro è positivo (area verde), verso sinistra è compresso e il
+lavoro è negativo (area rossa).</p>
+</div>
+
+<h2>Calore specifico a pressione costante</h2>
+
+<p>Calore scambiato da $n$ moli di gas a pressione costante:</p>
+
+<p class="eq">$$Q_P=C_P\,n\,\Delta T$$</p>
+
+<p>$C_P$, calore specifico molare a pressione costante: calore che innalza di $1\ \text{K}$ la
+temperatura di una mole di gas a pressione costante.</p>
+
+<p>Gas ideale monoatomico, primo principio $\Delta E_{\text{int}}=Q-L$:</p>
+
+<ul>
+<li>$\Delta E_{\text{int}}=\tfrac{3}{2}\,nR\,\Delta T$;</li>
+<li>$Q=C_P\,n\,\Delta T$;</li>
+<li>$L=P\,\Delta V=nR\,\Delta T$ (da $PV=nRT$ con $P$ costante).</li>
+</ul>
+
+<p class="eq">$$\tfrac{3}{2}\,nR\,\Delta T=C_P\,n\,\Delta T-nR\,\Delta T$$</p>
+
+<p>Dividendo per $n\,\Delta T$:</p>
+
+<p class="eq principio">$$C_P=\tfrac{5}{2}\,R$$</p>
+
+<ul>
+<li>Gas biatomico: $C_P=\tfrac{7}{2}\,R$.</li>
+<li>Gas poliatomico: $C_P=4R$.</li>
+</ul>
+
+<nav class="nav-unita"><a class="precedente" href="../08-trasformazioni-termodinamiche-e-funzioni-di-stato/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Trasformazioni termodinamiche e funzioni di stato</span></a><a class="successiva" href="../11-trasformazione-isocora-e-calore-specifico-a-volume-costante/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Trasformazione isocora e calore specifico a volume costante</span></a></nav>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 08</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(g,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
+  function f(n){return n.toFixed(1);}
+  function virg(x,d){return x.toFixed(d).replace('.',',').replace('-','−');}
+  function testo(g,x,y,t,att){att=att||{};att.x=x;att.y=y;att['font-family']='var(--sans)';if(!att['font-size'])att['font-size']=12;if(!att.fill)att.fill='var(--inchiostro)';return el(g,'text',att,t);}
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function continuo(fn){if(ridotto)return;var t0=null;(function passo(t){var dt=t0===null?0:Math.min(0.05,(t-t0)/1000);t0=t;fn(dt);requestAnimationFrame(passo);})(performance.now());}
+  /* particelle: moto rettilineo e urti elastici; il modulo della velocità dipende solo da T */
+  function gas(g,n,seme,box){
+    var Rn=rng(seme),L=[];
+    for(var i=0;i<n;i++){var a=Rn()*2*Math.PI;L.push({x:box.x+4+Rn()*(box.w-8),y:box.y+4+Rn()*(box.h-8),vx:Math.cos(a),vy:Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
+    return function(box,dt,vel){
+      var x0=box.x+4,x1=box.x+box.w-4,y0=box.y+4,y1=box.y+box.h-4;
+      L.forEach(function(p){
+        p.x+=p.vx*vel*dt; p.y+=p.vy*vel*dt;
+        if(p.x<x0){p.x=2*x0-p.x;p.vx=Math.abs(p.vx);} if(p.x>x1){p.x=2*x1-p.x;p.vx=-Math.abs(p.vx);}
+        if(p.y<y0){p.y=y0+(y0-p.y)%Math.max(1,y1-y0);p.vy=Math.abs(p.vy);} if(p.y>y1){p.y=Math.max(y0,2*y1-p.y);p.vy=-Math.abs(p.vy);}
+        set(p.c,{cx:f(p.x),cy:f(p.y)});
+      });
+    };
+  }
+  /* piano P-V: V in 10⁻³ m³, P in kPa */
+  function piano(g,mk,ox,sx,vmax,tickV){
+    var X=function(V){return ox+V*sx;}, Y=function(P){return 240-P*1.2;};
+    el(g,'line',{x1:ox-10,y1:240,x2:X(vmax),y2:240,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    el(g,'line',{x1:ox,y1:250,x2:ox,y2:24,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    testo(g,ox+8,30,'P (kPa)');
+    testo(g,X(vmax)+2,275,'V (10⁻³ m³)',{'text-anchor':'end'});
+    tickV.forEach(function(V){el(g,'line',{x1:X(V),y1:236,x2:X(V),y2:244,stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,X(V),256,V,{'text-anchor':'middle','font-size':11});});
+    [50,100,150].forEach(function(P){el(g,'line',{x1:ox-4,y1:Y(P),x2:ox+4,y2:Y(P),stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,ox-7,Y(P)+4,P,{'text-anchor':'end','font-size':11});});
+    return {X:X,Y:Y};
+  }
+  function tratt(g,a){var o={stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'};for(var k in a)o[k]=a[k];return el(g,'line',o);}
+
+  /* --- figura 1: isobara, pistone e area P·ΔV --- */
+  var K=document.getElementById('fig-lavoro'), cK=document.getElementById('cur-lavoro');
+  if(K&&cK){
+    var q=function(c){return K.querySelector('.'+c);}, g=q('graf');
+    var P=100, V1=2, V2=4, A=piano(g,'m8a',60,65,4.9,[1,2,3,4]);
+    tratt(g,{x1:60,y1:A.Y(P),x2:A.X(V2),y2:A.Y(P)});
+    [[V1,'1'],[V2,'2']].forEach(function(d){tratt(g,{x1:A.X(d[0]),y1:A.Y(P),x2:A.X(d[0]),y2:240});
+      testo(g,A.X(d[0])-4,A.Y(P)-10,d[1],{'font-size':13,'font-weight':700,fill:'var(--verde)'});});
+    var area=el(g,'rect',{x:A.X(V1),y:A.Y(P),height:240-A.Y(P),fill:'var(--verde)',opacity:.22});
+    var seg=el(g,'line',{x1:A.X(V1),y1:A.Y(P),y2:A.Y(P),stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#m8r)'});
+    var pt=el(g,'circle',{cy:A.Y(P),r:5,fill:'#fff',stroke:'var(--rosso)','stroke-width':2});
+    var eti=testo(g,0,190,'L = PΔV',{'text-anchor':'middle',fill:'var(--verde)','font-size':13});
+    var t1=testo(g,130,50,'',{'font-size':12}), t2=testo(g,130,68,'',{'font-size':12,fill:'var(--verde)'});
+    /* pistone: altezza del gas proporzionale al volume */
+    var h=function(V){return V*48;}, base=248;
+    [[V1,'1'],[V2,'2']].forEach(function(d){var y=base-h(d[0]);
+      el(q('rif'),'line',{x1:424,x2:576,y1:y,y2:y,stroke:'var(--verde)','stroke-width':1.2,'stroke-dasharray':'4,3'});
+      testo(q('rif'),582,y+5,d[1],{'font-size':13,'font-weight':700,fill:'var(--verde)'});});
+    var fr=el(q('dh'),'line',{x1:410,x2:410,y1:base-h(V1),stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#m8r)'});
+    var tdh=testo(q('dh'),402,0,'Δh',{'text-anchor':'end',fill:'var(--rosso)','font-size':13});
+    var G=gas(q('part'),12,21,{x:432,y:base-h(V1),w:136,h:h(V1)});
+    function vel(V){return 55*Math.pow(V/V1,1.8);} /* T proporzionale a V; effetto accentuato */
+    function dis(dt){
+      var V=+cK.value, top=base-h(V), x=A.X(V);
+      set(q('gas'),{y:f(top),height:f(h(V)+2)}); set(q('pist'),{y:f(top-10)}); set(q('peso'),{y:f(top-34)});
+      G({x:432,y:top,w:136,h:h(V)},dt,vel(V));
+      if(!dt){
+        set(area,{width:f(x-A.X(V1))}); set(seg,{x2:f(x),visibility:V-V1>0.05?'visible':'hidden'}); set(pt,{cx:f(x)});
+        set(eti,{x:f((A.X(V1)+x)/2),visibility:V-V1>1.1?'visible':'hidden'});
+        var ok=V-V1>0.05; set(fr,{y2:f(top+(ok?4:0)),visibility:V-V1>0.25?'visible':'hidden'}); set(tdh,{y:f((base-h(V1)+top)/2+4),visibility:V-V1>0.25?'visible':'hidden'});
+        t1.textContent='ΔV = '+virg(V-V1,2)+' × 10⁻³ m³';
+        t2.textContent='L = PΔV = '+Math.round(P*(V-V1))+' J';
+      }
+    }
+    cK.addEventListener('input',function(){dis(0);}); dis(0); continuo(dis);
+  }
+
+  /* --- figura 2: segno del lavoro, P·V = 300 J --- */
+  var S=document.getElementById('fig-segno'), cS=document.getElementById('cur-segno');
+  if(S&&cS){
+    var qs=function(c){return S.querySelector('.'+c);}, gs=qs('graf');
+    var k=300, W1=4, B=piano(gs,'m8b',50,50,7.8,[2,4,6]), Pf=function(V){return k/V;};
+    var c=[];for(var V=1.9;V<=7.5;V+=0.05)c.push(f(B.X(V))+','+f(B.Y(Pf(V))));
+    var ar=el(gs,'path',{opacity:.25});
+    el(gs,'polyline',{points:c.join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,opacity:.5});
+    var tr=el(gs,'path',{fill:'none','stroke-width':3});
+    tratt(gs,{x1:B.X(W1),y1:B.Y(Pf(W1)),x2:B.X(W1),y2:240});
+    el(gs,'circle',{cx:B.X(W1),cy:B.Y(Pf(W1)),r:4,fill:'var(--verde)'});
+    testo(gs,B.X(W1)+6,B.Y(Pf(W1))-8,'1',{'font-size':13,'font-weight':700,fill:'var(--verde)'});
+    var ps=el(gs,'circle',{r:5,fill:'#fff','stroke-width':2});
+    var s1=testo(gs,250,52,'',{'font-size':12}), s2=testo(gs,250,70,'',{'font-size':12});
+    var hs=function(V){return V*28;}, bs=248;
+    el(qs('rif'),'line',{x1:454,x2:536,y1:bs-hs(W1),y2:bs-hs(W1),stroke:'var(--verde)','stroke-width':1.2,'stroke-dasharray':'4,3'});
+    testo(qs('rif'),542,bs-hs(W1)+5,'1',{'font-size':13,'font-weight':700,fill:'var(--verde)'});
+    function disS(){
+      var V=+cS.value, pos=V>=W1, col=pos?'var(--verde)':'var(--rosso)', a=Math.min(V,W1), b=Math.max(V,W1);
+      var p=[];for(var u=a;u<b;u+=0.05)p.push(f(B.X(u))+','+f(B.Y(Pf(u))));p.push(f(B.X(b))+','+f(B.Y(Pf(b))));
+      var fermo=Math.abs(V-W1)<0.06;
+      set(ar,{d:fermo?'':'M'+f(B.X(a))+',240 L'+p.join(' L')+' L'+f(B.X(b))+',240 Z',fill:col});
+      var pv=pos?p:p.slice().reverse();
+      set(tr,{d:fermo||pv.length<2?'':'M'+pv.join(' L'),stroke:col,'marker-end':'url(#'+(pos?'m8v':'m8s')+')'});
+      set(ps,{cx:f(B.X(V)),cy:f(B.Y(Pf(V))),stroke:col});
+      var L=k*Math.log(V/W1);
+      s1.textContent='V = '+virg(V,2)+' × 10⁻³ m³';
+      s2.textContent=fermo?'L = 0 J':'L = '+(L>0?'+':'−')+Math.abs(Math.round(L))+' J  '+(pos?'espansione':'compressione');
+      set(s2,{fill:fermo?'var(--inchiostro)':col});
+      var top=bs-hs(V); set(qs('gas'),{y:f(top),height:f(hs(V)+2)}); set(qs('pist'),{y:f(top-8)});
+    }
+    cS.addEventListener('input',disS); disS();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
