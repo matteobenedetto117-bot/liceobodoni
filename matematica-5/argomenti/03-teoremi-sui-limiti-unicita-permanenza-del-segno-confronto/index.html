@@ -73,9 +73,6 @@ h1{position:relative;top:.5rem}
   <h1>Teoremi sui limiti</h1>
 </header>
 
-<p>Tre proprietà generali che ogni limite, quando esiste, deve rispettare: essere unico, ereditare
-il segno del valore a cui tende, e restare intrappolato fra due funzioni che vanno nello stesso
-posto.</p>
 
 <h2>Teorema di unicità del limite</h2>
 
@@ -84,20 +81,7 @@ posto.</p>
 <p>Se $f(x)$ ha limite finito $\ell$ per $x\to x_0$, allora tale limite è unico.</p>
 </div>
 
-<p>Una funzione non può avvicinarsi contemporaneamente a due valori diversi mentre $x\to x_0$. Il
-teorema si vede all'opera ogni volta che si confrontano limite destro e limite sinistro: se sono
-diversi, il limite bilatero in quel punto non esiste, perché non ci sarebbe un unico valore a cui
-la funzione tende.</p>
-
-<div class="fig">
-<svg id="g-unic" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg"></svg>
-<div class="cursore"><label for="c-unic">punto $x$</label>
-<input id="c-unic" type="range" min="0" max="1" step="0.002" value="0">
-<span class="val" id="v-unic"></span></div>
-<p class="did">Avvicinandosi a 2 da sinistra la quota del punto sale verso 1, ripartendo da destra
-parte da $-\tfrac32$: i due valori non coincidono, quindi $\lim\limits_{x\to2}f(x)$ non esiste. Se
-esistesse, il teorema di unicità obbligherebbe i due rami ad arrivare allo stesso numero.</p>
-</div>
+<p>Se il limite destro e il limite sinistro non coincidono, il limite non esiste.</p>
 
 <h2>Teorema della permanenza del segno</h2>
 
@@ -112,17 +96,13 @@ negativi.</p>
 per sapere che, vicino a $x_0$, ha lo stesso segno di $\ell$. L'intorno può essere piccolo quanto si
 vuole, ma esiste sempre.</p>
 
+<p>Nel disegno studiamo il limite per $x\to2$ della funzione $f(x)=1{,}2\sin(x-0{,}5)$ (a sinistra) e della sua opposta $-f(x)$ (a destra). Il limite vale $\ell\approx1{,}20$ nel primo caso e $\ell\approx-1{,}20$ nel secondo: esiste un intorno di 2, evidenziato in azzurro, in cui la funzione non cambia segno.</p>
+
 <div class="fig">
 <svg id="g-segno" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg"></svg>
 <div class="cursore"><label for="c-segno">punto $x$</label>
 <input id="c-segno" type="range" min="0" max="1" step="0.002" value="0">
 <span class="val" id="v-segno"></span></div>
-<div class="did-parti" style="--n:2">
-<p class="did">Con $\ell&gt;0$ il punto resta sopra l'asse per tutta la fascia azzurra attorno a
-$x_0$, e diventa negativo solo uscendone.</p>
-<p class="did">Con $\ell&lt;0$ accade il contrario: dentro la fascia la funzione è negativa come il
-suo limite.</p>
-</div>
 </div>
 
 <h2>Teorema del confronto</h2>
@@ -144,8 +124,7 @@ $\ell$, e non ha scampo dal seguirle.</p>
 <h2>Esempio 1</h2>
 
 <p>Di una funzione $f$ non si conosce l'espressione: si sa soltanto che, per ogni $x\neq0$ di un
-intorno di 0, i suoi valori stanno fra quelli di due parabole. Il tasto scopre un passaggio per
-volta.</p>
+intorno di 0, i suoi valori stanno fra quelli di due parabole.</p>
 
 <div class="passi" id="passi1">
 <div class="passo" hidden>
@@ -194,8 +173,7 @@ confronto invece di due:</p>
 <h2>Esempio 2</h2>
 
 <p>Calcoliamo $\displaystyle\lim_{x\to+\infty}\frac{3+\cos x}{x}$. Qui la funzione oscilla, e
-un'oscillazione non ha limite: il confronto serve proprio a togliere di mezzo il coseno. Anche qui
-il tasto scopre un passaggio per volta.</p>
+un'oscillazione non ha limite: il confronto serve proprio a togliere di mezzo il coseno.</p>
 
 <div class="passi" id="passi2">
 <div class="passo" hidden>
@@ -331,35 +309,6 @@ Piano.prototype.curva=function(f,a,b,n,col,w,dash){
 };
 Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
 
-
-/* ---------- 1. unicità: salto in x = 2 ---------- */
-(function(){
-  var svg=document.getElementById('g-unic'); if(!svg)return;
-  var P=new Piano(svg,[-0.6,4.6],[-2.4,2.2],{l:42,r:26,t:18,b:34});
-  var fs=function(x){return 1-0.3*Math.pow(2-x,2);}, fd=function(x){return -1.5+1.2*Math.sqrt(x-2);};
-  P.assi([-0,1,2,3,4],[-2,-1,1,2]);
-  P.add(el('line',{x1:P.X(2),y1:P.m.t,x2:P.X(2),y2:P.H-P.m.b,stroke:'var(--riga)','stroke-width':1.4}),'sotto');
-  [[1,'var(--verde)'],[-1.5,'var(--rosso)']].forEach(function(q){
-    P.add(el('line',{x1:P.m.l,y1:P.Y(q[0]),x2:P.W-P.m.r,y2:P.Y(q[0]),stroke:q[1],
-      'stroke-width':1,'stroke-dasharray':'5,4'}),'sotto');
-  });
-  P.curva(fs,-0.6,2,220); P.curva(fd,2,4.6,220);
-  P.add(el('circle',{cx:P.X(2),cy:P.Y(1),r:5,fill:'var(--inchiostro)'}));
-  P.add(el('circle',{cx:P.X(2),cy:P.Y(-1.5),r:5,fill:'var(--carta)',stroke:'var(--inchiostro)','stroke-width':2}));
-  P.add(txt(P.W-P.m.r-4,P.Y(1)-6,'limite sinistro: 1',{fill:'var(--verde)','text-anchor':'end'}),'testo');
-  P.add(txt(P.W-P.m.r-4,P.Y(-1.5)+16,'limite destro: −3/2',{fill:'var(--rosso)','text-anchor':'end'}),'testo');
-  var pt=P.add(el('circle',{r:6,fill:'var(--rosso)'}));
-  var st=P.add(txt(P.W-P.m.r-4,P.m.t+14,'',{'text-anchor':'end','font-size':13,fill:'var(--grigio)'}),'testo');
-  var c=document.getElementById('c-unic'), v=document.getElementById('v-unic');
-  function agg(){
-    var u=parseFloat(c.value), x, y;
-    if(u<0.5){x=-0.6+(u/0.5)*2.6-1e-4;y=fs(x);} else {x=2+((u-0.5)/0.5)*2.6+1e-4;y=fd(x);}
-    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
-    st.textContent='x = '+num(x,2)+'  ·  f(x) = '+num(y,2);
-    v.textContent='x = '+num(x,2);
-  }
-  c.addEventListener('input',agg); agg();
-})();
 
 /* ---------- 2. permanenza del segno ---------- */
 (function(){

@@ -143,6 +143,8 @@ teorema del confronto, a pagina 21.
 - Nessuna dimostrazione: la traccia riporta unicità, permanenza del segno e confronto come soli
   enunciati con disegno, senza dimostrarli; restano così anche qui.
 
+- Revisione (26/09/2026, su richiesta): tolta la frase introduttiva sotto il titolo; unicità del limite ridotta all'enunciato più la frase «se limite destro e sinistro non coincidono, il limite non esiste», tolta la figura del salto (e il suo script); permanenza del segno: aggiunta prima del disegno la frase che spiega che si studia il limite per x→2 di f(x)=1,2·sin(x−0,5) e della sua opposta e che esiste un intorno di 2 in cui la funzione non cambia segno, tolte le didascalie dei due pannelli; tolti i commenti sui comandi («il tasto scopre un passaggio per volta») negli esempi 1 e 2: il testo deve poter essere copiato sul quaderno.
+
 ## Unità 04 — Forme indeterminate
 - Parole: 523 su 4 pagine di traccia (14–17)
 - Rettifica: nessuna sui limiti. Verificati con SymPy tutti i sette limiti: $x^4-3x^2+1\to+\infty$,
