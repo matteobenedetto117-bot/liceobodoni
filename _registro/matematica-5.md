@@ -180,6 +180,7 @@ teorema del confronto, a pagina 21.
   $x^{1/\ln x}$.
 - Aggiunta: nulla di contenuto nuovo. Resta la riga che esplicita il criterio del confronto fra i
   gradi, già presente dalla prima stesura.
+- Revisione (26/09/2026, su richiesta): introduzione riscritta partendo dall'esempio lim(x²−x+2) per x→+∞ (+∞−∞ non risolvibile con l'algebra dei limiti, forma indeterminata) e poi l'elenco delle sette forme; tolto il commento sui tasti; nei capitoletti tolte le frasi di metodo iniziali, la spiegazione sta nei passaggi degli esempi (coniugato nel passo 1 dell'esempio con la radice); ∞/∞: la regola dei gradi resta come conclusione «dai tre esempi»; forme esponenziali: la formula f^g = e^(g·ln f) spostata dopo l'esempio come generalizzazione.
 
 ## Unità 05 — Limiti notevoli
 - Parole: circa 420 (conteggio totale token, prosa e formule) su 4 pagine di traccia (20–23).
