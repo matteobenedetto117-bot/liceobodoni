@@ -3,19 +3,60 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trasformazione isoterma — Fisica quarta</title>
+<title>Trasformazione isoterma e primo principio — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+table.gradi{border-collapse:collapse;margin:var(--r) auto 0;font-family:var(--sans);font-size:.9rem;line-height:var(--r)}
+table.gradi th{text-align:left;font-weight:600;color:var(--blu);padding:0 18px;border-bottom:1px solid var(--inchiostro)}
+table.gradi td{padding:0 18px}
+table.gradi td.l{font-family:var(--serif);font-size:1rem;text-align:center;font-weight:700}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul{padding-left:1.4em}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio>.comm{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;margin-top:var(--r)}
+.foglio>.comm+.eq{margin-top:0}
+.foglio>.fig+.comm{margin-top:var(--r)}
+.fig .val{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -23,147 +64,218 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 10</p>
-  <h1>Trasformazione isoterma</h1>
-  <p class="sommario">In una trasformazione isoterma la temperatura del gas resta costante:
-  l'energia interna, che dipende solo da $T$, non cambia, e tutto il calore scambiato si
-  trasforma in lavoro. Vediamo come questo fatto porta a una formula del lavoro diversa da
-  quella vista finora, con il logaritmo del rapporto fra i volumi.</p>
+  <p class="occhiello">Termodinamica &middot; Unità 10</p>
+  <h1>Trasformazione isoterma e primo principio</h1>
 </header>
 
-<h2>Energia interna costante</h2>
+<h2>Energia interna</h2>
 
-<p>Consideriamo un gas che passa da uno stato $A$ a uno stato $B$ a temperatura costante: nel
-diagramma pressione-volume la trasformazione &egrave; un tratto di curva decrescente, pi&ugrave;
-ripida vicino all'asse $P$ e pi&ugrave; piatta vicino all'asse $V$.</p>
-
-<div class="fig">
-<svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f12a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="f12b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<path d="M50,240 L260,240" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f12a)"/>
-<path d="M50,240 L50,30" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f12a)"/>
-<text x="266" y="244" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">V</text>
-<text x="38" y="30" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">P</text>
-<path d="M90,60 C130,100 150,150 230,210" stroke="var(--rosso)" stroke-width="2.6" fill="none" marker-end="url(#f12b)"/>
-<circle cx="90" cy="60" r="4" fill="var(--rosso)"/>
-<circle cx="230" cy="210" r="4" fill="var(--rosso)"/>
-<text x="76" y="52" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="240" y="216" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-<rect x="300" y="150" width="60" height="70" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
-<rect x="300" y="182" width="60" height="38" fill="var(--blu-chiaro)" stroke="none"/>
-<circle cx="315" cy="200" r="2.4" fill="var(--blu)"/><circle cx="330" cy="192" r="2.4" fill="var(--blu)"/>
-<circle cx="345" cy="205" r="2.4" fill="var(--blu)"/><circle cx="322" cy="210" r="2.4" fill="var(--blu)"/>
-<text x="330" y="238" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">A</text>
-<rect x="385" y="90" width="60" height="130" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
-<rect x="385" y="122" width="60" height="98" fill="var(--blu-chiaro)" stroke="none"/>
-<circle cx="400" cy="140" r="2.4" fill="var(--blu)"/><circle cx="415" cy="160" r="2.4" fill="var(--blu)"/>
-<circle cx="430" cy="130" r="2.4" fill="var(--blu)"/><circle cx="408" cy="200" r="2.4" fill="var(--blu)"/>
-<circle cx="425" cy="185" r="2.4" fill="var(--blu)"/>
-<text x="415" y="238" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-<text x="372" y="60" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">T costante</text>
-</svg>
-<p class="did">Il gas passa dallo stato $A$, pi&ugrave; compresso, allo stato $B$, pi&ugrave;
-espanso, restando sempre alla stessa temperatura: nei due recipienti il numero di particelle
-&egrave; lo stesso, cambia solo il volume che occupano.</p>
-</div>
-
-<p>L'energia interna di un gas ideale dipende solo dalla temperatura, $E_{int}=\tfrac{3}{2}nRT$.
-Poich&eacute; $T_A=T_B$, anche $E_{int,A}=E_{int,B}$, quindi</p>
-
-<div class="formula-box">
-$$\Delta E_{int}=0$$
-</div>
-
-<p>Il primo principio $\Delta E_{int}=Q-L$ diventa allora $0=Q-L$, cio&egrave;</p>
-
-<div class="riquadro">
-<span class="etichetta">Primo principio per una trasformazione isoterma</span>
-$$Q=L$$
-</div>
-
-<p>tutto il calore assorbito dal gas si trasforma integralmente in lavoro, e viceversa.</p>
-
-<h2>Il lavoro come area sotto l'iperbole</h2>
-
-<p>A differenza delle trasformazioni isobara e isocora, qui la pressione non &egrave; costante
-durante lo scambio, quindi non possiamo scrivere semplicemente $L=P\Delta V$: il lavoro &egrave;
-l'area sotto la curva, che ha la forma di un ramo di iperbole perch&eacute; $PV=nRT$ con $T$
-fissata.</p>
+<p>Un gas è chiuso in un cilindro con un pistone mobile, appoggiato su un termostato: un corpo
+molto grande che mantiene costante la temperatura. Se il pistone si sposta lentamente, il gas
+scambia calore con il termostato e la sua temperatura resta la stessa. Una trasformazione a
+temperatura costante si chiama <strong>isoterma</strong>: nel diagramma P-V è un ramo di
+iperbole, perché il prodotto $PV=nRT$ non cambia.</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+<svg id="fig-iso" viewBox="0 0 620 290" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<marker id="f12c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
+<marker id="m10a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
 </defs>
-<path d="M50,220 L280,220" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f12c)"/>
-<path d="M50,220 L50,30" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f12c)"/>
-<text x="290" y="224" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">V</text>
-<text x="38" y="30" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">P</text>
-<path d="M100,50 C140,90 160,140 240,200 L240,220 L100,220 Z" fill="var(--verde)" fill-opacity="0.18" stroke="none"/>
-<path d="M100,50 C140,90 160,140 240,200" stroke="var(--rosso)" stroke-width="2.6" fill="none"/>
-<circle cx="100" cy="50" r="4" fill="var(--rosso)"/>
-<circle cx="240" cy="200" r="4" fill="var(--rosso)"/>
-<text x="86" y="42" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="250" y="206" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-<path d="M100,220 L100,50" stroke="var(--inchiostro)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M240,220 L240,200" stroke="var(--inchiostro)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="100" y="236" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">Vi</text>
-<text x="240" y="236" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">Vf</text>
+<g class="graf"></g>
+<rect class="gas" x="462" width="96" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<path d="M460,34 L460,250 L560,250 L560,34" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
+<g class="rif"></g>
+<rect class="pist" x="462" width="96" height="10" fill="var(--blu)"/>
+<rect x="440" y="252" width="140" height="24" rx="3" fill="#f6e4e2" stroke="var(--rosso)" stroke-width="1.2"/>
+<text x="510" y="268" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--rosso)">termostato a 310 K</text>
 </svg>
-<p class="did">Il lavoro compiuto dal gas &egrave; l'area colorata sotto la curva, fra $V_i$ e
-$V_f$: non &egrave; un rettangolo, perch&eacute; $P$ diminuisce man mano che $V$ cresce.</p>
+<div class="cursore"><label for="cur-iso">V</label><input id="cur-iso" type="range" min="0.15" max="0.6" step="0.005" value="0.31"></div>
+<p class="did">Il gas passa dallo stato A allo stato B restando alla stessa temperatura: la
+pressione cambia in modo che il prodotto PV resti costante, e le particelle si muovono sempre
+con la stessa velocità.</p>
 </div>
 
-<p>Il calcolo di quest'area (che richiede il calcolo integrale) porta al risultato</p>
+<p class="comm">L'energia interna di un gas ideale dipende solo dalla temperatura, che non cambia</p>
+<p class="eq">$$\Delta E_{\text{int}}=0$$</p>
+<p class="comm">Primo principio</p>
+<p class="eq">$$\Delta E_{\text{int}}=Q-L$$</p>
+<p class="comm">Con $\Delta E_{\text{int}}=0$, per una trasformazione isoterma</p>
+<p class="eq principio">$$Q=L$$</p>
 
-<div class="riquadro">
-<span class="etichetta">Lavoro in una trasformazione isoterma</span>
-$$L=nRT\,\ln\!\left(\frac{V_f}{V_i}\right)$$
+<p>Tutto il calore che il gas assorbe dal termostato diventa lavoro; in una compressione, tutto
+il lavoro compiuto sul gas viene ceduto al termostato come calore.</p>
+
+<h2>Lavoro</h2>
+
+<p>Durante la trasformazione la pressione cambia, quindi non si può scrivere $L=P\,\Delta V$: il
+lavoro è l'area compresa fra l'iperbole e l'asse dei volumi, fra $V_i$ e $V_f$.</p>
+
+<div class="fig">
+<svg id="fig-area" viewBox="0 0 470 285" style="width:100%;max-width:560px" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="m10b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
+<marker id="m10v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
+<marker id="m10s" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
+</defs>
+<g class="graf"></g>
+</svg>
+<div class="cursore"><label for="cur-area">V<sub>f</sub></label><input id="cur-area" type="range" min="0.15" max="0.6" step="0.005" value="0.45"></div>
+<p class="did">Isoterma a 310 K di 0,50 mol di gas, a partire da V<sub>i</sub> = 0,31 m³: verso
+destra il gas si espande e il lavoro è l'area verde, positiva; verso sinistra è compresso e il
+lavoro è l'area rossa, negativa.</p>
 </div>
 
-<p>dove $\ln$ &egrave; il logaritmo naturale, in base $e$.</p>
+<p>Il calcolo di quest'area richiede il calcolo integrale e porta al risultato</p>
 
-<p>Il segno di $L$ segue quello del logaritmo: se $V_f&gt;V_i$ (espansione) allora
-$\ln(V_f/V_i)&gt;0$ e $L&gt;0$, il gas compie lavoro sull'ambiente; se $V_f&lt;V_i$
-(compressione) allora $\ln(V_f/V_i)&lt;0$ e $L&lt;0$, &egrave; l'ambiente a compiere lavoro sul
-gas.</p>
+<p class="eq principio">$$L=nRT\,\ln\frac{V_f}{V_i}$$</p>
+
+<p>dove $\ln$ è il logaritmo naturale, in base $e$. Il segno del lavoro è quello del
+logaritmo:</p>
+
+<ul>
+<li>Espansione ($V_f&gt;V_i$): $\ln(V_f/V_i)&gt;0$ e $L&gt;0$, il gas compie lavoro sull'ambiente.</li>
+<li>Compressione ($V_f&lt;V_i$): $\ln(V_f/V_i)&lt;0$ e $L&lt;0$, l'ambiente compie lavoro sul gas.</li>
+</ul>
 
 <h2>Esempio</h2>
 
-<p>Una quantit&agrave; $n=0{,}50\ \text{mol}$ di gas a temperatura $T=310\ \text{K}$ si espande
-isotermicamente da $V_i=0{,}31\ \text{m}^3$ a $V_f=0{,}45\ \text{m}^3$. Calcoliamo il calore
+<p>Una quantità $n=0{,}50\ \text{mol}$ di gas alla temperatura $T=310\ \text{K}$ si espande in
+modo isotermo da $V_i=0{,}31\ \text{m}^3$ a $V_f=0{,}45\ \text{m}^3$. Calcoliamo il calore
 scambiato.</p>
 
-<p>Poich&eacute; $Q=L$,</p>
+<p class="comm">Nella trasformazione isoterma il calore è uguale al lavoro</p>
+<p class="eq">$$Q=L=nRT\,\ln\frac{V_f}{V_i}$$</p>
+<p class="comm">Sostituisco i valori</p>
+<p class="eq">$$Q=0{,}50\ \text{mol}\cdot 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}}\cdot 310\ \text{K}\cdot\ln\frac{0{,}45\ \text{m}^3}{0{,}31\ \text{m}^3}$$</p>
+<p class="comm">Calcolo il prodotto e il logaritmo</p>
+<p class="eq">$$Q=1288\ \text{J}\cdot 0{,}373\approx 480\ \text{J}$$</p>
 
-<div class="formula-box">
-$$L=nRT\,\ln\!\left(\frac{V_f}{V_i}\right)=0{,}50\cdot8{,}31\cdot310\cdot
-\ln\!\left(\frac{0{,}45}{0{,}31}\right)\ \text{J}\approx480\ \text{J}$$
-</div>
-
-<p>quindi $Q=480\ \text{J}$: il gas assorbe questo calore dall'ambiente e lo trasforma
-interamente in lavoro di espansione.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>La trasformazione senza scambio di calore, dove il ruolo di $Q=0$ prende il posto di
-$L=0$ o $Q=L$: l'adiabatica, unit&agrave; 11.</li>
-</ul>
-</div>
+<p>Il gas assorbe $480\ \text{J}$ di calore dal termostato e li trasforma interamente in lavoro
+di espansione.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../11-trasformazione-isocora-e-calore-specifico-a-volume-costante/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Trasformazione isocora e primo principio</span></a><a class="successiva" href="../13-trasformazione-adiabatica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Trasformazione adiabatica</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 10</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 10</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(g,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
+  function f(n){return n.toFixed(1);}
+  function virg(x,d){return x.toFixed(d).replace('.',',').replace('-','−');}
+  function testo(g,x,y,t,att){att=att||{};att.x=x;att.y=y;att['font-family']='var(--sans)';if(!att['font-size'])att['font-size']=12;if(!att.fill)att.fill='var(--inchiostro)';return el(g,'text',att,t);}
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function continuo(fn){if(ridotto)return;var t0=null;(function passo(t){var dt=t0===null?0:Math.min(0.05,(t-t0)/1000);t0=t;fn(dt);requestAnimationFrame(passo);})(performance.now());}
+  /* particelle: moto rettilineo e urti elastici; il modulo della velocità dipende solo da T */
+  function gas(g,n,seme,box){
+    var Rn=rng(seme),L=[];
+    for(var i=0;i<n;i++){var a=Rn()*2*Math.PI;L.push({x:box.x+4+Rn()*(box.w-8),y:box.y+4+Rn()*(box.h-8),vx:Math.cos(a),vy:Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
+    return function(box,dt,vel){
+      var x0=box.x+4,x1=box.x+box.w-4,y0=box.y+4,y1=box.y+box.h-4;
+      L.forEach(function(p){
+        p.x+=p.vx*vel*dt; p.y+=p.vy*vel*dt;
+        if(p.x<x0){p.x=2*x0-p.x;p.vx=Math.abs(p.vx);} if(p.x>x1){p.x=2*x1-p.x;p.vx=-Math.abs(p.vx);}
+        if(p.y<y0){p.y=y0+(y0-p.y)%Math.max(1,y1-y0);p.vy=Math.abs(p.vy);} if(p.y>y1){p.y=Math.max(y0,2*y1-p.y);p.vy=-Math.abs(p.vy);}
+        set(p.c,{cx:f(p.x),cy:f(p.y)});
+      });
+    };
+  }
+  /* piano P-V: V in m³, P in kPa */
+  function piano(g,mk,ox,sx){
+    var X=function(V){return ox+V*sx;}, Y=function(P){return 240-P*20;};
+    el(g,'line',{x1:ox-10,y1:240,x2:X(0.69),y2:240,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    el(g,'line',{x1:ox,y1:250,x2:ox,y2:24,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    testo(g,ox+8,30,'P (kPa)');
+    testo(g,X(0.69)+2,275,'V (m³)',{'text-anchor':'end'});
+    [0.2,0.4,0.6].forEach(function(V){el(g,'line',{x1:X(V),y1:236,x2:X(V),y2:244,stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,X(V),256,virg(V,1),{'text-anchor':'middle','font-size':11});});
+    [2,4,6,8].forEach(function(P){el(g,'line',{x1:ox-4,y1:Y(P),x2:ox+4,y2:Y(P),stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,ox-7,Y(P)+4,P,{'text-anchor':'end','font-size':11});});
+    return {X:X,Y:Y};
+  }
+  function tratt(g,a){var o={stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'};for(var k in a)o[k]=a[k];return el(g,'line',o);}
+  var nRT=0.50*8.31*310, Pf=function(V){return nRT/V/1000;}, VA=0.31, VB=0.45;
+  function iperbole(g,A,att){var c=[];for(var V=0.15;V<=0.6001;V+=0.005)c.push(f(A.X(V))+','+f(A.Y(Pf(V))));var o={points:c.join(' '),fill:'none'};for(var k in att)o[k]=att[k];return el(g,'polyline',o);}
+
+  /* --- figura 1: isoterma e pistone --- */
+  var I=document.getElementById('fig-iso'), cI=document.getElementById('cur-iso');
+  if(I&&cI){
+    var q=function(c){return I.querySelector('.'+c);}, g=q('graf'), A=piano(g,'m10a',60,540);
+    iperbole(g,A,{stroke:'var(--blu)','stroke-width':2.2});
+    [[VA,'A'],[VB,'B']].forEach(function(d){tratt(g,{x1:A.X(d[0]),y1:A.Y(Pf(d[0])),x2:A.X(d[0]),y2:240});
+      el(g,'circle',{cx:A.X(d[0]),cy:A.Y(Pf(d[0])),r:4,fill:'var(--verde)'});
+      testo(g,A.X(d[0])+6,A.Y(Pf(d[0]))-8,d[1],{'font-size':13,'font-weight':700,fill:'var(--verde)'});});
+    var pt=el(g,'circle',{r:5,fill:'#fff',stroke:'var(--rosso)','stroke-width':2});
+    var t1=testo(g,260,50,''), t2=testo(g,260,68,''), t3=testo(g,260,86,''), t5=testo(g,260,104,'T = 310 K'), t4=testo(g,260,122,'ΔEᵢₙₜ = 0',{fill:'var(--verde)'});
+    var h=function(V){return V*330;}, base=248;
+    [[VA,'A'],[VB,'B']].forEach(function(d){var y=base-h(d[0]);
+      el(q('rif'),'line',{x1:454,x2:566,y1:y,y2:y,stroke:'var(--verde)','stroke-width':1.2,'stroke-dasharray':'4,3'});
+      testo(q('rif'),572,y+5,d[1],{'font-size':13,'font-weight':700,fill:'var(--verde)'});});
+    var G=gas(q('part'),12,31,{x:462,y:base-h(VA),w:96,h:h(VA)});
+    function dis(dt){
+      var V=+cI.value, top=base-h(V);
+      set(q('gas'),{y:f(top),height:f(h(V)+2)}); set(q('pist'),{y:f(top-10)});
+      G({x:462,y:top,w:96,h:h(V)},dt,70); /* T costante: stessa velocità */
+      if(!dt){
+        set(pt,{cx:f(A.X(V)),cy:f(A.Y(Pf(V)))});
+        t1.textContent='V = '+virg(V,2)+' m³';
+        t2.textContent='P = '+virg(Pf(V),2)+' kPa';
+        t3.textContent='PV = '+Math.round(Pf(V)*V*1000)+' J';
+      }
+    }
+    cI.addEventListener('input',function(){dis(0);}); dis(0); continuo(dis);
+  }
+
+  /* --- figura 2: area sotto l'iperbole --- */
+  var S=document.getElementById('fig-area'), cS=document.getElementById('cur-area');
+  if(S&&cS){
+    var gs=S.querySelector('.graf'), B=piano(gs,'m10b',60,560);
+    var ar=el(gs,'path',{opacity:.25});
+    iperbole(gs,B,{stroke:'var(--inchiostro)','stroke-width':1.6,opacity:.5});
+    var tr=el(gs,'path',{fill:'none','stroke-width':3});
+    tratt(gs,{x1:B.X(VA),y1:B.Y(Pf(VA)),x2:B.X(VA),y2:240});
+    el(gs,'circle',{cx:B.X(VA),cy:B.Y(Pf(VA)),r:4,fill:'var(--verde)'});
+    testo(gs,B.X(VA)+6,B.Y(Pf(VA))-8,'iniziale',{'font-size':13,'font-weight':700,fill:'var(--verde)'});
+    var pf=tratt(gs,{y2:240});
+    var ps=el(gs,'circle',{r:5,fill:'#fff','stroke-width':2});
+    var s1=testo(gs,250,52,''), s2=testo(gs,250,70,'');
+    function disS(){
+      var V=+cS.value, pos=V>=VA, col=pos?'var(--verde)':'var(--rosso)', a=Math.min(V,VA), b=Math.max(V,VA);
+      var p=[];for(var u=a;u<b;u+=0.004)p.push(f(B.X(u))+','+f(B.Y(Pf(u))));p.push(f(B.X(b))+','+f(B.Y(Pf(b))));
+      var fermo=Math.abs(V-VA)<0.004;
+      set(ar,{d:fermo?'':'M'+f(B.X(a))+',240 L'+p.join(' L')+' L'+f(B.X(b))+',240 Z',fill:col});
+      var pv=pos?p:p.slice().reverse();
+      set(tr,{d:fermo||pv.length<2?'':'M'+pv.join(' L'),stroke:col,'marker-end':'url(#'+(pos?'m10v':'m10s')+')'});
+      set(ps,{cx:f(B.X(V)),cy:f(B.Y(Pf(V))),stroke:col});
+      set(pf,{x1:f(B.X(V)),x2:f(B.X(V)),y1:f(B.Y(Pf(V)))});
+      var L=nRT*Math.log(V/VA);
+      s1.textContent='Vf = '+virg(V,2)+' m³';
+      s2.textContent=fermo?'L = Q = 0 J':'L = Q = '+(L>0?'+':'−')+Math.abs(Math.round(L))+' J  '+(pos?'espansione':'compressione');
+      set(s2,{fill:fermo?'var(--inchiostro)':col});
+    }
+    cS.addEventListener('input',disS); disS();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
