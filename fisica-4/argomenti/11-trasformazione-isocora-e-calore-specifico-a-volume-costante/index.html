@@ -3,19 +3,60 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trasformazione isocora e calore specifico a volume costante — Fisica quarta</title>
+<title>Trasformazione isocora e primo principio — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+table.gradi{border-collapse:collapse;margin:var(--r) auto 0;font-family:var(--sans);font-size:.9rem;line-height:var(--r)}
+table.gradi th{text-align:left;font-weight:600;color:var(--blu);padding:0 18px;border-bottom:1px solid var(--inchiostro)}
+table.gradi td{padding:0 18px}
+table.gradi td.l{font-family:var(--serif);font-size:1rem;text-align:center;font-weight:700}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul{padding-left:1.4em}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio>.comm{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;margin-top:var(--r)}
+.foglio>.comm+.eq{margin-top:0}
+.foglio>.fig+.comm{margin-top:var(--r)}
+.fig .val{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -23,124 +64,183 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 09</p>
-  <h1>Trasformazione isocora e calore specifico a volume costante</h1>
-  <p class="sommario">In una trasformazione isocora il volume del gas non cambia, quindi il gas
-  non compie lavoro: tutto il calore scambiato va ad aumentare l'energia interna. Da questa
-  osservazione ricaviamo il calore specifico molare a volume costante, il valore che regola
-  quanto calore serve per scaldare un gas quando non pu&ograve; espandersi.</p>
+  <p class="occhiello">Termodinamica &middot; Unità 09</p>
+  <h1>Trasformazione isocora e primo principio</h1>
 </header>
 
-<h2>Lavoro nullo e primo principio</h2>
-
-<p>Consideriamo un gas che passa dallo stato &#9312; allo stato &#9313; a volume costante: nel
-diagramma pressione-volume la trasformazione &egrave; un segmento verticale, perch&eacute; $V$
-non cambia mentre $P$ cresce.</p>
+<p>Un gas è chiuso in un recipiente rigido, che non può né dilatarsi né comprimersi. Se lo si
+riscalda, il volume resta lo stesso mentre la temperatura e la pressione crescono. Una
+trasformazione a volume costante si chiama <strong>isocora</strong>: nel diagramma P-V è un
+segmento verticale.</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+<svg id="fig-isocora" viewBox="0 0 620 285" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<marker id="f11a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="f11b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
+<marker id="m9a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
+<marker id="m9r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
 </defs>
-<path d="M50,220 L260,220" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f11a)"/>
-<path d="M50,220 L50,36" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#f11a)"/>
-<text x="266" y="224" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">V</text>
-<text x="38" y="36" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">P</text>
-<path d="M150,190 L150,80" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#f11b)"/>
-<circle cx="150" cy="190" r="4" fill="var(--rosso)"/>
-<circle cx="150" cy="80" r="4" fill="var(--rosso)"/>
-<text x="168" y="195" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#9312;</text>
-<text x="168" y="84" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#9313;</text>
-<path d="M150,220 L150,190" stroke="var(--inchiostro)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="150" y="236" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">V costante</text>
-<path d="M50,190 L150,190" stroke="var(--inchiostro)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M50,80 L150,80" stroke="var(--inchiostro)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="42" y="194" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">P&#8321;</text>
-<text x="42" y="84" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">P&#8322;</text>
+<g class="graf"></g>
+<rect x="452" y="72" width="116" height="156" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<rect x="450" y="70" width="120" height="160" fill="none" stroke="var(--inchiostro)" stroke-width="4"/>
+<g class="calore"><path d="M510,272 L510,240" stroke="var(--rosso)" stroke-width="3" marker-end="url(#m9r)"/>
+<text x="522" y="264" font-family="var(--sans)" font-size="15" font-style="italic" fill="var(--rosso)">Q</text></g>
+<text x="510" y="58" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">V costante</text>
 </svg>
-<p class="did">Lo stato passa da &#9312; a &#9313; a volume costante: il segmento &egrave;
-verticale e non racchiude nessuna area con l'asse V, perch&eacute; non c'&egrave; lavoro.</p>
+<div class="cursore"><label for="cur-isocora">T</label><input id="cur-isocora" type="range" min="200" max="450" step="1" value="200"></div>
+<p class="did">Il gas monoatomico nel recipiente rigido riceve calore: la temperatura e la
+pressione crescono, il punto sale lungo il segmento verticale a partire dallo stato 1 e sotto
+il segmento non c'è area, perché il lavoro è nullo.</p>
 </div>
 
-<p>Poich&eacute; il volume non varia, $\Delta V=0$ e quindi il lavoro &egrave; nullo, $L=0$. Il
-primo principio $\Delta E_{int}=Q-L$ diventa allora</p>
+<p class="comm">Il volume non cambia</p>
+<p class="eq">$$\Delta V=0$$</p>
+<p class="comm">Il gas non sposta nessuna parete, quindi non compie lavoro</p>
+<p class="eq">$$L=0$$</p>
+<p class="comm">Primo principio</p>
+<p class="eq">$$\Delta E_{\text{int}}=Q-L$$</p>
+<p class="comm">Con $L=0$, per una trasformazione isocora</p>
+<p class="eq principio">$$\Delta E_{\text{int}}=Q$$</p>
 
-<div class="riquadro">
-<span class="etichetta">Primo principio per una trasformazione isocora</span>
-$$\Delta E_{int}=Q$$
-</div>
-
-<p>tutto il calore scambiato si trasforma in energia interna.</p>
+<p>Tutto il calore scambiato va a variare l'energia interna: se il gas riceve calore la sua
+temperatura sale, se lo cede scende.</p>
 
 <h2>Calore specifico a volume costante</h2>
 
-<p>Come per la trasformazione a pressione costante, definiamo il calore specifico molare a
-volume costante $C_V$ tramite</p>
+<p>Come per la trasformazione a pressione costante, il calore che serve per scaldare $n$ moli di
+gas a volume costante si scrive</p>
 
-<div class="formula-box">
-$$Q_V=C_V\,n\,\Delta T$$
-</div>
+<p class="eq">$$Q_V=C_V\,n\,\Delta T$$</p>
 
-<p>dove $n$ &egrave; il numero di moli e $\Delta T$ la variazione di temperatura.</p>
+<p>dove $C_V$ è il <strong>calore specifico molare a volume costante</strong>, cioè il calore che
+innalza di $1\ \text{K}$ la temperatura di una mole di gas mantenendo costante il volume.</p>
 
-<h2>Calcolo di $C_V$ per un gas monoatomico</h2>
+<p>Per un gas ideale monoatomico il valore di $C_V$ si ricava dal primo principio, scrivendo ogni
+termine in funzione di $\Delta T$.</p>
 
-<p>Per un gas ideale monoatomico l'energia interna &egrave;
-$\Delta E_{int}=\tfrac{3}{2}nR\,\Delta T$. A volume costante il primo principio d&agrave;
-$Q=\Delta E_{int}$, cio&egrave; $Q_V=\Delta E_{int}$. Sostituendo le due espressioni del
-calore,</p>
-
-<div class="formula-box">
-$$C_V\,n\,\Delta T=\tfrac{3}{2}nR\,\Delta T$$
-</div>
-
-<p>Semplificando i fattori $n\,\Delta T$ si ottiene</p>
-
-<div class="riquadro">
-<span class="etichetta">Calore specifico molare a volume costante &mdash; gas monoatomico</span>
-$$C_V=\tfrac{3}{2}R$$
-</div>
-
-<p>Con lo stesso procedimento, a partire dall'energia interna propria di ciascun tipo di gas, si
-trova $C_V=\tfrac{5}{2}R$ per un gas biatomico e $C_V=3R$ per un gas poliatomico.</p>
+<p class="comm">Primo principio nella trasformazione isocora</p>
+<p class="eq">$$\Delta E_{\text{int}}=Q$$</p>
+<p class="comm">Energia interna del gas monoatomico</p>
+<p class="eq">$$\Delta E_{\text{int}}=\tfrac{3}{2}\,nR\,\Delta T$$</p>
+<p class="comm">Calore ricevuto a volume costante</p>
+<p class="eq">$$Q=C_V\,n\,\Delta T$$</p>
+<p class="comm">Sostituisco nel primo principio</p>
+<p class="eq">$$\tfrac{3}{2}\,nR\,\Delta T=C_V\,n\,\Delta T$$</p>
+<p class="comm">Divido per $n\,\Delta T$, che compare in ogni termine</p>
+<p class="eq principio">$$C_V=\tfrac{3}{2}\,R$$</p>
+<p class="comm">Con lo stesso ragionamento, partendo dall'energia interna di ciascun tipo di gas</p>
+<p class="eq">$$C_V=\tfrac{5}{2}\,R\ \ \text{(biatomico)}\qquad C_V=3R\ \ \text{(poliatomico)}$$</p>
 
 <h2>Esempio</h2>
 
-<p>Una quantit&agrave; $n=0{,}200\ \text{mol}$ di gas monoatomico subisce una variazione di
-temperatura $\Delta T=5\ \text{K}$. Calcoliamo il calore scambiato a volume costante e, per
-confronto, quello a pressione costante.</p>
+<p>Una quantità $n=0{,}200\ \text{mol}$ di gas monoatomico viene riscaldata di
+$\Delta T=5\ \text{K}$. Confrontiamo il calore necessario a volume costante con quello
+necessario a pressione costante.</p>
 
-<p>A volume costante:</p>
+<p class="comm">Calore a volume costante, con $C_V=\tfrac{3}{2}R$</p>
+<p class="eq">$$Q_V=\tfrac{3}{2}\,R\,n\,\Delta T$$</p>
+<p class="comm">Sostituisco i valori</p>
+<p class="eq">$$Q_V=\tfrac{3}{2}\cdot 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}}\cdot 0{,}200\ \text{mol}\cdot 5\ \text{K}=12{,}5\ \text{J}$$</p>
+<p class="comm">Calore a pressione costante, con $C_P=\tfrac{5}{2}R$ dell'unità precedente</p>
+<p class="eq">$$Q_P=\tfrac{5}{2}\,R\,n\,\Delta T$$</p>
+<p class="comm">Sostituisco i valori</p>
+<p class="eq">$$Q_P=\tfrac{5}{2}\cdot 8{,}31\ \tfrac{\text{J}}{\text{mol}\cdot\text{K}}\cdot 0{,}200\ \text{mol}\cdot 5\ \text{K}=20{,}8\ \text{J}$$</p>
 
-<div class="formula-box">
-$$Q_V=\tfrac{3}{2}nR\,\Delta T=\tfrac{3}{2}\cdot0{,}200\cdot8{,}31\cdot5\ \text{J}=12{,}5\ \text{J}$$
-</div>
-
-<p>A pressione costante, con $C_P=\tfrac{5}{2}R$ dell'unit&agrave; precedente:</p>
-
-<div class="formula-box">
-$$Q_P=C_P\,n\,\Delta T=\tfrac{5}{2}R\,n\,\Delta T=20{,}8\ \text{J}$$
-</div>
-
-<p>A parit&agrave; di $\Delta T$ serve pi&ugrave; calore a pressione costante, perch&eacute; una
-parte si trasforma anche in lavoro di espansione.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>La trasformazione a temperatura costante, dove tutto il calore scambiato diventa lavoro:
-unit&agrave; 10.</li>
-</ul>
-</div>
+<p>A parità di $\Delta T$ serve più calore a pressione costante: una parte diventa il lavoro di
+espansione del gas, mentre a volume costante va tutto in energia interna.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../09-il-lavoro-di-un-gas-e-il-diagramma-p-v/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Trasformazione isobara e primo principio</span></a><a class="successiva" href="../12-trasformazione-isoterma/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Trasformazione isoterma</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 09</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 09</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(g,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
+  function f(n){return n.toFixed(1);}
+  function virg(x,d){return x.toFixed(d).replace('.',',').replace('-','−');}
+  function testo(g,x,y,t,att){att=att||{};att.x=x;att.y=y;att['font-family']='var(--sans)';if(!att['font-size'])att['font-size']=12;if(!att.fill)att.fill='var(--inchiostro)';return el(g,'text',att,t);}
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function continuo(fn){if(ridotto)return;var t0=null;(function passo(t){var dt=t0===null?0:Math.min(0.05,(t-t0)/1000);t0=t;fn(dt);requestAnimationFrame(passo);})(performance.now());}
+  /* particelle: moto rettilineo e urti elastici; il modulo della velocità dipende solo da T */
+  function gas(g,n,seme,box){
+    var Rn=rng(seme),L=[];
+    for(var i=0;i<n;i++){var a=Rn()*2*Math.PI;L.push({x:box.x+4+Rn()*(box.w-8),y:box.y+4+Rn()*(box.h-8),vx:Math.cos(a),vy:Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
+    return function(box,dt,vel){
+      var x0=box.x+4,x1=box.x+box.w-4,y0=box.y+4,y1=box.y+box.h-4;
+      L.forEach(function(p){
+        p.x+=p.vx*vel*dt; p.y+=p.vy*vel*dt;
+        if(p.x<x0){p.x=2*x0-p.x;p.vx=Math.abs(p.vx);} if(p.x>x1){p.x=2*x1-p.x;p.vx=-Math.abs(p.vx);}
+        if(p.y<y0){p.y=y0+(y0-p.y)%Math.max(1,y1-y0);p.vy=Math.abs(p.vy);} if(p.y>y1){p.y=Math.max(y0,2*y1-p.y);p.vy=-Math.abs(p.vy);}
+        set(p.c,{cx:f(p.x),cy:f(p.y)});
+      });
+    };
+  }
+  /* piano P-V: V in 10⁻³ m³, P in kPa */
+  function piano(g,mk,ox,sx,vmax,tickV){
+    var X=function(V){return ox+V*sx;}, Y=function(P){return 240-P*1.2;};
+    el(g,'line',{x1:ox-10,y1:240,x2:X(vmax),y2:240,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    el(g,'line',{x1:ox,y1:250,x2:ox,y2:24,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#'+mk+')'});
+    testo(g,ox+8,30,'P (kPa)');
+    testo(g,X(vmax)+2,275,'V (10⁻³ m³)',{'text-anchor':'end'});
+    tickV.forEach(function(V){el(g,'line',{x1:X(V),y1:236,x2:X(V),y2:244,stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,X(V),256,V,{'text-anchor':'middle','font-size':11});});
+    [50,100,150].forEach(function(P){el(g,'line',{x1:ox-4,y1:Y(P),x2:ox+4,y2:Y(P),stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,ox-7,Y(P)+4,P,{'text-anchor':'end','font-size':11});});
+    return {X:X,Y:Y};
+  }
+  function tratt(g,a){var o={stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'};for(var k in a)o[k]=a[k];return el(g,'line',o);}
+
+  /* --- isocora: recipiente rigido e segmento verticale nel piano P-V --- */
+  var K=document.getElementById('fig-isocora'), cK=document.getElementById('cur-isocora');
+  if(K&&cK){
+    var q=function(c){return K.querySelector('.'+c);}, g=q('graf');
+    var n=0.12, R=8.31, V=3, T1=200, A=piano(g,'m9a',60,65,4.9,[1,2,3,4]);
+    var Pd=function(T){return n*R*T/V;}; /* kPa, con V in 10⁻³ m³ */
+    tratt(g,{x1:A.X(V),y1:A.Y(Pd(T1)),x2:A.X(V),y2:240});
+    tratt(g,{x1:60,y1:A.Y(Pd(T1)),x2:A.X(V),y2:A.Y(Pd(T1))});
+    el(g,'circle',{cx:A.X(V),cy:A.Y(Pd(T1)),r:4,fill:'var(--verde)'});
+    testo(g,A.X(V)-16,A.Y(Pd(T1))-8,'1',{'font-size':13,'font-weight':700,fill:'var(--verde)'});
+    var seg=el(g,'line',{x1:A.X(V),x2:A.X(V),y1:A.Y(Pd(T1)),stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#m9r)'});
+    var pt=el(g,'circle',{cx:A.X(V),r:5,fill:'#fff',stroke:'var(--rosso)','stroke-width':2});
+    var t1=testo(g,272,150,''), t2=testo(g,272,168,''), t3=testo(g,272,186,'L = 0'), t4=testo(g,272,204,'',{fill:'var(--rosso)'});
+    var cal=q('calore');
+    var G=gas(q('part'),14,9,{x:452,y:72,w:116,h:156});
+    function vel(T){return 40*Math.pow(T/T1,1.8);}
+    function dis(dt){
+      var T=+cK.value, P=Pd(T), y=A.Y(P);
+      G({x:452,y:72,w:116,h:156},dt,vel(T));
+      if(!dt){
+        var su=T-T1>3;
+        set(seg,{y2:f(y+4),visibility:su?'visible':'hidden'}); set(pt,{cy:f(y)});
+        set(cal,{visibility:su?'visible':'hidden'});
+        t1.textContent='T = '+T+' K';
+        t2.textContent='P = '+virg(P,1)+' kPa';
+        t4.textContent='Q = ΔEᵢₙₜ = '+Math.round(1.5*n*R*(T-T1))+' J';
+      }
+    }
+    cK.addEventListener('input',function(){dis(0);}); dis(0); continuo(dis);
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
