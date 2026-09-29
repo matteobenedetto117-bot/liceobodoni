@@ -32,3 +32,7 @@ Esecuzione delle 22:03 UTC (due unità).
 
 - fisica-5 unità 07 (Campo magnetico generato da un filo percorso da corrente): pubblicata, commit f93a9a7. Figura degli aghi con cursore sulla corrente (orientazione calcolata con il campo terrestre verso nord: da controllare se il riferimento al nord va bene per la classe); figura dei due versi ridisegnata con linee di campo in prospettiva. Nessuna correzione concettuale, nessun esempio, nessuna figura decorativa.
 - fisica-1 unità 08 (Equivalenze in notazione scientifica): pubblicata (commit nella riga della coda). Da controllare: tolti gli esempi mg → µg e m → miglia marine (tenuti Gm → mm e m → U.A.). Contenuto dubbio non modificato: 3,8/1,50 = 2,53 U.A. dà tre cifre significative da un dato che ne ha due (2,5 U.A.). Figura delle semplificazioni resa a comparsa con ▶; nessuna figura decorativa.
+
+Esecuzione delle 23:02 UTC (due unità).
+
+- matematica-2 unità 08 (Sistemi fratti): pubblicata (commit nella riga della coda). Tolti l'introduzione discorsiva e il paragrafo finale di commento sulla coppia (−3; 1); metodo in tre passi in riquadro. Nessuna correzione concettuale, nessun esempio tolto, nessuna figura.

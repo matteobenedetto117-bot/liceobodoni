@@ -106,6 +106,7 @@
 - Revisione, contenuto: nessuna rettifica. Ricontrollato con SymPy che il sistema ridotto {x+3y=0, x−8y=−11} dia (−3; 1) e che y = 1 violi la condizione y ≠ 1, quindi sistema impossibile. Tolto il riferimento al determinante non nullo nella conclusione (l'unità sui letterali non usa più Cramer): al suo posto si dice che il calcolo algebrico aveva dato un risultato.
 - Revisione, aggiunta: un riquadro di avvertenza sul terzo passo (la soluzione che cade in un valore vietato non si tiene lo stesso) e un paragrafo finale che spiega perché quella coppia era comparsa: moltiplicando per y − 1 si è trattato quel fattore come se non fosse nullo. Nella traccia c'è solo la scritta «non accettabile».
 - Revisione, figure: nessuna; la traccia non ne ha.
+- Revisione: titolo invariato. Testo telegrafico: tolti l'introduzione discorsiva, il titoletto «Il metodo» e il paragrafo finale di commento sulla coppia (−3; 1); definizione e metodo in due riquadri .def (metodo in tre passi numerati), nota «Attenzione» ridotta a una riga; «Un esempio» diventa «Esempio». Spiegazioni dei passaggi accorciate a poche parole; passaggi a comparsa, tasto «Mostra tutti i passaggi» e fondo rosato dei passaggi sulle condizioni invariati. Controllo concettuale: nessuna correzione; riverificati con SymPy il sistema ridotto {x+3y=0, x−8y=−11} → (−3; 1), y = 1 escluso dalle CE, sistema di partenza senza soluzioni. Figure: nessuna; nessun esempio tolto.
 
 ## Unità 09 — Radici quadrate, cubiche e n-esime
 - Parole: 352 su 2 pagine di traccia (pagine 27–28)
