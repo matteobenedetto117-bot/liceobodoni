@@ -48,6 +48,7 @@
 - Parole: 323 su circa 1,5 pagine di traccia
 - Rettifica: nessuna. Il contenuto della traccia (definizione, procedura, regola del primo fattore rispetto a 5, tre esempi) è corretto e verificato.
 - Aggiunta: nessun contenuto nuovo. È stato aggiunto solo il cursore interattivo sul primo fattore, che mostra la soglia del 5 già enunciata nella traccia, e una frase di confronto (4800 kg e 1200 kg) per chiarire l'osservazione della traccia secondo cui l'o.d.g. non serve a conoscere la misura con precisione.
+- Revisione: titolo invariato. Tolti sommario, introduzione discorsiva e riquadro «Dove si riprende» (rimandi alle unità 08, 10, 11). Definizione e regola del primo fattore in riquadri .def, osservazione «stima, non misura» in .nota di una riga; due esempi sotto «Esempio 1» (4800 kg → 10³ kg) ed «Esempio 2» (5,0·10⁸ s → 10⁹ s, caso a = 5), nella forma dati → confronto con 5 → risultato. Esempio tolto: 7,8·10³ m → 10⁴ m. Nessuna correzione concettuale (regola della soglia 5 lasciata com'è nella traccia). Impaginazione a quaderno con script di allineamento. Figura: il cursore testuale è diventato un SVG con il segmento da 10³ a 10⁴ kg, soglia 5 tratteggiata in verde, punto rosso sul valore a·10³ kg e cerchio sull'ordine di grandezza scelto, con freccia; valore e o.d.g. accanto al cursore.
 
 ## Unità 08 — Equivalenze in notazione scientifica
 - Parole: 255 su 1 pagina di traccia (pag. 11 del quaderno = pag. 12 del PDF, dal titolo fino in fondo; la pagina successiva apre «Formule inverse», unità 09).

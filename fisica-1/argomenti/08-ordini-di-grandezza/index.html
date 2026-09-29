@@ -6,20 +6,42 @@
 <title>Ordini di grandezza — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.regole{margin:22px 0;padding:14px 18px;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-.strumento{background:#fff;border:1px solid var(--riga);border-radius:10px;
-  padding:16px 18px;margin:26px 0;text-align:center}
-.strumento input[type=range]{width:min(420px,90%)}
-.strumento .out{font-family:var(--sans);font-size:1.05rem;margin-top:10px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>ul.lunghi{list-style:none;padding:0}
+.lungo{font-family:var(--sans);font-size:.82rem;word-break:break-all}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:9rem;text-align:left}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -28,88 +50,99 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Grandezze fisiche e strumenti matematici &middot; Unità 07</p>
   <h1>Ordini di grandezza</h1>
-  <p class="sommario">La potenza di dieci più vicina a una misura: una stima delle sue
-  dimensioni, non il suo valore preciso.</p>
 </header>
 
-<p>Spesso di una misura non interessa il valore esatto, ma soltanto quanto è grande
-all'ingrosso: se siamo nell'ordine dei metri o dei chilometri, dei secondi o dei
-miliardi di secondi. A questa domanda risponde l'ordine di grandezza.</p>
-
-<div class="regole">
-<p>L'<strong>ordine di grandezza</strong> di una misura è la potenza di $10$ più vicina
-al valore della misura.</p>
+<div class="def">
+<span class="et">Definizione &middot; ordine di grandezza</span>
+<p>Potenza di $10$ più vicina al valore della misura (con l'unità di misura).</p>
 </div>
 
-<p>Il risultato è dunque una potenza di dieci soltanto, con l'unità di misura: non un
-numero qualunque. Per individuarlo occorre prima trasformare la misura in notazione
-scientifica.</p>
-
-<div class="esempi">
-<p>$$m = 4800\ \mathrm{kg} = 4{,}8 \cdot 10^{3}\ \mathrm{kg}$$</p>
-</div>
-
-<p>A questo punto occorre osservare il numero davanti alla potenza di $10$, cioè il
-$4{,}8$: è lui a dire se la misura sta più vicino a $10^{3}$ oppure al gradino
-successivo $10^{4}$.</p>
-
-<div class="regole">
 <ul>
-<li>Se è minore di $5$, si prende la potenza così com'è.</li>
-<li>Se è maggiore o uguale a $5$, si arrotonda all'esponente successivo.</li>
+<li>Misura scritta in notazione scientifica: $a \cdot 10^{n}$.</li>
+<li>Il primo fattore $a$ decide fra $10^{n}$ e $10^{n+1}$.</li>
+</ul>
+
+<div class="def">
+<span class="et">Regola &middot; primo fattore</span>
+<ul>
+<li>$a &lt; 5$: o.d.g. $= 10^{n}$.</li>
+<li>$a \ge 5$: o.d.g. $= 10^{n+1}$.</li>
 </ul>
 </div>
 
-<div class="esempi">
-<p>$$4{,}8 \cdot 10^{3}\ \mathrm{kg} \;\longrightarrow\; \text{o.d.g.} = 10^{3}\ \mathrm{kg}
-\qquad (4{,}8 &lt; 5)$$</p>
-<p>$$7{,}8 \cdot 10^{3}\ \mathrm{m} \;\longrightarrow\; \text{o.d.g.} = 10^{4}\ \mathrm{m}
-\qquad (7{,}8 &gt; 5)$$</p>
-<p>$$5{,}0 \cdot 10^{8}\ \mathrm{s} \;\longrightarrow\; \text{o.d.g.} = 10^{9}\ \mathrm{s}$$</p>
+<div class="fig">
+<svg id="odg" viewBox="0 10 420 100" style="width:100%;max-width:420px" role="img"
+     aria-label="Misura fra 10 alla 3 e 10 alla 4 kg: il primo fattore decide l'ordine di grandezza"></svg>
+<div class="cursore"><label for="coef">primo fattore $a$</label><input type="range" id="coef" min="10" max="99" step="1" value="48"><span class="val" id="vcoef"></span></div>
+<p class="did">Misura $a \cdot 10^{3}\ \mathrm{kg}$; soglia $a = 5$ tratteggiata in verde.</p>
 </div>
-
-<div class="strumento">
-  <label for="coef">primo fattore: <output id="vcoef">4,8</output></label><br>
-  <input type="range" id="coef" min="10" max="99" step="1" value="48">
-  <div class="out" id="esito"></div>
-</div>
-<p style="font-size:.9rem;color:var(--grigio);text-align:center;margin-top:-14px">
-L'esponente della misura resta $10^{3}$, ma l'ordine di grandezza scatta al gradino
-successivo appena il primo fattore raggiunge $5$.</p>
 
 <div class="nota">
-<strong>Una stima, non una misura.</strong> L'ordine di grandezza serve per avere
-un'idea delle dimensioni di una misura. Non si usa per conoscere con precisione la
-misura stessa: due corpi da $4800\ \mathrm{kg}$ e da $1200\ \mathrm{kg}$ hanno lo stesso
-ordine di grandezza, pur essendo molto diversi.
+<span class="et">Attenzione</span>
+<p>Stima delle dimensioni, non valore preciso: $4800\ \mathrm{kg}$ e $1200\ \mathrm{kg}$ hanno lo stesso o.d.g., $10^{3}\ \mathrm{kg}$.</p>
 </div>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Nell'unità 08 la notazione scientifica viene usata per eseguire le equivalenze, e da
-lì in poi ogni risultato numerico si accompagna alle cifre significative, di cui si
-occupano le unità 10 e 11.</p>
-</div>
+<h2>Esempio 1</h2>
 
+<ul>
+<li>Dato: $m = 4800\ \mathrm{kg} = 4{,}8 \cdot 10^{3}\ \mathrm{kg}$.</li>
+<li>$4{,}8 &lt; 5$: esponente invariato.</li>
+</ul>
+<p class="eq">$$\text{o.d.g.} = 10^{3}\ \mathrm{kg}$$</p>
+
+<h2>Esempio 2</h2>
+
+<ul>
+<li>Dato: $t = 5{,}0 \cdot 10^{8}\ \mathrm{s}$.</li>
+<li>$5{,}0 \ge 5$: esponente successivo.</li>
+</ul>
+<p class="eq">$$\text{o.d.g.} = 10^{9}\ \mathrm{s}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../07-notazione-scientifica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Notazione scientifica</span></a><a class="successiva" href="../09-equivalenze-in-notazione-scientifica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equivalenze in notazione scientifica</span></a></nav>
 </div>
-
 <script>
 (function(){
-  var s = document.getElementById('coef'),
-      v = document.getElementById('vcoef'),
-      o = document.getElementById('esito');
-  function agg(){
-    var k = parseInt(s.value, 10), c = k / 10;
-    var testo = c.toFixed(1).replace('.', ',');
-    var esp = (c < 5) ? 3 : 4;
-    v.textContent = testo;
-    o.innerHTML = testo + ' &middot; 10<sup>3</sup> kg &nbsp;&rarr;&nbsp; o.d.g. = 10<sup>'
-      + esp + '</sup> kg';
+  var NS='http://www.w3.org/2000/svg', svg=document.getElementById('odg'),
+      s=document.getElementById('coef'), v=document.getElementById('vcoef');
+  var x0=40, x1=380, Y=62;
+  function X(a){return x0+(a-1)/9*(x1-x0);}
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
+  function txt(x,y,t,a){var e=el('text',Object.assign({x:x,y:y,'text-anchor':'middle','font-family':'sans-serif','font-size':13,fill:'var(--grigio)'},a||{}));e.textContent=t;return e;}
+  el('line',{x1:x0,y1:Y,x2:x1,y2:Y,stroke:'var(--inchiostro)','stroke-width':1.5});
+  for(var a=1;a<=10;a++){
+    el('line',{x1:X(a),y1:Y-(a===1||a===10?8:4),x2:X(a),y2:Y+(a===1||a===10?8:4),stroke:'var(--inchiostro)','stroke-width':1});
+    if(a>1&&a<10)txt(X(a),Y+20,String(a),{'font-size':11});
   }
-  s.addEventListener('input', agg);
-  agg();
+  txt(X(1),Y+22,'10³ kg',{fill:'var(--inchiostro)','font-size':14});
+  txt(X(10),Y+22,'10⁴ kg',{fill:'var(--inchiostro)','font-size':14});
+  el('line',{x1:X(5),y1:Y-30,x2:X(5),y2:Y+8,stroke:'var(--verde)','stroke-width':1.6,'stroke-dasharray':'5 3'});
+  var arco=el('path',{fill:'none',stroke:'var(--rosso)','stroke-width':1.8,'stroke-dasharray':'5 3'});
+  var anello=el('circle',{r:11,fill:'none',stroke:'var(--rosso)','stroke-width':2});
+  var p=el('circle',{r:5.5,fill:'var(--rosso)'});
+  function agg(){
+    var a=parseInt(s.value,10)/10, su=a>=5, xa=X(a), xt=su?X(10):X(1);
+    p.setAttribute('cx',xa);p.setAttribute('cy',Y);
+    anello.setAttribute('cx',xt);anello.setAttribute('cy',Y);
+    arco.setAttribute('d',Math.abs(xa-xt)<16?'':'M'+xa+','+(Y-8)+' Q'+((xa+xt)/2)+','+(Y-44)+' '+xt+','+(Y-12));
+    var st=a.toFixed(1).replace('.',',');
+    v.textContent=st+' · 10³ kg → o.d.g. = '+(su?'10⁴':'10³')+' kg';
+  }
+  s.addEventListener('input',agg);agg();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>

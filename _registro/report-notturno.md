@@ -11,3 +11,9 @@ Esecuzione delle 16:04 UTC (due unità).
 
 - fisica-2 unità 03 (Velocità scalare media e velocità media): pubblicata, commit 94b7c72. Da controllare: i titoletti e le figure statiche erano scelte dell'utente del 22/09, sostituiti secondo le nuove regole (solo «Esempio 1» ed «Esempio 2»; diagramma spazio-tempo con cursore sul tempo); tolto il rimando all'unità 02. Nessun esempio tolto, nessuna figura decorativa, nessuna correzione concettuale.
 - fisica-4 unità 12 (Il secondo principio: macchina termica e i due enunciati): pubblicata (commit nella riga della coda). Corrette le etichette dei disegni (pedici T₄, Q₄, «ᶐ» → c, f). Schema della macchina con cursore su Q_f; schemi vietati statici. La pagina non ha esempi.
+
+Esecuzione delle 16:18 UTC (due unità).
+
+- matematica-5 unità 05 (Limiti notevoli): pubblicata, commit e36f7da. Da controllare: tolti i sette titoletti numerati e il riquadro di riepilogo «Da tenere a memoria» (ripetizione dei sette riquadri verdi): valutare se il riepilogo va ripristinato. Riscritto $\ln(1+x)^{1/x}$ come $\ln[(1+x)^{1/x}]$. Figure invariate (già con cursore); nessun esempio, nessuna figura decorativa.
+- fisica-5 unità 06 (Spettrometro di massa): saltata (già revisionata).
+- fisica-1 unità 07 (Ordini di grandezza): pubblicata (commit nella riga della coda). Da controllare: tolto l'esempio 7,8·10³ m → 10⁴ m (tenuti 4800 kg e 5,0·10⁸ s). Contenuto dubbio non modificato: la soglia 5 è una convenzione; con la distanza lineare il punto medio fra 10ⁿ e 10ⁿ⁺¹ è 5,5·10ⁿ, con quella logaritmica √10 ≈ 3,16·10ⁿ. Cursore testuale sostituito da un SVG con soglia e punto mobile.
