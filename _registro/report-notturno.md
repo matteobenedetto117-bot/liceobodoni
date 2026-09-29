@@ -27,3 +27,7 @@ Esecuzione delle 21:03 UTC (due unità).
 
 - fisica-4 unità 13 (Rendimento di una macchina termica): pubblicata, commit 33665f2. Schema della macchina con cursore su Q_f e valore di η accanto al cursore; etichette con pedici sbagliati corrette. Tolto il rimando alle unità 14–15. Nessuna correzione concettuale, nessun esempio tolto, nessuna figura decorativa.
 - matematica-5 unità 06 (Infinitesimi e infiniti, gerarchia, principio di sostituzione): pubblicata (commit nella riga della coda). Da controllare: i quattro limiti della gerarchia tenuti insieme come «Esempio 2» (valutare se ridurli a due). Correzioni: esponenti e base della gerarchia con lettere distinte (α, β, a); didascalia del grafico sull'ordine dei sorpassi era errata, sostituita dal segnale verde per x > 4. Grafico Plotly riscritto in SVG con cursore. Nessuna figura decorativa.
+
+Esecuzione delle 22:03 UTC (due unità).
+
+- fisica-5 unità 07 (Campo magnetico generato da un filo percorso da corrente): pubblicata (commit nella riga della coda). Figura degli aghi con cursore sulla corrente (orientazione calcolata con il campo terrestre verso nord: da controllare se il riferimento al nord va bene per la classe); figura dei due versi ridisegnata con linee di campo in prospettiva. Nessuna correzione concettuale, nessun esempio, nessuna figura decorativa.
