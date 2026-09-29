@@ -22,3 +22,7 @@ Esecuzione delle 20:03 UTC (due unità).
 
 - matematica-2 unità 07 (Sistemi letterali): pubblicata, commit d164600. Da controllare: tolta la seconda nota «Attenzione» (i valori critici nascono dai conti) perché ripeteva il metodo; titoletti h3 dei casi a = 0 e a = 6 sostituiti da righe di testo. Nessuna correzione, nessuna figura.
 - fisica-2 unità 04 (Velocità istantanea): pubblicata (commit nella riga della coda). Tre figure ridisegnate con forma calcolata (due con cursore: Δt sulla secante, t per il segno della velocità); le curve sono funzioni scelte per l'illustrazione, non tratte dalla traccia. Nessuna correzione, nessun esempio tolto.
+
+Esecuzione delle 21:03 UTC (due unità).
+
+- fisica-4 unità 13 (Rendimento di una macchina termica): pubblicata (commit nella riga della coda). Schema della macchina con cursore su Q_f e valore di η accanto al cursore; etichette con pedici sbagliati corrette. Tolto il rimando alle unità 14–15. Nessuna correzione concettuale, nessun esempio tolto, nessuna figura decorativa.
