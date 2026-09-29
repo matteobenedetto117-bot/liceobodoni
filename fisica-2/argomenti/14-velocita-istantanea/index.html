@@ -5,19 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Velocità istantanea — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.definizione{background:#fff;border-left:3px solid var(--rosso);border-radius:0 8px 8px 0;padding:14px 20px;margin:22px 0}
-.esempio{background:#f7f9fb;border-radius:10px;padding:16px 20px;margin:22px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,142 +49,189 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Cinematica &middot; Unità 04</p>
   <h1>Velocità istantanea</h1>
-  <p class="sommario">La velocità media racconta come è andato un intero tratto di moto, non che
-  cosa succede in un istante preciso. Per questo restringiamo l'intervallo di tempo fino a
-  renderlo piccolissimo, e arriviamo così alla velocità in un singolo punto.</p>
 </header>
 
-<h2>Dalla secante alla tangente</h2>
-
-<p>Prendiamo due punti $A$ e $B$ sul diagramma spazio-tempo e la secante che li unisce, la cui
-pendenza è $v_{m,AB}$. Se avviciniamo $B$ ad $A$, rimpicciolendo $\Delta t_{AB}$, la secante
-ruota e si avvicina sempre di più a una posizione limite: la retta tangente al grafico nel punto
-$A$.</p>
+<ul>
+<li>Secante per due punti $A$ e $B$ del diagramma spazio-tempo: pendenza $v_{m,AB}$.</li>
+<li>$B$ che si avvicina ad $A$ ($\Delta t_{AB}$ sempre più piccolo): la secante tende alla retta tangente in $A$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f14fr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="30" y1="190" x2="460" y2="190" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f14fr)"/>
-<line x1="30" y1="190" x2="30" y2="20" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f14fr)"/>
-<text x="465" y="195" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="14" y="18" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<path d="M50,170 C120,60 220,40 300,60 C360,74 400,110 440,150" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="120" cy="88" r="4" fill="var(--rosso)"/>
-<text x="105" y="75" font-size="13" fill="var(--rosso)" font-family="var(--sans)">A</text>
-<line x1="120" y1="88" x2="280" y2="58" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<circle cx="280" cy="58" r="3.5" fill="var(--grigio)"/>
-<line x1="120" y1="88" x2="200" y2="63" stroke="var(--blu)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<circle cx="200" cy="63" r="3.5" fill="var(--blu)"/>
-<line x1="120" y1="88" x2="150" y2="72" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="240" y="35" font-size="12" fill="var(--rosso)" font-family="var(--sans)">B</text>
-<path d="M270,45 Q210,25 155,55" fill="none" stroke="var(--rosso)" stroke-width="1.3" marker-end="url(#f14fr)"/>
-<text x="200" y="20" font-size="11.5" fill="var(--rosso)" font-family="var(--sans)">B &rarr; A</text>
-<line x1="55" y1="105" x2="185" y2="65" stroke="var(--verde)" stroke-width="1.6" stroke-dasharray="0"/>
-<text x="50" y="120" font-size="11.5" fill="var(--verde)" font-family="var(--sans)">retta tangente in A</text>
-</svg>
-<p class="did">Al ridursi di $\Delta t_{AB}$ il punto $B$ scivola verso $A$ e la secante ruota
-fino a diventare la tangente in $A$.</p>
+<svg id="sec" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Diagramma spazio-tempo: la secante per A e B ruota verso la tangente in A al ridursi dell'intervallo di tempo"></svg>
+<div class="cursore"><label for="cur-dt">$\Delta t_{AB}$</label><input id="cur-dt" type="range" min="0.05" max="4" step="0.05" value="3"><span class="val" id="val-dt"></span></div>
+<p class="did">Secante $AB$ (blu) e tangente in $A$ (verde tratteggiata).</p>
 </div>
 
-<div class="definizione">
-<p>L'inclinazione della retta tangente al grafico spazio-tempo in un punto è la
-<strong>velocità istantanea</strong> del corpo in quel punto: il limite a cui tende la velocità
-media quando l'intervallo di tempo si restringe a zero.</p>
+<div class="def">
+<span class="et">Definizione &middot; velocità istantanea</span>
+<p>Pendenza della retta tangente al diagramma spazio-tempo in un punto: limite della velocità media per l'intervallo di tempo che tende a zero.</p>
 </div>
 
-<p>Poiché la tangente è una retta, il suo rapporto $\Delta x/\Delta t$ è lo stesso preso su una
-sua coppia qualunque di punti: basta leggerne due per calcolare la velocità istantanea nel punto
-di tangenza.</p>
+<ul>
+<li>Grafico che sale: $v &gt; 0$.</li>
+<li>Grafico che scende: $v &lt; 0$.</li>
+<li>Tangente orizzontale (massimi e minimi del grafico): $v = 0$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f14fr2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="55" y1="190" x2="290" y2="190" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f14fr2)"/>
-<line x1="55" y1="190" x2="55" y2="20" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f14fr2)"/>
-<text x="296" y="195" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">t (s)</text>
-<text x="35" y="18" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x (m)</text>
-<line x1="90" y1="186" x2="90" y2="194" stroke="var(--inchiostro)"/>
-<text x="83" y="207" font-size="11.5" fill="var(--inchiostro)" font-family="var(--sans)">1</text>
-<line x1="230" y1="186" x2="230" y2="194" stroke="var(--inchiostro)"/>
-<text x="223" y="207" font-size="11.5" fill="var(--inchiostro)" font-family="var(--sans)">4</text>
-<line x1="51" y1="150" x2="59" y2="150" stroke="var(--inchiostro)"/>
-<text x="30" y="154" font-size="11.5" fill="var(--inchiostro)" font-family="var(--sans)">6</text>
-<line x1="51" y1="60" x2="59" y2="60" stroke="var(--inchiostro)"/>
-<text x="30" y="64" font-size="11.5" fill="var(--inchiostro)" font-family="var(--sans)">9</text>
-<line x1="70" y1="180" x2="270" y2="40" stroke="var(--verde)" stroke-width="2"/>
-<circle cx="90" cy="150" r="4" fill="var(--rosso)"/>
-<circle cx="230" cy="60" r="4" fill="var(--rosso)"/>
-<line x1="90" y1="150" x2="230" y2="150" stroke="var(--grigio)" stroke-dasharray="3 3"/>
-<line x1="230" y1="150" x2="230" y2="60" stroke="var(--grigio)" stroke-dasharray="3 3"/>
-<text x="150" y="165" font-size="11.5" fill="var(--grigio)" font-family="var(--sans)">&Delta;t</text>
-<text x="238" y="108" font-size="11.5" fill="var(--grigio)" font-family="var(--sans)">&Delta;x</text>
-<text x="72" y="140" font-size="12" fill="var(--rosso)" font-family="var(--sans)">A</text>
-</svg>
-<p class="did">Due punti letti sulla tangente in $A$: da $t=1$ s, $x=6$ m a $t=4$ s, $x=9$ m.</p>
+<svg id="segno" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Diagramma spazio-tempo con la tangente in un punto mobile e il segno della velocità istantanea"></svg>
+<div class="cursore"><label for="cur-t">$t$</label><input id="cur-t" type="range" min="0.2" max="7.8" step="0.05" value="1"><span class="val" id="val-t"></span></div>
+<p class="did">Tangente nel punto mobile e segno della velocità istantanea.</p>
 </div>
 
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>$v_A = \dfrac{9\text{ m} - 6\text{ m}}{4\text{ s} - 1\text{ s}} = \dfrac{3\text{ m}}{3\text{ s}}
-= 1$ m/s</p>
-</div>
+<ul>
+<li>Tangente: retta, stesso rapporto $\Delta x/\Delta t$ fra due suoi punti qualsiasi.</li>
+<li>Velocità istantanea in $A$: da due punti letti sulla tangente in $A$.</li>
+</ul>
 
-<h2>Il segno della velocità istantanea</h2>
-
-<p>Il segno di $v$ segue quello della pendenza della tangente: positivo dove il grafico sale,
-negativo dove scende, nullo nei punti in cui la tangente è orizzontale, cioè nei massimi e nei
-minimi del grafico.</p>
+<h2>Esempio 1</h2>
 
 <div class="fig">
-<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="150" x2="460" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M30,170 C90,40 130,40 180,90 C230,140 250,175 300,175 C350,175 380,120 420,60 C440,35 450,25 460,20"
-  fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="55" y1="150" x2="105" y2="90" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="55" y="80" font-size="12" fill="var(--verde)" font-family="var(--sans)">v &gt; 0</text>
-<line x1="105" y1="42" x2="155" y2="42" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="100" y="32" font-size="12" fill="var(--blu)" font-family="var(--sans)">v = 0</text>
-<line x1="180" y1="70" x2="230" y2="128" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="222" y="115" font-size="12" fill="var(--rosso)" font-family="var(--sans)">v &lt; 0</text>
-<line x1="275" y1="175" x2="325" y2="175" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="272" y="192" font-size="12" fill="var(--blu)" font-family="var(--sans)">v = 0</text>
-<line x1="395" y1="95" x2="440" y2="42" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="400" y="35" font-size="12" fill="var(--verde)" font-family="var(--sans)">v &gt; 0</text>
-</svg>
-<p class="did">Le tangenti nei diversi punti mostrano dove la velocità istantanea è positiva,
-negativa o nulla.</p>
+<svg id="tan" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Tangente in A con due punti letti: t = 1 s, x = 6 m e t = 4 s, x = 9 m"></svg>
+<p class="did">Tangente in $A$: punti $(1\ \text{s};\ 6\ \text{m})$ e $(4\ \text{s};\ 9\ \text{m})$.</p>
 </div>
 
-<h2>Conversione fra km/h e m/s</h2>
+<p class="eq">$$v_A = \frac{9\ \text{m} - 6\ \text{m}}{4\ \text{s} - 1\ \text{s}} = \frac{3\ \text{m}}{3\ \text{s}} = 1\ \text{m/s}$$</p>
 
-<p>Le due unità si convertono l'una nell'altra scrivendo per esteso i fattori di conversione
-$1$ h $= 3600$ s e $1$ km $= 1000$ m:</p>
-
-<div class="formula-box">
-$$88\ \frac{\text{km}}{\text{h}} \cdot \frac{1\text{ h}}{3600\text{ s}} \cdot
-\frac{1000\text{ m}}{1\text{ km}} = 88 \cdot \frac{1000}{3600}\ \frac{\text{m}}{\text{s}} =
-\frac{88}{3{,}6}\ \frac{\text{m}}{\text{s}} \approx 24{,}4\ \frac{\text{m}}{\text{s}}$$
+<div class="def">
+<span class="et">Conversione &middot; km/h e m/s</span>
+<ul>
+<li>$1\ \text{h} = 3600\ \text{s}$, $\ 1\ \text{km} = 1000\ \text{m}$.</li>
+<li>Da km/h a m/s: diviso $3{,}6$. Da m/s a km/h: per $3{,}6$.</li>
+</ul>
 </div>
 
-<p>Per passare da km/h a m/s si divide per $3{,}6$. Nel verso opposto si moltiplica per $3{,}6$:</p>
+<h2>Esempio 2</h2>
 
-<div class="formula-box">
-$$31\ \frac{\text{m}}{\text{s}} \cdot \frac{3600\text{ s}}{1\text{ h}} \cdot
-\frac{1\text{ km}}{1000\text{ m}} = 31 \cdot 3{,}6\ \frac{\text{km}}{\text{h}} \approx
-112\ \frac{\text{km}}{\text{h}}$$
-</div>
+<p class="eq">$$88\ \frac{\text{km}}{\text{h}} \cdot \frac{1\ \text{h}}{3600\ \text{s}} \cdot
+\frac{1000\ \text{m}}{1\ \text{km}} = \frac{88}{3{,}6}\ \frac{\text{m}}{\text{s}} \approx 24{,}4\ \frac{\text{m}}{\text{s}}$$</p>
+
+<p class="eq">$$31\ \frac{\text{m}}{\text{s}} \cdot \frac{3600\ \text{s}}{1\ \text{h}} \cdot
+\frac{1\ \text{km}}{1000\ \text{m}} = 31 \cdot 3{,}6\ \frac{\text{km}}{\text{h}} \approx
+112\ \frac{\text{km}}{\text{h}}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../13-velocita-scalare-media-e-velocita-media/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Velocità scalare media e velocità media</span></a><a class="successiva" href="../15-moto-rettilineo-uniforme/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Moto rettilineo uniforme</span></a></nav>
 <footer><p>Fisica seconda &middot; Cinematica &middot; Unità 04</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(s==='-'+(0).toFixed(d).replace('.',','))s=s.slice(1);return s.replace('-','\u2212');}
+  // piano cartesiano: t in s, x in m
+  function Piano(svg,id,o){
+    var P={X:function(t){return o.X0+o.SX*t;},Y:function(x){return o.Y0-o.SY*x;}};
+    var defs=el(svg,'defs',{}), m=el(defs,'marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});
+    el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'});
+    el(svg,'line',{x1:o.X0,y1:o.Y0,x2:o.X1,y2:o.Y0,stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#'+id+')'});
+    el(svg,'line',{x1:o.X0,y1:o.Y0,x2:o.X0,y2:o.Y1,stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#'+id+')'});
+    txt(svg,o.X1,o.Y0+30,'t (s)',{'text-anchor':'end','font-style':'italic',fill:'var(--inchiostro)'});
+    txt(svg,o.X0+8,o.Y1+6,'x (m)',{'text-anchor':'start','font-style':'italic',fill:'var(--inchiostro)'});
+    (o.tt||[]).forEach(function(t){el(svg,'line',{x1:P.X(t),y1:o.Y0-4,x2:P.X(t),y2:o.Y0+4,stroke:'var(--inchiostro)','stroke-width':1.2});txt(svg,P.X(t),o.Y0+18,String(t),{'font-size':12});});
+    (o.tx||[]).forEach(function(x){el(svg,'line',{x1:o.X0-4,y1:P.Y(x),x2:o.X0+4,y2:P.Y(x),stroke:'var(--inchiostro)','stroke-width':1.2});txt(svg,o.X0-9,P.Y(x)+4,String(x),{'font-size':12,'text-anchor':'end'});});
+    P.curva=function(f,a,b,att){var d='';for(var i=0;i<=200;i++){var t=a+(b-a)*i/200;d+=(i?'L':'M')+P.X(t).toFixed(1)+','+P.Y(f(t)).toFixed(1);}return el(svg,'path',Object.assign({d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.2},att||{}));};
+    // retta di pendenza k per (t0,x0), ritagliata sul rettangolo del piano
+    P.retta=function(e,t0,x0,k,ta,tb){
+      var a=Math.max(ta,0), b=Math.min(tb,o.tmax);
+      function lim(t){return x0+k*(t-t0);}
+      if(k>0){a=Math.max(a,t0+(0-x0)/k);b=Math.min(b,t0+(o.xmax-x0)/k);}
+      if(k<0){a=Math.max(a,t0+(o.xmax-x0)/k);b=Math.min(b,t0+(0-x0)/k);}
+      e.setAttribute('x1',P.X(a));e.setAttribute('y1',P.Y(lim(a)));e.setAttribute('x2',P.X(b));e.setAttribute('y2',P.Y(lim(b)));
+    };
+    return P;
+  }
+
+  // 1. dalla secante alla tangente: x(t) = 1 + 4t - 0,5t^2, A in t = 1 s
+  (function(){
+    var svg=document.getElementById('sec'), cur=document.getElementById('cur-dt'), val=document.getElementById('val-dt');
+    var P=Piano(svg,'fsec',{X0:50,Y0:220,SX:60,SY:20,X1:472,Y1:14,tmax:6.8,xmax:9.8,tt:[1,2,3,4,5,6],tx:[2,4,6,8]});
+    function f(t){return 1+4*t-0.5*t*t;}
+    var tA=1, xA=f(tA), vA=4-tA;                      // v_A = 3 m/s
+    P.curva(f,0,6.6);
+    var tg=el(svg,'line',{stroke:'var(--verde)','stroke-width':2,'stroke-dasharray':'7,5'});
+    P.retta(tg,tA,xA,vA,-1,2.8);
+    var se=el(svg,'line',{stroke:'var(--blu)','stroke-width':2.2});
+    el(svg,'circle',{cx:P.X(tA),cy:P.Y(xA),r:5.5,fill:'var(--inchiostro)',stroke:'#fff','stroke-width':2});
+    txt(svg,P.X(tA)+12,P.Y(xA)+18,'A',{fill:'var(--inchiostro)','font-weight':700,'font-size':14});
+    var pB=el(svg,'circle',{r:6,fill:'var(--rosso)',stroke:'#fff','stroke-width':2}),
+        lB=txt(svg,0,0,'B',{fill:'var(--rosso)','font-weight':700,'font-size':14});
+    function disegna(){
+      var dt=+cur.value, tB=tA+dt, xB=f(tB), k=(xB-xA)/dt;
+      P.retta(se,tA,xA,k,tA-0.9,tB+0.9);
+      pB.setAttribute('cx',P.X(tB));pB.setAttribute('cy',P.Y(xB));
+      lB.setAttribute('x',P.X(tB)+4);lB.setAttribute('y',P.Y(xB)-12);
+      lB.style.display=dt<0.6?'none':'';
+      val.innerHTML='&Delta;t = '+num(dt,2)+' s &nbsp; v<sub>m</sub> = '+num(k,2)+' m/s'+
+        (dt<=0.2?' &nbsp; <span class="ok">&asymp; tangente: '+num(vA,0)+' m/s</span>':'');
+    }
+    cur.addEventListener('input',disegna);disegna();
+  })();
+
+  // 2. segno della velocità: x(t) = 0,25(t^3 - 12t^2 + 36t) + 1; massimo in t = 2 s, minimo in t = 6 s
+  (function(){
+    var svg=document.getElementById('segno'), cur=document.getElementById('cur-t'), val=document.getElementById('val-t');
+    var P=Piano(svg,'fseg',{X0:50,Y0:220,SX:50,SY:20,X1:472,Y1:14,tmax:8.2,xmax:9.8,tt:[2,4,6,8],tx:[2,4,6,8]});
+    function f(t){return 0.25*(t*t*t-12*t*t+36*t)+1;}
+    function v(t){return 0.75*(t-2)*(t-6);}
+    P.curva(f,0,8);
+    var tg=el(svg,'line',{'stroke-width':2.4,'stroke-linecap':'round'}),
+        pt=el(svg,'circle',{r:6,fill:'var(--rosso)',stroke:'#fff','stroke-width':2}),
+        lv=txt(svg,0,0,'',{'font-weight':700,'font-size':14});
+    function disegna(){
+      var t=+cur.value, x=f(t), k=v(t), px=P.X(t), py=P.Y(x);
+      var dy=-20*k, n=Math.sqrt(50*50+dy*dy), L=55;
+      var ux=50/n*L, uy=dy/n*L;
+      var zero=Math.abs(k)<0.08, c=zero?'var(--blu)':(k>0?'var(--verde)':'var(--rosso)');
+      tg.setAttribute('x1',px-ux);tg.setAttribute('y1',py-uy);tg.setAttribute('x2',px+ux);tg.setAttribute('y2',py+uy);
+      tg.setAttribute('stroke',c);
+      pt.setAttribute('cx',px);pt.setAttribute('cy',py);
+      var s=zero?'v = 0':(k>0?'v > 0':'v < 0');
+      lv.textContent=s;lv.setAttribute('fill',c);
+      lv.setAttribute('x',110);lv.setAttribute('y',206);
+      val.innerHTML='t = '+num(t,2)+' s &nbsp; v = '+num(zero?0:k,2)+' m/s'+
+        (zero?' &nbsp; <span class="ok">tangente orizzontale</span>':'');
+    }
+    cur.addEventListener('input',disegna);disegna();
+  })();
+
+  // 3. lettura della tangente: retta di pendenza 1 m/s per (1 s; 6 m) e (4 s; 9 m)
+  (function(){
+    var svg=document.getElementById('tan');
+    var P=Piano(svg,'ftan',{X0:50,Y0:220,SX:64,SY:20,X1:392,Y1:14,tmax:5.1,xmax:9.8,tt:[1,4],tx:[6,9]});
+    [[1,6],[4,9]].forEach(function(q){
+      el(svg,'line',{x1:P.X(q[0]),y1:P.Y(q[1]),x2:P.X(q[0]),y2:220,stroke:'var(--riga)','stroke-width':1.2,'stroke-dasharray':'4,4'});
+      el(svg,'line',{x1:50,y1:P.Y(q[1]),x2:P.X(q[0]),y2:P.Y(q[1]),stroke:'var(--riga)','stroke-width':1.2,'stroke-dasharray':'4,4'});
+    });
+    var r=el(svg,'line',{stroke:'var(--verde)','stroke-width':2.4});
+    P.retta(r,1,6,1,0,5);
+    el(svg,'line',{x1:P.X(1),y1:P.Y(6),x2:P.X(4),y2:P.Y(6),stroke:'var(--grigio)','stroke-width':1.4,'stroke-dasharray':'5,4'});
+    el(svg,'line',{x1:P.X(4),y1:P.Y(6),x2:P.X(4),y2:P.Y(9),stroke:'var(--grigio)','stroke-width':1.4,'stroke-dasharray':'5,4'});
+    txt(svg,P.X(2.5),P.Y(6)+18,'Δt = 3 s',{'font-size':12});
+    txt(svg,P.X(4)+10,P.Y(7.5)+4,'Δx = 3 m',{'font-size':12,'text-anchor':'start'});
+    [[1,6],[4,9]].forEach(function(q){el(svg,'circle',{cx:P.X(q[0]),cy:P.Y(q[1]),r:5.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':2});});
+    txt(svg,P.X(1)-6,P.Y(6)-12,'A',{fill:'var(--rosso)','font-weight':700,'font-size':14,'text-anchor':'end'});
+  })();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

@@ -17,3 +17,8 @@ Esecuzione delle 16:18 UTC (due unità).
 - matematica-5 unità 05 (Limiti notevoli): pubblicata, commit e36f7da. Da controllare: tolti i sette titoletti numerati e il riquadro di riepilogo «Da tenere a memoria» (ripetizione dei sette riquadri verdi): valutare se il riepilogo va ripristinato. Riscritto $\ln(1+x)^{1/x}$ come $\ln[(1+x)^{1/x}]$. Figure invariate (già con cursore); nessun esempio, nessuna figura decorativa.
 - fisica-5 unità 06 (Spettrometro di massa): saltata (già revisionata).
 - fisica-1 unità 07 (Ordini di grandezza): pubblicata (commit nella riga della coda). Da controllare: tolto l'esempio 7,8·10³ m → 10⁴ m (tenuti 4800 kg e 5,0·10⁸ s). Contenuto dubbio non modificato: la soglia 5 è una convenzione; con la distanza lineare il punto medio fra 10ⁿ e 10ⁿ⁺¹ è 5,5·10ⁿ, con quella logaritmica √10 ≈ 3,16·10ⁿ. Cursore testuale sostituito da un SVG con soglia e punto mobile.
+
+Esecuzione delle 20:03 UTC (due unità).
+
+- matematica-2 unità 07 (Sistemi letterali): pubblicata, commit d164600. Da controllare: tolta la seconda nota «Attenzione» (i valori critici nascono dai conti) perché ripeteva il metodo; titoletti h3 dei casi a = 0 e a = 6 sostituiti da righe di testo. Nessuna correzione, nessuna figura.
+- fisica-2 unità 04 (Velocità istantanea): pubblicata (commit nella riga della coda). Tre figure ridisegnate con forma calcolata (due con cursore: Δt sulla secante, t per il segno della velocità); le curve sono funzioni scelte per l'illustrazione, non tratte dalla traccia. Nessuna correzione, nessun esempio tolto.
