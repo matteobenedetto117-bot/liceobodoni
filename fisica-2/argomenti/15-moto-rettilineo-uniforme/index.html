@@ -5,19 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moto rettilineo uniforme — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.definizione{background:#fff;border-left:3px solid var(--rosso);border-radius:0 8px 8px 0;padding:14px 20px;margin:22px 0}
-.esempio{background:#f7f9fb;border-radius:10px;padding:16px 20px;margin:22px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,79 +49,115 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Cinematica &middot; Unità 05</p>
   <h1>Moto rettilineo uniforme</h1>
-  <p class="sommario">C'è un caso in cui la velocità istantanea non cambia mai: allora il
-  grafico spazio-tempo è una retta, e basta un solo numero per sapere dove si trova il corpo in
-  qualsiasi istante.</p>
 </header>
 
-<div class="definizione">
-<p>Il <strong>moto rettilineo uniforme</strong> (MRU) è un moto a traiettoria rettilinea e
-velocità costante: $v \to$ costante. Poiché la velocità non cambia, la velocità media su
-qualunque intervallo e la velocità istantanea in ogni punto coincidono sempre, $v_m =
-v_{\text{istantanea}}$.</p>
+<div class="def">
+<span class="et">Definizione &middot; moto rettilineo uniforme (MRU)</span>
+<ul>
+<li>Traiettoria rettilinea, velocità costante.</li>
+<li>Velocità media su qualunque intervallo uguale alla velocità istantanea: $v_m = v$.</li>
+</ul>
 </div>
+
+<div class="def">
+<span class="et">Definizione &middot; legge oraria</span>
+<p>Funzione $x(t)$: posizione del corpo in ogni istante $t$. Grafico: diagramma spazio-tempo.</p>
+</div>
+
+<ul>
+<li>Istante iniziale $t = 0$, posizione iniziale $x_0$.</li>
+<li>Velocità costante: rapporto $\Delta x/\Delta t$ uguale su ogni intervallo.</li>
+</ul>
+
+<p class="eq">$$v = \frac{\Delta x}{\Delta t} = \frac{x - x_0}{t - 0} \qquad\Longrightarrow\qquad x = x_0 + vt$$</p>
+
+<p class="leg">$x$ posizione (m) &middot; $x_0$ posizione iniziale (m) &middot; $v$ velocità (m/s) &middot; $t$ tempo (s)</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f15fr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="50" y1="190" x2="300" y2="190" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f15fr)"/>
-<line x1="50" y1="190" x2="50" y2="20" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f15fr)"/>
-<text x="305" y="195" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="32" y="18" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<line x1="65" y1="150" x2="270" y2="45" stroke="var(--verde)" stroke-width="2"/>
-<circle cx="65" cy="150" r="4" fill="var(--rosso)"/>
-<circle cx="200" cy="80" r="4" fill="var(--rosso)"/>
-<line x1="50" y1="150" x2="65" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="28" y="154" font-size="12" fill="var(--rosso)" font-family="var(--sans)">x&#8320;</text>
-<line x1="200" y1="80" x2="200" y2="190" stroke="var(--grigio)" stroke-dasharray="3 3"/>
-<line x1="200" y1="80" x2="50" y2="80" stroke="var(--grigio)" stroke-dasharray="3 3"/>
-<text x="196" y="204" font-size="12" fill="var(--grigio)" font-family="var(--sans)">t</text>
-<text x="28" y="84" font-size="12" fill="var(--grigio)" font-family="var(--sans)">x</text>
-</svg>
-<p class="did">Nel MRU il grafico spazio-tempo è una retta: parte da $x_0$ all'istante $t=0$ e
-sale con pendenza costante $v$.</p>
+<svg id="mru" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Diagramma spazio-tempo del moto rettilineo uniforme: retta che parte da x0 = 3 m con pendenza 1,3 m/s"></svg>
+<div class="cursore"><label for="cur-t">$t$</label><input id="cur-t" type="range" min="0" max="5" step="0.1" value="2.7"><span class="val" id="val-t"></span></div>
+<p class="did">Diagramma spazio-tempo del MRU: retta di pendenza $v$ che parte da $x_0$.</p>
 </div>
 
-<h2>Legge oraria del MRU</h2>
+<h2>Esempio</h2>
 
-<div class="definizione">
-<p>La <strong>legge oraria</strong> di un moto è la funzione $x(t)$ che dà la posizione del corpo
-in ogni istante $t$: a ogni istante corrisponde una sola posizione. Il suo grafico è il diagramma
-spazio-tempo del moto.</p>
-</div>
+<p>$x_0 = 3$ m, $\ v = 1{,}3$ m/s, $\ t = 2{,}7$ s. Posizione $x$?</p>
 
-<p>Partiamo da un istante $t=0$ e da una posizione iniziale $x_0$. Poiché la velocità è
-costante, il rapporto incrementale calcolato fra l'istante iniziale e un istante generico $t$
-dà già il valore di $v$:</p>
-
-<div class="formula-box">
-$$v = \frac{\Delta x}{\Delta t} = \frac{x - x_0}{t - 0} = \frac{x-x_0}{t}$$
-</div>
-
-<p>Da qui, moltiplicando entrambi i membri per $t$ e isolando $x$:</p>
-
-<div class="formula-box">
-$$vt = x - x_0 \qquad\Longrightarrow\qquad x = x_0 + vt$$
-</div>
-
-<p>Questa è la <strong>legge oraria del moto rettilineo uniforme</strong>: dati la posizione di
-partenza $x_0$ e la velocità $v$, dice dove si trova il corpo a ogni istante $t$.</p>
-
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un corpo parte da $x_0 = 3$ m con velocità $v = 1{,}3$ m/s. Dove si trova all'istante
-$t = 2{,}7$ s?</p>
-<p>$$x = x_0 + vt = 3\text{ m} + 1{,}3\ \tfrac{\text{m}}{\text{s}} \cdot 2{,}7\text{ s} =
-6{,}51\text{ m}$$</p>
-</div>
+<p class="eq">$$x = x_0 + vt = 3\ \text{m} + 1{,}3\ \tfrac{\text{m}}{\text{s}} \cdot 2{,}7\ \text{s} = 6{,}51\ \text{m}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../14-velocita-istantanea/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Velocità istantanea</span></a><a class="successiva" href="../16-problemi-di-incontro/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Problemi di incontro</span></a></nav>
 <footer><p>Fisica seconda &middot; Cinematica &middot; Unità 05</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(s==='-'+(0).toFixed(d).replace('.',','))s=s.slice(1);return s.replace('-','\u2212');}
+  // piano cartesiano: t in s, x in m
+  function Piano(svg,id,o){
+    var P={X:function(t){return o.X0+o.SX*t;},Y:function(x){return o.Y0-o.SY*x;}};
+    var defs=el(svg,'defs',{}), m=el(defs,'marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});
+    el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'});
+    el(svg,'line',{x1:o.X0,y1:o.Y0,x2:o.X1,y2:o.Y0,stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#'+id+')'});
+    el(svg,'line',{x1:o.X0,y1:o.Y0,x2:o.X0,y2:o.Y1,stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#'+id+')'});
+    txt(svg,o.X1,o.Y0+30,'t (s)',{'text-anchor':'end','font-style':'italic',fill:'var(--inchiostro)'});
+    txt(svg,o.X0+8,o.Y1+6,'x (m)',{'text-anchor':'start','font-style':'italic',fill:'var(--inchiostro)'});
+    (o.tt||[]).forEach(function(t){el(svg,'line',{x1:P.X(t),y1:o.Y0-4,x2:P.X(t),y2:o.Y0+4,stroke:'var(--inchiostro)','stroke-width':1.2});txt(svg,P.X(t),o.Y0+18,String(t),{'font-size':12});});
+    (o.tx||[]).forEach(function(x){el(svg,'line',{x1:o.X0-4,y1:P.Y(x),x2:o.X0+4,y2:P.Y(x),stroke:'var(--inchiostro)','stroke-width':1.2});txt(svg,o.X0-9,P.Y(x)+4,String(x),{'font-size':12,'text-anchor':'end'});});
+    P.curva=function(f,a,b,att){var d='';for(var i=0;i<=200;i++){var t=a+(b-a)*i/200;d+=(i?'L':'M')+P.X(t).toFixed(1)+','+P.Y(f(t)).toFixed(1);}return el(svg,'path',Object.assign({d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.2},att||{}));};
+    // retta di pendenza k per (t0,x0), ritagliata sul rettangolo del piano
+    P.retta=function(e,t0,x0,k,ta,tb){
+      var a=Math.max(ta,0), b=Math.min(tb,o.tmax);
+      function lim(t){return x0+k*(t-t0);}
+      if(k>0){a=Math.max(a,t0+(0-x0)/k);b=Math.min(b,t0+(o.xmax-x0)/k);}
+      if(k<0){a=Math.max(a,t0+(o.xmax-x0)/k);b=Math.min(b,t0+(0-x0)/k);}
+      e.setAttribute('x1',P.X(a));e.setAttribute('y1',P.Y(lim(a)));e.setAttribute('x2',P.X(b));e.setAttribute('y2',P.Y(lim(b)));
+    };
+    return P;
+  }
+
+
+  // legge oraria x = 3 + 1,3 t (dati dell'esempio)
+  (function(){
+    var svg=document.getElementById('mru'), cur=document.getElementById('cur-t'), val=document.getElementById('val-t');
+    var P=Piano(svg,'fmru',{X0:50,Y0:220,SX:76,SY:18,X1:472,Y1:14,tmax:5.4,xmax:10.8,tt:[1,2,3,4,5],tx:[2,4,6,8,10]});
+    var x0=3, v=1.3;
+    function f(t){return x0+v*t;}
+    var gv=el(svg,'line',{stroke:'var(--grigio)','stroke-width':1.3,'stroke-dasharray':'4,4'}),
+        go=el(svg,'line',{stroke:'var(--grigio)','stroke-width':1.3,'stroke-dasharray':'4,4'});
+    P.curva(f,0,5,{stroke:'var(--blu)'});
+    el(svg,'circle',{cx:P.X(0),cy:P.Y(x0),r:5,fill:'var(--inchiostro)',stroke:'#fff','stroke-width':2});
+    txt(svg,P.X(0)+10,P.Y(x0)+18,'x\u2080',{fill:'var(--inchiostro)','font-weight':700,'font-size':14,'text-anchor':'start'});
+    var pt=el(svg,'circle',{r:6,fill:'var(--rosso)',stroke:'#fff','stroke-width':2});
+    function disegna(){
+      var t=+cur.value, x=f(t), px=P.X(t), py=P.Y(x);
+      gv.setAttribute('x1',px);gv.setAttribute('y1',py);gv.setAttribute('x2',px);gv.setAttribute('y2',220);
+      go.setAttribute('x1',50);go.setAttribute('y1',py);go.setAttribute('x2',px);go.setAttribute('y2',py);
+      pt.setAttribute('cx',px);pt.setAttribute('cy',py);
+      val.innerHTML='t = '+num(t,1)+' s &nbsp; x = '+num(x,2)+' m'+
+        (Math.abs(t-2.7)<0.01?' &nbsp; <span class="ok">esempio</span>':'');
+    }
+    cur.addEventListener('input',disegna);disegna();
+  })();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
