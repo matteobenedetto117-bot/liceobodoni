@@ -225,6 +225,7 @@ teorema del confronto, a pagina 21.
      mostra il valore di sin x/x e la larghezza della stretta, che si annulla avvicinandosi a 0.
 - Verifica con SymPy dei sette limiti e dell'identità (1−cos x)/x = sin²x/(x(1+cos x)); controllo
   numerico di sin x < x < tan x per x = 0,05 · 0,3 · 0,7 · 0,9 · 1,4.
+- Revisione: titolo invariato. Tolti l'introduzione, i sette titoletti numerati e il titoletto «Riepilogo» con il riquadro «Da tenere a memoria» (ripeteva i sette riquadri): restano in fila derivazioni e riquadri verdi «Limite notevole n. N». Testo telegrafico (forma indeterminata, passaggio, fattori che tendono a…), didascalie in una riga. Correzione di scrittura: $\ln(1+x)^{1/x}$ riscritto $\ln\left[(1+x)^{1/x}\right]$, per non leggerlo come potenza del logaritmo. Verificati con SymPy i sette limiti e l'identità $(1-\cos x)/x=\sin^2x/(x(1+\cos x))$. Figure (cerchio goniometrico, stretta cos x < sin x/x < 1) invariate nel disegno, già con cursore; larghezza massima 420px. Nessun esempio tolto (la pagina non ne ha), nessuna figura decorativa.
 
 ## Unità 06 — Infinitesimi e infiniti, gerarchia, principio di sostituzione
 - Parole: 649 su circa 4,5 pagine di traccia equivalenti (coda di pag. 23, dopo il limite notevole
