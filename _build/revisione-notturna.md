@@ -42,8 +42,8 @@ Un'unità non pubblicata non blocca la coda: l'esecuzione successiva passa alla 
 * Repo `matteobenedetto117-bot/liceobodoni`, branch `main`, pubblicato con GitHub Pages.
 * Si lavora **solo** nella cartella locale collegata: `D:\Documents\Lavoro\Scuola\Bodoni\2026_2027\liceobodoni` (in `device_bash`: `$HOME/mnt/liceobodoni`). Il push dal sandbox cloud è bloccato: non provarlo.
 * Se la cartella non è raggiungibile: riprova una volta; se fallisce ancora, termina e scrivi nel messaggio finale che il lavoro non è iniziato.
-* Inizio sessione: `git pull`.
-* **Nessuna richiesta di permesso di cancellazione** (di notte nessuno può rispondere). Se git segnala `Operation not permitted` su un file `.lock`: sposta il file in `_to_delete/` nella stessa cartella (`mv`), poi riprova il comando. Esegui i comandi git uno alla volta, mai in parallelo.
+* Inizio esecuzione: `git pull` (via `git-sicuro.sh`). Se il repo locale ha commit non ancora inviati, il primo push li invia insieme.
+* **Nessuna richiesta di permesso di cancellazione** (di notte nessuno può rispondere). Nella cartella collegata git non riesce a cancellare i propri `.lock`: **esegui ogni comando git con `bash _build/git-sicuro.sh <argomenti>`** (per esempio `bash _build/git-sicuro.sh commit -m …`), che dopo il comando sposta i `.lock` rimasti in `.git/_to_delete/`. Gli avvisi `unable to unlink … tmp_obj_…` sono innocui. Esegui i comandi git uno alla volta, mai in parallelo.
 * Identità (config locale): `user.name = Claude`, `user.email = noreply@anthropic.com`.
 * Commit: `<classe> unità NN: <sintesi>` + righe di attribuzione richieste dalla sessione.
 * Push, token solo nell'URL del comando, mai salvato nel remote:
