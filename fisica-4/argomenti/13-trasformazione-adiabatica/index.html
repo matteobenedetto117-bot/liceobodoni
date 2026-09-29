@@ -3,22 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trasformazione adiabatica — Fisica quarta</title>
+<title>Trasformazione adiabatica e primo principio — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px;border-left:4px solid var(--rosso);background:#fdf6f5}
+.nota p{line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-table.riassunto{width:100%;border-collapse:collapse;margin:22px 0;font-size:.95rem}
-table.riassunto th,table.riassunto td{border:1px solid var(--riga);padding:8px 10px;text-align:center}
-table.riassunto th{background:var(--blu-chiaro);font-family:var(--sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.03em}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.foglio>ul{padding-left:1.4em}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio>.comm{font-family:var(--sans);font-size:.85rem;color:var(--grigio);text-align:center;margin-top:var(--r)}
+.foglio>.comm+.eq{margin-top:0}
+.foglio>.fig+.comm{margin-top:var(--r)}
+table.riassunto{border-collapse:collapse;margin:var(--r) auto 0;font-size:.9rem;line-height:var(--r);background:#fff}
+table.riassunto th{font-family:var(--sans);font-weight:600;color:var(--blu);padding:0 14px;border-bottom:1px solid var(--inchiostro);text-align:center}
+table.riassunto td{padding:0 14px;text-align:center;border-top:1px solid var(--riga)}
+table.riassunto td:first-child{font-family:var(--sans);text-align:left}
+.tab{overflow-x:auto}
+.foglio>.tab+p{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,177 +57,213 @@ table.riassunto th{background:var(--blu-chiaro);font-family:var(--sans);font-siz
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 11</p>
-  <h1>Trasformazione adiabatica</h1>
-  <p class="sommario">Un gas si trasforma adiabaticamente quando non scambia calore con
-  l'ambiente: succede quando la trasformazione &egrave; troppo rapida perch&eacute; il calore
-  faccia in tempo a passare, o quando il recipiente &egrave; isolato termicamente. Vediamo che
-  relazione lega pressione, volume e temperatura in questo caso, diversa da quella
-  dell'isoterma.</p>
+  <p class="occhiello">Termodinamica &middot; Unità 11</p>
+  <h1>Trasformazione adiabatica e primo principio</h1>
 </header>
 
-<h2>Nessuno scambio di calore</h2>
+<div class="fig">
+<svg id="fig-cil" viewBox="0 0 420 270" style="width:100%;max-width:520px" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern id="isol11" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#eeebe3"/><line x1="0" y1="0" x2="0" y2="8" stroke="var(--grigio)" stroke-width="1.6"/></pattern>
+</defs>
+<path d="M186,26 L186,236 L306,236 L306,26 L296,26 L296,226 L196,226 L196,26 Z" fill="url(#isol11)" stroke="var(--inchiostro)" stroke-width="1.6"/>
+<rect class="gas" x="196" width="100" fill="var(--blu-chiaro)"/>
+<g class="part"></g>
+<g class="rif"></g>
+<rect class="pist" x="196" width="100" height="10" fill="#eeebe3" stroke="var(--inchiostro)" stroke-width="1.2"/>
+<rect class="asta" x="242" y="0" width="8" fill="var(--grigio)"/>
+<text x="246" y="256" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">pareti e pistone isolanti</text>
+<g class="val"></g>
+</svg>
+<div class="cursore"><label for="cur-cil">V</label><input id="cur-cil" type="range" min="0.012" max="0.036" step="0.0002" value="0.0265"></div>
+</div>
 
-<p>Consideriamo un gas racchiuso in un cilindro isolato, cos&igrave; che non pu&ograve;
-scambiare calore con l'esterno: se il pistone si sposta, comprimendo o espandendo il gas, la
-trasformazione &egrave; adiabatica.</p>
+<p class="comm">Il gas non scambia calore con l'esterno</p>
+<p class="eq principio">$$Q=0$$</p>
+
+<div class="nota"><p>Le relazioni che seguono valgono per un'adiabatica reversibile.</p></div>
+
+<p>Nel piano $P$-$V$ l'adiabatica è più inclinata dell'isoterma che passa per lo stesso punto:
+in una compressione la temperatura sale, quindi la pressione cresce più in fretta che a
+temperatura costante.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
-<rect x="40" y="60" width="70" height="120" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
-<rect x="40" y="92" width="70" height="88" fill="var(--blu-chiaro)" stroke="none"/>
-<circle cx="58" cy="120" r="2.6" fill="var(--blu)"/><circle cx="75" cy="150" r="2.6" fill="var(--blu)"/>
-<circle cx="92" cy="105" r="2.6" fill="var(--blu)"/><circle cx="65" cy="165" r="2.6" fill="var(--blu)"/>
-<text x="75" y="200" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">A</text>
-<rect x="180" y="30" width="70" height="150" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
-<rect x="180" y="92" width="70" height="88" fill="var(--blu-chiaro)" stroke="none"/>
-<circle cx="198" cy="130" r="2.6" fill="var(--blu)"/><circle cx="215" cy="110" r="2.6" fill="var(--blu)"/>
-<circle cx="232" cy="150" r="2.6" fill="var(--blu)"/><circle cx="205" cy="165" r="2.6" fill="var(--blu)"/>
-<circle cx="238" cy="100" r="2.6" fill="var(--blu)"/>
-<text x="215" y="200" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-<text x="150" y="115" text-anchor="middle" font-family="var(--sans)" font-size="20" fill="var(--rosso)">&#8594;</text>
-<text x="150" y="20" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">Q = 0 (parete isolante)</text>
+<svg id="fig-pv" viewBox="0 0 470 285" style="width:100%;max-width:560px" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="m11a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
+</defs>
+<g class="graf"></g>
 </svg>
-<p class="did">Il gas passa da $A$ a $B$ senza alcuno scambio di calore con l'esterno: tutto
-l'effetto della trasformazione si scarica sull'energia interna.</p>
+<div class="cursore"><label for="cur-pv">V</label><input id="cur-pv" type="range" min="0.012" max="0.036" step="0.0002" value="0.0265"></div>
 </div>
-
-<div class="riquadro">
-<span class="etichetta">Trasformazione adiabatica</span>
-$$Q=0$$
-</div>
-
-<p>Nel piano $P$-$V$ la curva adiabatica che parte da uno stesso punto &egrave; sempre pi&ugrave;
-inclinata di un'isoterma: comprimendo senza lasciar uscire calore, la temperatura sale, e con
-essa la pressione cresce pi&ugrave; rapidamente che a temperatura costante.</p>
-
-<div class="fig">
-<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
-<path d="M50,220 L280,220" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M50,220 L50,30" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="290" y="224" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">V</text>
-<text x="38" y="30" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">P</text>
-<path d="M70,60 C110,90 180,110 260,124" stroke="var(--verde)" stroke-width="2" fill="none"/>
-<text x="264" y="120" font-family="var(--sans)" font-size="12" fill="var(--verde)">T = 400 K</text>
-<path d="M70,100 C110,125 180,142 260,154" stroke="var(--verde)" stroke-width="2" fill="none"/>
-<text x="264" y="158" font-family="var(--sans)" font-size="12" fill="var(--verde)">T = 300 K</text>
-<text x="130" y="200" font-family="var(--sans)" font-size="12" fill="var(--grigio)">isoterme</text>
-<path d="M100,45 C120,90 140,130 160,180" stroke="var(--rosso)" stroke-width="2.6" fill="none"/>
-<circle cx="100" cy="45" r="4" fill="var(--rosso)"/>
-<circle cx="160" cy="180" r="4" fill="var(--rosso)"/>
-<text x="88" y="38" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="168" y="186" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">B</text>
-</svg>
-<p class="did">La curva adiabatica (in rosso) &egrave; pi&ugrave; inclinata delle isoterme
-(in verde) che incontra.</p>
-</div>
-
-<h2>La relazione fra pressione e volume</h2>
 
 <p>Al posto di $PV=\text{costante}$ dell'isoterma, in una trasformazione adiabatica vale</p>
 
-<div class="formula-box">
-$$PV^{\gamma}=\text{costante}$$
-</div>
+<p class="eq principio">$$PV^{\gamma}=\text{costante}$$</p>
+<p class="comm">$\gamma$ (gamma) è il rapporto fra i calori specifici molari a pressione e a volume costante</p>
+<p class="eq">$$\gamma=\frac{C_p}{C_v}$$</p>
+<p class="comm">Per un gas monoatomico, con $C_p=\tfrac{5}{2}R$ e $C_v=\tfrac{3}{2}R$</p>
+<p class="eq">$$\gamma=\frac{\tfrac{5}{2}R}{\tfrac{3}{2}R}=\frac{5}{3}$$</p>
 
-<p>dove l'esponente $\gamma$ (gamma) &egrave; il rapporto fra i calori specifici molari a
-pressione e a volume costante:</p>
+<p>Dalla stessa relazione si ricavano altre due forme, utili a seconda delle grandezze note.</p>
 
-<div class="formula-box">
-$$\gamma=\frac{C_p}{C_v}$$
-</div>
+<p class="comm">Sostituisco $P=\dfrac{nRT}{V}$ in $PV^{\gamma}=\text{costante}$</p>
+<p class="eq">$$nRT\,V^{\gamma-1}=\text{costante}$$</p>
+<p class="comm">$n$ e $R$ sono costanti</p>
+<p class="eq">$$TV^{\gamma-1}=\text{costante}$$</p>
+<p class="comm">Elevo $PV^{\gamma}=\text{costante}$ alla $1/\gamma$ e sostituisco $V=\dfrac{nRT}{P}$</p>
+<p class="eq">$$P^{\frac{1}{\gamma}}\cdot\frac{nRT}{P}=\text{costante}$$</p>
+<p class="comm">Raccolgo le potenze di $P$</p>
+<p class="eq">$$P^{\frac{1}{\gamma}-1}\,T=\text{costante}$$</p>
+<p class="comm">Fra due stati 1 e 2 della stessa trasformazione</p>
+<p class="eq">$$P_1V_1^{\gamma}=P_2V_2^{\gamma}\qquad T_1V_1^{\gamma-1}=T_2V_2^{\gamma-1}\qquad P_1^{\frac{1}{\gamma}-1}T_1=P_2^{\frac{1}{\gamma}-1}T_2$$</p>
 
-<p>Per un gas monoatomico, con $C_p=\tfrac{5}{2}R$ e $C_v=\tfrac{3}{2}R$,</p>
+<p class="comm">Primo principio</p>
+<p class="eq">$$\Delta E_{\text{int}}=Q-L$$</p>
+<p class="comm">Con $Q=0$, per una trasformazione adiabatica</p>
+<p class="eq principio">$$\Delta E_{\text{int}}=-L$$</p>
 
-<div class="formula-box">
-$$\gamma=\frac{\tfrac{5}{2}R}{\tfrac{3}{2}R}=\frac{5}{3}$$
-</div>
+<p>Il lavoro compiuto dal gas è pagato dalla sua energia interna:</p>
 
-<p>Da $PV^{\gamma}=\text{costante}$ si ricavano altre due forme della stessa relazione, utili a
-seconda di quali grandezze si conoscono. Sostituendo $P=\dfrac{nRT}{V}$ (dall'equazione di
-stato) si ottiene $nRT\,V^{\gamma-1}=\text{costante}$, e poich&eacute; $n$ e $R$ sono costanti
-del sistema,</p>
+<ul>
+<li>Espansione ($L&gt;0$): $\Delta E_{\text{int}}&lt;0$, il gas si raffredda.</li>
+<li>Compressione ($L&lt;0$): $\Delta E_{\text{int}}&gt;0$, il gas si riscalda.</li>
+</ul>
 
-<div class="formula-box">
-$$TV^{\gamma-1}=\text{costante}$$
-</div>
+<h2>Tabella riassuntiva</h2>
 
-<p>Analogamente, elevando $PV^{\gamma}=\text{costante}$ alla $1/\gamma$ si ha
-$P^{1/\gamma}V=\text{costante}'$; sostituendo qui $V=\dfrac{nRT}{P}$ e raccogliendo le potenze
-di $P$ si arriva a</p>
-
-<div class="formula-box">
-$$P^{\frac{1}{\gamma}-1}T=\text{costante}$$
-</div>
-
-<p>Fra due stati $1$ e $2$ della stessa trasformazione le tre relazioni si scrivono</p>
-
-<div class="formula-box">
-$$P_1V_1^{\gamma}=P_2V_2^{\gamma}\qquad
-T_1V_1^{\gamma-1}=T_2V_2^{\gamma-1}\qquad
-P_1^{\frac{1}{\gamma}-1}T_1=P_2^{\frac{1}{\gamma}-1}T_2$$
-</div>
-
-<h2>Il primo principio in una adiabatica</h2>
-
-<p>Poich&eacute; $Q=0$, il primo principio $\Delta E_{int}=Q-L$ si riduce a</p>
-
-<div class="riquadro">
-<span class="etichetta">Primo principio per una trasformazione adiabatica</span>
-$$\Delta E_{int}=-L$$
-</div>
-
-<p>tutto il lavoro compiuto dal gas viene pagato dalla sua energia interna, cio&egrave; dalla
-sua temperatura: un'espansione adiabatica raffredda il gas, una compressione adiabatica lo
-riscalda.</p>
-
-<h2>Le quattro trasformazioni a confronto</h2>
-
-<p>Raccogliamo qui i risultati ottenuti per isobara, isocora, isoterma e adiabatica, che
-condividono lo stesso primo principio ma lo declinano in modo diverso.</p>
-
+<div class="tab">
 <table class="riassunto">
 <tr><th>Trasformazione</th><th>Lavoro</th><th>Calore</th><th>Primo principio</th></tr>
-<tr><td>Isobara</td><td>$L=p\,\Delta V$</td><td>$Q=nC_p\Delta T$</td><td>$\Delta E_{int}=Q-p\Delta V$</td></tr>
-<tr><td>Isocora</td><td>$L=0$</td><td>$Q=nC_v\Delta T$</td><td>$\Delta E_{int}=Q$</td></tr>
-<tr><td>Isoterma</td><td>$L=nRT\ln\frac{V_f}{V_i}$</td><td>$Q=L$</td><td>$\Delta E_{int}=0$</td></tr>
-<tr><td>Adiabatica</td><td>$L=-\Delta E_{int}$</td><td>$Q=0$</td><td>$\Delta E_{int}=-L$</td></tr>
+<tr><td>Isobara</td><td>$L=P\,\Delta V$</td><td>$Q=nC_p\Delta T$</td><td>$\Delta E_{\text{int}}=Q-P\,\Delta V$</td></tr>
+<tr><td>Isocora</td><td>$L=0$</td><td>$Q=nC_v\Delta T$</td><td>$\Delta E_{\text{int}}=Q$</td></tr>
+<tr><td>Isoterma</td><td>$L=nRT\ln(V_f/V_i)$</td><td>$Q=L$</td><td>$\Delta E_{\text{int}}=0$</td></tr>
+<tr><td>Adiabatica</td><td>$L=-\Delta E_{\text{int}}$</td><td>$Q=0$</td><td>$\Delta E_{\text{int}}=-L$</td></tr>
 </table>
+</div>
 
-<p>In ogni caso, per un gas monoatomico $E_{int}=\tfrac{3}{2}nRT$ e quindi
-$\Delta E_{int}=\tfrac{3}{2}nR\,\Delta T$.</p>
+<p>Per un gas monoatomico, in ogni trasformazione $\Delta E_{\text{int}}=\tfrac{3}{2}nR\,\Delta T$.</p>
 
 <h2>Esempio</h2>
 
-<p>Una mole di gas monoatomico ($\gamma=5/3$) si trova inizialmente a $P_1=1{,}07\cdot10^5\
-\text{Pa}$ e $T_1=341\ \text{K}$; una compressione adiabatica la porta a
-$P_2=2{,}81\cdot10^5\ \text{Pa}$. Calcoliamo $T_2$.</p>
+<p>Una mole di gas monoatomico ($\gamma=5/3$) si trova a $P_1=1{,}07\cdot10^5\ \text{Pa}$ e
+$T_1=341\ \text{K}$; una compressione adiabatica la porta a $P_2=2{,}81\cdot10^5\ \text{Pa}$.
+Calcoliamo $T_2$.</p>
 
-<p>Usiamo la relazione fra $P$ e $T$, con $\dfrac{1}{\gamma}-1=-\dfrac{2}{5}$:</p>
-
-<div class="formula-box">
-$$P_1^{-2/5}T_1=P_2^{-2/5}T_2 \quad\Rightarrow\quad
-T_2=\left(\frac{P_2}{P_1}\right)^{2/5}T_1$$
-</div>
-
-<div class="formula-box">
-$$T_2=\left(\frac{2{,}81\cdot10^5}{1{,}07\cdot10^5}\right)^{2/5}\cdot341\ \text{K}\approx502\ \text{K}$$
-</div>
-
-<p>la compressione fa salire la temperatura di oltre $160\ \text{K}$, coerentemente con il
-fatto che tutto il lavoro subito dal gas si trasforma in energia interna.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Che cosa impedisce di trasformare tutto il calore in lavoro senza scarti: il secondo
-principio della termodinamica, unit&agrave; 12.</li>
-</ul>
-</div>
+<p class="comm">Uso la relazione fra $P$ e $T$, con $\dfrac{1}{\gamma}-1=-\dfrac{2}{5}$</p>
+<p class="eq">$$P_1^{-2/5}\,T_1=P_2^{-2/5}\,T_2$$</p>
+<p class="comm">Ricavo $T_2$</p>
+<p class="eq">$$T_2=\left(\frac{P_2}{P_1}\right)^{2/5}T_1$$</p>
+<p class="comm">Sostituisco i valori</p>
+<p class="eq">$$T_2=\left(\frac{2{,}81\cdot10^5\ \text{Pa}}{1{,}07\cdot10^5\ \text{Pa}}\right)^{2/5}\cdot341\ \text{K}$$</p>
+<p class="comm">Calcolo la potenza e il prodotto</p>
+<p class="eq">$$T_2=1{,}471\cdot341\ \text{K}\approx502\ \text{K}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../12-trasformazione-isoterma/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Trasformazione isoterma e primo principio</span></a><a class="successiva" href="../14-il-secondo-principio-macchina-termica-e-i-due-enunciati/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il secondo principio: macchina termica e i due enunciati</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 11</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 11</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(g,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!==undefined)e.textContent=txt;g.appendChild(e);return e;}
+  function f(n){return n.toFixed(1);}
+  function virg(x,d){return x.toFixed(d).replace('.',',').replace('-','−');}
+  function testo(g,x,y,t,att){att=att||{};att.x=x;att.y=y;att['font-family']='var(--sans)';if(!att['font-size'])att['font-size']=12;if(!att.fill)att.fill='var(--inchiostro)';return el(g,'text',att,t);}
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function continuo(fn){if(ridotto)return;var t0=null;(function passo(t){var dt=t0===null?0:Math.min(0.05,(t-t0)/1000);t0=t;fn(dt);requestAnimationFrame(passo);})(performance.now());}
+  /* particelle: moto rettilineo e urti elastici; il modulo della velocità dipende solo da T */
+  function gas(g,n,seme,box){
+    var Rn=rng(seme),L=[];
+    for(var i=0;i<n;i++){var a=Rn()*2*Math.PI;L.push({x:box.x+4+Rn()*(box.w-8),y:box.y+4+Rn()*(box.h-8),vx:Math.cos(a),vy:Math.sin(a),c:el(g,'circle',{r:3,fill:'var(--inchiostro)'})});}
+    return function(box,dt,vel){
+      var x0=box.x+4,x1=box.x+box.w-4,y0=box.y+4,y1=box.y+box.h-4;
+      L.forEach(function(p){
+        p.x+=p.vx*vel*dt; p.y+=p.vy*vel*dt;
+        if(p.x<x0){p.x=2*x0-p.x;p.vx=Math.abs(p.vx);} if(p.x>x1){p.x=2*x1-p.x;p.vx=-Math.abs(p.vx);}
+        if(p.y<y0){p.y=y0+(y0-p.y)%Math.max(1,y1-y0);p.vy=Math.abs(p.vy);} if(p.y>y1){p.y=Math.max(y0,2*y1-p.y);p.vy=-Math.abs(p.vy);}
+        set(p.c,{cx:f(p.x),cy:f(p.y)});
+      });
+    };
+  }
+  /* gas dell'esempio: 1 mol monoatomico, A = (P1, T1), B = (P2, T2) */
+  var R=8.31, g5=5/3, T1=341, P1=1.07e5, V1=R*T1/P1, T2=T1*Math.pow(2.81/1.07,0.4), V2=R*T2/2.81e5;
+  var Tad=function(V){return T1*Math.pow(V1/V,g5-1);};           /* T V^(γ-1) = cost */
+  var Pad=function(V){return R*Tad(V)/V/1000;};                   /* kPa */
+  var vel=function(T){return 70*Math.pow(T/T1,1.8);};
+
+  /* --- figura 1: cilindro isolato --- */
+  var C=document.getElementById('fig-cil'), cC=document.getElementById('cur-cil');
+  if(C&&cC){
+    var q=function(c){return C.querySelector('.'+c);}, base=226, h=function(V){return V*5200;};
+    [[V1,'A'],[V2,'B']].forEach(function(d){var y=base-h(d[0]);
+      el(q('rif'),'line',{x1:190,x2:314,y1:y,y2:y,stroke:'var(--verde)','stroke-width':1.2,'stroke-dasharray':'4,3'});
+      testo(q('rif'),320,y+5,d[1],{'font-size':13,'font-weight':700,fill:'var(--verde)'});});
+    var v1=testo(q('val'),20,80,''), v2=testo(q('val'),20,100,''), v3=testo(q('val'),20,120,'Q = 0',{fill:'var(--rosso)'});
+    var G=gas(q('part'),12,11,{x:196,y:base-h(V1),w:100,h:h(V1)});
+    function dis(dt){
+      var V=+cC.value, top=base-h(V), T=Tad(V);
+      set(q('gas'),{y:f(top),height:f(h(V))}); set(q('pist'),{y:f(top-10)}); set(q('asta'),{height:f(Math.max(0,top-10))});
+      G({x:196,y:top,w:100,h:h(V)},dt,vel(T));
+      if(!dt){v1.textContent='V = '+virg(V,4)+' m³'; v2.textContent='T = '+Math.round(T)+' K';}
+    }
+    cC.addEventListener('input',function(){dis(0);}); dis(0); continuo(dis);
+  }
+
+  /* --- figura 2: adiabatica e isoterma nel piano P-V --- */
+  var S=document.getElementById('fig-pv'), cS=document.getElementById('cur-pv');
+  if(S&&cS){
+    var g=S.querySelector('.graf'), ox=60, X=function(V){return ox+V*10000;}, Y=function(P){return 240-P*0.5;};
+    el(g,'line',{x1:ox-10,y1:240,x2:X(0.039),y2:240,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#m11a)'});
+    el(g,'line',{x1:ox,y1:250,x2:ox,y2:18,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#m11a)'});
+    testo(g,ox+8,26,'P (kPa)');
+    testo(g,X(0.039)+2,275,'V (m³)',{'text-anchor':'end'});
+    [0.01,0.02,0.03].forEach(function(V){el(g,'line',{x1:X(V),y1:236,x2:X(V),y2:244,stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,X(V),258,virg(V,2),{'text-anchor':'middle','font-size':11});});
+    [100,200,300,400].forEach(function(P){el(g,'line',{x1:ox-4,y1:Y(P),x2:ox+4,y2:Y(P),stroke:'var(--inchiostro)','stroke-width':1.2});testo(g,ox-7,Y(P)+4,P,{'text-anchor':'end','font-size':11});});
+    function curva(fn,att){var c=[];for(var V=0.012;V<=0.0360001;V+=0.0002)c.push(f(X(V))+','+f(Y(fn(V))));var o={points:c.join(' '),fill:'none'};for(var k in att)o[k]=att[k];return el(g,'polyline',o);}
+    var iso=el(g,'polyline',{fill:'none',stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'6,4'});
+    curva(Pad,{stroke:'var(--blu)','stroke-width':2.6});
+    testo(g,X(0.036)-2,Y(Pad(0.036))+18,'adiabatica',{'text-anchor':'end','font-size':12,fill:'var(--blu)'});
+    var tIso=testo(g,0,0,'isoterma',{'text-anchor':'end','font-size':12,fill:'var(--rosso)'});
+    [[V1,'A'],[V2,'B']].forEach(function(d){var x=X(d[0]),y=Y(Pad(d[0]));
+      el(g,'circle',{cx:x,cy:y,r:4,fill:'var(--verde)'});
+      testo(g,d[1]=='B'?x-18:x+7,y-7,d[1],{'font-size':13,'font-weight':700,fill:'var(--verde)'});});
+    var pt=el(g,'circle',{r:5,fill:'#fff',stroke:'var(--rosso)','stroke-width':2});
+    var s1=testo(g,300,48,''), s2=testo(g,300,66,''), s3=testo(g,300,84,'');
+    function disS(){
+      var V=+cS.value, T=Tad(V), c=[];
+      for(var u=0.012;u<=0.0360001;u+=0.0002){var P=R*T/u/1000;if(P<=440)c.push(f(X(u))+','+f(Y(P)));}
+      set(iso,{points:c.join(' ')});
+      set(tIso,{x:f(X(0.036)-2),y:f(Y(R*T/0.036/1000)-20)});
+      set(pt,{cx:f(X(V)),cy:f(Y(Pad(V)))});
+      s1.textContent='V = '+virg(V,4)+' m³';
+      s2.textContent='P = '+Math.round(Pad(V))+' kPa';
+      s3.textContent='T = '+Math.round(T)+' K';
+    }
+    cS.addEventListener('input',disS); disS();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did),.foglio>ul,.foglio>.tab,.foglio nav.briciole,.fig,.nota,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return (!e.closest('.fig')||e.classList.contains('fig'))&&!e.closest('.nota');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
