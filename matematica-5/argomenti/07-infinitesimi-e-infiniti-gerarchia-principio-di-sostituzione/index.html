@@ -5,23 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Infinitesimi e infiniti, gerarchia, principio di sostituzione — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def,.notevole,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.notevole{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p,.foglio>.notevole+p{margin-top:var(--r)}
+.nota,.def,.notevole{padding:0 18px}
+.nota p,.def p,.notevole p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>ul{padding-left:1.4rem}
+.foglio>ul+.eq,.foglio>.fig+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et,.notevole .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq,.notevole .eq{text-align:center;margin:0}
+/* riquadro dei limiti notevoli: verde, come nella traccia */
+.notevole{background:#eef5ee;border:2px solid var(--verde);border-radius:10px}
+.notevole .et{color:var(--verde);font-weight:700}
+.notevole .eq{font-size:1.2rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input[type=range]{width:min(320px,55%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:4.5rem;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.foglio>ul+.eq,.foglio>.eq+ul,.foglio>.eq+p:not(.leg){margin-top:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.ok{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -31,154 +69,212 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Limiti &middot; Unità 06</p>
   <h1>Infinitesimi e infiniti, gerarchia, principio di sostituzione</h1>
-  <p class="sommario">Due funzioni possono tendere entrambe a $0$, o entrambe all'infinito, ma con
-  "velocità" molto diverse: confrontarle permette di sostituire, dentro un limite, un pezzo
-  complicato con uno equivalente più semplice, senza rifare ogni volta i calcoli visti finora.</p>
 </header>
 
-<h2>Infinitesimi e loro confronto</h2>
-
-<div class="def"><span class="et">Definizione</span>
-Una funzione $f(x)$ è un <strong>infinitesimo</strong> per $x\to\alpha$ se
-$\displaystyle\lim_{x\to\alpha}f(x)=0$. Per esempio $f(x)=\dfrac{1}{x+2}$ è infinitesimo per
-$x\to\pm\infty$.</div>
-
-<p>Se $f(x)$ e $g(x)$ sono entrambi infinitesimi per $x\to\alpha$, il rapporto
-$\displaystyle\lim_{x\to\alpha}\frac{f(x)}{g(x)}$ si presenta in forma indeterminata
-$\frac{0}{0}$, e il suo valore dice chi tende a $0$ più in fretta:</p>
-
-<ul>
-<li>se il limite è $l\neq0$ (finito), $f$ e $g$ sono infinitesimi <strong>dello stesso ordine</strong>;</li>
-<li>se il limite è $0$, $f(x)$ è infinitesimo di <strong>ordine superiore</strong> a $g(x)$: tende a
-$0$ più rapidamente;</li>
-<li>se il limite è $\pm\infty$, $f(x)$ è infinitesimo di <strong>ordine inferiore</strong> a $g(x)$:
-è $g(x)$ a tendere a $0$ più rapidamente;</li>
-<li>se il limite del rapporto non esiste, i due infinitesimi non sono confrontabili.</li>
-</ul>
-
-<div class="def"><span class="et">Definizione — infinitesimi equivalenti</span>
-$f(x)$ e $g(x)$, infinitesimi per $x\to\alpha$, sono <strong>equivalenti</strong> (o
-asintoticamente uguali), e si scrive $f(x)\sim g(x)$, se
-$\displaystyle\lim_{x\to\alpha}\frac{f(x)}{g(x)}=1$.</div>
-
-<p>Il limite notevole $\displaystyle\lim_{x\to0}\frac{\sin x}{x}=1$ dice esattamente questo: per
-$x\to0$, $\sin x\sim x$.</p>
-
-<h2>Il principio di sostituzione</h2>
-
-<p>Nel calcolo di un limite, un infinitesimo può essere sostituito da un suo equivalente più
-semplice, purché a farlo sia un fattore (moltiplicativo o divisivo) dell'espressione, non un
-addendo.</p>
-
-<div class="def"><span class="et">Teorema — principio di sostituzione degli infinitesimi</span>
-Se $f\sim f_1$ e $g\sim g_1$ per $x\to\alpha$, allora
-$$\lim_{x\to\alpha}\frac{f(x)}{g(x)}=\lim_{x\to\alpha}\frac{f_1(x)}{g_1(x)}$$</div>
-
-<p>Dai limiti notevoli già trovati si ricavano le equivalenze più usate, per $x\to0$:</p>
-
-$$\sin x\sim x \qquad \ln(1+x)\sim x \qquad e^{x}-1\sim x \qquad 1-\cos x\sim\frac{x^2}{2}
-\qquad (1+x)^{k}-1\sim kx$$
-
-<p><strong>Esempio.</strong> $\displaystyle\lim_{x\to0}\frac{\ln(1+5x)}{\sin 2x}$: sostituendo
-$\ln(1+5x)\sim5x$ e $\sin2x\sim2x$,</p>
-
-$$\lim_{x\to0}\frac{\ln(1+5x)}{\sin 2x}=\lim_{x\to0}\frac{5x}{2x}=\frac{5}{2}$$
-
-<h2>Infiniti e loro confronto</h2>
-
-<div class="def"><span class="et">Definizione</span>
-Una funzione $f(x)$ è un <strong>infinito</strong> per $x\to\alpha$ se
-$\displaystyle\lim_{x\to\alpha}f(x)=\pm\infty$.</div>
-
-<p>Se $f(x)$ e $g(x)$ sono entrambi infiniti per $x\to\alpha$, il rapporto si presenta in forma
-$\frac{\infty}{\infty}$ e il confronto è speculare a quello degli infinitesimi, ma con i ruoli
-scambiati:</p>
-
-<ul>
-<li>se il limite è $l\neq0$ (finito), $f$ e $g$ sono infiniti dello stesso ordine;</li>
-<li>se il limite è $0$, $f(x)$ è infinito di <strong>ordine inferiore</strong> a $g(x)$;</li>
-<li>se il limite è $\pm\infty$, $f(x)$ è infinito di <strong>ordine superiore</strong> a $g(x)$;</li>
-<li>se il limite non esiste, non sono confrontabili.</li>
-</ul>
-
-<p>Anche per gli infiniti si definiscono equivalenza ($f\sim g$ se $\lim f/g=1$) e vale lo stesso
-principio di sostituzione visto sopra.</p>
-
-<h2>Gerarchia degli infiniti</h2>
-
-<p>Per $x\to+\infty$, logaritmi, potenze, esponenziali e la funzione $x^x$ divergono tutti, ma con
-rapidità crescente in quest'ordine: un logaritmo elevato a potenza cresce più lentamente di una
-potenza $x^a$ (con $a>0$), che cresce più lentamente di un esponenziale $a^x$ (con base $a>1$), che
-a sua volta è battuto da $x^x$:</p>
-
-$$(\ln x)^{a}\;\prec\; x^{a}\;\prec\; a^{x}\;\prec\; x^{x} \qquad (x\to+\infty)$$
-
-<div class="widget">
-  <div class="controlli">
-    <label>Ascissa: $x$
-      <input type="range" id="s-x" min="1.1" max="6" step="0.02" value="2">
-      <span>$x$ = <span class="val" id="v-x"></span></span>
-    </label>
-  </div>
-  <div id="g-ger" style="height:340px"></div>
-  <p class="leggenda">Le quattro curve sono $\ln x$, $x^2$, $2^x$ e $x^x$ in scala logaritmica sulle
-  ordinate. Spostando il cursore verso destra si vede l'ordine di sorpasso previsto dalla
-  gerarchia: prima $x^2$ supera $\ln x$, poi $2^x$ supera $x^2$, e infine $x^x$ supera tutte.</p>
+<div class="def"><span class="et">Definizione &middot; infinitesimo</span>
+<p>$f(x)$ è un infinitesimo per $x\to\alpha$ se $\displaystyle\lim_{x\to\alpha}f(x)=0$. Esempio: $\dfrac{1}{x+2}$ per $x\to\pm\infty$.</p>
 </div>
 
-<p>La gerarchia permette di leggere all'istante limiti che altrimenti richiederebbero calcoli
-lunghi:</p>
+<ul>
+<li>Confronto di due infinitesimi per $x\to\alpha$: limite di $\dfrac{f(x)}{g(x)}$, forma $\frac{0}{0}$.</li>
+<li>$l\neq0$ finito: stesso ordine.</li>
+<li>$0$: $f$ di ordine superiore a $g$ (tende a $0$ più rapidamente).</li>
+<li>$\pm\infty$: $f$ di ordine inferiore a $g$.</li>
+<li>Limite inesistente: infinitesimi non confrontabili.</li>
+</ul>
 
-$$\lim_{x\to+\infty}\frac{(\ln x)^3}{x^2}=0 \qquad
-\lim_{x\to+\infty}\frac{(\log_2 x)^{100}}{\sqrt{x}}=0$$
+<div class="def"><span class="et">Definizione &middot; infinitesimi equivalenti</span>
+<p>$f(x)\sim g(x)$ per $x\to\alpha$ se $\displaystyle\lim_{x\to\alpha}\frac{f(x)}{g(x)}=1$. Esempio: $\sin x\sim x$ per $x\to0$.</p>
+</div>
 
-<p>In entrambi i casi il numeratore è una potenza di un logaritmo, il denominatore una potenza di
-$x$: per la gerarchia il logaritmo perde sempre, qualunque sia l'esponente.</p>
+<div class="def"><span class="et">Teorema &middot; principio di sostituzione</span>
+<p>Se $f\sim f_1$ e $g\sim g_1$ per $x\to\alpha$:</p>
+<p class="eq">$$\lim_{x\to\alpha}\frac{f(x)}{g(x)}=\lim_{x\to\alpha}\frac{f_1(x)}{g_1(x)}$$</p>
+</div>
 
-$$\lim_{x\to+\infty}\frac{x^4}{2^x}=0 \qquad\qquad
-\lim_{x\to+\infty}\frac{x^x}{e^x}=+\infty$$
+<div class="nota"><span class="et">Attenzione</span>
+<p>Si sostituiscono solo fattori (moltiplicativi o divisivi), mai addendi.</p>
+</div>
 
-<p>Nel primo la potenza $x^4$ è battuta dall'esponenziale $2^x$; nel secondo è $x^x$ a battere
-l'esponenziale $e^x$, coerentemente con l'ultimo posto della gerarchia.</p>
+<ul>
+<li>Equivalenze per $x\to0$ (dai limiti notevoli):</li>
+</ul>
 
+<p class="eq">$$\sin x\sim x \qquad \ln(1+x)\sim x \qquad e^{x}-1\sim x$$</p>
+<p class="eq">$$1-\cos x\sim\frac{x^2}{2} \qquad (1+x)^{k}-1\sim kx$$</p>
+
+<h2>Esempio 1</h2>
+
+<ul>
+<li>$\ln(1+5x)\sim5x$, $\ \sin2x\sim2x$ per $x\to0$:</li>
+</ul>
+
+<p class="eq">$$\lim_{x\to0}\frac{\ln(1+5x)}{\sin 2x}=\lim_{x\to0}\frac{5x}{2x}=\frac{5}{2}$$</p>
+
+<div class="def"><span class="et">Definizione &middot; infinito</span>
+<p>$f(x)$ è un infinito per $x\to\alpha$ se $\displaystyle\lim_{x\to\alpha}f(x)=\pm\infty$.</p>
+</div>
+
+<ul>
+<li>Confronto di due infiniti: limite di $\dfrac{f(x)}{g(x)}$, forma $\frac{\infty}{\infty}$.</li>
+<li>$l\neq0$ finito: stesso ordine.</li>
+<li>$0$: $f$ di ordine inferiore a $g$.</li>
+<li>$\pm\infty$: $f$ di ordine superiore a $g$.</li>
+<li>Limite inesistente: non confrontabili.</li>
+<li>Equivalenza e principio di sostituzione: come per gli infinitesimi.</li>
+</ul>
+
+<ul>
+<li>Gerarchia degli infiniti per $x\to+\infty$:</li>
+</ul>
+
+<p class="eq">$$(\ln x)^{\alpha}\;\prec\; x^{\beta}\;\prec\; a^{x}\;\prec\; x^{x}$$</p>
+<p class="leg">$\alpha&gt;0$, $\beta&gt;0$, $a&gt;1$; $f\prec g$: $f$ infinito di ordine inferiore a $g$.</p>
+
+<div class="fig">
+  <svg id="f-ger" xml:space="preserve" viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+  <div class="cursore">
+    <label for="s-x">$x$</label>
+    <input type="range" id="s-x" min="1.1" max="7" step="0.02" value="2.5">
+    <span class="val" id="v-x"></span>
+  </div>
+  <p class="did">$\ln x$, $x^2$, $2^x$, $x^x$ con ordinate in scala logaritmica.</p>
+</div>
+
+<h2>Esempio 2</h2>
+
+<p class="eq">$$\lim_{x\to+\infty}\frac{(\ln x)^3}{x^2}=0 \qquad \lim_{x\to+\infty}\frac{(\log_2 x)^{100}}{\sqrt{x}}=0$$</p>
+<p class="eq">$$\lim_{x\to+\infty}\frac{x^4}{2^x}=0 \qquad \lim_{x\to+\infty}\frac{x^x}{e^x}=+\infty$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../06-limiti-notevoli/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Limiti notevoli</span></a><a class="successiva" href="../08-continuita-in-un-punto-e-in-un-intervallo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Continuità in un punto e in un intervallo</span></a></nav>
 <footer><p>Matematica quinta &middot; Limiti &middot; Unità 06</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var lnx=function(x){return Math.log(x);};
-  var x2=function(x){return x*x;};
-  var e2x=function(x){return Math.pow(2,x);};
-  var xx=function(x){return Math.pow(x,x);};
-  var xs=[],y1=[],y2=[],y3=[],y4=[];
-  for(var i=0;i<=400;i++){var v=1.05+i*(6-1.05)/400; xs.push(v); y1.push(lnx(v)); y2.push(x2(v)); y3.push(e2x(v)); y4.push(xx(v));}
-  var sx=document.getElementById('s-x'), vx=document.getElementById('v-x');
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-  function agg(){
-    var x=parseFloat(sx.value);
-    vx.textContent=fmt(x);
-    Plotly.react('g-ger',[
-      {x:xs,y:y1,mode:'lines',name:'ln x',line:{color:'#b3392f',width:2},hoverinfo:'skip'},
-      {x:xs,y:y2,mode:'lines',name:'x²',line:{color:'#1f4e79',width:2},hoverinfo:'skip'},
-      {x:xs,y:y3,mode:'lines',name:'2^x',line:{color:'#2f6b4f',width:2},hoverinfo:'skip'},
-      {x:xs,y:y4,mode:'lines',name:'x^x',line:{color:'#c9862a',width:2},hoverinfo:'skip'},
-      {x:[x,x,x,x],y:[lnx(x),x2(x),e2x(x),xx(x)],mode:'markers',
-        marker:{size:9,color:['#b3392f','#1f4e79','#2f6b4f','#c9862a']},
-        text:['ln x = '+fmt(lnx(x)),'x² = '+fmt(x2(x)),'2^x = '+fmt(e2x(x)),'x^x = '+fmt(xx(x))],
-        hovertemplate:'%{text}<extra></extra>'}
-    ],{
-      margin:{l:54,r:14,t:10,b:34},showlegend:true,
-      legend:{orientation:'h',y:-0.22,font:{size:11}},
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[1,6],zeroline:false,gridcolor:'#e6e0d4'},
-      yaxis:{title:'y (scala log)',type:'log',gridcolor:'#e6e0d4'},
-      shapes:[{type:'line',x0:x,x1:x,y0:0.01,y1:1e5,line:{color:'#4a5a6d',width:1,dash:'dot'}}]
-    },{displayModeBar:false,responsive:true});
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.notevole .et,.fig,.nota,.def,.notevole,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  sx.addEventListener('input',agg); agg();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+
+
+/* ---------- gerarchia: ln x, x^2, 2^x, x^x in scala logaritmica ---------- */
+(function(){
+  var svg=document.getElementById('f-ger'); if(!svg)return;
+  // ordinata u = log10(y) + 1: u = 0 corrisponde a y = 0,1 (asse x in basso)
+  var L10=Math.LN10, U=function(y){return Math.log(y)/L10+1;};
+  var P=new Piano(svg,[1,7.2],[0,7.3],{l:46,r:52,t:24,b:78});
+  var et=['0,1','1','10','10²','10³','10⁴','10⁵','10⁶'];
+  for(var k=1;k<=7;k++)P.add(el('line',{x1:P.X(1),y1:P.Y(k),x2:P.X(7.2),y2:P.Y(k),stroke:'var(--riga)','stroke-width':1}),'sotto');
+  P.assi([2,3,4,5,6,7],[],'x','y');
+  for(var k=0;k<=7;k++){
+    P.testo.appendChild(el('line',{x1:P.m.l-4,y1:P.Y(k),x2:P.m.l+4,y2:P.Y(k),stroke:'var(--inchiostro)','stroke-width':1}));
+    P.testo.appendChild(txt(P.m.l-8,P.Y(k)+4,et[k],{'text-anchor':'end','font-size':11}));
+  }
+  var F=[{f:function(x){return Math.log(x);},c:'var(--rosso)'},
+         {f:function(x){return x*x;},c:'var(--blu)'},
+         {f:function(x){return Math.pow(2,x);},c:'var(--verde)'},
+         {f:function(x){return Math.pow(x,x);},c:'var(--inchiostro)'}];
+  var vert=P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'}),'sotto');
+  F.forEach(function(o){
+    P.curva(function(x){return U(o.f(x));},1.02,7.2,500,o.c,2.2);
+    o.p=P.add(el('circle',{r:4,fill:o.c}));
+  });
+  P.testo.appendChild(txt(P.X(7.2)+5,P.Y(U(Math.log(7.2)))+4,'ln x',{fill:'var(--rosso)'}));
+  P.testo.appendChild(txt(P.X(7.2)+5,P.Y(U(7.2*7.2))+10,'x²',{fill:'var(--blu)'}));
+  P.testo.appendChild(txt(P.X(7.2)+5,P.Y(U(Math.pow(2,7.2)))-2,'2ˣ',{fill:'var(--verde)'}));
+  P.testo.appendChild(txt(P.X(6.3),P.Y(6.2),'xˣ',{fill:'var(--inchiostro)','text-anchor':'end'}));
+  var r1=txt(46,262,'',{fill:'var(--inchiostro)','font-size':13});
+  var r2=txt(46,286,'',{'font-size':13});
+  svg.appendChild(r1); svg.appendChild(r2);
+  var sl=document.getElementById('s-x'), vv=document.getElementById('v-x');
+  function breve(v){ if(v<10)return num(v,2); if(v<1e4)return String(Math.round(v)); var e=Math.floor(Math.log(v)/L10);return num(v/Math.pow(10,e),1)+'·10'+String(e).split('').map(function(c){return '⁰¹²³⁴⁵⁶⁷⁸⁹'[+c];}).join(''); }
+  function agg(){
+    var x=parseFloat(sl.value);
+    vert.setAttribute('x1',P.X(x));vert.setAttribute('x2',P.X(x));
+    vert.setAttribute('y1',P.Y(0));vert.setAttribute('y2',P.Y(7.3));
+    var v=F.map(function(o){var y=o.f(x);o.p.setAttribute('cx',P.X(x));o.p.setAttribute('cy',P.Y(U(y)));return y;});
+    vv.textContent=num(x,2);
+    r1.textContent='ln x = '+breve(v[0])+';  x² = '+breve(v[1])+';  2ˣ = '+breve(v[2])+';  xˣ = '+breve(v[3]);
+    var ord=v[0]<v[1]&&v[1]<v[2]&&v[2]<v[3];
+    r2.textContent=ord?'ordine della gerarchia: ln x < x² < 2ˣ < xˣ':'ordine diverso da quello della gerarchia';
+    r2.setAttribute('fill',ord?'var(--verde)':'var(--grigio)');
+    r2.setAttribute('font-weight',ord?600:400);
+  }
+  sl.addEventListener('input',agg); agg();
+})();
 })();
 </script>
 </body>
