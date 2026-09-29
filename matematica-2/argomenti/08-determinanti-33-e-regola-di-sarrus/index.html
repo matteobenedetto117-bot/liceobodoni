@@ -15,8 +15,6 @@ body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent
 .foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
 h1{font-size:2.4rem;line-height:calc(2*var(--r))}
 h2{font-size:1.45rem;line-height:var(--r)}
-h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
-.foglio h3{margin-top:var(--r)}
 .occhiello,nav.briciole{line-height:var(--r)}
 header.testata{padding:0;margin:0;border-bottom:0}
 .foglio>p+p{margin-top:var(--r)}
@@ -44,6 +42,8 @@ h1{position:relative;top:.5rem}
 .eq mjx-container{margin:0!important}
 .foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
 .def .eq,.nota .eq{text-align:center;margin:0}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:1.4rem}
+.def li{line-height:var(--r)}
 .def .eq+p,.nota .eq+p{padding-top:calc(var(--r)*.5)}
 .cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
 .cursore input[type=range]{width:min(280px,45%)}
@@ -86,50 +86,48 @@ h1{position:relative;top:.5rem}
   <h1>Sistemi di tre equazioni in tre incognite</h1>
 </header>
 
-<p>I tre metodi già visti per due equazioni in due incognite — sostituzione, riduzione e regola di
-Cramer — funzionano allo stesso modo con tre equazioni in tre incognite: cambia solo la quantità
-di conti da tenere in ordine. Partiamo dai due metodi già noti, e arrivati a Cramer vedremo come
-si calcola il determinante di una matrice $3\times3$.</p>
-
-<h2>Metodo di sostituzione</h2>
-
-<p>Si isola un'incognita in una delle tre equazioni, la si sostituisce nelle altre due e ci si
-ritrova con un sistema di due equazioni in due incognite, già noto. Conviene partire
-dall'equazione in cui un'incognita ha il coefficiente più semplice.</p>
+<p>Sostituzione, riduzione e regola di Cramer: validi anche per tre equazioni in tre incognite.</p>
 
 <div class="barra-ris">
 <button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i passaggi</button>
 </div>
 
+<div class="def">
+<span class="et">Metodo &middot; sostituzione</span>
+<ul>
+<li>Isolare un'incognita in un'equazione (quella con il coefficiente più semplice).</li>
+<li>Sostituirla nelle altre due: sistema di due equazioni in due incognite.</li>
+</ul>
+</div>
+
 <div class="es">
 <p class="eq quesito">$$\begin{cases}5x+4y-z=2\\-3x+3y+2z=7\\x+y-z=-1\end{cases}$$</p>
 <div class="passo" hidden>
-<p class="spieg">Nella terza equazione $x$ ha coefficiente $1$: isolo $x$.</p>
+<p class="spieg">Isolo $x$ dalla terza equazione.</p>
 <p class="eq">$$x=-y+z-1$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Sostituisco questa espressione nella prima e nella seconda equazione.</p>
+<p class="spieg">Sostituisco nella prima e nella seconda.</p>
 <p class="eq">$$\begin{cases}5(-y+z-1)+4y-z=2\\-3(-y+z-1)+3y+2z=7\end{cases}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Svolgo i prodotti e sommo i termini simili: resta un sistema di due equazioni
-in due incognite.</p>
+<p class="spieg">Svolgo: sistema $2\times2$.</p>
 <p class="eq">$$\begin{cases}-y+4z=7\\6y-z=4\end{cases}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Dalla prima ricavo $y$ e sostituisco nella seconda.</p>
+<p class="spieg">Ricavo $y$ dalla prima, sostituisco nella seconda.</p>
 <p class="eq">$$y=4z-7 \;\Rightarrow\; 6(4z-7)-z=4$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Svolgo e risolvo in $z$.</p>
+<p class="spieg">Risolvo in $z$.</p>
 <p class="eq">$$24z-42-z=4 \;\Rightarrow\; 23z=46 \;\Rightarrow\; z=2$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Risalgo: prima $y$, poi $x$.</p>
+<p class="spieg">Ricavo $y$, poi $x$.</p>
 <p class="eq">$$y=4\cdot2-7=1 \qquad x=-1+2-1=0$$</p>
 </div>
 <div class="passo finale" hidden>
-<p class="spieg">La soluzione è una terna ordinata.</p>
+<p class="spieg">Soluzione: terna ordinata.</p>
 <p class="eq">$$(x;y;z)=(0;\,1;\,2)$$</p>
 </div>
 <div class="comandi">
@@ -138,42 +136,42 @@ in due incognite.</p>
 </div>
 </div>
 
-<h2>Metodo di riduzione</h2>
-
-<p>Si combinano le equazioni a due a due in modo da far sparire ogni volta la stessa incognita:
-da tre equazioni se ne ottengono due, in due incognite. Riprendiamo lo stesso sistema, così alla
-fine possiamo confrontare i risultati.</p>
+<div class="def">
+<span class="et">Metodo &middot; riduzione</span>
+<ul>
+<li>Combinare le equazioni a due a due eliminando sempre la stessa incognita.</li>
+<li>Da tre equazioni: sistema di due equazioni in due incognite.</li>
+</ul>
+</div>
 
 <div class="es">
 <p class="eq quesito">$$\begin{cases}5x+4y-z=2\\-3x+3y+2z=7\\x+y-z=-1\end{cases}$$</p>
 <div class="passo" hidden>
-<p class="spieg">Moltiplico per $2$ la prima e la terza equazione, così il coefficiente di $z$
-diventa opposto a quello della seconda.</p>
+<p class="spieg">Prima e terza per $2$: coefficiente di $z$ opposto a quello della seconda.</p>
 <p class="eq">$$\begin{cases}10x+8y-2z=4 &(1)\\-3x+3y+2z=7 &(2)\\2x+2y-2z=-2 &(3)\end{cases}$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Sommo $(1)$ e $(2)$: la $z$ si elide.</p>
+<p class="spieg">$(1)+(2)$: si elimina $z$.</p>
 <p class="eq">$$7x+11y=11$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Sommo $(2)$ e $(3)$: la $z$ si elide di nuovo.</p>
+<p class="spieg">$(2)+(3)$: si elimina $z$.</p>
 <p class="eq">$$-x+5y=5$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Resta un sistema di due equazioni in due incognite: moltiplico la seconda per
-$7$ e sommo, così sparisce anche la $x$.</p>
+<p class="spieg">Seconda per $7$, poi somma: si elimina $x$.</p>
 <p class="eq">$$\begin{cases}7x+11y=11\\-7x+35y=35\end{cases} \;\Rightarrow\; 46y=46 \;\Rightarrow\; y=1$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Sostituisco $y=1$ in $7x+11y=11$.</p>
+<p class="spieg">$y=1$ in $7x+11y=11$.</p>
 <p class="eq">$$7x+11=11 \;\Rightarrow\; x=0$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Metto $x=0$ e $y=1$ nella terza equazione di partenza, $x+y-z=-1$.</p>
+<p class="spieg">$x=0$, $y=1$ nella terza equazione iniziale.</p>
 <p class="eq">$$0+1-z=-1 \;\Rightarrow\; z=2$$</p>
 </div>
 <div class="passo finale" hidden>
-<p class="spieg">La stessa terna trovata con la sostituzione.</p>
+<p class="spieg">Stessa terna della sostituzione.</p>
 <p class="eq">$$(x;y;z)=(0;\,1;\,2)$$</p>
 </div>
 <div class="comandi">
@@ -183,37 +181,34 @@ $7$ e sommo, così sparisce anche la $x$.</p>
 </div>
 
 <div class="nota">
-<span class="et">Da ricordare</span>
-<p>I due metodi partono da scelte diverse — quale incognita isolare, quali equazioni combinare —
-ma su un sistema determinato arrivano sempre alla stessa terna.</p>
+<span class="et">Attenzione</span>
+<p>Sistema determinato: metodi diversi, stessa terna.</p>
 </div>
 
-<h2>Regola di Cramer per i sistemi 3×3</h2>
-
-<p>Anche la regola di Cramer si estende ai sistemi di tre equazioni, ma prima serve saper
-calcolare il determinante di una matrice $3\times3$: si ottiene con la regola di Sarrus.</p>
-
 <div class="def">
-<span class="et">Regola di Sarrus</span>
-<p>Data una matrice $3\times3$, si riscrivono accanto, a destra, le prime due colonne. Si
-ottengono così sei diagonali di tre elementi: tre <strong>discendenti</strong>, da sinistra in
-alto verso destra in basso, e tre <strong>ascendenti</strong>, da sinistra in basso verso destra
-in alto. Sommando i tre prodotti discendenti si ottiene $A$, sommando i tre ascendenti si ottiene
-$B$: il determinante è la differenza $D=A-B$.</p>
+<span class="et">Regola di Sarrus &middot; determinante $3\times3$</span>
+<ul>
+<li>Ricopiare a destra della matrice le prime due colonne.</li>
+<li>$A$: somma dei tre prodotti sulle diagonali <strong>discendenti</strong> (dall'alto a sinistra verso il basso a destra).</li>
+<li>$B$: somma dei tre prodotti sulle diagonali <strong>ascendenti</strong> (dal basso a sinistra verso l'alto a destra).</li>
+<li>Determinante: $D=A-B$.</li>
+</ul>
 </div>
 
 <p class="eq">$$D=\begin{vmatrix}a_1&b_1&c_1\\a_2&b_2&c_2\\a_3&b_3&c_3\end{vmatrix}
 =\underbrace{a_1b_2c_3+b_1c_2a_3+c_1a_2b_3}_{A}-\underbrace{(a_3b_2c_1+b_3c_2a_1+c_3a_2b_1)}_{B}$$</p>
 
-<p>Dato un sistema di tre equazioni in forma normale</p>
+<div class="def">
+<span class="et">Regola di Cramer &middot; sistemi $3\times3$</span>
+<ul>
+<li>$D$: determinante dei coefficienti delle incognite.</li>
+<li>$D_x$, $D_y$, $D_z$: colonna di $x$, $y$ o $z$ sostituita dalla colonna dei termini noti.</li>
+</ul>
+</div>
 
 <p class="eq">$$\begin{cases}\cx{a_1x}+\cy{b_1y}+\cz{c_1z}=\ct{d_1}\\
 \cx{a_2x}+\cy{b_2y}+\cz{c_2z}=\ct{d_2}\\
 \cx{a_3x}+\cy{b_3y}+\cz{c_3z}=\ct{d_3}\end{cases}$$</p>
-
-<p>il <strong>determinante del sistema</strong> $D$ è quello dei coefficienti delle incognite;
-$D_x$, $D_y$, $D_z$ si ottengono sostituendo, in $D$, la colonna di $x$, di $y$ o di $z$ con la
-colonna dei termini noti. Tutti e quattro si calcolano con la regola di Sarrus.</p>
 
 <p class="eq">$$D=\begin{vmatrix}\cx{a_1}&\cy{b_1}&\cz{c_1}\\\cx{a_2}&\cy{b_2}&\cz{c_2}\\\cx{a_3}&\cy{b_3}&\cz{c_3}\end{vmatrix}\quad
 D_x=\begin{vmatrix}\ct{d_1}&\cy{b_1}&\cz{c_1}\\\ct{d_2}&\cy{b_2}&\cz{c_2}\\\ct{d_3}&\cy{b_3}&\cz{c_3}\end{vmatrix}\quad
@@ -223,64 +218,55 @@ D_z=\begin{vmatrix}\cx{a_1}&\cy{b_1}&\ct{d_1}\\\cx{a_2}&\cy{b_2}&\ct{d_2}\\\cx{a
 <p class="legenda"><span class="cx">coefficienti di $x$</span> &middot;
 <span class="cy">coefficienti di $y$</span> &middot;
 <span class="cz">coefficienti di $z$</span> &middot;
-<span class="ct">termini noti</span>: in ogni determinante una colonna viene sostituita da
-quella rossa.</p>
+<span class="ct">termini noti</span></p>
 
 <ul>
-<li>se $D\neq0$ il sistema è <strong>determinato</strong>, con l'unica soluzione
-$x=\dfrac{D_x}{D}$, $y=\dfrac{D_y}{D}$, $z=\dfrac{D_z}{D}$;</li>
-<li>se $D=0$ e almeno uno fra $D_x$, $D_y$, $D_z$ è diverso da zero, il sistema è
-<strong>impossibile</strong>;</li>
-<li>se $D=0$ e anche $D_x=0$, $D_y=0$, $D_z=0$, il sistema è <strong>indeterminato</strong>.</li>
+<li>$D\neq0$: sistema <strong>determinato</strong>, $x=\dfrac{D_x}{D}$, $y=\dfrac{D_y}{D}$, $z=\dfrac{D_z}{D}$.</li>
+<li>$D=0$ e almeno uno fra $D_x$, $D_y$, $D_z$ diverso da zero: sistema <strong>impossibile</strong>.</li>
+<li>$D=0$ e $D_x=D_y=D_z=0$: sistema <strong>indeterminato oppure impossibile</strong>; si decide con sostituzione o riduzione.</li>
 </ul>
 
-<h3>Esempio: lo stesso sistema con Cramer</h3>
+<h2>Esempio</h2>
 
-<p>Riprendiamo il sistema di prima. Il determinante del sistema si calcola con lo schema di
-Sarrus: accanto alla matrice dei coefficienti si ricopiano le prime due colonne, e il cursore
-percorre le sei diagonali una per volta.</p>
+<p>Stesso sistema, con la regola di Cramer.</p>
 
 <div class="fig">
-<svg id="fig3" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:430px"></svg>
+<svg id="fig3" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
 <div class="cursore">
 <label for="c3">diagonale</label>
 <input id="c3" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale">
 <span class="val" id="v3"></span>
 </div>
-<p class="did">Le due colonne grigie sono la copia delle prime due. Le tre diagonali discendenti,
-in verde, danno $A=-15+8+3=-4$; le tre ascendenti, in rosso, danno $B=-3+10+12=19$. Il
-determinante del sistema è la differenza: $D=-4-19=-23$. Non è zero, dunque il sistema è
-determinato.</p>
+<p class="did">Colonne grigie: copia delle prime due. Discendenti in verde, ascendenti in rosso.</p>
 </div>
 
 <div class="es">
 <p class="eq quesito">$$\begin{cases}5x+4y-z=2\\-3x+3y+2z=7\\x+y-z=-1\end{cases}$$</p>
 <div class="passo" hidden>
-<p class="spieg">Il determinante del sistema, calcolato qui sopra con Sarrus.</p>
+<p class="spieg">$D$ con Sarrus (figura).</p>
 <p class="eq">$$D=\begin{vmatrix}5&4&-1\\-3&3&2\\1&1&-1\end{vmatrix}=-4-19=-23$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Sostituisco la colonna di $x$ con quella dei termini noti.</p>
+<p class="spieg">Colonna di $x$ → termini noti.</p>
 <p class="eq">$$D_x=\begin{vmatrix}\ct{2}&4&-1\\\ct{7}&3&2\\\ct{-1}&1&-1\end{vmatrix}
 =(-6-8-7)-(3+4-28)=-21+21=0$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Poi la colonna di $y$.</p>
+<p class="spieg">Colonna di $y$ → termini noti.</p>
 <p class="eq">$$D_y=\begin{vmatrix}5&\ct{2}&-1\\-3&\ct{7}&2\\1&\ct{-1}&-1\end{vmatrix}
 =(-35+4-3)-(-7-10+6)=-34+11=-23$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">Infine la colonna di $z$.</p>
+<p class="spieg">Colonna di $z$ → termini noti.</p>
 <p class="eq">$$D_z=\begin{vmatrix}5&4&\ct{2}\\-3&3&\ct{7}\\1&1&\ct{-1}\end{vmatrix}
 =(-15+28-6)-(6+35+12)=7-53=-46$$</p>
 </div>
 <div class="passo" hidden>
-<p class="spieg">$D$ non è zero: applico le tre formule.</p>
+<p class="spieg">$D\neq0$: sistema determinato.</p>
 <p class="eq">$$x=\frac{0}{-23}=0 \qquad y=\frac{-23}{-23}=1 \qquad z=\frac{-46}{-23}=2$$</p>
 </div>
 <div class="passo finale" hidden>
-<p class="spieg">Ancora la stessa terna: i tre metodi, sullo stesso sistema, non possono che
-concordare.</p>
+<p class="spieg">Stessa terna dei metodi precedenti.</p>
 <p class="eq">$$(x;y;z)=(0;\,1;\,2)$$</p>
 </div>
 <div class="comandi">
@@ -296,7 +282,7 @@ concordare.</p>
 </div>
 <script>
 (function(){
-  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did):not(.spieg):not(.legenda),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,.es .spieg,nav.nav-unita';
+  var sel='.foglio h1,.foglio h2,.foglio p:not(.did):not(.spieg):not(.legenda),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,.es .spieg,nav.nav-unita';
   function allinea(){
     var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
     var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
