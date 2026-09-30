@@ -5,19 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moto rettilineo uniformemente accelerato — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.definizione{background:#fff;border-left:3px solid var(--rosso);border-radius:0 8px 8px 0;padding:14px 20px;margin:22px 0}
-.esempio{background:#f7f9fb;border-radius:10px;padding:16px 20px;margin:22px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,98 +54,108 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Cinematica &middot; Unità 08</p>
   <h1>Moto rettilineo uniformemente accelerato</h1>
-  <p class="sommario">Finora la velocità è rimasta costante. Il moto rettilineo uniformemente
-  accelerato è il caso più semplice in cui essa cambia: quello in cui il cambiamento avviene
-  sempre allo stesso ritmo, cioè con accelerazione costante. Da questa sola condizione si
-  ricavano le due leggi che descrivono il moto.</p>
 </header>
 
-<h2>Relazione velocità-tempo</h2>
-
-<p>Se l'accelerazione è costante, coincide in ogni istante con la sua media $a_M$. Scrivendo
-la definizione di accelerazione media fra l'istante iniziale, in cui la velocità vale $v_0$,
-e un istante generico $t$:</p>
-
-<div class="formula-box">
-$$a=\frac{\Delta v}{\Delta t}=\frac{v-v_0}{t-0}$$
+<div class="def"><span class="et">Definizione</span>
+<p>Moto rettilineo uniformemente accelerato (MRUA): moto rettilineo con accelerazione costante.</p>
+<p>Accelerazione costante: $a=a_M$ in ogni istante.</p>
 </div>
 
-<p>Risolvendo rispetto a $v$:</p>
+<p class="eq">$$a=\frac{\Delta v}{\Delta t}=\frac{v-v_0}{t-0}$$</p>
 
-<div class="formula-box">
-$$v=v_0+at$$
+<div class="def"><span class="et">Legge velocità-tempo</span>
+<p class="eq">$$v=v_0+at$$</p>
 </div>
 
-<p>dove $v_0$ è la velocità all'istante iniziale $t=0$, $v$ la velocità all'istante generico
-$t$, $a$ l'accelerazione, costante durante tutto il moto.</p>
+<p class="leg">$v_0$: velocità all'istante $t=0$; $v$: velocità all'istante $t$; $a$: accelerazione (costante).</p>
 
-<h2>Il grafico velocità-tempo</h2>
-
-<p>Nel moto uniforme il grafico $v$-$t$ è una retta orizzontale, perché $v$ non cambia. Nel
-moto uniformemente accelerato è invece una retta inclinata che parte da $v_0$: sale se
-$a&gt;0$, scende se $a&lt;0$, e la sua pendenza è proprio il valore di $a$.</p>
+<ul>
+<li>Grafico $v$-$t$ del moto uniforme (MRU): retta orizzontale.</li>
+<li>Grafico $v$-$t$ del MRUA: retta inclinata che parte da $v_0$; pendenza $=a$.</li>
+<li>$a&gt;0$: retta che sale; $a&lt;0$: retta che scende.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f18ax" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-
-<line x1="40" y1="220" x2="260" y2="220" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f18ax)"/>
-<line x1="40" y1="220" x2="40" y2="40" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f18ax)"/>
-<text x="265" y="225" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="24" y="34" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">v</text>
-<line x1="60" y1="110" x2="230" y2="110" stroke="var(--blu)" stroke-width="2.2"/>
-<text x="110" y="240" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">MRU</text>
-
-<line x1="360" y1="220" x2="580" y2="220" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f18ax)"/>
-<line x1="360" y1="220" x2="360" y2="40" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f18ax)"/>
-<text x="585" y="225" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="344" y="34" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">v</text>
-<circle cx="375" cy="150" r="3.5" fill="var(--inchiostro)"/>
-<text x="352" y="145" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">v&#8320;</text>
-<line x1="375" y1="150" x2="560" y2="70" stroke="var(--rosso)" stroke-width="2.2"/>
-<text x="500" y="65" font-size="13" fill="var(--rosso)" font-family="var(--sans)">a&gt;0</text>
-<line x1="375" y1="150" x2="560" y2="205" stroke="var(--verde)" stroke-width="2.2"/>
-<text x="500" y="222" font-size="13" fill="var(--verde)" font-family="var(--sans)">a&lt;0</text>
-<text x="440" y="240" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">MRUA</text>
-</svg>
-<p class="did">A sinistra il moto uniforme: la velocità è costante e il grafico è orizzontale.
-A destra il moto uniformemente accelerato: la retta parte da $v_0$ con pendenza $a$, positiva
-se il moto accelera, negativa se decelera.</p>
+<svg id="g-vt" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafici velocità-tempo del moto uniforme e del moto uniformemente accelerato"></svg>
+<div class="did-parti" style="--n:2;max-width:560px;margin-left:auto;margin-right:auto"><p class="did">MRU: $v$ costante.</p><p class="did">MRUA: $v_0=2$ m/s, pendenza $a$.</p></div>
+<div class="cursore"><label for="cur-a">$a$</label><input id="cur-a" type="range" min="-0.2" max="0.5" step="0.05" value="0.5"><span class="val" id="val-a"></span></div>
 </div>
 
-<h2>Legge oraria del moto uniformemente accelerato</h2>
+<ul>
+<li>Velocità variabile in modo lineare con $t$: velocità media $v_M=\dfrac{v+v_0}{2}$.</li>
+<li>Legge oraria del MRU con $v_M$ al posto di $v$:</li>
+</ul>
 
-<p>Nel moto uniforme lo spostamento è $x=x_0+vt$, perché la velocità è unica. Qui la velocità
-cambia da $v_0$ a $v$, ma cambia in modo regolare: si può allora usare la velocità media
-$v_M=\dfrac{v+v_0}{2}$ al posto di $v$ nella stessa formula:</p>
+<p class="eq">$$x=x_0+v_M t=x_0+\frac{v+v_0}{2}\,t$$</p>
+<p class="eq">$$x=x_0+\frac{v_0+at+v_0}{2}\,t=x_0+\frac{2v_0+at}{2}\,t$$</p>
 
-<div class="formula-box">
-$$x=x_0+v_M t=x_0+\frac{v+v_0}{2}\,t$$
+<div class="def"><span class="et">Legge oraria del MRUA</span>
+<p class="eq principio">$$x=x_0+v_0t+\frac12 at^2$$</p>
 </div>
 
-<p>Sostituendo $v=v_0+at$ e sviluppando:</p>
-
-<div class="formula-box">
-$$x=x_0+\frac{v_0+at+v_0}{2}\,t=x_0+\frac{2v_0+at}{2}\,t
-\;\;\Longrightarrow\;\; x=x_0+v_0t+\frac12 at^2$$
-</div>
-
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un ciclista parte con velocità $v_0=2$ m/s e accelera con $a=0{,}5$ m/s² per $t=10$ s,
-partendo da $x_0=0$. La velocità finale è:</p>
-<p>$$v=v_0+at=2+0{,}5\cdot10=7\ \text{m/s}$$</p>
-<p>e lo spazio percorso:</p>
-<p>$$x=v_0t+\frac12 at^2=2\cdot10+\frac12\cdot0{,}5\cdot10^2=20+25=45\ \text{m}$$</p>
-</div>
+<h2>Esempio</h2>
+<p>Ciclista: $x_0=0$, $v_0=2$ m/s, $a=0{,}5$ m/s², $t=10$ s.</p>
+<p class="eq">$$v=v_0+at=2\ \text{m/s}+0{,}5\ \text{m/s}^2\cdot10\ \text{s}=7\ \text{m/s}$$</p>
+<p class="eq">$$x=v_0t+\frac12 at^2=2\cdot10\ \text{m}+\frac12\cdot0{,}5\cdot10^2\ \text{m}=45\ \text{m}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../17-l-accelerazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">L'accelerazione</span></a><a class="successiva" href="../19-distanza-percorsa-nel-diagramma-velocita-tempo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Distanza percorsa nel diagramma velocità-tempo</span></a></nav>
 <footer><p>Fisica seconda &middot; Cinematica &middot; Unità 08</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0,?0*$/.test(s))s=s.slice(1);return s.replace('-','−');}
+  var svg=document.getElementById('g-vt'), cur=document.getElementById('cur-a'), val=document.getElementById('val-a');
+  var defs=el(svg,'defs',{}), mk=el(defs,'marker',{id:'u8i',markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});
+  el(mk,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'});
+  /* due pannelli: t da 0 a 10 s, v da 0 a 8 m/s; v0 = 2 m/s */
+  var V0=2, TM=10, VM=8, T=18, B=176;
+  function pannello(L,R){
+    var X=function(t){return L+t/TM*(R-L);}, Y=function(v){return B-v/VM*(B-T);};
+    el(svg,'line',{x1:L,y1:B,x2:R+12,y2:B,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#u8i)'});
+    el(svg,'line',{x1:L,y1:B,x2:L,y2:T-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#u8i)'});
+    txt(svg,R+12,B+16,'t',{'font-style':'italic',fill:'var(--inchiostro)'});
+    txt(svg,L-12,T,'v',{'font-style':'italic',fill:'var(--inchiostro)'});
+    return {X:X,Y:Y};
+  }
+  var P1=pannello(40,165), P2=pannello(225,350);
+  el(svg,'line',{x1:P1.X(0),y1:P1.Y(V0),x2:P1.X(TM),y2:P1.Y(V0),stroke:'var(--blu)','stroke-width':2.4});
+  txt(svg,P1.X(5),P1.Y(V0)-10,'a = 0',{'font-size':12});
+  txt(svg,P2.X(0)-13,P2.Y(V0)+4,'v₀',{'font-size':12,fill:'var(--inchiostro)'});
+  el(svg,'line',{x1:P2.X(0),y1:P2.Y(V0),x2:P2.X(TM),y2:P2.Y(V0),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 4'});
+  var retta=el(svg,'line',{x1:P2.X(0),y1:P2.Y(V0),stroke:'var(--blu)','stroke-width':2.4});
+  el(svg,'circle',{cx:P2.X(0),cy:P2.Y(V0),r:3.5,fill:'var(--inchiostro)'});
+  var fin=el(svg,'circle',{r:5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});
+  var lab=txt(svg,0,0,'',{'font-size':12,fill:'var(--rosso)','text-anchor':'start'});
+  function disegna(){
+    var a=Math.round(+cur.value*100)/100, v=V0+a*TM, x=P2.X(TM), y=P2.Y(v);
+    retta.setAttribute('x2',x);retta.setAttribute('y2',y);
+    fin.setAttribute('cx',x);fin.setAttribute('cy',y);
+    lab.setAttribute('x',x+9);lab.setAttribute('y',v<1?y-8:y+4);lab.textContent=num(v,1)+' m/s';
+    var st=Math.abs(a)<1e-9?'<span class="ok">MRU</span>':(a>0?'retta che sale':'retta che scende');
+    val.innerHTML='a = '+num(a,2)+' m/s² &nbsp; v(10 s) = '+num(v,1)+' m/s &nbsp; '+st;
+    if(window.allineaQuaderno)window.allineaQuaderno();
+  }
+  cur.addEventListener('input',disegna);disegna();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

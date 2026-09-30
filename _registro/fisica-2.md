@@ -65,6 +65,7 @@ La statica dei fluidi (unità 01–08, pagine 1–17 degli appunti) è stata spo
 - Parole: 317 su 2 pagine di traccia (34-35)
 - Rettifica: nessuna. Verificato con SymPy: dalla definizione a=(v-v0)/t si ricava v=v0+at; sostituendo in x=x0+((v+v0)/2)t si ottiene x=x0+v0t+(1/2)at², coerente con la traccia.
 - Aggiunta: la traccia non contiene alcun esempio numerico per questa unità, quindi ne ho aggiunto uno solo (ciclista con v0=2 m/s, a=0,5 m/s², t=10 s), verificato con SymPy: v=7 m/s, x=45 m. Nessun'altra aggiunta oltre alle frasi di collegamento; la derivazione di v=v0+at, i due grafici v-t (MRU e MRUA) e la derivazione della legge oraria tramite la velocità media sono tutti e soli quelli della traccia.
+- Revisione: tolti sommario e i quattro titoletti; definizione, legge velocità-tempo e legge oraria in riquadri (legge oraria in rosso), legenda dei simboli in una riga, derivazione della legge oraria in due formule. Precisazione: la velocità media (v+v₀)/2 vale perché v varia linearmente con t. Esempio del ciclista riscritto dati → formula → risultato (v = 7 m/s, x = 45 m, verificati). Figura MRU/MRUA ridisegnata da script, retta calcolata v = v₀ + at con cursore su a (−0,2…0,5 m/s², v₀ = 2 m/s; a = 0,5 coincide con l'esempio, a = 0 «MRU» in verde); tolto il doppio ramo fisso a > 0 / a < 0. Nessun esempio tolto, nessuna figura decorativa. Impaginazione a quaderno.
 
 ## Unità 09 — Distanza percorsa nel diagramma velocità-tempo
 - Parole: 597 su 3 pagine di traccia (36-38)
