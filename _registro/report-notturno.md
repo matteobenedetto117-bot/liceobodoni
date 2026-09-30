@@ -65,4 +65,5 @@ Esecuzione delle 04:02 UTC (due unità).
 
 Esecuzione delle 05:03 UTC (due unità).
 
-- matematica-2 unità 10 (Condizioni di esistenza e segno di un radicale): pubblicata (commit nella riga della coda). Tolti sommario e tre titoletti; proprietà, CE e segno in riquadri; due esempi («Esempio 1» CE, «Esempio 2» segno). Precisazione: $(\sqrt[n]{a})^n=a$ «se il radicale esiste». Nessuna figura, nessun esempio tolto.
+- matematica-2 unità 10 (Condizioni di esistenza e segno di un radicale): pubblicata, commit de20b98. Tolti sommario e tre titoletti; proprietà, CE e segno in riquadri; due esempi («Esempio 1» CE, «Esempio 2» segno). Precisazione: $(\sqrt[n]{a})^n=a$ «se il radicale esiste». Nessuna figura, nessun esempio tolto.
+- fisica-2 unità 07 (L'accelerazione): pubblicata (commit nella riga della coda). Tolti sommario e tre titoletti; esempio spostato in fondo. Nessuna correzione concettuale; didascalia del grafico v–t completata con i tratti BC, DE, EF. Da controllare: diagramma dei quattro casi di segno reso interattivo (cursore sul tempo, moto calcolato con v₀ = ±2 m/s, a = ±1 m/s²); grafico v–t, prima tracciato a occhio, ora calcolato a tratti con la stessa sequenza A–I e cursore su t. Nessun esempio tolto, nessuna figura decorativa.

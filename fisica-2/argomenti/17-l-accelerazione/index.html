@@ -5,19 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'accelerazione — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.definizione{background:#fff;border-left:3px solid var(--rosso);border-radius:0 8px 8px 0;padding:14px 20px;margin:22px 0}
-.esempio{background:#f7f9fb;border-radius:10px;padding:16px 20px;margin:22px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,158 +50,161 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Cinematica &middot; Unità 07</p>
   <h1>L'accelerazione</h1>
-  <p class="sommario">Abbiamo definito la velocità come misura di quanto cambia la posizione
-  nel tempo. Ora chiediamoci quanto rapidamente cambia la velocità stessa: la grandezza che
-  risponde è l'accelerazione, costruita esattamente sullo stesso modello.</p>
 </header>
 
-<h2>Accelerazione media</h2>
-
-<p>Così come la velocità media è il rapporto fra la variazione di posizione e l'intervallo di
-tempo in cui avviene, l'accelerazione media è il rapporto fra la variazione di velocità e
-l'intervallo di tempo:</p>
-
-<div class="formula-box">
-$$v_M=\frac{\Delta x}{\Delta t}=\frac{x_f-x_0}{t_f-t_0} \qquad\qquad
-a_M=\frac{\Delta v}{\Delta t}=\frac{v_f-v_0}{t_f-t_0}$$
+<div class="def"><span class="et">Definizione &middot; accelerazione media</span>
+<p>Rapporto fra variazione di velocità e intervallo di tempo.</p>
+<p class="eq">$$a_M=\frac{\Delta v}{\Delta t}=\frac{v_f-v_0}{t_f-t_0}$$</p>
 </div>
 
-<p>Al numeratore c'è la differenza fra la velocità finale $v_f$ e quella iniziale $v_0$, al
-denominatore l'intervallo di tempo $t_f-t_0$ in cui il cambiamento avviene. L'unità di misura
-si ottiene dividendo m/s per s:</p>
+<p class="leg">$v_0$, $v_f$: velocità iniziale e finale; $t_0$, $t_f$: istanti iniziale e finale.</p>
 
-<div class="formula-box">
-$$[a]=\frac{\text{m/s}}{\text{s}}=\frac{\text{m}}{\text{s}^2}$$
-</div>
+<ul>
+<li>Stessa struttura della velocità media: $v_M=\dfrac{\Delta x}{\Delta t}=\dfrac{x_f-x_0}{t_f-t_0}$.</li>
+</ul>
 
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un'automobile passa da $0$ a $100$ km/h in $3$ s. Convertendo, $100$ km/h $=27{,}8$ m/s,
-quindi:</p>
-<p>$$a_M=\frac{v_f-v_0}{t_f-t_0}=\frac{27{,}8\ \text{m/s}-0}{3\ \text{s}-0}\approx
-9{,}27\ \frac{\text{m}}{\text{s}^2}$$</p>
-</div>
+<p class="eq">$$[a]=\frac{\text{m/s}}{\text{s}}=\frac{\text{m}}{\text{s}^2}$$</p>
 
-<h2>Segno della velocità e dell'accelerazione</h2>
-
-<p>Velocità e accelerazione hanno entrambe un segno, che indica il verso rispetto all'asse
-scelto. Confrontare i due segni dice se il corpo sta accelerando, cioè aumentando la rapidità
-con cui si muove, oppure decelerando:</p>
+<ul>
+<li>Segno di $v$ e di $a$: verso rispetto all'asse scelto.</li>
+<li>$v$ e $a$ con lo stesso segno: il modulo di $v$ aumenta, il moto accelera.</li>
+<li>$v$ e $a$ di segno opposto: il modulo di $v$ diminuisce, il moto decelera.</li>
+<li>Vale in entrambi i versi del moto.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f17fr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="f17fv" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-
-<line x1="40" y1="90" x2="240" y2="90" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="245" y="94" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<line x1="70" y1="55" x2="130" y2="55" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f17fr)"/>
-<text x="72" y="46" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a+</text>
-<line x1="70" y1="72" x2="150" y2="72" stroke="var(--verde)" stroke-width="2" marker-end="url(#f17fv)"/>
-<text x="72" y="65" font-size="12" fill="var(--verde)" font-family="var(--sans)">v+</text>
-<text x="70" y="120" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)" font-weight="600">ACCELERAZIONE</text>
-
-<line x1="340" y1="90" x2="540" y2="90" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="545" y="94" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<line x1="470" y1="55" x2="410" y2="55" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f17fr)"/>
-<text x="440" y="46" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a&#8722;</text>
-<line x1="370" y1="72" x2="450" y2="72" stroke="var(--verde)" stroke-width="2" marker-end="url(#f17fv)"/>
-<text x="372" y="65" font-size="12" fill="var(--verde)" font-family="var(--sans)">v+</text>
-<text x="365" y="120" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)" font-weight="600">DECELERAZIONE</text>
-
-<line x1="40" y1="210" x2="240" y2="210" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="245" y="214" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<line x1="150" y1="175" x2="90" y2="175" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f17fr)"/>
-<text x="120" y="166" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a&#8722;</text>
-<line x1="170" y1="192" x2="90" y2="192" stroke="var(--verde)" stroke-width="2" marker-end="url(#f17fv)"/>
-<text x="140" y="185" font-size="12" fill="var(--verde)" font-family="var(--sans)">v&#8722;</text>
-<text x="70" y="240" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)" font-weight="600">ACCELERAZIONE</text>
-
-<line x1="340" y1="210" x2="540" y2="210" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="545" y="214" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<line x1="410" y1="175" x2="470" y2="175" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f17fr)"/>
-<text x="440" y="166" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a+</text>
-<line x1="470" y1="192" x2="390" y2="192" stroke="var(--verde)" stroke-width="2" marker-end="url(#f17fv)"/>
-<text x="440" y="185" font-size="12" fill="var(--verde)" font-family="var(--sans)">v&#8722;</text>
-<text x="365" y="240" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)" font-weight="600">DECELERAZIONE</text>
-
-<line x1="300" y1="20" x2="300" y2="260" stroke="var(--riga)" stroke-width="1" stroke-dasharray="3 3"/>
-</svg>
-<p class="did">Quando $v$ e $a$ hanno lo stesso segno il modulo della velocità aumenta: il moto
-accelera. Quando hanno segno opposto il modulo della velocità diminuisce: il moto decelera.
-Questo vale indipendentemente dal verso in cui il corpo si sta muovendo.</p>
+<svg id="g-segni" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Quattro casi di segno di velocità e accelerazione"></svg>
+<p class="did">Velocità in verde, accelerazione in rosso; $v_0=\pm2$ m/s, $a=\pm1$ m/s².</p>
+<div class="cursore"><label for="cur-s">$t$</label><input id="cur-s" type="range" min="0" max="1.5" step="0.05" value="0"><span class="val" id="val-s"></span></div>
 </div>
 
-<h2>Il grafico velocità-tempo</h2>
-
-<p>Sul grafico velocità-tempo l'accelerazione è positiva dove la curva sale, negativa dove
-scende, nulla dove è orizzontale: nei tratti a velocità costante e nei punti di massimo e di
-minimo della velocità, dove la curva passa da crescente a decrescente o viceversa.</p>
+<ul>
+<li>Grafico velocità-tempo: curva che sale, $a&gt;0$; che scende, $a&lt;0$; orizzontale, $a=0$.</li>
+<li>$a=0$ nei tratti a velocità costante e nei massimi e minimi di $v$ (tangente orizzontale).</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f17ax" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="40" y1="200" x2="600" y2="200" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f17ax)"/>
-<line x1="40" y1="330" x2="40" y2="40" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f17ax)"/>
-<text x="605" y="205" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="25" y="34" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">v</text>
-
-<path d="M60,140 C90,95 115,90 140,90 C170,90 195,140 220,200
-         C240,240 260,290 280,290 C300,290 320,240 340,200
-         C355,175 365,150 380,150 L460,150
-         C480,150 495,120 520,80 C545,55 560,70 580,170"
-  fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-
-<circle cx="60" cy="140" r="4" fill="var(--blu)"/>
-<circle cx="140" cy="90" r="4" fill="var(--blu)"/>
-<circle cx="220" cy="200" r="4" fill="var(--blu)"/>
-<circle cx="280" cy="290" r="4" fill="var(--blu)"/>
-<circle cx="340" cy="200" r="4" fill="var(--blu)"/>
-<circle cx="380" cy="150" r="4" fill="var(--blu)"/>
-<circle cx="460" cy="150" r="4" fill="var(--blu)"/>
-<circle cx="520" cy="80" r="4" fill="var(--blu)"/>
-<circle cx="580" cy="170" r="4" fill="var(--blu)"/>
-
-<text x="52" y="128" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">A</text>
-<text x="132" y="78" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">B</text>
-<text x="224" y="196" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">C</text>
-<text x="284" y="305" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">D</text>
-<text x="344" y="196" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">E</text>
-<text x="372" y="140" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">F</text>
-<text x="452" y="140" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">G</text>
-<text x="512" y="68" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">H</text>
-<text x="584" y="168" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">I</text>
-
-<text x="75" y="108" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a&gt;0</text>
-<text x="235" y="255" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a&lt;0</text>
-<text x="395" y="140" font-size="12" fill="var(--verde)" font-family="var(--sans)">a=0, v=cost</text>
-<text x="480" y="105" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a&gt;0</text>
-<text x="555" y="140" font-size="12" fill="var(--rosso)" font-family="var(--sans)">a&lt;0</text>
-<text x="335" y="220" font-size="11" fill="var(--grigio)" font-family="var(--sans)">v=0</text>
-
-<line x1="130" y1="90" x2="150" y2="90" stroke="var(--verde)" stroke-width="2"/>
-<line x1="270" y1="290" x2="290" y2="290" stroke="var(--verde)" stroke-width="2"/>
-<line x1="510" y1="80" x2="530" y2="80" stroke="var(--verde)" stroke-width="2"/>
-</svg>
-<p class="did">Nei tratti AB, GH la curva sale e $a&gt;0$; nei tratti CD, HI scende e
-$a&lt;0$; nel tratto FG è orizzontale, con velocità costante e $a=0$. Nei punti B, D, H
-&mdash; massimo, minimo e massimo della velocità &mdash; la tangente è orizzontale: anche lì
-$a=0$.</p>
+<svg id="g-vt" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico velocità-tempo con i punti da A a I"></svg>
+<p class="did">Sale in AB, DF, GH; scende in BD, HI; orizzontale in FG; tangente orizzontale in B, D, H.</p>
+<div class="cursore"><label for="cur-t">$t$</label><input id="cur-t" type="range" min="0" max="10" step="0.05" value="0.5"><span class="val" id="val-t"></span></div>
 </div>
+
+<h2>Esempio</h2>
+<p>Automobile: da $0$ a $100$ km/h in $3$ s; $v_f=100$ km/h $\approx27{,}8$ m/s.</p>
+<p class="eq">$$a_M=\frac{v_f-v_0}{t_f-t_0}=\frac{27{,}8\ \text{m/s}-0}{3\ \text{s}-0}\approx9{,}27\ \frac{\text{m}}{\text{s}^2}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../16-problemi-di-incontro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Problemi di incontro</span></a><a class="successiva" href="../18-moto-rettilineo-uniformemente-accelerato/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Moto rettilineo uniformemente accelerato</span></a></nav>
 <footer><p>Fisica seconda &middot; Cinematica &middot; Unità 07</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0,?0*$/.test(s))s=s.slice(1);return s.replace('-','−');}
+  function frecce(svg,id){
+    var defs=el(svg,'defs',{});
+    [['i','var(--inchiostro)'],['r','var(--rosso)'],['v','var(--verde)']].forEach(function(c){
+      var m=el(defs,'marker',{id:id+c[0],markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});
+      el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:c[1]});});
+  }
+
+  /* quattro casi: x = x0 + v0 t + a t^2/2, v = v0 + a t (calcolati) */
+  (function(){
+    var svg=document.getElementById('g-segni'), cur=document.getElementById('cur-s'), val=document.getElementById('val-s');
+    frecce(svg,'s');
+    el(svg,'line',{x1:210,y1:8,x2:210,y2:252,stroke:'var(--riga)','stroke-dasharray':'3 3'});
+    el(svg,'line',{x1:8,y1:130,x2:412,y2:130,stroke:'var(--riga)','stroke-dasharray':'3 3'});
+    var S=26, casi=[
+      {ox:0,oy:0,v0:2,a:1,nome:'accelera'},{ox:210,oy:0,v0:2,a:-1,nome:'decelera'},
+      {ox:0,oy:130,v0:-2,a:-1,nome:'accelera'},{ox:210,oy:130,v0:-2,a:1,nome:'decelera'}];
+    casi.forEach(function(c){
+      var Y=c.oy+82;
+      el(svg,'line',{x1:c.ox+12,y1:Y,x2:c.ox+196,y2:Y,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#si)'});
+      txt(svg,c.ox+198,Y+16,'x',{'font-style':'italic',fill:'var(--inchiostro)','font-size':12});
+      c.x0=c.v0>0?c.ox+24:c.ox+186; c.Y=Y;
+      c.fv=el(svg,'line',{stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#sv)'});
+      c.fa=el(svg,'line',{stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#sr)'});
+      c.lv=txt(svg,0,0,'v'+(c.v0>0?'+':'−'),{fill:'var(--verde)','font-size':12,'font-weight':700});
+      c.la=txt(svg,0,0,'a'+(c.a>0?'+':'−'),{fill:'var(--rosso)','font-size':12,'font-weight':700});
+      c.p=el(svg,'circle',{r:6,fill:'var(--blu)',stroke:'#fff','stroke-width':1.5,cy:Y});
+      c.mod=txt(svg,c.ox+105,Y+22,'',{'font-size':12});
+      txt(svg,c.ox+105,c.oy+18,c.nome.toUpperCase(),{fill:'var(--inchiostro)','font-size':12,'font-weight':700,'letter-spacing':'.08em'});
+    });
+    function disegna(){
+      var t=Math.round(+cur.value*100)/100;
+      casi.forEach(function(c){
+        var x=c.x0+S*(c.v0*t+c.a*t*t/2), v=c.v0+c.a*t, sv=v>0?1:-1, sa=c.a>0?1:-1, Lv=14*Math.abs(v), La=20;
+        c.p.setAttribute('cx',x);
+        c.fv.setAttribute('x1',x);c.fv.setAttribute('x2',x+sv*Lv);c.fv.setAttribute('y1',c.Y-16);c.fv.setAttribute('y2',c.Y-16);
+        c.fa.setAttribute('x1',x);c.fa.setAttribute('x2',x+sa*La);c.fa.setAttribute('y1',c.Y-34);c.fa.setAttribute('y2',c.Y-34);
+        c.lv.setAttribute('x',x-sv*12);c.lv.setAttribute('y',c.Y-12);
+        c.la.setAttribute('x',x-sa*12);c.la.setAttribute('y',c.Y-30);
+        c.mod.textContent='|v| = '+num(Math.abs(v),2)+' m/s';
+      });
+      val.textContent='t = '+num(t,2)+' s';
+    }
+    cur.addEventListener('input',disegna);disegna();
+  })();
+
+  /* grafico v-t: curva calcolata a tratti con tangente orizzontale in B, D, F, G, H */
+  (function(){
+    var svg=document.getElementById('g-vt'), cur=document.getElementById('cur-t'), val=document.getElementById('val-t');
+    frecce(svg,'t');
+    function cosTr(t0,t1,v0,v1){return {f:function(t){return (v0+v1)/2+(v0-v1)/2*Math.cos(Math.PI*(t-t0)/(t1-t0));},
+      d:function(t){return -(v0-v1)/2*Math.sin(Math.PI*(t-t0)/(t1-t0))*Math.PI/(t1-t0);}};}
+    var tr=[
+      {a:0,b:1,f:function(t){return 2.2-(1-t)*(1-t);},d:function(t){return 2*(1-t);}},
+      Object.assign({a:1,b:3.5},cosTr(1,3.5,2.2,-1.7)),
+      Object.assign({a:3.5,b:5.5},cosTr(3.5,5.5,-1.7,0.9)),
+      {a:5.5,b:7.5,f:function(){return 0.9;},d:function(){return 0;}},
+      Object.assign({a:7.5,b:9},cosTr(7.5,9,0.9,2.8)),
+      {a:9,b:10,f:function(t){return 2.8-1.8*(t-9)*(t-9);},d:function(t){return -3.6*(t-9);}}];
+    function seg(t){for(var i=0;i<tr.length;i++)if(t<=tr[i].b+1e-9)return tr[i];return tr[tr.length-1];}
+    function v(t){return seg(t).f(t);} function a(t){return seg(t).d(t);}
+    function zero(t0,t1){for(var k=0;k<60;k++){var m=(t0+t1)/2;if(v(t0)*v(m)<=0)t1=m;else t0=m;}return (t0+t1)/2;}
+    var L=34,R=400,T=14,B=236, X=function(t){return L+t/10.6*(R-L);}, Y=function(u){return T+(3.2-u)/5.4*(B-T);};
+    el(svg,'line',{x1:L,y1:Y(0),x2:R+10,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#ti)'});
+    el(svg,'line',{x1:L,y1:B,x2:L,y2:T-4,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#ti)'});
+    txt(svg,R+10,Y(0)+17,'t',{'font-style':'italic',fill:'var(--inchiostro)'});
+    txt(svg,L-14,T+6,'v',{'font-style':'italic',fill:'var(--inchiostro)'});
+    var d='';for(var i=0;i<=500;i++){var t=i/50;d+=(i?'L':'M')+X(t).toFixed(1)+','+Y(v(t)).toFixed(1);}
+    el(svg,'path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    var tC=zero(1,3.5), tE=zero(3.5,5.5);
+    [['A',0,10,-8],['B',1,0,-12],['C',tC,11,-6],['D',3.5,0,22],['E',tE,-11,-6],['F',5.5,-2,-12],['G',7.5,2,-12],['H',9,0,-12],['I',10,11,4]].forEach(function(p){
+      var px=X(p[1]),py=Y(v(p[1]));
+      el(svg,'circle',{cx:px,cy:py,r:3.5,fill:'var(--blu)'});
+      txt(svg,px+p[2],py+p[3],p[0],{fill:'var(--inchiostro)','font-size':12});});
+    var tg=el(svg,'line',{stroke:'var(--rosso)','stroke-width':2});
+    var pt=el(svg,'circle',{r:6,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});
+    var kx=(R-L)/10.6, ky=(B-T)/5.4;
+    function disegna(){
+      var t=Math.round(+cur.value*100)/100, u=v(t), s=a(t), px=X(t), py=Y(u);
+      pt.setAttribute('cx',px);pt.setAttribute('cy',py);
+      var dx=kx, dy=-s*ky, n=Math.sqrt(dx*dx+dy*dy), h=26;
+      tg.setAttribute('x1',px-h*dx/n);tg.setAttribute('y1',py-h*dy/n);tg.setAttribute('x2',px+h*dx/n);tg.setAttribute('y2',py+h*dy/n);
+      var z=Math.abs(s)<1e-6;
+      val.innerHTML='t = '+num(t,2)+' s &nbsp; v = '+num(u,2)+' m/s &nbsp; '+(z?'<span class="ok">a = 0</span>':(s>0?'a &gt; 0':'a &lt; 0'));
+    }
+    cur.addEventListener('input',disegna);disegna();
+  })();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
