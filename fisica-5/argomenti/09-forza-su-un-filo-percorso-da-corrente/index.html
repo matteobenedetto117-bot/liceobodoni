@@ -5,20 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Forza su un filo percorso da corrente — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.regola{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:16px 22px;margin:22px 0}
-.regola p{margin:0 0 6px}
-.regola p:last-child{margin-bottom:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
 </head>
 <body>
@@ -28,97 +49,162 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 08</p>
   <h1>Forza su un filo percorso da corrente</h1>
-  <p class="sommario">Abbiamo visto che un filo percorso da corrente genera un campo magnetico.
-  Vale anche il contrario: immerso in un campo magnetico esterno, il filo risente di una forza.
-  È l'esperienza di Faraday, e se ne ricava l'espressione dalla forza di Lorentz.</p>
 </header>
 
-<h2>Esperienza di Faraday</h2>
+<ul>
+<li>Esperienza di Faraday: filo percorso da corrente in un campo magnetico esterno → forza sul filo.</li>
+<li>Verso della corrente invertito: verso della forza invertito.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f9i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f9b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="70" y1="55" x2="70" y2="225" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="115" x2="70" y2="65" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f9i)"/>
-<text x="80" y="72" font-family="var(--sans)" font-size="14" fill="var(--verde)">i</text>
-<line x1="15" y1="90" x2="145" y2="90" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<line x1="15" y1="140" x2="145" y2="140" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<line x1="15" y1="190" x2="145" y2="190" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<text x="150" y="82" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<circle cx="70" cy="140" r="10" fill="#fff" stroke="var(--rosso)" stroke-width="1.7"/>
-<line x1="63" y1="133" x2="77" y2="147" stroke="var(--rosso)" stroke-width="1.4"/>
-<line x1="77" y1="133" x2="63" y2="147" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="70" y="245" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">i verso l'alto: F entrante</text>
-<line x1="330" y1="55" x2="330" y2="225" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="330" y1="165" x2="330" y2="215" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f9i)"/>
-<text x="340" y="210" font-family="var(--sans)" font-size="14" fill="var(--verde)">i</text>
-<line x1="275" y1="90" x2="405" y2="90" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<line x1="275" y1="140" x2="405" y2="140" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<line x1="275" y1="190" x2="405" y2="190" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f9b)"/>
-<text x="410" y="82" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<circle cx="330" cy="140" r="10" fill="#fff" stroke="var(--rosso)" stroke-width="1.7"/>
-<circle cx="330" cy="140" r="2.6" fill="var(--rosso)"/>
-<text x="330" y="245" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">i verso il basso: F uscente</text>
-</svg>
-<p class="did">Filo verticale in un campo $\vec B$ orizzontale: invertendo la corrente $i$, la forza
-passa da entrante ($\otimes$) a uscente ($\odot$) nel foglio.</p>
+<svg id="fig-a" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">corrente</label><input id="cur-a" type="range" min="-3" max="3" step="0.5" value="2"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Filo verticale in un campo $\vec B$ orizzontale: $\otimes$ forza entrante nel foglio, $\odot$ forza uscente.</p>
 </div>
 
-<p>Consideriamo un tratto di filo lungo $L$, percorso da corrente $i$, in un campo $\vec B$ che
-forma un angolo $\theta$ con il filo. Nel tempo $\Delta t$ lo attraversa una carica equivalente
-$q$, che si muove alla velocità di deriva $v$ delle cariche nel filo.</p>
+<ul>
+<li>Tratto di filo lungo $L$, corrente $i$, campo $\vec B$ che forma l'angolo $\theta$ con il filo.</li>
+<li>Carica che attraversa il tratto nel tempo $\Delta t$: $q=i\,\Delta t$.</li>
+<li>Tempo per percorrere $L$ alla velocità di deriva $v$: $\Delta t=\dfrac{L}{v}$, quindi $q=\dfrac{iL}{v}$.</li>
+</ul>
+
+<p class="eq">$$F=qvB\sin\theta=\frac{iL}{v}\,vB\sin\theta$$</p>
+
+<ul>
+<li>La velocità di deriva $v$ si semplifica.</li>
+</ul>
+
+<div class="def"><span class="et">Forza su un filo</span>
+<p class="eq">$$F=BiL\sin\theta$$</p>
+<p>$F$ forza (N), $B$ campo (T), $i$ corrente (A), $L$ lunghezza del filo (m), $\theta$ angolo fra filo e campo.</p>
+</div>
 
 <div class="fig">
-<svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f9i2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f9b2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="f9f2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="60" y1="180" x2="420" y2="180" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<line x1="330" y1="180" x2="400" y2="180" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f9i2)"/>
-<text x="405" y="176" font-family="var(--sans)" font-size="14" fill="var(--verde)">i</text>
-<line x1="60" y1="205" x2="420" y2="205" stroke="var(--grigio)" stroke-width="1"/>
-<text x="240" y="222" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">L</text>
-<line x1="240" y1="180" x2="330" y2="105" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#f9b2)"/>
-<text x="336" y="98" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<path d="M300,180 A48,48 0 0 1 288,142" fill="none" stroke="var(--grigio)" stroke-width="1.2"/>
-<text x="304" y="150" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&theta;</text>
-<line x1="240" y1="180" x2="185" y2="90" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f9f2)"/>
-<text x="165" y="82" font-family="var(--sans)" font-size="14" fill="var(--rosso)">F</text>
-</svg>
-<p class="did">Filo lungo $L$ percorso da $i$, in un campo $\vec B$ inclinato di $\theta$ rispetto al
-filo. La forza $\vec F$ è perpendicolare al piano di $i$ e $\vec B$.</p>
+<svg id="fig-b" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-b">angolo</label><input id="cur-b" type="range" min="0" max="180" step="5" value="50"><output id="val-b" for="cur-b"></output></div>
+<p class="did">Forza perpendicolare al piano di filo e campo; modulo massimo per $\theta=90°$, nullo per $\theta=0°$ e $180°$.</p>
 </div>
 
-<p>Da $i=\dfrac{q}{\Delta t}$ ricaviamo $q=i\,\Delta t$; poiché il tempo per percorrere $L$ alla
-velocità $v$ è $\Delta t=\dfrac{L}{v}$, otteniamo $q=i\dfrac{L}{v}$. La forza di Lorentz
-$F=qvB\sin\theta$ diventa allora</p>
-
-$$F=i\,\frac{L}{v}\,vB\sin\theta$$
-
-<p>La velocità di deriva $v$ si semplifica, e resta un risultato che dipende solo da $i$, $L$,
-$B$ e dall'angolo $\theta$ fra filo e campo:</p>
-
-<div class="formula-box">
-$$F=BiL\sin\theta$$
+<div class="def"><span class="et">Regola della mano destra</span>
+<ul>
+<li>Pollice: verso della corrente $i$.</li>
+<li>Indice: verso del campo $\vec B$.</li>
+<li>Medio, perpendicolare a pollice e indice: verso della forza $\vec F$.</li>
+</ul>
 </div>
-
-<p>La direzione e il verso si trovano con la regola della mano destra:</p>
-
-<div class="regola">
-<p><strong>Pollice</strong> &rarr; verso della corrente $i$.</p>
-<p><strong>Indice</strong> &rarr; verso del campo magnetico $\vec B$.</p>
-<p><strong>Medio</strong> &rarr; verso della forza $\vec F$.</p>
-</div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../08-campo-magnetico-generato-da-un-filo-percorso-da-corrente/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campo magnetico generato da un filo percorso da corrente</span></a><a class="successiva" href="../10-spire-di-corrente-e-momento-torcente-magnetico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Spire di corrente e momento torcente magnetico</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 08</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function virgola(x,d){return x.toFixed(d).replace('.',',');}
+  function marcatori(svg,pre){
+    var d=el(svg,'defs',{});
+    [[pre+'v','var(--verde)'],[pre+'b','var(--blu)']].forEach(function(m){
+      var k=el(d,'marker',{id:m[0],markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+      el(k,'path',{d:'M0,0 L6,3 L0,6 Z',fill:m[1]});
+    });
+  }
+  /* simbolo della forza perpendicolare al foglio: s>0 uscente (punto), s<0 entrante (croce); r raggio */
+  function simbolo(g,x,y,r,s){
+    while(g.firstChild)g.removeChild(g.firstChild);
+    if(r<1.5||s===0)return;
+    el(g,'circle',{cx:x,cy:y,r:f(r),fill:'#fff',stroke:'var(--rosso)','stroke-width':2});
+    if(s>0)el(g,'circle',{cx:x,cy:y,r:f(Math.max(2,r*.28)),fill:'var(--rosso)'});
+    else{var c=r*.7;
+      el(g,'line',{x1:f(x-c),y1:f(y-c),x2:f(x+c),y2:f(y+c),stroke:'var(--rosso)','stroke-width':2});
+      el(g,'line',{x1:f(x+c),y1:f(y-c),x2:f(x-c),y2:f(y+c),stroke:'var(--rosso)','stroke-width':2});}
+  }
+
+  /* --- figura 1: filo verticale in B orizzontale, cursore sulla corrente --- */
+  var A=document.getElementById('fig-a'), ca=document.getElementById('cur-a'), va=document.getElementById('val-a');
+  if(A&&ca){
+    marcatori(A,'a');
+    var cx=210, cy=130;
+    [60,130,200].forEach(function(y){el(A,'line',{x1:70,y1:y,x2:340,y2:y,stroke:'var(--blu)','stroke-width':1.8,'marker-end':'url(#ab)'});});
+    T(A,350,64,'B',{fill:'var(--blu)','font-weight':700,'font-style':'italic','font-size':14});
+    el(A,'line',{x1:cx,y1:20,x2:cx,y2:240,stroke:'var(--inchiostro)','stroke-width':2.6});
+    var ci=el(A,'line',{stroke:'var(--verde)','stroke-width':2.8,'marker-end':'url(#av)'});
+    var ti=T(A,cx+10,0,'i',{fill:'var(--verde)','font-weight':700,'font-style':'italic','font-size':14});
+    var gFa=el(A,'g',{}), tFa=T(A,cx+30,cy-10,'F',{fill:'var(--rosso)','font-weight':700,'font-style':'italic','font-size':14});
+    function disA(i){
+      var s=i>0?1:i<0?-1:0, L=10+10*Math.abs(i);
+      if(s){
+        var y0=s>0?100:160;
+        set(ci,{x1:cx,y1:y0,x2:cx,y2:y0-s*L,opacity:1});
+        set(ti,{y:f(y0-s*L/2+5),opacity:1});
+      }else{set(ci,{opacity:0});set(ti,{opacity:0});}
+      /* F = i L x B: L verso l'alto, B verso destra -> entrante (s<0 del simbolo) */
+      simbolo(gFa,cx,cy,6+4*Math.abs(i),-s);
+      set(tFa,{x:f(cx+14+4*Math.abs(i)),opacity:s?1:0});
+      va.innerHTML='i = '+(i>0?'+':i<0?'−':'')+virgola(Math.abs(i),1)+' A · '+(i>0?'F entrante':i<0?'F uscente':'F = 0');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    ca.addEventListener('input',function(){disA(+ca.value);});
+    disA(+ca.value);
+  }
+
+  /* --- figura 2: filo orizzontale, B inclinato di theta, cursore sull'angolo --- */
+  var Bf=document.getElementById('fig-b'), cb=document.getElementById('cur-b'), vb=document.getElementById('val-b');
+  if(Bf&&cb){
+    marcatori(Bf,'b');
+    var ox=210, oy=160, Lb=110;
+    el(Bf,'line',{x1:40,y1:oy,x2:380,y2:oy,stroke:'var(--inchiostro)','stroke-width':2.6});
+    el(Bf,'line',{x1:300,y1:oy,x2:360,y2:oy,stroke:'var(--verde)','stroke-width':2.8,'marker-end':'url(#bv)'});
+    T(Bf,362,oy-8,'i',{fill:'var(--verde)','font-weight':700,'font-style':'italic','font-size':14});
+    el(Bf,'line',{x1:40,y1:oy+30,x2:380,y2:oy+30,stroke:'var(--grigio)','stroke-width':1});
+    el(Bf,'line',{x1:40,y1:oy+24,x2:40,y2:oy+36,stroke:'var(--grigio)','stroke-width':1});
+    el(Bf,'line',{x1:380,y1:oy+24,x2:380,y2:oy+36,stroke:'var(--grigio)','stroke-width':1});
+    T(Bf,210,oy+50,'L',{'text-anchor':'middle',fill:'var(--grigio)','font-style':'italic'});
+    var arco=el(Bf,'path',{fill:'none',stroke:'var(--grigio)','stroke-width':1.3});
+    var tth=T(Bf,0,0,'θ',{fill:'var(--grigio)','font-size':13});
+    var vB=el(Bf,'line',{x1:ox,y1:oy,stroke:'var(--blu)','stroke-width':2.4,'marker-end':'url(#bb)'});
+    var tB=T(Bf,0,0,'B',{fill:'var(--blu)','font-weight':700,'font-style':'italic','font-size':14});
+    var gFb=el(Bf,'g',{}), tFb=T(Bf,0,0,'F',{fill:'var(--rosso)','font-weight':700,'font-style':'italic','font-size':14});
+    function disB(g){
+      var t=g*Math.PI/180, s=Math.sin(t), c=Math.cos(t);
+      var bx=ox+Lb*c, by=oy-Lb*s;
+      set(vB,{x2:f(bx),y2:f(by)});
+      set(tB,{x:f(ox+(Lb+12)*c-5),y:f(oy-(Lb+12)*s+5-(s<0.35?16:0))});
+      var ra=34;
+      if(g>0){set(arco,{d:'M'+(ox+ra)+','+oy+' A'+ra+','+ra+' 0 0 0 '+f(ox+ra*c)+','+f(oy-ra*s),opacity:1});
+        set(tth,{x:f(ox+(ra+12)*Math.cos(t/2)-4),y:f(oy-(ra+12)*Math.sin(t/2)+5),opacity:1});}
+      else{set(arco,{opacity:0});set(tth,{opacity:0});}
+      /* F = i L x B: i verso destra, B nel piano sopra il filo -> uscente, modulo ~ sin(theta) */
+      var fx=ox-70, fy=70;
+      simbolo(gFb,fx,fy,18*s,1);
+      set(tFb,{x:f(fx+20*s+8),y:fy+5,opacity:s>0.08?1:0});
+      vb.innerHTML='θ = '+g+'° · F = '+virgola(Math.abs(s)<1e-9?0:s,2)+'·BiL'+(g===90?' <span class="ok">massima</span>':'');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    cb.addEventListener('input',function(){disB(+cb.value);});
+    disB(+cb.value);
+  }
+})();
+</script>
 </body>
 </html>

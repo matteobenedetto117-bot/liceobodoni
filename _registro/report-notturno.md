@@ -42,3 +42,7 @@ Esecuzione delle 00:03 UTC (due unità).
 
 - fisica-4 unità 14 (Cicli termodinamici e ciclo di Carnot): pubblicata commit bde7489. Correzioni: tolta l'etichetta «adiabatica» dal disegno del ciclo irreversibile (tratto fra due stati alla stessa pressione) e il riempimento dell'area in quel ciclo; «massimo teorico» precisato «fra le stesse due temperature». Da controllare: i due cicli generici ridisegnati come isobara–isoterma–isobara–isocora (forma prima tracciata a occhio); ciclo di Carnot calcolato per 1 mol di gas monoatomico con cursore su T_f. Nessun esempio, nessuna figura decorativa.
 - matematica-5 unità 07 (Continuità in un punto e in un intervallo): pubblicata (commit nella riga della coda). Correzione: continuità della composta f(g(x)) con le ipotesi giuste (g continua in x₀, f continua in g(x₀)). Da controllare: tolta la frase sul dominio di √(x+2) (già nella tabella); nei quattro pannelli x₀ spostato da 0 a 1. Grafici Plotly riscritti in SVG; cursore su c con «continua» in verde per c = 0. Nessun esempio, nessuna figura decorativa.
+
+Esecuzione delle 01:03 UTC (due unità).
+
+- fisica-5 unità 08 (Forza su un filo percorso da corrente): pubblicata, commit nella riga della coda. Correzione: nel secondo disegno la forza era nel piano di filo e campo, ora è perpendicolare al foglio (⊙). Da controllare: le due figure statiche dell'esperienza di Faraday sono diventate un solo filo con cursore sulla corrente (⊗/⊙ che si inverte). Nessun esempio, nessuna figura decorativa.
