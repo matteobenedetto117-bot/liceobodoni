@@ -46,3 +46,4 @@ Esecuzione delle 00:03 UTC (due unità).
 Esecuzione delle 01:03 UTC (due unità).
 
 - fisica-5 unità 08 (Forza su un filo percorso da corrente): pubblicata, commit nella riga della coda. Correzione: nel secondo disegno la forza era nel piano di filo e campo, ora è perpendicolare al foglio (⊙). Da controllare: le due figure statiche dell'esperienza di Faraday sono diventate un solo filo con cursore sulla corrente (⊗/⊙ che si inverte). Nessun esempio, nessuna figura decorativa.
+- fisica-1 unità 09 (Formule inverse): pubblicata (commit nella riga della coda). Da controllare: tenuti due dei sei esercizi della traccia (a = b·c ed E = ½mv²); tolti d = m/V, (a+b)/c = d, a = b·c·d, A = (b+B)h/2: valutare se ripristinare un caso con la somma. Nessuna correzione concettuale; figura delle semplificazioni resa a comparsa con ▶. Nessuna figura decorativa.

@@ -6,22 +6,41 @@
 <title>Formule inverse — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.regole{margin:22px 0;padding:14px 18px;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+#inv .fase{transition:opacity .5s}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -30,136 +49,121 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Grandezze fisiche e strumenti matematici &middot; Unità 09</p>
   <h1>Formule inverse</h1>
-  <p class="sommario">Ricavare da una formula una qualunque delle lettere che vi
-  compaiono, e non solo quella già isolata.</p>
 </header>
 
-<p>Una formula è scritta con una lettera sola a sinistra dell'uguale, ma il dato mancante
-non è quasi mai quello. Ricavare la formula inversa significa riscrivere la stessa
-uguaglianza in modo che a restare da sola sia l'incognita che serve.</p>
-
-<div class="regole">
-<p>Un'uguaglianza resta vera se si esegue la <strong>stessa operazione sui due membri</strong>:
-moltiplicarli entrambi per la stessa quantità, dividerli entrambi, estrarne la radice.
-Ogni volta si sceglie l'operazione che <strong>elimina</strong> ciò che sta attaccato
-all'incognita: una divisione si annulla moltiplicando, una moltiplicazione si annulla
-dividendo.</p>
+<div class="def">
+<span class="et">Metodo</span>
+<ul>
+<li>Formula inversa: stessa uguaglianza, con l'incognita da sola in un membro.</li>
+<li>Stessa operazione sui due membri: l'uguaglianza resta vera.</li>
+<li>Si sceglie l'operazione che elimina ciò che è attaccato all'incognita: divisione ↔ moltiplicazione, quadrato ↔ radice quadrata.</li>
+</ul>
 </div>
 
-<p>Si semplifica però solo ciò che moltiplica o divide l'<em>intero</em> membro. Un
-termine addizionato si sposta per ultimo, quando tutto il resto è già stato tolto.</p>
+<ul>
+<li>Si semplifica solo un fattore che moltiplica o divide l'intero membro.</li>
+<li>Termine addizionato: si sposta per ultimo, sottraendolo ai due membri.</li>
+</ul>
 
-<div class="esempi">
-<h3>1) &nbsp; da $a = b \cdot c$ ricavare $b$ e $c$</h3>
-<p>Dividendo entrambi i membri per $c$, a destra la $c$ di sopra e quella di sotto se ne vanno:</p>
-<p>$$\frac{a}{c} = \frac{b \cdot \cancel{c}}{\cancel{c}} \qquad\Longrightarrow\qquad b = \frac{a}{c}$$</p>
-<p>Dividendo invece per $b$ si isola l'altra lettera:</p>
-<p>$$\frac{a}{b} = \frac{\cancel{b}\cdot c}{\cancel{b}} \qquad\Longrightarrow\qquad c = \frac{a}{b}$$</p>
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>In $\dfrac{a+b}{c}$ la $c$ divide tutto il numeratore: non si semplifica con la sola $a$.</p>
 </div>
+
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>$v^{2}$ si toglie con la radice quadrata, non dividendo per $2$.</p>
+</div>
+
+<h2>Esempio 1</h2>
+
+<ul>
+<li>Da $a = b \cdot c$ ricavare $b$ e $c$.</li>
+</ul>
+<p class="eq">$$\frac{a}{c} = \frac{b \cdot \cancel{c}}{\cancel{c}} \qquad\Longrightarrow\qquad b = \frac{a}{c}$$</p>
+<p class="eq">$$\frac{a}{b} = \frac{\cancel{b} \cdot c}{\cancel{b}} \qquad\Longrightarrow\qquad c = \frac{a}{b}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="20">
-  <text x="30" y="60">a</text>
-  <line x1="24" y1="70" x2="48" y2="70" stroke="#333" stroke-width="1.6"/>
-  <text x="30" y="98" fill="#c0392b">c</text>
-
-  <text x="66" y="78">=</text>
-
-  <text x="98" y="60">b · c</text>
-  <line x1="152" y1="52" x2="168" y2="32" stroke="#2e7d32" stroke-width="2.2"/>
-  <line x1="92" y1="70" x2="148" y2="70" stroke="#333" stroke-width="1.6"/>
-  <text x="112" y="98" fill="#c0392b">c</text>
-  <line x1="108" y1="104" x2="126" y2="84" stroke="#2e7d32" stroke-width="2.2"/>
-
-  <text x="196" y="78">&#8658;</text>
-
-  <text x="238" y="60">a</text>
-  <line x1="232" y1="70" x2="256" y2="70" stroke="#333" stroke-width="1.6"/>
-  <text x="238" y="98">c</text>
-  <text x="272" y="78">= b</text>
-
-  <text x="352" y="78" fill="#1a5ea8">b =</text>
-  <text x="412" y="60" fill="#1a5ea8">a</text>
-  <line x1="406" y1="70" x2="430" y2="70" stroke="#1a5ea8" stroke-width="1.6"/>
-  <text x="412" y="98" fill="#1a5ea8">c</text>
-  <line x1="392" y1="118" x2="452" y2="118" stroke="#2e7d32" stroke-width="2.4"/>
-
-  <text x="24" y="140" font-size="13" fill="#666">in rosso l'operazione fatta su tutti e due i membri, in verde ciò che si semplifica</text>
+<svg id="inv" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" font-family="Georgia, serif" font-size="20" fill="var(--inchiostro)">
+  <text x="52" y="90" text-anchor="middle">a</text>
+  <text x="96" y="90" text-anchor="middle">=</text>
+  <text x="150" y="90" text-anchor="middle">b · c</text>
+  <g class="fase" id="g1">
+    <line x1="38" y1="100" x2="66" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
+    <text x="52" y="126" text-anchor="middle" fill="var(--rosso)">c</text>
+    <line x1="126" y1="100" x2="174" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
+    <text x="150" y="126" text-anchor="middle" fill="var(--rosso)">c</text>
+    <text x="20" y="30" font-family="var(--sans)" font-size="13" fill="var(--rosso)">1 · diviso c tutti e due i membri</text>
+  </g>
+  <g class="fase" id="g2">
+    <line x1="161" y1="94" x2="177" y2="72" stroke="var(--verde)" stroke-width="2.4"/>
+    <line x1="142" y1="130" x2="158" y2="108" stroke="var(--verde)" stroke-width="2.4"/>
+    <text x="20" y="160" font-family="var(--sans)" font-size="13" fill="var(--verde)">2 · c con c</text>
+  </g>
+  <g class="fase" id="g3">
+    <text x="232" y="96" text-anchor="middle">⇒</text>
+    <text x="300" y="96" text-anchor="middle" fill="var(--blu)" font-weight="700">b =</text>
+    <text x="360" y="84" text-anchor="middle" fill="var(--blu)" font-weight="700">a</text>
+    <line x1="346" y1="90" x2="374" y2="90" stroke="var(--blu)" stroke-width="1.8"/>
+    <text x="360" y="114" text-anchor="middle" fill="var(--blu)" font-weight="700">c</text>
+    <text x="270" y="160" font-family="var(--sans)" font-size="13" fill="var(--blu)">3 · risultato</text>
+  </g>
 </svg>
-<p class="did">La $c$ scritta sotto a destra cancella la $c$ che moltiplicava $b$:
-a destra resta la sola incognita.</p>
+<div><button type="button" class="btn-anim" id="btn-inv" aria-label="Avvia">&#9654;</button></div>
+<p class="did">In rosso l'operazione sui due membri, in verde ciò che si semplifica.</p>
 </div>
 
-<div class="esempi">
-<h3>2) &nbsp; da $d = \dfrac{m}{V}$ ricavare $m$ e $V$</h3>
-<p>Qui l'incognita sta al denominatore: per farla salire si moltiplicano i due membri per $V$.</p>
-<p>$$V \cdot d = \frac{m}{\cancel{V}} \cdot \cancel{V} \qquad\Longrightarrow\qquad m = d \cdot V$$</p>
-<p>Da quest'ultima, per il volume basta dividere per $d$:</p>
-<p>$$\frac{V \cdot \cancel{d}}{\cancel{d}} = \frac{m}{d} \qquad\Longrightarrow\qquad V = \frac{m}{d}$$</p>
-</div>
+<h2>Esempio 2</h2>
 
-<div class="esempi">
-<h3>3) &nbsp; da $\dfrac{a+b}{c} = d$ ricavare $c$, $a$ e $b$</h3>
-<p>Moltiplicando per $c$ si libera la frazione, poi si divide per $d$:</p>
-<p>$$c \cdot d = \frac{a+b}{\cancel{c}} \cdot \cancel{c} \qquad\Longrightarrow\qquad
-c \cdot d = a+b \qquad\Longrightarrow\qquad c = \frac{a+b}{d}$$</p>
-<p>La stessa uguaglianza $a+b = c\cdot d$ serve anche per le altre due lettere: $a$ e $b$
-sono addizionate, e si separano sottraendo.</p>
-<p>$$a = c \cdot d - b \qquad\qquad b = c \cdot d - a$$</p>
-</div>
-
-<div class="esempi">
-<h3>4) &nbsp; da $a = b \cdot c \cdot d$ ricavare $b$, $c$ e $d$</h3>
-<p>Tre fattori a destra: ogni volta si divide per i due che non interessano, che si
-semplificano insieme.</p>
-<p>$$\frac{a}{c\,d} = \frac{b \cdot \cancel{c}\,\cancel{d}}{\cancel{c}\,\cancel{d}}
-\qquad\Longrightarrow\qquad b = \frac{a}{c\,d}$$</p>
-<p>$$c = \frac{a}{b\,d} \qquad\qquad d = \frac{a}{b\,c}$$</p>
-</div>
-
-<div class="esempi">
-<h3>5) &nbsp; da $E = \dfrac{1}{2}m v^{2}$ ricavare $m$ e $v$</h3>
-<p>Prima si toglie di mezzo il fattore $\tfrac{1}{2}$ moltiplicando per $2$, poi si divide
-per $v^{2}$:</p>
-<p>$$2E = m v^{2} \qquad\Longrightarrow\qquad \frac{2E}{v^{2}} = \frac{m \cancel{v^{2}}}{\cancel{v^{2}}}
-\qquad\Longrightarrow\qquad m = \frac{2E}{v^{2}}$$</p>
-<p>Per la velocità si divide invece per $m$, e resta $v^{2}$: l'ultimo passo è la radice
-quadrata, che è l'operazione che disfa il quadrato.</p>
-<p>$$\frac{2E}{m} = v^{2} \qquad\Longrightarrow\qquad \sqrt{v^{2}} = \sqrt{\frac{2E}{m}}
-\qquad\Longrightarrow\qquad v = \sqrt{\frac{2E}{m}}$$</p>
-</div>
-
-<div class="esempi">
-<h3>6) &nbsp; da $A = \dfrac{(b+B)h}{2}$ ricavare $h$, $b$ e $B$</h3>
-<p>Si moltiplica per $2$ e si divide per la parentesi, che va trattata come un unico blocco:</p>
-<p>$$2A = (b+B)h \qquad\Longrightarrow\qquad h = \frac{2A}{(b+B)}$$</p>
-<p>Dividendo invece per $h$ si arriva alla somma delle due basi, e da lì le si separa
-con una sottrazione:</p>
-<p>$$\frac{2A}{h} = b+B \qquad\Longrightarrow\qquad b = \frac{2A}{h} - B
-\qquad\qquad B = \frac{2A}{h} - b$$</p>
-</div>
-
-<div class="nota">
-<strong>Da non fare.</strong> Non si cancella una lettera che sta dentro una somma: in
-$\dfrac{a+b}{c}$ la $c$ divide tutto il numeratore, non la sola $a$. Prima si libera il
-blocco $a+b$, poi lo si spezza.
-</div>
-
-<div class="nota">
-<strong>Da non fare.</strong> Quando resta $v^{2}$ l'incognita non è ancora isolata:
-il quadrato si toglie con la radice, non dividendo per $2$.
-</div>
-
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Con quante cifre scrivere il risultato di un'inversione è l'argomento delle unità 10
-e 11. La densità del caso 2 torna nell'unità 12 fra le grandezze derivate, e le formule
-inverse si useranno poi in ogni capitolo, dalla cinematica ai fluidi.</p>
-</div>
-
+<ul>
+<li>Da $E = \dfrac{1}{2}\,m v^{2}$ ricavare $m$ e $v$.</li>
+</ul>
+<p class="eq">$$2E = m v^{2} \qquad\Longrightarrow\qquad \frac{2E}{v^{2}} = \frac{m\,\cancel{v^{2}}}{\cancel{v^{2}}} \qquad\Longrightarrow\qquad m = \frac{2E}{v^{2}}$$</p>
+<p class="eq">$$\frac{2E}{m} = v^{2} \qquad\Longrightarrow\qquad v = \sqrt{\frac{2E}{m}}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../09-equivalenze-in-notazione-scientifica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equivalenze in notazione scientifica</span></a><a class="successiva" href="../11-cifre-significative/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Cifre significative</span></a></nav>
+<footer><p>Fisica prima &middot; Grandezze fisiche e strumenti matematici &middot; Unità 09</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  /* passaggi a comparsa: fermo -> in corso (disabilitato) -> finito (ricomincia) */
+  var b=document.getElementById('btn-inv'); if(!b)return;
+  var fasi=['g1','g2','g3'].map(function(id){return document.getElementById(id);});
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finito=false, raf=null;
+  function mostra(n){fasi.forEach(function(g,k){g.style.opacity=k<n?1:0;});}
+  if(ridotto){mostra(3);b.hidden=true;return;}
+  mostra(0);
+  b.addEventListener('click',function(){
+    if(finito){finito=false;mostra(0);b.innerHTML='&#9654;';b.setAttribute('aria-label','Avvia');return;}
+    b.disabled=true; var t0=null;
+    function passo(t){
+      if(t0===null)t0=t;
+      var n=Math.min(3,Math.floor((t-t0)/1100)+1); mostra(n);
+      if(t-t0<3300)raf=requestAnimationFrame(passo);
+      else{finito=true;b.disabled=false;b.innerHTML='&#8634;';b.setAttribute('aria-label','Ricomincia');}
+    }
+    raf=requestAnimationFrame(passo);
+  });
+})();
+</script>
 </body>
 </html>
