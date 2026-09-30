@@ -5,15 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proprietà invariantiva — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -23,46 +60,61 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 11</p>
   <h1>Proprietà invariantiva</h1>
-  <p class="sommario">Uno stesso numero si può scrivere come radicale in più modi, con indici
-  diversi. La proprietà invariantiva dice come passare dall'uno all'altro, ed è quello che serve
-  per confrontare o combinare radicali che partono con indici differenti.</p>
 </header>
 
-<h2>Radicali equivalenti</h2>
-<p>Due radicali sono <strong>equivalenti</strong> se rappresentano lo stesso numero reale, anche
-se hanno indice e radicando diversi:</p>
-$$\sqrt[3]{27}=3\qquad\sqrt[4]{81}=3\qquad\text{equivalenti}$$
-
-<h2>Il teorema</h2>
-<div class="regola">
-$$\sqrt[n]{a^p}=\sqrt[n\cdot m]{a^{p\cdot m}}\qquad a\geqslant0,\ \ n,m,p\in\mathbb{N}-\{0\}$$
-</div>
-<p>Moltiplicando indice ed esponente per lo stesso numero naturale $m$ il valore del radicale non
-cambia: si tratta della stessa proprietà per cui una frazione non cambia se si moltiplicano
-numeratore e denominatore per lo stesso numero, dato che l'esponente $p/n$ è di fatto una
-frazione. La condizione $a\geqslant0$ serve a evitare ambiguità di segno quando si cambia
-l'indice.</p>
-
-<div class="esempio">
-<p>$\sqrt[5]{2}=\sqrt[5\cdot3]{2^{1\cdot3}}=\sqrt[15]{2^3}=\sqrt[15]{8}$</p>
-<p>$\sqrt[3]{5^2}=\sqrt[3\cdot2]{5^{2\cdot2}}=\sqrt[6]{5^4}=\sqrt[6]{625}$</p>
+<div class="def"><span class="et">Radicali equivalenti</span>
+<p>Radicali che rappresentano lo stesso numero reale, con indice e radicando diversi.</p>
+<p class="eq">$$\sqrt[3]{27}=3=\sqrt[4]{81}$$</p>
 </div>
 
-<h2>Indice dispari e radicando negativo</h2>
-<p>Se $n$ è dispari il segno meno può uscire dal radicale, e a quel punto il radicando è tornato
-positivo: si può applicare la proprietà invariantiva anche a un indice pari.</p>
-$$\sqrt[n]{-a}=-\sqrt[n]{a}=-\sqrt[n\cdot2]{a^{1\cdot2}}$$
-
-<div class="esempio">
-<p>Per costruire un radicale di indice $6$ equivalente a $\sqrt{x+6}$ (CE: $x+6\geqslant0$, cioè
-$x\geqslant-6$) basta moltiplicare indice ed esponente per $3$:</p>
-$$\sqrt{x+6}=\sqrt[2\cdot3]{(x+6)^3}=\sqrt[6]{(x+6)^3}$$
+<div class="def"><span class="et">Proprietà invariantiva</span>
+<p class="eq">$$\sqrt[n]{a^p}=\sqrt[n\cdot m]{a^{p\cdot m}}\qquad a\geqslant0,\ \ n,m,p\in\mathbb{N}-\{0\}$$</p>
+<p>Moltiplicando indice ed esponente per lo stesso numero naturale $m$, il valore del radicale non cambia.</p>
 </div>
 
+<div class="nota"><span class="et">Attenzione</span>
+<p>Condizione $a\geqslant0$: evita ambiguità di segno nel cambio di indice.</p>
+</div>
+
+<ul>
+<li>Indice $n$ dispari, radicando negativo: il segno meno esce dal radicale, poi si applica la proprietà.</li>
+</ul>
+<p class="eq">$$\sqrt[n]{-a}=-\sqrt[n]{a}=-\sqrt[n\cdot2]{a^{1\cdot2}}\qquad a\geqslant0,\ n\text{ dispari}$$</p>
+
+<h2>Esempio 1</h2>
+<ul>
+<li>$\sqrt[5]{2}=\sqrt[5\cdot3]{2^{1\cdot3}}=\sqrt[15]{2^3}=\sqrt[15]{8}$</li>
+<li>$\sqrt[3]{5^2}=\sqrt[3\cdot2]{5^{2\cdot2}}=\sqrt[6]{5^4}=\sqrt[6]{625}$</li>
+</ul>
+
+<h2>Esempio 2</h2>
+<ul>
+<li>Radicale di indice $6$ equivalente a $\sqrt{x+6}$.</li>
+<li>CE: $x+6\geqslant0\ \Rightarrow\ x\geqslant-6$.</li>
+<li>Indice ed esponente moltiplicati per $3$:</li>
+</ul>
+<p class="eq">$$\sqrt{x+6}=\sqrt[2\cdot3]{(x+6)^3}=\sqrt[6]{(x+6)^3}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../13-condizioni-di-esistenza-e-segno-di-un-radicale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Condizioni di esistenza e segno di un radicale</span></a><a class="successiva" href="../15-condizioni-di-esistenza-di-frazioni-algebriche-sotto-radice/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Condizioni di esistenza di frazioni algebriche sotto radice</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 11</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
