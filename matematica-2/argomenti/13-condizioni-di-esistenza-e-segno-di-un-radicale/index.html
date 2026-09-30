@@ -5,15 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Condizioni di esistenza e segno di un radicale — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -23,52 +60,61 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 10</p>
   <h1>Condizioni di esistenza e segno di un radicale</h1>
-  <p class="sommario">Un radicale con l'incognita sotto il segno di radice non è definito per
-  ogni valore: prima di calcolarlo dobbiamo stabilire per quali numeri ha senso. E una volta che
-  esiste, conviene sapere subito che segno ha, senza calcolarlo per intero.</p>
 </header>
 
-<h2>Una proprietà dei radicali</h2>
-<p>Elevare alla $n$ un radicale di indice $n$ restituisce il radicando:</p>
-$$\left(\sqrt[n]{a}\right)^n=a$$
-<p>e se $n$ è dispari il segno meno può uscire liberamente dal segno di radice:</p>
-$$\sqrt[n]{-a}=-\sqrt[n]{a}\qquad (n\text{ dispari})$$
+<div class="def"><span class="et">Proprietà</span>
+<p class="eq">$$\left(\sqrt[n]{a}\right)^n=a\qquad\text{se }\sqrt[n]{a}\text{ esiste}$$</p>
+<p class="eq">$$\sqrt[n]{-a}=-\sqrt[n]{a}\qquad n\text{ dispari}$$</p>
+</div>
 
-<h2>Condizioni di esistenza</h2>
-<p>Per un radicale $\sqrt[n]{a}$ la condizione di esistenza dipende solo dalla parità di $n$:</p>
-<div class="regola">
+<div class="def"><span class="et">Condizioni di esistenza (CE)</span>
 <p>$n$ <strong>pari</strong>: $\sqrt[n]{a}$ esiste se e solo se $a\geqslant0$.</p>
 <p>$n$ <strong>dispari</strong>: $\sqrt[n]{a}$ esiste per ogni $a\in\mathbb{R}$.</p>
 </div>
-<p>Quando $a$ è un'espressione con l'incognita, la condizione di esistenza (CE) diventa una
-disequazione da risolvere, oppure, se $n$ è dispari, è automaticamente verificata per ogni
-valore.</p>
 
-<div class="esempio">
-<p>$\sqrt[4]{x-1}$: $n$ pari, quindi CE $x-1\geqslant0$, cioè $x\geqslant1$.</p>
-<p>$\sqrt[7]{7-y}$: $n$ dispari, quindi CE $\forall y\in\mathbb{R}$.</p>
-<p>$\sqrt[8]{\dfrac{x+7}{2}}$: $n$ pari, quindi CE $\dfrac{x+7}{2}\geqslant0$; moltiplicando per
-$2$, che è positivo, $x+7\geqslant0$, cioè $x\geqslant-7$.</p>
+<ul>
+<li>Radicando con l'incognita, $n$ pari: CE = disequazione radicando $\geqslant0$.</li>
+<li>$n$ dispari: CE verificata per ogni valore.</li>
+</ul>
+
+<h2>Esempio 1</h2>
+<ul>
+<li>$\sqrt[4]{x-1}$: $n$ pari; CE $x-1\geqslant0\ \Rightarrow\ x\geqslant1$.</li>
+<li>$\sqrt[7]{7-y}$: $n$ dispari; CE $\forall y\in\mathbb{R}$.</li>
+<li>$\sqrt[8]{\dfrac{x+7}{2}}$: $n$ pari; CE $\dfrac{x+7}{2}\geqslant0\ \Rightarrow\ x+7\geqslant0\ \Rightarrow\ x\geqslant-7$.</li>
+</ul>
+
+<div class="def"><span class="et">Segno di un radicale</span>
+<p>$n$ <strong>pari</strong>: $\sqrt[n]{a}\geqslant0$.</p>
+<p>$n$ <strong>dispari</strong>: $\sqrt[n]{a}$ ha lo stesso segno di $a$.</p>
 </div>
 
-<h2>Segno di un radicale</h2>
-<p>Anche il segno del risultato dipende dalla parità dell'indice:</p>
-<div class="regola">
-<p>Se $n$ è <strong>pari</strong>, $\sqrt[n]{a}$ è sempre positivo o nullo.</p>
-<p>Se $n$ è <strong>dispari</strong>, $\sqrt[n]{a}$ ha lo stesso segno del radicando $a$.</p>
-</div>
-
-<div class="esempio">
-<p>Segno di $\sqrt[8]{2-a}$ (CE: $a\leqslant2$): per $a=2$ vale $0$; per $a&lt;2$ è
-$&gt;0$.</p>
-<p>Segno di $\sqrt[7]{b-3}$ (definito per ogni $b$): per $b=3$ vale $0$; per $b&gt;3$ è
-$&gt;0$; per $b&lt;3$ è $&lt;0$.</p>
-</div>
-
+<h2>Esempio 2</h2>
+<ul>
+<li>$\sqrt[8]{2-a}$, CE $a\leqslant2$: $=0$ per $a=2$; $&gt;0$ per $a&lt;2$.</li>
+<li>$\sqrt[7]{b-3}$, $\forall b\in\mathbb{R}$: $=0$ per $b=3$; $&gt;0$ per $b&gt;3$; $&lt;0$ per $b&lt;3$.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../12-radici-quadrate-cubiche-e-n-esime/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Radici quadrate, cubiche e n-esime</span></a><a class="successiva" href="../14-proprieta-invariantiva/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Proprietà invariantiva</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 10</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

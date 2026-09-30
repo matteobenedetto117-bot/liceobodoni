@@ -62,3 +62,7 @@ Esecuzione delle 04:02 UTC (due unità).
 
 - fisica-5 unità 09 (Spire di corrente e momento torcente magnetico): pubblicata, commit 7f82566. Correzione: θ ora è l'angolo fra B e la perpendicolare alla spira (il testo lo misurava dalla posizione di momento massimo, che darebbe cos θ); «momento minimo» → «momento nullo, equilibrio». Da controllare: le due figure statiche «momento massimo/minimo» sono diventate una vista dall'alto con cursore su θ (forze, bracci, M = sin θ·iAB). Nessun esempio tolto, nessuna figura decorativa.
 - fisica-1 unità 10 (Cifre significative): pubblicata (commit nella riga della coda). Precisazione: «zeri a sinistra, se c'è la virgola» → «zeri a sinistra della prima cifra diversa da zero». Tolti i rimandi alle unità 11 e 16; aggiunto il piè di pagina mancante. Figura di l = 1,722 m ridisegnata statica. Contenuto dubbio non modificato: 3700 e 34 000 con 2 cifre significative (convenzione della traccia; il numero è ambiguo senza notazione scientifica). Nessun esempio tolto, nessuna figura decorativa.
+
+Esecuzione delle 05:03 UTC (due unità).
+
+- matematica-2 unità 10 (Condizioni di esistenza e segno di un radicale): pubblicata (commit nella riga della coda). Tolti sommario e tre titoletti; proprietà, CE e segno in riquadri; due esempi («Esempio 1» CE, «Esempio 2» segno). Precisazione: $(\sqrt[n]{a})^n=a$ «se il radicale esiste». Nessuna figura, nessun esempio tolto.
