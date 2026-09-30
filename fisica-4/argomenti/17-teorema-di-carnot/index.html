@@ -5,86 +5,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema di Carnot — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;font-size:1rem;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 15</p>
+  <p class="occhiello">Termodinamica &middot; Unità 15</p>
   <h1>Teorema di Carnot</h1>
-  <p class="sommario">Il rendimento della macchina di Carnot dipende soltanto dalle temperature
-  delle due sorgenti. Il teorema di Carnot precisa in che senso quel numero sia un limite:
-  nessuna macchina pu&ograve; superarlo, e ogni macchina reversibile che lavori fra le stesse
-  due temperature lo raggiunge esattamente, qualunque sia il modo in cui &egrave; costruita.</p>
 </header>
 
-<h2>Enunciato</h2>
-
-<p>Consideriamo una macchina termica che scambia calore soltanto con due sorgenti, una calda a
-temperatura $T_c$ e una fredda a temperatura $T_f$. Il teorema di Carnot afferma che:</p>
-
+<div class="def">
+<span class="et">Teorema di Carnot</span>
 <ul>
-<li>fra tutte le macchine che operano fra $T_c$ e $T_f$, quella reversibile (la macchina di
-Carnot) ha il rendimento massimo;</li>
-<li>tutte le macchine reversibili che operano fra le stesse due temperature hanno lo stesso
-rendimento.</li>
-</ul>
-
-<div class="formula-box">
-$$\eta_{\text{rev}}=1-\frac{T_f}{T_c}\qquad\text{vale per ogni macchina reversibile fra }T_c\text{ e }T_f$$
-</div>
-
-<div class="riquadro">
-<span class="etichetta">Da non confondere</span>
-Il rendimento di Carnot &egrave; un limite teorico, non quello di una macchina reale: attriti e
-trasformazioni irreversibili fanno s&igrave; che ogni macchina costruita in pratica renda meno.
-</div>
-
-<h2>Un esempio</h2>
-
-<p>Una macchina reversibile lavora fra una sorgente fredda a $T_f=311$ K e una calda a
-$T_c=563$ K, compiendo in un ciclo il lavoro $L=750\times10^3$ J. Cerchiamo il calore assorbito
-$Q_c$ e quello ceduto $Q_f$.</p>
-
-<p>Il rendimento si scrive in due modi, uno con le temperature e uno con lavoro e calore
-assorbito, e devono coincidere perch&eacute; la macchina &egrave; reversibile:</p>
-
-$$\eta=1-\frac{T_f}{T_c}=\frac{L}{Q_c}$$
-
-<p>Isoliamo $Q_c$:</p>
-
-$$Q_c=\frac{L}{1-\dfrac{T_f}{T_c}}=\frac{L\,T_c}{T_c-T_f}=\frac{750\times10^3\times563}{563-311}
-\ \text{J}\approx1{,}676\times10^6\ \text{J}$$
-
-<p>Il calore ceduto alla sorgente fredda segue dal bilancio del ciclo, $L=Q_c-Q_f$:</p>
-
-$$Q_f=Q_c-L\approx1{,}676\times10^6-0{,}750\times10^6\ \text{J}\approx9{,}26\times10^5\ \text{J}$$
-
-<div class="formula-box">
-$Q_c\approx1{,}68\times10^6$ J&emsp;&emsp;$Q_f\approx9{,}26\times10^5$ J
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Percorriamo lo stesso ciclo al contrario: unit&agrave; 16, frigoriferi e pompe di
-calore, con i loro coefficienti di prestazione.</li>
+<li>Fra tutte le macchine che scambiano calore con due sole sorgenti a $T_c$ e $T_f$, la macchina reversibile ha il rendimento massimo.</li>
+<li>Tutte le macchine reversibili che operano fra le stesse due temperature hanno lo stesso rendimento.</li>
 </ul>
 </div>
+
+<p class="eq principio">$$\eta_{\text{rev}}=1-\frac{T_f}{T_c}$$</p>
+<p class="leg">$\eta_{\text{rev}}$: rendimento di ogni macchina reversibile (numero puro); $T_c$, $T_f$: temperature delle sorgenti calda e fredda (K).</p>
+
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>Limite teorico: attriti e trasformazioni irreversibili rendono minore il rendimento di ogni macchina reale.</p>
+</div>
+
+<h2>Esempio</h2>
+
+<ul>
+<li>Dati: macchina reversibile; $T_f = 311\ \text{K}$; $T_c = 563\ \text{K}$; $L = 750\times10^3\ \text{J}$ per ciclo.</li>
+<li>Calore assorbito, da $\eta = 1-\dfrac{T_f}{T_c}=\dfrac{L}{Q_c}$:</li>
+</ul>
+
+<p class="eq">$$Q_c=\frac{L\,T_c}{T_c-T_f}=\frac{750\times10^3\ \text{J}\times563\ \text{K}}{563\ \text{K}-311\ \text{K}}\approx1{,}68\times10^6\ \text{J}$$</p>
+
+<ul>
+<li>Calore ceduto, da $L = Q_c - Q_f$:</li>
+</ul>
+
+<p class="eq">$$Q_f=Q_c-L\approx1{,}676\times10^6\ \text{J}-0{,}750\times10^6\ \text{J}\approx9{,}26\times10^5\ \text{J}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../16-cicli-termodinamici-e-ciclo-di-carnot/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Cicli termodinamici e ciclo di Carnot</span></a><a class="successiva" href="../18-macchine-frigorifere-e-pompe-di-calore/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Macchine frigorifere e pompe di calore</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 15</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 15</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
