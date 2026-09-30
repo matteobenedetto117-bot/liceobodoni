@@ -51,3 +51,4 @@ Esecuzione delle 01:03 UTC (due unità).
 Esecuzione delle 02:02 UTC (due unità).
 
 - matematica-2 unità 09 (Radici quadrate, cubiche e n-esime): pubblicata (commit nella riga della coda). Correzione: nel grafico di ∛x il punto (1; 1) era disegnato sotto l'asse x. Due grafici ridisegnati con un cursore su x comune ("non definita" per √x con x < 0); diagramma della notazione ridisegnato statico. Nessun esempio, nessuna figura decorativa.
+- fisica-2 unità 06 (Problemi di incontro): pubblicata (commit nella riga della coda). I due disegni sull'asse x resi interattivi con cursore sul tempo (posizioni calcolate, «incontro» in verde a t = 6,3 s e t = 90 s). Nessuna nuova correzione, nessun esempio tolto, nessuna figura decorativa. Contenuto dubbio non modificato: v_A arrotondata a 15,3 m/s dà x_A ≈ 1377 m; nella pagina resta x_A ≈ x_C ≈ 1375 m (valore esatto con 55/3,6 m/s).
