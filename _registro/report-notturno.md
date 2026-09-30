@@ -37,3 +37,7 @@ Esecuzione delle 23:02 UTC (due unità).
 
 - matematica-2 unità 08 (Sistemi fratti): pubblicata, commit 8bc6b49. Tolti l'introduzione discorsiva e il paragrafo finale di commento sulla coppia (−3; 1); metodo in tre passi in riquadro. Nessuna correzione concettuale, nessun esempio tolto, nessuna figura.
 - fisica-2 unità 05 (Moto rettilineo uniforme): pubblicata (commit nella riga della coda). Correzione: «v → costante» diventa «velocità costante». Diagramma spazio-tempo ridisegnato sui dati dell'esempio, con cursore sul tempo. Contenuto dubbio non modificato: 6,51 m ha più cifre significative dei dati (3 m, 1,3 m/s, 2,7 s). Nessun esempio tolto, nessuna figura decorativa.
+
+Esecuzione delle 00:03 UTC (due unità).
+
+- fisica-4 unità 14 (Cicli termodinamici e ciclo di Carnot): pubblicata (commit nella riga della coda). Correzioni: tolta l'etichetta «adiabatica» dal disegno del ciclo irreversibile (tratto fra due stati alla stessa pressione) e il riempimento dell'area in quel ciclo; «massimo teorico» precisato «fra le stesse due temperature». Da controllare: i due cicli generici ridisegnati come isobara–isoterma–isobara–isocora (forma prima tracciata a occhio); ciclo di Carnot calcolato per 1 mol di gas monoatomico con cursore su T_f. Nessun esempio, nessuna figura decorativa.
