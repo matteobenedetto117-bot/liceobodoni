@@ -5,26 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Punti di discontinuità e di singolarità — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:22px 0}
-.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
-.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
-.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px;margin:22px 0;max-width:480px}
-.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+.quattro-svg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;justify-items:center}
+@media(max-width:640px){.did-parti,.due-svg,.quattro-svg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -34,228 +58,303 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Continuità &middot; Unità 09</p>
   <h1>Punti di discontinuità e di singolarità</h1>
-  <p class="sommario">Una funzione può smettere di essere continua in modi molto diversi tra loro:
-  un salto netto non è la stessa cosa di un buco che basterebbe un punto solo a tappare.
-  Classifichiamo qui i punti in cui viene meno la continuità in tre specie, secondo il
-  comportamento dei due limiti laterali.</p>
 </header>
 
-<h2>Discontinuità e singolarità</h2>
-
-<div class="def"><span class="et">Definizione</span>
-Data una funzione $f(x)$ definita in $x_0$ e in un intorno di $x_0$, diciamo che $x_0$ è un
-<strong>punto di discontinuità</strong> di $f(x)$ se
-$$\lim_{x\to x_0}f(x)\neq f(x_0).$$
-Se invece $x_0$ non appartiene al dominio di $f(x)$, cioè la funzione in quel punto non è
-definita, parliamo di <strong>punto di singolarità</strong>.</div>
-
-<p>La differenza tra le due sta tutta nel dominio: nella discontinuità $f(x_0)$ esiste, solo non
-coincide col limite; nella singolarità $f(x_0)$ non esiste affatto.</p>
-
-<div class="galleria">
-  <figure><div id="gal-disc" style="height:150px"></div><figcaption>Punto di discontinuità:<br>$x_0$ è nel dominio</figcaption></figure>
-  <figure><div id="gal-sing" style="height:150px"></div><figcaption>Punto di singolarità:<br>$x_0$ non è nel dominio</figcaption></figure>
+<div class="def"><span class="et">Definizione &middot; discontinuità e singolarità</span>
+<p>$f(x)$ definita in $x_0$ e in un intorno di $x_0$: $x_0$ è un <strong>punto di discontinuità</strong> se $\lim_{x\to x_0}f(x)$ non esiste oppure è diverso da $f(x_0)$.</p>
+<p>$f(x)$ definita in un intorno di $x_0$, escluso $x_0$: $x_0$ è un <strong>punto di singolarità</strong>.</p>
 </div>
 
-<h2>Prima specie</h2>
-
-<div class="def"><span class="et">Definizione</span>
-$x_0$ è un punto di discontinuità (o di singolarità) di <strong>prima specie</strong> se i due
-limiti laterali esistono finiti ma sono diversi tra loro:
-$$\lim_{x\to x_0^-}f(x)=l_1,\qquad\lim_{x\to x_0^+}f(x)=l_2,\qquad l_1\neq l_2.$$
-La quantità $|l_2-l_1|$ si chiama <strong>salto</strong> della funzione in $x_0$.</div>
-
-<div class="galleria">
-  <figure><div id="gal-i-disc" style="height:150px"></div><figcaption>Discontinuità di I specie</figcaption></figure>
-  <figure><div id="gal-i-sing" style="height:150px"></div><figcaption>Singolarità di I specie</figcaption></figure>
+<div class="fig">
+<div class="due-svg">
+<svg id="gal-disc" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Curva con un buco in x0 e il valore f(x0) più in basso"></svg>
+<svg id="gal-sing" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Curva con un buco in x0, nessun valore in x0"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Discontinuità: $x_0$ nel dominio.</p>
+<p class="did">Singolarità: $x_0$ fuori dal dominio.</p>
+</div>
 </div>
 
-<p>Consideriamo
-$$f(x)=\begin{cases}-3x & x&lt;2\\ x-1 & x\geq2\end{cases}$$
-Il punto $x_0=2$ appartiene al dominio ($f(2)=2-1=1$), quindi è un candidato punto di
-discontinuità, non di singolarità. I due limiti laterali valgono
-$$\lim_{x\to2^-}f(x)=-3\cdot2=-6,\qquad\lim_{x\to2^+}f(x)=2-1=1,$$
-diversi tra loro: $x_0=2$ è un punto di discontinuità di prima specie, con salto
-$|1-(-6)|=7$.</p>
-
-<h2>Seconda specie</h2>
-
-<div class="def"><span class="et">Definizione</span>
-$x_0$ è un punto di discontinuità (o di singolarità) di <strong>seconda specie</strong> se, per
-$x\to x_0$, almeno uno dei due limiti laterali è infinito oppure non esiste.</div>
-
-<div class="galleria">
-  <figure><div id="gal-ii-a" style="height:150px"></div><figcaption>Un limite laterale è infinito</figcaption></figure>
-  <figure><div id="gal-ii-b" style="height:150px"></div><figcaption>Un limite laterale non esiste</figcaption></figure>
+<div class="def"><span class="et">Prima specie</span>
+<p>Limiti laterali finiti e diversi:</p>
+<p class="eq">$$\lim_{x\to x_0^-}f(x)=l_1\qquad\lim_{x\to x_0^+}f(x)=l_2\qquad l_1\neq l_2$$</p>
+<p>Salto della funzione in $x_0$: $|l_2-l_1|$.</p>
 </div>
 
-<p>Consideriamo
-$$f(x)=\frac{5}{x^2-1}=\frac{5}{(x-1)(x+1)},$$
-definita per $x\neq\pm1$: poiché questi due punti non appartengono al dominio, sono singolarità,
-non discontinuità. Vicino a $1$:
-$$\lim_{x\to1^+}f(x)=+\infty,\qquad\lim_{x\to1^-}f(x)=-\infty;$$
-vicino a $-1$:
-$$\lim_{x\to-1^+}f(x)=-\infty,\qquad\lim_{x\to-1^-}f(x)=+\infty.$$
-In entrambi i punti almeno un limite laterale è infinito: sono singolarità di seconda specie.</p>
-
-<figure class="figuraunica">
-  <div id="g-rami" style="height:260px"></div>
-  <figcaption>Il grafico si spezza in tre rami separati dalle due singolarità: quello centrale
-  scende da $+\infty$ a $-\infty$ passando per $f(0)=-5$.</figcaption>
-</figure>
-
-<h2>Terza specie, o eliminabili</h2>
-
-<div class="def"><span class="et">Definizione</span>
-$x_0$ è un punto di discontinuità (o singolarità) di <strong>terza specie</strong>, detta anche
-<strong>eliminabile</strong>, se esiste finito
-$$\lim_{x\to x_0}f(x)=l,$$
-ma $f(x_0)\neq l$, oppure $f(x_0)$ non esiste (caso della singolarità). In entrambi i casi basta
-definire, o ridefinire, $f(x_0)=l$ per ottenere una funzione continua in quel punto.</div>
-
-<div class="galleria">
-  <figure><div id="gal-iii-disc" style="height:150px"></div><figcaption>Discontinuità eliminabile</figcaption></figure>
-  <figure><div id="gal-iii-sing" style="height:150px"></div><figcaption>Singolarità eliminabile</figcaption></figure>
+<div class="fig">
+<div class="due-svg">
+<svg id="gal-i-disc" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Salto con estremo destro pieno"></svg>
+<svg id="gal-i-sing" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Salto con entrambi gli estremi vuoti"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Discontinuità di prima specie.</p>
+<p class="did">Singolarità di prima specie.</p>
+</div>
 </div>
 
-<p>Consideriamo
-$$f(x)=\frac{1-x^2}{x-1},$$
-definita per $x\neq1$. Semplificando,
-$$\frac{1-x^2}{x-1}=\frac{-(x-1)(x+1)}{x-1}=-(x+1)\quad(x\neq1),$$
-quindi
-$$\lim_{x\to1}f(x)=-(1+1)=-2:$$
-il limite esiste finito, ma $x=1$ non è nel dominio, dunque è una singolarità eliminabile (o di
-terza specie). Per eliminarla basta definire
-$$g(x)=\begin{cases}\dfrac{1-x^2}{x-1} & x\neq1\\[4pt] -2 & x=1\end{cases}$$
-che è continua anche in $x=1$.</p>
-
-<div class="widget">
-  <div class="controlli">
-    <label>Valore assegnato in $x=1$: $k$
-      <input type="range" id="s-k" min="-4" max="1" step="0.1" value="-4">
-      <span>$k$ = <span class="val" id="v-k"></span></span>
-    </label>
-  </div>
-  <div id="g-buco" style="height:320px"></div>
-  <p class="leggenda">La curva è $\dfrac{1-x^2}{x-1}$ per $x\neq1$; il punto isolato è il valore
-  scelto in $x=1$. Solo per $k=-2$ il punto cade esattamente sul buco e la funzione diventa
-  continua.</p>
+<div class="def"><span class="et">Seconda specie</span>
+<p>Almeno uno dei due limiti laterali, per $x\to x_0$, è infinito oppure non esiste.</p>
 </div>
 
+<div class="fig">
+<div class="due-svg">
+<svg id="gal-ii-a" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Asintoto verticale: limiti laterali infiniti"></svg>
+<svg id="gal-ii-b" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Oscillazione sempre più fitta vicino a x0: limiti laterali che non esistono"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Limite laterale infinito.</p>
+<p class="did">Limite laterale che non esiste.</p>
+</div>
+</div>
+
+<div class="def"><span class="et">Terza specie &middot; eliminabile</span>
+<p>Esiste finito il limite</p>
+<p class="eq">$$\lim_{x\to x_0}f(x)=l$$</p>
+<p>ma $f(x_0)\neq l$ oppure $f(x_0)$ non esiste. Ponendo $f(x_0)=l$ la funzione diventa continua in $x_0$.</p>
+</div>
+
+<div class="fig">
+<div class="due-svg">
+<svg id="gal-iii-disc" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Curva con un buco e il valore f(x0) fuori dalla curva"></svg>
+<svg id="gal-iii-sing" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px" role="img" aria-label="Curva con un solo buco"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Discontinuità eliminabile.</p>
+<p class="did">Singolarità eliminabile.</p>
+</div>
+</div>
+
+<h2>Esempio 1</h2>
+
+<ul>
+<li>$f(x)=\dfrac{5}{x^2-1}=\dfrac{5}{(x-1)(x+1)}$, definita per $x\neq\pm1$ ⇒ $x=\pm1$ singolarità.</li>
+</ul>
+
+<p class="eq">$$\lim_{x\to1^\pm}f(x)=\pm\infty\qquad\lim_{x\to-1^\pm}f(x)=\mp\infty$$</p>
+
+<ul>
+<li>Limiti laterali infiniti ⇒ singolarità di seconda specie in $x=1$ e in $x=-1$.</li>
+</ul>
+
+<div class="fig">
+<svg id="g-rami" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico di 5 fratto x al quadrato meno 1: tre rami separati dagli asintoti x = -1 e x = 1"></svg>
+<div class="cursore"><label for="s-t">$x$</label>
+<input type="range" id="s-t" min="0" max="300" step="1" value="40">
+<span class="val" id="v-t"></span></div>
+<p class="did">Tre rami separati da $x=-1$ e $x=1$; ramo centrale per $(0;-5)$.</p>
+</div>
+
+<h2>Esempio 2</h2>
+
+<ul>
+<li>$f(x)=\dfrac{1-x^2}{x-1}$, definita per $x\neq1$.</li>
+</ul>
+
+<p class="eq">$$\frac{1-x^2}{x-1}=\frac{-(x-1)(x+1)}{x-1}=-(x+1)\quad(x\neq1)$$</p>
+<p class="eq">$$\lim_{x\to1}f(x)=-(1+1)=-2$$</p>
+
+<ul>
+<li>Limite finito, $x=1$ fuori dal dominio ⇒ singolarità eliminabile (terza specie).</li>
+<li>Funzione continua anche in $x=1$:</li>
+</ul>
+
+<p class="eq">$$g(x)=\begin{cases}\dfrac{1-x^2}{x-1} & x\neq1\\[4pt] -2 & x=1\end{cases}$$</p>
+
+<div class="fig">
+<svg id="g-buco" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Retta con un buco in (1; -2) e un punto mobile in x = 1"></svg>
+<div class="cursore"><label for="s-k">$k=g(1)$</label>
+<input type="range" id="s-k" min="-4" max="1" step="0.1" value="-4">
+<span class="val" id="v-k"></span></div>
+<p class="did">Curva: $\dfrac{1-x^2}{x-1}$ per $x\neq1$; pallino rosso: valore $k$ assegnato in $x=1$.</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../09-weierstrass-valori-intermedi-esistenza-degli-zeri/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Weierstrass, valori intermedi, esistenza degli zeri</span></a><a class="successiva" href="../11-asintoti-verticali-orizzontali-e-obliqui/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Asintoti verticali, orizzontali e obliqui</span></a></nav>
 <footer><p>Matematica quinta &middot; Continuità &middot; Unità 09</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var base={margin:{l:24,r:10,t:8,b:22},showlegend:false,
-    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
-  function mini(id,tracce,xr,yr){
-    Plotly.newPlot(id,tracce,Object.assign({},base,{
-      xaxis:{range:xr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
-      yaxis:{range:yr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}}}),
-      {displayModeBar:false,responsive:true,staticPlot:true});
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  function ramo(f,a,b,n,dash){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n;x.push(v);y.push(f(v));}
-    return {x:x,y:y,mode:'lines',line:{color:'#16283d',width:2.2,dash:dash||'solid'},hoverinfo:'skip'};}
-  function punto(x,y,pieno){return {x:[x],y:[y],mode:'markers',
-    marker:pieno?{size:9,color:'#16283d'}:{size:9,color:'#f7f5ef',line:{color:'#16283d',width:2}}};}
-  function verticale(x,yr){return {x:[x,x],y:yr,mode:'lines',line:{color:'#9aa7b5',width:1,dash:'dot'},hoverinfo:'skip'};}
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
 
-  // punto di discontinuità: curva che arriva su un vuoto, valore vero più in basso
-  mini('gal-disc',[
-    ramo(function(x){return 0.3+0.35*Math.sin(1.6*x)+0.55*x/2.2;},0,2.2,60),
-    punto(1.1,0.98,false), punto(1.1,0.35,true)
-  ],[-0.2,2.4],[-0.1,1.6]);
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
 
-  // punto di singolarità: stesso tipo di curva, solo il vuoto, nessun valore vero
-  mini('gal-sing',[
-    ramo(function(x){return 0.3+0.35*Math.sin(1.6*x)+0.55*x/2.2;},0,2.2,60),
-    punto(1.1,0.98,false)
-  ],[-0.2,2.4],[-0.1,1.6]);
 
-  // I specie: discontinuità (salto, x0 nel dominio: un estremo pieno)
-  mini('gal-i-disc',[
-    ramo(function(x){return 0.35+0.12*x;},0,1.1,20),
-    ramo(function(x){return 1.25+0.12*(x-1.1);},1.1,2.2,20),
-    verticale(1.1,[0.3,1.6]),
-    punto(1.1,0.47,false), punto(1.1,1.25,true)
-  ],[-0.1,2.3],[0.1,1.7]);
 
-  // I specie: singolarità (salto, ma x0 fuori dal dominio: entrambi vuoti)
-  mini('gal-i-sing',[
-    ramo(function(x){return 0.35+0.12*x;},0,1.1,20),
-    ramo(function(x){return 1.25+0.12*(x-1.1);},1.1,2.2,20),
-    verticale(1.1,[0.3,1.6]),
-    punto(1.1,0.47,false), punto(1.1,1.25,false)
-  ],[-0.1,2.3],[0.1,1.7]);
+Piano.prototype.param=function(fx,fy,a,b,n,col,w){
+  var s='',X=this.X,Y=this.Y;
+  for(var i=0;i<=n;i++){var t=a+i*(b-a)/n;s+=(i?'L':'M')+X(fx(t)).toFixed(1)+' '+Y(fy(t)).toFixed(1)+' ';}
+  var p=el('path',{d:s,fill:'none',stroke:col||'var(--inchiostro)','stroke-width':w||1.8,'stroke-linejoin':'round'});
+  this.sopra.appendChild(p);return p;
+};
+function vert(P,x,col,dash){return P.add(el('line',{x1:P.X(x),x2:P.X(x),y1:P.m.t,y2:P.H-P.m.b,stroke:col||'var(--grigio)','stroke-width':1.2,'stroke-dasharray':dash||'3,4'}),'sotto');}
 
-  // II specie: asintoto verticale, un limite infinito
-  mini('gal-ii-a',[
-    ramo(function(x){return 0.7/(1.1-x)+0.7;},0,1.02,50),
-    ramo(function(x){return 0.7/(1.1-x)+0.7;},1.18,2.2,50),
-    verticale(1.1,[-2.2,2.6])
-  ],[-0.1,2.3],[-2.3,2.7]);
+/* ---------- sei pannelli: x0 = 1,1 ---------- */
+var X0=1.1;
+function pannello(id,xr,yr,alto){var svg=document.getElementById(id);var P=new Piano(svg,xr,yr,{l:16,r:18,t:18,b:24});
+  P.assi([],[],'x','y');var y0=P.Y(0);
+  P.testo.appendChild(el('line',{x1:P.X(X0),y1:y0-4,x2:P.X(X0),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+  P.testo.appendChild(alto?txt(P.X(X0)+5,P.m.t+4,'x₀',{'fill':'var(--inchiostro)'}):txt(P.X(X0),y0+17,'x₀',{'text-anchor':'middle','fill':'var(--inchiostro)'}));
+  return P;}
+var h=function(x){return 0.3+0.35*Math.sin(1.6*x)+0.25*x;};
+['gal-disc','gal-sing'].forEach(function(id,i){
+  var P=pannello(id,[-0.2,2.5],[-0.2,1.6]);
+  vert(P,X0);
+  P.curva(h,0,2.2,300,'var(--blu)');
+  pallino(P,X0,h(X0),false,'var(--blu)');
+  if(i===0)pallino(P,X0,h(X0)-0.6,true,'var(--blu)');
+});
+var s1=function(x){return 0.35+0.12*x;}, s2=function(x){return 1.25+0.12*(x-X0);};
+['gal-i-disc','gal-i-sing'].forEach(function(id,i){
+  var P=pannello(id,[-0.2,2.5],[-0.2,1.7]);
+  vert(P,X0);
+  P.curva(s1,0,X0,50,'var(--blu)');P.curva(s2,X0,2.2,50,'var(--blu)');
+  pallino(P,X0,s1(X0),false,'var(--blu)');pallino(P,X0,s2(X0),i===0,'var(--blu)');
+});
+(function(){
+  var P=pannello('gal-ii-a',[-0.2,2.5],[-2.4,2.8]);
+  vert(P,X0,'var(--rosso)','5,4');
+  var f=function(x){return 0.7/(X0-x)+0.7;};
+  P.curva(f,0,X0-0.001,400,'var(--blu)');P.curva(f,X0+0.001,2.2,400,'var(--blu)');
+})();
+(function(){
+  var P=pannello('gal-ii-b',[-0.2,2.5],[-1.3,1.3],true);
+  vert(P,X0);
+  // campionamento uniforme in u = 1/|x - x0|
+  P.param(function(u){return X0-1/u;},function(u){return 0.9*Math.sin(9*u);},1/X0,25,3000,'var(--blu)',1.4);
+  P.param(function(u){return X0+1/u;},function(u){return 0.9*Math.sin(9*u);},1/(2.3-X0),25,3000,'var(--blu)',1.4);
+})();
+var q=function(x){return 0.3+0.5*Math.pow((x-X0)/X0,2);};
+['gal-iii-disc','gal-iii-sing'].forEach(function(id,i){
+  var P=pannello(id,[-0.2,2.5],[-0.2,1.3]);
+  vert(P,X0);
+  P.curva(q,0,2.2,200,'var(--blu)');
+  pallino(P,X0,q(X0),false,'var(--blu)');
+  if(i===0)pallino(P,X0,0.95,true,'var(--blu)');
+});
 
-  // II specie: limite che non esiste (oscillazione)
-  mini('gal-ii-b',[
-    ramo(function(x){return 0.9*Math.sin(9/(1.15-x));},0,1.05,300),
-    ramo(function(x){return 0.9*Math.sin(9/(x-1.15));},1.25,2.3,300),
-    verticale(1.15,[-1.1,1.1])
-  ],[-0.1,2.4],[-1.2,1.2]);
-
-  // III specie: discontinuità eliminabile (buco + punto vero altrove)
-  mini('gal-iii-disc',[
-    ramo(function(x){return 0.3+0.5*Math.pow((x-1.1)/1.1,2);},0,2.2,60),
-    punto(1.1,0.3,false), punto(1.1,0.95,true)
-  ],[-0.2,2.4],[0.1,1.3]);
-
-  // III specie: singolarità eliminabile (solo il buco)
-  mini('gal-iii-sing',[
-    ramo(function(x){return 0.3+0.5*Math.pow((x-1.1)/1.1,2);},0,2.2,60),
-    punto(1.1,0.3,false)
-  ],[-0.2,2.4],[0.1,1.3]);
-
-  // figura unica: i tre rami di 5/(x^2-1)
-  Plotly.newPlot('g-rami',[
-    ramo(function(x){return 5/(x*x-1);},-2.6,-1.06,80),
-    ramo(function(x){return 5/(x*x-1);},-0.94,0.94,80),
-    ramo(function(x){return 5/(x*x-1);},1.06,2.6,80),
-    verticale(-1,[-9,9]), verticale(1,[-9,9]),
-    punto(0,-5,true)
-  ],Object.assign({},base,{
-    xaxis:{range:[-2.8,2.8],zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
-    yaxis:{range:[-9,9],zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}}
-  }),{displayModeBar:false,responsive:true,staticPlot:true});
-
-  // widget: buco tappabile con k
-  var sk=document.getElementById('s-k'), vk=document.getElementById('v-k');
-  function fmt(n){return n.toFixed(1).replace('.',',');}
-  function g(x){return (1-x*x)/(x-1);}
-  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
-  var xl=xs(-2.6,0.94,90), xr=xs(1.06,3.4,90);
+/* ---------- esempio 1: tre rami di 5/(x^2-1), cursore sui rami ---------- */
+(function(){
+  var svg=document.getElementById('g-rami');
+  function f(x){return 5/(x*x-1);}
+  var P=new Piano(svg,[-2.8,2.8],[-16,16],{l:30,r:24,t:22,b:26});
+  P.assi([-2,-1,1,2],[10],'x','y');
+  vert(P,-1,'var(--rosso)','6,5');vert(P,1,'var(--rosso)','6,5');
+  P.curva(f,-2.8,-1.0001,600,'var(--blu)');P.curva(f,-0.9999,0.9999,600,'var(--blu)');P.curva(f,1.0001,2.8,600,'var(--blu)');
+  pallino(P,0,-5,true,'var(--blu)');
+  var R=[[-2.6,-1.15],[-0.83,0.83],[1.15,2.6]];
+  var pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-t'), v=document.getElementById('v-t');
   function agg(){
-    var k=parseFloat(sk.value), continua=Math.abs(k-(-2))<1e-9;
-    vk.textContent=fmt(k);
-    Plotly.react('g-buco',[
-      {x:xl,y:xl.map(g),mode:'lines',line:{color:'#16283d',width:2.2},hoverinfo:'skip'},
-      {x:xr,y:xr.map(g),mode:'lines',line:{color:'#16283d',width:2.2},hoverinfo:'skip'},
-      {x:[1],y:[-2],mode:'markers',marker:{size:10,color:'#f7f5ef',line:{color:'#16283d',width:2}},hoverinfo:'skip'},
-      {x:[1],y:[k],mode:'markers',marker:{size:10,color:continua?'#2f6b4f':'#b3392f'},
-        text:['g(1) = '+fmt(k)],hovertemplate:'%{text}<extra></extra>'}
-    ],{
-      margin:{l:44,r:14,t:10,b:34},showlegend:false,
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[-2.6,3.4],gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[-4.2,3.8],gridcolor:'#e6e0d4'},
-      annotations:[{x:0.4,y:3.3,
-        text:continua?'k = −2: il buco è tappato, g continua in 1':'k ≠ −2: resta una discontinuità eliminabile',
-        showarrow:false,font:{size:12,color:continua?'#2f6b4f':'#b3392f'}}]
-    },{displayModeBar:false,responsive:true});
+    var t=+sl.value, r=Math.min(2,Math.floor(t/100.0001)), u=(t-100*r)/100;
+    if(t===300){r=2;u=1;}
+    var x=R[r][0]+u*(R[r][1]-R[r][0]), y=f(x);
+    pt.setAttribute('cx',P.X(x));pt.setAttribute('cy',P.Y(y));
+    var s='x = '+num(x)+' &nbsp; f(x) = '+num(y,1), w='';
+    if(r===0&&x>-1.25)w='x → −1⁻: f → +∞';
+    else if(r===1&&x<-0.75)w='x → −1⁺: f → −∞';
+    else if(r===1&&x>0.75)w='x → 1⁻: f → −∞';
+    else if(r===2&&x<1.25)w='x → 1⁺: f → +∞';
+    if(w)s+=' &nbsp; <span class="ok">'+w+'</span>';
+    v.innerHTML=s;
   }
-  sk.addEventListener('input',agg); agg();
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+})();
+
+/* ---------- esempio 2: buco in (1; -2), cursore sul valore k ---------- */
+(function(){
+  var svg=document.getElementById('g-buco');
+  function g(x){return (1-x*x)/(x-1);}
+  var P=new Piano(svg,[-2.6,3.4],[-4.4,3.4],{l:30,r:24,t:22,b:26});
+  P.assi([-2,-1,1,2,3],[-4,-2,2],'x','y');
+  vert(P,1);
+  P.curva(g,-2.6,0.999,300,'var(--blu)');P.curva(g,1.001,3.4,300,'var(--blu)');
+  pallino(P,1,-2,false,'var(--blu)');
+  var pt=pallino(P,1,-4,true,'var(--rosso)');
+  var sl=document.getElementById('s-k'), v=document.getElementById('v-k');
+  function agg(){
+    var k=Math.round(parseFloat(sl.value)*10)/10, ok=(k===-2);
+    pt.setAttribute('cy',P.Y(k));
+    pt.setAttribute('fill',ok?'var(--verde)':'var(--rosso)');pt.setAttribute('stroke',ok?'var(--verde)':'var(--rosso)');
+    v.innerHTML='k = '+num(k,1)+' &nbsp; '+(ok?'<span class="ok">g continua in x = 1</span>':'<span class="no">discontinuità eliminabile</span>');
+  }
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+})();
 })();
 </script>
 </body>
