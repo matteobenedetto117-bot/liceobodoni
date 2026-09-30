@@ -5,19 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Legge di Ampère — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.due-fig{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.due-fig .fig{margin:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-@media(max-width:640px){.due-fig{grid-template-columns:1fr}}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
 </head>
 <body>
@@ -27,175 +50,293 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 10</p>
   <h1>Legge di Ampère</h1>
-  <p class="sommario">Fin qui il campo magnetico di un filo percorso da corrente è stato solo
-  descritto, mai calcolato. La legge di Ampère mette in relazione il campo lungo un percorso chiuso
-  con la corrente che quel percorso racchiude, ed è lo strumento che permette di ricavarlo.</p>
 </header>
 
-<h2>Percorsi concatenati e non concatenati</h2>
+<ul>
+<li>Filo percorso da corrente $i$; $\gamma$ percorso chiuso nello spazio intorno al filo.</li>
+<li>Percorso <strong>concatenato</strong> alla corrente: il filo attraversa la superficie racchiusa da $\gamma$; altrimenti <strong>non concatenato</strong>.</li>
+</ul>
 
-<p>Preso un filo percorso da corrente $i$, consideriamo un percorso chiuso qualunque $\gamma$
-nello spazio intorno ad esso. Il percorso si dice <strong>concatenato</strong> alla corrente se il
-filo attraversa la superficie che il percorso racchiude; altrimenti si dice <strong>non
-concatenato</strong>.</p>
-
-<div class="due-fig">
 <div class="fig">
-<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f11i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker></defs>
-<line x1="90" y1="200" x2="90" y2="20" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="90" y1="55" x2="90" y2="20" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f11i)"/>
-<text x="100" y="30" font-family="var(--sans)" font-size="14" fill="var(--verde)">i</text>
-<path d="M55,80 C35,95 35,120 55,130 C75,142 110,132 120,110 C110,88 75,72 55,80 Z"
-  fill="none" stroke="var(--blu)" stroke-width="2"/>
-<text x="128" y="112" font-family="var(--sans)" font-size="13" fill="var(--blu)">&gamma;&#8321;</text>
-<path d="M120,150 C102,158 102,182 120,190 C138,198 165,190 168,170 C165,150 138,142 120,150 Z"
-  fill="none" stroke="var(--blu)" stroke-width="2"/>
-<text x="176" y="172" font-family="var(--sans)" font-size="13" fill="var(--blu)">&gamma;&#8322;</text>
-</svg>
-<p class="did">$\gamma_1$: percorso concatenato a $i$ (il filo attraversa la superficie racchiusa).
-$\gamma_2$: percorso non concatenato.</p>
+<svg id="fig-a" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">posizione di $\gamma$</label><input id="cur-a" type="range" min="-140" max="140" step="5" value="-100"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Percorso $\gamma$ spostato rispetto al filo.</p>
 </div>
+
+<ul>
+<li>Percorso su un piano qualunque: $\vec B$ in generale non parallelo al percorso.</li>
+</ul>
+
 <div class="fig">
-<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f11i2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f11b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="30" y1="150" x2="140" y2="185" stroke="var(--grigio)" stroke-width="1.3" fill="none"/>
-<line x1="30" y1="150" x2="185" y2="120" stroke="var(--grigio)" stroke-width="1.3" fill="none"/>
-<line x1="140" y1="185" x2="185" y2="120" stroke="var(--grigio)" stroke-width="1.3" fill="none"/>
-<line x1="107" y1="30" x2="107" y2="185" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="107" y1="55" x2="107" y2="30" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f11i2)"/>
-<text x="115" y="42" font-family="var(--sans)" font-size="13" fill="var(--verde)">i</text>
-<ellipse cx="107" cy="150" rx="55" ry="20" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<line x1="145" y1="140" x2="160" y2="132" stroke="var(--blu)" stroke-width="2" marker-end="url(#f11b)"/>
-<text x="165" y="126" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<text x="60" y="205" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&gamma;</text>
-</svg>
-<p class="did">Percorso chiuso $\gamma$ concatenato al filo, appoggiato a un piano qualunque: in
-ogni suo punto il campo $\vec B$ ha, in generale, una direzione diversa da quella del percorso.</p>
-</div>
+<svg id="fig-b" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">$\gamma$ concatenato, su un piano inclinato: $\vec B$ (blu) e tratto $\Delta l$ (verde).</p>
 </div>
 
-<h2>La circuitazione lungo un percorso circolare</h2>
+<ul>
+<li>Percorso diviso in tratti $\Delta l$; su ciascun tratto il campo vale $B$.</li>
+<li>$\gamma$ circonferenza di raggio $r$ centrata sul filo: $B$ uguale in ogni punto, parallelo a $\Delta l$.</li>
+<li>Ipotesi: $B=k\,\dfrac{i}{r}$, $k$ costante da determinare.</li>
+</ul>
 
-<p>Su ogni tratto piccolissimo $\Delta l$ del percorso il campo vale $B$; se scegliamo come
-$\gamma$ una circonferenza di raggio $r$ centrata sul filo, per simmetria $B$ ha lo stesso modulo
-in ogni punto della circonferenza ed è sempre parallelo a $\Delta l$. Supponiamo che $B$ dipenda
-da $i$ e da $r$ nella forma $B=k\,\dfrac{i}{r}$, con $k$ costante da determinare, e sommiamo il
-prodotto $B\cdot\Delta l$ su tutti i tratti in cui immaginiamo diviso il percorso:</p>
-
-<div class="fig" style="max-width:320px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f11bt" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker></defs>
-<circle cx="120" cy="100" r="3" fill="var(--verde)"/>
-<circle cx="120" cy="100" r="7" fill="none" stroke="var(--verde)" stroke-width="1.4"/>
-<text x="132" y="94" font-family="var(--sans)" font-size="13" fill="var(--verde)">i</text>
-<circle cx="120" cy="100" r="70" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<line x1="120" y1="100" x2="188" y2="100" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-<text x="150" y="94" font-family="var(--sans)" font-size="12" fill="var(--grigio)">r</text>
-<path d="M180,58 L192,64" stroke="var(--blu)" stroke-width="2" marker-end="url(#f11bt)"/>
-<text x="196" y="58" font-family="var(--sans)" font-size="12" fill="var(--blu)">B</text>
-<text x="182" y="76" font-family="var(--sans)" font-size="11" fill="var(--grigio)">&Delta;l</text>
-</svg>
-<p class="did">Percorso circolare di raggio $r$ intorno al filo: $B$ è tangente e costante in
-modulo su tutta la circonferenza.</p>
-</div>
-
-$$\sum_\gamma B\cdot\Delta l=\sum_\gamma k\,\frac{i}{r}\,\Delta l
-=k\,\frac{i}{r}\sum_\gamma\Delta l=k\,\frac{i}{r}\cdot 2\pi r=2\pi k\,i$$
-
-<p>perché la somma di tutti i $\Delta l$ lungo il giro è la circonferenza $2\pi r$, che si
-semplifica con la $r$ a denominatore. Il risultato non dipende più né da $r$ né dalla forma del
-percorso: chiamiamo $\mu_0=2\pi k$ la <strong>permeabilità magnetica del vuoto</strong>, misurata
-sperimentalmente:</p>
-
-<div class="formula-box">
-$$\mu_0=4\pi\cdot10^{-7}\ \text{T}\cdot\text{m/A}\qquad\qquad \sum_\gamma B\cdot\Delta l=\mu_0\,i$$
-</div>
-
-<h2>Percorsi qualunque e legge di Ampère</h2>
-
-<p>Il risultato vale non solo per la circonferenza ma per <strong>qualunque</strong> percorso
-chiuso concatenato al filo, purché in ogni tratto $\Delta l$ si prenda solo la componente di
-$\vec B$ parallela al percorso, $B_\parallel$: se il percorso non è una circonferenza centrata sul
-filo, $\vec B$ non è più parallelo a $\Delta l$ in ogni punto.</p>
-
-<div class="fig" style="max-width:260px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f11bp" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker><marker id="f11dl" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker></defs>
-<line x1="30" y1="120" x2="55" y2="35" stroke="var(--blu)" stroke-width="2" marker-end="url(#f11bp)"/>
-<text x="18" y="30" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<line x1="30" y1="120" x2="150" y2="120" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11dl)"/>
-<text x="155" y="124" font-family="var(--sans)" font-size="13" fill="var(--verde)">&Delta;l</text>
-<line x1="55" y1="35" x2="55" y2="120" stroke="var(--blu)" stroke-width="1.6" stroke-dasharray="3,3"/>
-<text x="40" y="112" font-family="var(--sans)" font-size="12" fill="var(--blu)">B&#8741;</text>
-</svg>
-<p class="did">Solo la componente $B_\parallel$ di $\vec B$ nella direzione di $\Delta l$ entra
-nella somma.</p>
-</div>
-
-<p>Con questa accortezza il risultato ottenuto per la circonferenza è generale:</p>
-
-<div class="formula-box">
-$$\sum_\gamma B_\parallel\,\Delta l=\mu_0\,i_{\text{concatenata}}$$
-</div>
-
-<p>dove $i_{\text{concatenata}}$ è la somma delle correnti che il percorso $\gamma$ racchiude: le
-correnti non concatenate a $\gamma$ non danno alcun contributo alla somma.</p>
-
-<h2>Esempi</h2>
-
-<p>Se il percorso $\gamma$ racchiude due fili percorsi da correnti $i_1$ e $i_2$ nello stesso
-verso, la corrente concatenata è la loro somma:</p>
-
-<div class="due-fig">
 <div class="fig">
-<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f11e1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker></defs>
-<line x1="40" y1="120" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="40" y1="55" x2="40" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e1)"/>
-<text x="30" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8321;</text>
-<line x1="90" y1="120" x2="90" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="90" y1="55" x2="90" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e1)"/>
-<text x="80" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8322;</text>
-<line x1="160" y1="120" x2="160" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="160" y1="55" x2="160" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e1)"/>
-<text x="150" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8323;</text>
-<ellipse cx="65" cy="85" rx="42" ry="20" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<text x="55" y="120" font-family="var(--sans)" font-size="12" fill="var(--blu)">&gamma;</text>
-</svg>
-<p class="did">$\gamma$ racchiude $i_1$ e $i_2$, non $i_3$:</p>
-<p style="font-family:var(--sans);font-size:.92rem">$\displaystyle\sum_\gamma B_\parallel\Delta l=\mu_0(i_1+i_2)$</p>
-</div>
-<div class="fig">
-<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f11e2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f11e3" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="40" y1="120" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="40" y1="55" x2="40" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e2)"/>
-<text x="30" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8321;</text>
-<line x1="90" y1="120" x2="90" y2="20" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="90" y1="55" x2="90" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f11e2)"/>
-<text x="80" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i&#8322;</text>
-<line x1="160" y1="20" x2="160" y2="120" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="160" y1="85" x2="160" y2="120" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f11e3)"/>
-<text x="150" y="18" font-family="var(--sans)" font-size="12" fill="var(--rosso)">i&#8323;</text>
-<ellipse cx="97" cy="85" rx="80" ry="20" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<text x="10" y="100" font-family="var(--sans)" font-size="12" fill="var(--blu)">&gamma;</text>
-</svg>
-<p class="did">$\gamma$ racchiude tutti e tre i fili, ma $i_3$ ha verso opposto:</p>
-<p style="font-family:var(--sans);font-size:.92rem">$\displaystyle\sum_\gamma B_\parallel\Delta l=\mu_0(i_1+i_2-i_3)$</p>
-</div>
+<svg id="fig-c" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-c">raggio</label><input id="cur-c" type="range" min="1" max="3" step="0.25" value="1.5"><output id="val-c" for="cur-c"></output></div>
+<p class="did">Vista dall'alto, corrente uscente ($\odot$): $B$ tangente alla circonferenza.</p>
 </div>
 
+<p class="eq">$$\sum_\gamma B\,\Delta l=k\,\frac{i}{r}\sum_\gamma\Delta l=k\,\frac{i}{r}\cdot2\pi r=2\pi k\,i$$</p>
+
+<ul>
+<li>Il risultato non dipende da $r$.</li>
+</ul>
+
+<div class="def"><span class="et">Permeabilità magnetica del vuoto</span>
+<p class="eq">$$\mu_0=2\pi k\approx4\pi\cdot10^{-7}\ \text{T}\cdot\text{m/A}\qquad\sum_\gamma B\,\Delta l=\mu_0\,i$$</p>
+<p>Valore misurato sperimentalmente.</p>
+</div>
+
+<ul>
+<li>Percorso qualunque concatenato: in ogni tratto conta solo la componente $B_\parallel$ di $\vec B$ nella direzione di $\Delta l$.</li>
+</ul>
+
+<div class="fig">
+<svg id="fig-d" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-d">angolo</label><input id="cur-d" type="range" min="0" max="180" step="5" value="60"><output id="val-d" for="cur-d"></output></div>
+<p class="did">$B_\parallel=B\cos\alpha$, con $\alpha$ angolo fra $\vec B$ e $\Delta l$.</p>
+</div>
+
+<div class="def"><span class="et">Legge di Ampère</span>
+<p class="eq">$$\sum_\gamma B_\parallel\,\Delta l=\mu_0\,i_{\text{conc}}$$</p>
+<p>$B_\parallel$ componente di $\vec B$ lungo il percorso (T), $\Delta l$ tratto del percorso (m), $i_{\text{conc}}$ somma delle correnti concatenate a $\gamma$ (A).</p>
+</div>
+
+<ul>
+<li>Correnti non concatenate: nessun contributo alla somma.</li>
+<li>Correnti di verso opposto: con segno opposto.</li>
+</ul>
+
+<h2>Esempio 1</h2>
+
+<div class="fig">
+<svg id="fig-e1" viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">$\gamma$ racchiude $i_1$ e $i_2$ (stesso verso), non $i_3$.</p>
+</div>
+
+<p class="eq">$$\sum_\gamma B_\parallel\,\Delta l=\mu_0\,(i_1+i_2)$$</p>
+
+<h2>Esempio 2</h2>
+
+<div class="fig">
+<svg id="fig-e2" viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">$\gamma$ racchiude i tre fili; $i_3$ di verso opposto.</p>
+</div>
+
+<p class="eq">$$\sum_\gamma B_\parallel\,\Delta l=\mu_0\,(i_1+i_2-i_3)$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../10-spire-di-corrente-e-momento-torcente-magnetico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Spire di corrente e momento torcente magnetico</span></a><a class="successiva" href="../12-legge-di-biot-savart-e-forze-fra-fili-paralleli/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Legge di Biot-Savart e forze fra fili paralleli</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 10</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function virgola(x,d){return x.toFixed(d).replace('.',',').replace('-','−');}
+  var LAB={'font-weight':700,'font-style':'italic','font-size':14};
+  function lab(col){var o={fill:col};for(var k in LAB)o[k]=LAB[k];return o;}
+  function marcatori(svg,pre){
+    var d=el(svg,'defs',{});
+    [[pre+'v','var(--verde)'],[pre+'b','var(--blu)'],[pre+'r','var(--rosso)'],[pre+'g','var(--grigio)']].forEach(function(m){
+      var k=el(d,'marker',{id:m[0],markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+      el(k,'path',{d:'M0,0 L6,3 L0,6 Z',fill:m[1]});
+    });
+  }
+  function freccia(p,x1,y1,x2,y2,col,mk,w){return el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2),y2:f(y2),stroke:col,'stroke-width':w||2.2,'marker-end':'url(#'+mk+')'});}
+  /* arco di ellisse da t1 a t2 (radianti, y dello schermo verso il basso) */
+  function arco(cx,cy,rx,ry,t1,t2){
+    var n=40,d='';
+    for(var k=0;k<=n;k++){var t=t1+(t2-t1)*k/n;d+=(k?' L':'M')+f(cx+rx*Math.cos(t))+','+f(cy+ry*Math.sin(t));}
+    return d;
+  }
+
+  /* --- figura 1: percorso concatenato / non concatenato, cursore sulla posizione --- */
+  var A=document.getElementById('fig-a'), ca=document.getElementById('cur-a'), va=document.getElementById('val-a');
+  (function(){
+  if(A&&ca){
+    marcatori(A,'a');
+    var wx=210, cy=160, rx=70, ry=22;
+    var sup=el(A,'ellipse',{cy:cy,rx:rx,ry:ry,fill:'var(--blu-chiaro)',opacity:.6});
+    var dietro=el(A,'path',{fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    el(A,'line',{x1:wx,y1:18,x2:wx,y2:250,stroke:'var(--inchiostro)','stroke-width':2});
+    freccia(A,wx,74,wx,34,'var(--verde)','av',2.6);
+    T(A,wx+9,44,'i',lab('var(--verde)'));
+    var buco=el(A,'circle',{cx:wx,cy:cy,r:3.5,fill:'var(--inchiostro)'});
+    var sotto=el(A,'path',{fill:'none',stroke:'#fff','stroke-width':7});
+    var avanti=el(A,'path',{fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    var tg=T(A,0,0,'γ',lab('var(--blu)'));
+    function disA(o){
+      var cx=wx+o;
+      set(sup,{cx:cx});
+      set(dietro,{d:arco(cx,cy,rx,ry,Math.PI,2*Math.PI)});
+      set(sotto,{d:arco(cx,cy,rx,ry,0,Math.PI)});
+      set(avanti,{d:arco(cx,cy,rx,ry,0,Math.PI)});
+      set(tg,{x:f(cx-rx-16),y:cy+5});
+      var dentro=Math.abs(o)<rx;
+      set(buco,{opacity:dentro?1:0});
+      va.innerHTML=dentro?'<span class="ok">concatenato</span>':'non concatenato';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    ca.addEventListener('input',function(){disA(+ca.value);});
+    disA(+ca.value);
+  }
+  })();
+
+  /* --- figura 2: percorso su un piano inclinato, B e Δl calcolati in 3D (statica) --- */
+  var Bf=document.getElementById('fig-b');
+  (function(){
+  if(Bf){
+    marcatori(Bf,'b');
+    var S=72, m=0.25, x0=0.55, a=1.45, b=0.75;
+    /* filo lungo z nell'origine; y verso chi guarda; proiezione obliqua */
+    function P(x,y,z){return [175+S*(x-0.45*y), 140-S*(z-0.5*y)];}
+    function dirP(v){var p=P(v[0],v[1],v[2]),o=P(0,0,0),dx=p[0]-o[0],dy=p[1]-o[1],n=Math.hypot(dx,dy);return [dx/n,dy/n];}
+    function pt(t){var x=x0+a*Math.cos(t);return [x,b*Math.sin(t),m*x];}
+    function tg(t){return [-a*Math.sin(t),b*Math.cos(t),-m*a*Math.sin(t)];}
+    function Bv(p){var r2=p[0]*p[0]+p[1]*p[1];return [-p[1]/r2,p[0]/r2,0];}
+    /* filo sotto il piano */
+    var z0=P(0,0,-1.6), zc=P(0,0,0), z1=P(0,0,1.65);
+    el(Bf,'line',{x1:f(z0[0]),y1:f(z0[1]),x2:f(zc[0]),y2:f(zc[1]),stroke:'var(--inchiostro)','stroke-width':2});
+    /* piano */
+    var c=[[-1.2,-1.05],[2.3,-1.05],[2.3,1.05],[-1.2,1.05]].map(function(q){return P(q[0],q[1],m*q[0]);});
+    el(Bf,'path',{d:'M'+c.map(function(q){return f(q[0])+','+f(q[1]);}).join(' L')+' Z',fill:'var(--blu-chiaro)','fill-opacity':.55,stroke:'var(--grigio)','stroke-width':1});
+    /* percorso: metà posteriore (y<0), filo sopra il piano, metà anteriore */
+    function tratto(t1,t2,w,col){var d='';for(var k=0;k<=60;k++){var q=P.apply(null,pt(t1+(t2-t1)*k/60));d+=(k?' L':'M')+f(q[0])+','+f(q[1]);}return el(Bf,'path',{d:d,fill:'none',stroke:col,'stroke-width':w});}
+    tratto(Math.PI,2*Math.PI,2.2,'var(--blu)');
+    el(Bf,'line',{x1:f(zc[0]),y1:f(zc[1]),x2:f(z1[0]),y2:f(z1[1]),stroke:'var(--inchiostro)','stroke-width':2});
+    el(Bf,'circle',{cx:f(zc[0]),cy:f(zc[1]),r:3.5,fill:'var(--inchiostro)'});
+    freccia(Bf,z1[0],z1[1]+44,z1[0],z1[1]+8,'var(--verde)','bv',2.6);
+    T(Bf,z1[0]+9,z1[1]+22,'i',lab('var(--verde)'));
+    tratto(0,Math.PI,7,'#fff'); tratto(0,Math.PI,2.2,'var(--blu)');
+    var pg=P.apply(null,pt(Math.PI)); T(Bf,pg[0]-20,pg[1]+14,'γ',lab('var(--blu)'));
+    /* vettori in tre punti */
+    [[3*Math.PI/2,1],[1.9*Math.PI,0]].forEach(function(q,k){
+      var p=pt(q[0]), s=P(p[0],p[1],p[2]), u=dirP(Bv(p)), v=dirP(tg(q[0]));
+      el(Bf,'circle',{cx:f(s[0]),cy:f(s[1]),r:2.5,fill:'var(--inchiostro)'});
+      freccia(Bf,s[0],s[1],s[0]+40*u[0],s[1]+40*u[1],'var(--blu)','bb',2.4);
+      freccia(Bf,s[0],s[1],s[0]+34*v[0],s[1]+34*v[1],'var(--verde)','bv',2.4);
+      if(q[1]){T(Bf,s[0]+50*u[0]-4,s[1]+50*u[1]+14,'B',lab('var(--blu)'));
+               T(Bf,s[0]+44*v[0]-10,s[1]+44*v[1]-8,'Δl',lab('var(--verde)'));}
+    });
+  }
+  })();
+
+  /* --- figura 3: circonferenza centrata sul filo, cursore sul raggio --- */
+  var C=document.getElementById('fig-c'), cc=document.getElementById('cur-c'), vc=document.getElementById('val-c');
+  (function(){
+  if(C&&cc){
+    marcatori(C,'c');
+    var ox=210, oy=140, R0=38, L0=28;
+    var cer=el(C,'circle',{cx:ox,cy:oy,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8});
+    var rag=el(C,'line',{x1:ox,y1:oy,y2:oy,stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 3'});
+    var tr=T(C,0,0,'r',{fill:'var(--grigio)','font-style':'italic','font-size':14});
+    el(C,'circle',{cx:ox,cy:oy,r:8,fill:'#fff',stroke:'var(--verde)','stroke-width':2});
+    el(C,'circle',{cx:ox,cy:oy,r:2.6,fill:'var(--verde)'});
+    T(C,ox-22,oy-10,'i',lab('var(--verde)'));
+    var fr=[];for(var k=0;k<8;k++)fr.push(el(C,'line',{stroke:'var(--blu)','stroke-width':2.4,'marker-end':'url(#cb)'}));
+    var tB=T(C,0,0,'B',lab('var(--blu)'));
+    function disC(q){
+      var r=R0*q, L=L0/q;
+      set(cer,{r:f(r)}); set(rag,{x2:f(ox+r)}); set(tr,{x:f(ox+r/2-4),y:oy+16});
+      fr.forEach(function(e,k){
+        var t=Math.PI/8+k*Math.PI/4, px=ox+r*Math.cos(t), py=oy-r*Math.sin(t);
+        /* corrente uscente: verso antiorario visto dall'alto */
+        set(e,{x1:f(px),y1:f(py),x2:f(px-L*Math.sin(t)),y2:f(py-L*Math.cos(t))});
+      });
+      var t0=Math.PI/8+Math.PI/4, qx=ox+r*Math.cos(t0), qy=oy-r*Math.sin(t0);
+      set(tB,{x:f(qx-L*Math.sin(t0)+4),y:f(qy-L*Math.cos(t0)-4)});
+      vc.innerHTML='r = '+virgola(q,2)+'·r₀ · B = '+virgola(1/q,2)+'·B₀ · B·2πr = 2πk i';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    cc.addEventListener('input',function(){disC(+cc.value);});
+    disC(+cc.value);
+  }
+  })();
+
+  /* --- figura 4: componente di B lungo Δl, cursore sull'angolo --- */
+  var D=document.getElementById('fig-d'), cd=document.getElementById('cur-d'), vd=document.getElementById('val-d');
+  (function(){
+  if(D&&cd){
+    marcatori(D,'d');
+    var ox=190, oy=200, LB=140;
+    el(D,'line',{x1:40,y1:oy,x2:380,y2:oy,stroke:'var(--riga)','stroke-width':1});
+    freccia(D,ox,oy,ox+175,oy,'var(--verde)','dv',2.6);
+    T(D,ox+170,oy+22,'Δl',lab('var(--verde)'));
+    var pr=el(D,'line',{stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'4 3'});
+    var comp=el(D,'line',{y1:oy+1,y2:oy+1,x1:ox,stroke:'var(--blu)','stroke-width':5,opacity:.55,'stroke-linecap':'round'});
+    var tc=T(D,0,oy+22,'B∥',lab('var(--blu)'));
+    var vB=el(D,'line',{x1:ox,y1:oy,stroke:'var(--blu)','stroke-width':2.6,'marker-end':'url(#db)'});
+    var tB=T(D,0,0,'B',lab('var(--blu)'));
+    var ar=el(D,'path',{fill:'none',stroke:'var(--grigio)','stroke-width':1.3});
+    var ta=T(D,0,0,'α',{fill:'var(--grigio)','font-size':13});
+    function disD(g){
+      var t=g*Math.PI/180, c=Math.cos(t), s=Math.sin(t), bx=ox+LB*c, by=oy-LB*s;
+      set(vB,{x2:f(bx),y2:f(by)}); set(tB,{x:f(ox+(LB+14)*c-5),y:f(oy-(LB+14)*s-6)});
+      set(pr,{x1:f(bx),y1:f(by),x2:f(bx),y2:oy});
+      set(comp,{x2:f(bx),opacity:Math.abs(c)>0.02?.55:0});
+      set(tc,{x:f(ox+LB*c/2-8),opacity:Math.abs(c)>0.15?1:0});
+      var ra=30;
+      set(ar,{d:g>0?'M'+(ox+ra)+','+oy+' A'+ra+','+ra+' 0 0 0 '+f(ox+ra*c)+','+f(oy-ra*s):'',opacity:g>0?1:0});
+      set(ta,{x:f(ox+(ra+10)*Math.cos(t/2)-3),y:f(oy-(ra+10)*Math.sin(t/2)+4),opacity:g>=15?1:0});
+      var bp=Math.abs(c)<1e-9?0:c;
+      vd.innerHTML='α = '+g+'° · B∥ = '+virgola(bp,2)+'·B'+(g===90?' <span class="ok">nessun contributo</span>':'');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    cd.addEventListener('input',function(){disD(+cd.value);});
+    disD(+cd.value);
+  }
+  })();
+
+  /* --- esempi: fili verticali e percorso γ in prospettiva (statici) --- */
+  function esempio(id,cx,rx,versi){
+    var E=document.getElementById(id); if(!E)return;
+    marcatori(E,id);
+    var cy=130, ry=24, xs=[110,200,320], nomi=['i₁','i₂','i₃'];
+    el(E,'ellipse',{cx:cx,cy:cy,rx:rx,ry:ry,fill:'var(--blu-chiaro)',opacity:.6});
+    el(E,'path',{d:arco(cx,cy,rx,ry,Math.PI,2*Math.PI),fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    xs.forEach(function(x,k){
+      var col=versi[k]>0?'var(--verde)':'var(--rosso)', mk=id+(versi[k]>0?'v':'r');
+      el(E,'line',{x1:x,y1:20,x2:x,y2:200,stroke:'var(--inchiostro)','stroke-width':2});
+      if(versi[k]>0)freccia(E,x,72,x,32,col,mk,2.6);else freccia(E,x,32,x,72,col,mk,2.6);
+      T(E,x+9,46,nomi[k],lab(col));
+      if(Math.abs(x-cx)<rx)el(E,'circle',{cx:x,cy:cy,r:3.5,fill:'var(--inchiostro)'});
+    });
+    el(E,'path',{d:arco(cx,cy,rx,ry,0,Math.PI),fill:'none',stroke:'#fff','stroke-width':7});
+    el(E,'path',{d:arco(cx,cy,rx,ry,0,Math.PI),fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    T(E,cx-rx-16,cy+5,'γ',lab('var(--blu)'));
+  }
+  esempio('fig-e1',155,80,[1,1,1]);
+  esempio('fig-e2',215,160,[1,1,-1]);
+})();
+</script>
 </body>
 </html>
