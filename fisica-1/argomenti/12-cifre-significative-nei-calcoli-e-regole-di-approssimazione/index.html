@@ -6,22 +6,36 @@
 <title>Cifre significative nei calcoli e regole di approssimazione — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.regole{margin:22px 0;padding:14px 18px;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -30,116 +44,100 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Grandezze fisiche e strumenti matematici &middot; Unità 11</p>
   <h1>Cifre significative nei calcoli e regole di approssimazione</h1>
-  <p class="sommario">Quante cifre tenere nel risultato di una moltiplicazione o di una
-  somma, e come si arrotonda quello che si butta via.</p>
 </header>
 
-<p>Quando due misure entrano in un calcolo, la calcolatrice restituisce una lunga fila di
-cifre. Quelle cifre non sono tutte misurate: il risultato non può essere più preciso dei
-dati da cui viene. Servono quindi due regole, una per prodotti e quozienti e una per somme
-e differenze, e un modo per tagliare le cifre in eccesso.</p>
-
-<h2>Moltiplicazioni e divisioni</h2>
-
-<div class="regole">
-<p>In una moltiplicazione o divisione, il risultato deve avere lo stesso numero di
-<strong>cifre significative</strong> del fattore che ne ha di meno.</p>
-</div>
-
-<div class="fig">
-<svg viewBox="0 0 470 150" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="27">
-  <text x="352" y="26" font-size="16" fill="#1a5ea8" letter-spacing="1">3 c.s.</text>
-  <path d="M330 48 L330 38 L424 38 L424 48" fill="none" stroke="#1a5ea8" stroke-width="2"/>
-
-  <text x="14" y="82" fill="#c0392b">2,4712</text>
-  <text x="140" y="82">&#183;</text>
-  <text x="176" y="82" fill="#2e7d32">6,12</text>
-  <text x="272" y="82">=</text>
-  <text x="330" y="82" fill="#1a5ea8">15,1</text>
-
-  <path d="M14 96 L14 106 L124 106 L124 96" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <text x="34" y="132" font-size="16" fill="#c0392b" letter-spacing="1">5 c.s.</text>
-
-  <path d="M176 96 L176 106 L248 106 L248 96" fill="none" stroke="#2e7d32" stroke-width="2"/>
-  <text x="186" y="132" font-size="16" fill="#2e7d32" letter-spacing="1">3 c.s.</text>
-</svg>
-<p class="did">Il fattore più povero comanda: $6{,}12$ ha tre cifre significative, quindi
-tre ne ha il risultato.</p>
-</div>
-
-<div class="esempi">
-<h3>Il conto per esteso</h3>
-<p>$$2{,}4712 \cdot 6{,}12 = 15{,}123744 \;\longrightarrow\; 15{,}1$$</p>
-<p>La calcolatrice dà otto cifre, ma $6{,}12$ è noto solo fino ai centesimi: pretendere di
-conoscere il prodotto fino ai milionesimi non avrebbe senso. Si tengono le prime tre cifre
-e si arrotonda.</p>
-</div>
-
-<h2>Regole per l'approssimazione</h2>
-
-<p>Tagliare le cifre in eccesso non è cancellarle: bisogna decidere che cosa succede
-all'ultima cifra che si tiene. Si guarda la prima delle cifre che si escludono.</p>
-
-<div class="regole">
 <ul>
-  <li>se la prima cifra da escludere è maggiore o uguale a $5$, si somma $+1$ all'ultima
-  cifra significativa;</li>
-  <li>se la prima cifra da escludere è minore di $5$, si lascia l'ultima cifra
-  significativa così com'è.</li>
+<li>Il risultato di un calcolo non può essere più preciso dei dati.</li>
+</ul>
+
+<div class="def"><span class="et">Moltiplicazioni e divisioni</span>
+<p>Il risultato ha lo stesso numero di cifre significative del fattore che ne ha di meno.</p>
+</div>
+
+<div class="def"><span class="et">Approssimazione</span>
+<ul>
+<li>prima cifra esclusa maggiore o uguale a $5$: $+1$ all'ultima cifra tenuta;</li>
+<li>prima cifra esclusa minore di $5$: ultima cifra tenuta invariata.</li>
 </ul>
 </div>
 
-<p>Nel prodotto di prima la prima cifra esclusa è $2$, minore di $5$: l'$1$ dei decimi
-resta al suo posto e il risultato è $15{,}1$.</p>
-
-<h2>Addizioni e sottrazioni</h2>
-
-<p>Qui non contano le cifre significative ma le cifre dopo la virgola, perché in una somma
-ciò che conta è fino a quale posizione decimale ciascun addendo è stato misurato.</p>
-
-<div class="regole">
-<p>In un'addizione il risultato deve avere un numero di <strong>cifre decimali</strong>
-pari a quello dell'addendo che ne ha di meno. Per le sottrazioni vale la stessa regola.</p>
+<div class="def"><span class="et">Addizioni e sottrazioni</span>
+<p>Il risultato ha lo stesso numero di cifre decimali dell'addendo che ne ha di meno.</p>
 </div>
 
-<div class="esempi">
-<h3>Il volume totale di due blocchetti</h3>
-<p>$$V_1 = 2{,}2 \cdot 10^{2}\ \text{m}^3 \qquad V_2 = 3{,}16 \cdot 10^{2}\ \text{m}^3$$</p>
-<p>$$V_{\text{TOT}} = V_1 + V_2 = 2{,}2 \cdot 10^{2}\ \text{m}^3 + 3{,}16 \cdot 10^{2}\
-\text{m}^3 = 5{,}36 \cdot 10^{2}\ \text{m}^3 = 5{,}4 \cdot 10^{2}\ \text{m}^3$$</p>
-<p>I due addendi hanno la stessa potenza di dieci, quindi si confrontano direttamente:
-$2{,}2$ ha una cifra decimale, $3{,}16$ ne ha due, e il risultato ne tiene una. La prima
-cifra esclusa è $6$, maggiore di $5$, perciò il $3$ diventa $4$.</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Somme: cifre decimali. $12\ \text{m}+3{,}4\ \text{m}=15\ \text{m}$, non $15{,}4\ \text{m}$.</p>
 </div>
 
-<div class="esempi">
-<h3>Altre due somme</h3>
-<p>$$2{,}4422\ \text{m}^3 + 711{,}2\ \text{m}^3 = 713{,}6422\ \text{m}^3 = 713{,}6\
-\text{m}^3$$</p>
-<p>Il primo addendo ha tre cifre decimali, il secondo una sola: il risultato si ferma ai
-decimi.</p>
-<p>$$12\ \text{m} + 3{,}4\ \text{m} = 15{,}4\ \text{m} = 15\ \text{m}$$</p>
-<p>$12$ non ha cifre decimali, quindi nemmeno il risultato ne ha.</p>
+<h2>Esempio 1</h2>
+
+<div class="fig">
+<svg id="fig-prod" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">Fattore con meno cifre significative: $6{,}12$ (3 c.s.).</p>
 </div>
 
-<div class="nota">
-<strong>Da non confondere.</strong> Le due regole contano cose diverse: nei prodotti si
-contano le cifre significative, nelle somme le cifre decimali. È per questo che
-$12\ \text{m} + 3{,}4\ \text{m}$ dà $15\ \text{m}$: applicare qui la regola dei prodotti
-porterebbe a tenere due cifre e a scrivere $15{,}4\ \text{m}$, che sarebbe sbagliato.
-</div>
+<p class="eq">$$2{,}4712\cdot6{,}12=15{,}123744\ \longrightarrow\ 15{,}1$$</p>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Queste regole si applicano a ogni calcolo con misure, a partire dalle grandezze
-derivate dell'unità 12, dove area, volume e densità si ottengono proprio da prodotti e
-quozienti. Tornano poi nell'unità 16, quando al risultato si affianca la stima
-dell'errore.</p>
-</div>
+<ul>
+<li>Prima cifra esclusa: $2<5$, ultima cifra invariata.</li>
+</ul>
 
+<h2>Esempio 2</h2>
+
+<ul>
+<li>$V_1=2{,}2\cdot10^{2}\ \text{m}^3$ (1 decimale), $V_2=3{,}16\cdot10^{2}\ \text{m}^3$ (2 decimali), stessa potenza di dieci.</li>
+</ul>
+
+<p class="eq">$$V_{\text{TOT}}=2{,}2\cdot10^{2}\ \text{m}^3+3{,}16\cdot10^{2}\ \text{m}^3=5{,}36\cdot10^{2}\ \text{m}^3\ \longrightarrow\ 5{,}4\cdot10^{2}\ \text{m}^3$$</p>
+
+<ul>
+<li>Prima cifra esclusa: $6\ge5$, il $3$ diventa $4$.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../11-cifre-significative/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Cifre significative</span></a><a class="successiva" href="../13-grandezze-derivate-area-volume-densita/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Grandezze derivate: area, volume, densità</span></a></nav>
+<footer><p>Fisica prima &middot; Grandezze fisiche e strumenti matematici &middot; Unità 11</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  var S=document.getElementById('fig-prod'); if(!S)return;
+  /* 2,4712 · 6,12 = 15,1: pezzi scritti uno dopo l'altro, parentesi calcolate sulle larghezze reali */
+  var y=92, x=0, pezzi=[['2,4712','var(--rosso)',16],['·','var(--inchiostro)',16],['6,12','var(--verde)',16],['=','var(--inchiostro)',16],['15,1','var(--blu)',0]], bb=[], tt=[];
+  pezzi.forEach(function(p){
+    var t=el(S,'text',{x:x,y:y,'font-family':'Georgia, serif','font-size':36,fill:p[1],'font-weight':p[1]==='var(--inchiostro)'?400:700},p[0]);
+    var w=t.getComputedTextLength(); bb.push([x,x+w]); tt.push(t); x+=w+p[2];
+  });
+  var dx=(420-x)/2; tt.forEach(function(t){set(t,{x:(+t.getAttribute('x')+dx).toFixed(1)});});
+  bb=bb.map(function(b){return [b[0]+dx,b[1]+dx];});
+  function graffa(b,yb,su,col){
+    var h=su?-9:9;
+    el(S,'path',{d:'M'+b[0].toFixed(1)+' '+yb+' L'+b[0].toFixed(1)+' '+(yb+h)+' L'+b[1].toFixed(1)+' '+(yb+h)+' L'+b[1].toFixed(1)+' '+yb,fill:'none',stroke:col,'stroke-width':2});
+  }
+  function scritta(b,yy,txt,col){el(S,'text',{x:((b[0]+b[1])/2).toFixed(1),y:yy,'text-anchor':'middle','font-family':'var(--sans)','font-size':13,'letter-spacing':1,fill:col},txt);}
+  graffa(bb[0],106,false,'var(--rosso)'); scritta(bb[0],136,'5 C.S.','var(--rosso)');
+  graffa(bb[2],106,false,'var(--verde)'); scritta(bb[2],136,'3 C.S.','var(--verde)');
+  graffa(bb[4],56,true,'var(--blu)');   scritta(bb[4],36,'3 C.S.','var(--blu)');
+})();
+</script>
 </body>
 </html>
