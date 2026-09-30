@@ -56,3 +56,4 @@ Esecuzione delle 02:02 UTC (due unità).
 Esecuzione delle 03:03 UTC (due unità).
 
 - fisica-4 unità 15 (Teorema di Carnot): pubblicata (commit nella riga della coda). Tolti sommario, premessa, titoletto «Enunciato» e rimando all'unità 16; enunciato in riquadro, formula in rosso, esempio verificato (Qc ≈ 1,68×10⁶ J, Qf ≈ 9,26×10⁵ J). Nessuna correzione, nessuna figura, nessun esempio tolto.
+- matematica-5 unità 08 (Weierstrass, valori intermedi, esistenza degli zeri): pubblicata (commit nella riga della coda). Correzioni: figura di massimo/minimo col pallino del minimo fuori dalla curva (ora intervallo [0,3; 3,6], α calcolato); primo pannello della galleria corretto in [a,b[ («minimo sì, massimo no»). Da controllare: la galleria non ha un caso di intervallo illimitato (ipotesi citata nel testo). Tre grafici Plotly riscritti in SVG, due con cursore. Nessun esempio tolto, nessuna figura decorativa.

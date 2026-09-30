@@ -5,26 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Weierstrass, valori intermedi, esistenza degli zeri — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:22px 0}
-.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
-.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
-.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px;margin:22px 0;max-width:480px}
-.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+.quattro-svg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;justify-items:center}
+@media(max-width:640px){.did-parti,.due-svg,.quattro-svg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -34,159 +57,244 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Continuità &middot; Unità 08</p>
   <h1>Weierstrass, valori intermedi, esistenza degli zeri</h1>
-  <p class="sommario">Su un intervallo chiuso e limitato una funzione continua si comporta molto
-  bene: raggiunge un valore massimo e un valore minimo, e nel farlo passa per tutti i valori
-  intermedi. Da qui discende anche il modo più usato per dimostrare che un'equazione ha soluzione,
-  senza doverla risolvere esplicitamente.</p>
 </header>
 
-<h2>Massimo e minimo assoluto</h2>
+<div class="def"><span class="et">Definizione &middot; massimo e minimo assoluto</span>
+<p>$f(x)$ definita in un intervallo $I$. Massimo assoluto $M$: il massimo dei valori assunti da $f$ in $I$, se esiste. Minimo assoluto $m$: il minimo dei valori assunti da $f$ in $I$, se esiste.</p>
+</div>
 
-<div class="def"><span class="et">Definizione</span>
-Data una funzione $y=f(x)$ definita in un intervallo $I$, chiamiamo <strong>massimo assoluto</strong>
-di $f(x)$, se esiste, il massimo $M$ dei valori assunti dalla funzione in $I$; chiamiamo
-<strong>minimo assoluto</strong> di $f(x)$, se esiste, il minimo $m$ dei valori assunti dalla
-funzione in $I$.</div>
-
-<figure class="figuraunica">
-  <div id="g-mm" style="height:260px"></div>
-  <figcaption>Il massimo assoluto $M$ è raggiunto qui in un punto interno $\alpha$, il minimo
-  assoluto $m$ nell'estremo $b$: il teorema che segue garantisce che esistano, non dice dove si
-  trovano.</figcaption>
-</figure>
-
-<h2>Teorema di Weierstrass</h2>
+<div class="fig">
+<svg id="g-mm" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Funzione continua in un intervallo chiuso con massimo in un punto interno e minimo nell'estremo destro"></svg>
+<div class="cursore"><label for="s-x">$x$</label>
+<input type="range" id="s-x" min="0.3" max="3.6" step="0.01" value="2.2">
+<span class="val" id="v-x"></span></div>
+<p class="did">$M$ nel punto interno $\alpha$, $m$ nell'estremo $b$.</p>
+</div>
 
 <div class="def"><span class="et">Teorema di Weierstrass</span>
-Se $f$ è una funzione continua in un intervallo chiuso e limitato $[a,b]$, allora $f$ assume, in
-tale intervallo, il massimo assoluto e il minimo assoluto.</div>
-
-<p>Ognuna delle tre ipotesi &mdash; intervallo chiuso, intervallo limitato, funzione continua
-&mdash; è indispensabile: togliendone anche una sola, il massimo o il minimo assoluto possono
-sparire.</p>
-
-<div class="galleria">
-  <figure><div id="gal-a" style="height:150px"></div><figcaption>$(a,b)$ aperto:<br>nessun massimo assoluto</figcaption></figure>
-  <figure><div id="gal-b" style="height:150px"></div><figcaption>$]a,b[$ aperto, $f$ decrescente:<br>né massimo né minimo assoluto</figcaption></figure>
-  <figure><div id="gal-c" style="height:150px"></div><figcaption>$[a,b]$ chiuso, $f$ discontinua:<br>massimo sì, minimo no</figcaption></figure>
-  <figure><div id="gal-d" style="height:150px"></div><figcaption>$[a,b]$ chiuso, $f$ continua:<br>massimo e minimo entrambi garantiti</figcaption></figure>
+<p>$f$ continua in un intervallo chiuso e limitato $[a,b]$ ⇒ $f$ assume in $[a,b]$ il massimo assoluto e il minimo assoluto.</p>
 </div>
 
-<p>Weierstrass è dunque una condizione sufficiente, ma non necessaria: esistono funzioni che non
-rispettano le sue ipotesi e hanno comunque massimo e minimo assoluti.</p>
+<ul>
+<li>Ipotesi indispensabili: intervallo chiuso, intervallo limitato, funzione continua.</li>
+<li>Condizione sufficiente, non necessaria: massimo e minimo possono esistere anche senza le ipotesi.</li>
+</ul>
 
-<h2>Teorema dei valori intermedi</h2>
+<div class="fig">
+<div class="quattro-svg">
+<svg id="gal-a" viewBox="0 0 170 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:170px" role="img" aria-label="Funzione crescente in un intervallo chiuso a sinistra e aperto a destra"></svg>
+<svg id="gal-b" viewBox="0 0 170 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:170px" role="img" aria-label="Funzione decrescente in un intervallo aperto"></svg>
+<svg id="gal-c" viewBox="0 0 170 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:170px" role="img" aria-label="Funzione discontinua in un intervallo chiuso"></svg>
+<svg id="gal-d" viewBox="0 0 170 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:170px" role="img" aria-label="Funzione continua in un intervallo chiuso"></svg>
+</div>
+<div class="did-parti" style="--n:4">
+<p class="did">$[a,b[$ non chiuso: minimo sì, massimo no.</p>
+<p class="did">$]a,b[$ aperto: né massimo né minimo.</p>
+<p class="did">$[a,b]$, $f$ discontinua: massimo sì, minimo no.</p>
+<p class="did">$[a,b]$, $f$ continua: massimo e minimo.</p>
+</div>
+</div>
 
 <div class="def"><span class="et">Teorema dei valori intermedi</span>
-Se $f$ è una funzione continua in un intervallo chiuso e limitato $[a,b]$, allora essa assume,
-almeno una volta, tutti i valori compresi tra il massimo e il minimo.</div>
-
-<p>Il risultato si appoggia su Weierstrass: una volta certi che $M$ e $m$ esistano, la continuità
-impedisce alla funzione di "saltare" un valore intermedio fra i due.</p>
-
-<h2>Teorema di esistenza degli zeri</h2>
-
-<div class="def"><span class="et">Teorema di esistenza degli zeri</span>
-Se $f$ è una funzione continua in un intervallo chiuso e limitato $[a,b]$ e negli estremi
-dell'intervallo assume valori di segno opposto, allora esiste almeno un punto $c\in\,]a,b[\,$ in
-cui $f$ si annulla, cioè $f(c)=0$.</div>
-
-<p>È un caso particolare del teorema dei valori intermedi: se $f(a)$ e $f(b)$ hanno segno opposto,
-lo $0$ è uno dei valori compresi tra il minimo e il massimo, quindi la funzione lo tocca.</p>
-
-<div class="widget">
-  <div class="controlli">
-    <label>Estremo destro dell'intervallo: $b$
-      <input type="range" id="s-b" min="1.05" max="2.0" step="0.05" value="1.2">
-      <span>$b$ = <span class="val" id="v-b"></span></span>
-    </label>
-  </div>
-  <div id="g-zeri" style="height:340px"></div>
-  <p class="leggenda">La curva è $f(x)=x^3-x-1$, con $a=1$ fisso. Sposta $b$ e osserva quando
-  $f(a)$ e $f(b)$ hanno segno opposto: solo allora il teorema garantisce uno zero in $(a,b)$.</p>
+<p>$f$ continua in un intervallo chiuso e limitato $[a,b]$ ⇒ $f$ assume, almeno una volta, tutti i valori compresi fra il minimo e il massimo.</p>
 </div>
 
-<p>Verifichiamo il teorema su $f(x)=x^3-x-1$ nell'intervallo $[1,2]$: la funzione è continua su
-tutto $\mathbb{R}$ perché somma di funzioni razionali intere, e agli estremi vale
-$$f(1)=1-1-1=-1&lt;0,\qquad f(2)=8-2-1=5&gt;0.$$
-I due valori hanno segno opposto, quindi esiste almeno un $c\in\,]1,2[\,$ con $f(c)=0$: l'equazione
-$x^3-x-1=0$ ammette una soluzione reale tra $1$ e $2$ (vale circa $1{,}325$, ma il teorema non
-serve a calcolarla: serve solo a garantirne l'esistenza).</p>
+<div class="def"><span class="et">Teorema di esistenza degli zeri</span>
+<p>$f$ continua in $[a,b]$ chiuso e limitato, $f(a)$ e $f(b)$ di segno opposto ⇒ esiste almeno un $c\in\,]a,b[\,$ con $f(c)=0$.</p>
+</div>
 
+<ul>
+<li>Caso particolare dei valori intermedi: $0$ è compreso fra $f(a)$ e $f(b)$.</li>
+</ul>
+
+<div class="fig">
+<svg id="g-zeri" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico di x alla terza meno x meno 1 con l'intervallo da 1 a b"></svg>
+<div class="cursore"><label for="s-b">$b$</label>
+<input type="range" id="s-b" min="1.05" max="2" step="0.05" value="1.2">
+<span class="val" id="v-b"></span></div>
+<p class="did">$f(x)=x^3-x-1$, $a=1$ fisso.</p>
+</div>
+
+<h2>Esempio</h2>
+
+<ul>
+<li>Equazione $x^3-x-1=0$ nell'intervallo $[1,2]$.</li>
+<li>$f(x)=x^3-x-1$ continua su $\mathbb{R}$ (polinomio).</li>
+</ul>
+
+<p class="eq">$$f(1)=1-1-1=-1<0\qquad f(2)=8-2-1=5>0$$</p>
+
+<ul>
+<li>Segno opposto agli estremi ⇒ esiste almeno un $c\in\,]1,2[\,$ con $f(c)=0$ ($c\approx1{,}325$).</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../08-continuita-in-un-punto-e-in-un-intervallo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Continuità in un punto e in un intervallo</span></a><a class="successiva" href="../10-punti-di-discontinuita-e-di-singolarita/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Punti di discontinuità e di singolarità</span></a></nav>
 <footer><p>Matematica quinta &middot; Continuità &middot; Unità 08</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var base={margin:{l:24,r:10,t:8,b:22},showlegend:false,
-    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
-  function mini(id,tracce,xr,yr){
-    Plotly.newPlot(id,tracce,Object.assign({},base,{
-      xaxis:{range:xr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
-      yaxis:{range:yr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}}}),
-      {displayModeBar:false,responsive:true,staticPlot:true});
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  function ramo(f,a,b,n){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n;x.push(v);y.push(f(v));}
-    return {x:x,y:y,mode:'lines',line:{color:'#16283d',width:2.2},hoverinfo:'skip'};}
-  function punto(x,y,pieno){return {x:[x],y:[y],mode:'markers',
-    marker:pieno?{size:9,color:'#16283d'}:{size:9,color:'#f7f5ef',line:{color:'#16283d',width:2}}};}
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
 
-  // figura unica: massimo interno, minimo all'estremo
-  Plotly.newPlot('g-mm',[
-    ramo(function(x){return 0.9+0.9*Math.sin(1.15*x)*Math.exp(-0.12*x);},0,6.4,140),
-    punto(1.35,1.72,true), punto(6.4,-0.05,true)
-  ],Object.assign({},base,{
-    xaxis:{range:[-0.3,6.8],zeroline:true,zerolinecolor:'#16283d',showgrid:false,
-      tickvals:[1.35,6.4],ticktext:['α','b'],tickfont:{size:11}},
-    yaxis:{range:[-0.9,2.1],zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
-    annotations:[
-      {x:1.35,y:1.98,text:'M',showarrow:false,font:{size:12,color:'#1f4e79'}},
-      {x:6.4,y:-0.32,text:'m',showarrow:false,font:{size:12,color:'#1f4e79'}}]
-  }),{displayModeBar:false,responsive:true,staticPlot:true});
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
 
-  // (a,b) aperto, crescente: nessun massimo
-  mini('gal-a',[ramo(function(x){return 0.4+0.55*Math.pow(x/2,1.4);},0.02,1.98,60),
-    punto(0.02,0.42,false),punto(1.98,0.94,false)],[-0.15,2.15],[0.1,1.15]);
-  // ]a,b[ aperto, decrescente: né massimo né minimo
-  mini('gal-b',[ramo(function(x){return 1.4-0.5*x;},0.02,1.98,20),
-    punto(0.02,1.39,false),punto(1.98,0.41,false)],[-0.15,2.15],[0.2,1.6]);
-  // [a,b] chiuso, discontinua: massimo sì (nel salto), minimo no
-  mini('gal-c',[ramo(function(x){return 0.4+Math.pow(x-1,2);},0,2,60),
-    punto(0,1.4,true),punto(2,1.4,true),punto(1,0.4,false),punto(1,1.85,true)],[-0.2,2.2],[0.1,2.1]);
-  // [a,b] chiuso, continua: massimo e minimo garantiti
-  mini('gal-d',[ramo(function(x){return 0.4+Math.pow(x-1,2);},0,2,60),
-    punto(0,1.4,true),punto(2,1.4,true),punto(1,0.4,true)],[-0.2,2.2],[0.1,2.1]);
 
-  var sb=document.getElementById('s-b'), vb=document.getElementById('v-b');
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-  function f(x){return x*x*x-x-1;}
-  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
-  var xc=xs(0.85,2.15,150);
+/* ---------- massimo e minimo assoluto: punto mobile sulla curva ---------- */
+(function(){
+  var svg=document.getElementById('g-mm'); if(!svg)return;
+  var A=0.3, Bx=3.6, AL=1.2755;
+  function f(x){return 0.9+0.9*Math.sin(1.15*x)*Math.exp(-0.12*x);}
+  // alfa calcolato numericamente
+  var best=A; for(var i=0;i<=33000;i++){var x=A+i*(Bx-A)/33000; if(f(x)>f(best))best=x;} AL=best;
+  var M=f(AL), m=f(Bx);
+  var P=new Piano(svg,[-0.2,4.1],[-0.3,2.1],{l:24,r:24,t:22,b:30});
+  P.assi([],[],'x','y');
+  var y0=P.Y(0);
+  [[A,'a'],[AL,'α'],[Bx,'b']].forEach(function(t){
+    P.testo.appendChild(el('line',{x1:P.X(t[0]),y1:y0-4,x2:P.X(t[0]),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    P.testo.appendChild(txt(P.X(t[0]),y0+18,t[1],{'text-anchor':'middle','fill':'var(--inchiostro)'}));
+  });
+  P.add(el('line',{x1:P.X(AL),y1:y0,x2:P.X(AL),y2:P.Y(M),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  P.add(el('line',{x1:P.X(Bx),y1:y0,x2:P.X(Bx),y2:P.Y(m),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  P.curva(f,A,Bx,400,'var(--blu)');
+  pallino(P,A,f(A),true,'var(--blu)'); pallino(P,Bx,m,true,'var(--blu)');
+  P.testo.appendChild(txt(P.X(AL),P.Y(M)-10,'M',{'text-anchor':'middle','fill':'var(--blu)','font-size':13}));
+  P.testo.appendChild(txt(P.X(Bx)+10,P.Y(m)+4,'m',{'fill':'var(--blu)','font-size':13}));
+  var pt=pallino(P,2.2,f(2.2),true,'var(--rosso)');
+  var sl=document.getElementById('s-x'), v=document.getElementById('v-x');
   function agg(){
-    var b=parseFloat(sb.value), fa=f(1), fb=f(b), garantito=fa*fb<0;
-    vb.textContent=fmt(b);
-    Plotly.react('g-zeri',[
-      {x:xc,y:xc.map(f),mode:'lines',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
-      {x:[0.85,2.15],y:[0,0],mode:'lines',line:{color:'#9aa7b5',width:1,dash:'dot'},hoverinfo:'skip'},
-      {x:[1,b],y:[0,0],mode:'lines',line:{color:garantito?'#2f6b4f':'#b3392f',width:5},hoverinfo:'skip'},
-      {x:[1],y:[fa],mode:'markers',marker:{size:10,color:'#16283d'},
-        text:['f(1) = '+fmt(fa)],hovertemplate:'%{text}<extra></extra>'},
-      {x:[b],y:[fb],mode:'markers',marker:{size:10,color:garantito?'#2f6b4f':'#b3392f'},
-        text:['f('+fmt(b)+') = '+fmt(fb)],hovertemplate:'%{text}<extra></extra>'}
-    ],{
-      margin:{l:44,r:14,t:10,b:34},showlegend:false,
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[0.85,2.15],gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[-1.4,5.5],gridcolor:'#e6e0d4'},
-      annotations:[{x:1.5,y:5.0,
-        text:garantito?'segno opposto: zero garantito in (1, '+fmt(b)+')':'stesso segno: il teorema non garantisce nulla qui',
-        showarrow:false,font:{size:12,color:garantito?'#2f6b4f':'#b3392f'}}]
-    },{displayModeBar:false,responsive:true});
+    var x=parseFloat(sl.value), y=f(x);
+    pt.setAttribute('cx',P.X(x)); pt.setAttribute('cy',P.Y(y));
+    var s='x = '+num(x)+' &nbsp; f(x) = '+num(y);
+    if(Math.abs(x-AL)<0.015)s+=' &nbsp; <span class="ok">massimo M</span>';
+    else if(x>Bx-0.005)s+=' &nbsp; <span class="ok">minimo m</span>';
+    v.innerHTML=s;
   }
-  sb.addEventListener('input',agg); agg();
+  sl.addEventListener('input',agg); agg();
+})();
+
+/* ---------- quattro casi ---------- */
+function caso(id,f,a,b,punti){
+  var svg=document.getElementById(id); if(!svg)return;
+  var S=0.3, P=new Piano(svg,[-0.2,2.55],[-0.2,2.2],{l:14,r:16,t:16,b:22});
+  P.assi([],[],'x','y');
+  var y0=P.Y(0);
+  [[a+S,'a'],[b+S,'b']].forEach(function(t){
+    P.testo.appendChild(el('line',{x1:P.X(t[0]),y1:y0-4,x2:P.X(t[0]),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    P.testo.appendChild(txt(P.X(t[0]),y0+17,t[1],{'text-anchor':'middle','fill':'var(--inchiostro)'}));
+  });
+  f.forEach(function(r){P.curva(function(x){return r[0](x-S);},r[1]+S,r[2]+S,200);});
+  punti.forEach(function(q){pallino(P,q[0]+S,q[1],q[2]);});
+}
+var cre=function(x){return 0.4+0.55*Math.pow(x/2,1.4);}, dec=function(x){return 1.4-0.5*x;},
+    par=function(x){return 0.4+(x-1)*(x-1);};
+caso('gal-a',[[cre,0,2]],0,2,[[0,cre(0),true],[2,cre(2),false]]);
+caso('gal-b',[[dec,0,2]],0,2,[[0,dec(0),false],[2,dec(2),false]]);
+caso('gal-c',[[par,0,2]],0,2,[[0,par(0),true],[2,par(2),true],[1,par(1),false],[1,1.85,true]]);
+caso('gal-d',[[par,0,2]],0,2,[[0,par(0),true],[2,par(2),true],[1,par(1),true]]);
+
+/* ---------- esistenza degli zeri: cursore su b ---------- */
+(function(){
+  var svg=document.getElementById('g-zeri'); if(!svg)return;
+  function f(x){return x*x*x-x-1;}
+  var C=1.3247;
+  var P=new Piano(svg,[0.8,2.2],[-1.5,5.5],{l:34,r:24,t:22,b:30});
+  P.assi([1,1.5,2],[-1,1,2,3,4,5],'x','y');
+  P.curva(f,0.8,2.2,400,'var(--blu)');
+  var seg=P.add(el('line',{y1:P.Y(0),y2:P.Y(0),'stroke-width':5,'stroke-linecap':'round'}),'sotto');
+  var gb=P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  P.add(el('line',{x1:P.X(1),x2:P.X(1),y1:P.Y(0),y2:P.Y(-1),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  pallino(P,1,-1,true);
+  var zc=pallino(P,C,0,true,'var(--verde)');
+  var pb=pallino(P,1.2,f(1.2),true,'var(--rosso)');
+  var sl=document.getElementById('s-b'), v=document.getElementById('v-b');
+  function agg(){
+    var b=parseFloat(sl.value), fb=f(b), ok=fb>0;
+    seg.setAttribute('x1',P.X(1)); seg.setAttribute('x2',P.X(b));
+    seg.setAttribute('stroke',ok?'var(--verde)':'var(--rosso)');
+    gb.setAttribute('x1',P.X(b)); gb.setAttribute('x2',P.X(b)); gb.setAttribute('y1',P.Y(0)); gb.setAttribute('y2',P.Y(fb));
+    pb.setAttribute('cx',P.X(b)); pb.setAttribute('cy',P.Y(fb));
+    zc.style.display=ok?'':'none';
+    v.innerHTML='b = '+num(b)+' &nbsp; f(1) = −1 &nbsp; f(b) = '+num(fb)+' &nbsp; '+
+      (ok?'<span class="ok">segno opposto: zero garantito</span>':'<span class="no">stesso segno</span>');
+  }
+  sl.addEventListener('input',agg); agg();
+})();
 })();
 </script>
 </body>
