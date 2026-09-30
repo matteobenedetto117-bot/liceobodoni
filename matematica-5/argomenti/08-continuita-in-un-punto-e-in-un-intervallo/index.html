@@ -5,27 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Continuità in un punto e in un intervallo — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:22px 0}
-.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
-.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
-.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;margin:20px 0}
-.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:8px 10px;text-align:left}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
 .tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
 </style>
 </head>
 <body>
@@ -35,58 +60,61 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Continuità &middot; Unità 07</p>
   <h1>Continuità in un punto e in un intervallo</h1>
-  <p class="sommario">Dire che un grafico "si disegna senza staccare la penna" significa qualcosa
-  di preciso: il valore a cui la funzione si avvicina in un punto deve coincidere con il valore che
-  la funzione assume in quel punto.</p>
 </header>
 
-<h2>Continuità in un punto</h2>
-
-<div class="def"><span class="et">Definizione</span>
-Una funzione $f(x)$ definita in un intervallo $[a,b]$ è <strong>continua</strong> in un punto
-$x_0\in[a,b]$ se esiste $\displaystyle\lim_{x\to x_0}f(x)$ e risulta
-$$\lim_{x\to x_0}f(x)=f(x_0)$$</div>
-
-<p>La richiesta è doppia: il limite deve esistere finito, e deve coincidere proprio con $f(x_0)$,
-non con un valore qualsiasi. Se una delle due condizioni cade, la funzione non è continua in
-$x_0$.</p>
-
-<div class="galleria">
-  <figure><div id="gal-a" style="height:160px"></div><figcaption>continua in $x_0$</figcaption></figure>
-  <figure><div id="gal-b" style="height:160px"></div><figcaption>non continua in $x_0$:<br>il limite esiste ma non vale $f(x_0)$</figcaption></figure>
+<div class="def"><span class="et">Definizione &middot; continuità in un punto</span>
+<p>$f(x)$ definita in $[a,b]$ è continua in $x_0\in[a,b]$ se esiste il limite per $x\to x_0$ e</p>
+<p class="eq">$$\lim_{x\to x_0}f(x)=f(x_0)$$</p>
 </div>
 
-<p>Si dice che $f(x)$ è continua <strong>a destra</strong> in $x_0$ se
-$\displaystyle\lim_{x\to x_0^{+}}f(x)=f(x_0)$, ed è continua <strong>a sinistra</strong> in $x_0$ se
-$\displaystyle\lim_{x\to x_0^{-}}f(x)=f(x_0)$. Come per il limite bilatero, la continuità in $x_0$
-equivale ad avere entrambe le continuità unilaterali.</p>
+<ul>
+<li>Due condizioni: il limite esiste finito; il limite coincide con $f(x_0)$.</li>
+<li>Se una delle due manca, $f$ non è continua in $x_0$.</li>
+</ul>
 
-<div class="galleria">
-  <figure><div id="gal-c" style="height:160px"></div><figcaption>continua a destra in $x_0$</figcaption></figure>
-  <figure><div id="gal-d" style="height:160px"></div><figcaption>continua a sinistra in $x_0$</figcaption></figure>
+<div class="fig">
+<div class="due-svg">
+<svg id="g-a" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px" role="img" aria-label="Funzione continua in x0"></svg>
+<svg id="g-b" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px" role="img" aria-label="Funzione con limite in x0 diverso dal valore f(x0)"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Continua in $x_0$.</p>
+<p class="did">Non continua: il limite esiste ma è diverso da $f(x_0)$.</p>
+</div>
 </div>
 
-<div class="def"><span class="et">Definizione — continuità in un intervallo</span>
-Una funzione definita in $[a,b]$ si dice continua nell'intervallo $[a,b]$ se è continua in ogni
-punto dell'intervallo.</div>
+<ul>
+<li>Continua a destra in $x_0$: $\displaystyle\lim_{x\to x_0^{+}}f(x)=f(x_0)$.</li>
+<li>Continua a sinistra in $x_0$: $\displaystyle\lim_{x\to x_0^{-}}f(x)=f(x_0)$.</li>
+<li>Continua in $x_0$ se e solo se continua a destra e a sinistra in $x_0$.</li>
+</ul>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Scostamento del valore in $x_0=1$: $c$
-      <input type="range" id="s-c" min="-1.5" max="1.5" step="0.05" value="0.6">
-      <span>$c$ = <span class="val" id="v-c"></span></span>
-    </label>
-  </div>
-  <div id="g-cont" style="height:340px"></div>
-  <p class="leggenda">La curva è $f(x)=x^2$, ma in $x_0=1$ il valore è fissato a mano a $1+c$. Il
-  limite per $x\to1$ resta sempre $1$: quando $c=0$ il punto cade sulla curva e la funzione è
-  continua in $1$; per ogni altro $c$ il punto si stacca dalla curva e la funzione, pur avendo
-  limite in $1$, non è continua lì.</p>
+<div class="fig">
+<div class="due-svg">
+<svg id="g-c" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px" role="img" aria-label="Funzione continua a destra in x0"></svg>
+<svg id="g-d" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px" role="img" aria-label="Funzione continua a sinistra in x0"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Continua a destra in $x_0$.</p>
+<p class="did">Continua a sinistra in $x_0$.</p>
+</div>
 </div>
 
-<h2>Funzioni continue nel loro dominio</h2>
+<div class="def"><span class="et">Definizione &middot; continuità in un intervallo</span>
+<p>$f(x)$ definita in $[a,b]$ è continua in $[a,b]$ se è continua in ogni punto dell'intervallo.</p>
+</div>
 
-<p>Sono continue in ogni intervallo del proprio dominio le funzioni elementari:</p>
+<div class="fig">
+<svg id="g-cont" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Parabola y = x al quadrato con il valore in x = 1 spostabile"></svg>
+<div class="cursore"><label for="s-c">$c$</label>
+<input type="range" id="s-c" min="-0.8" max="1.5" step="0.05" value="0.6">
+<span class="val" id="v-c"></span></div>
+<p class="did">$f(x)=x^2$ per $x\neq1$, $f(1)=1+c$.</p>
+</div>
+
+<ul>
+<li>Funzioni elementari: continue in ogni intervallo del proprio dominio.</li>
+</ul>
 
 <table class="tabellina">
 <tr><th>Famiglia</th><th>Esempio</th><th>Dominio</th></tr>
@@ -97,81 +125,141 @@ punto dell'intervallo.</div>
 <tr><td>goniometriche $\sin,\cos$</td><td>$f(x)=\sin x$</td><td>$\mathbb{R}$</td></tr>
 </table>
 
-<p>Nel caso di $\sqrt{x+2}$ il dominio è imposto dalla condizione $x+2\geq0$, cioè $x\geq-2$: sotto
-radice non può comparire un numero negativo.</p>
-
-<h2>Proprietà delle funzioni continue</h2>
-
-<p>Se $f(x)$ e $g(x)$ sono continue in un punto o in un intervallo, sono continue anche:</p>
-
 <ul>
-<li>$f(x)\pm g(x)$;</li>
-<li>$k\cdot f(x)$, con $k\in\mathbb{R}$;</li>
-<li>$f(x)\cdot g(x)$;</li>
-<li>$[f(x)]^{n}$, con $n\in\mathbb{N}\setminus\{0\}$;</li>
-<li>$\dfrac{f(x)}{g(x)}$, dove $g(x)\neq0$;</li>
-<li>$f(g(x))$.</li>
+<li>$f(x)$, $g(x)$ continue in un punto (o in un intervallo) ⇒ continue anche:</li>
+<li>$f(x)\pm g(x)$; $\ k\cdot f(x)$, con $k\in\mathbb{R}$; $\ f(x)\cdot g(x)$;</li>
+<li>$[f(x)]^{n}$, con $n\in\mathbb{N}\setminus\{0\}$; $\ \dfrac{f(x)}{g(x)}$, dove $g(x)\neq0$.</li>
+<li>$f(g(x))$ è continua in $x_0$ se $g$ è continua in $x_0$ e $f$ è continua in $g(x_0)$.</li>
 </ul>
 
-<div class="def"><span class="et">Teorema — continuità della funzione inversa</span>
-Se $y=f(x)$ è iniettiva e continua in un intervallo $D$, allora la funzione inversa $f^{-1}$ è
-continua in $f(D)$.</div>
-
+<div class="def"><span class="et">Teorema &middot; continuità della funzione inversa</span>
+<p>$y=f(x)$ iniettiva e continua in un intervallo $D$ ⇒ $f^{-1}$ continua in $f(D)$.</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../07-infinitesimi-e-infiniti-gerarchia-principio-di-sostituzione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Infinitesimi e infiniti, gerarchia, principio di sostituzione</span></a><a class="successiva" href="../09-weierstrass-valori-intermedi-esistenza-degli-zeri/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Weierstrass, valori intermedi, esistenza degli zeri</span></a></nav>
 <footer><p>Matematica quinta &middot; Continuità &middot; Unità 07</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var base={margin:{l:24,r:10,t:8,b:22},showlegend:false,
-    paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)'};
-  function mini(id,tracce,xr,yr){
-    Plotly.newPlot(id,tracce,Object.assign({},base,{
-      xaxis:{range:xr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}},
-      yaxis:{range:yr,zeroline:true,zerolinecolor:'#16283d',showgrid:false,tickfont:{size:9}}}),
-      {displayModeBar:false,responsive:true,staticPlot:true});
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  function ramo(f,a,b,n){var x=[],y=[];for(var i=0;i<=n;i++){var v=a+i*(b-a)/n;x.push(v);y.push(f(v));}
-    return {x:x,y:y,mode:'lines',line:{color:'#16283d',width:2.2},hoverinfo:'skip'};}
-  function punto(x,y,pieno){return {x:[x],y:[y],mode:'markers',
-    marker:pieno?{size:9,color:'#16283d'}:{size:9,color:'#f7f5ef',line:{color:'#16283d',width:2}}};}
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
 
-  // continua in x0
-  mini('gal-a',[ramo(function(x){return x*x*0.5+0.3;},-1.6,1.6,80),punto(0,0.3,true)],[-1.8,1.8],[-0.3,1.6]);
-  // non continua: limite esiste, valore diverso
-  mini('gal-b',[ramo(function(x){return x*x*0.5+0.3;},-1.6,1.6,80),punto(0,0.3,false),punto(0,1.1,true)],[-1.8,1.8],[-0.3,1.6]);
-  // continua a destra: salto, il punto pieno coincide col ramo destro
-  mini('gal-c',[ramo(function(x){return 0.5*x+0.2;},-1.6,-0.02,60),ramo(function(x){return 0.5*x+1.0;},0.02,1.6,60),
-    punto(0,0.2,false),punto(0,1.0,true)],[-1.8,1.8],[-0.8,1.8]);
-  // continua a sinistra: il punto pieno coincide col ramo sinistro
-  mini('gal-d',[ramo(function(x){return 0.5*x+0.2;},-1.6,-0.02,60),ramo(function(x){return 0.5*x+1.0;},0.02,1.6,60),
-    punto(0,0.2,true),punto(0,1.0,false)],[-1.8,1.8],[-0.8,1.8]);
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',','),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',','),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
 
-  var sc=document.getElementById('s-c'), vc=document.getElementById('v-c');
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
-  var xL=xs(-1.2,0.985,150), xR=xs(1.015,3,150);
+/* ---------- quattro pannelli: x0 = 1 ---------- */
+function pannello(id,rami,punti){
+  var svg=document.getElementById(id); if(!svg)return;
+  var P=new Piano(svg,[-0.6,2.8],[-0.4,2.4],{l:16,r:18,t:18,b:22});
+  P.assi([],[],'x','y');
+  var y0=P.Y(0);
+  P.testo.appendChild(el('line',{x1:P.X(1),y1:y0-4,x2:P.X(1),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+  P.testo.appendChild(txt(P.X(1),y0+17,'x₀',{'text-anchor':'middle','fill':'var(--inchiostro)'}));
+  P.add(el('line',{x1:P.X(1),y1:y0,x2:P.X(1),y2:P.m.t,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  rami.forEach(function(r){P.curva(r[0],r[1],r[2],200);});
+  punti.forEach(function(q){pallino(P,q[0],q[1],q[2]);});
+}
+var par=function(x){return 0.6*(x-1)*(x-1)+0.5;};
+var sx=function(x){return 0.4*(x-1)+0.5;}, dx=function(x){return 0.4*(x-1)+1.5;};
+pannello('g-a',[[par,-0.6,2.8]],[[1,0.5,true]]);
+pannello('g-b',[[par,-0.6,2.8]],[[1,0.5,false],[1,1.6,true]]);
+pannello('g-c',[[sx,-0.6,0.99],[dx,1.01,2.8]],[[1,0.5,false],[1,1.5,true]]);
+pannello('g-d',[[sx,-0.6,0.99],[dx,1.01,2.8]],[[1,0.5,true],[1,1.5,false]]);
+
+/* ---------- valore in x0 = 1 spostabile ---------- */
+(function(){
+  var svg=document.getElementById('g-cont'); if(!svg)return;
+  var P=new Piano(svg,[-1.2,3],[-0.4,4.4],{l:34,r:24,t:22,b:30});
+  P.assi([-1,1,2,3],[1,2,3,4],'x','y');
+  P.curva(function(x){return x*x;},-1.2,3,400,'var(--blu)');
+  var guida=P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  var vuoto=pallino(P,1,1,false,'var(--blu)'), pt=pallino(P,1,1,true,'var(--rosso)');
+  var sl=document.getElementById('s-c'), vc=document.getElementById('v-c');
   function agg(){
-    var c=parseFloat(sc.value);
-    vc.textContent=fmt(c);
-    Plotly.react('g-cont',[
-      {x:xL,y:xL.map(function(v){return v*v;}),mode:'lines',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
-      {x:xR,y:xR.map(function(v){return v*v;}),mode:'lines',line:{color:'#1f4e79',width:2.2},hoverinfo:'skip'},
-      {x:[1],y:[1],mode:'markers',marker:{size:11,color:'#f7f5ef',line:{color:'#1f4e79',width:2}},hoverinfo:'skip'},
-      {x:[1],y:[1+c],mode:'markers',marker:{size:11,color:'#b3392f'},
-        text:['f(1) = '+fmt(1+c)],hovertemplate:'%{text}<extra></extra>'}
-    ],{
-      margin:{l:44,r:14,t:10,b:34},showlegend:false,
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[-1.2,3],gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[-0.3,4.2],gridcolor:'#e6e0d4'},
-      annotations:[{x:1,y:4.0,text:Math.abs(c)<1e-9?'continua in x₀=1':'non continua in x₀=1',
-        showarrow:false,font:{size:12,color:Math.abs(c)<1e-9?'#2f6b4f':'#b3392f'}}]
-    },{displayModeBar:false,responsive:true});
+    var c=parseFloat(sl.value), y=1+c, ok=Math.abs(c)<1e-9;
+    pt.setAttribute('cy',P.Y(y));
+    vuoto.style.display=ok?'none':'';
+    guida.setAttribute('x1',P.X(1));guida.setAttribute('x2',P.X(1));
+    guida.setAttribute('y1',P.Y(Math.min(0,y)));guida.setAttribute('y2',P.Y(Math.max(1,y)));
+    vc.innerHTML='c = '+num(c)+' &nbsp; f(1) = '+num(y)+' &nbsp; limite = 1 &nbsp; '+
+      (ok?'<span class="ok">continua</span>':'<span class="no">non continua</span>');
   }
-  sc.addEventListener('input',agg); agg();
+  sl.addEventListener('input',agg); agg();
+})();
 })();
 </script>
 </body>

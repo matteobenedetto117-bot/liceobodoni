@@ -250,6 +250,7 @@ teorema del confronto, a pagina 21.
   interattivo mostra $f(x)=x^2$ con il valore in $x_0=1$ spostabile a mano, per far vedere dal vivo
   quando il punto cade sulla curva (continuità) e quando se ne stacca pur restando il limite
   invariato.
+- Revisione: titolo invariato. Testo ridotto a traccia schematica: tolti sommario, titoletti «Continuità in un punto», «Funzioni continue nel loro dominio», «Proprietà delle funzioni continue» (contenuto nel flusso), frase discorsiva sulla doppia richiesta (ora due voci) e frase sul dominio di √(x+2) (già nella tabella). Definizioni e teorema in riquadri .def, formula della definizione in riquadro azzurro; tabella delle funzioni elementari tenuta. Correzione: la composta f(g(x)) è continua in x₀ se g è continua in x₀ e f è continua in g(x₀) (non basta che f e g siano continue «in un punto»). Nessun esempio nella pagina. Impaginazione a quaderno con script di allineamento. Figure: i quattro grafici Plotly riscritti in SVG (due figure a due pannelli, x₀ spostato da 0 a 1 per non sovrapporre i pallini all'asse y); grafico interattivo Plotly riscritto in SVG con cursore su c (−0,8…1,5), valori c, f(1), limite accanto al cursore e «continua» in verde per c = 0.
 
 ## Unità 08 — Weierstrass, valori intermedi, esistenza degli zeri
 - Parole: 551 su 3 pagine di traccia (32–34)
