@@ -5,98 +5,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Macchine frigorifere e pompe di calore — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Termodinamica &middot; Unit&agrave; 16</p>
+  <p class="occhiello">Termodinamica &middot; Unità 16</p>
   <h1>Macchine frigorifere e pompe di calore</h1>
-  <p class="sommario">Il frigorifero e la pompa di calore percorrono lo stesso schema della
-  macchina termica, ma al contrario: invece di sfruttare la differenza di temperatura per
-  produrre lavoro, spendiamo lavoro per spostare calore dalla sorgente fredda a quella calda.
-  Lo stesso dispositivo prende l'uno o l'altro nome a seconda di quale calore ci interessa.</p>
 </header>
 
-<h2>Lo schema, percorso al contrario</h2>
-
-<p>La macchina scambia ancora calore con due sorgenti, ma ora il lavoro non esce da essa: le
-viene fornito dall'esterno. Assorbe il calore $Q_f$ dalla sorgente fredda e cede il calore
-$Q_c$ a quella calda, e il bilancio energetico &egrave; lo stesso gi&agrave; scritto per la
-macchina termica:</p>
-
-<div class="formula-box">$$L=Q_c-Q_f$$</div>
+<div class="def">
+<span class="et">Definizione &middot; macchina frigorifera</span>
+<p>Macchina termica percorsa al contrario: assorbe il calore $Q_f$ dalla sorgente fredda, riceve il lavoro $L$ dall'esterno, cede il calore $Q_c$ alla sorgente calda.</p>
+</div>
 
 <div class="fig">
-<svg viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f18a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="f18b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-<marker id="f18c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<rect x="90" y="20" width="200" height="55" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<text x="190" y="53" text-anchor="middle" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">T&#8203;c (sorgente calda)</text>
-<circle cx="190" cy="175" r="42" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<text x="190" y="182" text-anchor="middle" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">M</text>
-<rect x="90" y="265" width="200" height="55" fill="none" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<text x="190" y="298" text-anchor="middle" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">T&#8203;f (sorgente fredda)</text>
-<path d="M190,130 L190,77" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#f18a)"/>
-<text x="215" y="105" font-family="var(--sans)" font-size="15" fill="var(--rosso)">Qc</text>
-<path d="M190,262 L190,219" stroke="var(--blu)" stroke-width="2.6" marker-end="url(#f18b)"/>
-<text x="215" y="245" font-family="var(--sans)" font-size="15" fill="var(--blu)">Qf</text>
-<path d="M300,175 L234,175" stroke="var(--verde)" stroke-width="2.6" marker-end="url(#f18c)"/>
-<text x="313" y="165" font-family="var(--sans)" font-size="15" fill="var(--verde)">L</text>
-<text x="313" y="198" font-family="var(--sans)" font-size="13" fill="var(--verde)">(L &lt; 0)</text>
-</svg>
-<p class="did">La macchina M assorbe $Q_f$ dalla sorgente fredda, riceve dall'esterno il
-lavoro $L$ e cede $Q_c$ alla sorgente calda: lo stesso schema della macchina termica, con le
-frecce invertite.</p>
+<svg id="frigo" viewBox="0 0 380 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Schema della macchina frigorifera: frecce di spessore proporzionale a calore assorbito, lavoro fornito e calore ceduto"></svg>
+<div class="cursore"><label for="cur-l">lavoro fornito</label><input id="cur-l" type="range" min="10" max="60" step="5" value="20"><span id="val-l"></span></div>
+<p class="did">Spessore delle frecce proporzionale all'energia scambiata in un ciclo.</p>
 </div>
 
-<h2>Frigoriferi e condizionatori</h2>
+<p class="eq">$$L = Q_c - Q_f$$</p>
+<p class="leg">$L$: lavoro fornito alla macchina in un ciclo; $Q_c$, $Q_f$: calore ceduto e calore assorbito; tutti in valore assoluto (J).</p>
 
-<p>Di un frigorifero o di un condizionatore ci interessa il calore $Q_f$ che tolgono
-all'ambiente freddo. Il coefficiente di prestazione frigorifero confronta questo calore
-estratto con il lavoro speso:</p>
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>Lavoro compiuto dalla macchina negativo: il lavoro è fornito dall'esterno.</p>
+</div>
 
-<div class="formula-box">$$C_f=\frac{Q_f}{L}$$</div>
-
-<h2>Pompe di calore</h2>
-
-<p>Di una pompa di calore ci interessa invece il calore $Q_c$ che cede all'ambiente caldo. Il
-coefficiente di prestazione della pompa di calore confronta questo calore immesso con il
-lavoro speso:</p>
-
-<div class="formula-box">$$C_p=\frac{Q_c}{L}$$</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Lasciamo la termodinamica e passiamo alle onde: che cosa sono e come si classificano,
-unit&agrave; 17.</li>
+<li>Frigorifero, condizionatore: conta il calore $Q_f$ tolto all'ambiente freddo.</li>
 </ul>
-</div>
+
+<p class="eq">$$C_f=\frac{Q_f}{L}$$</p>
+<p class="leg">$C_f$: coefficiente di prestazione frigorifero (numero puro).</p>
+
+<ul>
+<li>Pompa di calore: conta il calore $Q_c$ ceduto all'ambiente caldo.</li>
+</ul>
+
+<p class="eq">$$C_p=\frac{Q_c}{L}$$</p>
+<p class="leg">$C_p$: coefficiente di prestazione della pompa di calore (numero puro).</p>
 
 <nav class="nav-unita"><a class="precedente" href="../17-teorema-di-carnot/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema di Carnot</span></a><a class="successiva" href="../19-che-cos-e-un-onda-classificazioni/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Che cos'è un'onda: classificazioni</span></a></nav>
-<footer><p>Fisica quarta &middot; Termodinamica &middot; Unit&agrave; 16</p></footer>
+<footer><p>Fisica quarta &middot; Termodinamica &middot; Unità 16</p></footer>
 
 </div>
+<script>
+(function(){
+  // macchina frigorifera: Qf = 60 J fisso, L regolabile, Qc = Qf + L; spessori proporzionali
+  var NS='http://www.w3.org/2000/svg', svg=document.getElementById('frigo'),
+      cur=document.getElementById('cur-l'), val=document.getElementById('val-l'), QF=60, K=0.2;
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;}
+  function sub(x,y,a,b,att){var e=el('text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':14},att));e.textContent=a;
+    if(b){var s=el('tspan',{'baseline-shift':'sub','font-size':10},e);s.textContent=b;}return e;}
+  function num(v){return v.toFixed(1).replace('.',',');}
+  el('rect',{x:90,y:20,width:200,height:50,fill:'#f6e4e2',stroke:'var(--inchiostro)','stroke-width':2.2});
+  sub(190,50,'sorgente calda  T','c',{'text-anchor':'middle',fill:'var(--inchiostro)'});
+  el('rect',{x:90,y:260,width:200,height:50,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2.2});
+  sub(190,290,'sorgente fredda  T','f',{'text-anchor':'middle',fill:'var(--inchiostro)'});
+  var fc=el('path',{fill:'var(--rosso)'}), ff=el('path',{fill:'var(--blu)'}), fl=el('path',{fill:'var(--verde)'});
+  el('circle',{cx:190,cy:165,r:40,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2.4});
+  sub(190,170,'M','',{'text-anchor':'middle',fill:'var(--inchiostro)'});
+  var tc=sub(212,102,'Q','c',{fill:'var(--rosso)'}), tf=sub(212,236,'Q','f',{fill:'var(--blu)'}), tl=sub(300,152,'L','',{fill:'var(--verde)'});
+  // frecce a nastro verso l'alto e verso sinistra
+  function su(x,y1,y2,w){var h=Math.max(w,8);return 'M'+(x-w/2)+','+y1+' L'+(x+w/2)+','+y1+' L'+(x+w/2)+','+(y2+h)+' L'+(x+w/2+5)+','+(y2+h)+' L'+x+','+y2+' L'+(x-w/2-5)+','+(y2+h)+' L'+(x-w/2)+','+(y2+h)+' Z';}
+  function sx(y,x1,x2,w){var h=Math.max(w,8);return 'M'+x1+','+(y-w/2)+' L'+(x2+h)+','+(y-w/2)+' L'+(x2+h)+','+(y-w/2-5)+' L'+x2+','+y+' L'+(x2+h)+','+(y+w/2+5)+' L'+(x2+h)+','+(y+w/2)+' L'+x1+','+(y+w/2)+' Z';}
+  function disegna(){
+    var l=+cur.value, qc=QF+l;
+    fc.setAttribute('d',su(190,123,72,qc*K));
+    ff.setAttribute('d',su(190,258,207,QF*K));
+    fl.setAttribute('d',sx(165,310,232,l*K));
+    tc.setAttribute('x',190+qc*K/2+14);
+    tf.setAttribute('x',190+QF*K/2+14);
+    tl.setAttribute('y',165-l*K/2-10);
+    val.innerHTML='Q<sub>f</sub> = 60 J &nbsp; L = '+l+' J &nbsp; Q<sub>c</sub> = '+qc+' J &nbsp; C<sub>f</sub> = '+num(QF/l)+' &nbsp; C<sub>p</sub> = '+num(qc/l);
+  }
+  cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)allineaQuaderno();});disegna();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

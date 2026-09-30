@@ -67,3 +67,9 @@ Esecuzione delle 05:03 UTC (due unità).
 
 - matematica-2 unità 10 (Condizioni di esistenza e segno di un radicale): pubblicata, commit de20b98. Tolti sommario e tre titoletti; proprietà, CE e segno in riquadri; due esempi («Esempio 1» CE, «Esempio 2» segno). Precisazione: $(\sqrt[n]{a})^n=a$ «se il radicale esiste». Nessuna figura, nessun esempio tolto.
 - fisica-2 unità 07 (L'accelerazione): pubblicata (commit nella riga della coda). Tolti sommario e tre titoletti; esempio spostato in fondo. Nessuna correzione concettuale; didascalia del grafico v–t completata con i tratti BC, DE, EF. Da controllare: diagramma dei quattro casi di segno reso interattivo (cursore sul tempo, moto calcolato con v₀ = ±2 m/s, a = ±1 m/s²); grafico v–t, prima tracciato a occhio, ora calcolato a tratti con la stessa sequenza A–I e cursore su t. Nessun esempio tolto, nessuna figura decorativa.
+
+## Sera del 30/09/2026
+
+Esecuzione delle 20:03 UTC (due unità).
+
+- fisica-4 unità 16 (Macchine frigorifere e pompe di calore): pubblicata (commit nella riga della coda). Correzione: «L = Qc − Qf» con «(L < 0)» nel disegno era incoerente; ora grandezze in valore assoluto e nota «lavoro compiuto dalla macchina negativo». Da controllare: schema ridisegnato come quello dell'unità 12, con cursore sul lavoro fornito (Qf = 60 J fisso) e valori di Qc, Cf, Cp a fianco. Nessun esempio, nessuna figura decorativa.
