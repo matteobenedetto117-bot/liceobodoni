@@ -126,6 +126,7 @@
   che misure concordi non sono per questo corrette — è l'errore tipico che la griglia dei
   bersagli serve a smontare. Nessuna tabella riassuntiva oltre a quella della traccia,
   nessuno strumento interattivo.
+- Revisione: titolo invariato. Tolti sommario, introduzione discorsiva, titoletto «Le due famiglie a confronto» (tabella nel flusso), paragrafo di commento sul verso (ridotto a due voci) e sezione «Dove si riprende»; aggiunto il piè di pagina mancante. Errore di misura in riquadro .def; tabella di confronto con voci telegrafiche (origine, evitabilità, verso), contenuto invariato; «Da non confondere» ridotto a nota di una riga; esempio del metro a nastro in due voci. Nessuna correzione concettuale (verso dell'errore del nastro allungato ricontrollato: tacche più distanti, letture minori del vero). Impaginazione a quaderno come l'unità 14, con script di allineamento. Figure: schema ad albero ERRORI → casuali / sistematici lasciato com'è (figura decorativa: valutare se toglierla); griglia 2×2 dei bersagli ridisegnata da script (SVG inline) come un solo bersaglio con due cursori (errori casuali: dispersione di dieci colpi gaussiani fissi; errori sistematici: spostamento del gruppo), agli estremi i quattro casi della traccia, scritta «colpi concordi, ma lontani dal centro» in rosso e «colpi vicini al centro» in verde. Nessun esempio tolto.
 
 ## Unità 16 — Il risultato di una misura
 - Parole: 480 su 2 pagine di traccia (pag. 24–25)
