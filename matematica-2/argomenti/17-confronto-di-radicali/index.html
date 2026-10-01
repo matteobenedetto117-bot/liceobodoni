@@ -5,15 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Confronto di radicali — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -23,39 +60,47 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 14</p>
   <h1>Confronto di radicali</h1>
-  <p class="sommario">Confrontare due radicali vuol dire stabilire quale dei due è il numero
-  più grande. Se gli indici sono uguali il confronto è immediato; se sono diversi, va fatto un
-  passaggio in più prima di poter guardare i radicandi.</p>
 </header>
 
-<h2>Radicali con lo stesso indice</h2>
-<div class="regola">
-<p>Se due radicali hanno lo stesso indice, è maggiore quello con il radicando maggiore:</p>
-$$\sqrt[3]{5}&gt;\sqrt[3]{2}$$
+<div class="def"><span class="et">Stesso indice</span>
+<p>È maggiore il radicale con il radicando maggiore.</p>
+<p class="eq">$$\sqrt[3]{5}&gt;\sqrt[3]{2}$$</p>
 </div>
 
-<h2>Radicali con indici diversi</h2>
-<p>Se gli indici sono diversi, il confronto diretto non è possibile: si riducono prima allo
-stesso indice, con il minimo comune multiplo degli indici di partenza, e poi si confrontano i
-radicandi ottenuti.</p>
-
-<div class="esempio">
-<p>Confrontiamo $\sqrt2$, $\sqrt[3]4$ e $\sqrt[4]3$: gli indici sono $2$, $3$ e $4$, il cui
-minimo comune multiplo è $12$.</p>
-$$\sqrt2=\sqrt[12]{2^6}\qquad \sqrt[3]4=\sqrt[12]{4^4}=\sqrt[12]{2^8}\qquad
-\sqrt[4]3=\sqrt[12]{3^3}$$
-<p>Svolgendo le potenze sotto radice:</p>
-$$\sqrt[12]{2^6}=\sqrt[12]{64}\qquad \sqrt[12]{2^8}=\sqrt[12]{256}\qquad
-\sqrt[12]{3^3}=\sqrt[12]{27}$$
-<p>Ora i tre radicali hanno lo stesso indice, quindi basta confrontare i radicandi:
-$27&lt;64&lt;256$, dunque</p>
-$$\sqrt[4]3&lt;\sqrt2&lt;\sqrt[3]4$$
+<div class="def"><span class="et">Indici diversi</span>
+<p>Riduzione allo stesso indice (m.c.m. degli indici), poi confronto dei radicandi.</p>
 </div>
 
+<h2>Esempio</h2>
+<ul>
+<li>$\sqrt2,\ \sqrt[3]4,\ \sqrt[4]3$: indici $2,3,4$; m.c.m. $=12$.</li>
+</ul>
+<p class="eq">$$\sqrt2=\sqrt[12]{2^6}=\sqrt[12]{64}\qquad \sqrt[3]4=\sqrt[12]{4^4}=\sqrt[12]{256}\qquad \sqrt[4]3=\sqrt[12]{3^3}=\sqrt[12]{27}$$</p>
+<ul>
+<li>$27&lt;64&lt;256$</li>
+</ul>
+<p class="eq">$$\sqrt[4]3&lt;\sqrt2&lt;\sqrt[3]4$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../16-semplificazione-e-riduzione-allo-stesso-indice/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Semplificazione e riduzione allo stesso indice</span></a><a class="successiva" href="../18-moltiplicazione-e-divisione-di-radicali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Moltiplicazione e divisione di radicali</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 14</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
