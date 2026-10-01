@@ -90,6 +90,7 @@
   densità); l'unico elemento non presente nel quaderno è il disegno del metro quadro
   suddiviso in millimetri quadrati, aggiunto perché il punto dell'unità — il fattore che
   agisce due volte — non ha nella traccia alcun supporto visivo.
+- Revisione: titolo invariato. Tolti sommario, titoletti «Aree», «Volumi», «Velocità», «Densità» e la sezione «Dove si riprende» (rimando ad altre unità); premessa e regola in elenco telegrafico, frazione di conversione in riquadro .def, errore comune in .nota di una riga. Esempi: tenuti area (Esempio 1) e densità (Esempio 2); tolti volume (3,12·10⁻⁸ cm³ = 3,12·10⁻¹⁴ m³) e velocità (740 m/s ≈ 2,7·10³ km/h). Precisazione: risultato dell'area scritto 7,1·10⁴ mm² (71 000 era ambiguo nelle cifre significative). Verificati con Python: 0,071/10⁻⁶ = 7,1·10⁴; 2,85/(10³·10⁻⁶) = 2,85·10³. Impaginazione a quaderno come l'unità 12, con script di allineamento. Figura del metro quadro ridisegnata da script (SVG inline) con cursore sull'unità: griglia 10×10 (dm²), 100×100 (cm²), per i mm² 1 cm² evidenziato e ingrandito in 10×10; uguaglianze accanto al cursore. Aggiunto il piè di pagina mancante. Nessuna figura decorativa.
 
 ## Unità 14 — Strumenti di misura: portata e sensibilità
 - Parole: 269 su 1 pagina di traccia (p. 22 del PDF, di cui l'unità occupa in realtà solo
