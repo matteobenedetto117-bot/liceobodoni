@@ -5,17 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Semplificazione e riduzione allo stesso indice — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.attenzione{background:#fff;border:1px solid var(--rosso);border-radius:10px;padding:14px 20px;margin:14px 0}
-.attenzione p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -25,68 +60,70 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 13</p>
   <h1>Semplificazione e riduzione allo stesso indice</h1>
-  <p class="sommario">La proprietà invariantiva funziona anche a rovescio: invece di alzare
-  indice ed esponente, li si può abbassare, portando un radicale alla sua forma più semplice.
-  La stessa idea, applicata insieme a più radicali con indici diversi, li riscrive tutti con lo
-  stesso indice.</p>
 </header>
 
-<h2>Semplificazione di radicali</h2>
-<div class="regola">
-$$\sqrt[n\cdot m]{a^{p\cdot m}}=\sqrt[n]{a^p}\qquad a\geqslant0$$
-</div>
-<p>È la stessa proprietà vista in precedenza, letta da destra a sinistra: se indice ed esponente
-hanno un fattore comune $m$, lo si può dividere via da entrambi senza cambiare il valore del
-radicale.</p>
-
-<div class="esempio">
-<p>$\sqrt[21]{5^{14}}=\sqrt[7\cdot3]{5^{2\cdot7}}=\sqrt[3]{5^2}=\sqrt[3]{25}$</p>
-<p>$\sqrt{121}=\sqrt[2]{11^2}=11$</p>
-<p>$\sqrt[6]{169}=\sqrt[6]{13^2}=\sqrt[3]{13}$</p>
+<div class="def"><span class="et">Semplificazione</span>
+<p class="eq">$$\sqrt[n\cdot m]{a^{p\cdot m}}=\sqrt[n]{a^p}\qquad a\geqslant0$$</p>
+<p>Proprietà invariantiva letta da destra a sinistra: indice ed esponente divisi per un fattore comune $m$.</p>
 </div>
 
-<div class="attenzione">
-<p><strong>Attenzione:</strong> indice ed esponente si dividono, non si sottraggono. Da
-$\sqrt[5]{14^2}$ non si può passare a $\sqrt[3]{14}$: $5$ e $2$ non hanno nessun fattore comune
-da eliminare, quindi quel radicale è già nella sua forma più semplice.</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Indice ed esponente si dividono, non si sottraggono: $\sqrt[5]{14^2}\neq\sqrt[3]{14}$; $\sqrt[5]{14^2}$ è già irriducibile.</p>
 </div>
 
-<p>Se il radicando è negativo e l'indice è dispari, si porta prima fuori il segno, poi si
-semplifica come sopra:</p>
-$$\sqrt[21]{(-4)^7}=\sqrt[21]{-4^7}=-\sqrt[21]{4^7}=-\sqrt[3\cdot7]{4^{1\cdot7}}=-\sqrt[3]{4}$$
+<ul>
+<li>Radicando negativo, indice dispari: il segno meno esce dal radicale, poi si semplifica.</li>
+</ul>
 
-<h2>Semplificazione di radicali letterali</h2>
-<p>Quando sotto il quadrato c'è una lettera, il segno del risultato dipende dal segno della
-lettera stessa, perché il risultato di una radice quadrata non può mai essere negativo:</p>
-$$\sqrt{a^2}=\begin{cases}a & \text{se } a\geqslant0\\[2pt]-a & \text{se } a&lt;0\end{cases}
-\qquad\text{cioè}\qquad \sqrt{a^2}=|a|$$
-<div class="esempio">
-<p>$\sqrt{(-3)^2}=\sqrt9=3$</p>
-</div>
-<p>Se invece l'indice $n$ è dispari, non serve nessun valore assoluto: la potenza n-esima
-conserva il segno, quindi il radicale restituisce $a$ così com'è, positivo o negativo che sia:</p>
-$$\sqrt[n]{a^n}=a\qquad\forall a\in\mathbb{R},\ \ n\text{ dispari}$$
-
-<h2>Riduzione di radicali allo stesso indice</h2>
-<p>Per riscrivere più radicali con lo stesso indice si calcola il minimo comune multiplo degli
-indici di partenza: quello sarà il nuovo indice comune. L'esponente di ciascun radicando si
-ottiene poi moltiplicandolo per il numero di volte in cui il suo vecchio indice sta nel nuovo
-indice.</p>
-<div class="esempio">
-<p>$\sqrt{3},\ \sqrt[3]{5},\ \sqrt[5]{2}$ &nbsp;&mdash;&nbsp; indici $2,3,5$, m.c.m. $=30$</p>
-<p>$\sqrt{3}=\sqrt[30]{3^{15}}\qquad \sqrt[3]{5}=\sqrt[30]{5^{10}}\qquad
-\sqrt[5]{2}=\sqrt[30]{2^{6}}$</p>
-</div>
-<div class="esempio">
-<p>$\sqrt[4]{7},\ \sqrt[3]{2^4},\ \sqrt[7]{3^2}$ &nbsp;&mdash;&nbsp; indici $4,3,7$, m.c.m. $=84$</p>
-<p>$\sqrt[4]{7}=\sqrt[84]{7^{21}}\qquad \sqrt[3]{2^4}=\sqrt[84]{2^{112}}\qquad
-\sqrt[7]{3^2}=\sqrt[84]{3^{24}}$</p>
+<div class="def"><span class="et">Radicali letterali</span>
+<p class="eq">$$\sqrt{a^2}=|a|=\begin{cases}a & a\geqslant0\\[2pt]-a & a&lt;0\end{cases}$$</p>
+<p>Il risultato di una radice quadrata non è mai negativo: $\sqrt{(-3)^2}=\sqrt9=3$.</p>
+<p class="eq">$$\sqrt[n]{a^n}=a\qquad\forall a\in\mathbb{R},\ \ n\text{ dispari}$$</p>
 </div>
 
+<div class="def"><span class="et">Riduzione allo stesso indice</span>
+<p>Indice comune: m.c.m. degli indici.</p>
+<p>Esponente di ogni radicando moltiplicato per (indice comune) : (vecchio indice).</p>
+</div>
+
+<h2>Esempio 1</h2>
+<ul>
+<li>$\sqrt[21]{5^{14}}=\sqrt[7\cdot3]{5^{2\cdot7}}=\sqrt[3]{5^2}=\sqrt[3]{25}$</li>
+<li>$\sqrt{121}=\sqrt[2]{11^2}=11$</li>
+<li>$\sqrt[6]{169}=\sqrt[6]{13^2}=\sqrt[3]{13}$</li>
+</ul>
+<p class="eq">$$\sqrt[21]{(-4)^7}=-\sqrt[21]{4^7}=-\sqrt[3\cdot7]{4^{1\cdot7}}=-\sqrt[3]{4}$$</p>
+
+<h2>Esempio 2</h2>
+<ul>
+<li>$\sqrt{3},\ \sqrt[3]{5},\ \sqrt[5]{2}$: indici $2,3,5$; m.c.m. $=30$.</li>
+</ul>
+<p class="eq">$$\sqrt{3}=\sqrt[30]{3^{15}}\qquad \sqrt[3]{5}=\sqrt[30]{5^{10}}\qquad \sqrt[5]{2}=\sqrt[30]{2^{6}}$$</p>
+<ul>
+<li>$\sqrt[4]{7},\ \sqrt[3]{2^4},\ \sqrt[7]{3^2}$: indici $4,3,7$; m.c.m. $=84$.</li>
+</ul>
+<p class="eq">$$\sqrt[4]{7}=\sqrt[84]{7^{21}}\qquad \sqrt[3]{2^4}=\sqrt[84]{2^{112}}\qquad \sqrt[7]{3^2}=\sqrt[84]{3^{24}}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../15-condizioni-di-esistenza-di-frazioni-algebriche-sotto-radice/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Condizioni di esistenza di frazioni algebriche sotto radice</span></a><a class="successiva" href="../17-confronto-di-radicali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Confronto di radicali</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 13</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
