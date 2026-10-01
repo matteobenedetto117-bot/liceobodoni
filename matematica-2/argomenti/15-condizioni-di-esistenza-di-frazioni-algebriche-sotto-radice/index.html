@@ -5,17 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Condizioni di esistenza di frazioni algebriche sotto radice — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.diagramma{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px;margin:20px 0;text-align:center}
-.diagramma svg{display:block;width:100%;height:auto;max-width:620px;margin:0 auto}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -25,81 +60,136 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 12</p>
   <h1>Condizioni di esistenza di frazioni algebriche sotto radice</h1>
-  <p class="sommario">Quando sotto una radice di indice pari c'è una frazione con l'incognita
-  anche al denominatore, non basta più imporre una sola disuguaglianza: bisogna studiare il
-  segno del numeratore e quello del denominatore separatamente, e poi combinarli come si fa per
-  il segno di un quoziente.</p>
 </header>
 
-<h2>Il problema</h2>
-<p>Per un radicale di indice pari $\sqrt[n]{f(x)}$ la condizione di esistenza è
-$f(x)\geqslant0$. Se $f(x)=\dfrac{N(x)}{D(x)}$ è una frazione algebrica, il segno del rapporto
-non è quello di $N$ né quello di $D$ preso da solo: dipende da come i due si combinano.</p>
-
-<div class="regola">
-<p>Un quoziente è positivo o nullo quando numeratore e denominatore sono <strong>concordi</strong>
-(entrambi $\geqslant0$, con $D\neq0$, oppure entrambi $&lt;0$); è negativo quando sono
-<strong>discordi</strong>. Il denominatore deve comunque essere sempre diverso da zero.</p>
+<div class="def"><span class="et">Condizione di esistenza</span>
+<p>Radicale di indice $n$ pari con radicando frazione algebrica $\dfrac{N(x)}{D(x)}$:</p>
+<p class="eq">$$\text{CE:}\quad \frac{N(x)}{D(x)}\geqslant0$$</p>
 </div>
 
-<p>Per usarla si studia il segno di $N$ da solo, quello di $D$ da solo, e si riportano i due
-risultati sulla stessa retta: dove i segni coincidono il quoziente è $\geqslant0$ e la CE è
-verificata, dove sono opposti no.</p>
-
-<h2>Esempio svolto</h2>
-<p>Condizione di esistenza di $\sqrt{\dfrac{x}{x-3}}$: serve $\dfrac{x}{x-3}\geqslant0$.</p>
-<div class="esempio">
-<p>Numeratore: $N=x\geqslant0$ per $x\geqslant0$.</p>
-<p>Denominatore: $D=x-3&gt;0$ per $x&gt;3$ (comunque sempre $x\neq3$).</p>
+<div class="def"><span class="et">Regola &middot; segno di un quoziente</span>
+<p>$N$ e $D$ <strong>concordi</strong>: quoziente positivo. $N$ e $D$ <strong>discordi</strong>: quoziente negativo.</p>
+<p>$N=0$ (con $D\neq0$): quoziente nullo. $D=0$: quoziente non definito.</p>
 </div>
 
-<div class="diagramma">
-<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg">
-<line x1="60" y1="30" x2="600" y2="30" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#frx)"/>
-<defs><marker id="frx" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="220" y1="20" x2="220" y2="170" stroke="var(--riga)" stroke-width="1" stroke-dasharray="3,3"/>
-<line x1="460" y1="20" x2="460" y2="170" stroke="var(--riga)" stroke-width="1" stroke-dasharray="3,3"/>
-<line x1="220" y1="24" x2="220" y2="36" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="460" y1="24" x2="460" y2="36" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="216" y="48" font-family="var(--sans)" font-size="13">0</text>
-<text x="456" y="48" font-family="var(--sans)" font-size="13">3</text>
+<ul>
+<li>Segno di $N$ da solo; segno di $D$ da solo.</li>
+<li>Grafico dei segni: $N$ e $D$ sulla stessa retta, poi segno di $N/D$ intervallo per intervallo.</li>
+<li>CE: intervalli con $N/D$ positivo, più gli zeri di $N$; zeri di $D$ sempre esclusi.</li>
+</ul>
 
-<text x="14" y="80" font-family="var(--serif)" font-style="italic" font-size="15">N</text>
-<text x="140" y="80" font-family="var(--sans)" font-size="15" text-anchor="middle">&#8722;</text>
-<text x="340" y="80" font-family="var(--sans)" font-size="15" text-anchor="middle">+</text>
-<text x="530" y="80" font-family="var(--sans)" font-size="15" text-anchor="middle">+</text>
-<circle cx="220" cy="75" r="3.6" fill="var(--inchiostro)"/>
+<h2>Esempio</h2>
+<p>$\sqrt{\dfrac{x}{x-3}}$: serve $\dfrac{x}{x-3}\geqslant0$.</p>
+<ul>
+<li>$N=x\geqslant0$ per $x\geqslant0$.</li>
+<li>$D=x-3&gt;0$ per $x&gt;3$; $x\neq3$.</li>
+</ul>
 
-<text x="10" y="118" font-family="var(--serif)" font-style="italic" font-size="15">D</text>
-<text x="240" y="118" font-family="var(--sans)" font-size="15" text-anchor="middle">&#8722;</text>
-<text x="530" y="118" font-family="var(--sans)" font-size="15" text-anchor="middle">+</text>
-<circle cx="460" cy="113" r="3.6" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-
-<text x="0" y="158" font-family="var(--serif)" font-style="italic" font-size="13">N/D</text>
-<text x="140" y="158" font-family="var(--sans)" font-size="15" text-anchor="middle">+</text>
-<text x="340" y="158" font-family="var(--sans)" font-size="15" text-anchor="middle">&#8722;</text>
-<text x="530" y="158" font-family="var(--sans)" font-size="15" text-anchor="middle">+</text>
-<circle cx="220" cy="153" r="3.6" fill="var(--verde)"/>
-<circle cx="460" cy="153" r="3.6" fill="#fff" stroke="var(--rosso)" stroke-width="1.4"/>
-
-<line x1="65" y1="178" x2="215" y2="178" stroke="var(--verde)" stroke-width="3.5"/>
-<line x1="465" y1="178" x2="595" y2="178" stroke="var(--verde)" stroke-width="3.5"/>
-<text x="140" y="198" font-family="var(--sans)" font-size="12" fill="var(--verde)" text-anchor="middle">accolto</text>
-<text x="530" y="198" font-family="var(--sans)" font-size="12" fill="var(--verde)" text-anchor="middle">accolto</text>
-</svg>
+<div class="fig">
+<svg id="g-segni" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico dei segni di x, di x meno 3 e del loro quoziente"></svg>
+<p class="did">Grafico dei segni: pallino pieno = valore accolto, vuoto = escluso.</p>
+<div class="cursore"><label for="s-x">$x$</label>
+<input type="range" id="s-x" min="-3" max="6" step="0.1" value="-1.5">
+<span class="val" id="v-x"></span></div>
 </div>
 
-<p>Per $x&lt;0$ numeratore e denominatore sono entrambi negativi, quindi concordi: il quoziente
-è positivo. Fra $0$ e $3$ sono discordi: il quoziente è negativo, e quella zona va esclusa. Oltre
-il $3$ tornano entrambi positivi. Il punto $x=0$ si include, perché lì il quoziente vale
-esattamente $0$; il punto $x=3$ resta escluso, perché annulla il denominatore.</p>
+<ul>
+<li>$x&lt;0$: $N$ e $D$ negativi, concordi: $N/D&gt;0$.</li>
+<li>$0&lt;x&lt;3$: discordi: $N/D&lt;0$, escluso.</li>
+<li>$x&gt;3$: entrambi positivi: $N/D&gt;0$.</li>
+<li>$x=0$: $N/D=0$, accolto. $x=3$: $D=0$, escluso.</li>
+</ul>
 
-$$\text{CE:}\quad x\leqslant0\ \lor\ x&gt;3$$
-
+<p class="eq">$$\text{CE:}\quad x\leqslant0\ \lor\ x&gt;3$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../14-proprieta-invariantiva/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Proprietà invariantiva</span></a><a class="successiva" href="../16-semplificazione-e-riduzione-allo-stesso-indice/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Semplificazione e riduzione allo stesso indice</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 12</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,
+  fill:'var(--inchiostro)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+
+/* ---------- grafico dei segni di N = x, D = x - 3, N/D; cursore su x ---------- */
+(function(){
+  var svg=document.getElementById('g-segni'); if(!svg)return;
+  var x0=-3.4, x1=6.4, L=50, Rr=385;
+  function X(x){return L+(x-x0)/(x1-x0)*(Rr-L);}
+  var d=el('defs',{}), mk=el('marker',{id:'frs',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));d.appendChild(mk);svg.appendChild(d);
+  /* asse */
+  var yA=26;
+  svg.appendChild(el('line',{x1:L,y1:yA,x2:Rr+6,y2:yA,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#frs)'}));
+  [0,3].forEach(function(v){
+    svg.appendChild(el('line',{x1:X(v),y1:yA-4,x2:X(v),y2:yA+4,stroke:'var(--inchiostro)','stroke-width':1.2}));
+    svg.appendChild(txt(X(v),yA-9,String(v),{'text-anchor':'middle'}));
+    svg.appendChild(el('line',{x1:X(v),y1:yA+6,x2:X(v),y2:162,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}));
+  });
+  /* righe: N, D, N/D; tratto continuo = positivo, tratteggiato = negativo */
+  var righe=[
+    {y:62, nome:'N', f:function(x){return x;}, zeri:[[0,true]]},
+    {y:98, nome:'D', f:function(x){return x-3;}, zeri:[[3,false]]},
+    {y:134,nome:'N/D', f:function(x){return x/(x-3);}, zeri:[[0,true],[3,false]]}
+  ];
+  var tagli=[x0+0.2,0,3,x1-0.2];
+  righe.forEach(function(r){
+    svg.appendChild(txt(L-10,r.y+5,r.nome,{'text-anchor':'end','font-family':'var(--serif)','font-style':'italic','font-size':14}));
+    for(var i=0;i<3;i++){
+      var a=tagli[i],b=tagli[i+1],m=(a+b)/2,pos=r.f(m)>0;
+      var o={x1:X(a),y1:r.y,x2:X(b),y2:r.y,stroke:pos?'var(--blu)':'var(--grigio)','stroke-width':pos?2.4:1.4};
+      if(!pos)o['stroke-dasharray']='5,4';
+      svg.appendChild(el('line',o));
+      svg.appendChild(txt(X(m),r.y-7,pos?'+':'−',{'text-anchor':'middle','font-size':15,fill:pos?'var(--blu)':'var(--grigio)'}));
+    }
+    r.zeri.forEach(function(z){svg.appendChild(el('circle',{cx:X(z[0]),cy:r.y,r:4,fill:z[1]?'var(--inchiostro)':'#fff',stroke:'var(--inchiostro)','stroke-width':1.6}));});
+  });
+  /* soluzione */
+  var yS=170;
+  svg.appendChild(el('line',{x1:X(x0+0.2),y1:yS,x2:X(0),y2:yS,stroke:'var(--verde)','stroke-width':4}));
+  svg.appendChild(el('line',{x1:X(3),y1:yS,x2:X(x1-0.2),y2:yS,stroke:'var(--verde)','stroke-width':4}));
+  svg.appendChild(el('circle',{cx:X(0),cy:yS,r:4.5,fill:'var(--verde)',stroke:'var(--verde)','stroke-width':1.6}));
+  svg.appendChild(el('circle',{cx:X(3),cy:yS,r:4.5,fill:'#fff',stroke:'var(--verde)','stroke-width':1.8}));
+  svg.appendChild(txt(L-10,yS+5,'CE',{'text-anchor':'end','font-size':12,fill:'var(--verde)'}));
+  /* cursore: linea verticale e punto */
+  var lin=el('line',{y1:yA+6,y2:yS+12,stroke:'var(--rosso)','stroke-width':1.4});svg.appendChild(lin);
+  var pt=el('circle',{cy:yA,r:4.5,fill:'var(--rosso)'});svg.appendChild(pt);
+  var et=txt(0,194,'',{'text-anchor':'middle','font-size':12,'font-weight':600});svg.appendChild(et);
+  var sl=document.getElementById('s-x'), v=document.getElementById('v-x');
+  function sg(t){return Math.abs(t)<1e-9?'0':(t>0?'+':'−');}
+  function agg(){
+    var x=Math.round(parseFloat(sl.value)*10)/10, n=x, dd=x-3, def=Math.abs(dd)>1e-9;
+    var ok=def&&n/dd>=-1e-12;
+    lin.setAttribute('x1',X(x));lin.setAttribute('x2',X(x));pt.setAttribute('cx',X(x));
+    et.setAttribute('x',Math.min(Math.max(X(x),40),360));
+    et.textContent=ok?'accolto':'escluso';et.setAttribute('fill',ok?'var(--verde)':'var(--rosso)');
+    v.innerHTML='x = '+num(x,1)+' &nbsp; N: '+sg(n)+' &nbsp; D: '+sg(dd)+' &nbsp; N/D = '+
+      (def?num(n/dd,2):'<span class="no">non definito</span>')+' &nbsp; '+
+      (ok?'<span class="ok">accolto</span>':'<span class="no">escluso</span>');
+  }
+  sl.addEventListener('input',agg); agg();
+})();
+})();
+</script>
 </body>
 </html>
