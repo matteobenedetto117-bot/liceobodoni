@@ -330,6 +330,7 @@ teorema del confronto, a pagina 21.
 - Nessun quesito di maturità: è la prima unità sulle derivate, limitata alla definizione; i
   quesiti reali su tangenti e derivate richiedono le regole di derivazione dell'unità 14 e
   arriveranno dall'unità 17 in poi.
+- Revisione: titolo invariato. Testo ridotto a traccia schematica: tolti sommario, tre titoletti (contenuto nel flusso), frasi di raccordo e la legenda discorsiva del grafico; rapporto incrementale, derivata e funzione derivabile (tre condizioni in elenco) in riquadri .def; formule in riquadro azzurro (anche dentro .def); significato geometrico in una riga. Nessuna correzione concettuale (SymPy: h²+5h → f'(3)=5; 4h²+8hx → f'(x)=8x). Due esempi (f'(3) di x²−x, f'(x) di 4x²) come quesito con risultato a comparsa e catena di tre passaggi; tasto «Mostra tutti i risultati». Impaginazione a quaderno con script di allineamento. Figura Plotly riscritta in SVG da script (Piano): parabola, tangente verde tratteggiata in A(3;6), secante blu, B rosso; cursore su h da −2,5 a 2,5 (ora anche h negativo, limite sinistro) con h e Δy/Δx accanto, «→ f'(3) = 5» in verde vicino al limite; per h = 0 la secante sparisce («rapporto non definito»). Nessuna figura decorativa.
 
 ## Unità 13 — Derivate fondamentali e regole di derivazione
 - Parole: 336 su 4 pagine di traccia (54–57).
