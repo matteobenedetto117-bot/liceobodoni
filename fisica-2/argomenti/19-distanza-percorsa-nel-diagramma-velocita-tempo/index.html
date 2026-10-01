@@ -5,19 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Distanza percorsa nel diagramma velocità-tempo — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.definizione{background:#fff;border-left:3px solid var(--rosso);border-radius:0 8px 8px 0;padding:14px 20px;margin:22px 0}
-.esempio{background:#f7f9fb;border-radius:10px;padding:16px 20px;margin:22px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,170 +54,182 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Cinematica &middot; Unità 09</p>
   <h1>Distanza percorsa nel diagramma velocità-tempo</h1>
-  <p class="sommario">Il grafico spazio-tempo di un moto uniforme è una retta, perché lo
-  spostamento è proporzionale al tempo; quello di un moto uniformemente accelerato è invece
-  una curva, perché la proporzionalità è quadratica. Vediamo ora che lo spostamento di un moto
-  uniformemente accelerato si può leggere anche nel grafico velocità-tempo, come area della
-  figura compresa fra la retta della velocità e l'asse dei tempi.</p>
 </header>
 
-<div class="fig">
-<svg viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u19ax" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="40" y1="190" x2="260" y2="190" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u19ax)"/>
-<line x1="40" y1="190" x2="40" y2="30" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u19ax)"/>
-<text x="265" y="195" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="24" y="24" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<line x1="60" y1="160" x2="230" y2="60" stroke="var(--rosso)" stroke-width="2.2"/>
-<text x="235" y="58" font-size="13" fill="var(--rosso)" font-family="var(--sans)">v&gt;0</text>
-<line x1="60" y1="160" x2="230" y2="185" stroke="var(--verde)" stroke-width="2.2"/>
-<text x="200" y="205" font-size="13" fill="var(--verde)" font-family="var(--sans)">v&lt;0</text>
-<text x="105" y="215" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">MRU: proporzionalità diretta</text>
-
-<line x1="380" y1="190" x2="600" y2="190" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u19ax)"/>
-<line x1="380" y1="190" x2="380" y2="30" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u19ax)"/>
-<text x="605" y="195" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="364" y="24" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<circle cx="395" cy="150" r="3.5" fill="var(--inchiostro)"/>
-<text x="373" y="145" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">x&#8320;</text>
-<path d="M395,150 Q470,140 570,45" fill="none" stroke="var(--rosso)" stroke-width="2.2"/>
-<text x="520" y="55" font-size="13" fill="var(--rosso)" font-family="var(--sans)">a&gt;0</text>
-<path d="M395,150 Q470,160 570,182" fill="none" stroke="var(--verde)" stroke-width="2.2"/>
-<text x="510" y="203" font-size="13" fill="var(--verde)" font-family="var(--sans)">a&lt;0</text>
-<text x="425" y="215" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">MRUA: proporzionalità quadratica</text>
-</svg>
-<p class="did">A sinistra il grafico spazio-tempo del moto uniforme, una retta. A destra quello
-del moto uniformemente accelerato, una curva: sale in modo sempre più ripido se $a&gt;0$, si
-appiattisce se $a&lt;0$.</p>
-</div>
-
-<h2>L'area sotto il grafico velocità-tempo</h2>
-
-<p>Consideriamo il grafico $v$-$t$ di un moto uniformemente accelerato fra l'istante $t=0$, in
-cui la velocità vale $v_0$, e un istante generico $t$, in cui vale $v$. La regione compresa fra
-la retta della velocità e l'asse dei tempi è un trapezio, che si scompone in un rettangolo di
-altezza $v_0$ e in un triangolo sopra di esso:</p>
-
-<div class="formula-box">
-$$A_1=\frac{(v-v_0)\,t}{2} \qquad\qquad A_2=v_0\,t$$
-</div>
+<ul>
+<li>Grafico $x$-$t$ del MRU: retta; $\Delta x$ direttamente proporzionale a $t$.</li>
+<li>Grafico $x$-$t$ del MRUA: arco di parabola; $a&gt;0$ sempre più ripido, $a&lt;0$ sempre meno ripido.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u19ax2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="60" y1="210" x2="400" y2="210" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u19ax2)"/>
-<line x1="60" y1="210" x2="60" y2="40" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u19ax2)"/>
-<text x="405" y="215" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="44" y="34" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">v</text>
-<polygon points="60,150 350,150 350,210" fill="var(--blu-chiaro)" stroke="none"/>
-<rect x="60" y="150" width="290" height="60" fill="none" stroke="var(--verde)" stroke-width="1.6"/>
-<polygon points="60,150 350,150 350,80" fill="#f3e3e1" stroke="none"/>
-<polygon points="60,150 350,150 350,80" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="60" y1="150" x2="350" y2="80" stroke="var(--inchiostro)" stroke-width="2.2"/>
-<circle cx="60" cy="150" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="350" cy="80" r="3.5" fill="var(--inchiostro)"/>
-<text x="36" y="146" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">v&#8320;</text>
-<text x="356" y="76" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">v</text>
-<text x="195" y="185" font-size="14" fill="var(--verde)" font-family="var(--sans)">A&#8322;</text>
-<text x="195" y="130" font-size="14" fill="var(--rosso)" font-family="var(--sans)">A&#8321;</text>
-<line x1="350" y1="210" x2="350" y2="80" stroke="var(--riga)" stroke-width="1" stroke-dasharray="4 3"/>
-<text x="345" y="228" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t</text>
-<text x="55" y="228" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">0</text>
-</svg>
-<p class="did">L'area sotto la retta della velocità, fra $0$ e $t$, si divide nel rettangolo
-$A_2=v_0t$ e nel triangolo $A_1=\dfrac{(v-v_0)t}{2}$ sopra di esso.</p>
+<svg id="g-xt" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafici spazio-tempo del moto uniforme e del moto uniformemente accelerato"></svg>
+<div class="did-parti" style="--n:2;max-width:560px;margin-left:auto;margin-right:auto"><p class="did">MRU: retta.</p><p class="did">MRUA: parabola, stessa $v_0&gt;0$.</p></div>
 </div>
 
-<p>Sommando le due aree e usando $v-v_0=at$, ricavato dalla relazione velocità-tempo:</p>
+<ul>
+<li>Grafico $v$-$t$ del MRUA fra $0$ e $t$: trapezio = rettangolo $A_2$ + triangolo $A_1$.</li>
+</ul>
 
-<div class="formula-box">
-$$A_{TOT}=A_1+A_2=\frac{(v-v_0)t}{2}+v_0t=\frac{(at)t}{2}+v_0t=v_0t+\frac12at^2$$
-</div>
-
-<p>che è esattamente $\Delta x=x-x_0$ della legge oraria vista nell'unità precedente. Vale
-quindi la regola generale:</p>
-
-<div class="definizione">
-<p>Nel diagramma velocità-tempo, la distanza percorsa da un oggetto fra due istanti $t_1$ e
-$t_2$ è uguale all'area della parte di piano sottesa alla curva della velocità in
-quell'intervallo.</p>
-</div>
-
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un oggetto ha il grafico velocità-tempo mostrato in figura: la velocità cresce da $3$ a $6$
-m/s fra $t=0$ e $t=4$ s, poi decresce fino a $0$ a $t=7$ s, poi continua a decrescere fino a
-$-2$ m/s a $t=10$ s. Calcoliamo lo spostamento come somma delle aree, sottraendo la parte in
-cui $v&lt;0$.</p>
+<p class="eq">$$A_1=\frac{(v-v_0)\,t}{2}\qquad\qquad A_2=v_0\,t$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
-<line x1="50" y1="200" x2="430" y2="200" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="60" y1="260" x2="60" y2="40" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="435" y="205" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">t (s)</text>
-<text x="30" y="34" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">v (m/s)</text>
-<!-- griglia assi -->
-<text x="30" y="114" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">6</text>
-<text x="30" y="159" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">3</text>
-<text x="30" y="234" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">-2</text>
-<text x="190" y="220" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">4</text>
-<text x="292" y="220" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">7</text>
-<text x="394" y="220" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">10</text>
-<!-- A1B rettangolo -->
-<rect x="60" y="155" width="136" height="45" fill="var(--blu-chiaro)"/>
-<!-- A1A triangolo -->
-<polygon points="60,155 196,155 196,110" fill="#f3e3e1"/>
-<!-- A2 triangolo -->
-<polygon points="196,110 298,200 196,200" fill="#e2ede6"/>
-<!-- A3 triangolo (sotto asse) -->
-<polygon points="298,200 400,230 400,200" fill="#f3e3e1"/>
-<!-- linea velocità -->
-<polyline points="60,155 196,110 298,200 400,230" fill="none" stroke="var(--rosso)" stroke-width="2.4"/>
-<line x1="60" y1="155" x2="196" y2="155" stroke="var(--inchiostro)" stroke-width="1" stroke-dasharray="4 3"/>
-<line x1="196" y1="110" x2="196" y2="200" stroke="var(--riga)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="298" y1="200" x2="298" y2="200" stroke="var(--riga)"/>
-<line x1="400" y1="200" x2="400" y2="230" stroke="var(--riga)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="110" y="185" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">A&#8321;&#7495;</text>
-<text x="150" y="140" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">A&#8321;&#7480;</text>
-<text x="235" y="175" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">A&#8322;</text>
-<text x="335" y="212" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">A&#8323;</text>
-</svg>
-<p class="did">Il primo tratto (trapezio) si scompone nel rettangolo $A_{1B}$ e nel triangolo
-$A_{1A}$; il secondo tratto è il triangolo $A_2$; il terzo, sotto l'asse dei tempi dove
-$v&lt;0$, è il triangolo $A_3$, che va sottratto.</p>
+<svg id="g-area" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Area sotto il grafico velocità-tempo divisa in un rettangolo e un triangolo"></svg>
+<p class="did">$v_0=2$ m/s, $a=0{,}5$ m/s²: rettangolo $A_2$ e triangolo $A_1$ fra $0$ e $t$.</p>
+<div class="cursore"><label for="cur-t">$t$</label><input id="cur-t" type="range" min="0" max="10" step="0.1" value="6"><span class="val" id="val-t"></span></div>
 </div>
 
-<p>Il primo tratto è un trapezio, che scomponiamo in un rettangolo $A_{1B}$ e in un triangolo
-$A_{1A}$:</p>
+<ul>
+<li>Con $v-v_0=at$ (legge velocità-tempo):</li>
+</ul>
 
-$$A_{1B}=3\ \tfrac{\text{m}}{\text{s}}\cdot4\ \text{s}=12\ \text{m}\qquad
-A_{1A}=\frac{3\ \tfrac{\text{m}}{\text{s}}\cdot4\ \text{s}}{2}=6\ \text{m}\qquad A_1=A_{1A}+A_{1B}=18\ \text{m}$$
+<p class="eq">$$A_1+A_2=\frac{(at)\,t}{2}+v_0t=v_0t+\frac12at^2=\Delta x$$</p>
 
-<p>Il secondo tratto è un triangolo, dove la velocità scende da $6$ a $0$ m/s in $3$ s:</p>
-
-$$A_2=\frac{6\ \tfrac{\text{m}}{\text{s}}\cdot3\ \text{s}}{2}=9\ \text{m}$$
-
-<p>Il terzo tratto è un triangolo sotto l'asse, dove la velocità è negativa, e va sottratto:</p>
-
-$$A_3=\frac{2\ \tfrac{\text{m}}{\text{s}}\cdot3\ \text{s}}{2}=3\ \text{m}$$
-
-<p>Lo spostamento totale è quindi:</p>
-
-$$\Delta x=A_1+A_2-A_3=18+9-3=24\ \text{m}$$
-
+<div class="def"><span class="et">Regola</span>
+<p>Spostamento $\Delta x$ fra $t_1$ e $t_2$ = area compresa fra grafico $v$-$t$ e asse dei tempi; le aree sotto l'asse ($v&lt;0$) si sottraggono.</p>
 </div>
+
+<div class="nota"><span class="et">Nota</span>
+<p>Distanza percorsa: somma delle aree, tutte positive; uguale a $\Delta x$ solo se $v$ non cambia segno.</p>
+</div>
+
+<h2>Esempio</h2>
+<ul>
+<li>$0$–$4$ s: $v$ da $3$ a $6$ m/s; $4$–$7$ s: da $6$ a $0$ m/s; $7$–$10$ s: da $0$ a $-2$ m/s.</li>
+</ul>
+
+<div class="fig">
+<svg id="g-es" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico velocità-tempo dell'esempio con le aree A1B, A1A, A2, A3"></svg>
+<p class="did">$A_{1B}$, $A_{1A}$, $A_2$ sopra l'asse; $A_3$ sotto l'asse ($v&lt;0$).</p>
+<div class="cursore"><label for="cur-e">$t$</label><input id="cur-e" type="range" min="0" max="10" step="0.1" value="10"><span class="val" id="val-e"></span></div>
+</div>
+
+<p class="eq">$$A_{1B}=3\ \tfrac{\text{m}}{\text{s}}\cdot4\ \text{s}=12\ \text{m}\qquad A_{1A}=\frac{3\ \tfrac{\text{m}}{\text{s}}\cdot4\ \text{s}}{2}=6\ \text{m}\qquad A_1=18\ \text{m}$$</p>
+<p class="eq">$$A_2=\frac{6\ \tfrac{\text{m}}{\text{s}}\cdot3\ \text{s}}{2}=9\ \text{m}\qquad A_3=\frac{2\ \tfrac{\text{m}}{\text{s}}\cdot3\ \text{s}}{2}=3\ \text{m}$$</p>
+<p class="eq">$$\Delta x=A_1+A_2-A_3=18+9-3=24\ \text{m}$$</p>
+<p class="eq">$$\text{distanza percorsa}=A_1+A_2+A_3=18+9+3=30\ \text{m}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../18-moto-rettilineo-uniformemente-accelerato/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Moto rettilineo uniformemente accelerato</span></a><a class="successiva" href="../20-relazione-velocita-spostamento/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Relazione velocità-spostamento</span></a></nav>
 <footer><p>Fisica seconda &middot; Cinematica &middot; Unità 09</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0,?0*$/.test(s))s=s.slice(1);return s.replace('-','−');}
+  function freccia(svg,id){var defs=el(svg,'defs',{}),mk=el(defs,'marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});
+    el(mk,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'});return 'url(#'+id+')';}
+  /* piano: t in [0,tm], grandezza in [ymin,ymax] */
+  function piano(svg,L,R,T,B,tm,ymin,ymax,mk,ey,et){
+    var X=function(t){return L+t/tm*(R-L);}, Y=function(y){return B-(y-ymin)/(ymax-ymin)*(B-T);};
+    var y0=Y(0);
+    el(svg,'line',{x1:L,y1:y0,x2:R+12,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':mk});
+    el(svg,'line',{x1:L,y1:B+(ymin<0?4:0),x2:L,y2:T-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':mk});
+    txt(svg,R+10,y0+18,et||'t',{'font-style':'italic',fill:'var(--inchiostro)'});
+    txt(svg,L+8,T-6,ey,{'font-style':'italic',fill:'var(--inchiostro)','text-anchor':'start'});
+    return {X:X,Y:Y};
+  }
+  function poli(f,a,b,n,P){var s='';for(var i=0;i<=n;i++){var t=a+(b-a)*i/n;s+=(i?'L':'M')+P.X(t).toFixed(1)+' '+P.Y(f(t)).toFixed(1)+' ';}return s;}
+
+  /* ---------- 1. grafici x-t (statici, calcolati) ---------- */
+  (function(){
+    var svg=document.getElementById('g-xt'); if(!svg)return;
+    var mk=freccia(svg,'u9a'), X0=1;
+    var P1=piano(svg,40,165,18,166,10,0,12,mk,'x'), P2=piano(svg,225,350,18,166,10,0,12,mk,'x');
+    [[P1,function(t){return X0+1*t;},'v > 0','var(--blu)'],[P1,function(t){return X0-0.08*t;},'v < 0','var(--rosso)'],
+     [P2,function(t){return X0+0.5*t+0.05*t*t;},'a > 0','var(--blu)'],[P2,function(t){return X0+0.5*t-0.025*t*t;},'a < 0','var(--rosso)']]
+    .forEach(function(c){var P=c[0],f=c[1];
+      el(svg,'path',{d:poli(f,0,10,80,P),fill:'none',stroke:c[3],'stroke-width':2.2});
+      var yf=P.Y(f(10)); if(c[2]==='v < 0'){txt(svg,P.X(7),P.Y(f(7))-8,c[2],{'font-size':12,fill:c[3]});return;} txt(svg,P.X(10)+6,c[2]==='a < 0'?yf-8:yf+4,c[2],{'font-size':12,fill:c[3],'text-anchor':c[2]==='v < 0'||c[2]==='a < 0'?'end':'start'});
+    });
+    [P1,P2].forEach(function(P){el(svg,'circle',{cx:P.X(0),cy:P.Y(X0),r:3.5,fill:'var(--inchiostro)'});
+      txt(svg,P.X(0)-14,P.Y(X0)+4,'x₀',{'font-size':12,fill:'var(--inchiostro)'});});
+  })();
+
+  /* ---------- 2. area sotto v-t: rettangolo + triangolo, cursore su t ---------- */
+  (function(){
+    var svg=document.getElementById('g-area'), cur=document.getElementById('cur-t'), val=document.getElementById('val-t'); if(!svg)return;
+    var V0=2, A=0.5, mk=freccia(svg,'u9b');
+    var P=piano(svg,50,370,24,190,10,0,8,mk,'v (m/s)','t (s)');
+    var g=el(svg,'g',{});
+    svg.insertBefore(g,svg.querySelector('line'));
+    var rett=el(g,'rect',{fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4});
+    var tri=el(g,'polygon',{fill:'#f6e4e2',stroke:'var(--rosso)','stroke-width':1.4});
+    el(svg,'line',{x1:P.X(0),y1:P.Y(V0),x2:P.X(10),y2:P.Y(V0+A*10),stroke:'var(--inchiostro)','stroke-width':2.2});
+    [2,4,6].forEach(function(v){el(svg,'line',{x1:P.X(0)-4,y1:P.Y(v),x2:P.X(0)+4,y2:P.Y(v),stroke:'var(--inchiostro)'});txt(svg,P.X(0)-10,P.Y(v)+4,String(v),{'font-size':11,'text-anchor':'end'});});
+    [2,4,6,8].forEach(function(t){el(svg,'line',{x1:P.X(t),y1:P.Y(0)-4,x2:P.X(t),y2:P.Y(0)+4,stroke:'var(--inchiostro)'});txt(svg,P.X(t),P.Y(0)+16,String(t),{'font-size':11});});
+    var la2=txt(svg,0,0,'A₂',{'font-size':13,fill:'var(--blu)','font-weight':600}), la1=txt(svg,0,0,'A₁',{'font-size':13,fill:'var(--rosso)','font-weight':600});
+    var pt=el(svg,'circle',{r:4.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});
+    function disegna(){
+      var t=Math.round(+cur.value*10)/10, v=V0+A*t, xt=P.X(t);
+      rett.setAttribute('x',P.X(0));rett.setAttribute('y',P.Y(V0));rett.setAttribute('width',xt-P.X(0));rett.setAttribute('height',P.Y(0)-P.Y(V0));
+      tri.setAttribute('points',P.X(0)+','+P.Y(V0)+' '+xt+','+P.Y(V0)+' '+xt+','+P.Y(v));
+      pt.setAttribute('cx',xt);pt.setAttribute('cy',P.Y(v));
+      var vis=t>=2.5; la2.style.display=la1.style.display=vis?'':'none';
+      la2.setAttribute('x',(P.X(0)+xt)/2);la2.setAttribute('y',(P.Y(V0)+P.Y(0))/2+5);
+      la1.setAttribute('x',P.X(0)+(xt-P.X(0))*2/3);la1.setAttribute('y',P.Y(V0)-(P.Y(V0)-P.Y(v))/3+5);
+      var a2=V0*t, a1=A*t*t/2;
+      val.innerHTML='t = '+num(t,1)+' s &nbsp; A₂ = '+num(a2,1)+' m &nbsp; A₁ = '+num(a1,1)+' m &nbsp; Δx = '+num(a1+a2,1)+' m';
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});disegna();
+  })();
+
+  /* ---------- 3. esempio: aree con segno, cursore su t ---------- */
+  (function(){
+    var svg=document.getElementById('g-es'), cur=document.getElementById('cur-e'), val=document.getElementById('val-e'); if(!svg)return;
+    var nodi=[[0,3],[4,6],[7,0],[10,-2]];
+    function v(t){for(var i=0;i<3;i++){var a=nodi[i],b=nodi[i+1];if(t<=b[0])return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0]);}return -2;}
+    function integ(t,ass){var s=0,n=Math.max(1,Math.round(t*200));for(var i=0;i<n;i++){var tm=(i+.5)*t/n,y=v(tm);s+=(ass?Math.abs(y):y)*t/n;}return s;}
+    var mk=freccia(svg,'u9c');
+    var P=piano(svg,50,370,24,212,10,-3,7,mk,'v (m/s)','t (s)');
+    var g=el(null,'g',{}); svg.insertBefore(g,svg.querySelector('line'));
+    var clip=el(svg.querySelector('defs'),'clipPath',{id:'u9clip'}), cr=el(clip,'rect',{x:P.X(0),y:0,height:240,width:0});
+    var gc=el(g,'g',{'clip-path':'url(#u9clip)'});
+    /* aree: A1B rettangolo, A1A triangolo, A2, A3 */
+    function pts(a){return a.map(function(p){return P.X(p[0])+','+P.Y(p[1]);}).join(' ');}
+    el(gc,'polygon',{points:pts([[0,0],[4,0],[4,3],[0,3]]),fill:'var(--blu-chiaro)'});
+    el(gc,'polygon',{points:pts([[0,3],[4,3],[4,6]]),fill:'#dfe9f5'});
+    el(gc,'polygon',{points:pts([[4,0],[4,6],[7,0]]),fill:'#e2ede6'});
+    el(gc,'polygon',{points:pts([[7,0],[10,-2],[10,0]]),fill:'#f6e4e2'});
+    /* contorni statici tratteggiati */
+    el(svg,'line',{x1:P.X(0),y1:P.Y(3),x2:P.X(4),y2:P.Y(3),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    el(svg,'line',{x1:P.X(4),y1:P.Y(0),x2:P.X(4),y2:P.Y(6),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    el(svg,'line',{x1:P.X(10),y1:P.Y(0),x2:P.X(10),y2:P.Y(-2),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    el(svg,'polyline',{points:pts(nodi),fill:'none',stroke:'var(--inchiostro)','stroke-width':2.4,'stroke-linejoin':'round'});
+    [[6,''],[3,''],[-2,'']].forEach(function(c){el(svg,'line',{x1:P.X(0)-4,y1:P.Y(c[0]),x2:P.X(0)+4,y2:P.Y(c[0]),stroke:'var(--inchiostro)'});txt(svg,P.X(0)-10,P.Y(c[0])+4,num(c[0],0),{'font-size':11,'text-anchor':'end'});});
+    [4,7,10].forEach(function(t){el(svg,'line',{x1:P.X(t),y1:P.Y(0)-4,x2:P.X(t),y2:P.Y(0)+4,stroke:'var(--inchiostro)'});txt(svg,P.X(t)+(t===10?-10:-8),P.Y(0)+(t===10?-8:16),String(t),{'font-size':11});});
+    [['1B',2,1.5],['1A',2.9,4.2],['2',5,2],['3',9,-0.55]].forEach(function(c){var e=txt(svg,P.X(c[1]),P.Y(c[2])+5,'A',{'font-size':13,fill:'var(--inchiostro)','font-weight':600});
+      var s=el(e,'tspan',{'font-size':9,dy:3});s.textContent=c[0];});
+    var lin=el(svg,'line',{stroke:'var(--rosso)','stroke-width':1.2,'stroke-dasharray':'3 3'});
+    var pt=el(svg,'circle',{r:4.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});
+    function disegna(){
+      var t=Math.round(+cur.value*10)/10, vv=v(t), dx=integ(t,false), d=integ(t,true);
+      cr.setAttribute('width',P.X(t)-P.X(0));
+      lin.setAttribute('x1',P.X(t));lin.setAttribute('x2',P.X(t));lin.setAttribute('y1',P.Y(0));lin.setAttribute('y2',P.Y(vv));
+      pt.setAttribute('cx',P.X(t));pt.setAttribute('cy',P.Y(vv));
+      val.innerHTML='t = '+num(t,1)+' s &nbsp; v = '+num(vv,1)+' m/s &nbsp; Δx = '+num(dx,1)+' m &nbsp; distanza = '+num(d,1)+' m';
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
