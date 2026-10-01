@@ -5,16 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campo magnetico di un solenoide — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px}
+.did-parti svg{width:100%}
 </style>
 </head>
 <body>
@@ -24,115 +52,181 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 13</p>
   <h1>Campo magnetico di un solenoide</h1>
-  <p class="sommario">Un solenoide è un filo avvolto a elica su molte spire ravvicinate: è la
-  geometria con cui in pratica si costruisce un campo magnetico uniforme e intenso. La legge di
-  Ampère, applicata a un percorso rettangolare, dà il campo al suo interno.</p>
 </header>
 
-<h2>Campo interno e campo esterno</h2>
+<ul>
+<li>Solenoide: filo avvolto a elica in molte spire ravvicinate, percorso da corrente $i$.</li>
+<li>All'interno: $\vec B$ uniforme, parallelo all'asse.</li>
+<li>All'esterno: campo trascurabile.</li>
+</ul>
 
-<p>Un solenoide percorso da corrente $i$ genera, al proprio interno, un campo $\vec B$ diretto
-lungo l'asse; all'esterno, lontano dal solenoide, le linee di campo che escono da un'estremità si
-riallineano e il campo risulta trascurabile.</p>
-
-<div class="fig" style="max-width:420px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f14i" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f14b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<path d="M40,110 C50,70 65,130 75,90 C85,50 100,110 110,70 C120,30 135,90 145,50 C155,10 170,70 180,30"
-  fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="40" y1="30" x2="40" y2="110" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="180" y1="30" x2="180" y2="110" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="15" y1="120" x2="35" y2="105" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f14i)"/>
-<text x="8" y="132" font-family="var(--sans)" font-size="13" fill="var(--verde)">i</text>
-<line x1="60" y1="128" x2="260" y2="128" stroke="var(--blu)" stroke-width="2.4" marker-end="url(#f14b)"/>
-<text x="265" y="132" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<text x="90" y="145" font-family="var(--sans)" font-size="12" fill="var(--grigio)">campo uniforme dentro, quasi nullo fuori</text>
-</svg>
-<p class="did">Solenoide percorso da corrente $i$: il campo $\vec B$ è uniforme all'interno e
-diretto lungo l'asse.</p>
-</div>
-
-<h2>Il percorso di Ampère</h2>
-
-<p>Per calcolare $B$ tracciamo un percorso rettangolare $\gamma$ che attraversa la sezione del
-solenoide: un lato lungo, di lunghezza $L$, corre parallelo all'asse dentro il solenoide; il lato
-opposto corre fuori, lontano, dove $B\approx0$; i due lati corti li collegano, perpendicolari
-all'asse.</p>
+<div class="nota"><p>Solenoide ideale: lunghezza molto maggiore del diametro, lontano dalle estremità.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f14bx" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<g font-family="var(--sans)" font-size="13">
-<circle cx="60" cy="60" r="4" fill="var(--verde)"/><circle cx="60" cy="60" r="9" fill="none" stroke="var(--verde)" stroke-width="1.3"/>
-<circle cx="140" cy="60" r="4" fill="var(--verde)"/><circle cx="140" cy="60" r="9" fill="none" stroke="var(--verde)" stroke-width="1.3"/>
-<circle cx="220" cy="60" r="4" fill="var(--verde)"/><circle cx="220" cy="60" r="9" fill="none" stroke="var(--verde)" stroke-width="1.3"/>
-<circle cx="300" cy="60" r="4" fill="var(--verde)"/><circle cx="300" cy="60" r="9" fill="none" stroke="var(--verde)" stroke-width="1.3"/>
-<circle cx="360" cy="60" r="4" fill="var(--verde)"/><circle cx="360" cy="60" r="9" fill="none" stroke="var(--verde)" stroke-width="1.3"/>
-<line x1="55" y1="155" x2="65" y2="145" stroke="var(--rosso)" stroke-width="1.6"/><line x1="55" y1="145" x2="65" y2="155" stroke="var(--rosso)" stroke-width="1.6"/><circle cx="60" cy="150" r="9" fill="none" stroke="var(--rosso)" stroke-width="1.3"/>
-<line x1="135" y1="155" x2="145" y2="145" stroke="var(--rosso)" stroke-width="1.6"/><line x1="135" y1="145" x2="145" y2="155" stroke="var(--rosso)" stroke-width="1.6"/><circle cx="140" cy="150" r="9" fill="none" stroke="var(--rosso)" stroke-width="1.3"/>
-<line x1="215" y1="155" x2="225" y2="145" stroke="var(--rosso)" stroke-width="1.6"/><line x1="215" y1="145" x2="225" y2="155" stroke="var(--rosso)" stroke-width="1.6"/><circle cx="220" cy="150" r="9" fill="none" stroke="var(--rosso)" stroke-width="1.3"/>
-<line x1="295" y1="155" x2="305" y2="145" stroke="var(--rosso)" stroke-width="1.6"/><line x1="295" y1="145" x2="305" y2="155" stroke="var(--rosso)" stroke-width="1.6"/><circle cx="300" cy="150" r="9" fill="none" stroke="var(--rosso)" stroke-width="1.3"/>
-<line x1="355" y1="155" x2="365" y2="145" stroke="var(--rosso)" stroke-width="1.6"/><line x1="355" y1="145" x2="365" y2="155" stroke="var(--rosso)" stroke-width="1.6"/><circle cx="360" cy="150" r="9" fill="none" stroke="var(--rosso)" stroke-width="1.3"/>
-</g>
-<line x1="20" y1="105" x2="390" y2="105" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f14bx)"/>
-<text x="393" y="109" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<rect x="55" y="20" width="280" height="140" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<text x="185" y="14" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&#9312; fuori, lontano</text>
-<text x="345" y="95" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&#9313;</text>
-<text x="185" y="177" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&#9314; dentro, lungo L</text>
-<text x="42" y="95" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&#9315;</text>
-<line x1="55" y1="168" x2="335" y2="168" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-<text x="190" y="200" font-family="var(--sans)" font-size="12" fill="var(--grigio)">L</text>
-</svg>
-<p class="did">Sezione del solenoide: i pallini sono le spire viste da un verso (corrente uscente
-dal foglio), le crocette dal verso opposto (corrente entrante). Percorso $\gamma$ rettangolare,
-con i quattro lati numerati.</p>
+<svg id="fig-a" viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">spire $N$</label><input id="cur-a" type="range" min="4" max="16" step="1" value="10"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Sezione del solenoide, linee di campo calcolate: in alto corrente uscente, in basso entrante.</p>
 </div>
 
-<p>Sommiamo $B_\parallel\cdot\Delta L$ sui quattro lati:</p>
+<ul>
+<li>Calcolo di $B$: legge di Ampère su un percorso rettangolare $\gamma$ che racchiude una sola fila di spire.</li>
+<li>Lato ③ dentro il solenoide, parallelo all'asse, lungo $L$; lato ① fuori; lati ② e ④ perpendicolari all'asse.</li>
+</ul>
 
-<ol style="padding-left:1.3em">
-<li>lato esterno: $\vec B=0$, quindi $B_\parallel\cdot\Delta L=0$;</li>
-<li>lato corto: qui $B$, se c'è, è perpendicolare al percorso, quindi $B_\parallel\cdot\Delta
-L=0$;</li>
-<li>lato interno, lungo $L$: $B$ è parallelo al percorso, quindi $B_\parallel\cdot\Delta L=B\cdot
-L$;</li>
-<li>lato corto: come il lato 2, $B_\parallel\cdot\Delta L=0$.</li>
-</ol>
-
-<p>In totale $(1+2+3+4)$ resta solo il contributo del lato interno:</p>
-
-$$\sum_\gamma B_\parallel\,\Delta L=B\cdot L$$
-
-<p>Per la legge di Ampère la stessa somma vale $\mu_0$ per la corrente concatenata al percorso,
-cioè $\mu_0$ per il numero $N$ di spire racchiuse da $\gamma$, ciascuna percorsa da $i$:</p>
-
-$$\sum_\gamma B_\parallel\,\Delta L=\mu_0\,N\,i$$
-
-<p>Uguagliando le due espressioni:</p>
-
-<div class="formula-box">
-$$B\cdot L=\mu_0\,N\,i\qquad\Longrightarrow\qquad B=\mu_0\,\frac{N}{L}\,i=\mu_0\,n\,i$$
+<div class="fig">
+<svg id="fig-b" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-b">spire racchiuse $N$</label><input id="cur-b" type="range" min="1" max="11" step="1" value="5"><output id="val-b" for="cur-b"></output></div>
+<p class="did">Percorso $\gamma$ (rosso): $L$ e $N$ crescono insieme, $N/L$ resta costante (passo 0,50 mm).</p>
 </div>
 
-<p>dove $n=N/L$ è il numero di spire per unità di lunghezza del solenoide.</p>
+<ul>
+<li>① fuori: $B=0$, contributo nullo.</li>
+<li>② e ④: $B$ perpendicolare al lato (o nullo), contributo nullo.</li>
+<li>③ dentro: $B$ parallelo al lato, contributo $B\cdot L$.</li>
+<li>Corrente concatenata: $N$ spire, ciascuna percorsa da $i$: $N\,i$.</li>
+</ul>
 
-<h2>Un esempio numerico</h2>
+<p class="eq">$$\sum_\gamma B_\parallel\,\Delta L=B\cdot L=\mu_0\,N\,i$$</p>
 
-<p>Un solenoide di $N=500$ spire, lungo $L=25\ \text{cm}$, è percorso da $i=2{,}0\ \text{A}$. La
-densità di spire è $n=N/L=2000\ \text{m}^{-1}$, e il campo interno vale</p>
+<div class="def"><span class="et">Campo interno di un solenoide</span>
+<p class="eq">$$B=\mu_0\,\frac{N}{L}\,i=\mu_0\,n\,i$$</p>
+<p>$B$ campo (T), $N$ numero di spire, $L$ lunghezza (m), $n=N/L$ spire per metro (m⁻¹), $i$ corrente (A), $\mu_0\approx4\pi\cdot10^{-7}$ T·m/A.</p>
+</div>
 
-$$B=\mu_0\,n\,i=4\pi\times10^{-7}\cdot2000\cdot2{,}0\ \text{T}\approx5{,}0\times10^{-3}\ \text{T}$$
+<h2>Esempio</h2>
 
+<p>$N=500$, $L=25$ cm $=0{,}25$ m, $i=2{,}0$ A.</p>
+
+<p class="eq">$$n=\frac{N}{L}=\frac{500}{0{,}25\ \text{m}}=2000\ \text{m}^{-1}$$</p>
+<p class="eq">$$B=\mu_0\,n\,i=4\pi\cdot10^{-7}\cdot2000\cdot2{,}0\ \text{T}\approx5{,}0\cdot10^{-3}\ \text{T}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../13-campo-di-una-spira-circolare-e-di-una-bobina/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campo di una spira circolare e di una bobina</span></a><a class="successiva" href="../15-magnetismo-nella-materia/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Magnetismo nella materia</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 13</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function virgola(x,d){return x.toFixed(d).replace('.',',');}
+  function lab(col){return {fill:col,'font-weight':700,'font-style':'italic','font-size':14};}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function uscente(p,x,y,col,r){r=r||6;var g=el(p,'g',{});el(g,'circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:col,'stroke-width':1.6});el(g,'circle',{cx:x,cy:y,r:r*.33,fill:col});return g;}
+  function entrante(p,x,y,col,r){r=r||6;var g=el(p,'g',{}),s=r*.62;el(g,'circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:col,'stroke-width':1.6});
+    el(g,'line',{x1:x-s,y1:y-s,x2:x+s,y2:y+s,stroke:col,'stroke-width':1.4});el(g,'line',{x1:x+s,y1:y-s,x2:x-s,y2:y+s,stroke:col,'stroke-width':1.4});return g;}
+  function punta(p,x,y,dx,dy,col){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;var s=6,w=3.5;
+    el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+
+  /* integrali ellittici completi K(m), E(m) con la media aritmetico-geometrica */
+  function KE(m){var a=1,b=Math.sqrt(1-m),s=m/2,p=1;
+    for(var k=0;k<30;k++){var c=(a-b)/2,an=(a+b)/2;b=Math.sqrt(a*b);a=an;p*=2;s+=p*c*c/2;if(c<1e-13)break;}
+    var K=Math.PI/(2*a);return [K,K*(1-s)];}
+  /* campo di una spira di raggio A in (z, r), r >= 0; costante comune omessa */
+  function spira(A,z,r){
+    var q=(A+r)*(A+r)+z*z, d=(A-r)*(A-r)+z*z, m=4*A*r/q, ke=KE(Math.min(m,1-1e-12)), sq=Math.sqrt(q);
+    var Bz=(ke[0]+(A*A-r*r-z*z)/d*ke[1])/sq;
+    var Br=r<1e-9?0:z/(r*sq)*(-ke[0]+(A*A+r*r+z*z)/d*ke[1]);
+    return [Bz,Br];}
+
+  /* --- figura 1: linee di campo di un solenoide finito (somma dei campi delle spire) --- */
+  var S=document.getElementById('fig-a'), ca=document.getElementById('cur-a'), va=document.getElementById('val-a');
+  if(S&&ca){
+    var cx=210, cy=125, R=50, passo=13, W=420, H=250;
+    var gL=el(S,'g',{}), gF=el(S,'g',{});
+    function linee(N){
+      var zs=[];for(var k=0;k<N;k++)zs.push((k-(N-1)/2)*passo);
+      function B(z,r){var bz=0,br=0;for(var k=0;k<zs.length;k++){var b=spira(R,z-zs[k],r);bz+=b[0];br+=b[1];}return [bz,br];}
+      function dir(z,r){var b=B(z,r),l=Math.hypot(b[0],b[1])||1;return [b[0]/l,b[1]/l];}
+      function vicinoFilo(z,r){for(var k=0;k<zs.length;k++)if(Math.hypot(z-zs[k],r-R)<2.5)return true;return false;}
+      function traccia(z0,r0,s){
+        var z=z0,r=r0,pts=[[z,r]],h=1.4*s;
+        for(var n=0;n<4000;n++){
+          var d1=dir(z,r),d2=dir(z+d1[0]*h/2,r+d1[1]*h/2);
+          z+=d2[0]*h;r+=d2[1]*h;if(r<0)r=0;
+          pts.push([z,r]);
+          if(Math.abs(z)>cx+5||r>cy+5||vicinoFilo(z,r))return {p:pts,chiusa:false};
+          if(n>60&&Math.hypot(z-z0,r-r0)<1.5){pts.push([z0,r0]);return {p:pts,chiusa:true};}
+        }
+        return {p:pts,chiusa:false};
+      }
+      var righe=[];
+      [0.3,0.55,0.8].forEach(function(u){
+        var a=traccia(0,u*R,1);
+        if(a.chiusa)righe.push(a.p);
+        else{var b=traccia(0,u*R,-1);righe.push(b.p.reverse().concat(a.p.slice(1)));}
+      });
+      return righe;
+    }
+    function disA(N){
+      vuota(gL);vuota(gF);
+      var Lh=N*passo/2;
+      el(gL,'line',{x1:0,y1:cy,x2:W,y2:cy,stroke:'var(--blu)','stroke-width':1.5});
+      punta(gL,cx,cy,1,0,'var(--blu)');
+      linee(N).forEach(function(p){
+        [1,-1].forEach(function(sg){
+          el(gL,'polyline',{points:p.map(function(q){return f(cx+q[0])+','+f(cy-sg*q[1]);}).join(' '),fill:'none',stroke:'var(--blu)','stroke-width':1.5});
+          for(var k=1;k<p.length;k++){var a=p[k-1],b=p[k];
+            if((a[0]<0)!==(b[0]<0)&&Math.abs(a[1])>1)punta(gL,cx+b[0],cy-sg*b[1],b[0]-a[0],-sg*(b[1]-a[1]),'var(--blu)');}
+        });
+      });
+      for(var k=0;k<N;k++){var x=cx+(k-(N-1)/2)*passo;uscente(gF,x,cy-R,'var(--verde)',5);entrante(gF,x,cy+R,'var(--verde)',5);}
+      T(gF,cx+Lh+2,cy-R-8,'i',lab('var(--verde)'));
+      T(gF,W-18,cy-6,'B',lab('var(--blu)'));
+      /* B al centro rispetto a μ0 n i (spire discrete, n = 1/passo) */
+      var s=0;for(var k=0;k<N;k++){var z=(k-(N-1)/2)*passo;s+=R*R/(2*Math.pow(R*R+z*z,1.5));}
+      va.innerHTML='L = '+virgola(N*passo/R,1)+' R · B al centro = '+Math.round(100*s*passo)+'% di μ₀ n i';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    ca.addEventListener('input',function(){disA(+ca.value);});
+    disA(+ca.value);
+  }
+
+  /* --- figura 2: percorso di Ampère che racchiude N spire della fila superiore --- */
+  var P=document.getElementById('fig-b'), cb=document.getElementById('cur-b'), vb=document.getElementById('val-b');
+  if(P&&cb){
+    var x0=40, dx=31, yS=62, yI=158, M=12;
+    el(P,'line',{x1:10,y1:128,x2:395,y2:128,stroke:'var(--blu)','stroke-width':2});
+    punta(P,400,128,1,0,'var(--blu)');
+    T(P,388,120,'B',lab('var(--blu)'));
+    for(var k=0;k<M;k++){uscente(P,x0+k*dx,yS,'var(--verde)',7);entrante(P,x0+k*dx,yI,'var(--verde)',7);}
+    var gR=el(P,'g',{});
+    function disB(N){
+      vuota(gR);
+      var xa=x0-dx/2, xb=x0+(N-.5)*dx, ya=26, yb=96;
+      el(gR,'rect',{x:xa,y:ya,width:xb-xa,height:yb-ya,fill:'none',stroke:'var(--rosso)','stroke-width':2});
+      punta(gR,(xa+xb)/2,yb,1,0,'var(--rosso)');
+      var c={fill:'var(--rosso)','font-size':13};
+      T(gR,(xa+xb)/2-6,ya-7,'①',c);
+      T(gR,xb+4,yb-5,'②',c);
+      T(gR,(xa+xb)/2-14,yb+16,'③ L',c);
+      T(gR,xa-15,yb-5,'④',c);
+      vb.innerHTML='N = '+N+' · L = '+virgola(N*0.5,1)+' mm · N/L = 2000 m⁻¹';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    cb.addEventListener('input',function(){disB(+cb.value);});
+    disB(+cb.value);
+  }
+})();
+</script>
 </body>
 </html>
