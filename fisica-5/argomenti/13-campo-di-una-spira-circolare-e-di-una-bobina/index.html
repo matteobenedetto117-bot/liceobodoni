@@ -5,19 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campo di una spira circolare e di una bobina — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.due-fig{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.due-fig .fig{margin:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-@media(max-width:640px){.due-fig{grid-template-columns:1fr}}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px}
+.did-parti svg{width:100%}
 </style>
 </head>
 <body>
@@ -27,84 +52,139 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 12</p>
   <h1>Campo di una spira circolare e di una bobina</h1>
-  <p class="sommario">Applichiamo ancora la legge di Ampère, questa volta a una spira di filo
-  chiusa a cerchio: è la geometria che sta alla base di elettromagneti e bobine.</p>
 </header>
 
-<h2>Il campo al centro di una spira</h2>
+<ul>
+<li>Spira circolare di raggio $R$ percorsa da corrente $i$.</li>
+<li>Al centro: $B$ perpendicolare al piano della spira, lungo il suo asse.</li>
+<li>Verso di $B$ dato dal verso della corrente (regola della mano destra).</li>
+</ul>
 
-<p>Una spira circolare percorsa da corrente $i$ genera, nel proprio centro, un campo magnetico
-$B$ diretto lungo l'asse della spira. Il verso dipende dal verso di percorrenza della corrente:</p>
-
-<div class="due-fig">
 <div class="fig">
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f13a" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<circle cx="100" cy="100" r="70" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M 60,155 A 70 70 0 0 1 40 100" fill="none" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f13a)"/>
-<text x="20" y="130" font-family="var(--sans)" font-size="13" fill="var(--verde)">i</text>
-<circle cx="100" cy="100" r="6" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<circle cx="100" cy="100" r="2" fill="var(--blu)"/>
-<text x="112" y="94" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-</svg>
-<p class="did">Corrente antioraria: $B$ esce dal foglio al centro.</p>
+<div class="did-parti" style="--n:2">
+<div><svg id="fig-a1" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px"></svg><p class="did">Corrente antioraria: $B$ uscente ($\odot$).</p></div>
+<div><svg id="fig-a2" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px"></svg><p class="did">Corrente oraria: $B$ entrante ($\otimes$).</p></div>
 </div>
+</div>
+
+<div class="def"><span class="et">Campo al centro di una spira</span>
+<p class="eq">$$B=\frac{\mu_0\,i}{2R}$$</p>
+<p>$B$ campo al centro (T), $i$ corrente (A), $R$ raggio della spira (m), $\mu_0\approx4\pi\cdot10^{-7}$ T·m/A.</p>
+</div>
+
+<ul>
+<li>Bobina: $N$ spire di raggio $R$ affiancate, percorse dalla stessa corrente $i$.</li>
+<li>Al centro i campi delle singole spire si sommano: $B$ è $N$ volte quello di una spira.</li>
+</ul>
+
 <div class="fig">
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f13b" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<circle cx="100" cy="100" r="70" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M 40,100 A 70 70 0 0 1 60,45" fill="none" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f13b)"/>
-<text x="20" y="70" font-family="var(--sans)" font-size="13" fill="var(--verde)">i</text>
-<circle cx="100" cy="100" r="6" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="96" y1="96" x2="104" y2="104" stroke="var(--rosso)" stroke-width="1.4"/>
-<line x1="104" y1="96" x2="96" y2="104" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="112" y="94" font-family="var(--sans)" font-size="13" fill="var(--rosso)">B</text>
-</svg>
-<p class="did">Corrente oraria: $B$ entra nel foglio al centro.</p>
-</div>
+<svg id="fig-b" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-b">spire $N$</label><input id="cur-b" type="range" min="1" max="6" step="1" value="3"><output id="val-b" for="cur-b"></output></div>
+<p class="did">Bobina vista di lato; $i=0{,}50$ A, $R=4{,}0$ cm: in alto corrente uscente, in basso entrante.</p>
 </div>
 
-<p>Il modulo del campo al centro di una spira di raggio $R$ percorsa da corrente $i$ è:</p>
-
-<div class="formula-box">
-$$B=\frac{\mu_0\,i}{2R}$$
+<div class="def"><span class="et">Campo al centro di una bobina</span>
+<p class="eq">$$B=\frac{\mu_0\,N\,i}{2R}$$</p>
+<p>$N$ numero di spire; altri simboli come per la spira.</p>
 </div>
 
-<h2>Il campo di una bobina con $N$ avvolgimenti</h2>
+<div class="nota"><p>Valida per spire molto vicine: spessore della bobina piccolo rispetto a $R$.</p></div>
 
-<p>Se invece di una sola spira si hanno $N$ spire di raggio $R$ affiancate e attraversate dalla
-stessa corrente $i$, i campi generati da ciascuna si sommano nel centro comune:</p>
+<h2>Esempio</h2>
 
-<div class="fig" style="max-width:220px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="60" cy="70" rx="16" ry="55" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<ellipse cx="80" cy="70" rx="16" ry="55" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<ellipse cx="100" cy="70" rx="16" ry="55" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="130" y="75" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">3 spire attaccate</text>
-</svg>
-<p class="did">Bobina di $N$ spire sovrapposte, tutte percorse dalla stessa corrente.</p>
-</div>
+<p>$N=200$, $R=4{,}0$ cm $=0{,}040$ m, $i=0{,}50$ A.</p>
 
-<div class="formula-box">
-$$B=\frac{\mu_0\,N\,i}{2R}$$
-</div>
-
-<h2>Un esempio numerico</h2>
-
-<p>Una bobina di $N=200$ spire di raggio $R=4{,}0\ \text{cm}$ è percorsa da una corrente
-$i=0{,}50\ \text{A}$. Il campo al centro vale:</p>
-
-$$B=\frac{\mu_0Ni}{2R}=\frac{4\pi\times10^{-7}\cdot200\cdot0{,}50}{2\cdot0{,}040}\ \text{T}
-\approx1{,}6\times10^{-3}\ \text{T}$$
-
+<p class="eq">$$B=\frac{\mu_0Ni}{2R}=\frac{4\pi\cdot10^{-7}\cdot200\cdot0{,}50}{2\cdot0{,}040}\ \text{T}\approx1{,}6\cdot10^{-3}\ \text{T}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../12-legge-di-biot-savart-e-forze-fra-fili-paralleli/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Legge di Biot-Savart e forze fra fili paralleli</span></a><a class="successiva" href="../14-campo-magnetico-di-un-solenoide/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Campo magnetico di un solenoide</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 12</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function virgola(x,d){return x.toFixed(d).replace('.',',').replace('-','−');}
+  var SUP={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+  function sci(x){var e=Math.floor(Math.log10(x)+1e-9),m=x/Math.pow(10,e)+1e-9;if(+m.toFixed(1)>=10){m/=10;e++;}
+    return virgola(m,1)+'·10'+String(e).split('').map(function(c){return SUP[c];}).join('');}
+  function lab(col){return {fill:col,'font-weight':700,'font-style':'italic','font-size':14};}
+  function marcatori(svg,pre){
+    var d=el(svg,'defs',{});
+    [[pre+'v','var(--verde)'],[pre+'b','var(--blu)']].forEach(function(m){
+      var k=el(d,'marker',{id:m[0],markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+      el(k,'path',{d:'M0,0 L6,3 L0,6 Z',fill:m[1]});
+    });
+  }
+  function uscente(p,x,y,col,r){r=r||8;var g=el(p,'g',{});el(g,'circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:col,'stroke-width':1.8});el(g,'circle',{cx:x,cy:y,r:r*.33,fill:col});return g;}
+  function entrante(p,x,y,col,r){r=r||8;var g=el(p,'g',{}),s=r*.62;el(g,'circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:col,'stroke-width':1.8});
+    el(g,'line',{x1:x-s,y1:y-s,x2:x+s,y2:y+s,stroke:col,'stroke-width':1.6});el(g,'line',{x1:x+s,y1:y-s,x2:x-s,y2:y+s,stroke:col,'stroke-width':1.6});return g;}
+
+  /* --- spira vista di fronte: arco di corrente calcolato sulla circonferenza (angoli con y verso l'alto) --- */
+  function spira(id,antioraria){
+    var S=document.getElementById(id); if(!S)return;
+    marcatori(S,id);
+    var cx=100, cy=95, R=70;
+    el(S,'circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.2});
+    /* arco sul lato sinistro: da 160° a 215° (antiorario) o da 215° a 160° (orario) */
+    var a0=antioraria?160:215, a1=antioraria?215:160, pts=[];
+    for(var k=0;k<=24;k++){var a=(a0+(a1-a0)*k/24)*Math.PI/180;pts.push(f(cx+(R+9)*Math.cos(a))+','+f(cy-(R+9)*Math.sin(a)));}
+    el(S,'polyline',{points:pts.join(' '),fill:'none',stroke:'var(--verde)','stroke-width':2.6,'marker-end':'url(#'+id+'v)'});
+    T(S,8,cy+5,'i',lab('var(--verde)'));
+    if(antioraria)uscente(S,cx,cy,'var(--blu)');else entrante(S,cx,cy,'var(--blu)');
+    T(S,cx+13,cy-11,'B',lab('var(--blu)'));
+    /* raggio */
+    el(S,'line',{x1:cx,y1:cy,x2:f(cx+R*Math.cos(-0.6)),y2:f(cy-R*Math.sin(-0.6)),stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 3'});
+    T(S,cx+30,cy+36,'R',{fill:'var(--grigio)','font-style':'italic','font-size':14});
+  }
+  spira('fig-a1',true); spira('fig-a2',false);
+
+  /* --- bobina vista di lato, cursore su N; B = μ0 N i / (2R) --- */
+  var B=document.getElementById('fig-b'), cb=document.getElementById('cur-b'), vb=document.getElementById('val-b');
+  if(B&&cb){
+    marcatori(B,'b');
+    var cy=105, ry=72, rx=20, passo=13, x0=110;
+    el(B,'line',{x1:40,y1:cy,x2:400,y2:cy,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 4'});
+    var gS=el(B,'g',{}), gI=el(B,'g',{});
+    var fB=el(B,'line',{y1:cy,y2:cy,stroke:'var(--blu)','stroke-width':3,'marker-end':'url(#bb)'});
+    var tB=T(B,0,cy-7,'B',lab('var(--blu)'));
+    function disB(N){
+      while(gS.firstChild)gS.removeChild(gS.firstChild);
+      while(gI.firstChild)gI.removeChild(gI.firstChild);
+      for(var k=0;k<N;k++)el(gS,'ellipse',{cx:x0+k*passo,cy:cy,rx:rx,ry:ry,fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+      var xl=x0+(N-1)*passo;                        /* ultima spira, in primo piano */
+      uscente(gI,xl,cy-ry,'var(--verde)',7); entrante(gI,xl,cy+ry,'var(--verde)',7);
+      T(gI,xl+12,cy-ry+5,'i',lab('var(--verde)'));
+      var xc=x0+(N-1)*passo/2, L=28*N;               /* lunghezza direttamente proporzionale a B */
+      set(fB,{x1:f(xc),x2:f(xc+L)}); set(tB,{x:f(xc+L+8)});
+      var Bv=4e-7*Math.PI*N*0.5/(2*0.04);
+      vb.innerHTML='N = '+N+' · B = '+sci(Bv)+' T';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    cb.addEventListener('input',function(){disB(+cb.value);});
+    disB(+cb.value);
+  }
+})();
+</script>
 </body>
 </html>
