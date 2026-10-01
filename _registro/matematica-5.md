@@ -313,6 +313,7 @@ teorema del confronto, a pagina 21.
   dell'unità 11. Nessun quesito di maturità inserito: senza le derivate, disponibili solo
   dall'unità 13, i quesiti reali sul grafico di una funzione richiedono lo studio del segno della
   derivata prima, non ancora nel bagaglio a questo punto del percorso.
+- Revisione: titolo invariato. Testo ridotto a traccia schematica: tolti sommario e titoletti «Lo schema in sei passi», «Esempio svolto», «Funzioni con parametri» (ora «Esempio 1» ed «Esempio 2»); procedura in sei passi in riquadro .def; passaggi degli esempi in elenco e formule in riquadro azzurro. Correzione: «simmetrie rispetto agli assi» → «simmetrie» (la funzione dispari è simmetrica rispetto all'origine). Verificati di nuovo con SymPy disparità, zeri, segno, limiti, m e q di entrambi gli esempi. Nessun esempio tolto. Impaginazione a quaderno con script di allineamento. Figura: grafico Plotly (solo ramo x > 0) riscritto in SVG calcolato con entrambi i rami, asintoti x = 0 e y = x, zeri ±1; cursore che percorre prima il ramo sinistro poi il destro, con x, f(x), f(x) − x accanto e «distanza → 0» in verde. Esempio 2 senza figura (la traccia non ne ha).
 
 ## Unità 12 — Rapporto incrementale, definizione di derivata, significato geometrico
 - Parole: 450 su 4 pagine di traccia (50–53), conteggio del solo testo prosastico (formule
