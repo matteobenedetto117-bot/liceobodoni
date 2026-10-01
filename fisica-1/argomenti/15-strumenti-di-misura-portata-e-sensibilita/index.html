@@ -5,23 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Strumenti di misura: portata e sensibilità — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.regole{margin:22px 0;padding:14px 18px;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px}
+.did-parti svg{width:100%}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -30,91 +52,124 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Misure ed errori &middot; Unità 14</p>
   <h1>Strumenti di misura: portata e sensibilità</h1>
-  <p class="sommario">Il massimo valore che uno strumento riesce a misurare e la più piccola
-  variazione che riesce ad apprezzare.</p>
 </header>
 
-<p>Ogni strumento ha dei limiti propri: non arriva oltre un certo valore, e sotto una certa
-finezza non distingue più nulla. Questi due limiti hanno un nome preciso.</p>
-
-<h2>Portata</h2>
-
-<div class="regole">
-<p>La <strong>portata</strong> di uno strumento è il massimo valore di una grandezza che lo
-strumento può misurare.</p>
+<div class="def"><span class="et">Portata</span>
+<p>Massimo valore della grandezza che lo strumento può misurare.</p>
 </div>
 
-<p>Oltre la portata lo strumento non dà una misura sbagliata: non dà proprio una misura.</p>
-
-<h2>Sensibilità</h2>
-
-<div class="regole">
-<p>La <strong>sensibilità</strong> di uno strumento è la più piccola variazione della
-grandezza che lo strumento può misurare.</p>
+<div class="def"><span class="et">Sensibilità</span>
+<p>Più piccola variazione della grandezza che lo strumento può misurare.</p>
 </div>
 
-<p>È la distanza fra due tacche consecutive della scala: variazioni più piccole di così
-avvengono, ma lo strumento non le mostra.</p>
+<ul>
+<li>Scala graduata: portata = valore dell'ultima tacca; sensibilità = valore di un intervallo fra due tacche consecutive.</li>
+<li>Oltre la portata: nessuna misura.</li>
+<li>Variazioni minori della sensibilità: non rilevate.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 440 150" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="14">
-  <defs>
-    <marker id="fr" markerWidth="9" markerHeight="9" refX="8" refY="3"
-            orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L8,3 L0,6 z" fill="#c0392b"/>
-    </marker>
-  </defs>
-  <rect x="40" y="55" width="340" height="38" fill="#f4f8fd" stroke="#1f2a36"
-        stroke-width="2"/>
-  <g stroke="#1f2a36" stroke-width="1">
-    <line x1="57" y1="55" x2="57" y2="67"/><line x1="74" y1="55" x2="74" y2="67"/>
-    <line x1="91" y1="55" x2="91" y2="67"/><line x1="108" y1="55" x2="108" y2="67"/>
-    <line x1="125" y1="55" x2="125" y2="72"/>
-    <line x1="142" y1="55" x2="142" y2="67"/><line x1="159" y1="55" x2="159" y2="67"/>
-    <line x1="176" y1="55" x2="176" y2="67"/><line x1="193" y1="55" x2="193" y2="67"/>
-    <line x1="210" y1="55" x2="210" y2="72"/>
-    <line x1="227" y1="55" x2="227" y2="67"/><line x1="244" y1="55" x2="244" y2="67"/>
-    <line x1="261" y1="55" x2="261" y2="67"/><line x1="278" y1="55" x2="278" y2="67"/>
-    <line x1="295" y1="55" x2="295" y2="72"/>
-    <line x1="312" y1="55" x2="312" y2="67"/><line x1="329" y1="55" x2="329" y2="67"/>
-    <line x1="346" y1="55" x2="346" y2="67"/><line x1="363" y1="55" x2="363" y2="67"/>
-    <line x1="380" y1="55" x2="380" y2="72"/>
-  </g>
-  <g stroke="#c0392b" stroke-width="1.6" marker-end="url(#fr)" marker-start="url(#fr)">
-    <line x1="40" y1="112" x2="380" y2="112"/>
-    <line x1="363" y1="32" x2="380" y2="32"/>
-  </g>
-  <text x="175" y="132" fill="#c0392b">portata</text>
-  <text x="258" y="27" fill="#c0392b">sensibilità</text>
-  <line x1="371" y1="38" x2="371" y2="53" stroke="#c0392b" stroke-width="1"/>
-</svg>
-<p class="did">La portata è l'intera scala, dall'inizio all'ultima tacca; la sensibilità è
-l'ampiezza di un solo intervallo.</p>
+<svg id="fig-a" viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">oggetto</label><input id="cur-a" type="range" min="0.5" max="22" step="0.01" value="12.34"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Righello da 20 cm con tacche al millimetro; sotto, ingrandimento intorno all'estremità dell'oggetto.</p>
 </div>
 
-<div class="esempi">
-<h3>Esempio</h3>
-<p>Un righello da disegno è lungo $20\ \text{cm}$ ed è inciso con una tacca ogni
-millimetro. La sua portata è allora $20\ \text{cm}$, e la sua sensibilità è
-$1\ \text{mm} = 0{,}1\ \text{cm}$: la scala contiene $200$ intervalli. Due oggetti che
-differiscono di un decimo di millimetro appaiono qui lunghi uguali.</p>
-</div>
+<div class="nota"><p>Portata e sensibilità indipendenti: portata maggiore non significa strumento migliore.</p></div>
 
-<div class="nota">
-<strong>Da non confondere.</strong> Portata e sensibilità sono indipendenti. Una bilancia da
-laboratorio che arriva a $200\ \text{g}$ leggendo il milligrammo ha portata piccola e
-sensibilità finissima, una da cucina che arriva a $5\ \text{kg}$ leggendo il grammo ha
-portata grande e sensibilità grossolana: portata maggiore non significa strumento migliore.
-</div>
+<ul>
+<li>Bilancia da laboratorio: portata 200 g, sensibilità 1 mg.</li>
+<li>Bilancia da cucina: portata 5 kg, sensibilità 1 g.</li>
+</ul>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>La sensibilità torna subito dopo, quando si scrive l'incertezza di una misura eseguita
-una volta sola.</p>
-</div>
+<h2>Esempio</h2>
+
+<p>Righello: scala da 0 a 20 cm, una tacca ogni millimetro.</p>
+
+<p class="eq">$$\text{portata}=20\ \text{cm}\qquad\text{sensibilità}=1\ \text{mm}=0{,}1\ \text{cm}$$</p>
+<p class="eq">$$\text{intervalli}=\frac{20\ \text{cm}}{0{,}1\ \text{cm}}=200$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../14-equivalenze-di-grandezze-derivate/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equivalenze di grandezze derivate</span></a><a class="successiva" href="../16-errori-casuali-e-sistematici/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Errori casuali e sistematici</span></a></nav>
+<footer><p>Fisica prima &middot; Misure ed errori &middot; Unità 14</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(2);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function virgola(x,d){return x.toFixed(d).replace('.',',');}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,col){el(p,'path',{d:'M'+f(x)+','+f(y)+' l'+(-6*dx)+',-3.5 l0,7 Z',fill:col});}
+  function freccia2(p,xa,xb,y,col){el(p,'line',{x1:f(xa+3),y1:y,x2:f(xb-3),y2:y,stroke:col,'stroke-width':1.4});punta(p,xa,y,-1,col);punta(p,xb,y,1,col);}
+
+  var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), v=document.getElementById('val-a');
+  if(!S||!c)return;
+  /* righello: 0–20 cm, 16 px/cm (1,6 px/mm) */
+  var x0=40, u=16, yR=52, hR=30;
+  el(S,'rect',{x:x0-8,y:yR,width:20*u+16,height:hR,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.5,rx:2});
+  for(var k=0;k<=200;k++){var x=x0+k*u/10, h=k%10===0?12:(k%5===0?8:4.5);
+    el(S,'line',{x1:f(x),y1:yR,x2:f(x),y2:yR+h,stroke:'var(--inchiostro)','stroke-width':k%10===0?1:0.5});}
+  [0,5,10,15,20].forEach(function(n){T(S,x0+n*u-(n<10?3.5:7),yR+hR-4,String(n),{fill:'var(--inchiostro)','font-size':11});});
+  T(S,x0+20*u+12,yR+hR-4,'cm',{fill:'var(--grigio)','font-size':11});
+  /* portata */
+  freccia2(S,x0,x0+20*u,yR+hR+12,'var(--rosso)');
+  T(S,x0+10*u-34,yR+hR+27,'portata 20 cm',{fill:'var(--rosso)'});
+  var gO=el(S,'g',{}), gZ=el(S,'g',{});
+  /* ingrandimento: 2 cm intorno all'estremità, 15 px/mm */
+  var zx=60, zy=140, zw=300, zh=56, zu=zw/2;   /* px per cm */
+  function dis(Lc){
+    vuota(gO);vuota(gZ);
+    var xe=x0+Lc*u, fuori=Lc>20.0001;
+    el(gO,'rect',{x:x0,y:yR-14,width:f(Lc*u),height:10,fill:fuori?'var(--rosso)':'var(--blu)',opacity:.8,rx:2});
+    var c0=Math.min(Math.max(Lc,1),20.5)-1;     /* inizio della finestra, cm */
+    var wa=x0+c0*u, wb=x0+(c0+2)*u;
+    el(gZ,'rect',{x:f(wa),y:yR-16,width:f(wb-wa),height:hR+18,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 2'});
+    el(gZ,'line',{x1:f(wa),y1:yR+hR+2,x2:zx,y2:zy,stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'3 2'});
+    el(gZ,'line',{x1:f(wb),y1:yR+hR+2,x2:zx+zw,y2:zy,stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'3 2'});
+    el(gZ,'rect',{x:zx,y:zy,width:zw,height:zh,fill:'#fff',stroke:'var(--grigio)','stroke-width':1});
+    var yb=zy+14;   /* bordo del righello nell'ingrandimento */
+    var xmax=Math.min(c0+2,20);
+    el(gZ,'line',{x1:zx,y1:yb,x2:f(zx+(xmax-c0)*zu),y2:yb,stroke:'var(--inchiostro)','stroke-width':1.5});
+    for(var m=Math.ceil(c0*10-1e-9);m<=Math.floor(xmax*10+1e-9);m++){
+      var xx=zx+(m/10-c0)*zu, h=m%10===0?18:(m%5===0?13:8);
+      el(gZ,'line',{x1:f(xx),y1:yb,x2:f(xx),y2:yb+h,stroke:'var(--inchiostro)','stroke-width':m%10===0?1.4:0.9});
+      if(m%10===0)T(gZ,f(xx-4),yb+32,String(m/10),{fill:'var(--inchiostro)'});
+    }
+    /* oggetto nell'ingrandimento */
+    var xo=zx+Math.min(Lc-c0,2)*zu;
+    el(gZ,'rect',{x:zx,y:zy+3,width:f(xo-zx),height:8,fill:fuori?'var(--rosso)':'var(--blu)',opacity:.8});
+    /* sensibilità: un intervallo di 1 mm */
+    var m1=Math.ceil(c0*10+1e-9)+1, xs=zx+(m1/10-c0)*zu;
+    if(m1/10+0.1<=xmax+1e-9&&m1/10+0.1<=c0+2){
+      freccia2(gZ,xs,xs+zu/10,zy+zh+10,'var(--rosso)');
+      T(gZ,xs+zu/10+6,zy+zh+14,'sensibilità 1 mm',{fill:'var(--rosso)'});
+    }
+    var col=fuori?'var(--rosso)':'var(--inchiostro)';
+    v.innerHTML='oggetto '+virgola(Lc,2)+' cm · '+(fuori?'<span style="color:var(--rosso);font-weight:700">oltre la portata</span>':'lettura '+virgola(Math.round(Lc*10)/10,1)+' cm');
+    if(window.allineaQuaderno)window.allineaQuaderno();
+  }
+  c.addEventListener('input',function(){dis(+c.value);});
+  dis(+c.value);
+})();
+</script>
 </body>
 </html>

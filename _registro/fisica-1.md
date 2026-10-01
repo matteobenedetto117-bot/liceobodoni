@@ -106,6 +106,7 @@
   singolo intervallo, e il riquadro «Da non confondere» sull'indipendenza fra le due
   caratteristiche, che è l'errore tipico dell'argomento. Nessuna tabella riassuntiva,
   nessuno strumento interattivo.
+- Revisione: titolo invariato. Tolti sommario, introduzione, titoletti «Portata» e «Sensibilità» (definizioni in riquadri .def), frasi esplicative e la sezione «Dove si riprende»; riquadro «Da non confondere» ridotto a nota di una riga, con i due esempi di bilancia in elenco. Esempio del righello come «Esempio» (dati → portata e sensibilità → 200 intervalli, verificato). Nessuna correzione concettuale. Impaginazione a quaderno come l'unità 13, con script di allineamento; aggiunto il piè di pagina mancante. Figura ridisegnata da script (SVG inline): righello da 20 cm con tacche al millimetro, freccia della portata, ingrandimento di 2 cm intorno all'estremità dell'oggetto con l'intervallo di 1 mm (sensibilità); cursore sulla lunghezza dell'oggetto (0,5–22 cm) con lettura arrotondata al millimetro accanto, «oltre la portata» in rosso sopra 20 cm. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 15 — Errori casuali e sistematici
 - Parole: 345 su 2 pagine di traccia (pagine 22–23 del PDF; della pagina 22 appartiene
