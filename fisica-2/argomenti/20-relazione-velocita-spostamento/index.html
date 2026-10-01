@@ -5,18 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Relazione velocità-spostamento — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riepilogo{background:#fff;border:2px solid var(--verde);border-radius:10px;padding:18px 22px;margin:22px 0}
-.riepilogo p{margin:8px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -25,76 +54,114 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Cinematica &middot; Unità 10</p>
   <h1>Relazione velocità-spostamento</h1>
-  <p class="sommario">Le due leggi del moto uniformemente accelerato viste finora contengono
-  sempre il tempo. Cerchiamo ora una relazione fra velocità e spostamento che non dipenda da
-  $t$, utile quando il tempo non è fra i dati del problema.</p>
 </header>
 
-<h2>Eliminare il tempo</h2>
+<ul>
+<li>Relazione fra velocità e spostamento nel MRUA, senza il tempo $t$.</li>
+<li>Sistema fra legge oraria e legge velocità-tempo:</li>
+</ul>
 
-<p>Partiamo dal sistema formato dalla legge oraria e dalla relazione velocità-tempo:</p>
+<p class="eq">$$\begin{cases}x=x_0+v_0t+\dfrac12at^2\\[4pt] v=v_0+at\end{cases}$$</p>
 
-$$\begin{cases}x=x_0+v_0t+\dfrac12at^2\\[4pt] v=v_0+at\end{cases}$$
+<ul>
+<li>Dalla seconda: $t=\dfrac{v-v_0}{a}$ ($a\neq0$); sostituzione nella prima.</li>
+</ul>
 
-<p>Dalla seconda equazione ricaviamo il tempo, $t=\dfrac{v-v_0}{a}$, e lo sostituiamo nella
-prima:</p>
+<p class="eq">$$x=x_0+v_0\left(\frac{v-v_0}{a}\right)+\frac12a\left(\frac{v-v_0}{a}\right)^2$$</p>
+<p class="eq">$$x-x_0=\frac{2vv_0-2v_0^2}{2a}+\frac{v^2-2vv_0+v_0^2}{2a}$$</p>
 
-$$x=x_0+v_0\left(\frac{v-v_0}{a}\right)+\frac12a\left(\frac{v-v_0}{a}\right)^2$$
+<ul>
+<li>I termini in $vv_0$ si elidono.</li>
+</ul>
 
-<p>Sviluppando i quadrati e portando tutto sullo stesso denominatore $2a$:</p>
+<p class="eq">$$\Delta x=\frac{v^2-v_0^2}{2a}$$</p>
 
-$$x-x_0=\frac{2vv_0-2v_0^2}{2a}+\frac{v^2-2vv_0+v_0^2}{2a}$$
-
-<p>Al numeratore i termini in $vv_0$ si elidono a vicenda, e resta:</p>
-
-$$\Delta x=\frac{v^2-v_0^2}{2a}$$
-
-<p>da cui, moltiplicando per $2a$:</p>
-
-<div class="formula-box">
-$$v^2=v_0^2+2a\,\Delta x$$
+<div class="def"><span class="et">Relazione velocità-spostamento</span>
+<p class="eq principio">$$v^2=v_0^2+2a\,\Delta x$$</p>
+<p class="leg">$v_0$ velocità iniziale, $v$ velocità finale (m/s); $a$ accelerazione (m/s²); $\Delta x=x-x_0$ spostamento (m).</p>
 </div>
 
-<h2>Grafico spazio-velocità</h2>
-
-<p>Se $x_0=0$ e $v_0=0$, la relazione diventa $x=\dfrac{v^2}{2a}$: una parabola con asse
-verticale, che si apre verso l'alto se $a&gt;0$ e verso il basso se $a&lt;0$.</p>
+<ul>
+<li>Con $x_0=0$ e $v_0=0$: $x=\dfrac{v^2}{2a}$, parabola con asse verticale.</li>
+<li>$a&gt;0$: aperta verso l'alto; $a&lt;0$: aperta verso il basso.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u20ax" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="30" y1="130" x2="390" y2="130" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u20ax)"/>
-<line x1="210" y1="230" x2="210" y2="20" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u20ax)"/>
-<text x="395" y="135" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">v</text>
-<text x="195" y="16" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<path d="M90,50 Q210,130 330,50" fill="none" stroke="var(--verde)" stroke-width="2.2"/>
-<text x="330" y="40" font-size="13" fill="var(--verde)" font-family="var(--sans)">a&gt;0</text>
-<path d="M90,210 Q210,130 330,210" fill="none" stroke="var(--rosso)" stroke-width="2.2"/>
-<text x="330" y="225" font-size="13" fill="var(--rosso)" font-family="var(--sans)">a&lt;0</text>
-<circle cx="210" cy="130" r="3.5" fill="var(--inchiostro)"/>
-</svg>
-<p class="did">Il grafico $x$-$v$ per $x_0=0$, $v_0=0$: una parabola simmetrica, aperta verso
-l'alto se $a&gt;0$ e verso il basso se $a&lt;0$, perché $x$ dipende da $v^2$ e non da $v$.</p>
+<svg id="g-xv" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico posizione-velocità: due parabole per accelerazione positiva e negativa"></svg>
+<p class="did">$x_0=0$, $v_0=0$, $a=\pm1$ m/s²: $x=\dfrac{v^2}{2a}$.</p>
+<div class="cursore"><label for="cur-v">$v$</label><input id="cur-v" type="range" min="-4" max="4" step="0.1" value="2.5"><span class="val" id="val-v"></span></div>
 </div>
 
-<h2>Le leggi del moto uniformemente accelerato</h2>
-
-<p>Le tre relazioni ricavate finora si usano insieme, scegliendo di volta in volta quella che
-non contiene il dato mancante:</p>
-
-<div class="riepilogo">
-<p>$v=v_0+at$ — relazione velocità-tempo</p>
-<p>$x=x_0+v_0t+\dfrac12at^2$ — legge oraria, posizione-tempo</p>
-<p>$v^2=v_0^2+2a(x-x_0)$ — relazione velocità-posizione</p>
+<div class="def"><span class="et">Leggi del moto uniformemente accelerato</span>
+<p class="eq">$$v=v_0+at$$</p>
+<p class="eq">$$x=x_0+v_0t+\frac12at^2$$</p>
+<p class="eq">$$v^2=v_0^2+2a(x-x_0)$$</p>
+<p>Si usa la legge che non contiene il dato mancante.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../19-distanza-percorsa-nel-diagramma-velocita-tempo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Distanza percorsa nel diagramma velocità-tempo</span></a><a class="successiva" href="../21-caduta-libera/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Caduta libera</span></a></nav>
 <footer><p>Fisica seconda &middot; Cinematica &middot; Unità 10</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0,?0*$/.test(s))s=s.slice(1);return s.replace('-','−');}
+
+  /* ---------- grafico x-v: x = v^2/(2a), a = +1 e -1 m/s^2, cursore su v ---------- */
+  (function(){
+    var svg=document.getElementById('g-xv'), cur=document.getElementById('cur-v'), val=document.getElementById('val-v'); if(!svg)return;
+    var defs=el(svg,'defs',{}), mk=el(defs,'marker',{id:'u10a',markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});
+    el(mk,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'});
+    var VM=4.4, XM=9, cx=210, cy=130;
+    function X(v){return cx+v/VM*160;} function Y(x){return cy-x/XM*110;}
+    /* assi */
+    el(svg,'line',{x1:X(-VM),y1:cy,x2:X(VM)+12,y2:cy,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#u10a)'});
+    el(svg,'line',{x1:cx,y1:Y(-XM),x2:cx,y2:Y(XM)-10,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#u10a)'});
+    txt(svg,X(VM)+12,cy-8,'v (m/s)',{'font-style':'italic',fill:'var(--inchiostro)','text-anchor':'end'});
+    txt(svg,cx+8,Y(XM)-6,'x (m)',{'font-style':'italic',fill:'var(--inchiostro)','text-anchor':'start'});
+    [-4,-2,2,4].forEach(function(v){el(svg,'line',{x1:X(v),y1:cy-4,x2:X(v),y2:cy+4,stroke:'var(--inchiostro)'});txt(svg,X(v),cy+(v<0?-8:16),num(v,0),{'font-size':11});});
+    [-8,-4,4,8].forEach(function(x){el(svg,'line',{x1:cx-4,y1:Y(x),x2:cx+4,y2:Y(x),stroke:'var(--inchiostro)'});txt(svg,cx-8,Y(x)+4,num(x,0),{'font-size':11,'text-anchor':'end'});});
+    /* curve calcolate, v in [-4,4] */
+    function tratto(a){var s='';for(var i=0;i<=160;i++){var v=-4+8*i/160;s+=(i?'L':'M')+X(v).toFixed(1)+' '+Y(v*v/(2*a)).toFixed(1)+' ';}return s;}
+    el(svg,'path',{d:tratto(1),fill:'none',stroke:'var(--blu)','stroke-width':2.4});
+    el(svg,'path',{d:tratto(-1),fill:'none',stroke:'var(--rosso)','stroke-width':2.2,'stroke-dasharray':'6 4'});
+    txt(svg,X(-4)-4,Y(8)+4,'a > 0',{'font-size':12,fill:'var(--blu)','text-anchor':'end'});
+    txt(svg,X(-4)-4,Y(-8)+4,'a < 0',{'font-size':12,fill:'var(--rosso)','text-anchor':'end'});
+    el(svg,'circle',{cx:cx,cy:cy,r:3.5,fill:'var(--inchiostro)'});
+    /* punti mobili */
+    var g1=el(svg,'line',{stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3 3'});
+    var p1=el(svg,'circle',{r:4.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});
+    var p2=el(svg,'circle',{r:4.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});
+    function disegna(){
+      var v=Math.round(+cur.value*10)/10, x1=v*v/2, x2=-v*v/2;
+      g1.setAttribute('x1',X(v));g1.setAttribute('x2',X(v));g1.setAttribute('y1',Y(x1));g1.setAttribute('y2',Y(x2));
+      p1.setAttribute('cx',X(v));p1.setAttribute('cy',Y(x1));p2.setAttribute('cx',X(v));p2.setAttribute('cy',Y(x2));
+      val.innerHTML='v = '+num(v,1)+' m/s &nbsp; x(a &gt; 0) = '+num(x1,2)+' m &nbsp; x(a &lt; 0) = '+num(x2,2)+' m'+
+        (Math.abs(v)<1e-9?' &nbsp; <span class="ok">vertice</span>':'');
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
