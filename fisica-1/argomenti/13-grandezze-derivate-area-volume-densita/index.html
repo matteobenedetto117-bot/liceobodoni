@@ -6,22 +6,42 @@
 <title>Grandezze derivate: area, volume, densità — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.regole{margin:22px 0;padding:14px 18px;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -30,138 +50,178 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Grandezze fisiche e strumenti matematici &middot; Unità 12</p>
   <h1>Grandezze derivate: area, volume, densità</h1>
-  <p class="sommario">Come si costruisce l'unità di misura di una grandezza che nasce da
-  altre grandezze, e i tre casi che servono subito.</p>
 </header>
 
-<p>Sette grandezze del Sistema Internazionale sono fondamentali; tutte le altre si ottengono
-da queste con moltiplicazioni e divisioni, e per questo si dicono <strong>derivate</strong>.
-La regola è che l'unità di misura segue la formula: le stesse operazioni che legano le
-grandezze legano anche le loro unità. Il simbolo $[\,\cdot\,]$ indica proprio l'unità di
-misura della grandezza che racchiude.</p>
+<ul>
+<li>Grandezze fondamentali del SI: sette.</li>
+<li>Grandezze <strong>derivate</strong>: ottenute dalle fondamentali con moltiplicazioni e divisioni.</li>
+<li>L'unità di misura segue la formula: stesse operazioni sulle unità.</li>
+<li>$[\,\cdot\,]$: unità di misura della grandezza fra parentesi.</li>
+</ul>
 
-<h2>Area</h2>
-
-<div class="regole">
-<p>L'area di una figura piana si ottiene moltiplicando una lunghezza per una lunghezza:</p>
-<p>$$A = \ell \cdot \ell \qquad\Longrightarrow\qquad [A] = \text{m} \cdot \text{m} =
-\text{m}^2$$</p>
+<div class="def"><span class="et">Area</span>
+<p class="eq">$$A=\ell\cdot\ell\qquad[A]=\text{m}\cdot\text{m}=\text{m}^2$$</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="16">
-  <defs>
-    <marker id="fr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-      <path d="M0 0 L8 4 L0 8 z" fill="#c0392b"/>
-    </marker>
-    <marker id="fr2" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
-      <path d="M8 0 L0 4 L8 8 z" fill="#c0392b"/>
-    </marker>
-  </defs>
-  <rect x="70" y="30" width="230" height="70" fill="#f4f8fd" stroke="#1f2a36"
-        stroke-width="2"/>
-  <line x1="52" y1="30" x2="52" y2="100" stroke="#c0392b" stroke-width="1.6"
-        marker-start="url(#fr2)" marker-end="url(#fr)"/>
-  <text x="30" y="70" fill="#c0392b">h</text>
-  <line x1="70" y1="120" x2="300" y2="120" stroke="#c0392b" stroke-width="1.6"
-        marker-start="url(#fr2)" marker-end="url(#fr)"/>
-  <text x="180" y="140" fill="#c0392b">b</text>
-  <text x="145" y="72" fill="#1f2a36">A = b &#183; h</text>
-</svg>
-<p class="did">Le due lunghezze che si moltiplicano sono la base e l'altezza: il prodotto
-di due metri dà metri quadrati.</p>
+<svg id="fig-area" viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-area">base</label><input id="cur-area" type="range" min="1" max="6" step="1" value="4"><output id="val-area" for="cur-area"></output></div>
+<p class="did">Rettangolo di altezza $h=2$ m diviso in quadrati di lato 1 m.</p>
 </div>
 
-<div class="esempi">
-<h3>Esempio</h3>
-<p>$b = 3{,}71\ \text{m}$, $h = 1{,}02741\ \text{m}$.</p>
-<p>$$A = b \cdot h = 3{,}71\ \text{m} \cdot 1{,}02741\ \text{m} = 3{,}8116911\ \text{m}^2
-= 3{,}81\ \text{m}^2$$</p>
-<p>La base ha tre cifre significative, ed è il fattore che ne ha di meno: il risultato si
-ferma a tre.</p>
-</div>
-
-<h2>Volume</h2>
-
-<div class="regole">
-<p>Il volume di un solido moltiplica tre lunghezze:</p>
-<p>$$V = \ell \cdot \ell \cdot \ell \qquad\Longrightarrow\qquad [V] = \text{m} \cdot
-\text{m} \cdot \text{m} = \text{m}^3$$</p>
+<div class="def"><span class="et">Volume</span>
+<p class="eq">$$V=\ell\cdot\ell\cdot\ell\qquad[V]=\text{m}\cdot\text{m}\cdot\text{m}=\text{m}^3$$</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="16">
-  <defs>
-    <marker id="gr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-      <path d="M0 0 L8 4 L0 8 z" fill="#c0392b"/>
-    </marker>
-    <marker id="gr2" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
-      <path d="M8 0 L0 4 L8 8 z" fill="#c0392b"/>
-    </marker>
-  </defs>
-  <g fill="none" stroke="#1f2a36" stroke-width="2">
-    <rect x="90" y="55" width="150" height="95"/>
-    <path d="M90 55 L140 20 L290 20 L240 55"/>
-    <path d="M290 20 L290 115 L240 150"/>
-  </g>
-  <line x1="72" y1="55" x2="72" y2="150" stroke="#c0392b" stroke-width="1.6"
-        marker-start="url(#gr2)" marker-end="url(#gr)"/>
-  <text x="52" y="108" fill="#c0392b">a</text>
-  <line x1="90" y1="168" x2="240" y2="168" stroke="#c0392b" stroke-width="1.6"
-        marker-start="url(#gr2)" marker-end="url(#gr)"/>
-  <text x="160" y="186" fill="#c0392b">b</text>
-  <line x1="252" y1="160" x2="300" y2="126" stroke="#c0392b" stroke-width="1.6"
-        marker-start="url(#gr2)" marker-end="url(#gr)"/>
-  <text x="308" y="150" fill="#c0392b">c</text>
-</svg>
-<p class="did">I tre spigoli del parallelepipedo sono le tre lunghezze che si
-moltiplicano.</p>
+<svg id="fig-vol" viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-vol">altezza</label><input id="cur-vol" type="range" min="1" max="4" step="1" value="3"><output id="val-vol" for="cur-vol"></output></div>
+<p class="did">Parallelepipedo con $b=3$ m e $c=2$ m diviso in cubi di spigolo 1 m.</p>
 </div>
 
-<div class="esempi">
-<h3>Esempio</h3>
-<p>$a = 7{,}2\ \text{m}$, $b = 7{,}2\ \text{m}$, $c = 4{,}18\ \text{m}$.</p>
-<p>$$V = a \cdot b \cdot c = 7{,}2\ \text{m} \cdot 7{,}2\ \text{m} \cdot 4{,}18\ \text{m}
-= 216{,}6912\ \text{m}^3 = 220\ \text{m}^3$$</p>
-<p>Qui il fattore più povero ne ha due, quindi il risultato ne tiene due: si arrotonda a
-$2{,}2 \cdot 10^2\ \text{m}^3$.</p>
+<div class="def"><span class="et">Densità</span>
+<p class="eq">$$d=\frac{m}{V}\qquad[d]=\frac{\text{kg}}{\text{m}^3}$$</p>
+<p>$d$ densità (kg/m³), $m$ massa (kg), $V$ volume (m³). Massa per unità di volume.</p>
 </div>
 
-<h2>Densità</h2>
-
-<p>La densità di un corpo dice quanta massa è stipata in ogni unità di volume: è la
-grandezza che distingue un blocco di ferro da un blocco di legno delle stesse dimensioni.</p>
-
-<div class="regole">
-<p>La densità è il rapporto fra la massa $m$ del corpo e il suo volume $V$:</p>
-<p>$$d = \frac{m}{V} \qquad\Longrightarrow\qquad [d] = \frac{\text{kg}}{\text{m}^3}$$</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>L'unità di una grandezza derivata si ricava dalla formula, non si sceglie.</p>
 </div>
 
-<div class="esempi">
-<h3>Esempio</h3>
-<p>$m = 174\ \text{kg}$, $V = 1{,}6\ \text{m}^3$.</p>
-<p>$$d = \frac{174\ \text{kg}}{1{,}6\ \text{m}^3} = 108{,}75\ \frac{\text{kg}}{\text{m}^3}
-= 110\ \frac{\text{kg}}{\text{m}^3}$$</p>
-<p>Il divisore ha due cifre significative: il risultato si ferma a due.</p>
-</div>
+<h2>Esempio 1</h2>
 
-<div class="nota">
-<strong>Attenzione all'unità.</strong> L'unità di una grandezza derivata non si sceglie,
-si ricava. Dividere chilogrammi per metri cubi dà necessariamente
-$\text{kg}/\text{m}^3$: se l'unità che esce non torna, l'errore è nella formula.
-</div>
+<ul>
+<li>$b=3{,}71\ \text{m}$, $h=1{,}02741\ \text{m}$.</li>
+</ul>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Poiché le unità delle grandezze derivate sono prodotti e quozienti di unità
-fondamentali, anche le loro conversioni seguono regole particolari: l'unità 13 mostra come
-il fattore di conversione vada elevato alla stessa potenza. La densità torna con la
-pressione e con il principio di Archimede, nell'ultima area del programma.</p>
-</div>
+<p class="eq">$$A=b\cdot h=3{,}71\ \text{m}\cdot1{,}02741\ \text{m}=3{,}8116911\ \text{m}^2\ \longrightarrow\ 3{,}81\ \text{m}^2$$</p>
+
+<ul>
+<li>Fattore con meno cifre significative: $b$ (3 c.s.).</li>
+</ul>
+
+<h2>Esempio 2</h2>
+
+<ul>
+<li>$m=174\ \text{kg}$, $V=1{,}6\ \text{m}^3$.</li>
+</ul>
+
+<p class="eq">$$d=\frac{m}{V}=\frac{174\ \text{kg}}{1{,}6\ \text{m}^3}=108{,}75\ \frac{\text{kg}}{\text{m}^3}\ \longrightarrow\ 1{,}1\cdot10^{2}\ \frac{\text{kg}}{\text{m}^3}$$</p>
+
+<ul>
+<li>Divisore con meno cifre significative: $V$ (2 c.s.).</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../12-cifre-significative-nei-calcoli-e-regole-di-approssimazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Cifre significative nei calcoli e regole di approssimazione</span></a><a class="successiva" href="../14-equivalenze-di-grandezze-derivate/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equivalenze di grandezze derivate</span></a></nav>
+<footer><p>Fisica prima &middot; Grandezze fisiche e strumenti matematici &middot; Unità 12</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function mix(a,b){var o={};for(var k in a)o[k]=a[k];for(k in b)o[k]=b[k];return o;}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  var LAB={fill:'var(--rosso)','font-style':'italic','font-weight':700,'font-size':14};
+  function marcatori(svg,pre){
+    var d=el(svg,'defs',{});
+    var a=el(d,'marker',{id:pre+'e',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+    el(a,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--rosso)'});
+    var b=el(d,'marker',{id:pre+'s',markerWidth:8,markerHeight:8,refX:0,refY:3,orient:'auto'});
+    el(b,'path',{d:'M6,0 L0,3 L6,6 Z',fill:'var(--rosso)'});
+  }
+  function quota(p,pre){return el(p,'line',{stroke:'var(--rosso)','stroke-width':1.6,'marker-start':'url(#'+pre+'s)','marker-end':'url(#'+pre+'e)'});}
+
+  /* --- area: rettangolo b × h (h = 2 m) a quadretti di 1 m², cursore su b --- */
+  var A=document.getElementById('fig-area'), ca=document.getElementById('cur-area'), va=document.getElementById('val-area');
+  (function(){
+  if(A&&ca){
+    marcatori(A,'a');
+    var U=40, H=2, y0=30;
+    var ret=el(A,'rect',{y:y0,height:H*U,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2});
+    var q1=el(A,'rect',{y:y0,width:U,height:U,fill:'var(--blu)','fill-opacity':.18});
+    var griglia=el(A,'g',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    var tq=T(A,0,y0+U/2+4,'1 m²',{'text-anchor':'middle','font-size':11,fill:'var(--inchiostro)'});
+    var qb=quota(A,'a'), qh=quota(A,'a');
+    var tb=T(A,0,y0+H*U+42,'b',LAB), th=T(A,0,y0+H*U/2+5,'h',LAB);
+    el(A,'rect',{y:y0,height:H*U,fill:'none',stroke:'var(--inchiostro)','stroke-width':2}); /* bordo sopra la griglia */
+    var bordo=A.lastChild;
+    function disA(b){
+      var w=b*U, x0=210-w/2;
+      set(ret,{x:x0,width:w}); set(bordo,{x:x0,width:w}); set(q1,{x:x0});
+      while(griglia.firstChild)griglia.removeChild(griglia.firstChild);
+      for(var k=1;k<b;k++)el(griglia,'line',{x1:x0+k*U,y1:y0,x2:x0+k*U,y2:y0+H*U});
+      for(var j=1;j<H;j++)el(griglia,'line',{x1:x0,y1:y0+j*U,x2:x0+w,y2:y0+j*U});
+      set(tq,{x:x0+U/2});
+      set(qb,{x1:x0,y1:y0+H*U+20,x2:x0+w,y2:y0+H*U+20}); set(tb,{x:f(210-4)});
+      set(qh,{x1:x0-18,y1:y0,x2:x0-18,y2:y0+H*U}); set(th,{x:f(x0-36)});
+      va.innerHTML='b = '+b+' m · A = '+(2*b)+' m²';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    ca.addEventListener('input',function(){disA(+ca.value);});
+    disA(+ca.value);
+  }
+  })();
+
+  /* --- volume: parallelepipedo a × b × c (b = 3 m, c = 2 m) a cubetti di 1 m³, cursore su a --- */
+  var V=document.getElementById('fig-vol'), cv=document.getElementById('cur-vol'), vv=document.getElementById('val-vol');
+  (function(){
+  if(V&&cv){
+    marcatori(V,'v');
+    var U=40, Bm=3, Cm=2, dx=0.55*U, dy=-0.4*U, yb=210;
+    var w=Bm*U, x0=210-(w+Cm*dx)/2;
+    var g=el(V,'g',{});
+    function P(x,y,z){return [x0+x*U+z*dx, yb-y*U+z*dy];}   /* x larghezza, y altezza, z profondità */
+    function lin(p,q,a){var A1=P.apply(null,p),B1=P.apply(null,q);return el(g,'line',mix({x1:f(A1[0]),y1:f(A1[1]),x2:f(B1[0]),y2:f(B1[1])},a||{}));}
+    function poli(pts,a){return el(g,'path',mix({d:'M'+pts.map(function(q){var r=P.apply(null,q);return f(r[0])+','+f(r[1]);}).join(' L')+' Z'},a));}
+    var qa=quota(V,'v'), qb=quota(V,'v'), qc=quota(V,'v');
+    var ta=T(V,0,0,'a',LAB), tb=T(V,0,0,'b',LAB), tc=T(V,0,0,'c',LAB);
+    function disV(a){
+      while(g.firstChild)g.removeChild(g.firstChild);
+      var sott={stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'};
+      poli([[0,0,0],[Bm,0,0],[Bm,a,0],[0,a,0]],{fill:'var(--blu-chiaro)'});
+      poli([[0,a,0],[Bm,a,0],[Bm,a,Cm],[0,a,Cm]],{fill:'#dfeaf6'});
+      poli([[Bm,0,0],[Bm,0,Cm],[Bm,a,Cm],[Bm,a,0]],{fill:'#cfdff0'});
+      var k;
+      for(k=1;k<Bm;k++){lin([k,0,0],[k,a,0],sott);lin([k,a,0],[k,a,Cm],sott);}
+      for(k=1;k<a;k++){lin([0,k,0],[Bm,k,0],sott);lin([Bm,k,0],[Bm,k,Cm],sott);}
+      for(k=1;k<Cm;k++){lin([0,a,k],[Bm,a,k],sott);lin([Bm,0,k],[Bm,a,k],sott);}
+      var sp={stroke:'var(--inchiostro)','stroke-width':2,fill:'none'};
+      poli([[0,0,0],[Bm,0,0],[Bm,a,0],[0,a,0]],sp);
+      poli([[0,a,0],[Bm,a,0],[Bm,a,Cm],[0,a,Cm]],sp);
+      poli([[Bm,0,0],[Bm,0,Cm],[Bm,a,Cm],[Bm,a,0]],sp);
+      /* quote */
+      var p0=P(0,0,0), p1=P(0,a,0), p2=P(Bm,0,0), p3=P(Bm,0,Cm);
+      set(qa,{x1:f(p0[0]-16),y1:f(p0[1]),x2:f(p1[0]-16),y2:f(p1[1])}); set(ta,{x:f(p0[0]-34),y:f((p0[1]+p1[1])/2+5)});
+      set(qb,{x1:f(p0[0]),y1:f(p0[1]+16),x2:f(p2[0]),y2:f(p2[1]+16)}); set(tb,{x:f((p0[0]+p2[0])/2-4),y:f(p0[1]+34)});
+      set(qc,{x1:f(p2[0]+12),y1:f(p2[1]+10),x2:f(p3[0]+12),y2:f(p3[1]+10)}); set(tc,{x:f((p2[0]+p3[0])/2+22),y:f((p2[1]+p3[1])/2+22)});
+      vv.innerHTML='a = '+a+' m · V = '+(a*6)+' m³';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    cv.addEventListener('input',function(){disV(+cv.value);});
+    disV(+cv.value);
+  }
+  })();
+})();
+</script>
 </body>
 </html>
