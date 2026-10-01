@@ -5,93 +5,157 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Onde su una corda — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Onde e suono &middot; Unit&agrave; 19</p>
+  <p class="occhiello">Onde e suono &middot; Unità 19</p>
   <h1>Onde su una corda</h1>
-  <p class="sommario">Una corda tesa &egrave; il caso pi&ugrave; semplice per vedere quanto
-  velocemente si propaga un'onda meccanica, e da che cosa dipende quella velocit&agrave;.</p>
 </header>
 
-<h2>Densit&agrave; lineare</h2>
+<ul>
+<li>Corda tesa di massa $m$ e lunghezza $L$, percorsa da un'onda con velocità $v$.</li>
+</ul>
 
-<p>Consideriamo una corda di massa $m$ e lunghezza $L$, fissata a un'estremit&agrave; e percorsa
-da un'onda che si propaga con velocit&agrave; $v$. Conviene descrivere la corda con la sua
-<strong>densit&agrave; lineare</strong>:</p>
-
-$$ \mu = \frac{m}{L} $$
-
-<p>misurata in $[\mu] = \text{kg/m}$: indica quanti chilogrammi di corda ci sono in ogni metro di
-lunghezza.</p>
-
-<div class="fig">
-<svg viewBox="0 0 520 170" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f21a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="440" y1="20" x2="440" y2="150" stroke="var(--inchiostro)" stroke-width="3"/>
-<g stroke="var(--inchiostro)" stroke-width="1.4">
-<line x1="440" y1="24" x2="465" y2="34"/>
-<line x1="440" y1="44" x2="465" y2="54"/>
-<line x1="440" y1="64" x2="465" y2="74"/>
-<line x1="440" y1="84" x2="465" y2="94"/>
-<line x1="440" y1="104" x2="465" y2="114"/>
-<line x1="440" y1="124" x2="465" y2="134"/>
-</g>
-<path d="M 20,85 C 45,50 65,50 90,85 S 135,120 160,85 L 440,85"
- fill="none" stroke="var(--blu)" stroke-width="2.6"/>
-<line x1="30" y1="30" x2="70" y2="30" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#f21a)"/>
-<text x="50" y="20" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">v</text>
-<text x="250" y="150" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">corda di massa $m$ e lunghezza $L$</text>
-</svg>
-<p class="did">La perturbazione avanza lungo la corda tesa con velocit&agrave; $v$.</p>
+<div class="def">
+<span class="et">Definizione &middot; densità lineare</span>
+<p>$\mu$: massa della corda per unità di lunghezza. Unità: kg/m.</p>
 </div>
 
-<h2>Velocit&agrave; di propagazione</h2>
+<p class="eq">$$\mu = \frac{m}{L}$$</p>
+<p class="leg">$\mu$: densità lineare (kg/m); $m$: massa (kg); $L$: lunghezza (m).</p>
 
-<p>La velocit&agrave; con cui l'onda si propaga lungo la corda, ottenuta per via sperimentale,
-dipende dalla tensione $F$ della corda e dalla sua densit&agrave; lineare:</p>
+<div class="fig">
+<svg id="corda" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Impulso su una corda tesa fissata a una parete: posizione iniziale tratteggiata e posizione dopo 0,5 s; al crescere della tensione F l'impulso percorre più strada"></svg>
+<div class="cursore"><label for="cur-f">tensione</label><input id="cur-f" type="range" min="0.2" max="2.4" step="0.1" value="0.8"><span class="val" id="val-f"></span></div>
+<p class="did">$\mu = 0{,}3\ \text{kg/m}$. Impulso all'istante iniziale (1) e dopo $0{,}5\ \text{s}$ (2).</p>
+</div>
 
-$$ v = \sqrt{\frac{F}{\mu}} $$
+<div class="def">
+<span class="et">Legge sperimentale &middot; velocità di propagazione</span>
+<p>Velocità di un'onda su una corda tesa.</p>
+</div>
 
-<p>dove $F$ &egrave; la tensione della corda, cio&egrave; la forza con cui essa &egrave; tirata
-alle estremit&agrave;.</p>
+<p class="eq">$$v = \sqrt{\frac{F}{\mu}}$$</p>
+<p class="leg">$v$: velocità di propagazione (m/s); $F$: tensione della corda (N); $\mu$: densità lineare (kg/m).</p>
+
+<ul>
+<li>Tensione $F$: forza con cui la corda è tirata alle estremità.</li>
+</ul>
 
 <h2>Esempio</h2>
 
-<p>Una corda ha tensione $F = 0{,}8\ \text{N}$ e densit&agrave; lineare $\mu = 0{,}3\
-\text{kg/m}$. La velocit&agrave; di propagazione dell'onda vale:</p>
+<p>Dati: $F = 0{,}8\ \text{N}$; $\mu = 0{,}3\ \text{kg/m}$.</p>
 
-$$ v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{0{,}8}{0{,}3}} \approx 1{,}63\ \text{m/s} $$
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Nell'unit&agrave; successiva vediamo come si scrive la funzione d'onda armonica, che
-descrive la posizione di ogni punto della corda in ogni istante.</li>
-<li>Quando la corda &egrave; fissata a entrambe le estremit&agrave; nascono le onde
-stazionarie, con una trattazione propria pi&ugrave; avanti nel percorso.</li>
-</ul>
-</div>
+<p class="eq">$$v = \sqrt{\frac{F}{\mu}} = \sqrt{\frac{0{,}8\ \text{N}}{0{,}3\ \text{kg/m}}} \approx 1{,}63\ \text{m/s}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../20-caratteristiche-di-un-onda/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Caratteristiche di un'onda</span></a><a class="successiva" href="../22-la-funzione-d-onda-armonica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La funzione d'onda armonica</span></a></nav>
-<footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 19</p></footer>
+<footer><p>Fisica quarta &middot; Onde e suono &middot; Unità 19</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,'text-anchor':'middle',fill:'var(--grigio)'},a||{}),p);e.textContent=s;return e;}
+  function num(v){return v.toFixed(2).replace('.',',');}
+
+  /* impulso y = A exp(-((x-xc)/w)^2) su corda tesa; xc = x0 + v·t, v = √(F/μ), t = 0,5 s */
+  var svg=document.getElementById('corda');
+  var d0=el('defs',{},svg);
+  var m=el('marker',{id:'fr-c',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'},d0);
+  el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--rosso)'},m);
+  var mv=el('marker',{id:'fr-v',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'},d0);
+  el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--verde)'},mv);
+  var MU=0.3, T=0.5, S=160, XA=70, Y0=120, A=42, W=0.11, X0=0.25, LC=2.1;
+  var XW=XA+LC*S; // parete
+  function px(x){return XA+x*S;}
+  function d(xc,a,b){a=a||0;b=b||LC;var s='';for(var i=0;i<=420;i++){var x=a+(b-a)*i/420, yy=Y0-A*Math.exp(-Math.pow((x-xc)/W,2));s+=(i?'L':'M')+px(x).toFixed(1)+' '+yy.toFixed(1)+' ';}return s;}
+  var sotto=el('g',{},svg), sopra=el('g',{},svg);
+  // parete
+  el('line',{x1:XW,y1:40,x2:XW,y2:180,stroke:'var(--inchiostro)','stroke-width':3},sotto);
+  for(var k=0;k<7;k++)el('line',{x1:XW,y1:46+k*20,x2:XW+18,y2:56+k*20,stroke:'var(--inchiostro)','stroke-width':1.3},sotto);
+  // impulso iniziale (1)
+  el('path',{d:d(X0,X0-0.28,X0+0.28),fill:'none',stroke:'var(--grigio)','stroke-width':1.6,'stroke-dasharray':'5,4'},sotto);
+  txt(sotto,px(X0),Y0-A-10,'1',{'font-size':13});
+  // corda con impulso dopo t (2)
+  var corda=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':2.6,'stroke-linejoin':'round'},sopra);
+  var t2=txt(sopra,0,Y0-A-10,'2',{'font-size':13,fill:'var(--blu)'});
+  // spostamento v·t
+  var yb=Y0+28;
+  var sp=el('line',{y1:yb,y2:yb,stroke:'var(--verde)','stroke-width':1.6,'marker-end':'url(#fr-v)'},sopra);
+  var tsp=txt(sopra,0,yb+18,'',{'font-size':12,fill:'var(--verde)'});
+  // tensione all'estremità sinistra
+  var fF=el('line',{y1:Y0,y2:Y0,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#fr-c)'},sopra);
+  var tF=txt(sopra,0,Y0-8,'F',{'font-size':13,fill:'var(--rosso)'});
+
+  var cur=document.getElementById('cur-f'), val=document.getElementById('val-f');
+  function disegna(){
+    var F=parseFloat(cur.value), v=Math.sqrt(F/MU), xc=X0+v*T;
+    corda.setAttribute('d',d(xc));
+    t2.setAttribute('x',px(xc));
+    sp.setAttribute('x1',px(X0));sp.setAttribute('x2',px(xc)-4);
+    tsp.setAttribute('x',(px(X0)+px(xc))/2);tsp.textContent='v·t = '+num(v*T)+' m';
+    var lf=10+12*F; fF.setAttribute('x1',XA);fF.setAttribute('x2',XA-lf);
+    tF.setAttribute('x',XA-lf/2-2);
+    val.textContent='F = '+num(F)+' N · v = '+num(v)+' m/s';
+  }
+  cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)allineaQuaderno();});disegna();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
