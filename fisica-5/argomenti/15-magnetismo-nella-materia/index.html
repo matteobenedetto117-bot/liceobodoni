@@ -5,21 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Magnetismo nella materia — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.tabella{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.92rem;margin:18px 0}
-.tabella caption{text-align:left;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--grigio);margin-bottom:8px}
-.tabella th,.tabella td{border-bottom:1px solid var(--riga);padding:7px 10px;text-align:left}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
 .tabella th{color:var(--blu);font-weight:600}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
 </style>
 </head>
 <body>
@@ -29,141 +53,190 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 14</p>
   <h1>Magnetismo nella materia</h1>
-  <p class="sommario">Ogni materiale è fatto di atomi, e ogni atomo, visto come una minuscola
-  spira di corrente, genera un proprio campo magnetico. Il modo in cui questi campi microscopici
-  rispondono a un campo esterno distingue i materiali in tre famiglie, e fissa quanto un campo
-  magnetico venga rinforzato o indebolito dalla loro presenza.</p>
 </header>
 
-<h2>Il modello atomico come piccola spira</h2>
-
-<p>Il modello atomico più accurato verrà studiato nella parte di meccanica quantistica; per ora
-basta un'approssimazione semplice ma efficace: il moto dell'elettrone attorno al nucleo si può
-interpretare come una corrente, quindi ogni atomo si comporta come una piccola spira che genera un
-campo magnetico $\vec B$.</p>
-
-<div class="fig" style="max-width:520px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 460 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f15e" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="f15i" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="f15b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<ellipse cx="110" cy="95" rx="80" ry="45" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="110" cy="95" r="6" fill="var(--rosso)"/>
-<text x="118" y="99" font-family="var(--sans)" font-size="12" fill="var(--rosso)">+</text>
-<path d="M60,60 A80,45 0 0 1 65,63" fill="none" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#f15e)"/>
-<circle cx="55" cy="58" r="4" fill="var(--inchiostro)"/>
-<text x="30" y="45" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">elettrone</text>
-<text x="60" y="160" font-family="var(--sans)" font-size="12" fill="var(--grigio)">l'orbita equivale a una corrente</text>
-<line x1="230" y1="95" x2="270" y2="95" stroke="var(--grigio)" stroke-width="1.4" marker-end="url(#f15i)"/>
-<text x="240" y="85" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&#8801;</text>
-<ellipse cx="360" cy="105" rx="55" ry="20" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<circle cx="360" cy="105" r="4" fill="var(--blu)"/>
-<path d="M405,105 A55,20 0 0 1 400,111" fill="none" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f15i)"/>
-<text x="410" y="112" font-family="var(--sans)" font-size="13" fill="var(--blu)">i</text>
-<line x1="360" y1="85" x2="360" y2="40" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#f15b)"/>
-<text x="367" y="45" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-</svg>
-<p class="did">L'elettrone in orbita attorno al nucleo equivale a una piccola spira di corrente
-$i$, che genera un campo magnetico $\vec B$.</p>
-</div>
-
-<p>In un materiale non magnetizzato sono presenti moltissime di queste spire atomiche, orientate
-in direzioni casuali: i loro campi magnetici si sommano vettorialmente e il campo totale del
-materiale risulta nullo.</p>
-
-<div class="fig" style="max-width:340px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f15r" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker></defs>
-<rect x="14" y="14" width="232" height="90" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<g stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f15r)">
-<line x1="35" y1="80" x2="55" y2="55"/><line x1="75" y1="55" x2="65" y2="80"/><line x1="100" y1="80" x2="120" y2="60"/>
-<line x1="140" y1="55" x2="155" y2="75"/><line x1="175" y1="80" x2="160" y2="55"/><line x1="195" y1="60" x2="215" y2="80"/>
-<line x1="45" y1="35" x2="60" y2="50"/><line x1="90" y1="40" x2="75" y2="60"/><line x1="130" y1="35" x2="140" y2="55"/>
-<line x1="170" y1="40" x2="185" y2="55"/><line x1="205" y1="35" x2="195" y2="55"/>
-</g>
-<text x="130" y="120" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">materiale non magnetizzato: campo totale nullo</text>
-</svg>
-</div>
-
-<h2>Tre risposte a un campo magnetico esterno</h2>
-
-<p>Immergendo il materiale in un campo magnetico esterno, i campi legati alle singole particelle
-tendono ad allinearsi con esso, ma in misura molto diversa da un materiale all'altro. Si
-distinguono tre casi.</p>
+<ul>
+<li>Modello classico: elettrone in orbita attorno al nucleo &equiv; piccola spira di corrente.</li>
+<li>Ogni spira atomica genera un campo magnetico $\vec B$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f15be" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="f15bi" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<g stroke="var(--rosso)" stroke-width="2" marker-end="url(#f15be)">
-<line x1="30" y1="30" x2="450" y2="30"/><line x1="30" y1="55" x2="450" y2="55"/><line x1="30" y1="80" x2="450" y2="80"/>
-</g>
-<text x="455" y="34" font-family="var(--sans)" font-size="13" fill="var(--rosso)">B&#8320;</text>
-<text x="30" y="18" font-family="var(--sans)" font-size="12" fill="var(--grigio)">campo magnetico esterno</text>
-
-<rect x="20" y="105" width="130" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<g stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f15bi)">
-<line x1="35" y1="150" x2="60" y2="150"/><line x1="70" y1="150" x2="95" y2="150"/><line x1="105" y1="150" x2="130" y2="150"/>
-<line x1="35" y1="130" x2="60" y2="130"/><line x1="70" y1="130" x2="95" y2="130"/><line x1="105" y1="130" x2="130" y2="130"/>
-</g>
-<text x="85" y="185" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="600" fill="var(--inchiostro)">FERROMAGNETICO</text>
-<text x="85" y="200" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">allineamento totale</text>
-
-<rect x="175" y="105" width="130" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<g stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f15bi)">
-<line x1="190" y1="150" x2="215" y2="150"/><line x1="225" y1="150" x2="248" y2="135"/><line x1="260" y1="150" x2="285" y2="150"/>
-<line x1="190" y1="130" x2="210" y2="118"/><line x1="225" y1="130" x2="250" y2="130"/><line x1="262" y1="128" x2="285" y2="130"/>
-</g>
-<text x="240" y="185" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="600" fill="var(--inchiostro)">PARAMAGNETICO</text>
-<text x="240" y="200" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">allineamento parziale</text>
-
-<rect x="330" y="105" width="130" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<g stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f15bi)">
-<line x1="345" y1="155" x2="365" y2="130"/><line x1="378" y1="150" x2="400" y2="155"/><line x1="410" y1="130" x2="430" y2="150"/>
-<line x1="345" y1="125" x2="365" y2="145"/><line x1="385" y1="115" x2="365" y2="130"/><line x1="415" y1="150" x2="440" y2="130"/>
-</g>
-<text x="395" y="185" text-anchor="middle" font-family="var(--sans)" font-size="12" font-weight="600" fill="var(--inchiostro)">DIAMAGNETICO</text>
-<text x="395" y="200" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">nessun allineamento</text>
-</svg>
-<p class="did">Nei tre casi, gli stessi campi atomici del materiale rispondono in modo diverso al
-campo esterno $B_0$.</p>
+<svg id="fig-a" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">Corrente $i$ opposta al moto dell'elettrone (carica negativa); $\vec B$ con la regola della mano destra.</p>
 </div>
 
-<p>Nei materiali <strong>ferromagnetici</strong> l'allineamento è totale: il campo magnetico che
-si crea nel materiale si somma a quello esterno, incrementandolo in modo netto. Nei
-<strong>paramagnetici</strong> l'allineamento è solo parziale, e il campo esterno viene
-incrementato in modo lieve. Nei <strong>diamagnetici</strong> non c'è allineamento: il campo
-esterno, in presenza del materiale, diminuisce leggermente.</p>
+<ul>
+<li>Materiale non magnetizzato: spire atomiche orientate a caso.</li>
+<li>Somma vettoriale dei campi atomici nulla: campo totale nullo.</li>
+</ul>
 
-<h2>Permeabilità magnetica relativa</h2>
-
-<p>L'effetto del materiale si misura con la permeabilità magnetica relativa $\mu_r$, il rapporto
-fra il campo magnetico in presenza del materiale, $B$, e il campo che ci sarebbe nello stesso
-punto in sua assenza, $B_0$:</p>
-
-<div class="formula-box">
-$$\mu_r=\frac{B}{B_0}$$
+<div class="fig">
+<svg id="fig-b" viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">Campi atomici orientati a caso: somma vettoriale nulla.</p>
 </div>
 
-<p>È un numero puro, senza unità di misura: vale molto più di 1 nei ferromagnetici, poco più di 1
-nei paramagnetici, poco meno di 1 nei diamagnetici.</p>
+<ul>
+<li>Materiale in un campo esterno $\vec B_0$: risposta diversa secondo il materiale.</li>
+<li><strong>Ferromagnetici</strong>: forte allineamento dei campi atomici con $\vec B_0$; campo molto più intenso.</li>
+<li><strong>Paramagnetici</strong>: allineamento parziale; campo lievemente più intenso.</li>
+<li><strong>Diamagnetici</strong>: atomi senza campo proprio; campi indotti deboli, opposti a $\vec B_0$; campo lievemente meno intenso.</li>
+</ul>
+
+<div class="fig">
+<svg id="fig-c" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-c">campo esterno $B_0$</label><input id="cur-c" type="range" min="0" max="10" step="1" value="0"><output id="val-c" for="cur-c"></output></div>
+<p class="did">Risposta dei tre materiali al campo esterno (effetto esagerato per para- e diamagnetici).</p>
+</div>
+
+<div class="def"><span class="et">Permeabilità magnetica relativa</span>
+<p class="eq">$$\mu_r=\frac{B}{B_0}$$</p>
+<p>$B$ campo in presenza del materiale (T), $B_0$ campo nello stesso punto senza materiale (T); $\mu_r$ numero puro.</p>
+</div>
+
+<ul>
+<li>Ferromagnetici: $\mu_r\gg1$.</li>
+<li>Paramagnetici: $\mu_r$ poco maggiore di 1.</li>
+<li>Diamagnetici: $\mu_r$ poco minore di 1.</li>
+</ul>
 
 <table class="tabella">
-<caption>Permeabilità magnetica relativa $\mu_r$ di alcuni materiali</caption>
-<tr><th>Ferromagnetici</th><th>$\mu_r$</th><th>Paramagnetici</th><th>$\mu_r$</th><th>Diamagnetici</th><th>$\mu_r$</th></tr>
-<tr><td>Ferro</td><td>10&thinsp;000&ndash;200&thinsp;000</td><td>Platino</td><td>1,000265</td><td>Rame</td><td>0,999994</td></tr>
-<tr><td>Ferro-Nichel</td><td>90&ndash;100</td><td>Alluminio</td><td>1,000022</td><td>Acqua</td><td>0,999992</td></tr>
-<tr><td>Nichel</td><td>100&ndash;600</td><td>Aria</td><td>1,000004</td><td>Argento</td><td>0,999981</td></tr>
+<tr><th>Materiale</th><th>Tipo</th><th>$\mu_r$</th></tr>
+<tr><td>Ferro</td><td>ferromagnetico</td><td>10&thinsp;000&ndash;200&thinsp;000</td></tr>
+<tr><td>Ferro-Nichel</td><td>ferromagnetico</td><td>90&ndash;100</td></tr>
+<tr><td>Nichel</td><td>ferromagnetico</td><td>100&ndash;600</td></tr>
+<tr><td>Platino</td><td>paramagnetico</td><td>1,000265</td></tr>
+<tr><td>Alluminio</td><td>paramagnetico</td><td>1,000022</td></tr>
+<tr><td>Aria</td><td>paramagnetico</td><td>1,000004</td></tr>
+<tr><td>Rame</td><td>diamagnetico</td><td>0,999994</td></tr>
+<tr><td>Acqua</td><td>diamagnetico</td><td>0,999992</td></tr>
+<tr><td>Argento</td><td>diamagnetico</td><td>0,999981</td></tr>
 </table>
-
 
 <nav class="nav-unita"><a class="precedente" href="../14-campo-magnetico-di-un-solenoide/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campo magnetico di un solenoide</span></a><a class="successiva" href="../16-temperatura-di-curie-e-geomagnetismo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Temperatura di Curie e geomagnetismo</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 14</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function lab(col){return {fill:col,'font-weight':700,'font-style':'italic','font-size':14};}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  /* freccia centrata in (x,y), direzione th (rad, 0 = verso destra, positivo antiorario), lunghezza l */
+  function freccia(p,x,y,th,l,col,w){
+    var dx=Math.cos(th)*l/2, dy=-Math.sin(th)*l/2;
+    el(p,'line',{x1:f(x-dx),y1:f(y-dy),x2:f(x+dx*.75),y2:f(y+dy*.75),stroke:col,'stroke-width':w||1.8,'stroke-linecap':'round'});
+    punta(p,x+dx*.75,y+dy*.75,dx,dy,col,5);
+  }
+  /* generatore pseudocasuale con seme fisso */
+  function rng(s){return function(){s=(s*16807)%2147483647;return (s-1)/2147483646;};}
+
+  /* --- figura 1: orbita dell'elettrone e spira equivalente --- */
+  var A=document.getElementById('fig-a');
+  if(A){
+    /* orbita orizzontale vista dall'alto in prospettiva: la parte bassa dell'ellisse è davanti */
+    var ax=110, ay=105, rx=78, ry=28;
+    el(A,'ellipse',{cx:ax,cy:ay,rx:rx,ry:ry,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(A,'circle',{cx:ax,cy:ay,r:7,fill:'var(--rosso)'});
+    T(A,ax,ay+4.5,'+',{fill:'#fff','font-size':13,'font-weight':700,'text-anchor':'middle'});
+    T(A,ax,ay-14,'nucleo',{fill:'var(--grigio)','font-size':11,'text-anchor':'middle'});
+    /* elettrone davanti, moto verso sinistra */
+    var ex=ax+20, ey=ay+ry*Math.sqrt(1-(20/rx)*(20/rx));
+    el(A,'circle',{cx:f(ex),cy:f(ey),r:5,fill:'var(--inchiostro)'});
+    el(A,'line',{x1:f(ex-8),y1:f(ey+12),x2:f(ex-40),y2:f(ey+12),stroke:'var(--inchiostro)','stroke-width':1.6});
+    punta(A,ex-40,ey+12,-1,0,'var(--inchiostro)');
+    T(A,ex+10,ey+16,'e⁻',{fill:'var(--inchiostro)','font-size':13});
+    T(A,ax,ay+ry+38,'moto dell’elettrone',{fill:'var(--grigio)','font-size':11,'text-anchor':'middle'});
+    /* equivalenza */
+    T(A,212,ay+6,'≡',{fill:'var(--grigio)','font-size':22,'text-anchor':'middle'});
+    /* spira equivalente: corrente verso destra davanti (antioraria vista dall'alto), B verso l'alto */
+    var sx=320, sy=115, srx=68, sry=24;
+    el(A,'line',{x1:sx,y1:sy,x2:sx,y2:sy-sry,stroke:'var(--blu)','stroke-width':2.2,'stroke-dasharray':'4 3'});
+    el(A,'ellipse',{cx:sx,cy:sy,rx:srx,ry:sry,fill:'none',stroke:'var(--verde)','stroke-width':2});
+    el(A,'line',{x1:sx,y1:sy-sry,x2:sx,y2:30,stroke:'var(--blu)','stroke-width':2.2});
+    punta(A,sx,30,0,-1,'var(--blu)',8);
+    T(A,sx+9,40,'B',lab('var(--blu)'));
+    /* frecce della corrente: davanti verso destra, dietro verso sinistra */
+    punta(A,sx+4,sy+sry,1,0,'var(--verde)',7);
+    var cf=-30/srx, sf=Math.sqrt(1-cf*cf);
+    punta(A,sx-30,sy-sry*sf,-srx*sf,-sry*cf,'var(--verde)',7);
+    T(A,sx+14,sy+sry+17,'i',lab('var(--verde)'));
+    T(A,sx,sy+sry+38,'spira equivalente',{fill:'var(--grigio)','font-size':11,'text-anchor':'middle'});
+  }
+
+  /* --- figura 2: campi atomici orientati a caso, somma nulla --- */
+  var Bf=document.getElementById('fig-b');
+  if(Bf){
+    var r=rng(7), ang=[], k;
+    for(k=0;k<12;k++){var t=r()*2*Math.PI;ang.push(t,t+Math.PI);}
+    for(k=ang.length-1;k>0;k--){var j=Math.floor(r()*(k+1)),q=ang[k];ang[k]=ang[j];ang[j]=q;}
+    el(Bf,'rect',{x:60,y:15,width:300,height:120,rx:6,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    for(k=0;k<24;k++){var c=k%8, rr=Math.floor(k/8);
+      freccia(Bf,60+300/16+c*300/8,15+20+rr*40,ang[k],22,'var(--blu)');}
+  }
+
+  /* --- figura 3: tre materiali nel campo esterno, cursore su B0 --- */
+  var C=document.getElementById('fig-c'), cc=document.getElementById('cur-c'), vc=document.getElementById('val-c');
+  if(C&&cc){
+    var r3=rng(11), base=[], i;
+    for(i=0;i<4;i++){var t3=r3()*2*Math.PI;base.push(t3,t3+Math.PI);}
+    for(i=base.length-1;i>0;i--){var j3=Math.floor(r3()*(i+1)),q3=base[i];base[i]=base[j3];base[j3]=q3;}
+    var gB=el(C,'g',{}), gM=el(C,'g',{});
+    var px=[12,147,282], pw=126, py=62, ph=90;
+    var nomi=['FERROMAGNETICO','PARAMAGNETICO','DIAMAGNETICO'];
+    function norm(t){while(t>Math.PI)t-=2*Math.PI;while(t<=-Math.PI)t+=2*Math.PI;return t;}
+    function disC(b){
+      vuota(gB);vuota(gM);
+      var u=b/10;
+      if(b>0){
+        for(var l=0;l<3;l++){var y=10+l*14;
+          el(gB,'line',{x1:30,y1:y,x2:392,y2:y,stroke:'var(--rosso)','stroke-width':f(0.6+1.6*u),'stroke-dasharray':'6 4'});
+          punta(gB,394,y,1,0,'var(--rosso)',5+3*u);}
+        T(gB,4,29,'B₀',{fill:'var(--rosso)','font-size':13,'font-style':'italic','font-weight':700});
+      } else T(gB,210,29,'nessun campo esterno',{fill:'var(--grigio)','font-size':12,'text-anchor':'middle'});
+      var a=[1-Math.exp(-u*5),0.45*u];
+      for(var m=0;m<3;m++){
+        var x0=px[m];
+        el(gM,'rect',{x:x0,y:py,width:pw,height:ph,rx:6,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+        for(var k=0;k<8;k++){
+          var cx=x0+pw/8+(k%4)*pw/4, cy=py+ph/4+Math.floor(k/4)*ph/2;
+          if(m<2){freccia(gM,cx,cy,norm(base[k])*(1-a[m]),22,'var(--blu)');}
+          else{el(gM,'circle',{cx:cx,cy:cy,r:2.5,fill:'var(--grigio)'});
+            if(b>0)freccia(gM,cx,cy+11,Math.PI,6+10*u,'var(--blu)',1.5);}
+        }
+        T(gM,x0+pw/2,py+ph+18,nomi[m],{fill:'var(--inchiostro)','font-size':11,'font-weight':700,'text-anchor':'middle'});
+        var rel=b===0?'campo nullo':['B molto maggiore di B₀','B poco maggiore di B₀','B poco minore di B₀'][m];
+        T(gM,x0+pw/2,py+ph+34,rel,{fill:'var(--grigio)','font-size':11,'text-anchor':'middle'});
+      }
+      vc.innerHTML='B₀ = '+b+'/10 del massimo';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    cc.addEventListener('input',function(){disC(+cc.value);});
+    disC(+cc.value);
+  }
+})();
+</script>
 </body>
 </html>
