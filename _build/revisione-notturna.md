@@ -13,7 +13,7 @@ L'attività parte ogni mezz'ora, dalle 22:00 alle 7:30. **Ogni esecuzione lavora
 1. **Semaforo.** Leggi `_build/stato-notturno.txt` (non versionato).
    * Se contiene `occupato <data-ora>` meno vecchio di 2 ore: un'altra esecuzione è in corso. Termina subito, senza toccare nulla, con il messaggio "esecuzione precedente ancora in corso".
    * Altrimenti scrivici `occupato <data-ora attuale ISO>` (sovrascrivendo: non cancellare file) e procedi.
-2. **Coda.** In `_build/coda-notturna.txt` prendi la prima riga non di commento senza esito (`<classe> <NN>`). Se non ce ne sono: scrivi `libero` nel semaforo e termina con "coda esaurita".
+2. **Coda.** In `_build/coda-notturna.txt` prendi la prima riga non di commento senza esito (`<classe> <NN>` oppure `<classe> <NN> rifare`). Se non ce ne sono: scrivi `libero` nel semaforo e termina con "coda esaurita".
 3. Esegui il ciclo del §1 su quell'unità sola.
 4. **Esito.** Aggiungi alla riga della coda ` | pubblicata <hash>`, ` | saltata (già revisionata)` oppure ` | non pubblicata: <motivo breve>`. La coda si versiona nello stesso commit dell'unità (o in un commit a sé se l'unità non è pubblicata).
 5. **Report.** In `_registro/report-notturno.md` la sezione è quella della notte, intestata con la data della sera d'inizio (le esecuzioni fra 0:00 e 8:00 appartengono alla sera prima): aggiungi una riga con l'esito dell'unità. Nessun report "di fine sessione" a parte.
@@ -27,7 +27,7 @@ Un'unità saltata (già revisionata) non consuma l'esecuzione: segna l'esito e p
 
 Per l'unità presa dalla coda:
 
-1. **Salta** l'unità se in `_registro/<classe>.md` ha già la riga "Revisione:".
+1. **Salta** l'unità se in `_registro/<classe>.md` ha già la riga "Revisione:", **tranne** quando la riga della coda termina con `rifare`: in quel caso l'unità è stata revisionata con regole superate e va rifatta. Riparti dalla pagina attuale, recupera testo e titoletti tolti dalla versione precedente alla revisione (`git log` sulla cartella, poi `git show <hash>^:<file>`) e riscrivila secondo il §3; tieni impaginazione e figure interattive già fatte, correggendole solo se serve. Nel registro sostituisci la riga "Revisione:" esistente con quella nuova.
 2. Individua `<classe>/argomenti/NN-slug/index.html` (il numero della cartella può non coincidere con quello dell'unità: fa fede `_dati/<classe>.json`, campo `cartella`). Leggi la pagina, la voce del registro e quella del JSON.
 3. Riscrivi il testo (§3), applica l'impaginazione (§4), rifai le figure (§5).
 4. Verifica (§6). Se la verifica non passa dopo 3 tentativi di correzione: **non pubblicare quell'unità**, ripristina i file (`git checkout -- <cartella>`), scrivi il motivo nel report (§7) e passa alla successiva.
