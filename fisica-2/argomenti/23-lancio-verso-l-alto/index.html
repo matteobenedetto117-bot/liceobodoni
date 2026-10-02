@@ -5,17 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lancio verso l'alto — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#fff;border-left:3px solid var(--blu);border-radius:0 8px 8px 0;padding:10px 16px;margin:20px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -24,110 +54,127 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Cinematica &middot; Unità 13</p>
   <h1>Lancio verso l'alto</h1>
-  <p class="sommario">Lanciamo il corpo verso l'alto invece che verso il basso: la stessa
-  accelerazione di gravità, che nel lancio verso il basso aumentava la velocità, ora la
-  riduce, finché il corpo si ferma un istante e ricade.</p>
 </header>
 
-<h2>Lancio verso l'alto</h2>
-
-<p>Prendiamo l'asse $x$ verticale, orientato verso l'alto, con l'origine nel punto di
-partenza. Il corpo viene lanciato verso l'alto con velocità iniziale positiva $v_0$;
-l'accelerazione resta quella di gravità, diretta verso il basso: $a=-g$.</p>
+<ul>
+<li>Asse $x$ verticale verso l'alto, origine nel punto di lancio: $x_0=0$.</li>
+<li>Velocità iniziale $v_0&gt;0$ verso l'alto; accelerazione $a=-g$, verso il basso.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u23ax" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="u23v0" markerWidth="7" markerHeight="7" refX="3.5" refY="1" orient="auto">
-<path d="M0,7 L7,7 L3.5,0 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="u23a" markerWidth="7" markerHeight="7" refX="3.5" refY="6" orient="auto">
-<path d="M0,0 L7,0 L3.5,7 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="60" y1="270" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u23ax)"/>
-<text x="45" y="18" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">x</text>
-<line x1="52" y1="250" x2="68" y2="250" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="35" y="254" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">0</text>
-<circle cx="60" cy="250" r="3.5" fill="var(--inchiostro)"/>
-<line x1="52" y1="70" x2="68" y2="70" stroke-dasharray="3,3" stroke="var(--grigio)" stroke-width="1.2"/>
-<text x="35" y="74" font-size="13" fill="var(--grigio)" font-family="var(--sans)">h</text>
-<line x1="60" y1="70" x2="150" y2="70" stroke-dasharray="3,3" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="105" y1="225" x2="105" y2="175" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#u23v0)"/>
-<text x="113" y="205" font-size="13" fill="var(--rosso)" font-family="var(--sans)">v&#8320;</text>
-<line x1="150" y1="175" x2="150" y2="220" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u23a)"/>
-<text x="158" y="200" font-size="13" fill="var(--verde)" font-family="var(--sans)">a</text>
-</svg>
-<p class="did">Il corpo parte dall'origine con velocità $v_0$ diretta verso l'alto (verso
-positivo); l'accelerazione $a=-g$ è diretta verso il basso e frena la salita. La quota $h$,
-tratteggiata, è l'altezza massima che raggiungerà.</p>
+<svg id="g-lancio" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Corpo lanciato verso l'alto: salita fino all'altezza massima h e ricaduta, con velocità e accelerazione"></svg>
+<p class="did">$v_0=10$ m/s: posizioni ogni 0,1 s (salita a sinistra, discesa a destra); a destra i vettori $v$ e $a$.</p>
+<div class="cursore"><label for="cur-t">$t$</label><input id="cur-t" type="range" min="0" max="2.04" step="0.01" value="0.5"><span class="val" id="val-t"></span></div>
 </div>
 
-<p>Le tre equazioni del moto uniformemente accelerato, con $x_0=0$ e velocità iniziale $v_0$,
-diventano:</p>
+<p class="eq">$$\begin{cases}v=v_0-gt\\[2pt] x=v_0t-\dfrac12gt^2\\[2pt] v^2=v_0^2-2gx\end{cases}$$</p>
 
-$$\begin{cases}v=v_0-gt\\[2pt] x=v_0t-\dfrac12gt^2\\[2pt] v^2=v_0^2-2gx\end{cases}$$
+<ul>
+<li>Punto più alto: $v=0$ per un istante.</li>
+</ul>
 
-<h2>Altezza massima raggiunta</h2>
-
-<p>Nel punto più alto la velocità si annulla per un istante, prima che il corpo ricada:
-poniamo $v=0$ e $x=h$ nella terza equazione.</p>
-
-$$0=v_0^2-2gh \quad\Rightarrow\quad$$
-
-<div class="formula-box">
-$$h=\dfrac{v_0^2}{2g}$$
+<div class="def"><span class="et">Altezza massima</span>
+<p class="eq">$$0=v_0^2-2gh\quad\Rightarrow\quad h=\dfrac{v_0^2}{2g}$$</p>
 </div>
 
-<h2>Tempo di salita</h2>
-
-<p>Lo stesso annullamento della velocità, applicato alla prima equazione, dà il tempo $t_s$
-impiegato a raggiungere la quota massima:</p>
-
-$$0=v_0-gt_s$$
-
-<div class="formula-box">
-$$t_s=\dfrac{v_0}{g}$$
+<div class="def"><span class="et">Tempo di salita</span>
+<p class="eq">$$0=v_0-gt_s\quad\Rightarrow\quad t_s=\dfrac{v_0}{g}$$</p>
 </div>
 
-<h2>Tempo di discesa</h2>
+<ul>
+<li>Discesa: caduta libera da fermo dall'altezza $h$.</li>
+</ul>
 
-<p>Da $h$ il corpo ricade, e in quell'istante la sua velocità è nulla: è una caduta libera
-da fermo da un'altezza $h$, lo stesso caso già visto, dove il tempo di caduta era
-$t_d=\sqrt{2h/g}$. Sostituendo $h=v_0^2/(2g)$:</p>
-
-$$t_d=\sqrt{\dfrac{2h}{g}}=\sqrt{\dfrac{2}{g}\cdot\dfrac{v_0^2}{2g}}=\sqrt{\dfrac{v_0^2}{g^2}}=\dfrac{v_0}{g}$$
-
-<div class="nota">Il tempo di discesa coincide con il tempo di salita: $t_d=t_s$. La
-riscrittura come caduta libera riusa una formula già nota invece di ricavarne una nuova.</div>
-
-<h2>Tempo di volo totale</h2>
-
-<p>Il tempo totale che il corpo passa in aria è la somma dei due:</p>
-
-$$t_v=t_s+t_d=\dfrac{v_0}{g}+\dfrac{v_0}{g}$$
-
-<div class="formula-box">
-$$t_v=\dfrac{2v_0}{g}$$
+<div class="def"><span class="et">Tempo di discesa</span>
+<p class="eq">$$t_d=\sqrt{\dfrac{2h}{g}}=\sqrt{\dfrac{2}{g}\cdot\dfrac{v_0^2}{2g}}=\dfrac{v_0}{g}$$</p>
 </div>
 
-<h2>Velocità finale</h2>
+<div class="nota"><p>Tempo di discesa uguale al tempo di salita: $t_d=t_s$.</p></div>
 
-<p>Anche la velocità con cui il corpo tocca di nuovo il suolo si ottiene interpretando la
-discesa come caduta libera da fermo da un'altezza $h$: sappiamo che $v_f=-\sqrt{2gh}$.
-Sostituendo $h=v_0^2/(2g)$:</p>
+<div class="def"><span class="et">Tempo di volo</span>
+<p class="eq">$$t_v=t_s+t_d=\dfrac{2v_0}{g}$$</p>
+</div>
 
-$$v_f=-\sqrt{2gh}=-\sqrt{2g\cdot\dfrac{v_0^2}{2g}}=-\sqrt{v_0^2}=-v_0$$
+<div class="def"><span class="et">Velocità finale</span>
+<p class="eq">$$v_f=-\sqrt{2gh}=-\sqrt{2g\cdot\dfrac{v_0^2}{2g}}$$</p>
+<p class="eq principio">$$v_f=-v_0$$</p>
+<p class="leg">$v_0$ velocità iniziale (m/s); $g$ accelerazione di gravità (m/s²); $h$ altezza massima (m); $t_s$, $t_d$, $t_v$ tempi (s).</p>
+</div>
 
-<div class="nota">L'oggetto torna al suolo con la stessa velocità, in modulo, con cui è
-partito: solo il verso è cambiato, perché ora si muove verso il basso.</div>
+<ul>
+<li>Ritorno al punto di lancio con velocità di modulo $v_0$, verso opposto.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../22-lancio-verso-il-basso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Lancio verso il basso</span></a><a class="successiva" href="../24-prima-legge-della-dinamica-e-sistemi-di-riferimento/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Prima legge della dinamica e sistemi di riferimento</span></a></nav>
 <footer><p>Fisica seconda &middot; Cinematica &middot; Unità 13</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0,?0*$/.test(s))s=s.slice(1);return s.replace('-','−');}
+
+  /* ---------- lancio verso l'alto con v0 = 10 m/s: x = v0 t - g t^2/2, v = v0 - g t ---------- */
+  (function(){
+    var svg=document.getElementById('g-lancio'), cur=document.getElementById('cur-t'), val=document.getElementById('val-t'); if(!svg)return;
+    var g=9.81, v0=10, h=v0*v0/(2*g), ts=v0/g, tv=2*v0/g;
+    var defs=el(svg,'defs',{});
+    function freccia(id,col){var m=el(defs,'marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+    freccia('u13ax','var(--inchiostro)');freccia('u13v','var(--rosso)');freccia('u13a','var(--verde)');
+    var ax=130, y0=270, s=40;             /* 1 m = 40 unità */
+    function Y(x){return y0-x*s;}
+    function X(t){return v0*t-g*t*t/2;}
+    el(svg,'line',{x1:ax,y1:y0,x2:230,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.4});
+    for(var i=0;i<5;i++)el(svg,'line',{x1:ax+16+i*20,y1:y0,x2:ax+6+i*20,y2:y0+10,stroke:'var(--grigio)','stroke-width':1});
+    el(svg,'line',{x1:ax,y1:y0,x2:ax,y2:Y(h)-34,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#u13ax)'});
+    txt(svg,ax-10,Y(h)-30,'x (m)',{'font-style':'italic',fill:'var(--inchiostro)','text-anchor':'end'});
+    [1,2,3,4,5].forEach(function(x){el(svg,'line',{x1:ax-4,y1:Y(x),x2:ax+4,y2:Y(x),stroke:'var(--inchiostro)'});txt(svg,ax-9,Y(x)+4,String(x),{'font-size':11,'text-anchor':'end'});});
+    txt(svg,ax-9,y0+4,'0',{'font-size':11,'text-anchor':'end'});
+    el(svg,'line',{x1:ax,y1:Y(h),x2:230,y2:Y(h),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(svg,234,Y(h)+4,'h = '+num(h,2)+' m',{'font-size':11,'text-anchor':'start'});
+    txt(svg,310,30,'v',{'font-size':13,fill:'var(--rosso)','font-style':'italic'});
+    txt(svg,370,30,'a = −g',{'font-size':13,fill:'var(--verde)','font-style':'italic'});
+    var tracce=[];
+    for(var k=0;k*0.1<=tv+1e-9;k++){var tk=k*0.1, c=el(svg,'circle',{cx:tk<=ts?ax+20:ax+52,cy:Y(Math.max(X(tk),0)),r:3,fill:'none',stroke:'var(--grigio)','stroke-width':1});tracce.push([tk,c]);}
+    var vv=el(svg,'line',{stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#u13v)'});
+    var aa=el(svg,'line',{stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#u13a)'});
+    var corpo=el(svg,'circle',{cx:ax+36,r:7,fill:'var(--blu)',stroke:'#fff','stroke-width':1.5});
+    var ks=8, yv=150;                     /* scala: 1 m/s = 8 unità */
+    el(svg,'line',{x1:296,y1:yv,x2:384,y2:yv,stroke:'var(--riga)','stroke-width':1});
+    function disegna(){
+      var t=Math.min(+cur.value,tv), fine=t>=tv-0.005, x=fine?0:Math.max(X(t),0), v=fine?-v0:v0-g*t, y=Y(x);
+      corpo.setAttribute('cy',y);
+      tracce.forEach(function(p){p[1].style.opacity=p[0]<=t+1e-9?1:0;});
+      vv.style.display=Math.abs(v)<0.15?'none':'';
+      vv.setAttribute('x1',310);vv.setAttribute('x2',310);vv.setAttribute('y1',yv);vv.setAttribute('y2',yv-v*ks);
+      aa.setAttribute('x1',370);aa.setAttribute('x2',370);aa.setAttribute('y1',yv);aa.setAttribute('y2',yv+g*ks);
+      var cima=Math.abs(t-ts)<0.006;
+      val.innerHTML='t = '+num(t,2)+' s &nbsp; x = '+num(x,2)+' m &nbsp; v = '+num(cima?0:v,1)+' m/s'+
+        (cima?' &nbsp; <span class="ok">altezza massima</span>':'')+(fine?' &nbsp; <span class="ok">punto di lancio</span>':'');
+    }
+    cur.max=tv.toFixed(2);
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
