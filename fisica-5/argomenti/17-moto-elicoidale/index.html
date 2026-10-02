@@ -5,16 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moto elicoidale — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
 </style>
 </head>
 <body>
@@ -24,72 +57,122 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 16</p>
   <h1>Moto elicoidale</h1>
-  <p class="sommario">Quando la velocità ha sia una componente perpendicolare al campo
-  magnetico sia una componente parallela, il moto risultante è un'elica: circolare nel piano
-  perpendicolare a $\vec B$, uniforme lungo la direzione del campo. Ricaviamo qui le formule
-  per il raggio, il periodo e il passo di questa elica.</p>
 </header>
 
-<h2>Raggio e periodo dell'elica</h2>
+<ul>
+<li>Velocità scomposta: $v_\perp$ perpendicolare a $\vec B$, $v_\parallel$ parallela a $\vec B$.</li>
+<li>$v_\perp$: moto circolare uniforme nel piano perpendicolare a $\vec B$.</li>
+<li>$v_\parallel$: moto rettilineo uniforme lungo $\vec B$, non modificato dal campo.</li>
+<li>Composizione dei due moti: traiettoria elicoidale.</li>
+</ul>
 
-<p>La velocità si scompone nella componente perpendicolare $v_\perp$, responsabile della
-rotazione attorno alla linea di campo, e nella componente parallela $v_\parallel$, che il campo
-magnetico non altera. Il raggio della circonferenza percorsa segue dalla stessa relazione vista
-per il moto circolare, con $v_\perp$ al posto di $v$:</p>
-
-<div class="formula-box">
-$$r=\frac{mv_\perp}{qB}$$
+<div class="def"><span class="et">Raggio dell'elica</span>
+<p class="eq">$$r=\frac{mv_\perp}{qB}$$</p>
+<p>$m$ massa; $q$ carica (in valore assoluto); $B$ intensità del campo.</p>
 </div>
 
-<p>Il periodo di un giro è il rapporto fra la lunghezza della circonferenza e la velocità con
-cui viene percorsa:</p>
+<p class="eq">$$T=\frac{2\pi r}{v_\perp}=\frac{2\pi m}{qB}$$</p>
+<p>$T$ periodo: tempo di un giro.</p>
 
-<div class="formula-box">
-$$T=\frac{2\pi r}{v_\perp}=\frac{2\pi}{v_\perp}\cdot\frac{mv_\perp}{qB}=\frac{2\pi m}{qB}$$
+<div class="nota"><p>$T$ non dipende dalla velocità della particella.</p></div>
+
+<div class="def"><span class="et">Passo dell'elica</span>
+<p>Distanza $P$ percorsa lungo $\vec B$ in un periodo.</p>
+<p class="eq">$$P=v_\parallel\,T=\frac{2\pi m\,v_\parallel}{qB}$$</p>
 </div>
 
-<p>Il fattore $v_\perp$ si semplifica: il periodo non dipende dalla velocità della particella,
-ma solo da massa, carica e campo.</p>
-
-<h2>Il passo dell'elica</h2>
-
-<p>Mentre la particella compie un giro completo attorno alla linea di campo, la componente
-$v_\parallel$ la sposta in avanti di una distanza costante, il <strong>passo dell'elica</strong>
-$P$:</p>
-
-<div class="formula-box">
-$$P=v_\parallel\cdot T=\frac{2\pi m}{qB}\cdot v_\parallel$$
+<div class="fig">
+<svg id="fig-a" viewBox="0 0 420 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">angolo fra $\vec v$ e $\vec B$</label><input id="cur-a" type="range" min="30" max="90" step="5" value="50"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Carica positiva: elica attorno a $\vec B$; $P$ passo dell'elica.</p>
 </div>
-
-<div class="fig" style="max-width:460px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f17b" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="f17v" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="90" y1="270" x2="90" y2="25" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f17b)"/>
-<line x1="180" y1="270" x2="180" y2="25" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f17b)"/>
-<line x1="270" y1="270" x2="270" y2="25" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f17b)"/>
-<text x="282" y="22" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<path d="M75,190 C140,165 55,140 130,115 C195,90 110,70 175,45"
-  fill="none" stroke="var(--rosso)" stroke-width="1.8"/>
-<circle cx="130" cy="115" r="2.6" fill="var(--rosso)"/>
-<line x1="130" y1="115" x2="85" y2="130" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f17v)"/>
-<text x="66" y="140" font-family="var(--sans)" font-size="13" fill="var(--rosso)">v&#8869;</text>
-<line x1="130" y1="115" x2="150" y2="70" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f17v)"/>
-<text x="156" y="66" font-family="var(--sans)" font-size="13" fill="var(--rosso)">v&#8741;</text>
-<path d="M320,190 L332,190 L332,45 L320,45" fill="none" stroke="var(--verde)" stroke-width="1.4"/>
-<text x="345" y="122" font-family="var(--sans)" font-size="13" fill="var(--verde)">P</text>
-</svg>
-<p class="did">Attorno alle linee di campo $\vec B$ la traiettoria è un'elica: $v_\perp$ genera
-la rotazione, $v_\parallel$ l'avanzamento lungo il campo. $P$ è il passo, la distanza percorsa
-in direzione parallela in un periodo $T$.</p>
-</div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../16-temperatura-di-curie-e-geomagnetismo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Temperatura di Curie e geomagnetismo</span></a><a class="successiva" href="../18-acceleratori-di-particelle-ciclotrone-e-sincrotrone/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Acceleratori di particelle: ciclotrone e sincrotrone</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 16</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function linea(p,pts,a){var d='';pts.forEach(function(q,i){d+=(i?' L':'M')+f(q[0])+','+f(q[1]);});var b={d:d,fill:'none'};for(var k in a)b[k]=a[k];return el(p,'path',b);}
+  function freccia(p,x1,y1,x2,y2,col,w){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;var c=6/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,6);}
+
+  /* elica di una carica positiva, B verso l'alto.
+     k = mv/(qB) in unità del disegno: r = k sin(theta), P = 2 pi k cos(theta).
+     Punto: x = hx - r sin(phi), profondità cos(phi) (davanti se > 0), quota P*phi/(2 pi). */
+  var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+  if(!S||!c)return;
+  var hx=200, yb=290, H=255, k=45, sch=0.32, V=62;
+  [70,330].forEach(function(x){el(S,'line',{x1:x,y1:318,x2:x,y2:24,stroke:'var(--blu)','stroke-width':1.6});punta(S,x,18,0,-1,'var(--blu)',7);});
+  T(S,340,26,'B',{fill:'var(--blu)','font-size':14,'font-style':'italic','font-weight':700});
+  var dietro=el(S,'g',{});
+  el(S,'line',{x1:hx,y1:318,x2:hx,y2:24,stroke:'var(--blu)','stroke-width':1.6,'stroke-dasharray':'2 4',opacity:.7});
+  var davanti=el(S,'g',{}), gV=el(S,'g',{});
+  function dis(){
+    var th=+c.value*Math.PI/180, r=k*Math.sin(th), P=2*Math.PI*k*Math.cos(th);
+    if(+c.value===90)P=0;
+    vuota(dietro);vuota(davanti);vuota(gV);
+    var fmax=P>0.5?Math.min(2*Math.PI*H/P,2*Math.PI*9):2*Math.PI, N=Math.ceil(fmax/(2*Math.PI)*90);
+    function pt(ph){return [hx-r*Math.sin(ph), yb-P*ph/(2*Math.PI)+sch*r*Math.cos(ph), Math.cos(ph)];}
+    var seg=[], fr=null;
+    for(var i=0;i<=N;i++){var q=pt(fmax*i/N), front=q[2]>=0;
+      if(fr===null||front!==fr){if(seg.length>1)linea(fr?davanti:dietro,seg,fr?{stroke:'var(--inchiostro)','stroke-width':1.8}:{stroke:'var(--grigio)','stroke-width':1.3,'stroke-dasharray':'4 3'});seg=seg.length?[seg[seg.length-1]]:[];fr=front;}
+      seg.push([q[0],q[1]]);}
+    if(seg.length>1)linea(fr?davanti:dietro,seg,fr?{stroke:'var(--inchiostro)','stroke-width':1.8}:{stroke:'var(--grigio)','stroke-width':1.3,'stroke-dasharray':'4 3'});
+    /* passo: fra due passaggi successivi davanti all'asse */
+    var p0=pt(0);
+    if(P>12&&P<=H){
+      var p1=pt(2*Math.PI), xb=hx+k+40;
+      el(gV,'line',{x1:f(p0[0]+6),y1:f(p0[1]),x2:xb,y2:f(p0[1]),stroke:'var(--verde)','stroke-width':1,'stroke-dasharray':'3 3'});
+      el(gV,'line',{x1:f(p1[0]+6),y1:f(p1[1]),x2:xb,y2:f(p1[1]),stroke:'var(--verde)','stroke-width':1,'stroke-dasharray':'3 3'});
+      linea(gV,[[xb-6,p0[1]],[xb,p0[1]],[xb,p1[1]],[xb-6,p1[1]]],{stroke:'var(--verde)','stroke-width':1.8});
+      T(gV,xb+8,f((p0[1]+p1[1])/2+5),'P',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+    }
+    /* velocità iniziale e componenti */
+    var vp=V*Math.sin(th), va=V*Math.cos(th), x0=p0[0], y0=p0[1];
+    if(va>4){freccia(gV,x0,y0,x0,y0-va,'var(--grigio)',1.6);
+      T(gV,x0+6,f(y0-va+4),'v',{fill:'var(--grigio)','font-size':13,'font-style':'italic'});T(gV,x0+14,f(y0-va+8),'∥',{fill:'var(--grigio)','font-size':10});}
+    if(vp>4){freccia(gV,x0,y0,x0-vp,y0,'var(--grigio)',1.6);
+      T(gV,f(x0-vp-4),y0+18,'v',{fill:'var(--grigio)','font-size':13,'font-style':'italic','text-anchor':'end'});T(gV,f(x0-vp+4),y0+22,'⊥',{fill:'var(--grigio)','font-size':10,'text-anchor':'end'});}
+    if(vp>4&&va>4){el(gV,'line',{x1:f(x0-vp),y1:f(y0),x2:f(x0-vp),y2:f(y0-va),stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'2 3'});
+      el(gV,'line',{x1:f(x0),y1:f(y0-va),x2:f(x0-vp),y2:f(y0-va),stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'2 3'});}
+    freccia(gV,x0,y0,x0-vp,y0-va,'var(--inchiostro)',2.2);
+    T(gV,f(x0-vp-8),f(y0-va-4),'v',{fill:'var(--inchiostro)','font-size':14,'font-style':'italic','font-weight':700,'text-anchor':'end'});
+    if(vp>4&&va>4){var a0=-Math.PI/2, a1=-Math.PI/2-th, ra=20, d='M'+f(x0)+','+f(y0-ra)+' A'+ra+','+ra+' 0 0 0 '+f(x0+ra*Math.cos(a1))+','+f(y0+ra*Math.sin(a1));
+      el(gV,'path',{d:d,fill:'none',stroke:'var(--rosso)','stroke-width':1.2});
+      var am=(a0+a1)/2;T(gV,f(x0+30*Math.cos(am)),f(y0+30*Math.sin(am)+4),'θ',{fill:'var(--rosso)','font-size':13,'font-style':'italic','text-anchor':'middle'});}
+    el(gV,'circle',{cx:f(x0),cy:f(y0),r:4.5,fill:'var(--rosso)'});
+    var g=+c.value;
+    o.innerHTML='θ = '+g+'°'+(g===90?' <span class="ok">moto circolare</span>':'');
+    if(window.allineaQuaderno)window.allineaQuaderno();
+  }
+  c.addEventListener('input',dis);dis();
+})();
+</script>
 </body>
 </html>

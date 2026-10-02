@@ -147,6 +147,7 @@
   $P=v_\parallel\cdot T=2\pi m v_\parallel/(qB)$; tutte confermate identiche a quelle scritte.
 - Aggiunta: nessuna. Un solo disegno SVG, che riprende lo schema della traccia (linee di campo,
   traiettoria elicoidale, scomposizione di $v$ in $v_\perp$ e $v_\parallel$, passo $P$).
+- Revisione: titolo invariato. Tolti sommario e due titoletti («Raggio e periodo dell'elica», «Il passo dell'elica»; contenuto nel flusso, in elenco telegrafico) e il rimando al moto circolare. Raggio e passo in riquadri .def con formula; periodo in formula con legenda; nota di una riga «T non dipende dalla velocità». Correzione: nella legenda q indicata come carica in valore assoluto (le formule di r, T e P valgono per |q|); formule riverificate con SymPy (T = 2πm/(qB), P = 2πmv cosθ/(qB), P/r = 2π/tanθ). Impaginazione a quaderno come l'unità 15, con script di allineamento. Figura ridisegnata da script (SVG inline, forma calcolata: r = k sinθ, P = 2πk cosθ nella stessa scala) e resa interattiva con cursore sull'angolo θ fra v e B (30°–90°): elica di una carica positiva (rotazione oraria vista da B), v con componenti v∥ e v⊥, arco θ, passo P in verde; a 90° «moto circolare». Nessun esempio, nessuna figura decorativa.
 
 ## Unità 17 — Acceleratori di particelle: ciclotrone e sincrotrone
 - Parole: 442 su 3 pagine di traccia (pagine 29–31)
