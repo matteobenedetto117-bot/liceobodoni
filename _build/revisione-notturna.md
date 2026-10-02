@@ -58,30 +58,34 @@ Un'unità non pubblicata non blocca la coda: l'esecuzione successiva passa alla 
 
 ---
 
-## 3. Testo: minimo, schematico, da copiare
+## 3. Testo: sintetico, schematico, ben leggibile
 
-Gli studenti copiano la pagina sul quaderno. La pagina è una traccia; le spiegazioni le dà il docente a voce.
+Gli studenti copiano la pagina sul quaderno. La pagina è una traccia: le spiegazioni le dà il docente a voce, ma ciò che è scritto deve potersi rileggere e capire da solo.
 
-**Si mantiene**: definizioni, leggi, formule, unità di misura, esempio, figure.
-**Si elimina**: premesse, cenni storici, aneddoti, frasi di raccordo, ripetizioni, spiegazioni discorsive di ciò che formula o figura mostrano già, rimandi ad altre unità.
+**Si mantiene**: definizioni, leggi, formule, unità di misura, esempi, figure e le frasi che collegano un passaggio al successivo quando servono a capire.
+**Si elimina**: premesse lunghe, cenni storici, aneddoti, ripetizioni, rimandi ad altre unità, spiegazioni che ripetono ciò che formula o figura mostrano già.
 
 Regole:
-* Elenchi puntati al posto dei paragrafi. Una voce = un concetto, al massimo due righe (circa 25 parole).
-* Frasi nominali e telegrafiche. Registro neutro e tecnico: **niente frasi evocative, metaforiche o colloquiali**.
-* Introduzione: una frase al massimo, oppure nessuna.
-* Definizioni e leggi in riquadro `.def`; avvertenze in `.nota` (una riga).
-* Formule in evidenza (§4), con legenda dei simboli in una riga.
-* Esempio: dati → formula → calcolo → risultato, senza commenti.
-* Didascalie: una riga.
+* **Frasi complete**, con soggetto e verbo, e ben leggibili. Niente stile telegrafico né frasi nominali in serie (non "Pressione costante: volume proporzionale a T", ma "Se la pressione resta costante, il volume è direttamente proporzionale alla temperatura assoluta").
+* Sintesi sì, ma senza togliere il ragionamento: se un passaggio richiede due o tre frasi per essere chiaro, si tengono.
+* Elenchi puntati dove i contenuti sono davvero un elenco (proprietà, casi, condizioni); altrimenti brevi paragrafi di due o tre frasi. Una voce di elenco può occupare fino a tre righe.
+* Registro neutro e tecnico: niente frasi evocative, metaforiche o colloquiali.
+* Introduzione: una o due frasi che dicono di che cosa tratta l'unità, oppure nessuna se il titolo basta.
+* Definizioni e leggi in riquadro `.def`; avvertenze in `.nota` (una o due frasi).
+* Formule in evidenza (§4), con la legenda dei simboli in una frase.
+* Esempio: dati, formula, calcolo e risultato, con una breve frase di collegamento fra i passaggi quando serve.
+* Didascalie: una frase completa.
 * Nessun simbolo di proporzionalità (∝, `\propto`, `&prop;`): "direttamente proporzionale a…".
 * Unità: volumi in m³ (notazione esponenziale se scomodi, oppure fattore sull'asse: "V (10⁻⁵ m³)"), pressioni in Pa o kPa, temperature in K.
 * Titolo: quello attuale, in `<h1>` e `<title>` ("Titolo — Fisica quarta").
 * Togli `<p class="sommario">`: restano link "← Classe", occhiello "Argomento · Unità NN", titolo.
 * Togli sezioni "Nelle prossime unità".
+* Le unità già revisionate indicate come modelli valgono per impaginazione, script e figure, **non per la lunghezza del testo**, che in quelle pagine è troppo ridotta.
 
 ### Titoletti
-* **L'unico `<h2>` ammesso è "Esempio"** ("Esempio 1", "Esempio 2" se sono più d'uno). Tutti gli altri `<h2>` si eliminano.
-* Il contenuto sotto un titoletto eliminato resta, in forma schematica, nel flusso della pagina.
+* **Si tengono gli `<h2>` che aprono una sezione dell'unità**: un nuovo concetto, una nuova legge, un caso diverso, un procedimento. Il titoletto è breve e descrittivo (per esempio "Trasformazione isobara", "Regola del prodotto").
+* Si tolgono solo i titoletti superflui: quelli che coprono una o due righe, quelli che ripetono il titolo dell'unità, quelli generici ("Introduzione", "Riepilogo", "In sintesi") e "Nelle prossime unità".
+* Gli esempi hanno il titoletto "Esempio" ("Esempio 1", "Esempio 2" se sono più d'uno).
 * Se gli esempi sono più di due, tienine due (i più rappresentativi) e registra quali sono stati tolti.
 
 ### Controllo concettuale (obbligatorio)
@@ -163,7 +167,7 @@ Con Playwright nel sandbox cloud (Chromium in `/opt/pw-browsers/chromium`), pagi
 1. Nessun `pageerror` (`node --check` sul codice se è lungo).
 2. Screenshot della pagina intera e di ogni figura; per ogni figura interattiva screenshot con il cursore in almeno due posizioni.
 3. Comandi a comparsa: un clic sul tasto del risultato, uno su "mostra tutti", un paio sui passaggi.
-4. Esamina gli screenshot: linee di base del testo sulle righe (anche dopo le figure); etichette non sovrapposte né fuori riquadro; figure coerenti coi valori del testo; nessun `<h2>` diverso da "Esempio"; nessun ∝.
+4. Esamina gli screenshot: linee di base del testo sulle righe (anche dopo le figure); etichette non sovrapposte né fuori riquadro; figure coerenti coi valori del testo; titoletti tenuti dove si apre una sezione; testo in frasi complete, non telegrafico; nessun ∝.
 5. `grep` di controllo: assenza di `class="sommario"`, di "prossime unità", di `∝`, `\propto`, `&prop;`.
 
 MathJax non si carica nel sandbox: le formule appaiono come `$...$`, è normale.
@@ -189,7 +193,7 @@ A fine esecuzione (§0):
 | Caso | Decisione |
 |---|---|
 | Titolo | Resta quello attuale. |
-| Titoletti | Solo "Esempio" (§3). |
+| Titoletti | Si tengono quelli che aprono una sezione; si tolgono solo quelli superflui (§3). |
 | Contenuto che sembra errato ma non è verificabile | Non modificarlo; segnalalo nel report. |
 | Correzione concettuale certa (verificata con calcolo) | Applicala e registrala. |
 | Figura decorativa | Lasciala; segnalala. |
