@@ -5,85 +5,154 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Esempi di calcolo con la funzione d'onda — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.nota{background:#fdf6ec;border:1px solid #e7d6ae;border-radius:10px;padding:14px 18px;margin:26px 0;font-size:.96rem}
-.nota p{margin:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.ok{color:var(--verde);font-weight:600}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Onde e suono &middot; Unit&agrave; 21</p>
+  <p class="occhiello">Onde e suono &middot; Unità 21</p>
   <h1>Esempi di calcolo con la funzione d'onda</h1>
-  <p class="sommario">Restiamo sull'onda dell'unit&agrave; precedente, $A=0{,}20\ \text{m}$,
-  $\lambda=3{,}4\ \text{m}$, $T=1{,}6\ \text{s}$, propagata verso destra. Calcoliamo lo
-  spostamento in un terzo istante e ricaviamo la velocit&agrave; di propagazione a partire da
-  $\lambda$ e $T$.</p>
 </header>
 
-<h2>Terzo istante: $t=4\ \text{s}$, $x=0$</h2>
+<ul>
+<li>Funzione d'onda armonica progressiva (verso destra):</li>
+</ul>
 
-<p>Nell'origine, quattro secondi dopo l'istante iniziale:</p>
+<p class="eq">$$y = A\cos\left(\frac{2\pi}{\lambda}\,x-\frac{2\pi}{T}\,t\right)$$</p>
+<p class="leg">$y$: spostamento (m); $A$: ampiezza (m); $\lambda$: lunghezza d'onda (m); $T$: periodo (s); $x$: posizione (m); $t$: tempo (s).</p>
 
-$$ y = A\cos\left(\frac{2\pi}{T}\cdot 4\ \text{s}\right) = 0{,}20\cos\left(\frac{2\pi}{1{,}6}\cdot 4\right) \approx -0{,}20\ \text{m} $$
+<h2>Esempio 1</h2>
 
-<p>Il segno davanti a $t$ non conta, perch&eacute; il coseno &egrave; una funzione pari: nell'origine
-l'onda regressiva e quella progressiva danno lo stesso valore. Il rapporto $4\ \text{s}/1{,}6\
-\text{s}=2{,}5$ dice che sono trascorsi due periodi e mezzo: due periodi interi riportano il punto
-al massimo, il mezzo periodo in pi&ugrave; lo porta esattamente al minimo, coerentemente con il
-valore negativo trovato.</p>
+<p>Dati: $A = 0{,}20\ \text{m}$; $\lambda = 3{,}4\ \text{m}$; $T = 1{,}6\ \text{s}$; onda verso destra; $x = 0$; $t = 4\ \text{s}$.</p>
+
+<p class="eq">$$y = A\cos\left(-\frac{2\pi}{T}\,t\right) = A\cos\left(\frac{2\pi}{T}\,t\right)$$</p>
+<p class="eq">$$y = 0{,}20\ \text{m}\cdot\cos\left(\frac{2\pi}{1{,}6}\cdot 4\right) = 0{,}20\ \text{m}\cdot\cos(5\pi) = -0{,}20\ \text{m}$$</p>
+
+<ul>
+<li>$t/T = 4\ \text{s}/1{,}6\ \text{s} = 2{,}5$: due periodi e mezzo; origine al minimo.</li>
+</ul>
+
+<div class="nota">
+<span class="et">Attenzione</span>
+<p>In $x = 0$ il segno davanti a $t$ non conta: $\cos(-\alpha) = \cos\alpha$.</p>
+</div>
 
 <div class="fig">
-<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f23ax" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
-<path d="M0,0 L5,2.5 L0,5 Z" fill="var(--grigio)"/>
-</marker>
-</defs>
-<line x1="30" y1="150" x2="470" y2="150" stroke="var(--grigio)" stroke-width="1.3" marker-end="url(#f23ax)"/>
-<line x1="60" y1="250" x2="60" y2="40" stroke="var(--grigio)" stroke-width="1.3" marker-end="url(#f23ax)"/>
-<text x="478" y="154" font-family="var(--sans)" font-size="14" fill="var(--grigio)">t</text>
-<text x="48" y="34" font-family="var(--sans)" font-size="14" fill="var(--grigio)">y</text>
-<line x1="55" y1="230" x2="65" y2="230" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="20" y="234" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&minus;0,20 m</text>
-<line x1="55" y1="70" x2="65" y2="70" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="26" y="74" font-family="var(--sans)" font-size="12" fill="var(--grigio)">0,20 m</text>
-<path d="M 60.0,70.0 L 65.0,71.5 L 70.0,76.1 L 75.0,83.5 L 80.0,93.4 L 85.0,105.6 L 90.0,119.4 L 95.0,134.4 L 100.0,150.0 L 105.0,165.6 L 110.0,180.6 L 115.0,194.4 L 120.0,206.6 L 125.0,216.5 L 130.0,223.9 L 135.0,228.5 L 140.0,230.0 L 145.0,228.5 L 150.0,223.9 L 155.0,216.5 L 160.0,206.6 L 165.0,194.4 L 170.0,180.6 L 175.0,165.6 L 180.0,150.0 L 185.0,134.4 L 190.0,119.4 L 195.0,105.6 L 200.0,93.4 L 205.0,83.5 L 210.0,76.1 L 215.0,71.5 L 220.0,70.0 L 225.0,71.5 L 230.0,76.1 L 235.0,83.5 L 240.0,93.4 L 245.0,105.6 L 250.0,119.4 L 255.0,134.4 L 260.0,150.0 L 265.0,165.6 L 270.0,180.6 L 275.0,194.4 L 280.0,206.6 L 285.0,216.5 L 290.0,223.9 L 295.0,228.5 L 300.0,230.0 L 305.0,228.5 L 310.0,223.9 L 315.0,216.5 L 320.0,206.6 L 325.0,194.4 L 330.0,180.6 L 335.0,165.6 L 340.0,150.0 L 345.0,134.4 L 350.0,119.4 L 355.0,105.6 L 360.0,93.4 L 365.0,83.5 L 370.0,76.1 L 375.0,71.5 L 380.0,70.0 L 385.0,71.5 L 390.0,76.1 L 395.0,83.5 L 400.0,93.4 L 405.0,105.6 L 410.0,119.4 L 415.0,134.4 L 420.0,150.0 L 425.0,165.6 L 430.0,180.6 L 435.0,194.4 L 440.0,206.6 L 445.0,216.5 L 450.0,223.9 L 455.0,228.5 L 460.0,230.0"
- fill="none" stroke="var(--blu)" stroke-width="2.4"/>
-<circle cx="460" cy="230" r="4.5" fill="var(--blu)"/>
-<text x="60" y="270" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">0</text>
-<text x="460" y="270" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">4 s</text>
-</svg>
-<p class="did">Spostamento $y$ dell'origine in funzione del tempo: parte dal massimo a $t=0$ e,
-dopo due periodi e mezzo, si trova nel punto segnato, al minimo.</p>
+<svg id="g-yt" viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Spostamento dell'origine in funzione del tempo: coseno di ampiezza 0,20 m e periodo 1,6 s; il punto rosso segue la curva fino a t = 4 s"></svg>
+<div class="cursore"><label for="cur-t">tempo</label><input id="cur-t" type="range" min="0" max="4" step="0.02" value="4"><span class="val" id="val-t"></span></div>
+<p class="did">Spostamento dell'origine ($x = 0$) in funzione del tempo; $T = 1{,}6\ \text{s}$.</p>
 </div>
 
-<h2>Velocit&agrave; di propagazione</h2>
+<h2>Esempio 2</h2>
 
-<p>Conoscendo $\lambda$ e $T$ si ricava direttamente la velocit&agrave; con cui l'onda avanza:</p>
+<p>Dati: $\lambda = 3{,}4\ \text{m}$; $T = 1{,}6\ \text{s}$.</p>
 
-$$ v = \frac{\lambda}{T} = \frac{3{,}4\ \text{m}}{1{,}6\ \text{s}} \approx 2{,}1\ \text{m/s} $$
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Con le onde longitudinali e il suono la stessa funzione d'onda descriver&agrave; la
-propagazione delle compressioni e delle rarefazioni nell'aria.</li>
-</ul>
-</div>
+<p class="eq">$$v = \frac{\lambda}{T} = \frac{3{,}4\ \text{m}}{1{,}6\ \text{s}} \approx 2{,}1\ \text{m/s}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../22-la-funzione-d-onda-armonica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La funzione d'onda armonica</span></a><a class="successiva" href="../24-onde-longitudinali-il-suono/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Onde longitudinali: il suono</span></a></nav>
-<footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 21</p></footer>
+<footer><p>Fisica quarta &middot; Onde e suono &middot; Unità 21</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,'text-anchor':'middle',fill:'var(--grigio)'},a||{}),p);e.textContent=s;return e;}
+  function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace(/^-0,(0+)$/,'0,$1').replace('-','−');}
+
+  /* y(0, t) = A cos(2πt/T); A = 0,20 m, T = 1,6 s */
+  var A=0.20, T=1.6, TM=4;
+  var X0=56, Y0=112, SX=85, SY=300;   // 1 s = 85 px; 0,20 m = 60 px
+  function px(t){return X0+t*SX;} function py(y){return Y0-y*SY;}
+  function y(t){return A*Math.cos(2*Math.PI*t/T);}
+  var svg=document.getElementById('g-yt');
+  var df=el('defs',{},svg);
+  var m=el('marker',{id:'fr-ax',markerWidth:7,markerHeight:7,refX:5,refY:2.5,orient:'auto'},df);
+  el('path',{d:'M0,0 L5,2.5 L0,5 Z',fill:'var(--grigio)'},m);
+  var sotto=el('g',{},svg), sopra=el('g',{},svg);
+  // assi
+  el('line',{x1:X0,y1:Y0,x2:px(TM)+30,y2:Y0,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#fr-ax)'},sotto);
+  el('line',{x1:X0,y1:py(-A)+16,x2:X0,y2:py(A)-24,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#fr-ax)'},sotto);
+  txt(sotto,px(TM)+34,Y0+30,'t (s)',{'text-anchor':'end'});
+  txt(sotto,X0+8,py(A)-22,'y (m)',{'text-anchor':'start'});
+  [[T,'1,6'],[2*T,'3,2'],[4,'4']].forEach(function(a){
+    el('line',{x1:px(a[0]),y1:Y0-3,x2:px(a[0]),y2:Y0+3,stroke:'var(--grigio)'},sotto);
+    txt(sotto,px(a[0]),Y0+16,a[1],{'font-size':11});});
+  [A,-A].forEach(function(v){el('line',{x1:X0-3,y1:py(v),x2:X0+3,y2:py(v),stroke:'var(--grigio)'},sotto);
+    txt(sotto,X0-6,py(v)+4,num(v),{'font-size':11,'text-anchor':'end'});});
+  // curva intera
+  var s='';for(var i=0;i<=400;i++){var t=TM*i/400;s+=(i?'L':'M')+px(t).toFixed(1)+' '+py(y(t)).toFixed(1)+' ';}
+  el('path',{d:s,fill:'none',stroke:'var(--blu)','stroke-width':2.4,'stroke-linejoin':'round'},sopra);
+  // guida e punto mobile
+  var gd=el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'},sotto);
+  var pt=el('circle',{r:5,fill:'var(--rosso)'},sopra);
+
+  var cur=document.getElementById('cur-t'), val=document.getElementById('val-t');
+  function disegna(){
+    var t=parseFloat(cur.value), v=y(t);
+    gd.setAttribute('x1',px(t));gd.setAttribute('x2',px(t));gd.setAttribute('y1',v<0?Y0+20:Y0);gd.setAttribute('y2',py(v));
+    pt.setAttribute('cx',px(t));pt.setAttribute('cy',py(v));
+    var h='t = '+num(t)+' s · t/T = '+num(t/T)+' · y = '+num(v)+' m';
+    if(v<-A+0.0005)h+=' <span class="ok">minimo</span>';
+    else if(v>A-0.0005)h+=' <span class="ok">massimo</span>';
+    val.innerHTML=h;
+  }
+  cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)allineaQuaderno();});disegna();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
