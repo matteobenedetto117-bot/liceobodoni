@@ -5,26 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Funzioni composte, funzione inversa, goniometriche inverse — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) 1.4rem}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;margin:20px 0}
-.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:8px 10px;text-align:left}
-.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) 1.4rem}
+.def li{line-height:var(--r)}
+.tabellina{width:100%;border-collapse:collapse;font-size:1rem;margin-top:var(--r)}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;text-align:left;line-height:var(--r);height:calc(2*var(--r));box-sizing:border-box;vertical-align:middle}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio);height:var(--r)}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -34,48 +91,40 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Derivate &middot; Unità 14</p>
   <h1>Funzioni composte, funzione inversa, goniometriche inverse</h1>
-  <p class="sommario">Le regole viste finora derivano somme, prodotti e quozienti, ma non
-  bastano per una funzione come $\ln(x^2+2)$, che è una funzione dentro un'altra. Servono la
-  regola della catena, la derivata della funzione inversa e, di conseguenza, le derivate di
-  arcoseno, arcocoseno, arcotangente e arcocotangente.</p>
 </header>
 
-<h2>La regola della catena</h2>
+<div class="def"><span class="et">Regola &middot; funzione composta (regola della catena)</span>
+<p class="eq">$$D\big[f(g(x))\big]=f'(g(x))\cdot g'(x)$$</p>
+</div>
 
-<p>Quando $y=f(g(x))$, la variabile $x$ agisce su $g$ e il risultato di $g$ agisce su $f$: la
-derivata si ottiene moltiplicando le due derivate, ciascuna calcolata nel punto giusto.</p>
+<ul>
+<li>$g$: funzione interna; $f$: funzione esterna, con derivata calcolata in $g(x)$.</li>
+</ul>
 
-<div class="def"><span class="et">Regola</span>
-$$D\big[f(g(x))\big]=f'(g(x))\cdot g'(x).$$</div>
+<div class="def"><span class="et">Caso particolare &middot; potenza di una funzione</span>
+<p class="eq">$$D\big[f(x)\big]^\alpha=\alpha\,\big[f(x)\big]^{\alpha-1}\cdot f'(x)$$</p>
+</div>
 
-<p>Per esempio, con $y=\ln(x^2+2)$ la funzione esterna è il logaritmo e quella interna è
-$x^2+2$:
-$$y'=\frac{1}{x^2+2}\cdot 2x.$$
-Con $y=(x^3+2x)^3$: $y'=3(x^3+2x)^2\cdot(3x^2+2)$. Con $y=e^{2x+1}$: $y'=e^{2x+1}\cdot2=2e^{2x+1}$.</p>
+<div class="def"><span class="et">Regola &middot; catena di tre funzioni</span>
+<p class="eq">$$D\big[f(g(z(x)))\big]=f'(g(z(x)))\cdot g'(z(x))\cdot z'(x)$$</p>
+</div>
 
-<p><b>Caso particolare: potenza di una funzione.</b>
-$$D\big[f(x)\big]^\alpha=\alpha\,f(x)^{\alpha-1}f'(x).$$
-Per $y=(x^2+2x+7)^4$: $y'=4(x^2+2x+7)^3(2x+2)$.</p>
+<div class="def"><span class="et">Regola &middot; funzione inversa</span>
+<p class="eq">$$D\big[f^{-1}(y)\big]=\frac{1}{f'(x)}, \qquad x=f^{-1}(y),\ \ f'(x)\neq0$$</p>
+</div>
 
-<p><b>Catena di tre funzioni.</b> Se $y=f(g(z(x)))$, si moltiplicano le tre derivate:
-$$D\big[f(g(z(x)))\big]=f'(g(z(x)))\cdot g'(z(x))\cdot z'(x).$$
-Per $y=e^{(2x+1)^2}$, con $f=e^{\,\cdot\,}$, $g=(\,\cdot\,)^2$ e $z=2x+1$:
-$$y'=e^{(2x+1)^2}\cdot 2(2x+1)\cdot 2.$$</p>
+<ul>
+<li>Grafici di $f$ e $f^{-1}$ simmetrici rispetto alla bisettrice: pendenze delle tangenti corrispondenti reciproche.</li>
+<li>$y=\arcsin x$, inversa di $\sin$: $x\in[-1,1]$, $y\in[-\pi/2,\pi/2]$; da $x=\sin y$, con $\cos y\geq0$:</li>
+</ul>
 
-<h2>La derivata della funzione inversa</h2>
+<p class="eq">$$D\arcsin x=\frac{1}{\cos y}=\frac{1}{\sqrt{1-\sin^2y}}=\frac{1}{\sqrt{1-x^2}}$$</p>
 
-<p>Se $f$ è invertibile, il grafico di $f^{-1}$ è quello di $f$ ribaltato rispetto alla
-bisettrice: le due tangenti corrispondenti sono simmetriche, e le loro pendenze sono l'una il
-reciproco dell'altra.</p>
+<ul>
+<li>$y=\arccos x$: $y\in[0,\pi]$; da $x=\cos y$, con $\sin y\geq0$:</li>
+</ul>
 
-<div class="def"><span class="et">Regola</span>
-$$D\big[f^{-1}(y)\big]=\frac{1}{f'(x)}, \qquad \text{con } x=f^{-1}(y).$$</div>
-
-<p>Applichiamola a $y=\arcsin x$, definita per $x\in[-1,1]$ come inversa di $\sin$. Da
-$x=\sin y$:
-$$D\arcsin x=\frac{1}{D\sin y}=\frac{1}{\cos y}=\frac{1}{\sqrt{1-\sin^2y}}=\frac{1}{\sqrt{1-x^2}}.$$
-Allo stesso modo, da $x=\cos y$:
-$$D\arccos x=\frac{1}{D\cos y}=-\frac{1}{\sin y}=-\frac{1}{\sqrt{1-\cos^2y}}=-\frac{1}{\sqrt{1-x^2}}.$$</p>
+<p class="eq">$$D\arccos x=-\frac{1}{\sin y}=-\frac{1}{\sqrt{1-\cos^2y}}=-\frac{1}{\sqrt{1-x^2}}$$</p>
 
 <table class="tabellina">
 <tr><th>Funzione</th><th>Derivata</th></tr>
@@ -85,79 +134,253 @@ $$D\arccos x=\frac{1}{D\cos y}=-\frac{1}{\sin y}=-\frac{1}{\sqrt{1-\cos^2y}}=-\f
 <tr><td>$\text{arccot}\,x$</td><td>$-\dfrac{1}{1+x^2}$</td></tr>
 </table>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Punto $x_0$
-      <input type="range" id="s-x0" min="-0.9" max="0.9" step="0.02" value="0.5">
-      <span>$x_0$ = <span class="val" id="v-x0"></span></span>
-    </label>
-  </div>
-  <div id="g-arcsin" style="height:380px"></div>
-  <p class="leggenda">La curva è $y=\arcsin x$ sul suo dominio $[-1,1]$. La retta è la tangente
-  in $x_0$, con pendenza uguale a $1/\sqrt{1-x_0^2}$: sposta il cursore verso $\pm1$ e osserva
-  la pendenza crescere senza limite, coerente col fatto che il grafico diventa verticale ai
-  due estremi del dominio.</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>$\arcsin x$ e $\arccos x$: derivabili solo per $-1&lt;x&lt;1$.</p>
 </div>
 
-<h2>Derivata di $f(x)^{g(x)}$</h2>
+<div class="fig">
+<svg id="g-arcsin" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico di y = arcsin x sul dominio da −1 a 1 con la retta tangente nel punto mobile di ascissa x0"></svg>
+<div class="cursore"><label for="s-x0">$x_0$</label>
+<input type="range" id="s-x0" min="-0.95" max="0.95" step="0.01" value="0.5">
+<span class="val" id="v-x0"></span></div>
+<p class="did">Blu: tangente in $x_0$, coefficiente angolare $1/\sqrt{1-x_0^2}$.</p>
+</div>
 
-<p>Qui l'esponente non è un numero fisso ma un'altra funzione: la regola della potenza non
-si applica. Si passa al logaritmo di entrambi i membri e si deriva implicitamente.</p>
+<div class="def"><span class="et">Regola &middot; funzione elevata a funzione</span>
+<p>$y=f(x)^{g(x)}$, $f(x)&gt;0$: logaritmo dei due membri, $\ln y=g(x)\ln f(x)$; derivata dei due membri ($D\ln y=y'/y$).</p>
+<p class="eq">$$y'=f(x)^{g(x)}\left[g'(x)\ln f(x)+\frac{g(x)\,f'(x)}{f(x)}\right]$$</p>
+</div>
 
-<div class="def"><span class="et">Derivazione</span>
-<p>Da $y=f(x)^{g(x)}$, con $f(x)>0$: $\ln y=g(x)\ln f(x)$. Derivando entrambi i membri rispetto
-a $x$ (a sinistra compare $y'/y$ per la regola della catena applicata a $\ln y$):
-$$\frac{y'}{y}=g'(x)\ln f(x)+g(x)\frac{f'(x)}{f(x)}
-\;\;\Rightarrow\;\;
-y'=f(x)^{g(x)}\left[g'(x)\ln f(x)+\frac{g(x)f'(x)}{f(x)}\right].$$</p></div>
+<div class="def"><span class="et">Regola &middot; prodotto di tre funzioni</span>
+<p class="eq">$$D\big[f(x)\,g(x)\,h(x)\big]=f'(x)\,g(x)\,h(x)+f(x)\,g'(x)\,h(x)+f(x)\,g(x)\,h'(x)$$</p>
+</div>
 
-<p>Per $y=x^x$: $\ln y=x\ln x$, quindi $y'/y=\ln x+1$ e $y'=x^x(\ln x+1)$. Per
-$y=x^{2x+1}$: $\ln y=(2x+1)\ln x$, quindi
-$$y'=x^{2x+1}\left(2\ln x+\frac{2x+1}{x}\right).$$</p>
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button>
+</div>
 
-<h2>Prodotto di tre funzioni</h2>
+<h2>Esempio 1</h2>
 
-<p>La regola del prodotto si estende a tre fattori derivando ciascuno a turno e lasciando
-fermi gli altri due:
-$$D\big[f(x)g(x)h(x)\big]=f'(x)g(x)h(x)+f(x)g'(x)h(x)+f(x)g(x)h'(x).$$
-Per $y=x^2\ln x\,e^{2x}$:
-$$y'=2x\ln x\,e^{2x}+x^2\cdot\frac{1}{x}\cdot e^{2x}+x^2\ln x\cdot2e^{2x}.$$</p>
+<div class="es">
+<p class="eq quesito">$$y=\ln(x^2+2) \qquad y'=\,?$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$y'=\frac{2x}{x^2+2}$$</p>
+</div>
 
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Esterna $\ln$, interna $x^2+2$.</p>
+<p class="eq">$$y'=\frac{1}{x^2+2}\cdot 2x=\frac{2x}{x^2+2}$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
+
+<h2>Esempio 2</h2>
+
+<div class="es">
+<p class="eq quesito">$$y=x^x,\ \ x&gt;0 \qquad y'=\,?$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r2">risultato</button>
+<p class="eq ris" id="r2" hidden>$$y'=x^x(\ln x+1)$$</p>
+</div>
+
+<div class="passi" id="passi2">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Logaritmo dei due membri.</p>
+<p class="eq">$$\ln y=x\ln x$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Derivata dei due membri.</p>
+<p class="eq">$$\frac{y'}{y}=\ln x+x\cdot\frac{1}{x}=\ln x+1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Moltiplico per $y=x^x$.</p>
+<p class="eq">$$y'=x^x(\ln x+1)$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi2">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi2" hidden>&#8634;</button>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../14-derivate-fondamentali-e-regole-di-derivazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Derivate fondamentali e regole di derivazione</span></a><a class="successiva" href="../16-domini-e-derivate-di-ordine-superiore/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Domini e derivate di ordine superiore</span></a></nav>
 <footer><p>Matematica quinta &middot; Derivate &middot; Unità 14</p></footer>
 
 </div>
-
 <script>
 (function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+function vert(P,x,col,dash){return P.add(el('line',{x1:P.X(x),x2:P.X(x),y1:P.m.t,y2:P.H-P.m.b,stroke:col||'var(--grigio)','stroke-width':1.2,'stroke-dasharray':dash||'3,4'}),'sotto');}
+
+/* ---------- arcoseno: tangente in x0 ---------- */
+(function(){
+  var svg=document.getElementById('g-arcsin'), B='var(--blu)', R='var(--rosso)';
   function f(x){return Math.asin(x);}
   function fp(x){return 1/Math.sqrt(1-x*x);}
-  var sx=document.getElementById('s-x0'), vx=document.getElementById('v-x0');
-  function fmt(n){return n.toLocaleString('it-IT',{maximumFractionDigits:3});}
-  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
+  var P=new Piano(svg,[-1.45,1.45],[-2.2,2.2],{l:30,r:24,t:22,b:22});
+  P.assi([-1,-0.5,0.5,1],[],'x','y');
+  [[Math.PI/2,'π/2'],[-Math.PI/2,'−π/2']].forEach(function(a){
+    P.add(el('line',{x1:P.X(0)-4,x2:P.X(0)+4,y1:P.Y(a[0]),y2:P.Y(a[0]),stroke:'var(--inchiostro)','stroke-width':1}),'testo');
+    P.add(el('line',{x1:P.X(0),x2:P.X(a[0]>0?1:-1),y1:P.Y(a[0]),y2:P.Y(a[0]),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+    P.add(txt(P.X(0)+(a[0]>0?-8:8),P.Y(a[0])+4,a[1],{'text-anchor':a[0]>0?'end':'start'}),'testo');
+  });
+  // campionamento fitto vicino a ±1: x = sin(u)
+  var s='';for(var i=0;i<=300;i++){var u=-Math.PI/2+Math.PI*i/300, x=Math.sin(u);s+=(i?'L':'M')+P.X(x).toFixed(1)+' '+P.Y(u).toFixed(1)+' ';}
+  P.add(el('path',{d:s,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.4,'stroke-linejoin':'round'}),'sopra');
+  pallino(P,1,Math.PI/2,true); pallino(P,-1,-Math.PI/2,true);
+  P.add(txt(P.X(1.4),P.Y(1.95),'y = arcsin x',{fill:'var(--inchiostro)','text-anchor':'end'}),'testo');
+  var tg=P.add(el('line',{stroke:B,'stroke-width':2}),'sopra');
+  var gx=P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  var pt=pallino(P,0.5,f(0.5),true,R);
+  var sl=document.getElementById('s-x0'), v=document.getElementById('v-x0');
   function agg(){
-    var x0=parseFloat(sx.value);
-    vx.textContent=fmt(x0);
-    var m=fp(x0), y0=f(x0);
-    var lo=-0.98, hi=0.98;
-    var xc=xs(lo,hi,240);
-    var tlo=Math.max(lo,x0-0.5), thi=Math.min(hi,x0+0.5);
-    Plotly.react('g-arcsin',[
-      {x:xc,y:xc.map(f),mode:'lines',line:{color:'#b3392f',width:2.4},hoverinfo:'skip',name:'arcsin x'},
-      {x:[tlo,thi],y:[y0+m*(tlo-x0),y0+m*(thi-x0)],mode:'lines',line:{color:'#1f4e79',width:2},hoverinfo:'skip',name:'tangente'},
-      {x:[x0],y:[y0],mode:'markers',marker:{size:9,color:'#16283d'}}
-    ],{
-      margin:{l:44,r:14,t:10,b:34},showlegend:false,
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[-1.1,1.1],gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[-2.2,2.2],gridcolor:'#e6e0d4'},
-      annotations:[{x:-0.75,y:1.9,
-        text:"pendenza = "+fmt(m),
-        showarrow:false,font:{size:12,color:'#16283d'}}]
-    },{displayModeBar:false,responsive:true});
+    var x0=+sl.value, y0=f(x0), m=fp(x0), a=-1.45, b=1.45;
+    tg.setAttribute('x1',P.X(a));tg.setAttribute('y1',P.Y(y0+m*(a-x0)));
+    tg.setAttribute('x2',P.X(b));tg.setAttribute('y2',P.Y(y0+m*(b-x0)));
+    gx.setAttribute('x1',P.X(x0));gx.setAttribute('x2',P.X(x0));gx.setAttribute('y1',y0<0?P.Y(0)+22:P.Y(0));gx.setAttribute('y2',P.Y(y0));
+    pt.setAttribute('cx',P.X(x0));pt.setAttribute('cy',P.Y(y0));
+    var h='x₀ = '+num(x0)+' &nbsp; f(x₀) = '+num(y0)+' &nbsp; f′(x₀) = '+num(m);
+    if(Math.abs(x0)>=0.9)h+=' &nbsp; <span class="ok">pendenza sempre più grande</span>';
+    v.innerHTML=h;
   }
-  sx.addEventListener('input',agg); agg();
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+})();
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
 })();
 </script>
 </body>
