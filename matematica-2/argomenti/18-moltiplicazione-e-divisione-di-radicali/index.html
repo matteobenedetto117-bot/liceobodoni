@@ -5,16 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Moltiplicazione e divisione di radicali — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.nota{background:#fdf6ec;border:1px solid #e7d9b8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -24,69 +60,65 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 15</p>
   <h1>Moltiplicazione e divisione di radicali</h1>
-  <p class="sommario">Radicali con lo stesso indice si moltiplicano e si dividono
-  moltiplicando o dividendo i radicandi. La stessa regola, letta al contrario, permette anche
-  di scomporre un radicale in un prodotto di radicali più semplici.</p>
 </header>
 
-<h2>Prodotto di due radicali</h2>
-<div class="regola">
-<p>Il prodotto di due radicali con lo stesso indice e con radicando positivo o nullo è dato da:</p>
-$$\sqrt[n]{a}\cdot\sqrt[n]{b}=\sqrt[n]{a\cdot b}\qquad a\geq0,\ b\geq0,\ n\in\mathbb{N}\smallsetminus\{0\}$$
+<div class="def"><span class="et">Prodotto</span>
+<p>Stesso indice: si moltiplicano i radicandi.</p>
+<p class="eq">$$\sqrt[n]{a}\cdot\sqrt[n]{b}=\sqrt[n]{a\cdot b}\qquad a\geq0,\ b\geq0$$</p>
 </div>
 
-<div class="esempio">
-<p>$\sqrt[5]{3}\cdot\sqrt[5]{2}=\sqrt[5]{6}$</p>
-<p>$\sqrt[3]{2}\cdot\sqrt[3]{2}\cdot\sqrt[3]{2}=\sqrt[3]{2^3}=2$</p>
-<p>$\sqrt{32}\cdot\sqrt{2}=\sqrt{64}=8$</p>
+<ul>
+<li>Indice dispari: regola valida anche con radicandi negativi.</li>
+</ul>
+
+<div class="def"><span class="et">Scomposizione in fattori</span>
+<p>La regola del prodotto letta da destra a sinistra.</p>
+<p class="eq">$$\sqrt[n]{a\cdot b}=\sqrt[n]{a}\cdot\sqrt[n]{b}$$</p>
 </div>
 
-<p>Se l'indice è dispari, la regola vale anche con radicandi negativi, perché la radice di
-indice dispari di un numero negativo esiste ed è negativa:</p>
-
-<div class="esempio">
-<p>$\sqrt[3]{-7}\cdot\sqrt[3]{2}=-\sqrt[3]{7}\cdot\sqrt[3]{2}=-\sqrt[3]{14}$</p>
+<div class="def"><span class="et">Radicandi letterali, indice pari</span>
+<p>Valore assoluto su ciascun fattore.</p>
+<p class="eq">$$\sqrt[n]{a\cdot b}=\sqrt[n]{|a|}\cdot\sqrt[n]{|b|}\qquad n\ \text{pari},\ a\cdot b\geq0$$</p>
 </div>
 
-<h2>Scomposizione di un radicale in fattori</h2>
-<p>La stessa uguaglianza, letta da destra a sinistra, scompone un radicale nel prodotto di due
-radicali con radicando più semplice:</p>
-<div class="regola">
-$$\sqrt[n]{a\cdot b}=\sqrt[n]{a}\cdot\sqrt[n]{b}$$
+<div class="def"><span class="et">Quoziente</span>
+<p>Stesso indice: si dividono i radicandi.</p>
+<p class="eq">$$\sqrt[n]{a}:\sqrt[n]{b}=\sqrt[n]{a:b}\qquad a\geq0,\ b&gt;0$$</p>
 </div>
 
-<div class="esempio">
-<p>$\sqrt[5]{24}=\sqrt[5]{3\cdot8}=\sqrt[5]{3}\cdot\sqrt[5]{8}$</p>
-<p>$\sqrt[3]{-12}=-\sqrt[3]{12}=-\sqrt[3]{3\cdot4}=-\sqrt[3]{3}\cdot\sqrt[3]{4}$</p>
-</div>
+<h2>Esempio 1</h2>
+<p class="eq">$$\sqrt[5]{3}\cdot\sqrt[5]{2}=\sqrt[5]{6}$$</p>
+<p class="eq">$$\sqrt[3]{2}\cdot\sqrt[3]{2}\cdot\sqrt[3]{2}=\sqrt[3]{2^3}=2$$</p>
+<p class="eq">$$\sqrt{32}\cdot\sqrt{2}=\sqrt{64}=8$$</p>
+<p class="eq">$$\sqrt[3]{-7}\cdot\sqrt[3]{2}=-\sqrt[3]{7}\cdot\sqrt[3]{2}=-\sqrt[3]{14}$$</p>
+<p class="eq">$$\sqrt[7]{42}:\sqrt[7]{2}=\sqrt[7]{42:2}=\sqrt[7]{21}$$</p>
 
-<h2>Radicandi letterali e indice pari</h2>
-<p>Quando il radicando contiene lettere e l'indice è pari, non si può più garantire che i due
-fattori scomposti siano singolarmente positivi: si mette allora il valore assoluto su ciascuno,
-per restare sicuri che il radicando di ognuno non sia negativo.</p>
-<div class="regola">
-$$\sqrt[n]{a\cdot b}=\sqrt[n]{|a|}\cdot\sqrt[n]{|b|}\qquad n\ \text{pari}$$
-</div>
-
-<div class="esempio">
-<p>$\sqrt[n]{(-2)\cdot(-3)}=\sqrt[n]{|-2|}\cdot\sqrt[n]{|-3|}=\sqrt[n]{2}\cdot\sqrt[n]{3}$</p>
-<p>$\sqrt[6]{xy^3}=\sqrt[6]{|x|}\cdot\sqrt[6]{|y^3|}$</p>
-</div>
-
-<h2>Quoziente di due radicali</h2>
-<div class="regola">
-<p>Il quoziente di due radicali con lo stesso indice è dato da:</p>
-$$\sqrt[n]{a}:\sqrt[n]{b}=\sqrt[n]{a:b}\qquad a\geq0,\ b&gt;0,\ n\in\mathbb{N}\smallsetminus\{0\}$$
-</div>
-
-<div class="esempio">
-<p>$\sqrt[7]{42}:\sqrt[7]{2}=\sqrt[7]{42:2}=\sqrt[7]{21}$</p>
-</div>
-
+<h2>Esempio 2</h2>
+<p class="eq">$$\sqrt[5]{24}=\sqrt[5]{3\cdot8}=\sqrt[5]{3}\cdot\sqrt[5]{8}$$</p>
+<p class="eq">$$\sqrt[3]{-12}=-\sqrt[3]{12}=-\sqrt[3]{3\cdot4}=-\sqrt[3]{3}\cdot\sqrt[3]{4}$$</p>
+<p class="eq">$$\sqrt[n]{(-2)\cdot(-3)}=\sqrt[n]{|-2|}\cdot\sqrt[n]{|-3|}=\sqrt[n]{2}\cdot\sqrt[n]{3}\qquad n\ \text{pari}$$</p>
+<p class="eq">$$\sqrt[6]{xy^3}=\sqrt[6]{|x|}\cdot\sqrt[6]{|y^3|}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../17-confronto-di-radicali/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Confronto di radicali</span></a><a class="successiva" href="../19-trasporto-di-un-fattore-dentro-e-fuori-dal-segno-di-radice/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Trasporto di un fattore dentro e fuori dal segno di radice</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 15</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
