@@ -5,14 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Domini e derivate di ordine superiore — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;margin:20px 0}
-.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:8px 10px;text-align:left}
-.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) 1.4rem}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) 1.4rem}
+.def li{line-height:var(--r)}
+.tabellina{width:100%;border-collapse:collapse;font-size:1rem;margin-top:var(--r)}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;text-align:left;line-height:var(--r);height:calc(2*var(--r));box-sizing:border-box;vertical-align:middle}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio);height:var(--r)}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -22,26 +91,21 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Derivate &middot; Unità 15</p>
   <h1>Domini e derivate di ordine superiore</h1>
-  <p class="sommario">Prima di studiare il segno di una funzione o della sua derivata bisogna
-  sapere dove la funzione è definita: raccogliamo qui i domini delle famiglie di funzioni più
-  comuni. Vediamo poi che una funzione derivata è a sua volta una funzione, e quindi si può
-  derivare di nuovo: nascono così le derivate seconda, terza e successive.</p>
 </header>
 
-<h2>I domini delle funzioni elementari</h2>
+<ul>
+<li>Domini delle funzioni elementari ($k\in\mathbb{Z}$):</li>
+</ul>
 
 <table class="tabellina">
 <tr><th>Funzione</th><th>Dominio</th></tr>
 <tr><td>razionale intera: $y=a_0x^n+a_1x^{n-1}+\dots+a_n$</td><td>$\mathbb{R}$</td></tr>
-<tr><td>razionale fratta: $y=\dfrac{P(x)}{Q(x)}$</td><td>$\mathbb{R}$ con $Q(x)\neq0$</td></tr>
-<tr><td>irrazionale: $y=\sqrt[n]{f(x)}$</td>
-<td>$n$ pari: $f(x)\geq0$ &nbsp;&nbsp; $n$ dispari: $\mathbb{R}$</td></tr>
+<tr><td>razionale fratta: $y=\dfrac{P(x)}{Q(x)}$</td><td>$Q(x)\neq0$</td></tr>
+<tr><td>irrazionale: $y=\sqrt[n]{f(x)}$</td><td>$n$ pari: $f(x)\geq0$; $n$ dispari: dominio di $f(x)$</td></tr>
 <tr><td>logaritmica: $y=\log_a f(x)$, $a>0,\ a\neq1$</td><td>$f(x)>0$</td></tr>
-<tr><td>esponenziale: $y=a^{f(x)}$, $a>0,\ a\neq1$</td><td>$\mathbb{R}$</td></tr>
-<tr><td>potenza a esponente variabile: $y=[f(x)]^{g(x)}$</td>
-<td>$f(x)>0$ e dominio di $g(x)$</td></tr>
-<tr><td>potenza a esponente irrazionale $\alpha$: $y=[f(x)]^\alpha$</td>
-<td>$\alpha>0$: $f(x)\geq0$ &nbsp;&nbsp; $\alpha&lt;0$: $f(x)>0$</td></tr>
+<tr><td>esponenziale: $y=a^{f(x)}$, $a>0,\ a\neq1$</td><td>dominio di $f(x)$</td></tr>
+<tr><td>esponente variabile: $y=[f(x)]^{g(x)}$</td><td>$f(x)>0$ e dominio di $g(x)$</td></tr>
+<tr><td>esponente irrazionale $\alpha$: $y=[f(x)]^\alpha$</td><td>$\alpha>0$: $f(x)\geq0$; $\alpha&lt;0$: $f(x)>0$</td></tr>
 <tr><td>$y=\sin x$, $y=\cos x$</td><td>$\mathbb{R}$</td></tr>
 <tr><td>$y=\tan x$</td><td>$x\neq\dfrac{\pi}{2}+k\pi$</td></tr>
 <tr><td>$y=\cot x$</td><td>$x\neq k\pi$</td></tr>
@@ -49,36 +113,128 @@
 <tr><td>$y=\arctan x$, $y=\text{arccot}\,x$</td><td>$\mathbb{R}$</td></tr>
 </table>
 
-<p>Nella potenza a esponente variabile il dominio richiede due condizioni insieme, perché
-$[f(x)]^{g(x)}$ si legge come $e^{g(x)\ln f(x)}$: serve $f(x)>0$ perché il logaritmo esista, e
-serve che $g(x)$ sia a sua volta definita. Nella potenza a esponente irrazionale la condizione
-dipende dal segno di $\alpha$: se $\alpha>0$ basta $f(x)\geq0$, perché il valore $0^\alpha=0$ ha
-senso; se $\alpha<0$ serve $f(x)>0$, per non dividere per zero. Per questo $x^\pi$, con $\pi$
-irrazionale positivo, ha dominio $x\geq0$.</p>
+<ul>
+<li>$[f(x)]^{g(x)}=e^{\,g(x)\ln f(x)}$: $f(x)>0$ per il logaritmo, $g(x)$ definita.</li>
+<li>$[f(x)]^\alpha$: con $\alpha>0$ vale $0^\alpha=0$; con $\alpha&lt;0$ si esclude $f(x)=0$ (divisione per zero).</li>
+<li>$y=x^\pi$: dominio $x\geq0$.</li>
+</ul>
 
-<h2>Le derivate di ordine superiore al primo</h2>
+<div class="def"><span class="et">Definizione &middot; derivate di ordine superiore</span>
+<p>Derivata seconda: derivata della derivata prima; derivata terza: derivata della seconda; e così via.</p>
+<p class="eq">$$y''=D\,y' \qquad y'''=D\,y'' \qquad y''''=D\,y'''$$</p>
+</div>
 
-<p>La derivata $f'(x)$ di una funzione è a sua volta una funzione di $x$, e come tale si può
-derivare ancora. Le derivate successive descrivono come cambia la rapidità di variazione della
-funzione, e torneranno utili per studiare la concavità del grafico.</p>
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button>
+</div>
 
-<p>Sia $f(x)=x^3-2x+1$, con $x\in\mathbb{R}$. La derivata prima è
-$$y'=f'(x)=3x^2-2.$$
-Questa è una funzione in $x$ che possiamo derivare di nuovo:
-$$Dy'=D(3x^2-2)=6x.$$
-Si ottengono così, derivando ogni volta il risultato precedente:</p>
+<h2>Esempio</h2>
 
-<table class="tabellina">
-<tr><th>Derivata</th><th>Risultato</th><th>Nome</th></tr>
-<tr><td>$y''$</td><td>$6x$</td><td>derivata seconda</td></tr>
-<tr><td>$y'''$</td><td>$6$</td><td>derivata terza</td></tr>
-<tr><td>$y''''$</td><td>$0$</td><td>derivata quarta</td></tr>
-</table>
+<div class="es">
+<p class="eq quesito">$$f(x)=x^3-2x+1 \qquad f'',\ f''',\ f''''\ ?$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$f''(x)=6x \qquad f'''(x)=6 \qquad f''''(x)=0$$</p>
+</div>
 
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Derivata prima.</p>
+<p class="eq">$$f'(x)=3x^2-2$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Derivata seconda: derivo $f'$.</p>
+<p class="eq">$$f''(x)=D(3x^2-2)=6x$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Derivata terza: derivo $f''$.</p>
+<p class="eq">$$f'''(x)=D(6x)=6$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> Derivata quarta: derivo $f'''$.</p>
+<p class="eq">$$f''''(x)=D(6)=0$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../15-funzioni-composte-funzione-inversa-goniometriche-inverse/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Funzioni composte, funzione inversa, goniometriche inverse</span></a><a class="successiva" href="../17-retta-tangente-retta-normale-punti-stazionari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Retta tangente, retta normale, punti stazionari</span></a></nav>
 <footer><p>Matematica quinta &middot; Derivate &middot; Unità 15</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>

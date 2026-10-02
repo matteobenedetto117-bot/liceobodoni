@@ -379,6 +379,7 @@ teorema del confronto, a pagina 21.
   dinamico che non sia già chiaro dai due esempi statici. Nessun quesito di maturità: come
   l'unità 14, questa è solo un repertorio (domini e notazione delle derivate successive), non
   ancora uno studio di funzione.
+- Revisione: titolo invariato. Testo ridotto a traccia schematica: tolti sommario, due titoletti, il paragrafo discorsivo sulle potenze (→ tre voci di una riga) e il rimando alla concavità; tabella dei domini mantenuta con k ∈ ℤ; derivate di ordine superiore in riquadro .def; tabella dei nomi delle derivate sostituita dai passaggi dell'esempio. Correzioni: radice di indice dispari ed esponenziale a^f(x) hanno dominio «dominio di f(x)» (prima ℝ); razionale fratta «Q(x) ≠ 0». Esempio f(x) = x³ − 2x + 1 riverificato con SymPy (3x² − 2, 6x, 6, 0) e reso a comparsa: quesito con tasto risultato, quattro passaggi, tasto «Mostra tutti i risultati». Impaginazione a quaderno con script di allineamento. Nessuna figura, nessun esempio tolto.
 
 ## Unità 16 — Retta tangente, retta normale, punti stazionari
 - Parole: 731 su 4 pagine di traccia (66–69), conteggio del testo visibile incluse le
