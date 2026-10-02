@@ -5,25 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Il risultato di una misura — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.regole{margin:22px 0;padding:14px 18px;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-.regole ul{margin:8px 0 0;padding-left:22px}
-.regole li{margin:6px 0}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.tabella{margin:var(--r) 0 0}
+.tabella{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 12px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left;vertical-align:top}
+.tabella th{color:var(--blu);font-weight:600}
+.cursore output.cas{min-width:11em}
+.def ul{padding-left:1.4em}
+.def p.eq+p{padding-top:0}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -32,40 +57,30 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Misure ed errori &middot; Unità 16</p>
   <h1>Il risultato di una misura</h1>
-  <p class="sommario">La scrittura «valore attendibile più o meno errore assoluto», e le
-  due regole che dicono con quante cifre si scrivono l'una e l'altro.</p>
 </header>
 
-<p>Dire che un lato è lungo 3,462 m non è ancora un risultato di fisica: manca l'indicazione
-di quanto quel numero sia affidabile. Il risultato di una misura è sempre formato da due
-numeri, il valore che riteniamo più vicino al vero e il margine di incertezza che lo
-accompagna.</p>
-
-<p>Si scrive:</p>
-
-$$x = \left(\overline{x} \pm e_x\right)$$
+<div class="def"><span class="et">Risultato di una misura</span>
+<p class="eq">$$x=\left(\overline{x}\pm e_x\right)$$</p>
+<p>$\overline{x}$ valore attendibile: migliore stima del valore vero; $e_x$ errore assoluto (incertezza), stessa unità di $x$.</p>
+</div>
 
 <ul>
-<li>$\overline{x}$ è il <strong>valore attendibile</strong>: la migliore stima del valore
-vero della grandezza da misurare.</li>
-<li>$e_x$ è l'<strong>errore assoluto</strong>, detto anche <strong>incertezza</strong>:
-il margine associato alla misura.</li>
+<li>Valore vero compreso fra $\overline{x}-e_x$ e $\overline{x}+e_x$: intervallo di misura.</li>
+<li>Misura singola: valore attendibile = valore letto; errore assoluto = sensibilità dello strumento.</li>
 </ul>
 
-<p>Il doppio segno $\pm$ dice che il valore vero non lo conosciamo, ma siamo convinti che
-stia fra $\overline{x} - e_x$ e $\overline{x} + e_x$.</p>
+<div class="nota"><p>Errore piccolo non significa errore nullo: il risultato è sempre un intervallo.</p></div>
 
-<div class="esempi">
-<h3>Il lato di una stanza</h3>
-<p>Misuriamo il lato $a$ di una stanza con un metro a nastro e leggiamo</p>
-$$\overline{a} = 3{,}462\ \mathrm{m}$$
-<p>In una misura singola l'errore assoluto coincide con la sensibilità dello strumento con
-cui si è misurato. Il metro a nastro apprezza il millimetro, quindi</p>
-$$e_a = 0{,}001\ \mathrm{m}$$
-$$a = (3{,}462 \pm 0{,}001)\ \mathrm{m}$$
-<p>Qui il valore attendibile è semplicemente il valore letto sullo strumento, e l'errore
-assoluto è la sensibilità dello strumento.</p>
+<div class="def"><span class="et">Regole di scrittura</span>
+<ul>
+<li>Errore assoluto: una sola cifra significativa.</li>
+<li>Valore attendibile: termina alla stessa cifra decimale dell'errore assoluto.</li>
+</ul>
 </div>
+
+<h2>Esempio 1</h2>
+
+<p>Lato $a$ di una stanza, misura singola.</p>
 
 <div class="fig">
 <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg"
@@ -77,104 +92,98 @@ assoluto è la sensibilità dello strumento.</p>
 <p class="did">La stanza, con i due lati $a$ e $b$.</p>
 </div>
 
-<p>Ripetiamo la stessa misura con una rotella metrica di sensibilità 1 cm. Ora lo strumento
-non distingue i millimetri, e il risultato ha una cifra in meno:</p>
-
-$$a = (3{,}46 \pm 0{,}01)\ \mathrm{m}$$
-
-<div class="regole">
-<p><strong>Regole per valore attendibile ed errore</strong></p>
 <ul>
-<li>L'errore assoluto deve avere <strong>una sola cifra significativa</strong>.</li>
-<li>Il valore attendibile deve <strong>terminare alla stessa cifra decimale</strong>
-dell'errore assoluto.</li>
+<li>Metro a nastro, sensibilità 1 mm; lettura 3,462 m.</li>
 </ul>
-</div>
+<p class="eq">$$a=(3{,}462\pm0{,}001)\ \mathrm{m}$$</p>
 
-<p>La seconda regola ha una ragione precisa: se l'incertezza cade sui centesimi, i
-millesimi del valore attendibile sono cifre di cui non sappiamo nulla, e scriverle è
-dichiarare una precisione che non abbiamo.</p>
-
-<p>Così questa scrittura non ha senso</p>
-$$t = (0{,}748 \pm 0{,}01)\ \mathrm{s}$$
-<p>mentre questa ha senso:</p>
-$$t = (0{,}75 \pm 0{,}01)\ \mathrm{s}$$
-
-<p>Visualizziamo le due misure del lato della stanza sul piano cartesiano.</p>
+<ul>
+<li>Rotella metrica, sensibilità 1 cm.</li>
+</ul>
+<p class="eq">$$a=(3{,}46\pm0{,}01)\ \mathrm{m}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="13">
-  <defs>
-    <marker id="frecciaX" markerWidth="9" markerHeight="9" refX="8" refY="3"
-            orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L8,3 L0,6 z" fill="#16283d"/>
-    </marker>
-  </defs>
-
-  <!-- asse: 3,450 -> x=60 ; 3,470 -> x=560 ; 1 mm = 25 px -->
-  <line x1="40" y1="110" x2="600" y2="110" stroke="#16283d" stroke-width="1.6"
-        marker-end="url(#frecciaX)"/>
-  <text x="608" y="130" fill="#16283d">a (m)</text>
-
-  <g stroke="#16283d" stroke-width="1.2">
-    <line x1="60"  y1="104" x2="60"  y2="116"/>
-    <line x1="185" y1="104" x2="185" y2="116"/>
-    <line x1="310" y1="104" x2="310" y2="116"/>
-    <line x1="435" y1="104" x2="435" y2="116"/>
-    <line x1="560" y1="104" x2="560" y2="116"/>
-  </g>
-  <g fill="#16283d" text-anchor="middle" font-size="12">
-    <text x="60"  y="132">3,450</text>
-    <text x="185" y="132">3,455</text>
-    <text x="310" y="132">3,460</text>
-    <text x="435" y="132">3,465</text>
-    <text x="560" y="132">3,470</text>
-  </g>
-
-  <!-- intervallo rotella metrica: 3,45 - 3,47 -->
-  <g stroke="#1f4e79" stroke-width="3.4">
-    <line x1="60" y1="66" x2="60" y2="154"/>
-    <line x1="560" y1="66" x2="560" y2="154"/>
-  </g>
-  <line x1="60" y1="66" x2="560" y2="66" stroke="#1f4e79" stroke-width="1.6"/>
-  <text x="310" y="56" text-anchor="middle" fill="#1f4e79" font-size="12">
-    intervallo di misura &mdash; rotella metrica</text>
-
-  <!-- intervallo metro a nastro: 3,461 - 3,463 -->
-  <g stroke="#2f6b4f" stroke-width="3">
-    <line x1="335" y1="82" x2="335" y2="138"/>
-    <line x1="385" y1="82" x2="385" y2="138"/>
-  </g>
-  <line x1="335" y1="82" x2="385" y2="82" stroke="#2f6b4f" stroke-width="1.6"/>
-  <g fill="#2f6b4f" font-size="11" text-anchor="middle">
-    <text x="335" y="76">3,461</text>
-    <text x="385" y="76">3,463</text>
-  </g>
-  <line x1="360" y1="150" x2="360" y2="168" stroke="#2f6b4f" stroke-width="1.4"/>
-  <text x="360" y="182" text-anchor="middle" fill="#2f6b4f" font-size="12">
-    intervallo di misura &mdash; metro a nastro</text>
-</svg>
-<p class="did">Ogni misura occupa un segmento, non un punto: il segmento va da
-$\overline{x} - e_x$ a $\overline{x} + e_x$. Lo strumento più sensibile dà il segmento più
-corto, cioè l'informazione più stretta sul valore vero.</p>
+<svg id="fig-a" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">sensibilità</label><input id="cur-a" type="range" min="0" max="3" step="1" value="0"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Intervallo di misura da $\overline{a}-e_a$ a $\overline{a}+e_a$; in verde il metro a nastro.</p>
 </div>
 
-<div class="nota">
-<strong>Attenzione.</strong> Errore piccolo non vuol dire errore assente. Anche
-$(3{,}462 \pm 0{,}001)\ \mathrm{m}$ lascia indeterminati i decimi di millimetro: il
-risultato è un intervallo, e la misura non individua mai un singolo numero.
-</div>
+<h2>Esempio 2</h2>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Finora abbiamo preso una sola lettura per volta. Subito dopo vediamo come si ricavano
-valore attendibile ed errore quando la misura viene ripetuta più volte, e poi come si usano
-questi intervalli per decidere se due misure, o una misura e un valore teorico, sono fra
-loro compatibili.</p>
-</div>
+<p>Dati: $\overline{t}=0{,}748$ s, $e_t=0{,}01$ s.</p>
+
+<ul>
+<li>Errore sui centesimi: valore attendibile arrotondato ai centesimi, $0{,}748\to0{,}75$.</li>
+</ul>
+<p class="eq">$$t=(0{,}75\pm0{,}01)\ \mathrm{s}$$</p>
+
+<div class="nota"><p>$t=(0{,}748\pm0{,}01)$ s: scrittura non corretta.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../16-errori-casuali-e-sistematici/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Errori casuali e sistematici</span></a><a class="successiva" href="../18-misure-ripetute-media-e-semidispersione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Misure ripetute: media e semidispersione</span></a></nav>
+<footer><p>Fisica prima &middot; Misure ed errori &middot; Unità 16</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function v(n,d){return n.toFixed(d).replace('.',',');}
+  var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+  if(!S||!c)return;
+  /* asse: 3,450 m -> x=35, 3,470 m -> x=385 (1 mm = 17,5 unità) */
+  var x0=35, k=17.5, ya=110, lettura=3462;   /* lettura in mm */
+  function X(mm){return x0+(mm-3450)*k;}
+  el(S,'line',{x1:20,y1:ya,x2:400,y2:ya,stroke:'var(--inchiostro)','stroke-width':1.6});
+  el(S,'path',{d:'M408,'+ya+' L398,'+(ya-4)+' L398,'+(ya+4)+' Z',fill:'var(--inchiostro)'});
+  T(S,410,ya-12,'a (m)',{fill:'var(--inchiostro)','text-anchor':'end'});
+  for(var m=3450;m<=3470;m++){
+    var lungo=m%5===0;
+    el(S,'line',{x1:X(m),y1:ya-(lungo?6:3),x2:X(m),y2:ya+(lungo?6:3),stroke:'var(--inchiostro)','stroke-width':lungo?1.2:.8});
+    if(lungo)T(S,X(m),ya+22,v(m/1000,3),{fill:'var(--inchiostro)','font-size':11,'text-anchor':'middle'});
+  }
+  /* intervallo fisso del metro a nastro */
+  function intervallo(g,a,b,y,col,w){
+    el(g,'line',{x1:X(a),y1:y,x2:X(b),y2:y,stroke:col,'stroke-width':w});
+    el(g,'line',{x1:X(a),y1:y-8,x2:X(a),y2:ya,stroke:col,'stroke-width':w});
+    el(g,'line',{x1:X(b),y1:y-8,x2:X(b),y2:ya,stroke:col,'stroke-width':w});
+  }
+  var gF=el(S,'g',{}), gM=el(S,'g',{});
+  intervallo(gF,3461,3463,92,'var(--verde)',2.4);
+  var sens=[1,2,5,10], nomi=['metro a nastro','','','rotella metrica'];
+  function dis(){
+    var i=+c.value, e=sens[i], val=Math.round(lettura/e)*e;
+    vuota(gM);
+    intervallo(gM,val-e,val+e,56,'var(--blu)',2.4);
+    el(gM,'circle',{cx:X(val),cy:56,r:3.5,fill:'var(--blu)'});
+    var d=e>=10?2:3;
+    T(gM,(X(val-e)+X(val+e))/2,40,'('+v(val/1000,d)+' ± '+v(e/1000,d)+') m',{fill:'var(--blu)','font-size':13,'text-anchor':'middle','font-weight':700});
+    if(nomi[i])T(gM,(X(val-e)+X(val+e))/2,20,nomi[i],{fill:'var(--grigio)','font-size':12,'text-anchor':'middle'});
+    el(gM,'circle',{cx:X(lettura),cy:ya,r:0,fill:'none'});
+    o.innerHTML='e<sub>a</sub> = '+(e<10?e+' mm':'1 cm');
+    if(window.allineaQuaderno)window.allineaQuaderno();
+  }
+  c.addEventListener('input',dis);dis();
+})();
+</script>
 </body>
 </html>
