@@ -280,3 +280,10 @@ Esecuzione delle 05:03 UTC (due unità).
 
 - fisica-5 unità 12 (Campo di una spira circolare e di una bobina): pubblicata, commit 3cdd3e9. Introduzione di una frase; ripristinati i titoletti «Il campo al centro di una spira», «Il campo di una bobina con N avvolgimenti»; direzione di B, regola della mano destra, somma dei campi, legende, nota ed esempio in frasi complete. Nessuna nuova correzione (B ≈ 1,57·10⁻³ T riverificato). Figure invariate (spire statiche, bobina con cursore su N). Nessun esempio tolto, nessuna figura decorativa.
 - fisica-1 unità 13 (Equivalenze di grandezze derivate): pubblicata, commit c550f45. Introduzione di una frase; titoletti «La frazione di conversione», «Aree e volumi», «Velocità e densità»; metodo, nota ed esempi con frasi di collegamento. Nessuna nuova correzione (7,1·10⁴ mm² e 2,85·10³ kg/m³ riverificati). Figura con cursore invariata. Da controllare: i tre titoletti sostituiscono i quattro originali (uno per esempio); restano tolti gli esempi del volume e della velocità. Nessuna figura decorativa.
+
+## Sera del 04/10/2026
+
+Esecuzione delle 20:03 UTC (due unità).
+
+- matematica-2 unità 13 (Semplificazione e riduzione allo stesso indice): pubblicata, commit 8786f88. Introduzione di una frase; ripristinati i titoletti «Semplificazione di radicali», «Semplificazione di radicali letterali», «Riduzione allo stesso indice»; regole, nota ed esempi in frasi complete, con i fattori moltiplicativi degli esponenti esplicitati; tolto il rimando «vista in precedenza». Nessuna correzione (semplificazioni e m.c.m. riverificati con SymPy). Nessuna figura, nessun esempio tolto.
+- fisica-2 unità 10 (Relazione velocità-spostamento): pubblicata, commit 0a82d52. Introduzione di due frasi; ripristinati i titoletti «Eliminare il tempo», «Grafico spazio-velocità», «Le leggi del moto uniformemente accelerato»; passaggi della derivazione, legenda, didascalia e criterio di scelta della legge in frasi complete. Nessuna correzione (derivazione riverificata con SymPy). Figura con cursore invariata. Nessun esempio (la traccia non ne ha), nessuna figura decorativa.
