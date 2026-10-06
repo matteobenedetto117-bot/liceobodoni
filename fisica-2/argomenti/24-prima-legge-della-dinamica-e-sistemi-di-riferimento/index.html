@@ -6,9 +6,47 @@
 <title>Prima legge della dinamica e sistemi di riferimento — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
 <style>
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -17,41 +55,58 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Dinamica &middot; Unità 14</p>
   <h1>Prima legge della dinamica e sistemi di riferimento</h1>
-  <p class="sommario">Finora abbiamo descritto come si muovono i corpi, senza chiederci
-  perché. La dinamica collega il moto alle forze che lo producono. Partiamo dal caso più
-  semplice, quello in cui le forze si bilanciano, e vediamo in quali sistemi di riferimento
-  questa legge vale davvero.</p>
 </header>
 
-<h2>Prima legge della dinamica: principio d'inerzia</h2>
+<p>La dinamica studia il legame fra il moto di un corpo e le forze che agiscono su di esso. Si parte dal caso in cui la forza risultante è nulla e si stabilisce in quali sistemi di riferimento questa legge vale.</p>
 
-<p>Se la forza risultante che agisce su un oggetto è nulla, l'oggetto non cambia il proprio
-stato di moto. In sostanza: un oggetto in quiete resta in quiete, e un oggetto che si muove
-di moto rettilineo uniforme continua a muoversi di moto rettilineo uniforme. Questo enunciato
-è la prima legge di Newton.</p>
+<h2>Principio d'inerzia</h2>
+<div class="def"><span class="et">Prima legge della dinamica</span>
+<p>Se la forza risultante che agisce su un oggetto è nulla, l'oggetto non cambia il proprio stato di moto:</p>
+<ul>
+<li>un oggetto in quiete resta in quiete;</li>
+<li>un oggetto in moto rettilineo uniforme continua a muoversi di moto rettilineo uniforme.</li>
+</ul>
+</div>
+<p>Questo enunciato è la prima legge di Newton, detta anche principio d'inerzia.</p>
 
 <h2>Sistemi di riferimento inerziali</h2>
-
-<p>Un sistema di riferimento inerziale è un sistema in cui vale la prima legge di Newton, cioè
-il principio d'inerzia. Da qui segue una proprietà utile: se un sistema di riferimento è
-inerziale, allora qualunque altro sistema che si muove rispetto ad esso con velocità costante
-(anche nulla) è a sua volta inerziale.</p>
+<div class="def"><span class="et">Sistema inerziale</span>
+<p>Un sistema di riferimento inerziale è un sistema in cui vale il principio d'inerzia.</p>
+</div>
+<p>Se un sistema di riferimento è inerziale, è inerziale anche ogni altro sistema che si muove rispetto a esso con velocità costante, anche nulla.</p>
 
 <h2>Sistemi di riferimento non inerziali</h2>
-
-<p>Al contrario, qualunque sistema di riferimento che accelera rispetto a un sistema inerziale
-è un sistema non inerziale: in un sistema del genere, come vedremo più avanti, la prima legge
-di Newton smette di valere così com'è.</p>
+<div class="def"><span class="et">Sistema non inerziale</span>
+<p>Un sistema di riferimento che accelera rispetto a un sistema inerziale è un sistema non inerziale.</p>
+</div>
+<p>In un sistema non inerziale la prima legge di Newton, così come è enunciata, non vale.</p>
 
 <h2>Principio di relatività galileiano</h2>
-
-<p>Le leggi della dinamica sono le stesse in tutti i sistemi di riferimento inerziali. In modo
-equivalente: tutti i sistemi di riferimento inerziali sono equivalenti fra loro, e non esiste
-un sistema di riferimento privilegiato rispetto agli altri.</p>
+<div class="def"><span class="et">Principio di relatività</span>
+<p>Le leggi della dinamica sono le stesse in tutti i sistemi di riferimento inerziali.</p>
+</div>
+<p>In modo equivalente, tutti i sistemi di riferimento inerziali sono equivalenti fra loro, e non esiste un sistema di riferimento privilegiato rispetto agli altri.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../23-lancio-verso-l-alto/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Lancio verso l'alto</span></a><a class="successiva" href="../25-seconda-legge-della-dinamica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Seconda legge della dinamica</span></a></nav>
 <footer><p>Fisica seconda &middot; Dinamica &middot; Unità 14</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
