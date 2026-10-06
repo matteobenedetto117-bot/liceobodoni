@@ -5,21 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Compatibilità fra misura e valore teorico — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -28,116 +57,117 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Misure ed errori &middot; Unità 18</p>
   <h1>Compatibilità fra misura e valore teorico</h1>
-  <p class="sommario">Una misura è un intervallo, non un punto: per capire se conferma un
-  valore atteso si guarda se quel valore cade dentro l'intervallo.</p>
 </header>
 
-<p>Dopo aver misurato una grandezza abbiamo un valore attendibile e un errore, cioè un
-intervallo di valori possibili. Spesso però sappiamo già che cosa dovrebbe venire, perché
-il valore è riportato nelle tabelle. Confrontare i due numeri serve a convalidare i dati
-misurati: è l'accordo fra teoria ed esperimento.</p>
+<p>Questa unità mostra come si decide se una misura è in accordo con il valore teorico della grandezza, cioè con il valore riportato nelle tabelle.</p>
 
-<div class="esempi">
-<h3>Acciaio inox?</h3>
-<p>In laboratorio troviamo alcuni oggetti che sembrano fatti di acciaio inox e vogliamo
-verificarlo. Ne misuriamo la densità e, con i metodi visti finora, otteniamo</p>
-$$d = (7{,}97 \pm 0{,}07)\ \mathrm{g/cm^3}$$
-<p>Controllando sulle tabelle vediamo che il valore teorico dell'acciaio inox è
-$8{,}02\ \mathrm{g/cm^3}$. Mettiamo l'uno e l'altro su un asse cartesiano.</p>
+<p>Il risultato di una misura, valore attendibile più o meno errore assoluto, individua un intervallo di valori possibili. Per confrontare la misura con il valore teorico si rappresentano l'intervallo e il valore teorico sullo stesso asse.</p>
+
+<div class="def"><span class="et">Compatibilità</span>
+<p>Una misura $x=\overline{x}\pm e_x$ e un valore teorico sono compatibili se il valore teorico cade dentro l'intervallo di misura, cioè fra $\overline{x}-e_x$ e $\overline{x}+e_x$. Se cade fuori dall'intervallo, misura e valore teorico non sono compatibili.</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 620 160" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Asse delle densità con l'intervallo di misura da 7,90 a 8,04 e il valore teorico 8,02 al suo interno">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
-            orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
-    </marker>
-  </defs>
-
-  <line x1="40" y1="90" x2="590" y2="90" stroke="#333" stroke-width="1.6"
-        marker-end="url(#fr)"/>
-  <text x="586" y="114" text-anchor="end" font-size="12" fill="#333">d (g/cm³)</text>
-
-  <!-- intervallo di misura: 7,90 -> x=120 ; 8,04 -> x=470 -->
-  <g stroke="#b03030" stroke-width="2.6">
-    <line x1="120" y1="74" x2="120" y2="106"/>
-    <line x1="470" y1="74" x2="470" y2="106"/>
-    <line x1="120" y1="90" x2="470" y2="90"/>
-  </g>
-  <g fill="#b03030" font-size="12" text-anchor="middle">
-    <text x="120" y="126">7,90</text>
-    <text x="470" y="126">8,04</text>
-    <text x="295" y="126">7,97</text>
-  </g>
-  <line x1="295" y1="80" x2="295" y2="100" stroke="#b03030" stroke-width="2"/>
-
-  <!-- valore teorico -->
-  <circle cx="420" cy="90" r="6" fill="#2f6b4f"/>
-  <text x="420" y="58" text-anchor="middle" font-size="12" fill="#2f6b4f">valore teorico</text>
-  <text x="420" y="74" text-anchor="middle" font-size="12" fill="#2f6b4f">8,02</text>
-</svg>
-<p class="did">L'intervallo rosso va da valore attendibile meno errore a valore
-attendibile più errore. Il pallino verde è il valore delle tabelle.</p>
+<svg id="fig-b" viewBox="0 0 420 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">Il segmento rosso è l'intervallo di misura e il pallino verde è il valore teorico: a sinistra il pallino cade dentro l'intervallo, a destra fuori.</p>
 </div>
 
-<p>Il valore teorico è dentro l'intervallo di validità della misura. Diciamo allora che
-esperimento e valore teorico sono <strong>compatibili</strong>: la misura conferma che gli
-oggetti sono di acciaio inox. Se invece il pallino verde cadesse fuori dall'intervallo, le
-due informazioni non sarebbero compatibili, e a quel punto o gli oggetti non sono di
-acciaio inox, oppure c'è un errore sistematico nella misura.</p>
+<p>Se misura e valore teorico non sono compatibili, o l'ipotesi da cui viene il valore teorico è sbagliata, oppure nella misura c'è un errore sistematico.</p>
+
+<h2>Esempio</h2>
+
+<p>Si vuole verificare se alcuni oggetti sono di acciaio inox. Misurandone la densità si ottiene:</p>
+
+<p class="eq">$$d=(7{,}97\pm0{,}07)\ \mathrm{g/cm^3}$$</p>
+
+<p>Nelle tabelle la densità dell'acciaio inox è $8{,}02\ \mathrm{g/cm^3}$. Gli estremi dell'intervallo di misura sono:</p>
+
+<p class="eq">$$7{,}97-0{,}07=7{,}90\ \mathrm{g/cm^3}\qquad 7{,}97+0{,}07=8{,}04\ \mathrm{g/cm^3}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 620 130" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="A sinistra il valore teorico dentro l'intervallo, caso compatibile; a destra fuori dall'intervallo, caso non compatibile">
-  <defs>
-    <marker id="fr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
-            orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
-    </marker>
-  </defs>
-
-  <!-- caso compatibile -->
-  <line x1="20" y1="50" x2="280" y2="50" stroke="#333" stroke-width="1.4"
-        marker-end="url(#fr2)"/>
-  <g stroke="#b03030" stroke-width="2.4">
-    <line x1="100" y1="38" x2="100" y2="62"/>
-    <line x1="200" y1="38" x2="200" y2="62"/>
-    <line x1="100" y1="50" x2="200" y2="50"/>
-  </g>
-  <circle cx="160" cy="50" r="5.5" fill="#2f6b4f"/>
-  <text x="150" y="86" text-anchor="middle" font-size="12.5" fill="#333">COMPATIBILI</text>
-
-  <!-- caso non compatibile -->
-  <line x1="340" y1="50" x2="600" y2="50" stroke="#333" stroke-width="1.4"
-        marker-end="url(#fr2)"/>
-  <g stroke="#b03030" stroke-width="2.4">
-    <line x1="400" y1="38" x2="400" y2="62"/>
-    <line x1="490" y1="38" x2="490" y2="62"/>
-    <line x1="400" y1="50" x2="490" y2="50"/>
-  </g>
-  <circle cx="550" cy="50" r="5.5" fill="#2f6b4f"/>
-  <text x="475" y="86" text-anchor="middle" font-size="12.5" fill="#333">NON COMPATIBILI</text>
-</svg>
-<p class="did">Tutto si decide guardando se il pallino cade dentro o fuori dal segmento.</p>
+<svg id="fig-a" viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">valore teorico</label><input id="cur-a" type="range" min="7.80" max="8.14" step="0.01" value="8.02"><output id="val-a" for="cur-a"></output></div>
+<p class="did">L'intervallo rosso va da 7,90 a 8,04 g/cm³; il cursore sposta il valore teorico, che parte dal valore dell'acciaio inox.</p>
 </div>
 
-<div class="nota">
-<strong>Attenzione.</strong> Non serve che il valore teorico coincida con il valore
-attendibile: qui $7{,}97\ \mathrm{g/cm^3}$ e $8{,}02\ \mathrm{g/cm^3}$ sono numeri diversi,
-eppure la misura è in accordo con la teoria. Una misura senza errore accanto non permette
-nessun confronto di questo tipo.
-</div>
+<p>Il valore teorico $8{,}02\ \mathrm{g/cm^3}$ è compreso fra $7{,}90\ \mathrm{g/cm^3}$ e $8{,}04\ \mathrm{g/cm^3}$: la misura è compatibile con il valore teorico ed è in accordo con l'ipotesi che gli oggetti siano di acciaio inox.</p>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Lo stesso confronto si può fare fra due misure sperimentali della stessa grandezza,
-ciascuna con il proprio intervallo: è l'argomento dell'unità successiva. Poi l'errore
-relativo permetterà di dire quale delle due misure è la più precisa.</p>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Non serve che il valore teorico coincida con il valore attendibile: $7{,}97\ \mathrm{g/cm^3}$ e $8{,}02\ \mathrm{g/cm^3}$ sono diversi, ma la misura è compatibile. Senza l'errore assoluto il confronto non si può fare.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../18-misure-ripetute-media-e-semidispersione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Misure ripetute: media e semidispersione</span></a><a class="successiva" href="../20-compatibilita-fra-due-misure/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Compatibilità fra due misure</span></a></nav>
+<footer><p>Fisica prima &middot; Misure ed errori &middot; Unità 18</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function v(n,d){return (+n).toFixed(d).replace('.',',');}
+  function asse(S,x1,x2,y){el(S,'line',{x1:x1,y1:y,x2:x2-8,y2:y,stroke:'var(--inchiostro)','stroke-width':1.5});
+    el(S,'path',{d:'M'+x2+','+y+' L'+(x2-10)+','+(y-4)+' L'+(x2-10)+','+(y+4)+' Z',fill:'var(--inchiostro)'});}
+  function intervallo(S,a,b,y){el(S,'line',{x1:a,y1:y,x2:b,y2:y,stroke:'var(--rosso)','stroke-width':3});
+    [a,b].forEach(function(x){el(S,'line',{x1:x,y1:y-9,x2:x,y2:y+9,stroke:'var(--rosso)','stroke-width':2.4});});}
+
+  /* esempio: asse delle densità in scala, 0,01 g/cm³ = 10 unità */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var ya=84, yi=52;
+    function X(d){return 40+(d-7.80)*1000;}
+    asse(S,20,410,ya);
+    T(S,410,ya+40,'d (g/cm³)',{fill:'var(--inchiostro)','text-anchor':'end'});
+    for(var k=0;k<=7;k++){var d=7.80+0.05*k;
+      el(S,'line',{x1:X(d),y1:ya-5,x2:X(d),y2:ya+5,stroke:'var(--inchiostro)','stroke-width':1.2});
+      T(S,X(d),ya+20,v(d,2),{fill:'var(--inchiostro)','font-size':11,'text-anchor':'middle'});}
+    intervallo(S,X(7.90),X(8.04),yi);
+    el(S,'line',{x1:X(7.97),y1:yi-6,x2:X(7.97),y2:yi+6,stroke:'var(--rosso)','stroke-width':2});
+    T(S,X(7.90),yi-16,'7,90',{fill:'var(--rosso)','font-size':11,'text-anchor':'middle'});
+    T(S,X(7.97),yi-16,'7,97',{fill:'var(--rosso)','font-size':11,'text-anchor':'middle'});
+    T(S,X(8.04),yi-16,'8,04',{fill:'var(--rosso)','font-size':11,'text-anchor':'middle'});
+    var g=el(S,'g',{});
+    function dis(){
+      var d=Math.round(+c.value*100)/100, x=X(d);vuota(g);
+      el(g,'line',{x1:x,y1:yi,x2:x,y2:ya,stroke:'var(--verde)','stroke-width':1.2,'stroke-dasharray':'3 3'});
+      el(g,'circle',{cx:x,cy:yi,r:6,fill:'var(--verde)'});
+      var ok=d>=7.90-1e-9&&d<=8.04+1e-9;
+      o.innerHTML=v(d,2)+' g/cm³: '+(ok?'<span class="ok">compatibili</span>':'non compatibili');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* schema: compatibili / non compatibili */
+  (function(){
+    var S=document.getElementById('fig-b');if(!S)return;
+    asse(S,15,195,45);asse(S,225,405,45);
+    intervallo(S,60,150,45);intervallo(S,255,335,45);
+    el(S,'circle',{cx:118,cy:45,r:6,fill:'var(--verde)'});
+    el(S,'circle',{cx:372,cy:45,r:6,fill:'var(--verde)'});
+    T(S,105,88,'compatibili',{fill:'var(--inchiostro)','font-size':13,'text-anchor':'middle'});
+    T(S,315,88,'non compatibili',{fill:'var(--inchiostro)','font-size':13,'text-anchor':'middle'});
+  })();
+})();
+</script>
 </body>
 </html>
