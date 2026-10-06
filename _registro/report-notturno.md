@@ -339,3 +339,10 @@ Esecuzione programmata delle 05:02 UTC del 06/10, avviata alle 15:35 UTC (due un
 
 - fisica-4 unità 22 (Onde longitudinali: il suono): pubblicata, commit 476484c. Introduzione di due frasi; ripristinati i titoletti «Compressioni e rarefazioni», «Funzione d'onda armonica del suono», «Velocità di propagazione del suono»; definizione, membrana, compressione e rarefazione, moto delle molecole e confronto con le onde trasversali, legenda, fase fra densità e pressione, valore di v_s in frasi complete; didascalie in frase completa. Nessuna nuova correzione (d e p come variazioni mantenuto). Figure con cursore invariate. Nessun esempio, nessuna figura decorativa.
 - matematica-5 unità 15 (Domini e derivate di ordine superiore): pubblicata, commit a2c3995. Introduzione di una frase; ripristinati i titoletti «I domini delle funzioni elementari», «Le derivate di ordine superiore al primo»; condizioni per le potenze, definizione ed esempio in frasi complete; tasto «Mostra tutti i risultati» subito dopo l'introduzione. Nessuna nuova correzione (derivate riverificate). Nessuna figura, nessun esempio tolto.
+
+## Sera del 06/10/2026
+
+Esecuzione programmata delle 20:02 UTC, avviata alle 20:41 UTC (due unità).
+
+- fisica-5 unità 16 (Moto elicoidale): pubblicata, commit b0e9265. Introduzione di una frase; ripristinati i titoletti «Raggio e periodo dell'elica», «Il passo dell'elica»; scomposizione della velocità, composizione dei moti, origine del raggio, periodo con passaggio intermedio, nota su v⊥, passo, legenda e didascalia in frasi complete. Nessuna nuova correzione (q in valore assoluto mantenuto; formule riverificate con SymPy). Figura con cursore invariata. Nessun esempio, nessuna figura decorativa.
+- fisica-1 unità 17 (Misure ripetute: media e semidispersione): pubblicata, commit ac7001e. Introduzione di una frase e paragrafo sulla dispersione ripristinati; regole, legenda, caso della sensibilità con motivazione, nota sugli estremi, passaggi dell'esempio e nota sulla scrittura non corretta in frasi complete. Nessuna nuova correzione (2,255 s e 0,025 s riverificati). Figura con cursore invariata. Nessun esempio tolto, nessuna figura decorativa.
