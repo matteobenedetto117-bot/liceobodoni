@@ -5,16 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Acceleratori di particelle: ciclotrone e sincrotrone — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
 </style>
 </head>
 <body>
@@ -24,151 +57,177 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Magnetostatica &middot; Unità 17</p>
   <h1>Acceleratori di particelle: ciclotrone e sincrotrone</h1>
-  <p class="sommario">Per studiare la struttura della materia servono particelle cariche
-  portate ad altissima energia. Ciclotrone e sincrotrone usano insieme un campo elettrico, che
-  accelera, e un campo magnetico, che curva la traiettoria per farla passare più volte nella
-  zona di accelerazione.</p>
 </header>
+
+<p>Il ciclotrone e il sincrotrone accelerano particelle cariche usando insieme un campo elettrico, che aumenta la velocità della particella, e un campo magnetico, che ne curva la traiettoria.</p>
 
 <h2>Il ciclotrone</h2>
 
-<p>La particella viene iniettata al centro di due elettrodi cavi a forma di D (le "dees"),
-separati da una piccola fessura. Un campo magnetico $\vec B$, uscente dal piano del disegno,
-la costringe a percorrere una semicirconferenza dentro ciascuna D; ogni volta che attraversa la
-fessura, un campo elettrico $\vec E$ la accelera. Poiché la particella percorre la fessura in
-versi opposti a giri alterni, anche il verso di $\vec E$ va invertito con la stessa cadenza,
-altrimenti la frenerebbe invece di accelerarla.</p>
+<p>Il ciclotrone è formato da due elettrodi cavi a forma di D, separati da una sottile fessura e immersi in un campo magnetico uniforme $\vec B$ perpendicolare al loro piano. La particella viene immessa vicino al centro.</p>
 
-<div class="fig" style="max-width:460px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="c18r" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="c18v" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,0 L4,3 L0,6 Z" fill="var(--verde)"/></marker>
-<symbol id="c18x" viewBox="-8 -8 16 16">
-<circle r="7" fill="none" stroke="var(--blu)" stroke-width="1.3"/>
-<line x1="-4.2" y1="-4.2" x2="4.2" y2="4.2" stroke="var(--blu)" stroke-width="1.3"/>
-<line x1="-4.2" y1="4.2" x2="4.2" y2="-4.2" stroke="var(--blu)" stroke-width="1.3"/>
-</symbol>
-</defs>
-<path d="M80,150 A140,140 0 0 1 360,150 Z" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<path d="M80,170 A140,140 0 0 0 360,170 Z" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<use href="#c18x" x="152" y="102" width="16" height="16"/>
-<use href="#c18x" x="272" y="102" width="16" height="16"/>
-<use href="#c18x" x="142" y="52" width="16" height="16"/>
-<use href="#c18x" x="282" y="52" width="16" height="16"/>
-<use href="#c18x" x="212" y="27" width="16" height="16"/>
-<use href="#c18x" x="212" y="117" width="16" height="16"/>
-<use href="#c18x" x="152" y="202" width="16" height="16"/>
-<use href="#c18x" x="272" y="202" width="16" height="16"/>
-<use href="#c18x" x="142" y="252" width="16" height="16"/>
-<use href="#c18x" x="282" y="252" width="16" height="16"/>
-<use href="#c18x" x="212" y="287" width="16" height="16"/>
-<use href="#c18x" x="212" y="197" width="16" height="16"/>
-<text x="395" y="45" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<line x1="120" y1="168" x2="120" y2="152" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#c18v)"/>
-<line x1="170" y1="168" x2="170" y2="152" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#c18v)"/>
-<line x1="270" y1="168" x2="270" y2="152" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#c18v)"/>
-<line x1="320" y1="168" x2="320" y2="152" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#c18v)"/>
-<text x="200" y="145" font-family="var(--sans)" font-size="13" fill="var(--verde)">E</text>
-<line x1="60" y1="150" x2="60" y2="170" stroke="var(--inchiostro)" stroke-width="1.1"/>
-<line x1="55" y1="150" x2="65" y2="150" stroke="var(--inchiostro)" stroke-width="1.1"/>
-<line x1="55" y1="170" x2="65" y2="170" stroke="var(--inchiostro)" stroke-width="1.1"/>
-<text x="30" y="164" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">d</text>
-<text x="130" y="335" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#916;V = E&middot;d</text>
-<path d="M220.0,152.0 L221.2,151.1 L222.6,150.5 L224.2,150.0 L225.9,149.8 L227.8,149.9 L229.7,150.4 L231.7,151.2 L233.5,152.3 L235.3,153.8 L236.9,155.7 L238.3,157.8 L239.3,160.2 L240.1,162.9 L240.4,165.8 L240.4,168.8 L239.8,171.9 L238.8,175.0 L237.3,178.0 L235.4,180.9 L233.0,183.6 L230.1,186.0 L226.8,188.0 L223.2,189.6 L219.2,190.7 L215.1,191.2 L210.7,191.2 L206.3,190.6 L201.9,189.3 L197.6,187.4 L193.5,184.9 L189.7,181.7 L186.3,178.0 L183.3,173.7 L180.9,169.0 L179.1,163.9 L178.0,158.4 L177.7,152.7 L178.1,147.0 L179.3,141.2 L181.3,135.5 L184.2,130.0 L187.8,124.8 L192.2,120.1 L197.2,116.0 L202.9,112.5 L209.1,109.7 L215.7,107.8 L222.7,106.7 L229.8,106.6 L237.1,107.5"
-  fill="none" stroke="var(--rosso)" stroke-width="1.8"/>
-<line x1="237.1" y1="107.5" x2="352" y2="60" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#c18r)"/>
-<text x="330" y="50" font-family="var(--sans)" font-size="12.5" fill="var(--rosso)">particella in uscita</text>
-<text x="330" y="65" font-family="var(--sans)" font-size="12.5" fill="var(--rosso)">ad alta velocità</text>
-</svg>
-<p class="did">Le due D, immerse nel campo magnetico $\vec B$ uscente dal foglio (i pallini
-crociati), curvano la particella; la fessura larga $d$ la accelera con il campo $\vec E$,
-che alterna verso a ogni mezzo giro. Il raggio cresce a ogni passaggio, disegnando una
-spirale, finché la particella esce ad alta velocità.</p>
+<p>All'interno di ciascuna D il campo elettrico è nullo: la forza di Lorentz fa percorrere alla particella una semicirconferenza con velocità costante. Nella fessura, larga $d$, è applicata la differenza di potenziale $\Delta V=E\,d$, e il campo elettrico $\vec E$ accelera la particella.</p>
+
+<p>La particella attraversa la fessura in versi opposti a ogni mezzo giro, quindi anche il verso di $\vec E$ va invertito a ogni mezzo giro; altrimenti la particella verrebbe frenata. A ogni passaggio la velocità aumenta e con essa il raggio $r=mv/(qB)$: la traiettoria è una spirale formata da semicirconferenze di raggio crescente.</p>
+
+<div class="fig">
+<svg id="fig-a" viewBox="0 0 420 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">passaggi nella fessura</label><input id="cur-a" type="range" min="0" max="12" step="1" value="5"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Una carica positiva si muove nel campo $\vec B$ uscente dal foglio; il cursore indica quante volte ha attraversato la fessura, e la freccia verde mostra il verso di $\vec E$ al passaggio successivo.</p>
 </div>
 
-<p>Il periodo di un giro completo è lo stesso già trovato per il moto circolare in campo
-magnetico, e non dipende dalla velocità:</p>
+<h2>Periodo ed energia guadagnata</h2>
 
-<div class="formula-box">
-$$T=\frac{2\pi m}{qB}$$
+<p>Il tempo impiegato per un giro completo è il periodo del moto circolare di una carica in un campo magnetico uniforme.</p>
+
+<div class="def"><span class="et">Periodo del ciclotrone</span>
+<p class="eq">$$T=\frac{2\pi m}{qB}$$</p>
+<p>Nella formula $m$ è la massa della particella, $q$ il valore assoluto della sua carica e $B$ l'intensità del campo magnetico.</p>
 </div>
 
-<p>Il tempo impiegato per mezzo giro, dopo il quale va invertito $\vec E$, è quindi la metà:
-$T/2=\pi m/(qB)$.</p>
+<p>Il periodo non dipende dalla velocità: anche se il raggio cresce, ogni semicirconferenza viene percorsa nello stesso tempo. Per questo il verso di $\vec E$ si inverte a intervalli regolari, ogni mezzo periodo $T/2=\pi m/(qB)$.</p>
 
-<p>A ogni semiciclo la particella attraversa la fessura, sottoposta alla differenza di
-potenziale $\Delta V=E\cdot d$, e la sua energia cinetica aumenta di $\Delta U=q\Delta V$.
-Dopo $n$ cicli completi, cioè dopo $2n$ attraversamenti della fessura, l'aumento totale di
-energia è</p>
+<p>A ogni attraversamento della fessura l'energia cinetica della particella aumenta di $q\Delta V$. In un ciclo completo la particella attraversa la fessura due volte, quindi dopo $n$ cicli l'aumento di energia cinetica è</p>
 
-<div class="formula-box">
-$$\Delta U=2nq\Delta V$$
-</div>
+<p class="eq">$$\Delta U=2nq\Delta V$$</p>
 
-<h3>Esempio</h3>
+<h2>Esempio</h2>
 
-<p>Un protone ($q=1{,}60\times10^{-19}$ C, $m=1{,}67\times10^{-27}$ kg) entra in un ciclotrone
-con velocità $v_0=500$ m/s. La differenza di potenziale applicata alla fessura è
-$\Delta V=800$ V e il protone compie $n=5$ cicli completi: quanto vale la velocità finale
-$v_f$?</p>
+<p>Un protone ($q=1{,}60\times10^{-19}$ C, $m=1{,}67\times10^{-27}$ kg) entra in un ciclotrone con velocità $v_0=500$ m/s. Alla fessura è applicata la differenza di potenziale $\Delta V=800$ V e il protone compie $n=5$ cicli completi. Si vuole calcolare la velocità finale $v_f$.</p>
 
-<p>Uguagliando le due espressioni dell'energia guadagnata,</p>
+<p>L'energia guadagnata nella fessura è uguale all'aumento di energia cinetica del protone:</p>
 
-<div class="formula-box">
-$$2nq\Delta V=\frac12 m\left(v_f^2-v_0^2\right)$$
-</div>
+<p class="eq">$$2nq\Delta V=\frac12 m\left(v_f^2-v_0^2\right)$$</p>
 
-<p>si ricava</p>
+<p>Risolvendo rispetto a $v_f$ si ottiene:</p>
 
-<div class="formula-box">
-$$v_f=\sqrt{v_0^2+\frac{4nq\Delta V}{m}}\approx1{,}24\times10^{6}\ \text{m/s}$$
-</div>
+<p class="eq">$$v_f=\sqrt{v_0^2+\frac{4nq\Delta V}{m}}$$</p>
+
+<p>Sostituendo i valori:</p>
+
+<p class="eq">$$v_f=\sqrt{(500)^2+\frac{4\cdot5\cdot1{,}60\times10^{-19}\cdot800}{1{,}67\times10^{-27}}}\ \text{m/s}\approx1{,}24\times10^{6}\ \text{m/s}$$</p>
+
+<p>La velocità iniziale è trascurabile rispetto a quella finale.</p>
 
 <h2>Il sincrotrone</h2>
 
-<p>Il limite del ciclotrone è la dimensione: al crescere della velocità cresce anche il raggio
-$R=mv/(qB)$ percorso dalla particella, e con esso il diametro degli elettrodi e il costo
-dell'apparato. Nel sincrotrone la particella è invece mantenuta dentro un anello di raggio $R$
-fisso: mano a mano che $v$ aumenta a ogni passaggio nel campo elettrico, si aumenta in
-proporzione anche $B$, in modo che il rapporto $mv/(qB)$, e quindi $R$, resti costante.</p>
+<p>Nel ciclotrone il raggio della traiettoria cresce con la velocità: per raggiungere velocità elevate servono elettrodi di grande diametro, e l'apparato diventa grande e costoso.</p>
 
-<div class="fig" style="max-width:360px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="c18s" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,0 L4,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<circle cx="170" cy="170" r="123" fill="none" stroke="var(--inchiostro)" stroke-width="14"/>
-<circle cx="170" cy="170" r="123" fill="none" stroke="var(--blu-chiaro)" stroke-width="0"/>
-<use href="#c18x" x="277.6" y="204.1" width="16" height="16"/>
-<use href="#c18x" x="241.1" y="256.2" width="16" height="16"/>
-<use href="#c18x" x="183.4" y="283.1" width="16" height="16"/>
-<use href="#c18x" x="119.9" y="277.6" width="16" height="16"/>
-<use href="#c18x" x="67.8" y="241.1" width="16" height="16"/>
-<use href="#c18x" x="46.4" y="204.1" width="16" height="16"/>
-<use href="#c18x" x="46.4" y="119.9" width="16" height="16"/>
-<use href="#c18x" x="82.9" y="67.8" width="16" height="16"/>
-<use href="#c18x" x="140.6" y="40.9" width="16" height="16"/>
-<use href="#c18x" x="204.1" y="46.4" width="16" height="16"/>
-<use href="#c18x" x="256.2" y="82.9" width="16" height="16"/>
-<use href="#c18x" x="277.6" y="119.9" width="16" height="16"/>
-<line x1="170" y1="170" x2="170" y2="47" stroke="var(--rosso)" stroke-width="1.8"/>
-<text x="178" y="105" font-family="var(--sans)" font-size="14" fill="var(--rosso)">R</text>
-<line x1="293" y1="185" x2="293" y2="145" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#c18s)"/>
-<text x="300" y="168" font-family="var(--sans)" font-size="13" fill="var(--verde)">E</text>
-<line x1="47" y1="185" x2="47" y2="145" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#c18s)"/>
-<text x="20" y="168" font-family="var(--sans)" font-size="13" fill="var(--verde)">E</text>
-</svg>
-<p class="did">La particella resta su un anello di raggio $R$ fisso, immerso nel campo
-magnetico $\vec B$ (pallini crociati); il campo elettrico $\vec E$, applicato in punti
-dell'anello, la accelera a ogni giro. Aumentando $B$ di pari passo con $v$, il rapporto
-$R=mv/(qB)$ non cambia.</p>
+<p>Nel sincrotrone la particella percorre invece un anello di raggio $R$ fisso. Il campo elettrico la accelera in alcuni punti dell'anello; ogni volta che la velocità aumenta, si aumenta in proporzione anche l'intensità del campo magnetico, in modo che il raggio resti costante:</p>
+
+<p class="eq">$$R=\frac{mv}{qB}$$</p>
+
+<div class="fig">
+<svg id="fig-b" viewBox="0 0 340 350" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px"></svg>
+<div class="cursore"><label for="cur-b">velocità</label><input id="cur-b" type="range" min="1" max="1.5" step="0.05" value="1.25"><output id="val-b" for="cur-b"></output></div>
+<p class="did">Il cursore aumenta la velocità della particella: il campo $\vec B$ cresce in proporzione e il raggio $R$ resta fisso, mentre con $B$ costante la particella seguirebbe la circonferenza tratteggiata.</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../17-moto-elicoidale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Moto elicoidale</span></a><a class="successiva" href="../19-l-esperienza-di-faraday-e-la-forza-elettromotrice-indotta/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">L'esperienza di Faraday e la forza elettromotrice indotta</span></a></nav>
 <footer><p>Fisica quinta &middot; Magnetostatica &middot; Unità 17</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function v2(n){return (+n).toFixed(2).replace('.',',');}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  function uscente(p,x,y){el(p,'circle',{cx:x,cy:y,r:6,fill:'none',stroke:'var(--blu)','stroke-width':1.2});el(p,'circle',{cx:x,cy:y,r:1.8,fill:'var(--blu)'});}
+
+  /* ciclotrone: carica positiva, B uscente -> verso orario.
+     Dopo i passaggi nella fessura il raggio vale r1*sqrt(i) (energia i*q*DV, v0 trascurabile). */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var cx=210, yU=150, yL=166, RD=140, r1=36, xs=185.2, K=12;
+    el(S,'path',{d:'M'+(cx-RD)+','+yU+' A'+RD+','+RD+' 0 0 1 '+(cx+RD)+','+yU+' Z',fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(S,'path',{d:'M'+(cx-RD)+','+yL+' A'+RD+','+RD+' 0 0 0 '+(cx+RD)+','+yL+' Z',fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.6});
+    [[22,22],[398,22],[22,308],[398,308]].forEach(function(q){uscente(S,q[0],q[1]);});
+    T(S,384,27,'B',{fill:'var(--blu)','font-size':14,'font-style':'italic','font-weight':700,'text-anchor':'end'});
+    /* larghezza della fessura */
+    el(S,'line',{x1:58,y1:yU,x2:58,y2:yL,stroke:'var(--inchiostro)','stroke-width':1.1});
+    el(S,'line',{x1:53,y1:yU,x2:63,y2:yU,stroke:'var(--inchiostro)','stroke-width':1.1});
+    el(S,'line',{x1:53,y1:yL,x2:63,y2:yL,stroke:'var(--inchiostro)','stroke-width':1.1});
+    T(S,46,yL-3,'d',{fill:'var(--inchiostro)','font-size':13,'font-style':'italic','text-anchor':'end'});
+    /* traiettoria completa (centri e raggi calcolati) */
+    var X=[xs], Rr=[0];
+    for(var i=1;i<=K;i++){var r=r1*Math.sqrt(i);Rr.push(r);X.push(i%2?X[i-1]+2*r:X[i-1]-2*r);}
+    function tratto(k){var d='M'+f(xs)+','+yL;
+      for(var i=1;i<=k;i++){var r=Rr[i];
+        if(i%2)d+=' L'+f(X[i-1])+','+yU+' A'+f(r)+','+f(r)+' 0 0 1 '+f(X[i])+','+yU;
+        else d+=' L'+f(X[i-1])+','+yL+' A'+f(r)+','+f(r)+' 0 0 1 '+f(X[i])+','+yL;}
+      return d;}
+    el(S,'path',{d:tratto(K),fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 4'});
+    var g=el(S,'g',{});
+    function dis(){
+      var k=+c.value;vuota(g);
+      el(g,'path',{d:tratto(k),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8});
+      var su=(k%2===0), x=X[k], y=(k===0?yL:(k%2?yU:yL));
+      /* verso di E al passaggio successivo */
+      if(k<K){[95,150,270,325].forEach(function(xe){freccia(g,xe,su?yL-1:yU+1,xe,su?yU+1:yL-1,'var(--verde)',1.6,5);});
+        T(g,372,yL-3,'E',{fill:'var(--verde)','font-size':13,'font-style':'italic','font-weight':700});}
+      el(g,'circle',{cx:f(x),cy:f(y),r:5,fill:'var(--rosso)'});
+      o.innerHTML=(k===1?'1 passaggio':k+' passaggi')+': energia guadagnata '+(k?k+' qΔV':'0');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* sincrotrone: raggio fisso, B cresce come v; tratteggio = orbita con B costante */
+  (function(){
+    var S=document.getElementById('fig-b'), c=document.getElementById('cur-b'), o=document.getElementById('val-b');
+    if(!S||!c)return;
+    var cx=170, cy=160, R=90;
+    el(S,'circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--blu-chiaro)','stroke-width':16});
+    el(S,'circle',{cx:cx,cy:cy,r:R-8,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2});
+    el(S,'circle',{cx:cx,cy:cy,r:R+8,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2});
+    [[135,125],[205,125],[210,195]].forEach(function(q){uscente(S,q[0],q[1]);});
+    T(S,219,119,'B',{fill:'var(--blu)','font-size':14,'font-style':'italic','font-weight':700});
+    var a=Math.PI*3/4;
+    el(S,'line',{x1:cx,y1:cy,x2:f(cx+R*Math.cos(a)),y2:f(cy+R*Math.sin(a)),stroke:'var(--rosso)','stroke-width':1.6});
+    T(S,f(cx+R*.5*Math.cos(a)-12),f(cy+R*.5*Math.sin(a)-2),'R',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700,'text-anchor':'end'});
+    /* punti di accelerazione: verso orario -> a destra si scende, a sinistra si sale */
+    freccia(S,cx+R,cy-16,cx+R,cy+16,'var(--verde)',2,6);
+    T(S,cx+R-14,cy+5,'E',{fill:'var(--verde)','font-size':13,'font-style':'italic','font-weight':700,'text-anchor':'end'});
+    freccia(S,cx-R,cy+16,cx-R,cy-16,'var(--verde)',2,6);
+    T(S,cx-R+14,cy+5,'E',{fill:'var(--verde)','font-size':13,'font-style':'italic','font-weight':700});
+    var g=el(S,'g',{}), y0=cy-R;
+    function dis(){
+      var s=+c.value;vuota(g);
+      if(s>1.001)el(g,'circle',{cx:cx,cy:f(y0+R*s),r:f(R*s),fill:'none',stroke:'var(--rosso)','stroke-width':1.3,'stroke-dasharray':'6 4'});
+      freccia(g,cx,y0,cx+34*s,y0,'var(--inchiostro)',2.2,6);
+      T(g,f(cx+34*s+4),y0-8,'v',{fill:'var(--inchiostro)','font-size':14,'font-style':'italic','font-weight':700});
+      el(g,'circle',{cx:cx,cy:y0,r:5,fill:'var(--rosso)'});
+      o.innerHTML='v = '+v2(s)+' v₀, B = '+v2(s)+' B₀: <span class="ok">R costante</span>';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+})();
+</script>
 </body>
 </html>
