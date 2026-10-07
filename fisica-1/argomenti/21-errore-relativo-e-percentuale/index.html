@@ -5,21 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Errore relativo e percentuale — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>.eq+p.eq{margin-top:calc(var(--r)*.5)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -28,95 +60,116 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Misure ed errori &middot; Unità 20</p>
   <h1>Errore relativo e percentuale</h1>
-  <p class="sommario">Un errore di un centimetro è enorme su un quaderno e trascurabile su
-  un'autostrada: per dire quanto una misura è precisa bisogna confrontare l'errore con la
-  grandezza a cui si riferisce.</p>
 </header>
+
+<p>Questa unità introduce l'errore relativo e l'errore percentuale, che permettono di confrontare la precisione di misure di grandezze diverse.</p>
 
 <h2>Errore relativo</h2>
 
-<p>Abbiamo due misure:</p>
+<p>Si considerano due misure: la lunghezza di un'autostrada e la lunghezza del lato di un quaderno.</p>
 
-$$\ell_a = (247 \pm 1)\ \mathrm{km} \qquad \text{lunghezza dell'autostrada}$$
-$$\ell_q = (21{,}3 \pm 0{,}1)\ \mathrm{cm} \qquad \text{lunghezza del lato del quaderno}$$
+<p class="eq">$$\ell_a = (247 \pm 1)\ \mathrm{km} \qquad\qquad \ell_q = (21{,}3 \pm 0{,}1)\ \mathrm{cm}$$</p>
 
-<p>Qual è la più precisa? Gli errori assoluti, $1\ \mathrm{km}$ e $0{,}1\ \mathrm{cm}$,
-non sono confrontabili così come sono. Per capire quanto è precisa una misura serve
-confrontare l'errore con il valore a cui si riferisce: per questo introduciamo l'errore
-relativo.</p>
+<p>Per stabilire quale delle due è più precisa non basta confrontare gli errori assoluti, $1\ \mathrm{km}$ e $0{,}1\ \mathrm{cm}$. Occorre confrontare ciascun errore con il valore a cui si riferisce.</p>
 
-<p>L'<strong>errore relativo</strong> è il rapporto fra l'errore assoluto e il valore
-attendibile della misura. Indica quanto pesa l'incertezza rispetto alla grandezza misurata:</p>
-
-$$\varepsilon_x = \frac{e_x}{x}$$
-
-<p>dove $e_x$ è l'errore assoluto e $x$ il valore attendibile. Numeratore e denominatore
-hanno la stessa unità di misura, che si semplifica: l'errore relativo è un numero puro, ed
-è proprio questo che lo rende confrontabile fra grandezze diverse.</p>
-
-<div class="esempi">
-<h3>Le due misure a confronto</h3>
-$$\varepsilon_{\ell_a} = \frac{1\ \mathrm{km}}{247\ \mathrm{km}} = 0{,}0040$$
-$$\varepsilon_{\ell_q} = \frac{0{,}1\ \mathrm{cm}}{21{,}3\ \mathrm{cm}} = 0{,}0047$$
-<p>L'errore relativo dell'autostrada è più piccolo: nonostante l'errore assoluto sia di un
-chilometro intero, la misura dell'autostrada è la più precisa delle due.</p>
+<div class="def"><span class="et">Errore relativo</span>
+<p>L'errore relativo è il rapporto fra l'errore assoluto e il valore attendibile della misura:</p>
+<p class="eq">$$\varepsilon_x = \frac{e_x}{x}$$</p>
+<p>dove $e_x$ è l'errore assoluto e $x$ il valore attendibile.</p>
 </div>
 
+<p>Numeratore e denominatore hanno la stessa unità di misura, che si semplifica: l'errore relativo è un numero puro. Per questo si possono confrontare gli errori relativi di grandezze diverse.</p>
+
+<h2>Esempio 1</h2>
+
+<p>Si calcolano gli errori relativi delle due misure:</p>
+
+<p class="eq">$$\varepsilon_{\ell_a} = \frac{1\ \mathrm{km}}{247\ \mathrm{km}} = 0{,}0040 \qquad\qquad \varepsilon_{\ell_q} = \frac{0{,}1\ \mathrm{cm}}{21{,}3\ \mathrm{cm}} = 0{,}0047$$</p>
+
+<p>L'errore relativo dell'autostrada è più piccolo: anche se il suo errore assoluto è di un chilometro, la misura dell'autostrada è la più precisa delle due.</p>
+
 <div class="fig">
-<svg viewBox="0 0 620 175" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Due barre che rappresentano le misure: sulla barra dell'autostrada la fetta d'errore occupa una frazione minore che sulla barra del quaderno">
-  <text x="10" y="34" font-size="13" fill="#333">AUTOSTRADA</text>
-  <rect x="150" y="20" width="420" height="26" fill="#1f5fa8" fill-opacity="0.16"
-        stroke="#1f5fa8" stroke-width="1.2"/>
-  <rect x="568" y="20" width="1.7" height="26" fill="#b03030"/>
-  <text x="360" y="38" text-anchor="middle" font-size="12.5" fill="#1f5fa8">247 km</text>
-  <text x="578" y="16" font-size="12" fill="#b03030">1 km</text>
-  <text x="150" y="66" font-size="12.5" fill="#333">l'errore occupa lo 0,40 % della barra</text>
-
-  <text x="10" y="126" font-size="13" fill="#333">QUADERNO</text>
-  <rect x="150" y="112" width="420" height="26" fill="#1f5fa8" fill-opacity="0.16"
-        stroke="#1f5fa8" stroke-width="1.2"/>
-  <rect x="568" y="112" width="2" height="26" fill="#b03030"/>
-  <text x="360" y="130" text-anchor="middle" font-size="12.5" fill="#1f5fa8">21,3 cm</text>
-  <text x="578" y="108" font-size="12" fill="#b03030">0,1 cm</text>
-  <text x="150" y="158" font-size="12.5" fill="#333">l'errore occupa lo 0,47 % della barra</text>
-
-</svg>
-<p class="did">Portate allo stesso ingombro, le due misure si possono confrontare.</p>
+<svg id="fig-a" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">ingrandimento</label><input id="cur-a" type="range" min="1" max="50" step="1" value="1"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Le due misure sono disegnate con la stessa lunghezza e l'errore assoluto è la parte rossa in fondo a ciascuna barra; il cursore ingrandisce l'ultimo tratto delle due barre.</p>
 </div>
 
 <h2>Errore percentuale</h2>
 
-<p>L'errore relativo si esprime spesso in percentuale, moltiplicandolo per cento:</p>
+<p>L'errore relativo si esprime spesso in percentuale, moltiplicandolo per 100 %:</p>
 
-$$\varepsilon_{\%x} = \varepsilon_x \cdot 100\,\%$$
+<p class="eq">$$\varepsilon_{\%x} = \varepsilon_x \cdot 100\,\%$$</p>
 
-<p>dove $\varepsilon_{\%x}$ è l'errore percentuale sulla misura $x$ ed $\varepsilon_x$ è
-l'errore relativo sulla stessa misura.</p>
+<p>dove $\varepsilon_{\%x}$ è l'errore percentuale e $\varepsilon_x$ l'errore relativo della stessa misura.</p>
 
-<div class="esempi">
-<h3>L'autostrada in percentuale</h3>
-<p>Da $\ell_a = (247 \pm 1)\ \mathrm{km}$ avevamo ottenuto $\varepsilon_{\ell_a} = 0{,}0040$,
-quindi</p>
-$$\varepsilon_{\%\ell_a} = 0{,}0040 \cdot 100\,\% = 0{,}40\,\%$$
-<p>L'errore assoluto della misura è lo $0{,}40\,\%$ (in questo caso) del valore attendibile
-della misura.</p>
-</div>
+<h2>Esempio 2</h2>
 
-<div class="nota">
-<strong>Attenzione al confronto.</strong> Più precisa non vuol dire con l'errore assoluto
-più piccolo: $0{,}1\ \mathrm{cm}$ è molto meno di $1\ \mathrm{km}$, eppure è l'autostrada
-ad avere l'errore relativo minore.
-</div>
+<p>Per l'autostrada si è ottenuto $\varepsilon_{\ell_a} = 0{,}0040$, quindi l'errore percentuale è</p>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Con questo si chiude il modo di scrivere e di confrontare una misura. Da qui in avanti le
-grandezze non avranno più solo un valore con la sua incertezza, ma anche una direzione e un
-verso: cominciano le forze e i vettori.</p>
-</div>
+<p class="eq">$$\varepsilon_{\%\ell_a} = 0{,}0040 \cdot 100\,\% = 0{,}40\,\%$$</p>
+
+<p>L'errore assoluto della misura dell'autostrada è quindi lo $0{,}40\,\%$ del suo valore attendibile.</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Una misura più precisa non è quella con l'errore assoluto più piccolo: $0{,}1\ \mathrm{cm}$ è molto meno di $1\ \mathrm{km}$, eppure è l'autostrada ad avere l'errore relativo minore.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../20-compatibilita-fra-due-misure/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Compatibilità fra due misure</span></a><a class="successiva" href="../22-forza-e-vettore/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forza e vettore</span></a></nav>
+<footer><p>Fisica prima &middot; Misure ed errori &middot; Unità 20</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function v(n,d){return (+n).toFixed(d).replace('.',',');}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+
+  /* due barre di uguale lunghezza L; con ingrandimento z si vede la frazione 1/z finale della misura.
+     La parte rossa (errore) ha larghezza L*z*e/x. */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var x0=40, L=340, h=24;
+    var mis=[{nome:'autostrada',x:247,e:1,u:'km',dx:0,y:38},{nome:'quaderno',x:21.3,e:0.1,u:'cm',dx:1,y:118}];
+    mis.forEach(function(m){m.g=el(S,'g',{});
+      T(S,x0,m.y-10,m.nome+': ('+v(m.x,m.dx)+' ± '+v(m.e,m.dx)+') '+m.u,{fill:'var(--inchiostro)','font-size':13});
+      T(S,x0+L,m.y+h+20,"errore relativo "+v(m.e/m.x,4)+" = "+v(100*m.e/m.x,2)+" %",{fill:'var(--rosso)','font-size':12,'text-anchor':'end'});});
+    function dis(){
+      var z=+c.value, w=1/z;
+      mis.forEach(function(m){var g=m.g;vuota(g);
+        el(g,'rect',{x:x0,y:m.y,width:L,height:h,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.2});
+        if(z>1)el(g,'line',{x1:x0,y1:m.y-3,x2:x0,y2:m.y+h+3,stroke:'#fff','stroke-width':3,'stroke-dasharray':'3 3'});
+        var we=L*z*m.e/m.x;
+        el(g,'rect',{x:f(x0+L-we),y:m.y,width:f(Math.max(we,1.5)),height:h,fill:'var(--rosso)'});
+        var q=m.x*w, dd=Math.max(0,2-Math.floor(Math.log10(q)));var txt=z===1?v(m.x,m.dx)+' '+m.u:'ultimi '+v(q,dd)+' '+m.u;
+        T(g,f(x0+(L-we)/2),m.y+16,txt,{fill:'var(--blu)','font-size':12,'text-anchor':'middle'});
+      });
+      o.innerHTML='×'+z+(z>=10?': la parte rossa è <span class="ok">più corta per l\'autostrada</span>':'');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+})();
+</script>
 </body>
 </html>
