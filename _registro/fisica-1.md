@@ -177,6 +177,7 @@
 - Parole: 314 su 2 pagine di traccia
 - Rettifica: nessuna. La traccia è corretta.
 - Aggiunta: nessun contenuto nuovo. Unica scelta di confine: il disegno della scatola dentro la stanza, che nella traccia sta in cima a pagina 33, è stato tenuto in questa unità perché chiude l'argomento di pagina 32 (modulo, direzione e verso danno tutte le informazioni necessarie); l'unità 22 comincia comunque da "Grandezze scalari e vettoriali", più sotto nella stessa pagina.
+- Revisione: titolo invariato. Tolti il sommario e la sezione «Dove si continua»; introduzione di una frase; titoletti «Forza» e «Vettore» tenuti; forza e vettore in .def con elenchi in frasi complete (la direzione è la retta su cui il vettore giace, il verso uno dei due sensi di percorrenza); l'esempio F = 5 N, di una sola riga, è ora una frase con la formula in riquadro, senza titoletto; .nota «Attenzione» su direzione e verso; aggiunto il piè di pagina. Correzione: fra gli effetti di una forza «metterlo in movimento» è diventato «metterlo in movimento o modificarne il movimento». Impaginazione a quaderno e script di allineamento. Figure rifatte in SVG da script: freccia con tacche da 1 N, cursori su modulo e angolo, direzione tratteggiata (stessa direzione e verso opposto dopo mezzo giro); stanza vista dall'alto con cursore sull'angolo della forza, parete raggiunta calcolata come intersezione della semiretta ed evidenziata in rosso. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 22 — Grandezze scalari e vettoriali
 - Parole: 286 su 1 pagina di traccia (p. 33)
