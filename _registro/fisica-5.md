@@ -186,6 +186,7 @@
   B=1 T e A=1 m² per semplicità di lettura). Mostra concretamente il passaggio continuo fra i due
   casi limite già presenti nella traccia, senza aggiungere contenuto fisico oltre alla formula
   della traccia stessa.
+- Revisione: titolo invariato. Tolti il sommario (con il rimando alla legge dell'induzione) e la sezione «Nella prossima unità»; introduzione di una frase; titoletto «Definizione» sostituito da «Vettore area e flusso», «I due casi estremi» tenuto; vettore area e flusso in .def con legenda dei simboli, weber in riquadro, aggiunta una .nota (l'angolo è quello fra B e il vettore area, non fra B e la superficie); i due casi in elenco con frasi complete («nessuna linea di campo "buca" la superficie» → «nessuna linea di campo attraversa la superficie»). Nessuna correzione concettuale (cos 0 = 1, cos 90° = 0 riverificati). Impaginazione a quaderno e script di allineamento. Figura rifatta in SVG da script con cursore su θ (0–90°): superficie vista di taglio che ruota con il vettore area, linee di campo che la attraversano a tratto pieno (calcolate: |y − y₀| < L cos θ), cos θ e Φ = cos θ·BA a fianco, «flusso massimo» / «flusso nullo» in verde. Nessun esempio, nessuna figura decorativa.
 
 ## Unità 20 — Legge di Faraday-Neumann-Lenz
 - Parole: 397 su 2 pagine di traccia (pagine 35-36)

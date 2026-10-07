@@ -5,19 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flusso del campo magnetico — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.legge{background:#eef6f0;border:1px solid var(--verde);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.slider-box{font-family:var(--sans);font-size:.9rem;margin-top:14px}
-.slider-box input{width:60%;vertical-align:middle}
-.letture{margin-top:8px;font-size:.95rem}
-.letture b{color:var(--blu)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
 <body>
@@ -27,62 +60,41 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 19</p>
   <h1>Flusso del campo magnetico</h1>
-  <p class="sommario">Per rendere quantitativa l'osservazione di Faraday serve una grandezza che
-  misuri quanto campo magnetico attraversa una superficie: è il flusso, la stessa idea che tra poco
-  entrerà nella legge dell'induzione.</p>
 </header>
 
-<h2>Definizione</h2>
+<p>Questa unità definisce il flusso del campo magnetico, la grandezza che misura quanto campo magnetico attraversa una superficie.</p>
 
-<p>Consideriamo una superficie piana di area $A$ immersa in un campo magnetico uniforme $\vec{B}$.
-Ad essa associamo un vettore $\vec{A}$, perpendicolare al piano della superficie e di modulo pari
-all'area $A$. Il flusso del campo magnetico attraverso la superficie è</p>
+<h2>Vettore area e flusso</h2>
 
-$$\Phi(\vec{B}) = B\,A\cos\theta$$
+<p>Si considera una superficie piana di area $A$ immersa in un campo magnetico uniforme $\vec{B}$. Alla superficie si associa un vettore area $\vec{A}$, perpendicolare al piano della superficie e di modulo uguale all'area $A$.</p>
 
-<p>dove $\theta$ è l'angolo compreso fra $\vec{B}$ e $\vec{A}$. Il flusso si misura in tesla per
-metro quadrato, unità che prende il nome di weber:</p>
+<div class="def"><span class="et">Flusso del campo magnetico</span>
+<p>Il flusso del campo magnetico $\vec{B}$ attraverso la superficie è</p>
+<p class="eq">$$\Phi(\vec{B}) = B\,A\cos\theta$$</p>
+<p>dove $B$ è il modulo del campo, $A$ l'area della superficie e $\theta$ l'angolo compreso fra $\vec{B}$ e il vettore area $\vec{A}$.</p>
+</div>
 
-$$[\Phi] = \text{T}\cdot\text{m}^2 = \text{Wb}$$
+<p>Il flusso si misura in tesla per metro quadrato; questa unità prende il nome di weber (Wb):</p>
+
+<p class="eq">$$[\Phi] = \mathrm{T\cdot m^2} = \mathrm{Wb}$$</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>L'angolo $\theta$ è quello fra $\vec{B}$ e il vettore area $\vec{A}$, non quello fra $\vec{B}$ e la superficie.</p></div>
 
 <h2>I due casi estremi</h2>
 
-<div class="fig" style="max-width:460px;margin-left:auto;margin-right:auto">
-<svg id="figFlusso" viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="fA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="60" y1="150" x2="330" y2="150" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#fB)"/>
-<text x="340" y="155" font-family="var(--sans)" font-size="15" fill="var(--blu)">B&#8407;</text>
-<line id="piano" x1="200" y1="70" x2="200" y2="230" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<line id="normale" x1="200" y1="150" x2="200" y2="80" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fA)"/>
-<text id="etichettaA" x="185" y="70" font-family="var(--sans)" font-size="15" fill="var(--verde)">A&#8407;</text>
-<path id="arco" d="" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<text id="etichettaTheta" x="222" y="140" font-family="var(--sans)" font-size="14" fill="var(--rosso)">&theta;</text>
-<text x="230" y="245" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">superficie vista di taglio</text>
-</svg>
-<div class="slider-box">
-<label for="theta">angolo &theta; fra &nbsp;$\vec{B}$&nbsp; e &nbsp;$\vec{A}$: <span id="valTheta">0</span>&deg;</label><br>
-<input type="range" id="theta" min="0" max="90" value="0" step="1">
-<p class="letture">$\cos\theta = $ <b id="valCos">1,00</b> &nbsp;&mdash;&nbsp; con $B=1\,\text{T}$ e $A=1\,\text{m}^2$: $\Phi = $ <b id="valFlux">1,00</b> Wb</p>
-</div>
-<p class="did">La superficie è vista di taglio, come un segmento verticale; il vettore $\vec{A}$ le è
-sempre perpendicolare e ruota insieme ad essa al variare dell'angolo con $\vec{B}$.</p>
+<div class="fig">
+<svg id="fig-a" viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">angolo $\theta$</label><input id="cur-a" type="range" min="0" max="90" step="1" value="0"><output id="val-a" for="cur-a"></output></div>
+<p class="did">La superficie è vista di taglio; il cursore la ruota insieme al vettore area, e le linee di campo che la attraversano sono disegnate a tratto pieno.</p>
 </div>
 
-<p>Se $\vec{B}$ è perpendicolare alla superficie, cioè parallelo ad $\vec{A}$, l'angolo è $\theta=0$,
-$\cos\theta=1$ e il flusso è massimo: $\Phi = BA$. Se invece $\vec{B}$ giace nel piano della
-superficie, cioè è perpendicolare ad $\vec{A}$, l'angolo è $\theta=90°$, $\cos 90° = 0$ e il flusso
-è nullo: nessuna linea di campo "buca" la superficie.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Il flusso appena definito è l'ingrediente che manca per scrivere in una formula la fem indotta
-osservata da Faraday: è l'oggetto della legge di Faraday-Neumann-Lenz, unità 20.</li>
+<li>Se $\vec{B}$ è perpendicolare alla superficie, cioè parallelo ad $\vec{A}$, l'angolo è $\theta=0$ e $\cos\theta=1$: il flusso è massimo e vale $\Phi=BA$.</li>
+<li>Se $\vec{B}$ è parallelo alla superficie, cioè perpendicolare ad $\vec{A}$, l'angolo è $\theta=90°$ e $\cos 90°=0$: il flusso è nullo, perché nessuna linea di campo attraversa la superficie.</li>
 </ul>
-</div>
+
+<p>Per gli angoli intermedi il flusso diminuisce al crescere di $\theta$, insieme al numero di linee di campo che attraversano la superficie.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../19-l-esperienza-di-faraday-e-la-forza-elettromotrice-indotta/index.html"><span class="dir">&larr; Precedente</span><span class="tit">L'esperienza di Faraday e la forza elettromotrice indotta</span></a><a class="successiva" href="../21-legge-di-faraday-neumann-lenz/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Legge di Faraday-Neumann-Lenz</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 19</p></footer>
@@ -90,49 +102,71 @@ osservata da Faraday: è l'oggetto della legge di Faraday-Neumann-Lenz, unità 2
 </div>
 <script>
 (function(){
-  var slider = document.getElementById('theta');
-  var piano = document.getElementById('piano');
-  var normale = document.getElementById('normale');
-  var arco = document.getElementById('arco');
-  var etA = document.getElementById('etichettaA');
-  var etTheta = document.getElementById('etichettaTheta');
-  var valTheta = document.getElementById('valTheta');
-  var valCos = document.getElementById('valCos');
-  var valFlux = document.getElementById('valFlux');
-  var O = {x:200, y:150};
-  var Lp = 80, La = 70, Rarco = 34;
-
-  function aggiorna(){
-    var gradi = parseFloat(slider.value);
-    var rad = gradi * Math.PI / 180;
-    valTheta.textContent = gradi.toFixed(0);
-    var cosT = Math.cos(rad);
-    valCos.textContent = cosT.toFixed(2).replace('.', ',');
-    valFlux.textContent = cosT.toFixed(2).replace('.', ',');
-
-    // A ruota di theta rispetto a B (orizzontale, verso destra = 0 rad)
-    var ax = O.x + La*Math.cos(rad), ay = O.y - La*Math.sin(rad);
-    normale.setAttribute('x1', O.x); normale.setAttribute('y1', O.y);
-    normale.setAttribute('x2', ax); normale.setAttribute('y2', ay);
-    etA.setAttribute('x', ax - 15); etA.setAttribute('y', ay - 8);
-
-    // il piano è perpendicolare ad A: direzione a (theta+90)
-    var radP = rad + Math.PI/2;
-    var px1 = O.x + Lp*Math.cos(radP), py1 = O.y - Lp*Math.sin(radP);
-    var px2 = O.x - Lp*Math.cos(radP), py2 = O.y + Lp*Math.sin(radP);
-    piano.setAttribute('x1', px1); piano.setAttribute('y1', py1);
-    piano.setAttribute('x2', px2); piano.setAttribute('y2', py2);
-
-    // arco fra B (0 rad) e A (rad), disegnato dall'alto verso il basso in SVG (y invertita)
-    var bx = O.x + Rarco, by = O.y;
-    var axArco = O.x + Rarco*Math.cos(rad), ayArco = O.y - Rarco*Math.sin(rad);
-    var largeArc = gradi > 180 ? 1 : 0;
-    arco.setAttribute('d', 'M '+bx+' '+by+' A '+Rarco+' '+Rarco+' 0 '+largeArc+' 0 '+axArco+' '+ayArco);
-    etTheta.setAttribute('x', O.x + (Rarco+14)*Math.cos(rad/2));
-    etTheta.setAttribute('y', O.y - (Rarco+14)*Math.sin(rad/2) + 4);
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  slider.addEventListener('input', aggiorna);
-  aggiorna();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function v(n,d){return (+n).toFixed(d).replace('.',',');}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+
+  /* superficie vista di taglio, centro O, semilunghezza Lp. Con A ad angolo theta da B (orizzontale),
+     la superficie ha estensione verticale Lp*cos(theta): la attraversano le linee con |y-Oy| < Lp*cos(theta). */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var Ox=210, Oy=125, Lp=74, La=62, Ra=30, xs=30, xe=392;
+    var ys=[];for(var k=0;k<5;k++){ys.push(Oy-8-16*k);ys.push(Oy+8+16*k);}
+    var linee=ys.map(function(y){var g=el(S,'g',{});
+      el(g,'line',{x1:xs,y1:y,x2:xe-6,y2:y,stroke:'var(--blu)','stroke-width':1.6});
+      punta(g,xe-6,y,1,0,'var(--blu)',6);punta(g,110,y,1,0,'var(--blu)',5);return {g:g,y:y};});
+    T(S,xe,Oy-8-16*4-10,'B',{fill:'var(--blu)','font-size':14,'font-style':'italic','font-weight':700,'text-anchor':'end',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});
+    var gd=el(S,'g',{});
+    function dis(){
+      var th=+c.value, r=th*Math.PI/180, h=Lp*Math.cos(r), n=0;
+      linee.forEach(function(l){var dentro=Math.abs(l.y-Oy)<h-0.5;if(dentro)n++;set(l.g,{opacity:dentro?1:0.25});});
+      vuota(gd);
+      /* superficie: direzione theta+90 */
+      var ux=Math.cos(r+Math.PI/2), uy=-Math.sin(r+Math.PI/2);
+      el(gd,'line',{x1:f(Ox+Lp*ux),y1:f(Oy+Lp*uy),x2:f(Ox-Lp*ux),y2:f(Oy-Lp*uy),stroke:'var(--inchiostro)','stroke-width':5,'stroke-linecap':'round'});
+      /* arco dell'angolo fra B e A */
+      if(th>2){var p2x=Ox+Ra*Math.cos(r), p2y=Oy-Ra*Math.sin(r);
+        el(gd,'path',{d:'M'+(Ox+Ra)+','+Oy+' A'+Ra+','+Ra+' 0 0 0 '+f(p2x)+','+f(p2y),fill:'none',stroke:'var(--rosso)','stroke-width':1.6});
+        var rm=Ra+11;T(gd,f(Ox+rm*Math.cos(r/2)),f(Oy-rm*Math.sin(r/2)+4),'θ',{fill:'var(--rosso)','font-size':13,'text-anchor':'middle',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});}
+      /* vettore area */
+      var ax=Ox+La*Math.cos(r), ay=Oy-La*Math.sin(r);
+      freccia(gd,Ox,Oy,ax,ay,'var(--verde)',2.6,8);
+      var lx=ax+10*Math.cos(r)+(th>60?10:0), ly=ay-10*Math.sin(r)+(th<30?-6:4);
+      T(gd,f(lx),f(ly),'A',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700,'text-anchor':'start',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});
+      el(gd,'circle',{cx:Ox,cy:Oy,r:2.5,fill:'var(--inchiostro)'});
+      T(gd,Ox,240,'superficie vista di taglio',{fill:'var(--grigio)','font-size':12,'text-anchor':'middle'});
+      var cs=Math.cos(r), stato=th===0?' <span class="ok">flusso massimo</span>':(th===90?' <span class="ok">flusso nullo</span>':'');
+      o.innerHTML='θ = '+th+'°: cos θ = '+v(Math.abs(cs)<5e-4?0:cs,2)+', Φ = '+v(Math.abs(cs)<5e-4?0:cs,2)+'·BA'+stato;
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
 })();
 </script>
 </body>
