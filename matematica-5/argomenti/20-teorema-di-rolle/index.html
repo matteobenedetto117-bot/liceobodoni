@@ -5,22 +5,83 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema di Rolle — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
-.coppia{display:flex;flex-wrap:wrap;gap:24px;justify-content:center}
-.coppia svg{max-width:280px}
-ul.ipotesi{padding-left:1.3em;margin:10px 0}
-ul.ipotesi li{margin:4px 0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
 </style>
 </head>
 <body>
@@ -30,153 +91,356 @@ ul.ipotesi li{margin:4px 0}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Teoremi del calcolo differenziale &middot; Unità 19</p>
   <h1>Teorema di Rolle</h1>
-  <p class="sommario">Se una funzione parte e arriva allo stesso valore, restando continua
-  lungo tutto il tragitto e liscia al suo interno, da qualche parte nel mezzo il grafico
-  deve avere un tratto orizzontale: un massimo, un minimo o un pianerottolo. È il primo di
-  una serie di teoremi che collegano il segno e l'annullarsi della derivata al
-  comportamento della funzione.</p>
 </header>
+
+<p>Questa unità presenta il teorema di Rolle, mostra che ciascuna delle sue ipotesi è necessaria e ne verifica le ipotesi su un esempio.</p>
+
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button>
+</div>
 
 <h2>Enunciato</h2>
 
 <div class="def"><span class="et">Teorema di Rolle</span>
-<p>Data $f(x)$ definita in un intervallo chiuso e limitato $[a;b]$, se</p>
-<ul class="ipotesi">
+<p>Sia $f(x)$ definita in un intervallo chiuso e limitato $[a;b]$. Se:</p>
+<ul>
 <li>$f(x)$ è continua in $[a;b]$,</li>
 <li>$f(x)$ è derivabile in $\,]a;b[$,</li>
 <li>$f(a)=f(b)$,</li>
 </ul>
-<p>allora esiste almeno un punto $c$ interno all'intervallo per il quale risulta
-$$f'(c)=0.$$</p></div>
-
-<p>Le tre ipotesi servono tutte: continuità sull'intervallo chiuso, derivabilità
-sull'aperto (agli estremi la derivata non serve), e lo stesso valore agli estremi. La
-tesi non individua il punto $c$, ne garantisce solo l'esistenza; e $c$ può non essere
-unico.</p>
-
-<figure class="disegno">
-<div class="coppia">
-<svg viewBox="0 0 260 170" width="100%">
-<line x1="15" y1="140" x2="245" y2="140" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="15" y1="150" x2="15" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="234" y="134" font-size="10" fill="var(--inchiostro)">x</text>
-<text x="6" y="24" font-size="10" fill="var(--inchiostro)">y</text>
-<line x1="60" y1="60" x2="215" y2="60" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 60 105 C 100 55 165 55 215 105" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="60" cy="105" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="215" cy="105" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="137" cy="60" r="3.5" fill="var(--rosso)"/>
-<text x="52" y="122" font-size="11" fill="var(--inchiostro)">A</text>
-<text x="220" y="122" font-size="11" fill="var(--inchiostro)">B</text>
-<text x="132" y="50" font-size="11" fill="var(--rosso)">c</text>
-</svg>
-<svg viewBox="0 0 260 170" width="100%">
-<line x1="15" y1="140" x2="245" y2="140" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="15" y1="150" x2="15" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="234" y="134" font-size="10" fill="var(--inchiostro)">x</text>
-<text x="6" y="24" font-size="10" fill="var(--inchiostro)">y</text>
-<line x1="60" y1="85" x2="215" y2="85" stroke="var(--rosso)" stroke-width="1.4" stroke-dasharray="3 3"/>
-<path d="M 60 85 L 215 85" fill="none" stroke="var(--blu)" stroke-width="2.4"/>
-<circle cx="60" cy="85" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="215" cy="85" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="137" cy="85" r="3.5" fill="var(--rosso)"/>
-<text x="52" y="102" font-size="11" fill="var(--inchiostro)">A</text>
-<text x="220" y="102" font-size="11" fill="var(--inchiostro)">B</text>
-<text x="132" y="75" font-size="11" fill="var(--rosso)">c</text>
-</svg>
+<p>allora esiste almeno un punto $c$ interno all'intervallo per il quale risulta $f'(c)=0$.</p>
 </div>
-<figcaption>A sinistra $c$ è un massimo interno; a destra $f$ è costante e $f'=0$ in ogni
-punto.</figcaption>
-</figure>
 
-<figure class="disegno">
-<svg viewBox="0 0 300 170" width="100%" style="max-width:340px">
-<line x1="15" y1="140" x2="285" y2="140" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="15" y1="150" x2="15" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="274" y="134" font-size="10" fill="var(--inchiostro)">x</text>
-<line x1="55" y1="55" x2="140" y2="55" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="180" y1="115" x2="250" y2="115" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 55 100 C 85 55 105 55 100 60 C 90 75 175 130 180 115 C 185 105 220 90 250 60" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="55" cy="100" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="250" cy="60" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="97" cy="57" r="3.5" fill="var(--rosso)"/>
-<circle cx="180" cy="115" r="3.5" fill="var(--rosso)"/>
-<text x="47" y="118" font-size="11" fill="var(--inchiostro)">A</text>
-<text x="255" y="56" font-size="11" fill="var(--inchiostro)">B</text>
-<text x="90" y="47" font-size="11" fill="var(--rosso)">c&#8321;</text>
-<text x="185" y="132" font-size="11" fill="var(--rosso)">c&#8322;</text>
-</svg>
-<figcaption>I punti garantiti dal teorema possono essere più di uno: qui
-$f'(c_1)=f'(c_2)=0$.</figcaption>
-</figure>
+<p>La continuità è richiesta sull'intervallo chiuso, mentre la derivabilità serve solo nei punti interni. Il teorema garantisce l'esistenza del punto $c$, ma non dice dove si trova; inoltre il punto $c$ può non essere unico.</p>
+
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-rolle1" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Funzione con lo stesso valore agli estremi A e B e un massimo interno c, con la tangente nel punto mobile"></svg>
+<svg id="g-rolle2" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Funzione costante fra A e B, con tangente orizzontale in ogni punto"></svg>
+</div>
+<div class="cursore"><label for="s-x1">$x$</label>
+<input type="range" id="s-x1" min="-1" max="1" step="0.01" value="-0.6">
+<span class="val" id="v-x1"></span></div>
+<div class="did-parti" style="--n:2">
+<p class="did">A sinistra il punto $c$ è un massimo interno, in cui la tangente è orizzontale.</p>
+<p class="did">A destra $f$ è costante e $f'(x)=0$ in ogni punto dell'intervallo.</p>
+</div>
+</div>
+
+<div class="fig">
+<svg id="g-rolle3" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Funzione con lo stesso valore agli estremi A e B e due punti interni c1 e c2 a tangente orizzontale, con la tangente nel punto mobile"></svg>
+<div class="cursore"><label for="s-x2">$x$</label>
+<input type="range" id="s-x2" min="0" max="3" step="0.01" value="1.4">
+<span class="val" id="v-x2"></span></div>
+<p class="did">I punti garantiti dal teorema possono essere più di uno: qui $f'(c_1)=f'(c_2)=0$.</p>
+</div>
 
 <h2>Le ipotesi sono necessarie</h2>
 
-<p>Se manca anche una sola ipotesi, il teorema non si può applicare, e la tesi può
-mancare oppure valere lo stesso per altre ragioni.</p>
+<p>Se manca anche una sola ipotesi, il teorema non si può applicare. In questo caso la tesi può essere falsa, ma può anche risultare vera per altre ragioni.</p>
 
-<div class="coppia">
-<figure class="disegno">
-<svg viewBox="0 0 260 170" width="100%">
-<line x1="15" y1="140" x2="245" y2="140" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="15" y1="150" x2="15" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M 55 110 L 137 45 L 215 110" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="55" cy="110" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="215" cy="110" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="137" cy="45" r="3.5" fill="var(--rosso)"/>
-<text x="47" y="127" font-size="11" fill="var(--inchiostro)">A</text>
-<text x="220" y="127" font-size="11" fill="var(--inchiostro)">B</text>
-<text x="132" y="35" font-size="11" fill="var(--rosso)">c</text>
-</svg>
-<figcaption>In $c$ la funzione non è derivabile: mancano le ipotesi, e in generale
-potrebbe non esserci nessun punto stazionario.</figcaption>
-</figure>
-<figure class="disegno">
-<svg viewBox="0 0 260 170" width="100%">
-<line x1="15" y1="140" x2="245" y2="140" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="15" y1="150" x2="15" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M 55 60 C 80 100 105 115 128 118" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<path d="M 128 90 C 150 65 180 55 215 60" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="55" cy="60" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="215" cy="60" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="128" cy="118" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="128" cy="90" r="3.5" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="100" y1="90" x2="156" y2="90" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="47" y="50" font-size="11" fill="var(--inchiostro)">A</text>
-<text x="220" y="50" font-size="11" fill="var(--inchiostro)">B</text>
-<text x="118" y="132" font-size="11" fill="var(--inchiostro)">D</text>
-</svg>
-<figcaption>Salto in $D$: $f$ non è continua, non ci sono le condizioni per applicare il
-teorema, ma qui esiste comunque un punto a tangente orizzontale.</figcaption>
-</figure>
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-ip1" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Funzione con un punto angoloso c fra A e B: in nessun punto la tangente è orizzontale"></svg>
+<svg id="g-ip2" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Funzione con un salto nel punto D fra A e B, che ha comunque un punto a tangente orizzontale"></svg>
+</div>
+<div class="cursore"><label for="s-x3">posizione</label>
+<input type="range" id="s-x3" min="0" max="1" step="0.005" value="0.2">
+<span class="val" id="v-x3"></span></div>
+<div class="did-parti" style="--n:2">
+<p class="did">In $c$ la funzione non è derivabile, e in nessun punto dell'intervallo la tangente è orizzontale.</p>
+<p class="did">In $D$ la funzione non è continua, eppure esiste un punto a tangente orizzontale.</p>
+</div>
 </div>
 
-<h2>Verifica delle ipotesi: un esempio</h2>
+<h2>Esempio</h2>
 
-<p>Verifichiamo se $f(x)=x^4-2x^2$ rispetta le ipotesi del teorema in $[-1;1]$.</p>
+<p>Si verifica se la funzione seguente soddisfa le ipotesi del teorema di Rolle nell'intervallo indicato e si cercano i punti previsti dalla tesi.</p>
 
-<p>$f(-1)=1-2=-1$, $\ f(1)=1-2=-1$: gli estremi coincidono. $f(x)$ è continua e
-derivabile su tutto $\mathbb R$, quindi in particolare in $[-1;1]$: le tre ipotesi sono
-soddisfatte. Cerchiamo i punti stazionari:
-$$f'(x)=4x^3-4x=4x(x^2-1)=4x(x+1)(x-1)=0 \ \Longrightarrow\ x=0,\ x=1,\ x=-1.$$</p>
+<div class="es">
+<p class="eq quesito">$$f(x)=x^4-2x^2 \quad \text{in } [-1;1]$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$\text{ipotesi soddisfatte} \qquad c=0$$</p>
+</div>
+
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> I valori agli estremi coincidono.</p>
+<p class="eq">$$f(-1)=1-2=-1 \qquad f(1)=1-2=-1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Un polinomio è continuo e derivabile in tutto $\mathbb R$, quindi anche in $[-1;1]$.</p>
+<p class="eq">$$f'(x)=4x^3-4x$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Si cercano i punti in cui la derivata si annulla.</p>
+<p class="eq">$$4x^3-4x=4x(x+1)(x-1)=0 \ \Longrightarrow\ x=-1,\ x=0,\ x=1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> Solo $x=0$ è interno all'intervallo.</p>
+<p class="eq">$$c=0 \in\ ]-1;1[$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
 
 <div class="nota"><span class="et">Attenzione</span>
-<p>Il teorema garantisce l'esistenza di un punto interno all'intervallo aperto
-$\,]-1;1[\,$: dei tre punti trovati, solo $x=0$ lo è. Gli altri due, $x=\pm1$, sono gli
-estremi dell'intervallo, non punti "in più" rispetto alla tesi.</p></div>
+<p>Il teorema garantisce un punto interno all'intervallo aperto $\,]-1;1[$. I punti $x=\pm1$ annullano la derivata, ma sono gli estremi dell'intervallo e non fanno parte della tesi.</p>
+</div>
 
-<h2>Una prima conseguenza</h2>
+<h2>Funzioni con derivata nulla</h2>
 
-<p>Dai teoremi di Rolle e di Lagrange (unità 20) discendono alcuni corollari.</p>
+<p>Dai teoremi di Rolle e di Lagrange discende il seguente risultato.</p>
 
-<div class="def"><span class="et">Teorema 1</span>
-<p>Se $f(x)$ è continua in $[a;b]$, derivabile in $\,]a;b[\,$ ed è $f'(x)=0$ in ogni punto
-interno dell'intervallo, allora $f(x)$ è costante in tutto $[a;b]$.</p></div>
-
+<div class="def"><span class="et">Teorema</span>
+<p>Se $f(x)$ è continua in $[a;b]$, è derivabile in $\,]a;b[\,$ e $f'(x)=0$ in ogni punto interno dell'intervallo, allora $f(x)$ è costante in tutto $[a;b]$.</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../19-derivabilita-e-punti-di-non-derivabilita/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Derivabilità e punti di non derivabilità</span></a><a class="successiva" href="../21-teorema-di-lagrange-e-sue-conseguenze/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema di Lagrange e sue conseguenze</span></a></nav>
 <footer><p>Matematica quinta &middot; Teoremi del calcolo differenziale &middot; Unità 19</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+/* retta per (x0;y0) con pendenza m, aggiornabile */
+function retta(P,col,w,dash){var o={stroke:col,'stroke-width':w||1.8};if(dash)o['stroke-dasharray']=dash;return P.add(el('line',o),'sopra');}
+function poniRetta(P,r,x0,y0,m){var a=P.xr[0]-1,b=P.xr[1]+1;
+  r.setAttribute('x1',P.X(a));r.setAttribute('y1',P.Y(y0+m*(a-x0)));r.setAttribute('x2',P.X(b));r.setAttribute('y2',P.Y(y0+m*(b-x0)));}
+function sposta(P,c,x,y){c.setAttribute('cx',P.X(x));c.setAttribute('cy',P.Y(y));}
+
+/* ---------- punto mobile con tangente ---------- */
+function etichetta(P,x,y,s,col,dx,dy,anc){
+  return P.add(txt(P.X(x)+(dx||0),P.Y(y)+(dy||0),s,{'text-anchor':anc||'middle',fill:col||'var(--inchiostro)','font-size':13}),'testo');}
+function mobile(P,f,fp){
+  var r=retta(P,'var(--rosso)',1.6), pt=pallino(P,0,0,true,'var(--rosso)');
+  var t=P.add(txt(P.W/2,P.H-4,'',{'text-anchor':'middle','font-size':12}),'testo');
+  return function(x){
+    var y=f(x); sposta(P,pt,x,y);
+    var m=fp(x);
+    if(m===null){ r.setAttribute('visibility','hidden'); t.textContent='x = '+num(x)+' · non derivabile'; return null; }
+    r.setAttribute('visibility','visible'); poniRetta(P,r,x,y,m);
+    t.textContent='x = '+num(x)+' · f′(x) = '+num(m);
+    return m;
+  };
+}
+function piatto(m){return m!==null&&m!==undefined&&Math.abs(m)<0.05;}
+
+/* ---------- figura 1: massimo interno e funzione costante ---------- */
+(function(){
+  var f1=function(x){return 2-x*x;}, d1=function(x){return -2*x;};
+  var f2=function(x){return 1.2;}, d2=function(x){return 0;};
+  function piano(id,f){
+    var P=new Piano(document.getElementById(id),[-1.5,1.5],[-0.4,2.6],{l:16,r:18,t:22,b:30});
+    P.assi([],[],'x','y');
+    P.curva(f,-1,1,400,'var(--blu)');
+    pallino(P,-1,f(-1),true); pallino(P,1,f(1),true);
+    etichetta(P,-1,f(-1),'A','var(--inchiostro)',-4,18,'end');
+    etichetta(P,1,f(1),'B','var(--inchiostro)',4,18,'start');
+    return P;
+  }
+  var P1=piano('g-rolle1',f1), P2=piano('g-rolle2',f2);
+  etichetta(P1,0,2,'c','var(--rosso)',0,-10);
+  P1.add(el('line',{x1:P1.X(0),x2:P1.X(0),y1:P1.Y(2),y2:P1.Y(0),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+  var m1=mobile(P1,f1,d1), m2=mobile(P2,f2,d2);
+  var sl=document.getElementById('s-x1'), v=document.getElementById('v-x1');
+  function agg(){var x=+sl.value, a=m1(x); m2(x);
+    v.innerHTML='x = '+num(x)+(piatto(a)?' &nbsp; <span class="ok">f′(c) = 0 nel punto di massimo</span>':'');}
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+})();
+
+/* ---------- figura 2: due punti a tangente orizzontale ---------- */
+(function(){
+  var f=function(x){return x*x*x-4.5*x*x+4.5*x+1.5;}, d=function(x){return 3*x*x-9*x+4.5;};
+  var P=new Piano(document.getElementById('g-rolle3'),[-0.5,3.5],[-0.3,3.3],{l:24,r:22,t:22,b:30});
+  P.assi([1,2,3],[1,2,3],'x','y');
+  P.curva(f,0,3,500,'var(--blu)');
+  pallino(P,0,f(0),true); pallino(P,3,f(3),true);
+  etichetta(P,0,f(0),'A','var(--inchiostro)',-8,-6,'end');
+  etichetta(P,3,f(3),'B','var(--inchiostro)',8,-6,'start');
+  var c1=1.5-Math.sqrt(3)/2, c2=1.5+Math.sqrt(3)/2;
+  [[c1,'c₁'],[c2,'c₂']].forEach(function(c){
+    P.add(el('line',{x1:P.X(c[0]),x2:P.X(c[0]),y1:P.Y(f(c[0])),y2:P.Y(0),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,4'}),'sotto');
+    etichetta(P,c[0],0,c[1],'var(--rosso)',0,18);
+  });
+  var m=mobile(P,f,d);
+  var sl=document.getElementById('s-x2'), v=document.getElementById('v-x2');
+  function agg(){var x=+sl.value, a=m(x);
+    v.innerHTML='x = '+num(x)+(piatto(a)?' &nbsp; <span class="ok">tangente orizzontale</span>':'');}
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+})();
+
+/* ---------- figura 3: ipotesi mancanti ---------- */
+(function(){
+  /* punto angoloso: f(x) = 1 - |x| in [-1;1] */
+  var fa=function(x){return 1-Math.abs(x);}, da=function(x){return Math.abs(x)<1e-9?null:(x<0?1:-1);};
+  var P1=new Piano(document.getElementById('g-ip1'),[-1.5,1.5],[-0.5,1.6],{l:16,r:18,t:22,b:30});
+  P1.assi([],[],'x','y');
+  P1.curva(fa,-1,1,400,'var(--blu)');
+  pallino(P1,-1,0,true); pallino(P1,1,0,true);
+  etichetta(P1,-1,0,'A','var(--inchiostro)',-4,-8,'end');
+  etichetta(P1,1,0,'B','var(--inchiostro)',4,-8,'start');
+  etichetta(P1,0,1,'c','var(--rosso)',0,-10);
+  /* salto in D: 2 - 1,5x per x <= 1;  1 + 4t - 3t² con t = x - 1 per x > 1 */
+  var fs=function(x){return x<=1?2-1.5*x:1+4*(x-1)-3*(x-1)*(x-1);};
+  var ds=function(x){return Math.abs(x-1)<1e-9?null:(x<1?-1.5:4-6*(x-1));};
+  var P2=new Piano(document.getElementById('g-ip2'),[-0.5,2.5],[-0.3,2.7],{l:16,r:18,t:22,b:30});
+  P2.assi([],[],'x','y');
+  P2.curva(function(x){return x<=1?fs(x):NaN;},0,1,200,'var(--blu)');
+  P2.curva(function(x){return x>1?fs(x):NaN;},1.0001,2,300,'var(--blu)');
+  pallino(P2,0,2,true); pallino(P2,2,2,true);
+  pallino(P2,1,0.5,true); pallino(P2,1,1,false,'var(--inchiostro)');
+  etichetta(P2,0,2,'A','var(--inchiostro)',-8,4,'end');
+  etichetta(P2,2,2,'B','var(--inchiostro)',8,4,'start');
+  etichetta(P2,1,0.5,'D','var(--inchiostro)',0,20);
+  var m1=mobile(P1,fa,da), m2=mobile(P2,fs,ds);
+  var sl=document.getElementById('s-x3'), v=document.getElementById('v-x3');
+  function agg(){var s=+sl.value;
+    var a=m1(-1+2*s), b=m2(2*s);
+    var t=[];
+    if(a===null)t.push('<span style="color:var(--rosso)">sinistra: punto angoloso</span>');
+    if(Math.abs(2*s-1)<1e-9)t.push('<span style="color:var(--rosso)">destra: salto</span>');
+    if(piatto(b))t.push('<span class="ok">destra: tangente orizzontale</span>');
+    v.innerHTML=t.join(' &nbsp; ');}
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+})();
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
