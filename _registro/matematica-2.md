@@ -178,6 +178,7 @@
 - Parole: 152 su 1 pagina di traccia (pag. 46)
 - Rettifica: nessuna, il calcolo della traccia è corretto (verificato con SymPy: x = (3√3+1)/4).
 - Aggiunta: nessuna, solo commenti minimi ai passaggi già presenti.
+- Revisione: tolto il sommario; introduzione di due frasi; titoletto «Un'equazione con un radicale al denominatore» sostituito da «Esempio»; passaggi in frasi complete, ogni passaggio in riquadro (precisato che il coefficiente 2(1−√3) è diverso da zero); impaginazione a quaderno con script di allineamento. Nessuna correzione concettuale (soluzione riverificata con SymPy: x = (3√3+1)/4). Nessuna figura, nessun esempio tolto.
 
 ## Unità 21 — Potenze con esponente razionale
 - Parole: 288 su 3 pagine di traccia (pagg. 47–49 di matematica-2.pdf)
