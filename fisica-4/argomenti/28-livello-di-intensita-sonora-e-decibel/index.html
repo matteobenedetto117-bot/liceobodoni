@@ -5,96 +5,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Livello di intensità sonora e decibel — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.riquadro{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:1rem}
-.esempio{border-left:3px solid var(--blu);padding:2px 0 2px 18px;margin:26px 0}
-.esempio h3{margin:0 0 8px;font-size:1.05rem;color:var(--blu)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-table.critici{border-collapse:collapse;margin:20px 0;font-family:var(--sans);font-size:.95rem}
-table.critici td{border:1px solid var(--riga);padding:8px 16px}
-table.critici td:first-child{color:var(--grigio)}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.ok{color:var(--verde);font-weight:600}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
+.cursore .val sup{font-size:.7em;line-height:0}
+.letture{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:8px;font-variant-numeric:tabular-nums}
+.letture b{color:var(--blu)}
+.passo{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Onde e suono &middot; Unit&agrave; 26</p>
+  <p class="occhiello">Onde e suono &middot; Unità 26</p>
   <h1>Livello di intensit&agrave; sonora e decibel</h1>
-  <p class="sommario">L'orecchio umano percepisce intensit&agrave; sonore che vanno da valori
-  minuscoli a valori un miliardo di volte pi&ugrave; grandi: una scala lineare in W/m&sup2; &egrave;
-  scomoda su un intervallo cos&igrave; ampio. Per questo si usa una scala logaritmica, il decibel.</p>
 </header>
 
+<p>Questa unità introduce il livello di intensità sonora, misurato in decibel, e mostra come ricavare l'intensità di un suono a partire dal suo livello.</p>
+
 <h2>La scala dei decibel</h2>
-<p>Il minimo valore di intensit&agrave; rilevabile dall'orecchio umano &egrave;</p>
-<p>$$I_0 = 10^{-12}\ \text{W/m}^2$$</p>
-<p>Un altro modo, molto comune, per esprimere l'intensit&agrave; di un suono &egrave; la scala dei
-decibel (dB). Il <strong>livello sonoro</strong> $\beta$ &egrave; definito come:</p>
-<div class="riquadro" style="text-align:center">
-$$\beta = 10\ \text{dB} \cdot \log_{10}\!\left(\dfrac{I}{I_0}\right)$$
-</div>
-<p>dove $I$ &egrave; l'intensit&agrave; del suono in W/m&sup2; e $I_0$ &egrave; il valore di soglia
-appena definito, che compare al denominatore dentro il logaritmo.</p>
 
-<div class="esempio">
-<h3>Esempio</h3>
-<p>Un suono ha intensit&agrave; $I = 4{,}3\cdot10^{-6}$ W/m&sup2;. Il livello sonoro vale</p>
-<p>$$\beta = 10\ \text{dB}\cdot\log_{10}\!\left(\dfrac{4{,}3\cdot10^{-6}\ \text{W/m}^2}{10^{-12}\ \text{W/m}^2}\right) \approx 66\ \text{dB}$$</p>
-<p>Se l'intensit&agrave; raddoppia, $2I = 8{,}6\cdot10^{-6}$ W/m&sup2;, il livello diventa</p>
-<p>$$\beta = 10\ \text{dB}\cdot\log_{10}\!\left(\dfrac{8{,}6\cdot10^{-6}\ \text{W/m}^2}{10^{-12}\ \text{W/m}^2}\right) \approx 69\ \text{dB}$$</p>
+<p>Le intensità sonore percepite dall'orecchio umano coprono molti ordini di grandezza. Per questo, invece dell'intensità in W/m², si usa spesso una scala logaritmica, la scala dei decibel (dB).</p>
+
+<div class="def">
+<span class="et">Soglia di udibilità</span>
+<p>L'intensità di riferimento $I_0=10^{-12}$ W/m² corrisponde approssimativamente alla minima intensità che l'orecchio umano riesce a percepire.</p>
 </div>
 
-<p>Il salto da 66 dB a 69 dB non &egrave; un caso: si pu&ograve; ricavare in generale che cosa succede
-al livello sonoro quando l'intensit&agrave; raddoppia, usando la propriet&agrave; del logaritmo di
-un prodotto:</p>
-<p>$$\beta(2I) = 10\ \text{dB}\cdot\log_{10}\!\left(2\cdot\dfrac{I}{I_0}\right)
-= 10\ \text{dB}\left[\log_{10}2 + \log_{10}\dfrac{I}{I_0}\right]
-= 10\ \text{dB}\cdot\log_{10}2 + \beta \approx 3{,}01\ \text{dB} + \beta$$</p>
-<p>Quindi <strong>raddoppiare l'intensit&agrave; aggiunge sempre circa 3 dB</strong> al livello
-sonoro, qualunque sia il valore di partenza.</p>
+<div class="def">
+<span class="et">Livello di intensità sonora</span>
+<p>Il livello di intensità sonora $\beta$ di un suono di intensità $I$ è definito dalla relazione seguente e si misura in decibel.</p>
+</div>
+
+<p class="eq">$$\beta = 10\ \text{dB} \cdot \log_{10}\!\left(\dfrac{I}{I_0}\right)$$</p>
+<p class="leg">Nella formula $I$ è l'intensità del suono (W/m²) e $I_0=10^{-12}$ W/m² è l'intensità di riferimento.</p>
+
+<h2>Esempio 1</h2>
+
+<p>Un suono ha intensità $I = 4{,}3\cdot10^{-6}$ W/m². Calcoliamo il suo livello sonoro e il livello che si ottiene quando l'intensità raddoppia.</p>
+
+<p>Sostituendo i dati nella definizione si ottiene:</p>
+<p class="eq">$$\beta = 10\ \text{dB}\cdot\log_{10}\!\left(\dfrac{4{,}3\cdot10^{-6}\ \text{W/m}^2}{10^{-12}\ \text{W/m}^2}\right) \approx 66\ \text{dB}$$</p>
+
+<p>Se l'intensità raddoppia, diventa $2I = 8{,}6\cdot10^{-6}$ W/m², e il livello sonoro vale:</p>
+<p class="eq">$$\beta' = 10\ \text{dB}\cdot\log_{10}\!\left(\dfrac{8{,}6\cdot10^{-6}\ \text{W/m}^2}{10^{-12}\ \text{W/m}^2}\right) \approx 69\ \text{dB}$$</p>
+
+<h2>Raddoppio dell'intensità</h2>
+
+<p>L'aumento di circa 3 dB dell'esempio vale per qualunque intensità di partenza. Lo si ricava con la proprietà del logaritmo di un prodotto:</p>
+<p class="eq">$$\beta(2I) = 10\ \text{dB}\cdot\log_{10}\!\left(2\cdot\dfrac{I}{I_0}\right) = 10\ \text{dB}\cdot\log_{10}2 + 10\ \text{dB}\cdot\log_{10}\dfrac{I}{I_0}$$</p>
+<p class="eq principio">$$\beta(2I) \approx \beta(I) + 3{,}01\ \text{dB}$$</p>
+
+<p>Quindi, quando l'intensità di un suono raddoppia, il suo livello sonoro aumenta sempre di circa 3 dB.</p>
 
 <h2>Valori critici del livello sonoro</h2>
-<p>Due soglie segnano il limite della tollerabilit&agrave; per l'orecchio umano:</p>
-<table class="critici">
-<tr><td>soglia del dolore</td><td>$\beta_D = 120$ dB</td></tr>
-<tr><td>rottura del timpano</td><td>$\beta_T = 160$ dB</td></tr>
-</table>
-<p>Per ricavare l'intensit&agrave; corrispondente a un dato livello si inverte la definizione di
-$\beta$:</p>
-<p>$$\dfrac{\beta}{10\ \text{dB}} = \log_{10}\dfrac{I}{I_0}
-\quad\Longrightarrow\quad
-10^{\frac{\beta}{10\ \text{dB}}} = \dfrac{I}{I_0}$$</p>
-<div class="riquadro" style="text-align:center">
-$$I = I_0 \cdot 10^{\frac{\beta}{10\ \text{dB}}}$$
-</div>
 
-<div class="esempio">
-<h3>Esempio</h3>
-<p>Alla soglia del dolore, $\beta_D = 120$ dB, l'intensit&agrave; vale</p>
-<p>$$I_D = 10^{-12}\ \text{W/m}^2 \cdot 10^{\frac{120}{10}} = 1\ \text{W/m}^2$$</p>
-<p>Alla soglia di rottura del timpano, $\beta_T = 160$ dB, l'intensit&agrave; vale</p>
-<p>$$I_T = 10^{-12}\ \text{W/m}^2 \cdot 10^{\frac{160}{10}} = 10^{4}\ \text{W/m}^2$$</p>
-</div>
+<p>Due valori del livello sonoro segnano il limite di tollerabilità per l'orecchio umano:</p>
 
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Le prossime due unit&agrave; trattano l'effetto Doppler, prima con l'osservatore in movimento e
-poi con la sorgente in movimento.</li>
+<li>la soglia del dolore corrisponde a $\beta_D = 120$ dB;</li>
+<li>la rottura del timpano avviene a $\beta_T = 160$ dB.</li>
 </ul>
-</div>
+
+<h2>Dal livello sonoro all'intensità</h2>
+
+<p>Per ricavare l'intensità corrispondente a un dato livello si divide la definizione di $\beta$ per 10 dB e si usa la definizione di logaritmo:</p>
+<p class="eq">$$\dfrac{\beta}{10\ \text{dB}} = \log_{10}\dfrac{I}{I_0} \quad\Longrightarrow\quad \dfrac{I}{I_0} = 10^{\frac{\beta}{10\ \text{dB}}}$$</p>
+<p class="eq">$$I = I_0 \cdot 10^{\frac{\beta}{10\ \text{dB}}}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Calcoliamo le intensità che corrispondono alla soglia del dolore e alla rottura del timpano.</p>
+
+<p>Alla soglia del dolore, con $\beta_D = 120$ dB, l'intensità vale:</p>
+<p class="eq">$$I_D = 10^{-12}\ \text{W/m}^2 \cdot 10^{\frac{120}{10}} = 1\ \text{W/m}^2$$</p>
+
+<p>Alla rottura del timpano, con $\beta_T = 160$ dB, l'intensità vale:</p>
+<p class="eq">$$I_T = 10^{-12}\ \text{W/m}^2 \cdot 10^{\frac{160}{10}} = 10^{4}\ \text{W/m}^2$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../27-intensita-del-suono-e-sorgente-puntiforme/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Intensità del suono e sorgente puntiforme</span></a><a class="successiva" href="../29-effetto-doppler-osservatore-in-movimento/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Effetto Doppler: osservatore in movimento</span></a></nav>
 <footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 26</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
