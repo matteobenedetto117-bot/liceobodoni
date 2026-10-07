@@ -5,116 +5,177 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Esempi: il sasso nel pozzo — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.riquadro{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:1rem}
-.esempio{border-left:3px solid var(--blu);padding:2px 0 2px 18px;margin:26px 0}
-.esempio h3{margin:0 0 8px;font-size:1.05rem;color:var(--blu)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.ok{color:var(--verde);font-weight:600}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
+.letture{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:8px;font-variant-numeric:tabular-nums}
+.letture b{color:var(--blu)}
+.passo{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Onde e suono &middot; Unit&agrave; 24</p>
+  <p class="occhiello">Onde e suono &middot; Unità 24</p>
   <h1>Esempi: il sasso nel pozzo</h1>
-  <p class="sommario">Lasciar cadere un sasso in un pozzo e ascoltare il tonfo mette insieme due
-  fenomeni che viaggiano a velocit&agrave; molto diverse: la caduta libera del sasso e la
-  risalita del suono. Il tempo totale che misuriamo &egrave; la somma dei due, e questo permette
-  di ricavare l'uno conoscendo l'altro.</p>
 </header>
 
+<p>Questa unità risolve due problemi in cui si combinano la caduta libera di un sasso in un pozzo e la risalita del suono del tonfo.</p>
+
+<h2>Tempo totale</h2>
+
+<p>Il tempo che passa fra l'istante in cui lasciamo cadere il sasso e quello in cui sentiamo il tonfo è la somma di due contributi:</p>
+
+<p class="eq">$$t_{TOT}=t_d+t_s$$</p>
+<p class="leg">Nella formula $t_d$ è il tempo di caduta libera del sasso e $t_s$ il tempo che il suono impiega a risalire il pozzo (s).</p>
+
+<p>Il sasso parte da fermo, quindi percorre la profondità $h$ in caduta libera: $h=\frac12 g t_d^2$. Il suono risale la stessa distanza a velocità costante $v_s$, perché il mezzo, l'aria nel pozzo, è lo stesso lungo tutto il tragitto.</p>
+
+<p class="eq">$$t_d=\sqrt{\dfrac{2h}{g}} \qquad t_s=\dfrac{h}{v_s}$$</p>
+
 <div class="fig">
-<svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f26a" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto">
-<path d="M0,0 L5,2.5 L0,5 Z" fill="var(--grigio)"/>
-</marker>
-<marker id="f26b" markerWidth="7" markerHeight="7" refX="2" refY="2.5" orient="auto">
-<path d="M5,0 L0,2.5 L5,5 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="220" y1="30" x2="400" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="30" x2="220" y2="30" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="400" y1="30" x2="550" y2="30" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="220" y1="30" x2="220" y2="260" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="400" y1="30" x2="400" y2="260" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="310" cy="90" r="7" fill="var(--inchiostro)"/>
-<text x="310" y="75" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">sasso</text>
-<line x1="310" y1="100" x2="310" y2="150" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f26a)"/>
-<text x="330" y="130" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">t&#8320;</text>
-<path d="M 285,220 Q 270,180 285,150 Q 300,120 285,90 Q 275,65 285,40" fill="none" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#f26b)"/>
-<text x="252" y="130" font-family="var(--sans)" font-size="12.5" fill="var(--rosso)">t&#8330;</text>
-<line x1="440" y1="30" x2="440" y2="230" stroke="var(--grigio)" stroke-width="1.2" marker-end="url(#f26a)"/>
-<line x1="440" y1="230" x2="440" y2="30" stroke="var(--grigio)" stroke-width="1.2" marker-end="url(#f26a)"/>
-<text x="460" y="135" font-family="var(--sans)" font-size="14" fill="var(--grigio)">h</text>
-<line x1="220" y1="230" x2="400" y2="230" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="310" y="30" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)" dy="-8">O</text>
-</svg>
-<p class="did">Il sasso cade nel pozzo (freccia nera, tempo $t_d$) e il suono del tonfo risale fino
-all'apertura (freccia rossa, tempo $t_s$); $h$ &egrave; la profondit&agrave;.</p>
+<svg id="g-pozzo" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Pozzo profondo 7,3 metri disegnato in scala: il cursore sul tempo fa cadere il sasso fino al fondo e poi fa risalire il fronte del suono fino all'apertura"></svg>
+<div class="cursore"><label for="cur-t">tempo</label><input id="cur-t" type="range" min="0" max="1260" step="1" value="700"><span class="val" id="val-t"></span></div>
+<p class="did">In un pozzo profondo 7,3 m il sasso impiega circa 1,22 s a cadere, mentre il suono risale in circa 0,02 s.</p>
 </div>
 
-<p>In entrambi i problemi il tempo totale &egrave; la somma dei due contributi:</p>
+<h2>Esempio 1</h2>
 
-<div class="riquadro" style="text-align:center">
-$$t_{TOT} = t_d + t_s$$
+<p>Lasciamo cadere un sasso in un pozzo profondo $h=4{,}5$ m. Calcoliamo dopo quanto tempo sentiamo il tonfo, con $g=9{,}8$ m/s² e $v_s=343$ m/s.</p>
+
+<p>Il tempo di caduta del sasso è:</p>
+<p class="eq">$$t_d=\sqrt{\dfrac{2\cdot 4{,}5\ \text{m}}{9{,}8\ \text{m/s}^2}}\approx 0{,}96\ \text{s}$$</p>
+
+<p>Il tempo di risalita del suono è:</p>
+<p class="eq">$$t_s=\dfrac{4{,}5\ \text{m}}{343\ \text{m/s}}\approx 0{,}01\ \text{s}$$</p>
+
+<p>Il contributo del suono è piccolo rispetto a quello della caduta, perché il suono è molto più veloce del sasso. Il tempo totale è:</p>
+<p class="eq">$$t_{TOT}\approx 0{,}96\ \text{s}+0{,}01\ \text{s}=0{,}97\ \text{s}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Lasciamo cadere un sasso in un pozzo e sentiamo il tonfo dopo $1{,}24$ s. Calcoliamo la profondità $d$ del pozzo.</p>
+
+<p>Ora la profondità è l'incognita e compare in entrambi i tempi:</p>
+<p class="eq">$$\sqrt{\dfrac{2d}{g}}+\dfrac{d}{v_s}=1{,}24\ \text{s}$$</p>
+
+<div class="nota">
+<span class="et">Nota</span>
+<p>Nell'equazione $d$ compare sia sotto radice sia da sola, quindi non si può ricavare direttamente. Ponendo $x=\sqrt d$ si ottiene un'equazione di secondo grado in $x$.</p>
 </div>
 
-<p>dove $t_d$ &egrave; il tempo di caduta libera del sasso e $t_s$ il tempo che il suono impiega a
-risalire il pozzo alla velocit&agrave; $v_s$, costante perch&eacute; il mezzo (l'aria nel pozzo) &egrave; lo
-stesso lungo tutto il tragitto.</p>
+<p class="eq">$$\dfrac{x^2}{v_s}+\sqrt{\dfrac{2}{g}}\,x-1{,}24=0$$</p>
 
-<div class="esempio">
-<h3>Esempio 1 &mdash; conosciamo la profondit&agrave;</h3>
-<p>Lasciamo cadere un sasso in un pozzo profondo $h = 4{,}5$ m. Dopo quanto tempo sentiamo il
-tonfo?</p>
-<p>Il sasso parte da fermo, quindi la caduta libera d&agrave;
-$h = \frac12 g t_d^2$, da cui:</p>
-<p>$$t_d = \sqrt{\dfrac{2h}{g}} = \sqrt{\dfrac{2 \cdot 4{,}5\ \text{m}}{9{,}8\ \text{m/s}^2}} \approx 0{,}96\ \text{s}$$</p>
-<p>Il suono risale la stessa distanza $h$ a velocit&agrave; costante $v_s = 343$ m/s:</p>
-<p>$$t_s = \dfrac{h}{v_s} = \dfrac{4{,}5\ \text{m}}{343\ \text{m/s}} \approx 0{,}01\ \text{s}$$</p>
-<p>Il contributo del suono &egrave; piccolo rispetto a quello della caduta, perch&eacute; il suono &egrave;
-molto pi&ugrave; veloce del sasso. Il tempo totale &egrave;:</p>
-<p>$$t_{TOT} = t_d + t_s \approx 0{,}96\ \text{s} + 0{,}01\ \text{s} = 0{,}97\ \text{s}$$</p>
-</div>
+<p>Con $v_s=343$ m/s e $g=9{,}8$ m/s² il discriminante vale $\Delta\approx 0{,}219$. Delle due soluzioni ha senso fisico solo quella positiva, perché $x=\sqrt d$ non può essere negativo:</p>
+<p class="eq">$$x=\dfrac{-\sqrt{2/g}+\sqrt{\Delta}}{2/v_s}\approx 2{,}70$$</p>
 
-<div class="esempio">
-<h3>Esempio 2 &mdash; conosciamo il tempo totale</h3>
-<p>Lasciamo cadere un sasso in un pozzo e sentiamo il tonfo dopo $1{,}24$ s. Quanto &egrave;
-profondo il pozzo?</p>
-<p>Ora la profondit&agrave; $d$ &egrave; l'incognita, e compare in entrambi i tempi:</p>
-<p>$$t_d = \sqrt{\dfrac{2d}{g}} \qquad t_s = \dfrac{d}{v_s} \qquad t_d + t_s = 1{,}24\ \text{s}$$</p>
-<div class="riquadro">
-Sostituendo $t_d$ e $t_s$ nell'equazione resta $d$ sia sotto radice sia da sola: non &egrave; risolvibile
-direttamente. Ponendo $x = \sqrt{d}$ diventa un'equazione di secondo grado in $x$.
-</div>
-<p>$$\dfrac{x^2}{v_s} + \sqrt{\dfrac{2}{g}}\, x - 1{,}24 = 0$$</p>
-<p>Con $v_s = 343$ m/s e $g = 9{,}8$ m/s&sup2; il discriminante vale $\Delta \approx 0{,}219$, e delle
-due soluzioni solo quella positiva ha senso fisico:</p>
-<p>$$x = \dfrac{-\sqrt{2/g} + \sqrt{\Delta}}{2/v_s} \approx 2{,}70$$</p>
-<p>La profondit&agrave; &egrave; $d = x^2$:</p>
-<p>$$d \approx 2{,}70^2\ \text{m} \approx 7{,}3\ \text{m}$$</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>La prossima unit&agrave; definisce l'intensit&agrave; del suono a partire dalla potenza emessa
-da una sorgente puntiforme.</li>
-</ul>
-</div>
+<p>La profondità del pozzo è quindi:</p>
+<p class="eq">$$d=x^2\approx 2{,}70^2\ \text{m}\approx 7{,}3\ \text{m}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../25-frequenza-di-un-onda-sonora/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Frequenza di un'onda sonora</span></a><a class="successiva" href="../27-intensita-del-suono-e-sorgente-puntiforme/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Intensità del suono e sorgente puntiforme</span></a></nav>
-<footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 24</p></footer>
+<footer><p>Fisica quarta &middot; Onde e suono &middot; Unità 24</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,'text-anchor':'middle',fill:'var(--grigio)'},a||{}),p);e.textContent=s;return e;}
+  function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+  function freccia(svg,id,col){var df=el('defs',{},svg);var m=el('marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:2.5,orient:'auto'},df);el('path',{d:'M0,0 L5,2.5 L0,5 Z',fill:col},m);return 'url(#'+id+')';}
+
+  /* ---------- pozzo in scala: caduta del sasso e risalita del suono ---------- */
+  (function(){
+    var svg=document.getElementById('g-pozzo');
+    var fa=freccia(svg,'fr-h','var(--grigio)');
+    var g=9.8, vs=343, H=7.28;                       // profondità dell'esempio 2 (m)
+    var td=Math.sqrt(2*H/g), ts=H/vs, tt=td+ts;
+    var Y0=40, Y1=260, S=(Y1-Y0)/H;                  // pixel per metro
+    function Y(q){return Y0+q*S;}                    // q = profondità in metri
+    var XL=170, XR=250, XC=(XL+XR)/2;
+    var sotto=el('g',{},svg), sopra=el('g',{},svg);
+    el('line',{x1:60,y1:Y0,x2:XL,y2:Y0,stroke:'var(--inchiostro)','stroke-width':1.6},sotto);
+    el('line',{x1:XR,y1:Y0,x2:360,y2:Y0,stroke:'var(--inchiostro)','stroke-width':1.6},sotto);
+    el('rect',{x:XL,y:Y0,width:XR-XL,height:Y1-Y0,fill:'var(--blu-chiaro)',opacity:.45},sotto);
+    el('line',{x1:XL,y1:Y0,x2:XL,y2:Y1,stroke:'var(--inchiostro)','stroke-width':1.6},sotto);
+    el('line',{x1:XR,y1:Y0,x2:XR,y2:Y1,stroke:'var(--inchiostro)','stroke-width':1.6},sotto);
+    el('line',{x1:XL,y1:Y1,x2:XR,y2:Y1,stroke:'var(--inchiostro)','stroke-width':2},sotto);
+    // quota con frecce
+    el('line',{x1:300,y1:(Y0+Y1)/2,x2:300,y2:Y0+3,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':fa},sotto);
+    el('line',{x1:300,y1:(Y0+Y1)/2,x2:300,y2:Y1-3,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':fa},sotto);
+    txt(sotto,312,(Y0+Y1)/2+4,'d = 7,3 m',{'text-anchor':'start','font-size':12.5});
+    // tacche ogni metro a sinistra
+    for(var m=0;m<=7;m++){el('line',{x1:XL-6,x2:XL,y1:Y(m),y2:Y(m),stroke:'var(--grigio)'},sotto);if(m)txt(sotto,XL-10,Y(m)+4,m+' m',{'text-anchor':'end','font-size':11});}
+    var scia=el('line',{x1:XC,x2:XC,y1:Y0,stroke:'var(--inchiostro)','stroke-width':1,'stroke-dasharray':'3,4'},sotto);
+    var fronte=el('line',{x1:XL+3,x2:XR-3,stroke:'var(--rosso)','stroke-width':3},sopra);
+    var sasso=el('circle',{cx:XC,r:7,fill:'var(--inchiostro)'},sopra);
+    var et=txt(sopra,XR+8,0,'',{'text-anchor':'start','font-size':12,fill:'var(--rosso)'});
+    var cur=document.getElementById('cur-t'), val=document.getElementById('val-t');
+    cur.max=Math.round(tt*1000)+10;
+    function disegna(){
+      var t=parseFloat(cur.value)/1000, q, fase;
+      if(t<td){q=0.5*g*t*t;fase='caduta del sasso';fronte.style.display='none';et.textContent='';}
+      else{q=H;var qs=Math.max(H-vs*(t-td),0);fronte.style.display='';fronte.setAttribute('y1',Y(qs));fronte.setAttribute('y2',Y(qs));
+           et.setAttribute('y',Y(qs)-6);et.textContent='suono';
+           fase=t>=tt-0.0005?'<span class="ok">tonfo udito</span>':'risalita del suono';}
+      sasso.setAttribute('cy',Math.min(Y(q),Y1-7));
+      scia.setAttribute('y2',Math.min(Y(q),Y1-7));
+      val.innerHTML='t = '+num(t,3)+' s &nbsp; '+fase;
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)allineaQuaderno();});disegna();
+  })();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
