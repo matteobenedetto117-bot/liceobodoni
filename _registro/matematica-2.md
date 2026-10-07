@@ -184,6 +184,7 @@
 - Parole: 288 su 3 pagine di traccia (pagg. 47–49 di matematica-2.pdf)
 - Rettifica: nessuna, la traccia era corretta (verificato con SymPy ogni esempio delle definizioni e delle cinque proprietà).
 - Aggiunta: nessuna oltre a brevi commenti di collegamento fra numeratore/denominatore dell'esponente e indice/esponente del radicale, già impliciti nella traccia.
+- Revisione: (07/10/2026) titolo invariato. Tolto il sommario dell'intestazione; introduzione di due frasi; titoletti «Esponente razionale positivo o nullo», «Esponente razionale negativo» e «Proprietà» tenuti; le due definizioni in riquadri .def con frasi complete (aggiunta per l'esponente negativo la forma intermedia $(1/a)^{m/n}$); i casi di non esistenza $(-5)^{1/8}$ e $0^{-2/3}$ in riquadri .nota; la tabella delle cinque proprietà sostituita da due riquadri allineati (proprietà ed esempi nello stesso ordine) per l'impaginazione a quaderno. Controllo concettuale: precisato che per $a=0$ l'esponente deve essere positivo ($0^{0/n}$ non è definito) e che le proprietà valgono per basi positive; riverificati con SymPy tutti gli esempi. Impaginazione a quaderno (stile e script dall'unità 20). Nessuna figura, nessun esempio tolto.
 
 ## Unità 22 — Punti nel piano: distanza e punto medio
 - Parole: 282 su 2 pagine di traccia (pagg. 50–51 di matematica-2.pdf)
