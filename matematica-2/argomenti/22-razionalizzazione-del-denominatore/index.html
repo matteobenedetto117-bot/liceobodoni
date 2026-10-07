@@ -5,16 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Razionalizzazione del denominatore — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.nota{background:#fdf6ec;border:1px solid #e7d9b8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -24,62 +60,61 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 19</p>
   <h1>Razionalizzazione del denominatore</h1>
-  <p class="sommario">Una frazione come $\dfrac{5}{\sqrt3}$ o $\dfrac{2x}{\sqrt5-\sqrt6}$ ha un
-  radicale al denominatore, il che rende scomodo ogni calcolo successivo. Razionalizzare vuol
-  dire trasformarla in una frazione equivalente senza radicali al denominatore, moltiplicando
-  numeratore e denominatore per un fattore ben scelto.</p>
 </header>
 
-<h2>Denominatore monomio, indice due</h2>
-<p>Se il denominatore è un solo radicale quadratico, si moltiplicano numeratore e denominatore
-per quello stesso radicale: sotto radice compare un quadrato, che l'indice elimina.</p>
+<p>Razionalizzare il denominatore di una frazione significa trasformarla in una frazione equivalente che non ha radicali al denominatore. Si ottiene moltiplicando numeratore e denominatore per uno stesso fattore, scelto in modo che il radicale al denominatore scompaia.</p>
 
-<div class="esempio">
-<p>$\dfrac{6}{\sqrt3}\cdot\dfrac{\sqrt3}{\sqrt3}=\dfrac{6\sqrt3}{3}=2\sqrt3$</p>
-<p>$\dfrac{1}{\sqrt2}\cdot\dfrac{\sqrt2}{\sqrt2}=\dfrac{\sqrt2}{2}$</p>
-</div>
+<h2>Denominatore monomio con indice due</h2>
+<p>Se il denominatore è un solo radicale quadratico, si moltiplicano numeratore e denominatore per lo stesso radicale. Al denominatore compare così il quadrato della radice, che è uguale al radicando.</p>
+<p class="eq">$$\dfrac{6}{\sqrt3}=\dfrac{6}{\sqrt3}\cdot\dfrac{\sqrt3}{\sqrt3}=\dfrac{6\sqrt3}{3}=2\sqrt3$$</p>
+<p class="eq">$$\dfrac{1}{\sqrt2}=\dfrac{1}{\sqrt2}\cdot\dfrac{\sqrt2}{\sqrt2}=\dfrac{\sqrt2}{2}$$</p>
 
-<h2>Denominatore monomio, indice qualunque</h2>
-<p>Con un indice superiore a due non basta moltiplicare per lo stesso radicale: bisogna
-completare l'esponente del radicando fino a raggiungere l'indice, così la radice si semplifica
-del tutto.</p>
-
-<div class="esempio">
-<p>$\dfrac{1}{\sqrt[3]{2}}\cdot\dfrac{\sqrt[3]{2^2}}{\sqrt[3]{2^2}}=\dfrac{\sqrt[3]{4}}{\sqrt[3]{2^3}}=\dfrac{\sqrt[3]{4}}{2}$</p>
-<p>Al denominatore mancava l'esponente $2$ per arrivare a $2^3$; l'abbiamo aggiunto sotto
-entrambi i radicali.</p>
-</div>
-
-<div class="regola">
-<p>In generale, per razionalizzare $\dfrac{1}{\sqrt[n]{a}}$ si moltiplica per
-$\sqrt[n]{a^{n-1}}$:</p>
-<p>$$\dfrac{1}{\sqrt[n]{a}}\cdot\dfrac{\sqrt[n]{a^{n-1}}}{\sqrt[n]{a^{n-1}}}=\dfrac{\sqrt[n]{a^{n-1}}}{\sqrt[n]{a^{n-1}}\cdot\sqrt[n]{a}}=\dfrac{\sqrt[n]{a^{n-1}}}{\sqrt[n]{a^n}}=\dfrac{\sqrt[n]{a^{n-1}}}{a}$$</p>
-<p>perché sotto l'ultima radice l'esponente $1$ del radicando di partenza si somma a $n-1$, dando
-esattamente $n$.</p>
+<h2>Denominatore monomio con indice qualunque</h2>
+<p>Se l'indice è maggiore di due, moltiplicare per lo stesso radicale non basta. Bisogna moltiplicare per un radicale con lo stesso indice, scelto in modo che sotto la radice del denominatore l'esponente del radicando diventi uguale all'indice.</p>
+<p>Nell'esempio seguente al denominatore c'è $\sqrt[3]{2}$: per arrivare a $2^3$ manca il fattore $2^2$, quindi si moltiplica per $\sqrt[3]{2^2}$.</p>
+<p class="eq">$$\dfrac{1}{\sqrt[3]{2}}=\dfrac{1}{\sqrt[3]{2}}\cdot\dfrac{\sqrt[3]{2^2}}{\sqrt[3]{2^2}}=\dfrac{\sqrt[3]{4}}{\sqrt[3]{2^3}}=\dfrac{\sqrt[3]{4}}{2}$$</p>
+<div class="def"><span class="et">Regola generale</span>
+<p>Per razionalizzare $\dfrac{1}{\sqrt[n]{a}}$, con $a>0$, si moltiplicano numeratore e denominatore per $\sqrt[n]{a^{n-1}}$.</p>
+<p class="eq">$$\dfrac{1}{\sqrt[n]{a}}\cdot\dfrac{\sqrt[n]{a^{n-1}}}{\sqrt[n]{a^{n-1}}}=\dfrac{\sqrt[n]{a^{n-1}}}{\sqrt[n]{a^{n}}}=\dfrac{\sqrt[n]{a^{n-1}}}{a}$$</p>
+<p>Al denominatore l'esponente $1$ del radicando si somma a $n-1$ e dà esattamente $n$, quindi la radice si semplifica.</p>
 </div>
 
 <h2>Denominatore binomio</h2>
-<p>Se il denominatore è la somma o la differenza di due radicali (o di un numero e un radicale),
-si moltiplica per il binomio <strong>coniugato</strong>: lo stesso binomio con il segno centrale
-cambiato. Il prodotto notevole $(x-y)(x+y)=x^2-y^2$ toglie di mezzo le radici quadrate, perché
-al quadrato spariscono.</p>
-
-<div class="esempio">
-<p>$\dfrac{1}{\sqrt3-\sqrt2}\cdot\dfrac{\sqrt3+\sqrt2}{\sqrt3+\sqrt2}=\dfrac{\sqrt3+\sqrt2}{(\sqrt3)^2-(\sqrt2)^2}=\dfrac{\sqrt3+\sqrt2}{3-2}=\sqrt3+\sqrt2$</p>
+<p>Se il denominatore è la somma o la differenza di due radicali quadratici, oppure di un numero e di un radicale quadratico, si moltiplicano numeratore e denominatore per il binomio coniugato.</p>
+<div class="def"><span class="et">Binomio coniugato</span>
+<p>Il coniugato di un binomio è lo stesso binomio con il segno centrale cambiato: il coniugato di $\sqrt x-\sqrt y$ è $\sqrt x+\sqrt y$, e viceversa.</p>
 </div>
+<p>Il prodotto di un binomio per il suo coniugato è la differenza dei quadrati dei due termini. Le radici quadrate, elevate al quadrato, scompaiono.</p>
+<p class="eq">$$(\sqrt x-\sqrt y)(\sqrt x+\sqrt y)=x-y$$</p>
 
-<div class="esempio">
-<p>$\dfrac{2}{\sqrt5+\sqrt3}\cdot\dfrac{\sqrt5-\sqrt3}{\sqrt5-\sqrt3}=\dfrac{2\sqrt5-2\sqrt3}{5-3}=\dfrac{2(\sqrt5-\sqrt3)}{2}=\sqrt5-\sqrt3$</p>
-</div>
+<h2>Esempio 1</h2>
+<p>Il denominatore è $\sqrt5+\sqrt3$, quindi si moltiplica per il coniugato $\sqrt5-\sqrt3$. Al denominatore si ottiene $5-3=2$, che si semplifica con il fattore $2$ del numeratore.</p>
+<p class="eq">$$\dfrac{2}{\sqrt5+\sqrt3}\cdot\dfrac{\sqrt5-\sqrt3}{\sqrt5-\sqrt3}=\dfrac{2(\sqrt5-\sqrt3)}{5-3}=\dfrac{2(\sqrt5-\sqrt3)}{2}=\sqrt5-\sqrt3$$</p>
 
-<div class="esempio">
-<p>$\dfrac{3}{\sqrt{10}-2}\cdot\dfrac{\sqrt{10}+2}{\sqrt{10}+2}=\dfrac{3(\sqrt{10}+2)}{10-4}=\dfrac{3(\sqrt{10}+2)}{6}=\dfrac{\sqrt{10}+2}{2}$</p>
-</div>
-
+<h2>Esempio 2</h2>
+<p>Il denominatore è la differenza fra un radicale e un numero, quindi si moltiplica per il coniugato $\sqrt{10}+2$. Al denominatore si ottiene $10-4=6$, che si semplifica con il $3$ del numeratore.</p>
+<p class="eq">$$\dfrac{3}{\sqrt{10}-2}\cdot\dfrac{\sqrt{10}+2}{\sqrt{10}+2}=\dfrac{3(\sqrt{10}+2)}{10-4}=\dfrac{3(\sqrt{10}+2)}{6}=\dfrac{\sqrt{10}+2}{2}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../21-addizione-e-sottrazione-di-radicali/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Addizione e sottrazione di radicali</span></a><a class="successiva" href="../23-equazioni-con-i-radicali-a-coefficienti-irrazionali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni con i radicali a coefficienti irrazionali</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 19</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
