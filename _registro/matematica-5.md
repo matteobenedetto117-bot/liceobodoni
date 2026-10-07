@@ -241,6 +241,7 @@ teorema del confronto, a pagina 21.
   l'unico interattivo riusa le quattro funzioni della gerarchia (ln x, x², 2^x, x^x) già disegnate
   nella traccia, mostrandone i sorpassi al crescere di x su scala logaritmica.
 - Revisione: titolo invariato (rifatta il 02/10/2026 con le regole nuove). Introduzione di due frasi ripresa dal vecchio sommario; ripristinati i titoletti «Infinitesimi e loro confronto», «Il principio di sostituzione», «Infiniti e loro confronto», «Gerarchia degli infiniti» (recuperati dalla versione 3aff9db). Testo in frasi complete: definizioni, i due elenchi dei confronti (una condizione per voce, con soggetto e verbo), frase su equivalenza e sostituzione per gli infiniti, nota «solo fattori, mai addendi», legenda della gerarchia, didascalia; nell'«Esempio 1» frase che spiega la sostituzione, nell'«Esempio 2» due frasi di commento ai limiti riprese dalla traccia. Nessuna nuova correzione (i sei limiti e le equivalenze riverificati con SymPy; restano le correzioni della gerarchia con α, β, a e della didascalia del grafico). Impaginazione: formula del principio di sostituzione dentro il riquadro .def ora con il proprio riquadro azzurro; margine di una riga per i paragrafi dopo elenchi e formule. Figura invariata (gerarchia in scala logaritmica con cursore su x). Nessun esempio tolto, nessuna figura decorativa.
+- Correzione 07/10/2026: tolta la frase introduttiva sotto il titolo.
 
 ## Unità 07 — Continuità in un punto e in un intervallo
 - Parole: 413 su 4 pagine di traccia (28–31)
