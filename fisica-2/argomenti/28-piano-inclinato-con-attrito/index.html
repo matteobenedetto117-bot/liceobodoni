@@ -5,14 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Piano inclinato con attrito — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -22,129 +55,116 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Dinamica &middot; Unità 18</p>
   <h1>Piano inclinato con attrito</h1>
-  <p class="sommario">Un oggetto scivola su un piano inclinato: il peso resta
-  verticale, ma va scomposto lungo due direzioni nuove, parallela e perpendicolare
-  al piano.</p>
 </header>
 
-<h2>Scomposizione del peso sul piano</h2>
+<p>L'unità ricava l'accelerazione di un oggetto che scivola su un piano inclinato in presenza di attrito.</p>
 
-<p>Conviene ruotare gli assi in modo che $x$ sia parallelo al piano, nel verso in
-cui l'oggetto scivola, e $y$ perpendicolare ad esso. Il peso $\vec F_p$ si scompone
-allora in una componente $F_{px}$ lungo il piano e una $F_{py}$ che preme contro di
-esso.</p>
+<h2>Scomposizione del peso sul piano</h2>
+<p>Conviene ruotare gli assi: l'asse $x'$ è parallelo al piano e orientato nel verso in cui l'oggetto scivola, l'asse $y'$ è perpendicolare al piano. Il peso $\vec F_p$ resta verticale e si scompone in una componente $\vec F_{px}$ lungo il piano e in una componente $\vec F_{py}$ che preme contro il piano.</p>
 
 <div class="fig">
-<svg viewBox="0 0 620 250" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u28r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="u28v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/>
-</marker>
-<marker id="u28b" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--blu)"/>
-</marker>
-<marker id="u28k" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-
-<!-- Pannello 1: il piano inclinato -->
-<polygon points="30,105 30,220 230,220" fill="#eeebe3" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M 210,220 A 20,20 0 0 0 197,203" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="192" y="200" font-size="13" font-family="var(--sans)">&#945;</text>
-
-<!-- blocco -->
-<g transform="translate(139,147) rotate(30)">
-<rect x="-16" y="-14" width="32" height="20" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-</g>
-
-<!-- Fp: peso, verticale -->
-<line x1="139" y1="147" x2="139" y2="217" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#u28r)"/>
-<text x="150" y="200" font-size="14" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">p</tspan></text>
-
-<!-- Fpy: nel piano, verso l'interno -->
-<line x1="139" y1="147" x2="108.7" y2="199.5" stroke="var(--rosso)" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#u28r)"/>
-<text x="88" y="205" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">py</tspan></text>
-
-<!-- Fpx: lungo il piano, verso il basso -->
-<line x1="139" y1="147" x2="169.3" y2="164.5" stroke="var(--rosso)" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#u28r)"/>
-<text x="180" y="170" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">px</tspan></text>
-
-<!-- FN: normale, verso l'esterno -->
-<line x1="139" y1="147" x2="169" y2="95" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u28v)"/>
-<text x="178" y="90" font-size="14" fill="var(--verde)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">N</tspan></text>
-
-<!-- Fat: attrito, verso l'alto lungo il piano -->
-<line x1="139" y1="147" x2="113" y2="132" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#u28b)"/>
-<text x="80" y="128" font-size="14" fill="var(--blu)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">at</tspan></text>
-
-<!-- Pannello 2: assi ruotati e vettori dall'origine -->
-<line x1="1" y1="1" x2="1" y2="1" stroke="none"/>
-<g>
-<circle cx="380" cy="150" r="2.2" fill="var(--inchiostro)"/>
-<!-- asse x' lungo il piano -->
-<line x1="380" y1="150" x2="467" y2="195" stroke="var(--inchiostro)" stroke-width="1.1" marker-end="url(#u28k)"/>
-<text x="478" y="203" font-size="14" font-family="var(--sans)">x'</text>
-<!-- asse y' perpendicolare -->
-<line x1="380" y1="150" x2="425" y2="63" stroke="var(--inchiostro)" stroke-width="1.1" marker-end="url(#u28k)"/>
-<text x="430" y="52" font-size="14" font-family="var(--sans)">y'</text>
-
-<!-- FN lungo +y' -->
-<line x1="380" y1="150" x2="410" y2="90" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u28v)"/>
-<text x="415" y="83" font-size="14" fill="var(--verde)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">N</tspan></text>
-
-<!-- Fat lungo -x' -->
-<line x1="380" y1="150" x2="354" y2="135" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#u28b)"/>
-<text x="322" y="130" font-size="14" fill="var(--blu)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">at</tspan></text>
-
-<!-- Fpx lungo +x' -->
-<line x1="380" y1="150" x2="415" y2="167.5" stroke="var(--rosso)" stroke-width="2" marker-end="url(#u28r)"/>
-<text x="422" y="176" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">px</tspan></text>
-
-<!-- Fpy lungo -y' -->
-<line x1="380" y1="150" x2="350" y2="202.5" stroke="var(--rosso)" stroke-width="2" marker-end="url(#u28r)"/>
-<text x="330" y="212" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">py</tspan></text>
-
-<!-- Fp: peso completo, dalla somma delle componenti -->
-<line x1="380" y1="150" x2="415" y2="220" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#u28r)"/>
-<text x="422" y="232" font-size="14" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">p</tspan></text>
-<path d="M 380,178 A 28,28 0 0 1 402,193" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="392" y="182" font-size="12" font-family="var(--sans)">&#945;</text>
-</g>
-</svg>
-<p class="did">A sinistra, il blocco con il peso e le sue componenti, la normale e
-l'attrito. A destra, gli stessi vettori dall'origine degli assi $x'$, $y'$ solidali
-al piano: $\vec F_p$ è la somma di $\vec F_{px}$ e $\vec F_{py}$.</p>
+<svg id="g-piano" viewBox="0 20 470 270" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forze su un blocco appoggiato su un piano inclinato e le stesse forze riportate sugli assi ruotati"></svg>
+<div class="cursore"><label for="cur-a">inclinazione</label><input id="cur-a" type="range" min="20" max="50" step="1" value="30"><span class="val" id="val-a"></span></div>
+<p class="did">A sinistra il blocco di massa 1 kg con le forze applicate ($\mu=0{,}30$), a destra gli stessi vettori sugli assi $x'$ e $y'$: il peso è la somma delle sue due componenti.</p>
 </div>
 
 <h2>Equazioni del moto lungo il piano</h2>
-
-<p>Le componenti si leggono dal triangolo rettangolo che $\vec F_p$ forma con
-$\vec F_{px}$ e $\vec F_{py}$, dove $\alpha$ è lo stesso angolo del piano:</p>
-
-$$F_{px}=mg\sin\alpha \qquad F_{py}=mg\cos\alpha$$
-
-<p>Lungo $y'$ l'oggetto non si muove: la normale equilibra $F_{py}$, cioè
-$F_N=F_{py}=mg\cos\alpha$, e l'attrito dipende dalla normale tramite il
-coefficiente $\mu$:</p>
-
-$$F_{at}=\mu F_N=\mu mg\cos\alpha$$
-
-<p>Lungo $x'$ agiscono $F_{px}$ verso il basso e $F_{at}$ verso l'alto, opposto
-allo scivolamento: la loro somma è la forza totale, uguale a $ma$:</p>
-
-$$F_{TOT}=F_{px}-F_{at}=mg\sin\alpha-\mu mg\cos\alpha=ma$$
-
-<p>Semplificando la massa resta l'accelerazione di scivolamento:</p>
-
-$$a=g(\sin\alpha-\mu\cos\alpha)$$
+<p>L'angolo fra $\vec F_p$ e $\vec F_{py}$ è uguale all'angolo $\alpha$ di inclinazione del piano. Dal triangolo rettangolo formato dal peso e dalle sue componenti si ricava:</p>
+<p class="eq">$$F_{px}=mg\sin\alpha\qquad\quad F_{py}=mg\cos\alpha$$</p>
+<p>Lungo l'asse $y'$ l'oggetto non si muove, quindi la forza normale equilibra $F_{py}$. L'attrito è proporzionale alla forza normale secondo il coefficiente di attrito $\mu$:</p>
+<p class="eq">$$F_N=F_{py}=mg\cos\alpha\qquad\quad F_{at}=\mu F_N=\mu mg\cos\alpha$$</p>
+<p>Lungo l'asse $x'$ agiscono $F_{px}$, verso il basso, e $F_{at}$, verso l'alto, cioè opposta allo scivolamento. La loro differenza è la forza totale, che per la seconda legge della dinamica è uguale a $ma$:</p>
+<p class="eq">$$F_{TOT}=F_{px}-F_{at}=mg\sin\alpha-\mu mg\cos\alpha=ma$$</p>
+<p>Dividendo entrambi i membri per la massa $m$ si ottiene l'accelerazione dell'oggetto lungo il piano, che non dipende dalla massa.</p>
+<p class="eq principio">$$a=g(\sin\alpha-\mu\cos\alpha)$$</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Il risultato vale mentre l'oggetto scivola verso il basso lungo il piano, perché solo in questo caso l'attrito è diretto verso l'alto.</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../27-diagramma-di-corpo-libero-e-caduta-libera/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Diagramma di corpo libero e caduta libera</span></a><a class="successiva" href="../29-oggetti-a-contatto/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Oggetti a contatto</span></a></nav>
 <footer><p>Fisica seconda &middot; Dinamica &middot; Unità 18</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  /* ---------- piano inclinato: forze calcolate al variare dell'angolo ---------- */
+  (function(){
+    var svg=document.getElementById('g-piano'),cur=document.getElementById('cur-a'),val=document.getElementById('val-a');if(!svg)return;
+    var g=9.81, m=1, mu=0.30, K=66/(m*g);            /* il peso è lungo 66 unità */
+    var defs=el(svg,'defs',{});
+    function freccia(id,col){var mk=el(defs,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3.5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,0 L7,3.5 L0,7 Z',fill:col});}
+    freccia('u18r','var(--rosso)');freccia('u18v','var(--verde)');freccia('u18b','var(--blu)');freccia('u18k','var(--inchiostro)');
+    var sotto=el(svg,'g',{}),vett=el(svg,'g',{}),testo=el(svg,'g',{});
+    var piano=el(sotto,'polygon',{fill:'#eeebe3',stroke:'var(--inchiostro)','stroke-width':1.4});
+    var arco=el(sotto,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1});
+    var lalfa=el(testo,'text',{'font-size':13,'font-family':'sans-serif','font-style':'italic',fill:'var(--inchiostro)','text-anchor':'middle'});lalfa.textContent='α';
+    var blocco=el(sotto,'rect',{x:-17,y:-11,width:34,height:22,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+    var assex=el(sotto,'line',{stroke:'var(--inchiostro)','stroke-width':1.1,'marker-end':'url(#u18k)'});
+    var assey=el(sotto,'line',{stroke:'var(--inchiostro)','stroke-width':1.1,'marker-end':'url(#u18k)'});
+    function lab(s,col,it){var t=el(testo,'text',{'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':'middle',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'});var p=s.split('_');t.appendChild(document.createTextNode(p[0]));if(p[1]){var u=el(t,'tspan',{'font-size':10,dy:3});u.textContent=p[1];}return t;}
+    var lx=lab("x′",'var(--inchiostro)'),ly=lab("y′",'var(--inchiostro)');
+    var cp1=el(sotto,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}),cp2=el(sotto,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    var arco2=el(sotto,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1});
+    var lalfa2=el(testo,'text',{'font-size':12,'font-family':'sans-serif','font-style':'italic',fill:'var(--inchiostro)','text-anchor':'middle'});lalfa2.textContent='α';
+    var nomi=[['F_p','var(--rosso)','u18r',2.4,''],['F_px','var(--rosso)','u18r',2,'5 3'],['F_py','var(--rosso)','u18r',2,'5 3'],['F_N','var(--verde)','u18v',2.4,''],['F_at','var(--blu)','u18b',2.4,'']];
+    function serie(){return nomi.map(function(n){return {l:el(vett,'line',{stroke:n[1],'stroke-width':n[3],'stroke-dasharray':n[4],'marker-end':'url(#'+n[2]+')'}),t:lab(n[0],n[1])};});}
+    var A=serie(),B=serie();
+    function metti(v,o,w,p,k){var x2=o[0]+w[0],y2=o[1]+w[1];v.l.setAttribute('x1',o[0]);v.l.setAttribute('y1',o[1]);v.l.setAttribute('x2',x2);v.l.setAttribute('y2',y2);
+      var L=Math.hypot(w[0],w[1])||1,ux=w[0]/L,uy=w[1]/L;k=(k==null)?8:k;v.t.setAttribute('x',x2+ux*k+p[0]*16);v.t.setAttribute('y',y2+uy*k+p[1]*16+5);}
+    function disegna(){
+      var a=+cur.value*Math.PI/180,s=Math.sin(a),c=Math.cos(a);
+      var xR=250,yB=262,Lp=225,xL=xR-Lp*c,yT=yB-Lp*s;
+      piano.setAttribute('points',xL+','+yT+' '+xL+','+yB+' '+xR+','+yB);
+      var r=26;arco.setAttribute('d','M'+(xR-r)+','+yB+' A'+r+','+r+' 0 0 1 '+(xR-r*c)+','+(yB-r*s));
+      lalfa.setAttribute('x',xR-38*Math.cos(a/2));lalfa.setAttribute('y',yB-38*Math.sin(a/2)+5);
+      var d=[c,s],n=[s,-c];                            /* d: lungo il piano verso il basso; n: normale uscente */
+      var P=[xR-Lp*0.5*c,yB-Lp*0.5*s],C=[P[0]+11*n[0],P[1]+11*n[1]];
+      blocco.setAttribute('transform','translate('+C[0]+','+C[1]+') rotate('+(a*180/Math.PI)+')');
+      var Fp=m*g,Fpx=Fp*s,Fpy=Fp*c,FN=Fpy,Fat=mu*FN;
+      var w=[[0,K*Fp],[K*Fpx*d[0],K*Fpx*d[1]],[-K*Fpy*n[0],-K*Fpy*n[1]],[K*FN*n[0],K*FN*n[1]],[-K*Fat*d[0],-K*Fat*d[1]]];
+      /* pannello sinistro */
+      var md=[-d[0],-d[1]];
+      if(a<0.5)metti(A[0],C,w[0],[1,0],2);else if(a<0.66)metti(A[0],C,w[0],[1,0],-26);else metti(A[0],C,w[0],[-1.1,0],-14);metti(A[1],C,w[1],[n[0]*.8,n[1]*.8],12);metti(A[2],C,w[2],md);var ty=C[1]+w[2][1];if(ty<yB+3){A[2].t.setAttribute('x',C[0]+w[2][0]-20);A[2].t.setAttribute('y',Math.min(ty-2,yB-10));}metti(A[3],C,w[3],d);metti(A[4],C,w[4],[n[0]*1.3,n[1]*1.3],14);
+      /* pannello destro: assi ruotati */
+      var O=[350,132];
+      assex.setAttribute('x1',O[0]-30*d[0]);assex.setAttribute('y1',O[1]-30*d[1]);assex.setAttribute('x2',O[0]+105*d[0]);assex.setAttribute('y2',O[1]+105*d[1]);
+      assey.setAttribute('x1',O[0]-95*n[0]);assey.setAttribute('y1',O[1]-95*n[1]);assey.setAttribute('x2',O[0]+90*n[0]);assey.setAttribute('y2',O[1]+90*n[1]);
+      lx.setAttribute('x',O[0]+120*d[0]);lx.setAttribute('y',O[1]+120*d[1]+4);ly.setAttribute('x',O[0]+104*n[0]);ly.setAttribute('y',O[1]+104*n[1]+4);
+      metti(B[0],O,w[0],[1,0],2);metti(B[1],O,w[1],n);metti(B[2],O,w[2],md);metti(B[3],O,w[3],d);metti(B[4],O,w[4],n);
+      var T=[O[0]+w[0][0],O[1]+w[0][1]];
+      cp1.setAttribute('x1',O[0]+w[1][0]);cp1.setAttribute('y1',O[1]+w[1][1]);cp1.setAttribute('x2',T[0]);cp1.setAttribute('y2',T[1]);
+      cp2.setAttribute('x1',O[0]+w[2][0]);cp2.setAttribute('y1',O[1]+w[2][1]);cp2.setAttribute('x2',T[0]);cp2.setAttribute('y2',T[1]);
+      /* angolo α fra il peso e la componente perpendicolare */
+      var r2=30,e=[-n[0],-n[1]];
+      arco2.setAttribute('d','M'+(O[0]+r2*e[0])+','+(O[1]+r2*e[1])+' A'+r2+','+r2+' 0 0 0 '+O[0]+','+(O[1]+r2));
+      var bis=[(e[0]+0)/2,(e[1]+1)/2],bl=Math.hypot(bis[0],bis[1]);
+      lalfa2.setAttribute('x',O[0]+40*bis[0]/bl);lalfa2.setAttribute('y',O[1]+40*bis[1]/bl+4);
+      var acc=g*(s-mu*c);
+      val.innerHTML='α = '+Math.round(a*180/Math.PI)+'° &nbsp; F<sub>px</sub> = '+num(Fpx,2)+' N &nbsp; F<sub>at</sub> = '+num(Fat,2)+' N &nbsp; a = <span class="ok">'+num(acc,2)+' m/s²</span>';
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

@@ -128,6 +128,7 @@ La statica dei fluidi (unità 01–08, pagine 1–17 degli appunti) è stata spo
   (perché l'attrito si oppone allo scivolamento, perché la normale eguaglia F_py).
   Nessun esempio numerico, nessuna tabella: la traccia stessa ne è priva. Verificato
   con SymPy che a = g(sinα - μcosα) risolve correttamente mg·sinα - μmg·cosα = ma.
+- Revisione: (07/10/2026) titolo invariato. Tolto il sommario dell'intestazione; introduzione di una frase; titoletti «Scomposizione del peso sul piano» e «Equazioni del moto lungo il piano» tenuti; frasi complete con collegamento fra i passaggi (perché l'angolo fra peso e componente perpendicolare è α, perché si divide per m); formule in riquadri azzurri, risultato a = g(sinα − μcosα) in riquadro rosso. Controllo concettuale: aggiunta la nota «il risultato vale mentre l'oggetto scivola verso il basso, perché solo così l'attrito è diretto verso l'alto»; riverificata la formula (a 30° con μ = 0,30: 2,36 m/s²). Impaginazione a quaderno (stile e script dall'unità 17). Figura ridisegnata da script e resa interattiva: cursore sull'inclinazione (20°–50°) che ricalcola piano, blocco e forze in scala (massa 1 kg, μ = 0,30), con i vettori riportati sugli assi ruotati, i tratteggi che mostrano il peso come somma delle componenti e l'angolo α fra peso e componente perpendicolare; a fianco del cursore F_px, F_at e a. Nessun esempio (la traccia non ne ha), nessuna figura decorativa.
 
 ## Unità 19 — Oggetti a contatto
 - Parole: 472 su circa 2,5 pagine di traccia (fine pag. 51 – pag. 53)
