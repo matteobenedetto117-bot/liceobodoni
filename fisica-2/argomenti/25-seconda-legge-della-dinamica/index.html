@@ -5,18 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Seconda legge della dinamica — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.definizione{background:#fff;border-left:3px solid var(--rosso);border-radius:0 8px 8px 0;padding:14px 20px;margin:22px 0}
-.esempio{background:#f7f9fb;border-radius:10px;padding:16px 20px;margin:22px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -26,97 +55,112 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Dinamica &middot; Unità 15</p>
   <h1>Seconda legge della dinamica</h1>
-  <p class="sommario">La prima legge dice che cosa succede quando le forze si bilanciano.
-  La seconda legge di Newton risponde al caso generale: lega in modo quantitativo la forza
-  risultante applicata a un corpo, la sua massa e l'accelerazione che ne risulta.</p>
 </header>
 
-<h2>Forza, massa e accelerazione</h2>
+<p>L'unità presenta la seconda legge della dinamica, che lega la forza risultante applicata a un corpo, la massa del corpo e la sua accelerazione.</p>
 
-<p>Consideriamo un blocco su un piano senza attrito, spinto da una forza $\vec F$: acquista
-un'accelerazione $\vec a$. Se raddoppiamo la forza, a parità di massa, l'accelerazione
-raddoppia. Se invece dimezziamo la massa del blocco e applichiamo la stessa forza $\vec F$,
-l'accelerazione raddoppia lo stesso: una massa minore risponde di più alla stessa forza.</p>
+<h2>Forza, massa e accelerazione</h2>
+<p>Si consideri un blocco appoggiato su un piano senza attrito e spinto da una forza $\vec F$: il blocco acquista un'accelerazione $\vec a$.</p>
+<ul>
+<li>Se si raddoppia la forza e la massa resta la stessa, l'accelerazione raddoppia: l'accelerazione è direttamente proporzionale alla forza.</li>
+<li>Se si dimezza la massa e la forza resta la stessa, l'accelerazione raddoppia ugualmente: l'accelerazione è inversamente proporzionale alla massa.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 660 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u25fr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="u25fv" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-
-<rect x="30" y="90" width="70" height="50" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="65" y="120" font-size="13" text-anchor="middle" font-family="var(--sans)">m</text>
-<line x1="100" y1="140" x2="220" y2="140" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="115" y1="80" x2="160" y2="80" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#u25fr)"/>
-<text x="118" y="70" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F</text>
-<line x1="115" y1="60" x2="140" y2="60" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u25fv)"/>
-<text x="118" y="50" font-size="13" fill="var(--verde)" font-family="var(--sans)">a</text>
-<text x="20" y="165" font-size="11" fill="var(--grigio)" font-family="var(--sans)">no attrito</text>
-
-<rect x="260" y="90" width="70" height="50" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="295" y="120" font-size="13" text-anchor="middle" font-family="var(--sans)">m</text>
-<line x1="330" y1="140" x2="450" y2="140" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="345" y1="80" x2="425" y2="80" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#u25fr)"/>
-<text x="348" y="70" font-size="13" fill="var(--rosso)" font-family="var(--sans)">2F</text>
-<line x1="345" y1="60" x2="405" y2="60" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u25fv)"/>
-<text x="348" y="50" font-size="13" fill="var(--verde)" font-family="var(--sans)">2a</text>
-<text x="250" y="165" font-size="11" fill="var(--grigio)" font-family="var(--sans)">no attrito</text>
-
-<rect x="500" y="102" width="70" height="26" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="535" y="119" font-size="13" text-anchor="middle" font-family="var(--sans)">m/2</text>
-<line x1="570" y1="128" x2="620" y2="128" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="515" y1="80" x2="560" y2="80" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#u25fr)"/>
-<text x="518" y="70" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F</text>
-<line x1="515" y1="60" x2="575" y2="60" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u25fv)"/>
-<text x="518" y="50" font-size="13" fill="var(--verde)" font-family="var(--sans)">2a</text>
-<text x="490" y="165" font-size="11" fill="var(--grigio)" font-family="var(--sans)">no attrito</text>
-</svg>
-<p class="did">A parità di massa, raddoppiare la forza raddoppia l'accelerazione (al centro).
-A parità di forza, dimezzare la massa raddoppia ugualmente l'accelerazione (a destra): forza
-e accelerazione sono direttamente proporzionali, massa e accelerazione inversamente
-proporzionali.</p>
+<svg id="g-fma" viewBox="0 0 420 250" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forza, massa e accelerazione di due blocchi"></svg>
+<div class="cursore"><label for="cur-f">forza</label><input id="cur-f" type="range" min="1" max="6" step="1" value="4"></div>
+<div class="cursore"><label for="cur-m">massa</label><input id="cur-m" type="range" min="1" max="4" step="1" value="2"></div>
+<div class="cursore"><span class="val" id="val-fma"></span></div>
+<p class="did">In alto il blocco di riferimento, di massa $m_0$, spinto dalla forza $F_0$ con accelerazione $a_0$; in basso un blocco di cui si possono cambiare la forza e la massa.</p>
 </div>
 
-<p>Questa proporzionalità doppia si scrive in un'unica legge vettoriale:</p>
-
-<div class="formula-box">
-$$\vec F_{TOT}=m\,\vec a$$
+<p>Le due proporzionalità si riassumono in un'unica legge vettoriale.</p>
+<div class="def"><span class="et">Seconda legge della dinamica</span>
+<p>La forza risultante applicata a un corpo è uguale al prodotto della massa del corpo per la sua accelerazione.</p>
+<p class="eq principio">$$\vec F_{TOT}=m\,\vec a$$</p>
+<p>$\vec F_{TOT}$ è la somma vettoriale di tutte le forze applicate al corpo, $m$ è la sua massa e $\vec a$ la sua accelerazione.</p>
 </div>
-
-<p>$\vec F_{TOT}$ è la somma vettoriale di tutte le forze applicate al corpo, $m$ è la sua
-massa e $\vec a$ l'accelerazione risultante. L'accelerazione ha sempre la stessa direzione e
-lo stesso verso della forza risultante, perché $m$ è un numero positivo.</p>
+<p>Poiché la massa è un numero positivo, l'accelerazione ha sempre la stessa direzione e lo stesso verso della forza risultante.</p>
 
 <h2>Il newton</h2>
-
-<p>Dalle unità di misura di forza, massa e accelerazione, $[F]=\text{N}$, $[m]=\text{kg}$,
-$[a]=\text{m/s}^2$, e dalla legge $\vec F_{TOT}=m\vec a$ segue la relazione fra le unità:</p>
-
-<div class="formula-box">
-$$[F]=[m]\cdot[a] \quad\Rightarrow\quad 1\ \text{N}=1\ \text{kg}\cdot 1\ \frac{\text{m}}{\text{s}^2}
-=1\ \frac{\text{kg}\cdot\text{m}}{\text{s}^2}$$
+<p>Dalla seconda legge si ricava la relazione fra l'unità di misura della forza, il newton, e le unità di misura della massa e dell'accelerazione.</p>
+<p class="eq">$$[F]=[m]\cdot[a]\quad\Rightarrow\quad 1\ \text{N}=1\ \text{kg}\cdot1\ \frac{\text{m}}{\text{s}^2}=1\ \frac{\text{kg}\cdot\text{m}}{\text{s}^2}$$</p>
+<div class="def"><span class="et">Newton</span>
+<p>Un newton è la forza che imprime a un corpo di massa $1\ \text{kg}$ un'accelerazione di $1\ \text{m/s}^2$.</p>
 </div>
 
-<div class="definizione">
-<p><strong>Un newton</strong> è la forza da imprimere a un corpo di massa $1\ \text{kg}$ per
-accelerarlo di $1\ \text{m/s}^2$.</p>
-</div>
-
-<h2>Il caso particolare $\vec F_{TOT}=0$</h2>
-
-<p>Se la forza risultante è nulla, la legge $\vec F_{TOT}=m\vec a$ dà $\vec a=0$: il corpo
-resta fermo oppure mantiene una velocità costante. Ritroviamo così il principio d'inerzia,
-cioè la prima legge della dinamica: è il caso particolare della seconda legge in cui la forza
-risultante si annulla.</p>
+<h2>Forza risultante nulla</h2>
+<p>Se la forza risultante è nulla, dalla legge $\vec F_{TOT}=m\,\vec a$ si ottiene $\vec a=0$: il corpo resta fermo oppure si muove con velocità costante.</p>
+<p>Si ritrova così ciò che afferma il principio d'inerzia, cioè la prima legge della dinamica.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../24-prima-legge-della-dinamica-e-sistemi-di-riferimento/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Prima legge della dinamica e sistemi di riferimento</span></a><a class="successiva" href="../26-terza-legge-della-dinamica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Terza legge della dinamica</span></a></nav>
 <footer><p>Fisica seconda &middot; Dinamica &middot; Unità 15</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  function mcd(a,b){return b?mcd(b,a%b):a;}
+  /* multiplo n/d di una grandezza di riferimento: "2F₀", "F₀/2", "3a₀/2" */
+  function mult(n,d,s){var g=mcd(n,d);n/=g;d/=g;return (n===1?'':n)+s+(d===1?'':'/'+d);}
+  /* ---------- seconda legge: a = F/m; F = i·F₀/2, m = j·m₀/2, quindi a = (i/j)·a₀ ---------- */
+  (function(){
+    var svg=document.getElementById('g-fma'),cf=document.getElementById('cur-f'),cm=document.getElementById('cur-m'),val=document.getElementById('val-fma');if(!svg)return;
+    var defs=el(svg,'defs',{});
+    function freccia(id,col){var m=el(defs,'marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+    freccia('u15f','var(--rosso)');freccia('u15a','var(--verde)');
+    var x0=40, H=40, LM=60, LF=30, LA=30;   /* 1 m₀ = 60 di larghezza; 1 F₀ = 30; 1 a₀ = 30 */
+    function riga(yb,etichetta){
+      el(svg,'line',{x1:20,y1:yb,x2:400,y2:yb,stroke:'var(--inchiostro)','stroke-width':1.4});
+      for(var i=0;i<19;i++)el(svg,'line',{x1:30+i*20,y1:yb,x2:22+i*20,y2:yb+8,stroke:'var(--grigio)','stroke-width':1});
+      var r={blocco:el(svg,'rect',{x:x0,y:yb-H,height:H,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8}),
+        m:txt(svg,0,yb-15,'',{"font-size":11,fill:'var(--inchiostro)','font-style':'italic'}),
+        f:el(svg,'line',{y1:yb-H/2,y2:yb-H/2,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#u15f)'}),
+        fl:txt(svg,0,yb-H/2+4,'',{fill:'var(--rosso)','font-style':'italic','text-anchor':'start'}),
+        a:el(svg,'line',{y1:yb-H-16,y2:yb-H-16,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#u15a)'}),
+        al:txt(svg,0,yb-H-12,'',{fill:'var(--verde)','font-style':'italic','text-anchor':'start'})};
+      if(etichetta)txt(svg,400,yb-H-30,etichetta,{'font-size':11,'text-anchor':'end'});
+      return r;
+    }
+    function metti(r,i,j){
+      var w=LM*j/2, xe=x0+w, lf=LF*i/2, la=LA*i/j;
+      r.blocco.setAttribute('width',w);
+      r.m.setAttribute('x',x0+w/2);r.m.textContent=mult(j,2,'m₀');
+      r.f.setAttribute('x1',xe);r.f.setAttribute('x2',xe+lf-5);
+      r.fl.setAttribute('x',xe+lf+6);r.fl.textContent=mult(i,2,'F₀');
+      r.a.setAttribute('x1',x0);r.a.setAttribute('x2',x0+la-5);
+      r.al.setAttribute('x',x0+la+6);r.al.textContent=mult(i,j,'a₀');
+    }
+    var rif=riga(100,'riferimento'), var2=riga(220,'');
+    metti(rif,2,2);
+    function disegna(){
+      var i=+cf.value,j=+cm.value;metti(var2,i,j);
+      var r=i/j, nota=r===1?'stessa accelerazione':(r===2?'accelerazione doppia':'');
+      val.innerHTML='F = '+mult(i,2,'F₀')+' &nbsp; m = '+mult(j,2,'m₀')+' &nbsp; a = '+mult(i,j,'a₀')+(nota&&!(i===2&&j===2)?' &nbsp; <span class="ok">'+nota+'</span>':'');
+    }
+    function cambia(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();}
+    cf.addEventListener('input',cambia);cm.addEventListener('input',cambia);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
