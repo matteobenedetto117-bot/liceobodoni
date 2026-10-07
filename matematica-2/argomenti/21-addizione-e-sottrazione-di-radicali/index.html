@@ -5,16 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Addizione e sottrazione di radicali — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.nota{background:#fdf6ec;border:1px solid #e7d9b8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.foglio>.tabellina{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.no{color:var(--rosso)}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:16px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.due-svg{grid-template-columns:1fr}}
+.tabellina{width:100%;border-collapse:collapse;font-size:.96rem;background:#fff}
+.tabellina th,.tabellina td{border-bottom:1px solid var(--riga);padding:0 10px;height:var(--r);line-height:var(--r);text-align:left}
+.tabellina th{font-family:var(--sans);font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -24,44 +60,56 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Radicali &middot; Unità 18</p>
   <h1>Addizione e sottrazione di radicali</h1>
-  <p class="sommario">Con i monomi simili sappiamo sommare i coefficienti. Con i radicali la
-  tentazione è di fare qualcosa di simile sotto un unico segno di radice, ma il conto smentisce
-  subito questa scorciatoia: vediamo quando si può davvero sommare o sottrarre.</p>
 </header>
 
-<h2>Perché non si sommano i radicandi</h2>
-<p>Proviamo con $\sqrt{25}+\sqrt9$. Calcolato radicale per radicale vale $5+3=8$. Se invece
-sommassimo prima i radicandi otterremmo $\sqrt{25+9}=\sqrt{34}\approx5{,}83$: un numero diverso
-da $8$.</p>
+<p>L'unità spiega quando due radicali si possono sommare o sottrarre.</p>
 
-<div class="nota">
-<strong>Attenzione:</strong> la somma di due radicali non è la radice della somma dei radicandi,
-nemmeno quando l'indice è lo stesso. $\sqrt{25}+\sqrt9\neq\sqrt{25+9}$.
+<h2>Perché non si sommano i radicandi</h2>
+<p>Si consideri la somma $\sqrt{25}+\sqrt9$. Calcolando ciascun radicale separatamente si ottiene $8$.</p>
+<p class="eq">$$\sqrt{25}+\sqrt9=5+3=8$$</p>
+<p>Se invece si sommassero prima i radicandi, si otterrebbe un numero diverso da $8$.</p>
+<p class="eq">$$\sqrt{25+9}=\sqrt{34}\approx5{,}83$$</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>La somma di due radicali non è uguale alla radice della somma dei radicandi, nemmeno quando l'indice è lo stesso: $\sqrt{25}+\sqrt9\neq\sqrt{25+9}$.</p>
 </div>
 
 <h2>Radicali simili</h2>
-<p>In generale i radicali non si possono sommare né sottrarre, nemmeno con lo stesso indice. Gli
-unici che si possono sommare o sottrarre sono i <strong>radicali simili</strong>: quelli con lo
-stesso indice e lo stesso radicando. In quel caso si sommano o sottraggono i coefficienti che li
-moltiplicano, come per i monomi simili.</p>
-
-<div class="esempio">
-<p>$3\sqrt2+5\sqrt2=8\sqrt2$</p>
-<p>Radicali simili: stesso indice ($2$) e stesso radicando ($2$), quindi si sommano i coefficienti
-$3$ e $5$.</p>
+<div class="def"><span class="et">Radicali simili</span>
+<p>Due radicali si dicono simili se hanno lo stesso indice e lo stesso radicando.</p>
 </div>
+<p>In generale i radicali non si possono sommare né sottrarre, nemmeno quando hanno lo stesso indice. Si possono sommare o sottrarre soltanto i radicali simili: in questo caso si sommano o si sottraggono i coefficienti che li moltiplicano, come si fa con i monomi simili.</p>
 
-<div class="esempio">
-<p>$4\sqrt3-\sqrt[3]{3}+6\sqrt3+5\sqrt[3]{3}=10\sqrt3+4\sqrt[3]{3}$</p>
-<p>Qui ci sono due famiglie di radicali simili: quelli in $\sqrt3$ (indice $2$) e quelli in
-$\sqrt[3]{3}$ (indice $3$), pur avendo lo stesso radicando. Si raggruppano separatamente, e il
-risultato resta la somma di due termini distinti.</p>
-</div>
+<h2>Esempio 1</h2>
+<p>I due radicali sono simili, perché hanno lo stesso indice $2$ e lo stesso radicando $2$. Si sommano quindi i coefficienti $3$ e $5$.</p>
+<p class="eq">$$3\sqrt2+5\sqrt2=(3+5)\sqrt2=8\sqrt2$$</p>
 
+<h2>Esempio 2</h2>
+<p>Nell'espressione compaiono due gruppi di radicali simili: quelli in $\sqrt3$, di indice $2$, e quelli in $\sqrt[3]{3}$, di indice $3$. I due gruppi hanno lo stesso radicando ma indice diverso, quindi non sono simili fra loro.</p>
+<p class="eq">$$4\sqrt3-\sqrt[3]{3}+6\sqrt3+5\sqrt[3]{3}$$</p>
+<p>Si raggruppano i radicali simili e si sommano i coefficienti di ciascun gruppo.</p>
+<p class="eq">$$(4+6)\sqrt3+(-1+5)\sqrt[3]{3}=10\sqrt3+4\sqrt[3]{3}$$</p>
+<p>Il risultato è la somma di due termini che non si possono sommare ulteriormente.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../20-potenza-di-un-radicale-e-radice-di-un-radicale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Potenza di un radicale e radice di un radicale</span></a><a class="successiva" href="../22-razionalizzazione-del-denominatore/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Razionalizzazione del denominatore</span></a></nav>
 <footer><p>Matematica seconda &middot; Radicali &middot; Unità 18</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.fig,.nota,.def,.tabellina,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

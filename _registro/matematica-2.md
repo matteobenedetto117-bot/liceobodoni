@@ -166,6 +166,7 @@
 - Parole: 249 su 1 pagina di traccia (pagina 43)
 - Rettifica: la traccia riporta $\sqrt{34}\approx5{,}89$; il valore corretto, verificato con SymPy, è $\sqrt{34}\approx5{,}83$. Corretto in pagina senza segnalarlo al lettore. Tutto il resto (l'uguaglianza $\sqrt{25}+\sqrt9=8$, l'esempio $3\sqrt2+5\sqrt2=8\sqrt2$ e l'esempio $4\sqrt3-\sqrt[3]3+6\sqrt3+5\sqrt[3]3=10\sqrt3+4\sqrt[3]3$) è stato verificato con SymPy e risulta corretto così come in traccia.
 - Aggiunta: nessuna. Il riquadro di attenzione riprende l'annotazione "NO!" già presente in rosso nella traccia accanto al conto sbagliato.
+- Revisione: (07/10/2026) titolo invariato. Tolto il sommario dell'intestazione; introduzione di una frase; titoletti «Perché non si sommano i radicandi» e «Radicali simili» tenuti; il controesempio $\sqrt{25}+\sqrt9\neq\sqrt{25+9}$ in frasi complete con le due formule in riquadro azzurro e l'avvertenza nel riquadro .nota; la definizione di radicali simili nel riquadro .def; gli esempi raccolti in «Esempio 1» ($3\sqrt2+5\sqrt2=8\sqrt2$) ed «Esempio 2» ($4\sqrt3-\sqrt[3]3+6\sqrt3+5\sqrt[3]3=10\sqrt3+4\sqrt[3]3$), con il raggruppamento dei coefficienti scritto per esteso; nessun esempio tolto. Controllo concettuale: nessuna correzione; riverificati con SymPy $\sqrt{34}\approx5{,}83$ e i due risultati. Impaginazione a quaderno (stile e script dall'unità 17). Nessuna figura (la traccia non ne ha), nessuna figura decorativa.
 
 ## Unità 19 — Razionalizzazione del denominatore
 - Parole: 240 su 2 pagine di traccia (pagine 44–45)
