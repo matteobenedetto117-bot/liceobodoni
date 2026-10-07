@@ -5,22 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Derivabilità e punti di non derivabilità — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
-ol.passi{padding-left:1.3em}
-ol.passi li{margin:6px 0}
-.coppia{display:flex;flex-wrap:wrap;gap:24px;justify-content:center}
-.coppia svg{max-width:300px}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
 </style>
 </head>
 <body>
@@ -30,157 +90,385 @@ ol.passi li{margin:6px 0}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Derivate &middot; Unità 18</p>
   <h1>Derivabilità e punti di non derivabilità</h1>
-  <p class="sommario">Una funzione può essere continua in un punto senza avere lì una
-  derivata: il grafico non si stacca, ma non ha una tangente unica. Vediamo come si
-  definisce la derivabilità con le derivate laterali, il legame con la continuità, e come
-  si riconoscono e si classificano i punti in cui la derivata non esiste.</p>
 </header>
+
+<p>Questa unità definisce la derivabilità in un punto per mezzo delle derivate sinistra e destra, ne mostra il legame con la continuità e classifica i punti in cui una funzione continua non è derivabile.</p>
+
+<div class="barra-ris">
+<button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button>
+</div>
 
 <h2>Derivata sinistra e destra</h2>
 
-<p>Il rapporto incrementale ha un limite per $h\to0^-$ e uno per $h\to0^+$: se sono
-diversi, la funzione ha due pendenze diverse ai due lati del punto.</p>
+<p>Il rapporto incrementale di $f$ in $c$ può avere un limite per $h\to0^-$ e uno per $h\to0^+$. Se i due limiti sono diversi, il grafico ha due pendenze diverse ai due lati del punto.</p>
 
 <div class="def"><span class="et">Derivata sinistra e destra</span>
-<p>Data $f$ definita in un intorno di $c$,
-$$f'_-(c)=\lim_{h\to0^-}\frac{f(c+h)-f(c)}h, \qquad f'_+(c)=\lim_{h\to0^+}\frac{f(c+h)-f(c)}h.$$</p></div>
+<p>Sia $f$ definita in un intorno di $c$. La derivata sinistra e la derivata destra di $f$ in $c$ sono i limiti:</p>
+<p class="eq">$$f'_-(c)=\lim_{h\to0^-}\frac{f(c+h)-f(c)}h \qquad f'_+(c)=\lim_{h\to0^+}\frac{f(c+h)-f(c)}h$$</p>
+</div>
 
-<p>Per $f(x)=|x|=\begin{cases}-x & x&lt;0\\ x & x\ge0\end{cases}$ si trova $f'_-(0)=-1$ e
-$f'_+(0)=+1$: le due derivate laterali esistono ma non coincidono.</p>
+<p>Per $f(x)=|x|$ in $c=0$ il rapporto incrementale vale $\frac{|h|}h$, cioè $-1$ se $h&lt;0$ e $+1$ se $h&gt;0$. Le due derivate laterali esistono, ma non coincidono:</p>
+
+<p class="eq">$$f'_-(0)=-1 \qquad f'_+(0)=+1$$</p>
 
 <div class="def"><span class="et">Funzione derivabile in un punto</span>
-<p>$f$ è derivabile in $c$ se $f'_-(c)$ e $f'_+(c)$ esistono, sono finite e uguali fra
-loro; il valore comune è $f'(c)$. Per $f(x)=|x|$ in $x=0$ questo non accade.</p></div>
+<p>Una funzione $f$ è derivabile in $c$ se $f'_-(c)$ e $f'_+(c)$ esistono, sono finite e sono uguali fra loro. Il loro valore comune è la derivata $f'(c)$.</p>
+</div>
+
+<p>Per questo $f(x)=|x|$ non è derivabile in $x=0$.</p>
 
 <h2>Continuità e derivabilità</h2>
 
-<p>La derivabilità è più forte della continuità: implica la continuità, ma non vale il
-viceversa, come mostra $y=\sqrt[3]{x-1}$, continua ovunque.
-$$y'=\frac13(x-1)^{-2/3}=\frac1{3\sqrt[3]{(x-1)^2}}.$$
-Poiché $(x-1)^2\to0^+$ sia da destra sia da sinistra di $x=1$,
-$$\lim_{x\to1}\frac1{3\sqrt[3]{(x-1)^2}}=+\infty:$$
-la funzione non è derivabile in $x=1$ pur essendo continua; il grafico ha lì una tangente
-verticale.</p>
-
-<figure class="disegno">
-<svg viewBox="0 0 320 200" width="100%" style="max-width:360px">
-<line x1="15" y1="170" x2="305" y2="170" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="160" y1="190" x2="160" y2="10" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="298" y="164" font-size="11" fill="var(--inchiostro)">x</text>
-<text x="148" y="18" font-size="11" fill="var(--inchiostro)">y</text>
-<line x1="160" y1="10" x2="160" y2="190" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 40 30 C 100 90 145 108 160 112 C 175 116 220 130 280 165" fill="none" stroke="var(--blu)" stroke-width="2.2"/>
-<circle cx="160" cy="112" r="4" fill="var(--inchiostro)"/>
-<text x="168" y="105" font-size="10" fill="var(--inchiostro)">x=1</text>
-<text x="200" y="40" font-size="10" fill="var(--blu)">y=&#8731;(x-1)</text>
-</svg>
-<figcaption>Tangente verticale in $x=1$: la funzione è continua ma non derivabile.</figcaption>
-</figure>
-
 <div class="def"><span class="et">Teorema</span>
-<p>Se $f$ è derivabile in $x_0$, allora $f$ è continua in $x_0$.</p></div>
+<p>Se $f$ è derivabile in $x_0$, allora $f$ è continua in $x_0$.</p>
+</div>
 
-<figure class="disegno">
-<svg viewBox="0 0 300 170" width="100%" style="max-width:320px">
-<ellipse cx="150" cy="90" rx="130" ry="65" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<ellipse cx="150" cy="98" rx="68" ry="38" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="150" y="35" text-anchor="middle" font-size="12" fill="var(--blu)">CONTINUE</text>
-<text x="150" y="102" text-anchor="middle" font-size="12" fill="var(--inchiostro)">DERIVABILI</text>
-</svg>
-<figcaption>Le funzioni derivabili in un punto sono un sottoinsieme di quelle continue.</figcaption>
-</figure>
+<p>Il viceversa non vale: una funzione può essere continua in un punto senza essere derivabile. Un esempio è $y=\sqrt[3]{x-1}$, che è continua in tutto $\mathbb{R}$. La sua derivata è:</p>
+
+<p class="eq">$$y'=\frac13(x-1)^{-2/3}=\frac1{3\sqrt[3]{(x-1)^2}}$$</p>
+
+<p>Quando $x$ tende a $1$, sia da sinistra sia da destra, $(x-1)^2$ tende a $0^+$, quindi:</p>
+
+<p class="eq">$$\lim_{x\to1}\frac1{3\sqrt[3]{(x-1)^2}}=+\infty$$</p>
+
+<p>La funzione non è derivabile in $x=1$, pur essendo continua: in quel punto il grafico ha una tangente verticale.</p>
+
+<div class="fig">
+<svg id="g-radice" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Grafico di y uguale alla radice cubica di x meno 1 con la tangente nel punto mobile; avvicinandosi a x = 1 la tangente diventa sempre più ripida e in x = 1 è verticale"></svg>
+<div class="cursore"><label for="s-x">$x$</label>
+<input type="range" id="s-x" min="-1" max="3" step="0.02" value="-0.2">
+<span class="val" id="v-x"></span></div>
+<p class="did">Avvicinandosi a $x=1$ la tangente a $y=\sqrt[3]{x-1}$ diventa sempre più ripida; in $x=1$ è verticale.</p>
+</div>
+
+<div class="fig">
+<svg id="g-insiemi" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px" role="img"
+     aria-label="Insieme delle funzioni derivabili in un punto contenuto nell'insieme delle funzioni continue in quel punto"></svg>
+<p class="did">Le funzioni derivabili in un punto sono una parte delle funzioni continue in quel punto.</p>
+</div>
 
 <h2>Punti di non derivabilità</h2>
 
-<p>Per individuarli si procede in due passi.</p>
-<ol class="passi">
-<li>Si cercano i punti di discontinuità: sono automaticamente punti di non derivabilità.</li>
-<li>Si deriva la funzione e si cercano eventuali ulteriori discontinuità nella funzione
-derivata.</li>
-</ol>
+<p>Per individuare i punti in cui una funzione non è derivabile si procede in due passi:</p>
 
-<p>Studiamo $y=\dfrac{|x^2-4|}{x-2}+2x^2$. Il denominatore impone $x\ne2$: in $x=2$ la
-funzione non è definita, punto di singolarità, dunque non derivabile lì. Poiché
-$x^2-4\ge0 \iff x\le-2 \lor x\ge2$, il valore assoluto si scioglie in due rami:
-$$y=\begin{cases}\dfrac{-x^2+4}{x-2}+2x^2 & -2&lt;x&lt;2\\[4pt]
-\dfrac{x^2-4}{x-2}+2x^2 & x\le-2 \ \lor\ x&gt;2\end{cases}$$
-In $x=-2$ entrambi i rami valgono $8$: la funzione è continua lì. Semplificando (il
-fattore $x-2$ si cancella in entrambi i casi):
-$$y=\begin{cases}2x^2-x-2 & -2&lt;x&lt;2\\ 2x^2+x+2 & x\le-2 \ \lor\ x&gt;2\end{cases}
-\qquad\Longrightarrow\qquad
-y'=\begin{cases}4x-1 & -2&lt;x&lt;2\\ 4x+1 & x\le-2 \ \lor\ x&gt;2\end{cases}$$
-Le derivate laterali in $x=-2$ sono
-$$f'_+(-2)=\lim_{x\to-2^+}(4x-1)=-9, \qquad f'_-(-2)=\lim_{x\to-2^-}(4x+1)=-7:$$
-finite ma diverse, quindi $x=-2$ è un punto di non derivabilità pur essendo la funzione
-continua.</p>
+<ul>
+<li>si cercano i punti di discontinuità e quelli in cui la funzione non è definita, che sono sempre punti di non derivabilità;</li>
+<li>si calcola la derivata e si studiano i punti in cui la funzione è continua ma la derivata non esiste, confrontando le derivate laterali.</li>
+</ul>
 
-<h2>Classificazione dei punti di non derivabilità continui</h2>
+<h2>Esempio</h2>
 
-<p>Quando $f$ è continua ma non derivabile in $c$, il comportamento delle derivate
-laterali distingue tre casi.</p>
+<p>Si cercano i punti di non derivabilità della funzione seguente.</p>
 
-<figure class="disegno">
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 6px">1. Flesso a tangente verticale — $f'_-(c)=f'_+(c)=\pm\infty$, stesso segno</p>
-<div class="coppia">
-<svg viewBox="0 0 300 170"><line x1="15" y1="140" x2="290" y2="140" stroke="var(--inchiostro)" stroke-width="1.3"/><line x1="150" y1="160" x2="150" y2="15" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="150" y1="15" x2="150" y2="160" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 40 40 C 95 90 130 105 150 108 C 170 111 205 125 260 150" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="150" cy="108" r="4" fill="var(--inchiostro)"/>
-<text x="60" y="35" font-size="10" fill="var(--inchiostro)">f&#8242;&#8331;(c)=f&#8242;&#8330;(c)=+&#8734;</text>
-</svg>
-<svg viewBox="0 0 300 170"><line x1="15" y1="140" x2="290" y2="140" stroke="var(--inchiostro)" stroke-width="1.3"/><line x1="150" y1="160" x2="150" y2="15" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="150" y1="15" x2="150" y2="160" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 40 150 C 95 100 130 85 150 82 C 170 79 205 65 260 40" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="150" cy="82" r="4" fill="var(--inchiostro)"/>
-<text x="60" y="30" font-size="10" fill="var(--inchiostro)">f&#8242;&#8331;(c)=f&#8242;&#8330;(c)=-&#8734;</text>
-</svg>
+<div class="es">
+<p class="eq quesito">$$y=\frac{|x^2-4|}{x-2}+2x^2 \qquad \text{punti di non derivabilità?}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$x=2 \ \text{(fuori dal dominio)} \qquad x=-2:\ f'_-(-2)=-7,\ f'_+(-2)=-9$$</p>
 </div>
-<figcaption>Le due derivate laterali sono infinite e concordi: tangente verticale.</figcaption>
-</figure>
 
-<figure class="disegno">
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 6px">2. Cuspide — derivate laterali infinite e discordi</p>
-<div class="coppia">
-<svg viewBox="0 0 300 170"><line x1="15" y1="150" x2="290" y2="150" stroke="var(--inchiostro)" stroke-width="1.3"/><line x1="150" y1="160" x2="150" y2="15" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="150" y1="15" x2="150" y2="160" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 40 145 C 110 60 135 40 150 35 C 165 40 190 60 260 145" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="150" cy="35" r="4" fill="var(--inchiostro)"/>
-<text x="35" y="28" font-size="10" fill="var(--inchiostro)">f&#8242;&#8331;=+&#8734; f&#8242;&#8330;=-&#8734;</text>
-</svg>
-<svg viewBox="0 0 300 170"><line x1="15" y1="150" x2="290" y2="150" stroke="var(--inchiostro)" stroke-width="1.3"/><line x1="150" y1="160" x2="150" y2="15" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="150" y1="15" x2="150" y2="160" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 40 30 C 110 115 135 135 150 140 C 165 135 190 115 260 30" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="150" cy="140" r="4" fill="var(--inchiostro)"/>
-<text x="35" y="150" font-size="10" fill="var(--inchiostro)">f&#8242;&#8331;=-&#8734; f&#8242;&#8330;=+&#8734;</text>
-</svg>
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Il denominatore si annulla in $x=2$: lì la funzione non è definita.</p>
+<p class="eq">$$D:\ x\ne2$$</p>
 </div>
-<figcaption>Punta verso l'alto ($+\infty,-\infty$) o verso il basso ($-\infty,+\infty$).</figcaption>
-</figure>
-
-<figure class="disegno">
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 6px">3. Punto angoloso — $f'_-(c)\ne f'_+(c)$, entrambe finite oppure una sola infinita</p>
-<div class="coppia">
-<svg viewBox="0 0 300 170"><line x1="15" y1="140" x2="290" y2="140" stroke="var(--inchiostro)" stroke-width="1.3"/><line x1="150" y1="160" x2="150" y2="15" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="60" y1="150" x2="240" y2="100" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="60" y1="60" x2="240" y2="120" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 60 145 L 150 118 L 240 65" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="150" cy="118" r="4" fill="var(--inchiostro)"/>
-<text x="45" y="35" font-size="10" fill="var(--inchiostro)">entrambe finite</text>
-</svg>
-<svg viewBox="0 0 300 170"><line x1="15" y1="140" x2="290" y2="140" stroke="var(--inchiostro)" stroke-width="1.3"/><line x1="150" y1="160" x2="150" y2="15" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="150" y1="15" x2="150" y2="160" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 60 145 L 150 105 L 200 40" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="150" cy="105" r="4" fill="var(--inchiostro)"/>
-<text x="45" y="35" font-size="10" fill="var(--inchiostro)">una finita, l'altra infinita</text>
-</svg>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Si scioglie il valore assoluto: $x^2-4\ge0$ per $x\le-2 \lor x\ge2$.</p>
+<p class="eq">$$y=\begin{cases}\dfrac{-x^2+4}{x-2}+2x^2 & -2&lt;x&lt;2\\[4pt] \dfrac{x^2-4}{x-2}+2x^2 & x\le-2 \ \lor\ x&gt;2\end{cases}$$</p>
 </div>
-<figcaption>Le due tangenti laterali sono diverse: nessuna tangente unica nel punto.</figcaption>
-</figure>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> In entrambi i rami il fattore $x-2$ si semplifica.</p>
+<p class="eq">$$y=\begin{cases}2x^2-x-2 & -2&lt;x&lt;2\\ 2x^2+x+2 & x\le-2 \ \lor\ x&gt;2\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> In $x=-2$ i due rami valgono $8$: la funzione è continua.</p>
+<p class="eq">$$2(-2)^2-(-2)-2=8 \qquad 2(-2)^2+(-2)+2=8$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">5.</span> Si derivano i due rami, escluso il punto di raccordo $x=-2$.</p>
+<p class="eq">$$y'=\begin{cases}4x-1 & -2&lt;x&lt;2\\ 4x+1 & x&lt;-2 \ \lor\ x&gt;2\end{cases}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">6.</span> Le derivate laterali in $x=-2$ sono finite ma diverse: la funzione non è derivabile in $x=-2$.</p>
+<p class="eq">$$f'_-(-2)=\lim_{x\to-2^-}(4x+1)=-7 \qquad f'_+(-2)=\lim_{x\to-2^+}(4x-1)=-9$$</p>
+</div>
+</div>
 
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
+
+<h2>Classificazione dei punti di non derivabilità</h2>
+
+<p>Quando $f$ è continua in $c$ ma non è derivabile, le derivate laterali permettono di distinguere tre casi. Nelle figure il cursore riduce $h$ e le secanti verso $c-h$ e $c+h$ si avvicinano alle due tangenti laterali.</p>
+
+<h2>Flesso a tangente verticale</h2>
+
+<p>Le due derivate laterali sono infinite e hanno lo stesso segno: $f'_-(c)=f'_+(c)=+\infty$ oppure $f'_-(c)=f'_+(c)=-\infty$. In $c$ il grafico ha una tangente verticale.</p>
+
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-flesso1" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Flesso a tangente verticale con derivate laterali uguali a più infinito"></svg>
+<svg id="g-flesso2" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Flesso a tangente verticale con derivate laterali uguali a meno infinito"></svg>
+</div>
+<div class="cursore"><label for="s-h1">$h$</label>
+<input type="range" id="s-h1" min="0.02" max="1.5" step="0.01" value="1.2">
+<span class="val" id="v-h1"></span></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Derivate laterali entrambe uguali a $+\infty$.</p>
+<p class="did">Derivate laterali entrambe uguali a $-\infty$.</p>
+</div>
+</div>
+
+<h2>Cuspide</h2>
+
+<p>Le due derivate laterali sono infinite e hanno segni opposti. Se $f'_-(c)=+\infty$ e $f'_+(c)=-\infty$ la cuspide è rivolta verso l'alto; se $f'_-(c)=-\infty$ e $f'_+(c)=+\infty$ è rivolta verso il basso.</p>
+
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-cusp1" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Cuspide rivolta verso l'alto"></svg>
+<svg id="g-cusp2" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Cuspide rivolta verso il basso"></svg>
+</div>
+<div class="cursore"><label for="s-h2">$h$</label>
+<input type="range" id="s-h2" min="0.02" max="1.5" step="0.01" value="1.2">
+<span class="val" id="v-h2"></span></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Cuspide verso l'alto: $f'_-(c)=+\infty$ e $f'_+(c)=-\infty$.</p>
+<p class="did">Cuspide verso il basso: $f'_-(c)=-\infty$ e $f'_+(c)=+\infty$.</p>
+</div>
+</div>
+
+<h2>Punto angoloso</h2>
+
+<p>Le due derivate laterali sono diverse e almeno una delle due è finita: possono essere entrambe finite, oppure una finita e l'altra infinita. In $c$ il grafico ha due tangenti laterali distinte.</p>
+
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-ang1" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Punto angoloso con derivate laterali entrambe finite"></svg>
+<svg id="g-ang2" viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Punto angoloso con derivata sinistra finita e derivata destra infinita"></svg>
+</div>
+<div class="cursore"><label for="s-h3">$h$</label>
+<input type="range" id="s-h3" min="0.02" max="1.5" step="0.01" value="1.2">
+<span class="val" id="v-h3"></span></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Derivate laterali entrambe finite e diverse.</p>
+<p class="did">Derivata sinistra finita, derivata destra uguale a $+\infty$.</p>
+</div>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../18-tangenti-da-un-punto-esterno-e-angolo-fra-due-curve/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Tangenti da un punto esterno e angolo fra due curve</span></a><a class="successiva" href="../20-teorema-di-rolle/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema di Rolle</span></a></nav>
 <footer><p>Matematica quinta &middot; Derivate &middot; Unità 18</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+/* retta per (x0;y0) con pendenza m, aggiornabile */
+function retta(P,col,w,dash){var o={stroke:col,'stroke-width':w||1.8};if(dash)o['stroke-dasharray']=dash;return P.add(el('line',o),'sopra');}
+function poniRetta(P,r,x0,y0,m){var a=P.xr[0]-1,b=P.xr[1]+1;
+  r.setAttribute('x1',P.X(a));r.setAttribute('y1',P.Y(y0+m*(a-x0)));r.setAttribute('x2',P.X(b));r.setAttribute('y2',P.Y(y0+m*(b-x0)));}
+function sposta(P,c,x,y){c.setAttribute('cx',P.X(x));c.setAttribute('cy',P.Y(y));}
+
+/* ---------- y = radice cubica di (x - 1): tangente mobile ---------- */
+function cbrt(v){return v<0?-Math.pow(-v,1/3):Math.pow(v,1/3);}
+(function(){
+  var svg=document.getElementById('g-radice');
+  function f(x){return cbrt(x-1);} function fp(x){return 1/(3*Math.pow((x-1)*(x-1),1/3));}
+  var P=new Piano(svg,[-1.5,3.5],[-2,2],{l:26,r:24,t:22,b:22});
+  P.assi([-1,1,2,3],[-1,1],'x','y');
+  P.add(el('line',{x1:P.X(1),x2:P.X(1),y1:P.Y(2),y2:P.Y(-2),stroke:'var(--rosso)','stroke-width':1.2,'stroke-dasharray':'5,4'}),'sotto');
+  P.curva(f,-1.5,3.5,800,'var(--blu)');
+  P.add(txt(P.X(3.4),P.Y(1.62),'y = ∛(x − 1)',{fill:'var(--blu)','text-anchor':'end'}),'testo');
+  var r=retta(P,'var(--rosso)',1.8), pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-x'), v=document.getElementById('v-x');
+  function agg(){
+    var x=+sl.value, y=f(x);
+    sposta(P,pt,x,y);
+    if(Math.abs(x-1)<1e-9){
+      r.setAttribute('x1',P.X(1));r.setAttribute('x2',P.X(1));r.setAttribute('y1',P.Y(-3));r.setAttribute('y2',P.Y(3));
+      v.innerHTML='x = 1,00 &nbsp; y = 0,00 &nbsp; <span class="ok">tangente verticale</span>';
+    }else{
+      var m=fp(x); poniRetta(P,r,x,y,m);
+      v.innerHTML='x = '+num(x)+' &nbsp; y = '+num(y)+' &nbsp; y′ = '+num(m);
+    }
+  }
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+})();
+
+/* ---------- insiemi: derivabili dentro continue ---------- */
+(function(){
+  var svg=document.getElementById('g-insiemi');
+  svg.appendChild(el('ellipse',{cx:150,cy:88,rx:130,ry:68,fill:'none',stroke:'var(--blu)','stroke-width':1.6}));
+  svg.appendChild(el('ellipse',{cx:150,cy:102,rx:70,ry:38,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6}));
+  svg.appendChild(txt(150,46,'continue',{'text-anchor':'middle',fill:'var(--blu)','font-size':13}));
+  svg.appendChild(txt(150,106,'derivabili',{'text-anchor':'middle',fill:'var(--inchiostro)','font-size':13}));
+})();
+
+/* ---------- classificazione: secanti verso c - h e c + h ---------- */
+function pannello(id,f,yr,lab){
+  var svg=document.getElementById(id);
+  var P=new Piano(svg,[-2,2],yr,{l:16,r:18,t:22,b:30});
+  P.assi([],[],'x','y');
+  P.curva(f,-2,2,800,'var(--blu)');
+  pallino(P,0,f(0),true,'var(--inchiostro)');
+  P.add(txt(P.X(0)-6,P.Y(0)-6,'c',{'text-anchor':'end','fill':'var(--inchiostro)','font-style':'italic'}),'testo');
+  var s1=retta(P,'var(--rosso)',1.4,'5,4'), s2=retta(P,'var(--rosso)',1.4,'5,4');
+  var p1=pallino(P,0,0,true,'var(--rosso)'), p2=pallino(P,0,0,true,'var(--rosso)');
+  var t=P.add(txt(P.W/2,P.H-4,'',{'text-anchor':'middle','font-size':11}),'testo');
+  return function(h){
+    var y0=f(0), ms=(f(-h)-y0)/(-h), md=(f(h)-y0)/h;
+    poniRetta(P,s1,0,y0,ms); poniRetta(P,s2,0,y0,md);
+    sposta(P,p1,-h,f(-h)); sposta(P,p2,h,f(h));
+    t.textContent='rapporto sinistro '+num(ms,1)+' · destro '+num(md,1);
+  };
+}
+function gruppo(sid,vid,pannelli){
+  var sl=document.getElementById(sid), v=document.getElementById(vid);
+  function agg(){var h=+sl.value;pannelli.forEach(function(p){p(h);});
+    v.innerHTML='h = '+num(h)+(h<=0.02+1e-9?' &nbsp; <span class="ok">le secanti si avvicinano alle tangenti laterali</span>':'');}
+  sl.addEventListener('input',function(){agg();if(window.allineaQuaderno)allineaQuaderno();});agg();
+}
+gruppo('s-h1','v-h1',[pannello('g-flesso1',function(x){return cbrt(x);},[-1.6,1.6]),
+                      pannello('g-flesso2',function(x){return -cbrt(x);},[-1.6,1.6])]);
+gruppo('s-h2','v-h2',[pannello('g-cusp1',function(x){return 1-Math.sqrt(Math.abs(x));},[-0.6,1.6]),
+                      pannello('g-cusp2',function(x){return Math.sqrt(Math.abs(x))-0.6;},[-0.8,1.4])]);
+gruppo('s-h3','v-h3',[pannello('g-ang1',function(x){return x<0?0.4*x:1.5*x;},[-1.2,2]),
+                      pannello('g-ang2',function(x){return x<0?0.5*x:Math.sqrt(x);},[-1.2,1.6])]);
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
