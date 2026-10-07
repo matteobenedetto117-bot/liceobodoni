@@ -5,17 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Terza legge della dinamica — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.definizione{background:#fff;border-left:3px solid var(--rosso);border-radius:0 8px 8px 0;padding:14px 20px;margin:22px 0}
-.nota{background:#f7f9fb;border-radius:10px;padding:14px 20px;margin:22px 0;font-size:.96rem}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -25,57 +55,87 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Dinamica &middot; Unità 16</p>
   <h1>Terza legge della dinamica</h1>
-  <p class="sommario">Le prime due leggi riguardano un solo corpo. La terza descrive
-  che cosa succede quando due corpi interagiscono: ci servirà appena passeremo a oggetti
-  a contatto, collegati da una corda o appoggiati l'uno sull'altro.</p>
 </header>
 
+<p>L'unità presenta la terza legge della dinamica, che descrive le forze che due corpi si scambiano quando interagiscono.</p>
+
 <h2>Principio di azione e reazione</h2>
-
-<p>Ogni volta che un corpo esercita una forza su un secondo corpo, il secondo esercita a
-sua volta una forza sul primo, della stessa intensità e verso opposto. Le due forze non
-sono in successione: esistono insieme, nello stesso istante.</p>
-
-<div class="definizione">
-<p><strong>Terza legge di Newton (principio di azione e reazione).</strong> Se un
-oggetto 1 esercita una forza $\vec F$ sull'oggetto 2, l'oggetto 2 esercita
-sull'oggetto 1 una forza di uguale intensità e verso opposto, $-\vec F$.</p>
+<p>Quando un corpo esercita una forza su un secondo corpo, anche il secondo esercita una forza sul primo. Le due forze non si susseguono nel tempo: esistono insieme, nello stesso istante.</p>
+<div class="def"><span class="et">Terza legge della dinamica</span>
+<p>Se un oggetto 1 esercita una forza $\vec F$ su un oggetto 2, l'oggetto 2 esercita sull'oggetto 1 una forza $-\vec F$, che ha la stessa intensità e la stessa direzione di $\vec F$ ma verso opposto.</p>
+<p class="eq principio">$$\vec F_{2\,\text{su}\,1}=-\vec F_{1\,\text{su}\,2}$$</p>
+<p>Il segno meno indica soltanto il verso opposto: il modulo delle due forze è lo stesso.</p>
 </div>
 
-<p>Il segno meno in $-\vec F$ indica solo il verso opposto: il modulo è lo stesso. Le due
-forze agiscono però su corpi diversi, quindi non si annullano fra loro: nella somma
-$\vec F_{TOT}$ della seconda legge, scritta per un solo oggetto, compare soltanto la
-forza applicata a quell'oggetto, non la sua reazione sull'altro.</p>
+<h2>Forze applicate a corpi diversi</h2>
+<p>Le due forze sono applicate a corpi diversi: $\vec F$ agisce sull'oggetto 2, $-\vec F$ agisce sull'oggetto 1. Per questo motivo non si annullano fra loro.</p>
 
 <div class="fig">
-<svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u26fr" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="u26fv" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M7,0 L0,3.5 L7,7 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="30" y1="150" x2="370" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<rect x="130" y="90" width="70" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="165" y="125" font-size="14" text-anchor="middle" font-family="var(--sans)">1</text>
-<rect x="200" y="90" width="70" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="235" y="125" font-size="14" text-anchor="middle" font-family="var(--sans)">2</text>
-<line x1="205" y1="70" x2="255" y2="70" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#u26fr)"/>
-<text x="228" y="58" font-size="14" fill="var(--rosso)" text-anchor="middle" font-family="var(--sans)">F</text>
-<text x="228" y="86" font-size="11" fill="var(--grigio)" text-anchor="middle" font-family="var(--sans)">1 su 2</text>
-<line x1="195" y1="180" x2="145" y2="180" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#u26fv)"/>
-<text x="170" y="172" font-size="14" fill="var(--verde)" text-anchor="middle" font-family="var(--sans)">−F</text>
-<text x="170" y="198" font-size="11" fill="var(--grigio)" text-anchor="middle" font-family="var(--sans)">2 su 1</text>
-</svg>
-<p class="did">Due oggetti a contatto: la forza di 1 su 2 (rossa) e quella di 2 su 1
-(verde) hanno lo stesso modulo, verso opposto, e sono applicate a corpi diversi.</p>
+<svg id="g-ar" viewBox="0 55 400 150" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due blocchi a contatto e le forze che si scambiano"></svg>
+<div class="cursore"><label for="cur-ar">forza di 1 su 2</label><input id="cur-ar" type="range" min="6" max="20" step="1" value="12"><span class="val" id="val-ar"></span></div>
+<p class="did">Due blocchi a contatto: la forza dell'oggetto 1 sull'oggetto 2 e quella dell'oggetto 2 sull'oggetto 1 hanno sempre lo stesso modulo e verso opposto.</p>
+</div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Quando si applica la seconda legge a un solo oggetto, nella forza risultante $\vec F_{TOT}$ compaiono soltanto le forze applicate a quell'oggetto, non le reazioni che esso esercita sugli altri corpi.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../25-seconda-legge-della-dinamica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Seconda legge della dinamica</span></a><a class="successiva" href="../27-diagramma-di-corpo-libero-e-caduta-libera/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Diagramma di corpo libero e caduta libera</span></a></nav>
 <footer><p>Fisica seconda &middot; Dinamica &middot; Unità 16</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el(p,'text',Object.assign({x:x,y:y,'font-family':'sans-serif','font-size':13,fill:'var(--grigio)','text-anchor':'middle'},a||{}));e.textContent=s;return e;}
+  /* ---------- azione e reazione: due frecce di uguale modulo e verso opposto, applicate al contatto ---------- */
+  (function(){
+    var svg=document.getElementById('g-ar'),cur=document.getElementById('cur-ar'),val=document.getElementById('val-ar');if(!svg)return;
+    var defs=el(svg,'defs',{});
+    var mk=el(defs,'marker',{id:'u16f',markerWidth:7,markerHeight:7,refX:5,refY:3,orient:'auto',markerUnits:'strokeWidth'});
+    el(mk,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--rosso)'});
+    var yb=170, xc=200, W=100, H=100, K=4.5;          /* 1 N = 4,5 unità del disegno */
+    el(svg,'line',{x1:30,y1:yb,x2:370,y2:yb,stroke:'var(--inchiostro)','stroke-width':1.4});
+    for(var i=0;i<17;i++)el(svg,'line',{x1:40+i*20,y1:yb,x2:32+i*20,y2:yb+8,stroke:'var(--grigio)','stroke-width':1});
+    el(svg,'rect',{x:xc-W,y:yb-H,width:W,height:H,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(svg,'rect',{x:xc,y:yb-H,width:W,height:H,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    txt(svg,xc-W/2,yb-H+20,'1',{'font-size':14,fill:'var(--inchiostro)'});
+    txt(svg,xc+W/2,yb-H+20,'2',{'font-size':14,fill:'var(--inchiostro)'});
+    var y12=yb-H+48, y21=yb-H+78;
+    var f12=el(svg,'line',{x1:xc,y1:y12,y2:y12,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#u16f)'});
+    var f21=el(svg,'line',{x1:xc,y1:y21,y2:y21,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#u16f)'});
+    el(svg,'circle',{cx:xc,cy:y12,r:2.5,fill:'var(--rosso)'});el(svg,'circle',{cx:xc,cy:y21,r:2.5,fill:'var(--rosso)'});
+    var l12=txt(svg,0,y12-8,'F',{fill:'var(--rosso)','font-style':'italic','font-size':13});
+    var l21=txt(svg,0,y21-8,'−F',{fill:'var(--rosso)','font-style':'italic','font-size':13});
+    txt(svg,xc+W/2+8,yb+26,'F: forza di 1 su 2',{'font-size':12});
+    txt(svg,xc-W/2-8,yb+26,'−F: forza di 2 su 1',{'font-size':12});
+    function disegna(){
+      var F=+cur.value, L=F*K;
+      f12.setAttribute('x2',xc+L-5);f21.setAttribute('x2',xc-L+5);
+      l12.setAttribute('x',xc+L/2);l21.setAttribute('x',xc-L/2);
+      val.innerHTML='F = '+F+' N &nbsp; |−F| = '+F+' N';
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
