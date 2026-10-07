@@ -5,18 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Legge di Faraday-Neumann-Lenz — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.legge{background:#eef6f0;border:1px solid var(--verde);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.legge-et{text-align:center;font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--verde);margin:-10px 0 20px}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
 <body>
@@ -26,111 +60,151 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 20</p>
   <h1>Legge di Faraday-Neumann-Lenz</h1>
-  <p class="sommario">Abbiamo definito il flusso come la grandezza che misura quanto campo
-  magnetico attraversa una spira. Faraday scopre che è la sua variazione nel tempo, non il suo
-  valore, a generare la forza elettromotrice indotta: è la legge che racchiude in una formula
-  tutta l'induzione elettromagnetica.</p>
 </header>
+
+<p>Questa unità enuncia la legge che lega la forza elettromotrice indotta in una spira alla variazione del flusso del campo magnetico, e spiega il significato del segno meno che vi compare.</p>
 
 <h2>La legge dell'induzione</h2>
 
-<p>Nei suoi esperimenti Faraday trova che la fem indotta $\varepsilon$ in una spira è
-proporzionale alla rapidità con cui varia il flusso del campo magnetico che l'attraversa:</p>
+<p>La fem indotta in una spira non dipende dal valore del flusso che la attraversa, ma dalla rapidità con cui questo flusso varia nel tempo.</p>
 
-<div class="legge">
-$$\varepsilon = -\frac{\Delta\Phi(\vec{B})}{\Delta t} = -\frac{\Phi_F(\vec{B}) - \Phi_I(\vec{B})}{\Delta t}$$
+<div class="def"><span class="et">Legge di Faraday-Neumann-Lenz</span>
+<p>La fem indotta $\varepsilon$ in una spira è uguale, cambiata di segno, al rapporto fra la variazione del flusso del campo magnetico e l'intervallo di tempo in cui avviene:</p>
+<p class="eq">$$\varepsilon = -\frac{\Delta\Phi(\vec{B})}{\Delta t} = -\frac{\Phi_F(\vec{B}) - \Phi_I(\vec{B})}{\Delta t}$$</p>
+<p>dove $\Phi_I$ e $\Phi_F$ sono il flusso all'inizio e alla fine dell'intervallo $\Delta t$.</p>
 </div>
-<p class="legge-et">Legge dell'induzione di Faraday-Neumann-Lenz</p>
 
-<p>$\Phi_I$ e $\Phi_F$ sono il flusso all'inizio e alla fine dell'intervallo $\Delta t$. Il segno
-meno non tocca il valore numerico della fem: fissa il verso della corrente indotta, e lo
-riprendiamo fra poco con la legge di Lenz.</p>
+<p>Il segno meno non cambia il valore della fem: indica il verso della corrente indotta, che è descritto dalla legge di Lenz.</p>
 
 <h2>Intensità della fem indotta</h2>
 
-<p>Se interessa solo il valore della fem, si toglie il segno meno:</p>
+<p>Quando interessa solo l'intensità della fem, si considera il valore assoluto e il segno meno si omette:</p>
 
-$$\varepsilon = \frac{\Delta\Phi(\vec{B})}{\Delta t}$$
+<p class="eq">$$\varepsilon = \frac{|\Delta\Phi(\vec{B})|}{\Delta t}$$</p>
 
-<p>Se la spira ha $N$ avvolgimenti, ciascuno concatena lo stesso flusso e i contributi si
-sommano:</p>
+<p>Se la bobina ha $N$ avvolgimenti, ciascuno è attraversato dallo stesso flusso e le fem dei singoli avvolgimenti si sommano:</p>
 
-$$\varepsilon = N\,\frac{\Delta\Phi(\vec{B})}{\Delta t}$$
+<p class="eq">$$\varepsilon = N\,\frac{|\Delta\Phi(\vec{B})|}{\Delta t}$$</p>
+
+<p>Il flusso si misura in weber e il tempo in secondi; il rapporto Wb/s equivale a un volt, quindi la fem risulta in volt.</p>
 
 <h2>Esempio</h2>
 
-<p>Attraverso una spira il flusso passa da $\Phi_I = 0{,}850\ \text{Wb}$ a
-$\Phi_F = 0{,}110\ \text{Wb}$ in $\Delta t = 0{,}5\ \text{s}$. L'intensità della fem indotta è</p>
+<p>Il flusso del campo magnetico attraverso una spira passa da $\Phi_I = 0{,}850\ \text{Wb}$ a $\Phi_F = 0{,}110\ \text{Wb}$ in un intervallo $\Delta t = 0{,}5\ \text{s}$. Si vuole calcolare l'intensità della fem indotta.</p>
 
-$$\varepsilon = \left|\frac{0{,}110\ \text{Wb} - 0{,}850\ \text{Wb}}{0{,}5\ \text{s}}\right| = 1{,}48\ \text{V}$$
+<p>Si applica la legge in valore assoluto:</p>
 
-<h2>La legge di Lenz per il segno meno</h2>
+<p class="eq">$$\varepsilon = \frac{|0{,}110\ \text{Wb} - 0{,}850\ \text{Wb}|}{0{,}5\ \text{s}} = \frac{0{,}740\ \text{Wb}}{0{,}5\ \text{s}} = 1{,}48\ \text{V}$$</p>
 
-<p>Una corrente indotta scorre sempre nel verso che si oppone alla variazione di flusso che
-l'ha causata. Se il flusso sta aumentando, la corrente indotta genera un proprio campo
-$\vec{B_i}$ opposto al campo esterno, per frenarne la crescita; se il flusso sta diminuendo,
-genera un campo $\vec{B_i}$ concorde con quello esterno, per contrastarne il calo.</p>
+<h2>Legge di Lenz e segno meno</h2>
+
+<div class="def"><span class="et">Legge di Lenz</span>
+<p>La corrente indotta circola sempre nel verso che si oppone alla variazione di flusso che l'ha prodotta.</p>
+</div>
+
+<ul>
+<li>Se il flusso aumenta, la corrente indotta genera un campo $\vec{B}_i$ opposto al campo esterno, che ne contrasta la crescita.</li>
+<li>Se il flusso diminuisce, la corrente indotta genera un campo $\vec{B}_i$ concorde con il campo esterno, che ne contrasta la diminuzione.</li>
+<li>Se il flusso non varia, non c'è fem indotta e non circola corrente.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f21b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="f21r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="f21g" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="320" y1="10" x2="320" y2="240" stroke="var(--riga)" stroke-width="1"/>
-<text x="160" y="24" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)" font-weight="600">avvicinamento &mdash; &#934; aumenta</text>
-<rect x="18" y="96" width="66" height="44" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="38" y="123" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">S</text>
-<text x="64" y="123" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">N</text>
-<line x1="90" y1="118" x2="118" y2="118" stroke="var(--grigio)" stroke-width="1.8" marker-end="url(#f21b)"/>
-<ellipse cx="176" cy="118" rx="17" ry="46" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="130" y1="98" x2="163" y2="98" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f21b)"/>
-<text x="122" y="93" font-family="var(--sans)" font-size="12" fill="var(--blu)">B&#8321;</text>
-<line x1="140" y1="140" x2="163" y2="140" stroke="var(--blu)" stroke-width="2.4" marker-end="url(#f21b)"/>
-<text x="132" y="152" font-family="var(--sans)" font-size="12" fill="var(--blu)">B&#8322;</text>
-<line x1="240" y1="118" x2="196" y2="118" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f21r)"/>
-<text x="244" y="122" font-family="var(--sans)" font-size="12" fill="var(--rosso)">B&#8348;</text>
-<path d="M160,66 A20,22 0 0 1 194,66" fill="none" stroke="var(--verde)" stroke-width="2" marker-start="url(#f21g)"/>
-<text x="177" y="52" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">i</text>
-<text x="176" y="222" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">i indotta si oppone all'aumento</text>
-<text x="480" y="24" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)" font-weight="600">allontanamento &mdash; &#934; diminuisce</text>
-<rect x="556" y="96" width="66" height="44" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="576" y="123" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">S</text>
-<text x="602" y="123" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">N</text>
-<line x1="550" y1="118" x2="522" y2="118" stroke="var(--grigio)" stroke-width="1.8" marker-end="url(#f21b)"/>
-<ellipse cx="464" cy="118" rx="17" ry="46" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="510" y1="98" x2="477" y2="98" stroke="var(--blu)" stroke-width="1.4" marker-end="url(#f21b)" stroke-dasharray="4 3"/>
-<text x="484" y="93" font-family="var(--sans)" font-size="12" fill="var(--blu)">B</text>
-<line x1="400" y1="118" x2="444" y2="118" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f21r)"/>
-<text x="396" y="112" font-family="var(--sans)" font-size="12" fill="var(--rosso)">B&#8348;</text>
-<path d="M446,66 A20,22 0 0 0 480,66" fill="none" stroke="var(--verde)" stroke-width="2" marker-end="url(#f21g)"/>
-<text x="463" y="52" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">i</text>
-<text x="464" y="222" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">i indotta rinforza il campo</text>
-</svg>
-<p class="did">Il campo indotto $\vec{B_i}$ (rosso) e la corrente che lo genera si oppongono sempre
-alla variazione del flusso: si oppongono al campo esterno quando questo cresce, lo rinforzano
-quando cala.</p>
+<svg id="fig-a" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">tempo</label><input id="cur-a" type="range" min="0" max="100" step="1" value="25"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Il magnete si avvicina alla spira e poi se ne allontana: il campo indotto $\vec{B}_i$ (rosso) è opposto al campo del magnete quando il flusso aumenta e concorde quando diminuisce.</p>
 </div>
 
-<div class="nota">
-<span class="et">Da non confondere</span>
-Il segno meno nella legge non significa che la fem possa essere "negativa" nel senso comune: è
-una convenzione sul verso, legata all'orientamento scelto per percorrere la spira. Il valore che
-si misura con uno strumento è sempre l'intensità $\varepsilon$, positiva.
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 21 applica questa legge al caso concreto di una barretta che scorre su due binari in
-un campo magnetico, ricavando la formula $\varepsilon = Bvl$.</li>
-</ul>
-</div>
+<div class="nota"><span class="et">Da non confondere</span>
+<p>Il segno meno nella legge non indica una fem "negativa" in senso fisico: è legato all'orientamento scelto per percorrere la spira e stabilisce il verso della corrente indotta.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../20-flusso-del-campo-magnetico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Flusso del campo magnetico</span></a><a class="successiva" href="../22-la-barretta-in-moto-analisi-della-fem-indotta/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La barretta in moto: analisi della fem indotta</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 20</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function v(n,d){return (+n).toFixed(d).replace('.',',');}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+
+  /* Magnete cilindrico (lunghezza Lm, raggio Rm) con il polo N rivolto verso la spira.
+     Campo sull'asse alla distanza d dal polo N: B(d) proporzionale a (d+Lm)/sqrt((d+Lm)^2+Rm^2) - d/sqrt(d^2+Rm^2).
+     Flusso attraverso la spira: Phi = B(d)*A (spira piccola). Distanza nel tempo: d(t) = dmin + (dmax-dmin)(1 - sin(pi t)),
+     t fra 0 e 1: il magnete si avvicina fino a t = 0,5, si ferma un istante e poi si allontana. */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var Cx=320, Cy=95, scala=2.4, Lm=40, Rm=12, dmin=16, dmax=82; /* lunghezze in mm, 2,4 px per mm */
+    function Bax(d){return (d+Lm)/Math.sqrt((d+Lm)*(d+Lm)+Rm*Rm)-d/Math.sqrt(d*d+Rm*Rm);}
+    function dist(t){return dmin+(dmax-dmin)*(1-Math.sin(Math.PI*t));}
+    var Bmax=Bax(dmin), dPmax=0;
+    for(var i=0;i<=1000;i++){var t=i/1000,h=1e-4,dp=Math.abs(Bax(dist(Math.min(1,t+h)))-Bax(dist(Math.max(0,t-h))))/(Math.min(1,t+h)-Math.max(0,t-h));if(dp>dPmax)dPmax=dp;}
+    /* asse e spira (parte posteriore tratteggiata) */
+    el(S,'line',{x1:20,y1:Cy,x2:400,y2:Cy,stroke:'var(--riga)','stroke-width':1,'stroke-dasharray':'4 4'});
+    el(S,'path',{d:'M'+Cx+','+(Cy-58)+' A14,58 0 0 0 '+Cx+','+(Cy+58),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-dasharray':'4 3'});
+    var gd=el(S,'g',{});
+    el(S,'path',{d:'M'+Cx+','+(Cy-58)+' A14,58 0 0 1 '+Cx+','+(Cy+58),fill:'none',stroke:'var(--inchiostro)','stroke-width':2.4});
+    var gs=el(S,'g',{});
+    T(S,Cx+18,Cy+80,'spira',{fill:'var(--grigio)','font-size':12});
+    function dis(){
+      var t=c.value/100, d=dist(t), x0=Cx-d*scala, w=Lm*scala;
+      var h=1e-4, t1=Math.max(0,t-h), t2=Math.min(1,t+h);
+      var dPhi=(Bax(dist(t2))-Bax(dist(t1)))/(t2-t1), vel=(dist(t2)-dist(t1))/(t2-t1);
+      var B=Bax(d)/Bmax, ri=dPhi/dPmax; if(Math.abs(ri)<0.02)ri=0;
+      vuota(gd);vuota(gs);
+      /* magnete: S a sinistra (blu), N a destra (rosso), verso la spira */
+      el(gd,'rect',{x:f(x0-w),y:Cy-Rm*scala,width:f(w/2),height:Rm*scala*2,fill:'var(--blu)'});
+      el(gd,'rect',{x:f(x0-w/2),y:Cy-Rm*scala,width:f(w/2),height:Rm*scala*2,fill:'var(--rosso)'});
+      T(gd,f(x0-w*0.75),Cy+5,'S',{fill:'#fff','font-size':14,'font-weight':700,'text-anchor':'middle'});
+      T(gd,f(x0-w*0.25),Cy+5,'N',{fill:'#fff','font-size':14,'font-weight':700,'text-anchor':'middle'});
+      /* velocità del magnete */
+      if(Math.abs(vel)>1){var sv=vel<0?1:-1, xm=x0-w/2;
+        freccia(gd,xm-sv*16,Cy-Rm*scala-14,xm+sv*16,Cy-Rm*scala-14,'var(--grigio)',2,7);
+        T(gd,f(xm+sv*24),Cy-Rm*scala-10,'v',{fill:'var(--grigio)','font-size':13,'font-style':'italic','text-anchor':sv>0?'start':'end'});}
+      /* campo del magnete nella spira (blu), lunghezza proporzionale a B */
+      var lb=12+50*B;
+      freccia(gs,Cx-6,Cy+26,Cx-6+lb,Cy+26,'var(--blu)',2.4,7);
+      T(gs,f(Cx+lb),Cy+30,'B',{fill:'var(--blu)','font-size':13,'font-style':'italic','font-weight':700});
+      /* campo indotto (rosso), opposto all'aumento del flusso */
+      if(ri!==0){var li=10+50*Math.abs(ri), sg=ri>0?-1:1, x1=sg<0?Cx+20:Cx-6;
+        freccia(gs,x1,Cy-26,x1+sg*li,Cy-26,'var(--rosso)',2.4,7);
+        T(gs,f(sg<0?x1+6:x1+li+6),Cy-22,'Bi',{fill:'var(--rosso)','font-size':13,'font-style':'italic','font-weight':700,stroke:'#fff','stroke-width':3,'paint-order':'stroke'});
+        /* corrente sulla parte anteriore della spira: verso dato dalla regola della mano destra */
+        var su=sg<0;
+        punta(gs,Cx+14,Cy,0,su?-1:1,'var(--verde)',8);
+        T(gs,Cx+22,Cy+5,'i',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});}
+      var stato=ri>0?'Φ aumenta: <span class="ok">Bi opposto a B</span>':(ri<0?'Φ diminuisce: <span class="ok">Bi concorde con B</span>':'Φ non varia: <span class="ok">nessuna corrente</span>');
+      o.innerHTML=(vel<-1?'il magnete si avvicina; ':(vel>1?'il magnete si allontana; ':'il magnete è fermo; '))+stato;
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+})();
+</script>
 </body>
 </html>
