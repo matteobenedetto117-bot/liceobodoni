@@ -5,15 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'esperienza di Faraday e la forza elettromotrice indotta — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.legge{background:#eef6f0;border:1px solid var(--verde);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
 </style>
 </head>
 <body>
@@ -23,131 +59,214 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 18</p>
   <h1>L'esperienza di Faraday e la forza elettromotrice indotta</h1>
-  <p class="sommario">Finora i campi magnetici che abbiamo incontrato erano generati da correnti
-  costanti. Ora ci chiediamo che cosa succede quando il campo magnetico cambia nel tempo:
-  l'esperienza di Faraday mostra che un campo magnetico variabile genera corrente in un circuito
-  vicino, anche senza alcun collegamento elettrico fra i due.</p>
 </header>
+
+<p>Questa unità descrive l'esperienza con cui Faraday mostrò che un campo magnetico variabile genera corrente in un circuito vicino, anche senza alcun collegamento elettrico fra i due.</p>
 
 <h2>L'esperienza di Faraday</h2>
 
-<p>Faraday avvolge due circuiti indipendenti sullo stesso anello di ferro. Il circuito primario
-contiene una batteria e un interruttore; il circuito secondario contiene solo un amperometro,
-senza alcuna sorgente di tensione. I due circuiti non si toccano: sono legati solo dal nucleo di
-ferro comune, su cui si stabilisce il campo magnetico prodotto dal primario.</p>
+<p>Faraday avvolge due circuiti indipendenti sullo stesso anello di ferro. Il circuito primario contiene una batteria e un interruttore; il circuito secondario contiene solo un amperometro e nessuna sorgente di tensione.</p>
 
-<div class="fig" style="max-width:480px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f19b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<rect x="200" y="90" width="120" height="50" rx="8" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="212" y1="90" x2="212" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="220" y1="90" x2="220" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="228" y1="90" x2="228" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="236" y1="90" x2="236" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="284" y1="90" x2="284" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="292" y1="90" x2="292" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="300" y1="90" x2="300" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="308" y1="90" x2="308" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="210" y1="75" x2="238" y2="75" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f19b)"/>
-<text x="242" y="79" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<line x1="282" y1="75" x2="310" y2="75" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f19b)"/>
-<text x="314" y="79" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<line x1="260" y1="140" x2="260" y2="163" stroke="var(--grigio)" stroke-width="1"/>
-<text x="260" y="178" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">anello di ferro</text>
-<line x1="212" y1="90" x2="212" y2="40" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="212" y1="40" x2="55" y2="40" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="55" y1="40" x2="55" y2="90" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="55" cy="90" r="3" fill="var(--inchiostro)"/>
-<line x1="55" y1="90" x2="70" y2="105" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="55" cy="118" r="3" fill="var(--inchiostro)"/>
-<line x1="55" y1="118" x2="55" y2="150" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="42" y1="160" x2="68" y2="160" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="48" y1="170" x2="62" y2="170" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="55" y1="150" x2="55" y2="160" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="55" y1="170" x2="55" y2="205" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="55" y1="205" x2="212" y2="205" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="212" y1="205" x2="212" y2="140" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="130" y="230" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">circuito primario</text>
-<line x1="308" y1="90" x2="308" y2="40" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="308" y1="40" x2="465" y2="40" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="465" y1="40" x2="465" y2="106" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="465" cy="122" r="16" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="465" y="127" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">A</text>
-<line x1="465" y1="138" x2="465" y2="205" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="465" y1="205" x2="308" y2="205" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="308" y1="205" x2="308" y2="140" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="386" y="230" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">circuito secondario</text>
-</svg>
-<p class="did">Circuito primario (batteria e interruttore) e circuito secondario (solo un
-amperometro), avvolti sullo stesso anello di ferro senza alcun contatto elettrico fra loro.</p>
+<p>I due circuiti non si toccano: sono legati soltanto dall'anello di ferro, nel quale si stabilisce il campo magnetico prodotto dalla corrente del primario.</p>
+
+<div class="fig">
+<svg id="fig-a" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px"></svg>
+<div class="cursore"><label for="cur-a">tempo</label><input id="cur-a" type="range" min="0" max="10" step="0.05" value="0"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Il cursore fa scorrere il tempo: l'interruttore del primario si chiude e poi si riapre, le frecce blu mostrano il campo magnetico nell'anello e l'ago dell'amperometro segnala la corrente nel secondario.</p>
 </div>
 
 <p>Osservando l'amperometro del secondario, Faraday nota tre fatti:</p>
 
-<ol style="padding-left:1.3em">
-<li>chiudendo l'interruttore del primario, nel secondario passa corrente per un breve istante;</li>
-<li>con l'interruttore chiuso, dopo pochi secondi la corrente nel secondario si annulla;</li>
-<li>aprendo l'interruttore, nel secondario passa di nuovo corrente per un breve istante.</li>
+<ol>
+<li>quando si chiude l'interruttore del primario, nel secondario passa corrente per un breve istante;</li>
+<li>con l'interruttore chiuso, dopo pochi istanti la corrente nel secondario si annulla e resta nulla;</li>
+<li>quando si apre l'interruttore, nel secondario passa di nuovo corrente per un breve istante.</li>
 </ol>
 
 <h2>Che cosa cambia nei tre casi</h2>
 
-<p>Nel primo e nel terzo caso il campo magnetico prodotto dal primario sta cambiando: si sta
-accendendo o spegnendo. Nel secondo caso la corrente primaria, e quindi il campo, resta costante.
-Da questo confronto Faraday ricava due conclusioni.</p>
+<p>Quando l'interruttore viene chiuso o aperto, la corrente del primario cresce o si annulla, e con essa cambia il campo magnetico nell'anello. Con l'interruttore chiuso da tempo, invece, la corrente del primario e il campo magnetico restano costanti, e nel secondario non passa corrente.</p>
 
-<div class="legge">
-<p>Un campo magnetico variabile crea, in un circuito vicino, una forza elettromotrice indotta $\Delta V$.</p>
+<p>Da questo confronto Faraday ricava due conclusioni.</p>
+
+<div class="def"><span class="et">Forza elettromotrice indotta</span>
+<p>Un campo magnetico variabile genera, in un circuito vicino, una forza elettromotrice indotta $\Delta V$, che fa circolare nel circuito una corrente indotta.</p>
+<p>La forza elettromotrice indotta, e quindi la corrente indotta, è direttamente proporzionale alla rapidità con cui varia il campo magnetico.</p>
 </div>
 
-<div class="legge">
-<p>L'intensità della corrente indotta, e della fem che la produce, è proporzionale alla rapidità
-con cui varia il campo magnetico.</p>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Un campo magnetico costante, anche intenso, non genera corrente indotta: conta soltanto la sua variazione.</p></div>
 
 <h2>Lo stesso effetto con un magnete in movimento</h2>
 
-<p>Lo stesso risultato si ottiene senza alcun circuito primario, avvicinando un magnete a una
-bobina collegata a un amperometro: passa corrente finché il magnete è in movimento, e si annulla
-non appena si ferma. A contare non è la causa del campo magnetico, ma il fatto che stia
-cambiando rispetto al circuito.</p>
+<p>Lo stesso risultato si ottiene senza circuito primario. Si collega una bobina a un amperometro e le si avvicina un magnete: finché il magnete si muove, nella bobina passa corrente; quando il magnete si ferma, la corrente si annulla.</p>
 
-<div class="fig" style="max-width:440px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f19v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<ellipse cx="85" cy="105" rx="70" ry="45" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<ellipse cx="85" cy="105" rx="95" ry="63" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<path d="M90,60 L78,60 L84,53 Z" fill="var(--blu)"/>
-<path d="M90,42 L76,42 L83,34 Z" fill="var(--blu)"/>
-<rect x="30" y="80" width="110" height="50" fill="#fff" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="85" y1="80" x2="85" y2="130" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="57" y="111" text-anchor="middle" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">S</text>
-<text x="112" y="111" text-anchor="middle" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">N</text>
-<line x1="150" y1="105" x2="216" y2="105" stroke="var(--verde)" stroke-width="2" marker-end="url(#f19v)"/>
-<text x="183" y="125" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">si avvicina</text>
-<path d="M225,60 L225,170" stroke="var(--inchiostro)" stroke-width="1.8" fill="none"/>
-<path d="M225,60 L325,60" stroke="var(--inchiostro)" stroke-width="1.8" fill="none"/>
-<path d="M250,60 q6,-14 12,0 q6,-14 12,0 q6,-14 12,0 q6,-14 12,0" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="325" y1="60" x2="325" y2="98" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="325" cy="115" r="17" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="325" y="120" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">A</text>
-<line x1="325" y1="132" x2="325" y2="170" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="325" y1="170" x2="225" y2="170" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="255" y1="45" x2="285" y2="45" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#f19v)"/>
-<text x="270" y="35" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">passa corrente</text>
-</svg>
-<p class="did">Il magnete in avvicinamento fa variare il campo magnetico attraverso la bobina, e
-l'amperometro segnala il passaggio di corrente indotta; da fermo, la corrente si annulla.</p>
+<p>La corrente indotta non dipende quindi da come viene prodotto il campo magnetico, ma soltanto dal fatto che il campo cambi nella zona occupata dal circuito.</p>
+
+<div class="fig">
+<svg id="fig-b" viewBox="-15 10 400 215" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-b" aria-label="Avvia">&#9654;</button><output id="val-b"></output></div>
+<p class="did">Il magnete si avvicina alla bobina e poi si ferma: l'ago dell'amperometro si sposta solo mentre il magnete è in movimento.</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../18-acceleratori-di-particelle-ciclotrone-e-sincrotrone/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Acceleratori di particelle: ciclotrone e sincrotrone</span></a><a class="successiva" href="../20-flusso-del-campo-magnetico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Flusso del campo magnetico</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 18</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  function filo(p,pts){el(p,'polyline',{points:pts.map(function(q){return f(q[0])+','+f(q[1]);}).join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8,'stroke-linejoin':'round'});}
+  /* amperometro: cerchio, tacche a -50°, 0°, +50°, ago restituito per essere ruotato */
+  function amperometro(p,cx,cy,r){
+    el(p,'circle',{cx:cx,cy:cy,r:r,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    var px=cx, py=cy+r*.5, L=r*.95;
+    [-50,0,50].forEach(function(a){var s=Math.sin(a*Math.PI/180), c=Math.cos(a*Math.PI/180);
+      el(p,'line',{x1:f(px+L*s),y1:f(py-L*c),x2:f(px+(L-4)*s),y2:f(py-(L-4)*c),stroke:'var(--inchiostro)','stroke-width':1.2});});
+    T(p,cx,cy+r*.5+11,'A',{fill:'var(--grigio)','font-size':9,'text-anchor':'middle'});
+    var ago=el(p,'line',{x1:px,y1:py,x2:px,y2:f(py-(L-5)),stroke:'var(--rosso)','stroke-width':2,'stroke-linecap':'round'});
+    el(p,'circle',{cx:px,cy:py,r:2.4,fill:'var(--inchiostro)'});
+    return function(gradi){var s=Math.sin(gradi*Math.PI/180), c=Math.cos(gradi*Math.PI/180);
+      set(ago,{x2:f(px+(L-5)*s),y2:f(py-(L-5)*c)});};
+  }
+
+  /* esperienza di Faraday: i1 = corrente del primario (0..1), i2 = corrente indotta, proporzionale a di1/dt.
+     Chiusura a t=1, apertura a t=6, costante di tempo tau=0,4. */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var cx=260, cy=120, Ro=78, Ri=52, Rm=65, tc=1, to=6, tau=0.4;
+    el(S,'path',{d:'M'+(cx-Ro)+','+cy+' a'+Ro+','+Ro+' 0 1 0 '+(2*Ro)+',0 a'+Ro+','+Ro+' 0 1 0 '+(-2*Ro)+',0 Z M'+(cx-Ri)+','+cy+' a'+Ri+','+Ri+' 0 1 0 '+(2*Ri)+',0 a'+Ri+','+Ri+' 0 1 0 '+(-2*Ri)+',0 Z',
+      fill:'#e3e5e8','fill-rule':'evenodd',stroke:'var(--inchiostro)','stroke-width':1.4});
+    T(S,cx,cy+4,'anello di ferro',{fill:'var(--grigio)','font-size':11,'text-anchor':'middle'});
+    /* avvolgimenti sui due lati dell'anello */
+    var ys=[], y0=92, y1=148;
+    for(var y=y0;y<=y1;y+=8)ys.push(y);
+    function xo(y){return Math.sqrt(Ro*Ro-(y-cy)*(y-cy));}
+    function xi(y){return Math.sqrt(Ri*Ri-(y-cy)*(y-cy));}
+    ys.forEach(function(y){
+      el(S,'line',{x1:f(cx-xo(y)-6),y1:y-3,x2:f(cx-xi(y)+6),y2:y+3,stroke:'var(--inchiostro)','stroke-width':1.8});
+      el(S,'line',{x1:f(cx+xo(y)+6),y1:y-3,x2:f(cx+xi(y)-6),y2:y+3,stroke:'var(--inchiostro)','stroke-width':1.8});});
+    var xl=cx-xo(y0)-6, xl2=cx-xo(y1)-6, xr=cx+xo(y0)+6, xr2=cx+xo(y1)+6;
+    /* circuito primario: interruttore e batteria sul filo verticale x=70 */
+    var xs=70, ya=y0-3, yb=y1-3+6;
+    filo(S,[[xl,ya],[xs,ya],[xs,100]]);
+    el(S,'circle',{cx:xs,cy:100,r:2.6,fill:'var(--inchiostro)'});
+    el(S,'circle',{cx:xs,cy:118,r:2.6,fill:'var(--inchiostro)'});
+    filo(S,[[xs,118],[xs,128]]);
+    el(S,'line',{x1:xs-13,y1:128,x2:xs+13,y2:128,stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'line',{x1:xs-7,y1:135,x2:xs+7,y2:135,stroke:'var(--inchiostro)','stroke-width':4});
+    filo(S,[[xs,135],[xs,yb],[xl2,yb]]);
+    var leva=el(S,'line',{x1:xs,y1:100,x2:xs+14,y2:113,stroke:'var(--inchiostro)','stroke-width':2,'stroke-linecap':'round'});
+    T(S,110,215,'circuito primario',{fill:'var(--inchiostro)','font-size':12,'text-anchor':'middle'});
+    /* circuito secondario: solo amperometro */
+    var xa=440;
+    filo(S,[[xr,ya],[xa,ya],[xa,98]]);
+    filo(S,[[xa,142],[xa,yb],[xr2,yb]]);
+    var ago=amperometro(S,xa,120,22);
+    T(S,410,215,'circuito secondario',{fill:'var(--inchiostro)','font-size':12,'text-anchor':'middle'});
+    /* campo nell'anello: archi con freccia, opacità proporzionale a i1 */
+    var gB=el(S,'g',{});
+    function arco(a1,a2){var r=Rm, p1=[cx+r*Math.cos(a1),cy+r*Math.sin(a1)], p2=[cx+r*Math.cos(a2),cy+r*Math.sin(a2)];
+      el(gB,'path',{d:'M'+f(p1[0])+','+f(p1[1])+' A'+r+','+r+' 0 0 1 '+f(p2[0])+','+f(p2[1]),fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+      punta(gB,p2[0],p2[1],-Math.sin(a2),Math.cos(a2),'var(--blu)',7);}
+    var g=Math.PI/180;
+    arco(-118*g,-62*g);arco(62*g,118*g);
+    T(gB,cx,cy-Ro-8,'B',{fill:'var(--blu)','font-size':13,'font-style':'italic','font-weight':700,'text-anchor':'middle'});
+    function i1(t){if(t<tc)return 0;var a=1-Math.exp(-(t-tc)/tau);if(t<to)return a;return (1-Math.exp(-(to-tc)/tau))*Math.exp(-(t-to)/tau);}
+    function i2(t){if(t<tc)return 0;if(t<to)return Math.exp(-(t-tc)/tau);return -(1-Math.exp(-(to-tc)/tau))*Math.exp(-(t-to)/tau);}
+    function dis(){
+      var t=+c.value, chiuso=(t>=tc&&t<to), a=i1(t), b=i2(t);
+      set(leva,chiuso?{x2:xs,y2:118}:{x2:xs+14,y2:113});
+      set(gB,{opacity:f(Math.max(a,0)*0.95+0.05)});
+      gB.style.display=a<0.02?'none':'';
+      ago(50*b);
+      var campo=Math.abs(b)>0.03?(b>0?'campo in aumento':'campo in diminuzione'):(a>0.5?'campo costante':'campo nullo');
+      o.innerHTML='interruttore '+(chiuso?'chiuso':'aperto')+', '+campo+': '+(Math.abs(b)>0.03?'<span class="ok">corrente indotta</span>':'nessuna corrente indotta');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* magnete in avvicinamento: posizione x(u) = D(1-cos(pi u))/2, corrente indotta proporzionale a v per la
+     variazione del campo con la distanza (dipolo: B ~ 1/d^3, quindi dB/dx ~ 1/d^4) */
+  (function(){
+    var S=document.getElementById('fig-b'), btn=document.getElementById('btn-b'), o=document.getElementById('val-b');
+    if(!S||!btn)return;
+    var ym=95, Lm=110, hm=32, x0=20, D=125, dur=2.6, xb=292, d0=30;
+    /* bobina */
+    for(var x=xb;x<=348;x+=8)el(S,'ellipse',{cx:x,cy:ym,rx:6,ry:34,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+    filo(S,[[xb,ym+34],[xb,192],[300,192]]);
+    filo(S,[[348,ym+34],[348,192],[340,192]]);
+    var ago=amperometro(S,320,186,20);
+    T(S,320,30,'bobina',{fill:'var(--inchiostro)','font-size':12,'text-anchor':'middle'});
+    var gm=el(S,'g',{});
+    el(gm,'rect',{x:0,y:ym-hm/2,width:Lm/2,height:hm,fill:'var(--blu)'});
+    el(gm,'rect',{x:Lm/2,y:ym-hm/2,width:Lm/2,height:hm,fill:'var(--rosso)'});
+    el(gm,'rect',{x:0,y:ym-hm/2,width:Lm,height:hm,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4});
+    T(gm,Lm/4,ym+6,'S',{fill:'#fff','font-size':16,'font-weight':700,'text-anchor':'middle'});
+    T(gm,3*Lm/4,ym+6,'N',{fill:'#fff','font-size':16,'font-weight':700,'text-anchor':'middle'});
+    var gv=el(S,'g',{});
+    var fine=T(S,150,170,'magnete fermo: corrente nulla',{fill:'var(--verde)','font-size':12,'text-anchor':'middle',opacity:0});
+    function pos(u){return x0+D*(1-Math.cos(Math.PI*u))/2;}
+    function vel(u){return D*Math.PI/2*Math.sin(Math.PI*u)/dur;}
+    function corr(u){var d=xb-(pos(u)+Lm)+d0;return vel(u)/Math.pow(d,4);}
+    var cmax=0;for(var k=0;k<=400;k++)cmax=Math.max(cmax,corr(k/400));
+    function stato(u,alfa){
+      var xm=pos(u), v=vel(u), i=corr(u)/cmax;
+      set(gm,{transform:'translate('+f(xm)+',0)'});
+      vuota(gv);
+      if(v>1){var l=8+v*0.35;freccia(gv,xm+Lm/2-l/2,ym-30,xm+Lm/2+l/2,ym-30,'var(--verde)',2,6);
+        T(gv,f(xm+Lm/2+l/2+5),ym-26,'v',{fill:'var(--verde)','font-size':13,'font-style':'italic','font-weight':700});}
+      ago(50*i);
+      set(fine,{opacity:f(alfa||0)});
+      o.innerHTML=v>1?'magnete in movimento: <span class="ok">corrente indotta</span>':'magnete fermo: nessuna corrente';
+    }
+    var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches, finito=false;
+    function iniziale(){finito=false;btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');btn.disabled=false;stato(0,0);}
+    function chiudi(){finito=true;stato(1,1);btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');btn.disabled=false;
+      if(window.allineaQuaderno)window.allineaQuaderno();}
+    btn.addEventListener('click',function(){
+      if(finito){iniziale();return;}
+      if(ridotto){chiudi();return;}
+      btn.disabled=true;var t0=null;
+      function passo(ts){if(t0===null)t0=ts;var s=(ts-t0)/1000;
+        if(s<0.3){stato(0,0);}
+        else if(s<0.3+dur){stato((s-0.3)/dur,0);}
+        else if(s<0.3+dur+0.8){stato(1,(s-0.3-dur)/0.8);}
+        else{chiudi();return;}
+        requestAnimationFrame(passo);}
+      requestAnimationFrame(passo);
+    });
+    iniziale();
+  })();
+})();
+</script>
 </body>
 </html>

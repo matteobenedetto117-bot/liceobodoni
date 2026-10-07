@@ -172,6 +172,7 @@
   avvolti sullo stesso anello di ferro con batteria, interruttore e amperometro; il magnete in
   avvicinamento a una bobina collegata a un amperometro), senza introdurre contenuto fisico
   ulteriore.
+- Revisione: titolo invariato. Tolto il sommario; introduzione di una frase; titoletti «L'esperienza di Faraday», «Che cosa cambia nei tre casi», «Lo stesso effetto con un magnete in movimento» tenuti; descrizione dei due circuiti, tre osservazioni in elenco numerato, confronto fra i tre casi e conclusione sul magnete in frasi complete; le due conclusioni di Faraday riunite in un .def «Forza elettromotrice indotta» («proporzionale» → «direttamente proporzionale»); aggiunta una .nota (campo costante: nessuna corrente indotta). Nessuna correzione concettuale (contenuto qualitativo). Impaginazione a quaderno. Figure rifatte in SVG da script: anello di ferro con i due circuiti e cursore sul tempo (interruttore che si chiude e si riapre, campo nell'anello con intensità proporzionale alla corrente del primario, ago dell'amperometro proporzionale alla rapidità di variazione, deviazioni opposte in chiusura e apertura); magnete N rosso / S blu che si avvicina alla bobina con ▶/↺ (ago deviato solo durante il moto). Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 19 — Flusso del campo magnetico
 - Parole: 254 su 1 pagina di traccia (pagina 34)
