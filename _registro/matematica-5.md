@@ -472,6 +472,7 @@ teorema del confronto, a pagina 21.
   maturità: il teorema di Lagrange isolato non è materia di quesito, e il suo uso più
   frequente (De L'Hôpital, unità 24) non è ancora disponibile a questo punto del
   percorso.
+- Revisione: titolo invariato. Tolto il sommario; introduzione di una frase. Titoletti «Enunciato» tenuto; «Le ipotesi sono necessarie» sostituito da «Se manca un'ipotesi» (il titolo contraddiceva la didascalia, che dice correttamente che le ipotesi sono sufficienti e non necessarie); «Due conseguenze» diviso in «Funzioni con derivata nulla» e «Funzioni con la stessa derivata». Enunciato riscritto con le ipotesi in elenco e la tesi in riquadro; tolto il rimando «lo abbiamo già dimostrato» e scritto il primo corollario come Teorema 1 in .def; aggiunta la frase conclusiva «le ipotesi sono sufficienti, ma non necessarie»; «distanza verticale» fra i grafici di f e g = f + k (prima «distanza ... resta k»). Impaginazione a quaderno con script di allineamento. Figure rifatte in SVG calcolato con cursore: −0,3x²+1,6x+0,5 in [0;4] con secante (m = 0,4) e tangente mobile, c = 2; x³−4,5x²+5,5x+1 in [0;3] con c₁,₂ = 3/2 ∓ √3/2; due pannelli con punto angoloso (|x|+0,25x senza punti c; 1,5x²−|x|+0,25x con c = ±1/3); f = g + k con tangenti parallele e segmento k. Valori verificati con Python. Nessun esempio (nessuno presente), nessuna figura decorativa.
 
 ## Unità 21 — Monotonia e segno della derivata prima
 - Parole: 334 su circa 1,7 pagine di traccia (da "Teorema III" a fine pagina 83 fino a
