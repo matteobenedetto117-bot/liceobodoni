@@ -5,18 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campo elettrico indotto e generatori di corrente — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.risultato{background:#eef6f0;border:1px solid var(--verde);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.risultato-et{text-align:center;font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--verde);margin:-10px 0 20px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
+
 <body>
 <div class="foglio">
 
@@ -24,88 +62,174 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 22</p>
   <h1>Campo elettrico indotto e generatori di corrente</h1>
-  <p class="sommario">Il moto della barretta non produce solo una fem ai suoi capi: al suo interno
-  compare anche un campo elettrico. Lo stesso principio, applicato a una spira che ruota invece di
-  traslare, è alla base dei generatori di corrente reali.</p>
 </header>
+
+<p>Questa unità mostra che all'interno di una barretta in moto in un campo magnetico si stabilisce un campo elettrico e presenta il principio dei generatori di corrente.</p>
 
 <h2>Il campo elettrico all'interno della barretta</h2>
 
+<p>Una barretta conduttrice di lunghezza $\ell$ si muove con velocità $v$ in un campo magnetico uniforme $\vec B$, perpendicolare sia alla barretta sia alla velocità. Ai suoi capi si stabilisce una differenza di potenziale uguale alla fem indotta:</p>
+
+<p class="eq">$$\Delta V = B\,v\,\ell$$</p>
+
 <div class="fig">
-<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f23e" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="60" y1="50" x2="280" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="210" x2="280" y2="210" stroke="var(--inchiostro)" stroke-width="2"/>
-<rect x="150" y="50" width="20" height="160" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="160" y1="80" x2="160" y2="180" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#f23e)"/>
-<text x="182" y="132" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">E&#8407;</text>
-<line x1="330" y1="50" x2="330" y2="210" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="324" y1="50" x2="336" y2="50" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="324" y1="210" x2="336" y2="210" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="352" y="134" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#8467;</text>
-</svg>
-<p class="did">All'interno della barretta, fra i suoi due capi, agisce un campo elettrico $\vec E$
-diretto come la ddp che si stabilisce ai suoi estremi.</p>
+<svg id="fig-a" viewBox="0 0 440 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">velocità $v$</label><input id="cur-a" type="range" min="0" max="5" step="0.1" value="2"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Il campo $\vec B$ esce dal piano (i punti): gli estremi della barretta si caricano con segni opposti e al suo interno compare un campo elettrico $\vec E$, diretto dall'estremo positivo a quello negativo ($B = 0{,}50\ \text{T}$, $\ell = 0{,}20\ \text{m}$).</p>
 </div>
 
-<p>La ddp $\Delta V$ ai capi della barretta è uguale alla fem generata, $\Delta V = Bv\ell$
-(unità precedente). D'altra parte, lungo un tratto di lunghezza $\ell$ percorso da un campo
-elettrico uniforme vale $\Delta V = E\ell$. Uguagliando le due espressioni:</p>
+<p>D'altra parte, se all'interno della barretta agisce un campo elettrico uniforme $\vec E$ diretto lungo la barretta, la differenza di potenziale fra i suoi estremi è</p>
 
-$$E\ell = Bv\ell$$
+<p class="eq">$$\Delta V = E\,\ell$$</p>
 
-<div class="risultato">$$E = Bv$$</div>
-<p class="risultato-et">Campo elettrico indotto all'interno della barretta</p>
+<p>Uguagliando le due espressioni si ottiene $E\,\ell = B\,v\,\ell$; dividendo per $\ell$ si ricava l'intensità del campo elettrico.</p>
+
+<div class="def"><span class="et">Campo elettrico indotto nella barretta</span>
+<p class="eq">$$E = B\,v$$</p>
+<p>dove $B$ è l'intensità del campo magnetico in tesla e $v$ la velocità della barretta in m/s; il campo elettrico risulta in V/m, perché $\text{T}\cdot\text{m/s} = \text{V/m}$.</p>
+</div>
 
 <h2>Generatori di corrente</h2>
 
+<p>Invece di far traslare una barretta, si può far ruotare una spira in un campo magnetico uniforme: è il principio dei generatori di corrente. Ruotando, la spira cambia continuamente l'area esposta perpendicolarmente al campo $\vec B$, quindi il flusso $\Phi(\vec B)$ concatenato con la spira varia nel tempo.</p>
+
+<p>Per la legge di Faraday-Neumann-Lenz, la variazione del flusso genera nella spira una fem indotta e, se il circuito è chiuso, una corrente indotta.</p>
+
 <div class="fig">
-<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f23c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<rect x="30" y="60" width="90" height="60" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="75" y="96" text-anchor="middle" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">N</text>
-<rect x="290" y="60" width="90" height="60" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="335" y="96" text-anchor="middle" font-family="var(--sans)" font-size="18" fill="var(--inchiostro)">S</text>
-<line x1="122" y1="80" x2="286" y2="80" stroke="var(--blu)" stroke-width="1.6" marker-end="url(#f23c)"/>
-<line x1="122" y1="100" x2="286" y2="100" stroke="var(--blu)" stroke-width="1.6" marker-end="url(#f23c)"/>
-<rect x="192" y="65" width="16" height="50" fill="var(--inchiostro)" transform="rotate(20 200 90)"/>
-<text x="220" y="45" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">2&#969;</text>
-<path d="M215,55 A20,20 0 0 1 235,68" fill="none" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#f23c)"/>
-<text x="150" y="140" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">spira rotante</text>
-<line x1="200" y1="120" x2="130" y2="200" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="130" cy="200" r="5" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="130" y1="200" x2="80" y2="240" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="80" cy="240" r="5" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<path d="M80,240 L80,270 L250,270 L250,250" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<path d="M250,250 l-8,-4 l0,8 Z M250,238 l-8,-4 l0,8 Z M250,226 l-8,-4 l0,8 Z" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="250" y1="220" x2="250" y2="256" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="330" y="265" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">circuito esterno</text>
-</svg>
-<p class="did">Una spira ruota con velocità angolare $\omega$ dentro il campo magnetico costante
-fra due poli N-S. Contatti striscianti la collegano a un circuito esterno.</p>
-</div>
-
-<p>Invece di traslare una barretta, si può far ruotare una spira in un campo magnetico
-uniforme: è il principio dei generatori di corrente reali. Ruotando, la spira cambia
-continuamente l'area esposta perpendicolarmente al campo $\vec B$, quindi il flusso
-$\Phi(\vec B)$ concatenato varia nel tempo. Per la legge di Faraday-Neumann-Lenz, questa
-variazione genera una fem indotta e, se il circuito è chiuso, una corrente.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 23 ricava l'espressione della fem sinusoidale prodotta dalla spira rotante,
-$\varepsilon = NBA\omega\sin\omega t$: è l'alternatore.</li>
-</ul>
+<svg id="fig-b" viewBox="0 0 440 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-b">rotazione $\theta$</label><input id="cur-b" type="range" min="0" max="360" step="5" value="30"><output id="val-b" for="cur-b"></output></div>
+<p class="did">La spira ruota con velocità angolare $\omega$ attorno a un asse perpendicolare al campo fra i poli N e S; due anelli con contatti striscianti la collegano al circuito esterno.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../22-la-barretta-in-moto-analisi-della-fem-indotta/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La barretta in moto: analisi della fem indotta</span></a><a class="successiva" href="../24-l-alternatore/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">L'alternatore</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 22</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function v(n,d){return (+n).toFixed(d).replace('.',',');}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  /* simbolo vettoriale: lettera con la freccetta sopra */
+  function Vt(p,x,y,lett,col){
+    T(p,x,y,lett,{'text-anchor':'middle','font-size':15,'font-style':'italic','font-weight':700,fill:col});
+    freccia(p,x-6,y-15,x+8,y-15,col,1.3,4);
+  }
+
+  /* Figura A: barretta in moto, cariche agli estremi e campo E interno (E = Bv).
+     B esce dal piano, v verso destra: la forza magnetica sugli elettroni è verso l'alto,
+     quindi l'estremo superiore diventa negativo e quello inferiore positivo; E va dal basso verso l'alto. */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var B=0.50, l=0.20, yA=45, yB=185, xb=200, w=18;
+    for(var x=40;x<=400;x+=40)for(var y=65;y<=165;y+=40){ if(Math.abs(x-xb)>20) el(S,'circle',{cx:x,cy:y,r:2.6,fill:'var(--blu)'}); }
+    Vt(S,40,26,'B','var(--blu)');
+    el(S,'line',{x1:20,y1:yA,x2:420,y2:yA,stroke:'var(--inchiostro)','stroke-width':2});
+    el(S,'line',{x1:20,y1:yB,x2:420,y2:yB,stroke:'var(--inchiostro)','stroke-width':2});
+    el(S,'rect',{x:xb-w/2,y:yA-6,width:w,height:yB-yA+12,rx:3,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.8});
+    /* quota l a sinistra della barretta */
+    var xq=xb-46;
+    el(S,'line',{x1:xq,y1:yA,x2:xq,y2:yB,stroke:'var(--inchiostro)','stroke-width':1});
+    el(S,'line',{x1:xq-5,y1:yA,x2:xq+5,y2:yA,stroke:'var(--inchiostro)','stroke-width':1});
+    el(S,'line',{x1:xq-5,y1:yB,x2:xq+5,y2:yB,stroke:'var(--inchiostro)','stroke-width':1});
+    el(S,'rect',{x:xq-9,y:(yA+yB)/2-12,width:18,height:22,fill:'#fff'});
+    T(S,xq,(yA+yB)/2+5,'ℓ',{'text-anchor':'middle','font-size':14,'font-style':'italic',fill:'var(--inchiostro)'});
+    var gm=el(S,'g',{});
+    function dis(){
+      var vel=+c.value, E=B*vel, dV=E*l, n=Math.round(vel*0.8);
+      vuota(gm);
+      if(vel>0){
+        var lv=12+60*vel/5;
+        freccia(gm,xb+16,yA-22,xb+16+lv,yA-22,'var(--grigio)',2,7);
+        T(gm,f(xb+22+lv),yA-18,'v',{fill:'var(--grigio)','font-size':13,'font-style':'italic'});
+      }
+      for(var k=0;k<n;k++){
+        T(gm,xb,yA+12+k*13,'−',{'text-anchor':'middle','font-size':14,'font-weight':700,fill:'var(--blu)'});
+        T(gm,xb,yB-2-k*13,'+',{'text-anchor':'middle','font-size':14,'font-weight':700,fill:'var(--rosso)'});
+      }
+      if(vel>0){
+        var L=16+44*vel/5, ym=(yA+yB)/2;
+        freccia(gm,xb+30,ym+L/2,xb+30,ym-L/2,'var(--rosso)',3,8);
+        Vt(gm,xb+48,ym+6,'E','var(--rosso)');
+      }
+      o.innerHTML=v(vel,1)+' m/s; E = '+v(E,2)+' V/m; ΔV = '+v(dV,2)+' V'+(vel>0?'':'<br><span class="ok">barretta ferma: nessun campo</span>');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* Figura B: spira rotante fra i poli. Il campo è orizzontale (da N a S), l'asse di rotazione verticale.
+     theta = angolo fra la normale alla spira e il campo: area esposta = A|cos theta|. */
+  (function(){
+    var S=document.getElementById('fig-b'), c=document.getElementById('cur-b'), o=document.getElementById('val-b');
+    if(!S||!c)return;
+    var cx=220, yt=58, yb=138, w=62, d=10;
+    el(S,'rect',{x:20,y:40,width:70,height:116,rx:4,fill:'var(--rosso)'});
+    T(S,55,105,'N',{'text-anchor':'middle','font-size':22,'font-weight':700,fill:'#fff'});
+    el(S,'rect',{x:350,y:40,width:70,height:116,rx:4,fill:'var(--blu)'});
+    T(S,385,105,'S',{'text-anchor':'middle','font-size':22,'font-weight':700,fill:'#fff'});
+    [60,85,111,136].forEach(function(y){
+      el(S,'line',{x1:92,y1:y,x2:348,y2:y,stroke:'var(--blu)','stroke-width':1.2,opacity:.7});
+      punta(S,124,y,1,0,'var(--blu)',6);punta(S,322,y,1,0,'var(--blu)',6);
+    });
+    Vt(S,320,33,'B','var(--blu)');
+    /* asse di rotazione e collegamento al circuito esterno */
+    el(S,'line',{x1:cx,y1:22,x2:cx,y2:yt-8,stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 3'});
+    el(S,'line',{x1:cx,y1:yb+8,x2:cx,y2:188,stroke:'var(--inchiostro)','stroke-width':2});
+    [176,192].forEach(function(y){el(S,'ellipse',{cx:cx,cy:y,rx:14,ry:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});});
+    /* contatti striscianti e circuito esterno con resistenza */
+    el(S,'path',{d:'M'+(cx+14)+',176 L280,176 L280,232 L250,232',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(S,'path',{d:'M'+(cx-14)+',192 L160,192 L160,232 L190,232',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(S,'rect',{x:190,y:224,width:60,height:16,rx:2,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+    T(S,220,236,'R',{'text-anchor':'middle','font-size':12,'font-style':'italic',fill:'var(--inchiostro)'});
+    T(S,292,218,'circuito esterno',{'font-size':11,fill:'var(--grigio)'});
+    /* freccia di rotazione */
+    el(S,'path',{d:'M198,26 A26,8 0 0 0 246,26',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4});
+    punta(S,246,26,1,-0.6,'var(--inchiostro)',6);
+    T(S,258,24,'ω',{'font-size':14,'font-style':'italic',fill:'var(--inchiostro)'});
+    var gs=el(S,'g',{});
+    function dis(){
+      var th=+c.value, r=th*Math.PI/180, s=Math.sin(r), co=Math.cos(r), fr=Math.abs(co);
+      vuota(gs);
+      var x1=cx-w*s, x2=cx+w*s, dz=d*co;
+      var pts=[[x1,yt+dz],[x2,yt-dz],[x2,yb-dz],[x1,yb+dz]];
+      el(gs,'path',{d:'M'+pts.map(function(p){return f(p[0])+','+f(p[1]);}).join(' L')+' Z',
+        fill:s>=0?'var(--blu-chiaro)':'#e9e3d8','fill-opacity':.85,stroke:'var(--inchiostro)','stroke-width':3,'stroke-linejoin':'round'});
+      var pc=Math.round(fr*100), msg='';
+      if(fr>0.995)msg=' <span class="ok">flusso massimo</span>';
+      else if(fr<0.01)msg=' <span class="ok">flusso nullo</span>';
+      o.innerHTML='θ = '+th+'°; area esposta: '+pc+' % di A'+msg;
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+})();
+</script>
 </body>
 </html>
