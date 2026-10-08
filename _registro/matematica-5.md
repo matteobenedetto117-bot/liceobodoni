@@ -491,6 +491,7 @@ teorema del confronto, a pagina 21.
   caso singolo, senza parametro da far variare. Nessun quesito di maturità: un esercizio
   isolato di crescenza e decrescenza non compare come quesito a sé; la sua applicazione
   più ricca è dentro lo studio di funzione completo, ancora da venire.
+- Revisione: titolo invariato. Tolto il sommario; introduzione di una frase; titoletti «Il teorema», «Esempio», «Senso lato e senso stretto» tenuti. Teorema III in .def con i due casi in elenco e il teorema inverso; testo in frasi complete. Esempio a comparsa: quesito con risultato e quattro passaggi (derivata scomposta, segno dei fattori, tabella dei segni, conclusione), tasto «Mostra tutti i risultati». Tabella senso lato / senso stretto sostituita da un elenco. Correzione: la .nota affermava che con la disuguaglianza stretta la derivata non può annullarsi, suggerendo che f′ > 0 sia necessaria per la crescenza stretta; ora dice che f′ > 0 è sufficiente ma non necessaria, con l'esempio y = x³ (derivata nulla in x = 0, crescente in senso stretto). Esempio riverificato con SymPy (y′ = 2x(6x − 1), zeri 0 e 1/6, segni + − +). Impaginazione a quaderno con script di allineamento. Nessuna figura nella pagina, nessun esempio tolto.
 
 ## Unità 22 — Invertibilità e funzione inversa
 - Parole: 364 su 4 pagine di traccia (85–88).

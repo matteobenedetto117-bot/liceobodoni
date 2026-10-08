@@ -5,23 +5,91 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Monotonia e segno della derivata prima — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
-table.segni{border-collapse:collapse;margin:22px auto;font-family:var(--sans);font-size:.95rem}
-table.segni td{padding:6px 16px;text-align:center;border-bottom:1px solid var(--riga)}
-table.segni td.etichetta{text-align:left;color:var(--grigio);font-size:.85rem}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
 table.segni td.pos{color:var(--blu);font-weight:600}
 table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
 </style>
 </head>
 <body>
@@ -31,69 +99,153 @@ table.segni td.neg{color:var(--rosso);font-weight:600}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Teoremi del calcolo differenziale &middot; Unità 21</p>
   <h1>Monotonia e segno della derivata prima</h1>
-  <p class="sommario">Il segno di $f'(x)$ dice se il grafico sale o scende: è il criterio
-  che rende praticabile lo studio dell'andamento di una funzione senza dover ricorrere
-  ogni volta alla definizione di crescenza.</p>
 </header>
+
+<p>Il segno della derivata prima permette di stabilire in quali intervalli una funzione è crescente e in quali è decrescente.</p>
+
+<div class="barra-ris"><button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button></div>
 
 <h2>Il teorema</h2>
 
 <div class="def"><span class="et">Teorema III</span>
-<p>Data $f(x)$ continua in un intervallo $I$ e derivabile nei punti interni di $I$:</p>
+<p>Sia $f(x)$ continua in un intervallo $I$ e derivabile nei punti interni di $I$.</p>
 <ul>
-<li>se $f'(x)&gt;0$ per ogni $x$ interno a $I$, allora $f(x)$ è crescente in $I$;</li>
-<li>se $f'(x)&lt;0$ per ogni $x$ interno a $I$, allora $f(x)$ è decrescente in $I$.</li>
+<li>Se $f'(x)&gt;0$ per ogni $x$ interno a $I$, allora $f(x)$ è crescente in $I$.</li>
+<li>Se $f'(x)&lt;0$ per ogni $x$ interno a $I$, allora $f(x)$ è decrescente in $I$.</li>
 </ul>
-<p>Vale anche il teorema inverso: se $f(x)$ è crescente, allora $f'(x)\ge 0$; se $f(x)$ è
-decrescente, allora $f'(x)\le 0$.</p></div>
+<p>Vale anche il teorema inverso: se $f(x)$ è crescente, allora $f'(x)\ge 0$; se $f(x)$ è decrescente, allora $f'(x)\le 0$.</p>
+</div>
 
-<p>Il criterio trasforma un confronto fra valori della funzione (la definizione di
-crescenza) in uno studio del segno di $f'(x)$, molto più maneggevole nei casi concreti.</p>
+<p>Il teorema sostituisce il confronto fra i valori della funzione, richiesto dalla definizione di crescenza, con lo studio del segno di $f'(x)$, che nei casi concreti è molto più semplice.</p>
 
 <h2>Esempio</h2>
 
-<p>Determiniamo in quali intervalli la funzione $y=4x^3-x^2+1$ è crescente e in quali è
-decrescente.</p>
+<p>Si determinano gli intervalli in cui la funzione seguente è crescente e quelli in cui è decrescente.</p>
 
-<p>$$y'=12x^2-2x=2x(6x-1)$$</p>
+<div class="es">
+<p class="eq quesito">$$y=4x^3-x^2+1$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$x&lt;0:\ \text{crescente} \qquad 0&lt;x&lt;\tfrac16:\ \text{decrescente} \qquad x&gt;\tfrac16:\ \text{crescente}$$</p>
+</div>
 
-<p>Studiamo il segno imponendo $y'&gt;0$, cioè $2x(6x-1)&gt;0$: il prodotto è positivo dove i
-due fattori hanno lo stesso segno.</p>
-
-<p>$$2x&gt;0 \iff x&gt;0 \qquad\qquad 6x-1&gt;0 \iff x&gt;\tfrac16$$</p>
-
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Si calcola la derivata e la si scompone in fattori.</p>
+<p class="eq">$$y'=12x^2-2x=2x(6x-1)$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Si studia il segno di ciascun fattore.</p>
+<p class="eq">$$2x&gt;0 \iff x&gt;0 \qquad\qquad 6x-1&gt;0 \iff x&gt;\tfrac16$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Il prodotto è positivo dove i due fattori hanno lo stesso segno.</p>
 <table class="segni">
 <tr><td class="etichetta">$2x$</td><td class="neg">&minus;</td><td class="pos">+</td><td class="pos">+</td></tr>
 <tr><td class="etichetta">$6x-1$</td><td class="neg">&minus;</td><td class="neg">&minus;</td><td class="pos">+</td></tr>
 <tr><td class="etichetta">$y'$</td><td class="pos">+</td><td class="neg">&minus;</td><td class="pos">+</td></tr>
-<tr><td></td><td>$x&lt;0$</td><td>$0&lt;x&lt;\tfrac16$</td><td>$x&gt;\tfrac16$</td></tr>
+<tr class="intervalli"><td></td><td>$x&lt;0$</td><td>$0&lt;x&lt;\tfrac16$</td><td>$x&gt;\tfrac16$</td></tr>
 </table>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> Dove $y'$ è positiva la funzione cresce, dove è negativa decresce.</p>
+<p class="eq">$$x&lt;0:\ \text{crescente} \qquad 0&lt;x&lt;\tfrac16:\ \text{decrescente} \qquad x&gt;\tfrac16:\ \text{crescente}$$</p>
+</div>
+</div>
 
-<p>Dove $y'$ è positivo la funzione cresce, dove è negativo decresce:</p>
-
-<p>$$x&lt;0 \Rightarrow \text{crescente} \qquad 0&lt;x&lt;\tfrac16 \Rightarrow \text{decrescente}
-\qquad x&gt;\tfrac16 \Rightarrow \text{crescente}$$</p>
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
 
 <h2>Senso lato e senso stretto</h2>
 
-<p>Il segno della derivata distingue anche due gradi di monotonia:</p>
+<p>Il segno della derivata in un intervallo distingue anche due gradi di monotonia.</p>
 
-<table class="segni">
-<tr><td class="etichetta">$f'(x)\ge 0$</td><td>monotona crescente</td></tr>
-<tr><td class="etichetta">$f'(x)&gt;0$</td><td>monotona crescente in senso stretto</td></tr>
-<tr><td class="etichetta">$f'(x)\le 0$</td><td>monotona decrescente</td></tr>
-<tr><td class="etichetta">$f'(x)&lt;0$</td><td>monotona decrescente in senso stretto</td></tr>
-</table>
+<ul>
+<li>Se $f'(x)\ge 0$, la funzione è monotona crescente; se $f'(x)&gt;0$, è monotona crescente in senso stretto.</li>
+<li>Se $f'(x)\le 0$, la funzione è monotona decrescente; se $f'(x)&lt;0$, è monotona decrescente in senso stretto.</li>
+</ul>
 
 <div class="nota"><span class="et">Attenzione</span>
-<p>Con la disuguaglianza debole ($\ge$, $\le$) la derivata può annullarsi in singoli punti
-isolati senza che la crescenza si interrompa; con la disuguaglianza stretta questo non è
-permesso.</p></div>
-
+<p>La condizione $f'(x)&gt;0$ è sufficiente, ma non necessaria, per la crescenza in senso stretto. Se $f'(x)\ge 0$ e la derivata si annulla solo in punti isolati, la funzione resta crescente in senso stretto: per esempio $y=x^3$ ha derivata nulla in $x=0$ ed è crescente in senso stretto in tutto $\mathbb R$.</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../21-teorema-di-lagrange-e-sue-conseguenze/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema di Lagrange e sue conseguenze</span></a><a class="successiva" href="../23-invertibilita-e-funzione-inversa/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Invertibilità e funzione inversa</span></a></nav>
 <footer><p>Matematica quinta &middot; Teoremi del calcolo differenziale &middot; Unità 21</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.passo table.segni,.comandi,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
