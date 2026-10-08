@@ -183,6 +183,7 @@
 - Parole: 286 su 1 pagina di traccia (p. 33)
 - Rettifica: nessuna, la traccia è corretta.
 - Aggiunta: nessuna. Il riquadro sulla scrittura $\vec{F} = 120$ N riprende il passaggio barrato in rosso della traccia, non aggiunge contenuto.
+- Revisione: titolo invariato. Tolti il sommario e la sezione «Dove si continua»; introduzione di una frase; titoletti «Le due famiglie» e «Come si scrivono» tenuti; grandezza scalare e grandezza vettoriale in .def; i due esempi di una riga (m = 5,6 kg; la forza) scritti nel testo senza titoletto; formule in riquadro; frase colloquiale «la freccia non è un ornamento» riscritta in forma neutra; .nota «Scrittura da evitare» su F⃗ = 120 N; aggiunto il piè di pagina. Nessuna correzione concettuale. Impaginazione a quaderno e script di allineamento. Figura rifatta in SVG da script con cursore sull'angolo della forza: a sinistra la massa 5,6 kg, a destra un corpo con la forza di 120 N che ruota a modulo costante (retta d'azione tratteggiata), «stesso modulo, vettore diverso» in verde. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 23 — Somma di vettori: il metodo punta-coda
 - Parole: 332 su 2 pagine di traccia (34–35)

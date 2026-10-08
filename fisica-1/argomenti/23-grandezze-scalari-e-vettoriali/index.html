@@ -5,21 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grandezze scalari e vettoriali — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.esempi{margin:22px 0;padding:14px 18px;border-left:3px solid var(--rosso);background:#fff}
-.esempi h3{font-family:var(--sans);font-size:1rem;margin:0 0 6px;color:var(--grigio)}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore+.cursore{margin-top:0}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>.eq+p.eq{margin-top:calc(var(--r)*.5)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -28,88 +61,118 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Forze e vettori &middot; Unità 22</p>
   <h1>Grandezze scalari e vettoriali</h1>
-  <p class="sommario">Non tutte le grandezze fisiche si descrivono allo stesso modo: alcune
-  bastano un numero e un'unità di misura, altre richiedono anche una direzione e un verso.
-  Questa divisione si porta dietro una notazione precisa, che conviene fissare subito.</p>
 </header>
+
+<p>Questa unità distingue le grandezze scalari dalle grandezze vettoriali e stabilisce come si scrivono i vettori.</p>
 
 <h2>Le due famiglie</h2>
 
-<p>Una <strong>grandezza scalare</strong> è una grandezza fisica che si scrive con un numero
-e un'unità di misura.</p>
-
-<div class="esempi">
-<h3>Esempio</h3>
-$$m = 5{,}6\ \mathrm{kg}$$
-<p>Sapere che la massa vale $5{,}6\ \mathrm{kg}$ è tutto: non c'è una massa "verso destra".</p>
+<div class="def"><span class="et">Grandezza scalare</span>
+<p>Una grandezza scalare è una grandezza fisica che si descrive completamente con un numero e un'unità di misura.</p>
 </div>
 
-<p>Una <strong>grandezza vettoriale</strong> è una grandezza fisica che si descrive con un
-vettore, cioè con modulo, direzione e verso insieme.</p>
+<p>Per esempio, la massa è una grandezza scalare: per descriverla basta scrivere il suo valore,</p>
 
-<div class="esempi">
-<h3>Esempio</h3>
-<p>La forza.</p>
+<p class="eq">$$m = 5{,}6\ \mathrm{kg}$$</p>
+
+<p>Non esiste una massa diretta verso destra o verso l'alto.</p>
+
+<div class="def"><span class="et">Grandezza vettoriale</span>
+<p>Una grandezza vettoriale è una grandezza fisica che si descrive con un vettore, cioè con modulo, direzione e verso.</p>
 </div>
+
+<p>La forza è una grandezza vettoriale: due forze con la stessa intensità ma con direzione o verso diversi sono forze diverse.</p>
 
 <div class="fig">
-<svg viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="A sinistra una massa di 5,6 chilogrammi indicata da un solo numero; a destra una forza rappresentata da una freccia orientata">
-  <defs>
-    <marker id="fr23" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#b03030"/>
-    </marker>
-  </defs>
-  <line x1="280" y1="20" x2="280" y2="170" stroke="#c9c9c9" stroke-width="1.2"
-        stroke-dasharray="6 5"/>
-  <text x="140" y="38" text-anchor="middle" font-size="13" fill="#2e7d4f">SCALARE</text>
-  <rect x="98" y="72" width="84" height="62" fill="none" stroke="#222" stroke-width="1.8"/>
-  <text x="140" y="110" text-anchor="middle" font-size="14" fill="#222">5,6 kg</text>
-  <text x="140" y="162" text-anchor="middle" font-size="12" fill="#666">basta il numero</text>
-  <text x="420" y="38" text-anchor="middle" font-size="13" fill="#2e7d4f">VETTORIALE</text>
-  <rect x="330" y="72" width="62" height="62" fill="none" stroke="#222" stroke-width="1.8"/>
-  <line x1="392" y1="103" x2="512" y2="103" stroke="#b03030" stroke-width="2.6"
-        marker-end="url(#fr23)"/>
-  <text x="452" y="92" text-anchor="middle" font-size="15" fill="#b03030"
-        font-style="italic">F</text>
-  <line x1="444" y1="78" x2="460" y2="78" stroke="#b03030" stroke-width="1.5"/>
-  <path d="M458,74 L464,78 L458,82" fill="none" stroke="#b03030" stroke-width="1.3"/>
-  <text x="420" y="162" text-anchor="middle" font-size="12" fill="#666">numero, direzione e verso</text>
-</svg>
-<p class="did">A sinistra il numero esaurisce l'informazione; a destra no.</p>
+<svg id="fig-a" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">angolo della forza</label><input id="cur-a" type="range" min="0" max="345" step="15" value="0"><output id="val-a" for="cur-a"></output></div>
+<p class="did">La massa è descritta da un solo numero; il cursore fa ruotare la forza di 120 N, che cambia direzione e verso mantenendo lo stesso modulo.</p>
 </div>
 
 <h2>Come si scrivono</h2>
 
-<p>Le grandezze vettoriali si scrivono con una piccola freccia sopra il simbolo che le
-rappresenta:</p>
+<p>Una grandezza vettoriale si indica con una piccola freccia sopra il simbolo che la rappresenta:</p>
 
-$$\vec{F}$$
+<p class="eq">$$\vec{F}$$</p>
 
-<p>La freccia non è un ornamento: dice che quel simbolo non sta per un numero, ma per
-l'intero vettore, direzione e verso compresi.</p>
+<p>La freccia indica che il simbolo rappresenta l'intero vettore, con modulo, direzione e verso, e non soltanto un numero.</p>
 
-<p>Se vogliamo scrivere solo il <strong>modulo</strong> del vettore, cioè la sua intensità,
-togliamo la freccia oppure racchiudiamo il simbolo fra due barrette:</p>
+<p>Per indicare solo il modulo del vettore, cioè la sua intensità, si toglie la freccia oppure si racchiude il simbolo fra due barrette verticali. Le due scritture seguenti hanno lo stesso significato:</p>
 
-$$F = 120\ \mathrm{N} \qquad\qquad |\vec{F}| = 120\ \mathrm{N}$$
+<p class="eq">$$F = 120\ \mathrm{N} \qquad\qquad |\vec{F}| = 120\ \mathrm{N}$$</p>
 
-<p>Le due scritture dicono la stessa cosa.</p>
-
-<div class="nota">
-<strong>Non ha senso scrivere</strong> $\vec{F} = 120\ \mathrm{N}$. A sinistra c'è un
-vettore, a destra un numero: sono due oggetti di natura diversa e non possono essere
-uguali. Un numero può essere uguale solo al modulo del vettore, mai al vettore stesso.
-</div>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Stabilito che cosa sono i vettori e come si indicano, il passo successivo è imparare a
-combinarli: la somma di due o più vettori applicati allo stesso corpo, con il metodo
-punta-coda e con la regola del parallelogramma.</p>
-</div>
+<div class="nota"><span class="et">Scrittura da evitare</span>
+<p>Non ha senso scrivere $\vec{F} = 120\ \mathrm{N}$: a sinistra c'è un vettore, a destra un numero. Un numero può essere uguale al modulo di un vettore, mai al vettore stesso.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../22-forza-e-vettore/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Forza e vettore</span></a><a class="successiva" href="../24-somma-di-vettori-il-metodo-punta-coda/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Somma di vettori: il metodo punta-coda</span></a></nav>
+<footer><p>Fisica prima &middot; Forze e vettori &middot; Unità 22</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  /* simbolo F con la freccetta sopra, centrato in (x,y) */
+  function Fvett(p,x,y,col){
+    T(p,x,y+5,'F',{'text-anchor':'middle','font-size':15,'font-style':'italic','font-weight':700,fill:col});
+    freccia(p,x-6,y-11,x+8,y-11,col,1.3,4);
+  }
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    /* pannello sinistro: grandezza scalare */
+    T(S,95,24,'grandezza scalare',{'text-anchor':'middle',fill:'var(--grigio)'});
+    el(S,'rect',{x:58,y:91,width:74,height:54,rx:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    T(S,95,123,'5,6 kg',{'text-anchor':'middle','font-size':14,fill:'var(--inchiostro)'});
+    el(S,'line',{x1:190,y1:20,x2:190,y2:205,stroke:'var(--riga)','stroke-width':1.2,'stroke-dasharray':'6 5'});
+    /* pannello destro: grandezza vettoriale; corpo al centro, forza di 120 N lunga L px */
+    T(S,305,24,'grandezza vettoriale',{'text-anchor':'middle',fill:'var(--grigio)'});
+    var Cx=305, Cy=118, L=60, h=16;
+    var gr=el(S,'g',{});
+    el(S,'rect',{x:Cx-h,y:Cy-h,width:2*h,height:2*h,rx:3,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.8});
+    var gf=el(S,'g',{});
+    function dis(){
+      var a=+c.value, r=a*Math.PI/180, ux=Math.cos(r), uy=-Math.sin(r);
+      /* la freccia parte dal bordo del quadrato nella direzione della forza */
+      var k=h/Math.max(Math.abs(ux),Math.abs(uy)), x1=Cx+ux*k, y1=Cy+uy*k;
+      vuota(gr);vuota(gf);
+      el(gr,'line',{x1:f(Cx-ux*70),y1:f(Cy-uy*70),x2:f(Cx+ux*(k+L+8)),y2:f(Cy+uy*(k+L+8)),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 4'});
+      freccia(gf,x1,y1,x1+ux*L,y1+uy*L,'var(--rosso)',3,9);
+      /* etichetta a lato della freccia, dalla parte opposta all'asse tratteggiato */
+      var px=-uy, py=ux; if(py>0||(py===0&&px<0)){px=-px;py=-py;}
+      Fvett(gf,x1+ux*L*.55+px*18,y1+uy*L*.55+py*18,'var(--rosso)');
+      T(gf,205,208,'F = 120 N',{'font-size':13,fill:'var(--inchiostro)'});
+      o.innerHTML=a+'°: '+(a===0?'forza verso destra':'<span class="ok">stesso modulo, vettore diverso</span>');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+})();
+</script>
 </body>
 </html>
