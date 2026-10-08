@@ -5,21 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La barretta in moto: analisi della fem indotta — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.risultato{background:#eef6f0;border:1px solid var(--verde);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.risultato-et{text-align:center;font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--verde);margin:-10px 0 20px}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.interattivo label{font-family:var(--sans);font-size:.85rem;color:var(--inchiostro);display:block;margin-bottom:6px}
-.interattivo input[type=range]{width:100%}
-.interattivo .valori{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
-.interattivo .valori span.etichetta{color:var(--grigio)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+#val-b{text-align:center}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
 <body>
@@ -29,160 +62,187 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 21</p>
   <h1>La barretta in moto: analisi della fem indotta</h1>
-  <p class="sommario">Applichiamo la legge di Faraday-Neumann-Lenz al caso più semplice di
-  generatore: una barretta che scorre su due binari conduttori dentro un campo magnetico. Da
-  qui ricaviamo la fem indotta, la forza che si oppone al moto e il modo in cui la potenza
-  meccanica spesa si trasforma in potenza elettrica.</p>
 </header>
+
+<p>Questa unità applica la legge di Faraday-Neumann-Lenz a una barretta conduttrice che scorre su due binari immersi in un campo magnetico uniforme: si ricavano la fem e la corrente indotte, la forza che frena la barretta e il bilancio fra potenza meccanica e potenza elettrica.</p>
 
 <h2>Fem indotta dal moto della barretta</h2>
 
-<div class="fig">
-<svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f22a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f22b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="70" y1="60" x2="480" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="200" x2="480" y2="200" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="60" x2="70" y2="200" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="45" cy="130" r="22" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="45" y="134" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--inchiostro)">lampadina</text>
-<line x1="70" y1="108" x2="70" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="200" x2="70" y2="152" stroke="var(--inchiostro)" stroke-width="2"/>
-<g fill="var(--blu)">
-<circle cx="130" cy="90" r="3"/><circle cx="190" cy="90" r="3"/><circle cx="250" cy="90" r="3"/><circle cx="310" cy="90" r="3"/>
-<circle cx="130" cy="130" r="3"/><circle cx="190" cy="130" r="3"/><circle cx="250" cy="130" r="3"/><circle cx="310" cy="130" r="3"/>
-<circle cx="130" cy="170" r="3"/><circle cx="190" cy="170" r="3"/><circle cx="250" cy="170" r="3"/><circle cx="310" cy="170" r="3"/>
-</g>
-<line x1="230" y1="60" x2="230" y2="200" stroke="var(--grigio)" stroke-width="2" stroke-dasharray="5 4"/>
-<text x="230" y="218" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">posizione iniziale</text>
-<line x1="340" y1="60" x2="340" y2="200" stroke="var(--rosso)" stroke-width="3"/>
-<text x="340" y="218" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">barretta</text>
-<line x1="230" y1="240" x2="340" y2="240" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="230" y1="234" x2="230" y2="246" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="340" y1="234" x2="340" y2="246" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="285" y="256" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">v&#916;t</text>
-<line x1="340" y1="30" x2="400" y2="30" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f22a)"/>
-<text x="370" y="20" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">v</text>
-<line x1="500" y1="60" x2="500" y2="200" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="494" y1="60" x2="506" y2="60" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="494" y1="200" x2="506" y2="200" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="520" y="134" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#8467;</text>
-<path d="M92,68 A28,28 0 0 1 92,192" fill="none" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f22b)"/>
-<text x="108" y="130" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">i</text>
-</svg>
-<p class="did">Il campo $\vec B$ è uscente dal piano del circuito (i punti). Facendo scorrere la
-barretta verso destra con velocità $v$ aumento l'area racchiusa dal circuito, quindi il flusso
-$\Phi(\vec B)$: si genera una corrente indotta $i$ che si oppone a questo aumento.</p>
-</div>
-
-<p>Il flusso è $\Phi(\vec B) = B\cdot A$; con $B$ costante, la sua variazione dipende solo dalla
-variazione di area. Nel tempo $\Delta t$ la barretta percorre $v\Delta t$, quindi l'area spazzata
-è $\Delta A = v\Delta t \cdot \ell$:</p>
-
-$$\Delta\Phi(\vec B) = B\,\Delta A = B\,v\Delta t\,\ell$$
-
-<p>Dividendo per $\Delta t$ si ottiene l'intensità della fem indotta dal moto della barretta:</p>
-
-<div class="risultato">$$\varepsilon = \frac{\Delta\Phi(\vec B)}{\Delta t} = \frac{Bv\ell\,\Delta t}{\Delta t} = Bv\ell$$</div>
-<p class="risultato-et">Fem indotta dal moto di una barretta in un campo magnetico</p>
-
-<p>Per la legge di Lenz la corrente indotta deve generare un campo entrante, che si oppone
-all'aumento del flusso uscente: scorre quindi in senso orario. Con $i = \Delta V/R$, la sua
-intensità è</p>
-
-$$i_{\text{ind}} = \frac{\varepsilon}{R} = \frac{Bv\ell}{R}$$
-
-<h2>Forza magnetica sulla barretta e bilancio di potenza</h2>
+<p>La barretta, di lunghezza $\ell$, scorre con velocità costante $v$ su due binari collegati da un conduttore di resistenza $R$ (per esempio una lampadina). Il campo $\vec B$ è uniforme e perpendicolare al piano del circuito.</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f22r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="f22o" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#c47a1f"/></marker>
-<marker id="f22g" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="60" y1="60" x2="300" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="190" x2="300" y2="190" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="60" x2="60" y2="190" stroke="var(--inchiostro)" stroke-width="2"/>
-<g fill="var(--blu)">
-<circle cx="120" cy="90" r="3"/><circle cx="180" cy="90" r="3"/>
-<circle cx="120" cy="125" r="3"/><circle cx="180" cy="125" r="3"/>
-<circle cx="120" cy="160" r="3"/><circle cx="180" cy="160" r="3"/>
-</g>
-<line x1="230" y1="60" x2="230" y2="190" stroke="var(--inchiostro)" stroke-width="3.4"/>
-<line x1="230" y1="45" x2="180" y2="45" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#f22r)"/>
-<text x="200" y="35" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F&#8339;</text>
-<line x1="230" y1="80" x2="280" y2="80" stroke="#c47a1f" stroke-width="2.6" marker-end="url(#f22o)"/>
-<text x="262" y="70" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="#c47a1f">F&#8337;&#7605;&#7524;</text>
-<path d="M76,68 A28,28 0 0 1 214,68" fill="none" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#f22g)"/>
-<text x="145" y="46" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">i</text>
-<path d="M214,182 A28,28 0 0 1 76,182" fill="none" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#f22g)"/>
-<text x="145" y="212" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">i</text>
-</svg>
-<p class="did">La corrente indotta, immersa nel campo $\vec B$, subisce a sua volta una forza
-magnetica $F_M$ che si oppone al moto. Per mantenere la barretta a velocità costante occorre
-una forza esterna $F_{\text{est}}$ uguale e contraria.</p>
+<svg id="fig-a" viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">tempo</label><input id="cur-a" type="range" min="0" max="30" step="1" value="10"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Il campo $\vec B$ esce dal piano del circuito (i punti); la barretta si sposta verso destra e l'area racchiusa dal circuito aumenta della parte colorata ($B = 0{,}50\ \text{T}$, $\ell = 0{,}20\ \text{m}$, $v = 2{,}0\ \text{m/s}$).</p>
 </div>
 
-<p>La forza magnetica sulla barretta percorsa da corrente è $F_M = iB\ell$; sostituendo
-$i = Bv\ell/R$:</p>
+<p>Il flusso attraverso il circuito è $\Phi(\vec B) = B\cdot A$. Poiché $B$ è costante, il flusso varia solo perché varia l'area. Nell'intervallo $\Delta t$ la barretta percorre la distanza $v\Delta t$, quindi l'area aumenta di $\Delta A = v\Delta t\cdot\ell$:</p>
 
-<div class="risultato">$$F_M = iB\ell = \frac{Bv\ell}{R}\cdot B\ell = \frac{B^2v\ell^2}{R}$$</div>
-<p class="risultato-et">Forza magnetica frenante</p>
+<p class="eq">$$\Delta\Phi(\vec B) = B\,\Delta A = B\,v\,\Delta t\,\ell$$</p>
 
-<p>Poiché $F_M$ si oppone al moto, mantenere la barretta a velocità costante richiede
-$F_{\text{est}} = F_M$. Confrontiamo ora la potenza elettrica generata nel circuito con la
-potenza meccanica spesa dalla forza esterna:</p>
+<p>Dividendo per $\Delta t$ si ottiene l'intensità della fem indotta, che non dipende dall'intervallo scelto:</p>
 
-$$P_{\text{elettrica}} = i^2R = \left(\frac{Bv\ell}{R}\right)^{\!2} R = \frac{B^2v^2\ell^2}{R}$$
-
-$$P_{\text{meccanica}} = F_{\text{est}}\cdot v = \frac{B^2v\ell^2}{R}\cdot v = \frac{B^2v^2\ell^2}{R}$$
-
-<p>Le due potenze coincidono: tutta la potenza meccanica spesa per trascinare la barretta si
-ritrova come potenza elettrica dissipata nel circuito.</p>
-
-<div class="interattivo">
-<label for="slider-v">Velocità della barretta $v$ (con $B = 0{,}50\ \text{T}$, $\ell = 0{,}20\ \text{m}$, $R = 2{,}0\ \Omega$): <span id="v-val">2,0</span> m/s</label>
-<input type="range" id="slider-v" min="0" max="5" step="0.1" value="2">
-<div class="valori">
-<span class="etichetta">Fem indotta $\varepsilon$</span><span id="eps-val">—</span>
-<span class="etichetta">Corrente indotta $i$</span><span id="i-val">—</span>
-<span class="etichetta">Forza $F_M = F_{\text{est}}$</span><span id="f-val">—</span>
-<span class="etichetta">Potenza $P$</span><span id="p-val">—</span>
-</div>
+<div class="def"><span class="et">Fem indotta in una barretta in moto</span>
+<p class="eq">$$\varepsilon = \frac{\Delta\Phi(\vec B)}{\Delta t} = \frac{B\,v\,\Delta t\,\ell}{\Delta t} = B\,v\,\ell$$</p>
+<p>dove $B$ è l'intensità del campo in tesla, $v$ la velocità della barretta in m/s e $\ell$ la sua lunghezza in metri; la fem risulta in volt.</p>
 </div>
 
-<script>
-(function(){
-  var B=0.5, l=0.2, R=2.0;
-  var slider=document.getElementById('slider-v');
-  function agg(){
-    var v=parseFloat(slider.value);
-    document.getElementById('v-val').textContent=v.toFixed(1).replace('.',',');
-    var eps=B*v*l, i=eps/R, F=B*B*v*l*l/R, P=B*B*v*v*l*l/R;
-    document.getElementById('eps-val').textContent=eps.toFixed(3).replace('.',',')+' V';
-    document.getElementById('i-val').textContent=i.toFixed(3).replace('.',',')+' A';
-    document.getElementById('f-val').textContent=F.toFixed(4).replace('.',',')+' N';
-    document.getElementById('p-val').textContent=P.toFixed(4).replace('.',',')+' W';
-  }
-  slider.addEventListener('input',agg);
-  agg();
-})();
-</script>
+<h2>Corrente indotta</h2>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 22 riprende il campo elettrico indotto all'interno della barretta e introduce i
-generatori di corrente basati su una spira rotante.</li>
-</ul>
+<p>Per la legge di Lenz la corrente indotta genera, all'interno del circuito, un campo entrante nel piano, che si oppone all'aumento del flusso uscente. Nella figura la corrente circola quindi in senso orario. Se $R$ è la resistenza totale del circuito, la sua intensità è</p>
+
+<p class="eq">$$i_{\text{ind}} = \frac{\varepsilon}{R} = \frac{B\,v\,\ell}{R}$$</p>
+
+<h2>Forza magnetica frenante</h2>
+
+<p>La barretta è percorsa dalla corrente indotta ed è immersa nel campo $\vec B$, quindi subisce una forza magnetica $F_M = i B\ell$. Sostituendo l'espressione della corrente si ottiene</p>
+
+<p class="eq">$$F_M = i\,B\,\ell = \frac{B\,v\,\ell}{R}\cdot B\,\ell = \frac{B^2\,v\,\ell^2}{R}$$</p>
+
+<p>La forza magnetica è opposta alla velocità e tende a fermare la barretta. Per mantenerla in moto a velocità costante, trascurando l'attrito, serve una forza esterna $F_{\text{est}}$ uguale e contraria a $F_M$.</p>
+
+<div class="fig">
+<svg id="fig-b" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-b">velocità $v$</label><input id="cur-b" type="range" min="0" max="5" step="0.1" value="2"><output id="val-b" for="cur-b"></output></div>
+<p class="did">La forza magnetica $F_M$ (rossa) e la forza esterna $F_{\text{est}}$ crescono in proporzione alla velocità ($B = 0{,}50\ \text{T}$, $\ell = 0{,}20\ \text{m}$, $R = 2{,}0\ \Omega$).</p>
 </div>
+
+<h2>Bilancio di potenza</h2>
+
+<p>La potenza elettrica dissipata nella resistenza del circuito è</p>
+
+<p class="eq">$$P_{\text{elettrica}} = i^2R = \left(\frac{B\,v\,\ell}{R}\right)^{\!2} R = \frac{B^2\,v^2\,\ell^2}{R}$$</p>
+
+<p>La potenza meccanica spesa dalla forza esterna è il prodotto della forza per la velocità:</p>
+
+<p class="eq">$$P_{\text{meccanica}} = F_{\text{est}}\cdot v = \frac{B^2\,v\,\ell^2}{R}\cdot v = \frac{B^2\,v^2\,\ell^2}{R}$$</p>
+
+<p>Le due potenze coincidono: tutta la potenza meccanica spesa per trascinare la barretta si trasforma in potenza elettrica dissipata nel circuito.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../21-legge-di-faraday-neumann-lenz/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Legge di Faraday-Neumann-Lenz</span></a><a class="successiva" href="../23-campo-elettrico-indotto-e-generatori-di-corrente/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Campo elettrico indotto e generatori di corrente</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 21</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function v(n,d){return (+n).toFixed(d).replace('.',',');}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function Tsub(p,x,y,base,sub,a){var t=T(p,x,y,base,a);el(t,'tspan',{'font-size':9,dy:3,'font-style':'normal'},sub);return t;}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+
+  /* Circuito: lato sinistro con la resistenza R in x = xs, binari a y = yA e y = yB.
+     Scala: l = 0,20 m corrisponde a yB - yA = 120 px, quindi 600 px per metro. */
+  function circuito(S,xs,yA,yB,xfine){
+    var g=el(S,'g',{});
+    for(var x=xs+30;x<xfine;x+=36)for(var y=yA+20;y<yB;y+=40)el(g,'circle',{cx:x,cy:y,r:2.6,fill:'var(--blu)'});
+    el(S,'line',{x1:xs,y1:yA,x2:xfine,y2:yA,stroke:'var(--inchiostro)','stroke-width':2});
+    el(S,'line',{x1:xs,y1:yB,x2:xfine,y2:yB,stroke:'var(--inchiostro)','stroke-width':2});
+    var ym=(yA+yB)/2;
+    el(S,'line',{x1:xs,y1:yA,x2:xs,y2:ym-18,stroke:'var(--inchiostro)','stroke-width':2});
+    el(S,'line',{x1:xs,y1:ym+18,x2:xs,y2:yB,stroke:'var(--inchiostro)','stroke-width':2});
+    el(S,'rect',{x:xs-7,y:ym-18,width:14,height:36,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8,rx:2});
+    T(S,xs-12,ym+5,'R',{'text-anchor':'end','font-size':13,'font-style':'italic',fill:'var(--inchiostro)'});
+    return g;
+  }
+  /* corrente in senso orario: verso destra sul binario alto, verso il basso nella barretta, verso sinistra sul binario basso, verso l'alto nella resistenza */
+  function corrente(g,xs,yA,yB,xb){
+    var c='var(--verde)', xm=(xs+xb)/2;
+    punta(g,xm,yA,1,0,c,8);punta(g,xm,yB,-1,0,c,8);punta(g,xs,yA+16,0,-1,c,8);
+    T(g,xm,yA-8,'i',{fill:c,'font-size':14,'font-style':'italic','font-weight':700,'text-anchor':'middle'});
+  }
+
+  /* Figura A: area spazzata dalla barretta nel tempo */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var xs=40, yA=40, yB=160, x0=150, px=600, B=0.50, l=0.20, vel=2.0;
+    var gArea=el(S,'g',{});
+    circuito(S,xs,yA,yB,405);
+    el(S,'line',{x1:x0,y1:yA,x2:x0,y2:yB,stroke:'var(--grigio)','stroke-width':1.6,'stroke-dasharray':'5 4'});
+    /* quota l a destra */
+    el(S,'line',{x1:418,y1:yA,x2:418,y2:yB,stroke:'var(--inchiostro)','stroke-width':1});
+    el(S,'line',{x1:413,y1:yA,x2:423,y2:yA,stroke:'var(--inchiostro)','stroke-width':1});
+    el(S,'line',{x1:413,y1:yB,x2:423,y2:yB,stroke:'var(--inchiostro)','stroke-width':1});
+    T(S,428,(yA+yB)/2+5,'ℓ',{'font-size':14,'font-style':'italic',fill:'var(--inchiostro)'});
+    var gm=el(S,'g',{});
+    function dis(){
+      var t=c.value*0.005, dx=vel*t*px, xb=x0+dx;
+      vuota(gArea);vuota(gm);
+      if(dx>0)el(gArea,'rect',{x:x0,y:yA,width:f(dx),height:yB-yA,fill:'#f6e4e2'});
+      el(gm,'line',{x1:f(xb),y1:yA-8,x2:f(xb),y2:yB+8,stroke:'var(--inchiostro)','stroke-width':4,'stroke-linecap':'round'});
+      freccia(gm,xb+6,yA-18,xb+40,yA-18,'var(--grigio)',2,7);
+      T(gm,f(xb+46),yA-14,'v',{fill:'var(--grigio)','font-size':13,'font-style':'italic'});
+      punta(gm,xb,yA+18,0,1,'var(--verde)',8);
+      corrente(gm,xs,yA,yB,xb);
+      if(dx>14){
+        el(gm,'line',{x1:x0,y1:yB+22,x2:f(xb),y2:yB+22,stroke:'var(--inchiostro)','stroke-width':1});
+        el(gm,'line',{x1:x0,y1:yB+17,x2:x0,y2:yB+27,stroke:'var(--inchiostro)','stroke-width':1});
+        el(gm,'line',{x1:f(xb),y1:yB+17,x2:f(xb),y2:yB+27,stroke:'var(--inchiostro)','stroke-width':1});
+        T(gm,f((x0+xb)/2),yB+42,'vΔt',{'text-anchor':'middle','font-size':13,fill:'var(--inchiostro)'});
+      }
+      var dA=vel*t*l, dP=B*dA;
+      o.innerHTML=t===0?'Δt = 0 s: sposta il cursore':'Δt = '+v(t,3)+' s; ΔA = '+v(dA,3)+' m²; ΔΦ = '+v(dP,4)+' Wb; <span class="ok">ε = ΔΦ/Δt = '+v(dP/t,2)+' V</span>';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* Figura B: forza magnetica e forza esterna in funzione della velocità */
+  (function(){
+    var S=document.getElementById('fig-b'), c=document.getElementById('cur-b'), o=document.getElementById('val-b');
+    if(!S||!c)return;
+    var xs=60, yA=45, yB=165, xb=250, B=0.50, l=0.20, R=2.0, Fmax=B*B*5*l*l/R, Lmax=110;
+    circuito(S,xs,yA,yB,400);
+    el(S,'line',{x1:xb,y1:yA-8,x2:xb,y2:yB+8,stroke:'var(--inchiostro)','stroke-width':4,'stroke-linecap':'round'});
+    var gm=el(S,'g',{});
+    function dis(){
+      var vel=+c.value, eps=B*vel*l, i=eps/R, F=B*B*vel*l*l/R, P=F*vel, L=Lmax*F/Fmax;
+      vuota(gm);
+      if(vel>0){
+        var lv=10+60*vel/5;
+        freccia(gm,xb+6,yA-20,xb+6+lv,yA-20,'var(--grigio)',2,7);
+        T(gm,f(xb+12+lv),yA-16,'v',{fill:'var(--grigio)','font-size':13,'font-style':'italic'});
+        punta(gm,xb,yA+18,0,1,'var(--verde)',8);
+        corrente(gm,xs,yA,yB,xb);
+        var ym=(yA+yB)/2;
+        if(L>=4){
+          freccia(gm,xb,ym-14,xb-L,ym-14,'var(--rosso)',3,8);
+          Tsub(gm,f(xb-L-4),ym-10,'F','M',{fill:'var(--rosso)','font-size':13,'font-style':'italic','font-weight':700,'text-anchor':'end'});
+          freccia(gm,xb,ym+16,xb+L,ym+16,'var(--inchiostro)',3,8);
+          Tsub(gm,f(xb+L+4),ym+20,'F','est',{fill:'var(--inchiostro)','font-size':13,'font-style':'italic','font-weight':700});
+        }
+      }
+      o.innerHTML=v(vel,1)+' m/s<br>ε = '+v(eps,2)+' V; i = '+v(i,2)+' A; F = '+v(F,3)+' N; P = '+v(P,3)+' W'+(vel>0?'':'<br><span class="ok">barretta ferma: nessuna corrente</span>');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+})();
+</script>
 </body>
 </html>
