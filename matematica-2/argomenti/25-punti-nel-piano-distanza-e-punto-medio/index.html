@@ -5,16 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Punti nel piano: distanza e punto medio — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);font-weight:600}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h3{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -24,94 +54,272 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Piano cartesiano e retta &middot; Unità 22</p>
   <h1>Punti nel piano: distanza e punto medio</h1>
-  <p class="sommario">Il piano cartesiano associa a ogni punto una coppia ordinata di numeri, così
-  da poter trattare con i calcoli ciò che finora si vedeva solo nel disegno. Da questa
-  corrispondenza nascono due strumenti che serviranno per tutta la geometria analitica: la
-  distanza fra due punti e il punto medio di un segmento.</p>
 </header>
 
+<p>L'unità introduce le coordinate dei punti nel piano cartesiano e ricava le formule per la distanza fra due punti e per il punto medio di un segmento.</p>
+
 <h2>Il piano cartesiano</h2>
-<p>Due rette perpendicolari, l'asse $x$ orizzontale e l'asse $y$ verticale, dividono il piano in
-quattro quadranti, numerati in senso antiorario a partire da quello in alto a destra. Ogni punto
-è individuato da una coppia ordinata di coordinate, l'ascissa e l'ordinata: $A(x_A,y_A)$.</p>
+<p>Il piano cartesiano è formato da due rette perpendicolari: l'asse $x$, orizzontale, e l'asse $y$, verticale. I due assi dividono il piano in quattro quadranti, numerati in senso antiorario a partire da quello in alto a destra.</p>
+<p>Ogni punto è individuato da una coppia ordinata di numeri, le sue coordinate: la prima è l'ascissa, la seconda è l'ordinata. Per un punto $A$ si scrive $A(x_A,y_A)$.</p>
+
 <div class="fig">
-<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="fq" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16283d"/></marker></defs>
-<line x1="20" y1="100" x2="240" y2="100" stroke="#16283d" stroke-width="1.6" marker-end="url(#fq)"/>
-<line x1="130" y1="190" x2="130" y2="10" stroke="#16283d" stroke-width="1.6" marker-end="url(#fq)"/>
-<text x="228" y="92" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">x</text>
-<text x="138" y="22" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">y</text>
-<text x="175" y="60" font-family="Segoe UI, sans-serif" font-size="15" fill="#6d7280">I</text>
-<text x="80" y="60" font-family="Segoe UI, sans-serif" font-size="15" fill="#6d7280">II</text>
-<text x="80" y="145" font-family="Segoe UI, sans-serif" font-size="15" fill="#6d7280">III</text>
-<text x="175" y="145" font-family="Segoe UI, sans-serif" font-size="15" fill="#6d7280">IV</text>
-</svg>
+<svg id="g-quadranti" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Assi cartesiani e quattro quadranti"></svg>
+<p class="did">Gli assi dividono il piano in quattro quadranti, numerati da I a IV in senso antiorario.</p>
 </div>
 
 <h2>Distanza fra due punti</h2>
-<p>La distanza $\overline{AB}$ fra due punti dipende dalla loro posizione reciproca; nei casi
-particolari il calcolo si riduce a una semplice differenza, nel caso generale interviene il
-teorema di Pitagora.</p>
+<p>La distanza $\overline{AB}$ fra due punti si calcola in modo diverso secondo la loro posizione reciproca. Nei casi particolari basta una differenza di coordinate; nel caso generale interviene il teorema di Pitagora.</p>
 
-<div class="regola"><p>Stessa ordinata (segmento orizzontale): $$\overline{AB}=|x_B-x_A|$$</p></div>
-<div class="fig">
-<svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="90" x2="200" y2="90" stroke="#6d7280" stroke-width="1.2"/>
-<line x1="30" y1="90" x2="30" y2="10" stroke="#6d7280" stroke-width="1.2"/>
-<circle cx="70" cy="40" r="4" fill="#b3392f"/><text x="55" y="30" font-size="13" fill="#b3392f">A(2,3)</text>
-<circle cx="160" cy="40" r="4" fill="#b3392f"/><text x="150" y="30" font-size="13" fill="#b3392f">B(5,3)</text>
-<line x1="70" y1="40" x2="160" y2="40" stroke="#2f6b4f" stroke-width="1.8"/>
-</svg>
-</div>
-<div class="esempio"><p>$A(2,3)$, $B(5,3)$: $\overline{AB}=|5-2|=3$</p></div>
+<h3>Punti con la stessa ordinata</h3>
+<p>Se due punti hanno la stessa ordinata, il segmento che li unisce è orizzontale. La sua lunghezza è il valore assoluto della differenza delle ascisse, che rende il risultato positivo anche quando $B$ si trova a sinistra di $A$.</p>
+<p class="eq">$$\overline{AB}=|x_B-x_A|$$</p>
+<p>Per esempio, con $A(2,3)$ e $B(5,3)$ si ottiene:</p>
+<p class="eq">$$\overline{AB}=|5-2|=3$$</p>
 
-<div class="regola"><p>Stessa ascissa (segmento verticale): $$\overline{AB}=|y_B-y_A|$$</p></div>
 <div class="fig">
-<svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="90" x2="200" y2="90" stroke="#6d7280" stroke-width="1.2"/>
-<line x1="90" y1="90" x2="90" y2="10" stroke="#6d7280" stroke-width="1.2"/>
-<circle cx="90" cy="70" r="4" fill="#b3392f"/><text x="98" y="74" font-size="13" fill="#b3392f">A(2,1)</text>
-<circle cx="90" cy="20" r="4" fill="#b3392f"/><text x="98" y="24" font-size="13" fill="#b3392f">B(2,4)</text>
-<line x1="90" y1="70" x2="90" y2="20" stroke="#2f6b4f" stroke-width="1.8"/>
-</svg>
+<svg id="g-oriz" viewBox="0 0 340 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Segmento orizzontale fra A e B"></svg>
+<div class="cursore"><label for="c-oriz">$x_B$</label><input id="c-oriz" type="range" min="-1" max="7" step="1" value="5"><span class="val" id="v-oriz"></span></div>
+<p class="did">Il punto $B$ si muove sulla retta orizzontale che passa per $A$, e la distanza è sempre la differenza delle ascisse in valore assoluto.</p>
 </div>
-<div class="esempio"><p>$A(2,1)$, $B(2,4)$: $\overline{AB}=|4-1|=3$</p></div>
 
-<div class="regola"><p>Ascisse e ordinate qualsiasi: i due segmenti $|x_B-x_A|$ e $|y_B-y_A|$ sono i cateti
-di un triangolo rettangolo di cui $\overline{AB}$ è l'ipotenusa.
-$$\overline{AB}=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$$</p></div>
+<h3>Punti con la stessa ascissa</h3>
+<p>Se due punti hanno la stessa ascissa, il segmento che li unisce è verticale. La sua lunghezza è il valore assoluto della differenza delle ordinate.</p>
+<p class="eq">$$\overline{AB}=|y_B-y_A|$$</p>
+<p>Per esempio, con $A(2,1)$ e $B(2,4)$ si ottiene:</p>
+<p class="eq">$$\overline{AB}=|4-1|=3$$</p>
+
 <div class="fig">
-<svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="120" x2="200" y2="120" stroke="#6d7280" stroke-width="1.2"/>
-<line x1="30" y1="120" x2="30" y2="10" stroke="#6d7280" stroke-width="1.2"/>
-<circle cx="60" cy="90" r="4" fill="#b3392f"/><text x="45" y="80" font-size="13" fill="#b3392f">A(2,2)</text>
-<circle cx="150" cy="30" r="4" fill="#b3392f"/><text x="140" y="20" font-size="13" fill="#b3392f">B(5,4)</text>
-<line x1="60" y1="90" x2="150" y2="30" stroke="#1f4e79" stroke-width="1.8"/>
-<line x1="60" y1="90" x2="150" y2="90" stroke="#b3392f" stroke-width="1.4" stroke-dasharray="4,3"/>
-<line x1="150" y1="90" x2="150" y2="30" stroke="#b3392f" stroke-width="1.4" stroke-dasharray="4,3"/>
-</svg>
+<svg id="g-vert" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Segmento verticale fra A e B"></svg>
+<div class="cursore"><label for="c-vert">$y_B$</label><input id="c-vert" type="range" min="-1" max="5" step="1" value="4"><span class="val" id="v-vert"></span></div>
+<p class="did">Il punto $B$ si muove sulla retta verticale che passa per $A$, e la distanza è sempre la differenza delle ordinate in valore assoluto.</p>
 </div>
-<div class="esempio"><p>$A(2,2)$, $B(5,4)$: $\overline{AB}=\sqrt{2^2+3^2}=\sqrt{4+9}=\sqrt{13}$</p></div>
+
+<h3>Punti con ascisse e ordinate diverse</h3>
+<p>Se i due punti hanno ascisse e ordinate diverse, il segmento $AB$ è obliquo. I segmenti di lunghezza $|x_B-x_A|$ e $|y_B-y_A|$ sono i cateti di un triangolo rettangolo di cui $AB$ è l'ipotenusa, quindi la distanza si ricava con il teorema di Pitagora.</p>
+<div class="def"><span class="et">Distanza fra due punti</span>
+<p class="eq">$$\overline{AB}=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$$</p>
+<p>Le differenze sono elevate al quadrato, quindi il loro segno non conta e il valore assoluto non serve.</p>
+</div>
+<p>Per esempio, con $A(2,2)$ e $B(5,4)$ si ottiene:</p>
+<p class="eq">$$\overline{AB}=\sqrt{(5-2)^2+(4-2)^2}=\sqrt{9+4}=\sqrt{13}$$</p>
+
+<div class="fig">
+<svg id="g-gen" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Triangolo rettangolo con ipotenusa AB"></svg>
+<div class="cursore"><label for="c-gx">$x_B$</label><input id="c-gx" type="range" min="-1" max="7" step="1" value="5" style="width:min(220px,30%)"><label for="c-gy">$y_B$</label><input id="c-gy" type="range" min="-1" max="5" step="1" value="4" style="width:min(220px,30%)"></div>
+<div class="cursore"><span class="val" id="v-gen"></span></div>
+<p class="did">I cateti tratteggiati misurano la differenza delle ascisse e quella delle ordinate, e la distanza $\overline{AB}$ è l'ipotenusa.</p>
+</div>
 
 <h2>Punto medio di un segmento</h2>
-<p>Il punto medio $M$ di $AB$ ha come coordinate la media delle coordinate degli estremi:</p>
-<div class="regola"><p>$$M\left(\dfrac{x_A+x_B}{2},\ \dfrac{y_A+y_B}{2}\right)$$</p></div>
-<div class="fig">
-<svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="90" x2="200" y2="90" stroke="#6d7280" stroke-width="1.2"/>
-<line x1="30" y1="90" x2="30" y2="10" stroke="#6d7280" stroke-width="1.2"/>
-<circle cx="50" cy="70" r="4" fill="#b3392f"/><text x="35" y="82" font-size="13" fill="#b3392f">A</text>
-<circle cx="170" cy="20" r="4" fill="#b3392f"/><text x="176" y="22" font-size="13" fill="#b3392f">B</text>
-<line x1="50" y1="70" x2="170" y2="20" stroke="#2f6b4f" stroke-width="1.8"/>
-<circle cx="110" cy="45" r="4" fill="#1f4e79"/><text x="115" y="42" font-size="13" fill="#1f4e79">M</text>
-</svg>
+<p>Il punto medio $M$ di un segmento $AB$ lo divide in due parti uguali. Le sue coordinate sono la media delle ascisse e la media delle ordinate degli estremi.</p>
+<div class="def"><span class="et">Punto medio</span>
+<p class="eq">$$M\left(\dfrac{x_A+x_B}{2},\ \dfrac{y_A+y_B}{2}\right)$$</p>
 </div>
-<div class="esempio"><p>$A(1,1)$, $B(7,5)$: $x_M=\dfrac{1+7}{2}=4,\qquad y_M=\dfrac{1+5}{2}=3$</p></div>
+<p>Per esempio, con $A(1,1)$ e $B(7,5)$ si ottiene $M(4,3)$:</p>
+<p class="eq">$$x_M=\dfrac{1+7}{2}=4\qquad\quad y_M=\dfrac{1+5}{2}=3$$</p>
 
+<div class="fig">
+<svg id="g-medio" viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Segmento AB e il suo punto medio M"></svg>
+<div class="cursore"><label for="c-mx">$x_B$</label><input id="c-mx" type="range" min="-1" max="7" step="2" value="7" style="width:min(220px,30%)"><label for="c-my">$y_B$</label><input id="c-my" type="range" min="-1" max="5" step="2" value="5" style="width:min(220px,30%)"></div>
+<div class="cursore"><span class="val" id="v-medio"></span></div>
+<p class="did">Spostando $B$, il punto $M$ resta a metà del segmento: la sua ascissa è a metà fra quelle degli estremi, e così la sua ordinata.</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../24-potenze-con-esponente-razionale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Potenze con esponente razionale</span></a><a class="successiva" href="../26-area-di-un-triangolo-e-metodo-delle-matrici/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Area di un triangolo e metodo delle matrici</span></a></nav>
 <footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 22</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function np(v){return v<0?'('+n(v)+')':n(v);}
+function num(v,d){return v.toFixed(d===undefined?1:d).replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+
+/* ---------- quadranti ---------- */
+(function(){
+  var svg=document.getElementById('g-quadranti'); if(!svg)return;
+  var P=new Piano(svg,[-5,5],[-4,4],{l:24,r:24,t:18,b:18}); P.assi();
+  [['I',2.6,2.2],['II',-2.6,2.2],['III',-2.6,-2.2],['IV',2.6,-2.2]].forEach(function(q){
+    P.add(txt(P.X(q[1]),P.Y(q[2])+5,q[0],{'text-anchor':'middle','font-size':14,fill:'var(--grigio)'}),'testo');
+  });
+})();
+
+/* ---------- punto con etichetta ---------- */
+function Punto(P,col,nome){
+  this.P=P;this.c=P.add(el('circle',{r:4.5,fill:col}));
+  this.t=P.add(txt(0,0,'',{fill:col,'font-size':13}),'testo');this.nome=nome;
+}
+Punto.prototype.metti=function(x,y,dx,dy,anc){
+  set(this.c,{cx:this.P.X(x),cy:this.P.Y(y)});
+  set(this.t,{x:this.P.X(x)+dx,y:this.P.Y(y)+dy,'text-anchor':anc||'start'});
+  this.t.textContent=this.nome+'('+n(x)+','+n(y)+')';
+  this.dentro();
+};
+/* tiene l'etichetta dentro il disegno */
+Punto.prototype.dentro=function(){
+  try{var bb=this.t.getBBox(),W=this.P.W,x=+this.t.getAttribute('x'),s=0;
+    if(bb.x<3)s=3-bb.x;else if(bb.x+bb.width>W-3)s=W-3-bb.x-bb.width;
+    if(s)this.t.setAttribute('x',x+s);}catch(e){}
+};
+
+/* ---------- stessa ordinata ---------- */
+(function(){
+  var svg=document.getElementById('g-oriz'),cur=document.getElementById('c-oriz'),val=document.getElementById('v-oriz'); if(!svg)return;
+  var P=new Piano(svg,[-1.6,7.8],[-1,4.6],{l:24,r:22,t:18,b:26}); P.assi([2],[]);
+  var pA=P.X(2), pY=P.Y(3), y0=P.Y(0);
+  var pa=P.add(el('line',{x1:pA,y1:pY,x2:pA,y2:y0,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}),'sotto');
+  var pb=P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}),'sotto');
+  var tb=P.add(txt(0,y0+17,'',{'text-anchor':'middle','font-size':11,fill:'var(--rosso)'}),'testo');
+  var seg=P.add(el('line',{stroke:'var(--verde)','stroke-width':3,'stroke-linecap':'round'}),'sotto');
+  var A=new Punto(P,'var(--rosso)','A'),B=new Punto(P,'var(--rosso)','B');
+  function disegna(){
+    var xb=+cur.value;
+    set(seg,{x1:pA,y1:pY,x2:P.X(xb),y2:pY});
+    set(pb,{x1:P.X(xb),y1:pY,x2:P.X(xb),y2:y0});
+    set(tb,{x:P.X(xb)});tb.textContent=(xb===2||xb===0)?'':n(xb);
+    var dx=xb>=2?1:-1;
+    A.metti(2,3,-10*dx,-12,dx>0?'end':'start'); if(xb===2)A.t.textContent='A = B';
+    B.metti(xb,3,10*dx,-12,dx>0?'start':'end'); if(xb===2)B.t.textContent='';
+    val.innerHTML='<span style="text-decoration:overline">AB</span> = |'+n(xb)+' − 2| = <span class="ok">'+Math.abs(xb-2)+'</span>';
+  }
+  cur.addEventListener('input',function(){disegna();riallinea();});disegna();
+})();
+
+/* ---------- stessa ascissa ---------- */
+(function(){
+  var svg=document.getElementById('g-vert'),cur=document.getElementById('c-vert'),val=document.getElementById('v-vert'); if(!svg)return;
+  var P=new Piano(svg,[-1.5,6.5],[-1.6,5.6],{l:24,r:22,t:18,b:18}); P.assi([],[1]);
+  var pX=P.X(2), x0=P.X(0);
+  var seg=P.add(el('line',{stroke:'var(--verde)','stroke-width':3,'stroke-linecap':'round'}),'sotto');
+  var pa=P.add(el('line',{x1:pX,y1:P.Y(1),x2:x0,y2:P.Y(1),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}),'sotto');
+  var pb=P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}),'sotto');
+  var tb=P.add(txt(x0-8,0,'',{'text-anchor':'end','font-size':11,fill:'var(--rosso)'}),'testo');
+  var A=new Punto(P,'var(--rosso)','A'),B=new Punto(P,'var(--rosso)','B');
+  function disegna(){
+    var yb=+cur.value;
+    set(seg,{x1:pX,y1:P.Y(1),x2:pX,y2:P.Y(yb)});
+    set(pb,{x1:pX,y1:P.Y(yb),x2:x0,y2:P.Y(yb)});
+    set(tb,{y:P.Y(yb)+4});tb.textContent=(yb===1||yb===0)?'':n(yb);
+    A.metti(2,1,10,5); B.metti(2,yb,10,5);
+    if(yb===1){A.t.textContent='A = B';B.t.textContent='';}
+    val.innerHTML='<span style="text-decoration:overline">AB</span> = |'+n(yb)+' − 1| = <span class="ok">'+Math.abs(yb-1)+'</span>';
+  }
+  cur.addEventListener('input',function(){disegna();riallinea();});disegna();
+})();
+
+/* ---------- caso generale ---------- */
+(function(){
+  var svg=document.getElementById('g-gen'),cx=document.getElementById('c-gx'),cy=document.getElementById('c-gy'),val=document.getElementById('v-gen'); if(!svg)return;
+  var P=new Piano(svg,[-1.6,7.8],[-1.6,5.6],{l:24,r:22,t:18,b:18}); P.assi([],[]);
+  var c1=P.add(el('line',{stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5 4'}),'sotto');
+  var c2=P.add(el('line',{stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5 4'}),'sotto');
+  var ip=P.add(el('line',{stroke:'var(--blu)','stroke-width':2.6,'stroke-linecap':'round'}),'sotto');
+  var t1=P.add(txt(0,0,'',{'text-anchor':'middle','font-size':12,fill:'var(--rosso)'}),'testo');
+  var t2=P.add(txt(0,0,'',{'font-size':12,fill:'var(--rosso)'}),'testo');
+  var A=new Punto(P,'var(--rosso)','A'),B=new Punto(P,'var(--rosso)','B');
+  function disegna(){
+    var xb=+cx.value,yb=+cy.value,dx=xb-2,dy=yb-2;
+    set(c1,{x1:P.X(2),y1:P.Y(2),x2:P.X(xb),y2:P.Y(2)});
+    set(c2,{x1:P.X(xb),y1:P.Y(2),x2:P.X(xb),y2:P.Y(yb)});
+    set(ip,{x1:P.X(2),y1:P.Y(2),x2:P.X(xb),y2:P.Y(yb)});
+    var sopra=dy>0?1:-1, destra=dx>=0?1:-1;
+    set(t1,{x:(P.X(2)+P.X(xb))/2,y:P.Y(2)+(dy>0?17:-8)});t1.textContent=dx?String(Math.abs(dx)):'';
+    set(t2,{x:P.X(xb)+8*destra,y:(P.Y(2)+P.Y(yb))/2+4,'text-anchor':destra>0?'start':'end'});t2.textContent=dy?String(Math.abs(dy)):'';
+    A.metti(2,2,-8*destra,dy>0?17:-9,destra>0?'end':'start');
+    B.metti(xb,yb,8*destra,dy>=0?-9:17,destra>0?'start':'end');
+    if(!dx&&!dy){A.t.textContent='A = B';B.t.textContent='';}
+    var q=dx*dx+dy*dy, r=Math.sqrt(q), intero=Math.abs(r-Math.round(r))<1e-9;
+    val.innerHTML='<span style="text-decoration:overline">AB</span> = √('+Math.abs(dx)+'² + '+Math.abs(dy)+'²) = '+
+      (intero?'<span class="ok">'+Math.round(r)+'</span>':'√'+q+' ≈ <span class="ok">'+num(r,2)+'</span>');
+  }
+  [cx,cy].forEach(function(c){c.addEventListener('input',function(){disegna();riallinea();});});disegna();
+})();
+
+/* ---------- punto medio ---------- */
+(function(){
+  var svg=document.getElementById('g-medio'),cx=document.getElementById('c-mx'),cy=document.getElementById('c-my'),val=document.getElementById('v-medio'); if(!svg)return;
+  var P=new Piano(svg,[-1.6,7.8],[-1.6,5.6],{l:24,r:22,t:18,b:18}); P.assi([],[]);
+  var y0=P.Y(0);
+  var seg=P.add(el('line',{stroke:'var(--verde)','stroke-width':2.4,'stroke-linecap':'round'}),'sotto');
+  var pr=[0,1,2].map(function(){return P.add(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}),'sotto');});
+  var A=new Punto(P,'var(--rosso)','A'),B=new Punto(P,'var(--rosso)','B'),M=new Punto(P,'var(--blu)','M');
+  function disegna(){
+    var xb=+cx.value,yb=+cy.value,xm=(1+xb)/2,ym=(1+yb)/2;
+    set(seg,{x1:P.X(1),y1:P.Y(1),x2:P.X(xb),y2:P.Y(yb)});
+    [[1,1],[xm,ym],[xb,yb]].forEach(function(p,i){set(pr[i],{x1:P.X(p[0]),y1:P.Y(p[1]),x2:P.X(p[0]),y2:y0});});
+    var destra=xb>=1?1:-1, su=yb>=1?1:-1;
+    A.metti(1,1,-8*destra,su>0?17:-9,destra>0?'end':'start');
+    B.metti(xb,yb,8*destra,su>0?-9:17,destra>0?'start':'end');
+    /* M: etichetta dal lato opposto alla pendenza, per non toccare il segmento */
+    var pend=(xb!==1)?(yb-1)/(xb-1):Infinity, sx=(pend>0)?1:-1;
+    M.metti(xm,ym,sx*10,(pend>0)?14:-8,sx>0?'start':'end');
+    if(xb===1&&yb===1){A.t.textContent='A = B = M';B.t.textContent='';M.t.textContent='';}
+    val.innerHTML='x<sub>M</sub> = (1 + '+np(xb)+')/2 = '+n(xm)+' &nbsp; y<sub>M</sub> = (1 + '+np(yb)+')/2 = '+n(ym)+' &nbsp; <span class="ok">M('+n(xm)+','+n(ym)+')</span>';
+  }
+  [cx,cy].forEach(function(c){c.addEventListener('input',function(){disegna();riallinea();});});disegna();
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio>p,.foglio>ul,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
