@@ -5,18 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Effetto Doppler: sorgente in movimento — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.riquadro{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:1rem}
-.esempio{border-left:3px solid var(--blu);padding:2px 0 2px 18px;margin:26px 0}
-.esempio h3{margin:0 0 8px;font-size:1.05rem;color:var(--blu)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.ok{color:var(--verde);font-weight:600}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
+.cursore .val sup{font-size:.7em;line-height:0}
+.letture{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:8px;font-variant-numeric:tabular-nums}
+.letture b{color:var(--blu)}
+.passo{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -25,107 +54,152 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
   <p class="occhiello">Onde e suono &middot; Unit&agrave; 28</p>
   <h1>Effetto Doppler: sorgente in movimento</h1>
-  <p class="sommario">Ora è la sorgente a spostarsi mentre l'osservatore resta fermo. Il
-  meccanismo è diverso da prima: non cambia la velocità con cui le creste raggiungono
-  l'orecchio, ma è la lunghezza d'onda stessa a comprimersi o ad allargarsi, a seconda
-  di dove si trova la sorgente quando emette ciascuna cresta.</p>
 </header>
 
+<p>Quando la sorgente sonora si muove e l'osservatore resta fermo, la lunghezza d'onda delle onde che raggiungono l'osservatore cambia, e con essa la frequenza percepita. Questa unità ricava la frequenza percepita nei casi di avvicinamento e di allontanamento.</p>
+
 <div class="fig">
-<svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrR2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="arrG2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<circle cx="110" cy="120" r="105" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="130" cy="120" r="70" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="150" cy="120" r="35" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="110" cy="120" r="3" fill="var(--inchiostro)"/>
-<circle cx="130" cy="120" r="3" fill="var(--inchiostro)"/>
-<circle cx="150" cy="120" r="3" fill="var(--inchiostro)"/>
-<circle cx="170" cy="120" r="4" fill="var(--verde)"/>
-<line x1="170" y1="120" x2="200" y2="120" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#arrG2)"/>
-<text x="185" y="108" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">u</text>
-<text x="130" y="200" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">sorgente in movimento</text>
-<line x1="205" y1="70" x2="240" y2="70" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#arrR2)"/>
-<text x="222" y="60" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">v<tspan baseline-shift="sub" font-size="9">s</tspan></text>
-<circle cx="300" cy="106" r="12" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="300" y1="118" x2="300" y2="160" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="300" y1="128" x2="282" y2="142" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="300" y1="128" x2="318" y2="142" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="300" y1="160" x2="286" y2="185" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="300" y1="160" x2="314" y2="185" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="300" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">osservatore fermo</text>
-<text x="60" y="30" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">onde spaziate</text>
-<text x="330" y="30" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">onde compresse</text>
-</svg>
-<p class="did">La sorgente emette da tre posizioni successive mentre avanza con velocità
-$u$: davanti a sé, nella direzione del moto, le creste risultano più vicine fra loro.</p>
+<svg id="g-sorg" viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:440px" role="img"
+     aria-label="Sorgente che si muove emettendo fronti d'onda circolari, più vicini fra loro davanti alla sorgente, e osservatore fermo; la velocità della sorgente si sceglie con il cursore"></svg>
+<div class="cursore"><label for="cur-u">velocità $u$</label><input id="cur-u" type="range" min="-100" max="100" step="1" value="32"><span class="val" id="val-u"></span></div>
+<div class="letture" id="let-u"></div>
+<p class="did">La sorgente emette i fronti d'onda mentre si sposta con velocità $u$, quindi davanti a sé li trova più vicini e dietro di sé più distanti; con il cursore si sceglie $u$ (positiva verso l'osservatore, negativa in verso opposto) e si legge la frequenza percepita per $f=150$ Hz.</p>
 </div>
 
-<p>Se la sorgente fosse ferma, in un periodo $T$ emetterebbe un'onda di lunghezza
-$\lambda = v_s T$, con $v_s$ velocità del suono e $v_s = \lambda f$. Ma la sorgente si
-sposta con velocità $u$: nello stesso intervallo $T$ percorre uno spazio $uT$ nella
-direzione di propagazione, e la cresta successiva parte più vicina alla precedente. Nella
-direzione del moto la lunghezza d'onda emessa si riduce a</p>
-<p>$$\lambda' = (v_s-u)\,T$$</p>
-<p>La frequenza percepita dall'osservatore fermo davanti alla sorgente è allora</p>
-<p>$$f' = \dfrac{v_s}{\lambda'} = \dfrac{v_s}{(v_s-u)T} = \dfrac{v_s}{(v_s-u)\frac1f}
-= \dfrac{v_s}{v_s-u}\,f$$</p>
-<div class="riquadro" style="text-align:center">
-$$f' = \dfrac{1}{1-\dfrac{u}{v_s}}\,f \qquad \text{sorgente in avvicinamento}$$
-</div>
-<p>Se la sorgente si allontana, la lunghezza d'onda emessa nella direzione opposta si
-allarga a $(v_s+u)T$, e lo stesso conto dà</p>
-<div class="riquadro" style="text-align:center">
-$$f' = \dfrac{1}{1+\dfrac{u}{v_s}}\,f \qquad \text{sorgente in allontanamento}$$
-</div>
-<p>Le due formule si scrivono insieme come</p>
-<div class="riquadro" style="text-align:center">
-$$f' = \dfrac{1}{1\mp\dfrac{u}{v_s}}\,f$$
-</div>
-<p>In avvicinamento $f'&gt;f$, in allontanamento $f'&lt;f$: la stessa dipendenza già
-incontrata con l'osservatore in moto, ma qui ottenuta comprimendo o dilatando la
-lunghezza d'onda invece della velocità relativa.</p>
+<h2>Sorgente in avvicinamento</h2>
 
-<p>Quando sorgente e osservatore sono entrambi in moto, i due effetti si combinano in
-un'unica formula:</p>
-<div class="riquadro" style="text-align:center">
-$$f' = \dfrac{1\pm\dfrac{u_{\text{oss}}}{v_s}}{1\mp\dfrac{u_{\text{sorg}}}{v_s}}\,f$$
-</div>
-<p>segno superiore in avvicinamento, segno inferiore in allontanamento. Ponendo
-$u_{\text{sorg}}=0$ si ritrova la formula dell'osservatore in moto vista nell'unità
-precedente; ponendo $u_{\text{oss}}=0$ si ritrova quella appena ricavata per la
-sorgente in moto.</p>
+<p>Se la sorgente è ferma, in un periodo $T$ emette un'onda di lunghezza:</p>
+<p class="eq">$$\lambda=v_s\,T$$</p>
+<p class="leg">Nella formula $v_s$ è la velocità del suono nell'aria (m/s), $T$ il periodo (s) e $\lambda$ la lunghezza d'onda (m); il periodo è legato alla frequenza da $T=1/f$.</p>
 
-<div class="esempio">
-<h3>Esempio</h3>
-<p>Una sorgente si muove con $u = 32$ m/s ed emette un suono di frequenza $f = 150$ Hz,
-mentre l'osservatore resta fermo. Con $v_s = 343$ m/s, se la sorgente si avvicina</p>
-<p>$$f' = \dfrac{1}{1-\frac{32}{343}}\cdot150\ \text{Hz} \approx 165\ \text{Hz}$$</p>
-<p>se si allontana</p>
-<p>$$f' = \dfrac{1}{1+\frac{32}{343}}\cdot150\ \text{Hz} \approx 137\ \text{Hz}$$</p>
-<p>Valori vicini a quelli dell'osservatore in moto alla stessa velocità, ma non
-identici: muovere la sorgente o muovere l'osservatore produce effetti simili, non
-uguali.</p>
-</div>
+<p>Se la sorgente si muove verso l'osservatore con velocità $u$, in un periodo percorre lo spazio $uT$ nello stesso verso dell'onda. Ogni cresta parte quindi più vicina alla precedente, e la lunghezza d'onda che raggiunge l'osservatore si riduce a:</p>
+<p class="eq">$$\lambda'=(v_s-u)\,T$$</p>
 
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Se la sorgente raggiunge la velocità del suono, $u\to v_s$, il denominatore
-$1-u/v_s$ tende a zero e $f'$ diverge: è il muro del suono, con il cono di Mach per il
-caso in cui la sorgente lo supera, oggetto della prossima unità.</li>
-</ul>
-</div>
+<p>Le onde viaggiano sempre con velocità $v_s$, quindi la frequenza percepita dall'osservatore è:</p>
+<p class="eq">$$f'=\dfrac{v_s}{\lambda'}=\dfrac{v_s}{(v_s-u)\,T}=\dfrac{v_s}{v_s-u}\,f=\dfrac{1}{1-\dfrac{u}{v_s}}\,f$$</p>
+
+<h2>Sorgente in allontanamento</h2>
+
+<p>Se la sorgente si allontana dall'osservatore con velocità $u$, verso l'osservatore le creste partono più distanti l'una dall'altra e la lunghezza d'onda diventa $(v_s+u)\,T$. Lo stesso ragionamento dà:</p>
+<p class="eq">$$f'=\dfrac{v_s}{(v_s+u)\,T}=\dfrac{1}{1+\dfrac{u}{v_s}}\,f$$</p>
+
+<p>Le due formule si riassumono in una sola, in cui il segno dipende dal verso del moto: $-$ in avvicinamento, $+$ in allontanamento.</p>
+<p class="eq principio">$$f'=\dfrac{1}{1\mp\dfrac{u}{v_s}}\,f$$</p>
+
+<p>In avvicinamento la frequenza percepita è maggiore di quella emessa, quindi il suono è percepito più acuto. In allontanamento la frequenza percepita è minore, quindi il suono è percepito più grave.</p>
+
+<h2>Sorgente e osservatore in moto</h2>
+
+<p>Quando si muovono sia la sorgente sia l'osservatore, i due effetti si combinano in un'unica formula:</p>
+<p class="eq">$$f'=\dfrac{1\pm\dfrac{u_{\text{oss}}}{v_s}}{1\mp\dfrac{u_{\text{sorg}}}{v_s}}\,f$$</p>
+<p class="leg">Nella formula $u_{\text{oss}}$ è la velocità dell'osservatore e $u_{\text{sorg}}$ quella della sorgente; i segni superiori valgono quando ciascuno si muove verso l'altro, quelli inferiori quando si allontana.</p>
+
+<p>Ponendo $u_{\text{sorg}}=0$ si ottiene la formula dell'osservatore in moto, $f'=(1\pm u_{\text{oss}}/v_s)\,f$; ponendo $u_{\text{oss}}=0$ si ritrova la formula della sorgente in moto.</p>
+
+<h2>Esempio</h2>
+
+<p>Una sorgente emette un suono di frequenza $f=150$ Hz e si muove con velocità $u=32$ m/s, mentre l'osservatore resta fermo. La velocità del suono è $v_s=343$ m/s. Se la sorgente si avvicina, l'osservatore percepisce la frequenza:</p>
+<p class="eq">$$f'=\dfrac{1}{1-\dfrac{32\ \text{m/s}}{343\ \text{m/s}}}\cdot150\ \text{Hz}\approx 165\ \text{Hz}$$</p>
+
+<p>Se invece la sorgente si allontana con la stessa velocità, l'osservatore percepisce la frequenza:</p>
+<p class="eq">$$f'=\dfrac{1}{1+\dfrac{32\ \text{m/s}}{343\ \text{m/s}}}\cdot150\ \text{Hz}\approx 137\ \text{Hz}$$</p>
+
+<p>Se fosse l'osservatore a muoversi a 32 m/s verso la sorgente ferma, o ad allontanarsene, percepirebbe circa 164 Hz e 136 Hz: i due effetti sono simili, ma non uguali.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../29-effetto-doppler-osservatore-in-movimento/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Effetto Doppler: osservatore in movimento</span></a><a class="successiva" href="../31-muro-del-suono-e-cono-di-mach/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Muro del suono e cono di Mach</span></a></nav>
 <footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 28</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,'text-anchor':'middle',fill:'var(--grigio)'},a||{}),p);e.textContent=s;return e;}
+  function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+  function freccia(svg,id,col){var df=el('defs',{},svg);var m=el('marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:2.5,orient:'auto'},df);el('path',{d:'M0,0 L5,2.5 L0,5 Z',fill:col},m);return 'url(#'+id+')';}
+
+  /* ---------- sorgente in moto, osservatore fermo ---------- */
+  (function(){
+    var svg=document.getElementById('g-sorg');
+    var VS=343, F=150;                 // velocità del suono (m/s), frequenza emessa (Hz)
+    var VPX=60, TE=0.5;                // velocità dell'onda nel disegno (px/s), periodo nel disegno (s): λ = 30 px
+    var SY=110, XO=385, YO=150;        // quota della sorgente; osservatore fermo
+    var XMIN=70, XMAX=260;             // tratto percorso dalla sorgente
+    var NF=16;                         // fronti disegnati
+    var fv=freccia(svg,'fr-u','var(--verde)'), fr=freccia(svg,'fr-v','var(--rosso)');
+    var clip=el('clipPath',{id:'cl-s'},el('defs',{},svg));el('rect',{x:0,y:0,width:440,height:186},clip);
+    var fronti=el('g',{'clip-path':'url(#cl-s)'},svg), sopra=el('g',{},svg);
+    var cerchi=[];for(var k=0;k<NF;k++)cerchi.push(el('circle',{cx:0,cy:SY,r:0,fill:'none',stroke:'var(--rosso)','stroke-width':1.4,opacity:.75},fronti));
+    // velocità dell'onda
+    el('line',{x1:300,y1:28,x2:346,y2:28,stroke:'var(--rosso)','stroke-width':2,'marker-end':fr},sopra);
+    txt(sopra,323,18,'vₛ',{'font-size':13,fill:'var(--rosso)','font-style':'italic'});
+    // sorgente
+    var sor=el('g',{},sopra);
+    el('circle',{cx:0,cy:0,r:5,fill:'var(--inchiostro)'},sor);
+    var fu=el('line',{y1:-18,y2:-18,stroke:'var(--verde)','stroke-width':2.2,'marker-end':fv},sor);
+    var eu=txt(sor,0,-26,'u',{'font-size':13,fill:'var(--verde)','font-style':'italic'});
+    txt(sopra,(XMIN+XMAX)/2,204,'sorgente',{'font-size':12,fill:'var(--inchiostro)'});
+    // osservatore fermo
+    var oss=el('g',{transform:'translate('+XO+','+YO+')'},sopra);
+    el('circle',{cx:0,cy:-52,r:8,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8},oss);
+    el('path',{d:'M0,-44 L0,-18 M0,-36 L-11,-27 M0,-36 L11,-27 M0,-18 L-9,0 M0,-18 L9,0',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8},oss);
+    txt(sopra,XO,204,'osservatore fermo',{'font-size':12,fill:'var(--inchiostro)'});
+    var did=txt(svg,220,230,'',{'font-size':13});
+    [].forEach.call(sopra.querySelectorAll('text'),function(e){e.setAttribute('stroke','#fff');e.setAttribute('stroke-width',4);e.setAttribute('paint-order','stroke');});
+    var cur=document.getElementById('cur-u'), val=document.getElementById('val-u'), let_=document.getElementById('let-u');
+    var ferma=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var t=0, xs=(XMIN+XMAX)/2, emessi=[], prossima=0, prec=null;
+    function vpx(){return parseFloat(cur.value)/VS*VPX;}           // velocità della sorgente nel disegno, stessa scala dell'onda
+    // stato iniziale (o statico): sorgente al centro, già in moto da tempo con velocità costante
+    function riempi(){
+      var v=vpx(); emessi=[]; t=0; xs=(XMIN+XMAX)/2;
+      for(var k=NF-1;k>=0;k--)emessi.push({cx:xs-v*k*TE,t0:-k*TE});
+      prossima=TE;
+    }
+    function scrivi(){
+      var u=parseFloat(cur.value), fp=F/(1-u/VS), L=Math.min(30,Math.abs(u)*0.3);
+      fu.setAttribute('x1',u>=0?-L/2:L/2);fu.setAttribute('x2',u>=0?L/2:-L/2);
+      fu.style.display=u===0?'none':'';eu.style.display=u===0?'none':'';
+      val.textContent='u = '+num(Math.abs(u),0)+' m/s';
+      did.textContent=u>0?'sorgente in avvicinamento':(u<0?'sorgente in allontanamento':'sorgente ferma');
+      let_.innerHTML='<span>f = 150 Hz</span><span>f′ = 150 Hz / (1 '+(u<0?'+':'−')+' '+Math.abs(u)+'/343) ≈ <b>'+num(fp,0)+' Hz</b></span>'+
+        (u>0?'<span class="ok">più acuto</span>':(u<0?'<span class="ok">più grave</span>':''));
+    }
+    function disegna(){
+      var n=emessi.length;
+      cerchi.forEach(function(c,i){var e=emessi[n-1-i];
+        if(!e){c.style.display='none';return;}
+        c.style.display='';c.setAttribute('cx',e.cx.toFixed(1));c.setAttribute('r',Math.max(0,(t-e.t0)*VPX).toFixed(1));});
+      sor.setAttribute('transform','translate('+xs.toFixed(1)+','+SY+')');
+    }
+    function passo(ts){
+      if(prec===null)prec=ts;var dt=Math.min(.05,(ts-prec)/1000);prec=ts;
+      t+=dt; xs+=vpx()*dt;
+      if(xs>XMAX)xs=XMIN; if(xs<XMIN)xs=XMAX;
+      while(t>=prossima){emessi.push({cx:xs,t0:prossima});prossima+=TE;}
+      if(emessi.length>NF)emessi=emessi.slice(emessi.length-NF);
+      disegna(); requestAnimationFrame(passo);
+    }
+    cur.addEventListener('input',function(){scrivi();if(ferma){riempi();disegna();}});
+    riempi();scrivi();disegna();
+    if(!ferma)requestAnimationFrame(passo);
+  })();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
