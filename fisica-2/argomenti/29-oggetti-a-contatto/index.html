@@ -5,17 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oggetti a contatto — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 18px;margin:24px 0;border-left:4px solid var(--rosso)}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:6px}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -25,121 +55,116 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Dinamica &middot; Unità 19</p>
   <h1>Oggetti a contatto</h1>
-  <p class="sommario">Due scatole appoggiate a terra, una contro l'altra, vengono
-  spinte insieme da una stessa forza esterna: si muovono con la stessa
-  accelerazione, ma fra loro nasce una forza di contatto. Isolando prima il
-  sistema e poi ciascuna scatola, con l'aiuto della terza legge della dinamica,
-  si trova quanto vale questa forza.</p>
 </header>
 
-<h2>Il sistema delle due scatole</h2>
+<p>L'unità ricava l'accelerazione di due oggetti a contatto spinti da una stessa forza e la forza che ciascuno esercita sull'altro attraverso il contatto.</p>
 
-<p>Due scatole di massa $m_1$ e $m_2$, con $m_1&gt;m_2$, sono appoggiate per terra
-e a contatto tra loro. Una forza $\vec F$ spinge la scatola 1, che a sua volta
-preme sulla scatola 2 attraverso il contatto: per la terza legge della dinamica,
-la scatola 1 esercita su 2 una forza $\vec F_{12}$, e la scatola 2 esercita su 1
-una forza $\vec F_{21}$ di uguale intensità e verso opposto.</p>
+<h2>Il sistema delle due scatole</h2>
+<p>Due scatole di massa $m_1$ e $m_2$, con $m_1&gt;m_2$, sono appoggiate sul pavimento e a contatto tra loro; l'attrito con il pavimento è trascurabile. Una forza orizzontale $\vec F$ spinge la scatola 1, che a sua volta preme sulla scatola 2.</p>
+<p>Per la terza legge della dinamica, la scatola 1 esercita sulla 2 una forza $\vec F_{12}$, e la scatola 2 esercita sulla 1 una forza $\vec F_{21}$ di uguale intensità e verso opposto.</p>
 
 <div class="fig">
-<svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u29r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="u29v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-<marker id="u29b" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="40" y1="150" x2="580" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="150" y="90" width="80" height="60" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="190" y="125" font-size="16" text-anchor="middle" font-family="var(--sans)">m&#8321;</text>
-<rect x="230" y="105" width="55" height="45" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="257" y="132" font-size="15" text-anchor="middle" font-family="var(--sans)">m&#8322;</text>
-<line x1="70" y1="120" x2="148" y2="120" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#u29r)"/>
-<text x="70" y="108" font-size="14" fill="var(--rosso)" font-family="var(--sans)">F&#8407;</text>
-<line x1="230" y1="97" x2="255" y2="97" stroke="var(--verde)" stroke-width="2" marker-end="url(#u29v)"/>
-<text x="228" y="86" font-size="13" fill="var(--verde)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">12</tspan></text>
-<line x1="230" y1="115" x2="205" y2="115" stroke="var(--blu)" stroke-width="2" marker-end="url(#u29b)"/>
-<text x="196" y="128" font-size="13" fill="var(--blu)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">21</tspan></text>
-</svg>
-<p class="did">La scatola 1, spinta da $\vec F$, preme sulla scatola 2 con
-$\vec F_{12}$; per reazione, la scatola 2 preme su 1 con $\vec F_{21}$, di verso
-opposto e stessa intensità.</p>
+<svg id="g-12" viewBox="20 50 400 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due scatole a contatto spinte dalla forza F applicata alla scatola 1"></svg>
+<div class="cursore"><label for="c-12">$F$</label><input id="c-12" type="range" min="0" max="30" step="1" value="20"><span class="val" id="v-12"></span></div>
+<p class="did">Con $m_1=10$ kg e $m_2=5$ kg, la scatola 1, spinta da $\vec F$, preme sulla scatola 2 con $\vec F_{12}$, e la scatola 2 reagisce con $\vec F_{21}$, di uguale intensità e verso opposto.</p>
 </div>
 
 <h2>L'accelerazione del sistema</h2>
-
-<p>Sul sistema intero le forze di contatto sono interne: $\vec F_{12}$ e
-$\vec F_{21}$ compaiono una con verso opposto all'altra e si annullano nella
-somma. Resta solo la forza esterna $\vec F$:</p>
-
-$$F_{TOT}=F=(m_1+m_2)\,a \qquad\Longrightarrow\qquad a=\frac{F}{m_1+m_2}$$
+<p>Per il sistema formato dalle due scatole, $\vec F_{12}$ e $\vec F_{21}$ sono forze interne: hanno versi opposti e uguale intensità, quindi nella somma si annullano. Resta solo la forza esterna $\vec F$, che accelera la massa totale $m_1+m_2$.</p>
+<p class="eq">$$F_{TOT}=F=(m_1+m_2)\,a \qquad\Longrightarrow\qquad a=\frac{F}{m_1+m_2}$$</p>
 
 <h2>La forza di contatto su ciascuna scatola</h2>
-
-<p>Per trovare $\vec F_{12}$ e $\vec F_{21}$ bisogna isolare le scatole una alla
-volta. Sulla scatola 1 agiscono $\vec F$, in avanti, e $\vec F_{21}$, all'indietro:</p>
-
-$$F-F_{21}=m_1 a \qquad\Longrightarrow\qquad F_{21}=F-m_1a$$
-
-<p>Sulla scatola 2 agisce solo $\vec F_{12}$, che la spinge in avanti:</p>
-
-$$F_{12}=m_2a$$
-
-<p>Sostituendo $a=\dfrac{F}{m_1+m_2}$ in entrambe le espressioni:</p>
-
-<div class="risultato">
-$$F_{12}=\frac{m_2}{m_1+m_2}\,F \qquad\qquad F_{21}=F-m_1\frac{F}{m_1+m_2}=\frac{m_2}{m_1+m_2}\,F$$
-</div>
-
-<p>Le due forze risultano uguali, come deve essere per la terza legge della
-dinamica: il calcolo fatto scatola per scatola è coerente con quello fatto sul
-sistema intero.</p>
+<p>Per trovare le forze di contatto bisogna isolare le scatole una alla volta. Sulla scatola 1 agiscono $\vec F$, in avanti, e $\vec F_{21}$, all'indietro:</p>
+<p class="eq">$$F-F_{21}=m_1 a \qquad\Longrightarrow\qquad F_{21}=F-m_1a$$</p>
+<p>Sulla scatola 2, nella direzione del moto, agisce solo $\vec F_{12}$, che la spinge in avanti:</p>
+<p class="eq">$$F_{12}=m_2a$$</p>
+<p>Sostituendo $a=\dfrac{F}{m_1+m_2}$ in entrambe le espressioni si ottiene la forza di contatto.</p>
+<p class="eq principio">$$F_{12}=F_{21}=\frac{m_2}{m_1+m_2}\,F$$</p>
+<p>Le due forze risultano uguali, come richiede la terza legge della dinamica: il calcolo fatto scatola per scatola è coerente con quello fatto sul sistema intero.</p>
 
 <h2>Scambiando l'ordine delle scatole</h2>
-
-<p>Se la forza $\vec F$ venisse applicata alla scatola 2, mettendola davanti
-alla scatola 1, il ragionamento è lo stesso ma con i ruoli invertiti: la
-scatola non spinta direttamente da $\vec F$ è ora la 1, e la forza di contatto
-si ottiene con la massa dell'altra scatola al numeratore:</p>
-
-$$F_{12}=F_{21}=\frac{m_1}{m_1+m_2}\,F$$
+<p>Se la forza $\vec F$ viene applicata alla scatola 2, posta dietro la scatola 1, il ragionamento è lo stesso con i ruoli invertiti. Ora la scatola spinta attraverso il contatto è la 1, e al numeratore compare la sua massa:</p>
+<p class="eq">$$F_{12}=F_{21}=\frac{m_1}{m_1+m_2}\,F$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u29r2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="u29v2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-<marker id="u29b2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="40" y1="150" x2="580" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="150" y="105" width="55" height="45" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="177" y="132" font-size="15" text-anchor="middle" font-family="var(--sans)">m&#8322;</text>
-<rect x="205" y="90" width="80" height="60" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="245" y="125" font-size="16" text-anchor="middle" font-family="var(--sans)">m&#8321;</text>
-<line x1="70" y1="120" x2="148" y2="120" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#u29r2)"/>
-<text x="70" y="108" font-size="14" fill="var(--rosso)" font-family="var(--sans)">F&#8407;</text>
-<line x1="205" y1="97" x2="230" y2="97" stroke="var(--verde)" stroke-width="2" marker-end="url(#u29v2)"/>
-<text x="203" y="86" font-size="13" fill="var(--verde)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">21</tspan></text>
-<line x1="205" y1="115" x2="180" y2="115" stroke="var(--blu)" stroke-width="2" marker-end="url(#u29b2)"/>
-<text x="150" y="128" font-size="13" fill="var(--blu)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">12</tspan></text>
-</svg>
-<p class="did">Scambiando l'ordine, la scatola 2 è quella spinta direttamente da
-$\vec F$ e preme sulla scatola 1, più pesante.</p>
+<svg id="g-21" viewBox="20 50 400 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due scatole a contatto spinte dalla forza F applicata alla scatola 2"></svg>
+<div class="cursore"><label for="c-21">$F$</label><input id="c-21" type="range" min="0" max="30" step="1" value="20"><span class="val" id="v-21"></span></div>
+<p class="did">Con le stesse masse, ora la forza $\vec F$ spinge la scatola 2, che preme sulla scatola 1, più pesante: l'accelerazione è la stessa di prima, la forza di contatto è doppia.</p>
 </div>
 
-<p>Poiché $m_1&gt;m_2$, questa forza di contatto è maggiore di quella trovata
-prima.</p>
+<p>Poiché $m_1&gt;m_2$, questa forza di contatto è maggiore di quella trovata prima.</p>
 
-<div class="nota">
-<span class="et">Da non confondere</span>
-L'accelerazione del sistema $a=\dfrac{F}{m_1+m_2}$ non cambia scambiando
-l'ordine delle scatole, perché dipende solo dalla massa totale. Cambia invece
-la forza di contatto tra le due scatole: è maggiore quando a essere spinta
-direttamente è la scatola più leggera, che deve trasmettere il moto a quella
-più pesante.
+<div class="nota"><span class="et">Da non confondere</span>
+<p>Scambiando l'ordine delle scatole l'accelerazione non cambia, perché dipende solo dalla massa totale. Cambia invece la forza di contatto, che è maggiore quando la forza esterna spinge la scatola più leggera.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../28-piano-inclinato-con-attrito/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Piano inclinato con attrito</span></a><a class="successiva" href="../30-oggetti-collegati-da-una-corda/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Oggetti collegati da una corda</span></a></nav>
 <footer><p>Fisica seconda &middot; Dinamica &middot; Unità 19</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  var m1=10,m2=5,K=4;                                   /* 4 unità del disegno per newton */
+  /* scatole a contatto: 'pr' è la scatola spinta da F, 'se' quella spinta attraverso il contatto */
+  function figura(id,cid,vid,ordine){
+    var svg=document.getElementById(id),cur=document.getElementById(cid),val=document.getElementById(vid);if(!svg)return;
+    var defs=el(svg,'defs',{});
+    function freccia(n,col){var mk=el(defs,'marker',{id:n,markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:col});}
+    freccia(id+'r','var(--rosso)');freccia(id+'v','var(--verde)');freccia(id+'b','var(--blu)');
+    var Y0=160;
+    el(svg,'line',{x1:30,y1:Y0,x2:410,y2:Y0,stroke:'var(--inchiostro)','stroke-width':1.4});
+    for(var x=40;x<410;x+=16)el(svg,'line',{x1:x,y1:Y0+1,x2:x-8,y2:Y0+9,stroke:'var(--grigio)','stroke-width':1});
+    var B1={w:100,h:76,nome:'1'},B2={w:70,h:52,nome:'2'};
+    var pr=ordine===12?B1:B2, se=ordine===12?B2:B1;
+    var x0=170, xI=x0+pr.w, xF=xI+se.w;
+    function scatola(x,b){el(svg,'rect',{x:x,y:Y0-b.h,width:b.w,height:b.h,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+      var t=el(svg,'text',{x:x+b.w/2,y:Y0-b.h/2+5,'font-size':15,'font-family':'sans-serif','font-style':'italic','text-anchor':'middle',fill:'var(--inchiostro)'});
+      t.appendChild(document.createTextNode('m'));var s=el(t,'tspan',{'font-size':11,dy:4});s.textContent=b.nome;}
+    scatola(x0,pr);scatola(xI,se);
+    function lab(col,pedice){var t=el(svg,'text',{'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':'middle',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'});
+      t.appendChild(document.createTextNode('F'));if(pedice){var s=el(t,'tspan',{'font-size':10,dy:4});s.textContent=pedice;}return t;}
+    var yF=Y0-pr.h/2+6;
+    var fF=el(svg,'line',{stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#'+id+'r)'}),tF=lab('var(--rosso)','');
+    /* forze di contatto disegnate sopra la scatola su cui agiscono */
+    var yA=Y0-se.h-10, yR=Y0-pr.h-10;
+    var fA=el(svg,'line',{stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#'+id+'v)'}),tA=lab('var(--verde)',ordine===12?'12':'21');
+    var fR=el(svg,'line',{stroke:'var(--blu)','stroke-width':2.4,'marker-end':'url(#'+id+'b)'}),tR=lab('var(--blu)',ordine===12?'21':'12');
+    function vis(e,t,L){e.setAttribute('visibility',L>3?'visible':'hidden');t.setAttribute('visibility',L>24?'visible':'hidden');}
+    function disegna(){
+      var F=+cur.value,a=F/(m1+m2),Fc=(ordine===12?m2:m1)*a;
+      var LF=K*F,Lc=K*Fc;
+      set(fF,{x1:x0-LF,y1:yF,x2:x0-2,y2:yF});set(tF,{x:x0-LF/2,y:yF-9});vis(fF,tF,LF);
+      set(fA,{x1:xI,y1:yA,x2:xI+Lc,y2:yA});set(tA,{x:xI+Lc+16,y:yA+4});vis(fA,tA,Lc);
+      set(fR,{x1:xI,y1:yR,x2:xI-Lc,y2:yR});set(tR,{x:xI-Lc-16,y:yR+4});vis(fR,tR,Lc);
+      val.innerHTML='F = '+F+' N &nbsp; a = '+num(a,2)+' m/s² &nbsp; F<sub>12</sub> = F<sub>21</sub> = <span class="ok">'+num(Fc,2)+' N</span>';
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});disegna();
+  }
+  figura('g-12','c-12','v-12',12);
+  figura('g-21','c-21','v-21',21);
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
