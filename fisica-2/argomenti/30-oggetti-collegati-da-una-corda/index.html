@@ -5,17 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oggetti collegati da una corda — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 18px;margin:24px 0;border-left:4px solid var(--rosso)}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:6px}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -25,117 +55,115 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Dinamica &middot; Unità 20</p>
   <h1>Oggetti collegati da una corda</h1>
-  <p class="sommario">Quando due oggetti, invece di toccarsi, sono collegati da
-  una corda inestensibile, si muovono ancora con la stessa accelerazione: al
-  posto della forza di contatto agisce la tensione della corda, uguale in
-  modulo ai due estremi. Il metodo resta lo stesso già usato per le scatole a
-  contatto: isolare prima il sistema, poi ciascun oggetto.</p>
 </header>
 
+<p>L'unità ricava l'accelerazione di due oggetti collegati da una corda e trainati da una forza esterna, e la tensione della corda.</p>
+
 <h2>Il sistema delle due scatole</h2>
+<p>Due scatole di massa $m_1$ e $m_2$ sono appoggiate sul pavimento e collegate da una corda inestensibile e di massa trascurabile; l'attrito con il pavimento è trascurabile. Una forza orizzontale $\vec F$ è applicata alla scatola 1, e la scatola 2 è trainata dalla corda.</p>
+<p>Poiché la corda è inestensibile, le due scatole si muovono con la stessa accelerazione. Agli estremi della corda agiscono due tensioni $\vec T$ di uguale intensità e verso opposto: ciascuna tira la propria scatola verso l'altra.</p>
 
-<p>Due scatole di massa $m_1$ e $m_2$ sono collegate da una corda e trainate
-da una forza esterna $\vec F$, applicata a una delle due. Agli estremi della
-corda nascono due tensioni $\vec T$, uguali in modulo e dirette in verso
-opposto: ciascuna tira la propria scatola verso l'altra. Isolando il sistema
-nel suo complesso, le due tensioni sono forze interne e si elidono nella
-somma:</p>
+<div class="fig">
+<svg id="g-sist" viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due scatole collegate da una corda, con la forza F applicata alla scatola 1"></svg>
+<p class="did">La forza $\vec F$ tira la scatola 1; la corda tira la scatola 2 in avanti e la scatola 1 all'indietro, con tensioni di uguale intensità $T$.</p>
+</div>
 
-$$F_{TOT}=F+T-T=F \qquad\Longrightarrow\qquad F=(m_1+m_2)\,a
-\qquad\Longrightarrow\qquad a=\frac{F}{m_1+m_2}$$
-
-<p>È la stessa formula già trovata per le scatole a contatto: l'accelerazione
-del sistema non sa se il collegamento è una corda o un contatto diretto.</p>
+<h2>L'accelerazione del sistema</h2>
+<p>Per il sistema formato dalle due scatole le due tensioni sono forze interne: hanno uguale intensità e versi opposti, quindi nella somma si annullano. Resta solo la forza esterna $\vec F$, che accelera la massa totale $m_1+m_2$.</p>
+<p class="eq">$$F_{TOT}=F+T-T=F=(m_1+m_2)\,a \qquad\Longrightarrow\qquad a=\frac{F}{m_1+m_2}$$</p>
 
 <h2>La tensione della corda</h2>
+<p>Per trovare la tensione bisogna isolare le scatole una alla volta. Sulla scatola 1 agiscono $\vec F$, in avanti, e la tensione $\vec T$, all'indietro:</p>
+<p class="eq">$$F-T=m_1a \qquad\Longrightarrow\qquad T=F-m_1a$$</p>
+<p>Sulla scatola 2, nella direzione del moto, agisce solo la tensione, che la tira in avanti:</p>
+<p class="eq">$$T=m_2a$$</p>
+<p>Sostituendo $a=\dfrac{F}{m_1+m_2}$ nell'ultima espressione si ottiene la tensione della corda.</p>
+<p class="eq principio">$$T=\frac{m_2}{m_1+m_2}\,F$$</p>
+<p>La tensione è sempre minore di $F$: la corda accelera soltanto la scatola 2, mentre $\vec F$ accelera l'intero sistema.</p>
 
-<p>Isolando la scatola 1, quella su cui agisce $\vec F$, la corda la tira
-all'indietro:</p>
-
-$$F-T=m_1a \qquad\Longrightarrow\qquad T=F-m_1a$$
-
-<p>Isolando la scatola 2, trainata solo dalla corda:</p>
-
-$$T=m_2a$$
-
-<p>Sostituendo $a=\dfrac{F}{m_1+m_2}$ in quest'ultima si ottiene
-$T=\dfrac{m_2}{m_1+m_2}\,F$: la stessa espressione già vista per la forza di
-contatto, con la tensione al posto di $F_{12}$.</p>
+<h2>Esempio</h2>
+<p>Una forza $F=420\ \text N$ è applicata alla scatola di massa $m_2=40\ \text{kg}$, che tramite una corda traina la scatola di massa $m_1=50\ \text{kg}$. In questo caso la scatola trainata dalla corda è quella di massa $m_1$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u30r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="u30v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="40" y1="175" x2="600" y2="175" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="150" y="110" width="60" height="55" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="180" y="142" font-size="16" text-anchor="middle" font-family="var(--sans)">m&#8322;</text>
-<line x1="210" y1="137" x2="280" y2="137" stroke="var(--inchiostro)" stroke-width="2" stroke-dasharray="5 4"/>
-<text x="245" y="128" font-size="12" text-anchor="middle" font-family="var(--sans)" fill="#4a5a6d">corda</text>
-<rect x="280" y="100" width="75" height="65" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="317" y="138" font-size="16" text-anchor="middle" font-family="var(--sans)">m&#8321;</text>
-<line x1="185" y1="98" x2="207" y2="98" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u30r)"/>
-<text x="180" y="86" font-size="14" fill="var(--verde)" font-family="var(--sans)">T&#8407;</text>
-<line x1="278" y1="88" x2="256" y2="88" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u30v)"/>
-<text x="252" y="76" font-size="14" fill="var(--verde)" font-family="var(--sans)">T&#8407;</text>
-<line x1="355" y1="120" x2="415" y2="120" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#u30r)"/>
-<text x="358" y="108" font-size="15" fill="var(--rosso)" font-family="var(--sans)">F&#8407;</text>
-<line x1="440" y1="190" x2="500" y2="190" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u30r)"/>
-<text x="500" y="205" font-size="13" font-family="var(--sans)">x</text>
-</svg>
-<p class="did">La corda tira $m_2$ in avanti e $m_1$ all'indietro con la stessa
-tensione $T$; la forza esterna $\vec F$ spinge $m_1$.</p>
+<svg id="g-es" viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Scatola di 50 kg trainata con una corda dalla scatola di 40 kg, a cui è applicata la forza F"></svg>
+<div class="cursore"><label for="c-es">$F$</label><input id="c-es" type="range" min="0" max="600" step="10" value="420"><span class="val" id="v-es"></span></div>
+<p class="did">Le frecce sono in scala: aumentando $F$ crescono l'accelerazione e la tensione, che resta pari a $50/90$ della forza applicata.</p>
 </div>
 
-<h2>Verifica numerica: il caso già noto del contatto</h2>
-
-<p>Prima di passare alla corda, un numero sul caso già noto: $F=20\ \text N$
-spinge una scatola di $10\ \text{kg}$, che preme su una di $5\ \text{kg}$.</p>
-
-$$a=\frac{F}{m_1+m_2}=\frac{20\ \text N}{15\ \text{kg}}\approx1{,}33\ \text{m/s}^2
-\qquad F_{12}=m_2a=5\ \text{kg}\cdot1{,}33\ \text{m/s}^2\approx6{,}67\ \text N$$
-
-<h2>Esempio: due scatole collegate da una corda</h2>
-
-<p>Una forza $F=420\ \text N$ è applicata alla scatola $m_2=40\ \text{kg}$,
-che tramite una corda traina quella da $m_1=50\ \text{kg}$.</p>
-
-<div class="fig">
-<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u30re" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="u30ve" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="40" y1="175" x2="600" y2="175" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="140" y="105" width="65" height="60" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="172" y="138" font-size="15" text-anchor="middle" font-family="var(--sans)">m&#8321;</text>
-<text x="172" y="192" font-size="12" text-anchor="middle" font-family="var(--sans)" fill="#4a5a6d">50 kg</text>
-<line x1="205" y1="135" x2="285" y2="135" stroke="var(--inchiostro)" stroke-width="2" stroke-dasharray="5 4"/>
-<rect x="285" y="112" width="58" height="53" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="314" y="142" font-size="15" text-anchor="middle" font-family="var(--sans)">m&#8322;</text>
-<text x="314" y="192" font-size="12" text-anchor="middle" font-family="var(--sans)" fill="#4a5a6d">40 kg</text>
-<line x1="200" y1="96" x2="222" y2="96" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u30re)"/>
-<text x="196" y="84" font-size="14" fill="var(--verde)" font-family="var(--sans)">T&#8407;</text>
-<line x1="288" y1="100" x2="266" y2="100" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u30ve)"/>
-<text x="262" y="88" font-size="14" fill="var(--verde)" font-family="var(--sans)">T&#8407;</text>
-<line x1="343" y1="122" x2="415" y2="122" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#u30re)"/>
-<text x="350" y="110" font-size="15" fill="var(--rosso)" font-family="var(--sans)">F&#8407; = 420 N</text>
-</svg>
-<p class="did">$m_1$ è trainata dalla corda, $m_2$ riceve direttamente la forza
-esterna $F$.</p>
-</div>
-
-$$a=\frac{F}{m_1+m_2}=\frac{420\ \text N}{90\ \text{kg}}\approx4{,}67\ \text{m/s}^2
-\qquad\qquad T=m_1a=50\ \text{kg}\cdot4{,}67\ \text{m/s}^2\approx233\ \text N$$
-
-<div class="risultato">
-$a\approx4{,}67\ \text{m/s}^2 \qquad\qquad T\approx233\ \text N$
-</div>
+<p>L'accelerazione del sistema si calcola con la massa totale:</p>
+<p class="eq">$$a=\frac{F}{m_1+m_2}=\frac{420\ \text N}{90\ \text{kg}}\approx4{,}67\ \text{m/s}^2$$</p>
+<p>La tensione è la forza che accelera la scatola trainata, di massa $m_1$:</p>
+<p class="eq">$$T=m_1a=\frac{m_1}{m_1+m_2}\,F=\frac{50\ \text{kg}}{90\ \text{kg}}\cdot420\ \text N\approx233\ \text N$$</p>
+<p>Le due scatole accelerano quindi di circa $4{,}67\ \text{m/s}^2$, e la corda è tesa con una forza di circa $233\ \text N$.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../29-oggetti-a-contatto/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Oggetti a contatto</span></a><a class="successiva" href="../31-macchina-di-atwood/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Macchina di Atwood</span></a></nav>
 <footer><p>Fisica seconda &middot; Dinamica &middot; Unità 20</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  /* due scatole collegate da una corda: 'tr' è la scatola trainata (a sinistra), 'ti' quella a cui è applicata F */
+  function figura(o){
+    var svg=document.getElementById(o.id);if(!svg)return;
+    var cur=o.cur?document.getElementById(o.cur):null,val=o.val?document.getElementById(o.val):null;
+    var defs=el(svg,'defs',{});
+    function freccia(n,col){var mk=el(defs,'marker',{id:n,markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:col});}
+    freccia(o.id+'r','var(--rosso)');freccia(o.id+'v','var(--verde)');
+    var Y0=128;
+    el(svg,'line',{x1:10,y1:Y0,x2:510,y2:Y0,stroke:'var(--inchiostro)','stroke-width':1.4});
+    for(var x=20;x<510;x+=16)el(svg,'line',{x1:x,y1:Y0+1,x2:x-8,y2:Y0+9,stroke:'var(--grigio)','stroke-width':1});
+    var tr=o.tr,ti=o.ti;
+    var x1=24,xc1=x1+tr.w,xc2=xc1+200,xF=xc2+ti.w,yc=Y0-26;
+    function scatola(x,b){el(svg,'rect',{x:x,y:Y0-b.h,width:b.w,height:b.h,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+      var t=el(svg,'text',{x:x+b.w/2,y:Y0-b.h/2+(b.kg?0:5),'font-size':15,'font-family':'sans-serif','font-style':'italic','text-anchor':'middle',fill:'var(--inchiostro)'});
+      t.appendChild(document.createTextNode('m'));var s=el(t,'tspan',{'font-size':11,dy:4});s.textContent=b.nome;
+      if(b.kg){var k=el(svg,'text',{x:x+b.w/2,y:Y0-b.h/2+20,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'});k.textContent=b.kg+' kg';}}
+    el(svg,'line',{x1:xc1,y1:yc,x2:xc2,y2:yc,stroke:'var(--grigio)','stroke-width':2,'stroke-dasharray':'5 4'});
+    scatola(x1,tr);scatola(xc2,ti);
+    function lab(col,s){var t=el(svg,'text',{'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':'middle',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'});t.textContent=s;return t;}
+    var yF=Y0-ti.h/2;
+    var fF=el(svg,'line',{stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#'+o.id+'r)'}),tF=lab('var(--rosso)','F');
+    var fA=el(svg,'line',{stroke:'var(--verde)','stroke-width':2.6,'marker-end':'url(#'+o.id+'v)'}),tA=lab('var(--verde)','T');
+    var fB=el(svg,'line',{stroke:'var(--verde)','stroke-width':2.6,'marker-end':'url(#'+o.id+'v)'}),tB=lab('var(--verde)','T');
+    function vis(e,t,L){e.setAttribute('visibility',L>3?'visible':'hidden');t.setAttribute('visibility',L>12?'visible':'hidden');}
+    function disegna(){
+      var F=cur?+cur.value:o.F, T=F*tr.m/(tr.m+ti.m), a=F/(tr.m+ti.m);
+      var LF=o.K*F, LT=o.K*T;
+      set(fF,{x1:xF+1,y1:yF,x2:xF+LF,y2:yF});set(tF,{x:xF+LF/2,y:yF-9});vis(fF,tF,LF);
+      set(fA,{x1:xc1,y1:yc,x2:xc1+LT,y2:yc});set(tA,{x:xc1+LT/2,y:yc-9});vis(fA,tA,LT);
+      set(fB,{x1:xc2,y1:yc,x2:xc2-LT,y2:yc});set(tB,{x:xc2-LT/2,y:yc-9});vis(fB,tB,LT);
+      if(val)val.innerHTML='F = '+F+' N &nbsp; a = '+num(a,2)+' m/s² &nbsp; T = <span class="ok">'+num(T,0)+' N</span>';
+    }
+    if(cur)cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});
+    disegna();
+  }
+  /* figura generale: scatola 2 trainata, F sulla scatola 1 (lunghezze indicative, T < F) */
+  figura({id:'g-sist',tr:{w:70,h:56,nome:'2',m:1},ti:{w:84,h:68,nome:'1',m:1.2},F:100,K:0.85});
+  /* esempio: m1 = 50 kg trainata, F sulla m2 = 40 kg; 0,22 unità del disegno per newton */
+  figura({id:'g-es',cur:'c-es',val:'v-es',tr:{w:84,h:68,nome:'1',m:50,kg:50},ti:{w:76,h:60,nome:'2',m:40,kg:40},K:0.22});
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
