@@ -5,19 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regola del parallelogramma — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore+.cursore{margin-top:0}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>.eq+p.eq{margin-top:calc(var(--r)*.5)}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px}
+.btn-anim{margin-top:8px}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,112 +64,175 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Forze e vettori &middot; Unità 24</p>
   <h1>Regola del parallelogramma</h1>
-  <p class="sommario">Due vettori non paralleli si possono sommare anche senza spostarne
-  nessuno: si lasciano applicati nello stesso punto e si chiude la figura che disegnano.
-  È la costruzione più comoda con le forze, che agiscono tutte insieme sullo stesso
-  punto.</p>
 </header>
+
+<p>Questa unità presenta un secondo metodo grafico per sommare due vettori non paralleli, che li lascia applicati nello stesso punto.</p>
 
 <h2>La costruzione</h2>
 
-<p>Facciamo coincidere le code dei due vettori. Dalla punta di $\vec{F_2}$ tracciamo un
-tratteggio parallelo a $\vec{F_1}$, e dalla punta di $\vec{F_1}$ un tratteggio parallelo
-a $\vec{F_2}$. La <strong>risultante</strong> $\vec{R}$ parte dal punto in cui abbiamo
-unito le code e arriva all'intersezione dei due tratteggi.</p>
+<p>Con la regola del parallelogramma nessun vettore viene spostato: i due vettori restano applicati nello stesso punto e si completa la figura che formano. È la costruzione più comoda con le forze, che agiscono tutte insieme sullo stesso punto del corpo.</p>
 
-<div class="fig">
-<svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Due vettori applicati nello stesso punto; i tratteggi paralleli a ciascuno chiudono un parallelogramma e la risultante ne è la diagonale">
-  <defs>
-    <marker id="mr" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#b03030"/></marker>
-    <marker id="mv" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#2e7d4f"/></marker>
-    <marker id="mo" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#e08a1e"/></marker>
-  </defs>
-  <line x1="150" y1="70" x2="270" y2="70" stroke="#b03030" stroke-width="1.6" stroke-dasharray="7 5"/>
-  <line x1="180" y1="150" x2="270" y2="70" stroke="#2e7d4f" stroke-width="1.6" stroke-dasharray="7 5"/>
-  <line x1="60" y1="150" x2="180" y2="150" stroke="#b03030" stroke-width="2.6" marker-end="url(#mr)"/>
-  <text x="112" y="168" font-size="14" fill="#b03030" font-style="italic">F₁</text>
-  <line x1="60" y1="150" x2="150" y2="70" stroke="#2e7d4f" stroke-width="2.6" marker-end="url(#mv)"/>
-  <text x="88" y="98" font-size="14" fill="#2e7d4f" font-style="italic">F₂</text>
-  <line x1="60" y1="150" x2="270" y2="70" stroke="#e08a1e" stroke-width="2.8" marker-end="url(#mo)"/>
-  <text x="196" y="118" font-size="14" fill="#e08a1e" font-style="italic">R</text>
-  <circle cx="60" cy="150" r="3.5" fill="#222"/>
-  <text x="14" y="168" font-size="11" fill="#666">code unite</text>
-</svg>
-<p class="did">La risultante è la diagonale che esce dal punto di applicazione comune.</p>
+<div class="def"><span class="et">Regola del parallelogramma</span>
+<p>Si fanno coincidere le code dei due vettori. Dalla punta di $\vec{F_2}$ si traccia un tratteggio parallelo a $\vec{F_1}$ e dalla punta di $\vec{F_1}$ un tratteggio parallelo a $\vec{F_2}$. La risultante $\vec{R}$ parte dal punto in cui sono unite le code e arriva all'intersezione dei due tratteggi.</p>
 </div>
 
-<div class="nota">
-<strong>La diagonale giusta è una sola.</strong> Delle due diagonali, solo quella che
-parte dalle code unite è la risultante: l'altra congiunge le punte e non è la somma.
+<div class="fig">
+<svg id="fig-a" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Due vettori applicati nello stesso punto; i tratteggi paralleli a ciascuno chiudono un parallelogramma e la risultante ne è la diagonale"></svg>
+<div class="cursore"><label for="cur-a">angolo fra i vettori</label><input id="cur-a" type="range" min="20" max="160" step="5" value="45"><output id="val-a" for="cur-a"></output></div>
+<p class="did">La risultante è la diagonale del parallelogramma che parte dal punto di applicazione comune.</p>
+</div>
+
+<div class="nota"><span class="et">La diagonale giusta è una sola</span>
+<p>Delle due diagonali del parallelogramma, solo quella che parte dalle code unite è la risultante: l'altra congiunge le punte dei due vettori e non è la loro somma.</p>
 </div>
 
 <h2>Se i vettori sono tre</h2>
 
-<p>La costruzione lavora su due vettori per volta. Con tre si procede in due tempi: prima
-si sommano due vettori a scelta, poi si somma il vettore ottenuto con il terzo, ripetendo
-la stessa costruzione.</p>
+<p>La costruzione si applica a due vettori per volta. Con tre vettori si procede in due passi: prima si sommano due vettori a scelta, poi si somma il vettore ottenuto con il terzo, ripetendo la stessa costruzione.</p>
 
 <div class="fig">
-<svg viewBox="0 0 600 215" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Prima costruzione: F1 e F2 danno la risultante intermedia F12. Seconda costruzione: F12 sommata a F3 dà la risultante finale R">
-  <defs>
-    <marker id="nr" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#b03030"/></marker>
-    <marker id="nv" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#2e7d4f"/></marker>
-    <marker id="nc" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#0aa3b5"/></marker>
-    <marker id="no" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#e08a1e"/></marker>
-    <marker id="nb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <path d="M0,0 L10,4 L0,8 z" fill="#1f5fa8"/></marker>
-  </defs>
-
-  <text x="20" y="22" font-size="12" fill="#666">primo passo</text>
-  <line x1="110" y1="110" x2="210" y2="110" stroke="#b03030" stroke-width="1.6" stroke-dasharray="7 5"/>
-  <line x1="140" y1="175" x2="210" y2="110" stroke="#2e7d4f" stroke-width="1.6" stroke-dasharray="7 5"/>
-  <line x1="40" y1="175" x2="140" y2="175" stroke="#b03030" stroke-width="2.6" marker-end="url(#nr)"/>
-  <text x="84" y="193" font-size="13" fill="#b03030" font-style="italic">F₁</text>
-  <line x1="40" y1="175" x2="110" y2="110" stroke="#2e7d4f" stroke-width="2.6" marker-end="url(#nv)"/>
-  <text x="62" y="130" font-size="13" fill="#2e7d4f" font-style="italic">F₂</text>
-  <line x1="40" y1="175" x2="210" y2="110" stroke="#e08a1e" stroke-width="2.8" marker-end="url(#no)"/>
-  <text x="152" y="152" font-size="13" fill="#e08a1e" font-style="italic">F₁₂</text>
-  <circle cx="40" cy="175" r="3.5" fill="#222"/>
-
-  <text x="315" y="22" font-size="12" fill="#666">secondo passo</text>
-  <line x1="370" y1="105" x2="540" y2="40" stroke="#e08a1e" stroke-width="1.6" stroke-dasharray="7 5"/>
-  <line x1="500" y1="110" x2="540" y2="40" stroke="#0aa3b5" stroke-width="1.6" stroke-dasharray="7 5"/>
-  <line x1="330" y1="175" x2="500" y2="110" stroke="#e08a1e" stroke-width="2.6" marker-end="url(#no)"/>
-  <text x="440" y="152" font-size="13" fill="#e08a1e" font-style="italic">F₁₂</text>
-  <line x1="330" y1="175" x2="370" y2="105" stroke="#0aa3b5" stroke-width="2.6" marker-end="url(#nc)"/>
-  <text x="336" y="122" font-size="13" fill="#0aa3b5" font-style="italic">F₃</text>
-  <line x1="330" y1="175" x2="540" y2="40" stroke="#1f5fa8" stroke-width="2.8" marker-end="url(#nb)"/>
-  <text x="452" y="88" font-size="14" fill="#1f5fa8" font-style="italic">R</text>
-  <circle cx="330" cy="175" r="3.5" fill="#222"/>
-</svg>
-<p class="did">Il vettore intermedio $\vec{F_{12}}$ non è una forza applicata al corpo:
-è un passaggio di calcolo, che nel secondo parallelogramma diventa un lato.</p>
+<svg id="fig-b" viewBox="0 0 440 172" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Primo passo: F1 e F2 danno la risultante intermedia F12. Secondo passo: F12 sommata a F3 dà la risultante finale R"></svg>
+<div><button type="button" class="btn-anim" id="btn-b" aria-label="Avvia">&#9654;</button></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Primo passo: $\vec{F_1}$ e $\vec{F_2}$ danno il vettore intermedio $\vec{F_{12}}$.</p>
+<p class="did">Secondo passo: $\vec{F_{12}}$ e $\vec{F_3}$ danno la risultante $\vec{R}$.</p>
+</div>
 </div>
 
-<p>In simboli:</p>
+<p>In simboli i due passi si scrivono così:</p>
 
-$$\vec{F_{12}} = \vec{F_1} + \vec{F_2} \qquad\qquad \vec{R} = \vec{F_{12}} + \vec{F_3}$$
+<p class="eq">$$\vec{F_{12}} = \vec{F_1} + \vec{F_2} \qquad\qquad \vec{R} = \vec{F_{12}} + \vec{F_3}$$</p>
 
-<p>La coppia da cui partire si sceglie liberamente: il risultato finale non cambia.</p>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Vedremo poi come moltiplicare un vettore per un numero, il vettore opposto e la
-differenza fra vettori. Se i due vettori sono perpendicolari il parallelogramma diventa un
-rettangolo e il modulo della risultante si ricava con il teorema di Pitagora; da lì si
-arriva alle componenti cartesiane.</p>
-</div>
+<p>Il vettore intermedio $\vec{F_{12}}$ non è una forza applicata al corpo: è un passaggio di calcolo, che nel secondo parallelogramma diventa un lato. La coppia da cui partire si sceglie liberamente, perché il risultato finale non cambia.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../24-somma-di-vettori-il-metodo-punta-coda/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Somma di vettori: il metodo punta-coda</span></a><a class="successiva" href="../26-prodotto-di-un-vettore-per-un-numero-e-vettore-opposto/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Prodotto di un vettore per un numero e vettore opposto</span></a></nav>
+<footer><p>Fisica prima &middot; Forze e vettori &middot; Unità 24</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  /* simbolo vettoriale con pedice e freccetta sopra, centrato in (x,y) */
+  function Vt(p,x,y,lett,ped,col){
+    var t=T(p,x,y+5,lett,{'text-anchor':'middle','font-size':15,'font-style':'italic','font-weight':700,fill:col});
+    if(ped)el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'},ped);
+    freccia(p,x-7,y-11,x+(ped?11:7),y-11,col,1.3,4);
+  }
+  var C1='var(--rosso)', C2='var(--verde)', C3='var(--inchiostro)', CR='var(--blu)';
+
+
+  /* Figura A: regola del parallelogramma con cursore sull'angolo fra F1 e F2 */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var L1=150, L2=105;
+    var g0=el(S,'g',{}), g;
+    function dis(){
+      var th=+c.value, a=th*Math.PI/180;
+      vuota(g0); g=el(g0,'g',{});
+      /* centra il parallelogramma nel riquadro */
+      var xs=[0,L1,L2*Math.cos(a),L1+L2*Math.cos(a)], ys=[0,-L2*Math.sin(a)];
+      var ox=180-(Math.min.apply(null,xs)+Math.max.apply(null,xs))/2, oy=100-(ys[0]+ys[1])/2+8;
+      var p1=[ox+L1,oy], p2=[ox+L2*Math.cos(a),oy-L2*Math.sin(a)], pr=[p1[0]+p2[0]-ox,p1[1]+p2[1]-oy];
+      /* tratteggi: dalla punta di F2 parallelo a F1, dalla punta di F1 parallelo a F2 */
+      el(g,'line',{x1:f(p2[0]),y1:f(p2[1]),x2:f(pr[0]),y2:f(pr[1]),stroke:C1,'stroke-width':1.6,'stroke-dasharray':'7 5'});
+      el(g,'line',{x1:f(p1[0]),y1:f(p1[1]),x2:f(pr[0]),y2:f(pr[1]),stroke:C2,'stroke-width':1.6,'stroke-dasharray':'7 5'});
+      /* arco dell'angolo */
+      var ra=24;
+      el(g,'path',{d:'M'+(ox+ra)+','+oy+' A'+ra+','+ra+' 0 0 0 '+f(ox+ra*Math.cos(a))+','+f(oy-ra*Math.sin(a)),fill:'none',stroke:'var(--grigio)','stroke-width':1.2});
+      freccia(g,ox,oy,p1[0],p1[1],C1,3,9);
+      freccia(g,ox,oy,p2[0],p2[1],C2,3,9);
+      freccia(g,ox,oy,pr[0],pr[1],CR,3.4,10);
+      Vt(g,ox+L1/2+10,oy+22,'F','1',C1);
+      /* etichetta di F2 a sinistra del vettore, a metà */
+      var mx=(ox+p2[0])/2, my=(oy+p2[1])/2, nx=-Math.sin(a), ny=-Math.cos(a);
+      Vt(g,mx+nx*18,my+ny*18+4,'F','2',C2);
+      /* etichetta di R oltre la punta */
+      var dR=Math.hypot(pr[0]-ox,pr[1]-oy), ux=(pr[0]-ox)/dR, uy=(pr[1]-oy)/dR;
+      Vt(g,pr[0]+ux*16+8,pr[1]+uy*16,'R','',CR);
+      el(g,'circle',{cx:ox,cy:oy,r:3.5,fill:'var(--inchiostro)'});
+      o.innerHTML=th+'°'+(th===90?' <span class="ok">il parallelogramma è un rettangolo</span>':'');
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* Figura B: due passi con tre vettori, animazione ▶/↺ */
+  (function(){
+    var S=document.getElementById('fig-b'), b=document.getElementById('btn-b'); if(!S||!b)return;
+    var C12='var(--grigio)', C3v='var(--inchiostro)', CRf=CR;
+    var O1=[25,140], v1=[86,0], v2=[60,-56], v12=[v1[0]+v2[0],v1[1]+v2[1]];
+    var O2=[236,140], v3=[35,-72], vR=[v12[0]+v3[0],v12[1]+v3[1]];
+    el(S,'line',{x1:220,y1:10,x2:220,y2:165,stroke:'var(--riga)','stroke-width':1.2,'stroke-dasharray':'6 5'});
+    var g=el(S,'g',{});
+    function ease(u){u=Math.max(0,Math.min(1,u));return u<.5?2*u*u:1-2*(1-u)*(1-u);}
+    function P(O,v){return [O[0]+v[0],O[1]+v[1]];}
+    function tratto(a,bp,u,col){ if(u<=0)return; el(g,'line',{x1:f(a[0]),y1:f(a[1]),x2:f(a[0]+(bp[0]-a[0])*u),y2:f(a[1]+(bp[1]-a[1])*u),stroke:col,'stroke-width':1.5,'stroke-dasharray':'6 4'}); }
+    function cresce(O,v,u,col,w){ if(u<=0)return; freccia(g,O[0],O[1],O[0]+v[0]*u,O[1]+v[1]*u,col,w,9); }
+    function stato(t){
+      vuota(g);
+      var d1=ease(t/0.9), r1=ease((t-1.0)/0.8), q2=ease((t-2.0)/0.4), d2=ease((t-2.5)/0.9), r2=ease((t-3.5)/0.8);
+      /* primo passo */
+      tratto(P(O1,v2),P(O1,v12),d1,C1); tratto(P(O1,v1),P(O1,v12),d1,C2);
+      cresce(O1,v1,1,C1,2.6); cresce(O1,v2,1,C2,2.6); cresce(O1,v12,r1,C12,3);
+      Vt(g,O1[0]+43,O1[1]+20,'F','1',C1); Vt(g,O1[0]+14,O1[1]-42,'F','2',C2);
+      if(r1>=1)Vt(g,P(O1,v12)[0]+6,P(O1,v12)[1]-14,'F','12',C12);
+      el(g,'circle',{cx:O1[0],cy:O1[1],r:3.2,fill:'var(--inchiostro)'});
+      /* secondo passo */
+      cresce(O2,v3,1,C3v,2.6); Vt(g,O2[0]-2,O2[1]-52,'F','3',C3v);
+      if(q2>0){
+        var gg=el(g,'g',{opacity:q2}), gs=g; g=gg;
+        cresce(O2,v12,1,C12,2.6); Vt(g,O2[0]+92,O2[1]-10,'F','12',C12);
+        g=gs;
+      }
+      tratto(P(O2,v3),P(O2,vR),d2,C12); tratto(P(O2,v12),P(O2,vR),d2,C3v);
+      cresce(O2,vR,r2,CRf,3.2);
+      if(r2>=1)Vt(g,P(O2,vR)[0]+12,P(O2,vR)[1]+4,'R','',CRf);
+      el(g,'circle',{cx:O2[0],cy:O2[1],r:3.2,fill:'var(--inchiostro)'});
+    }
+    var DUR=4.4, finito=false;
+    var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(ridotto){stato(DUR);b.hidden=true;return;}
+    stato(0);
+    b.addEventListener('click',function(){
+      if(finito){finito=false;stato(0);b.innerHTML='&#9654;';b.setAttribute('aria-label','Avvia');return;}
+      b.disabled=true;var t0=null;
+      function passo(t){
+        if(t0===null)t0=t;
+        var s=(t-t0)/1000; stato(Math.min(s,DUR));
+        if(s<DUR)requestAnimationFrame(passo);
+        else{finito=true;b.disabled=false;b.innerHTML='&#8634;';b.setAttribute('aria-label','Ricomincia');}
+      }
+      requestAnimationFrame(passo);
+    });
+  })();
+})();
+</script>
 </body>
 </html>
