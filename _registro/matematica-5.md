@@ -511,6 +511,7 @@ teorema del confronto, a pagina 21.
   degli schizzi a mano libera. Nessun interattivo: l'unico esempio non dipende da un
   parametro variabile. Nessun quesito di maturità: l'invertibilità isolata non compare
   come quesito a sé in questo punto del percorso.
+- Revisione: titolo invariato. Tolto il sommario; introduzione di una frase; titoletti «Il criterio» ed «Esempio» tenuti; criterio in .def in frasi complete. Correzione: il criterio vale in un intervallo (prima «su tutto il dominio», falso per domini non connessi) e il segno costante di f′ si chiede nei punti interni. Esempio a comparsa: quesito con risultato f⁻¹(x) = −x² + 4x + 1, x ≤ 2, e sei passaggi (dominio, derivata, segno, ricavo di x, scambio delle variabili, codominio con i limiti), tasto «Mostra tutti i risultati». Passaggi riverificati con SymPy (f′, limiti, f(f⁻¹(x)) = x per x ≤ 2). Nota ridotta a due frasi. Impaginazione a quaderno con script di allineamento. Figure rifatte in SVG calcolato da script: grafico di f con cursore su x (punto e tangente mobili, f′(x) a fianco con «crescente», tangente verticale in x = 5; ultimo tratto campionato in u = √(5 − x)); grafico di f⁻¹ con cursore su x (ramo pieno per x ≤ 2, tratto tratteggiato per x > 2 segnalato «fuori dal dominio di f⁻¹»). Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 23 — Teorema di Cauchy e teorema di De L'Hôpital
 - Parole: 667 su 6 pagine di traccia (89–94).

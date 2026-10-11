@@ -5,19 +5,91 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Invertibilità e funzione inversa — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center;display:inline-block;vertical-align:top}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px;max-width:280px;margin-left:auto;margin-right:auto}
-.coppia{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;margin:24px 0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
 </style>
 </head>
 <body>
@@ -27,107 +99,282 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Teoremi del calcolo differenziale &middot; Unità 22</p>
   <h1>Invertibilità e funzione inversa</h1>
-  <p class="sommario">Una funzione è invertibile quando non ripete mai lo stesso valore:
-  la condizione più semplice da controllare è che sia sempre crescente o sempre
-  decrescente. Vediamo come verificarlo e come costruire esplicitamente l'inversa.</p>
 </header>
+
+<p>Questa unità mostra come si verifica che una funzione è invertibile e come si costruisce la funzione inversa, con il suo dominio.</p>
+
+<div class="barra-ris"><button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button></div>
 
 <h2>Il criterio</h2>
 
 <div class="def"><span class="et">Criterio</span>
-<p>Per dimostrare che $f(x)$ è invertibile nel proprio dominio verifichiamo che sia
-continua e monotona in senso stretto. Il modo più pratico per controllare la
-monotonia stretta è studiare il segno di $f'(x)$: se $f'(x)$ ha segno costante
-(sempre positivo o sempre negativo) su tutto il dominio, $f(x)$ è invertibile.</p></div>
+<p>Una funzione continua e monotona in senso stretto in un intervallo è invertibile. Per controllare la monotonia stretta si studia il segno di $f'(x)$: se $f'(x)$ ha segno costante (sempre positivo o sempre negativo) in tutti i punti interni dell'intervallo, $f(x)$ è invertibile.</p></div>
 
 <h2>Esempio</h2>
 
-<p>Consideriamo $f(x)=2-\sqrt{5-x}$ e dimostriamo che è invertibile nel suo dominio.</p>
+<p>Si dimostra che la funzione seguente è invertibile nel suo dominio e se ne ricava la funzione inversa.</p>
 
-<p>$$5-x\ge 0 \quad\Longrightarrow\quad x\le 5$$</p>
+<div class="es">
+<p class="eq quesito">$$f(x)=2-\sqrt{5-x}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$f^{-1}(x)=-x^2+4x+1,\qquad x\le 2$$</p>
+</div>
 
-<p>$f(x)$ è continua in tutto il dominio, come composizione di funzioni continue.
-Calcoliamo la derivata:</p>
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Il radicando non deve essere negativo; nel dominio $f$ è continua.</p>
+<p class="eq">$$5-x\ge 0 \iff x\le 5$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> La derivata esiste nei punti interni del dominio.</p>
+<p class="eq">$$f'(x)=\dfrac{1}{2\sqrt{5-x}},\qquad x&lt;5$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> La derivata è sempre positiva: $f$ è crescente, quindi invertibile.</p>
+<p class="eq">$$f'(x)&gt;0 \quad \text{per ogni } x&lt;5$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> Si pone $y=f(x)$ e si ricava $x$ in funzione di $y$.</p>
+<p class="eq">$$y=2-\sqrt{5-x} \;\Rightarrow\; 2-y=\sqrt{5-x} \;\Rightarrow\; (2-y)^2=5-x \;\Rightarrow\; x=-y^2+4y+1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">5.</span> Si scambiano i nomi delle variabili.</p>
+<p class="eq">$$f^{-1}(x)=-x^2+4x+1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">6.</span> Il codominio di $f$, dato dai limiti agli estremi del dominio, è il dominio di $f^{-1}$.</p>
+<p class="eq">$$\lim_{x\to-\infty}f(x)=-\infty \qquad \lim_{x\to 5^-}f(x)=2 \qquad\Rightarrow\qquad x\le 2$$</p>
+</div>
+</div>
 
-<p>$$f'(x) = \frac{1}{2\sqrt{5-x}}, \qquad x&lt;5$$</p>
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
 
-<p>La derivata non esiste nell'estremo $x=5$ (tangente verticale), ma è definita in
-tutti i punti interni del dominio, ed è sempre positiva: $f(x)$ è dunque sempre
-crescente, quindi invertibile.</p>
+<div class="fig">
+<svg id="g-f" viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Grafico di f(x) = 2 − radice di (5 − x), crescente, con il punto (5; 2) e una tangente mobile"></svg>
+<div class="cursore"><label for="s-x">$x$</label>
+<input type="range" id="s-x" min="-5" max="5" step="0.05" value="0">
+<span class="val" id="v-x"></span></div>
+<p class="did">Il grafico di $f(x)=2-\sqrt{5-x}$ è sempre crescente, è definito per $x\le 5$ e ha codominio $]-\infty;2]$; con il cursore si sposta il punto e si legge la pendenza della tangente.</p>
+</div>
 
-<figure class="disegno">
-<svg viewBox="0 0 280 190" width="100%" style="max-width:300px">
-<line x1="34" y1="100" x2="266" y2="100" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="140.5" y1="160" x2="140.5" y2="14" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="255" y="96" font-size="10" fill="var(--inchiostro)">x</text>
-<text x="145" y="22" font-size="10" fill="var(--inchiostro)">y</text>
-<line x1="34" y1="33.9" x2="258.9" y2="33.9" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="20" y="37" font-size="10" fill="var(--grigio)">2</text>
-<polyline points="36.4,135.6 42.1,134.3 47.8,133.0 53.5,131.7 59.2,130.3 64.9,128.9 70.6,127.5 76.3,126.1 82.0,124.6 87.7,123.1 93.4,121.6 99.1,120.1 104.8,118.6 110.5,117.0 116.3,115.4 122.0,113.7 127.7,112.0 133.4,110.3 139.1,108.6 144.8,106.8 150.5,104.9 156.2,103.0 161.9,101.1 167.6,99.1 173.3,97.0 179.0,94.9 184.7,92.6 190.4,90.3 196.1,87.9 201.8,85.4 207.5,82.8 213.3,80.0 219.0,77.0 224.7,73.8 230.4,70.3 236.1,66.5 241.8,62.1 247.5,56.9 253.2,50.2 258.9,33.9"
-fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="258.9" cy="33.9" r="3.5" fill="var(--inchiostro)"/>
-<text x="192" y="48" font-size="10" fill="var(--inchiostro)">(5,2)</text>
-<line x1="266" y1="18" x2="278" y2="6" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="266" y1="26" x2="278" y2="14" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="266" y1="34" x2="278" y2="22" stroke="var(--grigio)" stroke-width="1.2"/>
-</svg>
-<figcaption>Grafico di $f(x)=2-\sqrt{5-x}$: sempre crescente, definito per $x\le 5$,
-con codominio $\,]-\infty,2]$.</figcaption>
-</figure>
-
-<p>Ricaviamo ora la funzione inversa: poniamo $y=f(x)$ e ricaviamo $x$ in funzione di
-$y$.</p>
-
-<p>$$y=2-\sqrt{5-x} \;\Longrightarrow\; 2-y=\sqrt{5-x} \;\Longrightarrow\;
-(2-y)^2=5-x \;\Longrightarrow\; x=5-(2-y)^2=-y^2+4y+1$$</p>
-
-<p>Scambiando i nomi delle variabili otteniamo la funzione inversa:</p>
-
-<p>$$f^{-1}(x) = -x^2+4x+1$$</p>
-
-<p>Il dominio di $f^{-1}$ coincide con il codominio di $f$: per trovarlo calcoliamo i
-limiti di $f(x)$ agli estremi del suo dominio.</p>
-
-<p>$$\lim_{x\to -\infty}\left(2-\sqrt{5-x}\right) = -\infty \qquad\qquad
-\lim_{x\to 5^-}\left(2-\sqrt{5-x}\right) = 2$$</p>
-
-<p>Il codominio di $f$ è $\,]-\infty,2]$: questo diventa il dominio di $f^{-1}$, cioè
-$x\le 2$.</p>
-
-<figure class="disegno">
-<svg viewBox="0 0 280 190" width="100%" style="max-width:300px">
-<line x1="34" y1="91.9" x2="266" y2="91.9" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="122.4" y1="160" x2="122.4" y2="14" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="255" y="88" font-size="10" fill="var(--inchiostro)">x</text>
-<text x="127" y="22" font-size="10" fill="var(--inchiostro)">y</text>
-<line x1="122.4" y1="30.1" x2="232.9" y2="30.1" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="232.9" y1="91.9" x2="232.9" y2="30.1" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="105" y="34" font-size="10" fill="var(--grigio)">5</text>
-<text x="230" y="104" font-size="10" fill="var(--grigio)">2</text>
-<polyline points="39.5,181.7 45.0,173.1 50.6,164.8 56.1,156.8 61.6,149.0 67.1,141.4 72.7,134.1 78.2,127.1 83.7,120.3 89.2,113.7 94.8,107.4 100.3,101.4 105.8,95.5 111.3,90.0 116.9,84.6 122.4,79.6 127.9,74.8 133.4,70.2 139.0,65.8 144.5,61.8 150.0,57.9 155.5,54.3 161.0,51.0 166.6,47.9 172.1,45.1 177.6,42.5 183.1,40.1 188.7,38.0 194.2,36.1 199.7,34.5 205.2,33.2 210.8,32.1 216.3,31.2 221.8,30.6 227.3,30.2 232.9,30.1"
-fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<polyline points="232.9,30.1 236.8,30.1 240.7,30.3 244.7,30.7 248.6,31.1 252.6,31.7 256.5,32.4 260.5,33.2"
-fill="none" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="4 3"/>
-<circle cx="232.9" cy="30.1" r="3.5" fill="var(--inchiostro)"/>
-<text x="150" y="48" font-size="10" fill="var(--inchiostro)">(2,5)</text>
-<line x1="234" y1="16" x2="248" y2="2" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="240" y1="22" x2="254" y2="8" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="246" y1="28" x2="260" y2="14" stroke="var(--grigio)" stroke-width="1.2"/>
-</svg>
-<figcaption>Grafico di $f^{-1}(x)=-x^2+4x+1$, ramo di parabola con vertice $(2,5)$:
-dominio $x\le 2$, lo stesso codominio di $f$.</figcaption>
-</figure>
+<div class="fig">
+<svg id="g-inv" viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Grafico di f inversa, ramo di parabola con vertice (2; 5) definito per x minore o uguale a 2; il resto della parabola è tratteggiato"></svg>
+<div class="cursore"><label for="s-y">$x$</label>
+<input type="range" id="s-y" min="-1" max="3" step="0.05" value="0">
+<span class="val" id="v-y"></span></div>
+<p class="did">Il grafico di $f^{-1}(x)=-x^2+4x+1$ è il ramo di parabola con vertice $(2;5)$ definito per $x\le 2$; il tratto per $x&gt;2$, tratteggiato, non appartiene a $f^{-1}$.</p>
+</div>
 
 <div class="nota"><span class="et">Attenzione</span>
-<p>Dominio e codominio si scambiano fra una funzione e la sua inversa: il codominio di
-$f$ diventa il dominio di $f^{-1}$, e il dominio di $f$ diventa il codominio di
-$f^{-1}$. Conviene sempre calcolare prima gli estremi del codominio di $f$ tramite i
-limiti, e usarli come dominio di $f^{-1}$.</p></div>
-
+<p>Dominio e codominio si scambiano fra una funzione e la sua inversa. Per questo conviene calcolare prima il codominio di $f$, con i limiti agli estremi del dominio, e usarlo come dominio di $f^{-1}$.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../22-monotonia-e-segno-della-derivata-prima/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Monotonia e segno della derivata prima</span></a><a class="successiva" href="../24-teorema-di-cauchy-e-teorema-di-de-l-hopital/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema di Cauchy e teorema di De L'Hôpital</span></a></nav>
 <footer><p>Matematica quinta &middot; Teoremi del calcolo differenziale &middot; Unità 22</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+/* retta per (x0;y0) con pendenza m, aggiornabile */
+function retta(P,col,w,dash){var o={stroke:col,'stroke-width':w||1.8};if(dash)o['stroke-dasharray']=dash;return P.add(el('line',o),'sopra');}
+function poniRetta(P,r,x0,y0,m){var a=P.xr[0]-1,b=P.xr[1]+1;
+  r.setAttribute('x1',P.X(a));r.setAttribute('y1',P.Y(y0+m*(a-x0)));r.setAttribute('x2',P.X(b));r.setAttribute('y2',P.Y(y0+m*(b-x0)));}
+function sposta(P,c,x,y){c.setAttribute('cx',P.X(x));c.setAttribute('cy',P.Y(y));}
+
+/* ---------- f(x) = 2 - sqrt(5 - x): punto e tangente mobili ---------- */
+(function(){
+  var svg=document.getElementById('g-f');
+  function f(x){return x<=5?2-Math.sqrt(5-x):NaN;} function fp(x){return 1/(2*Math.sqrt(5-x));}
+  var P=new Piano(svg,[-6,6.5],[-2.5,3],{l:26,r:24,t:22,b:22});
+  P.assi([-4,-2,2,4],[-2,-1,1,2],'x','y');
+  P.add(el('line',{x1:P.X(0),x2:P.X(5),y1:P.Y(2),y2:P.Y(2),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  P.add(el('line',{x1:P.X(5),x2:P.X(5),y1:P.Y(0),y2:P.Y(2),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  P.curva(function(x){return x<=5?f(x):NaN;},-6,5,1200,'var(--blu)');
+  /* ultimo tratto fino a x = 5 campionato in u = sqrt(5 - x) */
+  var s='';for(var i=0;i<=60;i++){var u=0.5*(1-i/60),x=5-u*u;s+=(i?'L':'M')+P.X(x).toFixed(1)+' '+P.Y(2-u).toFixed(1)+' ';}
+  P.add(el('path',{d:s,fill:'none',stroke:'var(--blu)','stroke-width':2.2}),'sopra');
+  pallino(P,5,2,true,'var(--inchiostro)');
+  P.add(txt(P.X(5)+8,P.Y(2)+16,'(5; 2)',{fill:'var(--inchiostro)'}),'testo');
+  P.add(txt(P.X(6.3),P.Y(-1.9),'y = 2 − √(5 − x)',{fill:'var(--blu)','text-anchor':'end'}),'testo');
+  var r=retta(P,'var(--rosso)',1.6), pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-x'), v=document.getElementById('v-x');
+  function agg(){
+    var x=+sl.value, y=f(x); sposta(P,pt,x,y);
+    if(x>=5-1e-9){
+      r.setAttribute('x1',P.X(5));r.setAttribute('x2',P.X(5));r.setAttribute('y1',P.Y(-3));r.setAttribute('y2',P.Y(4));
+      v.innerHTML='x = 5,00 &nbsp; f(x) = 2,00 &nbsp; tangente verticale';
+    }else{
+      var m=fp(x); poniRetta(P,r,x,y,m);
+      v.innerHTML='x = '+num(x)+' &nbsp; f(x) = '+num(y)+' &nbsp; f′(x) = '+num(m)+' &nbsp; <span class="ok">crescente</span>';
+    }
+  }
+  sl.addEventListener('input',agg);agg();
+})();
+
+/* ---------- f^-1(x) = -x^2 + 4x + 1, x <= 2 ---------- */
+(function(){
+  var svg=document.getElementById('g-inv');
+  function g(x){return -x*x+4*x+1;}
+  var P=new Piano(svg,[-1.5,3.5],[-4.5,6.5],{l:26,r:24,t:22,b:22});
+  P.assi([-1,1,2,3],[-4,-2,2,4],'x','y');
+  P.add(el('line',{x1:P.X(0),x2:P.X(2),y1:P.Y(5),y2:P.Y(5),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  P.add(el('line',{x1:P.X(2),x2:P.X(2),y1:P.Y(0),y2:P.Y(5),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  P.add(txt(P.X(0)-8,P.Y(5)+4,'5',{'text-anchor':'end'}),'testo');
+  P.curva(g,-1.5,2,400,'var(--blu)');
+  P.curva(g,2,3.5,200,'var(--blu)',1.4,'5,4');
+  pallino(P,2,5,true,'var(--inchiostro)');
+  P.add(txt(P.X(2)-8,P.Y(5)-8,'(2; 5)',{fill:'var(--inchiostro)','text-anchor':'end'}),'testo');
+  P.add(txt(P.X(3.4),P.Y(-3.3),'y = −x² + 4x + 1',{fill:'var(--blu)','text-anchor':'end'}),'testo');
+  var pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-y'), v=document.getElementById('v-y');
+  function agg(){
+    var x=+sl.value, y=g(x); sposta(P,pt,x,y);
+    var fuori=x>2+1e-9;
+    pt.setAttribute('fill',fuori?'var(--carta)':'var(--rosso)');
+    v.innerHTML='x = '+num(x)+' &nbsp; '+(fuori?'y = '+num(y)+' &nbsp; <span style="color:var(--rosso);font-weight:600">x &gt; 2: fuori dal dominio di f⁻¹</span>'
+      :'f⁻¹(x) = '+num(y)+' &nbsp; <span class="ok">x ≤ 2</span>');
+  }
+  sl.addEventListener('input',agg);agg();
+})();
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
