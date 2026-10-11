@@ -5,25 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'alternatore — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.risultato{background:#eef6f0;border:1px solid var(--verde);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.risultato-et{text-align:center;font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--verde);margin:-10px 0 20px}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.interattivo label{font-family:var(--sans);font-size:.85rem;color:var(--inchiostro);display:block;margin-bottom:6px}
-.interattivo input[type=range]{width:100%}
-.interattivo .valori{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
-.interattivo .valori span.etichetta{color:var(--grigio)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
+
 <body>
 <div class="foglio">
 
@@ -31,126 +62,160 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 23</p>
   <h1>L'alternatore</h1>
-  <p class="sommario">Facendo ruotare una spira, invece di traslarla, dentro un campo magnetico
-  costante, la fem indotta non è più costante ma varia nel tempo con legge sinusoidale. È il
-  principio su cui funzionano i generatori di corrente alternata: gli alternatori.</p>
 </header>
+
+<p>Questa unità ricava l'andamento della fem indotta in una spira che ruota in un campo magnetico costante e presenta l'alternatore, il generatore di corrente alternata.</p>
 
 <h2>La fem indotta in una spira rotante</h2>
 
-<p>Riprendiamo la spira che ruota con velocità angolare $\omega$ nel campo magnetico costante
-$\vec B$ dell'unità precedente. Mentre la spira ruota, il flusso concatenato cambia in modo
-continuo, e la fem indotta vale:</p>
+<p>Una spira di area $A$ ruota con velocità angolare costante $\omega$ in un campo magnetico uniforme $\vec B$, attorno a un asse perpendicolare al campo. Durante la rotazione il flusso concatenato con la spira cambia in modo continuo, quindi nella spira si genera una fem indotta e, se il circuito è chiuso, una corrente.</p>
 
-<div class="risultato">
-$$\varepsilon = BA\omega\sin(\omega t)\quad\text{(1 spira)}$$
-$$\varepsilon = NBA\omega\sin(\omega t)\quad\text{(N spire)}$$
-</div>
-<p class="risultato-et">fem indotta in una spira rotante</p>
+<p>Se all'istante $t = 0$ la spira è perpendicolare al campo, la fem indotta vale:</p>
 
-<p>$B$ è l'intensità del campo, $A$ l'area della spira, $\omega$ la sua velocità angolare; se
-l'avvolgimento è fatto di più spire in serie, $N$ ne indica il numero, e la fem totale è la
-somma delle fem di ciascuna.</p>
+<p class="eq">$$\varepsilon = B\,A\,\omega\,\sin(\omega t)\qquad\text{(1 spira)}$$</p>
+<p class="eq">$$\varepsilon = N\,B\,A\,\omega\,\sin(\omega t)\qquad\text{(}N\text{ spire)}$$</p>
 
-<div class="nota">
-<span class="et">Da non confondere</span>
-In questa formula $N$ è il numero di spire dell'avvolgimento, non il polo nord del magnete che
-genera $\vec B$: le due lettere ricorrono vicine ma indicano cose diverse.
+<p>Qui $B$ è l'intensità del campo in tesla, $A$ l'area della spira in m² e $\omega$ la velocità angolare in rad/s. Se l'avvolgimento è formato da $N$ spire in serie, la fem totale è la somma delle fem di ciascuna spira, cioè $N$ volte quella di una spira sola.</p>
+
+<div class="nota"><span class="et">Da non confondere</span>
+<p>In questa formula $N$ è il numero di spire dell'avvolgimento, non il polo nord del magnete che genera $\vec B$.</p>
 </div>
 
 <h2>Andamento sinusoidale e valore massimo</h2>
 
-<p>La fem indotta oscilla dunque nel tempo fra $-NBA\omega$ e $+NBA\omega$, con lo stesso
-periodo della rotazione. Un generatore che produce una fem di questo tipo si chiama generatore
-di corrente alternata, o più semplicemente <strong>alternatore</strong>. Di conseguenza anche la
-corrente nel circuito esterno cambia verso periodicamente.</p>
+<p>La fem indotta è una funzione sinusoidale del tempo: oscilla fra $-NBA\omega$ e $+NBA\omega$ con lo stesso periodo della rotazione. Un generatore che produce una fem di questo tipo si chiama generatore di corrente alternata o, più semplicemente, <strong>alternatore</strong>. Anche la corrente nel circuito esterno cambia verso periodicamente.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg">
-<line x1="40" y1="130" x2="420" y2="130" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="40" y1="40" x2="40" y2="220" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="424" y="134" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">t</text>
-<text x="20" y="45" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#949;</text>
-<text x="8" y="44" font-family="var(--sans)" font-size="11" fill="var(--blu)">NBA&#969;</text>
-<text x="4" y="226" font-family="var(--sans)" font-size="11" fill="var(--blu)">&#8722;NBA&#969;</text>
-<path id="curva-eps" d="" fill="none" stroke="var(--blu)" stroke-width="2.2"/>
-<circle id="punto-eps" cx="40" cy="130" r="5" fill="var(--rosso)"/>
-<g id="spira-fig" transform="translate(370,60)">
-<rect x="-34" y="-22" width="26" height="44" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="-21" y="4" text-anchor="middle" font-family="var(--sans)" font-size="12">N</text>
-<rect x="8" y="-22" width="26" height="44" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="21" y="4" text-anchor="middle" font-family="var(--sans)" font-size="12">S</text>
-<line id="spira-linea" x1="-6" y1="-16" x2="6" y2="16" stroke="var(--rosso)" stroke-width="3"/>
-</g>
-<text x="330" y="105" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">spira, vista di taglio</text>
-</svg>
-<p class="did">Il punto rosso percorre la curva della fem al variare dell'angolo $\omega t$; a
-destra, la stessa fase di rotazione vista sulla spira fra i poli.</p>
-<div class="interattivo">
-<label for="slider-t">Fase di rotazione $\omega t$: <span id="t-val">90&deg;</span></label>
-<input type="range" id="slider-t" min="0" max="360" step="5" value="90">
-<div class="valori">
-<span class="etichetta">$\sin(\omega t)$</span><span id="sin-val">—</span>
-<span class="etichetta">$\varepsilon\,/\,NBA\omega$</span><span id="eps-val">—</span>
-</div>
-</div>
+<svg id="fig-a" viewBox="0 0 440 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<div class="cursore"><label for="cur-a">fase $\omega t$</label><input id="cur-a" type="range" min="0" max="360" step="5" value="45"><output id="val-a" for="cur-a"></output></div>
+<p class="did">Il punto rosso percorre la curva della fem al variare della fase $\omega t$; a destra la spira, vista lungo l'asse di rotazione, ruota fra i poli con la stessa fase.</p>
 </div>
 
-<script>
-(function(){
-  var xmin=40,xmax=420,ymid=130,amp=90;
-  function xpx(t){return xmin+(t/360)*(xmax-xmin);}
-  function ypx(s){return ymid-s*amp;}
-  var d='M'+xpx(0)+','+ypx(0);
-  for(var t=0;t<=360;t+=4){ d+=' L'+xpx(t)+','+ypx(Math.sin(t*Math.PI/180)); }
-  document.getElementById('curva-eps').setAttribute('d',d);
-  var slider=document.getElementById('slider-t');
-  var punto=document.getElementById('punto-eps');
-  var linea=document.getElementById('spira-linea');
-  function agg(){
-    var t=parseFloat(slider.value);
-    document.getElementById('t-val').textContent=t+'°';
-    var s=Math.sin(t*Math.PI/180);
-    punto.setAttribute('cx',xpx(t)); punto.setAttribute('cy',ypx(s));
-    document.getElementById('sin-val').textContent=s.toFixed(2).replace('.',',');
-    document.getElementById('eps-val').textContent=s.toFixed(2).replace('.',',');
-    var rad=t*Math.PI/180, r=20;
-    var x1=-r*Math.cos(rad), y1=-r*Math.sin(rad), x2=r*Math.cos(rad), y2=r*Math.sin(rad);
-    linea.setAttribute('x1',x1); linea.setAttribute('y1',y1);
-    linea.setAttribute('x2',x2); linea.setAttribute('y2',y2);
-  }
-  slider.addEventListener('input',agg);
-  agg();
-})();
-</script>
+<p>La fem è massima quando $\sin(\omega t) = 1$, cioè quando il piano della spira è parallelo al campo: in quella posizione il flusso è nullo, ma varia con la massima rapidità.</p>
 
-<p>Il valore massimo della fem si ha quando $\sin\omega t=1$, cioè quando la spira attraversa la
-posizione parallela al campo:</p>
-
-<div class="risultato">
-$$\varepsilon_{max}=BA\omega\quad\text{(1 spira)}\qquad\qquad \varepsilon_{max}=NBA\omega\quad\text{(N spire)}$$
+<div class="def"><span class="et">Fem indotta massima</span>
+<p class="eq">$$\varepsilon_{max} = B\,A\,\omega\qquad\text{(1 spira)}$$</p>
+<p class="eq">$$\varepsilon_{max} = N\,B\,A\,\omega\qquad\text{(}N\text{ spire)}$$</p>
 </div>
-<p class="risultato-et">fem indotta massima</p>
 
-<div class="fig" style="max-width:200px;margin-left:auto;margin-right:auto">
-<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-<circle cx="60" cy="60" r="46" fill="#fff" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="60" y="70" text-anchor="middle" font-family="var(--sans)" font-size="30" fill="var(--inchiostro)">N</text>
-</svg>
+<p>Nei circuiti l'alternatore si indica con un cerchio che contiene una piccola sinusoide.</p>
+
+<div class="fig">
+<svg id="fig-b" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:110px"></svg>
 <p class="did">Simbolo circuitale dell'alternatore.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 24 descrive il funzionamento inverso: il motore elettrico in corrente alternata, che
-trasforma energia elettrica in energia meccanica.</li>
-</ul>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../23-campo-elettrico-indotto-e-generatori-di-corrente/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campo elettrico indotto e generatori di corrente</span></a><a class="successiva" href="../25-motori-elettrici-in-corrente-alternata/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Motori elettrici in corrente alternata</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 23</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function v(n,d){var s=(+n).toFixed(d);if(/^-0[.,]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+
+  /* Figura A: fem ε = NBAω sin(ωt) e spira vista lungo l'asse.
+     Il campo B è orizzontale da N a S; per ωt = 0 la normale alla spira è parallela a B
+     (spira perpendicolare al campo, flusso massimo, fem nulla). La normale forma con B l'angolo ωt. */
+  (function(){
+    var S=document.getElementById('fig-a'), c=document.getElementById('cur-a'), o=document.getElementById('val-a');
+    if(!S||!c)return;
+    var x0=56, x1=262, ym=125, amp=78;
+    function X(t){return x0+(x1-x0)*t/360;}
+    function Y(s){return ym-amp*s;}
+    /* assi */
+    freccia(S,x0,ym,x1+22,ym,'var(--inchiostro)',1.4,6);
+    freccia(S,x0,ym+amp+18,x0,ym-amp-22,'var(--inchiostro)',1.4,6);
+    T(S,x1+10,ym-8,'ωt',{'font-size':13,'font-style':'italic',fill:'var(--inchiostro)'});
+    T(S,x0+8,ym-amp-12,'ε',{'font-size':14,'font-style':'italic',fill:'var(--inchiostro)'});
+    [[1,'NBAω'],[-1,'−NBAω']].forEach(function(q){
+      el(S,'line',{x1:x0,y1:Y(q[0]),x2:x1,y2:Y(q[0]),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3',opacity:.6});
+      el(S,'line',{x1:x0-4,y1:Y(q[0]),x2:x0+4,y2:Y(q[0]),stroke:'var(--inchiostro)','stroke-width':1.2});
+      T(S,x0-6,Y(q[0])+4,q[1],{'text-anchor':'end','font-size':11,fill:'var(--blu)'});
+    });
+    [90,180,270,360].forEach(function(t){
+      el(S,'line',{x1:X(t),y1:ym-3,x2:X(t),y2:ym+3,stroke:'var(--inchiostro)','stroke-width':1.2});
+      T(S,X(t),ym+16,t+'°',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    });
+    var d='';
+    for(var t=0;t<=360;t+=2)d+=(t?' L':'M')+f(X(t))+','+f(Y(Math.sin(t*Math.PI/180)));
+    el(S,'path',{d:d,fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+
+    /* poli e campo */
+    var cx=372, cy=125, R=30;
+    el(S,'rect',{x:304,y:78,width:22,height:94,rx:3,fill:'var(--rosso)'});
+    T(S,315,130,'N',{'text-anchor':'middle','font-size':14,'font-weight':700,fill:'#fff'});
+    el(S,'rect',{x:418,y:78,width:22,height:94,rx:3,fill:'var(--blu)'});
+    T(S,429,130,'S',{'text-anchor':'middle','font-size':14,'font-weight':700,fill:'#fff'});
+    [88,108,142,162].forEach(function(y){
+      el(S,'line',{x1:328,y1:y,x2:416,y2:y,stroke:'var(--blu)','stroke-width':1,opacity:.6});
+      punta(S,408,y,1,0,'var(--blu)',5);
+    });
+    T(S,394,72,'B',{'font-size':13,'font-style':'italic','font-weight':700,fill:'var(--blu)'});
+    /* freccia di rotazione (antioraria nel disegno) */
+    T(S,cx,206,'spira vista',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    T(S,cx,220,'lungo l\'asse',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+
+    var gm=el(S,'g',{});
+    function dis(){
+      var t=+c.value, r=t*Math.PI/180, s=Math.sin(r);
+      vuota(gm);
+      el(gm,'line',{x1:X(t),y1:ym,x2:X(t),y2:Y(s),stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3 3'});
+      el(gm,'circle',{cx:f(X(t)),cy:f(Y(s)),r:5,fill:'var(--rosso)'});
+      /* normale n a angolo t da B (orizzontale); y dello schermo verso il basso: rotazione antioraria */
+      var nx=Math.cos(r), ny=-Math.sin(r);
+      /* spira: segmento perpendicolare alla normale */
+      var ax=-ny*R, ay=nx*R;
+      el(gm,'line',{x1:f(cx-ax),y1:f(cy-ay),x2:f(cx+ax),y2:f(cy+ay),stroke:'var(--inchiostro)','stroke-width':3.2,'stroke-linecap':'round'});
+      el(gm,'circle',{cx:f(cx-ax),cy:f(cy-ay),r:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+      el(gm,'circle',{cx:f(cx+ax),cy:f(cy+ay),r:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+      el(gm,'circle',{cx:cx,cy:cy,r:2.2,fill:'var(--inchiostro)'});
+      var msg='';
+      if(Math.abs(s)>0.995)msg=' <span class="ok">fem massima</span>';
+      else if(Math.abs(s)<0.01)msg=' <span class="ok">fem nulla</span>';
+      o.innerHTML='ωt = '+t+'°; ε = '+v(s,2)+' · NBAω'+msg;
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* Figura B: simbolo dell'alternatore, cerchio con una sinusoide */
+  (function(){
+    var S=document.getElementById('fig-b'); if(!S)return;
+    el(S,'line',{x1:4,y1:50,x2:30,y2:50,stroke:'var(--inchiostro)','stroke-width':2});
+    el(S,'line',{x1:90,y1:50,x2:116,y2:50,stroke:'var(--inchiostro)','stroke-width':2});
+    el(S,'circle',{cx:60,cy:50,r:30,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2.4});
+    var d='';
+    for(var k=0;k<=40;k++){var x=44+32*k/40, y=50-9*Math.sin(2*Math.PI*k/40);d+=(k?' L':'M')+f(x)+','+f(y);}
+    el(S,'path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.2,'stroke-linecap':'round'});
+  })();
+})();
+</script>
 </body>
 </html>
