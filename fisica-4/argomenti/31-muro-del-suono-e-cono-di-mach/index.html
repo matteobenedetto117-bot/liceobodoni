@@ -5,15 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Muro del suono e cono di Mach — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.ok{color:var(--verde);font-weight:600}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
+.cursore .val sup{font-size:.7em;line-height:0}
+.letture{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:8px;font-variant-numeric:tabular-nums}
+.letture b{color:var(--blu)}
+.passo{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -22,81 +58,165 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
   <p class="occhiello">Onde e suono &middot; Unit&agrave; 29</p>
   <h1>Muro del suono e cono di Mach</h1>
-  <p class="sommario">Nella formula dell'effetto Doppler per la sorgente in movimento la
-  frequenza percepita cresce quanto più la sorgente si avvicina alla velocità del suono.
-  Vediamo che cosa succede nei due casi limite: quando la sorgente raggiunge quella
-  velocità, e quando la supera.</p>
 </header>
 
-<div class="fig">
-<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrV" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-<marker id="arrU" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-</defs>
-<circle cx="130" cy="120" r="120" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="170" cy="120" r="80" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="210" cy="120" r="40" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="250" cy="120" r="2.5" fill="var(--inchiostro)"/>
-<line x1="250" y1="140" x2="250" y2="185" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#arrU)"/>
-<text x="250" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">muro del suono</text>
-<line x1="250" y1="80" x2="290" y2="80" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#arrV)"/>
-<text x="270" y="68" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--verde)">v</text>
-<line x1="250" y1="100" x2="290" y2="100" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#arrU)"/>
-<text x="270" y="92" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--blu)">u</text>
-<text x="130" y="30" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">u = v</text>
-</svg>
-<p class="did">Tutte le circonferenze, emesse dalla sorgente in istanti successivi,
-risultano tangenti nello stesso punto: la sorgente avanza esattamente alla velocità $v$
-con cui si propaga il suono che ha appena emesso.</p>
-</div>
+<p>Questa unità descrive che cosa succede ai fronti d'onda quando la sorgente sonora si muove alla velocità del suono oppure più velocemente.</p>
 
-<p>Quando la sorgente si sposta alla velocità del suono ($u = v$), ogni fronte d'onda
-emesso resta agganciato a quello precedente, tutti tangenti nello stesso punto davanti
-alla sorgente: è il muro del suono. Un osservatore che si trova su quella direzione non
-sente nulla finché la sorgente non lo raggiunge; nell'istante in cui lo raggiunge, sente
-insieme tutto il suono che nel frattempo si è accumulato in quel punto.</p>
+<h2>Muro del suono</h2>
+
+<p>Per una sorgente in avvicinamento la frequenza percepita è:</p>
+<p class="eq">$$f'=\dfrac{1}{1-\dfrac{u}{v_s}}\,f$$</p>
+<p class="leg">Nella formula $u$ è la velocità della sorgente e $v_s$ la velocità del suono; quando $u$ si avvicina a $v_s$ il denominatore tende a zero e la frequenza percepita cresce senza limite.</p>
 
 <div class="fig">
-<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
-<circle cx="130" cy="130" r="115" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="230" cy="130" r="75" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="310" cy="130" r="35" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<circle cx="130" cy="130" r="2.5" fill="var(--inchiostro)"/>
-<circle cx="230" cy="130" r="2.5" fill="var(--inchiostro)"/>
-<circle cx="310" cy="130" r="2.5" fill="var(--inchiostro)"/>
-<text x="130" y="115" text-anchor="middle" font-family="var(--sans)" font-size="12">1</text>
-<text x="230" y="115" text-anchor="middle" font-family="var(--sans)" font-size="12">2</text>
-<text x="310" y="115" text-anchor="middle" font-family="var(--sans)" font-size="12">3</text>
-<line x1="345" y1="130" x2="30" y2="15" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="345" y1="130" x2="30" y2="245" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="220" y="45" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--blu)">cono di Mach</text>
-</svg>
-<p class="did">Con $u&gt;v$ la sorgente supera i propri fronti d'onda: le circonferenze
-emesse nei punti $1$, $2$, $3$ restano indietro rispetto alla sorgente, e la retta
-tangente a tutte loro disegna il cono di Mach.</p>
+<svg id="g-muro" viewBox="0 0 440 226" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Sorgente che si muove alla velocità del suono emettendo fronti d'onda circolari, tutti tangenti nel punto in cui si trova la sorgente"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="btn-muro" aria-label="Avvia">&#9654;</button></div>
+<p class="did">Con $u=v_s$ la sorgente avanza alla stessa velocità dei fronti d'onda che emette, quindi tutti i fronti risultano tangenti nel punto in cui si trova la sorgente.</p>
 </div>
 
-<p>Se la sorgente supera la velocità del suono ($u &gt; v$), i fronti d'onda emessi non
-riescono più a restare davanti alla sorgente: ciascuna circonferenza resta centrata nel
-punto in cui è stata emessa, mentre la sorgente è già andata oltre. L'inviluppo di tutte
-queste circonferenze, la retta tangente comune, è il cono di Mach.</p>
+<p>Quando la sorgente si muove alla velocità del suono ($u=v_s$), ogni fronte d'onda emesso avanza insieme alla sorgente. Tutti i fronti sono tangenti nel punto in cui si trova la sorgente e lì si accumulano.</p>
 
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Il caso di due sorgenti che emettono insieme, con le stesse caratteristiche
-dell'onda, è l'argomento della prossima unità, sovrapposizione e interferenza.</li>
-</ul>
+<div class="def"><span class="et">Definizione</span>
+<p>Il <b>muro del suono</b> è l'accumulo dei fronti d'onda davanti a una sorgente che si muove alla velocità del suono.</p></div>
+
+<p>Un osservatore che si trova davanti alla sorgente, lungo la direzione del moto, non sente nulla finché la sorgente non lo raggiunge. Nell'istante in cui la sorgente lo raggiunge, riceve insieme tutto il suono che si è accumulato.</p>
+
+<h2>Cono di Mach</h2>
+
+<p>Se la sorgente si muove più velocemente del suono ($u&gt;v_s$), supera i fronti d'onda che ha emesso. Ogni fronte resta una circonferenza centrata nel punto in cui è stato emesso, mentre la sorgente è già più avanti.</p>
+
+<div class="fig">
+<svg id="g-mach" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Fronti d'onda emessi nei punti 1, 2, 3 da una sorgente più veloce del suono e rette tangenti comuni che formano il cono di Mach; la velocità della sorgente si sceglie con il cursore"></svg>
+<div class="cursore"><label for="cur-m">velocità $u$</label><input id="cur-m" type="range" min="1.2" max="3" step="0.05" value="2"><span class="val" id="val-m"></span></div>
+<p class="did">Le circonferenze emesse nei punti 1, 2, 3 restano indietro rispetto alla sorgente, e le rette tangenti a tutte formano il cono di Mach; con il cursore si sceglie $u$ e si vede che, più la sorgente è veloce, più il cono è stretto.</p>
 </div>
+
+<p>Le circonferenze emesse nei punti successivi della traiettoria hanno due rette tangenti comuni, che passano per la sorgente. Nello spazio i fronti d'onda sono superfici sferiche e la superficie tangente a tutti è un cono con il vertice nella sorgente; nel disegno, che ne mostra una sezione, il cono appare come due rette.</p>
+
+<div class="def"><span class="et">Definizione</span>
+<p>Il <b>cono di Mach</b> è la superficie tangente a tutti i fronti d'onda emessi da una sorgente più veloce del suono; ha il vertice nella sorgente.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../30-effetto-doppler-sorgente-in-movimento/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Effetto Doppler: sorgente in movimento</span></a><a class="successiva" href="../32-sovrapposizione-e-interferenza/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sovrapposizione e interferenza</span></a></nav>
 <footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 29</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,'text-anchor':'middle',fill:'var(--grigio)'},a||{}),p);e.textContent=s;return e;}
+  function num(v,d){return v.toFixed(d===undefined?2:d).replace('.',',').replace('-','−');}
+  function freccia(svg,id,col){var df=el('defs',{},svg);var m=el('marker',{id:id,markerWidth:7,markerHeight:7,refX:5,refY:2.5,orient:'auto'},df);el('path',{d:'M0,0 L5,2.5 L0,5 Z',fill:col},m);return 'url(#'+id+')';}
+  function alone(g){[].forEach.call(g.querySelectorAll('text'),function(e){e.setAttribute('stroke','#fff');e.setAttribute('stroke-width',4);e.setAttribute('paint-order','stroke');});}
+  var ferma=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- muro del suono: u = vs, sequenza con ▶ ---------- */
+  (function(){
+    var svg=document.getElementById('g-muro');
+    var VPX=50, TE=0.6, SY=100, X0=40, X1=330, NF=9;   // velocità dell'onda = velocità della sorgente (px/s), periodo (s)
+    var DUR=(X1-X0)/VPX;
+    var fv=freccia(svg,'fm-u','var(--verde)'), fr=freccia(svg,'fm-v','var(--rosso)');
+    var clip=el('clipPath',{id:'cl-m'},el('defs',{},svg));el('rect',{x:0,y:0,width:440,height:192},clip);
+    var fronti=el('g',{'clip-path':'url(#cl-m)'},svg), sopra=el('g',{},svg);
+    el('line',{x1:X0,y1:SY,x2:X1+60,y2:SY,stroke:'var(--riga)','stroke-width':1,'stroke-dasharray':'4,4'},fronti);
+    var cerchi=[];for(var k=0;k<NF;k++)cerchi.push(el('circle',{cx:0,cy:SY,r:0,fill:'none',stroke:'var(--rosso)','stroke-width':1.4},fronti));
+    var sor=el('g',{},sopra);
+    el('circle',{cx:0,cy:0,r:5,fill:'var(--inchiostro)'},sor);
+    el('line',{x1:-34,y1:22,x2:-6,y2:22,stroke:'var(--verde)','stroke-width':2.2,'marker-end':fv},sor);
+    txt(sor,-20,40,'u',{'font-size':13,fill:'var(--verde)','font-style':'italic'});
+    el('line',{x1:4,y1:-22,x2:32,y2:-22,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':fr},sor);
+    txt(sor,18,-30,'vₛ',{'font-size':13,fill:'var(--rosso)','font-style':'italic'});
+    txt(sopra,14,24,'u = vₛ',{'font-size':13,fill:'var(--inchiostro)','text-anchor':'start'});
+    var fine=txt(svg,220,214,'i fronti si accumulano dove si trova la sorgente: muro del suono',{'font-size':13,fill:'var(--inchiostro)',opacity:0});
+    alone(sopra);
+    var btn=document.getElementById('btn-muro'), t=0, prec=null, stato='fermo';
+    function disegna(t){
+      var xs=X0+VPX*t, n=Math.floor(t/TE+1e-9);
+      for(var i=0;i<NF;i++){var k=n-i, c=cerchi[i];
+        if(k<0){c.style.display='none';continue;}
+        var age=t-k*TE; c.style.display='';
+        c.setAttribute('cx',(X0+VPX*k*TE).toFixed(1));c.setAttribute('r',(VPX*age).toFixed(1));
+        c.setAttribute('opacity',(1-i/NF*0.7).toFixed(2));}
+      sor.setAttribute('transform','translate('+xs.toFixed(1)+','+SY+')');
+    }
+    function passo(ts){
+      if(prec===null)prec=ts;var dt=Math.min(.05,(ts-prec)/1000);prec=ts;t+=dt;
+      if(t>=DUR){t=DUR;disegna(t);finisci();return;}
+      disegna(t);requestAnimationFrame(passo);
+    }
+    function finisci(){
+      stato='finito';btn.disabled=false;btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');
+      fine.style.transition=ferma?'':'opacity .8s';fine.setAttribute('opacity',1);
+    }
+    function ripristina(){
+      stato='fermo';t=0;prec=null;disegna(DUR);btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');
+      fine.style.transition='';fine.setAttribute('opacity',0);
+    }
+    btn.addEventListener('click',function(){
+      if(stato==='finito'){ripristina();return;}
+      if(stato!=='fermo')return;
+      if(ferma){t=DUR;disegna(t);finisci();return;}
+      stato='corso';btn.disabled=true;prec=null;t=0;requestAnimationFrame(passo);
+    });
+    disegna(DUR);
+  })();
+
+  /* ---------- cono di Mach: cursore su u / vs ---------- */
+  (function(){
+    var svg=document.getElementById('g-mach');
+    var S, CY=130, R=105, VS=343;     // posizione della sorgente; raggio del fronte più vecchio (px)
+    var fv=freccia(svg,'fc-u','var(--verde)');
+    var clip=el('clipPath',{id:'cl-c'},el('defs',{},svg));el('rect',{x:0,y:0,width:480,height:260},clip);
+    var g=el('g',{'clip-path':'url(#cl-c)'},svg), sopra=el('g',{},svg);
+    el('line',{x1:10,y1:CY,x2:470,y2:CY,stroke:'var(--riga)','stroke-width':1,'stroke-dasharray':'4,4'},g);
+    var l1=el('line',{stroke:'var(--blu)','stroke-width':1.8},g), l2=el('line',{stroke:'var(--blu)','stroke-width':1.8},g);
+    var fr=[], pc=[], et=[];
+    for(var k=1;k<=3;k++){
+      fr.push(el('circle',{cy:CY,fill:'none',stroke:'var(--rosso)','stroke-width':1.4},g));
+      pc.push(el('circle',{cy:CY,r:2.8,fill:'var(--inchiostro)'},g));
+      et.push(txt(sopra,0,CY-9,String(k),{'font-size':12,fill:'var(--inchiostro)'}));
+    }
+    var so=el('g',{},sopra);
+    el('circle',{cx:0,cy:CY,r:5,fill:'var(--inchiostro)'},so);
+    el('line',{x1:8,y1:CY,x2:34,y2:CY,stroke:'var(--verde)','stroke-width':2.2,'marker-end':fv},so);
+    txt(so,22,CY-10,'u',{'font-size':13,fill:'var(--verde)','font-style':'italic'});
+    var eti=txt(sopra,0,0,'cono di Mach',{'font-size':12,fill:'var(--blu)'});
+    alone(sopra);
+    var cur=document.getElementById('cur-m'), val=document.getElementById('val-m');
+    function agg(){
+      var M=parseFloat(cur.value), a=Math.asin(1/M), S=Math.min(438,240+(M*R+R)/2), d=Math.min(R*Math.sqrt(M*M-1)+40,86*M), L=Math.max(R*Math.sqrt(M*M-1),d)+70;
+      so.setAttribute('transform','translate('+S.toFixed(1)+',0)');
+      for(var i=0;i<3;i++){var r=R*(3-i)/3, cx=S-M*r;
+        fr[i].setAttribute('cx',cx.toFixed(1));fr[i].setAttribute('r',r.toFixed(1));
+        pc[i].setAttribute('cx',cx.toFixed(1));et[i].setAttribute('x',cx.toFixed(1));}
+      var dx=-Math.cos(a)*L, dy=Math.sin(a)*L;
+      l1.setAttribute('x1',S);l1.setAttribute('y1',CY);l1.setAttribute('x2',S+dx);l1.setAttribute('y2',CY-dy);
+      l2.setAttribute('x1',S);l2.setAttribute('y1',CY);l2.setAttribute('x2',S+dx);l2.setAttribute('y2',CY+dy);
+      var ex=S-Math.cos(a)*d, ey=CY-Math.sin(a)*d, ang=-a*180/Math.PI;
+      eti.setAttribute('x',(ex+Math.sin(a)*14).toFixed(1));eti.setAttribute('y',(ey-Math.cos(a)*14+4).toFixed(1));
+      eti.setAttribute('transform','rotate('+(-ang).toFixed(1)+' '+(ex+Math.sin(a)*14).toFixed(1)+' '+(ey-Math.cos(a)*14+4).toFixed(1)+')');
+      val.textContent='u = '+num(M,2)+' vₛ ≈ '+num(M*VS,0)+' m/s';
+    }
+    cur.addEventListener('input',agg);agg();
+  })();
+})();
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
