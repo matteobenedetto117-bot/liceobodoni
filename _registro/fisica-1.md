@@ -213,6 +213,7 @@
 - Parole: 267 su 1 pagina di traccia (pag. 39)
 - Rettifica: nessuna. Il calcolo della traccia, R = √(40² + 30²) N = 50 N, è corretto (verificato con SymPy).
 - Aggiunta: nessuna. Il riquadro "Solo se l'angolo è retto" non aggiunge contenuto nuovo, usa i dati dell'unico esempio della traccia per segnalare l'errore tipico di sommare i moduli.
+- Revisione: titolo invariato. Tolti il sommario e la sezione «Dove si continua» con il rimando alle unità successive; introduzione di una frase; titoletti «La costruzione» ed «Esempio» tenuti, aggiunto «Il modulo della risultante» che apre la sezione della formula; costruzione in forma impersonale («abbiamo costruito» → «formano»); formula di Pitagora in .def «Somma di vettori perpendicolari» con legenda in frase completa; nota «Solo se l'angolo è retto» con etichetta; esempio con frasi di collegamento fra dati e calcolo; aggiunto il piè di pagina. Nessuna correzione concettuale (√(40² + 30²) = 50 N riverificato; 40 + 30 = 70 N). Impaginazione a quaderno e script di allineamento. Figura rifatta in SVG da script con i colori del modello (F₁ rosso, F₂ verde, R blu): rettangolo e triangolo punta-coda in due pannelli con didascalie per pannello, due cursori sui moduli F₁ e F₂ (10–50 N, in scala) e valore di R a fianco, «come nell'esempio» in verde per 40 N e 30 N. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 28 — Componenti cartesiane di un vettore
 - Parole: 527 su 2 pagine di traccia (pp. 40–41), cioè 264 per pagina
