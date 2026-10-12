@@ -5,23 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Definizioni, teorema di Fermat, ricerca di massimi e minimi — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
-table.segni{border-collapse:collapse;margin:22px auto;font-family:var(--sans);font-size:.95rem}
-table.segni td{padding:6px 16px;text-align:center;border-bottom:1px solid var(--riga)}
-table.segni td.etichetta{text-align:left;color:var(--grigio);font-size:.85rem}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
 table.segni td.pos{color:var(--blu);font-weight:600}
 table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
 </style>
 </head>
 <body>
@@ -31,119 +100,282 @@ table.segni td.neg{color:var(--rosso);font-weight:600}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Massimi, minimi e flessi &middot; Unità 24</p>
   <h1>Definizioni, teorema di Fermat, ricerca di massimi e minimi</h1>
-  <p class="sommario">Dove una funzione tocca i suoi valori più alti o più bassi, e come
-  trovare quei punti a partire dalla derivata. È il passaggio che, unito allo studio del
-  segno di $f'$, permette di ricostruire l'andamento completo di una funzione.</p>
 </header>
+
+<p>Questa unità definisce i massimi e i minimi di una funzione e mostra come si trovano, per una funzione derivabile, con il teorema di Fermat e lo studio del segno della derivata prima.</p>
+
+<div class="barra-ris"><button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button></div>
 
 <h2>Massimi e minimi assoluti e relativi</h2>
 
-<p>Un punto di massimo è un punto in cui la funzione raggiunge il valore più alto, o il
-più alto in una zona vicina; un punto di minimo, il più basso. Il primo caso è assoluto,
-il secondo è relativo: la differenza è se il confronto vale su tutto il dominio o solo in
-un intorno.</p>
-
-<figure class="disegno">
-<svg viewBox="0 0 400 210" width="100%" style="max-width:440px">
-<line x1="20" y1="185" x2="380" y2="185" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="40" y1="200" x2="40" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="370" y="179" font-size="10" fill="var(--inchiostro)">x</text>
-<text x="31" y="24" font-size="10" fill="var(--inchiostro)">y</text>
-<path d="M 50 150 C 65 95 80 48 95 45 C 112 42 150 125 170 170 C 190 205 210 120 230 115 C 242 111 246 124 255 128 C 270 133 300 126 340 122" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="95" cy="45" r="3.6" fill="var(--rosso)"/>
-<circle cx="170" cy="170" r="3.6" fill="var(--rosso)"/>
-<circle cx="230" cy="115" r="3.6" fill="var(--rosso)"/>
-<circle cx="255" cy="128" r="3.6" fill="var(--rosso)"/>
-<line x1="76" y1="33" x2="92" y2="42" stroke="var(--grigio)" stroke-width="1"/>
-<text x="18" y="28" font-size="10.5" fill="var(--inchiostro)" font-family="var(--sans)">massimo assoluto</text>
-<line x1="170" y1="182" x2="170" y2="174" stroke="var(--grigio)" stroke-width="1"/>
-<text x="130" y="196" font-size="10.5" fill="var(--inchiostro)" font-family="var(--sans)">minimo assoluto</text>
-<text x="245" y="98" font-size="10.5" fill="var(--inchiostro)" font-family="var(--sans)">massimo relativo</text>
-<line x1="270" y1="101" x2="234" y2="113" stroke="var(--grigio)" stroke-width="1"/>
-<text x="258" y="152" font-size="10.5" fill="var(--inchiostro)" font-family="var(--sans)">minimo relativo</text>
-<line x1="270" y1="140" x2="258" y2="131" stroke="var(--grigio)" stroke-width="1"/>
-</svg>
-<figcaption>I quattro tipi di estremo sullo stesso grafico: assoluti se confrontati con
-tutto il dominio, relativi se confrontati solo con un intorno.</figcaption>
-</figure>
+<p>Un punto di massimo è un punto in cui la funzione assume il valore più alto; un punto di minimo, il valore più basso. L'estremo è assoluto se il confronto riguarda tutto il dominio, relativo se riguarda soltanto un intorno del punto.</p>
 
 <div class="def"><span class="et">Massimo e minimo assoluti</span>
-<p>$x_0\in D$ è punto di <b>massimo assoluto</b> se $f(x)\le f(x_0)\ \ \forall x\in D$; il
-valore $f(x_0)=M$ si chiama massimo assoluto della funzione.</p>
-<p>$x_0\in D$ è punto di <b>minimo assoluto</b> se $f(x)\ge f(x_0)\ \ \forall x\in D$; il
-valore $f(x_0)=m$ si chiama minimo assoluto della funzione.</p></div>
+<p>$x_0\in D$ è punto di <b>massimo assoluto</b> se $f(x)\le f(x_0)$ per ogni $x\in D$; il valore $M=f(x_0)$ si chiama massimo assoluto della funzione.</p>
+<p>$x_0\in D$ è punto di <b>minimo assoluto</b> se $f(x)\ge f(x_0)$ per ogni $x\in D$; il valore $m=f(x_0)$ si chiama minimo assoluto della funzione.</p></div>
 
 <div class="def"><span class="et">Massimo e minimo relativi</span>
-<p>$x_0$ è punto di <b>massimo relativo</b> se esiste un intorno $I$ di $x_0$ tale che
-$f(x)\le f(x_0)\ \ \forall x\in I$.</p>
-<p>$x_0$ è punto di <b>minimo relativo</b> se esiste un intorno $I$ di $x_0$ tale che
-$f(x)\ge f(x_0)\ \ \forall x\in I$.</p></div>
+<p>$x_0$ è punto di <b>massimo relativo</b> se esiste un intorno $I$ di $x_0$ tale che $f(x)\le f(x_0)$ per ogni $x\in I$.</p>
+<p>$x_0$ è punto di <b>minimo relativo</b> se esiste un intorno $I$ di $x_0$ tale che $f(x)\ge f(x_0)$ per ogni $x\in I$.</p></div>
 
-<p>Il confronto, in questo caso, riguarda solo i punti vicini a $x_0$, non l'intero
-dominio: un massimo relativo può benissimo essere più basso di un minimo assoluto altrove
-sul grafico. I punti di massimo e di minimo si dicono anche <b>punti estremanti</b>, e i
-valori massimo e minimo si dicono <b>estremi</b> della funzione.</p>
+<p>Nel caso relativo il confronto riguarda solo i punti vicini a $x_0$: un massimo relativo può essere più basso di un minimo relativo che si trova altrove. I punti di massimo e di minimo si dicono <b>punti estremanti</b>; i valori massimo e minimo si dicono <b>estremi</b> della funzione.</p>
 
-<h2>Ricerca di massimi e minimi per funzioni derivabili</h2>
+<div class="fig">
+<svg id="g-estremi" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img"
+     aria-label="Grafico di una funzione definita in un intervallo chiuso con un massimo assoluto, un minimo assoluto, un massimo relativo e un minimo relativo; un punto mobile mostra la tangente"></svg>
+<div class="cursore"><label for="s-e">$x$</label>
+<input type="range" id="s-e" min="0.3" max="8" step="0.05" value="2.2">
+<span class="val" id="v-e"></span></div>
+<p class="did">La funzione, definita in un intervallo chiuso, ha i quattro tipi di estremo; con il cursore si sposta il punto e si osserva che nei punti di massimo e di minimo interni la tangente è orizzontale.</p>
+</div>
+
+<h2>Teorema di Fermat</h2>
 
 <div class="def"><span class="et">Teorema di Fermat</span>
-<p>Data $f(x)$ definita in $[a;b]$ e derivabile in $\,]a;b[\,$, se $f$ ha un massimo o un
-minimo relativo in un punto $x_0$ interno all'intervallo, allora
-$$f'(x_0)=0.$$</p></div>
+<p>Sia $f(x)$ definita in $[a;b]$ e derivabile in $]a;b[$. Se $f$ ha un massimo o un minimo relativo in un punto $x_0$ interno all'intervallo, allora la derivata in quel punto è nulla.</p>
+<p class="eq">$$f'(x_0)=0$$</p></div>
 
-<p>I punti in cui $f'(x)=0$ si dicono <b>punti stazionari</b>: geometricamente, la
-tangente al grafico in quei punti è orizzontale. Il teorema indica dove cercare gli
-estremi relativi, non li garantisce: bisogna poi controllare il segno di $f'$ attorno a
-ciascun punto stazionario.</p>
+<p>I punti in cui $f'(x)=0$ si dicono <b>punti stazionari</b>: in essi la tangente al grafico è orizzontale. Il teorema indica dove cercare gli estremi relativi, ma non garantisce che un punto stazionario sia un estremo: occorre studiare il segno di $f'$ attorno a ciascun punto stazionario.</p>
+
+<p>Dove $f'$ è positiva la funzione cresce, dove è negativa decresce. Se in $x_0$ la funzione passa da crescente a decrescente, $x_0$ è un punto di massimo relativo; se passa da decrescente a crescente, è un punto di minimo relativo.</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Se il segno di $f'$ non cambia attorno a un punto stazionario $x_0$, la funzione continua a crescere (o a decrescere) attraversando $x_0$: il punto è un <b>flesso a tangente orizzontale</b>, non un massimo né un minimo.</p>
+<p class="mini"><svg id="g-flesso" viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:180px" role="img" aria-label="Flesso a tangente orizzontale: la curva cresce prima e dopo il punto, dove la tangente è orizzontale"></svg></p>
+</div>
 
 <h2>Esempio</h2>
 
-<p>Cerchiamo massimi e minimi di $f(x)=x^3-3x$, definita su $D=\mathbb R$.</p>
+<p>Si cercano i massimi e i minimi della funzione seguente, definita su $D=\mathbb R$.</p>
 
-<p>Calcoliamo la derivata e la scomponiamo:
-$$f'(x)=3x^2-3=3(x^2-1)=3(x+1)(x-1).$$</p>
-
-<p>Cerchiamo i punti stazionari:
-$$f'(x)=0 \ \Longrightarrow\ 3(x-1)(x+1)=0 \ \Longrightarrow\ x=\pm1.$$</p>
-
-<p>Studiamo il segno di $f'(x)>0$, cioè $3(x-1)(x+1)&gt;0$:</p>
-
-<p>$$x&lt;-1 \ \vee\ x&gt;1$$</p>
-
-<table class="segni">
-<tr><td class="etichetta">$f'(x)$</td><td class="pos">+</td><td class="neg">&minus;</td><td class="pos">+</td></tr>
-<tr><td></td><td>$x&lt;-1$</td><td>$-1&lt;x&lt;1$</td><td>$x&gt;1$</td></tr>
-</table>
-
-<p>Dove $f'$ è positiva la funzione cresce, dove è negativa decresce: in $x=-1$ la
-funzione passa da crescente a decrescente, quindi $x=-1$ è un punto di <b>massimo
-relativo</b>; in $x=1$ passa da decrescente a crescente, quindi $x=1$ è un punto di
-<b>minimo relativo</b>.</p>
-
-<div class="nota"><span class="et">Attenzione</span>
-<p>Un punto stazionario non è automaticamente un estremo: se il segno di $f'$ non cambia
-attorno a $x_0$ &mdash; resta positivo, o resta negativo, su entrambi i lati &mdash; la
-funzione continua a crescere (o a decrescere) attraversando $x_0$, che è allora un
-<b>flesso a tangente orizzontale</b>, non un massimo né un minimo.</p>
-<svg viewBox="0 0 160 100" width="100%" style="max-width:170px">
-<path d="M 15 85 C 40 60 65 52 80 50 C 95 48 120 40 145 15" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<line x1="58" y1="50" x2="102" y2="50" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3 3"/>
-<circle cx="80" cy="50" r="3" fill="var(--rosso)"/>
-</svg>
+<div class="es">
+<p class="eq quesito">$$f(x)=x^3-3x$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$x=-1 \text{ massimo relativo},\ f(-1)=2 \qquad x=1 \text{ minimo relativo},\ f(1)=-2$$</p>
 </div>
 
-<p>Per stabilire se questi estremi relativi sono anche assoluti, confrontiamo i valori
-della funzione in quei punti con il comportamento agli estremi del dominio:
-$$f(-1)=(-1)^3-3(-1)=-1+3=2 \qquad\qquad f(1)=1^3-3(1)=1-3=-2$$
-$$\lim_{x\to-\infty}f(x)=-\infty \qquad\qquad \lim_{x\to+\infty}f(x)=+\infty.$$</p>
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Si calcola la derivata e la si scompone.</p>
+<p class="eq">$$f'(x)=3x^2-3=3(x^2-1)=3(x+1)(x-1)$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Si cercano i punti stazionari.</p>
+<p class="eq">$$f'(x)=0 \iff 3(x+1)(x-1)=0 \iff x=\pm1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Si studia il segno della derivata: $f'(x)&gt;0$ per $x&lt;-1 \vee x&gt;1$.</p>
+<table class="segni">
+<tr><td class="etichetta">$f'(x)$</td><td class="pos">+</td><td class="neg">&minus;</td><td class="pos">+</td></tr>
+<tr class="intervalli"><td></td><td>$x&lt;-1$</td><td>$-1&lt;x&lt;1$</td><td>$x&gt;1$</td></tr>
+</table>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> In $x=-1$ la funzione passa da crescente a decrescente (massimo relativo), in $x=1$ da decrescente a crescente (minimo relativo).</p>
+<p class="eq">$$f(-1)=-1+3=2 \qquad f(1)=1-3=-2$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">5.</span> I limiti agli estremi del dominio mostrano che la funzione non è limitata: gli estremi sono solo relativi.</p>
+<p class="eq">$$\lim_{x\to-\infty}f(x)=-\infty \qquad \lim_{x\to+\infty}f(x)=+\infty$$</p>
+</div>
+</div>
 
-<p>La funzione non è limitata né superiormente né inferiormente: $x=-1$ e $x=1$ restano
-estremi soltanto relativi, e $f(x)=x^3-3x$ non ha massimo né minimo assoluti.</p>
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
 
+<p>La funzione $f(x)=x^3-3x$ ha quindi un massimo relativo in $x=-1$ e un minimo relativo in $x=1$, ma non ha né massimo né minimo assoluti.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../24-teorema-di-cauchy-e-teorema-di-de-l-hopital/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema di Cauchy e teorema di De L'Hôpital</span></a><a class="successiva" href="../26-estremi-di-funzioni-non-derivabili-o-discontinue/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Estremi di funzioni non derivabili o discontinue</span></a></nav>
 <footer><p>Matematica quinta &middot; Massimi, minimi e flessi &middot; Unità 24</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+/* retta per (x0;y0) con pendenza m, aggiornabile */
+function retta(P,col,w,dash){var o={stroke:col,'stroke-width':w||1.8};if(dash)o['stroke-dasharray']=dash;return P.add(el('line',o),'sopra');}
+function poniRetta(P,r,x0,y0,m){var a=P.xr[0]-1,b=P.xr[1]+1;
+  r.setAttribute('x1',P.X(a));r.setAttribute('y1',P.Y(y0+m*(a-x0)));r.setAttribute('x2',P.X(b));r.setAttribute('y2',P.Y(y0+m*(b-x0)));}
+function sposta(P,c,x,y){c.setAttribute('cx',P.X(x));c.setAttribute('cy',P.Y(y));}
+
+
+/* ---------- i quattro tipi di estremo: f'(x) = (x-1)(x-3,5)(x-5,5)(x-7)/10 su [0,3; 8] ---------- */
+(function(){
+  var svg=document.getElementById('g-estremi');
+  function f(x){return x*(134.75+x*(-108.5+x*(32.75+x*(-4.25+x*0.2))))/10;}
+  function fp(x){return (x-1)*(x-3.5)*(x-5.5)*(x-7)/10;}
+  var A=0.3,B=8;
+  var P=new Piano(svg,[-0.4,8.8],[-0.3,6.6],{l:26,r:24,t:24,b:24});
+  P.assi([1,2,3,4,5,6,7],[],'x','y');
+  [A,B].forEach(function(x){P.add(el('line',{x1:P.X(x),x2:P.X(x),y1:P.Y(0),y2:P.Y(f(x)),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');});
+  P.add(txt(P.X(A),P.Y(0)+18,'a',{'text-anchor':'middle','font-style':'italic'}),'testo');
+  P.add(txt(P.X(B),P.Y(0)+18,'b',{'text-anchor':'middle','font-style':'italic'}),'testo');
+  P.curva(f,A,B,600,'var(--blu)');
+  pallino(P,A,f(A),true,'var(--blu)'); pallino(P,B,f(B),true,'var(--blu)');
+  var ST=[{x:1,n:'massimo assoluto',dx:0,dy:-12,an:'middle'},{x:3.5,n:'minimo assoluto',dx:0,dy:22,an:'middle'},
+          {x:5.5,n:'massimo relativo',dx:0,dy:-12,an:'middle'},{x:7,n:'minimo relativo',dx:0,dy:22,an:'middle'}];
+  ST.forEach(function(s){
+    P.add(el('circle',{cx:P.X(s.x),cy:P.Y(f(s.x)),r:3.5,fill:'var(--inchiostro)'}),'testo');
+    P.add(txt(P.X(s.x)+s.dx,P.Y(f(s.x))+s.dy,s.n,{'text-anchor':s.an,'font-size':11,fill:'var(--inchiostro)'}),'testo');
+  });
+  var r=P.add(el('line',{stroke:'var(--rosso)','stroke-width':1.6}),'sopra'), pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-e'), v=document.getElementById('v-e');
+  function agg(){
+    var x=+sl.value, y=f(x), m=fp(x), h=0.7;
+    sposta(P,pt,x,y);
+    r.setAttribute('x1',P.X(x-h));r.setAttribute('y1',P.Y(y-m*h));r.setAttribute('x2',P.X(x+h));r.setAttribute('y2',P.Y(y+m*h));
+    var s=null; ST.forEach(function(q){if(Math.abs(q.x-x)<1e-6)s=q;});
+    if(s) v.innerHTML='x = '+num(x)+' &nbsp; f′(x) = 0 &nbsp; <span class="ok">'+s.n+'</span>';
+    else if(Math.abs(x-A)<1e-6||Math.abs(x-B)<1e-6) v.innerHTML='x = '+num(x)+' &nbsp; estremo dell’intervallo';
+    else v.innerHTML='x = '+num(x)+' &nbsp; f′(x) = '+num(m)+' &nbsp; '+(m>0?'crescente':'decrescente');
+  }
+  sl.addEventListener('input',agg);agg();
+})();
+
+/* ---------- flesso a tangente orizzontale: y = x^3 ---------- */
+(function(){
+  var svg=document.getElementById('g-flesso');
+  var P=new Piano(svg,[-1.3,1.3],[-1.3,1.3],{l:12,r:12,t:10,b:10});
+  P.curva(function(x){return x*x*x;},-1.3,1.3,200,'var(--blu)',2);
+  P.add(el('line',{x1:P.X(-0.6),x2:P.X(0.6),y1:P.Y(0),y2:P.Y(0),stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'4,3'}),'sopra');
+  pallino(P,0,0,true,'var(--rosso)');
+})();
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
