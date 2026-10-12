@@ -5,17 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sovrapposizione e interferenza — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.nota{background:#fdf6ec;border:1px solid #e7d6ae;border-radius:10px;padding:14px 18px;margin:26px 0;font-size:.96rem}
-.nota p{margin:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.ok{color:var(--verde);font-weight:600}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
+.cursore .val sup{font-size:.7em;line-height:0}
+.letture{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:8px;font-variant-numeric:tabular-nums}
+.letture b{color:var(--blu)}
+.passo{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -24,181 +58,171 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
   <p class="occhiello">Onde e suono &middot; Unit&agrave; 30</p>
   <h1>Sovrapposizione e interferenza</h1>
-  <p class="sommario">Due sorgenti che emettono onde identiche possono, nello stesso punto,
-  produrre un suono più forte oppure il silenzio, a seconda soltanto delle distanze percorse
-  dalle due onde per arrivarci. È l'interferenza, e dipende dal fatto che le onde arrivino
-  in fase oppure in controfase.</p>
 </header>
 
-<h2>Le due onde nello stesso punto</h2>
+<p>Due onde identiche che arrivano nello stesso punto si sommano. A seconda della differenza fra i cammini percorsi, nel punto d'arrivo l'ampiezza può raddoppiare oppure annullarsi: questo fenomeno si chiama interferenza.</p>
 
-<p>Consideriamo due sorgenti puntiformi $S_1$ e $S_2$ che emettono onde con la stessa
-intensità, la stessa ampiezza $A$, la stessa frequenza e la stessa lunghezza d'onda
-$\lambda$. Le due onde percorrono cammini diversi, di lunghezza $L_1$ e $L_2$, per
-raggiungere uno stesso osservatore $O$.</p>
+<h2>Le due onde nello stesso punto</h2>
+<p>Due sorgenti puntiformi $S_1$ e $S_2$ emettono in fase onde con la stessa ampiezza $A$, la stessa frequenza e la stessa lunghezza d'onda $\lambda$. Le due onde percorrono cammini di lunghezza $L_1$ e $L_2$ per raggiungere lo stesso osservatore $O$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg">
-<circle cx="40" cy="55" r="4" fill="var(--rosso)"/>
-<text x="24" y="40" font-family="var(--sans)" font-size="14" fill="var(--rosso)">S&#8321;</text>
-<circle cx="40" cy="165" r="4" fill="var(--rosso)"/>
-<text x="24" y="188" font-family="var(--sans)" font-size="14" fill="var(--rosso)">S&#8322;</text>
-<circle cx="560" cy="110" r="4" fill="var(--inchiostro)"/>
-<text x="572" y="106" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">O</text>
-<text x="590" y="122" font-family="var(--sans)" font-size="12" fill="var(--grigio)">osservatore</text>
-<path d="M 40,55 C 180,10 380,10 560,110" fill="none" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="290" y="30" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">L&#8321;</text>
-<path d="M 40,165 C 180,210 380,210 560,110" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="290" y="205" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--blu)">L&#8322;</text>
-</svg>
-<p class="did">Le due onde partono in fase dalle sorgenti, ma percorrono cammini di
-lunghezza diversa: quello che conta nel punto $O$ è la differenza $L_2-L_1$.</p>
+<svg id="g-cam" viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due sorgenti S1 e S2 e i due cammini L1 e L2 che raggiungono l'osservatore O"></svg>
+<p class="did">Le due onde partono in fase dalle sorgenti ma percorrono cammini di lunghezza diversa: nel punto $O$ conta la differenza $L_2-L_1$.</p>
 </div>
 
-<p>Fissiamo un istante $t=0$ e scriviamo le due onde con la stessa legge oraria già nota,
-$y=A\cos\!\left(\frac{2\pi}{\lambda}x\right)$. Calcolata nel punto in cui si trova
-l'osservatore, ciascuna onda vale</p>
-
-$$ y_1(L_1) = A\cos\left(\frac{2\pi L_1}{\lambda}\right) \qquad
-y_2(L_2) = A\cos\left(\frac{2\pi L_2}{\lambda}\right) $$
-
-<p>Le due espressioni hanno la stessa forma: cambia solo il cammino percorso, $L_1$
-oppure $L_2$. È questa differenza di cammino a decidere se le due onde si rinforzano o si
-annullano.</p>
+<p>All'istante $t=0$ un'onda si descrive con $y=A\cos\left(\dfrac{2\pi}{\lambda}x\right)$. Nel punto in cui si trova l'osservatore le due onde valgono:</p>
+<p class="eq">$$y_1=A\cos\left(\frac{2\pi L_1}{\lambda}\right) \qquad\qquad y_2=A\cos\left(\frac{2\pi L_2}{\lambda}\right)$$</p>
+<p>Le due espressioni differiscono solo per il cammino percorso. È quindi la differenza di cammino $L_2-L_1$ a stabilire se le due onde si rinforzano o si annullano.</p>
 
 <h2>Interferenza costruttiva</h2>
-
-<p>Supponiamo che la differenza di cammino sia un numero intero di lunghezze d'onda:</p>
-
-$$ L_2 - L_1 = m\lambda, \qquad m \text{ intero positivo} $$
-
-<p>Sostituendo $L_2 = L_1 + m\lambda$ nell'espressione di $y_2$:</p>
-
-$$ y_2 = A\cos\left(\frac{2\pi L_2}{\lambda}\right)
-       = A\cos\left(\frac{2\pi L_1}{\lambda} + \frac{2\pi m\lambda}{\lambda}\right)
-       = A\cos\left(\frac{2\pi L_1}{\lambda} + 2m\pi\right) $$
-
-<p>Poiché il coseno è periodico di $2\pi$, il termine $2m\pi$ non cambia nulla, e resta</p>
-
-$$ y_2 = A\cos\left(\frac{2\pi L_1}{\lambda}\right) = y_1 $$
-
-<p>Le due onde arrivano nello stesso punto con lo stesso valore in ogni istante: si dicono
-in fase. La loro somma vale</p>
-
-$$ y_{TOT} = y_1 + y_2 = 2y_1 $$
-
-<p>l'ampiezza raddoppia. Se le stesse onde si interpretano come onde di pressione o di
-densità dell'aria, vale la stessa relazione: $P_{TOT}=2P_1$, $\rho_{TOT}=2\rho_1$.</p>
+<p>Si supponga che la differenza di cammino sia un numero intero di lunghezze d'onda:</p>
+<p class="eq">$$L_2-L_1=m\lambda \qquad m=0,\,1,\,2,\,\ldots$$</p>
+<p>Sostituendo $L_2=L_1+m\lambda$ nell'espressione di $y_2$ si ottiene:</p>
+<p class="eq">$$y_2=A\cos\left(\frac{2\pi L_1}{\lambda}+\frac{2\pi m\lambda}{\lambda}\right)=A\cos\left(\frac{2\pi L_1}{\lambda}+2m\pi\right)=y_1$$</p>
+<p>Il termine $2m\pi$ non cambia il valore, perché il coseno è periodico di periodo $2\pi$. Le due onde arrivano in fase e la loro somma ha ampiezza doppia:</p>
+<p class="eq principio">$$y_{TOT}=y_1+y_2=2y_1$$</p>
+<p>La stessa relazione vale se le onde sonore si descrivono come onde di pressione o di densità dell'aria: $P_{TOT}=2P_1$ e $\rho_{TOT}=2\rho_1$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<path d="M 0.0,18.0 L 3.6,18.7 L 7.2,20.9 L 10.8,24.4 L 14.4,29.0 L 18.1,34.3 L 21.7,40.0 L 25.3,45.7 L 28.9,51.0 L 32.5,55.6 L 36.1,59.1 L 39.7,61.3 L 43.3,62.0 L 46.9,61.3 L 50.6,59.1 L 54.2,55.6 L 57.8,51.0 L 61.4,45.7 L 65.0,40.0 L 68.6,34.3 L 72.2,29.0 L 75.8,24.4 L 79.4,20.9 L 83.1,18.7 L 86.7,18.0 L 90.3,18.7 L 93.9,20.9 L 97.5,24.4 L 101.1,29.0 L 104.7,34.3 L 108.3,40.0 L 111.9,45.7 L 115.6,51.0 L 119.2,55.6 L 122.8,59.1 L 126.4,61.3 L 130.0,62.0 L 133.6,61.3 L 137.2,59.1 L 140.8,55.6 L 144.4,51.0 L 148.1,45.7 L 151.7,40.0 L 155.3,34.3 L 158.9,29.0 L 162.5,24.4 L 166.1,20.9 L 169.7,18.7 L 173.3,18.0 L 176.9,18.7 L 180.6,20.9 L 184.2,24.4 L 187.8,29.0 L 191.4,34.3 L 195.0,40.0 L 198.6,45.7 L 202.2,51.0 L 205.8,55.6 L 209.4,59.1 L 213.1,61.3 L 216.7,62.0 L 220.3,61.3 L 223.9,59.1 L 227.5,55.6 L 231.1,51.0 L 234.7,45.7 L 238.3,40.0 L 241.9,34.3 L 245.6,29.0 L 249.2,24.4 L 252.8,20.9 L 256.4,18.7 L 260.0,18.0"
- fill="none" stroke="var(--verde)" stroke-width="2"/>
-<text x="0" y="10" font-family="var(--sans)" font-size="12" fill="var(--verde)">y&#8321;</text>
-<path d="M 0.0,18.0 L 3.6,18.7 L 7.2,20.9 L 10.8,24.4 L 14.4,29.0 L 18.1,34.3 L 21.7,40.0 L 25.3,45.7 L 28.9,51.0 L 32.5,55.6 L 36.1,59.1 L 39.7,61.3 L 43.3,62.0 L 46.9,61.3 L 50.6,59.1 L 54.2,55.6 L 57.8,51.0 L 61.4,45.7 L 65.0,40.0 L 68.6,34.3 L 72.2,29.0 L 75.8,24.4 L 79.4,20.9 L 83.1,18.7 L 86.7,18.0 L 90.3,18.7 L 93.9,20.9 L 97.5,24.4 L 101.1,29.0 L 104.7,34.3 L 108.3,40.0 L 111.9,45.7 L 115.6,51.0 L 119.2,55.6 L 122.8,59.1 L 126.4,61.3 L 130.0,62.0 L 133.6,61.3 L 137.2,59.1 L 140.8,55.6 L 144.4,51.0 L 148.1,45.7 L 151.7,40.0 L 155.3,34.3 L 158.9,29.0 L 162.5,24.4 L 166.1,20.9 L 169.7,18.7 L 173.3,18.0 L 176.9,18.7 L 180.6,20.9 L 184.2,24.4 L 187.8,29.0 L 191.4,34.3 L 195.0,40.0 L 198.6,45.7 L 202.2,51.0 L 205.8,55.6 L 209.4,59.1 L 213.1,61.3 L 216.7,62.0 L 220.3,61.3 L 223.9,59.1 L 227.5,55.6 L 231.1,51.0 L 234.7,45.7 L 238.3,40.0 L 241.9,34.3 L 245.6,29.0 L 249.2,24.4 L 252.8,20.9 L 256.4,18.7 L 260.0,18.0"
- fill="none" stroke="var(--blu)" stroke-width="2" transform="translate(0,80)"/>
-<text x="0" y="90" font-family="var(--sans)" font-size="12" fill="var(--blu)">y&#8322;</text>
-<path d="M 0.0,-4.0 L 3.6,-2.5 L 7.2,1.9 L 10.8,8.9 L 14.4,18.0 L 18.1,28.6 L 21.7,40.0 L 25.3,51.4 L 28.9,62.0 L 32.5,71.1 L 36.1,78.1 L 39.7,82.5 L 43.3,84.0 L 46.9,82.5 L 50.6,78.1 L 54.2,71.1 L 57.8,62.0 L 61.4,51.4 L 65.0,40.0 L 68.6,28.6 L 72.2,18.0 L 75.8,8.9 L 79.4,1.9 L 83.1,-2.5 L 86.7,-4.0 L 90.3,-2.5 L 93.9,1.9 L 97.5,8.9 L 101.1,18.0 L 104.7,28.6 L 108.3,40.0 L 111.9,51.4 L 115.6,62.0 L 119.2,71.1 L 122.8,78.1 L 126.4,82.5 L 130.0,84.0 L 133.6,82.5 L 137.2,78.1 L 140.8,71.1 L 144.4,62.0 L 148.1,51.4 L 151.7,40.0 L 155.3,28.6 L 158.9,18.0 L 162.5,8.9 L 166.1,1.9 L 169.7,-2.5 L 173.3,-4.0 L 176.9,-2.5 L 180.6,1.9 L 184.2,8.9 L 187.8,18.0 L 191.4,28.6 L 195.0,40.0 L 198.6,51.4 L 202.2,62.0 L 205.8,71.1 L 209.4,78.1 L 213.1,82.5 L 216.7,84.0 L 220.3,82.5 L 223.9,78.1 L 227.5,71.1 L 231.1,62.0 L 234.7,51.4 L 238.3,40.0 L 241.9,28.6 L 245.6,18.0 L 249.2,8.9 L 252.8,1.9 L 256.4,-2.5 L 260.0,-4.0"
- fill="none" stroke="var(--rosso)" stroke-width="2.4" transform="translate(0,170)"/>
-<text x="0" y="172" font-family="var(--sans)" font-size="12" fill="var(--rosso)">y&#8321;+y&#8322;</text>
-</svg>
-<p class="did">In fase: creste con creste, ventri con ventri. La somma ha ampiezza
-doppia — interferenza costruttiva.</p>
+<svg id="g-som" viewBox="0 0 420 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Le onde y1 e y2 e la loro somma, al variare della differenza di cammino"></svg>
+<div class="cursore"><label for="c-som">$L_2-L_1$</label><input id="c-som" type="range" min="0" max="2" step="0.05" value="1"><span class="val" id="v-som"></span></div>
+<p class="did">Quando la differenza di cammino è un numero intero di lunghezze d'onda, creste e valli delle due onde coincidono e la somma ha ampiezza doppia.</p>
 </div>
 
 <h2>Interferenza distruttiva</h2>
-
-<p>Supponiamo ora che la differenza di cammino sia un multiplo semi-intero di
-$\lambda$:</p>
-
-$$ L_2 - L_1 = \left(m+\tfrac{1}{2}\right)\lambda $$
-
-<p>Ripetendo lo stesso procedimento:</p>
-
-$$ y_2 = A\cos\left(\frac{2\pi L_1}{\lambda} + 2m\pi + \pi\right)
-       = A\cos\left(\frac{2\pi L_1}{\lambda} + \pi\right) $$
-
-<p>Poiché $\cos(\alpha+\pi) = -\cos\alpha$, questo dà</p>
-
-$$ y_2 = -A\cos\left(\frac{2\pi L_1}{\lambda}\right) = -y_1 $$
-
-<p>le due onde arrivano in controfase, e la somma si annulla:</p>
-
-$$ y_{TOT} = y_1 + y_2 = y_1 - y_1 = 0 $$
+<p>Si supponga ora che la differenza di cammino sia un numero semintero di lunghezze d'onda:</p>
+<p class="eq">$$L_2-L_1=\left(m+\tfrac12\right)\lambda \qquad m=0,\,1,\,2,\,\ldots$$</p>
+<p>Con lo stesso procedimento, e poiché $\cos(\alpha+\pi)=-\cos\alpha$, si ottiene:</p>
+<p class="eq">$$y_2=A\cos\left(\frac{2\pi L_1}{\lambda}+2m\pi+\pi\right)=-A\cos\left(\frac{2\pi L_1}{\lambda}\right)=-y_1$$</p>
+<p>Le due onde arrivano in controfase e la loro somma si annulla:</p>
+<p class="eq principio">$$y_{TOT}=y_1+y_2=y_1-y_1=0$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
-<path d="M 0.0,18.0 L 3.6,18.7 L 7.2,20.9 L 10.8,24.4 L 14.4,29.0 L 18.1,34.3 L 21.7,40.0 L 25.3,45.7 L 28.9,51.0 L 32.5,55.6 L 36.1,59.1 L 39.7,61.3 L 43.3,62.0 L 46.9,61.3 L 50.6,59.1 L 54.2,55.6 L 57.8,51.0 L 61.4,45.7 L 65.0,40.0 L 68.6,34.3 L 72.2,29.0 L 75.8,24.4 L 79.4,20.9 L 83.1,18.7 L 86.7,18.0 L 90.3,18.7 L 93.9,20.9 L 97.5,24.4 L 101.1,29.0 L 104.7,34.3 L 108.3,40.0 L 111.9,45.7 L 115.6,51.0 L 119.2,55.6 L 122.8,59.1 L 126.4,61.3 L 130.0,62.0 L 133.6,61.3 L 137.2,59.1 L 140.8,55.6 L 144.4,51.0 L 148.1,45.7 L 151.7,40.0 L 155.3,34.3 L 158.9,29.0 L 162.5,24.4 L 166.1,20.9 L 169.7,18.7 L 173.3,18.0 L 176.9,18.7 L 180.6,20.9 L 184.2,24.4 L 187.8,29.0 L 191.4,34.3 L 195.0,40.0 L 198.6,45.7 L 202.2,51.0 L 205.8,55.6 L 209.4,59.1 L 213.1,61.3 L 216.7,62.0 L 220.3,61.3 L 223.9,59.1 L 227.5,55.6 L 231.1,51.0 L 234.7,45.7 L 238.3,40.0 L 241.9,34.3 L 245.6,29.0 L 249.2,24.4 L 252.8,20.9 L 256.4,18.7 L 260.0,18.0"
- fill="none" stroke="var(--verde)" stroke-width="2"/>
-<text x="0" y="10" font-family="var(--sans)" font-size="12" fill="var(--verde)">y&#8321;</text>
-<path d="M 0.0,62.0 L 3.6,61.3 L 7.2,59.1 L 10.8,55.6 L 14.4,51.0 L 18.1,45.7 L 21.7,40.0 L 25.3,34.3 L 28.9,29.0 L 32.5,24.4 L 36.1,20.9 L 39.7,18.7 L 43.3,18.0 L 46.9,18.7 L 50.6,20.9 L 54.2,24.4 L 57.8,29.0 L 61.4,34.3 L 65.0,40.0 L 68.6,45.7 L 72.2,51.0 L 75.8,55.6 L 79.4,59.1 L 83.1,61.3 L 86.7,62.0 L 90.3,61.3 L 93.9,59.1 L 97.5,55.6 L 101.1,51.0 L 104.7,45.7 L 108.3,40.0 L 111.9,34.3 L 115.6,29.0 L 119.2,24.4 L 122.8,20.9 L 126.4,18.7 L 130.0,18.0 L 133.6,18.7 L 137.2,20.9 L 140.8,24.4 L 144.4,29.0 L 148.1,34.3 L 151.7,40.0 L 155.3,45.7 L 158.9,51.0 L 162.5,55.6 L 166.1,59.1 L 169.7,61.3 L 173.3,62.0 L 176.9,61.3 L 180.6,59.1 L 184.2,55.6 L 187.8,51.0 L 191.4,45.7 L 195.0,40.0 L 198.6,34.3 L 202.2,29.0 L 205.8,24.4 L 209.4,20.9 L 213.1,18.7 L 216.7,18.0 L 220.3,18.7 L 223.9,20.9 L 227.5,24.4 L 231.1,29.0 L 234.7,34.3 L 238.3,40.0 L 241.9,45.7 L 245.6,51.0 L 249.2,55.6 L 252.8,59.1 L 256.4,61.3 L 260.0,62.0"
- fill="none" stroke="var(--blu)" stroke-width="2" transform="translate(0,80)"/>
-<text x="0" y="90" font-family="var(--sans)" font-size="12" fill="var(--blu)">y&#8322;</text>
-<line x1="0" y1="212" x2="260" y2="212" stroke="var(--rosso)" stroke-width="2.4"/>
-<text x="0" y="200" font-family="var(--sans)" font-size="12" fill="var(--rosso)">y&#8321;+y&#8322;=0</text>
-</svg>
-<p class="did">In controfase: le creste di un'onda cadono sui ventri dell'altra. La somma
-è nulla in ogni punto — interferenza distruttiva, non si sente nulla.</p>
+<svg id="g-dis" viewBox="0 0 420 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due onde in controfase e la loro somma nulla"></svg>
+<p class="did">In controfase le creste di un'onda cadono sulle valli dell'altra, e la somma è nulla in ogni punto.</p>
 </div>
 
 <h2>Esempio</h2>
-
-<p>Due sorgenti sonore identiche, poste a distanza $D=4{,}30\ \text{m}$ e con frequenza
-$f=221\ \text{Hz}$, emettono in fase. Un osservatore si trova a distanza $d_1=2{,}80\
-\text{m}$ dalla prima sorgente, lungo la perpendicolare al segmento che unisce le due
-sorgenti. L'interferenza nel punto in cui si trova è costruttiva o distruttiva?</p>
+<p>Due sorgenti sonore identiche, a distanza $D=4{,}30\ \text m$ l'una dall'altra, emettono in fase con frequenza $f=221\ \text{Hz}$. Un osservatore si trova a distanza $d_1=2{,}80\ \text m$ dalla prima sorgente, sulla perpendicolare al segmento che unisce le due sorgenti. Si vuole stabilire se nel punto dell'osservatore l'interferenza è costruttiva o distruttiva.</p>
 
 <div class="fig">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<circle cx="60" cy="40" r="4" fill="var(--rosso)"/>
-<text x="44" y="26" font-family="var(--sans)" font-size="13" fill="var(--rosso)">S&#8321;</text>
-<circle cx="260" cy="40" r="4" fill="var(--rosso)"/>
-<text x="266" y="26" font-family="var(--sans)" font-size="13" fill="var(--rosso)">S&#8322;</text>
-<line x1="60" y1="40" x2="260" y2="40" stroke="var(--grigio)" stroke-width="1.3"/>
-<text x="160" y="26" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">D</text>
-<path d="M 60,40 L 60,60 L 66,60 L 66,66 L 60,66" fill="none" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="60" y1="40" x2="60" y2="180" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="42" y="112" font-family="var(--sans)" font-size="13" fill="var(--verde)">d&#8321;</text>
-<line x1="260" y1="40" x2="60" y2="180" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="175" y="120" font-family="var(--sans)" font-size="13" fill="var(--blu)">d&#8322;</text>
-<circle cx="60" cy="180" r="4" fill="var(--inchiostro)"/>
-<text x="66" y="196" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">osservatore</text>
-</svg>
-<p class="did">Il triangolo rettangolo con cateti $D$ e $d_1$ e ipotenusa $d_2$ dà
-$d_2$ per via del teorema di Pitagora.</p>
+<svg id="g-es" viewBox="0 0 420 265" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Le due sorgenti a distanza D e l'osservatore sulla perpendicolare per S1, con i cammini d1 e d2"></svg>
+<div class="cursore"><label for="c-es">$d_1$</label><input id="c-es" type="range" min="0.5" max="5.5" step="0.01" value="2.8"><span class="val" id="v-es"></span></div>
+<p class="did">Il triangolo rettangolo di cateti $D$ e $d_1$ ha per ipotenusa $d_2$; spostando l'osservatore cambia il rapporto $(d_2-d_1)/\lambda$.</p>
 </div>
 
 <p>La lunghezza d'onda si ricava dalla velocità del suono, $v=343\ \text{m/s}$:</p>
-
-$$ \lambda = \frac{v}{f} = \frac{343\ \text{m/s}}{221\ \text{Hz}} \approx 1{,}55\ \text{m} $$
-
-<p>Il secondo cammino $d_2$ si trova dal triangolo rettangolo di cateti $d_1$ e $D$:</p>
-
-$$ d_2 = \sqrt{d_1^2+D^2} = \sqrt{(2{,}80\ \text{m})^2+(4{,}30\ \text{m})^2} \approx 5{,}13\ \text{m} $$
-
-<p>La differenza di cammino vale</p>
-
-$$ d_2-d_1 \approx 5{,}13\ \text{m} - 2{,}80\ \text{m} = 2{,}33\ \text{m} $$
-
-<p>e, confrontata con $\lambda$:</p>
-
-$$ \frac{d_2-d_1}{\lambda} \approx \frac{2{,}33\ \text{m}}{1{,}55\ \text{m}} \approx 1{,}50 $$
-
-<p>è un numero semintero: la differenza di cammino vale $\left(1+\tfrac12\right)\lambda$, e
-nel punto in cui si trova l'osservatore l'interferenza è distruttiva.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Lo stesso meccanismo di interferenza, applicato a un'onda che si sovrappone al proprio
-riflesso su una corda fissata agli estremi, genera le onde stazionarie, l'argomento della
-prossima unità.</li>
-</ul>
-</div>
+<p class="eq">$$\lambda=\frac{v}{f}=\frac{343\ \text{m/s}}{221\ \text{Hz}}\approx1{,}55\ \text m$$</p>
+<p>Il secondo cammino $d_2$ è l'ipotenusa del triangolo rettangolo di cateti $d_1$ e $D$:</p>
+<p class="eq">$$d_2=\sqrt{d_1^2+D^2}=\sqrt{(2{,}80\ \text m)^2+(4{,}30\ \text m)^2}\approx5{,}13\ \text m$$</p>
+<p>La differenza di cammino, confrontata con la lunghezza d'onda, dà:</p>
+<p class="eq">$$d_2-d_1\approx5{,}13\ \text m-2{,}80\ \text m=2{,}33\ \text m \qquad\qquad \frac{d_2-d_1}{\lambda}\approx\frac{2{,}33\ \text m}{1{,}55\ \text m}\approx1{,}50$$</p>
+<p>Il rapporto è semintero: la differenza di cammino vale $\left(1+\tfrac12\right)\lambda$, quindi nel punto dell'osservatore l'interferenza è distruttiva.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../31-muro-del-suono-e-cono-di-mach/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Muro del suono e cono di Mach</span></a><a class="successiva" href="../33-onde-stazionarie-su-una-corda-fissata-agli-estremi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Onde stazionarie su una corda fissata agli estremi</span></a></nav>
 <footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 30</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  function txt(p,x,y,s,col,o){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif',fill:col},o||{}));t.textContent=s;return t;}
+  function sub(p,x,y,a,b,col,o){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col},o||{}));t.appendChild(document.createTextNode(a));if(b){var q=el(t,'tspan',{'font-size':10,dy:4});q.textContent=b;}return t;}
+
+  /* 1. sorgenti, cammini, osservatore */
+  (function(){
+    var s=document.getElementById('g-cam');if(!s)return;
+    var S1=[50,40],S2=[50,140],O=[360,90];
+    el(s,'path',{d:'M50,40 C150,8 270,20 360,90',fill:'none',stroke:'var(--verde)','stroke-width':1.8});
+    el(s,'path',{d:'M50,140 C150,178 270,170 360,90',fill:'none',stroke:'var(--blu)','stroke-width':1.8});
+    [S1,S2].forEach(function(p){el(s,'circle',{cx:p[0],cy:p[1],r:5,fill:'var(--rosso)'});});
+    el(s,'circle',{cx:O[0],cy:O[1],r:5,fill:'var(--inchiostro)'});
+    sub(s,22,36,'S','1','var(--rosso)');sub(s,22,150,'S','2','var(--rosso)');
+    sub(s,372,95,'O','','var(--inchiostro)');
+    sub(s,200,22,'L','1','var(--verde)',{'text-anchor':'middle'});
+    sub(s,200,176,'L','2','var(--blu)',{'text-anchor':'middle'});
+  })();
+
+  /* onde y1, y2 e somma su tre righe; d = sfasamento in lunghezze d'onda */
+  function onde(id,curId,valId,d0){
+    var s=document.getElementById(id);if(!s)return;
+    var cur=curId?document.getElementById(curId):null,val=valId?document.getElementById(valId):null;
+    var X0=50,X1=400,LAM=140,A=22,Y=[45,125,215];
+    function asse(y){el(s,'line',{x1:X0,y1:y,x2:X1,y2:y,stroke:'var(--riga)','stroke-width':1});}
+    Y.forEach(asse);
+    sub(s,8,Y[0]+5,'y','1','var(--verde)');sub(s,8,Y[1]+5,'y','2','var(--blu)');
+    var ts=el(s,'text',{x:8,y:Y[2]+5,'font-size':13,'font-family':'sans-serif','font-style':'italic',fill:'var(--rosso)'});ts.textContent='somma';
+    el(s,'line',{x1:X0,y1:Y[2]-2*A,x2:X0-6,y2:Y[2]-2*A,stroke:'var(--grigio)'});
+    txt(s,X0-8,Y[2]-2*A+4,'2A','var(--grigio)',{'text-anchor':'end','font-size':11});
+    var p1=el(s,'path',{fill:'none',stroke:'var(--verde)','stroke-width':2});
+    var p2=el(s,'path',{fill:'none',stroke:'var(--blu)','stroke-width':2});
+    var p3=el(s,'path',{fill:'none',stroke:'var(--rosso)','stroke-width':2.4});
+    function tracc(y0,f){var d='';for(var x=X0;x<=X1;x+=2){d+=(x==X0?'M':'L')+x+','+(y0-f(x)).toFixed(2);}return d;}
+    function disegna(){
+      var dl=cur?+cur.value:d0,k=2*Math.PI/LAM;
+      set(p1,{d:tracc(Y[0],function(x){return A*Math.cos(k*(x-X0));})});
+      set(p2,{d:tracc(Y[1],function(x){return A*Math.cos(k*(x-X0)+2*Math.PI*dl);})});
+      set(p3,{d:tracc(Y[2],function(x){return A*Math.cos(k*(x-X0))+A*Math.cos(k*(x-X0)+2*Math.PI*dl);})});
+      if(val){var r=dl-Math.floor(dl),amp=2*Math.abs(Math.cos(Math.PI*dl)),st='';
+        if(Math.abs(r)<1e-6||Math.abs(r-1)<1e-6)st=' <span class="ok">costruttiva</span>';
+        else if(Math.abs(r-0.5)<1e-6)st=' <span class="ok">distruttiva</span>';
+        val.innerHTML=num(dl,2)+' λ &nbsp; ampiezza della somma = '+num(amp,2)+' A'+st;}
+    }
+    if(cur)cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});
+    disegna();
+  }
+  onde('g-som','c-som','v-som',1);
+  onde('g-dis',null,null,0.5);
+
+  /* esempio: osservatore sulla perpendicolare per S1 */
+  (function(){
+    var s=document.getElementById('g-es');if(!s)return;
+    var cur=document.getElementById('c-es'),val=document.getElementById('v-es');
+    var D=4.30,LAM=343/221,K=38,S1=[120,35],S2=[70+K*D,35];
+    var defs=el(s,'defs',{});
+    el(s,'line',{x1:S1[0],y1:S1[1],x2:S2[0],y2:S2[1],stroke:'var(--grigio)','stroke-width':1.3});
+    txt(s,(S1[0]+S2[0])/2,S1[1]-10,'D = 4,30 m','var(--grigio)',{'text-anchor':'middle'});
+    var ang=el(s,'path',{d:'M'+S1[0]+','+(S1[1]+10)+' h10 v-10',fill:'none',stroke:'var(--grigio)'});
+    var l1=el(s,'line',{x1:S1[0],y1:S1[1],x2:S1[0],stroke:'var(--verde)','stroke-width':2});
+    var l2=el(s,'line',{x1:S2[0],y1:S2[1],x2:S1[0],stroke:'var(--blu)','stroke-width':2});
+    [S1,S2].forEach(function(p){el(s,'circle',{cx:p[0],cy:p[1],r:5,fill:'var(--rosso)'});});
+    sub(s,S1[0]-28,S1[1]+4,'S','1','var(--rosso)');sub(s,S2[0]+10,S2[1]+4,'S','2','var(--rosso)');
+    var t1=sub(s,0,0,'d','1','var(--verde)',{'text-anchor':'end'}),t2=sub(s,0,0,'d','2','var(--blu)');
+    var o=el(s,'circle',{cx:S1[0],r:5,fill:'var(--inchiostro)'}),to=sub(s,S1[0]+10,0,'O','','var(--inchiostro)');
+    function disegna(){
+      var d1=+cur.value,d2=Math.hypot(d1,D),r=(d2-d1)/LAM,y=S1[1]+K*d1;
+      set(l1,{y2:y});set(l2,{y2:y});set(o,{cy:y});set(to,{y:y+16});
+      set(t1,{x:S1[0]-8,y:(S1[1]+y)/2+5});set(t2,{x:(S1[0]+S2[0])/2+8,y:(S1[1]+y)/2+2});
+      var fr=r-Math.round(r),st='';
+      if(Math.abs(fr)<0.03)st=' <span class="ok">costruttiva</span>';
+      else if(Math.abs(Math.abs(fr)-0.5)<0.03)st=' <span class="ok">distruttiva</span>';
+      val.innerHTML='d₁ = '+num(d1,2)+' m &nbsp; d₂ = '+num(d2,2)+' m &nbsp; (d₂ − d₁)/λ = '+num(r,2)+st;
+    }
+    cur.addEventListener('input',function(){disegna();if(window.allineaQuaderno)window.allineaQuaderno();});
+    disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
