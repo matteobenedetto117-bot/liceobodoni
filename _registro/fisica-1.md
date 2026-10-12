@@ -201,6 +201,7 @@
 - Parole: 249 su 1 pagina di traccia (p. 37)
 - Rettifica: nessuna. I valori della traccia tornano: con $|\vec{F_1}| = 30$ N si ha $|3\vec{F_1}| = 90$ N e $|-2\vec{F_1}| = 60$ N, coerenti con la regola del valore assoluto.
 - Aggiunta: nessun esempio e nessuna dimostrazione nuovi. Si usano soltanto i tre vettori della traccia ($\vec{F_1}$, $3\vec{F_1}$, $-2\vec{F_1}$) e la coppia $\vec{F_1}$, $-\vec{F_1}$. L'unico riquadro ricorda che il modulo non è mai negativo perché nel prodotto entra il valore assoluto: è l'errore tipico su questa regola, non contenuto aggiuntivo. I due disegni della traccia sono stati ridisegnati in SVG.
+- Revisione: titolo invariato. Tolti il sommario e la sezione «Dove si continua» con il rimando alla differenza fra vettori; introduzione di una frase; titoletti «La regola» e «Vettore opposto» tenuti, aggiunto «Esempio» per il caso F₁ = 30 N; regola in .def come elenco di tre voci con la formula |kF| = |k|·|F| e la legenda; vettore opposto in .def con −F₁ = (−1)·F₁; nota «Il modulo non è mai negativo» tenuta; aggiunto il piè di pagina. Nessuna correzione (valori 90 N e 60 N riverificati). Impaginazione a quaderno. Figure rifatte in SVG da script: F₁ e kF₁ con cursore su k (da −3 a 3, senza lo 0; a k = 3 e k = −2 i valori dell'esempio), modulo a fianco e «verso opposto» in verde per k negativo; vettore e opposto statico. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 26 — Differenza fra vettori
 - Parole: 229 su 1 pagina di traccia (p. 38)
