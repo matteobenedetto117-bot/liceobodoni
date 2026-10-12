@@ -164,6 +164,7 @@ La statica dei fluidi (unità 01–08, pagine 1–17 degli appunti) è stata spo
 - Parole: 150 su 1 pagina di traccia (pag. 62)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: con F_p=mg, L=F_p·s·cosθ dà mgs per θ=0, 0 per θ=90°, -mgs per θ=180°, coerenti in ogni caso con la traccia.
 - Aggiunta: nessuna oltre a poche parole di collegamento fra un caso e l'altro. Nessuno strumento interattivo: i tre casi sono già mostrati per intero dalle tre figure statiche, come nella traccia.
+- Revisione: (13/10/2026) titolo invariato. Tolto il sommario; introduzione di due frasi con L = F_p s cosθ e F_p = mg in riquadro e legenda dei simboli; titoletti «Caduta libera», «Spostamento orizzontale» e «Oggetto sollevato da terra» tenuti; testo in frasi complete; formule in riquadro azzurro. Correzione di forma: «si opporrebbe al moto se non intervenisse un'altra forza» → la forza peso si oppone allo spostamento e per sollevare l'oggetto deve agire un'altra forza diretta verso l'alto. Verificati con SymPy mgs·cos0 = mgs, cos90° = 0, cos180° = −1. Impaginazione a quaderno (stile e script dall'unità 23). Figura dei tre casi rifatta in SVG da script, un solo disegno a tre pannelli con didascalie separate, tratteggi delle posizioni iniziale e finale «1» e «2» e cursore sullo spostamento s (0,5–1 m) che muove il blocco nei tre casi. Nessun esempio, nessuna figura decorativa.
 
 ## Unità 25 — Lavoro di una forza variabile
 - Parole: 295 su 1 pagina di traccia (pag. 63)

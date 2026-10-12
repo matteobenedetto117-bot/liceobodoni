@@ -5,18 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lavoro della forza peso — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.casi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
-.casi div.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px;text-align:center}
-.casi svg{max-width:100%;height:auto}
-.casi h3{font-size:1.05rem;margin:0 0 10px}
-.casi p{font-family:var(--sans);font-size:.85rem;margin:10px 0 0;color:#4a5a6d;text-align:left}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-@media(max-width:640px){.casi{grid-template-columns:1fr}}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -25,86 +55,111 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Lavoro ed energia &middot; Unità 24</p>
   <h1>Lavoro della forza peso</h1>
-  <p class="sommario">Applichiamo la definizione generale di lavoro alla
-  forza peso, che è sempre verticale e diretta verso il basso. Il segno del
-  risultato dipende soltanto dall'angolo fra il peso e lo spostamento.</p>
 </header>
 
+<p>L'unità applica la definizione di lavoro alla forza peso, che è sempre verticale e diretta verso il basso. Il segno del lavoro dipende soltanto dall'angolo $\theta$ fra il peso e lo spostamento.</p>
+<p class="eq">$$L = F_p\,s\cos\theta \qquad F_p = m\,g$$</p>
+<p>Nelle formule $F_p$ è il modulo della forza peso, $m$ la massa dell'oggetto, $g$ l'accelerazione di gravità e $s$ il modulo dello spostamento.</p>
+
+<div class="fig">
+<svg id="g-peso" viewBox="0 0 420 216" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Tre casi: oggetto che cade, oggetto spostato in orizzontale, oggetto sollevato, con la forza peso e lo spostamento"></svg>
+<div class="cursore"><label for="c-peso">spostamento $s$</label><input id="c-peso" type="range" min="0.5" max="1" step="0.01" value="0.8"><span class="val" id="v-peso"></span></div>
+<div class="did-parti" style="--n:3"><p class="did">Nella caduta il peso e lo spostamento sono concordi.</p><p class="did">Nello spostamento orizzontale il peso è perpendicolare allo spostamento.</p><p class="did">Nel sollevamento il peso è opposto allo spostamento.</p></div>
+</div>
+
 <h2>Caduta libera</h2>
-
-<p>Se l'oggetto cade, la forza peso $\vec F_p$ e lo spostamento $\vec s$
-hanno la stessa direzione e lo stesso verso: l'angolo fra loro è $0$, quindi
-$\cos0=1$ e il lavoro coincide con il prodotto dei moduli:</p>
-
-$$L = \vec F_p\cdot\vec s = mgs \qquad (L>0)$$
-
-<p>Il lavoro è positivo: la forza peso è motrice, accompagna il moto.</p>
+<p>Se l'oggetto cade, la forza peso $\vec F_p$ e lo spostamento $\vec s$ hanno la stessa direzione e lo stesso verso. L'angolo fra i due vettori è $\theta = 0$, quindi $\cos 0 = 1$ e il lavoro è il prodotto dei moduli:</p>
+<p class="eq">$$L = \vec F_p\cdot\vec s = m\,g\,s \qquad (L>0)$$</p>
+<p>Il lavoro è positivo: la forza peso è motrice, perché agisce nel verso del moto.</p>
 
 <h2>Spostamento orizzontale</h2>
-
-<p>Se l'oggetto viene spinto in avanti lungo un piano orizzontale, $\vec
-F_p$ è perpendicolare a $\vec s$. Con $\theta = 90°$ si ha $\cos90°=0$:</p>
-
-$$L = F_p\, s\cos90° = 0$$
-
-<p>La forza peso non ha nessuna componente nella direzione del movimento,
-quindi non compie lavoro.</p>
+<p>Se l'oggetto viene spinto lungo un piano orizzontale, la forza peso $\vec F_p$ è perpendicolare allo spostamento $\vec s$. Con $\theta = 90°$ si ha $\cos 90° = 0$:</p>
+<p class="eq">$$L = F_p\,s\cos 90° = 0$$</p>
+<p>La forza peso non ha alcuna componente nella direzione del movimento, quindi non compie lavoro.</p>
 
 <h2>Oggetto sollevato da terra</h2>
-
-<p>Se l'oggetto viene alzato, lo spostamento è verso l'alto mentre la forza
-peso resta verso il basso: l'angolo è $180°$ e $\cos180°=-1$:</p>
-
-$$L = F_p\, s\cos180° = -F_p\, s = -mgs \qquad (L<0)$$
-
-<p>Il lavoro è negativo: la forza peso è resistente, si opporrebbe al moto
-se non intervenisse un'altra forza a sollevare l'oggetto.</p>
-
-<div class="casi">
-<div class="caso">
-<h3>Caduta libera</h3>
-<svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f1" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="v1" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker></defs>
-<rect x="45" y="20" width="34" height="26" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="55" y1="46" x2="55" y2="95" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f1)"/>
-<text x="35" y="75" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">p</tspan></text>
-<line x1="70" y1="46" x2="70" y2="95" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#v1)"/>
-<text x="78" y="75" font-size="13" fill="var(--verde)" font-family="var(--sans)">s&#8407;</text>
-</svg>
-<p>$\theta=0$: $L=mgs>0$</p>
-</div>
-<div class="caso">
-<h3>Spostamento orizzontale</h3>
-<svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="v2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker></defs>
-<rect x="45" y="35" width="34" height="26" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="62" y1="61" x2="62" y2="95" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f2)"/>
-<text x="68" y="90" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">p</tspan></text>
-<line x1="79" y1="48" x2="125" y2="48" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#v2)"/>
-<text x="95" y="40" font-size="13" fill="var(--verde)" font-family="var(--sans)">s&#8407;</text>
-</svg>
-<p>$\theta=90°$: $L=0$</p>
-</div>
-<div class="caso">
-<h3>Oggetto sollevato</h3>
-<svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="v3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker></defs>
-<rect x="45" y="55" width="34" height="26" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="55" y1="55" x2="55" y2="15" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#v3)"/>
-<text x="35" y="30" font-size="13" fill="var(--verde)" font-family="var(--sans)">s&#8407;</text>
-<line x1="70" y1="81" x2="70" y2="105" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f3)"/>
-<text x="78" y="98" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">p</tspan></text>
-</svg>
-<p>$\theta=180°$: $L=-mgs&lt;0$</p>
-</div>
-</div>
+<p>Se l'oggetto viene sollevato, lo spostamento è diretto verso l'alto, mentre la forza peso resta diretta verso il basso. L'angolo è $\theta = 180°$ e $\cos 180° = -1$:</p>
+<p class="eq">$$L = F_p\,s\cos 180° = -F_p\,s = -m\,g\,s \qquad (L<0)$$</p>
+<p>Il lavoro è negativo: la forza peso è resistente, perché si oppone allo spostamento. Per sollevare l'oggetto deve agire un'altra forza, diretta verso l'alto.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../33-il-lavoro-di-una-forza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il lavoro di una forza</span></a><a class="successiva" href="../35-lavoro-di-una-forza-variabile/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Lavoro di una forza variabile</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 24</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',').replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function frecce(svg,pre){var d=el(svg,'defs',{});[['r','var(--rosso)'],['v','var(--verde)']].forEach(function(c){var m=el(d,'marker',{id:pre+c[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(m,'path',{d:'M0,0 L8,4 L0,8 Z',fill:c[1]});});}
+  function piano(svg,x1,x2,y){el(svg,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'var(--inchiostro)','stroke-width':2.2});for(var x=x1+12;x<=x2;x+=14)el(svg,'line',{x1:x,y1:y+1,x2:x-9,y2:y+10,stroke:'var(--grigio)','stroke-width':1});}
+
+  var s=document.getElementById('g-peso');
+  if(!s)return;
+  frecce(s,'w');
+  var c=document.getElementById('c-peso'),v=document.getElementById('v-peso');
+  var W=34,H=26,D=90;
+  /* tre pannelli: posizione iniziale (x,y del centro) e direzione dello spostamento */
+  var casi=[
+    {x0:70, y0:35, dx:0, dy:1, th:'θ = 0', L:'L = +mgs'},
+    {x0:185,y0:95, dx:1, dy:0, th:'θ = 90°', L:'L = 0'},
+    {x0:350,y0:135,dx:0, dy:-1,th:'θ = 180°',L:'L = −mgs'}
+  ];
+  [140,280].forEach(function(x){el(s,'line',{x1:x,y1:10,x2:x,y2:186,stroke:'var(--riga)','stroke-width':1});});
+  casi.forEach(function(k,i){
+    el(s,'rect',{x:k.x0-W/2,y:k.y0-H/2,width:W,height:H,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+    txt(s,k.dx?k.x0-W/2-8:k.x0+W/2+8,k.y0+4,'1',{'font-size':11});
+    k.sv=el(s,'line',{stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#wv)'});
+    k.st=txt(s,0,0,'s',{fill:'var(--verde)','font-style':'italic'});
+    k.b=el(s,'rect',{width:W,height:H,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+    k.n2=txt(s,0,0,'2',{'font-size':11});
+    k.f=el(s,'line',{stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#wr)'});
+    k.ft=el(s,'text',{'font-size':13,'font-family':'sans-serif',fill:'var(--rosso)','font-style':'italic'});
+    k.ft.innerHTML='F<tspan baseline-shift="sub" font-size="9">p</tspan>';
+    txt(s,i*140+70,206,k.th+':  '+k.L,{fill:'var(--inchiostro)','font-size':12});
+  });
+  var rid=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function d(){
+    var u=+c.value;
+    casi.forEach(function(k,i){
+      var X=k.x0+k.dx*u*D, Y=k.y0+k.dy*u*D;
+      set(k.b,{x:X-W/2,y:Y-H/2});
+      set(k.n2,{x:X+W/2+8,y:Y+4,visibility:u>0.35?'visible':'hidden'});
+      /* forza peso: dal centro del blocco verso il basso */
+      var fx=X;
+      set(k.f,{x1:fx,y1:Y,x2:fx,y2:Y+H/2+28});
+      set(k.ft,{x:fx+8,y:Y+H/2+22});
+      /* spostamento: dalla posizione iniziale a quella attuale, a lato del blocco */
+      var off=(k.dx?{x:0,y:-H/2-12}:{x:-W/2-12,y:0});
+      var x1=k.x0+off.x,y1=k.y0+off.y,x2=X+off.x,y2=Y+off.y;
+      var lung=u*D;
+      set(k.sv,{x1:x1,y1:y1,x2:x2,y2:y2,visibility:lung>12?'visible':'hidden'});
+      set(k.st,{x:(x1+x2)/2+(k.dx?0:-10),y:(y1+y2)/2+(k.dx?-6:4),visibility:lung>24?'visible':'hidden'});
+    });
+    v.innerHTML='s = '+num(u,2)+' m';
+  }
+  c.addEventListener('input',d);d();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
