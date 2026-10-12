@@ -5,26 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Estremi di funzioni non derivabili o discontinue — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
-table.segni{border-collapse:collapse;margin:22px auto;font-family:var(--sans);font-size:.95rem}
-table.segni td{padding:6px 16px;text-align:center;border-bottom:1px solid var(--riga)}
-table.segni td.etichetta{text-align:left;color:var(--grigio);font-size:.85rem}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
 table.segni td.pos{color:var(--blu);font-weight:600}
 table.segni td.neg{color:var(--rosso);font-weight:600}
-.griglia-casi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:24px 0}
-.griglia-casi figure{margin:0}
-.griglia-casi figcaption{font-family:var(--sans);font-size:.76rem;color:var(--grigio);margin-top:4px}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
 </style>
 </head>
 <body>
@@ -34,159 +102,381 @@ table.segni td.neg{color:var(--rosso);font-weight:600}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Massimi, minimi e flessi &middot; Unità 25</p>
   <h1>Estremi di funzioni non derivabili o discontinue</h1>
-  <p class="sommario">Il teorema di Fermat richiede la derivabilità: dove questa
-  condizione manca, o dove la funzione ha una discontinuità, la ricerca degli estremi va
-  fatta con un'analisi diretta del segno di $f'$ o del comportamento della funzione
-  attorno al punto.</p>
 </header>
+
+<p>Il teorema di Fermat vale solo per le funzioni derivabili. Questa unità mostra come si cercano massimi e minimi nei punti in cui la funzione non è derivabile o non è continua.</p>
+
+<div class="barra-ris"><button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button></div>
 
 <h2>Punti di non derivabilità</h2>
 
-<p>Consideriamo $f(x)=|x|$, definita su tutto $\mathbb R$:
-$$f(x)=\begin{cases}x & \text{se } x\ge0\\ -x & \text{se } x&lt;0\end{cases}
-\qquad\qquad
-f'(x)=\begin{cases}1 & \text{se } x&gt;0\\ -1 & \text{se } x&lt;0\end{cases}$$
-La derivata non esiste in $x=0$, perché il limite destro e il limite sinistro del
-rapporto incrementale non coincidono; eppure il grafico ha lì un punto evidente di
-minimo.</p>
+<p>Si consideri la funzione $f(x)=|x|$, definita su tutto $\mathbb R$, e la sua derivata.</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 260 170" width="100%" style="max-width:230px">
-<line x1="15" y1="145" x2="245" y2="145" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="130" y1="155" x2="130" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="236" y="139" font-size="10" fill="var(--inchiostro)">x</text>
-<text x="121" y="24" font-size="10" fill="var(--inchiostro)">y</text>
-<path d="M 45 30 L 130 145 L 215 30" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="130" cy="145" r="3.6" fill="var(--rosso)"/>
-<text x="98" y="163" font-size="10.5" fill="var(--inchiostro)" font-family="var(--sans)">minimo assoluto</text>
-</svg>
-<figcaption>$f(x)=|x|$: nel punto angoloso $x=0$ la derivata non esiste, ma la funzione
-ha comunque un minimo.</figcaption>
-</figure>
+<p class="eq">$$f(x)=\begin{cases}x & \text{se } x\ge0\\ -x & \text{se } x&lt;0\end{cases}
+\qquad\qquad
+f'(x)=\begin{cases}1 & \text{se } x&gt;0\\ -1 & \text{se } x&lt;0\end{cases}$$</p>
+
+<p>In $x=0$ la derivata non esiste, perché il limite sinistro e il limite destro del rapporto incrementale sono diversi ($-1$ e $1$). Il grafico mostra tuttavia che in $x=0$ la funzione ha un minimo.</p>
+
+<div class="fig">
+<svg id="g-abs" viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img"
+     aria-label="Grafico di f(x) uguale al valore assoluto di x, con un punto mobile e la sua tangente; nell'origine il grafico ha un punto angoloso"></svg>
+<div class="cursore"><label for="s-abs">$x$</label>
+<input type="range" id="s-abs" min="-2" max="2" step="0.05" value="-1.2">
+<span class="val" id="v-abs"></span></div>
+<p class="did">Nel punto angoloso $x=0$ la derivata non esiste, ma la funzione ha un minimo; il cursore sposta il punto lungo il grafico.</p>
+</div>
+
+<p>Anche in un punto in cui $f'$ non esiste si può cercare un estremo studiando il segno di $f'$ a sinistra e a destra del punto.</p>
 
 <table class="segni">
 <tr><td class="etichetta">$f'(x)$</td><td class="neg">&minus;</td><td>&nexists;</td><td class="pos">+</td></tr>
-<tr><td></td><td>$x&lt;0$</td><td>$x=0$</td><td>$x&gt;0$</td></tr>
+<tr class="intervalli"><td></td><td>$x&lt;0$</td><td>$x=0$</td><td>$x&gt;0$</td></tr>
 </table>
 
-<p>Anche nei punti in cui $f'$ non esiste possiamo cercare estremi così, studiando il
-segno di $f'$ sui due lati: qui il segno passa da negativo a positivo, quindi $x=0$ è un
-punto di minimo relativo. Poiché
-$$\lim_{x\to\pm\infty}|x|=+\infty,$$
-la funzione non scende mai sotto $f(0)=0$: $x=0$ è allora anche un punto di minimo
-assoluto.</p>
+<p>Il segno passa da negativo a positivo, quindi $x=0$ è un punto di minimo relativo. Poiché inoltre la funzione tende a $+\infty$ agli estremi del dominio, non assume mai valori minori di $f(0)=0$: $x=0$ è anche un punto di minimo assoluto.</p>
 
-<div class="nota"><span class="et">Due casi possibili</span>
-<p>Se il segno di $f'$ cambia attorno al punto di non derivabilità &mdash; da meno a
-più, o da più a meno &mdash; si ha un estremo relativo, minimo nel primo caso e massimo
-nel secondo. Se invece il segno resta lo stesso sui due lati e $f'$ tende a $\pm\infty$,
-il punto non è un estremo ma un <b>flesso a tangente verticale</b>.</p>
-<div class="griglia-casi">
-<figure><svg viewBox="0 0 130 80" width="100%">
-<line x1="65" y1="10" x2="65" y2="50" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="61" y="8" font-size="9" fill="var(--inchiostro)">0</text>
-<text x="30" y="30" font-size="11" fill="var(--rosso)">&minus;</text>
-<text x="90" y="30" font-size="11" fill="var(--blu)">+</text>
-<path d="M 20 45 L 55 55" stroke="var(--inchiostro)" stroke-width="1.3" marker-end="url(#f1)"/>
-<path d="M 75 55 L 110 45" stroke="var(--inchiostro)" stroke-width="1.3" marker-end="url(#f1)"/>
-<defs><marker id="f1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
-</svg><figcaption>segno diverso &rarr; estremo</figcaption></figure>
-<figure><svg viewBox="0 0 130 80" width="100%">
-<line x1="65" y1="10" x2="65" y2="50" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="61" y="8" font-size="9" fill="var(--inchiostro)">0</text>
-<text x="30" y="30" font-size="11" fill="var(--rosso)">&minus;</text>
-<text x="90" y="30" font-size="11" fill="var(--rosso)">&minus;</text>
-<path d="M 20 30 L 55 55" stroke="var(--inchiostro)" stroke-width="1.3" marker-end="url(#f2)"/>
-<path d="M 75 30 L 110 55" stroke="var(--inchiostro)" stroke-width="1.3" marker-end="url(#f2)"/>
-<defs><marker id="f2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker></defs>
-</svg><figcaption>segno uguale &rarr; flesso verticale</figcaption></figure>
+<p class="eq">$$\lim_{x\to\pm\infty}|x|=+\infty$$</p>
+
+<div class="def"><span class="et">Due casi possibili</span>
+<p>Sia $f$ continua in $x_0$ ma non derivabile in $x_0$.</p>
+<ul>
+<li>Se il segno di $f'$ cambia attraversando $x_0$, il punto è un estremo relativo: un minimo se il segno passa da meno a più, un massimo se passa da più a meno.</li>
+<li>Se il segno di $f'$ è lo stesso sui due lati e $f'$ tende a $+\infty$ o a $-\infty$, il punto non è un estremo ma un <b>flesso a tangente verticale</b>.</li>
+</ul></div>
+
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-caso1" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Il segno di f primo passa da meno a più: punto angoloso di minimo"></svg>
+<svg id="g-caso2" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Il segno di f primo è negativo sui due lati: flesso a tangente verticale"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Il segno di $f'$ cambia: il punto è un estremo.</p>
+<p class="did">Il segno di $f'$ non cambia: il punto è un flesso a tangente verticale.</p>
 </div>
 </div>
 
 <h2>Estremi di funzioni discontinue</h2>
 
-<p>Nei punti di discontinuità il teorema di Fermat non si applica nemmeno lì: dove la
-funzione è continua si procede come prima studiando il segno di $f'$, mentre nei punti
-di discontinuità va osservato caso per caso il comportamento a destra e a sinistra del
-punto.</p>
+<p>Anche nei punti di discontinuità il teorema di Fermat non si può applicare. Negli intervalli in cui la funzione è continua e derivabile si studia il segno di $f'$ come di consueto; nei punti di discontinuità si esamina il comportamento della funzione a sinistra e a destra del punto. Occorre inoltre controllare i valori della funzione agli estremi del dominio.</p>
 
-<div class="griglia-casi">
-<figure><svg viewBox="0 0 150 110" width="100%">
-<line x1="10" y1="90" x2="140" y2="90" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="55" y1="100" x2="55" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="30" y1="10" x2="30" y2="95" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 12 20 C 20 55 26 85 30 90" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<path d="M 30 90 C 45 78 60 70 90 72 C 110 73 125 78 138 88" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="60" cy="71" r="3" fill="var(--rosso)"/>
-</svg><figcaption>asintoto verticale: minimo relativo, nessun massimo</figcaption></figure>
-<figure><svg viewBox="0 0 150 110" width="100%">
-<line x1="10" y1="90" x2="140" y2="90" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="75" y1="100" x2="75" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M 20 100 L 65 65" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<path d="M 85 55 L 130 20" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="75" cy="60" r="3.4" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-</svg><figcaption>discontinuità eliminabile: nessun massimo, nessun minimo</figcaption></figure>
-<figure><svg viewBox="0 0 150 110" width="100%">
-<line x1="10" y1="90" x2="140" y2="90" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="55" y1="100" x2="55" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M 15 55 C 30 35 42 25 55 60" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<path d="M 55 30 C 70 25 100 22 138 15" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="55" cy="60" r="3.4" fill="var(--rosso)"/>
-<circle cx="55" cy="30" r="3" fill="#fff" stroke="var(--rosso)" stroke-width="1.4"/>
-</svg><figcaption>salto: il punto basso del salto è minimo assoluto</figcaption></figure>
-<figure><svg viewBox="0 0 150 110" width="100%">
-<line x1="10" y1="90" x2="140" y2="90" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="30" y1="100" x2="30" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M 30 92 C 15 92 18 25 30 25 C 55 25 65 22 90 22 C 110 22 122 40 122 60" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="30" cy="92" r="3.4" fill="var(--rosso)"/>
-<circle cx="90" cy="22" r="3.4" fill="var(--rosso)"/>
-<line x1="122" y1="10" x2="132" y2="20" stroke="var(--grigio)" stroke-width="1.4"/>
-<line x1="122" y1="20" x2="132" y2="30" stroke="var(--grigio)" stroke-width="1.4"/>
-<line x1="122" y1="30" x2="132" y2="40" stroke="var(--grigio)" stroke-width="1.4"/>
-<line x1="122" y1="40" x2="132" y2="50" stroke="var(--grigio)" stroke-width="1.4"/>
-<line x1="122" y1="50" x2="132" y2="60" stroke="var(--grigio)" stroke-width="1.4"/>
-</svg><figcaption>dominio limitato: massimo assoluto interno, minimo assoluto all'estremo</figcaption></figure>
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-d1" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Funzione con un asintoto verticale e un minimo relativo"></svg>
+<svg id="g-d2" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Funzione crescente con una discontinuità eliminabile"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Con un asintoto verticale la funzione ha un minimo relativo ma nessun massimo.</p>
+<p class="did">Con una discontinuità eliminabile la funzione non ha né massimo né minimo.</p>
+</div>
+<div class="pannelli" style="--n:2;margin-top:14px">
+<svg id="g-d3" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Funzione con un salto: il valore più basso del salto è il minimo assoluto"></svg>
+<svg id="g-d4" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Funzione su un intervallo chiuso con massimo assoluto interno e minimo assoluto all'estremo sinistro"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Con un salto, il valore più basso del salto è il minimo assoluto.</p>
+<p class="did">In un dominio limitato il massimo assoluto è interno e il minimo assoluto si trova a un estremo.</p>
+</div>
 </div>
 
 <h2>Esempio</h2>
 
-<p>Cerchiamo massimo e minimo assoluti di
-$$f(x)=\begin{cases}x & \text{se } x\le0\\ x+1 & \text{se } x&gt;0\end{cases}
-\qquad\qquad D=[-2;2].$$</p>
+<p>Si cercano il massimo e il minimo assoluti della funzione seguente, definita nell'intervallo $D=[-2;2]$.</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 260 210" width="100%" style="max-width:260px">
-<line x1="15" y1="150" x2="245" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="130" y1="195" x2="130" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="236" y="144" font-size="10" fill="var(--inchiostro)">x</text>
-<text x="121" y="24" font-size="10" fill="var(--inchiostro)">y</text>
-<path d="M 50 180 L 130 150" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<path d="M 130 135 L 220 105" fill="none" stroke="var(--blu)" stroke-width="2.1"/>
-<circle cx="50" cy="180" r="3.6" fill="var(--rosso)"/>
-<circle cx="130" cy="150" r="3.6" fill="var(--rosso)"/>
-<circle cx="130" cy="135" r="3.6" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-<circle cx="220" cy="105" r="3.6" fill="var(--rosso)"/>
-<text x="30" y="193" font-size="10" fill="var(--inchiostro)" font-family="var(--sans)">&minus;2</text>
-<text x="212" y="97" font-size="10" fill="var(--inchiostro)" font-family="var(--sans)">2</text>
-</svg>
-<figcaption>Il salto in $x=0$ non produce un estremo: la funzione cresce prima e dopo.
-Gli estremi assoluti sono ai bordi del dominio.</figcaption>
-</figure>
+<div class="es">
+<p class="eq quesito">$$f(x)=\begin{cases}x & \text{se } x\le0\\ x+1 & \text{se } x&gt;0\end{cases}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$x=-2 \text{ minimo assoluto},\ f(-2)=-2 \qquad x=2 \text{ massimo assoluto},\ f(2)=3$$</p>
+</div>
 
-<p>La derivata vale $f'(x)=1$ sia per $x&lt;0$ sia per $x&gt;0$: il segno non cambia
-attraversando $x=0$, dove $f'$ non esiste, quindi lì non c'è un estremo, anche se la
-funzione è discontinua (salto da $0$ a $1$):
-$$\lim_{x\to0^-}f(x)=0 \qquad\qquad \lim_{x\to0^+}f(x)=1.$$
-Controlliamo allora il comportamento agli estremi del dominio:
-$$\lim_{x\to-2^+}f(x)=-2 \qquad\qquad \lim_{x\to2^-}f(x)=3.$$
-Poiché $f$ è crescente su ciascuno dei due tratti, questi sono anche i valori estremi
-della funzione: $x=-2$ è punto di minimo assoluto, $x=2$ è punto di massimo
-assoluto.</p>
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Si calcola la derivata: in $x=0$ non esiste, perché la funzione è discontinua.</p>
+<p class="eq">$$f'(x)=1 \quad \text{per } x&lt;0 \text{ e per } x&gt;0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> In $x=0$ la funzione ha un salto da $0$ a $1$.</p>
+<p class="eq">$$\lim_{x\to0^-}f(x)=0 \qquad \lim_{x\to0^+}f(x)=1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Il segno di $f'$ è positivo sui due lati di $x=0$: lì non c'è un estremo.</p>
+<table class="segni">
+<tr><td class="etichetta">$f'(x)$</td><td class="pos">+</td><td>&nexists;</td><td class="pos">+</td></tr>
+<tr class="intervalli"><td></td><td>$-2&lt;x&lt;0$</td><td>$x=0$</td><td>$0&lt;x&lt;2$</td></tr>
+</table>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> La funzione cresce su ciascun tratto: gli estremi assoluti sono agli estremi del dominio.</p>
+<p class="eq">$$f(-2)=-2 \qquad f(2)=2+1=3$$</p>
+</div>
+</div>
 
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
+
+<div class="fig">
+<svg id="g-es" viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img"
+     aria-label="Grafico della funzione dell'esempio: due segmenti crescenti con un salto in x uguale a zero; un punto mobile percorre i due tratti"></svg>
+<div class="cursore"><label for="s-es">$x$</label>
+<input type="range" id="s-es" min="-2" max="2" step="0.05" value="-1">
+<span class="val" id="v-es"></span></div>
+<p class="did">Il salto in $x=0$ non produce un estremo, perché la funzione cresce prima e dopo il salto; gli estremi assoluti sono agli estremi del dominio.</p>
+</div>
+
+<p>La funzione ha quindi il minimo assoluto $-2$ in $x=-2$ e il massimo assoluto $3$ in $x=2$.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../25-definizioni-teorema-di-fermat-ricerca-di-massimi-e-minimi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Definizioni, teorema di Fermat, ricerca di massimi e minimi</span></a><a class="successiva" href="../27-concavita-derivata-seconda-e-flessi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Concavità, derivata seconda e flessi</span></a></nav>
 <footer><p>Matematica quinta &middot; Massimi, minimi e flessi &middot; Unità 25</p></footer>
-
 </div>
+
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+/* retta per (x0;y0) con pendenza m, aggiornabile */
+function retta(P,col,w,dash){var o={stroke:col,'stroke-width':w||1.8};if(dash)o['stroke-dasharray']=dash;return P.add(el('line',o),'sopra');}
+function poniRetta(P,r,x0,y0,m){var a=P.xr[0]-1,b=P.xr[1]+1;
+  r.setAttribute('x1',P.X(a));r.setAttribute('y1',P.Y(y0+m*(a-x0)));r.setAttribute('x2',P.X(b));r.setAttribute('y2',P.Y(y0+m*(b-x0)));}
+function sposta(P,c,x,y){c.setAttribute('cx',P.X(x));c.setAttribute('cy',P.Y(y));}
+
+
+
+
+/* ---------- f(x)=|x| con punto mobile e tangente ---------- */
+(function(){
+  var svg=document.getElementById('g-abs');
+  var P=new Piano(svg,[-2.6,2.6],[-0.6,2.7],{l:22,r:26,t:24,b:22});
+  P.assi([-2,-1,1,2],[1,2]);
+  P.curva(function(x){return Math.abs(x);},-2.6,2.6,520,'var(--blu)');
+  var r=P.add(el('line',{stroke:'var(--rosso)','stroke-width':1.6}),'sopra'), pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-abs'), v=document.getElementById('v-abs');
+  function agg(){
+    var x=+sl.value, y=Math.abs(x), h=0.6;
+    sposta(P,pt,x,y);
+    if(Math.abs(x)<1e-9){
+      r.setAttribute('visibility','hidden');
+      v.innerHTML='x = 0 &nbsp; f(x) = 0 &nbsp; f′(0) non esiste &nbsp; <span class="ok">minimo assoluto</span>';
+      return;
+    }
+    var m=x>0?1:-1;
+    r.setAttribute('visibility','visible');
+    r.setAttribute('x1',P.X(x-h));r.setAttribute('y1',P.Y(y-m*h));r.setAttribute('x2',P.X(x+h));r.setAttribute('y2',P.Y(y+m*h));
+    v.innerHTML='x = '+num(x)+' &nbsp; f(x) = '+num(y)+' &nbsp; f′(x) = '+num(m,0)+' &nbsp; '+(m>0?'crescente':'decrescente');
+  }
+  sl.addEventListener('input',agg);agg();
+})();
+
+/* ---------- i due casi nei punti di non derivabilità ---------- */
+function casoSegni(id,f,s1,s2,c1,c2){
+  var svg=document.getElementById(id);
+  var P=new Piano(svg,[-1.5,1.5],[-1.45,1.45],{l:14,r:14,t:26,b:12});
+  P.add(el('line',{x1:P.X(0),x2:P.X(0),y1:P.m.t-4,y2:P.H-P.m.b,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'testo');
+  P.curva(f,-1.5,1.5,600,'var(--blu)',2);
+  pallino(P,0,f(0),true,'var(--rosso)');
+  P.add(txt(P.X(-0.75),18,s1,{'text-anchor':'middle','font-size':13,fill:c1}),'testo');
+  P.add(txt(P.X(0.75),18,s2,{'text-anchor':'middle','font-size':13,fill:c2}),'testo');
+}
+casoSegni('g-caso1',function(x){return 1.1*Math.abs(x)-0.75;},'f′ < 0','f′ > 0','var(--rosso)','var(--blu)');
+casoSegni('g-caso2',function(x){return -0.95*Math.cbrt(x);},'f′ < 0','f′ < 0','var(--rosso)','var(--rosso)');
+
+/* ---------- galleria delle discontinuità ---------- */
+function etichetta(P,x,y,s,dy){P.add(txt(P.X(x),P.Y(y)+dy,s,{'text-anchor':'middle','font-size':11,fill:'var(--inchiostro)'}),'testo');}
+/* asintoto verticale: f(x)=(x-1)+1/(x-1)^2 */
+(function(){
+  var P=new Piano(document.getElementById('g-d1'),[-1.6,4.6],[-3,6],{l:12,r:18,t:16,b:10});
+  P.assi([],[],'','');
+  P.add(el('line',{x1:P.X(1),x2:P.X(1),y1:P.m.t,y2:P.H-P.m.b,stroke:'var(--rosso)','stroke-width':1.3,'stroke-dasharray':'5,4'}),'sotto');
+  function f(x){var u=x-1;return u+1/(u*u);}
+  P.curva(f,-1.6,0.995,400,'var(--blu)',2); P.curva(f,1.005,4.6,400,'var(--blu)',2);
+  var xm=1+Math.cbrt(2); pallino(P,xm,f(xm),true,'var(--rosso)'); etichetta(P,xm,f(xm),'min',20);
+})();
+/* discontinuità eliminabile: f(x)=x+1 per x≠1 */
+(function(){
+  var P=new Piano(document.getElementById('g-d2'),[-2,3.4],[-1.4,4.6],{l:12,r:18,t:16,b:10});
+  P.assi([],[],'','');
+  P.curva(function(x){return x+1;},-2,3.4,50,'var(--blu)',2);
+  pallino(P,1,2,false,'var(--rosso)');
+})();
+/* salto su [-2;3]: -x(x+2,5) per x≤0, 2+0,3x per x>0 */
+(function(){
+  var P=new Piano(document.getElementById('g-d3'),[-2.4,3.4],[-0.9,3.5],{l:12,r:18,t:16,b:14});
+  P.assi([],[],'','');
+  P.curva(function(x){return -x*(x+2.5);},-2,0,200,'var(--blu)',2);
+  P.curva(function(x){return 2+0.3*x;},0,3,50,'var(--blu)',2);
+  pallino(P,-2,1,true,'var(--blu)'); pallino(P,3,2.9,true,'var(--blu)');
+  pallino(P,0,2,false,'var(--rosso)'); pallino(P,0,0,true,'var(--rosso)');
+  P.add(txt(P.X(0)+8,P.Y(0)+16,'min',{'font-size':11,fill:'var(--inchiostro)'}),'testo');
+})();
+/* dominio limitato [0;4]: f(x)=-(x-2,5)^2+6,25 */
+(function(){
+  var P=new Piano(document.getElementById('g-d4'),[-0.8,5],[-0.9,7.6],{l:12,r:18,t:16,b:14});
+  P.assi([],[],'','');
+  P.curva(function(x){return -(x-2.5)*(x-2.5)+6.25;},0,4,200,'var(--blu)',2);
+  P.add(el('line',{x1:P.X(4),x2:P.X(4),y1:P.Y(0),y2:P.Y(4),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'}),'sotto');
+  pallino(P,4,4,true,'var(--blu)');
+  pallino(P,2.5,6.25,true,'var(--rosso)'); etichetta(P,2.5,6.25,'max',-9);
+  pallino(P,0,0,true,'var(--rosso)');
+  P.add(txt(P.X(0)+8,P.Y(0)+16,'min',{'font-size':11,fill:'var(--inchiostro)'}),'testo');
+})();
+
+/* ---------- esempio: x per x≤0, x+1 per x>0 su [-2;2] ---------- */
+(function(){
+  var svg=document.getElementById('g-es');
+  var P=new Piano(svg,[-2.7,2.7],[-2.6,3.6],{l:22,r:26,t:24,b:16});
+  P.assi([-2,-1,1,2],[-2,-1,1,2,3]);
+  function f(x){return x<=0?x:x+1;}
+  P.curva(function(x){return x;},-2,0,50,'var(--blu)');
+  P.curva(function(x){return x+1;},0,2,50,'var(--blu)');
+  pallino(P,-2,-2,true,'var(--blu)'); pallino(P,0,0,true,'var(--blu)');
+  pallino(P,0,1,false,'var(--blu)'); pallino(P,2,3,true,'var(--blu)');
+  var pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-es'), v=document.getElementById('v-es');
+  function agg(){
+    var x=+sl.value, y=f(x); sposta(P,pt,x,y);
+    var s='x = '+num(x)+' &nbsp; f(x) = '+num(y);
+    if(Math.abs(x+2)<1e-9) s+=' &nbsp; <span class="ok">minimo assoluto</span>';
+    else if(Math.abs(x-2)<1e-9) s+=' &nbsp; <span class="ok">massimo assoluto</span>';
+    else if(Math.abs(x)<1e-9) s+=' &nbsp; salto: nessun estremo';
+    else s+=' &nbsp; f′(x) = 1';
+    v.innerHTML=s;
+  }
+  sl.addEventListener('input',agg);agg();
+})();
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
