@@ -289,6 +289,7 @@
   colloca dopo l'intestazione "Induttanza di un solenoide" nell'indicizzazione delle pagine
   (unità 27, pagine 46-47), quindi resta di competenza di quell'unità pur non usando la formula
   del solenoide.
+- Revisione: titolo invariato. Tolti sommario e «Nella prossima unità»; introduzione di una frase; titoletti «La costante di proporzionalità» e «Unità di misura» tenuti. ε_ind = L|Δi/Δt| in riquadro rosso con legenda dei simboli; definizione dell'induttanza in .def con formula in riquadro; la nota «Da ricordare» accorpata nella definizione (ripeteva il paragrafo precedente); aggiunta la frase «1 H: fem di 1 V quando la corrente varia di 1 A ogni secondo». Correzione: l'induttanza non dipende «solo dalla forma» della bobina ma da forma, dimensioni e numero di spire. Figura del circuito rifatta in SVG da script (la scritta $L$ dentro l'SVG non veniva composta da MathJax) con cursore su Δi/Δt (−5…5 A/s, L = 0,20 H): valore di ε_ind, freccia di i_ind proporzionale, opposta a i se la corrente aumenta e concorde se diminuisce. Nessun esempio, nessuna figura decorativa. Da controllare: il valore L = 0,20 H scelto per il cursore e la frase aggiunta sull'henry.
 
 ## Unità 27 — Induttanza di un solenoide
 - Parole: circa 363 (prosa, didascalie e riquadro compresi, formule incluse nel conteggio) su

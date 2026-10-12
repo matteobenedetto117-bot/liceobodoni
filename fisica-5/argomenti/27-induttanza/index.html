@@ -5,18 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Induttanza — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:14em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
+
 <body>
 <div class="foglio">
 
@@ -24,88 +62,141 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 26</p>
   <h1>Induttanza</h1>
-  <p class="sommario">Quando la corrente che scorre in una bobina cambia, cambia con essa anche
-  il flusso di campo magnetico che la bobina stessa concatena, e nasce una fem autoindotta. Ci
-  serve una grandezza che misuri quanto una bobina risente di questo effetto: quanto vale la fem
-  indotta a parità di rapidità con cui la corrente varia.</p>
 </header>
 
+<p>Questa unità definisce l'induttanza, la grandezza che lega la fem autoindotta in una bobina alla rapidità con cui varia la corrente che la percorre, e la sua unità di misura.</p>
+
 <div class="fig">
-<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f27r" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<!-- lato superiore con resistenza -->
-<line x1="60" y1="40" x2="150" y2="40" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<path d="M150,40 L160,26 L172,54 L184,26 L196,54 L208,26 L220,40" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="220" y1="40" x2="340" y2="40" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<!-- lato destro -->
-<line x1="340" y1="40" x2="340" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<!-- lato inferiore con bobina -->
-<line x1="340" y1="180" x2="270" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<path d="M270,180 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0"
-  fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="160" y1="180" x2="60" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="150" y="163" width="130" height="34" fill="none" stroke="var(--verde)" stroke-width="1.6" rx="6"/>
-<text x="215" y="215" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">bobina (induttanza $L$)</text>
-<!-- lato sinistro con pila -->
-<line x1="60" y1="40" x2="60" y2="95" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="45" y1="95" x2="75" y2="95" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="52" y1="103" x2="68" y2="103" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="60" y1="103" x2="60" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<!-- corrente indotta ed emf autoindotta -->
-<line x1="255" y1="205" x2="215" y2="205" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f27r)"/>
-<text x="235" y="196" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">i<tspan font-size="9" dy="3">ind</tspan></text>
-</svg>
-<p class="did">Circuito con generatore, resistenza e bobina in serie. Se la corrente $i$ varia, il
-flusso concatenato con la bobina varia con essa, e nella bobina nasce una fem autoindotta
-$\varepsilon_{ind}$ che genera la corrente indotta $i_{ind}$, opposta alla variazione che l'ha
-causata.</p>
+<svg id="fig-circuito" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px" role="img" aria-label="Circuito con generatore, resistenza e bobina in serie; la corrente indotta nella bobina si oppone alla variazione della corrente"></svg>
+<div class="cursore"><label for="s-di">$\Delta i/\Delta t$</label>
+<input type="range" id="s-di" min="-5" max="5" step="0.5" value="2">
+<output id="o-di"></output></div>
+<p class="did">In un circuito con generatore, resistenza e bobina in serie, una variazione della corrente $i$ induce nella bobina una fem $\varepsilon_{ind}$, la cui corrente $i_{ind}$ si oppone alla variazione; il cursore regola la rapidità di variazione con $L=0{,}20\ \text{H}$.</p>
 </div>
 
 <h2>La costante di proporzionalità</h2>
 
-<p>La fem autoindotta si scrive $\varepsilon_{ind} = N\left|\dfrac{\Delta\Phi(\vec B)}{\Delta
-t}\right|$, dove $N$ è il numero di spire della bobina. La rapidità con cui varia il flusso,
-$\Delta\Phi/\Delta t$, è a sua volta proporzionale alla rapidità con cui varia la corrente,
-$\Delta i/\Delta t$: possiamo allora scrivere la stessa fem come</p>
+<p>Per la legge di Faraday-Neumann-Lenz, la fem autoindotta in una bobina di $N$ spire dipende dalla rapidità con cui varia il flusso del campo magnetico concatenato con le spire.</p>
 
-$$\varepsilon_{ind} = N\left|\dfrac{\Delta\Phi(\vec B)}{\Delta t}\right| = L\left|\dfrac{\Delta
-i}{\Delta t}\right|$$
+<p class="eq">$$\varepsilon_{ind}=N\left|\frac{\Delta\Phi(\vec B)}{\Delta t}\right|$$</p>
 
-<p>dove $L$ è proprio la costante di proporzionalità fra le due grandezze, e la chiamiamo
-induttanza. Isolando $L$ nell'uguaglianza, il fattore $\Delta t$ si semplifica:</p>
+<p>Il campo magnetico generato dalla bobina, e quindi il suo flusso, è direttamente proporzionale alla corrente che la percorre. Di conseguenza anche la rapidità di variazione del flusso è direttamente proporzionale alla rapidità di variazione della corrente, e la fem autoindotta si può scrivere così:</p>
 
-$$L = N\left|\dfrac{\Delta\Phi(\vec B)}{\Delta t}\cdot\dfrac{\Delta t}{\Delta i}\right| =
-N\left|\dfrac{\Delta\Phi(\vec B)}{\Delta i}\right|$$
+<p class="eq principio">$$\varepsilon_{ind}=N\left|\frac{\Delta\Phi(\vec B)}{\Delta t}\right|=L\left|\frac{\Delta i}{\Delta t}\right|$$</p>
 
-<p>L'induttanza è quindi il rapporto, in modulo, fra il flusso concatenato con la bobina e la
-corrente che lo produce: non dipende da come la corrente varia nel tempo, ma solo dalla forma
-della bobina.</p>
+<p>Qui $\Delta i/\Delta t$ è la rapidità con cui varia la corrente e $L$ è la costante di proporzionalità, che si chiama induttanza della bobina. Isolando $L$ nell'uguaglianza, il fattore $\Delta t$ si semplifica.</p>
+
+<p class="eq">$$L=N\left|\frac{\Delta\Phi(\vec B)}{\Delta t}\cdot\frac{\Delta t}{\Delta i}\right|=N\left|\frac{\Delta\Phi(\vec B)}{\Delta i}\right|$$</p>
+
+<div class="def"><span class="et">Induttanza</span>
+<p>L'induttanza $L$ di una bobina è il rapporto, in modulo, fra la variazione del flusso concatenato con le sue $N$ spire e la variazione della corrente che la produce.</p>
+<p class="eq">$$L=N\left|\frac{\Delta\Phi(\vec B)}{\Delta i}\right|$$</p>
+<p>L'induttanza non dipende da come la corrente varia nel tempo: è una caratteristica della bobina, che dipende dalla sua forma, dalle sue dimensioni e dal numero di spire.</p></div>
 
 <h2>Unità di misura</h2>
 
-<p>L'unità di misura di $L$ è l'henry: $[L] = \text{H}$, con</p>
+<p>Nel Sistema Internazionale l'induttanza si misura in henry (H). Dalla relazione $\varepsilon_{ind}=L\left|\Delta i/\Delta t\right|$ si ricava l'unità:</p>
 
-$$1\ \text{H} = 1\ \dfrac{\text{V}\cdot\text{s}}{\text{A}}$$
+<p class="eq">$$1\ \text{H}=1\ \frac{\text{V}\cdot\text{s}}{\text{A}}$$</p>
 
-<div class="nota">
-<span class="et">Da ricordare</span>
-L'induttanza è una caratteristica di un solenoide o di una bobina, e dice quanto varia il flusso
-di campo magnetico concatenato al variare della corrente che scorre al suo interno.
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 27 ricava l'induttanza di un solenoide, $L = \mu_0\dfrac{N^2}{\ell}A$, a partire dal
-campo magnetico che esso stesso genera.</li>
-</ul>
-</div>
+<p>Una bobina ha induttanza di 1 H se in essa si induce una fem di 1 V quando la corrente varia di 1 A ogni secondo.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../26-mutua-induzione-e-autoinduzione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Mutua induzione e autoinduzione</span></a><a class="successiva" href="../28-induttanza-di-un-solenoide/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Induttanza di un solenoide</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 26</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* bobina vista di lato: n anse da x0, raggio r, base y */
+  function bobina(p,x0,y,n,r,w){var d='M'+x0+','+y;for(var k=0;k<n;k++)d+=' a'+r+','+r+' 0 0 1 '+(2*r)+',0';
+    el(p,'path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':w||2});
+    el(p,'line',{x1:x0,y1:y,x2:x0,y2:y+28,stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(p,'line',{x1:x0+2*r*n,y1:y,x2:x0+2*r*n,y2:y+28,stroke:'var(--inchiostro)','stroke-width':1.6});}
+  function sub(p,x,y,a,b,col,fs,anchor){var t=T(p,x,y,a,{'font-size':fs||13,fill:col,'font-style':'italic','text-anchor':anchor||'start'});
+    var s=document.createElementNS(NS,'tspan');s.setAttribute('font-size',(fs||13)*.7);s.setAttribute('dy',3);s.textContent=b;t.appendChild(s);return t;}
+  /* pulsante ▶ / ↺ */
+  function animatore(btn,dur,disegna,fine){
+    var stato='fermo',t0=0;
+    function passo(ts){if(!t0)t0=ts;var t=Math.min((ts-t0)/1000,dur);disegna(t);
+      if(t<dur)requestAnimationFrame(passo);else{stato='finito';btn.disabled=false;btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');if(fine)fine();}}
+    btn.addEventListener('click',function(){
+      if(stato==='finito'){stato='fermo';btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');disegna(-1);return;}
+      if(stato!=='fermo')return;
+      if(ridotto){disegna(dur);stato='finito';btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');if(fine)fine();return;}
+      stato='corsa';btn.disabled=true;t0=0;requestAnimationFrame(passo);});
+    disegna(-1);
+  }
+  function dissolvi(e){e.setAttribute('opacity',0);var t0=0;function s(ts){if(!t0)t0=ts;var a=Math.min((ts-t0)/700,1);e.setAttribute('opacity',a);if(a<1)requestAnimationFrame(s);}
+    if(ridotto)e.setAttribute('opacity',1);else requestAnimationFrame(s);}
+
+  /* ---------- circuito con cursore su Δi/Δt ---------- */
+  (function(){
+    var S=document.getElementById('fig-circuito'),sl=document.getElementById('s-di'),o=document.getElementById('o-di');
+    var ink='var(--inchiostro)',L=0.20;
+    el(S,'line',{x1:60,y1:40,x2:150,y2:40,stroke:ink,'stroke-width':1.8});
+    el(S,'path',{d:'M150,40 L160,26 L172,54 L184,26 L196,54 L208,26 L220,40',fill:'none',stroke:ink,'stroke-width':1.8});
+    T(S,185,18,'resistenza',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    el(S,'line',{x1:220,y1:40,x2:340,y2:40,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:340,y1:40,x2:340,y2:180,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:340,y1:180,x2:270,y2:180,stroke:ink,'stroke-width':1.8});
+    el(S,'path',{d:'M270,180 a11,11 0 0 0 -22,0 a11,11 0 0 0 -22,0 a11,11 0 0 0 -22,0 a11,11 0 0 0 -22,0 a11,11 0 0 0 -22,0',fill:'none',stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:160,y1:180,x2:60,y2:180,stroke:ink,'stroke-width':1.8});
+    el(S,'rect',{x:150,y:158,width:130,height:34,fill:'none',stroke:'var(--verde)','stroke-width':1.4,rx:6});
+    T(S,215,232,'bobina (induttanza L)',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    el(S,'line',{x1:60,y1:40,x2:60,y2:95,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:45,y1:95,x2:75,y2:95,stroke:ink,'stroke-width':1.4});
+    el(S,'line',{x1:52,y1:103,x2:68,y2:103,stroke:ink,'stroke-width':3});
+    el(S,'line',{x1:60,y1:103,x2:60,y2:180,stroke:ink,'stroke-width':1.8});
+    T(S,82,104,'generatore',{'font-size':11,fill:'var(--grigio)'});
+    freccia(S,250,40,300,40,'var(--verde)',2.4,8);
+    T(S,275,62,'i',{'text-anchor':'middle','font-size':14,'font-style':'italic',fill:'var(--verde)'});
+    var g=el(S,'g',{});
+    function agg(){
+      vuota(g); var r=+sl.value, e=L*Math.abs(r), v=r.toFixed(1).replace('.',',').replace('-','−');
+      var stato;
+      if(r===0){stato='corrente costante: <span class="ok">nessuna fem indotta</span>';}
+      else{
+        var lung=12+11*Math.abs(r), cx=215, y=208;
+        /* nella bobina i scorre da destra a sinistra; i_ind opposta se i aumenta, concorde se diminuisce */
+        if(r>0)freccia(g,cx-lung/2,y,cx+lung/2,y,'var(--rosso)',2.4,8);else freccia(g,cx+lung/2,y,cx-lung/2,y,'var(--rosso)',2.4,8);
+        sub(g,cx+lung/2+8,y+5,'i','ind','var(--rosso)',13);
+        stato=r>0?'i in aumento: i<sub>ind</sub> opposta a i':'i in diminuzione: i<sub>ind</sub> concorde con i';
+      }
+      freccia(g,320,180,300,180,'var(--verde)',2.2,7);
+      o.innerHTML='Δi/Δt = '+v+' A/s &nbsp; ε<sub>ind</sub> = '+e.toFixed(2).replace('.',',')+' V &nbsp; '+stato;
+    }
+    sl.addEventListener('input',agg);agg();
+  })();
+})();
+</script>
 </body>
 </html>
