@@ -536,6 +536,7 @@ teorema del confronto, a pagina 21.
   Nessun quesito di maturità: i due teoremi isolati non compaiono come quesito a sé,
   e il loro impiego più ricco (dentro lo studio di funzione completo) non è ancora
   disponibile a questo punto del percorso.
+- Revisione: titolo invariato. Tolto il sommario; introduzione di due frasi; tasto «Mostra tutti i risultati» subito dopo l'introduzione. Titoletti «Teorema di Cauchy», «Teorema di De L'Hôpital», «Il teorema si estende», «Forme indeterminate 0⁰, ∞⁰, 1^∞» tenuti; «Esempio 1» ed «Esempio 2». Enunciati dei due teoremi in .def con formula in riquadro; nota «Attenzione» ridotta (limite del rapporto delle derivate inesistente, limite di partenza 2/7). Correzione: nel teorema di Cauchy l'ipotesi g′(x) ≠ 0 vale in ]a;b[ (prima «∀x ∈ [a;b]», dove g può non essere derivabile agli estremi) e c ∈ ]a;b[. Esempi a comparsa con risultato e passaggi uno per volta: Esempio 1 = (4x² − 4)/ln x per x → 1 (due passaggi, risultato 8); Esempio 2 = (eˣ − 1)^{2x} per x → 0⁺ (cinque passaggi, risultato 1). Esempi tolti (più di due): (3x + ln x)/(2x + 1) per x → +∞ (forma ∞/∞, risultato 3/2) e 1/sin x − 3/x per x → 0⁺ (forma +∞ − ∞, risultato −∞); del secondo resta in una frase il metodo (riduzione allo stesso denominatore). Tutti i limiti riverificati con SymPy. Impaginazione a quaderno con script di allineamento. Nessuna figura (la pagina non ne aveva), nessuna figura decorativa.
 
 ## Unità 24 — Definizioni, teorema di Fermat, ricerca di massimi e minimi
 - Parole: 573 su 5 pagine di traccia (95–99).

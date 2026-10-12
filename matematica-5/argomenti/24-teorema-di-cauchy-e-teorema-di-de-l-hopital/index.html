@@ -5,18 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema di Cauchy e teorema di De L'Hôpital — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-ul.ipotesi{padding-left:1.3em;margin:10px 0}
-ul.ipotesi li{margin:4px 0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+.def li{line-height:var(--r)}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
 </style>
 </head>
 <body>
@@ -26,130 +100,203 @@ ul.ipotesi li{margin:4px 0}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Teoremi del calcolo differenziale &middot; Unità 23</p>
   <h1>Teorema di Cauchy e teorema di De L'Hôpital</h1>
-  <p class="sommario">Il teorema di Cauchy confronta l'incremento di due funzioni fra
-  loro; da esso discende il teorema di De L'Hôpital, lo strumento più efficace per
-  calcolare i limiti che si presentano in forma indeterminata, sostituendo al rapporto
-  fra le funzioni il rapporto fra le loro derivate.</p>
 </header>
+
+<p>Questa unità presenta il teorema di Cauchy e il teorema di De L'Hôpital, che da esso discende. Il secondo permette di calcolare molti limiti in forma indeterminata usando le derivate.</p>
+
+<div class="barra-ris"><button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button></div>
 
 <h2>Teorema di Cauchy</h2>
 
 <div class="def"><span class="et">Teorema di Cauchy</span>
-<p>Se le funzioni $f(x)$ e $g(x)$ sono tali che:</p>
-<ul class="ipotesi">
-<li>$f(x)$ e $g(x)$ sono continue in $[a;b]$,</li>
-<li>$f(x)$ e $g(x)$ sono derivabili in $\,]a;b[$,</li>
-<li>$g'(x)\neq 0 \;\; \forall x\in[a;b]$,</li>
+<p>Siano $f(x)$ e $g(x)$ due funzioni tali che:</p>
+<ul>
+<li>$f(x)$ e $g(x)$ sono continue in $[a;b]$;</li>
+<li>$f(x)$ e $g(x)$ sono derivabili in $]a;b[$;</li>
+<li>$g'(x)\neq 0$ per ogni $x\in\,]a;b[$.</li>
 </ul>
-<p>allora esiste almeno un punto $c$ interno ad $[a;b]$ in cui si ha:</p>
-<p>$$\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(c)}{g'(c)}$$</p></div>
+<p>Allora esiste almeno un punto $c\in\,]a;b[$ in cui si ha:</p>
+<p class="eq">$$\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(c)}{g'(c)}$$</p></div>
 
-<p>Scegliendo $g(x)=x$ si ritrova il teorema di Lagrange: il teorema di Cauchy lo
-generalizza, confrontando l'incremento di due funzioni invece di una funzione sola con
-la retta $y=x$.</p>
+<p>Se si sceglie $g(x)=x$, si ritrova il teorema di Lagrange. Il teorema di Cauchy lo generalizza, perché confronta fra loro gli incrementi di due funzioni.</p>
 
 <h2>Teorema di De L'Hôpital</h2>
 
 <div class="def"><span class="et">Teorema di De L'Hôpital</span>
-<p>Date due funzioni $f(x)$ e $g(x)$ definite nell'intorno $I$ di un punto $x_0$, se:</p>
-<ul class="ipotesi">
-<li>$f(x)$ e $g(x)$ sono continue in $x_0$ e $f(x_0)=g(x_0)=0$,</li>
-<li>$f(x)$ e $g(x)$ sono derivabili in $I$, escluso al più $x_0$,</li>
-<li>$g'(x)\neq 0$ in $I-\{x_0\}$,</li>
-<li>esiste $\displaystyle\lim_{x\to x_0}\frac{f'(x)}{g'(x)}$,</li>
+<p>Siano $f(x)$ e $g(x)$ due funzioni definite in un intorno $I$ di un punto $x_0$, tali che:</p>
+<ul>
+<li>$f(x)$ e $g(x)$ sono continue in $x_0$ e $f(x_0)=g(x_0)=0$;</li>
+<li>$f(x)$ e $g(x)$ sono derivabili in $I$, escluso al più $x_0$;</li>
+<li>$g'(x)\neq 0$ in $I-\{x_0\}$;</li>
+<li>esiste il limite del rapporto delle derivate $\dfrac{f'(x)}{g'(x)}$ per $x\to x_0$.</li>
 </ul>
-<p>allora esiste anche $\displaystyle\lim_{x\to x_0}\frac{f(x)}{g(x)}$ e risulta:</p>
-<p>$$\lim_{x\to x_0}\frac{f(x)}{g(x)} = \lim_{x\to x_0}\frac{f'(x)}{g'(x)}$$</p></div>
+<p>Allora esiste anche il limite di $\dfrac{f(x)}{g(x)}$ e risulta:</p>
+<p class="eq">$$\lim_{x\to x_0}\frac{f(x)}{g(x)} = \lim_{x\to x_0}\frac{f'(x)}{g'(x)}$$</p></div>
 
-<p>In pratica, il teorema permette di sostituire un limite in forma indeterminata con il
-limite del rapporto delle derivate, spesso più semplice da calcolare. Vale anche per
-intorni destri e sinistri, quindi con limiti che tendono a $x_0^+$ o a $x_0^-$.</p>
+<p>Il teorema permette di sostituire un limite in forma indeterminata con il limite del rapporto delle derivate, che spesso è più semplice. Numeratore e denominatore si derivano separatamente, senza applicare la regola del quoziente all'intera frazione. Il teorema vale anche per i limiti destro e sinistro, cioè per $x\to x_0^+$ e per $x\to x_0^-$.</p>
 
-<h2>Esempio: forma indeterminata $0/0$</h2>
+<h2>Esempio 1</h2>
 
-<p>$$\lim_{x\to 1}\frac{4x^2-4}{\ln x} \;\;\stackrel{\left[\frac00\right]}{=}\;\;
-\lim_{x\to 1}\frac{8x}{1/x} = 8$$</p>
+<p>Si calcola il limite seguente, che si presenta nella forma $0/0$.</p>
 
-<p>Deriviamo separatamente numeratore e denominatore, senza applicare la regola del
-quoziente sull'intera frazione.</p>
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to 1}\frac{4x^2-4}{\ln x}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$\lim_{x\to 1}\frac{4x^2-4}{\ln x}=8$$</p>
+</div>
+
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Per $x=1$ numeratore e denominatore si annullano.</p>
+<p class="eq">$$4\cdot 1^2-4=0 \qquad \ln 1=0 \qquad \left[\tfrac00\right]$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> Si derivano separatamente numeratore e denominatore.</p>
+<p class="eq">$$\lim_{x\to 1}\frac{4x^2-4}{\ln x}=\lim_{x\to 1}\frac{8x}{1/x}=\lim_{x\to 1}8x^2=8$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
 
 <h2>Il teorema si estende</h2>
 
-<p>Si può dimostrare che il teorema resta valido anche quando le due funzioni non sono
-definite in $x_0$, purché la prima ipotesi sia sostituita da</p>
+<p>Il teorema resta valido anche quando le due funzioni non sono definite in $x_0$, purché la prima ipotesi sia sostituita da una delle seguenti:</p>
 
-<p>$$\lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=0 \qquad\text{oppure}\qquad
-\lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=\pm\infty,$$</p>
+<p class="eq">$$\lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=0 \qquad\text{oppure}\qquad \lim_{x\to x_0}f(x)=\lim_{x\to x_0}g(x)=\pm\infty$$</p>
 
-<p>e si estende anche al caso di limite per $x\to+\infty$ (o $x\to-\infty$): le
-condizioni devono valere in un intorno di $+\infty$ (o di $-\infty$). In sostanza
-occorre che esista il limite del rapporto fra le derivate (anche solo da destra o da
-sinistra) e che numeratore e denominatore tendano entrambi a $0$, oppure entrambi a
-$-\infty$ o a $+\infty$.</p>
+<p>Il teorema vale anche per $x\to+\infty$ e per $x\to-\infty$, se le ipotesi sono verificate in un intorno di $+\infty$ o di $-\infty$. In ogni caso numeratore e denominatore devono tendere entrambi a $0$ oppure entrambi a $\pm\infty$, e deve esistere il limite del rapporto delle derivate.</p>
 
-<h2>Esempio: forma indeterminata $\infty/\infty$</h2>
-
-<p>$$\lim_{x\to+\infty}\frac{3x+\ln x}{2x+1} \;\;\stackrel{\left[\frac{\infty}{\infty}\right]}{=}\;\;
-\lim_{x\to+\infty}\frac{3+1/x}{2} = \frac32$$</p>
+<p>La forma $+\infty-\infty$ si riconduce alla forma $0/0$ o alla forma $\infty/\infty$ riducendo le frazioni allo stesso denominatore; poi si applica il teorema.</p>
 
 <div class="nota"><span class="et">Attenzione</span>
-<p>In alcuni casi non conviene usare De L'Hôpital. Nel limite
-$\displaystyle\lim_{x\to\pm\infty}\frac{2x+\sin x}{7x}$, forma $\infty/\infty$,
-derivando numeratore e denominatore si ottiene $\dfrac{2+\cos x}{7}$, il cui limite
-per $x\to\pm\infty$ non esiste, perché $\cos x$ oscilla. Il teorema non si può allora
-applicare, dato che manca proprio l'ipotesi dell'esistenza del limite del rapporto
-delle derivate: questo non significa che il limite originario non esista. Raccogliendo
-$x$ si trova infatti</p>
-<p>$$\lim_{x\to\pm\infty}\frac{2x+\sin x}{7x} =
-\lim_{x\to\pm\infty}\frac{2+\dfrac{\sin x}{x}}{7} = \frac27,$$</p>
-<p>poiché $\sin x/x\to 0$.</p></div>
-
-<h2>Esempio: forma indeterminata $+\infty-\infty$</h2>
-
-<p>Calcoliamo $\displaystyle\lim_{x\to 0^+}\left(\frac{1}{\sin x}-\frac3x\right)$.
-Riduciamo prima allo stesso denominatore, ottenendo la forma $0/0$:</p>
-
-<p>$$\lim_{x\to 0^+}\left(\frac{1}{\sin x}-\frac3x\right) =
-\lim_{x\to 0^+}\frac{x-3\sin x}{x\sin x} \;\;\stackrel{\left[\frac00\right]}{=}\;\;
-\lim_{x\to 0^+}\frac{1-3\cos x}{\sin x+x\cos x} = \frac{-2}{0^+} = -\infty$$</p>
+<p>Se il limite del rapporto delle derivate non esiste, il teorema non si può applicare, ma il limite di partenza può esistere ugualmente. Per esempio, nel limite seguente, di forma $\infty/\infty$, il rapporto delle derivate $\dfrac{2+\cos x}{7}$ non ha limite, mentre raccogliendo $x$ si trova:</p>
+<p class="eq">$$\lim_{x\to\pm\infty}\frac{2x+\sin x}{7x}=\lim_{x\to\pm\infty}\frac{2+\dfrac{\sin x}{x}}{7}=\frac27$$</p></div>
 
 <h2>Forme indeterminate $0^0$, $\infty^0$, $1^\infty$</h2>
 
-<p>Queste tre forme, che compaiono in un esponente, si riconducono a De L'Hôpital
-scrivendo la potenza come esponenziale:</p>
+<p>Queste tre forme compaiono in una potenza con la variabile all'esponente. Si scrive la potenza come esponenziale:</p>
 
-<p>$$\lim_{x\to x_0}F(x)^{g(x)} = \lim_{x\to x_0}e^{\,\ln F(x)^{g(x)}} =
-\lim_{x\to x_0}e^{\,g(x)\ln F(x)}$$</p>
+<p class="eq">$$\lim_{x\to x_0}F(x)^{g(x)} = \lim_{x\to x_0}e^{\,g(x)\ln F(x)}$$</p>
 
-<p>e calcolando il limite dell'esponente $g(x)\ln F(x)$, che si presenta nella forma
-$0\cdot\infty$.</p>
+<p>Poi si calcola il limite dell'esponente $g(x)\ln F(x)$, che si presenta nella forma $0\cdot\infty$. Il prodotto si riscrive come quoziente, per ottenere la forma $0/0$ o $\infty/\infty$ e applicare il teorema.</p>
 
-<p>Calcoliamo $\displaystyle\lim_{x\to 0^+}\left(e^x-1\right)^{2x}$, forma $0^0$.
-Scriviamo la potenza come esponenziale e calcoliamo il limite dell'esponente:</p>
+<h2>Esempio 2</h2>
 
-<p>$$\lim_{x\to 0^+}2x\ln(e^x-1) \;\;\left[0\cdot\infty\right]$$</p>
+<p>Si calcola il limite seguente, che si presenta nella forma $0^0$.</p>
 
-<p>Riscriviamo il prodotto come quoziente per ricadere in una forma $\infty/\infty$ e
-applichiamo De L'Hôpital:</p>
+<div class="es">
+<p class="eq quesito">$$\lim_{x\to 0^+}\left(e^x-1\right)^{2x}$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r2">risultato</button>
+<p class="eq ris" id="r2" hidden>$$\lim_{x\to 0^+}\left(e^x-1\right)^{2x}=1$$</p>
+</div>
 
-<p>$$\lim_{x\to 0^+}\frac{\ln(e^x-1)}{1/(2x)} \;\;\stackrel{\left[\frac{\infty}{\infty}\right]}{=}\;\;
-\lim_{x\to 0^+}\frac{e^x/(e^x-1)}{-1/(2x^2)} =
-\lim_{x\to 0^+}e^x\cdot\frac{-2x^2}{e^x-1}$$</p>
+<div class="passi" id="passi2">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Si scrive la potenza come esponenziale.</p>
+<p class="eq">$$\left(e^x-1\right)^{2x}=e^{\,2x\ln(e^x-1)}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> L'esponente è nella forma $0\cdot\infty$: lo si riscrive come quoziente.</p>
+<p class="eq">$$\lim_{x\to 0^+}2x\ln(e^x-1)=\lim_{x\to 0^+}\frac{\ln(e^x-1)}{1/(2x)} \qquad \left[\tfrac{\infty}{\infty}\right]$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Si applica il teorema di De L'Hôpital.</p>
+<p class="eq">$$\lim_{x\to 0^+}\frac{e^x/(e^x-1)}{-1/(2x^2)}=\lim_{x\to 0^+}e^x\cdot\frac{-2x^2}{e^x-1}$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> Il fattore $e^x$ tende a 1; il rapporto è ancora $0/0$ e si applica di nuovo il teorema.</p>
+<p class="eq">$$\lim_{x\to 0^+}\frac{-2x^2}{e^x-1}=\lim_{x\to 0^+}\frac{-4x}{e^x}=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">5.</span> L'esponente tende a $1\cdot 0=0$, quindi il limite vale $e^0$.</p>
+<p class="eq">$$\lim_{x\to 0^+}\left(e^x-1\right)^{2x}=e^0=1$$</p>
+</div>
+</div>
 
-<p>Il fattore $e^x\to 1$, mentre $\dfrac{-2x^2}{e^x-1}$ è ancora una forma $0/0$:
-applichiamo di nuovo De L'Hôpital sul solo rapporto.</p>
-
-<p>$$\lim_{x\to 0^+}\frac{-2x^2}{e^x-1} \;\;\stackrel{\left[\frac00\right]}{=}\;\;
-\lim_{x\to 0^+}\frac{-4x}{e^x} = 0$$</p>
-
-<p>Il limite dell'esponente è dunque $1\cdot 0=0$, e quindi:</p>
-
-<p>$$\lim_{x\to 0^+}(e^x-1)^{2x} = e^0 = 1$$</p>
-
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi2">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi2" hidden>&#8634;</button>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../23-invertibilita-e-funzione-inversa/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Invertibilità e funzione inversa</span></a><a class="successiva" href="../25-definizioni-teorema-di-fermat-ricerca-di-massimi-e-minimi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Definizioni, teorema di Fermat, ricerca di massimi e minimi</span></a></nav>
 <footer><p>Matematica quinta &middot; Teoremi del calcolo differenziale &middot; Unità 23</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
