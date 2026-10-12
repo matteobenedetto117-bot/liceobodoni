@@ -5,23 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Motori elettrici in corrente alternata — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.conversione{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:16px 22px;margin:20px 0;font-family:var(--sans);font-size:.95rem;line-height:1.9}
-.conversione b{color:var(--blu)}
-.tre-fig{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.tre-fig .fig{margin:0;padding:12px 8px}
-.tre-fig .did{font-size:.74rem}
-@media(max-width:640px){.tre-fig{grid-template-columns:1fr}}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:14em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
+
 <body>
 <div class="foglio">
 
@@ -29,148 +62,157 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 24</p>
   <h1>Motori elettrici in corrente alternata</h1>
-  <p class="sommario">La stessa spira che, fatta ruotare in un campo magnetico, genera una fem
-  alternata può funzionare al contrario: se la alimentiamo con corrente, si mette in rotazione.
-  È il principio del motore elettrico, alla base di ogni macchina che trasforma energia elettrica
-  in movimento.</p>
 </header>
+
+<p>Questa unità mostra come una spira percorsa da corrente, posta in un campo magnetico, si mette in rotazione. È il principio del motore elettrico, che trasforma energia elettrica in energia meccanica.</p>
 
 <h2>Il generatore alla rovescia</h2>
 
-<p>Lo schema è lo stesso della spira rotante fra i poli del magnete, ma ora è collegata, tramite
-un commutatore, a un generatore di corrente alternata: è la corrente esterna a far nascere le
-forze che la mettono in rotazione.</p>
+<p>Lo schema è quello di una spira che può ruotare fra i poli di un magnete. Ora però la spira è collegata, tramite un commutatore, a un generatore di corrente alternata: è la corrente esterna a far nascere le forze magnetiche che mettono in rotazione la spira.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m25b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<rect x="40" y="70" width="70" height="110" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="75" y="132" text-anchor="middle" font-family="var(--sans)" font-size="20" fill="var(--inchiostro)">N</text>
-<rect x="350" y="70" width="70" height="110" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="385" y="132" text-anchor="middle" font-family="var(--sans)" font-size="20" fill="var(--inchiostro)">S</text>
-<line x1="115" y1="95" x2="345" y2="95" stroke="var(--blu)" stroke-width="1.6" marker-end="url(#m25b)"/>
-<line x1="115" y1="120" x2="345" y2="120" stroke="var(--blu)" stroke-width="1.6" marker-end="url(#m25b)"/>
-<line x1="115" y1="150" x2="345" y2="150" stroke="var(--blu)" stroke-width="1.6" marker-end="url(#m25b)"/>
-<line x1="115" y1="175" x2="345" y2="175" stroke="var(--blu)" stroke-width="1.6" marker-end="url(#m25b)"/>
-<text x="230" y="80" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">campo B</text>
-<line x1="215" y1="95" x2="245" y2="170" stroke="var(--rosso)" stroke-width="4"/>
-<circle cx="215" cy="95" r="6" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-<circle cx="245" cy="170" r="6" fill="#fff" stroke="var(--rosso)" stroke-width="1.6"/>
-<path d="M215,95 C205,150 200,180 210,215" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M245,170 C255,190 258,200 250,215" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="200" y="215" width="20" height="12" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="240" y="215" width="20" height="12" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="230" y="212" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">commutatore</text>
-<line x1="210" y1="227" x2="210" y2="270" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="250" y1="227" x2="250" y2="270" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="210" y1="270" x2="210" y2="280" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="250" y1="270" x2="250" y2="280" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="230" cy="280" r="22" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<path d="M215,280 Q222,270 230,280 T245,280" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="210" y1="270" x2="215" y2="280" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="250" y1="270" x2="245" y2="280" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="230" y="310" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">generatore di corrente alternata</text>
-</svg>
-<p class="did">La spira, vista di taglio, è collegata tramite il commutatore a un generatore
-di corrente alternata che la alimenta.</p>
+<svg id="fig-a" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Spira vista di taglio fra il polo nord e il polo sud, collegata tramite il commutatore a un generatore di corrente alternata"></svg>
+<p class="did">La spira, vista di taglio, è collegata tramite il commutatore a un generatore di corrente alternata che la alimenta.</p>
 </div>
 
-<div class="conversione">
-<b>GENERATORE</b>&nbsp; energia meccanica &rarr; energia elettrica<br>
-<b>MOTORE ELETTRICO</b>&nbsp; energia elettrica &rarr; energia meccanica
+<div class="def"><span class="et">Conversione di energia</span>
+<p>Il generatore trasforma energia meccanica in energia elettrica. Il motore elettrico compie la trasformazione inversa: trasforma energia elettrica in energia meccanica.</p>
 </div>
 
 <h2>Perché la spira continua a ruotare</h2>
 
-<p>Sulla spira agiscono le forze già viste per il filo rettilineo, che la mettono in
-rotazione. Se il verso della corrente non cambiasse, le forze si invertirebbero a ogni mezzo
-giro e la spira oscillerebbe avanti e indietro. Il commutatore inverte la corrente proprio
-quando la spira passa per la posizione verticale, così le forze continuano a spingerla nello
-stesso verso.</p>
+<p>I due lati della spira perpendicolari al campo sono percorsi da correnti di verso opposto. Su di essi agiscono quindi due forze magnetiche uguali e opposte, che formano una coppia e mettono in rotazione la spira.</p>
 
-<div class="tre-fig">
+<p>Se il verso della corrente non cambiasse, le forze manterrebbero sempre la stessa direzione e lo stesso verso. Dopo la posizione verticale, in cui il piano della spira è perpendicolare al campo, la coppia cambierebbe verso e la spira oscillerebbe avanti e indietro attorno a quella posizione.</p>
+
+<p>Il commutatore inverte la corrente proprio quando la spira passa per la posizione verticale. In questo modo la coppia mantiene sempre lo stesso verso e la spira continua a ruotare.</p>
 
 <div class="fig">
-<svg viewBox="0 0 150 175" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="m25g1" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--verde)"/></marker>
-<marker id="m25r1" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--rosso)"/></marker>
-<marker id="m25b1" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--blu)"/></marker></defs>
-<rect x="5" y="45" width="30" height="65" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<text x="20" y="82" text-anchor="middle" font-family="var(--sans)" font-size="12">N</text>
-<rect x="115" y="45" width="30" height="65" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<text x="130" y="82" text-anchor="middle" font-family="var(--sans)" font-size="12">S</text>
-<line x1="38" y1="62" x2="112" y2="62" stroke="var(--blu)" stroke-width="1.2" marker-end="url(#m25b1)"/>
-<line x1="38" y1="92" x2="112" y2="92" stroke="var(--blu)" stroke-width="1.2" marker-end="url(#m25b1)"/>
-<line x1="65" y1="45" x2="65" y2="110" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="85" y1="45" x2="85" y2="110" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="65" y1="88" x2="65" y2="68" stroke="var(--verde)" stroke-width="2" marker-end="url(#m25g1)"/>
-<line x1="85" y1="68" x2="85" y2="88" stroke="var(--verde)" stroke-width="2" marker-end="url(#m25g1)"/>
-<line x1="65" y1="45" x2="65" y2="25" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m25r1)"/>
-<line x1="85" y1="110" x2="85" y2="130" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m25r1)"/>
-<text x="75" y="150" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--grigio)">posizione iniziale</text>
-</svg>
-<p class="did">$i$ (verde) e $F$ (rosso) nella posizione di partenza.</p>
-</div>
-
-<div class="fig">
-<svg viewBox="0 0 150 175" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="m25g2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--verde)"/></marker>
-<marker id="m25r2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--rosso)"/></marker>
-<marker id="m25b2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--blu)"/></marker></defs>
-<rect x="5" y="45" width="30" height="65" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<text x="20" y="82" text-anchor="middle" font-family="var(--sans)" font-size="12">N</text>
-<rect x="115" y="45" width="30" height="65" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<text x="130" y="82" text-anchor="middle" font-family="var(--sans)" font-size="12">S</text>
-<line x1="38" y1="62" x2="112" y2="62" stroke="var(--blu)" stroke-width="1.2" marker-end="url(#m25b2)"/>
-<line x1="38" y1="92" x2="112" y2="92" stroke="var(--blu)" stroke-width="1.2" marker-end="url(#m25b2)"/>
-<line x1="50" y1="50" x2="100" y2="105" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="50" cy="50" r="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<circle cx="100" cy="105" r="4" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="50" y1="50" x2="65" y2="35" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m25r2)"/>
-<line x1="100" y1="105" x2="85" y2="120" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m25r2)"/>
-<text x="75" y="150" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--grigio)">posizione verticale</text>
-</svg>
-<p class="did">La spira passa per la posizione verticale.</p>
-</div>
-
-<div class="fig">
-<svg viewBox="0 0 150 175" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="m25g3" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--verde)"/></marker>
-<marker id="m25r3" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--rosso)"/></marker>
-<marker id="m25b3" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--blu)"/></marker></defs>
-<rect x="5" y="45" width="30" height="65" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<text x="20" y="82" text-anchor="middle" font-family="var(--sans)" font-size="12">N</text>
-<rect x="115" y="45" width="30" height="65" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<text x="130" y="82" text-anchor="middle" font-family="var(--sans)" font-size="12">S</text>
-<line x1="38" y1="62" x2="112" y2="62" stroke="var(--blu)" stroke-width="1.2" marker-end="url(#m25b3)"/>
-<line x1="38" y1="92" x2="112" y2="92" stroke="var(--blu)" stroke-width="1.2" marker-end="url(#m25b3)"/>
-<line x1="65" y1="45" x2="65" y2="110" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="85" y1="45" x2="85" y2="110" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="65" y1="68" x2="65" y2="88" stroke="var(--verde)" stroke-width="2" marker-end="url(#m25g3)"/>
-<line x1="85" y1="88" x2="85" y2="68" stroke="var(--verde)" stroke-width="2" marker-end="url(#m25g3)"/>
-<line x1="65" y1="45" x2="65" y2="25" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m25r3)"/>
-<line x1="85" y1="110" x2="85" y2="130" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m25r3)"/>
-<text x="75" y="18" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--verde)">inverto la corrente</text>
-<text x="75" y="150" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--grigio)">dopo il commutatore</text>
-</svg>
-<p class="did">La corrente si inverte, la forza resta nello stesso verso.</p>
-</div>
-
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 25 introduce mutua induzione e autoinduzione: come la corrente in un circuito genera
-una fem indotta in un circuito vicino, o in se stesso.</li>
-</ul>
+<svg id="fig-b" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Spira vista lungo l'asse di rotazione fra i poli, con le forze sui due lati e il verso della corrente"></svg>
+<div class="cursore"><label for="cur-b">rotazione</label><input id="cur-b" type="range" min="0" max="360" step="5" value="30"><output id="val-b" for="cur-b"></output></div>
+<p class="did">Con il cursore si fa ruotare la spira, vista lungo l'asse di rotazione: le forze sui due lati sono in rosso e la corrente si inverte ogni volta che la spira passa per la posizione verticale.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../24-l-alternatore/index.html"><span class="dir">&larr; Precedente</span><span class="tit">L'alternatore</span></a><a class="successiva" href="../26-mutua-induzione-e-autoinduzione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Mutua induzione e autoinduzione</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 24</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  function poli(S,y0,h,xn,xs,w){
+    el(S,'rect',{x:xn,y:y0,width:w,height:h,rx:3,fill:'var(--rosso)'});
+    T(S,xn+w/2,y0+h/2+5,'N',{'text-anchor':'middle','font-size':14,'font-weight':700,fill:'#fff'});
+    el(S,'rect',{x:xs,y:y0,width:w,height:h,rx:3,fill:'var(--blu)'});
+    T(S,xs+w/2,y0+h/2+5,'S',{'text-anchor':'middle','font-size':14,'font-weight':700,fill:'#fff'});
+  }
+  /* lato della spira visto di sezione: s = +1 corrente uscente (punto), -1 entrante (croce), 0 nessun simbolo */
+  function lato(p,x,y,s){
+    el(p,'circle',{cx:f(x),cy:f(y),r:9,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+    if(s>0)el(p,'circle',{cx:f(x),cy:f(y),r:2.6,fill:'var(--inchiostro)'});
+    else if(s<0){el(p,'line',{x1:f(x-5),y1:f(y-5),x2:f(x+5),y2:f(y+5),stroke:'var(--inchiostro)','stroke-width':1.6});
+      el(p,'line',{x1:f(x-5),y1:f(y+5),x2:f(x+5),y2:f(y-5),stroke:'var(--inchiostro)','stroke-width':1.6});}
+  }
+
+  /* Figura A: schema del motore (statico) */
+  (function(){
+    var S=document.getElementById('fig-a'); if(!S)return;
+    poli(S,40,120,40,340,40);
+    [62,88,112,138].forEach(function(y){
+      el(S,'line',{x1:84,y1:y,x2:334,y2:y,stroke:'var(--blu)','stroke-width':1,opacity:.6});
+      punta(S,326,y,1,0,'var(--blu)',5);
+    });
+    T(S,300,32,'B',{'font-size':13,'font-style':'italic','font-weight':700,fill:'var(--blu)'});
+    /* spira di taglio, inclinata */
+    var a=-60*Math.PI/180, R=48, cx=210, cy=100, ax=R*Math.cos(a), ay=R*Math.sin(a);
+    el(S,'line',{x1:f(cx-ax),y1:f(cy-ay),x2:f(cx+ax),y2:f(cy+ay),stroke:'var(--inchiostro)','stroke-width':3.2,'stroke-linecap':'round'});
+    lato(S,cx+ax,cy+ay,0); lato(S,cx-ax,cy-ay,0);
+    el(S,'circle',{cx:cx,cy:cy,r:2.2,fill:'var(--inchiostro)'});
+    /* collegamenti al commutatore */
+    el(S,'path',{d:'M'+f(cx-ax)+','+f(cy-ay+9)+' C'+f(cx-ax-8)+',190 196,200 198,215',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'path',{d:'M'+f(cx+ax)+','+f(cy+ay+9)+' C'+f(cx+ax+30)+',150 226,200 222,215',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'path',{d:'M188,226 A12,12 0 0 1 206,215 L206,226 Z',fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'path',{d:'M232,226 A12,12 0 0 0 214,215 L214,226 Z',fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.4});
+    T(S,250,222,'commutatore',{'font-size':11,fill:'var(--grigio)'});
+    el(S,'line',{x1:196,y1:226,x2:196,y2:256,stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'line',{x1:224,y1:226,x2:224,y2:256,stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'line',{x1:196,y1:256,x2:190,y2:256,stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'line',{x1:224,y1:256,x2:230,y2:256,stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(S,'circle',{cx:210,cy:262,r:20,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    var d='';for(var k=0;k<=30;k++){var x=198+24*k/30,y=262-6*Math.sin(2*Math.PI*k/30);d+=(k?' L':'M')+f(x)+','+f(y);}
+    el(S,'path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8});
+    T(S,240,280,'generatore di corrente alternata',{'font-size':11,fill:'var(--grigio)'});
+  })();
+
+  /* Figura B: spira vista lungo l'asse. B orizzontale da N a S (verso +x).
+     Lato A in (cos φ, sin φ) (rotazione antioraria). Con corrente uscente in A la forza su A è verso l'alto,
+     su B verso il basso; momento direttamente proporzionale a cos φ. Il commutatore impone corrente uscente in A per cos φ > 0,
+     entrante per cos φ < 0, quindi il momento, direttamente proporzionale a |cos φ|, ha sempre verso antiorario. */
+  (function(){
+    var S=document.getElementById('fig-b'), c=document.getElementById('cur-b'), o=document.getElementById('val-b');
+    if(!S||!c)return;
+    var cx=210, cy=130, R=62, L=46;
+    poli(S,55,150,30,350,40);
+    [75,105,155,185].forEach(function(y){
+      el(S,'line',{x1:74,y1:y,x2:344,y2:y,stroke:'var(--blu)','stroke-width':1,opacity:.45});
+      punta(S,336,y,1,0,'var(--blu)',5);
+    });
+    T(S,318,48,'B',{'font-size':13,'font-style':'italic','font-weight':700,fill:'var(--blu)'});
+    el(S,'circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 4',opacity:.6});
+    /* verso di rotazione antiorario, fuori dalla traiettoria */
+    var qx=110, qy=28, qr=10, b1=-30*Math.PI/180, b2=240*Math.PI/180;
+    el(S,'path',{d:'M'+f(qx+qr*Math.cos(b1))+','+f(qy-qr*Math.sin(b1))+' A'+qr+','+qr+' 0 1 0 '+f(qx+qr*Math.cos(b2))+','+f(qy-qr*Math.sin(b2)),fill:'none',stroke:'var(--grigio)','stroke-width':1.4});
+    punta(S,qx+qr*Math.cos(b2),qy-qr*Math.sin(b2),-Math.sin(b2),-Math.cos(b2),'var(--grigio)',5);
+    T(S,qx+18,qy+4,'verso di rotazione',{'font-size':11,fill:'var(--grigio)'});
+    var g=el(S,'g',{});
+    function dis(){
+      var t=+c.value, p=t*Math.PI/180, co=Math.cos(p);
+      var vert=Math.abs(co)<0.02, s=vert?0:(co>0?1:-1);
+      vuota(g);
+      var xa=cx+R*co, ya=cy-R*Math.sin(p), xb=cx-R*co, yb=cy+R*Math.sin(p);
+      el(g,'line',{x1:f(xb),y1:f(yb),x2:f(xa),y2:f(ya),stroke:'var(--inchiostro)','stroke-width':3.2,'stroke-linecap':'round'});
+      el(g,'circle',{cx:cx,cy:cy,r:2.2,fill:'var(--inchiostro)'});
+      lato(g,xa,ya,s); lato(g,xb,yb,-s);
+      if(!vert){
+        freccia(g,xa,ya-s*11,xa,ya-s*(11+L),'var(--rosso)',2.4,8);
+        freccia(g,xb,yb+s*11,xb,yb+s*(11+L),'var(--rosso)',2.4,8);
+        T(g,xa+12,ya-s*(11+L/2)+4,'F',{'font-size':13,'font-style':'italic','font-weight':700,fill:'var(--rosso)'});
+        T(g,xb-12,yb+s*(11+L/2)+4,'F',{'text-anchor':'end','font-size':13,'font-style':'italic','font-weight':700,fill:'var(--rosso)'});
+      }
+      var msg;
+      if(vert)msg='posizione verticale: coppia nulla, <span class="ok">la corrente si inverte</span>';
+      else msg='coppia <span class="ok">antioraria</span>';
+      o.innerHTML='angolo = '+t+'°; '+msg;
+    }
+    c.addEventListener('input',function(){dis();});dis();
+  })();
+})();
+</script>
 </body>
 </html>
