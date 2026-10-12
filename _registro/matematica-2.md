@@ -216,6 +216,7 @@
 - Parole: ~250 su 1 pagina di traccia (pag. 53)
 - Rettifica: nessuna, la traccia era corretta
 - Aggiunta: nessuna oltre alle frasi di collegamento fra i passaggi già presenti
+- Revisione: titolo invariato. Tolto il sommario; introduzione di una frase; titoletti «L'equazione y = mx» e «Casi particolari» tenuti; equazione e nome del coefficiente angolare in .def; pendenza detta come «quando x aumenta di 1, y varia di m»; casi del segno di m e rette con nome in elenco; asse y in .nota. Aggiunta una frase: la bisettrice del secondo e quarto quadrante è formata dai punti con ascissa e ordinata opposte. Nessuna correzione. Impaginazione a quaderno. Figure rifatte in SVG calcolato da script: fascio di rette per l'origine (m = ±1/2, ±1, ±3 e m = 0); retta y = mx con cursore su m (da −3 a 3) e triangolo 1–m, equazione e «la retta sale/scende» a fianco; bisettrici e assi. Nessun esempio, nessuna figura decorativa.
 
 ## Unità 26 — Equazione generale della retta: forma esplicita e implicita
 - Parole: 372 su 2 pagine di traccia (pagg. 54–55 di matematica-2.pdf)

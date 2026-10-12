@@ -5,20 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rette per l'origine e coefficiente angolare — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:22px 0}
-.interattivo p{margin:0 0 10px;font-family:var(--sans);font-size:.92rem;color:#4a5a6d}
-.interattivo input[type=range]{width:100%}
-.interattivo .valore{font-family:var(--sans);font-size:.95rem;color:var(--blu);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:12em}
+.ok{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -28,79 +53,55 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Piano cartesiano e retta &middot; Unità 25</p>
   <h1>Rette per l'origine e coefficiente angolare</h1>
-  <p class="sommario">Le rette più semplici da scrivere sono quelle che passano per l'origine: il
-  punto $(0,0)$ è già fissato, e resta da dire solo quanto la retta è inclinata. Vediamo che
-  equazione hanno e che cosa rappresenta il numero che le distingue.</p>
 </header>
+
+<p>L'unità presenta l'equazione delle rette che passano per l'origine e il significato geometrico del numero che le distingue.</p>
 
 <h2>L'equazione $y=mx$</h2>
 
-<div class="regola"><p>Ogni retta passante per l'origine, tranne l'asse $y$, ha equazione
-$$y = mx, \qquad m \in \mathbb{R}$$</p></div>
-
-<p>Il numero $m$ si chiama <strong>coefficiente angolare</strong> e indica la pendenza della
-retta: quanto cresce (o diminuisce) $y$ per ogni unità di $x$. Se $m&gt;0$ la retta sale da sinistra
-a destra, e più $m$ è grande più la salita è ripida. Se $m&lt;0$ la retta scende. Se $m=0$ la retta
-è orizzontale e coincide con l'asse $x$.</p>
-
-<div class="fig">
-<svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<defs>
-<marker id="fr-x" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#16283d"/></marker>
-<marker id="fr-y" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#16283d"/></marker>
-</defs>
-<line x1="20" y1="120" x2="300" y2="120" stroke="#16283d" stroke-width="1.4" marker-end="url(#fr-x)"/>
-<line x1="160" y1="220" x2="160" y2="15" stroke="#16283d" stroke-width="1.4" marker-end="url(#fr-y)"/>
-<text x="292" y="112" font-size="13" fill="#16283d">x</text>
-<text x="168" y="24" font-size="13" fill="#16283d">y</text>
-<line x1="160" y1="120" x2="290" y2="45" stroke="#b3392f" stroke-width="1.8"/>
-<line x1="160" y1="120" x2="250" y2="20" stroke="#b3392f" stroke-width="1.8"/>
-<line x1="160" y1="120" x2="200" y2="18" stroke="#b3392f" stroke-width="1.8"/>
-<line x1="20" y1="120" x2="300" y2="120" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="160" y1="120" x2="290" y2="195" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="160" y1="120" x2="250" y2="220" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="160" y1="120" x2="200" y2="222" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="245" y="30" font-size="12" fill="#b3392f">m &gt; 0</text>
-<text x="215" y="215" font-size="12" fill="#2f6b4f">m &lt; 0</text>
-<text x="240" y="132" font-size="12" fill="#1f4e79">m = 0</text>
-</svg>
+<div class="def"><span class="et">Rette per l'origine</span>
+<p>Ogni retta passante per l'origine, tranne l'asse $y$, ha equazione</p>
+<p class="eq">$$y = mx \qquad m \in \mathbb{R}$$</p>
+<p>Il numero $m$ si chiama <strong>coefficiente angolare</strong>.</p>
 </div>
 
-<div class="interattivo">
-<p>Muovi il cursore: la retta ruota attorno all'origine e la sua equazione cambia insieme al
-valore di $m$.</p>
-<input type="range" id="slider-m" min="-3" max="3" step="0.1" value="1">
-<div class="valore">m = <span id="val-m">1.0</span> &nbsp;&mdash;&nbsp; y = <span id="val-eq">1.0</span> x</div>
-<svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="120" x2="300" y2="120" stroke="#16283d" stroke-width="1.4"/>
-<line x1="160" y1="220" x2="160" y2="15" stroke="#16283d" stroke-width="1.4"/>
-<text x="292" y="112" font-size="13" fill="#16283d">x</text>
-<text x="168" y="24" font-size="13" fill="#16283d">y</text>
-<line id="retta-m" x1="20" y1="120" x2="300" y2="120" stroke="#b3392f" stroke-width="2.2"/>
-</svg>
+<p>Il coefficiente angolare indica la pendenza della retta: quando $x$ aumenta di $1$, $y$ varia di $m$. Il segno di $m$ determina l'andamento della retta:</p>
+
+<ul>
+<li>se $m&gt;0$, la retta sale da sinistra a destra, e la salita è tanto più ripida quanto più $m$ è grande;</li>
+<li>se $m&lt;0$, la retta scende da sinistra a destra;</li>
+<li>se $m=0$, la retta è orizzontale e coincide con l'asse $x$.</li>
+</ul>
+
+<div class="fig">
+<svg id="g-fascio" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Rette per l'origine con coefficiente angolare positivo, negativo e nullo"></svg>
+<p class="did">Le rette con $m$ positivo salgono, quelle con $m$ negativo scendono e quella con $m=0$ è l'asse $x$.</p>
+</div>
+
+<div class="fig">
+<svg id="g-m" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Retta y = mx che ruota attorno all'origine al variare di m"></svg>
+<div class="cursore"><label for="c-m">$m$</label><input id="c-m" type="range" min="-3" max="3" step="0.25" value="1"><span class="val" id="v-m"></span></div>
+<p class="did">Al variare di $m$ la retta ruota attorno all'origine; il triangolo mostra che, quando $x$ aumenta di $1$, $y$ varia di $m$.</p>
 </div>
 
 <h2>Casi particolari</h2>
 
-<p>Alcune rette per l'origine ricorrono così spesso da avere un nome. La bisettrice del primo e
-terzo quadrante è $y=x$ ($m=1$): passa per i punti con ascissa e ordinata uguali. La bisettrice
-del secondo e quarto quadrante è $y=-x$ ($m=-1$). L'asse $x$ stesso è la retta $y=0$ ($m=0$).
-L'asse $y$, invece, è la retta $x=0$: non si può scrivere nella forma $y=mx$, perché nessun
-valore di $m$ dà una retta verticale — la sua pendenza non è definita.</p>
+<p>Alcune rette per l'origine hanno un nome:</p>
 
-<div class="fig">
-<svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="120" x2="300" y2="120" stroke="#b3392f" stroke-width="2"/>
-<line x1="160" y1="220" x2="160" y2="15" stroke="#b3392f" stroke-width="2"/>
-<line x1="60" y1="220" x2="260" y2="20" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="60" y1="20" x2="260" y2="220" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="266" y="24" font-size="12" fill="#2f6b4f">y = x  (m=1)</text>
-<text x="200" y="235" font-size="12" fill="#2f6b4f">y = &minus;x  (m=&minus;1)</text>
-<text x="240" y="132" font-size="12" fill="#b3392f">y = 0</text>
-<text x="168" y="30" font-size="12" fill="#b3392f">x = 0</text>
-</svg>
+<ul>
+<li>la bisettrice del primo e del terzo quadrante ha equazione $y=x$ ($m=1$) ed è formata dai punti con ascissa e ordinata uguali;</li>
+<li>la bisettrice del secondo e del quarto quadrante ha equazione $y=-x$ ($m=-1$) ed è formata dai punti con ascissa e ordinata opposte;</li>
+<li>l'asse $x$ ha equazione $y=0$ ($m=0$).</li>
+</ul>
+
+<div class="nota"><span class="et">L'asse y</span>
+<p>L'asse $y$ ha equazione $x=0$ e non si può scrivere nella forma $y=mx$: nessun valore di $m$ dà una retta verticale, perché la pendenza di una retta verticale non è definita.</p>
 </div>
 
+<div class="fig">
+<svg id="g-casi" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Le bisettrici y = x e y = −x e gli assi y = 0 e x = 0"></svg>
+<p class="did">Le due bisettrici dei quadranti e i due assi cartesiani passano tutti per l'origine.</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../02-proporzionalita-diretta-e-funzioni-lineari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Le funzioni lineari</span></a><a class="successiva" href="../28-equazione-generale-della-retta-forma-esplicita-e-implicita/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazione generale della retta: forma esplicita e implicita</span></a></nav>
 <footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 25</p></footer>
@@ -108,23 +109,124 @@ valore di $m$ dà una retta verticale — la sua pendenza non è definita.</p>
 </div>
 <script>
 (function(){
-  var slider = document.getElementById('slider-m');
-  var valM = document.getElementById('val-m');
-  var valEq = document.getElementById('val-eq');
-  var retta = document.getElementById('retta-m');
-  var cx = 160, cy = 120, scale = 40;
-  function aggiorna(){
-    var m = parseFloat(slider.value);
-    valM.textContent = m.toFixed(1);
-    valEq.textContent = m.toFixed(1);
-    var dx = 3.5, dy = m*3.5;
-    var x1 = cx - dx*scale, y1 = cy + dy*scale;
-    var x2 = cx + dx*scale, y2 = cy - dy*scale;
-    retta.setAttribute('x1', x1); retta.setAttribute('y1', y1);
-    retta.setAttribute('x2', x2); retta.setAttribute('y2', y2);
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+Piano.prototype.retta=function(m,a,dove){var X=this.X,Y=this.Y,x1=this.xr[0]-1,x2=this.xr[1]+1;
+  return this.add(el('line',Object.assign({x1:X(x1),y1:Y(m*x1),x2:X(x2),y2:Y(m*x2),'stroke-width':2},a)),dove);};
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+var M={l:20,r:20,t:20,b:20}, XR=[-3.6,3.6], YR=[-3.1,3.1];
+
+/* ---------- fascio: m > 0, m < 0, m = 0 ---------- */
+(function(){
+  var svg=document.getElementById('g-fascio'); if(!svg)return;
+  var P=new Piano(svg,XR,YR,M); P.assi([],[]);
+  [0.5,1,3].forEach(function(m){P.retta(m,{stroke:'var(--blu)'},'sopra');});
+  [-0.5,-1,-3].forEach(function(m){P.retta(m,{stroke:'var(--rosso)'},'sopra');});
+  P.retta(0,{stroke:'var(--verde)','stroke-width':3},'sopra');
+  P.add(txt(P.X(1.35),P.Y(2.6),'m > 0',{'font-size':13,fill:'var(--blu)'}),'testo');
+  P.add(txt(P.X(1.35),P.Y(-2.85),'m < 0',{'font-size':13,fill:'var(--rosso)'}),'testo');
+  P.add(txt(P.X(-3.3),P.Y(0)-8,'m = 0',{'font-size':13,fill:'var(--verde)'}),'testo');
+})();
+
+/* ---------- retta y = mx con cursore su m ---------- */
+(function(){
+  var svg=document.getElementById('g-m'),cur=document.getElementById('c-m'),v=document.getElementById('v-m'); if(!svg)return;
+  var P=new Piano(svg,XR,YR,M); P.assi([-3,-2,-1,1,2,3],[-3,-2,-1,1,2,3]);
+  var X=P.X,Y=P.Y;
+  var r=P.add(el('line',{stroke:'var(--blu)','stroke-width':2.4}),'sopra');
+  var oriz=P.add(el('line',{stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-dasharray':'5 4'}),'sopra');
+  var vert=P.add(el('line',{stroke:'var(--rosso)','stroke-width':2.6}),'sopra');
+  var pt=P.add(el('circle',{r:4.5,fill:'var(--rosso)'}),'sopra');
+  var t1=P.add(txt(0,0,'1',{'text-anchor':'middle','font-size':12,fill:'var(--inchiostro)'}),'testo');
+  var tm=P.add(txt(0,0,'m',{'font-size':13,'font-style':'italic',fill:'var(--rosso)'}),'testo');
+  function eq(m){return m===0?'y = 0':m===1?'y = x':m===-1?'y = −x':'y = '+n(m)+'x';}
+  function dis(){
+    var m=+cur.value, x1=XR[0]-1, x2=XR[1]+1;
+    set(r,{x1:X(x1),y1:Y(m*x1),x2:X(x2),y2:Y(m*x2)});
+    set(oriz,{x1:X(0),y1:Y(0),x2:X(1),y2:Y(0)});
+    set(vert,{x1:X(1),y1:Y(0),x2:X(1),y2:Y(m)});
+    set(pt,{cx:X(1),cy:Y(m)});
+    set(t1,{x:X(0.5),y:m>=0?Y(0)+16:Y(0)-7});
+    set(tm,{x:X(1)+7,y:Y(m/2)+5}); tm.style.display=m===0?'none':'';
+    var stato=m>0?'la retta sale':m<0?'la retta scende':'retta orizzontale';
+    v.innerHTML='m = '+n(m)+' &nbsp; '+eq(m)+' &nbsp; <span class="ok">'+stato+'</span>';
   }
-  slider.addEventListener('input', aggiorna);
-  aggiorna();
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+
+/* ---------- casi particolari ---------- */
+(function(){
+  var svg=document.getElementById('g-casi'); if(!svg)return;
+  var P=new Piano(svg,XR,YR,M); P.assi([],[]);
+  var X=P.X,Y=P.Y;
+  P.retta(1,{stroke:'var(--blu)'},'sopra');
+  P.retta(-1,{stroke:'var(--rosso)'},'sopra');
+  P.add(el('line',{x1:X(XR[0]),y1:Y(0),x2:X(XR[1]),y2:Y(0),stroke:'var(--verde)','stroke-width':3}),'sopra');
+  P.add(el('line',{x1:X(0),y1:Y(YR[0]),x2:X(0),y2:Y(YR[1]),stroke:'var(--verde)','stroke-width':3}),'sopra');
+  P.add(txt(X(2.75),Y(2.25),'y = x',{'font-size':13,fill:'var(--blu)'}),'testo');
+  P.add(txt(X(-2.75),Y(2.25),'y = −x',{'font-size':13,fill:'var(--rosso)','text-anchor':'end'}),'testo');
+  P.add(txt(X(2.6),Y(0)-8,'y = 0',{'font-size':13,fill:'var(--verde)'}),'testo');
+  P.add(txt(X(0)+8,Y(-2.6),'x = 0',{'font-size':13,fill:'var(--verde)'}),'testo');
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
