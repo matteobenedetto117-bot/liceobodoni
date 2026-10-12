@@ -5,25 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Il lavoro di una forza — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.casi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
-.casi div.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px;text-align:center}
-.casi svg{max-width:100%;height:auto}
-.casi p{font-family:var(--sans);font-size:.85rem;margin:8px 0 0;color:#4a5a6d}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:24px 0}
-.interattivo label{font-family:var(--sans);font-size:.9rem;color:#33465c;display:block;margin-bottom:8px}
-.interattivo input[type=range]{width:100%}
-.interattivo .valore{font-family:var(--sans);font-size:1rem;margin-top:10px;color:var(--blu);font-weight:600}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-@media(max-width:640px){.casi{grid-template-columns:1fr}}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -32,159 +55,156 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Lavoro ed energia &middot; Unità 23</p>
   <h1>Il lavoro di una forza</h1>
-  <p class="sommario">Introduciamo una nuova grandezza scalare che lega la
-  forza allo spostamento che essa produce: il lavoro. Il suo valore dipende
-  non solo dall'intensità della forza ma anche dall'angolo con cui questa
-  agisce rispetto al movimento.</p>
 </header>
 
+<p>Il lavoro è la grandezza che lega una forza allo spostamento del corpo su cui agisce. Il suo valore dipende dall'intensità della forza, dallo spostamento e dall'angolo fra i due vettori.</p>
+
 <h2>Forza e spostamento nella stessa direzione</h2>
-
-<p>Quando una forza costante $\vec F$ agisce nella stessa direzione e nello
-stesso verso dello spostamento $\vec s$ che essa produce, il lavoro compiuto
-è il prodotto dei moduli dei due vettori:</p>
-
-$$L = F\cdot s \qquad\text{(lavoro)}$$
+<p>Se una forza costante $\vec F$ agisce nella stessa direzione e nello stesso verso dello spostamento $\vec s$, il lavoro compiuto dalla forza è il prodotto dei moduli dei due vettori:</p>
+<p class="eq">$$L = F\,s$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u33r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="u33v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="30" y1="130" x2="390" y2="130" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="80" y="70" width="70" height="55" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="150" y1="88" x2="230" y2="88" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#u33r)"/>
-<text x="188" y="78" font-size="15" fill="var(--rosso)" font-family="var(--sans)">F&#8407;</text>
-<line x1="150" y1="112" x2="230" y2="112" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#u33v)"/>
-<text x="188" y="130" font-size="15" fill="var(--verde)" font-family="var(--sans)">s&#8407;</text>
-</svg>
-<p class="did">Forza e spostamento hanno la stessa direzione e lo stesso verso.</p>
+<svg id="g-par" viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Blocco su un piano con la forza e lo spostamento paralleli e concordi"></svg>
+<p class="did">La forza (rossa) e lo spostamento (verde) hanno la stessa direzione e lo stesso verso.</p>
 </div>
 
-<p>Il lavoro è una grandezza scalare, non un vettore. Si misura in
-newton per metro, unità che prende il nome di joule (J):</p>
-
-$$1\,\text{J} = 1\,\text{N}\cdot\text{m} = 1\,\dfrac{\text{kg}\cdot\text{m}^2}{\text{s}^2}$$
+<p>Il lavoro è una grandezza scalare, non un vettore. Si misura in newton per metro (N·m), unità che prende il nome di joule (J):</p>
+<p class="eq">$$1\ \text{J} = 1\ \text{N}\cdot\text{m} = 1\ \frac{\text{kg}\cdot\text{m}^2}{\text{s}^2}$$</p>
 
 <h2>Il prodotto scalare</h2>
-
-<p>Per trattare il caso generale, in cui forza e spostamento non sono
-paralleli, serve il prodotto scalare fra due vettori $\vec a$ e $\vec b$: è
-il prodotto dei loro moduli per il coseno dell'angolo $\theta$ compreso fra
-loro, ed è a sua volta uno scalare:</p>
-
-$$\vec a\cdot\vec b = |\vec a|\,|\vec b|\cos\theta = ab\cos\theta$$
+<div class="def"><span class="et">Definizione</span>
+<p>Il prodotto scalare di due vettori $\vec a$ e $\vec b$ è il prodotto dei loro moduli per il coseno dell'angolo $\theta$ compreso fra i due vettori. Il risultato è uno scalare:</p>
+<p class="eq">$$\vec a\cdot\vec b = a\,b\cos\theta$$</p>
+</div>
 
 <h2>Definizione generale del lavoro</h2>
-
-<p>Quando la forza $\vec F$ forma un angolo $\theta$ con lo spostamento
-$\vec s$, il lavoro è il prodotto scalare fra i due vettori:</p>
-
-$$L = \vec F\cdot\vec s = FS\cos\theta$$
-
-<p>Conviene scomporre la forza in una componente $F_x$ parallela allo
-spostamento e una componente $F_y$ perpendicolare. Solo $F_x$ produce
-movimento nella direzione di $\vec s$; $F_y$ non vi contribuisce:</p>
-
-$$F_x = F\cos\theta \qquad\qquad L = F_x\cdot s$$
+<div class="def"><span class="et">Definizione</span>
+<p>Il lavoro compiuto da una forza costante $\vec F$ durante uno spostamento rettilineo $\vec s$ è il prodotto scalare fra la forza e lo spostamento:</p>
+<p class="eq principio">$$L = \vec F\cdot\vec s = F\,s\cos\theta$$</p>
+</div>
+<p>Per capire il significato della formula si scompone la forza in una componente $F_x$ parallela allo spostamento e in una componente $F_y$ perpendicolare. Solo la componente parallela compie lavoro, mentre quella perpendicolare non contribuisce:</p>
+<p class="eq">$$F_x = F\cos\theta \qquad\qquad L = F_x\,s$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u33r2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="u33v2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-<marker id="u33g2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="30" y1="190" x2="390" y2="190" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<rect x="90" y="150" width="70" height="40" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="125" y1="170" x2="270" y2="80" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#u33r2)"/>
-<text x="262" y="72" font-size="15" fill="var(--rosso)" font-family="var(--sans)">F&#8407;</text>
-<line x1="125" y1="170" x2="235" y2="170" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#u33g2)"/>
-<text x="230" y="188" font-size="14" fill="var(--blu)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">x</tspan></text>
-<line x1="125" y1="170" x2="125" y2="90" stroke="#9aa7b8" stroke-width="2" marker-end="url(#u33v2)"/>
-<text x="132" y="95" font-size="14" fill="#4a5a6d" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="10">y</tspan></text>
-<path d="M155,170 A30,30 0 0 0 145,146" fill="none" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="160" y="152" font-size="13" font-family="var(--sans)">&#952;</text>
-<line x1="160" y1="190" x2="300" y2="190" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#u33v2)"/>
-<text x="225" y="208" font-size="14" fill="var(--verde)" font-family="var(--sans)">s&#8407;</text>
-</svg>
-<p class="did">La componente $F_y$, perpendicolare allo spostamento, non
-compie lavoro; solo $F_x=F\cos\theta$ vi contribuisce.</p>
+<svg id="g-ang" viewBox="40 0 340 215" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Forza inclinata di un angolo theta rispetto allo spostamento, con le sue componenti parallela e perpendicolare"></svg>
+<div class="cursore"><label for="c-ang">angolo $\theta$</label><input id="c-ang" type="range" min="0" max="180" step="1" value="40"><span class="val" id="v-ang"></span></div>
+<p class="did">La forza $\vec F$ (rossa) ha modulo costante; la componente $F_x$ (blu) è quella che compie lavoro, la componente $F_y$ (grigia) non ne compie.</p>
 </div>
 
 <h2>I tre casi limite</h2>
+<p>Il valore e il segno del lavoro dipendono dall'angolo $\theta$ fra la forza e lo spostamento:</p>
+<ul>
+<li>se $\theta = 0$, si ha $\cos\theta = 1$ e $L = F\,s$: il lavoro è positivo ed è detto <strong>lavoro motore</strong>;</li>
+<li>se $\theta = 90°$, si ha $\cos\theta = 0$ e $L = 0$: una forza perpendicolare allo spostamento non compie lavoro;</li>
+<li>se $\theta = 180°$, si ha $\cos\theta = -1$ e $L = -F\,s$: il lavoro è negativo ed è detto <strong>lavoro resistente</strong>.</li>
+</ul>
 
-<p>Il segno e il valore del lavoro dipendono dall'angolo $\theta$ fra forza
-e spostamento:</p>
-
-<div class="casi">
-<div class="caso">
-<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="c1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker></defs>
-<rect x="35" y="35" width="35" height="25" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="70" y1="40" x2="115" y2="40" stroke="var(--rosso)" stroke-width="2" marker-end="url(#c1)"/>
-<line x1="70" y1="52" x2="115" y2="52" stroke="var(--verde)" stroke-width="2" marker-end="url(#c1)"/>
-</svg>
-<p>$\theta=0$: $\cos0=1$<br>$L=FS$ (lavoro motore)</p>
+<div class="fig">
+<svg id="g-casi" viewBox="0 0 420 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="I tre casi: forza concorde, perpendicolare e opposta allo spostamento"></svg>
+<div class="did-parti" style="--n:3"><p class="did">Con $\theta=0$ il lavoro è $F\,s$.</p><p class="did">Con $\theta=90°$ il lavoro è nullo.</p><p class="did">Con $\theta=180°$ il lavoro è $-F\,s$.</p></div>
 </div>
-<div class="caso">
-<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="c2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker></defs>
-<rect x="52" y="40" width="35" height="25" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="69" y1="40" x2="69" y2="12" stroke="var(--rosso)" stroke-width="2" marker-end="url(#c2)"/>
-<line x1="87" y1="52" x2="125" y2="52" stroke="var(--verde)" stroke-width="2" marker-end="url(#c2)"/>
-</svg>
-<p>$\theta=90°$: $\cos90°=0$<br>$L=0$</p>
-</div>
-<div class="caso">
-<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="c3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker></defs>
-<rect x="55" y="35" width="35" height="25" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="55" y1="40" x2="15" y2="40" stroke="var(--rosso)" stroke-width="2" marker-end="url(#c3)"/>
-<line x1="15" y1="52" x2="60" y2="52" stroke="var(--verde)" stroke-width="2" marker-end="url(#c3)"/>
-</svg>
-<p>$\theta=180°$: $\cos180°=-1$<br>$L=-FS$ (lavoro resistente)</p>
-</div>
-</div>
-
-<div class="interattivo">
-<label for="angolo">Angolo $\theta$ fra forza e spostamento: <span id="gradi">45°</span></label>
-<input type="range" id="angolo" min="0" max="180" step="1" value="45">
-<svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg" id="svgint">
-<defs><marker id="ci" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker></defs>
-<line x1="20" y1="110" x2="280" y2="110" stroke="#9aa7b8" stroke-width="1.4" stroke-dasharray="4 3"/>
-<rect x="90" y="90" width="40" height="30" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line id="freccia" x1="110" y1="105" x2="180" y2="105" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#ci)"/>
-</svg>
-<p class="valore">L = F&middot;s&middot;cos&#952; = 0,71 &middot; F s</p>
-</div>
-<script>
-(function(){
-  var slider=document.getElementById('angolo');
-  var gradi=document.getElementById('gradi');
-  var freccia=document.getElementById('freccia');
-  var valore=document.querySelector('.interattivo .valore');
-  function aggiorna(){
-    var th=parseFloat(slider.value);
-    gradi.textContent=th.toFixed(0)+'°';
-    var rad=th*Math.PI/180;
-    var len=70;
-    var x2=110+len*Math.cos(rad);
-    var y2=105-len*Math.sin(rad);
-    freccia.setAttribute('x2',x2);
-    freccia.setAttribute('y2',y2);
-    var c=Math.cos(rad);
-    valore.textContent='L = F·s·cosθ = '+c.toFixed(2)+' · F s';
-  }
-  slider.addEventListener('input',aggiorna);
-  aggiorna();
-})();
-</script>
 
 <nav class="nav-unita"><a class="precedente" href="../32-blocchi-e-carrucole/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Blocchi e carrucole</span></a><a class="successiva" href="../34-lavoro-della-forza-peso/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Lavoro della forza peso</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 23</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',').replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':14,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function frecce(svg,pre){var d=el(svg,'defs',{});[['r','var(--rosso)'],['v','var(--verde)'],['b','var(--blu)'],['g','var(--grigio)']].forEach(function(c){var m=el(d,'marker',{id:pre+c[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(m,'path',{d:'M0,0 L8,4 L0,8 Z',fill:c[1]});});}
+  function piano(svg,x1,x2,y){el(svg,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'var(--inchiostro)','stroke-width':2.4});for(var x=x1+12;x<=x2;x+=14)el(svg,'line',{x1:x,y1:y+1,x2:x-9,y2:y+10,stroke:'var(--grigio)','stroke-width':1});}
+  function blocco(svg,x,y,w,h){el(svg,'rect',{x:x,y:y-h,width:w,height:h,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});}
+  function vett(svg,x1,y1,x2,y2,col,pre,sw){return el(svg,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var('+col+')','stroke-width':sw||2.6,'marker-end':'url(#'+pre+col.charAt(2)+')'});}
+
+  /* figura 1: forza e spostamento paralleli */
+  var s1=document.getElementById('g-par');
+  if(s1){
+    frecce(s1,'p');
+    piano(s1,40,380,105);blocco(s1,110,105,70,50);
+    var r={'--rosso':'r','--verde':'v'};
+    el(s1,'line',{x1:180,y1:72,x2:290,y2:72,stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#pr)'});
+    txt(s1,240,62,'F',{fill:'var(--rosso)','font-style':'italic'});
+    el(s1,'line',{x1:110,y1:30,x2:250,y2:30,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#pv)'});
+    txt(s1,180,22,'s',{fill:'var(--verde)','font-style':'italic'});
+    el(s1,'line',{x1:110,y1:36,x2:110,y2:52,stroke:'var(--verde)','stroke-width':1,'stroke-dasharray':'2,2'});
+  }
+
+  /* figura 2: forza inclinata e componenti, cursore su theta */
+  var s2=document.getElementById('g-ang');
+  if(s2){
+    frecce(s2,'a');
+    var c2=document.getElementById('c-ang'),v2=document.getElementById('v-ang');
+    var OX=210,OY=150,LF=115;
+    piano(s2,50,370,180);blocco(s2,180,180,60,30);
+    el(s2,'line',{x1:250,y1:200,x2:350,y2:200,stroke:'var(--verde)','stroke-width':2.2,'marker-end':'url(#av)'});
+    txt(s2,300,214,'s',{fill:'var(--verde)','font-style':'italic','font-size':13});
+    var guidaX=el(s2,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+    var guidaY=el(s2,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+    var fy=el(s2,'line',{x1:OX,y1:OY,x2:OX,stroke:'var(--grigio)','stroke-width':2,'marker-end':'url(#ag)'});
+    var fx=el(s2,'line',{x1:OX,y1:OY,y2:OY,stroke:'var(--blu)','stroke-width':2.6,'marker-end':'url(#ab)'});
+    var f=el(s2,'line',{x1:OX,y1:OY,stroke:'var(--rosso)','stroke-width':2.8,'marker-end':'url(#ar)'});
+    var arco=el(s2,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2});
+    var tF=txt(s2,0,0,'F',{fill:'var(--rosso)','font-style':'italic'});
+    var tFx=txt(s2,0,0,'Fx',{fill:'var(--blu)','font-size':13});tFx.innerHTML='F<tspan baseline-shift="sub" font-size="10">x</tspan>';
+    var tFy=txt(s2,0,0,'Fy',{fill:'var(--grigio)','font-size':13});tFy.innerHTML='F<tspan baseline-shift="sub" font-size="10">y</tspan>';
+    var tTh=txt(s2,0,0,'θ',{fill:'var(--inchiostro)','font-size':13});
+    function d2(){
+      var th=+c2.value,a=th*Math.PI/180,cx=Math.cos(a),sy=Math.sin(a);
+      var X=OX+LF*cx,Y=OY-LF*sy;
+      set(f,{x2:X,y2:Y});
+      var dx=LF*cx, dy=LF*sy;
+      set(fx,{x2:OX+dx,visibility:Math.abs(dx)>9?'visible':'hidden'});
+      set(fy,{y2:OY-dy,visibility:dy>9?'visible':'hidden'});
+      set(guidaX,{x1:X,y1:Y,x2:X,y2:OY});set(guidaY,{x1:X,y1:Y,x2:OX,y2:Y});
+      var r=26;set(arco,{d:'M'+(OX+r)+','+OY+' A'+r+','+r+' 0 0 0 '+(OX+r*cx).toFixed(1)+','+(OY-r*sy).toFixed(1),visibility:th>3?'visible':'hidden'});
+      var am=a/2;set(tTh,{x:OX+40*Math.cos(am),y:OY-40*Math.sin(am)+5,visibility:th>8?'visible':'hidden'});
+      set(tF,{x:OX+(LF+16)*cx,y:OY-(LF+16)*sy+5});
+      set(tFx,{x:OX+dx+(cx>0?10:-10),y:OY+5,'text-anchor':cx>0?'start':'end',visibility:Math.abs(dx)>24?'visible':'hidden'});
+      set(tFy,{x:OX+(cx>=0?-8:8),'text-anchor':cx>=0?'end':'start',y:OY-dy+14,visibility:dy>24?'visible':'hidden'});
+      var c=Math.round(cx*100)/100, tipo=c>0?'lavoro motore':(c<0?'lavoro resistente':'lavoro nullo');
+      v2.innerHTML='θ = '+th+'° &nbsp; cos θ = '+num(c===0?0:c,2)+' &nbsp; L = '+num(c===0?0:c,2)+' · F s &nbsp; <span class="ok">'+tipo+'</span>';
+    }
+    c2.addEventListener('input',d2);d2();
+  }
+
+  /* figura 3: i tre casi */
+  var s3=document.getElementById('g-casi');
+  if(s3){
+    frecce(s3,'c');
+    [0,90,180].forEach(function(th,i){
+      var x0=i*140, Y=88, bx=x0+48, cxb=bx+22;
+      piano(s3,x0+12,x0+128,Y);blocco(s3,bx,Y,44,30);
+      el(s3,'line',{x1:x0+30,y1:16,x2:x0+110,y2:16,stroke:'var(--verde)','stroke-width':2,'marker-end':'url(#cv)'});
+      txt(s3,x0+70,11,'s',{fill:'var(--verde)','font-style':'italic','font-size':12});
+      var L=46,a=th*Math.PI/180,ox=th===0?bx+44:(th===180?bx:cxb),oy=th===90?Y-30:Y-15;
+      el(s3,'line',{x1:ox,y1:oy,x2:ox+L*Math.cos(a),y2:oy-L*Math.sin(a)*(th===90?0.6:1),stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#cr)'});
+      var lx=ox+(L+10)*Math.cos(a), ly=th===90?oy-L*0.6+4:oy-4;
+      txt(s3,th===90?ox+12:lx,ly,'F',{fill:'var(--rosso)','font-style':'italic','font-size':13});
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
