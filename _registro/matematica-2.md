@@ -222,6 +222,7 @@
 - Parole: 372 su 2 pagine di traccia (pagg. 54–55 di matematica-2.pdf)
 - Rettifica: nessuna, tutta la traccia (forma esplicita y=mx+q, caso y=q, caso x=k, forma implicita ax+by+c=0 e le formule m=-a/b, q=-c/b) è stata verificata con SymPy e risulta corretta.
 - Aggiunta: nessuna oltre a brevi frasi di collegamento fra i passaggi già presenti.
+- Revisione: titolo invariato. Tolto il sommario; introduzione di una frase; titoletti «La forma esplicita y=mx+q», «Rette parallele agli assi» e «La forma implicita» tenuti, aggiunto «Esempio» per y = 3x + 2; forma esplicita, rette x = k e forma implicita in .def; passaggio alla forma esplicita e formule m = −a/b, q = −c/b in riquadro; tolto il rimando al significato «già visto per y=mx». Correzione: nella forma implicita a e b non devono essere entrambi nulli; aggiunta la frase «se b = 0 si ottiene la retta verticale x = −c/a» a giustificazione di «comprende anche le rette verticali» (verificato con SymPy). Impaginazione a quaderno e script di allineamento. Figure rifatte in SVG calcolato con l'aiuto Piano: y = 0,5x + q con cursore su q e y = mx tratteggiata; y = q con cursore su q; x = k con cursore su k (punto (k; 0)). Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 27 — Appartenenza di un punto a una retta
 - Parole: 240 su 1 pagina di traccia
