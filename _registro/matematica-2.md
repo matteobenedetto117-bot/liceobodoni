@@ -228,6 +228,7 @@
 - Parole: 240 su 1 pagina di traccia
 - Rettifica: nessuna, i calcoli della traccia erano corretti (verificati con SymPy)
 - Aggiunta: nessuna
+- Revisione: titolo invariato. Tolto il sommario (la frase «una retta è l'insieme dei punti che soddisfano la sua equazione» passa nella definizione); introduzione di una frase; regola in .def; titoletti «Forma esplicita» e «Forma implicita» tenuti, ciascuno con una frase sul procedimento; esempi con titoletto «Esempio 1» ed «Esempio 2», scritti in forma impersonale («Sostituisco» → «Si sostituisce») con calcoli in riquadro; aggiunto il piè di pagina. Correzione di coerenza nell'esempio 2: la traccia annunciava il controllo «si sostituisce e si verifica che il risultato sia 0» ma poi ricavava y da x = 3; ora si sostituiscono entrambe le coordinate di B (2·3 + 4·7/2 + 1 = 21 ≠ 0), e il calcolo di C(3; −7/4) resta come secondo passo (verificati con frazioni esatte: 21 e 0; 3·1 + 2 = 5). Impaginazione a quaderno e script di allineamento. Figura rifatta in SVG calcolato con l'aiuto Piano: retta y = 3x + 2 e punto A di ascissa 1 con cursore sull'ordinata y_A (1–7), confronto 3·1 + 2 = 5 con y_A a fianco e «appartiene» in verde per y_A = 5. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 28 — Rette parallele e perpendicolari
 - Parole: ~160 di prosa su 1 pagina di traccia (pag. 57 di matematica-2.pdf)

@@ -5,16 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Appartenenza di un punto a una retta — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:12em}
+.ok{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -24,51 +53,144 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Piano cartesiano e retta &middot; Unità 27</p>
   <h1>Appartenenza di un punto a una retta</h1>
-  <p class="sommario">Una retta è l'insieme dei punti che soddisfano la sua equazione: stabilire
-  se un punto assegnato le appartiene è allora un semplice controllo di sostituzione.</p>
 </header>
 
-<div class="regola"><p>Un punto $P(x_P, y_P)$ appartiene a una retta se, sostituendo $x_P$ e
-$y_P$ al posto di $x$ e $y$ nell'equazione della retta, si ottiene un'uguaglianza vera.</p></div>
+<p>L'unità mostra come si stabilisce se un punto assegnato appartiene a una retta di cui è nota l'equazione.</p>
+
+<div class="def"><span class="et">Appartenenza di un punto a una retta</span>
+<p>Una retta è l'insieme dei punti le cui coordinate soddisfano la sua equazione. Un punto $P(x_P, y_P)$ appartiene a una retta se, sostituendo $x_P$ e $y_P$ al posto di $x$ e $y$ nell'equazione della retta, si ottiene un'uguaglianza vera.</p>
+</div>
 
 <h2>Forma esplicita</h2>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> La retta $y=3x+2$ passa per $A(1,5)$?</p>
-<p>Sostituisco $x_A=1$: $\;y = 3\cdot 1 + 2 = 5$, che è proprio $y_A$. L'uguaglianza è vera,
-quindi $A$ appartiene alla retta.</p>
-</div>
+<p>Se la retta è scritta nella forma $y=mx+q$, si sostituisce l'ascissa $x_P$ nel secondo membro e si confronta il valore ottenuto con l'ordinata $y_P$.</p>
+
+<h2>Esempio 1</h2>
+
+<p>Si vuole stabilire se la retta $y=3x+2$ passa per il punto $A(1,5)$. Si sostituisce l'ascissa $x_A=1$ nell'equazione:</p>
+
+<p class="eq">$$y = 3\cdot 1 + 2 = 5$$</p>
+
+<p>Il valore ottenuto è uguale all'ordinata $y_A=5$: l'uguaglianza è vera, quindi $A$ appartiene alla retta.</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="170" x2="240" y2="170" stroke="#16283d" stroke-width="1.4"/>
-<line x1="60" y1="190" x2="60" y2="15" stroke="#16283d" stroke-width="1.4"/>
-<text x="232" y="162" font-size="12" fill="#16283d">x</text>
-<text x="66" y="24" font-size="12" fill="#16283d">y</text>
-<line x1="30" y1="185" x2="220" y2="35" stroke="#2f6b4f" stroke-width="1.8"/>
-<circle cx="110" cy="107" r="3.2" fill="#b3392f"/>
-<text x="118" y="103" font-size="12" fill="#b3392f">A(1, 5)</text>
-<line x1="110" y1="170" x2="110" y2="107" stroke="#b3392f" stroke-width="1" stroke-dasharray="3,3"/>
-<line x1="60" y1="107" x2="110" y2="107" stroke="#b3392f" stroke-width="1" stroke-dasharray="3,3"/>
-</svg>
+<svg id="g-a" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="La retta y = 3x + 2 e il punto A di ascissa 1, che si sposta in verticale al variare della sua ordinata"></svg>
+<div class="cursore"><label for="c-a">$y_A$</label><input id="c-a" type="range" min="1" max="7" step="0.5" value="5"><span class="val" id="v-a"></span></div>
+<p class="did">Il punto $A(1, y_A)$ appartiene alla retta $y=3x+2$ soltanto quando la sua ordinata vale $5$.</p>
 </div>
 
 <h2>Forma implicita</h2>
 
-<p>Il controllo funziona allo stesso modo se la retta è scritta come $ax+by+c=0$: si sostituisce
-e si verifica che il risultato sia $0$.</p>
+<p>Se la retta è scritta nella forma $ax+by+c=0$, il controllo è lo stesso: si sostituiscono le coordinate del punto nel primo membro e si verifica che il risultato sia $0$.</p>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> La retta $2x+4y+1=0$ passa per $B\!\left(3, \dfrac{7}{2}\right)$?</p>
-<p>Sostituisco $x=3$: $\;2\cdot 3 + 4y + 1 = 0 \Rightarrow 4y+7=0 \Rightarrow y=-\dfrac{7}{4}$.
-Questo è il valore di $y$ richiesto quando $x=3$, ed è diverso da $\dfrac{7}{2}$: $B$ non
-appartiene alla retta. Il punto $C\!\left(3,-\dfrac{7}{4}\right)$, invece, sì.</p>
-</div>
+<h2>Esempio 2</h2>
 
+<p>Si vuole stabilire se la retta $2x+4y+1=0$ passa per il punto $B\!\left(3, \dfrac{7}{2}\right)$. Si sostituiscono $x=3$ e $y=\dfrac{7}{2}$ nel primo membro:</p>
+
+<p class="eq">$$2\cdot 3 + 4\cdot\frac{7}{2} + 1 = 6 + 14 + 1 = 21$$</p>
+
+<p>Il risultato è diverso da $0$, quindi $B$ non appartiene alla retta.</p>
+
+<p>Il punto della retta che ha ascissa $3$ si trova sostituendo soltanto $x=3$ e ricavando $y$:</p>
+
+<p class="eq">$$2\cdot 3 + 4y + 1 = 0 \;\Longrightarrow\; 4y = -7 \;\Longrightarrow\; y = -\frac{7}{4}$$</p>
+
+<p>Il punto $C\!\left(3,-\dfrac{7}{4}\right)$ appartiene quindi alla retta, mentre $B$, che ha la stessa ascissa ma ordinata diversa, non le appartiene.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../28-equazione-generale-della-retta-forma-esplicita-e-implicita/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazione generale della retta: forma esplicita e implicita</span></a><a class="successiva" href="../30-rette-parallele-e-perpendicolari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Rette parallele e perpendicolari</span></a></nav>
 <footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 27</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+Piano.prototype.retta=function(m,a,dove){var X=this.X,Y=this.Y,x1=this.xr[0]-1,x2=this.xr[1]+1;
+  return this.add(el('line',Object.assign({x1:X(x1),y1:Y(m*x1),x2:X(x2),y2:Y(m*x2),'stroke-width':2},a)),dove);};
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+var M={l:20,r:20,t:20,b:20}, XR=[-3.6,3.6], YR=[-3.1,3.1];
+
+/* ---------- y = 3x + 2 e punto A(1, yA) con cursore su yA ---------- */
+(function(){
+  var svg=document.getElementById('g-a'),cur=document.getElementById('c-a'),v=document.getElementById('v-a'); if(!svg)return;
+  var P=new Piano(svg,[-2.6,3.2],[-1.6,7.6],{l:20,r:20,t:20,b:20}); P.assi([-2,-1,1,2,3],[1,2,3,4,5,6,7]);
+  var X=P.X,Y=P.Y;
+  P.add(el('line',{x1:X(-3.5),y1:Y(3*-3.5+2),x2:X(3.5),y2:Y(3*3.5+2),stroke:'var(--blu)','stroke-width':2.4}),'sotto');
+  P.add(txt(X(1.75)+10,Y(3*1.75+2)+6,'y = 3x + 2',{'font-size':13,fill:'var(--blu)'}),'testo');
+  var ly=P.add(el('line',{stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3 3'}),'sotto');
+  var lx=P.add(el('line',{stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3 3'}),'sotto');
+  var pt=P.add(el('circle',{r:4.5,fill:'var(--rosso)'}),'sopra');
+  var ta=P.add(txt(0,0,'',{'font-size':14,'font-style':'italic',fill:'var(--rosso)','text-anchor':'end'}),'testo');
+  function dis(){
+    var y=+cur.value, ok=(y===5);
+    set(ly,{x1:X(1),y1:Y(0),x2:X(1),y2:Y(y)});
+    set(lx,{x1:X(0),y1:Y(y),x2:X(1),y2:Y(y)});
+    set(pt,{cx:X(1),cy:Y(y)});
+    set(ta,{x:X(1)-8,y:Y(y)-7}); ta.textContent='A';
+    v.innerHTML='y<sub>A</sub> = '+n(y)+' &nbsp; 3·1 + 2 = 5 '+(ok?'= y<sub>A</sub> &nbsp; <span class="ok">appartiene</span>':'≠ y<sub>A</sub> &nbsp; non appartiene');
+  }
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
