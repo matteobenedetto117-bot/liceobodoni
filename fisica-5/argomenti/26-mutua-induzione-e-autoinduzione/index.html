@@ -5,22 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mutua induzione e autoinduzione — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.tre-fig{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.tre-fig .fig{margin:0;padding:12px 8px}
-.tre-fig .did{font-size:.74rem}
-@media(max-width:640px){.tre-fig{grid-template-columns:1fr}}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:14em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
+
 <body>
 <div class="foglio">
 
@@ -28,163 +62,202 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 25</p>
   <h1>Mutua induzione e autoinduzione</h1>
-  <p class="sommario">Il campo magnetico generato da una corrente non riguarda solo il circuito
-  che lo produce. Se il flusso concatenato con un circuito vicino cambia, in quel circuito nasce
-  una fem indotta; e lo stesso può accadere dentro un'unica bobina, fra una spira e quella
-  accanto. È il fenomeno che regola il modo in cui la corrente in un avvolgimento può crescere o
-  calare nel tempo.</p>
 </header>
+
+<p>Questa unità descrive la fem indotta in una bobina quando varia la corrente in una bobina vicina (mutua induzione) e quando varia la corrente nella bobina stessa (autoinduzione).</p>
 
 <h2>Mutua induzione</h2>
 
-<p>Consideriamo una bobina percorsa da una corrente $i$ che sta diminuendo: il campo magnetico
-$\vec B$ che genera diminuisce con essa. Se avviciniamo una seconda bobina, non collegata
-elettricamente alla prima, il flusso di $\vec B$ concatenato con essa varia nel tempo e, per la
-legge di Faraday-Neumann-Lenz, vi si induce una corrente $i_{ind}$. Questa corrente genera a sua
-volta un campo $\vec B_{ind}$, orientato in modo da opporsi alla diminuzione del flusso che l'ha
-causata: nello stesso verso di $\vec B$.</p>
+<p>Si consideri una bobina percorsa da una corrente $i$ che diminuisce: con la corrente diminuisce anche il campo magnetico $\vec B$ che essa genera. Una seconda bobina vicina, non collegata elettricamente alla prima, è attraversata da questo campo, quindi il flusso di $\vec B$ concatenato con essa varia nel tempo.</p>
+
+<p>Per la legge di Faraday-Neumann-Lenz nella seconda bobina si induce una corrente $i_{ind}$. Questa corrente genera un campo $\vec B_{ind}$ che si oppone alla diminuzione del flusso che l'ha causata: per questo $\vec B_{ind}$ ha lo stesso verso di $\vec B$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f26g" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f26b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<path d="M50,100 a9,9 0 0 1 18,0 a9,9 0 0 1 18,0 a9,9 0 0 1 18,0 a9,9 0 0 1 18,0" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="50" y1="100" x2="50" y2="130" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="122" y1="100" x2="122" y2="130" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="20" y1="60" x2="20" y2="95" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f26g)"/>
-<text x="8" y="55" font-family="var(--sans)" font-size="14" fill="var(--verde)">i</text>
-<text x="0" y="145" font-family="var(--sans)" font-size="11" fill="var(--verde)">(in diminuzione)</text>
-<line x1="86" y1="60" x2="86" y2="30" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="140" y1="70" x2="220" y2="70" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#f26b)"/>
-<text x="225" y="74" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<path d="M330,100 a9,9 0 0 1 18,0 a9,9 0 0 1 18,0 a9,9 0 0 1 18,0 a9,9 0 0 1 18,0" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="330" y1="100" x2="330" y2="130" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="402" y1="100" x2="402" y2="130" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<path d="M348,55 A22,18 0 0 1 384,55" fill="none" stroke="var(--verde)" stroke-width="2" marker-end="url(#f26g)"/>
-<text x="356" y="42" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">i<tspan font-size="9" dy="3">ind</tspan></text>
-<line x1="420" y1="70" x2="480" y2="70" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#f26b)"/>
-<text x="484" y="74" font-family="var(--sans)" font-size="14" fill="var(--blu)">B<tspan font-size="9" dy="3">ind</tspan></text>
-<text x="86" y="170" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">bobina 1</text>
-<text x="366" y="170" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">bobina 2 (non collegata alla 1)</text>
-</svg>
-<p class="did">La corrente $i$ nella bobina 1 diminuisce e con essa il campo $\vec B$. Nella
-bobina 2, vicina ma elettricamente separata, si induce una corrente $i_{ind}$ che genera un
-campo $\vec B_{ind}$ concorde con $\vec B$, per contrastarne il calo.</p>
+<svg id="fig-mutua" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due bobine affiancate: la corrente nella prima diminuisce e nella seconda compare una corrente indotta con il suo campo, concorde con quello della prima"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-mutua" aria-label="Avvia">&#9654;</button><output id="o-mutua"></output></div>
+<p class="did">Mentre la corrente $i$ nella bobina 1 diminuisce, nella bobina 2, elettricamente separata, circola una corrente indotta $i_{ind}$, il cui campo $\vec B_{ind}$ ha lo stesso verso di $\vec B$.</p>
 </div>
 
 <h2>Autoinduzione</h2>
 
-<p>Lo stesso meccanismo avviene anche dentro un'unica bobina: il campo generato da una spira
-concatena anche le spire vicine, che appartengono allo stesso avvolgimento. Se la corrente
-cambia, cambia il flusso concatenato con le spire accanto, e in esse si induce una corrente
-indotta opposta a quella che l'ha generata: la bobina induce una fem su se stessa.</p>
+<p>Lo stesso fenomeno avviene in un'unica bobina. Il campo generato da ciascuna spira attraversa anche le spire vicine, che fanno parte dello stesso avvolgimento. Se la corrente nella bobina varia, varia il flusso concatenato con le sue spire, e nella bobina stessa si induce una fem che si oppone alla variazione della corrente: la bobina induce una fem su se stessa.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f26g2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="f26b2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="f26r2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<path d="M70,100 a11,11 0 0 1 22,0 a11,11 0 0 1 22,0 a11,11 0 0 1 22,0 a11,11 0 0 1 22,0 a11,11 0 0 1 22,0 a11,11 0 0 1 22,0"
-  fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="100" x2="70" y2="140" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="378" y1="100" x2="378" y2="140" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="30" y1="55" x2="30" y2="95" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f26g2)"/>
-<text x="14" y="48" font-family="var(--sans)" font-size="14" fill="var(--verde)">i</text>
-<text x="0" y="155" font-family="var(--sans)" font-size="11" fill="var(--verde)">(in diminuzione)</text>
-<line x1="90" y1="65" x2="230" y2="65" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#f26b2)"/>
-<text x="234" y="69" font-family="var(--sans)" font-size="14" fill="var(--blu)">B</text>
-<path d="M180,58 A16,14 0 0 1 208,58" fill="none" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f26r2)"/>
-<path d="M224,58 A16,14 0 0 1 252,58" fill="none" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f26r2)"/>
-<text x="216" y="40" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">B<tspan font-size="9" dy="3">i</tspan> (spire vicine)</text>
-<text x="224" y="165" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">una spira genera una variazione di &#934;(B) nella spira successiva</text>
-</svg>
-<p class="did">Nella bobina la corrente $i$ diminuisce spira dopo spira: la variazione di flusso
-che ciascuna spira genera nelle spire vicine vi induce una corrente, e quindi un campo
-$\vec B_i$, opposti alla variazione che li ha causati.</p>
+<svg id="fig-auto" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Una bobina con corrente in diminuzione: il campo indotto nelle spire ha lo stesso verso del campo della bobina"></svg>
+<p class="did">Nella bobina la corrente $i$ diminuisce: la variazione del flusso concatenato con le spire vi induce una corrente, il cui campo $\vec B_{ind}$ ha lo stesso verso di $\vec B$ e si oppone alla diminuzione.</p>
 </div>
 
-<p>Vediamo l'effetto su un circuito con una bobina in serie a un generatore e un
-interruttore.</p>
+<h2>Chiusura di un circuito con una bobina</h2>
 
-<div class="tre-fig">
+<p>Si consideri un circuito formato da un generatore, una bobina e un interruttore. Con l'interruttore aperto non circola corrente: il flusso del campo magnetico nella bobina è nullo e non c'è fem indotta.</p>
+
+<p>Quando l'interruttore si chiude, la corrente cresce a partire da zero e con essa cresce il flusso concatenato con la bobina. Nella bobina nasce allora una fem autoindotta che si oppone all'aumento della corrente. Per questo la corrente non raggiunge subito il valore finale: cresce rapidamente all'inizio, poi sempre più lentamente.</p>
 
 <div class="fig">
-<svg viewBox="0 0 160 170" xmlns="http://www.w3.org/2000/svg">
-<rect x="20" y="20" width="90" height="100" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="20" y1="50" x2="20" y2="90" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="14" y1="60" x2="26" y2="60" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="16" y1="80" x2="24" y2="80" stroke="var(--inchiostro)" stroke-width="3"/>
-<path d="M50,120 a8,8 0 0 1 16,0 a8,8 0 0 1 16,0" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="110" y1="20" x2="110" y2="40" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="110" cy="44" r="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="113" y1="40" x2="130" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="110" y1="20" x2="130" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" stroke-dasharray="2,3"/>
-<circle cx="130" cy="20" r="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="65" y="150" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">interruttore aperto</text>
-</svg>
-<p class="did">$i=0$: nessuna corrente, $\Phi(\vec B)=0$, quindi $i_{ind}=0$ e
-$\varepsilon_{ind}=0$.</p>
+<svg id="fig-chiusura" viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Circuito con generatore, bobina e interruttore; alla chiusura la corrente cresce nel tempo fino al valore finale, mentre la fem autoindotta diminuisce"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-chiusura" aria-label="Avvia">&#9654;</button><output id="o-chiusura"></output></div>
+<p class="did">Alla chiusura dell'interruttore la corrente cresce gradualmente fino al valore finale, mentre la fem autoindotta, opposta all'aumento, diminuisce fino ad annullarsi.</p>
 </div>
 
-<div class="fig">
-<svg viewBox="0 0 160 170" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f26g3" markerWidth="6" markerHeight="6" refX="4" refY="2.5" orient="auto"><path d="M0,0 L4,2.5 L0,5 Z" fill="var(--verde)"/></marker>
-<marker id="f26b3" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--blu)"/></marker></defs>
-<rect x="20" y="20" width="90" height="100" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="20" y1="50" x2="20" y2="90" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="14" y1="60" x2="26" y2="60" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="16" y1="80" x2="24" y2="80" stroke="var(--inchiostro)" stroke-width="3"/>
-<path d="M50,120 a8,8 0 0 1 16,0 a8,8 0 0 1 16,0" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="90" y1="105" x2="120" y2="105" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#f26b3)"/>
-<text x="124" y="109" font-family="var(--sans)" font-size="11" fill="var(--blu)">B</text>
-<line x1="110" y1="20" x2="130" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="18" y1="30" x2="26" y2="20" stroke="var(--verde)" stroke-width="2" marker-end="url(#f26g3)"/>
-<text x="30" y="18" font-family="var(--sans)" font-size="12" fill="var(--verde)">i</text>
-<text x="65" y="150" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">interruttore chiuso</text>
-</svg>
-<p class="did">$i$ cresce da zero: cresce anche $\Phi(\vec B)$ concatenato con la bobina, e
-nasce una $\varepsilon_{ind}$ (quindi una $i_{ind}$) che si oppone all'aumento.</p>
-</div>
-
-<div class="fig">
-<svg viewBox="0 0 160 170" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="f26bx" markerWidth="6" markerHeight="6" refX="4" refY="2.5" orient="auto"><path d="M0,0 L4,2.5 L0,5 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="25" y1="130" x2="25" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f26bx)"/>
-<line x1="15" y1="130" x2="140" y2="130" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f26bx)"/>
-<text x="14" y="15" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">i</text>
-<text x="145" y="134" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">t</text>
-<path d="M25,130 C40,55 65,45 130,42" fill="none" stroke="var(--blu)" stroke-width="2.2"/>
-<line x1="25" y1="42" x2="130" y2="42" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-<text x="65" y="155" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">valore finale</text>
-</svg>
-<p class="did">La corrente non salta al valore finale: cresce rapidamente all'inizio, poi sempre
-più lentamente, per effetto della fem autoindotta che si oppone alla variazione.</p>
-</div>
-
-</div>
-
-<div class="nota">
-<span class="et">Da non confondere</span>
-Nella mutua induzione la fem indotta nasce in un circuito diverso da quello che genera il campo
-variabile. Nell'autoinduzione nasce nello stesso circuito, per effetto della variazione della
-propria corrente.
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 26 introduce l'induttanza $L$, la costante che lega quantitativamente la fem
-autoindotta alla rapidità di variazione della corrente.</li>
-</ul>
-</div>
+<div class="nota"><span class="et">Da non confondere</span>
+<p>Nella mutua induzione la fem indotta nasce in un circuito diverso da quello che genera il campo variabile. Nell'autoinduzione nasce nello stesso circuito, per effetto della variazione della sua corrente.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../25-motori-elettrici-in-corrente-alternata/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Motori elettrici in corrente alternata</span></a><a class="successiva" href="../27-induttanza/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Induttanza</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 25</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* bobina vista di lato: n anse da x0, raggio r, base y */
+  function bobina(p,x0,y,n,r,w){var d='M'+x0+','+y;for(var k=0;k<n;k++)d+=' a'+r+','+r+' 0 0 1 '+(2*r)+',0';
+    el(p,'path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':w||2});
+    el(p,'line',{x1:x0,y1:y,x2:x0,y2:y+28,stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(p,'line',{x1:x0+2*r*n,y1:y,x2:x0+2*r*n,y2:y+28,stroke:'var(--inchiostro)','stroke-width':1.6});}
+  function sub(p,x,y,a,b,col,fs,anchor){var t=T(p,x,y,a,{'font-size':fs||13,fill:col,'font-style':'italic','text-anchor':anchor||'start'});
+    var s=document.createElementNS(NS,'tspan');s.setAttribute('font-size',(fs||13)*.7);s.setAttribute('dy',3);s.textContent=b;t.appendChild(s);return t;}
+  /* pulsante ▶ / ↺ */
+  function animatore(btn,dur,disegna,fine){
+    var stato='fermo',t0=0;
+    function passo(ts){if(!t0)t0=ts;var t=Math.min((ts-t0)/1000,dur);disegna(t);
+      if(t<dur)requestAnimationFrame(passo);else{stato='finito';btn.disabled=false;btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');if(fine)fine();}}
+    btn.addEventListener('click',function(){
+      if(stato==='finito'){stato='fermo';btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');disegna(-1);return;}
+      if(stato!=='fermo')return;
+      if(ridotto){disegna(dur);stato='finito';btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');if(fine)fine();return;}
+      stato='corsa';btn.disabled=true;t0=0;requestAnimationFrame(passo);});
+    disegna(-1);
+  }
+  function dissolvi(e){e.setAttribute('opacity',0);var t0=0;function s(ts){if(!t0)t0=ts;var a=Math.min((ts-t0)/700,1);e.setAttribute('opacity',a);if(a<1)requestAnimationFrame(s);}
+    if(ridotto)e.setAttribute('opacity',1);else requestAnimationFrame(s);}
+
+  /* ---------- Figura 1: mutua induzione ---------- */
+  (function(){
+    var S=document.getElementById('fig-mutua'),b=document.getElementById('b-mutua'),o=document.getElementById('o-mutua');
+    bobina(S,40,120,4,11); bobina(S,260,120,4,11);
+    T(S,84,180,'bobina 1',{'text-anchor':'middle','font-size':12,fill:'var(--grigio)'});
+    T(S,304,180,'bobina 2',{'text-anchor':'middle','font-size':12,fill:'var(--grigio)'});
+    T(S,304,196,'(non collegata alla 1)',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    var g=el(S,'g',{}), msg=T(S,210,24,'la corrente indotta c’è solo mentre il flusso varia',{'text-anchor':'middle','font-size':12,fill:'var(--inchiostro)',opacity:0});
+    var DUR=4;
+    function I(t){return t<0.5?1:t<3?1-0.8*(t-0.5)/2.5:0.2;}
+    function dis(t){
+      vuota(g); var tt=Math.max(t,0), i=t<0?1:I(tt), varia=t>=0.5&&t<3;
+      freccia(g,22,74,22,112,'var(--verde)',2.2,7);
+      T(g,12,68,'i',{'font-size':14,'font-style':'italic',fill:'var(--verde)'});
+      freccia(g,136,92,136+110*i,92,'var(--blu)',2.4,8);
+      T(g,140+110*i,96,'B',{'font-size':14,'font-style':'italic','font-weight':700,fill:'var(--blu)'});
+      if(varia){
+        el(g,'path',{d:'M286,70 A22,16 0 0 1 320,70',fill:'none',stroke:'var(--verde)','stroke-width':2});
+        punta(g,320,70,0.5,1,'var(--verde)',6);
+        sub(g,303,52,'i','ind','var(--verde)',14,'middle');
+        freccia(g,356,92,410,92,'var(--blu)',2.4,8);
+        sub(g,366,82,'B','ind','var(--blu)',14);
+      }
+      o.innerHTML=t<0?'corrente costante: nessuna corrente indotta':varia?'i in diminuzione: <span class="ok">corrente indotta nella bobina 2</span>':(t<0.5?'corrente costante':'corrente di nuovo costante: nessuna corrente indotta');
+      if(t<0)msg.setAttribute('opacity',0);
+    }
+    animatore(b,DUR,dis,function(){dissolvi(msg);});
+  })();
+
+  /* ---------- Figura 2: autoinduzione (statica) ---------- */
+  (function(){
+    var S=document.getElementById('fig-auto');
+    bobina(S,80,110,6,22);
+    freccia(S,40,62,40,104,'var(--verde)',2.2,7);
+    T(S,30,56,'i',{'font-size':14,'font-style':'italic',fill:'var(--verde)'});
+    T(S,40,160,'(in diminuzione)',{'text-anchor':'middle','font-size':11,fill:'var(--verde)'});
+    freccia(S,90,96,350,96,'var(--blu)',2.4,8);
+    T(S,356,100,'B',{'font-size':14,'font-style':'italic','font-weight':700,fill:'var(--blu)'});
+    freccia(S,150,74,290,74,'var(--blu)',1.6,7);
+    el(S,'line',{x1:150,y1:74,x2:283,y2:74,stroke:'#fff','stroke-width':1.6,'stroke-dasharray':'2 5'});
+    sub(S,296,70,'B','ind','var(--blu)',14);
+    T(S,212,170,'il campo indotto ha lo stesso verso di B',{'text-anchor':'middle','font-size':12,fill:'var(--grigio)'});
+  })();
+
+  /* ---------- Figura 3: chiusura del circuito ---------- */
+  (function(){
+    var S=document.getElementById('fig-chiusura'),b=document.getElementById('b-chiusura'),o=document.getElementById('o-chiusura');
+    var ink='var(--inchiostro)';
+    /* circuito: rettangolo 30..170 x 40..150 */
+    el(S,'line',{x1:30,y1:40,x2:120,y2:40,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:150,y1:40,x2:170,y2:40,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:170,y1:40,x2:170,y2:150,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:170,y1:150,x2:132,y2:150,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:68,y1:150,x2:30,y2:150,stroke:ink,'stroke-width':1.8});
+    el(S,'path',{d:'M68,150 a8,8 0 0 1 16,0 a8,8 0 0 1 16,0 a8,8 0 0 1 16,0 a8,8 0 0 1 16,0',fill:'none',stroke:ink,'stroke-width':1.8});
+    T(S,100,172,'bobina',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    el(S,'line',{x1:30,y1:40,x2:30,y2:84,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:30,y1:100,x2:30,y2:150,stroke:ink,'stroke-width':1.8});
+    el(S,'line',{x1:18,y1:84,x2:42,y2:84,stroke:ink,'stroke-width':2.4});
+    el(S,'line',{x1:24,y1:100,x2:36,y2:100,stroke:ink,'stroke-width':3.4});
+    T(S,48,96,'generatore',{'font-size':11,fill:'var(--grigio)'});
+    el(S,'circle',{cx:120,cy:40,r:3.2,fill:'#fff',stroke:ink,'stroke-width':1.4});
+    el(S,'circle',{cx:150,cy:40,r:3.2,fill:'#fff',stroke:ink,'stroke-width':1.4});
+    var leva=el(S,'line',{x1:120,y1:40,stroke:ink,'stroke-width':2,'stroke-linecap':'round'});
+    T(S,135,24,'interruttore',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    /* grafico i(t) */
+    var gx=228,gy=160,gw=170,gh=110;
+    freccia(S,gx,gy,gx,gy-gh-14,ink,1.4,7); freccia(S,gx-6,gy,gx+gw+12,gy,ink,1.4,7);
+    T(S,gx-14,gy-gh-8,'i',{'font-size':13,'font-style':'italic',fill:ink});
+    T(S,gx+gw+8,gy+16,'t',{'font-size':13,'font-style':'italic',fill:ink});
+    el(S,'line',{x1:gx,y1:gy-gh+10,x2:gx+gw,y2:gy-gh+10,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 4'});
+    T(S,gx+gw,gy-gh+2,'valore finale',{'text-anchor':'end','font-size':11,fill:'var(--grigio)'});
+    var curva=el(S,'path',{fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    var pt=el(S,'circle',{r:4.5,fill:'var(--rosso)'});
+    var g=el(S,'g',{});
+    var DUR=4, TAU=0.8, H=gh-10;
+    function I(t){return 1-Math.exp(-t/TAU);}
+    function X(t){return gx+gw*t/DUR;} function Y(i){return gy-H*i;}
+    function dis(t){
+      vuota(g); var chiuso=t>=0;
+      if(chiuso){leva.setAttribute('x2',150);leva.setAttribute('y2',40);}else{leva.setAttribute('x2',145);leva.setAttribute('y2',24);}
+      var tt=Math.max(t,0), i=chiuso?I(tt):0, d='';
+      if(chiuso){for(var k=0;k<=120;k++){var s=tt*k/120;d+=(k?' L':'M')+f(X(s))+','+f(Y(I(s)));}}
+      curva.setAttribute('d',d);
+      pt.setAttribute('cx',f(X(tt)));pt.setAttribute('cy',f(Y(i)));pt.setAttribute('opacity',chiuso?1:0);
+      if(chiuso&&i>0.02){
+        freccia(g,170,62,170,62+60*i,'var(--verde)',2.4,7);
+        T(g,178,92,'i',{'font-size':13,'font-style':'italic',fill:'var(--verde)'});
+      }
+      var e=chiuso?Math.exp(-tt/TAU):0;
+      if(e>0.03){freccia(g,72,134,72+60*e,134,'var(--rosso)',2.2,7);
+        sub(g,72,126,'ε','ind','var(--rosso)',13);}
+      if(!chiuso)o.innerHTML='interruttore aperto: i = 0, nessuna fem indotta';
+      else if(tt<DUR)o.innerHTML='i cresce: la <span style="color:var(--rosso);font-weight:600">fem autoindotta</span> si oppone all’aumento';
+      else o.innerHTML='<span class="ok">la corrente è vicina al valore finale</span>';
+    }
+    animatore(b,DUR,dis);
+  })();
+})();
+</script>
 </body>
 </html>
