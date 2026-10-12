@@ -5,125 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le armoniche superiori — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.scatola{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.scatola p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.ok{color:var(--verde);font-weight:600}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:5.5em;text-align:left}
+.cursore .val sup{font-size:.7em;line-height:0}
+.letture{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:8px;font-variant-numeric:tabular-nums}
+.letture b{color:var(--blu)}
+.passo{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Onde e suono &middot; Unit&agrave; 32</p>
+  <p class="occhiello">Onde e suono &middot; Unità 32</p>
   <h1>Le armoniche superiori</h1>
-  <p class="sommario">Il modo fondamentale non è l'unico modo in cui una corda fissata agli
-  estremi può vibrare stazionariamente: esiste un'intera famiglia di modi superiori, ciascuno
-  con più ventri e con una frequenza multipla della fondamentale.</p>
 </header>
 
-<h2>Nodi e antinodi</h2>
+<p>Il modo fondamentale non è l'unica onda stazionaria che può formarsi su una corda fissata agli estremi. L'unità tratta i modi di vibrazione successivi e le loro frequenze.</p>
 
-<p>La prima armonica non è l'unica onda stazionaria che può esistere su una corda fissata agli
-estremi. Per ogni corda c'è un numero infinito di modi di oscillazione, detti
-<strong>armoniche</strong>, con frequenze che sono multipli interi della fondamentale. In ogni
-modo, i punti della corda che restano sempre fermi si chiamano <strong>nodi</strong>; i punti
-che oscillano con ampiezza massima si chiamano <strong>antinodi</strong>. Nel modo
-fondamentale c'è un nodo a ciascun estremo e un solo antinodo al centro.</p>
+<h2>Nodi e antinodi</h2>
+<p>Su una corda fissata agli estremi esistono infiniti modi di oscillazione stazionaria, detti <strong>armoniche</strong>. Le loro frequenze sono multipli interi della frequenza fondamentale.</p>
+<p>In ogni modo i punti della corda che restano sempre fermi sono i <strong>nodi</strong> (N), mentre i punti che oscillano con l'ampiezza massima sono gli <strong>antinodi</strong> (A). Nel modo fondamentale ci sono un nodo a ciascun estremo e un solo antinodo al centro; nell'armonica $n$-esima gli antinodi sono $n$ e i nodi sono $n+1$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<g id="muro">
-<line x1="0" y1="-40" x2="0" y2="40" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="-10" y1="-40" x2="0" y2="-30" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="-10" y1="-26" x2="0" y2="-16" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="-10" y1="-12" x2="0" y2="-2" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="-10" y1="2" x2="0" y2="12" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="-10" y1="16" x2="0" y2="26" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="-10" y1="30" x2="0" y2="40" stroke="var(--inchiostro)" stroke-width="1.2"/>
-</g>
-</defs>
-
-<!-- n=1 -->
-<use href="#muro" x="60" y="140"/>
-<use href="#muro" x="240" y="140"/>
-<path d="M 60,140 C 100,80 200,80 240,140 C 200,200 100,200 60,140 Z" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="60" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="240" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<text x="60" y="118" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">N</text>
-<text x="240" y="118" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">N</text>
-<text x="150" y="75" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">A</text>
-<text x="150" y="235" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">n = 1</text>
-
-<!-- n=2 -->
-<use href="#muro" x="340" y="140"/>
-<use href="#muro" x="560" y="140"/>
-<path d="M 340,140 C 370,80 420,80 450,140 C 420,200 370,200 340,140 Z" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M 450,140 C 480,80 530,80 560,140 C 530,200 480,200 450,140 Z" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="340" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="450" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="560" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<text x="450" y="235" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">n = 2</text>
-
-<!-- n=3 -->
-<use href="#muro" x="660" y="140"/>
-<use href="#muro" x="840" y="140"/>
-<path d="M 660,140 C 680,80 700,80 720,140 C 700,200 680,200 660,140 Z" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M 720,140 C 740,80 760,80 780,140 C 760,200 740,200 720,140 Z" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M 780,140 C 800,80 820,80 840,140 C 820,200 800,200 780,140 Z" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="660" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="720" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="780" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="840" cy="140" r="3.5" fill="var(--inchiostro)"/>
-<text x="750" y="235" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">n = 3</text>
-</svg>
-<p class="did">I punti neri sono i nodi (N), fermi; al centro di ogni ventre c'è un antinodo
-(A), dove l'oscillazione è massima. Il numero di ventri cresce con l'armonica.</p>
+<svg id="g-arm" viewBox="0 0 420 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Prima, seconda e terza armonica di una corda fissata agli estremi, con nodi e antinodi"></svg>
+<div class="cursore"><label for="c-arm">istante $t$</label><input id="c-arm" type="range" min="0" max="1" step="0.0125" value="0.05"><span class="val" id="v-arm"></span></div>
+<p class="did">Le tre corde hanno la stessa lunghezza; nello stesso intervallo di tempo $T_1$ la corda dell'armonica $n$-esima compie $n$ oscillazioni complete.</p>
 </div>
 
 <h2>Seconda e terza armonica</h2>
-
-<p>Nel secondo modo la corda forma due ventri separati da un nodo centrale: la lunghezza
-della corda contiene un'onda intera, non più mezza:</p>
-
-$$ \lambda_2 = L \qquad f_2 = \frac{v}{\lambda_2} = \frac{v}{L} = 2f_1 $$
-
-<p>Nel terzo modo la corda forma tre ventri, e la sua lunghezza contiene un'onda e mezza:</p>
-
-$$ \lambda_3 = \frac{2}{3}L \qquad f_3 = \frac{v}{\lambda_3} = \frac{3v}{2L} = 3f_1 $$
+<p>Nella seconda armonica la corda presenta due antinodi separati da un nodo centrale, quindi la sua lunghezza contiene un'onda intera:</p>
+<p class="eq">$$\lambda_2 = L \qquad f_2 = \frac{v}{\lambda_2} = \frac{v}{L} = 2f_1$$</p>
+<p>Nella terza armonica la corda presenta tre antinodi e due nodi interni, quindi la sua lunghezza contiene un'onda e mezza:</p>
+<p class="eq">$$\lambda_3 = \frac{2}{3}L \qquad f_3 = \frac{v}{\lambda_3} = \frac{3v}{2L} = 3f_1$$</p>
 
 <h2>La formula generale</h2>
-
-<p>Il modello si estende a un'armonica qualunque $n$: la frequenza è $n$ volte quella
-fondamentale, e la lunghezza d'onda è quella fondamentale divisa per $n$.</p>
-
-<div class="scatola">
-<p>$$ f_1 = \frac{v}{2L} \qquad \lambda_1 = 2L $$</p>
-<p>$$ f_n = n f_1 = n\,\frac{v}{2L} \qquad \lambda_n = \frac{\lambda_1}{n} = \frac{2L}{n} $$</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Lo stesso meccanismo di riflessione e sovrapposizione governa la colonna d'aria
-vibrante in un tubo, con la differenza che il vincolo può essere un'estremità chiusa o
-aperta.</li>
-<li>Quando due onde di frequenza vicina ma diversa si sovrappongono, invece che una
-stazionaria si ottiene un battimento.</li>
-</ul>
-</div>
+<p>Il ragionamento si estende a un'armonica qualunque: la frequenza dell'armonica $n$-esima è $n$ volte la frequenza fondamentale e la sua lunghezza d'onda è la lunghezza d'onda fondamentale divisa per $n$.</p>
+<p class="eq">$$f_1 = \frac{v}{2L} \qquad \lambda_1 = 2L$$</p>
+<p class="eq principio">$$f_n = n\,f_1 = n\,\frac{v}{2L} \qquad \lambda_n = \frac{\lambda_1}{n} = \frac{2L}{n} \qquad (n = 1, 2, 3, \dots)$$</p>
+<p>Nelle formule $L$ è la lunghezza della corda, $v$ la velocità dell'onda sulla corda e $n$ il numero d'ordine dell'armonica, uguale al numero di antinodi.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../33-onde-stazionarie-su-una-corda-fissata-agli-estremi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Onde stazionarie su una corda fissata agli estremi</span></a><a class="successiva" href="../35-colonna-d-aria-vibrante/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Colonna d'aria vibrante</span></a></nav>
-<footer><p>Fisica quarta &middot; Onde e suono &middot; Unit&agrave; 32</p></footer>
+<footer><p>Fisica quarta &middot; Onde e suono &middot; Unità 32</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function muro(p,x,y1,y2,lato){el(p,'line',{x1:x,y1:y1,x2:x,y2:y2,stroke:'var(--inchiostro)','stroke-width':2});for(var y=y1;y<y2-4;y+=12)el(p,'line',{x1:x,y1:y,x2:x+10*lato,y2:y+10,stroke:'var(--grigio)','stroke-width':1});}
+  function profilo(x0,Lp,yc,A,n,k){var d='';for(var i=0;i<=k;i++){var u=i/k,x=x0+u*Lp,y=yc-A*Math.sin(n*Math.PI*u);d+=(i?' L':'M')+x.toFixed(1)+','+y.toFixed(1);}return d;}
+
+  /* figura: prime tre armoniche, cursore sull'istante t in unità di T1 */
+  var s=document.getElementById('g-arm');
+  if(!s)return;
+  var c=document.getElementById('c-arm'),v=document.getElementById('v-arm');
+  var X0=70,LP=280,A=28,corde=[];
+  [1,2,3].forEach(function(n,i){
+    var YC=62+i*100;
+    muro(s,X0,YC-36,YC+36,-1);muro(s,X0+LP,YC-36,YC+36,1);
+    el(s,'line',{x1:X0,y1:YC,x2:X0+LP,y2:YC,stroke:'var(--riga)','stroke-width':1});
+    el(s,'path',{d:profilo(X0,LP,YC,A,n,120),fill:'none',stroke:'var(--grigio)','stroke-width':1.1,'stroke-dasharray':'4,4'});
+    el(s,'path',{d:profilo(X0,LP,YC,-A,n,120),fill:'none',stroke:'var(--grigio)','stroke-width':1.1,'stroke-dasharray':'4,4'});
+    corde.push({n:n,YC:YC,p:el(s,'path',{fill:'none',stroke:'var(--rosso)','stroke-width':2.4})});
+    for(var k=0;k<=n;k++){var x=X0+k*LP/n;el(s,'circle',{cx:x,cy:YC,r:4,fill:'var(--blu)'});txt(s,x+(k===0?9:(k===n?-9:0)),YC+18,'N',{fill:'var(--blu)','font-size':12});}
+    for(var k=0;k<n;k++){txt(s,X0+(k+0.5)*LP/n,YC-A-5,'A',{fill:'var(--blu)','font-size':12});}
+    txt(s,X0+LP/2,YC+50,['n = 1:  λ₁ = 2L','n = 2:  λ₂ = L,  f₂ = 2f₁','n = 3:  λ₃ = 2L/3,  f₃ = 3f₁'][i],{'font-size':13});
+  });
+  function d(){
+    var t=+c.value;
+    corde.forEach(function(o){set(o.p,{d:profilo(X0,LP,o.YC,A*Math.cos(2*Math.PI*o.n*t),o.n,120)});});
+    v.innerHTML='t = '+num(t,4).replace(/0+$/,'').replace(/,$/,'')+' T₁';
+  }
+  c.addEventListener('input',d);d();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
