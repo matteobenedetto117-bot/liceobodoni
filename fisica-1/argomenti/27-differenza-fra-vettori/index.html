@@ -5,19 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Differenza fra vettori — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(320px,60%)}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,90 +51,151 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Forze e vettori &middot; Unità 26</p>
   <h1>Differenza fra vettori</h1>
-  <p class="sommario">Per sottrarre due vettori non serve una regola nuova: basta
-  rovesciare il secondo e sommarlo al primo con il metodo punta-coda che già
-  conosciamo.</p>
 </header>
+
+<p>Questa unità mostra come si sottraggono due vettori usando il vettore opposto.</p>
 
 <h2>Dalla somma alla differenza</h2>
 
-<p>Dati due vettori $\vec{F_1}$ e $\vec{F_2}$, il vettore somma si indica con $\vec{R}$
-e il vettore differenza con $\vec{D}$:</p>
+<p>Dati due vettori $\vec{F_1}$ e $\vec{F_2}$, il vettore somma si indica con $\vec{R}$ e il vettore differenza con $\vec{D}$:</p>
 
-<p>$$\vec{R} = \vec{F_1} + \vec{F_2} \qquad\qquad
-\vec{D} = \vec{F_1} - \vec{F_2} = \vec{F_1} + \left(-\vec{F_2}\right)$$</p>
+<p class="eq">$$\vec{R} = \vec{F_1} + \vec{F_2} \qquad\qquad \vec{D} = \vec{F_1} - \vec{F_2}$$</p>
 
-<p>Il termine $-\vec{F_2}$ è il vettore opposto di $\vec{F_2}$: stesso modulo, stessa
-direzione, verso rovesciato.</p>
+<p>Il vettore $-\vec{F_2}$ è il vettore opposto di $\vec{F_2}$: ha lo stesso modulo e la stessa direzione di $\vec{F_2}$, ma verso opposto.</p>
 
-<p><strong>La differenza fra due vettori $\vec{F_1} - \vec{F_2}$ è uguale alla somma di
-$\vec{F_1}$ con il vettore opposto di $\vec{F_2}$.</strong></p>
+<div class="def"><span class="et">Differenza fra vettori</span>
+<p>La differenza fra due vettori $\vec{F_1} - \vec{F_2}$ è uguale alla somma di $\vec{F_1}$ con il vettore opposto di $\vec{F_2}$.</p>
+<p class="eq">$$\vec{D} = \vec{F_1} - \vec{F_2} = \vec{F_1} + \left(-\vec{F_2}\right)$$</p>
+</div>
 
 <div class="fig">
-<svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="I due vettori di partenza: F1 orizzontale verso destra, F2 obliquo verso l'alto a destra">
-  <defs>
-    <marker id="ar" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#b03030"/></marker>
-    <marker id="av" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#2e7d4f"/></marker>
-  </defs>
-  <line x1="60" y1="55" x2="230" y2="55" stroke="#b03030" stroke-width="2.6" marker-end="url(#ar)"/>
-  <text x="138" y="42" font-size="15" fill="#b03030" font-style="italic">F₁</text>
-  <line x1="60" y1="155" x2="190" y2="100" stroke="#2e7d4f" stroke-width="2.6" marker-end="url(#av)"/>
-  <text x="142" y="132" font-size="15" fill="#2e7d4f" font-style="italic">F₂</text>
-</svg>
-<p class="did">I due vettori di partenza.</p>
+<svg id="fig-a" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="I due vettori di partenza: F1 orizzontale verso destra, F2 obliquo verso l'alto a destra"></svg>
+<p class="did">I due vettori di partenza $\vec{F_1}$ e $\vec{F_2}$.</p>
 </div>
 
 <h2>La costruzione</h2>
 
-<p>Si disegna $\vec{F_1}$, poi si attacca alla sua punta il vettore opposto
-$-\vec{F_2}$: il vettore $\vec{D}$ è la freccia che chiude il cammino, dalla coda di
-$\vec{F_1}$ alla punta di $-\vec{F_2}$.</p>
+<p>Si disegna $\vec{F_1}$ e si attacca alla sua punta la coda del vettore opposto $-\vec{F_2}$. Il vettore $\vec{D}$ è la freccia che chiude il triangolo: va dalla coda di $\vec{F_1}$ alla punta di $-\vec{F_2}$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="A sinistra F1 e il vettore opposto meno F2; a destra la costruzione punta-coda con il vettore differenza D che chiude il triangolo">
-  <defs>
-    <marker id="br" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#b03030"/></marker>
-    <marker id="bb" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#1f5fa8"/></marker>
-    <marker id="bc" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#0f9bb0"/></marker>
-  </defs>
-
-  <line x1="40" y1="60" x2="210" y2="60" stroke="#b03030" stroke-width="2.6" marker-end="url(#br)"/>
-  <text x="118" y="47" font-size="15" fill="#b03030" font-style="italic">F₁</text>
-  <line x1="210" y1="140" x2="40" y2="195" stroke="#1f5fa8" stroke-width="2.6" marker-end="url(#bb)"/>
-  <text x="128" y="152" font-size="15" fill="#1f5fa8" font-style="italic">−F₂</text>
-
-  <line x1="360" y1="70" x2="560" y2="70" stroke="#b03030" stroke-width="2.6" marker-end="url(#br)"/>
-  <text x="462" y="57" font-size="15" fill="#b03030" font-style="italic">F₁</text>
-  <line x1="560" y1="70" x2="430" y2="160" stroke="#1f5fa8" stroke-width="2.6" marker-end="url(#bb)"/>
-  <text x="510" y="142" font-size="15" fill="#1f5fa8" font-style="italic">−F₂</text>
-  <line x1="360" y1="70" x2="424" y2="164" stroke="#0f9bb0" stroke-width="2.6" marker-end="url(#bc)"/>
-  <text x="362" y="140" font-size="15" fill="#0f9bb0" font-style="italic">D</text>
-  <circle cx="360" cy="70" r="3.2" fill="#333"/>
-</svg>
-<p class="did">A sinistra $\vec{F_1}$ e l'opposto di $\vec{F_2}$; a destra i due vettori
-messi punta-coda, con $\vec{D}$ che parte dal punto di applicazione comune.</p>
+<svg id="fig-b" viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px" role="img" aria-label="A sinistra F1, F2 e il vettore opposto meno F2; a destra la costruzione punta-coda con il vettore differenza D che chiude il triangolo"></svg>
+<div class="cursore"><label for="cur-b">angolo fra $\vec{F_1}$ e $\vec{F_2}$</label><input id="cur-b" type="range" min="30" max="150" step="5" value="40"><output id="val-b" for="cur-b"></output></div>
+<div class="did-parti" style="--n:2">
+<p class="did">Il vettore $\vec{F_2}$ (tratteggiato) e il suo opposto $-\vec{F_2}$, accanto a $\vec{F_1}$.</p>
+<p class="did">I vettori $\vec{F_1}$ e $-\vec{F_2}$ messi punta-coda: $\vec{D}$ parte dalla coda di $\vec{F_1}$.</p>
+</div>
 </div>
 
-<div class="nota">
-<strong>L'ordine conta.</strong> Nella somma si possono scambiare i due vettori senza
-cambiare il risultato, nella differenza no: $\vec{F_2} - \vec{F_1}$ è il vettore opposto
-di $\vec{F_1} - \vec{F_2}$, stessa lunghezza ma verso rovesciato.
-</div>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Nella prossima unità vediamo il caso dei vettori perpendicolari, e poi le componenti
-cartesiane, che riducono somma e differenza a operazioni fra numeri.</p>
+<div class="nota"><span class="et">L'ordine conta</span>
+<p>Nella somma si possono scambiare i due vettori senza cambiare il risultato, nella differenza no: $\vec{F_2} - \vec{F_1}$ è il vettore opposto di $\vec{F_1} - \vec{F_2}$, cioè ha lo stesso modulo e la stessa direzione, ma verso opposto.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../26-prodotto-di-un-vettore-per-un-numero-e-vettore-opposto/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Prodotto di un vettore per un numero e vettore opposto</span></a><a class="successiva" href="../28-somma-di-vettori-perpendicolari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Somma di vettori perpendicolari</span></a></nav>
+<footer><p>Fisica prima &middot; Forze e vettori &middot; Unità 26</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s,tratt){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    var a={x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'};
+    if(tratt)a['stroke-dasharray']='6 4';
+    el(p,'line',a);punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  /* simbolo vettoriale con pedice e freccetta sopra, centrato in (x,y); segno a sinistra */
+  function Vt(p,x,y,lett,ped,col,coeff){
+    var t=T(p,x,y+5,lett,{'text-anchor':'middle','font-size':15,'font-style':'italic','font-weight':700,fill:col});
+    if(ped)el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'},ped);
+    freccia(p,x-7,y-11,x+(ped?11:7),y-11,col,1.3,4);
+    if(coeff)T(p,x-8,y+5,coeff,{'text-anchor':'end','font-size':15,'font-weight':700,fill:col});
+  }
+  /* etichetta a distanza d dal punto medio del vettore, sul lato indicato (+1 sinistra rispetto al verso, -1 destra) */
+  function etich(p,x1,y1,x2,y2,lato,d,lett,ped,col,coeff){
+    var L=Math.hypot(x2-x1,y2-y1)||1, nx=(y2-y1)/L*lato, ny=-(x2-x1)/L*lato;
+    Vt(p,(x1+x2)/2+nx*d,(y1+y2)/2+ny*d,lett,ped,col,coeff);
+  }
+
+  /* etichetta oltre la punta del vettore */
+  function oltre(p,x1,y1,x2,y2,d,lett,ped,col,coeff){
+    var L=Math.hypot(x2-x1,y2-y1)||1;Vt(p,x2+(x2-x1)/L*d,y2+(y2-y1)/L*d+4,lett,ped,col,coeff);
+  }
+  /* etichetta di un lato del triangolo, dalla parte opposta al baricentro G */
+  function fuori(p,x1,y1,x2,y2,G,d,lett,ped,col,coeff){
+    var L=Math.hypot(x2-x1,y2-y1)||1, nx=(y2-y1)/L, ny=-(x2-x1)/L, mx=(x1+x2)/2, my=(y1+y2)/2;
+    if((G[0]-mx)*nx+(G[1]-my)*ny>0){nx=-nx;ny=-ny;}
+    Vt(p,mx+nx*d,my+ny*d+4,lett,ped,col,coeff);
+  }
+  var C1='var(--rosso)', C2='var(--verde)', CO='var(--blu)', CD='var(--inchiostro)';
+
+  /* Figura A: i due vettori di partenza (angolo 40 gradi) */
+  (function(){
+    var S=document.getElementById('fig-a'); if(!S)return;
+    var t=40*Math.PI/180, l1=160, l2=120, O1=[120,45], O2=[140,165];
+    freccia(S,O1[0],O1[1],O1[0]+l1,O1[1],C1,3,10);
+    etich(S,O1[0],O1[1],O1[0]+l1,O1[1],-1,-20,'F','1',C1);
+    var e=[O2[0]+l2*Math.cos(t),O2[1]-l2*Math.sin(t)];
+    freccia(S,O2[0],O2[1],e[0],e[1],C2,3,10);
+    etich(S,O2[0],O2[1],e[0],e[1],1,20,'F','2',C2);
+  })();
+
+  /* Figura B: costruzione della differenza con cursore sull'angolo */
+  (function(){
+    var S=document.getElementById('fig-b'), c=document.getElementById('cur-b'), o=document.getElementById('val-b');
+    if(!S||!c)return;
+    var L1=120, L2=90;
+    el(S,'line',{x1:250,y1:15,x2:250,y2:235,stroke:'var(--riga)','stroke-width':1.2,'stroke-dasharray':'6 5'});
+    var g=el(S,'g',{});
+    function dis(){
+      var gr=+c.value, t=gr*Math.PI/180, cx=Math.cos(t), sy=Math.sin(t);
+      vuota(g);
+      /* pannello sinistro: F1, F2 tratteggiato, -F2 dalla stessa origine */
+      var O=[118,125];
+      freccia(g,O[0],O[1],O[0]+L1,O[1],C1,3,9);
+      Vt(g,O[0]+L1*0.62,O[1]+(gr>90?-16:24),'F','1',C1);
+      var p2=[O[0]+L2*cx,O[1]-L2*sy], m2=[O[0]-L2*cx,O[1]+L2*sy];
+      freccia(g,O[0],O[1],p2[0],p2[1],C2,2,8,true);
+      oltre(g,O[0],O[1],p2[0],p2[1],18,'F','2',C2);
+      freccia(g,O[0],O[1],m2[0],m2[1],CO,3,9);
+      oltre(g,O[0],O[1],m2[0],m2[1],20,'F','2',CO,'−');
+      el(g,'circle',{cx:O[0],cy:O[1],r:3,fill:CD});
+      /* pannello destro: F1, poi -F2 dalla punta di F1, D dalla coda di F1 */
+      var A=[272,75], B=[A[0]+L1,A[1]], E=[B[0]-L2*cx,B[1]+L2*sy], G=[(A[0]+B[0]+E[0])/3,(A[1]+B[1]+E[1])/3];
+      freccia(g,A[0],A[1],B[0],B[1],C1,3,9);
+      fuori(g,A[0],A[1],B[0],B[1],G,16,'F','1',C1);
+      freccia(g,B[0],B[1],E[0],E[1],CO,3,9);
+      fuori(g,B[0],B[1],E[0],E[1],G,22,'F','2',CO,'−');
+      freccia(g,A[0],A[1],E[0],E[1],CD,3.4,10);
+      fuori(g,A[0],A[1],E[0],E[1],G,18,'D','',CD);
+      el(g,'circle',{cx:A[0],cy:A[1],r:3,fill:CD});
+      o.innerHTML='angolo '+gr+'°';
+      if(window.allineaQuaderno)window.allineaQuaderno();
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+})();
+</script>
 </body>
 </html>
