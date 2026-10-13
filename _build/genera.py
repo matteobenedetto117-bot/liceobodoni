@@ -91,23 +91,18 @@ def indice(dati):
         righe = []
         for u in a['unita']:
             c = cartella_unita(u)
-            pronto = esiste(u, perc)
-            tit = ('<a href="argomenti/%s/index.html">%s</a>' % (c, u['titolo'])) if pronto else u['titolo']
-            meta = ("pagine %s degli appunti" % u['pagine']) if u['pagine'] != '—' else "testo nuovo, non presente negli appunti"
-            if not pronto:
-                meta += " · in attesa di pubblicazione"
-            righe.append(
-                '<article class="unita">'
-                '<div class="numero">%02d</div>'
-                '<div><p class="titolo">%s</p><p class="testo">%s</p><p class="meta">%s</p></div>'
-                '</article>' % (u['n'], tit, u['descrizione'], meta))
+            interno = '<span class="n">%02d</span><span class="t">%s</span>' % (u['n'], u['titolo'])
+            if esiste(u, perc):
+                righe.append('<a class="btn-unita" href="argomenti/%s/index.html">%s</a>' % (c, interno))
+            else:
+                righe.append('<span class="btn-unita attesa" aria-disabled="true">%s</span>' % interno)
         etichetta = ' <span class="badge-nuovo">nuovo</span>' if a.get('nuovo') else ''
         blocco = ''
         parte = a.get('parte')
         if parte and parte != stato['parte']:
             stato['parte'] = parte
             blocco += '<h2 class="parte">%s</h2>\n' % parte
-        blocco += ('<h3>%s%s</h3>\n%s'
+        blocco += ('<h3>%s%s</h3>\n<div class="lista-unita">\n%s\n</div>'
                    % (a['nome'], etichetta, "\n".join(righe)))
         sez.append(blocco)
     return """<!DOCTYPE html>
