@@ -1,7 +1,7 @@
 # Revisione automatica delle unità — sito "Liceo Bodoni"
 
 Esecuzione notturna, senza nessuno presente. **Non fare domande.** Ogni dubbio si risolve con le regole del §8 e si annota nel report.
-Regole in vigore dal 13/10/2026: **testo più breve, sul modello di fisica quarta**, e **nessuna formula a comparsa**: tutto è visibile all'apertura della pagina.
+Regole in vigore dal 13/10/2026: **testo breve e schematico sul modello di fisica quinta, unità 03** (`fisica-5/argomenti/03-interazione-fra-campo-magnetico-e-carica-elettrica`), e **nessuna formula a comparsa**: tutto è visibile all'apertura della pagina. All'inizio di ogni esecuzione rileggi quella pagina: è lo stile da imitare.
 Il token GitHub è nel prompt dell'attività programmata, non qui. L'elenco delle unità è in `_build/coda-notturna.txt`.
 
 ---
@@ -25,7 +25,7 @@ Un'unità saltata (già revisionata) non consuma il turno: segna l'esito e passa
 
 ## 1. Ciclo per l'unità
 
-1. **Salta** l'unità se in `_registro/<classe>.md` ha già una riga "Revisione:" datata 13/10/2026 o successiva, **tranne** quando la riga della coda termina con `rifare`. Una riga "Revisione:" più vecchia non conta: la pagina va rifatta con le regole attuali.
+1. **Salta** l'unità se in `_registro/<classe>.md` ha già una riga "Revisione (…, regole 13/10):" (fisica quinta 01–04 sono già nello stile giusto e contano come revisionate), **tranne** quando la riga della coda termina con `rifare`. Una riga "Revisione:" senza la dicitura «regole 13/10» non conta: la pagina va rifatta con le regole attuali.
 2. Individua `<classe>/argomenti/<cartella>/index.html` (fa fede `_dati/<classe>.json`, campo `cartella`; il numero della cartella può non coincidere con quello dell'unità). Leggi la pagina, la voce del registro e quella del JSON.
 3. **Pagina già revisionata in passato** (ha già l'impaginazione a quaderno): riparti dalla pagina attuale. Tieni impaginazione, figure e figure interattive; accorcia il testo (§3); rendi visibili formule, passaggi e risultati a comparsa (§5). Non recuperare testo dalle versioni precedenti.
    **Pagina mai revisionata**: riscrivi il testo (§3), applica l'impaginazione (§4), rifai le figure (§5).
@@ -57,34 +57,33 @@ Un'unità non pubblicata non blocca la coda.
 
 ---
 
-## 3. Testo: breve, sul modello di fisica quarta
+## 3. Testo: breve e schematico, sul modello di fisica quinta unità 03
 
-Gli studenti copiano la pagina sul quaderno; le spiegazioni le dà il docente a voce. La pagina è fatta di **disegni e calcoli**, tenuti insieme da **poche frasi di raccordo e spiegazione**. Il modello è fisica quarta (per esempio unità 06–07), **ancora un po' più asciutta**.
+Gli studenti copiano la pagina sul quaderno; le spiegazioni le dà il docente a voce. La pagina è fatta di **disegni, elenchi, formule e calcoli**, tenuti insieme da **poche frasi brevi di raccordo**. Il modello è **fisica quinta, unità 03** (anche 04): rileggila e imitane il passo.
 
-**Si mantiene**: definizioni, leggi, formule, unità di misura, esempi svolti, figure.
-**Si elimina**: introduzioni lunghe, cenni storici, aneddoti, ripetizioni, rimandi ad altre unità, frasi che ripetono ciò che formula o figura mostrano già, commenti finali ("è la conservazione dell'energia applicata a…") quando non aggiungono nulla.
+**Si mantiene**: definizioni, leggi, formule, unità di misura, ipotesi e condizioni di validità, esempi svolti, figure.
+**Si elimina**: introduzioni, cenni storici, aneddoti, ripetizioni, rimandi ad altre unità, frasi che ripetono ciò che formula, elenco o figura mostrano già, commenti finali.
 
-Regole:
-* **Lunghezza**: indicativamente 120–180 parole di testo per unità (formule, didascalie e scritte nei disegni escluse). Una pagina sopra le 220 parole va accorciata; una più lunga del necessario solo perché l'argomento è ampio può arrivare a 250.
-* **Fra due elementi** (titoletto, formula, figura, riquadro) al massimo **una o due frasi**. Mai paragrafi di tre o più frasi.
-* Frasi **brevi ma complete**, con soggetto e verbo: niente stile telegrafico ("Se la pressione resta costante, il volume è direttamente proporzionale alla temperatura assoluta", non "P costante: V ∝ T").
-* Elenchi puntati solo per contenuti che sono davvero un elenco (proprietà, casi, condizioni); una voce non supera due righe.
-* Registro neutro e tecnico.
-* Introduzione: **una frase**, oppure nessuna se il titolo basta.
-* Definizioni e leggi in riquadro `.def` (enunciato in una o due frasi, poi la formula); avvertenze in `.nota` (una frase, al massimo due).
-* Formule in evidenza (§4), con la legenda dei simboli in una sola frase.
-* **Esempio**: una frase con i dati e la domanda, poi i calcoli in riquadri `.eq` uno sotto l'altro, poi il risultato. Le frasi di collegamento fra i passaggi si scrivono solo se il passaggio non è evidente, e sono di poche parole.
-* Didascalie: una frase breve.
-* Nessun simbolo di proporzionalità (∝, `\propto`, `&prop;`): "direttamente proporzionale a…".
-* Unità: volumi in m³ (notazione esponenziale se scomodi, oppure fattore sull'asse: "V (10⁻⁵ m³)"), pressioni in Pa o kPa, temperature in K.
+Come è fatta la pagina modello (e come devono essere le altre):
+* **Apertura**: una frase o una domanda che pone il problema ("Carica $q$ in un campo magnetico uniforme $\vec B$: in quali condizioni risente di una forza?"). Niente frase "L'unità tratta…".
+* **Casi e condizioni in elenco**, una riga per voce, nella forma *caso → conseguenza* ("carica ferma → nessuna forza;"). Le voci d'elenco possono essere brevi e senza verbo.
+* **Dipendenze in elenco** introdotte da una frase ("La forza risulta direttamente proporzionale a:" + voci "la carica $q$;", "l'intensità $B$ del campo.").
+* **Frasi di raccordo**: una sola frase, breve e completa, fra due elementi (figura, elenco, formula, riquadro). Introduce ciò che segue o dice da dove viene la formula ("Le tre dipendenze si riassumono in un'unica relazione:"). Mai due paragrafi di fila.
+* **Formule**: quelle intermedie in riquadro azzurro `.eq`; la legge o definizione finale in `.def` (con la formula inversa sulla stessa riga se serve); l'unità di misura in un `.def` a sé, in una riga ("Tesla (T): 1 T = 1 N·s/(C·m)").
+* **Didascalie** brevissime, anche senza verbo ("Carica ferma"; "θ = 0° o 180°: forza nulla; θ = 90°: forza massima"); nelle figure a più pannelli una didascalia per pannello.
+* **Esempio**: "Dati: … . Calcolare …" in una riga, poi una sola `.eq` con formula, sostituzione e risultato (più `.eq` solo se i passaggi sono davvero diversi). Risultato con le cifre significative dei dati.
+* `.nota` solo per un errore tipico o una condizione importante, in una frase.
+* **Lunghezza**: indicativamente 100–160 parole fra titolo e barra di navigazione (formule `$$…$$` e didascalie escluse). Sopra 200 va accorciata.
+* Registro neutro e tecnico; nessun simbolo di proporzionalità (∝, `\propto`, `&prop;`): "direttamente proporzionale a…".
+* Unità: volumi in m³ (o fattore sull'asse: "V (10⁻⁵ m³)"), pressioni in Pa o kPa, temperature in K.
 * Titolo: quello attuale, in `<h1>` e `<title>` ("Titolo — Fisica quarta").
-* Togli `<p class="sommario">`, le sezioni "Nelle prossime unità" / "Dove si continua": restano link "← Classe", occhiello "Argomento · Unità NN", titolo.
+* Togli `<p class="sommario">` e le sezioni "Nelle prossime unità" / "Dove si continua": restano link "← Classe", occhiello "Argomento · Unità NN", titolo.
 
 ### Titoletti
-* Si tengono gli `<h2>` che aprono una sezione: un nuovo concetto, una nuova legge, un caso diverso, un procedimento. Titoletto breve e descrittivo.
-* Si tolgono quelli che coprono una o due righe, quelli che ripetono il titolo, quelli generici ("Introduzione", "Riepilogo", "In sintesi") e "Nelle prossime unità".
-* Gli esempi hanno il titoletto "Esempio" ("Esempio 1", "Esempio 2").
-* Se gli esempi sono più di due, tienine due (i più rappresentativi) e registra quali sono stati tolti.
+* Pochi. In una pagina breve con un solo argomento basta il titoletto "Esempio" (come nel modello).
+* Si tiene un `<h2>` solo quando la pagina contiene argomenti davvero distinti (due leggi, due casi trattati separatamente, un procedimento a sé); titoletto breve e descrittivo.
+* Si tolgono quelli generici ("Introduzione", "Riepilogo", "In sintesi"), quelli che ripetono il titolo, quelli su una o due righe e "Nelle prossime unità".
+* Esempi: "Esempio" ("Esempio 1", "Esempio 2"). Se sono più di due, tienine due e registra quali sono stati tolti.
 
 ### Controllo concettuale (obbligatorio)
 Rileggi testo, formule e disegni; verifica calcoli, limiti e unità con SymPy o Python. Correggi in modo sobrio, senza citare argomenti non trattati, e registra ogni correzione. Accorciando, **non togliere ipotesi e condizioni di validità** (per esempio "per una quantità di gas data", "x_A ≠ x_B", "f derivabile due volte"). Errori già incontrati, da cercare:
@@ -102,7 +101,7 @@ Rileggi testo, formule e disegni; verifica calcoli, limiti e unità con SymPy o 
 
 ## 4. Impaginazione "a quaderno"
 
-Copia il blocco `<style>` e lo script di allineamento da un'unità di fisica quarta già revisionata (per esempio unità 34–35).
+Copia il blocco `<style>` e lo script di allineamento da fisica quinta unità 03 (o da fisica quarta unità 34–35, che hanno anche `.nota`, `.cursore .val` ed `.eq.principio`).
 
 * `html{font-size:165%}`, `:root{--r:1.8rem}` (distanza fra righe). Sfondo del `body` a righe ogni `--r`, riga a `1.3rem` dall'inizio del rigo; `line-height:var(--r)`.
 * `h1` 2.4rem, interlinea `2*var(--r)`, spostato giù .5rem; `h2` 1.45rem, interlinea `var(--r)`, `margin-top:var(--r)`; intestazione senza bordo.
@@ -154,7 +153,7 @@ Con Playwright nel sandbox cloud (Chromium in `/opt/pw-browsers/chromium`), pagi
 2. Screenshot della pagina intera e di ogni figura; per ogni cursore due posizioni (minimo e massimo); per ogni ▶ a metà e alla fine.
 3. Esamina gli screenshot: testo sulle righe (anche dopo le figure); etichette non sovrapposte né fuori riquadro; figure coerenti coi valori del testo; **tutte le formule e i risultati visibili all'apertura**.
 4. `grep` di controllo: assenza di `class="sommario"`, "prossime unità", `∝`, `\propto`, `&prop;`, `btn-ris`, `btn-tutti`, `btn-passo`, `barra-ris`, ` hidden` su elementi di testo o formule.
-5. Conteggio parole del testo (paragrafi, voci di elenco e riquadri; formule e didascalie escluse): se supera 220, accorcia ancora (vedi §3) o motiva nel report.
+5. Conteggio parole fra `<h1>` e la barra di navigazione (formule `$$…$$` e didascalie escluse): se supera 200, accorcia ancora (vedi §3) o motiva nel report. Confronta a occhio lo screenshot con quello di fisica quinta unità 03: stessa densità di testo.
 
 MathJax non si carica nel sandbox: le formule appaiono come `$...$`, è normale.
 
@@ -180,7 +179,8 @@ A fine esecuzione (§0): commit di coda e report, push, semaforo `libero`.
 |---|---|
 | Titolo | Resta quello attuale. |
 | Titoletti | Si tengono quelli che aprono una sezione; si tolgono solo quelli superflui (§3). |
-| Frase utile ma che allunga la pagina | Se ripete una formula o una figura, toglila; se contiene un'ipotesi o una condizione, tienila in forma breve. |
+| Frase utile ma che allunga la pagina | Se ripete una formula, un elenco o una figura, toglila; se contiene un'ipotesi o una condizione, trasformala in voce d'elenco o in mezza riga. |
+| Spiegazione in più frasi | Riducila a un elenco *caso → conseguenza* o a una frase di raccordo. |
 | Formule o risultati a comparsa | Rendili visibili, togli tasti e script relativi. |
 | Contenuto che sembra errato ma non è verificabile | Non modificarlo; segnalalo nel report. |
 | Correzione concettuale certa (verificata con calcolo) | Applicala e registrala. |
