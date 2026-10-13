@@ -5,18 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Derivate successive e tangente inflessionale — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.barra-ris{display:flex;justify-content:center;margin-top:var(--r)}
+.btn-tutti{font-family:var(--sans);font-size:.85rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:8px 18px;cursor:pointer}
+.btn-tutti:hover{background:#163a5b}
+.btn-ris{font-family:var(--sans);font-size:.78rem;color:var(--blu);background:#fff;
+  border:1px solid var(--blu);border-radius:8px;padding:4px 12px;cursor:pointer;white-space:nowrap}
+.btn-ris:hover{background:var(--blu-chiaro)}
+.btn-tutti:focus-visible,.btn-ris:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.es{display:grid;grid-template-columns:1fr auto;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .btn-ris{grid-column:2}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.ris[hidden]{display:none}
+.passo[hidden]{display:none}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.comandi{display:flex;justify-content:center;gap:10px;margin-top:var(--r)}
+.btn-passo{font-family:var(--sans);font-size:.82rem;color:#fff;background:var(--blu);border:0;
+  border-radius:8px;padding:6px 16px;cursor:pointer}
+.btn-passo:hover{background:#163a5b}
+.btn-passo:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-passo.chiaro{color:var(--blu);background:#fff;border:1px solid var(--blu)}
+.btn-passo.chiaro:hover{background:var(--blu-chiaro)}
+.btn-passo[hidden]{display:none}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
 </style>
 </head>
 <body>
@@ -26,109 +102,306 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Massimi, minimi e flessi &middot; Unità 27</p>
   <h1>Derivate successive e tangente inflessionale</h1>
-  <p class="sommario">Quando in un punto stazionario risulta anche $f''(x_0)=0$, il segno
-  della derivata seconda non basta più a dire se si tratta di un massimo, di un minimo o
-  di un flesso: bisogna salire alle derivate successive finché una non è diversa da zero.
-  Lo stesso punto di flesso, se obliquo, ha una sua retta tangente: la tangente
-  inflessionale.</p>
 </header>
+
+<p>Quando in un punto stazionario anche la derivata seconda è nulla, per classificare il punto si usano le derivate successive. In un punto di flesso si studia inoltre la retta tangente, detta tangente inflessionale.</p>
+
+<div class="barra-ris"><button type="button" class="btn-tutti" id="b-tutti">Mostra tutti i risultati</button></div>
 
 <h2>Massimo, minimo o flesso orizzontale</h2>
 
-<p>In un punto stazionario, dove $f'(x_0)=0$, il segno di $f''(x_0)$ decide già il
-carattere del punto.</p>
+<p>In un punto stazionario $x_0$, cioè in un punto in cui $f'(x_0)=0$, il segno di $f''(x_0)$ indica di solito il carattere del punto.</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 480 200" width="100%" style="max-width:560px">
-<g transform="translate(10,10)">
-<line x1="8" y1="150" x2="148" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="78" y1="165" x2="78" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M 20 130 C 45 55 65 40 78 40 C 91 40 111 55 136 130" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="55" y1="40" x2="101" y2="40" stroke="var(--verde)" stroke-width="1.3" stroke-dasharray="3 3"/>
-<circle cx="78" cy="40" r="3.4" fill="var(--verde)"/>
-<text x="30" y="180" font-family="var(--sans)" font-size="11">massimo</text>
-<text x="8" y="196" font-family="var(--sans)" font-size="10" fill="var(--grigio)">f&prime;(x&#8320;)=0, f&Prime;(x&#8320;)&lt;0</text>
-</g>
-<g transform="translate(175,10)">
-<line x1="8" y1="150" x2="148" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="78" y1="165" x2="78" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M 20 55 C 45 130 65 145 78 145 C 91 145 111 130 136 55" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="55" y1="145" x2="101" y2="145" stroke="var(--verde)" stroke-width="1.3" stroke-dasharray="3 3"/>
-<circle cx="78" cy="145" r="3.4" fill="var(--verde)"/>
-<text x="34" y="180" font-family="var(--sans)" font-size="11">minimo</text>
-<text x="8" y="196" font-family="var(--sans)" font-size="10" fill="var(--grigio)">f&prime;(x&#8320;)=0, f&Prime;(x&#8320;)&gt;0</text>
-</g>
-<g transform="translate(340,10)">
-<line x1="8" y1="150" x2="148" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="78" y1="165" x2="78" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M 20 130 C 45 100 65 90 78 90 C 91 90 111 80 136 40" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="55" y1="90" x2="101" y2="90" stroke="var(--verde)" stroke-width="1.3" stroke-dasharray="3 3"/>
-<circle cx="78" cy="90" r="3.4" fill="var(--verde)"/>
-<text x="10" y="180" font-family="var(--sans)" font-size="11">flesso orizzontale</text>
-<text x="8" y="196" font-family="var(--sans)" font-size="10" fill="var(--grigio)">f&prime;(x&#8320;)=0, f&Prime;(x&#8320;)=0</text>
-</g>
-</svg>
-<figcaption>I tre esiti di un punto stazionario, secondo il segno di $f''(x_0)$.</figcaption>
-</figure>
+<div class="fig">
+<div class="pannelli" style="--n:3">
+<svg id="g-max" viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:160px" role="img" aria-label="Massimo relativo con tangente orizzontale"></svg>
+<svg id="g-min" viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:160px" role="img" aria-label="Minimo relativo con tangente orizzontale"></svg>
+<svg id="g-fo" viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:160px" role="img" aria-label="Flesso orizzontale con tangente orizzontale"></svg>
+</div>
+<div class="did-parti" style="--n:3">
+<p class="did">Se $f'(x_0)=0$ e $f''(x_0)&lt;0$, $x_0$ è un massimo relativo.</p>
+<p class="did">Se $f'(x_0)=0$ e $f''(x_0)&gt;0$, $x_0$ è un minimo relativo.</p>
+<p class="did">Qui $f'(x_0)=0$ e $f''(x_0)=0$, e $x_0$ è un flesso orizzontale.</p>
+</div>
+</div>
 
-<p>Se anche $f''(x_0)=0$, come nel terzo caso, il segno di $f''$ da solo non distingue
-ancora un flesso orizzontale da un massimo o un minimo molto piatto: bisogna guardare
-oltre.</p>
+<p>Se anche $f''(x_0)=0$, il segno della derivata seconda non basta: il punto può essere un flesso orizzontale, come nel terzo grafico, ma anche un massimo o un minimo relativo. In questo caso si ricorre alle derivate successive.</p>
 
 <h2>Il criterio delle derivate successive</h2>
 
 <div class="def"><span class="et">Teorema</span>
-<p>Sia $f$ continua in $[a,b]$ e derivabile in $]a,b[$, e sia $x_0$ un punto interno in
-cui
-$$f'(x_0)=f''(x_0)=\dots=f^{(n-1)}(x_0)=0, \qquad f^{(n)}(x_0)\ne0.$$
-Se $n$ è <b>pari</b>: $x_0$ è un massimo relativo se $f^{(n)}(x_0)&lt;0$, un minimo
-relativo se $f^{(n)}(x_0)&gt;0$. Se $n$ è <b>dispari</b>: $x_0$ è un punto di flesso a
-tangente orizzontale, discendente se $f^{(n)}(x_0)&lt;0$, ascendente se
-$f^{(n)}(x_0)&gt;0$.</p></div>
+<p>Sia $f$ derivabile $n$ volte in un intorno di $x_0$, con derivata $n$-esima continua in $x_0$, e sia</p>
+<p class="eq">$$f'(x_0)=f''(x_0)=\dots=f^{(n-1)}(x_0)=0, \qquad f^{(n)}(x_0)\ne0.$$</p>
+<ul>
+<li>Se $n$ è <b>pari</b>, $x_0$ è un massimo relativo quando $f^{(n)}(x_0)&lt;0$ e un minimo relativo quando $f^{(n)}(x_0)&gt;0$.</li>
+<li>Se $n$ è <b>dispari</b>, $x_0$ è un punto di flesso a tangente orizzontale, discendente quando $f^{(n)}(x_0)&lt;0$ e ascendente quando $f^{(n)}(x_0)&gt;0$.</li>
+</ul></div>
 
-<p>In pratica si deriva ripetutamente finché il risultato in $x_0$ non è diverso da zero:
-l'ordine $n$ di quella derivata e il suo segno bastano a classificare il punto, senza
-bisogno di studiare il segno di $f''$ negli intorni.</p>
+<p>In pratica si deriva più volte e si calcola ogni derivata in $x_0$, finché si trova un valore diverso da zero. L'ordine $n$ di quella derivata e il suo segno bastano a classificare il punto, senza studiare il segno di $f''$ vicino a $x_0$.</p>
 
-<h2>Esempio</h2>
+<h2>Esempio 1</h2>
 
-<p>Studiamo le derivate di $f(x)=x^8-x^7+x^3$ in $x_0=0$:
-$$f'(x)=8x^7-7x^6+3x^2, \quad f'(0)=0;$$
-$$f''(x)=56x^6-42x^5+6x, \quad f''(0)=0;$$
-$$f'''(x)=336x^5-210x^4+6, \quad f'''(0)=6.$$
-La prima derivata diversa da zero in $x_0=0$ è la terza, $n=3$: essendo dispari e
-$f'''(0)=6&gt;0$, $x_0=0$ è un flesso a tangente orizzontale <b>ascendente</b>.</p>
+<p>Si classifica il punto stazionario $x_0=0$ della funzione seguente.</p>
+
+<div class="es">
+<p class="eq quesito">$$f(x)=x^8-x^7+x^3$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r1">risultato</button>
+<p class="eq ris" id="r1" hidden>$$x_0=0 \text{ è un flesso a tangente orizzontale ascendente}$$</p>
+</div>
+
+<div class="passi" id="passi1">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> Si calcola la derivata prima in $0$.</p>
+<p class="eq">$$f'(x)=8x^7-7x^6+3x^2 \qquad f'(0)=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> La derivata seconda in $0$ è ancora nulla.</p>
+<p class="eq">$$f''(x)=56x^6-42x^5+6x \qquad f''(0)=0$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> La derivata terza in $0$ è diversa da zero.</p>
+<p class="eq">$$f'''(x)=336x^5-210x^4+6 \qquad f'''(0)=6$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">4.</span> L'ordine $n=3$ è dispari e la derivata è positiva.</p>
+<p class="eq">$$n=3,\quad f'''(0)=6&gt;0 \ \Longrightarrow\ \text{flesso orizzontale ascendente}$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi1">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi1" hidden>&#8634;</button>
+</div>
 
 <h2>La tangente inflessionale</h2>
 
 <div class="def"><span class="et">Definizione</span>
-<p>In un flesso obliquo, la <b>tangente inflessionale</b> è la retta tangente al grafico
-nel punto di flesso.</p></div>
+<p>La retta tangente al grafico in un punto di flesso $x_0$ si chiama <b>tangente inflessionale</b>. In un flesso obliquo il suo coefficiente angolare è $f'(x_0)\ne0$.</p>
+<p class="eq">$$y-f(x_0)=f'(x_0)\,(x-x_0)$$</p></div>
 
-<p>Riprendiamo $f(x)=4x^3-3x+1$, di cui sappiamo già che $x_0=0$ è un flesso obliquo, con
-$f'(0)=-3$ e $f(0)=1$. Il coefficiente angolare della tangente inflessionale è
-$m=f'(0)=-3$, e la retta per $(0,1)$ è
-$$y-1=-3(x-0) \ \Longrightarrow\ y=-3x+1.$$</p>
+<p>Nel punto di flesso la concavità cambia, quindi la tangente attraversa il grafico: da una parte il grafico sta sopra la tangente, dall'altra sotto.</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 260 190" width="100%" style="max-width:280px">
-<line x1="15" y1="150" x2="245" y2="150" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="130" y1="175" x2="130" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="235" y="144" font-family="var(--sans)" font-size="10">x</text>
-<text x="120" y="20" font-family="var(--sans)" font-size="10">y</text>
-<path d="M 40 60 C 80 20 110 60 130 95 C 150 130 180 175 220 100" fill="none" stroke="var(--rosso)" stroke-width="2.1"/>
-<line x1="55" y1="185" x2="215" y2="65" stroke="var(--verde)" stroke-width="1.4" stroke-dasharray="4 3"/>
-<circle cx="130" cy="95" r="3.6" fill="var(--verde)"/>
-<text x="138" y="92" font-family="var(--sans)" font-size="10" fill="var(--grigio)">(0,1)</text>
-<text x="184" y="78" font-family="var(--sans)" font-size="10" fill="var(--verde)">y=&minus;3x+1</text>
-</svg>
-<figcaption>La tangente inflessionale in $x_0=0$ per $f(x)=4x^3-3x+1$.</figcaption>
-</figure>
+<div class="fig">
+<svg id="g-tang" viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img"
+     aria-label="Grafico di f(x) uguale a 4x al cubo meno 3x più 1 con un punto mobile e la sua tangente; in x uguale a 0 la tangente attraversa il grafico"></svg>
+<div class="cursore"><label for="s-x0">$x_0$</label>
+<input type="range" id="s-x0" min="-1" max="1" step="0.05" value="-0.6">
+<span class="val" id="v-x0"></span></div>
+<p class="did">Il punto si muove sul grafico di $f(x)=4x^3-3x+1$ con la sua tangente: in $x_0=0$ la tangente attraversa il grafico ed è la tangente inflessionale.</p>
+</div>
 
+<h2>Esempio 2</h2>
+
+<p>Si scrive l'equazione della tangente inflessionale della funzione seguente.</p>
+
+<div class="es">
+<p class="eq quesito">$$f(x)=4x^3-3x+1$$</p>
+<button type="button" class="btn-ris" aria-expanded="false" aria-controls="r2">risultato</button>
+<p class="eq ris" id="r2" hidden>$$y=-3x+1$$</p>
+</div>
+
+<div class="passi" id="passi2">
+<div class="passo" hidden>
+<p class="spieg"><span class="num">1.</span> La derivata seconda cambia segno in $x_0=0$, che è un punto di flesso.</p>
+<p class="eq">$$f'(x)=12x^2-3 \qquad f''(x)=24x$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">2.</span> La derivata prima in $0$ non è nulla: il flesso è obliquo.</p>
+<p class="eq">$$f'(0)=-3 \qquad f(0)=1$$</p>
+</div>
+<div class="passo" hidden>
+<p class="spieg"><span class="num">3.</span> Si scrive la retta per $(0;1)$ con coefficiente angolare $-3$.</p>
+<p class="eq">$$y-1=-3\,(x-0) \ \Longrightarrow\ y=-3x+1$$</p>
+</div>
+</div>
+
+<div class="comandi">
+<button type="button" class="btn-passo" data-passi="passi2">passo successivo</button>
+<button type="button" class="btn-passo chiaro" data-ricomincia="passi2" hidden>&#8634;</button>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../27-concavita-derivata-seconda-e-flessi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Concavità, derivata seconda e flessi</span></a><a class="successiva" href="../29-schema-generale-in-otto-passi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Schema generale in otto passi</span></a></nav>
 <footer><p>Matematica quinta &middot; Massimi, minimi e flessi &middot; Unità 27</p></footer>
-
 </div>
+
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def .et,.fig,.nota,.def,.barra-ris,.es,.passo .spieg,.comandi,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+/* retta per (x0;y0) con pendenza m, aggiornabile */
+function retta(P,col,w,dash){var o={stroke:col,'stroke-width':w||1.8};if(dash)o['stroke-dasharray']=dash;return P.add(el('line',o),'sopra');}
+function poniRetta(P,r,x0,y0,m){var a=P.xr[0]-1,b=P.xr[1]+1;
+  r.setAttribute('x1',P.X(a));r.setAttribute('y1',P.Y(y0+m*(a-x0)));r.setAttribute('x2',P.X(b));r.setAttribute('y2',P.Y(y0+m*(b-x0)));}
+function sposta(P,c,x,y){c.setAttribute('cx',P.X(x));c.setAttribute('cy',P.Y(y));}
+
+
+
+
+
+/* ---------- massimo, minimo, flesso orizzontale ---------- */
+function stazionario(id,f){
+  var P=new Piano(document.getElementById(id),[-1.5,1.5],[-1.5,1.5],{l:12,r:18,t:18,b:12});
+  P.curva(f,-1.5,1.5,400,'var(--blu)',2);
+  var r=retta(P,'var(--rosso)',1.5,'5,4'); poniRetta(P,r,0,f(0),0);
+  pallino(P,0,f(0),true,'var(--rosso)');
+}
+stazionario('g-max',function(x){return -0.9*x*x+0.7;});
+stazionario('g-min',function(x){return 0.9*x*x-0.7;});
+stazionario('g-fo',function(x){return 0.8*x*x*x;});
+
+/* ---------- f(x)=4x^3-3x+1: tangente mobile ---------- */
+(function(){
+  var P=new Piano(document.getElementById('g-tang'),[-1.25,1.25],[-2.6,4.6],{l:30,r:26,t:24,b:16});
+  P.assi([1],[1,3]);
+  function f(x){return 4*x*x*x-3*x+1;} function f1(x){return 12*x*x-3;} function f2(x){return 24*x;}
+  P.curva(f,-1.25,1.25,400,'var(--blu)');
+  var r=retta(P,'var(--rosso)',1.6,'6,4'), pt=pallino(P,0,1,true,'var(--rosso)');
+  var sl=document.getElementById('s-x0'), v=document.getElementById('v-x0');
+  function agg(){
+    var x=+sl.value; if(Math.abs(x)<1e-9)x=0;
+    var y=f(x), zero=(x===0);
+    sposta(P,pt,x,y); poniRetta(P,r,x,y,f1(x));
+    r.setAttribute('stroke',zero?'var(--verde)':'var(--rosso)');
+    var s='x₀ = '+num(x)+' &nbsp; f′(x₀) = '+num(f1(x))+' &nbsp; f″(x₀) = '+num(f2(x),1)+' &nbsp; ';
+    if(zero) s+='<span class="ok">tangente inflessionale y = −3x + 1</span>';
+    else s+=(x>0?'concavità verso l\'alto':'concavità verso il basso');
+    v.innerHTML=s;
+  }
+  sl.addEventListener('input',agg);agg();
+})();
+})();
+</script>
+<script>
+/* --- risultati a comparsa --- */
+(function(){
+  var bottoni=[].slice.call(document.querySelectorAll('.btn-ris'));
+  var tutti=document.getElementById('b-tutti');
+  function ris(b){return document.getElementById(b.getAttribute('aria-controls'));}
+  function mostra(b,vero){
+    var r=ris(b); if(!r)return;
+    r.hidden=!vero;
+    b.setAttribute('aria-expanded',vero?'true':'false');
+    b.textContent=vero?'nascondi':'risultato';
+  }
+  function aggiornaTutti(){
+    var nascosti=bottoni.some(function(b){return ris(b).hidden;});
+    tutti.textContent=nascosti?'Mostra tutti i risultati':'Nascondi tutti i risultati';
+  }
+  bottoni.forEach(function(b){
+    b.addEventListener('click',function(){
+      mostra(b,ris(b).hidden);
+      aggiornaTutti();
+      if(window.allineaQuaderno)allineaQuaderno();
+    });
+  });
+  if(tutti)tutti.addEventListener('click',function(){
+    var vero=bottoni.some(function(b){return ris(b).hidden;});
+    bottoni.forEach(function(b){mostra(b,vero);});
+    aggiornaTutti();
+    if(window.allineaQuaderno)allineaQuaderno();
+  });
+  aggiornaTutti();
+})();
+</script>
+<script>
+/* --- passaggi uno per volta --- */
+(function(){
+  [].slice.call(document.querySelectorAll('.btn-passo[data-passi]')).forEach(function(b){
+    var id=b.getAttribute('data-passi');
+    var cont=document.getElementById(id);
+    var re=document.querySelector('.btn-passo[data-ricomincia="'+id+'"]');
+    var passi=[].slice.call(cont.querySelectorAll('.passo'));
+    var n=0;
+    function mostra(k){
+      n=k;
+      passi.forEach(function(p,i){p.hidden=i>=n;});
+      b.hidden = n>=passi.length;
+      if(re) re.hidden = n===0;
+      b.textContent = n===0?'primo passaggio':'passo successivo';
+      if(window.allineaQuaderno)allineaQuaderno();
+    }
+    b.addEventListener('click',function(){mostra(n+1);});
+    if(re) re.addEventListener('click',function(){mostra(0);});
+    mostra(0);
+  });
+})();
+</script>
 </body>
 </html>
