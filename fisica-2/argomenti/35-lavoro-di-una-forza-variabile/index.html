@@ -5,16 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lavoro di una forza variabile — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -23,114 +55,189 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Lavoro ed energia &middot; Unità 25</p>
   <h1>Lavoro di una forza variabile</h1>
-  <p class="sommario">Finora la forza è rimasta costante. Quando invece
-  cambia intensità durante lo spostamento, il prodotto $F\cdot s$ non
-  basta più: serve un modo più generale di leggere il lavoro sul grafico
-  forza-spostamento.</p>
 </header>
 
-<h2>Il caso della forza costante come area</h2>
+<p>L'unità mostra come si calcola il lavoro quando la forza cambia intensità durante lo spostamento. Il lavoro si legge come un'area sul grafico forza-spostamento.</p>
 
-<p>Se la forza $\vec F$ è costante da $s_1$ a $s_2$, il lavoro è
-$L=F\cdot s$, con $s=s_2-s_1$. Sul grafico di $F$ in funzione di $s$
-questo prodotto è l'area del rettangolo di altezza $F$ fra $s_1$ e
-$s_2$.</p>
+<h2>Forza costante: il lavoro come area</h2>
+<p>Se la forza $\vec F$ è costante e parallela allo spostamento da $s_1$ a $s_2$, il lavoro è il prodotto della forza per lo spostamento:</p>
+<p class="eq">$$L = F\cdot s \qquad s = s_2 - s_1$$</p>
+<p>Sul grafico di $F$ in funzione di $s$ questo prodotto è l'area del rettangolo che ha per base l'intervallo da $s_1$ a $s_2$ e per altezza $F$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 380 170" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="a35f" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="40" y1="140" x2="360" y2="140" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a35f)"/>
-<line x1="40" y1="140" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a35f)"/>
-<text x="365" y="145" font-size="14" font-family="var(--sans)">s</text>
-<text x="24" y="24" font-size="14" font-family="var(--sans)">F</text>
-<line x1="40" y1="60" x2="330" y2="60" stroke="#9aa7b8" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="18" y="64" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">F</text>
-<rect x="130" y="60" width="120" height="80" fill="var(--verde)" opacity=".22" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="180" y="105" font-size="15" fill="var(--verde)" font-family="var(--sans)">L</text>
-<line x1="130" y1="140" x2="130" y2="150" stroke="var(--rosso)" stroke-width="1.4"/>
-<line x1="250" y1="140" x2="250" y2="150" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="122" y="163" font-size="13" fill="var(--rosso)" font-family="var(--sans)">s<tspan baseline-shift="sub" font-size="9">1</tspan></text>
-<text x="242" y="163" font-size="13" fill="var(--rosso)" font-family="var(--sans)">s<tspan baseline-shift="sub" font-size="9">2</tspan></text>
-</svg>
-<p class="did">Forza costante: il lavoro è l'area del rettangolo fra
-$s_1$ e $s_2$.</p>
+<svg id="g-cost" viewBox="0 0 420 206" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico forza-spostamento con forza costante di 5 newton e rettangolo colorato fra s1 e s2"></svg>
+<div class="cursore"><label for="c-cost">posizione finale $s_2$</label><input id="c-cost" type="range" min="3" max="9" step="0.1" value="7"><span class="val" id="v-cost"></span></div>
+<p class="did">Con una forza costante di 5 N il lavoro è l'area del rettangolo fra $s_1$ e $s_2$.</p>
 </div>
 
-<h2>Forza non costante: il lavoro come area sotto la curva</h2>
+<h2>Forza variabile: il lavoro come area sotto la curva</h2>
+<p>Quando $F$ cambia con $s$, il prodotto $F\cdot s$ non si può più usare, perché la forza non ha un unico valore. La lettura del lavoro come area, invece, resta valida.</p>
 
-<p>La stessa lettura vale anche quando $F$ cambia con $s$:</p>
-
-<div class="risultato">
-<p>Il lavoro compiuto da una forza per spostare un oggetto da $s_1$ a $s_2$
-è uguale all'area della regione di piano compresa tra la curva che
-rappresenta la forza nell'intervallo $s_1$–$s_2$ e l'asse $s$.</p>
+<div class="def"><span class="et">Lavoro di una forza variabile</span>
+<p>Il lavoro compiuto da una forza per spostare un oggetto da $s_1$ a $s_2$ è uguale all'area della regione di piano compresa fra la curva che rappresenta la forza nell'intervallo da $s_1$ a $s_2$ e l'asse $s$.</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 380 170" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="a35f2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="40" y1="140" x2="360" y2="140" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a35f2)"/>
-<line x1="40" y1="140" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a35f2)"/>
-<text x="365" y="145" font-size="14" font-family="var(--sans)">s</text>
-<text x="24" y="24" font-size="14" font-family="var(--sans)">F</text>
-<path d="M110,135 C150,60 210,45 270,80 L270,140 L110,140 Z" fill="var(--verde)" opacity=".22" stroke="none"/>
-<path d="M90,140 C130,55 220,35 290,90" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="185" y="100" font-size="15" fill="var(--verde)" font-family="var(--sans)">L</text>
-<line x1="110" y1="140" x2="110" y2="150" stroke="var(--rosso)" stroke-width="1.4"/>
-<line x1="270" y1="140" x2="270" y2="150" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="102" y="163" font-size="13" fill="var(--rosso)" font-family="var(--sans)">s<tspan baseline-shift="sub" font-size="9">1</tspan></text>
-<text x="262" y="163" font-size="13" fill="var(--rosso)" font-family="var(--sans)">s<tspan baseline-shift="sub" font-size="9">2</tspan></text>
-</svg>
-<p class="did">Forza non costante: il lavoro è l'area sotto la curva $F(s)$
-fra $s_1$ e $s_2$.</p>
+<svg id="g-var" viewBox="0 0 420 206" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico forza-spostamento con forza variabile e area colorata sotto la curva fra s1 e s2"></svg>
+<div class="cursore"><label for="c-var">posizione finale $s_2$</label><input id="c-var" type="range" min="3" max="9" step="0.1" value="7"><span class="val" id="v-var"></span></div>
+<p class="did">Con una forza variabile il lavoro è l'area sotto la curva $F(s)$ fra $s_1$ e $s_2$.</p>
+</div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Nel grafico $F$ è la componente della forza nella direzione dello spostamento. Se in un tratto questa componente è negativa, l'area sotto l'asse $s$ si conta con il segno meno.</p>
 </div>
 
 <h2>Esempio</h2>
-
-<p>Il grafico mostra una forza che cresce, resta costante e poi
-decresce. Si divide l'area in tre figure: un triangolo (A) da $0$ a
-$3\,$m con altezza $5\,$N, un rettangolo (B) da $3$ a $7\,$m con
-altezza $5\,$N, un triangolo (C) da $7$ a $9\,$m con altezza
-$5\,$N.</p>
+<p>Il grafico mostra una forza che cresce da 0 a 5 N fra 0 e 3 m, resta uguale a 5 N fra 3 e 7 m e poi torna a zero fra 7 e 9 m. Per calcolare il lavoro si divide l'area in tre figure elementari: il triangolo A, il rettangolo B e il triangolo C.</p>
 
 <div class="fig">
-<svg viewBox="0 0 380 190" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="a35f3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker></defs>
-<line x1="40" y1="150" x2="360" y2="150" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a35f3)"/>
-<line x1="40" y1="150" x2="40" y2="30" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a35f3)"/>
-<text x="365" y="155" font-size="13" font-family="var(--sans)">s (m)</text>
-<text x="16" y="34" font-size="13" font-family="var(--sans)">F (N)</text>
-<polygon points="70,150 150,70 230,70 270,150" fill="var(--verde)" opacity=".18" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="150" y1="150" x2="150" y2="158" stroke="var(--rosso)" stroke-width="1.2"/>
-<line x1="230" y1="150" x2="230" y2="158" stroke="var(--rosso)" stroke-width="1.2"/>
-<line x1="270" y1="150" x2="270" y2="158" stroke="var(--rosso)" stroke-width="1.2"/>
-<text x="65" y="170" font-size="12" fill="var(--rosso)" font-family="var(--sans)">0</text>
-<text x="144" y="170" font-size="12" fill="var(--rosso)" font-family="var(--sans)">3</text>
-<text x="224" y="170" font-size="12" fill="var(--rosso)" font-family="var(--sans)">7</text>
-<text x="264" y="170" font-size="12" fill="var(--rosso)" font-family="var(--sans)">9</text>
-<line x1="35" y1="70" x2="40" y2="70" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="16" y="74" font-size="12" font-family="var(--sans)">5</text>
-<text x="105" y="128" font-size="14" font-family="var(--sans)">A</text>
-<text x="188" y="118" font-size="14" font-family="var(--sans)">B</text>
-<text x="252" y="128" font-size="14" font-family="var(--sans)">C</text>
-</svg>
-<p class="did">Le tre aree elementari in cui si scompone il grafico
-forza-spostamento.</p>
+<svg id="g-es" viewBox="0 0 420 206" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico forza-spostamento a trapezio diviso nei triangoli A e C e nel rettangolo B"></svg>
+<div class="cursore"><label for="c-es">posizione $s$</label><input id="c-es" type="range" min="0" max="9" step="0.1" value="9"><span class="val" id="v-es"></span></div>
+<p class="did">L'area sotto il grafico si scompone in due triangoli e un rettangolo, e il cursore mostra il lavoro accumulato fino alla posizione $s$.</p>
 </div>
 
-<p>Si applica la formula del triangolo o del rettangolo a ciascuna:</p>
-
-$$L_A=\dfrac{3\,\text{m}\cdot5\,\text{N}}{2}=7{,}5\,\text{J} \qquad
-L_B=4\,\text{m}\cdot5\,\text{N}=20\,\text{J} \qquad
-L_C=\dfrac{2\,\text{m}\cdot5\,\text{N}}{2}=5\,\text{J}$$
-
-<p>Sommando le tre aree si ottiene il lavoro totale:</p>
-
-$$L_{TOT}=L_A+L_B+L_C=32{,}5\,\text{J}$$
+<p>A ciascuna figura si applica la formula dell'area del triangolo o del rettangolo:</p>
+<p class="eq">$$L_A = \dfrac{3\,\text{m}\cdot 5\,\text{N}}{2} = 7{,}5\,\text{J}$$</p>
+<p class="eq">$$L_B = 4\,\text{m}\cdot 5\,\text{N} = 20\,\text{J}$$</p>
+<p class="eq">$$L_C = \dfrac{2\,\text{m}\cdot 5\,\text{N}}{2} = 5\,\text{J}$$</p>
+<p>Il lavoro totale è la somma delle tre aree:</p>
+<p class="eq">$$L_{TOT} = L_A + L_B + L_C = 7{,}5\,\text{J} + 20\,\text{J} + 5\,\text{J} = 32{,}5\,\text{J}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../34-lavoro-della-forza-peso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Lavoro della forza peso</span></a><a class="successiva" href="../36-lavoro-della-forza-elastica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Lavoro della forza elastica</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 25</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',').replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(p,x,y,b,i,col){var t=el(p,'text',{x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle','font-style':'italic',fill:col});t.innerHTML=b+'<tspan baseline-shift="sub" font-size="9">'+i+'</tspan>';return t;}
+  /* scala comune: s da 0 a 10 m, F da 0 a 6 N */
+  function X(s){return 50+30*s;}
+  function Y(F){return 165-20*F;}
+  function assi(svg,pre,tickS,tickF){
+    var d=el(svg,'defs',{}),m=el(d,'marker',{id:pre+'a',markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(m,'path',{d:'M0,0 L8,4 L0,8 Z',fill:'var(--inchiostro)'});
+    var g={sotto:el(svg,'g',{}),sopra:null};
+    el(svg,'line',{x1:X(0),y1:Y(0),x2:X(11),y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#'+pre+'a)'});
+    el(svg,'line',{x1:X(0),y1:Y(0),x2:X(0),y2:Y(6.8),stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#'+pre+'a)'});
+    txt(svg,X(11),Y(0)-8,'s (m)',{fill:'var(--inchiostro)','text-anchor':'end'});
+    txt(svg,X(0)+8,Y(6.8)+4,'F (N)',{fill:'var(--inchiostro)','text-anchor':'start'});
+    tickS.forEach(function(s){el(svg,'line',{x1:X(s),y1:Y(0),x2:X(s),y2:Y(0)+5,stroke:'var(--inchiostro)','stroke-width':1});txt(svg,X(s),Y(0)+17,String(s));});
+    tickF.forEach(function(F){el(svg,'line',{x1:X(0)-5,y1:Y(F),x2:X(0),y2:Y(F),stroke:'var(--inchiostro)','stroke-width':1});txt(svg,X(0)-9,Y(F)+4,String(F),{'text-anchor':'end'});});
+    g.sopra=el(svg,'g',{});
+    return g;
+  }
+
+  /* 1. forza costante */
+  (function(){
+    var s=document.getElementById('g-cost');if(!s)return;
+    var c=document.getElementById('c-cost'),v=document.getElementById('v-cost');
+    var F=5,s1=2;
+    var g=assi(s,'k',[0,2,4,6,8,10],[1,2,3,4,5,6]);
+    var r=el(g.sotto,'rect',{fill:'var(--verde)','fill-opacity':.22,stroke:'var(--verde)','stroke-width':1.6});
+    el(g.sopra,'line',{x1:X(0),y1:Y(F),x2:X(10),y2:Y(F),stroke:'var(--blu)','stroke-width':2.2});
+    var L=txt(g.sopra,0,0,'L',{fill:'var(--verde)','font-size':14,'font-style':'italic'});
+    pedice(g.sopra,X(s1),Y(0)+33,'s','1','var(--rosso)');
+    el(g.sopra,'line',{x1:X(s1),y1:Y(F),x2:X(s1),y2:Y(0),stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'2,2'});
+    var t2l=el(g.sopra,'line',{stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'2,2'});
+    var t2=pedice(g.sopra,0,Y(0)+33,'s','2','var(--rosso)');
+    function d(){
+      var s2=+c.value;
+      set(r,{x:X(s1),y:Y(F),width:X(s2)-X(s1),height:Y(0)-Y(F)});
+      set(L,{x:(X(s1)+X(s2))/2,y:(Y(F)+Y(0))/2+5});
+      set(t2l,{x1:X(s2),y1:Y(F),x2:X(s2),y2:Y(0)});
+      set(t2,{x:X(s2)});
+      v.textContent='s₂ = '+num(s2,1)+' m · L = '+num(F*(s2-s1),1)+' J';
+    }
+    c.addEventListener('input',d);d();
+  })();
+
+  /* 2. forza variabile: F(s) = 6·exp(−((s − 5,5)/3)²) */
+  (function(){
+    var s=document.getElementById('g-var');if(!s)return;
+    var c=document.getElementById('c-var'),v=document.getElementById('v-var');
+    function f(x){var u=(x-5.5)/3;return 6*Math.exp(-u*u);}
+    function area(a,b){var n=200,h=(b-a)/n,S=f(a)+f(b);for(var i=1;i<n;i++)S+=(i%2?4:2)*f(a+i*h);return S*h/3;}
+    var s1=2;
+    var g=assi(s,'v',[0,2,4,6,8,10],[1,2,3,4,5,6]);
+    var p=el(g.sotto,'path',{fill:'var(--verde)','fill-opacity':.22,stroke:'none'});
+    var dc='';for(var i=0;i<=200;i++){var x=10*i/200;dc+=(i?'L':'M')+X(x).toFixed(1)+','+Y(f(x)).toFixed(1);}
+    el(g.sopra,'path',{d:dc,fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    var L=txt(g.sopra,0,0,'L',{fill:'var(--verde)','font-size':14,'font-style':'italic'});
+    pedice(g.sopra,X(s1),Y(0)+33,'s','1','var(--rosso)');
+    el(g.sopra,'line',{x1:X(s1),y1:Y(f(s1)),x2:X(s1),y2:Y(0),stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'2,2'});
+    var t2l=el(g.sopra,'line',{stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'2,2'});
+    var t2=pedice(g.sopra,0,Y(0)+33,'s','2','var(--rosso)');
+    var pt=el(g.sopra,'circle',{r:4.5,fill:'var(--rosso)'});
+    function d(){
+      var s2=+c.value,dd='M'+X(s1)+','+Y(0);
+      for(var i=0;i<=80;i++){var x=s1+(s2-s1)*i/80;dd+='L'+X(x).toFixed(1)+','+Y(f(x)).toFixed(1);}
+      dd+='L'+X(s2)+','+Y(0)+'Z';
+      set(p,{d:dd});
+      var xm=(s1+s2)/2;
+      set(L,{x:X(xm),y:(Y(f(xm))+Y(0))/2+12});
+      set(t2l,{x1:X(s2),y1:Y(f(s2)),x2:X(s2),y2:Y(0)});
+      set(t2,{x:X(s2)});
+      set(pt,{cx:X(s2),cy:Y(f(s2))});
+      v.textContent='s₂ = '+num(s2,1)+' m · F = '+num(f(s2),1)+' N · L ≈ '+num(area(s1,s2),1)+' J';
+    }
+    c.addEventListener('input',d);d();
+  })();
+
+  /* 3. esempio: trapezio 0–3–7–9 m, altezza 5 N */
+  (function(){
+    var s=document.getElementById('g-es');if(!s)return;
+    var c=document.getElementById('c-es'),v=document.getElementById('v-es');
+    function f(x){return x<=3?5*x/3:(x<=7?5:Math.max(0,5*(9-x)/2));}
+    function lav(x){
+      if(x<=3)return x*f(x)/2;
+      if(x<=7)return 7.5+5*(x-3);
+      return 27.5+(5+f(x))*(x-7)/2;
+    }
+    var g=assi(s,'e',[0,3,7,9],[5]);
+    var p=el(g.sotto,'path',{fill:'var(--verde)','fill-opacity':.25,stroke:'none'});
+    [3,7].forEach(function(x){el(g.sopra,'line',{x1:X(x),y1:Y(5),x2:X(x),y2:Y(0),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});});
+    el(g.sopra,'line',{x1:X(0),y1:Y(5),x2:X(3),y2:Y(5),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+    el(g.sopra,'polyline',{points:[X(0),Y(0),X(3),Y(5),X(7),Y(5),X(9),Y(0)].join(','),fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    txt(g.sopra,X(2),Y(5/3)+5,'A',{fill:'var(--inchiostro)','font-size':14});
+    txt(g.sopra,X(5),Y(2.5)+5,'B',{fill:'var(--inchiostro)','font-size':14});
+    txt(g.sopra,X(7+2/3),Y(5/3)+5,'C',{fill:'var(--inchiostro)','font-size':14});
+    var ln=el(g.sopra,'line',{stroke:'var(--rosso)','stroke-width':1.4});
+    var pt=el(g.sopra,'circle',{r:4.5,fill:'var(--rosso)'});
+    function d(){
+      var x=+c.value,dd='M'+X(0)+','+Y(0);
+      [3,7].forEach(function(k){if(x>k)dd+='L'+X(k)+','+Y(5);});
+      dd+='L'+X(x)+','+Y(f(x))+'L'+X(x)+','+Y(0)+'Z';
+      set(p,{d:dd});
+      set(ln,{x1:X(x),y1:Y(f(x)),x2:X(x),y2:Y(0)});
+      set(pt,{cx:X(x),cy:Y(f(x))});
+      v.innerHTML='s = '+num(x,1)+' m · L = '+num(lav(x),1)+' J'+(x>=9?' &nbsp;<span class="ok">totale</span>':'');
+    }
+    c.addEventListener('input',d);d();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
