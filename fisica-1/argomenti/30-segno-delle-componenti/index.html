@@ -5,19 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Segno delle componenti — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 10px;
-  margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.88rem;color:var(--grigio);line-height:1.4;
-  margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(320px,60%)}
+.cursore output{min-width:9.5em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,157 +51,181 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica prima</a></nav>
   <p class="occhiello">Forze e vettori &middot; Unità 29</p>
   <h1>Segno delle componenti</h1>
-  <p class="sommario">Seno e coseno danno la lunghezza delle componenti, sempre positiva.
-  Il segno lo porta il verso: è quello che distingue un vettore che punta a destra da uno
-  che punta a sinistra.</p>
 </header>
+
+<p>Il seno e il coseno danno il modulo delle componenti, che è sempre positivo. Il segno di ciascuna componente dipende invece dal suo verso rispetto all'asse.</p>
 
 <h2>La regola dei versi</h2>
 
-<p>Quando definiamo un vettore attraverso le sue componenti, davanti a ciascuna
-componente scriviamo:</p>
-
+<div class="def"><span class="et">Segno di una componente</span>
+<p>Quando si scrive un vettore per componenti, davanti a ciascuna componente si mette:</p>
 <ul>
-<li>il segno <strong>+</strong> se il verso della componente e quello dell'asse cartesiano
-sono <strong>concordi</strong>;</li>
-<li>il segno <strong>&minus;</strong> se il verso della componente e quello dell'asse
-cartesiano sono <strong>discordi</strong>.</li>
+<li>il segno $+$ se il verso della componente è <strong>concorde</strong> con il verso dell'asse;</li>
+<li>il segno $-$ se il verso della componente è <strong>discorde</strong> con il verso dell'asse.</li>
 </ul>
+</div>
 
-<p>L'asse $x$ è orientato verso destra e l'asse $y$ verso l'alto: quindi una componente
-orizzontale rivolta a sinistra è negativa, una componente verticale rivolta in basso è
-negativa. Basta questo per avere i quattro casi possibili, uno per quadrante.</p>
+<p>L'asse $x$ è orientato verso destra e l'asse $y$ verso l'alto. Una componente orizzontale rivolta a sinistra è quindi negativa, e una componente verticale rivolta verso il basso è negativa. Ne seguono quattro casi, uno per ciascun quadrante.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Piano cartesiano diviso nei quattro quadranti, con i segni delle componenti x e y in ciascuno: secondo quadrante meno e più, primo quadrante più e più, terzo quadrante meno e meno, quarto quadrante più e meno">
-  <defs>
-    <marker id="q1" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#333"/></marker>
-  </defs>
-  <line x1="60" y1="150" x2="460" y2="150" stroke="#333" stroke-width="1.6" marker-end="url(#q1)"/>
-  <line x1="260" y1="285" x2="260" y2="20" stroke="#333" stroke-width="1.6" marker-end="url(#q1)"/>
-  <text x="468" y="155" font-size="15" font-style="italic">x</text>
-  <text x="252" y="16" font-size="15" font-style="italic">y</text>
-
-  <text x="150" y="70" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">x</tspan><tspan dy="-4">: &#8722;</tspan></text>
-  <text x="150" y="95" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">y</tspan><tspan dy="-4">: +</tspan></text>
-  <text x="70" y="85" font-size="16" fill="#1f5fa8">(&#8722; ; +)</text>
-
-  <text x="300" y="70" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">x</tspan><tspan dy="-4">: +</tspan></text>
-  <text x="300" y="95" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">y</tspan><tspan dy="-4">: +</tspan></text>
-  <text x="375" y="85" font-size="16" fill="#1f5fa8">(+ ; +)</text>
-
-  <text x="150" y="215" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">x</tspan><tspan dy="-4">: &#8722;</tspan></text>
-  <text x="150" y="240" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">y</tspan><tspan dy="-4">: &#8722;</tspan></text>
-  <text x="70" y="230" font-size="16" fill="#1f5fa8">(&#8722; ; &#8722;)</text>
-
-  <text x="300" y="215" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">x</tspan><tspan dy="-4">: +</tspan></text>
-  <text x="300" y="240" font-size="15" fill="#b03030">F<tspan font-size="11" dy="4">y</tspan><tspan dy="-4">: &#8722;</tspan></text>
-  <text x="375" y="230" font-size="16" fill="#1f5fa8">(+ ; &#8722;)</text>
-</svg>
-<p class="did">In ogni quadrante i segni della coppia $(F_x\,;\,F_y)$ sono decisi soltanto
-dal verso delle due componenti rispetto agli assi.</p>
+<svg id="fig-q" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Piano cartesiano diviso nei quattro quadranti con i segni delle componenti: primo quadrante più e più, secondo meno e più, terzo meno e meno, quarto più e meno; un vettore ruota e mostra le sue componenti"></svg>
+<div class="cursore"><label for="cur-t">$\theta$</label><input id="cur-t" type="range" min="0" max="359" step="1" value="119"><output id="val-t" for="cur-t"></output></div>
+<p class="did">Il vettore ha modulo 10 N e θ è il suo angolo misurato dal semiasse <em>x</em> positivo in senso antiorario; i segni delle componenti cambiano solo quando il vettore passa in un altro quadrante.</p>
 </div>
 
-<div class="nota">
-<p><strong>Attenzione.</strong> Il segno non va mai dentro il seno o il coseno: si calcola
-la lunghezza della componente con l'angolo, e poi le si mette davanti il segno leggendo
-il disegno. Scrivere $\sin(-61°)$ al posto di $-\,6\ \text{N}\cdot\cos 61°$ è l'errore
-tipico.</p>
+<div class="nota"><span class="et">Il segno non va nell'angolo</span>
+<p>Con l'angolo si calcola il modulo della componente; il segno si aggiunge dopo, leggendo il verso nel disegno. Per esempio, la componente $x$ di $\vec{F_2}$ dell'esempio si scrive $-\,6\ \text{N}\cdot\cos 61°$ e non $6\ \text{N}\cdot\cos(-61°)$, che è positivo.</p>
 </div>
 
-<h2>Esercizio</h2>
+<h2>Esempio</h2>
 
-<p>Scriviamo attraverso le loro componenti i quattro vettori del disegno, uno per
-quadrante.</p>
+<p>Si scrivono per componenti i quattro vettori del disegno, uno per quadrante.</p>
 
 <div class="fig">
-<svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Quattro forze applicate nell'origine: F1 di 14 newton a 10 gradi sopra l'asse x positivo, F2 di 6 newton a 61 gradi sopra l'asse x negativo, F3 di 8 newton a 68 gradi dall'asse y negativo verso sinistra, F4 di 7 newton a 45 gradi dall'asse y negativo verso destra">
-  <defs>
-    <marker id="e1" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#333"/></marker>
-    <marker id="er" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#b03030"/></marker>
-    <marker id="eb" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#1f5fa8"/></marker>
-    <marker id="eo" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#d07b18"/></marker>
-    <marker id="ec" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-      <path d="M0,0 L9,3.5 L0,7 z" fill="#118a9e"/></marker>
-  </defs>
-  <line x1="40" y1="160" x2="500" y2="160" stroke="#333" stroke-width="1.6" marker-end="url(#e1)"/>
-  <line x1="270" y1="305" x2="270" y2="15" stroke="#333" stroke-width="1.6" marker-end="url(#e1)"/>
-  <text x="508" y="165" font-size="15" font-style="italic">x</text>
-  <text x="262" y="12" font-size="15" font-style="italic">y</text>
-
-  <line x1="270" y1="160" x2="448" y2="129" stroke="#b03030" stroke-width="2.6" marker-end="url(#er)"/>
-  <text x="452" y="122" font-size="15" fill="#b03030" font-style="italic">F₁</text>
-  <text x="340" y="132" font-size="13" fill="#b03030">14 N</text>
-  <path d="M320,160 A50,50 0 0 0 319,151" fill="none" stroke="#2a8a3e" stroke-width="1.6"/>
-  <text x="325" y="152" font-size="12" fill="#2a8a3e">10°</text>
-
-  <line x1="270" y1="160" x2="200" y2="33" stroke="#1f5fa8" stroke-width="2.6" marker-end="url(#eb)"/>
-  <text x="182" y="28" font-size="15" fill="#1f5fa8" font-style="italic">F₂</text>
-  <text x="228" y="75" font-size="13" fill="#1f5fa8">6 N</text>
-  <path d="M215,160 A55,55 0 0 0 243,112" fill="none" stroke="#2a8a3e" stroke-width="1.6"/>
-  <text x="196" y="122" font-size="12" fill="#2a8a3e">61°</text>
-
-  <line x1="270" y1="160" x2="152" y2="208" stroke="#d07b18" stroke-width="2.6" marker-end="url(#eo)"/>
-  <text x="140" y="224" font-size="15" fill="#d07b18" font-style="italic">F₃</text>
-  <text x="178" y="190" font-size="13" fill="#d07b18">8 N</text>
-  <path d="M270,215 A55,55 0 0 1 219,196" fill="none" stroke="#2a8a3e" stroke-width="1.6"/>
-  <text x="222" y="222" font-size="12" fill="#2a8a3e">68°</text>
-
-  <line x1="270" y1="160" x2="358" y2="248" stroke="#118a9e" stroke-width="2.6" marker-end="url(#ec)"/>
-  <text x="362" y="262" font-size="15" fill="#118a9e" font-style="italic">F₄</text>
-  <text x="318" y="196" font-size="13" fill="#118a9e">7 N</text>
-  <path d="M270,225 A65,65 0 0 0 316,206" fill="none" stroke="#2a8a3e" stroke-width="1.6"/>
-  <text x="283" y="238" font-size="12" fill="#2a8a3e">45°</text>
-</svg>
-<p class="did">Gli angoli di $\vec{F_1}$ e $\vec{F_2}$ sono misurati dall'asse orizzontale,
-quelli di $\vec{F_3}$ e $\vec{F_4}$ dall'asse verticale: l'angolo dice quale funzione
-goniometrica dà la componente lungo $x$ e quale quella lungo $y$.</p>
+<svg id="fig-4" viewBox="0 0 420 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Quattro forze applicate nell'origine: F1 di 14 newton a 10 gradi sopra l'asse x positivo, F2 di 6 newton a 61 gradi sopra l'asse x negativo, F3 di 8 newton a 68 gradi dall'asse y negativo verso sinistra, F4 di 7 newton a 45 gradi dall'asse y negativo verso destra"></svg>
+<p class="did">Gli angoli di F₁ e F₂ sono misurati dall'asse <em>x</em>, quelli di F₃ e F₄ dall'asse <em>y</em>; le lunghezze delle frecce sono in scala con i moduli.</p>
 </div>
 
-<p>Per $\vec{F_1}$ e $\vec{F_2}$ l'angolo è appoggiato all'asse $x$, quindi il coseno dà
-la componente orizzontale e il seno quella verticale. Entrambe le componenti di
-$\vec{F_1}$ sono concordi con gli assi; $\vec{F_2}$ punta invece verso sinistra, e la sua
-componente $x$ prende il segno meno.</p>
+<p>Per $\vec{F_1}$ e $\vec{F_2}$ l'angolo è misurato dall'asse $x$, quindi il coseno dà la componente orizzontale e il seno quella verticale. Le due componenti di $\vec{F_1}$ sono concordi con gli assi; $\vec{F_2}$ è rivolto verso sinistra, perciò la sua componente $x$ ha il segno meno.</p>
 
-<p>$$F_{1x} = 14\ \text{N}\cdot\cos 10° = 13{,}8\ \text{N}
-\qquad F_{1y} = 14\ \text{N}\cdot\sin 10° = 2{,}4\ \text{N}$$
-$$\vec{F_1} = (+13{,}8\ \text{N}\,;\ +2{,}4\ \text{N})$$</p>
+<p class="eq">$$F_{1x} = 14\ \text{N}\cdot\cos 10° = 13{,}8\ \text{N} \qquad F_{1y} = 14\ \text{N}\cdot\sin 10° = 2{,}4\ \text{N}$$</p>
+<p class="eq">$$\vec{F_1} = (+13{,}8\ \text{N}\,;\ +2{,}4\ \text{N})$$</p>
 
-<p>$$F_{2x} = 6\ \text{N}\cdot\cos 61° = 2{,}9\ \text{N}
-\qquad F_{2y} = 6\ \text{N}\cdot\sin 61° = 5{,}2\ \text{N}$$
-$$\vec{F_2} = (-2{,}9\ \text{N}\,;\ +5{,}2\ \text{N})$$</p>
+<p class="eq">$$F_{2x} = 6\ \text{N}\cdot\cos 61° = 2{,}9\ \text{N} \qquad F_{2y} = 6\ \text{N}\cdot\sin 61° = 5{,}2\ \text{N}$$</p>
+<p class="eq">$$\vec{F_2} = (-2{,}9\ \text{N}\,;\ +5{,}2\ \text{N})$$</p>
 
-<p>Per $\vec{F_3}$ e $\vec{F_4}$ l'angolo è appoggiato all'asse $y$: i ruoli si scambiano,
-ed è il seno a dare la componente orizzontale. $\vec{F_3}$ sta nel terzo quadrante e ha
-entrambe le componenti negative; $\vec{F_4}$ sta nel quarto, con la sola componente
-verticale negativa.</p>
+<p>Per $\vec{F_3}$ e $\vec{F_4}$ l'angolo è misurato dall'asse $y$, quindi è il seno a dare la componente orizzontale. $\vec{F_3}$ sta nel terzo quadrante e ha entrambe le componenti negative; $\vec{F_4}$ sta nel quarto quadrante e ha negativa solo la componente verticale.</p>
 
-<p>$$F_{3x} = 8\ \text{N}\cdot\sin 68° = 7{,}4\ \text{N}
-\qquad F_{3y} = 8\ \text{N}\cdot\cos 68° = 3{,}0\ \text{N}$$
-$$\vec{F_3} = (-7{,}4\ \text{N}\,;\ -3{,}0\ \text{N})$$</p>
+<p class="eq">$$F_{3x} = 8\ \text{N}\cdot\sin 68° = 7{,}4\ \text{N} \qquad F_{3y} = 8\ \text{N}\cdot\cos 68° = 3{,}0\ \text{N}$$</p>
+<p class="eq">$$\vec{F_3} = (-7{,}4\ \text{N}\,;\ -3{,}0\ \text{N})$$</p>
 
-<p>$$F_{4x} = 7\ \text{N}\cdot\sin 45° = 4{,}9\ \text{N}
-\qquad F_{4y} = 7\ \text{N}\cdot\cos 45° = 4{,}9\ \text{N}$$
-$$\vec{F_4} = (+4{,}9\ \text{N}\,;\ -4{,}9\ \text{N})$$</p>
+<p class="eq">$$F_{4x} = 7\ \text{N}\cdot\sin 45° = 4{,}9\ \text{N} \qquad F_{4y} = 7\ \text{N}\cdot\cos 45° = 4{,}9\ \text{N}$$</p>
+<p class="eq">$$\vec{F_4} = (+4{,}9\ \text{N}\,;\ -4{,}9\ \text{N})$$</p>
 
-<p>I quattro risultati mostrano la stessa cosa: i numeri escono dal calcolo, i segni dal
-disegno.</p>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Con le componenti scritte così, di segno giusto, si possono sommare più vettori
-comunque orientati: è il passo dell'unità successiva. Dopo di essa ricaveremo dalle
-componenti l'angolo di inclinazione del vettore.</p>
-</div>
+<p>In tutti e quattro i casi i valori numerici si ottengono dal calcolo, mentre i segni si leggono dal disegno.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../29-componenti-cartesiane-di-un-vettore/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Componenti cartesiane di un vettore</span></a><a class="successiva" href="../31-somma-di-vettori-per-componenti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Somma di vettori per componenti</span></a></nav>
+<footer><p>Fisica prima &middot; Forze e vettori &middot; Unità 29</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script><script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s,tratt){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    var a={x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'};
+    if(tratt)a['stroke-dasharray']='6 4';
+    el(p,'line',a);punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  /* simbolo vettoriale con pedice e freccetta sopra, centrato in (x,y); segno a sinistra */
+  function Vt(p,x,y,lett,ped,col,coeff){
+    var t=T(p,x,y+5,lett,{'text-anchor':'middle','font-size':15,'font-style':'italic','font-weight':700,fill:col});
+    if(ped)el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'},ped);
+    freccia(p,x-7,y-11,x+(ped?11:7),y-11,col,1.3,4);
+    if(coeff)T(p,x-8,y+5,coeff,{'text-anchor':'end','font-size':15,'font-weight':700,fill:col});
+  }
+  /* etichetta a distanza d dal punto medio del vettore, sul lato indicato (+1 sinistra rispetto al verso, -1 destra) */
+  function etich(p,x1,y1,x2,y2,lato,d,lett,ped,col,coeff){
+    var L=Math.hypot(x2-x1,y2-y1)||1, nx=(y2-y1)/L*lato, ny=-(x2-x1)/L*lato;
+    Vt(p,(x1+x2)/2+nx*d,(y1+y2)/2+ny*d,lett,ped,col,coeff);
+  }
+
+  /* etichetta oltre la punta del vettore */
+  function oltre(p,x1,y1,x2,y2,d,lett,ped,col,coeff){
+    var L=Math.hypot(x2-x1,y2-y1)||1;Vt(p,x2+(x2-x1)/L*d,y2+(y2-y1)/L*d+4,lett,ped,col,coeff);
+  }
+  /* etichetta di un lato del triangolo, dalla parte opposta al baricentro G */
+  function fuori(p,x1,y1,x2,y2,G,d,lett,ped,col,coeff){
+    var L=Math.hypot(x2-x1,y2-y1)||1, nx=(y2-y1)/L, ny=-(x2-x1)/L, mx=(x1+x2)/2, my=(y1+y2)/2;
+    if((G[0]-mx)*nx+(G[1]-my)*ny>0){nx=-nx;ny=-ny;}
+    Vt(p,mx+nx*d,my+ny*d+4,lett,ped,col,coeff);
+  }
+  var CF='var(--rosso)', CA='var(--inchiostro)', CV='var(--verde)', CB='var(--blu)', CG='var(--grigio)';
+  function assi(p,O,x0,x1,y0,y1){
+    freccia(p,x0,O[1],x1,O[1],CA,1.5,7);
+    freccia(p,O[0],y0,O[0],y1,CA,1.5,7);
+    T(p,x1+6,O[1]+5,'x',{'font-size':15,'font-style':'italic',fill:CA});
+    T(p,O[0]-5,y1-8,'y',{'font-size':15,'font-style':'italic',fill:CA});
+  }
+  /* arco di raggio r intorno a O fra gli angoli t1 e t2 (gradi, misurati dall'asse x positivo, verso antiorario) */
+  function arco(p,O,r,t1,t2,col){
+    var d='',n=24;
+    for(var i=0;i<=n;i++){var t=(t1+(t2-t1)*i/n)*Math.PI/180;d+=(i?' L':'M')+f(O[0]+r*Math.cos(t))+','+f(O[1]-r*Math.sin(t));}
+    el(p,'path',{d:d,fill:'none',stroke:col,'stroke-width':1.6});
+  }
+  function pt(O,r,t){t*=Math.PI/180;return [O[0]+r*Math.cos(t),O[1]-r*Math.sin(t)];}
+  function tr(p,a,b,col){el(p,'line',{x1:f(a[0]),y1:f(a[1]),x2:f(b[0]),y2:f(b[1]),stroke:col,'stroke-width':1.2,'stroke-dasharray':'5 4'});}
+
+  /* Figura 1: segni nei quattro quadranti, cursore su theta */
+  (function(){
+    var S=document.getElementById('fig-q'), c=document.getElementById('cur-t'), o=document.getElementById('val-t');
+    if(!S||!c)return;
+    var O=[210,140], F=10, k=8.5;
+    assi(S,O,40,385,268,18);
+    var Q=[{s:'(+ ; +)',x:330,y:42,n:'primo'},{s:'(− ; +)',x:90,y:42,n:'secondo'},{s:'(− ; −)',x:90,y:250,n:'terzo'},{s:'(+ ; −)',x:330,y:250,n:'quarto'}];
+    var lq=Q.map(function(q){return T(S,q.x,q.y,q.s,{'text-anchor':'middle','font-size':14,fill:CG});});
+    var g=el(S,'g',{});
+    function sg(v){return v>0.05?'+':(v<-0.05?'−':'');}
+    function nf(v){var a=Math.abs(v);return (a<0.05?'0':sg(v)+a.toFixed(1).replace('.',','))+' N';}
+    function dis(){
+      var t=+c.value, r=Math.PI/180, fx=F*Math.cos(t*r), fy=F*Math.sin(t*r);
+      var P=pt(O,F*k,t), X=[P[0],O[1]], Y=[O[0],P[1]];
+      vuota(g);
+      var iq=-1;
+      if(Math.abs(fx)>0.05&&Math.abs(fy)>0.05)iq=fx>0?(fy>0?0:3):(fy>0?1:2);
+      lq.forEach(function(e,i){e.setAttribute('fill',i===iq?'var(--blu)':'var(--grigio)');e.setAttribute('font-weight',i===iq?700:400);});
+      tr(g,X,P,CF);tr(g,Y,P,CF);
+      if(Math.abs(fx)>0.3){freccia(g,O[0],O[1],X[0],X[1],CF,2.6,9);Vt(g,(O[0]+X[0])/2,O[1]+(fy>0?24:-14),'F','x',CF);}
+      if(Math.abs(fy)>0.3){freccia(g,O[0],O[1],Y[0],Y[1],CF,2.6,9);Vt(g,O[0]+(fx>0?-22:22),(O[1]+Y[1])/2+4,'F','y',CF);}
+      freccia(g,O[0],O[1],P[0],P[1],CF,3.2,10);
+      var q=pt(O,F*k+16,t), pr=t*Math.PI/180;Vt(g,q[0]+12*Math.sin(pr),q[1]+12*Math.cos(pr)+4,'F','',CF);
+      el(g,'circle',{cx:O[0],cy:O[1],r:3,fill:CA});
+      o.innerHTML='θ = '+t+'°: F<sub>x</sub> = '+nf(fx)+', F<sub>y</sub> = '+nf(fy)+(iq>=0?' <span class="ok">'+Q[iq].n+' quadrante</span>':' (lungo un asse)');
+    }
+    c.addEventListener('input',dis);dis();
+  })();
+
+  /* Figura 2: i quattro vettori dell'esempio, in scala */
+  (function(){
+    var S=document.getElementById('fig-4');if(!S)return;
+    var O=[175,140], k=14;
+    assi(S,O,30,390,262,14);
+    var V=[{F:14,t:10,n:'1',l:1},{F:6,t:119,n:'2',l:-1},{F:8,t:202,n:'3',l:-1},{F:7,t:315,n:'4',l:1}];
+    V.forEach(function(v){
+      var P=pt(O,v.F*k,v.t);freccia(S,O[0],O[1],P[0],P[1],CF,2.8,9);
+      var q=pt(O,v.F*k+20,v.t);Vt(S,q[0],q[1]+4,'F',v.n,CF);
+      var m=pt(O,v.F*k*.62,v.t), d=14*v.l, nx=-Math.sin(v.t*Math.PI/180), ny=-Math.cos(v.t*Math.PI/180);
+      T(S,m[0]+nx*d,m[1]+ny*d+4,v.F+' N',{'text-anchor':'middle','font-size':12,fill:CF});
+    });
+    function ang(r,t1,t2,txt,rl){arco(S,O,r,t1,t2,CV);var p=pt(O,rl,(t1+t2)/2);T(S,p[0],p[1]+4,txt,{'text-anchor':'middle','font-size':12,fill:CV});}
+    ang(90,0,10,'10°',108);
+    ang(42,119,180,'61°',60);
+    ang(50,202,270,'68°',66);
+    ang(46,270,315,'45°',64);
+    el(S,'circle',{cx:O[0],cy:O[1],r:3,fill:CA});
+  })();
+})();
+</script>
 </body>
 </html>
