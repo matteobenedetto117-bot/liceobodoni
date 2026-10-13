@@ -25,7 +25,7 @@ Un'unità saltata (già revisionata) non consuma il turno: segna l'esito e passa
 
 ## 1. Ciclo per l'unità
 
-1. **Salta** l'unità se in `_registro/<classe>.md` ha già una riga "Revisione (…, regole 13/10):", **tranne** quando la riga della coda termina con `rifare`. Una riga "Revisione:" senza la dicitura «regole 13/10» non conta: la pagina va rifatta con le regole attuali.
+1. **Salta** l'unità se in `_registro/<classe>.md` ha già una riga "Revisione:" datata 13/10/2026 o successiva, **tranne** quando la riga della coda termina con `rifare`. Una riga "Revisione:" più vecchia non conta: la pagina va rifatta con le regole attuali.
 2. Individua `<classe>/argomenti/<cartella>/index.html` (fa fede `_dati/<classe>.json`, campo `cartella`; il numero della cartella può non coincidere con quello dell'unità). Leggi la pagina, la voce del registro e quella del JSON.
 3. **Pagina già revisionata in passato** (ha già l'impaginazione a quaderno): riparti dalla pagina attuale. Tieni impaginazione, figure e figure interattive; accorcia il testo (§3); rendi visibili formule, passaggi e risultati a comparsa (§5). Non recuperare testo dalle versioni precedenti.
    **Pagina mai revisionata**: riscrivi il testo (§3), applica l'impaginazione (§4), rifai le figure (§5).
