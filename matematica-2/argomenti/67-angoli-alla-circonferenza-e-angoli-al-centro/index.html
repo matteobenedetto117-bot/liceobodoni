@@ -5,18 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Angoli alla circonferenza e angoli al centro — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.quattro{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:24px 0}
-.quattro figure{margin:0;text-align:center;width:170px}
-.quattro figcaption{font-family:var(--sans);font-size:.78rem;color:var(--grigio);margin-top:6px;line-height:1.35}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.foglio>ol{margin:var(--r) 0 0;padding-left:1.6rem}
+.foglio>ol+p,.foglio>ol+div{margin-top:var(--r)}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px 18px}
+.pannelli svg{width:100%;max-width:220px}
+.pannelli .did{margin:4px 0 0}
+@media(max-width:640px){.pannelli{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -26,154 +59,159 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Angoli alla circonferenza &middot; Unità 65</p>
   <h1>Angoli alla circonferenza e angoli al centro</h1>
-  <p class="sommario">Fin qui abbiamo confrontato circonferenze fra loro; ora guardiamo agli
-  angoli che una circonferenza permette di costruire con il vertice sulla curva stessa.
-  Questi angoli alla circonferenza sono legati in modo preciso agli angoli al centro che
-  insistono sullo stesso arco, e da questo legame nascono i risultati più usati della
-  geometria del cerchio.</p>
 </header>
 
 <h2>Angolo alla circonferenza</h2>
 
-<p><strong>Definizione.</strong> Un angolo alla circonferenza è un angolo convesso che ha il
-vertice sulla circonferenza e i lati entrambi secanti, oppure uno secante e uno tangente
-alla circonferenza.</p>
+<div class="def">
+<span class="et">Definizione</span>
+<p>Angolo alla circonferenza = angolo convesso con il vertice sulla circonferenza e i lati entrambi secanti, oppure uno secante e uno tangente.</p>
+</div>
 
-<div class="quattro">
-
-<figure>
-<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="80" cy="65" r="50" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M 34 90 A 50 50 0 0 0 108 108 L 34 90 Z" fill="#f0d24a" opacity=".5"/>
-<line x1="34" y1="90" x2="60" y2="16" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="34" y1="90" x2="108" y2="108" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="34" cy="90" r="2.4" fill="var(--inchiostro)"/>
-</svg>
-<figcaption>due lati secanti &mdash; vertice sulla circonferenza</figcaption>
-</figure>
-
-<figure>
-<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="80" cy="65" r="50" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M 34 90 A 50 50 0 0 0 130 65 L 34 90 Z" fill="#f0d24a" opacity=".5"/>
-<line x1="34" y1="90" x2="0" y2="130" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="34" y1="90" x2="130" y2="65" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="34" cy="90" r="2.4" fill="var(--inchiostro)"/>
-</svg>
-<figcaption>un lato secante, uno tangente</figcaption>
-</figure>
-
-<figure>
-<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="80" cy="72" r="42" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="80" y1="20" x2="45" y2="95" stroke="#7a4fa3" stroke-width="2"/>
-<line x1="80" y1="20" x2="118" y2="90" stroke="#7a4fa3" stroke-width="2"/>
-<circle cx="80" cy="20" r="2.4" fill="#7a4fa3"/>
-</svg>
-<figcaption>vertice esterno alla circonferenza &mdash; non è alla circonferenza</figcaption>
-</figure>
-
-<figure>
-<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="80" cy="65" r="50" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="35" y1="35" x2="120" y2="95" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="120" y1="35" x2="45" y2="95" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="80" cy="65" r="2.4" fill="var(--inchiostro)"/>
-</svg>
-<figcaption>vertice interno alla circonferenza &mdash; non è alla circonferenza</figcaption>
-</figure>
-
+<div class="fig">
+<div class="pannelli" style="--n:4">
+<div><svg id="a1" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lati secanti"></svg><p class="did">lati secanti: sì</p></div>
+<div><svg id="a2" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Un lato secante e uno tangente"></svg><p class="did">secante e tangente: sì</p></div>
+<div><svg id="a3" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vertice esterno"></svg><p class="did">vertice esterno: no</p></div>
+<div><svg id="a4" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vertice interno"></svg><p class="did">vertice interno: no</p></div>
+</div>
 </div>
 
 <h2>Arco sotteso e angoli che insistono sullo stesso arco</h2>
 
-<p>Un angolo alla circonferenza $\alpha$ con vertice $P$ e lati che intersecano di nuovo la
-circonferenza in $A$ e $B$ <strong>insiste sull'arco</strong> $\widehat{AB}$ che è
-intersezione fra l'angolo e la circonferenza; viceversa, si dice che l'arco
-$\widehat{AB}$ è <strong>sotteso</strong> dall'angolo $\alpha$.</p>
+<ul>
+<li>$\alpha$ con vertice $P$; i lati incontrano la circonferenza in $A$ e $B$.</li>
+<li>$\alpha$ <strong>insiste</strong> sull'arco $\overset{\frown}{AB}$ interno all'angolo; l'arco $\overset{\frown}{AB}$ è <strong>sotteso</strong> da $\alpha$.</li>
+<li>Angolo al centro sullo stesso arco: uno solo, $A\hat{O}B$.</li>
+<li>Angoli alla circonferenza sullo stesso arco: infiniti (vertice in un punto qualsiasi dell'arco rimanente).</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="100" cy="75" r="55" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M 68 24 A 55 55 0 0 1 140 40" fill="none" stroke="var(--verde)" stroke-width="4"/>
-<line x1="45" y1="115" x2="68" y2="24" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="45" y1="115" x2="140" y2="40" stroke="var(--rosso)" stroke-width="1.6"/>
-<circle cx="45" cy="115" r="2.4" fill="var(--inchiostro)"/><text x="30" y="128" font-size="12">P</text>
-<circle cx="68" cy="24" r="2.4" fill="var(--verde)"/><text x="58" y="16" font-size="12">A</text>
-<circle cx="140" cy="40" r="2.4" fill="var(--verde)"/><text x="146" y="35" font-size="12">B</text>
-</svg>
-<figcaption>&alpha; insiste sull'arco AB (verde); l'arco AB è sotteso da &alpha;</figcaption>
+<svg id="a-arco" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Angolo alfa in P che insiste sull'arco AB"></svg>
 </div>
-
-<p>A un angolo alla circonferenza corrisponde un solo angolo al centro che insiste sullo
-stesso arco. A ogni angolo al centro, invece, corrispondono infiniti angoli alla
-circonferenza: tutti quelli che insistono sullo stesso arco, con vertice in un qualunque
-punto dell'arco rimanente.</p>
 
 <h2>Tre teoremi</h2>
 
-<div class="regola">
-<p><strong>Teorema.</strong> Gli angoli alla circonferenza che insistono sullo stesso arco,
-o su archi congruenti, sono congruenti.</p>
+<div class="def">
+<span class="et">Teorema</span>
+<p>Angoli alla circonferenza che insistono sullo stesso arco, o su archi congruenti, sono congruenti.</p>
 </div>
 
-<div class="regola">
-<p><strong>Teorema.</strong> Un angolo alla circonferenza insiste su una semicirconferenza
-se e solo se è un angolo retto.</p>
-</div>
-
-<div class="fig">
-<svg viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="110" cy="80" r="50" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="80" x2="160" y2="80" stroke="var(--grigio)" stroke-width="1.4" stroke-dasharray="4 3"/>
-<line x1="60" y1="80" x2="128" y2="32" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="160" y1="80" x2="128" y2="32" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M 128 42 L 120 42 L 120 50 L 128 50" fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-<circle cx="60" cy="80" r="2.4" fill="var(--inchiostro)"/><text x="47" y="94" font-size="12">A</text>
-<circle cx="160" cy="80" r="2.4" fill="var(--inchiostro)"/><text x="165" y="94" font-size="12">B</text>
-<circle cx="128" cy="32" r="2.4" fill="var(--inchiostro)"/><text x="132" y="24" font-size="12">P</text>
-</svg>
-<figcaption>AB diametro, quindi l'angolo retto in P insiste sulla semicirconferenza AB</figcaption>
-</div>
-
-<div class="regola">
-<p><strong>Teorema.</strong> Ogni angolo al centro è il doppio di qualsiasi angolo alla
-circonferenza che insiste sullo stesso arco.</p>
-<p><strong>Ipotesi.</strong> $A\hat{O}B$ angolo al centro, $A\hat{P}B$ angolo alla
-circonferenza, entrambi sull'arco $\widehat{AB}$.<br>
-<strong>Tesi.</strong> $A\hat{O}B \cong 2\,A\hat{P}B$.</p>
+<div class="def">
+<span class="et">Teorema</span>
+<p>Un angolo alla circonferenza insiste su una semicirconferenza se e solo se è retto.</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="100" cy="90" r="55" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="55" y1="115" x2="100" y2="90" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="145" y1="115" x2="100" y2="90" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="55" y1="115" x2="100" y2="20" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="145" y1="115" x2="100" y2="20" stroke="var(--rosso)" stroke-width="1.6"/>
-<circle cx="100" cy="90" r="2.4" fill="var(--blu)"/><text x="106" y="88" font-size="12">O</text>
-<circle cx="100" cy="20" r="2.4" fill="var(--rosso)"/><text x="106" y="17" font-size="12">P</text>
-<circle cx="55" cy="115" r="2.4" fill="var(--inchiostro)"/><text x="40" y="128" font-size="12">A</text>
-<circle cx="145" cy="115" r="2.4" fill="var(--inchiostro)"/><text x="150" y="128" font-size="12">B</text>
-</svg>
-<figcaption>l'angolo al centro AÔB (blu) è il doppio dell'angolo alla circonferenza AP̂B (rosso)</figcaption>
+<svg id="a-semi" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Angolo retto in P che insiste sulla semicirconferenza di diametro AB"></svg>
 </div>
 
-<p>Un'applicazione immediata: se un angolo al centro misura $100°$, ogni angolo alla
-circonferenza che insiste sullo stesso arco misura $50°$, qualunque sia il punto dell'arco
-in cui si trova il suo vertice.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Usiamo il legame fra angoli al centro e angoli alla circonferenza per stabilire quando
-un poligono è inscrivibile in una circonferenza o circoscrivibile a essa.</li>
-</ul>
+<div class="def">
+<span class="et">Teorema</span>
+<p>Un angolo al centro è il doppio di qualsiasi angolo alla circonferenza che insiste sullo stesso arco.</p>
+<p>Ipotesi: $A\hat{O}B$ angolo al centro, $A\hat{P}B$ angolo alla circonferenza, sullo stesso arco $\overset{\frown}{AB}$.</p>
+<p>Tesi: $A\hat{O}B = 2\,A\hat{P}B$</p>
 </div>
+
+<div class="fig">
+<svg id="a-doppio" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Angolo al centro AOB doppio dell'angolo alla circonferenza APB"></svg>
+</div>
+
+<h3>Esempio</h3>
+
+<p class="eq">$$A\hat{O}B = 100° \;\Rightarrow\; A\hat{P}B = \frac{100°}{2} = 50°$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../66-posizione-reciproca-di-due-circonferenze/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Posizione reciproca di due circonferenze</span></a><a class="successiva" href="../68-poligoni-inscritti-e-circoscritti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Poligoni inscritti e circoscritti</span></a></nav>
 <footer><p>Matematica seconda &middot; Angoli alla circonferenza &middot; Unità 65</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio>ol,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':14,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function rad(g){return g*Math.PI/180;}
+function add(p,q,k){k=k===undefined?1:k;return [p[0]+k*q[0],p[1]+k*q[1]];}
+function sub(p,q){return [p[0]-q[0],p[1]-q[1]];}
+function len(v){return Math.hypot(v[0],v[1]);}
+function uni(v){var l=len(v);return [v[0]/l,v[1]/l];}
+function dir(g){return [Math.cos(rad(g)),-Math.sin(rad(g))];}
+function C(s,cx,cy,R,a){a=a||{};
+  el('circle',Object.assign({cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2},a),s);
+  var o={O:[cx,cy],R:R,P:function(g,k){return add([cx,cy],dir(g),k===undefined?R:k);},
+    lab:function(g,str,k,at){txt(s,o.P(g,R+(k||15)),str,at);}};
+  return o;}
+function seg(s,p,q,a){return el('line',Object.assign({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':1.8,'stroke-linecap':'round'},a||{}),s);}
+function retta(s,p,q,e1,e2,a){var u=uni(sub(q,p));return seg(s,add(p,u,-e1),add(q,u,e2),a);}
+function dot(s,p,col,r){el('circle',{cx:p[0],cy:p[1],r:r||3.5,fill:col||'var(--inchiostro)'},s);}
+function tacca(s,p,q,n,f){f=f===undefined?.5:f;var m=add(p,sub(q,p),f),u=uni(sub(q,p)),nn=[-u[1]*6,u[0]*6];
+  for(var i=0;i<n;i++){var c=add(m,u,(i-(n-1)/2)*4);seg(s,add(c,nn,-1),add(c,nn),{stroke:'var(--verde)','stroke-width':2});}}
+function retto(s,V,p,q,k){k=k||9;var u=uni(sub(p,V)),v=uni(sub(q,V)),a=add(V,u,k),b=add(a,v,k),c=add(V,v,k);
+  el('path',{d:'M'+a+' L'+b+' L'+c,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3},s);}
+function angArc(s,V,p,q,k,a){var a1=Math.atan2(p[1]-V[1],p[0]-V[0]),a2=Math.atan2(q[1]-V[1],q[0]-V[0]),d=a2-a1;
+  while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;var pts=[];
+  for(var i=0;i<=24;i++){var t=a1+d*i/24;pts.push([V[0]+k*Math.cos(t),V[1]+k*Math.sin(t)]);}
+  el('polyline',Object.assign({points:pts.join(' '),fill:'none',stroke:'var(--rosso)','stroke-width':1.8},a||{}),s);
+  var m=a1+d/2;return function(kk){return [V[0]+kk*Math.cos(m),V[1]+kk*Math.sin(m)];};}
+function arcPts(c,g0,g1,n){n=n||48;var pts=[];for(var i=0;i<=n;i++)pts.push(c.P(g0+(g1-g0)*i/n));return pts;}
+function arco(s,c,g0,g1,a){el('polyline',Object.assign({points:arcPts(c,g0,g1).join(' '),fill:'none',stroke:'var(--verde)','stroke-width':4},a||{}),s);}
+window.G={el:el,txt:txt,add:add,sub:sub,len:len,uni:uni,dir:dir,C:C,seg:seg,retta:retta,dot:dot,tacca:tacca,retto:retto,angArc:angArc,arcPts:arcPts,arco:arco};
+})();
+</script>
+<script>
+(function(){var g=G;
+
+function sett(s,c,P,g0,g1){var pts=[P].concat(g.arcPts(c,g0,g1));g.el('polygon',{points:pts.join(' '),fill:'var(--blu-chiaro)',stroke:'none'},s);}
+(function(){var s=document.getElementById('a1'),c={O:[80,70],R:48,P:function(a,k){return g.add([80,70],g.dir(a),k===undefined?48:k);}},P=c.P(225),A=c.P(105),B=c.P(-20);
+  sett(s,c,P,105,-20);g.C(s,80,70,48);g.retta(s,P,A,0,16,{stroke:'var(--rosso)','stroke-width':2});g.retta(s,P,B,0,16,{stroke:'var(--rosso)','stroke-width':2});g.dot(s,P);})();
+(function(){var s=document.getElementById('a2'),c={P:function(a,k){return g.add([80,70],g.dir(a),k===undefined?48:k);}},P=c.P(225),A=c.P(75),t=g.dir(225-90);
+  sett(s,c,P,225,75);g.C(s,80,70,48);g.retta(s,P,A,0,16,{stroke:'var(--rosso)','stroke-width':2});g.seg(s,P,g.add(P,t,95),{stroke:'var(--rosso)','stroke-width':2});g.dot(s,P);})();
+(function(){var s=document.getElementById('a3'),c=g.C(s,80,82,42),V=[80,14];
+  [c.P(215),c.P(325)].forEach(function(q){g.retta(s,V,q,0,8,{stroke:'var(--grigio)','stroke-width':2});});g.dot(s,V,'var(--grigio)');})();
+(function(){var s=document.getElementById('a4'),c=g.C(s,80,70,48),V=[92,62];
+  [c.P(140),c.P(40)].forEach(function(q){g.seg(s,V,q,{stroke:'var(--grigio)','stroke-width':2});});g.dot(s,V,'var(--grigio)');})();
+/* arco sotteso */
+(function(){var s=document.getElementById('a-arco'),c=g.C(s,150,120,90),P=c.P(235),A=c.P(115),B=c.P(15);
+  g.arco(s,c,115,15);g.seg(s,P,A,{stroke:'var(--rosso)','stroke-width':2});g.seg(s,P,B,{stroke:'var(--rosso)','stroke-width':2});
+  var m=g.angArc(s,P,A,B,24);g.txt(s,m(38),'α',{fill:'var(--rosso)','font-style':'italic'});
+  g.dot(s,P);g.dot(s,A,'var(--verde)');g.dot(s,B,'var(--verde)');c.lab(235,'P');c.lab(115,'A');c.lab(15,'B');
+  g.dot(s,c.O,null,3);g.txt(s,g.add(c.O,[-12,6]),'O');})();
+/* semicirconferenza */
+(function(){var s=document.getElementById('a-semi'),c=g.C(s,150,115,88),A=c.P(180),B=c.P(0),P=c.P(60);
+  g.seg(s,A,B,{stroke:'var(--grigio)','stroke-width':1.6,'stroke-dasharray':'5 4'});
+  g.arco(s,c,180,360);
+  g.seg(s,P,A,{stroke:'var(--rosso)','stroke-width':2});g.seg(s,P,B,{stroke:'var(--rosso)','stroke-width':2});
+  g.retto(s,P,A,B,11);
+  g.dot(s,c.O,null,3);g.txt(s,g.add(c.O,[0,-13]),'O');
+  [[A,180,'A'],[B,0,'B'],[P,60,'P']].forEach(function(z){g.dot(s,z[0]);c.lab(z[1],z[2]);});})();
+/* angolo al centro doppio */
+(function(){var s=document.getElementById('a-doppio'),c=g.C(s,150,118,92),A=c.P(205),B=c.P(335),P=c.P(105);
+  g.arco(s,c,205,335);
+  g.seg(s,c.O,A,{stroke:'var(--blu)','stroke-width':2});g.seg(s,c.O,B,{stroke:'var(--blu)','stroke-width':2});
+  g.seg(s,P,A,{stroke:'var(--rosso)','stroke-width':2});g.seg(s,P,B,{stroke:'var(--rosso)','stroke-width':2});
+  var m1=g.angArc(s,P,A,B,30);g.txt(s,m1(44),'α',{fill:'var(--rosso)','font-style':'italic'});
+  var m2=g.angArc(s,c.O,A,B,20,{stroke:'var(--blu)'});g.txt(s,m2(34),'2α',{fill:'var(--blu)','font-style':'italic'});
+  g.dot(s,c.O,null,3);g.txt(s,g.add(c.O,[0,-13]),'O');
+  [[A,205,'A'],[B,335,'B'],[P,105,'P']].forEach(function(z){g.dot(s,z[0]);c.lab(z[1],z[2]);});})();
+
+})();
+</script>
 </body>
 </html>

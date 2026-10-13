@@ -5,18 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rette tangenti da un punto esterno — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.tripla{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.tripla figure{margin:0;text-align:center}
-.tripla figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.foglio>ol{margin:var(--r) 0 0;padding-left:1.6rem}
+.foglio>ol+p,.foglio>ol+div{margin-top:var(--r)}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px 18px}
+.pannelli svg{width:100%;max-width:220px}
+.pannelli .did{margin:4px 0 0}
+@media(max-width:640px){.pannelli{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -26,98 +59,117 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Circonferenze, rette e altre circonferenze &middot; Unità 63</p>
   <h1>Rette tangenti da un punto esterno</h1>
-  <p class="sommario">Da un punto esterno a una circonferenza si possono sempre tracciare due
-  rette tangenti, mai una sola o tre: vediamo perché, e che relazione hanno fra loro i due
-  segmenti di tangenza.</p>
 </header>
 
 <h2>Quante tangenti da un punto</h2>
 
-<p>Il numero di rette tangenti condotte da un punto $P$ dipende solo da dove si trova $P$
-rispetto alla circonferenza.</p>
-
-<div class="tripla">
-<figure>
-<svg viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="80" cy="85" r="55" fill="none" stroke="#16283d" stroke-width="2"/>
-<circle cx="80" cy="85" r="3.2" fill="#b3392f"/><text x="86" y="82" font-size="13">P</text>
-</svg>
-<figcaption>punto interno &mdash; 0 tangenti</figcaption>
-</figure>
-<figure>
-<svg viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="80" cy="85" r="55" fill="none" stroke="#16283d" stroke-width="2"/>
-<line x1="112.2" y1="58.0" x2="141.1" y2="92.5" stroke="#1f7a4c" stroke-width="2.2"/>
-<line x1="112.2" y1="58.0" x2="83.2" y2="23.5" stroke="#1f7a4c" stroke-width="2.2"/>
-<circle cx="112.2" cy="58.0" r="3.2" fill="#b3392f"/><text x="118" y="55" font-size="13">P</text>
-</svg>
-<figcaption>punto sulla circonferenza &mdash; 1 tangente</figcaption>
-</figure>
-<figure>
-<svg viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="80" cy="85" r="42" fill="none" stroke="#16283d" stroke-width="2"/>
-<line x1="140" y1="30" x2="114.6" y2="116.1" stroke="#1f7a4c" stroke-width="2.2"/>
-<line x1="140" y1="30" x2="52.1" y2="47.8" stroke="#1f7a4c" stroke-width="2.2"/>
-<circle cx="140" cy="30" r="3.2" fill="#b3392f"/><text x="146" y="27" font-size="13">P</text>
-</svg>
-<figcaption>punto esterno &mdash; 2 tangenti</figcaption>
-</figure>
+<div class="fig">
+<div class="pannelli" style="--n:3">
+<div><svg id="t-int" viewBox="0 0 180 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto interno"></svg><p class="did">$P$ interno: 0 tangenti</p></div>
+<div><svg id="t-sul" viewBox="0 0 180 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto sulla circonferenza"></svg><p class="did">$P$ sulla circonferenza: 1 tangente</p></div>
+<div><svg id="t-est" viewBox="0 0 180 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto esterno"></svg><p class="did">$P$ esterno: 2 tangenti</p></div>
+</div>
 </div>
 
-<div class="regola">
-<p><strong>Teorema (tangenti da un punto esterno).</strong> Tracciate da un punto $P$ esterno a
-una circonferenza di centro $O$ le rette tangenti nei punti $T_1$ e $T_2$:</p>
-<p>$PT_1 \cong PT_2$;</p>
-<p>$OP$ è bisettrice sia dell'angolo $T_1\hat{O}T_2$ sia dell'angolo $T_1\hat{P}T_2$.</p>
+<div class="def">
+<span class="et">Teorema</span>
+<p>Tangenti da un punto $P$ esterno, con punti di tangenza $T_1$ e $T_2$: i segmenti di tangente sono congruenti; $OP$ è bisettrice di $T_1\hat{O}T_2$ e di $T_1\hat{P}T_2$.</p>
+<p>Ipotesi: $PT_1$, $PT_2$ tangenti in $T_1$, $T_2$.</p>
+<p>Tesi: $PT_1 \cong PT_2$, &nbsp; $T_1\hat{O}P \cong T_2\hat{O}P$, &nbsp; $T_1\hat{P}O \cong T_2\hat{P}O$</p>
 </div>
-
-<p>I due punti di tangenza sono dunque simmetrici rispetto al segmento $OP$: i segmenti di
-tangente hanno la stessa lunghezza, e $OP$ taglia a metà tanto l'angolo al centro quanto
-l'angolo al vertice $P$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="150" cy="150" r="60" fill="none" stroke="#16283d" stroke-width="2"/>
-<circle cx="150" cy="150" r="2.6" fill="#16283d"/><text x="156" y="146" font-size="13">O</text>
-<line x1="40" y1="60" x2="189.1" y2="98.0" stroke="#1f7a4c" stroke-width="2.2"/>
-<line x1="40" y1="60" x2="106.8" y2="198.6" stroke="#1f7a4c" stroke-width="2.2"/>
-<line x1="150" y1="150" x2="164.8" y2="91.9" stroke="#b3392f" stroke-width="2.2"/>
-<line x1="150" y1="150" x2="96.0" y2="176.1" stroke="#b3392f" stroke-width="2.2"/>
-<line x1="150" y1="150" x2="40" y2="60" stroke="#1f4e79" stroke-width="2" stroke-dasharray="5 3"/>
-<path d="M 160 96 L 155 87 L 165 84" fill="none" stroke="#6d7280" stroke-width="1.3"/>
-<path d="M 101 172 L 111 174 L 108 184" fill="none" stroke="#6d7280" stroke-width="1.3"/>
-<circle cx="40" cy="60" r="3" fill="#16283d"/><text x="22" y="56" font-size="13">P</text>
-<circle cx="164.8" cy="91.9" r="3" fill="#16283d"/><text x="171" y="87" font-size="13">T&#8321;</text>
-<circle cx="96.0" cy="176.1" r="3" fill="#16283d"/><text x="76" y="188" font-size="13">T&#8322;</text>
-</svg>
-<figcaption>OT&#8321; &cong; OT&#8322; (raggi, rosso), PT&#8321; e PT&#8322; tangenti (verde), OP bisettrice (blu tratteggiato)</figcaption>
+<svg id="t-teo" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px" role="img" aria-label="Tangenti PT1 e PT2 da un punto esterno P"></svg>
 </div>
 
-<p><strong>Ipotesi.</strong> $PT_1$ e $PT_2$ tangenti alla circonferenza in $T_1$ e $T_2$.
-<strong>Tesi.</strong> $PT_1 \cong PT_2$, &nbsp;$T_1\hat{O}P \cong T_2\hat{O}P$, &nbsp;
-$T_2\hat{P}O \cong T_1\hat{P}O$.</p>
-
-<p><strong>Dimostrazione.</strong> Nei triangoli $OT_1P$ e $OT_2P$: $OT_1 \cong OT_2$ perché
-raggi; $OP$ in comune; $O\hat{T}_2P = O\hat{T}_1P = 90°$ per il teorema della tangente
-perpendicolare al raggio, quindi $O\hat{T}_1P \cong O\hat{T}_2P$. I due triangoli sono
-congruenti per il quarto criterio dei triangoli rettangoli (ipotenusa e un cateto congruenti).
-C.V.D.</p>
-
-<p>Dalla congruenza dei triangoli seguono insieme tutte e tre le conclusioni: i lati $PT_1$ e
-$PT_2$, corrispondenti, sono congruenti; gli angoli corrispondenti in $O$ sono congruenti fra
-loro, e così quelli in $P$ — cioè $OP$ biseca sia l'angolo al centro sia l'angolo al vertice.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Due circonferenze nel piano possono non toccarsi, essere tangenti o intersecarsi in due
-punti: vediamo come questi casi si leggano dal confronto fra la distanza dei centri e i raggi.</li>
-</ul>
-</div>
+<p>Dimostrazione (triangoli $OT_1P$ e $OT_2P$)</p>
+<ol>
+<li>$OT_1 \cong OT_2$ (raggi)</li>
+<li>$OP$ in comune</li>
+<li>$O\hat{T}_1P = O\hat{T}_2P = 90°$ (tangente perpendicolare al raggio)</li>
+<li>$OT_1P \cong OT_2P$ (triangoli rettangoli con ipotenusa e un cateto congruenti) $\Rightarrow$ tesi. C.V.D.</li>
+</ol>
 
 <nav class="nav-unita"><a class="precedente" href="../64-posizione-di-una-retta-rispetto-a-una-circonferenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Posizione di una retta rispetto a una circonferenza</span></a><a class="successiva" href="../66-posizione-reciproca-di-due-circonferenze/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Posizione reciproca di due circonferenze</span></a></nav>
 <footer><p>Matematica seconda &middot; Circonferenze, rette e altre circonferenze &middot; Unità 63</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio>ol,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':14,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function rad(g){return g*Math.PI/180;}
+function add(p,q,k){k=k===undefined?1:k;return [p[0]+k*q[0],p[1]+k*q[1]];}
+function sub(p,q){return [p[0]-q[0],p[1]-q[1]];}
+function len(v){return Math.hypot(v[0],v[1]);}
+function uni(v){var l=len(v);return [v[0]/l,v[1]/l];}
+function dir(g){return [Math.cos(rad(g)),-Math.sin(rad(g))];}
+function C(s,cx,cy,R,a){a=a||{};
+  el('circle',Object.assign({cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2},a),s);
+  var o={O:[cx,cy],R:R,P:function(g,k){return add([cx,cy],dir(g),k===undefined?R:k);},
+    lab:function(g,str,k,at){txt(s,o.P(g,R+(k||15)),str,at);}};
+  return o;}
+function seg(s,p,q,a){return el('line',Object.assign({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':1.8,'stroke-linecap':'round'},a||{}),s);}
+function retta(s,p,q,e1,e2,a){var u=uni(sub(q,p));return seg(s,add(p,u,-e1),add(q,u,e2),a);}
+function dot(s,p,col,r){el('circle',{cx:p[0],cy:p[1],r:r||3.5,fill:col||'var(--inchiostro)'},s);}
+function tacca(s,p,q,n,f){f=f===undefined?.5:f;var m=add(p,sub(q,p),f),u=uni(sub(q,p)),nn=[-u[1]*6,u[0]*6];
+  for(var i=0;i<n;i++){var c=add(m,u,(i-(n-1)/2)*4);seg(s,add(c,nn,-1),add(c,nn),{stroke:'var(--verde)','stroke-width':2});}}
+function retto(s,V,p,q,k){k=k||9;var u=uni(sub(p,V)),v=uni(sub(q,V)),a=add(V,u,k),b=add(a,v,k),c=add(V,v,k);
+  el('path',{d:'M'+a+' L'+b+' L'+c,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3},s);}
+function angArc(s,V,p,q,k,a){var a1=Math.atan2(p[1]-V[1],p[0]-V[0]),a2=Math.atan2(q[1]-V[1],q[0]-V[0]),d=a2-a1;
+  while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;var pts=[];
+  for(var i=0;i<=24;i++){var t=a1+d*i/24;pts.push([V[0]+k*Math.cos(t),V[1]+k*Math.sin(t)]);}
+  el('polyline',Object.assign({points:pts.join(' '),fill:'none',stroke:'var(--rosso)','stroke-width':1.8},a||{}),s);
+  var m=a1+d/2;return function(kk){return [V[0]+kk*Math.cos(m),V[1]+kk*Math.sin(m)];};}
+function arcPts(c,g0,g1,n){n=n||48;var pts=[];for(var i=0;i<=n;i++)pts.push(c.P(g0+(g1-g0)*i/n));return pts;}
+function arco(s,c,g0,g1,a){el('polyline',Object.assign({points:arcPts(c,g0,g1).join(' '),fill:'none',stroke:'var(--verde)','stroke-width':4},a||{}),s);}
+window.G={el:el,txt:txt,add:add,sub:sub,len:len,uni:uni,dir:dir,C:C,seg:seg,retta:retta,dot:dot,tacca:tacca,retto:retto,angArc:angArc,arcPts:arcPts,arco:arco};
+})();
+</script>
+<script>
+(function(){var g=G;
+
+var R=55;
+(function(){var s=document.getElementById('t-int'),c=g.C(s,90,85,R),P=g.add(c.O,[18,14]);
+  g.dot(s,c.O,null,3);g.txt(s,g.add(c.O,[-12,-4]),'O');g.dot(s,P,'var(--rosso)');g.txt(s,g.add(P,[12,-6]),'P');})();
+(function(){var s=document.getElementById('t-sul'),c=g.C(s,90,85,R),a=40,P=c.P(a),t=g.dir(a+90);
+  g.seg(s,g.add(P,t,-75),g.add(P,t,75),{stroke:'var(--blu)','stroke-width':2.4});
+  g.dot(s,c.O,null,3);g.txt(s,g.add(c.O,[-12,-4]),'O');g.dot(s,P,'var(--rosso)');c.lab(a,'P',14);})();
+(function(){var s=document.getElementById('t-est'),c=g.C(s,75,95,45),fi=40,d=95,P=g.add(c.O,g.dir(fi),d),b=Math.acos(45/d)*180/Math.PI;
+  [fi+b,fi-b].forEach(function(a){var T=c.P(a);g.retta(s,P,T,0,30,{stroke:'var(--blu)','stroke-width':2.4});});
+  g.dot(s,c.O,null,3);g.txt(s,g.add(c.O,[-12,-4]),'O');g.dot(s,P,'var(--rosso)');g.txt(s,g.add(P,[12,-4]),'P');})();
+(function(){var s=document.getElementById('t-teo'),c=g.C(s,215,130,72),fi=160,d=165,P=g.add(c.O,g.dir(fi),d),b=Math.acos(72/d)*180/Math.PI,
+  T1=c.P(fi-b),T2=c.P(fi+b);
+  g.seg(s,P,c.O,{stroke:'var(--grigio)','stroke-width':1.6,'stroke-dasharray':'5 4'});
+  g.seg(s,c.O,T1,{stroke:'var(--rosso)','stroke-width':2});g.seg(s,c.O,T2,{stroke:'var(--rosso)','stroke-width':2});
+  g.retta(s,P,T1,0,25,{stroke:'var(--blu)','stroke-width':2.4});g.retta(s,P,T2,0,25,{stroke:'var(--blu)','stroke-width':2.4});
+  g.retto(s,T1,c.O,P);g.retto(s,T2,c.O,P);
+  g.tacca(s,P,T1,1);g.tacca(s,P,T2,1);
+  g.angArc(s,P,T1,c.O,34,{stroke:'var(--verde)'});g.angArc(s,P,T2,c.O,38,{stroke:'var(--verde)'});
+  g.angArc(s,c.O,T1,P,18,{stroke:'var(--verde)'});g.angArc(s,c.O,T2,P,22,{stroke:'var(--verde)'});
+  g.dot(s,c.O,null,3);g.txt(s,g.add(c.O,[14,0]),'O');
+  g.dot(s,P);g.txt(s,g.add(P,[-12,0]),'P');g.dot(s,T1);g.dot(s,T2);c.lab(fi-b,'T₁',16);c.lab(fi+b,'T₂',16);
+})();
+
+})();
+</script>
 </body>
 </html>
