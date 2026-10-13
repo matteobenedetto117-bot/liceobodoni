@@ -5,16 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Retta per un punto e retta per due punti — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:12em}
+.ok{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -24,80 +53,175 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Piano cartesiano e retta &middot; Unità 29</p>
   <h1>Retta per un punto e retta per due punti</h1>
-  <p class="sommario">Conosciamo già l'equazione $y=mx+q$ a partire dal coefficiente
-  angolare e dall'ordinata all'origine. Vediamo ora come scrivere l'equazione di una retta
-  partendo invece dalle coordinate di uno o due suoi punti.</p>
 </header>
 
-<h2>Il coefficiente angolare come rapporto fra coordinate</h2>
+<p>L'equazione di una retta si può scrivere anche a partire dalle coordinate di uno o di due suoi punti, invece che dal coefficiente angolare e dall'ordinata all'origine.</p>
 
-<p>Presi due punti $A(x_A,y_A)$ e $B(x_B,y_B)$ della stessa retta, il coefficiente angolare
-è il rapporto fra la variazione dell'ordinata e la variazione dell'ascissa passando da $A$
-a $B$:</p>
+<h2>Coefficiente angolare da due punti</h2>
 
-$$m=\dfrac{y_B-y_A}{x_B-x_A}$$
-
-<div class="fig">
-<svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="15" y1="180" x2="265" y2="180" stroke="#16283d" stroke-width="1.4"/>
-<line x1="40" y1="195" x2="40" y2="15" stroke="#16283d" stroke-width="1.4"/>
-<text x="257" y="173" font-size="12" fill="#16283d">x</text>
-<text x="46" y="24" font-size="12" fill="#16283d">y</text>
-<line x1="59.2" y1="151.2" x2="181.6" y2="69.4" stroke="#1f4e79" stroke-width="1.8"/>
-<line x1="88" y1="132" x2="160" y2="132" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="160" y1="132" x2="160" y2="84" stroke="#b3392f" stroke-width="1.8"/>
-<circle cx="88" cy="132" r="3.2" fill="#16283d"/>
-<circle cx="160" cy="84" r="3.2" fill="#16283d"/>
-<text x="52" y="148" font-size="12" fill="#16283d">A(2, 2)</text>
-<text x="164" y="80" font-size="12" fill="#16283d">B(5, 4)</text>
-<text x="86" y="146" font-size="11" fill="#2f6b4f">x<tspan baseline-shift="sub" font-size="8">B</tspan>&#8722;x<tspan baseline-shift="sub" font-size="8">A</tspan></text>
-<text x="164" y="112" font-size="11" fill="#b3392f">y<tspan baseline-shift="sub" font-size="8">B</tspan>&#8722;y<tspan baseline-shift="sub" font-size="8">A</tspan></text>
-</svg>
+<div class="def"><span class="et">Coefficiente angolare</span>
+<p>Se $A(x_A, y_A)$ e $B(x_B, y_B)$ sono due punti di una retta, con $x_A \ne x_B$, il coefficiente angolare è il rapporto fra la variazione dell'ordinata e la variazione dell'ascissa passando da $A$ a $B$:</p>
+<p class="eq">$$m=\frac{y_B-y_A}{x_B-x_A}$$</p>
 </div>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Con $A(2,2)$ e $B(5,4)$: $m=\dfrac{4-2}{5-2}=\dfrac{2}{3}$.</p>
+<div class="fig">
+<svg id="g-m" viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="La retta per A(2, 2) e B(5, 4) con le differenze delle ascisse e delle ordinate fra A e B; il punto B si sposta lungo la retta"></svg>
+<div class="cursore"><label for="c-m">$x_B$</label><input id="c-m" type="range" min="0.5" max="6.5" step="1.5" value="5"><span class="val" id="v-m"></span></div>
+<p class="did">Spostando $B$ lungo la retta cambiano le due differenze, ma il loro rapporto resta $\dfrac23$.</p>
 </div>
 
 <h2>Retta per un punto con coefficiente angolare noto</h2>
 
-<p>Se conosciamo $m$ e un solo punto $A$ della retta, basta considerare al posto di $B$ un
-punto generico $(x,y)$ della retta stessa: il rapporto deve dare ancora $m$:</p>
+<p>Se si conoscono $m$ e un solo punto $A$ della retta, al posto di $B$ si considera un punto generico $P(x, y)$ della retta. Il rapporto fra le differenze delle coordinate deve dare ancora $m$:</p>
 
-$$m=\dfrac{y-y_A}{x-x_A}$$
+<p class="eq">$$m=\frac{y-y_A}{x-x_A}$$</p>
 
-<div class="regola">
-<p>$$y-y_A=m(x-x_A)$$</p>
-<p>Equazione della retta passante per $A(x_A,y_A)$ con coefficiente angolare $m$.</p>
+<p>Moltiplicando entrambi i membri per $x-x_A$ si ottiene l'equazione della retta.</p>
+
+<div class="def"><span class="et">Retta per un punto</span>
+<p>La retta passante per $A(x_A, y_A)$ con coefficiente angolare $m$ ha equazione</p>
+<p class="eq">$$y-y_A=m\,(x-x_A)$$</p>
 </div>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Con $m=\dfrac23$ e $A(2,2)$: $y-2=\dfrac23(x-2)$, cioè
-$y=\dfrac23x+\dfrac23$.</p>
-</div>
+<h2>Esempio 1</h2>
+
+<p>Si cerca la retta passante per $A(2, 2)$ con coefficiente angolare $m=\dfrac23$. Sostituendo nella formula si ha</p>
+
+<p class="eq">$$y-2=\frac23\,(x-2)$$</p>
+
+<p>e, risolvendo rispetto a $y$,</p>
+
+<p class="eq">$$y=\frac23\,x+\frac23$$</p>
 
 <h2>Retta per due punti</h2>
 
-<p>Se invece conosciamo due punti $A$ e $B$, il coefficiente angolare si scrive in due modi
-equivalenti — fra $A$ e $B$, oppure fra $A$ e il punto generico $(x,y)$ — e le due
-espressioni devono essere uguali:</p>
+<p>Se si conoscono due punti $A$ e $B$, il coefficiente angolare si può calcolare fra $A$ e $B$ oppure fra $A$ e il punto generico $P(x, y)$. Le due espressioni devono essere uguali.</p>
 
-<div class="regola">
-<p>$$\dfrac{y-y_A}{x-x_A}=\dfrac{y_B-y_A}{x_B-x_A}$$</p>
-<p>Equazione della retta passante per due punti $A(x_A,y_A)$ e $B(x_B,y_B)$.</p>
+<div class="def"><span class="et">Retta per due punti</span>
+<p>La retta passante per $A(x_A, y_A)$ e $B(x_B, y_B)$, con $x_A \ne x_B$, ha equazione</p>
+<p class="eq">$$\frac{y-y_A}{x-x_A}=\frac{y_B-y_A}{x_B-x_A}$$</p>
 </div>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Con $A(2,2)$ e $B(5,4)$: $\dfrac{y-2}{x-2}=\dfrac{4-2}{5-2}=
-\dfrac23$, da cui $y-2=\dfrac23(x-2)$ e $y=\dfrac23x+\dfrac23$: la stessa retta trovata
-sopra, come deve essere. Moltiplicando per 3 si ottiene la forma implicita
-$3y-2x-2=0$.</p>
+<div class="nota"><span class="et">Punti con la stessa ascissa</span>
+<p>Se $x_A = x_B$ il denominatore si annulla e le formule non si possono usare: la retta per $A$ e $B$ è verticale e ha equazione $x = x_A$.</p>
 </div>
 
+<h2>Esempio 2</h2>
+
+<p>Si cerca la retta passante per $A(2, 2)$ e $B(5, 4)$. Sostituendo le coordinate nella formula si ottiene</p>
+
+<p class="eq">$$\frac{y-2}{x-2}=\frac{4-2}{5-2}=\frac23$$</p>
+
+<p>da cui $y-2=\dfrac23\,(x-2)$, cioè</p>
+
+<p class="eq">$$y=\frac23\,x+\frac23$$</p>
+
+<p>È la stessa retta dell'esempio 1, perché passa per $A$ e ha lo stesso coefficiente angolare. Moltiplicando entrambi i membri per $3$ e portando tutto al primo membro si ottiene la forma implicita:</p>
+
+<p class="eq">$$3y-2x-2=0$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../30-rette-parallele-e-perpendicolari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Rette parallele e perpendicolari</span></a><a class="successiva" href="../32-fasci-di-rette-e-intersezione-fra-due-rette/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Fasci di rette e intersezione fra due rette</span></a></nav>
 <footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 29</p></footer>
 
 </div>
-</body>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+Piano.prototype.retta=function(m,a,dove){var X=this.X,Y=this.Y,x1=this.xr[0]-1,x2=this.xr[1]+1;
+  return this.add(el('line',Object.assign({x1:X(x1),y1:Y(m*x1),x2:X(x2),y2:Y(m*x2),'stroke-width':2},a)),dove);};
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+var M={l:20,r:20,t:20,b:20}, XR=[-3.6,3.6], YR=[-3.1,3.1];
+
+/* ---------- coefficiente angolare: A(2,2) fisso, B sulla retta y = 2/3 x + 2/3 ---------- */
+(function(){
+  var svg=document.getElementById('g-m'),cur=document.getElementById('c-m'),v=document.getElementById('v-m'); if(!svg)return;
+  var P=new Piano(svg,[-2.5,9.5],[-1,6.2],M); P.assi([-2,-1,1,2,3,4,5,6,7,8,9],[1,2,3,4,5,6]);
+  var X=P.X,Y=P.Y; function f(x){return 2/3*x+2/3;}
+  P.add(el('line',{x1:X(-3),y1:Y(f(-3)),x2:X(9),y2:Y(f(9)),stroke:'var(--blu)','stroke-width':2.4}),'sotto');
+  var dx=P.add(el('line',{stroke:'var(--verde)','stroke-width':2.2}),'sopra');
+  var dy=P.add(el('line',{stroke:'var(--rosso)','stroke-width':2.2}),'sopra');
+  P.add(el('circle',{cx:X(2),cy:Y(2),r:4,fill:'var(--inchiostro)'}),'sopra');
+  var pb=P.add(el('circle',{r:4.5,fill:'var(--rosso)'}),'sopra');
+  var tA=P.add(txt(X(2)-8,Y(2)-10,'A(2; 2)',{'font-size':12,fill:'var(--inchiostro)','text-anchor':'end'}),'testo');
+  var tB=P.add(txt(0,0,'',{'font-size':12,fill:'var(--rosso)'}),'testo');
+  var tx=P.add(txt(0,0,'',{'font-size':12,fill:'var(--verde)','text-anchor':'middle'}),'testo');
+  var ty=P.add(txt(0,0,'',{'font-size':12,fill:'var(--rosso)'}),'testo');
+  function dis(){
+    var xb=+cur.value, yb=f(xb), su=(xb===2);
+    set(pb,{cx:X(xb),cy:Y(yb)});
+    set(dx,{x1:X(2),y1:Y(2),x2:X(xb),y2:Y(2)}); set(dy,{x1:X(xb),y1:Y(2),x2:X(xb),y2:Y(yb)});
+    var dX=xb-2, dY=yb-2;
+    set(tA,dX<0?{x:X(2)+8,y:Y(2)+18,'text-anchor':'start'}:{x:X(2)-8,y:Y(2)-10,'text-anchor':'end'});
+    if(su){tB.textContent='';tx.textContent='';ty.textContent='';}
+    else{
+      set(tB,{x:X(xb)-8,y:Y(yb)+(dX>0?-10:16),'text-anchor':'end'}); tB.textContent='B('+n(xb)+'; '+n(Math.round(yb*100)/100)+')';
+      set(tx,{x:dX>0?(X(2)+X(xb))/2:X(xb),y:Y(2)+(dX>0?17:-8)}); tx.textContent='xB − xA = '+n(dX);
+      set(ty,{x:X(xb)+(dX>0?6:-6),y:(Y(2)+Y(yb))/2+4,'text-anchor':dX>0?'start':'end'}); ty.textContent='yB − yA = '+n(Math.round(dY*100)/100);
+    }
+    v.innerHTML=su?'B coincide con A: il rapporto non si può calcolare':'m = '+n(Math.round(dY*100)/100)+' / '+n(dX)+' = 2/3'+(xb===5?' &nbsp; <span class="ok">come negli esempi</span>':'');
+  }
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script></body>
 </html>
