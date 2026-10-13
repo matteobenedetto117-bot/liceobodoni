@@ -257,3 +257,6 @@ La statica dei fluidi (unità 01–08, pagine 1–17 degli appunti) è stata spo
 - Parole: 372 su 2 pagine di traccia (pagine 91–92; pagina 90 apparteneva già interamente all'unità 51, con lo stesso esempio del blocco metallico in acqua)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Non ci sono calcoli numerici da verificare: la traccia presenta solo la definizione L=Q/m e il grafico T-Q qualitativo, senza valori numerici assegnati.
 - Aggiunta: nessuna oltre alla frase di raccordo fra i due tratti inclinati e i due tratti orizzontali del grafico; non riportata la "tabella dei calori latenti a pagina 442" della traccia, riferimento a un libro di testo esterno non disponibile qui. Con questa unità si chiude il percorso di fisica di seconda (52 unità totali): la nota di chiusura sulla pagina segue lo stesso schema già usato per la chiusura di altri percorsi completi nel repository.
+
+## Revisione generale (13/10/2026, su richiesta dell'utente)
+- Tolte da tutte le unità le frasi introduttive sotto il titolo (sottotitoli «sommario» e frasi iniziali che annunciano il contenuto dell'unità, tipo «Questa unità…», «L'unità…», «Finora…»): ogni pagina comincia direttamente con il testo o con i calcoli. Dove la prima frase conteneva anche un contenuto (definizione, regola) è stata tenuta solo quella parte.
