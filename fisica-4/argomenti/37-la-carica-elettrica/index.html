@@ -5,194 +5,286 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La carica elettrica — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.scatola{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.scatola p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 35</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 35</p>
   <h1>La carica elettrica</h1>
-  <p class="sommario">Alcuni materiali, se strofinati con un panno, acquistano la capacit&agrave; di
-  attirare piccoli oggetti leggeri: &egrave; il fenomeno pi&ugrave; antico dell'elettricit&agrave;, gi&agrave;
-  osservato nell'antichit&agrave; con l'ambra. Da qui nasce l'idea di carica elettrica, che pu&ograve;
-  essere di due tipi, e la sua unit&agrave; di misura.</p>
 </header>
 
-<h2>Lo strofinio e l'attrazione</h2>
+<p>L'unità introduce la carica elettrica a partire dall'elettrizzazione per strofinio. Si vedono i due tipi di carica, il ruolo degli elettroni, la conservazione della carica e la carica fondamentale.</p>
 
-<p>Una bacchetta d'ambra strofinata con un panno di lana riesce ad attirare piccoli pezzetti di
-carta. Ripetendo lo stesso esperimento con una bacchetta di vetro si ottiene lo stesso
-risultato.</p>
+<h2>Lo strofinio e l'attrazione</h2>
+<p>Una bacchetta d'ambra strofinata con un panno di lana attira piccoli pezzetti di carta. Ripetendo l'esperimento con una bacchetta di vetro si ottiene lo stesso risultato.</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="fr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--grigio)"/>
-</marker>
-</defs>
-<rect x="55" y="105" width="110" height="60" fill="var(--blu-chiaro)" stroke="var(--blu)"/>
-<text x="110" y="182" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">panno</text>
-<line x1="35" y1="88" x2="175" y2="140" stroke="#b8863b" stroke-width="10" stroke-linecap="round"/>
-<text x="105" y="70" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">bacchetta d'ambra</text>
-<path d="M75,95 Q110,72 145,100" fill="none" stroke="var(--grigio)" stroke-width="1.6" marker-end="url(#fr2)"/>
-<line x1="440" y1="70" x2="570" y2="112" stroke="#b8863b" stroke-width="10" stroke-linecap="round"/>
-<text x="505" y="45" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">bacchetta strofinata</text>
-<g fill="var(--inchiostro)">
-<rect x="598" y="55" width="10" height="10"/>
-<rect x="608" y="90" width="10" height="10"/>
-<rect x="590" y="120" width="10" height="10"/>
-<rect x="560" y="150" width="10" height="10"/>
-</g>
-<line x1="600" y1="62" x2="580" y2="98" stroke="var(--rosso)" stroke-width="1.4" marker-end="url(#fr1)"/>
-<line x1="611" y1="97" x2="583" y2="106" stroke="var(--rosso)" stroke-width="1.4" marker-end="url(#fr1)"/>
-<line x1="593" y1="126" x2="578" y2="112" stroke="var(--rosso)" stroke-width="1.4" marker-end="url(#fr1)"/>
-<line x1="566" y1="153" x2="565" y2="120" stroke="var(--rosso)" stroke-width="1.4" marker-end="url(#fr1)"/>
-<text x="580" y="178" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">pezzetti di carta</text>
-</svg>
-<p class="did">La bacchetta strofinata con il panno acquista la capacit&agrave; di attirare
-piccoli pezzetti di carta.</p>
+<svg id="g-strof" viewBox="0 0 420 166" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Bacchetta d'ambra strofinata su un panno e poi avvicinata a pezzetti di carta, che vengono attirati"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-strof" aria-label="Avvia">&#9654;</button></div>
+<p class="did">La bacchetta strofinata con il panno acquista la capacità di attirare piccoli pezzetti di carta.</p>
 </div>
 
-<p>Definiamo <strong>carica</strong> una bacchetta strofinata capace di attirare la carta in
-questo modo. Per convenzione la carica che compare sull'ambra si chiama <strong>negativa</strong>,
-quella che compare sul vetro <strong>positiva</strong>.</p>
+<div class="def"><span class="et">Carica elettrica</span>
+<p>Un corpo che, dopo lo strofinio, è in grado di attirare oggetti leggeri si dice carico (elettrizzato). Per convenzione la carica che compare sull'ambra si chiama negativa, quella che compare sul vetro si chiama positiva.</p>
+</div>
 
 <h2>Repulsione e attrazione fra cariche</h2>
+<p>Si sospende a un filo una bacchetta d'ambra strofinata e le si avvicina un'altra bacchetta d'ambra strofinata: la bacchetta sospesa si allontana. Se invece le si avvicina una bacchetta di vetro strofinata, la bacchetta sospesa viene attirata.</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="100" y1="18" x2="200" y2="18" stroke="var(--inchiostro)" stroke-width="4"/>
-<g stroke="var(--inchiostro)" stroke-width="1.2">
-<line x1="105" y1="18" x2="98" y2="30"/><line x1="120" y1="18" x2="113" y2="30"/>
-<line x1="135" y1="18" x2="128" y2="30"/><line x1="150" y1="18" x2="143" y2="30"/>
-<line x1="165" y1="18" x2="158" y2="30"/><line x1="180" y1="18" x2="173" y2="30"/>
-<line x1="195" y1="18" x2="188" y2="30"/>
-</g>
-<line x1="150" y1="18" x2="150" y2="65" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="150" y1="65" x2="205" y2="48" stroke="#b8863b" stroke-width="10" stroke-linecap="round"/>
-<line x1="60" y1="140" x2="140" y2="95" stroke="#b8863b" stroke-width="10" stroke-linecap="round"/>
-<line x1="210" y1="50" x2="240" y2="30" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr3)"/>
-<text x="248" y="30" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F</text>
-<text x="150" y="215" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">ambra &ndash; ambra</text>
-<text x="150" y="200" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">si respingono</text>
-<line x1="420" y1="18" x2="520" y2="18" stroke="var(--inchiostro)" stroke-width="4"/>
-<g stroke="var(--inchiostro)" stroke-width="1.2">
-<line x1="425" y1="18" x2="418" y2="30"/><line x1="440" y1="18" x2="433" y2="30"/>
-<line x1="455" y1="18" x2="448" y2="30"/><line x1="470" y1="18" x2="463" y2="30"/>
-<line x1="485" y1="18" x2="478" y2="30"/><line x1="500" y1="18" x2="493" y2="30"/>
-<line x1="515" y1="18" x2="508" y2="30"/>
-</g>
-<line x1="470" y1="18" x2="470" y2="65" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="470" y1="65" x2="425" y2="110" stroke="#b8863b" stroke-width="10" stroke-linecap="round"/>
-<line x1="560" y1="150" x2="480" y2="105" stroke="var(--blu)" stroke-width="10" stroke-linecap="round"/>
-<line x1="428" y1="108" x2="405" y2="130" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr3)"/>
-<text x="390" y="146" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F</text>
-<text x="480" y="215" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">ambra &ndash; vetro</text>
-<text x="480" y="200" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">si attraggono</text>
-</svg>
-<p class="did">Una bacchetta d'ambra strofinata, sospesa a un filo, si allontana da un'altra
-bacchetta d'ambra strofinata (stesso segno, repulsione) e si avvicina a una bacchetta di vetro
-strofinato (segno opposto, attrazione).</p>
+<svg id="g-forze" viewBox="0 0 420 236" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Vista dall'alto di una bacchetta d'ambra sospesa: respinta da un'altra bacchetta d'ambra e attirata da una bacchetta di vetro"></svg>
+<div class="cursore"><label for="c-forze">distanza $d$</label><input id="c-forze" type="range" min="40" max="100" step="1" value="55"><span class="val" id="v-forze"></span></div>
+<p class="did">Vista dall'alto (il punto nero è il filo): la bacchetta d'ambra sospesa è respinta da un'altra bacchetta d'ambra ed è attirata da una bacchetta di vetro, tanto più quanto più le bacchette sono vicine.</p>
 </div>
 
-<p>Sospendendo a un filo una bacchetta d'ambra strofinata e avvicinandone un'altra, anch'essa
-d'ambra e strofinata, la bacchetta sospesa si allontana: due cariche dello stesso segno si
-respingono. Avvicinando invece una bacchetta di vetro strofinato, la bacchetta sospesa viene
-attirata: due cariche di segno opposto si attraggono.</p>
-
-<h2>Perch&eacute; i corpi si caricano</h2>
-
-<div class="fig">
-<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-</defs>
-<rect x="40" y="60" width="90" height="60" fill="var(--blu-chiaro)" stroke="var(--blu)"/>
-<text x="85" y="140" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">panno</text>
-<line x1="150" y1="60" x2="220" y2="120" stroke="#b8863b" stroke-width="12" stroke-linecap="round"/>
-<text x="185" y="45" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">ambra</text>
-<path d="M125,80 Q150,65 165,85" fill="none" stroke="var(--blu)" stroke-width="1.4" marker-end="url(#fr4)"/>
-<text x="145" y="60" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--blu)">e&#8315;</text>
-<text x="85" y="55" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">+</text>
-<text x="220" y="135" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&ndash;</text>
-<rect x="520" y="60" width="90" height="60" fill="var(--blu-chiaro)" stroke="var(--blu)"/>
-<text x="565" y="140" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">panno</text>
-<line x1="420" y1="60" x2="490" y2="120" stroke="var(--blu)" stroke-width="12" stroke-linecap="round"/>
-<text x="450" y="45" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">vetro</text>
-<path d="M480,90 Q505,72 515,88" fill="none" stroke="var(--blu)" stroke-width="1.4" marker-end="url(#fr4)"/>
-<text x="500" y="65" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--blu)">e&#8315;</text>
-<text x="450" y="135" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">+</text>
-<text x="565" y="55" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&ndash;</text>
-</svg>
-<p class="did">Strofinando l'ambra il panno cede elettroni alla bacchetta, che resta negativa;
-strofinando il vetro accade il contrario, ed &egrave; la bacchetta a cedere elettroni al panno,
-restando positiva.</p>
-</div>
-
-<p>Strofinando l'ambra, il panno cede elettroni alla bacchetta, che acquista cos&igrave; un eccesso
-di carica negativa. Strofinando il vetro accade il contrario: &egrave; la bacchetta a cedere
-elettroni al panno, e resta con un difetto di elettroni, cio&egrave; con carica positiva. In
-entrambi i casi a muoversi sono solo gli elettroni: i protoni, legati nel nucleo degli atomi,
-non si spostano.</p>
-
-<h2>Conservazione della carica</h2>
-
-<p>La carica elettrica totale di un sistema chiuso &egrave; costante: la carica che compare su un
-corpo &egrave; esattamente quella che scompare dall'altro.</p>
-
-<h2>Unit&agrave; di misura e carica fondamentale</h2>
-
-<p>La quantit&agrave; di carica si indica con $q$ e si misura in coulomb (C). La pi&ugrave; piccola
-quantit&agrave; di carica libera osservata in natura &egrave; la carica fondamentale:</p>
-
-$$ e = 1{,}60\times 10^{-19}\ \text{C} $$
-
-<p>Un elettrone porta carica $q_e=-e$, un protone $q_p=+e$.</p>
-
-<h2>Esempio</h2>
-
-<p>Una pallina di lana ha acquistato carica $q=-7{,}3\times 10^{-16}\ \text{C}$. Quanti elettroni
-ha acquistato?</p>
-
-$$ n_e = \frac{q}{q_e} = \frac{q}{-e} = \frac{-7{,}3\times 10^{-16}\ \text{C}}{-1{,}60\times
-10^{-19}\ \text{C}} \approx 4563\ \text{elettroni} $$
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
+<div class="def"><span class="et">Forze fra cariche</span>
 <ul>
-<li>La differenza fra conduttori e isolanti e i due modi di elettrizzare un conduttore, per
-strofinio e per contatto.</li>
-<li>L'elettrizzazione per induzione e la polarizzazione degli isolanti.</li>
-<li>La legge di Coulomb, che dice quanto vale la forza fra due cariche puntiformi.</li>
+<li>Due cariche dello stesso segno si respingono.</li>
+<li>Due cariche di segno opposto si attraggono.</li>
 </ul>
 </div>
 
+<h2>Perché i corpi si caricano</h2>
+<p>Strofinando l'ambra, il panno cede elettroni alla bacchetta, che acquista così un eccesso di elettroni e quindi una carica negativa. Strofinando il vetro accade il contrario: è la bacchetta a cedere elettroni al panno e resta con un difetto di elettroni, cioè con una carica positiva.</p>
+<p>In entrambi i casi si spostano soltanto gli elettroni. I protoni, legati nei nuclei degli atomi, non si spostano.</p>
+
+<div class="fig">
+<svg id="g-elet" viewBox="0 0 420 206" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Passaggio di elettroni dal panno all'ambra e dal vetro al panno"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-elet" aria-label="Avvia">&#9654;</button></div>
+<p class="did">Gli elettroni passano dal panno all'ambra e dal vetro al panno; le cariche positive restano dove sono e la carica totale di ciascuna coppia resta nulla.</p>
+</div>
+
+<h2>Conservazione della carica</h2>
+<div class="def"><span class="et">Principio di conservazione della carica</span>
+<p>La carica elettrica totale di un sistema isolato resta costante. Nello strofinio la carica che compare su un corpo è uguale e opposta a quella che compare sull'altro.</p>
+</div>
+
+<h2>Unità di misura e carica fondamentale</h2>
+<p>La carica elettrica si indica con $q$ e si misura in coulomb (C). La più piccola quantità di carica libera osservata in natura è la carica fondamentale:</p>
+<p class="eq">$$e \approx 1{,}60\times 10^{-19}\ \text{C}$$</p>
+<p>Un elettrone ha carica $q_e = -e$, un protone ha carica $q_p = +e$.</p>
+
+<h2>Esempio</h2>
+<p>Una pallina di lana ha acquistato la carica $q = -7{,}3\times 10^{-16}\ \text{C}$. Il numero di elettroni acquistati è il rapporto fra la carica della pallina e la carica di un elettrone:</p>
+<p class="eq">$$n_e = \frac{q}{q_e} = \frac{-7{,}3\times 10^{-16}\ \text{C}}{-1{,}60\times 10^{-19}\ \text{C}} \approx 4563$$</p>
+
 <nav class="nav-unita"><a class="precedente" href="../36-battimenti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Battimenti</span></a><a class="successiva" href="../38-conduttori-e-isolanti-elettrizzazione-per-strofinio-e-contat/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Conduttori e isolanti; elettrizzazione per strofinio e contatto</span></a></nav>
-<footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 35</p></footer>
+<footer><p>Fisica quarta &middot; Elettrostatica &middot; Unità 35</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var RID=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function freccia(svg,id,col){var d=el(svg,'defs',{}),m=el(d,'marker',{id:id,markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(m,'path',{d:'M0,0 L8,4 L0,8 Z',fill:col});}
+  function segno(p,x,y,s,col){return txt(p,x,y+4,s,{fill:col,'font-size':13,'font-weight':700});}
+  function clamp(x){return x<0?0:(x>1?1:x);}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  var AMBRA='#b8863b';
+  /* gestione del tasto ▶ / ↺ */
+  function animatore(btn,durata,disegna){
+    var t0=null,stato='fermo';
+    function passo(ts){if(t0===null)t0=ts;var t=(ts-t0)/1000;disegna(Math.min(t,durata));if(t<durata)requestAnimationFrame(passo);else{stato='finito';btn.disabled=false;btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');}}
+    btn.addEventListener('click',function(){
+      if(stato==='fermo'){stato='corso';btn.disabled=true;if(RID){disegna(durata);stato='finito';btn.disabled=false;btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');return;}t0=null;requestAnimationFrame(passo);}
+      else if(stato==='finito'){stato='fermo';disegna(0);btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');}
+    });
+    disegna(RID?durata:0);
+  }
+
+  /* 1. strofinio e attrazione della carta */
+  (function(){
+    var s=document.getElementById('g-strof'),b=document.getElementById('b-strof');if(!s)return;
+    freccia(s,'m35r','var(--rosso)');
+    el(s,'line',{x1:10,y1:140,x2:410,y2:140,stroke:'var(--inchiostro)','stroke-width':1.2});
+    el(s,'rect',{x:30,y:104,width:130,height:36,rx:4,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4});
+    txt(s,95,127,'panno di lana',{fill:'var(--blu)'});
+    var carte=[[262,-8],[288,12],[318,-4],[346,10],[372,-2]].map(function(c){return {x:c[0],r:c[1],e:el(s,'rect',{width:10,height:6,fill:'var(--inchiostro)'})};});
+    txt(s,318,157,'pezzetti di carta',{'font-size':11});
+    var g=el(s,'g',{});
+    var bac=el(g,'line',{stroke:AMBRA,'stroke-width':12,'stroke-linecap':'round'});
+    var meno=[];for(var i=0;i<5;i++)meno.push(segno(g,0,0,'−','var(--rosso)'));
+    var piu=[];for(var j=0;j<5;j++)piu.push(segno(s,48+j*22,114,'+','var(--rosso)'));
+    var et=txt(s,0,0,'ambra',{fill:'var(--inchiostro)'});
+    var fin=txt(s,318,100,'la carta è attirata',{fill:'var(--verde)','font-size':13});
+    var fr=carte.map(function(){return el(s,'line',{stroke:'var(--rosso)','stroke-width':1.6,'marker-end':'url(#m35r)'});});
+    var L=130;
+    function disegna(t){
+      /* 0–3 s strofinio; 3–4,5 s spostamento; 4,5–5,7 s attrazione; poi scritta */
+      var x0,y0;
+      if(t<3){x0=40+18*Math.sin(t*2*Math.PI*1.2);y0=95;}
+      else{var u=ease((t-3)/1.5);x0=40+u*(255-40);y0=95-u*(95-40);}
+      set(bac,{x1:x0,y1:y0,x2:x0+L,y2:y0});
+      set(et,{x:x0+L/2,y:y0-12});
+      var n=t<3?Math.floor(clamp(t/2.6)*5):5;
+      meno.forEach(function(m,k){set(m,{x:x0+15+k*25,y:y0+4.5,visibility:k<n?'visible':'hidden'});});
+      piu.forEach(function(p,k){set(p,{visibility:k<n?'visible':'hidden'});});
+      var a=clamp((t-4.5)/1.2);
+      carte.forEach(function(c,k){
+        var ritardo=k*0.08,aa=clamp((a-ritardo)/(1-0.32)),h=aa*aa*aa;
+        var yt=y0+9,yb=134,y=yb+(yt-yb)*h;
+        set(c.e,{x:c.x-5,y:y-3,transform:'rotate('+(c.r*(1-h))+' '+c.x+' '+y+')'});
+        var vis=t>4.5&&h<0.9;
+        set(fr[k],{x1:c.x,y1:y-6,x2:c.x,y2:y-24,visibility:vis?'visible':'hidden'});
+      });
+      set(fin,{opacity:clamp((t-5.8)/0.6)});
+    }
+    animatore(b,6.4,disegna);
+  })();
+
+  /* 2. repulsione e attrazione (vista dall'alto) */
+  (function(){
+    var s=document.getElementById('g-forze'),c=document.getElementById('c-forze'),v=document.getElementById('v-forze');if(!s)return;
+    freccia(s,'m35f','var(--rosso)');
+    var pannelli=[{cx:105,tipo:'rep',col:AMBRA,seg:'−',nome:'ambra – ambra',esito:'si respingono'},{cx:315,tipo:'att',col:'var(--blu)',seg:'+',nome:'ambra – vetro',esito:'si attraggono'}];
+    var L=60,Py=78;
+    pannelli.forEach(function(P){
+      P.g=el(s,'g',{});
+      P.sosp=el(P.g,'line',{stroke:AMBRA,'stroke-width':10,'stroke-linecap':'round'});
+      P.sm=[segno(P.g,0,0,'−','var(--rosso)'),segno(P.g,0,0,'−','var(--rosso)')];
+      el(s,'circle',{cx:P.cx,cy:Py,r:4,fill:'var(--inchiostro)'});
+      P.av=el(s,'line',{stroke:P.col,'stroke-width':10,'stroke-linecap':'round'});
+      P.as=[segno(s,0,0,P.seg,'var(--rosso)'),segno(s,0,0,P.seg,'var(--rosso)')];
+      P.f=el(s,'line',{stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#m35f)'});
+      P.ft=txt(s,0,0,'F',{fill:'var(--rosso)','font-size':13,'font-style':'italic'});
+      txt(s,P.cx,16,P.nome,{fill:'var(--inchiostro)','font-size':13});
+      txt(s,P.cx,31,P.esito,{'font-size':12});
+    });
+    function disegna(){
+      var d=+c.value;
+      var th=Math.min(25,25*Math.pow(40/d,2)); /* deviazione in gradi, decresce con d */
+      pannelli.forEach(function(P){
+        var sg=P.tipo==='rep'?1:-1, a=sg*th*Math.PI/180;
+        /* estremo sinistro: (cx-L, Py) ruotato; rep → sale (si allontana dalla bacchetta sotto) */
+        var ex=P.cx-L*Math.cos(a), ey=Py-L*Math.sin(a), fx=P.cx+L*Math.cos(a), fy=Py+L*Math.sin(a);
+        set(P.sosp,{x1:ex,y1:ey,x2:fx,y2:fy});
+        set(P.sm[0],{x:P.cx+(ex-P.cx)*.75,y:Py+(ey-Py)*.75+4.5});
+        set(P.sm[1],{x:P.cx+(ex-P.cx)*.35,y:Py+(ey-Py)*.35+4.5});
+        /* bacchetta che si avvicina: verticale, sotto l'estremo sinistro a riposo */
+        var bx=P.cx-L, top=Py+d;
+        set(P.av,{x1:bx,y1:top,x2:bx,y2:top+48});
+        set(P.as[0],{x:bx,y:top+12+4.5});set(P.as[1],{x:bx,y:top+34+4.5});
+        var lf=8+22*th/25;
+        set(P.f,{x1:ex-18,y1:ey,x2:ex-18,y2:ey-sg*lf});
+        set(P.ft,{x:ex-30,y:ey-sg*lf/2+4});
+      });
+      v.textContent='deviazione ≈ '+Math.round(th)+'°';
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+
+  /* 3. passaggio di elettroni */
+  (function(){
+    var s=document.getElementById('g-elet'),b=document.getElementById('b-elet');if(!s)return;
+    var P=[{x0:10,dir:1,bac:'ambra',col:AMBRA},{x0:220,dir:-1,bac:'vetro',col:'var(--blu)'}];
+    var mov=[];
+    P.forEach(function(p){
+      var px=p.x0+10,bx=p.x0+100; /* panno a sinistra, bacchetta a destra */
+      el(s,'rect',{x:px,y:40,width:80,height:110,rx:5,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4});
+      el(s,'rect',{x:bx,y:40,width:78,height:110,rx:12,fill:p.col,'fill-opacity':.28,stroke:p.col,'stroke-width':1.6});
+      txt(s,px+40,30,'panno',{fill:'var(--blu)'});
+      txt(s,bx+39,30,p.bac,{fill:'var(--inchiostro)'});
+      [px,bx].forEach(function(o){for(var i=0;i<4;i++)segno(s,o+14,58+i*26,'+','var(--rosso)');});
+      for(var i=0;i<4;i++){
+        [['panno',px],['bac',bx]].forEach(function(o){
+          var x=o[1]+38,y=58+i*26;
+          var e=el(s,'g',{});el(e,'circle',{cx:0,cy:0,r:8,fill:'#fff',stroke:'var(--blu)','stroke-width':1.2});segno(e,0,0,'−','var(--blu)');
+          var muove=(p.dir===1&&o[0]==='panno'&&i<2)||(p.dir===-1&&o[0]==='bac'&&i<2);
+          var dest=o[0]==='panno'?bx+62:px+62;
+          mov.push({e:e,x:x,y:y,muove:muove,dx:muove?dest:x,dy:58+(i+1)*26});
+        });
+      }
+      p.carP=txt(s,px+40,172,'',{'font-size':13,fill:'var(--inchiostro)'});
+      p.carB=txt(s,bx+39,172,'',{'font-size':13,fill:'var(--inchiostro)'});
+      p.tot=txt(s,p.x0+99,198,'carica totale: 0',{'font-size':12,fill:'var(--verde)'});
+    });
+    function disegna(t){
+      var u=ease((t-0.3)/2.2);
+      mov.forEach(function(m){
+        var x=m.muove?m.x+(m.dx-m.x)*u:m.x, y=m.muove?m.y+(m.dy-m.y)*u-30*Math.sin(Math.PI*u):m.y;
+        set(m.e,{transform:'translate('+x.toFixed(1)+','+y.toFixed(1)+')'});
+      });
+      var n=u>=1?2:0, op=clamp((t-2.7)/0.6);
+      P.forEach(function(p){
+        var qp=p.dir===1?n:-n;
+        p.carP.textContent='panno: '+(qp>0?'+':(qp<0?'−':''))+Math.abs(qp)+(qp?'e':'');
+        p.carB.textContent=p.bac+': '+(qp>0?'−':(qp<0?'+':''))+Math.abs(qp)+(qp?'e':'');
+        set(p.carP,{opacity:n?op:1});set(p.carB,{opacity:n?op:1});
+        set(p.tot,{opacity:op});
+      });
+    }
+    animatore(b,3.4,disegna);
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
