@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rigenera l'hub delle classi e l'indice degli argomenti a partire da _dati/*.json.
 Va rilanciato dopo ogni unità pubblicata, così l'avanzamento resta aggiornato."""
-import json, os, re, unicodedata, datetime
+import json, os, re, unicodedata, datetime, hashlib
 
 RAD = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -16,6 +16,10 @@ def cartella_unita(u):
 
 def esiste(u, percorso):
     return os.path.isfile(os.path.join(RAD, percorso, 'argomenti', cartella_unita(u), 'index.html'))
+
+def versione_css():
+    # cambia quando cambia stile.css: il browser non usa la copia vecchia in cache
+    return hashlib.md5(open(os.path.join(RAD, 'assets', 'stile.css'), 'rb').read()).hexdigest()[:8]
 
 ANNI = ["Prima", "Seconda", "Terza", "Quarta", "Quinta"]
 MATERIE = ["Matematica", "Fisica"]
@@ -63,7 +67,7 @@ def hub(classi):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Materiali di matematica e fisica — Liceo Bodoni</title>
-<link rel="stylesheet" href="assets/stile.css">
+<link rel="stylesheet" href="assets/stile.css?v=%s">
 </head>
 <body>
 <div class="foglio">
@@ -78,7 +82,7 @@ def hub(classi):
 </div>
 </body>
 </html>
-""" % ("\n".join(blocchi), datetime.date.today().strftime("%d/%m/%Y"))
+""" % (versione_css(), "\n".join(blocchi), datetime.date.today().strftime("%d/%m/%Y"))
 
 def indice(dati):
     perc = dati['percorso']
@@ -111,7 +115,7 @@ def indice(dati):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>%s — indice degli argomenti</title>
-<link rel="stylesheet" href="../assets/stile.css">
+<link rel="stylesheet" href="../assets/stile.css?v=%s">
 </head>
 <body>
 <div class="foglio">
@@ -128,7 +132,7 @@ def indice(dati):
 </div>
 </body>
 </html>
-""" % (dati['classe'], dati['classe'],
+""" % (dati['classe'], versione_css(), dati['classe'],
        "\n".join(sez), dati['fonte'], datetime.date.today().strftime("%d/%m/%Y"))
 
 if __name__ == '__main__':
