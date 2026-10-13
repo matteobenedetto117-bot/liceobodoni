@@ -5,25 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Circuiti RL — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol,.foglio>.tabella{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:26px 0}
-.interattivo label{font-family:var(--sans);font-size:.88rem;color:var(--grigio);display:block;margin-bottom:8px}
-.interattivo input[type=range]{width:100%}
-.interattivo .valori{display:flex;justify-content:space-between;font-family:var(--sans);
-  font-size:.84rem;color:var(--blu);margin-top:6px}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore{flex-wrap:wrap}
+.cursore output{min-width:14em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
+.tabella{border-collapse:collapse;align-self:center;width:max-content;max-width:100%;font-family:var(--sans);font-size:.8rem}
+.tabella th,.tabella td{border:1px solid var(--riga);padding:0 14px;line-height:calc(var(--r) - 1px);background:#fff;text-align:left}
+.tabella th{color:var(--blu);font-weight:600}
+.btn-anim{width:3rem;font-size:1rem;line-height:1.6;border:1px solid var(--riga);border-radius:8px;background:#fff;color:var(--blu);cursor:pointer}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.def p.eq+p{padding-top:0}
+.def p+p.eq{margin-top:0}
+.foglio>ol{padding-left:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul{padding-left:var(--r)}
 </style>
 </head>
+
 <body>
 <div class="foglio">
 
@@ -31,187 +62,190 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 28</p>
   <h1>Circuiti RL</h1>
-  <p class="sommario">Un circuito RL è un circuito in cui una resistenza e un'induttanza sono
-  collegate in serie con un generatore di fem. Poiché l'induttanza si oppone alle variazioni di
-  corrente, il passaggio dal circuito aperto a quello chiuso — e viceversa — non è istantaneo: la
-  corrente cresce o decresce con legge esponenziale, in un tempo caratteristico $\tau$.</p>
 </header>
+
+<p>Un circuito RL contiene una resistenza e un'induttanza collegate in serie a un generatore di fem. Quando il circuito viene chiuso o il generatore viene escluso, la corrente non cambia in modo istantaneo, ma con legge esponenziale.</p>
 
 <h2>Fase di carica</h2>
 
-<p>Chiudiamo l'interruttore del circuito in figura, dove la resistenza $R$ e l'induttanza $L$ sono
-in serie con un generatore di fem $\varepsilon$.</p>
+<p>Nel circuito in figura la resistenza $R$ e l'induttanza $L$ sono in serie con un generatore di fem $\varepsilon$. All'istante $t=0$ si chiude l'interruttore.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg">
-<!-- lato superiore: resistenza e interruttore -->
-<line x1="60" y1="60" x2="150" y2="60" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<path d="M150,60 L160,46 L172,74 L184,46 L196,74 L208,60" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="208" y1="60" x2="340" y2="60" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="340" cy="60" r="3.5" fill="var(--inchiostro)"/>
-<line x1="340" y1="60" x2="372" y2="42" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="382" cy="60" r="3.5" fill="var(--inchiostro)"/>
-<line x1="382" y1="60" x2="400" y2="60" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="179" y="34" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--rosso)">R</text>
-<text x="361" y="30" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">interruttore</text>
-<!-- lato destro -->
-<line x1="400" y1="60" x2="400" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<!-- lato inferiore: induttanza -->
-<line x1="400" y1="180" x2="300" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<path d="M300,180 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0 a11,11 0 0 1 -22,0"
-  fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="190" y1="180" x2="60" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="245" y="207" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--blu)">L</text>
-<!-- lato sinistro: generatore -->
-<line x1="60" y1="60" x2="60" y2="108" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="45" y1="108" x2="75" y2="108" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="52" y1="116" x2="68" y2="116" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="60" y1="116" x2="60" y2="180" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="30" y="108" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">&#8722;</text>
-<text x="30" y="122" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">+</text>
-<text x="20" y="145" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--verde)">&#949;</text>
-</svg>
-<p class="did">Circuito RL: resistenza $R$ e induttanza $L$ in serie con un generatore di fem
-$\varepsilon$ e un interruttore. La figura mostra l'interruttore aperto.</p>
+<svg id="fig-circ" viewBox="0 0 440 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Circuito RL: generatore, resistenza R, interruttore aperto e induttanza L in serie"></svg>
+<p class="did">Circuito RL con l'interruttore aperto: la resistenza $R$ e l'induttanza $L$ sono in serie con il generatore di fem $\varepsilon$.</p>
 </div>
 
-<p>Quando l'effetto dell'induttanza è ormai trascurabile, la corrente ha raggiunto il suo valore
-di regime e vale semplicemente $i=\varepsilon/R$, come in un circuito puramente resistivo.
-Nell'istante in cui chiudiamo l'interruttore, invece, l'induttanza si oppone alla variazione, e la
-corrente cresce secondo la legge:</p>
+<p>Quando si chiude l'interruttore, l'induttanza si oppone all'aumento della corrente con una fem autoindotta. Per questo la corrente non raggiunge subito il valore finale, ma cresce secondo la legge seguente.</p>
 
-<div class="formula-box">
-$$i(t)=\frac{\varepsilon}{R}\left(1-e^{-t/\tau}\right)\qquad \tau=\frac{L}{R}$$
+<p class="eq principio">$$i(t)=\frac{\varepsilon}{R}\left(1-e^{-t/\tau}\right)\qquad \tau=\frac{L}{R}$$</p>
+
+<p>Qui $\varepsilon$ è la fem del generatore, $R$ la resistenza, $L$ l'induttanza e $\tau$ la costante di tempo del circuito, che si misura in secondi.</p>
+
+<p>A regime la corrente è costante, la fem autoindotta è nulla e la corrente vale $\varepsilon/R$, come in un circuito con la sola resistenza. La costante di tempo indica la rapidità della crescita: più $\tau$ è grande, più lentamente la corrente si avvicina al valore di regime.</p>
+
+<p>Dopo un tempo $t=\tau$ la corrente ha raggiunto circa il 63% del valore di regime, dopo $2\tau$ circa l'86% e dopo $3\tau$ circa il 95%.</p>
+
+<p class="eq">$$i(\tau)=\frac{\varepsilon}{R}\left(1-\frac1e\right)\approx0{,}63\,\frac{\varepsilon}{R}$$</p>
+
+<div class="fig">
+<svg id="fig-carica" viewBox="0 0 440 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico della corrente di carica in funzione del tempo, con gli istanti tau, 2 tau e 3 tau"></svg>
+<div class="cursore"><label for="s-tau">$\tau$</label>
+<input type="range" id="s-tau" min="5" max="30" step="0.5" value="15">
+<output id="o-tau"></output></div>
+<p class="did">Il cursore cambia la costante di tempo a parità di resistenza ($R=35\ \Omega$): agli istanti $\tau$, $2\tau$ e $3\tau$ la corrente è il 63%, l'86% e il 95% del valore di regime.</p>
 </div>
 
-<p>$\tau$ è la costante di tempo del circuito: misura quanto rapidamente la corrente si avvicina
-al valore di regime. Più $\tau$ è grande, più lenta è la salita.</p>
-
-<p>Dopo un tempo $t=\tau$ la corrente ha già raggiunto $i=(\varepsilon/R)(1-1/e)\approx0{,}63\,
-\varepsilon/R$, cioè il 63% del valore finale; dopo $t=2\tau$ è all'86%; dopo $t=3\tau$ al 95%.</p>
-
-<div class="interattivo">
-<label for="slider-tau">Costante di tempo $\tau$: <span id="tau-val">15</span> ms
-(con $R$ fissata, corrisponde a un'induttanza $L=\tau R$ diversa)</label>
-<input type="range" id="slider-tau" min="5" max="30" step="1" value="15">
-<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
-<line x1="50" y1="260" x2="465" y2="260" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="50" y1="260" x2="50" y2="15" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="465" y="278" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">t (ms)</text>
-<text x="30" y="24" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">i</text>
-<line x1="50" y1="20" x2="460" y2="20" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="4,4"/>
-<text x="465" y="16" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&#949;/R</text>
-<path id="curvaRL" d="" fill="none" stroke="var(--blu)" stroke-width="2.2"/>
-<line id="mline1" x1="0" y1="0" x2="0" y2="0" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3,3"/>
-<line id="mline2" x1="0" y1="0" x2="0" y2="0" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3,3"/>
-<line id="mline3" x1="0" y1="0" x2="0" y2="0" stroke="var(--rosso)" stroke-width="1" stroke-dasharray="3,3"/>
-<circle id="mdot1" cx="0" cy="0" r="3.2" fill="var(--rosso)"/>
-<circle id="mdot2" cx="0" cy="0" r="3.2" fill="var(--rosso)"/>
-<circle id="mdot3" cx="0" cy="0" r="3.2" fill="var(--rosso)"/>
-<text id="mlbl1" x="0" y="0" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--rosso)"></text>
-<text id="mlbl2" x="0" y="0" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--rosso)"></text>
-<text id="mlbl3" x="0" y="0" text-anchor="middle" font-family="var(--sans)" font-size="10.5" fill="var(--rosso)"></text>
-</svg>
-<div class="valori">
-<span>$\tau$: 63% del valore finale</span>
-<span>$2\tau$: 86%</span>
-<span>$3\tau$: 95%</span>
-</div>
-</div>
-
-<script>
-(function(){
-  var slider=document.getElementById('slider-tau');
-  var tauLbl=document.getElementById('tau-val');
-  function tx(tms){return 50+tms*4.1;}
-  function iy(ifr){return 260-ifr*240;}
-  function build(tau){
-    var d='M'+tx(0).toFixed(1)+','+iy(0).toFixed(1);
-    for(var t=2;t<=100;t+=2){
-      var i=1-Math.exp(-t/tau);
-      d+=' L'+tx(t).toFixed(1)+','+iy(i).toFixed(1);
-    }
-    return d;
-  }
-  function agg(){
-    var tau=parseFloat(slider.value);
-    tauLbl.textContent=tau.toFixed(0);
-    document.getElementById('curvaRL').setAttribute('d',build(tau));
-    [1,2,3].forEach(function(k){
-      var tm=k*tau, ifr=1-Math.exp(-k);
-      var x=tx(tm), y=iy(ifr);
-      var line=document.getElementById('mline'+k);
-      line.setAttribute('x1',x);line.setAttribute('x2',x);
-      line.setAttribute('y1',260);line.setAttribute('y2',y);
-      var dot=document.getElementById('mdot'+k);
-      dot.setAttribute('cx',x);dot.setAttribute('cy',y);
-      var lbl=document.getElementById('mlbl'+k);
-      lbl.setAttribute('x',x);lbl.setAttribute('y',274);
-      lbl.textContent=(k===1?'τ':k+'τ');
-    });
-  }
-  slider.addEventListener('input',agg);
-  agg();
-})();
-</script>
-
-<div class="nota">
-<span class="et">Attenzione</span>
-La corrente non raggiunge mai esattamente il valore di regime $\varepsilon/R$: lo raggiunge solo
-nel limite $t\to\infty$. Dopo pochi $\tau$ è già praticamente a regime, ma $\varepsilon/R$ resta un
-asintoto, non un valore toccato in un tempo finito.
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>In un tempo finito la corrente non raggiunge mai esattamente il valore $\varepsilon/R$, che è il limite di $i(t)$ per $t\to+\infty$. Dopo pochi $\tau$, però, la differenza è trascurabile.</p></div>
 
 <h2>Fase di scarica</h2>
 
-<p>Se invece riapriamo il circuito, staccando il generatore ma lasciando resistenza e induttanza
-collegate fra loro, la corrente non si annulla di colpo: l'induttanza mantiene per un istante il
-flusso concatenato, e la corrente decresce con legge esponenziale:</p>
+<p>Se si esclude il generatore lasciando la resistenza e l'induttanza collegate in un circuito chiuso, la corrente non si annulla di colpo. L'induttanza si oppone alla sua diminuzione e la corrente decresce con legge esponenziale, con la stessa costante di tempo.</p>
 
-<div class="formula-box">
-$$i(t)=\frac{\varepsilon}{R}\,e^{-t/\tau}$$
-</div>
+<p class="eq principio">$$i(t)=\frac{\varepsilon}{R}\,e^{-t/\tau}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="40" y1="170" x2="330" y2="170" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="40" y1="170" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="330" y="188" text-anchor="end" font-family="var(--sans)" font-size="12" fill="var(--grigio)">t</text>
-<text x="24" y="24" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">i</text>
-<circle cx="40" cy="30" r="3" fill="var(--blu)"/>
-<text x="24" y="34" text-anchor="end" font-family="var(--sans)" font-size="11" fill="var(--grigio)">&#949;/R</text>
-<path d="M40,30 C90,60 120,110 160,138 C200,158 260,167 330,169" fill="none" stroke="var(--blu)" stroke-width="2.2"/>
-</svg>
-<p class="did">Corrente nella fase di scarica: parte dal valore di regime $\varepsilon/R$ e
-decresce esponenzialmente verso zero.</p>
+<svg id="fig-scarica" viewBox="0 0 440 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico della corrente di scarica in funzione del tempo, con un punto mobile sulla curva"></svg>
+<div class="cursore"><label for="s-t">$t$</label>
+<input type="range" id="s-t" min="0" max="5" step="0.1" value="1">
+<output id="o-t"></output></div>
+<p class="did">Nella fase di scarica la corrente parte dal valore di regime $\varepsilon/R$ e decresce verso zero: dopo un tempo $\tau$ si è ridotta al 37% circa.</p>
 </div>
 
 <h2>Esempio</h2>
 
-<p>In un circuito RL la resistenza vale $R=35\ \Omega$ e la costante di tempo è
-$\tau=7{,}5\times10^{-3}\ \text{s}$. Calcoliamo l'induttanza $L$ e, sapendo che la fem vale
-$\varepsilon=12{,}2\ \text{V}$, la corrente all'istante $t=0{,}03\ \text{s}$.</p>
+<p>In un circuito RL la resistenza vale $R=35\ \Omega$, la costante di tempo è $\tau=7{,}5\times10^{-3}\ \text{s}$ e la fem del generatore è $\varepsilon=12{,}2\ \text{V}$. Si calcolano l'induttanza $L$ e la corrente all'istante $t=0{,}03\ \text{s}$ dopo la chiusura dell'interruttore.</p>
 
-<p><strong>a)</strong> Dalla definizione $\tau=L/R$:</p>
+<p><b>a)</b> L'induttanza si ricava dalla definizione della costante di tempo $\tau=L/R$.</p>
 
-$$L=\tau R=7{,}5\times10^{-3}\ \text{s}\cdot35\ \Omega\approx0{,}26\ \text{H}$$
+<p class="eq">$$L=\tau R=7{,}5\times10^{-3}\ \text{s}\cdot35\ \Omega\approx0{,}26\ \text{H}$$</p>
 
-<p><strong>b)</strong> Dalla legge di carica:</p>
+<p><b>b)</b> La corrente si ricava dalla legge di carica; l'istante $t=0{,}03\ \text{s}$ corrisponde a $4\tau$.</p>
 
-$$i=\frac{\varepsilon}{R}\left(1-e^{-t/\tau}\right)=\frac{12{,}2\ \text{V}}{35\ \Omega}
-\left(1-e^{-0{,}03/7{,}5\times10^{-3}}\right)\approx0{,}34\ \text{A}$$
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 29 riprende proprio questo circuito RL per calcolare l'energia immagazzinata nel
-campo magnetico dell'induttanza durante la fase di carica.</li>
-</ul>
-</div>
+<p class="eq">$$i=\frac{\varepsilon}{R}\left(1-e^{-t/\tau}\right)=\frac{12{,}2\ \text{V}}{35\ \Omega}\left(1-e^{-0{,}03/(7{,}5\times10^{-3})}\right)\approx0{,}34\ \text{A}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../28-induttanza-di-un-solenoide/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Induttanza di un solenoide</span></a><a class="successiva" href="../30-energia-immagazzinata-in-un-campo-magnetico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia immagazzinata in un campo magnetico</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 28</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio>.tabella,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script><script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var L=Math.hypot(x2-x1,y2-y1);if(L<4)return;s=s||6;var c=s/L;
+    el(p,'line',{x1:f(x1),y1:f(y1),x2:f(x2-(x2-x1)*c),y2:f(y2-(y2-y1)*c),stroke:col,'stroke-width':w||2,'stroke-linecap':'round'});punta(p,x2-(x2-x1)*c,y2-(y2-y1)*c,x2-x1,y2-y1,col,s);}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+
+  /* ---------- circuito RL ---------- */
+  (function(){
+    var S=document.getElementById('fig-circ'), ink='var(--inchiostro)', w=1.8;
+    function L(x1,y1,x2,y2,c,s){el(S,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:c||ink,'stroke-width':s||w});}
+    var xa=70, xb=370, ya=50, yb=180;
+    /* lato superiore: resistenza e interruttore aperto */
+    L(xa,ya,150,ya);
+    var d='M150,'+ya; for(var k=0;k<6;k++){d+=' L'+(155+k*10)+','+(ya+(k%2?12:-12));} d+=' L210,'+ya;
+    el(S,'path',{d:d,fill:'none',stroke:ink,'stroke-width':w,'stroke-linejoin':'round'});
+    T(S,180,ya-20,'R',{'text-anchor':'middle','font-size':14,'font-style':'italic',fill:'var(--rosso)'});
+    L(210,ya,290,ya);
+    el(S,'circle',{cx:290,cy:ya,r:3.5,fill:ink}); el(S,'circle',{cx:330,cy:ya,r:3.5,fill:ink});
+    L(290,ya,324,ya-22);
+    T(S,310,ya-28,'interruttore',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    L(330,ya,xb,ya);
+    /* lato destro */
+    L(xb,ya,xb,yb);
+    /* lato inferiore: induttanza */
+    L(xb,yb,300,yb);
+    var c='M300,'+yb; for(k=0;k<5;k++) c+=' a11,11 0 0 1 -22,0';
+    el(S,'path',{d:c,fill:'none',stroke:ink,'stroke-width':w});
+    L(190,yb,xa,yb);
+    T(S,245,yb+30,'L',{'text-anchor':'middle','font-size':14,'font-style':'italic',fill:'var(--blu)'});
+    /* lato sinistro: generatore */
+    L(xa,ya,xa,104); L(xa-15,104,xa+15,104,ink,1.6); L(xa-8,112,xa+8,112,ink,3.2); L(xa,112,xa,yb);
+    T(S,xa+22,100,'+',{'text-anchor':'middle','font-size':13,fill:'var(--grigio)'});
+    T(S,xa+22,124,'−',{'text-anchor':'middle','font-size':13,fill:'var(--grigio)'});
+    T(S,xa-28,113,'ε',{'text-anchor':'middle','font-size':15,'font-style':'italic',fill:'var(--verde)'});
+  })();
+
+  /* ---------- assi comuni ai due grafici ---------- */
+  function assiTempo(S,x0,x1,y0,y1,etx){
+    el(S,'line',{x1:x0,y1:y0,x2:x1+10,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3});
+    punta(S,x1+10,y0,1,0,'var(--inchiostro)',6);
+    el(S,'line',{x1:x0,y1:y0,x2:x0,y2:y1-10,stroke:'var(--inchiostro)','stroke-width':1.3});
+    punta(S,x0,y1-10,0,-1,'var(--inchiostro)',6);
+    T(S,x1+12,y0-10,etx,{'text-anchor':'end',fill:'var(--inchiostro)'});
+    T(S,x0+10,y1-2,'i',{'font-style':'italic',fill:'var(--inchiostro)'});
+  }
+
+  /* ---------- carica: cursore su tau ---------- */
+  (function(){
+    var S=document.getElementById('fig-carica'),sl=document.getElementById('s-tau'),o=document.getElementById('o-tau');
+    var x0=50,x1=410,y0=200,y1=30, tmax=100;
+    function X(t){return x0+t/tmax*(x1-x0);} function Y(v){return y0-v*(y0-y1);}
+    assiTempo(S,x0,x1,y0,y1,'t (ms)');
+    el(S,'line',{x1:x0,y1:Y(1),x2:x1,y2:Y(1),stroke:'var(--rosso)','stroke-width':1.2,'stroke-dasharray':'5,4'});
+    T(S,x0-6,Y(1)+4,'ε/R',{'text-anchor':'end',fill:'var(--rosso)'});
+    for(var t=20;t<=80;t+=20){el(S,'line',{x1:X(t),y1:y0-4,x2:X(t),y2:y0+4,stroke:'var(--inchiostro)'});T(S,X(t),y0+18,String(t),{'text-anchor':'middle'});}
+    T(S,x0,y0+18,'0',{'text-anchor':'middle'});
+    var curva=el(S,'path',{fill:'none',stroke:'var(--blu)','stroke-width':2.2}), g=el(S,'g',{});
+    function agg(){
+      var tau=+sl.value, d='';
+      for(var k=0;k<=300;k++){var tt=k/300*tmax;d+=(k?'L':'M')+f(X(tt))+','+f(Y(1-Math.exp(-tt/tau)));}
+      curva.setAttribute('d',d); vuota(g);
+      [1,2,3].forEach(function(n){var xx=X(n*tau), yy=Y(1-Math.exp(-n));
+        el(g,'line',{x1:f(xx),y1:y0,x2:f(xx),y2:f(yy),stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3,3'});
+        el(g,'circle',{cx:f(xx),cy:f(yy),r:4,fill:'var(--rosso)'});
+        T(g,xx,y0+36,n===1?'τ':n+'τ',{'text-anchor':'middle',fill:'var(--rosso)','font-size':12});});
+      o.innerHTML='τ = '+num(tau,1)+' ms &nbsp; L = τR = '+num(tau*35/1000,2)+' H';
+    }
+    sl.addEventListener('input',agg);agg();
+  })();
+
+  /* ---------- scarica: cursore sul tempo ---------- */
+  (function(){
+    var S=document.getElementById('fig-scarica'),sl=document.getElementById('s-t'),o=document.getElementById('o-t');
+    var x0=50,x1=410,y0=200,y1=30, tmax=5;
+    function X(t){return x0+t/tmax*(x1-x0);} function Y(v){return y0-v*(y0-y1);}
+    assiTempo(S,x0,x1,y0,y1,'t');
+    T(S,x0-6,Y(1)+4,'ε/R',{'text-anchor':'end',fill:'var(--inchiostro)'});
+    el(S,'line',{x1:x0-4,y1:Y(1),x2:x0+4,y2:Y(1),stroke:'var(--inchiostro)'});
+    for(var n=1;n<=4;n++){el(S,'line',{x1:X(n),y1:y0-4,x2:X(n),y2:y0+4,stroke:'var(--inchiostro)'});T(S,X(n),y0+18,n===1?'τ':n+'τ',{'text-anchor':'middle'});}
+    var d=''; for(var k=0;k<=300;k++){var tt=k/300*tmax;d+=(k?'L':'M')+f(X(tt))+','+f(Y(Math.exp(-tt)));}
+    el(S,'path',{d:d,fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    var gv=el(S,'line',{stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3,3'}),
+        go=el(S,'line',{stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3,3'}),
+        p=el(S,'circle',{r:5,fill:'var(--rosso)'});
+    function agg(){
+      var t=+sl.value, v=Math.exp(-t), xx=X(t), yy=Y(v);
+      set(gv,{x1:f(xx),y1:y0,x2:f(xx),y2:f(yy)}); set(go,{x1:x0,y1:f(yy),x2:f(xx),y2:f(yy)});
+      set(p,{cx:f(xx),cy:f(yy)});
+      o.innerHTML='t = '+num(t,1)+' τ &nbsp; i = '+num(v,2)+' ε/R ('+Math.round(v*100)+'%)';
+    }
+    sl.addEventListener('input',agg);agg();
+  })();
+})();
+</script>
 </body>
 </html>
