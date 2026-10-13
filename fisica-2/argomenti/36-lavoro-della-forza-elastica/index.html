@@ -5,16 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lavoro della forza elastica — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -23,67 +55,124 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica seconda</a></nav>
   <p class="occhiello">Lavoro ed energia &middot; Unità 26</p>
   <h1>Lavoro della forza elastica</h1>
-  <p class="sommario">Applichiamo il metodo dell'area visto per una forza
-  variabile qualsiasi al caso della molla, la cui forza cresce in modo
-  proporzionale all'allungamento.</p>
 </header>
 
-<h2>La forza elastica cresce con l'allungamento</h2>
+<p>L'unità calcola il lavoro compiuto dalla forza elastica di una molla. Poiché questa forza non è costante, il lavoro si ricava come area sotto il grafico forza-allungamento.</p>
 
-<p>Una molla tirata di un tratto $x$ esercita una forza elastica
-$F_{el}=k\cdot x$, dove $k$ è la costante elastica della molla. A
-differenza del peso, questa forza non è costante: aumenta man mano che
-$x$ aumenta, e il suo grafico in funzione di $x$ è quindi una retta, non
-una linea orizzontale.</p>
+<h2>La forza elastica cresce con l'allungamento</h2>
+<p>Una molla allungata (o compressa) di un tratto $x$ rispetto alla sua lunghezza a riposo esercita una forza elastica di intensità:</p>
+<p class="eq">$$F_{el} = k\cdot x$$</p>
+<p>Qui $k$ è la costante elastica della molla, in N/m, e $x$ è l'allungamento, in m. La forza elastica è una forza di richiamo: è sempre diretta in verso opposto all'allungamento, cioè verso la posizione di riposo.</p>
+<p>A differenza del peso, la forza elastica non è costante: la sua intensità aumenta man mano che $x$ aumenta. Il suo grafico in funzione di $x$ è quindi una retta che passa per l'origine.</p>
 
 <div class="fig">
-<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="a36a" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker>
-<marker id="a36v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-<marker id="a36r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker></defs>
-<line x1="15" y1="35" x2="15" y2="55" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M15,35 l10,-6 l10,12 l10,-12 l10,12 l10,-12 l10,12 l10,-6" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="95" y1="35" x2="95" y2="55" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="95" y1="45" x2="150" y2="45" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#a36r)"/>
-<text x="105" y="38" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">el</tspan></text>
-<line x1="95" y1="60" x2="150" y2="60" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#a36v)"/>
-<text x="105" y="76" font-size="13" fill="var(--verde)" font-family="var(--sans)">s&#8407;</text>
-<line x1="40" y1="170" x2="330" y2="170" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a36a)"/>
-<line x1="40" y1="170" x2="40" y2="90" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#a36a)"/>
-<text x="335" y="175" font-size="14" font-family="var(--sans)">x</text>
-<text x="24" y="94" font-size="14" font-family="var(--sans)">F</text>
-<polygon points="40,170 220,170 220,100" fill="var(--verde)" opacity=".2" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="110" y="150" font-size="15" fill="var(--verde)" font-family="var(--sans)">L</text>
-<line x1="220" y1="170" x2="220" y2="180" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="212" y="194" font-size="13" fill="var(--rosso)" font-family="var(--sans)">x</text>
-<text x="204" y="94" font-size="13" font-family="var(--sans)">k&middot;x</text>
-</svg>
-<p class="did">Il grafico di $F_{el}$ in funzione di $x$ è una retta per
-l'origine: l'area del triangolo fra $0$ e $x$ vale
-$\tfrac12\cdot x\cdot kx=\tfrac12kx^2$.</p>
+<svg id="g-molla" viewBox="0 0 420 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Molla allungata con la forza elastica opposta all'allungamento e grafico della forza in funzione dell'allungamento con il triangolo dell'area"></svg>
+<div class="cursore"><label for="c-molla">allungamento $x$</label><input id="c-molla" type="range" min="0" max="0.05" step="0.001" value="0.03"><span class="val" id="v-molla"></span></div>
+<p class="did">Mentre la molla si allunga, la forza elastica è opposta all'allungamento e il lavoro è l'area del triangolo sotto la retta $F_{el}=kx$, presa con il segno meno.</p>
 </div>
 
-<p>Come per ogni forza variabile, il lavoro è l'area sotto il grafico
-$F$&ndash;$x$: qui è l'area del triangolo di base $x$ e altezza $kx$. La
-forza elastica è però una forza di richiamo, sempre diretta in verso
-opposto allo spostamento: per questo il lavoro che compie mentre la
-molla si allunga (o si comprime) è negativo.</p>
+<h2>Il lavoro come area del triangolo</h2>
+<p>Come per ogni forza variabile, il lavoro si legge come area sotto il grafico forza-allungamento. Fra $0$ e $x$ questa area è un triangolo di base $x$ e altezza $kx$:</p>
+<p class="eq">$$\text{area} = \dfrac{1}{2}\cdot x\cdot kx = \dfrac{1}{2}kx^2$$</p>
+<p>Mentre la molla si allunga (o si comprime) a partire dalla posizione di riposo, la forza elastica è opposta allo spostamento. Per questo il lavoro che compie è negativo.</p>
 
-<div class="risultato">
-<p>Lavoro della forza elastica per un allungamento $x$:</p>
-$$L_{el}=-\dfrac{1}{2}kx^2$$
+<div class="def"><span class="et">Lavoro della forza elastica</span>
+<p>Quando una molla di costante elastica $k$ viene allungata (o compressa) di un tratto $x$ a partire dalla posizione di riposo, la forza elastica compie il lavoro:</p>
+<p class="eq principio">$$L_{el} = -\dfrac{1}{2}kx^2$$</p>
 </div>
 
 <h2>Esempio</h2>
-
-<p>Una molla di costante elastica $k=300\ \text{N/m}$ viene allungata di
-$x=0{,}03\ \text{m}$. Il lavoro compiuto dalla forza elastica è:</p>
-
-$$L_{el}=-\dfrac{1}{2}kx^2=-\dfrac{1}{2}\cdot300\ \tfrac{\text{N}}{\text{m}}\cdot(0{,}03\ \text{m})^2=-0{,}135\ \text{J}$$
+<p>Una molla di costante elastica $k = 300\ \text{N/m}$ viene allungata di $x = 0{,}03\ \text{m}$ a partire dalla posizione di riposo. Il lavoro compiuto dalla forza elastica si calcola con la formula precedente:</p>
+<p class="eq">$$L_{el} = -\dfrac{1}{2}kx^2 = -\dfrac{1}{2}\cdot 300\ \tfrac{\text{N}}{\text{m}}\cdot(0{,}03\ \text{m})^2 = -0{,}135\ \text{J}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../35-lavoro-di-una-forza-variabile/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Lavoro di una forza variabile</span></a><a class="successiva" href="../37-energia-cinetica-e-teorema-del-lavoro/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia cinetica e teorema del lavoro</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 26</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',').replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(p,x,y,b,i,col){var t=el(p,'text',{x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle','font-style':'italic',fill:col});t.innerHTML=b+'<tspan baseline-shift="sub" font-size="9">'+i+'</tspan>';return t;}
+  var s=document.getElementById('g-molla');if(!s)return;
+  var c=document.getElementById('c-molla'),v=document.getElementById('v-molla');
+  var k=300;
+  var d=el(s,'defs',{});
+  [['a','var(--inchiostro)'],['r','var(--rosso)'],['v','var(--verde)']].forEach(function(m){
+    var mk=el(d,'marker',{id:'m26'+m[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:m[1]});
+  });
+  /* parte alta: molla e blocco; 1 m = 3000 px */
+  var P0=40,R0=170,Ym=60,H=36;
+  el(s,'line',{x1:P0,y1:Ym-30,x2:P0,y2:Ym+30,stroke:'var(--inchiostro)','stroke-width':3});
+  for(var i=0;i<6;i++)el(s,'line',{x1:P0-10,y1:Ym-26+i*10,x2:P0,y2:Ym-32+i*10,stroke:'var(--inchiostro)','stroke-width':1});
+  el(s,'line',{x1:P0,y1:Ym+H/2+2,x2:400,y2:Ym+H/2+2,stroke:'var(--inchiostro)','stroke-width':1.2});
+  el(s,'line',{x1:R0,y1:Ym+H/2+2,x2:R0,y2:Ym+H/2+30,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+  txt(s,R0,Ym+H/2+42,'riposo',{'font-size':11});
+  var molla=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+  var blocco=el(s,'rect',{y:Ym-H/2,width:36,height:H,rx:3,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+  var fr=el(s,'line',{y1:Ym,y2:Ym,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m26r)'});
+  var ft=pedice(s,0,Ym-H/2-7,'F','el','var(--rosso)');
+  var xr=el(s,'line',{y1:Ym+H/2+22,y2:Ym+H/2+22,stroke:'var(--verde)','stroke-width':2,'marker-end':'url(#m26v)'});
+  var xt=txt(s,0,Ym+H/2+18,'x',{fill:'var(--verde)','font-size':13,'font-style':'italic'});
+  /* parte bassa: grafico F–x */
+  function X(x){return 60+5600*x;}
+  function Y(F){return 268-7*F;}
+  el(s,'line',{x1:X(0),y1:Y(0),x2:X(0.062),y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#m26a)'});
+  el(s,'line',{x1:X(0),y1:Y(0),x2:X(0),y2:Y(17.5),stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#m26a)'});
+  txt(s,412,Y(0)-8,'x (10⁻² m)',{fill:'var(--inchiostro)','text-anchor':'end'});
+  pedice(s,X(0)+22,Y(17.5)+6,'F','el','var(--inchiostro)').setAttribute('font-style','normal');
+  txt(s,X(0)+36,Y(17.5)+6,'(N)',{fill:'var(--inchiostro)','text-anchor':'start'});
+  [1,2,3,4,5].forEach(function(n){el(s,'line',{x1:X(n/100),y1:Y(0),x2:X(n/100),y2:Y(0)+5,stroke:'var(--inchiostro)','stroke-width':1});txt(s,X(n/100),Y(0)+17,String(n));});
+  [5,10,15].forEach(function(F){el(s,'line',{x1:X(0)-5,y1:Y(F),x2:X(0),y2:Y(F),stroke:'var(--inchiostro)','stroke-width':1});txt(s,X(0)-9,Y(F)+4,String(F),{'text-anchor':'end'});});
+  var tri=el(s,'polygon',{fill:'var(--verde)','fill-opacity':.25,stroke:'var(--verde)','stroke-width':1.2});
+  el(s,'line',{x1:X(0),y1:Y(0),x2:X(0.05),y2:Y(15),stroke:'var(--blu)','stroke-width':2.2});
+  txt(s,X(0.05)-4,Y(15)-8,'kx',{fill:'var(--blu)','font-size':13,'font-style':'italic','text-anchor':'end'});
+  var tl=el(s,'line',{stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'2,2'});
+  var pt=el(s,'circle',{r:4.5,fill:'var(--rosso)'});
+  var Lt=txt(s,0,0,'|L|',{fill:'var(--verde)','font-size':13,'font-style':'italic'});
+  function disegna(){
+    var x=+c.value,F=k*x,xb=R0+3000*x;
+    var n=12,dd='M'+P0+','+Ym,w=(xb-P0-12)/n;
+    dd+='L'+(P0+6)+','+Ym;
+    for(var i=0;i<n;i++)dd+='L'+(P0+6+w*(i+.5)).toFixed(1)+','+(Ym+(i%2?9:-9))+'';
+    dd+='L'+(xb-6)+','+Ym+'L'+xb+','+Ym;
+    set(molla,{d:dd});
+    set(blocco,{x:xb});
+    var lf=4*F;
+    set(fr,{x1:xb+18,x2:xb+18-lf,visibility:lf>6?'visible':'hidden'});
+    set(ft,{x:xb-lf/2,visibility:lf>6?'visible':'hidden'});
+    set(xr,{x1:R0,x2:xb,visibility:x>0.004?'visible':'hidden'});
+    set(xt,{x:(R0+xb)/2,visibility:x>0.004?'visible':'hidden'});
+    set(tri,{points:[X(0),Y(0),X(x),Y(0),X(x),Y(F)].join(',')});
+    set(tl,{x1:X(x),y1:Y(F),x2:X(x),y2:Y(0)});
+    set(pt,{cx:X(x),cy:Y(F)});
+    set(Lt,{x:X(x*2/3)+4,y:Y(F/3)+12,visibility:x>0.022?'visible':'hidden'});
+    v.textContent='x = '+num(x,3)+' m · F = '+num(F,1)+' N · L = '+(x>0?'−':'')+num(k*x*x/2,3)+' J';
+  }
+  c.addEventListener('input',disegna);disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
