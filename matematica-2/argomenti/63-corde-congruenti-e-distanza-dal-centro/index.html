@@ -5,16 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Corde congruenti e distanza dal centro — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:14px 18px;margin:20px 0;font-size:.96rem}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
 </style>
 </head>
 <body>
@@ -24,107 +53,116 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Circonferenza e cerchio &middot; Unità 61</p>
   <h1>Corde congruenti e distanza dal centro</h1>
-  <p class="sommario">Corde diverse della stessa circonferenza si tengono a distanze diverse
-  dal centro: corde uguali stanno alla stessa distanza, e fra corde diseguali è la più lunga a
-  stare più vicina. Vediamo il legame preciso.</p>
 </header>
 
-<p>La distanza di una corda dal centro è la lunghezza del segmento $OH$, perpendicolare alla
-corda, che va dal centro $O$ al punto medio $H$ della corda (il piede della perpendicolare
-già incontrato con il diametro).</p>
+<div class="def">
+<span class="et">Definizione</span>
+<p>Distanza di una corda dal centro = lunghezza del segmento $OH$ perpendicolare alla corda
+($H$ = punto medio della corda).</p>
+</div>
 
 <h2>Corde congruenti e distanza dal centro</h2>
 
-<div class="regola">
-<p><strong>Teorema.</strong> In una circonferenza, corde congruenti hanno la stessa distanza
-dal centro.</p>
-<p>Ipotesi: $OH_1 \perp A_1B_1$, &nbsp; $OH_2 \perp A_2B_2$, &nbsp; $A_1B_1 \cong A_2B_2$</p>
+<div class="def">
+<span class="et">Teorema</span>
+<p>In una circonferenza, corde congruenti hanno la stessa distanza dal centro.</p>
+<p>Ipotesi: $A_1B_1 \cong A_2B_2$, &nbsp; $OH_1 \perp A_1B_1$, &nbsp; $OH_2 \perp A_2B_2$</p>
 <p>Tesi: $OH_1 \cong OH_2$</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="120" cy="110" r="80" fill="none" stroke="#16283d" stroke-width="2"/>
-<circle cx="120" cy="110" r="2.5" fill="#16283d"/><text x="126" y="106" font-size="12">O</text>
-
-<line x1="120" y1="110" x2="50.7" y2="70" stroke="#b3392f" stroke-width="1.4"/>
-<line x1="120" y1="110" x2="147.4" y2="34.8" stroke="#b3392f" stroke-width="1.4"/>
-<line x1="50.7" y1="70" x2="147.4" y2="34.8" stroke="#1f7a4c" stroke-width="2.2"/>
-<circle cx="50.7" cy="70" r="3" fill="#16283d"/><text x="34" y="66" font-size="13">A&#8321;</text>
-<circle cx="147.4" cy="34.8" r="3" fill="#16283d"/><text x="152" y="30" font-size="13">B&#8321;</text>
-<line x1="120" y1="110" x2="99" y2="52.4" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="99" cy="52.4" r="2.5" fill="#16283d"/><text x="78" y="56" font-size="12">H&#8321;</text>
-
-<line x1="120" y1="110" x2="160" y2="179.3" stroke="#b3392f" stroke-width="1.4"/>
-<line x1="120" y1="110" x2="58.7" y2="161.4" stroke="#b3392f" stroke-width="1.4"/>
-<line x1="160" y1="179.3" x2="58.7" y2="161.4" stroke="#1f7a4c" stroke-width="2.2"/>
-<circle cx="160" cy="179.3" r="3" fill="#16283d"/><text x="166" y="188" font-size="13">B&#8322;</text>
-<circle cx="58.7" cy="161.4" r="3" fill="#16283d"/><text x="34" y="168" font-size="13">A&#8322;</text>
-<line x1="120" y1="110" x2="109.4" y2="170.4" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="109.4" cy="170.4" r="2.5" fill="#16283d"/><text x="114" y="184" font-size="12">H&#8322;</text>
-
-<text x="106" y="83" font-size="12" fill="#1f7a4c">&times;</text>
-<text x="116" y="140" font-size="12" fill="#1f7a4c">&times;</text>
-</svg>
-<figcaption>A&#8321;B&#8321; &cong; A&#8322;B&#8322; (tacche verdi): allora OH&#8321; &cong; OH&#8322;</figcaption>
+<svg id="f-cong" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Due corde congruenti A1B1 e A2B2 con le distanze OH1 e OH2 dal centro"></svg>
 </div>
 
-<div class="regola">
-<p><strong>Teorema (inverso).</strong> In una circonferenza, corde che hanno la stessa
-distanza dal centro sono congruenti.</p>
-<p>Ipotesi: $OH_1 \perp A_1B_1$, &nbsp; $OH_2 \perp A_2B_2$, &nbsp; $OH_1 \cong OH_2$</p>
+<div class="def">
+<span class="et">Teorema inverso</span>
+<p>In una circonferenza, corde con la stessa distanza dal centro sono congruenti.</p>
+<p>Ipotesi: $OH_1 \cong OH_2$, &nbsp; $OH_1 \perp A_1B_1$, &nbsp; $OH_2 \perp A_2B_2$</p>
 <p>Tesi: $A_1B_1 \cong A_2B_2$</p>
 </div>
 
-<p>I due enunciati sono uno l'inverso dell'altro: la stessa figura letta nei due sensi mostra
-che «corde congruenti» ed «equidistanti dal centro» sono, in una circonferenza, la stessa
-condizione.</p>
-
 <h2>Corde non congruenti e distanza dal centro</h2>
 
-<div class="regola">
-<p><strong>Teorema.</strong> Se due corde di una circonferenza non sono congruenti, la corda
-maggiore ha distanza minore dal centro.</p>
+<div class="def">
+<span class="et">Teorema</span>
+<p>Se due corde di una circonferenza non sono congruenti, la corda maggiore ha distanza minore dal centro.</p>
+<p>Ipotesi: $AB > CD$, &nbsp; $OH \perp AB$, &nbsp; $OK \perp CD$</p>
+<p>Tesi: $OH < OK$</p>
 </div>
 
 <div class="fig">
-<svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<circle cx="120" cy="110" r="80" fill="none" stroke="#16283d" stroke-width="2"/>
-<circle cx="120" cy="110" r="2.5" fill="#16283d"/><text x="126" y="106" font-size="12">O</text>
-
-<line x1="44.8" y1="82.6" x2="198.8" y2="96.1" stroke="#1f7a4c" stroke-width="2.4"/>
-<circle cx="44.8" cy="82.6" r="3" fill="#16283d"/><text x="24" y="80" font-size="13">A</text>
-<circle cx="198.8" cy="96.1" r="3" fill="#16283d"/><text x="204" y="94" font-size="13">B</text>
-<line x1="120" y1="110" x2="121.8" y2="89.4" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="121.8" cy="89.4" r="2.5" fill="#16283d"/><text x="126" y="86" font-size="12">H</text>
-
-<line x1="99.3" y1="187.3" x2="47.5" y2="143.8" stroke="#c9821f" stroke-width="2.4"/>
-<circle cx="99.3" cy="187.3" r="3" fill="#16283d"/><text x="102" y="200" font-size="13">C</text>
-<circle cx="47.5" cy="143.8" r="3" fill="#16283d"/><text x="24" y="144" font-size="13">D</text>
-<line x1="120" y1="110" x2="73.4" y2="165.5" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="73.4" cy="165.5" r="2.5" fill="#16283d"/><text x="52" y="172" font-size="12">K</text>
-</svg>
-<figcaption>AB &gt; CD: la distanza OH (dalla corda più lunga) è minore di OK</figcaption>
+<svg id="f-noncong" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Corda AB più lunga, più vicina al centro; corda CD più corta, più lontana"></svg>
 </div>
 
 <div class="nota">
-<p>Attenzione al verso: non è la corda più lunga ad avere la distanza maggiore, ma il
-contrario. Una corda vicinissima al centro è quasi un diametro, dunque è la più lunga
-possibile; allontanandosi dal centro le corde si accorciano, fino a ridursi a un punto
-quando la distanza raggiunge il raggio.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Studiamo come una retta si può disporre rispetto a una circonferenza: esterna, tangente
-o secante, a seconda di quanti punti ha in comune con essa.</li>
-</ul>
+<span class="et">Attenzione</span>
+<p>Corda più lunga → più vicina al centro. Il diametro (distanza zero) è la corda più lunga.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../62-corde-diametro-perpendicolare-e-diametro-per-il-punto-medio/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Corde</span></a><a class="successiva" href="../64-posizione-di-una-retta-rispetto-a-una-circonferenza/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Posizione di una retta rispetto a una circonferenza</span></a></nav>
 <footer><p>Matematica seconda &middot; Circonferenza e cerchio &middot; Unità 61</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':14,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function rad(g){return g*Math.PI/180;}
+var cx=150,cy=120,R=95;
+function P(g,k){k=k===undefined?R:k;return [cx+k*Math.cos(rad(g)),cy-k*Math.sin(rad(g))];}
+function seg(s,p,q,a){return el('line',Object.assign({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':1.8},a||{}),s);}
+function tacca(s,p,q,n,f){f=f||.5;
+  var mx=p[0]+(q[0]-p[0])*f,my=p[1]+(q[1]-p[1])*f,dx=q[0]-p[0],dy=q[1]-p[1],l=Math.hypot(dx,dy),ux=dx/l,uy=dy/l,nx=-uy*6,ny=ux*6;
+  for(var i=0;i<n;i++){var o=(i-(n-1)/2)*4;
+    el('line',{x1:mx+ux*o-nx,y1:my+uy*o-ny,x2:mx+ux*o+nx,y2:my+uy*o+ny,stroke:'var(--verde)','stroke-width':2},s);}
+}
+function punto(s,p,nome,q){el('circle',{cx:p[0],cy:p[1],r:3.5,fill:'var(--inchiostro)'},s);if(nome)txt(s,q[0],q[1],nome);}
+/* corda con asse in direzione fi e semiangolo al centro a; piede H, angolo retto, etichette */
+function corda(s,fi,a,nA,nB,nH,tc,td){
+  var A=P(fi+a),B=P(fi-a),d=R*Math.cos(rad(a)),H=P(fi,d),O=[cx,cy];
+  var u=[Math.cos(rad(fi)),-Math.sin(rad(fi))], t=[Math.cos(rad(fi+90)),-Math.sin(rad(fi+90))];
+  seg(s,A,B,{stroke:'var(--blu)','stroke-width':2.6});
+  seg(s,O,H,{stroke:'var(--rosso)','stroke-width':2});
+  var a1=[H[0]-9*u[0],H[1]-9*u[1]],a2=[a1[0]+9*t[0],a1[1]+9*t[1]],a3=[H[0]+9*t[0],H[1]+9*t[1]];
+  el('path',{d:'M'+a1[0]+' '+a1[1]+' L'+a2[0]+' '+a2[1]+' L'+a3[0]+' '+a3[1],fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3},s);
+  if(tc){tacca(s,A,B,tc,.25);}
+  if(td){tacca(s,O,H,td);}
+  punto(s,A,nA,P(fi+a,R+15));punto(s,B,nB,P(fi-a,R+15));
+  el('circle',{cx:H[0],cy:H[1],r:3,fill:'var(--inchiostro)'},s);
+  txt(s,H[0]-14*t[0]-12*u[0],H[1]-14*t[1]-12*u[1],nH);
+}
+function base(id){var s=document.getElementById(id);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2},s);return s;}
+function centro(s,g){el('circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'},s);var q=P(g,14);txt(s,q[0],q[1],'O');}
+
+var s=base('f-cong');
+corda(s,100,55,'A₁','B₁','H₁',1,2);
+corda(s,250,55,'A₂','B₂','H₂',1,2);
+centro(s,180);
+
+s=base('f-noncong');
+corda(s,75,72,'A','B','H');
+corda(s,220,35,'C','D','K');
+centro(s,330);
+})();
+</script>
 </body>
 </html>
