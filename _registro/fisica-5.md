@@ -23,6 +23,7 @@
 - Aggiunta: nessuna.
 - Revisione: tolti sottotitolo e titoletti (resta «Esempio»); tolti i simboli di proporzionalità, sostituiti da «direttamente proporzionale»; impaginazione a quaderno come le unità 01–02. Figura dei tre casi animata (carica ferma, v parallela, v perpendicolare con comparsa di F uscente); figura dell'angolo resa interattiva con cursore e animazione su θ da 0° a 180°, con componenti di v e barra dell'intensità della forza.
 - Didascalie divise: nella figura dei tre casi ogni pannello ha la propria didascalia; stessa cosa per la figura dei poli uguali/opposti dell'unità 01 (una didascalia per riga).
+- Revisione 2 (testo schematico): tre casi in elenco, v⊥ = v sinθ in formula, dipendenze di F in elenco, F = q v⊥ B e B = F/(q v⊥) in .def, tesla in .def con l'equivalenza in kg/(C·s); esempio ridotto a dati → formula → risultato, arrotondato a 5,3×10⁻³ T (due cifre significative come i dati). Didascalie accorciate. Figura dell'angolo: tolto il tasto ▶, resta solo il cursore con il valore di θ accanto. Scelte dell'utente: titolo invariato, h2 solo «Esempio», brevi frasi di raccordo.
 
 ## Unità 04 — La forza di Lorentz
 - Parole: 357 su 1,7 pagine di traccia (seconda metà di pagina 7, dalla sezione "Forza di Lorentz" in poi, più pagina 8 intera)
