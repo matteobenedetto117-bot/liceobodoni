@@ -5,16 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rette parallele e perpendicolari — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:12em}
+.ok{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -24,69 +53,180 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Piano cartesiano e retta &middot; Unità 28</p>
   <h1>Rette parallele e perpendicolari</h1>
-  <p class="sommario">Il coefficiente angolare non descrive solo la pendenza di una singola
-  retta: confrontando i coefficienti angolari di due rette si stabilisce subito se sono
-  parallele o perpendicolari, senza bisogno di disegnarle.</p>
 </header>
+
+<p>Confrontando i coefficienti angolari di due rette si stabilisce se le rette sono parallele o perpendicolari, senza bisogno di disegnarle.</p>
 
 <h2>Rette parallele</h2>
 
-<div class="regola"><p>Due rette sono parallele se e solo se hanno lo stesso coefficiente
-angolare $m$.</p></div>
+<div class="def"><span class="et">Condizione di parallelismo</span>
+<p>Due rette non verticali sono parallele se e solo se hanno lo stesso coefficiente angolare:</p>
+<p class="eq">$$m_1 = m_2$$</p>
+</div>
 
-<p>Rette con lo stesso $m$ hanno la stessa inclinazione e non si incontrano mai, anche se hanno
-ordinate all'origine $q$ diverse.</p>
+<p>Rette con lo stesso coefficiente angolare hanno la stessa inclinazione rispetto all'asse $x$. Se le ordinate all'origine $q$ sono diverse, le rette non si incontrano mai; se anche $q$ è lo stesso, le due equazioni descrivono la stessa retta e le rette si dicono coincidenti.</p>
 
 <div class="fig">
-<svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="15" y1="170" x2="265" y2="170" stroke="#16283d" stroke-width="1.4"/>
-<line x1="70" y1="185" x2="70" y2="15" stroke="#16283d" stroke-width="1.4"/>
-<text x="257" y="163" font-size="12" fill="#16283d">x</text>
-<text x="76" y="24" font-size="12" fill="#16283d">y</text>
-<line x1="30" y1="150" x2="250" y2="80" stroke="#b3392f" stroke-width="1.8"/>
-<text x="200" y="72" font-size="12" fill="#b3392f">y = &#8531;x + 2</text>
-<line x1="30" y1="185" x2="250" y2="115" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="200" y="132" font-size="12" fill="#2f6b4f">y = &#8531;x &minus; 1</text>
-</svg>
+<svg id="g-par" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="La retta y = un terzo x + 2 e una seconda retta con lo stesso coefficiente angolare, che si sposta in verticale al variare della sua ordinata all'origine"></svg>
+<div class="cursore"><label for="c-par">$q_2$</label><input id="c-par" type="range" min="-2" max="2" step="0.5" value="-1"><span class="val" id="v-par"></span></div>
+<p class="did">Al variare di $q_2$ la seconda retta si sposta restando parallela alla prima, e coincide con essa quando $q_2 = 2$.</p>
 </div>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Le rette $y=\dfrac13x+2$ e $y=\dfrac13x-1$ hanno entrambe
-$m=\dfrac13$: sono parallele, pur avendo $q$ diverso.</p>
-</div>
+<h2>Esempio 1</h2>
+
+<p>Le rette $y=\dfrac13x+2$ e $y=\dfrac13x-1$ hanno lo stesso coefficiente angolare e ordinate all'origine diverse:</p>
+
+<p class="eq">$$m_1 = m_2 = \frac13 \qquad\qquad q_1 = 2 \ne q_2 = -1$$</p>
+
+<p>Le due rette sono quindi parallele e distinte.</p>
 
 <h2>Rette perpendicolari</h2>
 
-<div class="regola"><p>Due rette sono perpendicolari se e solo se il prodotto dei loro
-coefficienti angolari è $-1$:</p>
-$$m_2=-\dfrac{1}{m_1}$$
+<div class="def"><span class="et">Condizione di perpendicolarità</span>
+<p>Due rette non parallele agli assi sono perpendicolari se e solo se il prodotto dei loro coefficienti angolari è $-1$:</p>
+<p class="eq">$$m_1\cdot m_2=-1 \qquad\Longleftrightarrow\qquad m_2=-\frac{1}{m_1}$$</p>
+<p>Il coefficiente angolare della seconda retta è quindi l'opposto del reciproco del coefficiente angolare della prima.</p>
 </div>
 
-<p>Il coefficiente angolare della seconda retta è quindi l'opposto del reciproco del primo.</p>
+<div class="nota"><span class="et">Rette parallele agli assi</span>
+<p>Una retta orizzontale, con $m = 0$, è perpendicolare a ogni retta verticale, che non ha coefficiente angolare. Per questa coppia di rette la condizione $m_1\cdot m_2=-1$ non si applica.</p>
+</div>
 
 <div class="fig">
-<svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="15" y1="185" x2="265" y2="185" stroke="#16283d" stroke-width="1.4"/>
-<line x1="140" y1="205" x2="140" y2="15" stroke="#16283d" stroke-width="1.4"/>
-<text x="257" y="178" font-size="12" fill="#16283d">x</text>
-<text x="146" y="24" font-size="12" fill="#16283d">y</text>
-<line x1="127" y1="210" x2="153" y2="90" stroke="#b3392f" stroke-width="1.8"/>
-<text x="156" y="95" font-size="12" fill="#b3392f">1</text>
-<line x1="20" y1="130" x2="260" y2="170" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="24" y="124" font-size="12" fill="#2f6b4f">2</text>
-<circle cx="140" cy="150" r="3.2" fill="#16283d"/>
-</svg>
+<svg id="g-perp" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Due rette passanti per il punto (0, 1) con coefficienti angolari m1 e meno uno su m1, che formano un angolo retto"></svg>
+<div class="cursore"><label for="c-perp">$m_1$</label><input id="c-perp" type="range" min="0" max="9" step="1" value="9"><span class="val" id="v-perp"></span></div>
+<p class="did">Le due rette passano per il punto $(0, 1)$ e formano un angolo retto per ogni valore di $m_1$, perché $m_2 = -1/m_1$.</p>
 </div>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Le rette $y=3x+1$ e $y=-\dfrac13x+1$ sono perpendicolari, perché
-$3\cdot\left(-\dfrac13\right)=-1$.</p>
-</div>
+<h2>Esempio 2</h2>
 
+<p>Le rette $y=3x+1$ e $y=-\dfrac13x+1$ hanno coefficienti angolari $3$ e $-\dfrac13$. Il loro prodotto è</p>
+
+<p class="eq">$$3\cdot\left(-\frac13\right)=-1$$</p>
+
+<p>quindi le due rette sono perpendicolari.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../29-appartenenza-di-un-punto-a-una-retta/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Appartenenza di un punto a una retta</span></a><a class="successiva" href="../31-retta-per-un-punto-e-retta-per-due-punti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Retta per un punto e retta per due punti</span></a></nav>
 <footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 28</p></footer>
 
 </div>
-</body>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+Piano.prototype.retta=function(m,a,dove){var X=this.X,Y=this.Y,x1=this.xr[0]-1,x2=this.xr[1]+1;
+  return this.add(el('line',Object.assign({x1:X(x1),y1:Y(m*x1),x2:X(x2),y2:Y(m*x2),'stroke-width':2},a)),dove);};
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+var M={l:20,r:20,t:20,b:20}, XR=[-3.6,3.6], YR=[-3.1,3.1];
+
+function fr(v){var t={'-3':'−3','-2':'−2','-1':'−1','-0.5':'−1/2','0.5':'1/2','1':'1','2':'2','3':'3'};
+  if(Math.abs(Math.abs(v)-1/3)<1e-9)return (v<0?'−':'')+'1/3';return t[String(v)]||n(v);}
+
+/* ---------- rette parallele: y = x/3 + 2 e y = x/3 + q2 ---------- */
+(function(){
+  var svg=document.getElementById('g-par'),cur=document.getElementById('c-par'),v=document.getElementById('v-par'); if(!svg)return;
+  var P=new Piano(svg,[-4.4,4.4],[-3.8,5],M); P.assi([-3,-2,-1,1,2,3],[-3,-2,-1,1,2,3,4]);
+  var X=P.X,Y=P.Y,a=-5,b=5;
+  P.add(el('line',{x1:X(a),y1:Y(a/3+2),x2:X(b),y2:Y(b/3+2),stroke:'var(--blu)','stroke-width':2.4}),'sotto');
+  P.add(txt(X(4.2),Y(4.2/3+2)-8,'y = ⅓x + 2',{'font-size':13,fill:'var(--blu)','text-anchor':'end'}),'testo');
+  var l2=P.add(el('line',{stroke:'var(--rosso)','stroke-width':2.2,'stroke-dasharray':'7 5'}),'sopra');
+  var t2=P.add(txt(0,0,'',{'font-size':13,fill:'var(--rosso)'}),'testo');
+  var pq=P.add(el('circle',{r:4,fill:'var(--rosso)'}),'sopra');
+  function dis(){
+    var q=+cur.value, co=(q===2);
+    set(l2,{x1:X(a),y1:Y(a/3+q),x2:X(b),y2:Y(b/3+q)});
+    set(pq,{cx:X(0),cy:Y(q)});
+    if(q>=0.5){set(t2,{x:X(4.2),y:Y(1.8/3+q)+16,'text-anchor':'end'});}else{var xs=Math.max(-4.2,3*(-3-q)); set(t2,{x:X(xs),y:Y(xs/3+q)+16,'text-anchor':'start'});} t2.textContent=co?'':'y = ⅓x'+(q===0?'':q<0?' − '+n(-q):' + '+n(q));
+    v.innerHTML='m<sub>1</sub> = m<sub>2</sub> = 1/3, q<sub>2</sub> = '+n(q)+' &nbsp; '+(co?'<span class="ok">coincidenti</span>':'parallele e distinte')+(q===-1?' &nbsp; <span class="ok">come nell\'esempio 1</span>':'');
+  }
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+
+/* ---------- rette perpendicolari per (0, 1): m1 e m2 = -1/m1 ---------- */
+(function(){
+  var svg=document.getElementById('g-perp'),cur=document.getElementById('c-perp'),v=document.getElementById('v-perp'); if(!svg)return;
+  var VAL=[-3,-2,-1,-0.5,-1/3,1/3,0.5,1,2,3];
+  var P=new Piano(svg,[-4,4],[-3,5],M); P.assi([-3,-2,-1,1,2,3],[-2,-1,2,3,4]);
+  var X=P.X,Y=P.Y,O=[X(0),Y(1)];
+  function lin(col,w){return P.add(el('line',{stroke:col,'stroke-width':w}),'sotto');}
+  var l1=lin('var(--blu)',2.4), l2=lin('var(--rosso)',2.4);
+  var sq=P.add(el('path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2}),'sopra');
+  P.add(el('circle',{cx:O[0],cy:O[1],r:3.5,fill:'var(--inchiostro)'}),'sopra');
+  var t1=P.add(txt(0,0,'',{'font-size':13,fill:'var(--blu)','text-anchor':'middle'}),'testo');
+  var t2=P.add(txt(0,0,'',{'font-size':13,fill:'var(--rosso)','text-anchor':'middle'}),'testo');
+  function retta(l,m){var s=8/Math.sqrt(1+m*m);set(l,{x1:X(-s),y1:Y(1-m*s),x2:X(s),y2:Y(1+m*s)});}
+  function dir(m){var dx=X(1)-X(0), dy=Y(m)-Y(0), L=Math.hypot(dx,dy);return [dx/L,dy/L];}
+  function etich(t,m,s,lab){var d=dir(m), p=[O[0]+d[0]*s, O[1]+d[1]*s], nx=-d[1], ny=d[0]; if(ny>0){nx=-nx;ny=-ny;}
+    set(t,{x:p[0]+nx*14,y:p[1]+ny*14+4}); t.textContent=lab;}
+  function dis(){
+    var m1=VAL[+cur.value], m2=-1/m1;
+    retta(l1,m1); retta(l2,m2);
+    var u=dir(m1), w=dir(m2), s=13;
+    set(sq,{d:'M'+(O[0]+u[0]*s)+','+(O[1]+u[1]*s)+' L'+(O[0]+u[0]*s+w[0]*s)+','+(O[1]+u[1]*s+w[1]*s)+' L'+(O[0]+w[0]*s)+','+(O[1]+w[1]*s)});
+    etich(t1,m1,105,'m₁'); etich(t2,m2,105,'m₂');
+    v.innerHTML='m<sub>1</sub> = '+fr(m1)+', m<sub>2</sub> = '+fr(m2)+', m<sub>1</sub>·m<sub>2</sub> = −1'+(m1===3?' &nbsp; <span class="ok">come nell\'esempio 2</span>':'');
+  }
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script></body>
 </html>
