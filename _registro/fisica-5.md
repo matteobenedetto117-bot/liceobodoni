@@ -306,6 +306,7 @@
   sbaglia facilmente. Ridisegnato in SVG lo schema del solenoide con spire, asse, campo B e
   sezione A (pagina 46): nessun disegno nuovo rispetto alla traccia. Nessuno strumento
   interattivo: la pagina è quasi interamente formule ed esempi numerici già risolti a mano.
+- Revisione: titolo invariato. Tolti sommario, «Nella prossima unità» e il rimando all'unità 13 per il campo del solenoide; introduzione di una frase. Titoletto «Induttanza di un solenoide» tenuto, aggiunto «Densità di spire e volume»; i due «Esempio» diventano «Esempio 1» ed «Esempio 2». L = μ₀N²A/ℓ e L = μ₀n²V in riquadro rosso, con la legenda dei simboli; formule intermedie in riquadro azzurro; nota «Attenzione» su n² e N² mantenuta; unità di μ₀ esplicitate nei calcoli dell'esempio 2. Correzione: il campo è «approssimativamente uniforme» all'interno di un solenoide lungo (prima «uniforme» senza condizioni). Valori riverificati (Δt ≈ 2,2×10⁻³ s; L ≈ 1,7×10⁻³ H; A ≈ 4,3×10⁻⁴ m²; B_max ≈ 2,0×10⁻² T). Figura del solenoide rifatta in SVG da script con cursore sul numero di spire N (100–500, ℓ e A dell'esempio 2), con n e L a fianco. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 28 — Circuiti RL
 - Parole: circa 418 (prosa, didascalie e riquadro compresi) su 3 pagine di traccia (pagine
