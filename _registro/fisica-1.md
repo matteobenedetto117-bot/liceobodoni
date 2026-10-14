@@ -110,7 +110,7 @@
   singolo intervallo, e il riquadro «Da non confondere» sull'indipendenza fra le due
   caratteristiche, che è l'errore tipico dell'argomento. Nessuna tabella riassuntiva,
   nessuno strumento interattivo.
-- Revisione: titolo invariato. Rifatta con le regole nuove: introduzione di due frasi; ripristinati i titoletti «Portata» e «Sensibilità»; definizioni in riquadro .def, lettura su scala graduata, comportamento oltre la portata e sotto la sensibilità, nota sull'indipendenza, esempi delle due bilance ed esempio del righello (con i due oggetti indistinguibili) in frasi complete. Didascalia riscritta come frase completa. Nessuna correzione concettuale (verificato 20 cm / 0,1 cm = 200). Impaginazione e figura interattiva invariate (righello con ingrandimento e cursore sulla lunghezza). Nessun esempio tolto, nessuna figura decorativa.
+- Revisione (14/10/2026, regole 13/10): parole 224 → 123. Pagina già a quaderno: apertura a domanda; tolti i titoletti «Portata» e «Sensibilità» (ripetevano le etichette dei .def; resta «Esempio»); definizioni in una riga; lettura su scala graduata, valori oltre la portata e variazioni sotto la sensibilità in elenco caso → conseguenza; nota in una riga; bilance in due voci; esempio «Dati… Calcolare…» con due formule (aggiunta intervalli = portata/sensibilità nella sostituzione); frase finale accorciata. Nessuna comparsa, nessuna correzione (20 cm / 0,1 cm = 200). Figura con cursore invariata (didascalia accorciata). Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 15 — Errori casuali e sistematici
 - Parole: 345 su 2 pagine di traccia (pagine 22–23 del PDF; della pagina 22 appartiene
