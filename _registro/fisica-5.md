@@ -126,7 +126,7 @@
 - Aggiunta: un esempio numerico, perché in tutta l'unità la traccia non ne contiene nessuno
   (solo lo schema del solenoide, il disegno del campo nullo fuori/uniforme dentro, e la
   derivazione coi quattro tratti del percorso di Ampère).
-- Revisione: titolo invariato. Rifatta con le regole nuove: introduzione di una frase; ripristinati i titoletti «Campo interno e campo esterno», «Il percorso di Ampère»; descrizione del solenoide, campo esterno trascurabile, nota sul solenoide ideale, costruzione del percorso, contributi dei quattro lati, corrente concatenata, legenda ed esempio in frasi complete (contributi dei lati in elenco). Tolto il sommario. Nessuna correzione concettuale (verificato B = 4π·10⁻⁷·2000·2,0 ≈ 5,03·10⁻³ T). Impaginazione e figure interattive invariate (linee di campo con cursore su N, percorso di Ampère con cursore sulle spire racchiuse). Nessun esempio tolto, nessuna figura decorativa.
+- Revisione (14/10/2026, regole 13/10): parole 368 → 131. Pagina già a quaderno: apertura a domanda (con la definizione di solenoide fra parentesi), tolti l'introduzione e i titoletti «Campo interno e campo esterno», «Il percorso di Ampère» (resta «Esempio»), campo interno/esterno in elenco caso → conseguenza, nota sul solenoide ideale in una riga, costruzione del percorso in una frase, contributi dei quattro lati in elenco caso → conseguenza, legenda ridotta a n e μ₀, esempio «Dati… Calcolare…» in un'unica formula. Nessuna comparsa, nessuna correzione (B = 4π×10⁻⁷·2000·2,0 ≈ 5,0×10⁻³ T riverificato). Figure interattive invariate (didascalie accorciate). Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 15 — Magnetismo nella materia
 - Parole: 411 su 3 pagine di traccia (pagine 23–25; la pagina 26, con la temperatura di Curie e
