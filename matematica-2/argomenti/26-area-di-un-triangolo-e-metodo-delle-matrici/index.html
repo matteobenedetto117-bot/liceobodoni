@@ -57,47 +57,48 @@ h1{position:relative;top:.5rem}
   <h1>Area di un triangolo e metodo delle matrici</h1>
 </header>
 
-<p>L'unità mostra due modi per calcolare l'area di un triangolo conoscendo soltanto le coordinate dei suoi vertici: per differenza dal rettangolo circoscritto e con un determinante.</p>
+<p>Vertici $A$, $B$, $C$ noti per coordinate: come si calcola l'area del triangolo?</p>
 
 <h2>Il rettangolo circoscritto</h2>
-<p>Si racchiude il triangolo in un rettangolo con i lati paralleli agli assi, che passano per i vertici. L'area del triangolo è uguale all'area del rettangolo meno le aree dei triangoli rettangoli che restano negli angoli del rettangolo.</p>
+<p>Rettangolo con i lati paralleli agli assi, passanti per i vertici: area del triangolo = area del rettangolo − aree dei tre triangoli rettangoli negli angoli.</p>
 
 <div class="fig">
 <svg id="g-rett" viewBox="0 0 270 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Triangolo ABC nel rettangolo circoscritto"></svg>
 <div class="cursore"><label for="c-rett">$y_B$</label><input id="c-rett" type="range" min="3" max="5" step="0.5" value="3"><span class="val" id="v-rett1"></span></div>
 <div class="cursore"><span class="val" id="v-rett2"></span></div>
-<p class="did">Spostando $B$ in verticale cambiano il rettangolo e i triangoli negli angoli, ma l'area ottenuta per differenza coincide sempre con quella data dal determinante.</p>
+<p class="did">Al variare di $y_B$: area per differenza sempre uguale a $\frac12|D|$.</p>
 </div>
 
-<h3>Esempio</h3>
-<p>Il triangolo ha vertici $A(0,2)$, $B(4,3)$, $C(2,0)$. Il rettangolo circoscritto ha base $4$ e altezza $3$, quindi la sua area è:</p>
-<p class="eq">$$A_{rett}=4\cdot3=12$$</p>
-<p>I tre triangoli negli angoli sono rettangoli e hanno cateti lunghi $2$ e $2$, $2$ e $3$, $1$ e $4$:</p>
-<p class="eq">$$A_1=\frac{2\cdot2}{2}=2\qquad A_2=\frac{2\cdot3}{2}=3\qquad A_3=\frac{1\cdot4}{2}=2$$</p>
-<p>L'area del triangolo è la differenza fra l'area del rettangolo e la somma delle tre aree:</p>
+<h3>Esempio 1</h3>
+<p>Dati: $A(0,2)$, $B(4,3)$, $C(2,0)$. Calcolare l'area con il rettangolo circoscritto.</p>
+<p>Rettangolo $4\times3$; cateti dei triangoli negli angoli: $2$ e $2$, $2$ e $3$, $1$ e $4$:</p>
+<p class="eq">$$A_{rett}=4\cdot3=12\qquad A_1=\frac{2\cdot2}{2}=2\qquad A_2=\frac{2\cdot3}{2}=3\qquad A_3=\frac{1\cdot4}{2}=2$$</p>
 <p class="eq">$$A_{ABC}=A_{rett}-A_1-A_2-A_3=12-2-3-2=5$$</p>
 
 <h2>Il metodo delle matrici</h2>
-<p>Lo stesso risultato si ottiene senza disegno. Si scrivono come righe di una matrice quadrata le coordinate dei tre vertici, aggiungendo una terza colonna formata da $1$, e se ne calcola il determinante $D$.</p>
+<p>Coordinate dei vertici come righe di una matrice, terza colonna di $1$:</p>
 <div class="def"><span class="et">Area con il determinante</span>
 <p class="eq">$$D=\begin{vmatrix}x_A & y_A & 1\\ x_B & y_B & 1\\ x_C & y_C & 1\end{vmatrix}\qquad\qquad A_{ABC}=\frac12\,|D|$$</p>
-<p>Il valore assoluto è necessario perché il segno di $D$ dipende dal verso, orario o antiorario, in cui si leggono i vertici, mentre l'area è sempre positiva.</p>
+<p>Valore assoluto: il segno di $D$ dipende dal verso (orario o antiorario) di lettura dei vertici.</p>
 </div>
-<p>Il determinante si calcola con la regola di Sarrus: si ricopiano a destra della matrice le prime due colonne, si sommano i tre prodotti sulle diagonali discendenti e si sottraggono i tre prodotti sulle diagonali ascendenti.</p>
+<p>Regola di Sarrus:</p>
+<ul>
+<li>prime due colonne ricopiate a destra;</li>
+<li>somma dei prodotti sulle tre diagonali discendenti;</li>
+<li>meno la somma dei prodotti sulle tre diagonali ascendenti.</li>
+</ul>
 
-<h3>Esempio</h3>
-<p>Per lo stesso triangolo di vertici $A(0,2)$, $B(4,3)$, $C(2,0)$ il determinante vale:</p>
+<h3>Esempio 2</h3>
+<p>Stesso triangolo. Calcolare l'area con il determinante.</p>
 <p class="eq">$$D=\begin{vmatrix}0&2&1\\4&3&1\\2&0&1\end{vmatrix}=(0+4+0)-(6+0+8)=4-14=-10$$</p>
 
 <div class="fig">
 <svg id="g-sarrus" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Regola di Sarrus applicata alla matrice dei vertici"></svg>
 <div class="cursore"><label for="c-sarrus">diagonale</label><input id="c-sarrus" type="range" min="1" max="6" step="1" value="1" aria-label="Diagonale"><span class="val" id="v-sarrus"></span></div>
-<p class="did">Le colonne grigie sono la copia delle prime due; le diagonali discendenti sono in verde, quelle ascendenti in rosso.</p>
+<p class="did">Colonne grigie: copia delle prime due; diagonali discendenti in verde, ascendenti in rosso.</p>
 </div>
 
-<p>L'area del triangolo è quindi:</p>
 <p class="eq">$$A_{ABC}=\frac12\,|-10|=5$$</p>
-<p>Il risultato coincide con quello ottenuto con il rettangolo circoscritto.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../25-punti-nel-piano-distanza-e-punto-medio/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Punti nel piano: distanza e punto medio</span></a><a class="successiva" href="../02-proporzionalita-diretta-e-funzioni-lineari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Le funzioni lineari</span></a></nav>
 <footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 23</p></footer>
