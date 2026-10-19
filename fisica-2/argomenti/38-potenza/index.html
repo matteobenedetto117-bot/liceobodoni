@@ -5,17 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Potenza — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:12px 18px;margin:20px 0;border-left:4px solid var(--rosso);font-family:var(--sans);font-size:.92rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,75 +57,103 @@
   <h1>Potenza</h1>
 </header>
 
-<h2>Definizione</h2>
+<p>Lo stesso lavoro $L$ può essere compiuto in tempi diversi: come si misura la rapidità con cui viene compiuto?</p>
 
-<div class="risultato">
-<p>Potenza sviluppata compiendo un lavoro $L$ nel tempo $t$:</p>
-$$P=\dfrac{L}{t}$$
-<p>La potenza misura quanto velocemente viene compiuto un lavoro.</p>
-</div>
+<div class="def"><span class="et">Potenza</span>
+<p>Lavoro $L$ compiuto nel tempo $t$:</p>
+<p class="eq principio">$$P = \dfrac{L}{t}$$</p></div>
 
-<p>A parità di lavoro, un tempo più breve dà una potenza maggiore: fare
-lo stesso lavoro più in fretta costa più potenza, farlo con calma ne
-costa meno.</p>
+<div class="def"><span class="et">Unità di misura</span>
+<p>Watt (W): $1\ \text{W} = 1\ \text{J/s}$</p></div>
 
-<p>L'unità di misura si ricava direttamente dalla definizione:</p>
+<p>A parità di lavoro:</p>
+<ul>
+<li>tempo più breve → potenza maggiore;</li>
+<li>tempo più lungo → potenza minore.</li>
+</ul>
 
-$$[P]=\dfrac{\text{J}}{\text{s}}=\text{W (watt)}$$
-
-<p><strong>Esempio.</strong> Un lavoro $L=2150\ \text{J}$ viene
-compiuto in due modi diversi.</p>
-
-<p>Se è compiuto in $t=4\ \text{s}$:</p>
-
-$$P=\dfrac{L}{t}=\dfrac{2150\ \text{J}}{4\ \text{s}}=538\ \text{W}$$
-
-<p>Se lo stesso lavoro è compiuto in $t=10\ \text{s}$:</p>
-
-$$P=\dfrac{L}{t}=\dfrac{2150\ \text{J}}{10\ \text{s}}=215\ \text{W}$$
-
-<p>Il lavoro è identico nei due casi; a renderlo in meno tempo serve
-più potenza, a renderlo in più tempo ne basta meno.</p>
+<h2>Esempio</h2>
+<p>Dati: $L = 2150\ \text{J}$, compiuto in $t_1 = 4\ \text{s}$ oppure in $t_2 = 10\ \text{s}$. Calcolare la potenza nei due casi.</p>
+<p class="eq">$$P_1 = \dfrac{2150\ \text{J}}{4\ \text{s}} \approx 538\ \text{W} \qquad\qquad P_2 = \dfrac{2150\ \text{J}}{10\ \text{s}} = 215\ \text{W}$$</p>
 
 <h2>Potenza di una forza su un corpo in moto</h2>
 
 <div class="fig">
-<svg viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="a38r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="a38b" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--blu)"/></marker>
-<marker id="a38v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="20" y1="125" x2="320" y2="125" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="120" y="90" width="70" height="35" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="136" cy="127" r="6" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="174" cy="127" r="6" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="118" y1="100" x2="70" y2="100" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#a38b)"/>
-<text x="72" y="90" font-size="14" fill="var(--blu)" font-family="var(--sans)">F&#8407;<tspan baseline-shift="sub" font-size="9">at</tspan></text>
-<line x1="192" y1="100" x2="245" y2="100" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#a38r)"/>
-<text x="200" y="90" font-size="14" fill="var(--rosso)" font-family="var(--sans)">F&#8407;</text>
-<line x1="120" y1="75" x2="165" y2="75" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#a38v)"/>
-<text x="122" y="65" font-size="14" fill="var(--verde)" font-family="var(--sans)">v&#8407;</text>
-</svg>
-<p class="did">Per avanzare a velocità costante $v$ occorre una forza
-$F$ che vinca l'attrito $F_{at}$: la forza applicata non accelera
-l'oggetto, lo mantiene in moto.</p>
+<svg id="g-p" viewBox="0 28 420 122" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Carrello che avanza a velocità costante: la forza F applicata equilibra l'attrito"></svg>
+<div class="cursore"><label for="c-p">tempo $t$</label><input id="c-p" type="range" min="0.5" max="5" step="0.1" value="5"><span class="val" id="v-p"></span></div>
+<p class="did">$F = 50\ \text{N}$, $v = 2\ \text{m/s}$ costante: $F$ equilibra l'attrito $F_{at}$; $P = L/t = F\cdot v$ in ogni istante</p>
 </div>
 
-<p>Con la forza costante e nella direzione del moto, il lavoro è
-$L=F\cdot s$; sostituendo nella definizione di potenza:</p>
+<p>Forza costante, nella direzione del moto: $L = F\cdot s$, quindi</p>
+<p class="eq">$$P = \dfrac{L}{t} = \dfrac{F\cdot s}{t} = F\cdot\dfrac{s}{t} = F\cdot v$$</p>
 
-$$P=\dfrac{L}{t}=\dfrac{F\cdot s}{t}=F\cdot\dfrac{s}{t}=F\cdot v$$
-
-<div class="risultato">
-<p>Potenza necessaria a una forza $F$ per mantenere un corpo in moto a
-velocità costante $v$:</p>
-$$P=F\cdot v$$
-</div>
+<div class="def"><span class="et">Potenza di una forza</span>
+<p>Forza $F$ che mantiene un corpo in moto a velocità costante $v$:</p>
+<p class="eq principio">$$P = F\cdot v$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../37-energia-cinetica-e-teorema-del-lavoro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia cinetica e teorema del lavoro</span></a><a class="successiva" href="../39-forze-conservative-ed-energia-potenziale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forze conservative ed energia potenziale</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 28</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',').replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  var s=document.getElementById('g-p');if(!s)return;
+  var c=document.getElementById('c-p'),v=document.getElementById('v-p');
+  var F=50,vel=2;
+  var d=el(s,'defs',{});
+  [['a','var(--inchiostro)'],['r','var(--rosso)'],['b','var(--blu)'],['v','var(--verde)']].forEach(function(q){
+    var mk=el(d,'marker',{id:'m28'+q[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:q[1]});
+  });
+  var X0=70,PX=24,Yg=110,W=56,H=28;
+  el(s,'line',{x1:15,y1:Yg,x2:405,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.4});
+  for(var i=0;i<13;i++)el(s,'line',{x1:22+i*30,y1:Yg+1,x2:14+i*30,y2:Yg+9,stroke:'var(--riga)','stroke-width':1});
+  [0,2,4,6,8,10].forEach(function(n){var x=X0+PX*n;el(s,'line',{x1:x,y1:Yg+12,x2:x,y2:Yg+17,stroke:'var(--grigio)','stroke-width':1});txt(s,x,Yg+29,String(n));});
+  txt(s,X0+PX*10+36,Yg+29,'s (m)',{fill:'var(--inchiostro)'});
+  var sr=el(s,'line',{y1:Yg+14,y2:Yg+14,x1:X0,stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#m28a)'});
+  var g=el(s,'g',{});
+  el(g,'rect',{x:-W/2,y:-H-12,width:W,height:H,rx:3,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+  el(g,'circle',{cx:-W/2+12,cy:-6,r:6,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.5});
+  el(g,'circle',{cx:W/2-12,cy:-6,r:6,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.5});
+  el(g,'line',{x1:W/2,y1:-H/2-12,x2:W/2+44,y2:-H/2-12,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m28r)'});
+  txt(g,W/2+22,-H/2-19,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});
+  el(g,'line',{x1:-W/2,y1:-6,x2:-W/2-44,y2:-6,stroke:'var(--blu)','stroke-width':2.4,'marker-end':'url(#m28b)'});
+  var ta=txt(g,-W/2-24,-14,'F',{fill:'var(--blu)','font-size':14,'font-style':'italic','font-weight':700});
+  var sp=el(ta,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent='at';
+  el(g,'line',{x1:-W/2,y1:-H-24,x2:-W/2+40,y2:-H-24,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m28v)'});
+  txt(g,-W/2+20,-H-31,'v',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+  function disegna(){
+    var t=+c.value,sx=vel*t,x=X0+PX*sx;
+    set(g,{transform:'translate('+(x)+','+Yg+')'});
+    set(sr,{x2:x,visibility:sx>0.4?'visible':'hidden'});
+    var L=F*sx;
+    v.textContent='t = '+num(t,1)+' s · s = '+num(sx,1)+' m · L = '+num(L,0)+' J · P = '+num(L/t,0)+' W';
+  }
+  c.addEventListener('input',disegna);disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
