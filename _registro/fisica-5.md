@@ -360,6 +360,7 @@
   Un solo strumento interattivo, come da regola: uno slider sulla corrente i che sposta un punto
   lungo la curva U(i) = ½Li² e mostra il valore numerico, per rendere visibile la stessa
   dipendenza quadratica già presente nella formula, invece di lasciarla solo scritta.
+- Revisione (19/10/2026, regole 13/10): parole 337 → 114. Apertura a domanda; tolti sommario e «Nella prossima unità» (con il rimando all'unità 31) e il rimando all'unità 28; titoletti ridotti a «Energia di un'induttanza», «Solenoide», «Esempio»; derivazione condensata in una .eq (ε = Li/T, P_m = ½Li²/T) e U = ½Li² in .eq principio; caso del solenoide in una .eq, u_B = B²/(2μ₀) in .eq principio con unità J/m³ in .def; nota «Attenzione» in una frase senza simbolo di proporzionalità; esempio in forma «Dati… Calcolare…» con due .eq, tolte le righe a) e b). Nessuna comparsa da togliere. Controllo concettuale: i = √(2U/L) = 0,2880 A, R = 36/0,288 − 92,5 ≈ 32,5 Ω verificati; risultato riportato come ≈ 32 Ω per le due cifre significative di ε = 36 V (prima 32,5 Ω). Impaginazione a quaderno; figure rifatte da script (circuito ideale ε–L, i(t) lineare con i/2 a T/2, U(i) con cursore su i, solenoide con sezione A e lunghezza ℓ, circuito dell'esempio): nessuna figura nuova. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 31 — Trasformatori
 - Parole: circa 300 (prosa, didascalie e riquadro compresi) su 2 pagine di traccia (pagine 54-55).
