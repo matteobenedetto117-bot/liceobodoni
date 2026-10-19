@@ -5,17 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Energia cinetica e teorema del lavoro — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:12px 18px;margin:20px 0;border-left:4px solid var(--rosso);font-family:var(--sans);font-size:.92rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,86 +57,105 @@
   <h1>Energia cinetica e teorema del lavoro</h1>
 </header>
 
-<h2>Dal moto accelerato al lavoro</h2>
+<p>Corpo di massa $m$ con velocità iniziale $v_0$; una forza $F$ costante, nella direzione del moto, lo sposta di $s$. Quanto vale la velocità finale $v_f$?</p>
 
 <div class="fig">
-<svg viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="a37r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="a37v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker></defs>
-<line x1="20" y1="120" x2="320" y2="120" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="40" y="85" width="60" height="35" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="55" cy="122" r="6" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="85" cy="122" r="6" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="63" y="107" font-size="14" font-family="var(--sans)">m</text>
-<line x1="100" y1="95" x2="160" y2="95" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#a37r)"/>
-<text x="108" y="86" font-size="14" fill="var(--rosso)" font-family="var(--sans)">F&#8407;</text>
-<line x1="40" y1="70" x2="80" y2="70" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#a37v)"/>
-<text x="42" y="60" font-size="13" fill="var(--verde)" font-family="var(--sans)">v&#8407;<tspan baseline-shift="sub" font-size="9">0</tspan></text>
-</svg>
-<p class="did">Un oggetto ha già una velocità iniziale $v_0$; una forza
-$F$, costante e nella stessa direzione del moto, lo fa accelerare fino
-alla velocità $v_f$ dopo uno spostamento $s$.</p>
+<svg id="g-ek" viewBox="0 32 420 116" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Blocco spinto da una forza costante su un piano orizzontale: la velocità cresce con lo spostamento"></svg>
+<div class="cursore"><label for="c-ek">spostamento $s$</label><input id="c-ek" type="range" min="0" max="4" step="0.1" value="4"><span class="val" id="v-ek"></span></div>
+<p class="did">$m = 60\ \text{kg}$, $F = 120\ \text{N}$, $v_0 = 3\ \text{m/s}$, piano senza attrito: $L = K_f - K_i$ in ogni posizione</p>
 </div>
 
-<p>Per una forza costante che sposta un oggetto di un tratto $s$ nella
-propria direzione, il lavoro è $L=F\cdot s$. Se l'oggetto parte già con
-velocità $v_0$ e accelera per effetto di $F=ma$, la terza equazione
-della cinematica lega le due velocità allo spostamento:</p>
+<p>Dalla terza equazione della cinematica, con $a = F/m$:</p>
+<p class="eq">$$v_f^2 = v_0^2 + 2as = v_0^2 + 2\dfrac{F}{m}s$$</p>
+<p>Moltiplicando per $m/2$ e isolando $F\cdot s$:</p>
+<p class="eq">$$F\cdot s = \dfrac{1}{2}mv_f^2 - \dfrac{1}{2}mv_0^2$$</p>
+<ul>
+<li>$F\cdot s$ → lavoro $L$ della forza;</li>
+<li>$\tfrac12 mv^2$ → stessa grandezza, alla velocità finale e a quella iniziale.</li>
+</ul>
 
-$$v_f^2=v_0^2+2as$$
+<div class="def"><span class="et">Energia cinetica</span>
+<p>Energia dovuta al moto di un corpo di massa $m$ e velocità $v$:</p>
+<p class="eq">$$K = \dfrac{1}{2}mv^2$$</p></div>
 
-<p>Sostituendo $a=F/m$ e isolando $F\cdot s$ si ottiene:</p>
+<div class="def"><span class="et">Teorema dell'energia cinetica</span>
+<p>$L$: lavoro compiuto sul corpo dalla forza risultante.</p>
+<p class="eq principio">$$L = K_f - K_i$$</p></div>
 
-$$v_f^2=v_0^2+2\dfrac{F}{m}s \quad\Rightarrow\quad F\cdot s=\dfrac{1}{2}mv_f^2-\dfrac{1}{2}mv_0^2$$
+<ul>
+<li>$L > 0$ → l'energia cinetica aumenta;</li>
+<li>$L < 0$ → l'energia cinetica diminuisce.</li>
+</ul>
 
-<p>Il primo membro è il lavoro $L$ compiuto dalla forza. Il secondo
-membro coinvolge due volte la stessa quantità, $\tfrac12mv^2$, calcolata
-una alla velocità finale e una all'iniziale.</p>
+<h2>Esempio 1</h2>
+<p>Dati: $m = 60\ \text{kg}$, $\;v_i = 3\ \text{m/s}$, $\;v_f = 5\ \text{m/s}$. Calcolare $L$.</p>
+<p class="eq">$$L = \dfrac{1}{2}mv_f^2 - \dfrac{1}{2}mv_i^2 = \dfrac{1}{2}\cdot 60\ \text{kg}\cdot(5\ \text{m/s})^2 - \dfrac{1}{2}\cdot 60\ \text{kg}\cdot(3\ \text{m/s})^2 = 750\ \text{J} - 270\ \text{J} = 480\ \text{J}$$</p>
 
-<h2>Energia cinetica</h2>
-
-<div class="risultato">
-<p>Energia cinetica di un oggetto di massa $m$ e velocità $v$:</p>
-$$K=\dfrac{1}{2}mv^2$$
-<p>L'energia cinetica è l'energia dovuta al movimento dell'oggetto.</p>
-</div>
-
-<p>Con questa definizione, il risultato precedente diventa il
-<strong>teorema del lavoro e dell'energia cinetica</strong>:</p>
-
-$$L=K_f-K_i$$
-
-<p>Il lavoro compiuto sull'oggetto è uguale alla variazione della sua
-energia cinetica. Scritta come $K_f=K_i+L$, la relazione dice che
-compiere un lavoro positivo su un oggetto ne aumenta l'energia
-cinetica, mentre un lavoro negativo la fa diminuire.</p>
-
-<h2>Esempi</h2>
-
-<p><strong>Esempio 1.</strong> Un'automobile di massa $m=3{,}7\cdot
-10^3\ \text{kg}$ viaggia a $v=15\ \text{m/s}$. La sua energia cinetica
-è:</p>
-
-$$K=\dfrac{1}{2}mv^2=\dfrac{1}{2}\cdot3{,}7\cdot10^3\ \text{kg}\cdot(15\ \text{m/s})^2=4{,}2\cdot10^5\ \text{J}$$
-
-<p><strong>Esempio 2.</strong> Un oggetto di massa $m=60\ \text{kg}$
-passa da $v_i=3\ \text{m/s}$ a $v_f=5\ \text{m/s}$. Il lavoro compiuto
-su di esso è:</p>
-
-$$L=K_f-K_i=\dfrac{1}{2}mv_f^2-\dfrac{1}{2}mv_i^2=480\ \text{J}$$
-
-<p><strong>Esempio 3.</strong> Un oggetto di massa $m=27\ \text{kg}$
-viaggia a $v_i=8\ \text{m/s}$; su di esso viene compiuto un lavoro
-$L=-35\ \text{J}$. Dal teorema, ricavando $v_f$:</p>
-
-$$v_f^2=v_i^2+\dfrac{2L}{m} \quad\Rightarrow\quad v_f=\sqrt{v_i^2+\dfrac{2L}{m}}=7{,}8\ \text{m/s}$$
-
-<p>Il lavoro negativo riduce la velocità, coerentemente con il segno di
-$L$.</p>
+<h2>Esempio 2</h2>
+<p>Dati: $m = 27\ \text{kg}$, $\;v_i = 8\ \text{m/s}$, $\;L = -35\ \text{J}$. Calcolare $v_f$.</p>
+<p class="eq">$$v_f = \sqrt{v_i^2 + \dfrac{2L}{m}} = \sqrt{(8\ \text{m/s})^2 + \dfrac{2\cdot(-35\ \text{J})}{27\ \text{kg}}} \approx 7{,}8\ \text{m/s}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../36-lavoro-della-forza-elastica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Lavoro della forza elastica</span></a><a class="successiva" href="../38-potenza/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Potenza</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 27</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',').replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  var s=document.getElementById('g-ek');if(!s)return;
+  var c=document.getElementById('c-ek'),v=document.getElementById('v-ek');
+  var m=60,F=120,v0=3,a=F/m;
+  var d=el(s,'defs',{});
+  [['a','var(--inchiostro)'],['r','var(--rosso)'],['v','var(--verde)']].forEach(function(q){
+    var mk=el(d,'marker',{id:'m27'+q[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:q[1]});
+  });
+  var X0=30,PX=60,Yg=110,W=50,H=36;
+  el(s,'line',{x1:15,y1:Yg,x2:405,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.4});
+  for(var i=0;i<13;i++)el(s,'line',{x1:22+i*30,y1:Yg+1,x2:14+i*30,y2:Yg+9,stroke:'var(--riga)','stroke-width':1});
+  el(s,'rect',{x:X0,y:Yg-H,width:W,height:H,rx:3,fill:'none',stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4,3'});
+  [0,1,2,3,4].forEach(function(n){var x=X0+PX*n;el(s,'line',{x1:x,y1:Yg+12,x2:x,y2:Yg+17,stroke:'var(--grigio)','stroke-width':1});txt(s,x,Yg+29,n+(n?'':''));});
+  txt(s,X0+PX*4+40,Yg+29,'s (m)',{fill:'var(--inchiostro)'});
+  var sr=el(s,'line',{y1:Yg+14,y2:Yg+14,x1:X0,stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#m27a)'});
+  var blocco=el(s,'rect',{y:Yg-H,width:W,height:H,rx:3,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+  var mt=txt(s,0,Yg-H/2+5,'m',{fill:'var(--blu)','font-size':14,'font-style':'italic'});
+  var fr=el(s,'line',{y1:Yg-H/2,y2:Yg-H/2,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m27r)'});
+  var ft=txt(s,0,Yg-H/2-8,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});
+  var vr=el(s,'line',{y1:Yg-H-18,y2:Yg-H-18,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m27v)'});
+  var vt=txt(s,0,Yg-H-26,'v',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+  function disegna(){
+    var x=+c.value,vv=Math.sqrt(v0*v0+2*a*x),xb=X0+PX*x;
+    set(blocco,{x:xb});set(mt,{x:xb+W/2});
+    set(fr,{x1:xb+W,x2:xb+W+48});set(ft,{x:xb+W+22});
+    set(vr,{x1:xb,x2:xb+14*vv});set(vt,{x:xb+7*vv});
+    set(sr,{x2:xb,visibility:x>0.15?'visible':'hidden'});
+    var K0=m*v0*v0/2,K=m*vv*vv/2;
+    v.textContent='s = '+num(x,1)+' m · v = '+num(vv,1)+' m/s · L = '+num(F*x,0)+' J · K = '+num(K,0)+' J';
+  }
+  c.addEventListener('input',disegna);disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
