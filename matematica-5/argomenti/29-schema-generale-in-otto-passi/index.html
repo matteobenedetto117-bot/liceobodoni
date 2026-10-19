@@ -5,26 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Schema generale in otto passi — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.schema{margin:0;padding-left:0;list-style:none;counter-reset:passo}
-.schema>li{margin:20px 0;padding-left:2.4em;position:relative;counter-increment:passo}
-.schema>li::before{content:counter(passo);position:absolute;left:0;top:0;
-  font-family:var(--sans);font-weight:600;color:var(--blu);
-  background:var(--blu-chiaro);width:1.7em;height:1.7em;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:.9rem}
-.schema>li>b{display:block;margin-bottom:2px}
-.schema ul{margin:6px 0 0;padding-left:1.2em}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:6px}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
 </style>
 </head>
 <body>
@@ -34,117 +85,185 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Studio di funzione &middot; Unità 28</p>
   <h1>Schema generale in otto passi</h1>
-  <p class="sommario">Dominio, simmetrie, segno, limiti, derivata prima e derivata seconda sono
-  strumenti che già sappiamo usare uno per uno. Metterli in un ordine fisso permette di tracciare
-  il grafico completo di una funzione, passo dopo passo, senza saltarne nessuno.</p>
 </header>
 
-<h2>I passi</h2>
+<p>Come si traccia il grafico di $f$? Otto passi, sempre in questo ordine:</p>
 
-<ol class="schema">
-
-<li><b>Dominio</b> di $f$.</li>
-
-<li><b>Eventuali simmetrie.</b>
-<ul>
-<li>Se $f(-x)=f(x)\ \forall x\in D$, la funzione è <b>pari</b>: il grafico è simmetrico
-rispetto all'asse $y$.</li>
-<li>Se $f(-x)=-f(x)\ \forall x\in D$, la funzione è <b>dispari</b>: il grafico è simmetrico
-rispetto all'origine.</li>
-</ul></li>
-
-<li><b>Periodicità.</b> Se esiste un periodo $T$ tale che $f(x)=f(x+kT)\ \forall k\in\mathbb{Z}$
-(come per seno, coseno e tangente), possiamo limitarci a studiare la funzione all'interno di un
-solo periodo $T$.</li>
-
-<li><b>Intersezioni con gli assi cartesiani.</b> $f(0)$ dà l'intersezione con l'asse $y$;
-le soluzioni di $f(x)=0$ danno le intersezioni con l'asse $x$.</li>
-
-<li><b>Segno della funzione.</b> Si pone $f(x)&gt;0$ e si vedono gli intervalli in cui la
-funzione è positiva o negativa.</li>
-
-<li><b>Comportamento agli estremi del dominio.</b>
-<ul>
-<li>Eventuali punti di discontinuità e di singolarità.</li>
-<li>Ricerca degli asintoti: verticale $x=x_0$ se
-$\displaystyle\lim_{x\to x_0^-}f(x)=\pm\infty$ oppure $\displaystyle\lim_{x\to x_0^+}f(x)=\pm\infty$;
-orizzontale $y=y_0$ se $\displaystyle\lim_{x\to+\infty}f(x)=y_0$ oppure
-$\displaystyle\lim_{x\to-\infty}f(x)=y_0$; obliquo $y=mx+q$ (con $m\neq0$) se
-$\displaystyle\lim_{x\to\pm\infty}f(x)=\pm\infty$ e
-$$m=\lim_{x\to\pm\infty}\frac{f(x)}{x}, \qquad q=\lim_{x\to\pm\infty}\big[f(x)-mx\big].$$</li>
-</ul></li>
-
-<li><b>Studio della derivata prima $f'(x)$.</b>
-<ul>
-<li>Calcoliamo $f'(x)$, ne troviamo dominio e zeri.</li>
-<li>Studiamo il segno ponendo $f'(x)&gt;0$: dove $f'(x)&gt;0$ la funzione è crescente, dove
-$f'(x)&lt;0$ è decrescente. Da qui si leggono massimi, minimi e flessi orizzontali e
-verticali.</li>
-<li>Punti di non derivabilità e loro classificazione: flessi verticali, cuspidi, punti
-angolosi.</li>
-</ul></li>
-
-<li><b>Studio della derivata seconda $f''(x)$.</b>
-<ul>
-<li>Calcoliamo $f''(x)$, ne troviamo dominio e zeri.</li>
-<li>Studiamo il segno ponendo $f''(x)&gt;0$: dove $f''(x)&gt;0$ la concavità è verso l'alto
-($\cup$), dove $f''(x)&lt;0$ è verso il basso ($\cap$).</li>
-<li>Da qui si leggono i flessi a tangente obliqua, con l'eventuale tangente inflessionale.</li>
-</ul></li>
-
+<ol>
+<li><b>dominio</b> di $f$;</li>
+<li><b>simmetrie</b>, per ogni $x\in D$: $f(-x)=f(x)$ → pari, grafico simmetrico rispetto all'asse $y$; $f(-x)=-f(x)$ → dispari, simmetrico rispetto all'origine;</li>
+<li><b>periodicità</b>: $f(x+kT)=f(x)$ per ogni $k\in\mathbb{Z}$ → studio in un solo periodo $T$;</li>
+<li><b>intersezioni con gli assi</b>: $f(0)$ → asse $y$; soluzioni di $f(x)=0$ → asse $x$;</li>
+<li><b>segno</b>: $f(x)&gt;0$ → intervalli di positività e negatività;</li>
+<li><b>estremi del dominio</b>: limiti, punti di discontinuità e di singolarità, asintoti;</li>
+<li><b>derivata prima</b>: dominio, zeri e segno di $f'$ → crescenza, massimi, minimi, flessi orizzontali; punti di non derivabilità → flessi verticali, cuspidi, punti angolosi;</li>
+<li><b>derivata seconda</b>: zeri e segno di $f''$ → concavità ($f''&gt;0$ verso l'alto, $f''&lt;0$ verso il basso), flessi obliqui, tangente inflessionale.</li>
 </ol>
+
+<div class="def"><span class="et">Asintoti</span>
+<ul>
+<li>verticale $x=x_0$: $\displaystyle\lim_{x\to x_0}f(x)=\pm\infty$ (basta uno dei limiti unilaterali);</li>
+<li>orizzontale $y=y_0$: $\displaystyle\lim_{x\to\pm\infty}f(x)=y_0$;</li>
+<li>obliquo $y=mx+q$: $\displaystyle\lim_{x\to\pm\infty}f(x)=\pm\infty$, con $m\ne0$ e $q$ finiti:</li>
+</ul>
+<p class="eq">$$m=\lim_{x\to\pm\infty}\frac{f(x)}{x} \qquad q=\lim_{x\to\pm\infty}\big[f(x)-mx\big]$$</p></div>
 
 <h2>Esempio</h2>
 
-<p>Riprendiamo $f(x)=x-x^3$ per illustrare il passo 8. Le derivate sono
-$$f'(x)=1-3x^2, \qquad f''(x)=-6x.$$
-Gli zeri di $f$ sono $x=0,\pm1$; gli zeri di $f'$ sono $x=\pm\frac{1}{\sqrt3}$, con
-$f\!\left(\pm\frac{1}{\sqrt3}\right)=\pm\frac{2\sqrt3}{9}\approx\pm0{,}4$ (minimo e massimo
-relativi); l'unico zero di $f''$ è $x=0$, dove $f''$ cambia segno: per $x&lt;0$ è $f''(x)&gt;0$
-(concavità verso l'alto), per $x&gt;0$ è $f''(x)&lt;0$ (concavità verso il basso), quindi $x=0$
-è un flesso.</p>
+<p>Passi 7 e 8 per:</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 460 260" width="100%" style="max-width:480px">
-<g transform="translate(30,10)">
-<line x1="0" y1="130" x2="400" y2="130" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="200" y1="220" x2="200" y2="10" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="392" y="124" font-family="var(--sans)" font-size="11">x</text>
-<text x="192" y="20" font-family="var(--sans)" font-size="11">y</text>
-<path d="M 40 175 C 90 90 140 82 176 108 C 188 117 200 130 212 143
-         C 224 156 236 178 224 195
-         C 200 220 130 180 80 150 C 60 138 45 155 40 175" fill="none" stroke="var(--rosso)" stroke-width="2.1"/>
-<line x1="118" y1="10" x2="118" y2="216" stroke="var(--verde)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="282" y1="10" x2="282" y2="216" stroke="var(--verde)" stroke-width="1" stroke-dasharray="3 3"/>
-<circle cx="118" cy="93" r="3.4" fill="var(--verde)"/>
-<circle cx="282" cy="167" r="3.4" fill="var(--verde)"/>
-<circle cx="118" cy="130" r="3" fill="var(--inchiostro)"/>
-<circle cx="200" cy="130" r="3" fill="var(--inchiostro)"/>
-<circle cx="282" cy="130" r="3" fill="var(--inchiostro)"/>
-<text x="105" y="146" font-family="var(--sans)" font-size="10">&minus;1</text>
-<text x="193" y="146" font-family="var(--sans)" font-size="10">0</text>
-<text x="278" y="146" font-family="var(--sans)" font-size="10">1</text>
-<text x="122" y="90" font-family="var(--sans)" font-size="10" fill="var(--verde)">0,4</text>
-<text x="286" y="170" font-family="var(--sans)" font-size="10" fill="var(--verde)">&minus;0,4</text>
-</g>
-<g transform="translate(30,235)" font-family="var(--sans)" font-size="11">
-<text x="-24" y="4">f&prime;</text>
-<line x1="0" y1="0" x2="400" y2="0" stroke="var(--riga)" stroke-width="1"/>
-<line x1="118" y1="-6" x2="118" y2="6" stroke="var(--inchiostro)"/>
-<line x1="282" y1="-6" x2="282" y2="6" stroke="var(--inchiostro)"/>
-<text x="30" y="-4" fill="var(--rosso)">&#8600;</text>
-<text x="185" y="-4" fill="var(--verde)">&#8599;</text>
-<text x="340" y="-4" fill="var(--rosso)">&#8600;</text>
-</g>
-</svg>
-<figcaption>Segno di $f'$ e concavità di $f(x)=x-x^3$: minimo in $x=-\frac1{\sqrt3}$, massimo in
-$x=\frac1{\sqrt3}$, flesso in $x=0$.</figcaption>
-</figure>
+<div class="es">
+<p class="eq quesito">$$f(x)=x-x^3$$</p>
+<p class="eq ris">$$\text{minimo in } x=-\tfrac{1}{\sqrt3} \qquad \text{massimo in } x=\tfrac{1}{\sqrt3} \qquad \text{flesso in } x=0$$</p>
+</div>
 
+<div class="passi">
+<div class="passo">
+<p class="spieg"><span class="num">1.</span> Derivate</p>
+<p class="eq">$$f'(x)=1-3x^2 \qquad f''(x)=-6x$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">2.</span> Zeri di $f'$</p>
+<p class="eq">$$x=\pm\frac{1}{\sqrt3} \qquad f\!\left(\pm\frac{1}{\sqrt3}\right)=\pm\frac{2\sqrt3}{9}\approx\pm0{,}4$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">3.</span> Segno di $f'$ e di $f''$</p>
+<table class="segni">
+<tr class="intervalli"><td class="etichetta"></td><td>$x&lt;-\frac{1}{\sqrt3}$</td><td>$-\frac{1}{\sqrt3}&lt;x&lt;0$</td><td>$0&lt;x&lt;\frac{1}{\sqrt3}$</td><td>$x&gt;\frac{1}{\sqrt3}$</td></tr>
+<tr><td class="etichetta">$f'$</td><td class="neg">−</td><td class="pos">+</td><td class="pos">+</td><td class="neg">−</td></tr>
+<tr><td class="etichetta">$f''$</td><td class="pos">+</td><td class="pos">+</td><td class="neg">−</td><td class="neg">−</td></tr>
+<tr><td class="etichetta">$f$</td><td>↘ ∪</td><td>↗ ∪</td><td>↗ ∩</td><td>↘ ∩</td></tr>
+</table>
+</div>
+</div>
+
+<div class="fig">
+<svg id="g-studio" viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Grafico di f(x) uguale a x meno x al cubo, con minimo, massimo e flesso e un punto mobile"></svg>
+<div class="cursore"><label for="s-x">$x$</label>
+<input type="range" id="s-x" min="-1.3" max="1.3" step="0.01" value="-1.2">
+<span class="val" id="v-x"></span></div>
+<p class="did">$f(x)=x-x^3$</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../28-derivate-successive-e-tangente-inflessionale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Derivate successive e tangente inflessionale</span></a><a class="successiva" href="../30-studio-completo-svolto-f-x-x-x3/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Studio completo svolto: f(x) = x − x³</span></a></nav>
 <footer><p>Matematica quinta &middot; Studio di funzione &middot; Unità 28</p></footer>
-
 </div>
+
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def .et,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function pallino(P,x,y,pieno,col){col=col||'var(--inchiostro)';
+  return P.add(el('circle',{cx:P.X(x),cy:P.Y(y),r:4.5,fill:pieno?col:'var(--carta)',stroke:col,'stroke-width':2}),'testo');}
+/* retta per (x0;y0) con pendenza m, aggiornabile */
+function retta(P,col,w,dash){var o={stroke:col,'stroke-width':w||1.8};if(dash)o['stroke-dasharray']=dash;return P.add(el('line',o),'sopra');}
+function poniRetta(P,r,x0,y0,m){var a=P.xr[0]-1,b=P.xr[1]+1;
+  r.setAttribute('x1',P.X(a));r.setAttribute('y1',P.Y(y0+m*(a-x0)));r.setAttribute('x2',P.X(b));r.setAttribute('y2',P.Y(y0+m*(b-x0)));}
+function sposta(P,c,x,y){c.setAttribute('cx',P.X(x));c.setAttribute('cy',P.Y(y));}
+
+
+/* ---------- f(x)=x-x^3: punto mobile, massimo, minimo, flesso ---------- */
+(function(){
+  var P=new Piano(document.getElementById('g-studio'),[-1.5,1.5],[-1.2,1.2],{l:20,r:24,t:24,b:16});
+  P.assi([],[]);
+  [-1,1].forEach(function(v){P.add(el('line',{x1:P.X(v),y1:P.Y(0)-4,x2:P.X(v),y2:P.Y(0)+4,stroke:'var(--inchiostro)','stroke-width':1}),'testo');P.add(txt(P.X(v)+6,P.Y(0)-7,num(v,0),{'text-anchor':'start'}),'testo');});
+  function f(x){return x-x*x*x;} function f1(x){return 1-3*x*x;} function f2(x){return -6*x;}
+  P.curva(f,-1.5,1.5,400,'var(--blu)');
+  var a=1/Math.sqrt(3);
+  pallino(P,-a,f(-a),true); pallino(P,a,f(a),true); pallino(P,0,0,true);
+  P.add(txt(P.X(a),P.Y(f(a))-12,'max',{'text-anchor':'middle',fill:'var(--inchiostro)'}),'testo');
+  P.add(txt(P.X(-a),P.Y(f(-a))+22,'min',{'text-anchor':'middle',fill:'var(--inchiostro)'}),'testo');
+  P.add(txt(P.X(0)+10,P.Y(0)+22,'flesso',{'text-anchor':'start',fill:'var(--inchiostro)'}),'testo');
+  var pt=pallino(P,0,0,true,'var(--rosso)');
+  var sl=document.getElementById('s-x'), v=document.getElementById('v-x');
+  function agg(){
+    var x=+sl.value; if(Math.abs(x)<1e-9)x=0;
+    sposta(P,pt,x,f(x));
+    var s='x = '+num(x)+' &nbsp; f′(x) = '+num(f1(x))+' &nbsp; f″(x) = '+num(f2(x))+' &nbsp; ';
+    if(Math.abs(x+a)<0.006) s+='<span class="ok">minimo</span>';
+    else if(Math.abs(x-a)<0.006) s+='<span class="ok">massimo</span>';
+    else if(x===0) s+='<span class="ok">flesso</span>';
+    else s+=(f1(x)>0?'crescente':'decrescente')+', concavità verso '+(f2(x)>0?'l\'alto':'il basso');
+    v.innerHTML=s;
+  }
+  sl.addEventListener('input',agg);agg();
+})();
+})();
+</script>
 </body>
 </html>

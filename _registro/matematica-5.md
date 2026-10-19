@@ -633,6 +633,7 @@ teorema del confronto, a pagina 21.
   $-1,0,1$, punti di massimo e minimo con $y\approx\pm0,4$, schema di segno di $f'$).
   Nessun interattivo: questa unità è un elenco procedurale di controllo, non una
   costruzione che varia con un parametro.
+- Revisione (20/10/2026, regole 13/10): parole 351 → 163. Pagina mai revisionata: impaginazione a quaderno (stile e aiuto Piano dell'unità 27), tolti sommario, titoletto «I passi» e rimando «Riprendiamo … per illustrare il passo 8»; apertura a domanda; otto passi in elenco numerato di una voce ciascuno (caso → conseguenza), asintoti in .def con m e q in una .eq; esempio con quesito, risultato in verde, tre passi (derivate, zeri di f′, tabella dei segni di f′ e f″). Correzioni (SymPy): asintoto verticale in forma compatta con «basta uno dei limiti unilaterali»; asintoto obliquo con m ≠ 0 e q finiti; «f(±1/√3) = ±2√3/9 (minimo e massimo)» → massimo in 1/√3, minimo in −1/√3. Figura sbagliata (tracciato a mano che si richiudeva ad anello, massimo e minimo disegnati in x = ±1 e scambiati di segno) rifatta da script: grafico calcolato di x − x³ con massimo, minimo, flesso e cursore su x (valori di f′, f″, parola verde su minimo, massimo, flesso). Nessuna comparsa da togliere, nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 29 — Studio completo svolto: f(x) = x − x³
 - Parole: 468 su 3 pagine di traccia (115–117).
