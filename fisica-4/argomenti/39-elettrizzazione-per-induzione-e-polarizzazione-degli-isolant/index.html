@@ -5,157 +5,240 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elettrizzazione per induzione e polarizzazione degli isolanti — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 37</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 37</p>
   <h1>Elettrizzazione per induzione e polarizzazione degli isolanti</h1>
-  <p class="sommario">Un conduttore pu&ograve; caricarsi anche senza essere toccato: basta
-  avvicinargli un corpo carico. Negli isolanti, dove le cariche non sono libere di spostarsi,
-  succede qualcosa di diverso ma ugualmente osservabile.</p>
 </header>
+
+<p>Corpo carico vicino a un corpo neutro, senza contatto: che cosa succede alle cariche del corpo neutro?</p>
 
 <h2>Elettrizzazione per induzione</h2>
 
-<p>Si avvicina una bacchetta carica (qui negativa) a una sfera conduttrice neutra, senza
-toccarla. Il campo della bacchetta respinge gli elettroni liberi della sfera verso il lato
-pi&ugrave; lontano: sul lato vicino alla bacchetta resta un eccesso di carica positiva, su quello
-lontano un eccesso di carica negativa. La sfera, nel complesso, &egrave; ancora neutra: ha solo
-separato le proprie cariche.</p>
+<p>Bacchetta carica negativamente vicino a una sfera conduttrice neutra:</p>
+<ul>
+<li>elettroni liberi della sfera → respinti verso il lato lontano;</li>
+<li>lato vicino → eccesso di carica positiva; lato lontano → eccesso di carica negativa;</li>
+<li>sfera nel complesso → ancora neutra.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f39a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-</defs>
-
-<line x1="15" y1="120" x2="65" y2="60" stroke="#8a8f98" stroke-width="9" stroke-linecap="round"/>
-<g fill="none" stroke="var(--blu)" stroke-width="1.4">
-<line x1="30" y1="115" x2="18" y2="121"/>
-<line x1="42" y1="103" x2="30" y2="109"/>
-<line x1="54" y1="91" x2="42" y2="97"/>
-</g>
-<circle cx="160" cy="120" r="58" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<g font-family="var(--sans)" font-size="15" fill="var(--rosso)" text-anchor="middle">
-<text x="128" y="100">+</text><text x="118" y="122">+</text><text x="130" y="144">+</text>
-</g>
-<g font-family="var(--sans)" font-size="13" fill="var(--blu)" text-anchor="middle">
-<text x="192" y="100">&ndash;</text><text x="202" y="122">&ndash;</text><text x="190" y="144">&ndash;</text>
-</g>
-<text x="160" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">1. le cariche si separano</text>
-
-<circle cx="440" cy="120" r="58" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<g font-family="var(--sans)" font-size="15" fill="var(--rosso)" text-anchor="middle">
-<text x="408" y="100">+</text><text x="398" y="122">+</text><text x="410" y="144">+</text>
-</g>
-<g font-family="var(--sans)" font-size="13" fill="var(--blu)" text-anchor="middle">
-<text x="472" y="100">&ndash;</text><text x="482" y="122">&ndash;</text><text x="470" y="144">&ndash;</text>
-</g>
-<line x1="490" y1="130" x2="540" y2="180" stroke="var(--grigio)" stroke-width="1.6" marker-end="url(#f39a)"/>
-<line x1="520" y1="205" x2="580" y2="205" stroke="var(--inchiostro)" stroke-width="2.5"/>
-<line x1="533" y1="215" x2="567" y2="215" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="544" y1="224" x2="556" y2="224" stroke="var(--inchiostro)" stroke-width="1.5"/>
-<text x="550" y="240" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">terra</text>
-<text x="440" y="65" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">2. collego a terra</text>
-
-<circle cx="640" cy="120" r="58" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<g font-family="var(--sans)" font-size="15" fill="var(--rosso)" text-anchor="middle">
-<text x="612" y="98">+</text><text x="655" y="98">+</text><text x="600" y="130">+</text>
-<text x="665" y="130">+</text><text x="620" y="155">+</text><text x="650" y="155">+</text>
-</g>
-<text x="640" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">3. resta carica +</text>
-</svg>
-<p class="did">I tre passaggi dell'elettrizzazione per induzione: separazione delle cariche,
-scarico a terra del lato negativo, sfera rimasta con un eccesso di carica positiva.</p>
+<svg id="g-ind" viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Bacchetta negativa vicino a una sfera conduttrice: le cariche si separano, la sfera collegata a terra perde elettroni e, interrotto il collegamento e allontanata la bacchetta, resta carica positivamente"></svg>
+<div class="cursore"><button type="button" class="btn-anim" id="b-ind" aria-label="Avvia">&#9654;</button></div>
+<p class="did">Separazione, collegamento a terra, sfera carica positivamente</p>
 </div>
 
-<p>Se a questo punto si collega il lato lontano a terra con un filo conduttore, gli elettroni in
-eccesso defluiscono verso terra, che essendo enormemente pi&ugrave; grande li assorbe senza
-cambiare percettibilmente il proprio stato. Interrompendo il collegamento e poi allontanando la
-bacchetta, la sfera resta con un eccesso permanente di carica positiva, distribuita su tutta la
-superficie: di segno <strong>opposto</strong> a quello della bacchetta induttrice.</p>
+<p>Per lasciare la sfera carica, con la bacchetta ancora vicina:</p>
+<ul>
+<li>sfera collegata a terra → gli elettroni in eccesso defluiscono a terra;</li>
+<li>collegamento interrotto, poi bacchetta allontanata → sfera carica positivamente, carica distribuita su tutta la superficie.</li>
+</ul>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Carica finale della sfera: segno <b>opposto</b> a quello della bacchetta.</p></div>
 
 <h2>Polarizzazione degli isolanti</h2>
 
-<p>Un isolante non ha cariche libere di spostarsi, ma le sue molecole si comportano come tanti
-piccoli dipoli, cio&egrave; coppie di cariche opposte molto vicine fra loro. In assenza di campi
-esterni sono orientate a caso, e l'isolante nel suo complesso non mostra alcun effetto.</p>
+<p>Isolante: cariche non libere; molecole come piccoli dipoli (coppie di cariche opposte molto vicine):</p>
+<ul>
+<li>nessun corpo carico vicino → dipoli orientati a caso, nessun effetto;</li>
+<li>bacchetta carica vicina → ogni dipolo ruota senza spostarsi, polo di segno opposto verso la bacchetta;</li>
+<li>isolante <b>polarizzato</b> → nel complesso neutro, cariche di segno opposto sulle due superfici, attratto dalla bacchetta di qualunque segno;</li>
+<li>bacchetta allontanata → dipoli di nuovo orientati a caso.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<g id="f39dip">
-<rect x="-9" y="-5" width="9" height="10" fill="var(--rosso)"/>
-<rect x="0" y="-5" width="9" height="10" fill="var(--blu)"/>
-</g>
-</defs>
-
-<circle cx="130" cy="130" r="90" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<use href="#f39dip" transform="translate(90,90) rotate(20)"/>
-<use href="#f39dip" transform="translate(150,80) rotate(160)"/>
-<use href="#f39dip" transform="translate(110,130) rotate(75)"/>
-<use href="#f39dip" transform="translate(170,140) rotate(300)"/>
-<use href="#f39dip" transform="translate(90,175) rotate(200)"/>
-<use href="#f39dip" transform="translate(150,180) rotate(45)"/>
-<use href="#f39dip" transform="translate(130,110) rotate(250)"/>
-<text x="130" y="245" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">isolante neutro: dipoli orientati a caso</text>
-
-<line x1="330" y1="150" x2="380" y2="90" stroke="#8a8f98" stroke-width="9" stroke-linecap="round"/>
-<g fill="none" stroke="var(--blu)" stroke-width="1.4">
-<line x1="345" y1="145" x2="333" y2="151"/>
-<line x1="357" y1="133" x2="345" y2="139"/>
-<line x1="369" y1="121" x2="357" y2="127"/>
-</g>
-<circle cx="510" cy="130" r="90" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<use href="#f39dip" transform="translate(470,90) rotate(0)"/>
-<use href="#f39dip" transform="translate(470,130) rotate(0)"/>
-<use href="#f39dip" transform="translate(470,170) rotate(0)"/>
-<use href="#f39dip" transform="translate(500,105) rotate(0)"/>
-<use href="#f39dip" transform="translate(500,150) rotate(0)"/>
-<use href="#f39dip" transform="translate(455,110) rotate(0)"/>
-<use href="#f39dip" transform="translate(455,150) rotate(0)"/>
-<text x="425" y="70" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">polo +</text>
-<text x="580" y="70" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">polo &ndash;</text>
-<text x="510" y="245" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)">isolante polarizzato vicino alla bacchetta</text>
-</svg>
-<p class="did">Avvicinando la bacchetta negativa, ogni dipolo ruota su s&eacute; stesso (senza
-spostarsi) portando il polo positivo verso la bacchetta e quello negativo dal lato opposto.</p>
-</div>
-
-<p>Avvicinando una bacchetta carica, ciascun dipolo ruota su s&eacute; stesso, senza spostarsi:
-il polo di segno opposto alla bacchetta si affaccia verso di essa, quello dello stesso segno si
-allontana. L'isolante risulta <strong>polarizzato</strong>: nel complesso resta neutro, ma le sue
-due superfici mostrano cariche di segno opposto. Questo allineamento &egrave; ci&ograve; che
-permette a un isolante di essere attratto da un corpo carico di qualunque segno, pur non potendo
-essere caricato per contatto come un conduttore. A differenza dell'induzione nei conduttori,
-l'effetto scompare non appena si allontana la bacchetta.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>La legge di Coulomb, che quantifica la forza fra due cariche puntiformi.</li>
-<li>Il confronto fra la legge di Coulomb e la legge di gravitazione di Newton, e le densit&agrave;
-di carica.</li>
-</ul>
+<svg id="g-pol" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Sfera isolante con dipoli che si allineano, polo positivo verso la bacchetta negativa, quando la bacchetta si avvicina"></svg>
+<div class="cursore"><label for="s-pol">distanza della bacchetta</label>
+<input type="range" id="s-pol" min="0" max="100" step="1" value="100">
+<span class="val" id="v-pol"></span></div>
+<p class="did">Dipoli nell'isolante al variare della distanza della bacchetta</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../38-conduttori-e-isolanti-elettrizzazione-per-strofinio-e-contat/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Conduttori e isolanti; elettrizzazione per strofinio e contatto</span></a><a class="successiva" href="../40-la-legge-di-coulomb/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La legge di Coulomb</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 37</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var RID=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function segno(p,x,y,s,col){return txt(p,x,y+4,s,{fill:col,'font-size':13,'font-weight':700});}
+  function clamp(x){return x<0?0:(x>1?1:x);}
+  function ease(x){x=clamp(x);return x*x*(3-2*x);}
+  function lerp(a,b,u){return a+(b-a)*u;}
+  var METALLO='#8a8f98', D=Math.PI/180;
+  function animatore(btn,durata,disegna){
+    var t0=null,stato='fermo';
+    function fine(){stato='finito';btn.disabled=false;btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');}
+    function passo(ts){if(t0===null)t0=ts;var t=(ts-t0)/1000;disegna(Math.min(t,durata));if(t<durata)requestAnimationFrame(passo);else fine();}
+    btn.addEventListener('click',function(){
+      if(stato==='fermo'){stato='corso';btn.disabled=true;if(RID){disegna(durata);fine();return;}t0=null;requestAnimationFrame(passo);}
+      else if(stato==='finito'){stato='fermo';disegna(0);btn.innerHTML='&#9654;';btn.setAttribute('aria-label','Avvia');}
+    });
+    disegna(RID?durata:0);
+  }
+  function bacchetta(p,n){
+    var g=el(p,'g',{}), L=110;
+    el(g,'line',{x1:-L,y1:0,x2:0,y2:0,stroke:METALLO,'stroke-width':12,'stroke-linecap':'round'});
+    for(var i=0;i<n;i++)segno(g,-L+10+i*(L-20)/(n-1),0,'−','var(--blu)');
+    var et=txt(g,-L/2,-16,'bacchetta carica',{fill:'var(--inchiostro)'});
+    return {g:g,L:L,et:et};
+  }
+
+  /* 1. induzione: separazione, terra, sfera carica */
+  (function(){
+    var s=document.getElementById('g-ind'),b=document.getElementById('b-ind');if(!s)return;
+    var CX=250,CY=90,R=52;
+    el(s,'circle',{cx:CX,cy:CY,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    var stato=txt(s,CX,CY+R+22,'',{fill:'var(--inchiostro)','font-size':13});
+    /* filo e terra */
+    var P=[CX+R*Math.cos(45*D),CY+R*Math.sin(45*D)], GX=350, GY=172;
+    var filo=el(s,'path',{d:'M'+P[0]+','+P[1]+' L'+GX+','+P[1]+' L'+GX+','+GY,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+    var terra=el(s,'g',{});
+    el(terra,'line',{x1:GX-18,y1:GY,x2:GX+18,y2:GY,stroke:'var(--inchiostro)','stroke-width':2.2});
+    el(terra,'line',{x1:GX-11,y1:GY+7,x2:GX+11,y2:GY+7,stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(terra,'line',{x1:GX-5,y1:GY+14,x2:GX+5,y2:GY+14,stroke:'var(--inchiostro)','stroke-width':1.4});
+    txt(terra,GX,GY+30,'terra',{});
+    var bac=bacchetta(s,4);
+    var r1=R-11;
+    var pos=[130,165,195,230].map(function(a){return [CX+r1*Math.cos(a*D),CY-r1*Math.sin(a*D)];});
+    var fin=[45,135,225,315].map(function(a){return [CX+r1*Math.cos(a*D),CY-r1*Math.sin(a*D)];});
+    var neg=[50,15,-15,-50].map(function(a){return [CX+r1*Math.cos(a*D),CY-r1*Math.sin(a*D)];});
+    var piu=pos.map(function(){return segno(s,0,0,'+','var(--rosso)');});
+    var meno=neg.map(function(){return segno(s,0,0,'−','var(--blu)');});
+    function lungoFilo(u){ /* u in [0,1]: da P lungo il filo fino a terra */
+      var a=GX-P[0], c=GY-P[1], L=a+c, d=u*L;
+      return d<a?[P[0]+d,P[1]]:[GX,P[1]+(d-a)];
+    }
+    function disegna(t){
+      /* 0–1,2 avvicinamento; 1,2–2,6 separazione; 2,8 terra; 3,2–4,8 elettroni a terra; 5,0 filo staccato; 5,4–6,6 allontanamento; 6,6–7,8 ridistribuzione */
+      var xFar=130, xNear=CX-R-26, xp;
+      if(t<1.2)xp=lerp(xFar,xNear,ease(t/1.2));
+      else if(t<5.4)xp=xNear;
+      else xp=lerp(xNear,xFar,ease((t-5.4)/1.2));
+      set(bac.g,{transform:'translate('+xp+','+CY+')'});
+      var u=ease((t-1.2)/1.4);
+      piu.forEach(function(p,k){
+        var w=ease((t-6.6)/1.2), x=lerp(pos[k][0],fin[k][0],w), y=lerp(pos[k][1],fin[k][1],w);
+        set(p,{x:x,y:y+4,opacity:u});
+      });
+      var collegato=t>=2.8&&t<5.0;
+      set(filo,{opacity:collegato?1:0.12,'stroke-dasharray':collegato?'none':'4,4'});
+      var v=clamp((t-3.2)/1.6);
+      meno.forEach(function(m,k){
+        var x0=lerp(CX-10+k*6,neg[k][0],u), y0=lerp(CY-12+k*8,neg[k][1],u), x=x0,y=y0,op=u;
+        if(v>0){
+          var vk=clamp(v*1.6-k*0.2);
+          if(vk<0.3){var q=vk/0.3;x=lerp(x0,P[0],q);y=lerp(y0,P[1],q);}
+          else{var w=lungoFilo((vk-0.3)/0.7);x=w[0];y=w[1];}
+          if(vk>=1)op=0;
+        }
+        set(m,{x:x,y:y+4,opacity:op});
+      });
+      stato.textContent=t<1.4?'sfera neutra':t<2.8?'cariche separate':t<5.0?'collegata a terra':t<7.0?'collegamento interrotto':'sfera carica positivamente';
+    }
+    animatore(b,8.0,disegna);
+  })();
+
+  /* 2. polarizzazione: dipoli che si allineano avvicinando la bacchetta */
+  (function(){
+    var s=document.getElementById('g-pol'),c=document.getElementById('s-pol'),v=document.getElementById('v-pol');if(!s)return;
+    var CX=290,CY=100,R=78;
+    el(s,'circle',{cx:CX,cy:CY,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    txt(s,CX,CY+R+16,'sfera isolante',{fill:'var(--inchiostro)'});
+    var P=[[-34,-40,40],[0,-44,160],[34,-40,-75],[-48,0,110],[-14,-4,-150],[20,4,60],[50,0,-20],[-34,40,-110],[0,44,200],[34,40,25]];
+    var dip=P.map(function(p){
+      var g=el(s,'g',{});
+      el(g,'rect',{x:-10,y:-5,width:10,height:10,fill:'var(--rosso)'});
+      el(g,'rect',{x:0,y:-5,width:10,height:10,fill:'var(--blu)'});
+      txt(g,-5,3.5,'+',{fill:'#fff','font-size':10,'font-weight':700});
+      txt(g,5,3.5,'−',{fill:'#fff','font-size':10,'font-weight':700});
+      return g;
+    });
+    var bac=bacchetta(s,4);
+    function agg(){
+      var d=+c.value/100, xp=lerp(CX-R-14,CX-R-90,d), w=Math.pow(1-d,1.4);
+      if(d<=0.02)w=1;
+      set(bac.g,{transform:'translate('+xp+','+CY+')'});
+      P.forEach(function(p,k){var a=p[2]*(1-w);set(dip[k],{transform:'translate('+(CX+p[0])+','+(CY+p[1])+') rotate('+a.toFixed(1)+')'});});
+      v.innerHTML=w<0.15?'dipoli orientati a caso':(w>0.85?'<span class="ok">isolante polarizzato</span>':'dipoli in parte allineati');
+    }
+    c.addEventListener('input',agg);agg();
+  })();
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
