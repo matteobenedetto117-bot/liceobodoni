@@ -5,144 +5,200 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La legge di Coulomb — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 38</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 38</p>
   <h1>La legge di Coulomb</h1>
-  <p class="sommario">Due cariche si attraggono o si respingono con una forza che dipende dal
-  loro valore e dalla distanza che le separa. Coulomb la misur&ograve; per primo, trovando una
-  legge che assomiglia molto a quella della gravitazione.</p>
 </header>
 
-<h2>La forza fra due cariche</h2>
-
-<p>Prendiamo due cariche puntiformi $q_1$ e $q_2$, positive, poste a distanza $r$. La carica 2
-esercita sulla carica 1 una forza $\vec F_{21}$; la carica 1 esercita sulla carica 2 una forza
-$\vec F_{12}$. Per il terzo principio della dinamica le due forze sono uguali in modulo e
-opposte in verso: $F_{21}=F_{12}=F$.</p>
+<p>Due cariche puntiformi $q_1$ e $q_2$ a distanza $r$: con quale forza interagiscono?</p>
 
 <div class="fig">
-<svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="c40a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<circle cx="150" cy="90" r="7" fill="var(--inchiostro)"/>
-<circle cx="450" cy="90" r="7" fill="var(--inchiostro)"/>
-<text x="150" y="122" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">q&#8321;</text>
-<text x="450" y="122" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">q&#8322;</text>
-<line x1="140" y1="90" x2="80" y2="90" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#c40a)"/>
-<line x1="460" y1="90" x2="520" y2="90" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#c40a)"/>
-<text x="105" y="70" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">F&#8322;&#8321;</text>
-<text x="495" y="70" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">F&#8321;&#8322;</text>
-<line x1="150" y1="140" x2="450" y2="140" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="150" y1="132" x2="150" y2="148" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="450" y1="132" x2="450" y2="148" stroke="var(--grigio)" stroke-width="1.2"/>
-<text x="300" y="163" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">r</text>
-</svg>
-<p class="did">Cariche dello stesso segno: la forza che ciascuna esercita sull'altra le allontana.
-Se i segni fossero opposti le frecce punterebbero l'una verso l'altra.</p>
+<svg id="g-coul" viewBox="0 0 440 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due cariche positive che si respingono: allontanandole le forze diminuiscono con il quadrato della distanza"></svg>
+<div class="cursore"><label for="s-r">distanza $r$</label>
+<input type="range" id="s-r" min="1" max="3" step="0.1" value="1">
+<span class="val" id="v-r"></span></div>
+<p class="did">Cariche dello stesso segno; $F_0$ = forza alla distanza $r_0$</p>
 </div>
 
-<p>Dall'esperimento risulta che il modulo di questa forza &egrave; direttamente proporzionale al
-prodotto delle due cariche e inversamente proporzionale al quadrato della distanza:</p>
-
-$$F = k\,\frac{q_1 q_2}{r^2}, \qquad k = 8{,}99\cdot10^{9}\ \frac{\text{N}\cdot\text{m}^2}{\text{C}^2}$$
-
-<p>La forza pu&ograve; essere repulsiva, fra cariche dello stesso segno, oppure attrattiva, fra
-cariche di segno opposto.</p>
-
-<p>La costante $k$ si scrive spesso anche in un altro modo:</p>
-
-$$k=\frac{1}{4\pi\varepsilon_0}, \qquad \varepsilon_0 = 8{,}85\cdot10^{-12}\ \frac{\text{C}^2}{\text{N}\cdot\text{m}^2}$$
-
-<p>dove $\varepsilon_0$ &egrave; la <strong>costante dielettrica del vuoto</strong> (o
-permittivit&agrave; elettrica del vuoto). Le due scritture della legge di Coulomb sono
-equivalenti: quella con $\varepsilon_0$ &egrave; quella che user&agrave; per il campo elettrico e
-per il teorema di Gauss.</p>
-
-<h2>Esempio</h2>
-
-<p>Due cariche $q_1=4{,}7\cdot10^{-6}$ C e $q_2=-7{,}2\cdot10^{-6}$ C distano $r=0{,}07$ m. I
-segni sono opposti, quindi la forza &egrave; attrattiva; il suo modulo &egrave;</p>
-
-$$F=\frac{1}{4\pi\varepsilon_0}\cdot\frac{4{,}7\cdot10^{-6}\cdot7{,}2\cdot10^{-6}}{(0{,}07)^2}\approx 62\ \text{N}$$
-
-<h2>Esempio: la forza risultante su tre cariche</h2>
-
-<p>Una carica positiva $q_3=7{,}8\cdot10^{-4}$ C ha, a distanza $r=0{,}5$ m sopra di s&eacute;, la
-carica $q_1=3{,}1\cdot10^{-4}$ C, e alla stessa distanza alla sua destra la carica
-$q_2=-6{,}2\cdot10^{-4}$ C. Le due forze su $q_3$ risultano perpendicolari fra loro: $q_1$ la
-respinge verso il basso, $q_2$ la attrae verso destra.</p>
-
-<div class="fig">
-<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="c40blu" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-<marker id="c40verde" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-<marker id="c40rosso" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<circle cx="120" cy="60" r="7" fill="var(--inchiostro)"/>
-<text x="120" y="42" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">q&#8321; (+)</text>
-<circle cx="120" cy="180" r="7" fill="var(--inchiostro)"/>
-<text x="95" y="200" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">q&#8323; (+)</text>
-<circle cx="300" cy="180" r="7" fill="var(--inchiostro)"/>
-<text x="320" y="200" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">q&#8322; (&ndash;)</text>
-
-<line x1="120" y1="70" x2="120" y2="170" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="100" y="125" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">0,5 m</text>
-<line x1="130" y1="180" x2="290" y2="180" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="210" y="200" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">0,5 m</text>
-
-<line x1="120" y1="188" x2="120" y2="250" stroke="var(--blu)" stroke-width="2.4" marker-end="url(#c40blu)"/>
-<text x="100" y="225" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">F&#8321;&#8323;</text>
-<line x1="130" y1="180" x2="190" y2="180" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#c40verde)"/>
-<text x="160" y="168" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">F&#8322;&#8323;</text>
-<line x1="120" y1="180" x2="215" y2="270" stroke="var(--rosso)" stroke-width="2.6" marker-end="url(#c40rosso)"/>
-<text x="205" y="255" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">F</text>
-</svg>
-<p class="did">Le forze $F_{13}$ (verticale, repulsiva) e $F_{23}$ (orizzontale, attrattiva) agenti
-su $q_3$ sono fra loro perpendicolari: la risultante $F$ si trova con Pitagora.</p>
-</div>
-
-$$F_{13}=\frac{1}{4\pi\varepsilon_0}\frac{q_1 q_3}{r^2}\approx 8{,}7\cdot10^{3}\ \text{N}, \qquad F_{23}=\frac{1}{4\pi\varepsilon_0}\frac{q_2 q_3}{r^2}\approx 17{,}4\cdot10^{3}\ \text{N}$$
-
-<p>Essendo le due forze perpendicolari, la risultante si calcola con il teorema di Pitagora:</p>
-
-$$F_{tot}=\sqrt{F_{13}^{\,2}+F_{23}^{\,2}}\approx 19{,}5\cdot10^{3}\ \text{N}$$
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Il confronto fra la legge di Coulomb e la legge di gravitazione di Newton, e le densit&agrave;
-di carica.</li>
-<li>La distribuzione di carica su una sfera conduttrice.</li>
+<li>$\vec F_{21}$ (di $q_2$ su $q_1$) e $\vec F_{12}$ (di $q_1$ su $q_2$) → stesso modulo, verso opposto (terzo principio della dinamica);</li>
+<li>cariche dello stesso segno → forza repulsiva;</li>
+<li>cariche di segno opposto → forza attrattiva.</li>
 </ul>
+
+<p>Il modulo della forza è direttamente proporzionale al prodotto delle cariche e inversamente proporzionale al quadrato della distanza:</p>
+
+<div class="def"><span class="et">Legge di Coulomb</span>
+<p class="eq principio">$$F = k\,\frac{|q_1|\,|q_2|}{r^2}$$</p></div>
+
+<div class="def"><span class="et">Costante di Coulomb</span>
+<p class="eq">$$k = \frac{1}{4\pi\varepsilon_0} = 8{,}99\cdot10^{9}\ \frac{\text{N}\cdot\text{m}^2}{\text{C}^2}$$</p>
+<p>$\varepsilon_0 = 8{,}85\cdot10^{-12}\ \text{C}^2/(\text{N}\cdot\text{m}^2)$: costante dielettrica del vuoto</p></div>
+
+<h2>Esempio 1</h2>
+
+<p>Dati: $q_1=4{,}7\cdot10^{-6}\ \text{C}$, $\;q_2=-7{,}2\cdot10^{-6}\ \text{C}$, $\;r=0{,}07\ \text{m}$. Calcolare $F$.</p>
+
+<p class="eq">$$F=8{,}99\cdot10^{9}\cdot\frac{4{,}7\cdot10^{-6}\cdot7{,}2\cdot10^{-6}}{(0{,}07)^2}\ \text{N}\approx 62\ \text{N}\quad\text{(attrattiva)}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $q_3=7{,}8\cdot10^{-4}\ \text{C}$; $\;q_1=3{,}1\cdot10^{-4}\ \text{C}$ a $0{,}5\ \text{m}$ sopra $q_3$; $\;q_2=-6{,}2\cdot10^{-4}\ \text{C}$ a $0{,}5\ \text{m}$ a destra di $q_3$. Calcolare la forza risultante su $q_3$.</p>
+
+<div class="fig">
+<svg id="g-tre" viewBox="0 0 330 275" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:330px" role="img" aria-label="Tre cariche ai vertici di un angolo retto: su q3 agiscono F13 verso il basso e F23 verso destra, doppia; la risultante è la diagonale del rettangolo"></svg>
+<p class="did">Forze su $q_3$ in scala: $F_{23} = 2\,F_{13}$</p>
 </div>
+
+<p class="eq">$$F_{13}=k\,\frac{|q_1|\,|q_3|}{r^2}\approx 8{,}7\cdot10^{3}\ \text{N} \qquad F_{23}=k\,\frac{|q_2|\,|q_3|}{r^2}\approx 1{,}7\cdot10^{4}\ \text{N}$$</p>
+
+<p>Forze perpendicolari: risultante con il teorema di Pitagora.</p>
+
+<p class="eq">$$F=\sqrt{F_{13}^{\,2}+F_{23}^{\,2}}\approx 1{,}9\cdot10^{4}\ \text{N}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../39-elettrizzazione-per-induzione-e-polarizzazione-degli-isolant/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Elettrizzazione per induzione e polarizzazione degli isolanti</span></a><a class="successiva" href="../41-confronto-fra-coulomb-e-newton-densita-di-carica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Confronto fra Coulomb e Newton; densità di carica</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 38</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  function freccia(s,id,col){var d=el(s,'defs',{}),m=el(d,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});return 'url(#'+id+')';}
+  function carica(p,x,y,s,col){var g=el(p,'g',{transform:'translate('+x+','+y+')'});el(g,'circle',{r:11,fill:'#fff',stroke:col,'stroke-width':1.8});txt(g,0,5,s,{fill:col,'font-size':15,'font-weight':700});return g;}
+
+  /* 1. due cariche: cursore sulla distanza, F proporzionale a 1/r^2 */
+  (function(){
+    var s=document.getElementById('g-coul'),c=document.getElementById('s-r'),v=document.getElementById('v-r');if(!s)return;
+    var CX=220,CY=70,U=70,L0=72, mk=freccia(s,'mc1','var(--rosso)');
+    var f1=el(s,'line',{y1:CY,y2:CY,stroke:'var(--rosso)','stroke-width':2.6,'marker-end':mk});
+    var f2=el(s,'line',{y1:CY,y2:CY,stroke:'var(--rosso)','stroke-width':2.6,'marker-end':mk});
+    var e1=txt(s,0,CY-20,'F₂₁',{fill:'var(--rosso)'}), e2=txt(s,0,CY-20,'F₁₂',{fill:'var(--rosso)'});
+    var g1=carica(s,0,CY,'+','var(--rosso)'), g2=carica(s,0,CY,'+','var(--rosso)');
+    var n1=txt(s,0,CY+32,'q₁',{fill:'var(--inchiostro)'}), n2=txt(s,0,CY+32,'q₂',{fill:'var(--inchiostro)'});
+    var qu=el(s,'line',{y1:CY+50,y2:CY+50,stroke:'var(--grigio)','stroke-width':1.2});
+    var t1=el(s,'line',{y1:CY+44,y2:CY+56,stroke:'var(--grigio)','stroke-width':1.2}), t2=el(s,'line',{y1:CY+44,y2:CY+56,stroke:'var(--grigio)','stroke-width':1.2});
+    var er=txt(s,CX,CY+70,'r',{});
+    function agg(){
+      var r=+c.value, d=U*r, x1=CX-d/2, x2=CX+d/2, L=L0/(r*r), a=13;
+      set(g1,{transform:'translate('+x1+','+CY+')'});set(g2,{transform:'translate('+x2+','+CY+')'});
+      set(f1,{x1:x1-a,x2:x1-a-L});set(f2,{x1:x2+a,x2:x2+a+L});
+      set(e1,{x:x1-a-Math.max(L,14)/2});set(e2,{x:x2+a+Math.max(L,14)/2});
+      set(n1,{x:x1});set(n2,{x:x2});
+      set(qu,{x1:x1,x2:x2});set(t1,{x1:x1,x2:x1});set(t2,{x1:x2,x2:x2});
+      er.textContent='r = '+num(r,1)+' r₀';
+      v.innerHTML='F = '+num(1/(r*r),2)+' F₀'+(r===1?' &nbsp;<span class="ok">r = r₀</span>':'');
+    }
+    c.addEventListener('input',agg);agg();
+  })();
+
+  /* 2. tre cariche: forze su q3 in scala (calcolate) */
+  (function(){
+    var s=document.getElementById('g-tre');if(!s)return;
+    var k=8.99e9,q1=3.1e-4,q2=6.2e-4,q3=7.8e-4,r=0.5;
+    var F13=k*q1*q3/(r*r), F23=k*q2*q3/(r*r), S=100/F23;   /* 100 px per F23 */
+    var X3=110,Y3=180,D=145, X1=X3,Y1=Y3-D, X2=X3+D,Y2=Y3;
+    var mk=freccia(s,'mc2','var(--rosso)');
+    /* quote */
+    el(s,'line',{x1:54,y1:Y1,x2:54,y2:Y3,stroke:'var(--grigio)','stroke-width':1.1});
+    el(s,'line',{x1:48,y1:Y1,x2:60,y2:Y1,stroke:'var(--grigio)','stroke-width':1.1});
+    el(s,'line',{x1:48,y1:Y3,x2:60,y2:Y3,stroke:'var(--grigio)','stroke-width':1.1});
+    txt(s,48,(Y1+Y3)/2+4,'0,5 m',{'text-anchor':'end','font-size':12});
+    el(s,'line',{x1:X3,y1:Y3-38,x2:X2,y2:Y3-38,stroke:'var(--grigio)','stroke-width':1.1});
+    el(s,'line',{x1:X3,y1:Y3-44,x2:X3,y2:Y3-32,stroke:'var(--grigio)','stroke-width':1.1});
+    el(s,'line',{x1:X2,y1:Y3-44,x2:X2,y2:Y3-32,stroke:'var(--grigio)','stroke-width':1.1});
+    txt(s,(X3+X2)/2,Y3-46,'0,5 m',{'font-size':12});
+    /* forze */
+    var dx=F23*S, dy=F13*S;
+    el(s,'line',{x1:X3+dx,y1:Y3,x2:X3+dx,y2:Y3+dy,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'});
+    el(s,'line',{x1:X3,y1:Y3+dy,x2:X3+dx,y2:Y3+dy,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'});
+    el(s,'line',{x1:X3,y1:Y3+12,x2:X3,y2:Y3+dy,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':mk});
+    el(s,'line',{x1:X3+12,y1:Y3,x2:X3+dx,y2:Y3,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':mk});
+    var u=Math.hypot(dx,dy);
+    el(s,'line',{x1:X3+12*dx/u,y1:Y3+12*dy/u,x2:X3+dx,y2:Y3+dy,stroke:'var(--rosso)','stroke-width':3.4,'marker-end':mk});
+    txt(s,X3-8,Y3+dy/2+16,'F₁₃',{fill:'var(--rosso)','text-anchor':'end'});
+    txt(s,X3+dx/2+8,Y3-10,'F₂₃',{fill:'var(--rosso)'});
+    txt(s,X3+dx+10,Y3+dy+16,'F',{fill:'var(--rosso)','font-weight':700,'text-anchor':'start'});
+    /* cariche */
+    carica(s,X1,Y1,'+','var(--rosso)'); txt(s,X1+18,Y1+5,'q₁',{fill:'var(--inchiostro)','text-anchor':'start'});
+    carica(s,X2,Y2,'−','var(--blu)');  txt(s,X2+18,Y2+5,'q₂',{fill:'var(--inchiostro)','text-anchor':'start'});
+    carica(s,X3,Y3,'+','var(--rosso)'); txt(s,X3-18,Y3+5,'q₃',{fill:'var(--inchiostro)','text-anchor':'end'});
+  })();
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
