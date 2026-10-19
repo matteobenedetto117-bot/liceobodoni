@@ -5,20 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trasformatori — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>ul{padding-left:var(--r)}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.def p+p{margin-top:0}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(320px,60%)}
+.cursore output{min-width:16em;text-align:left}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
 </head>
+
 <body>
 <div class="foglio">
 
@@ -26,125 +52,138 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Induzione elettromagnetica &middot; Unità 31</p>
   <h1>Trasformatori</h1>
-  <p class="sommario">Un trasformatore cambia il valore di una tensione alternata senza motori né
-  parti in movimento: due avvolgimenti condividono lo stesso nucleo e lo stesso campo magnetico
-  variabile, e basta il rapporto fra i numeri di spire a fissare il rapporto fra le tensioni.</p>
 </header>
 
-<h2>Due circuiti accoppiati dallo stesso flusso</h2>
-
-<p>Il circuito primario, alimentato da un generatore di tensione alternata, avvolge un lato del
-nucleo con $N_p$ spire; il circuito secondario, che alimenta un carico resistivo $R$, avvolge
-l'altro lato con $N_s$ spire. Il nucleo di ferro convoglia lo stesso campo magnetico attraverso
-entrambi gli avvolgimenti.</p>
+<p>Due avvolgimenti sullo stesso nucleo di ferro, in corrente alternata: come sono legate le tensioni e le correnti?</p>
 
 <div class="fig">
-<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrM" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--blu)"/>
-</marker>
-</defs>
-<!-- nucleo -->
-<rect x="150" y="40" width="100" height="160" fill="none" stroke="var(--inchiostro)" stroke-width="6"/>
-<rect x="170" y="60" width="60" height="120" fill="var(--carta)" stroke="none"/>
-<!-- avvolgimento primario, gamba sinistra -->
-<g stroke="var(--inchiostro)" stroke-width="1.8" fill="none">
-<path d="M150,80 q-14,0 -14,10 q0,10 14,10"/>
-<path d="M150,100 q-14,0 -14,10 q0,10 14,10"/>
-<path d="M150,120 q-14,0 -14,10 q0,10 14,10"/>
-<path d="M150,140 q-14,0 -14,10 q0,10 14,10"/>
-</g>
-<text x="112" y="107" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--blu)">N&#8320;</text>
-<!-- avvolgimento secondario, gamba destra -->
-<g stroke="var(--inchiostro)" stroke-width="1.8" fill="none">
-<path d="M250,80 q14,0 14,10 q0,10 -14,10"/>
-<path d="M250,100 q14,0 14,10 q0,10 -14,10"/>
-<path d="M250,120 q14,0 14,10 q0,10 -14,10"/>
-<path d="M250,140 q14,0 14,10 q0,10 -14,10"/>
-</g>
-<text x="288" y="107" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--blu)">N&#8347;</text>
-<!-- campo magnetico variabile, freccia nel nucleo -->
-<line x1="200" y1="72" x2="200" y2="168" stroke="var(--blu)" stroke-width="2" marker-end="url(#arrM)"/>
-<text x="200" y="60" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">B(t) variabile</text>
-<!-- circuito primario: generatore -->
-<line x1="60" y1="90" x2="60" y2="150" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="60" cy="120" r="16" fill="none" stroke="var(--verde)" stroke-width="1.8"/>
-<text x="60" y="125" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">~</text>
-<line x1="60" y1="90" x2="136" y2="90" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="136" y1="90" x2="136" y2="80" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="60" y1="150" x2="136" y2="150" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="136" y1="150" x2="136" y2="160" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="60" y="184" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">circuito primario</text>
-<!-- circuito secondario: resistenza R -->
-<line x1="340" y1="90" x2="264" y2="90" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="264" y1="90" x2="264" y2="80" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="340" y1="90" x2="340" y2="150" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="332" y="100" width="16" height="36" fill="none" stroke="var(--rosso)" stroke-width="1.8"/>
-<text x="360" y="122" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">R</text>
-<line x1="340" y1="150" x2="264" y2="150" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="264" y1="150" x2="264" y2="160" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="340" y="184" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">circuito secondario</text>
-</svg>
-<p class="did">Nucleo comune: $N_p$ spire nel circuito primario, $N_s$ spire nel circuito
-secondario. Lo stesso campo magnetico variabile attraversa entrambi gli avvolgimenti.</p>
+<svg id="fig-trasf" viewBox="0 0 440 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:440px" role="img" aria-label="Trasformatore: nucleo di ferro con avvolgimento primario collegato al generatore alternato e avvolgimento secondario collegato al carico R; il flusso variabile percorre il nucleo"></svg>
+<div class="cursore"><label for="s-ns">$N_s$</label>
+<input type="range" id="s-ns" min="20" max="200" step="20" value="20">
+<output id="o-ns"></output></div>
+<p class="did">$\varepsilon_p=220\ \text{V}$, $N_p=100$, $i_p=16\ \text{A}$</p>
 </div>
 
-<p>Poiché il flusso $\Phi(\vec B)$ concatenato con ciascun avvolgimento è lo stesso, le fem indotte
-nei due circuiti sono, per la legge di Faraday-Neumann-Lenz:</p>
-
-$$\varepsilon_p=-N_p\,\frac{\Delta\Phi(\vec B)}{\Delta t}\qquad
-\varepsilon_s=-N_s\,\frac{\Delta\Phi(\vec B)}{\Delta t}$$
-
-<p>Dividendo ciascuna equazione per il proprio numero di spire, il termine $\Delta\Phi(\vec
-B)/\Delta t$ resta identico in entrambe:</p>
-
-$$\frac{\varepsilon_p}{N_p}=-\frac{\Delta\Phi(\vec B)}{\Delta t}=\frac{\varepsilon_s}{N_s}$$
-
-<div class="formula-box">
-$$\frac{\varepsilon_p}{\varepsilon_s}=\frac{N_p}{N_s}\qquad\text{rapporto di trasformazione}$$
-</div>
-
-<h2>Esempio</h2>
-
-<p>Un trasformatore ha $\varepsilon_p=220\ \text{V}$, $N_p=100$ spire, $N_s=20$ spire:</p>
-
-$$\varepsilon_s=\varepsilon_p\,\frac{N_s}{N_p}=220\ \text{V}\cdot\frac{20}{100}=44\ \text{V}$$
-
-<h2>Correnti e conservazione della potenza</h2>
-
-<p>Poiché l'energia si deve sempre conservare, la potenza media nel circuito primario deve essere
-uguale a quella nel circuito secondario. Usando $P=\varepsilon\cdot i$:</p>
-
-$$P_p=P_s\ \Rightarrow\ i_p\,\varepsilon_p=i_s\,\varepsilon_s$$
-
-<div class="formula-box">
-$$\frac{i_p}{i_s}=\frac{\varepsilon_s}{\varepsilon_p}=\frac{N_s}{N_p}$$
-</div>
-
-<div class="nota">
-<span class="et">Attenzione</span>
-Il rapporto fra le correnti è l'inverso di quello fra le tensioni: dove il trasformatore abbassa la
-tensione, la corrente aumenta nella stessa proporzione, e viceversa. La potenza resta invariata.
-</div>
-
-<h2>Esempio</h2>
-
-<p>Con $i_p=16\ \text{A}$, $N_p=100$ spire, $N_s=20$ spire:</p>
-
-$$i_s=i_p\,\frac{N_p}{N_s}=16\ \text{A}\cdot\frac{100}{20}=80\ \text{A}$$
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>L'unità 32 raccoglie tutta la fisica dei campi elettrici e magnetici in quattro equazioni
-fondamentali: le equazioni di Maxwell, a partire dai due teoremi di Gauss.</li>
+<li>primario: $N_p$ spire, generatore di tensione alternata;</li>
+<li>secondario: $N_s$ spire, carico $R$;</li>
+<li>nucleo: stesso flusso variabile nei due avvolgimenti.</li>
 </ul>
-</div>
+
+<p>Per la legge di Faraday-Neumann-Lenz:</p>
+
+<p class="eq">$$\varepsilon_p=-N_p\,\frac{\Delta\Phi(\vec B)}{\Delta t}\qquad\varepsilon_s=-N_s\,\frac{\Delta\Phi(\vec B)}{\Delta t}\ \Rightarrow\ \frac{\varepsilon_p}{N_p}=\frac{\varepsilon_s}{N_s}$$</p>
+
+<div class="def"><span class="et">Rapporto di trasformazione</span>
+<p class="eq">$$\frac{\varepsilon_p}{\varepsilon_s}=\frac{N_p}{N_s}$$</p></div>
+
+<ul>
+<li>$N_s&gt;N_p$ → tensione innalzata;</li>
+<li>$N_s&lt;N_p$ → tensione abbassata.</li>
+</ul>
+
+<h2>Esempio 1</h2>
+
+<p>Dati: $\varepsilon_p=220\ \text{V}$, $N_p=100$, $N_s=20$. Calcolare $\varepsilon_s$.</p>
+
+<p class="eq">$$\varepsilon_s=\varepsilon_p\,\frac{N_s}{N_p}=220\ \text{V}\cdot\frac{20}{100}=44\ \text{V}$$</p>
+
+<h2>Correnti e potenza</h2>
+
+<p>Trasformatore ideale, senza perdite: stessa potenza media nei due circuiti.</p>
+
+<p class="eq">$$P_p=P_s\ \Rightarrow\ i_p\,\varepsilon_p=i_s\,\varepsilon_s$$</p>
+
+<div class="def"><span class="et">Rapporto fra le correnti</span>
+<p class="eq">$$\frac{i_p}{i_s}=\frac{\varepsilon_s}{\varepsilon_p}=\frac{N_s}{N_p}$$</p></div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Rapporto inverso rispetto alle tensioni: tensione abbassata → corrente aumentata.</p></div>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $i_p=16\ \text{A}$, $N_p=100$, $N_s=20$. Calcolare $i_s$.</p>
+
+<p class="eq">$$i_s=i_p\,\frac{N_p}{N_s}=16\ \text{A}\cdot\frac{100}{20}=80\ \text{A}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../30-energia-immagazzinata-in-un-campo-magnetico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia immagazzinata in un campo magnetico</span></a><a class="successiva" href="../32-le-prime-tre-equazioni-di-maxwell/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Le prime tre equazioni di Maxwell</span></a></nav>
 <footer><p>Fisica quinta &middot; Induzione elettromagnetica &middot; Unità 31</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script><script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':12};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  var ink='var(--inchiostro)', w=1.8;
+  function L(S,x1,y1,x2,y2,c,s,extra){var a={x1:x1,y1:y1,x2:x2,y2:y2,stroke:c||ink,'stroke-width':s||w};for(var k in extra)a[k]=extra[k];return el(S,'line',a);}
+
+  var S=document.getElementById('fig-trasf'), sl=document.getElementById('s-ns'), o=document.getElementById('o-ns');
+  if(!S||!sl)return;
+  var EP=220, NP=100, IP=16;
+  /* nucleo: corona rettangolare, gambe di spessore 18 */
+  var cx1=150, cx2=290, cy1=30, cy2=230, sp=18;
+  el(S,'path',{d:'M'+cx1+','+cy1+' H'+cx2+' V'+cy2+' H'+cx1+' Z M'+(cx1+sp)+','+(cy1+sp)+' V'+(cy2-sp)+' H'+(cx2-sp)+' V'+(cy1+sp)+' Z',
+    fill:'#e3e6ea','fill-rule':'evenodd',stroke:'var(--grigio)','stroke-width':1.2});
+  /* flusso lungo la linea media del nucleo */
+  var mx1=cx1+sp/2, mx2=cx2-sp/2, my1=cy1+sp/2, my2=cy2-sp/2;
+  el(S,'rect',{x:mx1,y:my1,width:mx2-mx1,height:my2-my1,fill:'none',stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'5,4'});
+  punta(S,(mx1+mx2)/2,my1,1,0,'var(--blu)',7); punta(S,(mx1+mx2)/2,my2,-1,0,'var(--blu)',7);
+  T(S,(mx1+mx2)/2,(cy1+cy2)/2+5,'Φ(t)',{'text-anchor':'middle','font-size':14,fill:'var(--blu)'});
+  /* avvolgimento: spire che attraversano la gamba */
+  /* a: lato dei collegamenti, b: lato opposto */
+  function bobina(G,a,b,ya,yb,n){
+    var g=14, yc=(ya+yb)/2; L(G,a,ya,a,yc-n*g/2); L(G,a,yc+n*g/2,a,yb); ya=yc-n*g/2;
+    for(var k=0;k<n;k++){var y=ya+k*g;
+      el(G,'line',{x1:b,y1:f(y+g/2),x2:a,y2:f(y+g),stroke:ink,'stroke-width':1,opacity:.35});
+      el(G,'line',{x1:a,y1:f(y),x2:b,y2:f(y+g/2),stroke:ink,'stroke-width':w,'stroke-linecap':'round'});}
+  }
+  /* primario: 5 spire disegnate per N_p = 100 */
+  var pya=80, pyb=180, xg=70;
+  bobina(S,cx1-6,cx1+sp+6,pya,pyb,5);
+  L(S,cx1-6,pya,xg,pya); L(S,xg,pya,xg,114); L(S,xg,146,xg,pyb); L(S,xg,pyb,cx1-6,pyb);
+  el(S,'circle',{cx:xg,cy:130,r:16,fill:'#fff',stroke:'var(--verde)','stroke-width':1.8});
+  el(S,'path',{d:'M'+(xg-9)+',130 q4.5,-8 9,0 t9,0',fill:'none',stroke:'var(--verde)','stroke-width':1.8});
+  T(S,xg-24,135,'εₚ',{'text-anchor':'end','font-size':14,'font-style':'italic',fill:'var(--verde)'});
+  T(S,cx1+sp/2,252,'Nₚ = 100',{'text-anchor':'middle','font-size':13,fill:'var(--inchiostro)'});
+  /* secondario: spire variabili, carico R */
+  var sya=60, syb=200, xr=370, Gs=el(S,'g',{});
+  L(S,cx2+6,sya,xr,sya); L(S,xr,sya,xr,108); L(S,xr,152,xr,syb); L(S,xr,syb,cx2+6,syb);
+  el(S,'rect',{x:xr-8,y:108,width:16,height:44,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.8});
+  T(S,xr+16,135,'R',{'font-size':14,'font-style':'italic',fill:'var(--rosso)'});
+  var tNs=T(S,cx2-sp/2,252,'',{'text-anchor':'middle','font-size':13,fill:'var(--inchiostro)'});
+  function agg(){
+    var ns=+sl.value, n=Math.round(ns/20);
+    while(Gs.firstChild)Gs.removeChild(Gs.firstChild);
+    bobina(Gs,cx2+6,cx2-sp-6,sya,syb,n);
+    tNs.textContent='Nₛ = '+ns;
+    var es=EP*ns/NP, is=IP*NP/ns, tipo=ns<NP?'abbassata':ns>NP?'innalzata':'invariata';
+    o.innerHTML='ε<sub>s</sub> = '+num(es,0)+' V <span class="ok">'+tipo+'</span> &nbsp; i<sub>s</sub> = '+(is<10?num(is,1):num(is,0))+' A';
+  }
+  sl.addEventListener('input',agg); agg();
+})();
+</script>
 </body>
 </html>

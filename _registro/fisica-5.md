@@ -375,6 +375,7 @@
   trasformatore (nucleo, avvolgimenti primario e secondario, generatore, resistenza, freccia del
   campo magnetico variabile): nessun disegno nuovo, nessuno strumento interattivo (non richiesto
   dalla traccia).
+- Revisione (20/10/2026, regole 13/10): parole 272 → 126. Pagina mai revisionata: tolti sommario e «Nella prossima unità» (con il rimando all'unità 32); apertura a domanda; titoletto «Due circuiti accoppiati dallo stesso flusso» tolto (ripeteva l'apertura), «Correnti e potenza» tenuto, esempi rinominati «Esempio 1» ed «Esempio 2» in forma «Dati… Calcolare…»; descrizione dei due circuiti in elenco di tre voci; derivazione in una .eq; rapporto di trasformazione e rapporto fra le correnti in .def; casi N_s > N_p / N_s < N_p in elenco; nota «Attenzione» in una frase. Nessuna comparsa da togliere. Controllo concettuale: 220 V·20/100 = 44 V, 16 A·100/20 = 80 A, potenze uguali (3520 W) verificati; precisato che P_p = P_s vale per il trasformatore ideale, senza perdite (prima «l'energia si deve conservare»). Impaginazione a quaderno; figura rifatta da script con cursore su N_s (20–200): spire disegnate in proporzione, ε_s e i_s a fianco; corretto il flusso, prima disegnato come freccia nella finestra del nucleo, ora lungo il nucleo. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 32 — Le prime tre equazioni di Maxwell
 - Parole: circa 542 (prosa, didascalie e riquadri compresi) su 3 pagine di traccia (pagine 56-58).
