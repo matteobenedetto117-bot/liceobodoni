@@ -5,16 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Distanza di un punto da una retta — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:13em}
+.ok{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -24,74 +56,157 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Piano cartesiano e retta &middot; Unità 31</p>
   <h1>Distanza di un punto da una retta</h1>
-  <p class="sommario">Un punto che non sta su una retta ne è comunque "vicino" o
-  "lontano" in un senso preciso: la distanza è la lunghezza del segmento più corto che
-  unisce il punto alla retta, cioè quello perpendicolare a essa.</p>
 </header>
 
-<h2>Il segmento perpendicolare</h2>
+<p>Punto $P$ e retta $r$ che non lo contiene: quanto dista $P$ da $r$?</p>
 
-<p>Dato un punto $P$ e una retta $r$ che non lo contiene, tra tutti i segmenti che uniscono
-$P$ a un punto di $r$ il più corto è quello perpendicolare a $r$: il suo secondo estremo
-$Q$, il piede della perpendicolare, individua la distanza $\overline{PQ}$.</p>
+<div class="def"><span class="et">Distanza di un punto da una retta</span>
+<p>Lunghezza del segmento $PQ$ perpendicolare a $r$, con $Q$ su $r$ (piede della perpendicolare): è il più corto fra i segmenti che uniscono $P$ ai punti di $r$.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 280 190" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="170" x2="260" y2="40" stroke="#b3392f" stroke-width="1.6"/>
-<text x="255" y="30" font-size="13" fill="#b3392f">r</text>
-<circle cx="205" cy="55" r="3.4" fill="#16283d"/>
-<text x="212" y="50" font-size="13" fill="#16283d">P</text>
-<circle cx="150" cy="93" r="3.4" fill="#16283d"/>
-<text x="128" y="86" font-size="13" fill="#16283d">Q</text>
-<line x1="205" y1="55" x2="150" y2="93" stroke="#2f6b4f" stroke-width="2"/>
-<text x="188" y="68" font-size="13" fill="#2f6b4f">d</text>
-<path d="M 158 84 L 163 90 L 157 96" fill="none" stroke="#16283d" stroke-width="1.2"/>
-</svg>
+<svg id="g-dist" viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Retta r: y = 2x + 3, punto P(3; 4), piede della perpendicolare Q(1; 5) e un punto S mobile sulla retta"></svg>
+<div class="cursore"><label for="c-s">$S$</label><input id="c-s" type="range" min="-1.5" max="1.2" step="0.1" value="-0.5"><span class="val" id="v-s"></span></div>
+<p class="did">$r:\ y=2x+3$, $\;P(3,4)$, $\;Q(1,5)$</p>
 </div>
 
-<p>Per trovare $Q$ conviene scrivere la retta $s$ perpendicolare a $r$ e passante per
-$P$, e mettere a sistema $r$ ed $s$: la soluzione è $Q$. Da $P$ e $Q$ si calcola poi la
-distanza con la solita formula fra due punti.</p>
+<h2>Metodo della perpendicolare</h2>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Troviamo la distanza di $P(3,4)$ dalla retta
-$r:\ y=2x+3$.</p>
-<p>La retta $r$ ha coefficiente angolare $m_r=2$, quindi la perpendicolare $s$ per $P$
-ha coefficiente angolare $m_s=-\dfrac12$:</p>
-<p>$$s:\ y-4=-\frac12(x-3)\ \Rightarrow\ y=-\frac12x+\frac{11}{2}$$</p>
-<p>Mettiamo a sistema $r$ ed $s$ per trovare $Q$:</p>
-<p>$$-\frac12x+\frac{11}{2}=2x+3\ \Rightarrow\ -x+11=4x+6\ \Rightarrow\ x=1,\ y=5$$</p>
-<p>Quindi $Q(1,5)$. La distanza è</p>
-<p>$$\overline{PQ}=\sqrt{(1-3)^2+(5-4)^2}=\sqrt{4+1}=\sqrt5.$$</p>
-</div>
+<ol>
+<li>retta $s$ per $P$ perpendicolare a $r$: $m_s=-\dfrac1{m_r}$ ($r$ né orizzontale né verticale);</li>
+<li>$Q$: soluzione del sistema fra $r$ e $s$;</li>
+<li>$d=\overline{PQ}$ con la formula della distanza fra due punti.</li>
+</ol>
 
-<h2>La formula diretta</h2>
+<h2>Esempio 1</h2>
 
-<p>Passare ogni volta per la perpendicolare è lungo: conviene una formula che dia
-subito la distanza a partire dall'equazione generale della retta.</p>
+<p>Dati: $P(3,4)$, $\;r:\ y=2x+3$. Calcolare la distanza con la perpendicolare.</p>
 
-<div class="regola">
-<p>$$d=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$$</p>
-<p>Distanza del punto $P(x_0,y_0)$ dalla retta $r:\ ax+by+c=0$.</p>
-</div>
+<p class="eq">$$m_s=-\frac12\qquad s:\ y-4=-\frac12(x-3)\ \Rightarrow\ y=-\frac12x+\frac{11}{2}$$</p>
 
-<p>Il valore assoluto al numeratore serve perché $ax_0+by_0+c$ può risultare negativo a
-seconda da che parte di $r$ sta $P$, mentre una distanza è sempre positiva. Il
-denominatore $\sqrt{a^2+b^2}$ dipende solo dai coefficienti di $x$ e $y$ nella forma
-generale, non dal punto. Applicando la formula all'esempio precedente, con
-$r:\ 2x-y+3=0$ (cioè $a=2,\ b=-1,\ c=3$) e $P(3,4)$:</p>
-<p>$$d=\frac{|2\cdot3-4+3|}{\sqrt{4+1}}=\frac{5}{\sqrt5}=\sqrt5,$$</p>
-<p>lo stesso risultato trovato con il metodo della perpendicolare.</p>
+<p class="eq">$$-\frac12x+\frac{11}{2}=2x+3\ \Rightarrow\ -x+11=4x+6\ \Rightarrow\ x=1,\ y=5\qquad Q(1,5)$$</p>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Distanza di $P(1,3)$ dalla retta $r:\ 2x+3y+1=0$:</p>
-<p>$$d=\frac{|2\cdot1+3\cdot3+1|}{\sqrt{2^2+3^2}}=\frac{12}{\sqrt{13}}=\frac{12\sqrt{13}}{13}.$$</p>
-</div>
+<p class="eq">$$\overline{PQ}=\sqrt{(1-3)^2+(5-4)^2}=\sqrt5$$</p>
 
+<h2>Formula diretta</h2>
+
+<div class="def"><span class="et">Formula della distanza</span>
+<p>Distanza di $P(x_0,y_0)$ da $r:\ ax+by+c=0$:</p>
+<p class="eq">$$d=\frac{|ax_0+by_0+c|}{\sqrt{a^2+b^2}}$$</p></div>
+
+<ul>
+<li>retta in forma implicita, $a$ e $b$ non entrambi nulli;</li>
+<li>valore assoluto: $ax_0+by_0+c$ può essere negativo, la distanza no.</li>
+</ul>
+
+<p>Verifica sull'esempio 1, con $r:\ 2x-y+3=0$:</p>
+
+<p class="eq">$$d=\frac{|2\cdot3-4+3|}{\sqrt{4+1}}=\frac{5}{\sqrt5}=\sqrt5$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $P(1,3)$, $\;r:\ 2x+3y+1=0$. Calcolare $d$.</p>
+
+<p class="eq">$$d=\frac{|2\cdot1+3\cdot3+1|}{\sqrt{2^2+3^2}}=\frac{12}{\sqrt{13}}=\frac{12\sqrt{13}}{13}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../32-fasci-di-rette-e-intersezione-fra-due-rette/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Fasci di rette e intersezione fra due rette</span></a><a class="successiva" href="../34-forma-normale-e-classificazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forma normale e classificazione</span></a></nav>
 <footer><p>Matematica seconda &middot; Piano cartesiano e retta &middot; Unità 31</p></footer>
 
 </div>
-</body>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+
+/* ---------- distanza di P(3,4) da r: y = 2x + 3 (stessa scala sui due assi) ---------- */
+(function(){
+  var svg=document.getElementById('g-dist'),cur=document.getElementById('c-s'),v=document.getElementById('v-s'); if(!svg)return;
+  var M={l:20,r:20,t:20,b:20};
+  /* 320 px per 6,4 unità in x, 300 px per 6 unità in y: 50 px per unità su entrambi */
+  var P=new Piano(svg,[-2,4.4],[-0.5,5.5],M); P.assi([-1,1,2,3,4],[1,2,4,5]);
+  var X=P.X,Y=P.Y,xp=3,yp=4,xq=1,yq=5;
+  function r(x){return 2*x+3;}
+  P.add(el('line',{x1:X(-3),y1:Y(r(-3)),x2:X(3),y2:Y(r(3)),stroke:'var(--inchiostro)','stroke-width':2}),'sotto');
+  P.add(txt(X(-1.3)-10,Y(r(-1.3))+4,'r',{'font-size':13,'text-anchor':'end',fill:'var(--inchiostro)','font-style':'italic'}),'testo');
+  /* angolo retto in Q: versori lungo r e lungo QP */
+  var ur=[1/Math.sqrt(5),2/Math.sqrt(5)], up=[(xp-xq)/Math.sqrt(5),(yp-yq)/Math.sqrt(5)], k=0.22;
+  var a=[xq+ur[0]*k,yq+ur[1]*k], b=[a[0]+up[0]*k,a[1]+up[1]*k], c=[xq+up[0]*k,yq+up[1]*k];
+  P.add(el('path',{d:'M'+X(a[0])+','+Y(a[1])+' L'+X(b[0])+','+Y(b[1])+' L'+X(c[0])+','+Y(c[1]),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.1}),'sopra');
+  P.add(el('line',{x1:X(xp),y1:Y(yp),x2:X(xq),y2:Y(yq),stroke:'var(--verde)','stroke-width':2.6}),'sopra');
+  var seg=P.add(el('line',{stroke:'var(--rosso)','stroke-width':2,'stroke-dasharray':'6,4'}),'sopra');
+  P.add(el('circle',{cx:X(xp),cy:Y(yp),r:4.5,fill:'var(--inchiostro)'}),'sopra');
+  P.add(el('circle',{cx:X(xq),cy:Y(yq),r:4,fill:'var(--verde)'}),'sopra');
+  var pS=P.add(el('circle',{r:5,fill:'var(--rosso)'}),'sopra');
+  P.add(txt(X(xp)+9,Y(yp)+5,'P',{'font-size':13,fill:'var(--inchiostro)'}),'testo');
+  P.add(txt(X(xq)-10,Y(yq)+4,'Q',{'font-size':13,fill:'var(--verde)','text-anchor':'end'}),'testo');
+  P.add(txt(X(2)-4,Y(4.5)+20,'d',{'font-size':13,fill:'var(--verde)','font-style':'italic'}),'testo');
+  var tS=P.add(txt(0,0,'S',{'font-size':12,fill:'var(--rosso)','text-anchor':'end'}),'testo');
+  function dis(){var xs=+cur.value, ys=r(xs), d=Math.hypot(xs-xp,ys-yp);
+    set(seg,{x1:X(xp),y1:Y(yp),x2:X(xs),y2:Y(ys)}); set(pS,{cx:X(xs),cy:Y(ys)});
+    set(tS,{x:X(xs)-9,y:Y(ys)-6,opacity:Math.abs(xs-xq)<0.45?0:1});
+    v.innerHTML=Math.abs(xs-xq)<1e-9 ? '<span class="ok">S = Q: PS = PQ = √5 ≈ 2,24</span>'
+      : 'PS ≈ '+n(d.toFixed(2))+' &gt; PQ ≈ 2,24';}
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script></body>
 </html>
