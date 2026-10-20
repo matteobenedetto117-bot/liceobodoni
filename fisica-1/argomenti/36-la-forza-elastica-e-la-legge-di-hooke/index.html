@@ -5,26 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La forza elastica e la legge di Hooke — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:660px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.strum{margin:26px auto;max-width:660px;border:1px solid var(--riga);border-radius:10px;
-  background:#fff;padding:16px}
-.strum svg{width:100%;height:auto;display:block}
-.cursori{font-family:var(--sans);font-size:.9rem;display:flex;flex-wrap:wrap;gap:22px;
-  align-items:center;justify-content:center;margin-top:10px}
-.cursori label{display:flex;align-items:center;gap:8px}
-.cursori input{width:150px}
-.cursori output{font-weight:bold;color:var(--blu);min-width:68px;display:inline-block}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -35,184 +56,143 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>La forza elastica e la legge di Hooke</h1>
 </header>
 
-<h2>Che cos'è la forza elastica</h2>
+<p>Molla fissata a un muro, estremo libero spostato di $\vec x$ dalla posizione di riposo: che forza esercita la molla?</p>
 
-<p>La <strong>forza elastica</strong> è la forza esercitata da una molla quando la
-allunghiamo o la comprimiamo. Fissiamo la molla a un muro e tiriamo l'estremo libero:
-la molla si oppone. Se invece la spingiamo verso il muro, schiacciandola, di nuovo si
-oppone, ma questa volta respingendo in fuori.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 660 330" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
-  <defs>
-    <marker id="rosso" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
-    </marker>
-    <marker id="verde" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1e7a45"/>
-    </marker>
-    <pattern id="mattoni" width="10" height="10" patternUnits="userSpaceOnUse">
-      <path d="M0,10 L10,0" stroke="#555" stroke-width="1.2"/>
-    </pattern>
-  </defs>
-
-  <!-- ===== riga 1: allungamento ===== -->
-  <text x="20" y="22" font-size="12" fill="#555">a riposo</text>
-  <rect x="30" y="34" width="14" height="96" fill="url(#mattoni)" stroke="#333" stroke-width="1.6"/>
-  <line x1="30" y1="34" x2="30" y2="130" stroke="#333" stroke-width="2"/>
-  <text x="24" y="146" font-size="10" fill="#555">muro</text>
-  <line x1="44" y1="82" x2="60" y2="82" stroke="#222" stroke-width="2"/>
-  <path d="M60,82 l8,-13 l14,26 l14,-26 l14,26 l14,-26 l14,26 l8,-13" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="146" y1="82" x2="162" y2="82" stroke="#222" stroke-width="2"/>
-  <text x="80" y="112" font-size="11" fill="#555">molla</text>
-
-  <text x="340" y="22" font-size="12" fill="#555">allungata</text>
-  <rect x="350" y="34" width="14" height="96" fill="url(#mattoni)" stroke="#333" stroke-width="1.6"/>
-  <line x1="350" y1="34" x2="350" y2="130" stroke="#333" stroke-width="2"/>
-  <line x1="364" y1="82" x2="380" y2="82" stroke="#222" stroke-width="2"/>
-  <path d="M380,82 l12,-13 l22,26 l22,-26 l22,26 l22,-26 l22,26 l12,-13" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="516" y1="82" x2="546" y2="82" stroke="#222" stroke-width="2"/>
-  <!-- vettore x verso destra -->
-  <line x1="470" y1="48" x2="546" y2="48" stroke="#1e7a45" stroke-width="2.4" marker-end="url(#verde)"/>
-  <text x="500" y="40" fill="#1e7a45" font-weight="bold">x</text>
-  <!-- forza elastica verso il muro -->
-  <line x1="546" y1="116" x2="470" y2="116" stroke="#c0392b" stroke-width="2.4" marker-end="url(#rosso)"/>
-  <text x="552" y="121" fill="#c0392b" font-weight="bold">F</text>
-  <text x="562" y="125" fill="#c0392b" font-size="9">el</text>
-
-  <!-- ===== riga 2: compressione ===== -->
-  <text x="20" y="192" font-size="12" fill="#555">a riposo</text>
-  <rect x="30" y="204" width="14" height="96" fill="url(#mattoni)" stroke="#333" stroke-width="1.6"/>
-  <line x1="30" y1="204" x2="30" y2="300" stroke="#333" stroke-width="2"/>
-  <line x1="44" y1="252" x2="60" y2="252" stroke="#222" stroke-width="2"/>
-  <path d="M60,252 l8,-13 l14,26 l14,-26 l14,26 l14,-26 l14,26 l8,-13" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="146" y1="252" x2="162" y2="252" stroke="#222" stroke-width="2"/>
-
-  <text x="340" y="192" font-size="12" fill="#555">compressa</text>
-  <rect x="350" y="204" width="14" height="96" fill="url(#mattoni)" stroke="#333" stroke-width="1.6"/>
-  <line x1="350" y1="204" x2="350" y2="300" stroke="#333" stroke-width="2"/>
-  <line x1="364" y1="252" x2="374" y2="252" stroke="#222" stroke-width="2"/>
-  <path d="M374,252 l5,-13 l9,26 l9,-26 l9,26 l9,-26 l9,26 l9,-26 l9,26 l5,-13" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="447" y1="252" x2="467" y2="252" stroke="#222" stroke-width="2"/>
-  <!-- vettore x verso il muro -->
-  <line x1="543" y1="218" x2="467" y2="218" stroke="#1e7a45" stroke-width="2.4" marker-end="url(#verde)"/>
-  <text x="497" y="210" fill="#1e7a45" font-weight="bold">x</text>
-  <!-- forza elastica verso l'esterno -->
-  <line x1="467" y1="286" x2="543" y2="286" stroke="#c0392b" stroke-width="2.4" marker-end="url(#rosso)"/>
-  <text x="549" y="291" fill="#c0392b" font-weight="bold">F</text>
-  <text x="559" y="295" fill="#c0392b" font-size="9">el</text>
-</svg>
-<figcaption>In verde lo spostamento dell'estremo libero rispetto alla posizione di
-riposo, in rosso la forza elastica: in entrambi i casi punta nel verso opposto.</figcaption>
-</figure>
-
-<h2>La costante elastica</h2>
-
-<p>Ogni molla ha una costante caratteristica che ne determina la rigidità, indicata con
-$k$ e chiamata <strong>costante elastica della molla</strong>. Una molla rigida, difficile
-da deformare, ha $k$ grande; una molla poco rigida, che cede subito, ha $k$ piccolo.
-La sua unità di misura è</p>
-
-$$[k] = \frac{\text{N}}{\text{m}}$$
-
-<p>e si legge così: il numero di newton che occorrono per allungare la molla di un metro.
-Una molla da 360 N/m è molto più rigida di una da 150 N/m.</p>
-
-<h2>La legge di Hooke</h2>
-
-<p>La forza elastica ha <strong>modulo</strong></p>
-
-$$F_{el} = k \cdot x$$
-
-<p>dove $k$ è la costante elastica della molla e $x$ è l'allungamento, cioè di quanto
-l'estremo libero si è spostato rispetto alla posizione di riposo. La stessa formula vale
-per la compressione, con $x$ misura dello schiacciamento. Il modulo cresce in proporzione
-a $x$: doppio allungamento, doppia forza.</p>
-
-<p>Quanto a <strong>direzione</strong> e <strong>verso</strong>, la forza elastica ha la
-stessa direzione di $\vec{x}$ ma verso opposto. Le tre informazioni stanno insieme nella
-forma vettoriale</p>
-
-$$\vec{F}_{el} = -k\,\vec{x}$$
-
-<p>dove il segno meno è esattamente il ribaltamento del verso: la molla reagisce sempre
-contro la deformazione che le imponiamo.</p>
-
-<div class="nota">
-<p><strong>Attenzione.</strong> Nella formula del modulo, $F_{el} = kx$, il segno meno non
-compare: i moduli sono numeri positivi. Il meno appartiene solo alla scrittura vettoriale,
-dove serve a fissare il verso.</p>
-</div>
-
-<h2>La proporzionalità, vista</h2>
-
-<p>Muovendo il cursore si cambia l'allungamento $x$ a parità di molla: la lunghezza della
-freccia rossa, cioè il modulo di $\vec{F}_{el}$, cresce esattamente nella stessa
-proporzione.</p>
-
-<div class="strum">
-<svg id="mo" viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
-  <defs>
-    <marker id="r2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
-    </marker>
-    <pattern id="mu2" width="10" height="10" patternUnits="userSpaceOnUse">
-      <path d="M0,10 L10,0" stroke="#555" stroke-width="1.2"/>
-    </pattern>
-  </defs>
-  <rect x="40" y="40" width="14" height="110" fill="url(#mu2)" stroke="#333" stroke-width="1.6"/>
-  <line x1="40" y1="40" x2="40" y2="150" stroke="#333" stroke-width="2"/>
-  <line x1="54" y1="95" x2="70" y2="95" stroke="#222" stroke-width="2"/>
-  <path id="spira" d="" fill="none" stroke="#222" stroke-width="2"/>
-  <line id="asta" x1="0" y1="95" x2="0" y2="95" stroke="#222" stroke-width="2"/>
-  <line x1="210" y1="34" x2="210" y2="156" stroke="#999" stroke-width="1.2" stroke-dasharray="4 4"/>
-  <text x="214" y="30" font-size="11" fill="#777">riposo</text>
-  <line id="frec" x1="0" y1="132" x2="0" y2="132" stroke="#c0392b" stroke-width="3" marker-end="url(#r2)"/>
-  <text id="etF" x="0" y="172" fill="#c0392b" font-weight="bold" font-size="13">&#160;</text>
-</svg>
-<div class="cursori">
-  <label>k = <input id="ck" type="range" min="50" max="500" step="10" value="200"><output id="ok">200 N/m</output></label>
-  <label>x = <input id="cx" type="range" min="0" max="20" step="1" value="8"><output id="ox">0,08 m</output></label>
+<div class="fig">
+<svg id="g-casi" viewBox="0 0 370 128" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Molla allungata e molla compressa: forza elastica opposta allo spostamento"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Allungata: $\vec x$ verso destra, $\vec F_{el}$ verso il muro</p>
+<p class="did">Compressa: $\vec x$ verso il muro, $\vec F_{el}$ verso l'esterno</p>
 </div>
 </div>
 
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>La legge appena scritta si usa in due sensi: nota la deformazione si ricava la forza,
-e nota la forza si ricava la deformazione. I conti sono nell'unità successiva. Più avanti
-incontreremo forze che invece si oppongono al movimento lungo una superficie, le forze di
-attrito.</p>
+<ul>
+<li>molla allungata → forza verso il muro;</li>
+<li>molla compressa → forza verso l'esterno;</li>
+<li>in entrambi i casi → verso opposto allo spostamento.</li>
+</ul>
+
+<div class="def"><span class="et">Costante elastica</span>
+<p>$k$: rigidità della molla (molla rigida → $k$ grande; molla poco rigida → $k$ piccolo).</p></div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>Newton al metro (N/m): newton necessari per allungare la molla di 1 m.</p></div>
+
+<p>Il modulo della forza è direttamente proporzionale all'allungamento:</p>
+
+<div class="def"><span class="et">Legge di Hooke</span>
+<p class="eq principio">$$F_{el} = k\,x \qquad\qquad \vec F_{el} = -k\,\vec x$$</p>
+<p>$x$: allungamento o compressione rispetto alla posizione di riposo, entro il limite di elasticità della molla.</p></div>
+
+<div class="fig">
+<svg id="g-hooke" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Molla allungata di x con la forza elastica di modulo kx"></svg>
+<div class="cursore"><label for="c-k">costante elastica</label><input id="c-k" type="range" min="50" max="500" step="10" value="200"><span class="val" id="v-k"></span></div>
+<div class="cursore"><label for="c-x">allungamento</label><input id="c-x" type="range" min="0" max="0.08" step="0.004" value="0.04"><span class="val" id="v-x"></span></div>
+<p class="did">Stessa molla: doppio allungamento → doppia forza</p>
+</div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Nel modulo $F_{el} = kx$ il segno meno non compare: indica solo il verso, nella forma vettoriale.</p></div>
+
+<nav class="nav-unita"><a class="precedente" href="../35-definizione-operativa-del-newton/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Definizione operativa del newton</span></a><a class="successiva" href="../37-esempi-con-la-forza-elastica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Esempi con la forza elastica</span></a></nav>
+<footer><p>Fisica prima &middot; Forza peso, forza elastica e attrito &middot; Unità 35</p></footer>
 </div>
 
 <script>
 (function(){
-  var ck=document.getElementById('ck'),cx=document.getElementById('cx'),
-      ok=document.getElementById('ok'),ox=document.getElementById('ox'),
-      sp=document.getElementById('spira'),as=document.getElementById('asta'),
-      fr=document.getElementById('frec'),et=document.getElementById('etF');
-  function dis(){
-    var k=+ck.value, px=+cx.value, x=px/250;      // px = pixel di allungamento
-    var x0=70, xf=210+px, n=7, L=xf-x0, p=L/n;
-    var d='M'+x0+',95';
-    for(var i=0;i<n;i++){
-      d+=' l'+(p/2)+',-16 l'+(p/2)+',16';
-    }
-    sp.setAttribute('d',d);
-    as.setAttribute('x1',xf); as.setAttribute('x2',xf+26);
-    var F=k*x;                                     // newton
-    var lung=F*0.55;                               // 1 N -> 0,55 px
-    if(lung>250) lung=250;
-    fr.setAttribute('x1',xf+26); fr.setAttribute('x2',xf+26-lung);
-    et.setAttribute('x',xf+26-lung/2-30);
-    et.textContent = F.toFixed(1).replace('.',',')+' N';
-    ok.textContent=k+' N/m';
-    ox.textContent=x.toFixed(3).replace('.',',')+' m';
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0(,0*)?$/.test(s))s=s.slice(1);return s.replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+  function marcatori(s,id){
+    var d=el(s,'defs',{});
+    [['r','var(--rosso)'],['v','var(--verde)']].forEach(function(q){
+      var mk=el(d,'marker',{id:id+q[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+      el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:q[1]});});
   }
-  ck.addEventListener('input',dis); cx.addEventListener('input',dis); dis();
+  /* muro, molla a zigzag dal muro a xe, estremo (blocchetto) */
+  function muro(s,XM,Yc){
+    el(s,'line',{x1:XM,y1:Yc-34,x2:XM,y2:Yc+34,stroke:'var(--inchiostro)','stroke-width':2.4});
+    for(var i=0;i<6;i++)el(s,'line',{x1:XM,y1:Yc-30+i*12,x2:XM-8,y2:Yc-22+i*12,stroke:'var(--riga)','stroke-width':1});
+  }
+  function zig(XM,xe,Yc,n){
+    var a=XM+6,b=xe-6,h=(b-a)/n,p='M'+XM+','+Yc+' L'+a+','+Yc;
+    for(var j=0;j<n;j++)p+=' L'+(a+h*(j+.5)).toFixed(1)+','+(Yc+(j%2?9:-9));
+    return p+' L'+b+','+Yc+' L'+xe+','+Yc;
+  }
+
+  /* due casi: allungata e compressa */
+  (function(){
+    var s=document.getElementById('g-casi');if(!s)return;
+    marcatori(s,'m35a');
+    var Yc=64,R=96,D=44;
+    [[0,1],[214,-1]].forEach(function(q){
+      var X0=q[0],sg=q[1],XM=X0+18,xr=XM+R,xe=xr+sg*D;
+      muro(s,XM,Yc);
+      el(s,'line',{x1:xr,y1:Yc-40,x2:xr,y2:Yc+40,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+      txt(s,xr,Yc-46,'riposo');
+      el(s,'path',{d:zig(XM,xe,Yc,10),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'});
+      el(s,'rect',{x:xe,y:Yc-10,width:10,height:20,rx:2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4});
+      /* spostamento x (verde) dalla posizione di riposo all'estremo */
+      var ex=xe+(sg>0?5:5);
+      el(s,'line',{x1:xr,y1:Yc+24,x2:ex-sg*3,y2:Yc+24,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m35av)'});
+      txt(s,(xr+ex)/2,Yc+40,'x',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+      /* forza elastica (rossa), verso opposto */
+      var fx=ex-sg*D;
+      el(s,'line',{x1:ex,y1:Yc+52,x2:fx+sg*3,y2:Yc+52,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m35ar)'});
+      var tf=txt(s,fx-sg*12,Yc+56,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(tf,'el');
+    });
+  })();
+
+  /* legge di Hooke: F = k x con cursori su k e x */
+  (function(){
+    var s=document.getElementById('g-hooke');if(!s)return;
+    var ck=document.getElementById('c-k'),cx=document.getElementById('c-x'),vk=document.getElementById('v-k'),vx=document.getElementById('v-x');
+    marcatori(s,'m35b');
+    var XM=30,Yc=64,R=150,PX=1250,FN=4,W=14;
+    muro(s,XM,Yc);
+    el(s,'line',{x1:XM+R,y1:Yc-40,x2:XM+R,y2:Yc+40,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(s,XM+R,Yc-46,'riposo');
+    var molla=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'});
+    var b=el(s,'rect',{y:Yc-W,width:W,height:2*W,rx:2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4});
+    var sx=el(s,'line',{y1:Yc+32,y2:Yc+32,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m35bv)'});
+    var tx=txt(s,0,Yc+48,'x',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+    var fe=el(s,'line',{y1:Yc+62,y2:Yc+62,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m35br)'});
+    var tf=txt(s,0,Yc+80,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(tf,'el');
+    function disegna(){
+      var k=+ck.value,x=+cx.value,F=k*x,xe=XM+R+x*PX,ex=xe+W;
+      set(molla,{d:zig(XM,xe,Yc,10)});set(b,{x:xe});
+      var on=x*PX>14;
+      set(sx,{x1:XM+R,x2:ex-3,visibility:on?'visible':'hidden'});
+      set(tx,{x:(XM+R+ex)/2,visibility:on?'visible':'hidden'});
+      var lf=F*FN,onf=lf>12;
+      set(fe,{x1:ex,x2:ex-lf+3,visibility:onf?'visible':'hidden'});
+      set(tf,{x:ex-lf/2,visibility:onf?'visible':'hidden'});
+      vk.innerHTML='k = '+k+' N/m';
+      vx.innerHTML='x = '+num(x,3)+' m · F<sub>el</sub> = '+num(F,1)+' N';
+    }
+    ck.addEventListener('input',disegna);cx.addEventListener('input',disegna);disegna();
+  })();
 })();
 </script>
-
-<nav class="nav-unita"><a class="precedente" href="../35-definizione-operativa-del-newton/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Definizione operativa del newton</span></a><a class="successiva" href="../37-esempi-con-la-forza-elastica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Esempi con la forza elastica</span></a></nav>
-</div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
