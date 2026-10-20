@@ -5,17 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Forze conservative ed energia potenziale — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:12px 18px;margin:20px 0;border-left:4px solid var(--rosso);font-family:var(--sans);font-size:.92rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -26,71 +57,151 @@
   <h1>Forze conservative ed energia potenziale</h1>
 </header>
 
-<h2>Forze conservative e forze non conservative</h2>
+<p>Un corpo si sposta da una posizione a un'altra: il lavoro di una forza dipende dal percorso seguito?</p>
 
-<p>Su un oggetto che solleviamo agisce la forza peso. Lasciandolo andare,
-la caduta restituisce lo stesso lavoro che avevamo speso per sollevarlo:
-la forza peso è una <strong>forza conservativa</strong>. Si comporta allo
-stesso modo anche la forza elastica.</p>
+<div class="def"><span class="et">Forza conservativa</span>
+<p>Il lavoro dipende solo dalla posizione iniziale e da quella finale, non dal percorso.</p></div>
 
-<div class="fig">
-<svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f39r" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-<marker id="f39v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="20" y1="150" x2="120" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="45" y="118" width="30" height="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="45" y="58" width="30" height="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="60" y1="113" x2="60" y2="92" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f39r)"/>
-<text x="80" y="90" font-size="13" fill="var(--rosso)" font-family="var(--sans)">si solleva</text>
-<line x1="240" y1="150" x2="340" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="265" y="58" width="30" height="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="265" y="118" width="30" height="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="280" y1="93" x2="280" y2="114" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f39v)"/>
-<text x="150" y="140" font-size="13" fill="var(--verde)" font-family="var(--sans)">si lascia andare</text>
-</svg>
-<p class="did">Il lavoro speso per sollevare l'oggetto si ritrova nella
-caduta: la forza peso è conservativa.</p>
-</div>
-
-<p>Un oggetto trascinato su una superficie risente invece della forza di
-attrito. Una volta arrivato nella posizione finale non torna da solo in
-quella di partenza: il lavoro speso non si ritrova più. L'attrito è una
-<strong>forza non conservativa</strong>, o dissipativa.</p>
+<ul>
+<li>forza peso, forza elastica → conservative;</li>
+<li>attrito → non conservativa (dissipativa).</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 340 130" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f39r2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="20" y1="105" x2="320" y2="105" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="50" y="70" width="40" height="35" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="250" y="70" width="40" height="35" fill="none" stroke="var(--inchiostro)" stroke-width="1.4" stroke-dasharray="4 3"/>
-<line x1="95" y1="87" x2="245" y2="87" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f39r2)"/>
-</svg>
-<p class="did">L'oggetto trascinato non torna da solo nella posizione di
-partenza (in tratteggio, la posizione finale).</p>
+<svg id="g-peso" viewBox="100 8 270 168" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px" role="img" aria-label="Corpo sollevato di un'altezza h e riportato a terra"></svg>
+<div class="cursore"><label for="c-peso">percorso</label><input id="c-peso" type="range" min="0" max="2" step="0.02" value="2"><span class="val" id="v-peso"></span></div>
+<p class="did">$m = 2{,}0\ \text{kg}$, $h = 1{,}5\ \text{m}$: salita e ritorno</p>
 </div>
+
+<p>Corpo sollevato di $h$ e riportato al punto di partenza:</p>
+<ul>
+<li>salita → lavoro del peso $-mgh$;</li>
+<li>discesa → lavoro del peso $+mgh$;</li>
+<li>andata e ritorno → lavoro totale nullo.</li>
+</ul>
+
+<div class="fig">
+<svg id="g-att" viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Corpo trascinato avanti e indietro su un piano con attrito"></svg>
+<div class="cursore"><label for="c-att">percorso</label><input id="c-att" type="range" min="0" max="2" step="0.02" value="2"><span class="val" id="v-att"></span></div>
+<p class="did">$m = 2{,}0\ \text{kg}$, $\mu = 0{,}30$, tratto AB di $2{,}0\ \text{m}$: andata e ritorno</p>
+</div>
+
+<p>Corpo trascinato avanti e indietro su un piano con attrito:</p>
+<ul>
+<li>attrito sempre opposto al moto → lavoro negativo in entrambi i tratti;</li>
+<li>andata e ritorno → lavoro totale negativo.</li>
+</ul>
 
 <h2>Energia potenziale</h2>
 
-<div class="risultato">
-<p>Il lavoro compiuto da una forza conservativa è uguale alla variazione
-di energia potenziale, cambiata di segno:</p>
-$$L=-\Delta U \qquad \Delta U=-L$$
-<p>$U$ è l'energia potenziale, $\Delta U$ la sua variazione.</p>
-</div>
+<p>A una forza conservativa si associa un'energia potenziale $U$, che dipende solo dalla posizione:</p>
 
-<div class="nota">
-<p>Solo alle forze conservative si può associare un'energia potenziale.
-Per una forza dissipativa come l'attrito questa associazione non ha
-senso: il lavoro non dipende solo dai punti iniziale e finale.</p>
-</div>
+<div class="def"><span class="et">Energia potenziale</span>
+<p class="eq principio">$$L = -\Delta U \qquad\qquad \Delta U = -L$$</p>
+<p>$L$: lavoro della forza conservativa; $\Delta U$: variazione di energia potenziale, in joule (J).</p></div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>All'attrito non si associa un'energia potenziale: il suo lavoro dipende dal percorso.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../38-potenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Potenza</span></a><a class="successiva" href="../40-energia-potenziale-gravitazionale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia potenziale gravitazionale</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 29</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0(,0*)?$/.test(s))s=s.slice(1);return s.replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function frecce(s,id){var d=el(s,'defs',{});
+    [['r','var(--rosso)'],['v','var(--verde)'],['g','var(--grigio)']].forEach(function(q){
+      var mk=el(d,'marker',{id:id+q[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+      el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:q[1]});});}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+  var g=9.81,m=2;
+
+  /* forza peso: salita e ritorno */
+  (function(){
+    var s=document.getElementById('g-peso');if(!s)return;
+    var c=document.getElementById('c-peso'),v=document.getElementById('v-peso');
+    var h=1.5,PX=66,Yg=150,XC=210,W=34;
+    frecce(s,'m29a');
+    el(s,'line',{x1:120,y1:Yg,x2:300,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.4});
+    for(var i=0;i<6;i++)el(s,'line',{x1:132+i*30,y1:Yg+1,x2:124+i*30,y2:Yg+9,stroke:'var(--riga)','stroke-width':1});
+    var yt=Yg-h*PX;
+    el(s,'rect',{x:XC-W/2,y:yt-W,width:W,height:W,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    el(s,'line',{x1:330,y1:Yg,x2:330,y2:yt,stroke:'var(--grigio)','stroke-width':1});
+    el(s,'line',{x1:324,y1:Yg,x2:336,y2:Yg,stroke:'var(--grigio)','stroke-width':1});
+    el(s,'line',{x1:324,y1:yt,x2:336,y2:yt,stroke:'var(--grigio)','stroke-width':1});
+    el(s,'line',{x1:272,y1:yt,x2:324,y2:yt,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(s,346,(Yg+yt)/2+4,'h',{'font-style':'italic','font-size':14,fill:'var(--inchiostro)','text-anchor':'start'});
+    var b=el(s,'g',{});
+    el(b,'rect',{x:-W/2,y:-W,width:W,height:W,rx:2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    var fp=el(b,'line',{x1:W/2+12,y1:-W,x2:W/2+12,y2:-2,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m29ar)'});
+    var tf=txt(b,W/2+30,-W/2+4,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(tf,'p');
+    var vv=el(b,'line',{x1:-W/2-12,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m29av)',x2:-W/2-12});
+    var tv=txt(b,-W/2-26,-W/2+4,'v',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+    function disegna(){
+      var p=+c.value,su=p<1,y=(su?p:2-p)*h,L=-m*g*y;
+      set(b,{transform:'translate('+XC+','+(Yg-y*PX)+')'});
+      if(su)set(vv,{y1:-2,y2:-W});else set(vv,{y1:-W,y2:-2});
+      var fine=p>=1.99;
+      [vv,tv].forEach(function(e){set(e,{visibility:(p<=0.01||fine)?'hidden':'visible'});});
+      v.innerHTML=(fine?'<span class="ok">ritorno</span>':(su?'salita':'discesa'))+' · y = '+num(y,2)+' m · L<sub>peso</sub> = '+num(L,1)+' J';
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+
+  /* attrito: andata e ritorno */
+  (function(){
+    var s=document.getElementById('g-att');if(!s)return;
+    var c=document.getElementById('c-att'),v=document.getElementById('v-att');
+    var mu=0.30,d=2,PX=110,Yg=100,XA=100,W=44,H=30,Fat=mu*m*g;
+    frecce(s,'m29b');
+    el(s,'line',{x1:20,y1:Yg,x2:400,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.4});
+    for(var i=0;i<13;i++)el(s,'line',{x1:27+i*30,y1:Yg+1,x2:19+i*30,y2:Yg+9,stroke:'var(--riga)','stroke-width':1});
+    var XB=XA+d*PX;
+    [[XA,'A'],[XB,'B']].forEach(function(q){
+      el(s,'rect',{x:q[0]-W/2,y:Yg-H,width:W,height:H,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+      txt(s,q[0],Yg+24,q[1],{fill:'var(--inchiostro)','font-size':13});});
+    var b=el(s,'g',{});
+    el(b,'rect',{x:-W/2,y:-H,width:W,height:H,rx:2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    var fa=el(b,'line',{y1:-4,y2:-4,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m29br)'});
+    var ta=txt(b,0,-12,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(ta,'at');
+    var vv=el(b,'line',{y1:-H-10,y2:-H-10,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m29bv)'});
+    var tv=txt(b,0,-H-16,'v',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+    function disegna(){
+      var p=+c.value,av=p<1,x=(av?p:2-p)*d,l=p*d,L=-Fat*l,k=av?1:-1;
+      set(b,{transform:'translate('+(XA+x*PX)+','+Yg+')'});
+      set(vv,{x1:-k*16,x2:k*20});set(tv,{x:-k*24});
+      set(fa,{x1:-k*W/2,x2:-k*(W/2+34)});set(ta,{x:-k*(W/2+18)});
+      var fermo=p<=0.01||p>=1.99;
+      [vv,tv,fa,ta].forEach(function(e){set(e,{visibility:fermo?'hidden':'visible'});});
+      var st=p>=1.99?'<span class="ok">ritorno in A</span>':(av?'andata':'ritorno');
+      v.innerHTML=st+' · percorso = '+num(l,2)+' m · L<sub>attrito</sub> = '+num(L,1)+' J';
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
