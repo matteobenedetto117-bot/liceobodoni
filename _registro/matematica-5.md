@@ -691,6 +691,7 @@ teorema del confronto, a pagina 21.
   Nessun disegno: l'unità è una tavola di formule senza schemi. Nessun interattivo:
   non c'è un parametro naturale da far variare. Nessun quesito di maturità: l'unità è
   strumentale (tavola di consultazione), come già l'unità 14 con le derivate.
+- Revisione (20/10/2026, regole 13/10): parole 260 → 91. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 30), tolti sommario, titoletto «La tavola» e frasi di commento; tavola in .def a due colonne (integrale = risultato, condizione) con righe alte due righi; spiegazione di ln|x| ridotta a una frase e una .eq; nota in una frase. Correzioni (SymPy): nella nota «arccos x e arccos x + C differiscono da −arcsin x + C» → arccos x = π/2 − arcsin x e arccot x = π/2 − arctan x; aggiunta la condizione a > 0, a ≠ 1 per ∫aˣ dx. Esempi da sette a due (tenuti ∫(3x²+2)/x dx e quello con arcsin e arctan); tolti ∫x² dx, ∫√(x³) dx, ∫2x³ dx, ∫(2eˣ+5ˣ) dx, ∫(3 sin x − 4/cos²x) dx. Nessuna figura, nessuna comparsa.
 
 ## Unità 32 — Integrali di funzioni composte
 - Parole: 243 su 1,4 pagine di traccia (124, e la parte superiore di 125 fino agli esempi
