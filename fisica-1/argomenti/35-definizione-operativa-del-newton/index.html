@@ -5,18 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Definizione operativa del newton — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:640px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,86 +56,113 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Definizione operativa del newton</h1>
 </header>
 
-<h2>Il dinamometro</h2>
+<p>Le forze si misurano con il dinamometro: come si fissa sulla sua scala la tacca di 1 N?</p>
 
-<p>Le forze si misurano con uno strumento chiamato <strong>dinamometro</strong>. È una
-molla chiusa in un astuccio: a un estremo un gancio a cui si applica la forza, all'altro
-un dischetto che scorre lungo la scala e segna di quanto la molla si è allungata.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
-    </marker>
-    <marker id="fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
-    </marker>
-  </defs>
-
-  <!-- dinamometro scarico -->
-  <text x="155" y="26" text-anchor="middle" font-size="12" fill="#555">a riposo</text>
-  <rect x="120" y="40" width="70" height="170" fill="none" stroke="#222" stroke-width="2"/>
-  <path d="M155,22 q-10,10 0,18" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="126" y1="66" x2="184" y2="66" stroke="#c0392b" stroke-width="3"/>
-  <path d="M155,66 l-12,10 l24,12 l-24,12 l24,12 l-24,12 l24,12 l-24,12 l12,10"
-        fill="none" stroke="#222" stroke-width="2"/>
-  <path d="M155,158 v34 q-12,8 0,16" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="196" y1="66" x2="248" y2="60" stroke="#333" stroke-width="1.2" marker-start="url(#fn)"/>
-  <text x="252" y="58">dischetto</text>
-  <line x1="196" y1="115" x2="248" y2="128" stroke="#333" stroke-width="1.2" marker-start="url(#fn)"/>
-  <text x="252" y="132">molla</text>
-  <line x1="160" y1="222" x2="212" y2="252" stroke="#333" stroke-width="1.2" marker-start="url(#fn)"/>
-  <text x="216" y="256">gancio</text>
-
-  <!-- dinamometro carico -->
-  <text x="430" y="26" text-anchor="middle" font-size="12" fill="#555">con la massa appesa</text>
-  <rect x="395" y="40" width="70" height="170" fill="none" stroke="#222" stroke-width="2"/>
-  <path d="M430,22 q-10,10 0,18" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="401" y1="108" x2="459" y2="108" stroke="#c0392b" stroke-width="3"/>
-  <path d="M430,40 l-11,9 l22,11 l-22,11 l22,11 l-22,11 l22,11 l-11,9"
-        fill="none" stroke="#222" stroke-width="2"/>
-  <path d="M430,108 l-9,7 l18,9 l-18,9 l18,9 l-18,9 l9,7 v24 q-12,8 0,16"
-        fill="none" stroke="#222" stroke-width="2"/>
-  <rect x="418" y="250" width="26" height="26" fill="#fff" stroke="#222" stroke-width="2"/>
-  <text x="452" y="268" font-size="12">massa da 102 g</text>
-  <line x1="471" y1="108" x2="512" y2="100" stroke="#c0392b" stroke-width="1.4" marker-start="url(#fr)"/>
-  <text x="516" y="97" fill="#c0392b" font-weight="bold">tacca 1 N</text>
-  <line x1="340" y1="60" x2="340" y2="104" stroke="#c0392b" stroke-width="2" marker-end="url(#fr)"/>
-  <text x="300" y="86" fill="#c0392b" font-size="12">allungamento</text>
-</svg>
-<figcaption>Il dischetto scende dalla posizione di riposo fino al punto dove si ferma
-quando al gancio è appesa una massa di 102 g: lì si incide la tacca di 1 N.</figcaption>
-</figure>
-
-<h2>Come si fissa la tacca</h2>
-
-<p>Per graduare la scala serve una forza di valore noto, e un peso è la forza più facile
-da procurarsi. Appendiamo al gancio un blocchetto di massa $m = 102\ \text{g}$: la
-molla si allunga finché la forza elastica non bilancia il peso del blocchetto, e il
-dischetto si ferma. Nel punto in cui si è fermato si incide la tacca <strong>1 N</strong>.</p>
-
-<p>Da qui la definizione: <strong>1 N è il modulo della forza peso applicata da un
-blocchetto di massa 102 g</strong>. Il numero 102 non è scelto a caso: con
-$F_p = m \cdot g$ e $m = 0{,}102\ \text{kg}$ si ottiene</p>
-
-$$F_p = 0{,}102\ \text{kg} \cdot 9{,}81\ \frac{\text{N}}{\text{kg}} = 1{,}00\ \text{N}$$
-
-<p>cioè proprio un newton.</p>
-
-<div class="nota">
-<p><strong>Attenzione.</strong> Il dinamometro misura una forza, non una massa: i 102 g
-servono una volta sola, per costruire la scala. Sulla Luna lo stesso blocchetto tirerebbe
-molto meno, ma la tacca incisa resterebbe la tacca di 1 N.</p>
+<div class="fig">
+<svg id="g-dina" viewBox="0 0 300 292" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px" role="img" aria-label="Dinamometro: la molla si allunga quando al gancio si appende una massa"></svg>
+<div class="cursore"><label for="c-dina">massa appesa</label><input id="c-dina" type="range" min="0" max="102" step="2" value="102"><span class="val" id="v-dina"></span></div>
+<p class="did">Taratura: con 102 g appesi il dischetto si ferma sulla tacca di 1 N</p>
 </div>
 
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Lo strumento funziona perché la molla si allunga in modo regolare al crescere della
-forza applicata: quella regolarità ha una legge precisa, ed è l'argomento successivo.</p>
-</div>
+<p>Il dinamometro è una molla chiusa in un astuccio:</p>
+<ul>
+<li>gancio → si applica la forza;</li>
+<li>dischetto → scorre lungo la scala e segna l'allungamento della molla.</li>
+</ul>
+
+<p>Per la taratura si appende al gancio un blocchetto di massa nota:</p>
+<ul>
+<li>la molla si allunga finché la forza elastica bilancia il peso;</li>
+<li>il dischetto si ferma → lì si incide la tacca.</li>
+</ul>
+
+<div class="def"><span class="et">Definizione operativa del newton</span>
+<p>1 N è il modulo della forza peso di un blocchetto di massa 102 g, sulla superficie terrestre.</p></div>
+
+<p>Il valore 102 g si ricava da $F_p = m\cdot g$:</p>
+<p class="eq">$$F_p = 0{,}102\ \text{kg}\cdot 9{,}81\ \frac{\text{N}}{\text{kg}} \approx 1{,}00\ \text{N}$$</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Il dinamometro misura una forza, non una massa: i 102 g servono solo a tarare la scala.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../34-differenza-fra-massa-e-peso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Differenza fra massa e peso</span></a><a class="successiva" href="../36-la-forza-elastica-e-la-legge-di-hooke/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La forza elastica e la legge di Hooke</span></a></nav>
+<footer><p>Fisica prima &middot; Forza peso, forza elastica e attrito &middot; Unità 34</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0(,0*)?$/.test(s))s=s.slice(1);return s.replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+
+  /* dinamometro: allungamento della molla proporzionale alla massa appesa */
+  (function(){
+    var s=document.getElementById('g-dina');if(!s)return;
+    var c=document.getElementById('c-dina'),v=document.getElementById('v-dina');
+    var g=9.81,X=150,T=24,B=164,W=26,D0=70,L1=60,ASTA=104,M=24;
+    var d=el(s,'defs',{});
+    var mk=el(d,'marker',{id:'m34r',markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:'var(--rosso)'});
+    /* anello e astuccio */
+    el(s,'path',{d:'M'+X+','+T+' q-10,-8 0,-16 q10,8 0,16',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(s,'rect',{x:X-W,y:T,width:2*W,height:B-T,fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    /* scala: tacche 0 e 1 N */
+    [[D0,'0'],[D0+L1,'1 N']].forEach(function(q){
+      el(s,'line',{x1:X+W,y1:q[0],x2:X+W+10,y2:q[0],stroke:'var(--inchiostro)','stroke-width':1.4});
+      txt(s,X+W+14,q[0]+4,q[1],{'text-anchor':'start',fill:'var(--inchiostro)'});});
+    var molla=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'});
+    var asta=el(s,'line',{x1:X,x2:X,stroke:'var(--inchiostro)','stroke-width':2});
+    var gancio=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    var disc=el(s,'line',{x1:X-W+4,x2:X+W-4,stroke:'var(--rosso)','stroke-width':3.5});
+    var filo=el(s,'line',{x1:X,x2:X,stroke:'var(--inchiostro)','stroke-width':1.2});
+    var blocco=el(s,'rect',{x:X-M/2,width:M,height:M,rx:2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    var fp=el(s,'line',{x1:X+M/2+10,x2:X+M/2+10,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m34r)'});
+    var tf=txt(s,X+M/2+24,0,'F',{'text-anchor':'start',fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(tf,'p');
+    /* etichette a sinistra */
+    var eD=txt(s,X-W-12,0,'dischetto',{'text-anchor':'end'});
+    var eM=txt(s,X-W-12,0,'molla',{'text-anchor':'end'});
+    var eG=txt(s,X-W-12,0,'gancio',{'text-anchor':'end'});
+    function disegna(){
+      var m=+c.value,y=D0+L1*m/102,F=m/1000*g;
+      var n=8,a=T+6,b=y-6,h=(b-a)/n,p='M'+X+','+T+' L'+X+','+a;
+      for(var j=0;j<n;j++)p+=' L'+(X+(j%2?12:-12))+','+(a+h*(j+.5));
+      p+=' L'+X+','+b+' L'+X+','+y;
+      set(molla,{d:p});set(disc,{y1:y,y2:y});
+      var hy=y+ASTA;
+      set(asta,{y1:y,y2:hy});
+      set(gancio,{d:'M'+X+','+hy+' q-12,8 0,16'});
+      set(eD,{y:y+4});set(eM,{y:(T+y)/2+4});set(eG,{y:hy+12});
+      var on=m>0;
+      set(filo,{y1:hy+16,y2:hy+24,visibility:on?'visible':'hidden'});
+      set(blocco,{y:hy+24,visibility:on?'visible':'hidden'});
+      var lf=40*m/102,by=hy+24+M/2;
+      set(fp,{y1:by-lf/2,y2:by+lf/2,visibility:lf>12?'visible':'hidden'});
+      set(tf,{y:by+5,visibility:lf>12?'visible':'hidden'});
+      v.innerHTML='m = '+m+' g · F<sub>p</sub> = '+num(F,2)+' N'+(m==102?' · <span class="ok">tacca 1 N</span>':'');
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
