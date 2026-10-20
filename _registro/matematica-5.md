@@ -672,6 +672,7 @@ teorema del confronto, a pagina 21.
   interattivo: l'unità è fatta di sole definizioni e proprietà, senza un oggetto che
   vari con un parametro. Nessun quesito di maturità: l'unità introduce solo notazione
   e proprietà generali, senza calcolo di un integrale specifico su cui costruirne uno.
+- Revisione (20/10/2026, regole 13/10): parole 176 → 103. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 29), tolti sommario e frasi di commento; apertura a domanda, D(x²) = D(x²+2) = D(x²+12) = 2x in .eq, definizioni di primitiva, integrale indefinito e funzione integrabile in .def, proprietà delle primitive e continuità → integrabilità in elenco, linearità in .def rosso, nota su prodotto e quoziente in una frase. Correzioni (verificate con SymPy): «tutte le primitive sono F + C» precisato «in un intervallo»; linearità ∫k f = k∫f con k ≠ 0 (per k = 0 si avrebbe C = 0); continuità «condizione sufficiente, non necessaria». Figura dei tre insiemi annidati rifatta da script (didascalia accorciata). Nessuna comparsa, nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 31 — Integrali immediati
 - Parole: 237 su 3 pagine di traccia (121–123).
