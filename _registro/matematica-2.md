@@ -271,6 +271,7 @@
 - Parole: 234 su 2 pagine di traccia (69–70, più l'Esempio 3 che nella traccia sconfina all'inizio di pag. 71 prima dell'intestazione "Formula ridotta", riportato qui perché completa la casistica dei tre segni del discriminante)
 - Rettifica: nessuna. Il discriminante e le soluzioni dei tre esempi (3x²-5x-2=0 con Δ=49, x1=2, x2=-1/3; 25x²+20x+4=0 con Δ=0, x=-2/5; 2x²-x+3=0 con Δ=-23, nessuna soluzione reale) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna oltre a una frase che spiega il ruolo del doppio segno ± nella formula, idea implicita nella traccia ma non esplicitata a parole.
+- Revisione (20/10/2026, regole 13/10): parole 178 → 62. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 33), tolti sommario, «Nella prossima unità» e titoletti «Il procedimento in due passi» ed «Esempi»; apertura a domanda con a ≠ 0; discriminante in .def; tre casi in elenco caso → conseguenza («una soluzione (in realtà due coincidenti)» → «due soluzioni coincidenti, x₁ = x₂ = −b/(2a)»); formula risolutiva in .def rosso, frase sul doppio segno ridotta a mezza riga; esempi in .eq con titoletti «Esempio 1» ed «Esempio 2». Esempi da tre a due: tolto l'Esempio 3 (2x² − x + 3 = 0, Δ = −23, nessuna soluzione reale). Nessuna comparsa, nessuna figura. Controllo concettuale (SymPy): Δ = 49, x₁ = 2, x₂ = −1/3; Δ = 0, x = −2/5; Δ = −23 confermati.
 
 ## Unità 35 — Formula ridotta
 - Parole: 310 su 2 pagine di traccia (71–72)
