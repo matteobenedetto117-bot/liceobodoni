@@ -5,89 +5,153 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Distribuzione di carica su una sfera conduttrice — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 40</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 40</p>
   <h1>Distribuzione di carica su una sfera conduttrice</h1>
-  <p class="sommario">Una sfera conduttrice carica &egrave; il caso pi&ugrave; semplice di carica
-  distribuita su un corpo esteso, e mostra una propriet&agrave; che torner&agrave; utile: vista da
-  fuori, si comporta come se tutta la carica fosse concentrata nel centro.</p>
 </header>
 
-<h2>La forza vista dall'esterno</h2>
+<p>Sfera conduttrice di raggio $R$ con carica $Q$: dove si dispone la carica?</p>
 
-<p>Consideriamo una sfera conduttrice di raggio $r$ con carica $Q$ distribuita sulla sua
-superficie, e una carica puntiforme $q$ posta a distanza $r$ dal centro. Si pu&ograve;
-verificare che la forza fra le due cariche &egrave;</p>
-
-$$F=\frac{1}{4\pi\varepsilon_0}\cdot\frac{qQ}{r^2}$$
-
-<p>cio&egrave; la stessa legge di Coulomb che vale fra due cariche puntiformi. La carica
-contenuta nella sfera si comporta, ai fini della forza, come se fosse tutta concentrata nel
-suo centro.</p>
+<ul>
+<li>cariche libere dello stesso segno → si respingono e si allontanano il più possibile;</li>
+<li>equilibrio → carica tutta sulla superficie, nessuna carica all'interno.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg">
-<circle cx="140" cy="110" r="80" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="2"/>
-<g fill="var(--rosso)" font-family="var(--sans)" font-size="15" font-weight="600">
-<text x="140" y="36">+</text><text x="196" y="52">+</text><text x="216" y="112">+</text>
-<text x="196" y="172">+</text><text x="140" y="190">+</text><text x="84" y="172">+</text>
-<text x="64" y="112">+</text><text x="84" y="52">+</text>
-</g>
-<circle cx="140" cy="110" r="2.6" fill="var(--inchiostro)"/>
-<line x1="140" y1="110" x2="380" y2="110" stroke="var(--inchiostro)" stroke-width="1.6" stroke-dasharray="4,3"/>
-<text x="255" y="102" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">r</text>
-<circle cx="380" cy="110" r="4" fill="var(--rosso)"/>
-<text x="380" y="94" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">q</text>
-<text x="140" y="130" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">Q</text>
-</svg>
-<p class="did">Sfera conduttrice carica di raggio $r$: la carica $Q$ si dispone sulla superficie.
-Una carica di prova $q$ a distanza $r$ dal centro subisce la stessa forza che subirebbe da una
-carica puntiforme $Q$ posta nel centro.</p>
+<svg id="g-sfera" viewBox="0 0 380 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Sfera conduttrice con la carica sulla superficie e una carica esterna q respinta: la forza diminuisce con il quadrato della distanza dal centro"></svg>
+<div class="cursore"><label for="s-d">distanza $r$</label>
+<input type="range" id="s-d" min="1.2" max="3" step="0.1" value="2">
+<span class="val" id="v-d"></span></div>
+<p class="did">Carica $Q$ sulla superficie; $F_0$ = forza per $r = 2R$</p>
 </div>
 
-<h2>Perch&eacute; la carica si porta in superficie</h2>
+<p>Per una carica $q$ esterna, a distanza $r &gt; R$ dal centro, la sfera agisce come una carica puntiforme $Q$ posta nel centro:</p>
 
-<p>In una sfera conduttrice carica, le cariche libere si respingono a vicenda e tendono ad
-allontanarsi il pi&ugrave; possibile l'una dall'altra. Per questo si distribuiscono sulla
-superficie della sfera, lasciando il centro vuoto di carica.</p>
+<div class="def"><span class="et">Forza su una carica esterna ($r &gt; R$)</span>
+<p class="eq principio">$$F=\frac{1}{4\pi\varepsilon_0}\cdot\frac{|q|\,|Q|}{r^2}$$</p></div>
 
-<h2>Carica totale e densit&agrave; superficiale</h2>
+<h2>Carica totale</h2>
 
-<p>Nota la densit&agrave; superficiale di carica $\sigma=Q/A$ e l'area della superficie sferica
-$A=4\pi R^2$, la carica totale portata da una sfera conduttrice di raggio $R$ &egrave;</p>
+<p>Sfera isolata → densità superficiale $\sigma = Q/A$ uniforme, con area $A = 4\pi R^2$:</p>
 
-<div class="formula-box">
-$$Q=\sigma\cdot 4\pi R^2$$
-</div>
-
-<p>dove $R$ &egrave; il raggio della sfera e $\sigma$ la densit&agrave; superficiale di carica.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Il campo elettrico, definito a partire da una carica di prova.</li>
-<li>Il teorema di Gauss, che ritrover&agrave; questo stesso risultato in modo pi&ugrave; generale.</li>
-</ul>
-</div>
+<div class="def"><span class="et">Carica sulla sfera</span>
+<p class="eq principio">$$Q=\sigma\cdot 4\pi R^2 \qquad \sigma=\frac{Q}{4\pi R^2}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../41-confronto-fra-coulomb-e-newton-densita-di-carica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Confronto fra Coulomb e Newton; densità di carica</span></a><a class="successiva" href="../43-il-campo-elettrico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il campo elettrico</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 40</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  var s=document.getElementById('g-sfera'),c=document.getElementById('s-d'),v=document.getElementById('v-d');if(!s)return;
+  var CX=85,CY=78,R=55,L0=60;
+  var d=el(s,'defs',{}),m=el(d,'marker',{id:'mf',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--rosso)'});
+  el(s,'circle',{cx:CX,cy:CY,r:R,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2});
+  for(var i=0;i<12;i++){var a=i*Math.PI/6+Math.PI/12;txt(s,CX+(R-9)*Math.cos(a),CY+(R-9)*Math.sin(a)+5,'+',{fill:'var(--rosso)','font-size':14,'font-weight':700});}
+  /* raggio R */
+  var ar=-Math.PI*0.62;
+  el(s,'line',{x1:CX,y1:CY,x2:CX+R*Math.cos(ar),y2:CY+R*Math.sin(ar),stroke:'var(--inchiostro)','stroke-width':1.2});
+  txt(s,CX+0.5*R*Math.cos(ar)-9,CY+0.5*R*Math.sin(ar)+2,'R',{fill:'var(--inchiostro)','font-style':'italic'});
+  el(s,'circle',{cx:CX,cy:CY,r:2.6,fill:'var(--inchiostro)'});
+  txt(s,CX-4,CY+18,'O',{fill:'var(--inchiostro)','font-size':12});
+  /* quota r */
+  var qy=CY+R+22;
+  el(s,'line',{x1:CX,y1:CY+4,x2:CX,y2:qy+6,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+  var qu=el(s,'line',{x1:CX,y1:qy,y2:qy,stroke:'var(--grigio)','stroke-width':1.2});
+  var t2=el(s,'line',{y1:qy-6,y2:qy+6,stroke:'var(--grigio)','stroke-width':1.2});
+  var tq=el(s,'line',{y1:CY+8,y2:qy+6,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+  var er=txt(s,0,qy+16,'r',{'font-style':'italic'});
+  /* carica esterna e forza */
+  var f=el(s,'line',{y1:CY,y2:CY,stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#mf)'});
+  var ef=txt(s,0,CY-12,'F',{fill:'var(--rosso)','font-weight':700});
+  var g=el(s,'g',{});el(g,'circle',{r:8,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.8});txt(g,0,5,'+',{fill:'var(--rosso)','font-size':13,'font-weight':700});
+  var eq=txt(s,0,CY-14,'q',{fill:'var(--inchiostro)','font-style':'italic'});
+  function agg(){
+    var k=+c.value,x=CX+k*R,L=L0/((k/2)*(k/2)),a=10;
+    set(g,{transform:'translate('+x+','+CY+')'});
+    set(f,{x1:x+a,x2:x+a+L});set(ef,{x:x+a+L/2+(L<20?6:0)});
+    set(eq,{x:x-1}); if(L<26){set(eq,{x:x-14});}
+    set(qu,{x2:x});set(t2,{x1:x,x2:x});set(tq,{x1:x,x2:x});set(er,{x:(CX+x)/2+(k<1.6?14:0)});
+    v.innerHTML='r = '+num(k,1)+' R &nbsp; F = '+num(4/(k*k),2)+' F₀';
+  }
+  c.addEventListener('input',agg);agg();
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
