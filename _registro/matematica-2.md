@@ -265,6 +265,7 @@
 - Parole: 294 su 2 pagine di traccia (67–68)
 - Rettifica: nessuna, la traccia era corretta e completa
 - Aggiunta: nessuna, solo il richiamo al principio di annullamento del prodotto già noto dalle equazioni di primo grado, per spiegare il passaggio del raccoglimento
+- Revisione (20/10/2026, regole 13/10): parole 240 → 59. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 32), tolti sommario e «Nella prossima unità» (rimando alla formula risolutiva), apertura a domanda; tre titoletti tenuti (tre casi distinti); forma di ciascun caso in .def con le condizioni sui coefficienti nella formula; raccoglimento e soluzioni della spuria in una .eq; casi della pura in elenco caso → conseguenza; monomia in una .def; due esempi (spuria 7x² + 56x = 0, pura x² − 9 = 0) in forma «Esempio: risolvere …» + .eq; tolte le frasi di commento («ha sempre lo zero come soluzione»). Nessuna comparsa, nessuna figura (la pagina non ne aveva). Nessuna correzione concettuale: soluzioni generali ed esempi verificati con SymPy; mantenuta l'ipotesi a ≠ 0 nell'apertura.
 
 ## Unità 34 — Formula risolutiva e discriminante
 - Parole: 234 su 2 pagine di traccia (69–70, più l'Esempio 3 che nella traccia sconfina all'inizio di pag. 71 prima dell'intestazione "Formula ridotta", riportato qui perché completa la casistica dei tre segni del discriminante)
