@@ -5,18 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Energia potenziale gravitazionale — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0}
-.esempio h3{margin-top:0;font-size:1rem;font-family:var(--sans);color:var(--blu)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,76 +57,110 @@
   <h1>Energia potenziale gravitazionale</h1>
 </header>
 
-<h2>Dal lavoro della forza peso all'energia potenziale</h2>
-
-<p>La forza peso è conservativa, quindi vale $L=-\Delta U$. Solleviamo un
-oggetto di uno spostamento $\vec{s}$ diretto verso l'alto; su di esso
-agisce la forza peso $\vec{F_p}$, diretta verso il basso. Il lavoro della
-forza peso è</p>
-
-$$L=\vec{F_p}\cdot\vec{s}$$
-
-<p>Forza e spostamento sono opposti, quindi il prodotto scalare dà segno
-negativo: $L=-F_p\,s$. Con $F_p=mg$ e $s=h$:</p>
-
-$$L=-mgh$$
-
-<div class="risultato">
-<p>Dalla relazione generale $\Delta U=-L$ segue l'energia potenziale
-gravitazionale:</p>
-$$\Delta U=mgh$$
-<p>Preso lo zero dell'energia potenziale alla quota di partenza
-($U_i=0$), risulta $U_f=mgh$, cioè $\Delta U=U_f-U_i=mgh$.</p>
-</div>
+<p>Corpo di massa $m$ sollevato di un'altezza $h$: di quanto varia la sua energia potenziale?</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f40s" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-<marker id="f40f" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="30" y1="20" x2="30" y2="180" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="20" y1="180" x2="230" y2="180" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="10" y="60" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">h</text>
-<rect x="90" y="45" width="34" height="34" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="90" y="146" width="34" height="34" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="107" y1="140" x2="107" y2="85" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f40s)"/>
-<text x="118" y="110" font-size="13" fill="var(--verde)" font-family="var(--sans)">s</text>
-<line x1="150" y1="150" x2="150" y2="175" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f40f)"/>
-<text x="158" y="168" font-size="13" fill="var(--rosso)" font-family="var(--sans)">F<tspan font-size="9" dy="3">p</tspan></text>
-<text x="8" y="24" font-size="12" fill="var(--grigio)" font-family="var(--sans)">h(m)</text>
-</svg>
-<p class="did">L'oggetto sale di $s=h$; la forza peso $F_p$ punta verso il
-basso, in verso opposto allo spostamento.</p>
+<svg id="g-quota" viewBox="0 0 250 228" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px" role="img" aria-label="Corpo sollevato: spostamento verso l'alto, forza peso verso il basso"></svg>
+<div class="cursore"><label for="c-quota">quota</label><input id="c-quota" type="range" min="0" max="6" step="0.1" value="6"><span class="val" id="v-quota"></span></div>
+<p class="did">$m = 2{,}7\ \text{kg}$: spostamento $\vec s$ verso l'alto, forza peso $\vec F_p$ verso il basso</p>
 </div>
 
-<h2>Esempi</h2>
+<p>La forza peso è conservativa e ha verso opposto allo spostamento:</p>
+<ul>
+<li>$\vec F_p$ verso il basso, intensità $mg$;</li>
+<li>$\vec s$ verso l'alto, lunghezza $h$.</li>
+</ul>
 
-<div class="esempio">
-<h3>Esempio 1</h3>
-<p>Un oggetto di massa $m=12$ kg viene sollevato di $h=4$ m.</p>
-$$\Delta U=mgh=12\cdot 9{,}81\cdot 4=471\ \text{J}$$
-</div>
+<p>Il prodotto scalare è quindi negativo:</p>
+<p class="eq">$$L = \vec F_p\cdot\vec s = -F_p\,s = -mgh$$</p>
 
-<div class="esempio">
-<h3>Esempio 2</h3>
-<p>Un oggetto di massa $m=2{,}7$ kg passa dalla quota $h_i=3$ m alla
-quota $h_f=6$ m.</p>
-$$\Delta U=U_f-U_i=mgh_f-mgh_i=158{,}9-79{,}5=79{,}5\ \text{J}$$
-</div>
+<p>Da $\Delta U = -L$ segue:</p>
+<div class="def"><span class="et">Energia potenziale gravitazionale</span>
+<p class="eq principio">$$\Delta U = mgh$$</p>
+<p>Zero alla quota di partenza ($U_i = 0$): $U_f = mgh$. $\Delta U$ in joule (J).</p></div>
 
-<div class="esempio">
-<h3>Esempio 3</h3>
-<p>Un oggetto di massa $m=4$ kg scende dalla quota $h_i=7$ m alla quota
-$h_f=3$ m.</p>
-$$\Delta U=mg(h_f-h_i)=4\cdot 9{,}81\cdot(3-7)=-157\ \text{J}$$
-<p>La variazione è negativa: scendendo, l'energia potenziale
-diminuisce.</p>
-</div>
+<p>Fra due quote qualsiasi:</p>
+<p class="eq">$$\Delta U = U_f - U_i = mg\,(h_f - h_i)$$</p>
+<ul>
+<li>salita → $\Delta U$ positiva;</li>
+<li>discesa → $\Delta U$ negativa.</li>
+</ul>
+
+<h2>Esempio 1</h2>
+<p>Dati: $m = 2{,}7\ \text{kg}$, $\;h_i = 3\ \text{m}$, $\;h_f = 6\ \text{m}$. Calcolare $\Delta U$.</p>
+<p class="eq">$$\Delta U = mg\,(h_f - h_i) = 2{,}7\ \text{kg}\cdot 9{,}81\ \text{m/s}^2\cdot(6-3)\ \text{m} \approx 79{,}5\ \text{J}$$</p>
+
+<h2>Esempio 2</h2>
+<p>Dati: $m = 4\ \text{kg}$, $\;h_i = 7\ \text{m}$, $\;h_f = 3\ \text{m}$. Calcolare $\Delta U$.</p>
+<p class="eq">$$\Delta U = mg\,(h_f - h_i) = 4\ \text{kg}\cdot 9{,}81\ \text{m/s}^2\cdot(3-7)\ \text{m} \approx -157\ \text{J}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../39-forze-conservative-ed-energia-potenziale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Forze conservative ed energia potenziale</span></a><a class="successiva" href="../41-energia-potenziale-elastica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia potenziale elastica</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 30</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0(,0*)?$/.test(s))s=s.slice(1);return s.replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+
+  /* corpo sollevato: s verso l'alto, F_p verso il basso */
+  (function(){
+    var s=document.getElementById('g-quota');if(!s)return;
+    var c=document.getElementById('c-quota'),v=document.getElementById('v-quota');
+    var g=9.81,m=2.7,PX=28,Yg=208,XR=46,XC=150,W=30;
+    var d=el(s,'defs',{});
+    [['r','var(--rosso)'],['v','var(--verde)']].forEach(function(q){
+      var mk=el(d,'marker',{id:'m30'+q[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+      el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:q[1]});});
+    el(s,'line',{x1:XR-6,y1:Yg,x2:236,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.4});
+    for(var i=0;i<6;i++)el(s,'line',{x1:96+i*24,y1:Yg+1,x2:88+i*24,y2:Yg+9,stroke:'var(--riga)','stroke-width':1});
+    el(s,'line',{x1:XR,y1:Yg,x2:XR,y2:Yg-6*PX-10,stroke:'var(--grigio)','stroke-width':1});
+    for(var k=0;k<=6;k++){
+      el(s,'line',{x1:XR-4,y1:Yg-k*PX,x2:XR,y2:Yg-k*PX,stroke:'var(--grigio)','stroke-width':1});
+      if(k%3==0)txt(s,XR-8,Yg-k*PX+4,String(k),{'text-anchor':'end'});}
+    txt(s,XR+6,Yg-6*PX-6,'y (m)',{'text-anchor':'start'});
+    el(s,'rect',{x:XC-W/2,y:Yg-W,width:W,height:W,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    var rif=el(s,'line',{x1:XR,x2:XC-W/2,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    var sv=el(s,'line',{x1:XC-W/2-12,x2:XC-W/2-12,y1:Yg-W,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m30v)'});
+    var ts=txt(s,XC-W/2-24,0,'s',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+    var b=el(s,'g',{});
+    el(b,'rect',{x:-W/2,y:-W,width:W,height:W,rx:2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    el(b,'line',{x1:W/2+12,y1:-W+2,x2:W/2+12,y2:-2,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m30r)'});
+    var tf=txt(b,W/2+28,-W/2+4,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(tf,'p');
+    function disegna(){
+      var y=+c.value,yb=Yg-y*PX,L=-m*g*y;
+      set(b,{transform:'translate('+XC+','+yb+')'});
+      set(rif,{y1:yb,y2:yb,visibility:y>0.05?'visible':'hidden'});
+      var vis=(Yg-W)-(yb+3)>16;
+      set(sv,{y2:yb+3,visibility:vis?'visible':'hidden'});
+      set(ts,{y:((Yg-W)+yb)/2+5,visibility:vis?'visible':'hidden'});
+      v.innerHTML='y = '+num(y,1)+' m · L<sub>peso</sub> = '+num(L,0)+' J · ΔU = '+(y>0.05?'+':'')+num(-L,0)+' J';
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
