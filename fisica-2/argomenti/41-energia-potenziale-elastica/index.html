@@ -5,16 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Energia potenziale elastica — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -25,50 +57,105 @@
   <h1>Energia potenziale elastica</h1>
 </header>
 
-<h2>Dal lavoro della forza elastica all'energia potenziale elastica</h2>
-
-<p>Il lavoro della forza elastica per un allungamento $x$ è
-$L_{el}=-\tfrac12kx^2$: è negativo perché la forza è di richiamo,
-opposta allo spostamento. Dalla relazione generale $\Delta U=-L$
-applicata a questo caso:</p>
-
-$$\Delta U_{el}=-L_{el}$$
-
-<div class="risultato">
-<p>Variazione di energia potenziale elastica per un allungamento (o
-compressione) $x$:</p>
-$$\Delta U_{el}=\dfrac{1}{2}kx^2$$
-</div>
+<p>Molla di costante elastica $k$ allungata di $x$ rispetto alla posizione di riposo: di quanto varia la sua energia potenziale?</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f41x" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="20" y1="20" x2="20" y2="90" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<path d="M20,35 l14,-7 l14,14 l14,-14 l14,14 l14,-14 l14,14 l14,-7" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="132" y="35" width="34" height="34" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="166" y1="52" x2="230" y2="52" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#f41x)"/>
-<text x="190" y="45" font-size="13" fill="var(--verde)" font-family="var(--sans)">x</text>
-<line x1="132" y1="100" x2="132" y2="115" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="3,3"/>
-<line x1="230" y1="100" x2="230" y2="115" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="3,3"/>
-<text x="140" y="128" font-size="12" fill="var(--grigio)" font-family="var(--sans)">posizione di riposo</text>
-</svg>
-<p class="did">La molla, fissata a un muro, viene allungata di $x$
-rispetto alla posizione di riposo: in quella posizione immagazzina
-l'energia potenziale elastica.</p>
+<svg id="g-molla" viewBox="0 30 300 124" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Molla fissata a un muro, allungata di x; forza elastica opposta all'allungamento"></svg>
+<div class="cursore"><label for="c-molla">allungamento</label><input id="c-molla" type="range" min="0" max="2.2" step="0.1" value="2.2"><span class="val" id="v-molla"></span></div>
+<p class="did">$k = 150\ \text{N/m}$: allungamento $x$ verso destra, forza elastica $\vec F_{el}$ verso sinistra</p>
 </div>
 
+<p>La forza elastica è di richiamo, opposta all'allungamento; il suo lavoro è negativo:</p>
+<p class="eq">$$L_{el} = -\tfrac12\,k\,x^2$$</p>
+
+<p>Da $\Delta U = -L$ segue:</p>
+<div class="def"><span class="et">Energia potenziale elastica</span>
+<p class="eq principio">$$\Delta U_{el} = -L_{el} = \tfrac12\,k\,x^2$$</p>
+<p>$x$ misurato dalla posizione di riposo; $k$ in N/m, $x$ in m, $\Delta U_{el}$ in joule (J).</p></div>
+
+<ul>
+<li>allungamento $x$ → $\Delta U_{el} = \tfrac12 kx^2$;</li>
+<li>compressione $x$ → stesso valore (dipende da $x^2$).</li>
+</ul>
+
 <h2>Esempio</h2>
-
-<p>Una molla di costante elastica $k=150\ \text{N/m}$ viene allungata di
-$x=2{,}2\ \text{m}$:</p>
-
-$$\Delta U_{el}=\dfrac{1}{2}kx^2=\dfrac{1}{2}\cdot150\ \tfrac{\text{N}}{\text{m}}\cdot(2{,}2\ \text{m})^2=363\ \text{J}$$
+<p>Dati: $k = 150\ \text{N/m}$, $\;x = 2{,}2\ \text{m}$. Calcolare $\Delta U_{el}$.</p>
+<p class="eq">$$\Delta U_{el} = \tfrac12\,k\,x^2 = \tfrac12\cdot 150\ \tfrac{\text{N}}{\text{m}}\cdot(2{,}2\ \text{m})^2 = 363\ \text{J} \approx 3{,}6\times10^{2}\ \text{J}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../40-energia-potenziale-gravitazionale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia potenziale gravitazionale</span></a><a class="successiva" href="../42-conservazione-dell-energia-meccanica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Conservazione dell'energia meccanica</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 31</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0(,0*)?$/.test(s))s=s.slice(1);return s.replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+
+  /* molla allungata di x: forza elastica opposta all'allungamento */
+  (function(){
+    var s=document.getElementById('g-molla');if(!s)return;
+    var c=document.getElementById('c-molla'),v=document.getElementById('v-molla');
+    var k=150,PX=50,XM=24,X0=124,W=34,Yg=112,FN=0.22;
+    var d=el(s,'defs',{});
+    [['r','var(--rosso)'],['v','var(--verde)']].forEach(function(q){
+      var mk=el(d,'marker',{id:'m31'+q[0],markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+      el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:q[1]});});
+    /* muro e pavimento */
+    el(s,'line',{x1:XM,y1:Yg-62,x2:XM,y2:Yg,stroke:'var(--inchiostro)','stroke-width':2.4});
+    for(var i=0;i<5;i++)el(s,'line',{x1:XM,y1:Yg-56+i*12,x2:XM-8,y2:Yg-48+i*12,stroke:'var(--riga)','stroke-width':1});
+    el(s,'line',{x1:XM,y1:Yg,x2:290,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.4});
+    /* posizione di riposo */
+    el(s,'line',{x1:X0,y1:Yg-64,x2:X0,y2:Yg+14,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(s,X0,Yg-70,'riposo');
+    var molla=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'});
+    var b=el(s,'rect',{y:Yg-W,width:W,height:W,rx:2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    var fine=el(s,'line',{y1:Yg-66,y2:Yg+14,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    var sx=el(s,'line',{y1:Yg+20,y2:Yg+20,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m31v)'});
+    var tx=txt(s,0,Yg+36,'x',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+    var fe=el(s,'line',{y1:Yg-W-12,y2:Yg-W-12,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m31r)'});
+    var tf=txt(s,0,Yg-W-20,'F',{fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(tf,'el');
+    function disegna(){
+      var x=+c.value,xb=X0+x*PX,F=k*x,U=0.5*k*x*x;
+      /* molla a zigzag dal muro al blocco */
+      var n=10,a=XM+8,bx=xb-8,h=(bx-a)/n,p='M'+XM+','+(Yg-W/2)+' L'+a+','+(Yg-W/2);
+      for(var j=0;j<n;j++)p+=' L'+(a+h*(j+.5))+','+(Yg-W/2+(j%2?9:-9));
+      p+=' L'+bx+','+(Yg-W/2)+' L'+xb+','+(Yg-W/2);
+      set(molla,{d:p});
+      set(b,{x:xb});
+      var on=x>0.05;
+      set(fine,{x1:xb,x2:xb,visibility:on?'visible':'hidden'});
+      var lx=xb-X0>16;
+      set(sx,{x1:X0,x2:xb-3,visibility:lx?'visible':'hidden'});
+      set(tx,{x:(X0+xb)/2,visibility:lx?'visible':'hidden'});
+      var lf=F*FN,cx=xb+W/2;
+      set(fe,{x1:cx,x2:cx-lf+3,visibility:lf>12?'visible':'hidden'});
+      set(tf,{x:cx-lf/2,visibility:lf>12?'visible':'hidden'});
+      v.innerHTML='x = '+num(x,1)+' m · F<sub>el</sub> = '+num(F,0)+' N · ΔU<sub>el</sub> = '+num(U,0)+' J';
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
