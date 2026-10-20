@@ -5,20 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le prime tre equazioni di Maxwell — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>ul{padding-left:var(--r)}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.def p+p{margin-top:0}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-</style>
-</head>
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+</style></head>
+
 <body>
 <div class="foglio">
 
@@ -26,138 +50,183 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 32</p>
   <h1>Le prime tre equazioni di Maxwell</h1>
-  <p class="sommario">Tutta la fisica dei campi elettrici e magnetici che abbiamo incontrato si
-  lascia raccogliere in quattro equazioni fondamentali. Vediamo qui le prime tre: i due teoremi
-  di Gauss, che dicono come si comporta il flusso attraverso una superficie chiusa, e la legge di
-  Faraday-Neumann-Lenz riscritta nel linguaggio della circuitazione.</p>
 </header>
+
+<p>Flusso attraverso una superficie chiusa e circuitazione lungo un percorso chiuso: che cosa valgono per $\vec E$ e per $\vec B$?</p>
 
 <h2>Teorema di Gauss per il campo elettrico</h2>
 
-<p>Consideriamo una superficie chiusa qualsiasi. Il flusso del campo elettrico attraverso di essa
-dipende solo dalla carica racchiusa all'interno:</p>
+<p>Superficie chiusa qualsiasi, carica totale $q$ al suo interno:</p>
 
-$$\Phi(\vec E) = \frac{q}{\varepsilon_0}$$
-
-<p>$q$ è la carica totale contenuta nella superficie. Una carica esterna, per quanto vicina, non
-contribuisce al flusso: ogni linea di campo che entra nella superficie ne esce anche, e il suo
-contributo netto è nullo.</p>
+<div class="def"><span class="et">I equazione di Maxwell</span>
+<p class="eq">$$\Phi(\vec E) = \frac{q}{\varepsilon_0}$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f32r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<path d="M130,55 C185,25 255,35 288,75 C320,112 312,165 268,196 C218,230 148,222 112,186 C76,150 78,95 130,55 Z"
-  fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.8"/>
-<text x="200" y="216" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">superficie chiusa</text>
-<circle cx="205" cy="128" r="4" fill="var(--inchiostro)"/>
-<text x="218" y="124" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">q</text>
-<circle cx="46" cy="150" r="4" fill="var(--inchiostro)"/>
-<text x="30" y="172" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">q</text>
-<path d="M46,150 C80,95 110,70 148,80 C172,88 172,112 150,120 C126,128 104,120 92,150"
-  fill="none" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f32r)"/>
-</svg>
-<p class="did">Una carica interna genera flusso netto $q/\varepsilon_0$; una carica esterna manda
-una linea di campo dentro la superficie e la stessa linea ne esce: il contributo si cancella.</p>
+<svg id="fig-gauss-e" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px" role="img" aria-label="A sinistra una carica dentro una superficie chiusa, con linee di campo radiali che escono; a destra una carica fuori dalla superficie, con linee di campo che entrano ed escono"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Carica interna: $\Phi(\vec E)=q/\varepsilon_0$</p>
+<p class="did">Carica esterna: ogni linea entra ed esce, contributo nullo</p>
+</div>
 </div>
 
 <h2>Teorema di Gauss per il campo magnetico</h2>
 
-<p>Lo stesso ragionamento applicato al campo magnetico dà un risultato ancora più netto: il
-flusso di $\vec B$ attraverso una qualunque superficie chiusa è sempre nullo,</p>
+<div class="def"><span class="et">II equazione di Maxwell</span>
+<p class="eq">$$\Phi(\vec B) = 0 \qquad \text{per qualsiasi superficie chiusa}$$</p></div>
 
-$$\Phi(\vec B) = 0$$
-
-<p>perché non esistono cariche magnetiche isolate, i monopoli. Ogni linea di campo magnetico è
-chiusa su se stessa: se entra in una superficie chiusa, prima o poi ne esce.</p>
-
-<div class="fig">
-<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f32b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<rect x="30" y="88" width="74" height="44" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="52" y="115" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">S</text>
-<text x="82" y="115" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">N</text>
-<ellipse cx="230" cy="110" rx="130" ry="88" fill="none" stroke="var(--blu)" stroke-width="1.6" stroke-dasharray="5 4"/>
-<text x="230" y="206" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">superficie chiusa</text>
-<path d="M104,96 C160,55 230,55 270,96" fill="none" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f32b)"/>
-<path d="M104,124 C160,165 230,165 270,124" fill="none" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f32b)"/>
-<path d="M104,108 C190,88 260,88 320,108" fill="none" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#f32b)"/>
-<path d="M104,112 C190,138 260,138 320,112" fill="none" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#f32b)"/>
-</svg>
-<p class="did">Le linee del campo di un magnete sono chiuse: entrano ed escono dalla superficie
-in coppie, e il flusso totale $\Phi(\vec B)$ resta zero.</p>
-</div>
-
-<h2>La legge di Faraday-Neumann-Lenz come circuitazione</h2>
-
-<p>Conosciamo già la fem indotta come variazione nel tempo del flusso concatenato, e il suo
-limite per intervalli piccolissimi:</p>
-
-$$\varepsilon = -\frac{\Delta\Phi(\vec B)}{\Delta t}\ \xrightarrow[\Delta t\to 0]{}\ \varepsilon = -\frac{d\Phi(\vec B)}{dt}$$
-
-<p>Vediamo ora da dove viene fisicamente questa fem: è il campo elettrico indotto $\vec E$ stesso
-a compiere lavoro spostando una carica $q$ lungo un percorso chiuso $\gamma$.</p>
-
-<div class="fig">
-<svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f32e" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="f32q" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<path d="M90,60 C150,32 230,38 268,70 C300,98 292,150 250,178 C205,206 130,200 96,168 C64,138 62,90 90,60 Z"
-  fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="178" y="216" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">&gamma;</text>
-<line x1="120" y1="20" x2="105" y2="70" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f32e)"/>
-<line x1="165" y1="16" x2="158" y2="66" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f32e)"/>
-<line x1="210" y1="16" x2="212" y2="66" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f32e)"/>
-<line x1="255" y1="20" x2="262" y2="70" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f32e)"/>
-<text x="290" y="45" font-family="var(--sans)" font-size="14" fill="var(--rosso)">E</text>
-<circle cx="118" cy="58" r="4" fill="var(--inchiostro)"/>
-<text x="106" y="46" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">q</text>
-<line x1="122" y1="58" x2="148" y2="50" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f32q)"/>
-<text x="152" y="42" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&delta;l</text>
-</svg>
-<p class="did">Il campo elettrico indotto $\vec E$ compie lavoro su una carica $q$ che percorre
-$\gamma$: lo spostamento elementare è $\delta\vec l$.</p>
-</div>
-
-<p>Lungo un piccolo spostamento $\delta\vec l$ il lavoro della forza elettrica è
-$q\,\vec E\cdot\delta\vec l$; sommando su tutto il percorso $\gamma$:</p>
-
-$$L = \sum_\gamma \vec F_{el}\cdot\delta\vec l = \sum_\gamma q\,\vec E\cdot\delta\vec l
-\qquad\Rightarrow\qquad \frac{L}{q} = \sum_\gamma \vec E\cdot\delta\vec l = \Gamma(\vec E)$$
-
-<p>$\Gamma(\vec E)$ è la circuitazione del campo elettrico lungo $\gamma$: la somma, punto per
-punto, del prodotto scalare fra il campo e lo spostamento. D'altra parte il lavoro per unità di
-carica è per definizione la fem, $L/q = \Delta V = \varepsilon$: le due espressioni coincidono,
-$\varepsilon = \Gamma(\vec E)$.</p>
-
-<div class="formula-box">
-$$\Gamma(\vec E) = -\frac{d\Phi(\vec B)}{dt} \qquad \text{III equazione di Maxwell}$$
-</div>
-
-<div class="nota">
-<span class="et">Da non confondere</span>
-Nel campo elettrostatico, generato da cariche ferme, la circuitazione è sempre nulla: è la ragione
-per cui si può parlare di potenziale. Qui invece $\Gamma(\vec E) \ne 0$: il campo elettrico
-indotto da un flusso magnetico variabile non è conservativo.
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>L'unità 33 mostra un paradosso nella legge di Ampère applicata a un condensatore in carica, e
-introduce il termine correttivo di Maxwell, la corrente di spostamento: con esso si completa il
-quadro delle quattro equazioni.</li>
+<li>monopoli magnetici → mai osservati;</li>
+<li>linee di campo chiuse → ogni linea che entra nella superficie ne esce.</li>
 </ul>
+
+<div class="fig">
+<svg id="fig-gauss-b" viewBox="0 0 440 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:440px" role="img" aria-label="Magnete a barra con linee di campo chiuse e una superficie chiusa tratteggiata attorno al polo nord: le linee entrano dentro il magnete ed escono all'esterno"></svg>
+<p class="did">Superficie chiusa attorno al polo N: le linee entrano nel magnete ed escono all'esterno</p>
 </div>
+
+<h2>Legge di Faraday-Neumann-Lenz come circuitazione</h2>
+
+<p class="eq">$$\varepsilon = -\frac{\Delta\Phi(\vec B)}{\Delta t}\ \xrightarrow[\Delta t\to 0]{}\ \varepsilon = -\frac{d\Phi(\vec B)}{dt}$$</p>
+
+<p>La fem è il lavoro per unità di carica del campo elettrico indotto lungo un percorso chiuso $\gamma$:</p>
+
+<div class="fig">
+<svg id="fig-circ" viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Campo magnetico uniforme entrante nel foglio e in aumento; percorso chiuso gamma con il campo elettrico indotto tangente in verso antiorario e una carica q con spostamento delta l"></svg>
+<p class="did">$\vec B$ entrante, in aumento: $\vec E$ indotto tangente a $\gamma$</p>
+</div>
+
+<p class="eq">$$L = \sum_\gamma q\,\vec E\cdot\delta\vec l \qquad\Rightarrow\qquad \frac{L}{q} = \sum_\gamma \vec E\cdot\delta\vec l = \Gamma(\vec E)$$</p>
+
+<p>Con $L/q=\varepsilon$:</p>
+
+<div class="def"><span class="et">III equazione di Maxwell</span>
+<p class="eq">$$\Gamma(\vec E) = -\frac{d\Phi(\vec B)}{dt}$$</p></div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Campo elettrostatico: $\Gamma(\vec E)=0$; campo indotto: $\Gamma(\vec E)\neq0$, non conservativo.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../31-trasformatori/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Trasformatori</span></a><a class="successiva" href="../33-corrente-di-spostamento-e-legge-di-ampere-maxwell/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Corrente di spostamento e legge di Ampère-Maxwell</span></a></nav>
 <footer><p>Fisica quinta &middot; Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 32</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script><script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13,stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function carica(p,x,y){el(p,'circle',{cx:x,cy:y,r:9,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.6});
+    el(p,'text',{x:x,y:y+5,'text-anchor':'middle','font-family':'var(--sans)','font-size':13,fill:'var(--rosso)'},'+');}
+  /* intersezioni della semiretta P+t·u (t>0) con l'ellisse di centro C e semiassi a,b */
+  function inters(P,u,C,a,b){var px=(P[0]-C[0])/a,py=(P[1]-C[1])/b,ux=u[0]/a,uy=u[1]/b;
+    var A=ux*ux+uy*uy,B=2*(px*ux+py*uy),Cc=px*px+py*py-1,D=B*B-4*A*Cc;
+    if(D<=0)return [];var s=Math.sqrt(D);return [(-B-s)/(2*A),(-B+s)/(2*A)].filter(function(t){return t>0;});}
+
+  /* ---------- 1. Gauss per E: carica interna / carica esterna ---------- */
+  (function(){
+    var S=document.getElementById('fig-gauss-e'); if(!S)return;
+    var cp=el(S,'defs',{});
+    [[0,0,250,220],[270,0,250,220]].forEach(function(r,i){var c=el(cp,'clipPath',{id:'cg'+i});el(c,'rect',{x:r[0],y:r[1],width:r[2],height:r[3]});});
+    el(S,'line',{x1:260,y1:10,x2:260,y2:210,stroke:'var(--riga)','stroke-width':1.2});
+    /* pannello sinistro */
+    var C1=[125,110],a1=72,b1=56, g1=el(S,'g',{'clip-path':'url(#cg0)'});
+    el(g1,'ellipse',{cx:C1[0],cy:C1[1],rx:a1,ry:b1,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.8});
+    for(var k=0;k<8;k++){var th=k*Math.PI/4+Math.PI/8,u=[Math.cos(th),Math.sin(th)];
+      el(g1,'line',{x1:f(C1[0]+12*u[0]),y1:f(C1[1]+12*u[1]),x2:f(C1[0]+200*u[0]),y2:f(C1[1]+200*u[1]),stroke:'var(--rosso)','stroke-width':1.5});
+      var t=inters(C1,u,C1,a1,b1)[0]; punta(g1,C1[0]+(t+12)*u[0],C1[1]+(t+12)*u[1],u[0],u[1],'var(--rosso)',6);}
+    carica(S,C1[0],C1[1]);
+    T(S,C1[0]+a1-8,C1[1]+b1+22,'S',{'font-style':'italic',fill:'var(--blu)'});
+    /* pannello destro: carica a sinistra della superficie */
+    var Q=[300,110],C2=[430,110],a2=62,b2=56, g2=el(S,'g',{'clip-path':'url(#cg1)'});
+    el(g2,'ellipse',{cx:C2[0],cy:C2[1],rx:a2,ry:b2,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.8});
+    for(var k=0;k<12;k++){var th=k*Math.PI/6+Math.PI/12,u=[Math.cos(th),Math.sin(th)];
+      el(g2,'line',{x1:f(Q[0]+12*u[0]),y1:f(Q[1]+12*u[1]),x2:f(Q[0]+300*u[0]),y2:f(Q[1]+300*u[1]),stroke:'var(--rosso)','stroke-width':1.5});
+      var ts=inters(Q,u,C2,a2,b2);
+      if(ts.length===2){ts.forEach(function(t){punta(g2,Q[0]+t*u[0]+3*u[0],Q[1]+t*u[1]+3*u[1],u[0],u[1],'var(--rosso)',6);});}
+      else punta(g2,Q[0]+34*u[0],Q[1]+34*u[1],u[0],u[1],'var(--rosso)',6);}
+    carica(S,Q[0],Q[1]);
+    T(S,C2[0]+a2-24,C2[1]+b2+22,'S',{'font-style':'italic',fill:'var(--blu)'});
+  })();
+
+  /* ---------- 2. Gauss per B: linee di un magnete a barra (modello a due poli), superficie attorno a N ---------- */
+  (function(){
+    var S=document.getElementById('fig-gauss-b'); if(!S)return;
+    var cx=220,cy=165,Lm=60,hm=16;      /* magnete da cx-Lm a cx+Lm */
+    var pN=[cx+Lm-8,cy],pS=[cx-Lm+8,cy];
+    function campo(x,y){var bx=0,by=0;[[pN,1],[pS,-1]].forEach(function(p){var dx=x-p[0][0],dy=y-p[0][1],r=Math.hypot(dx,dy);var c=p[1]/(r*r*r);bx+=c*dx;by+=c*dy;});return [bx,by];}
+    var G=el(S,'g',{});
+    var partenze=[70,86,102,120];
+    partenze.forEach(function(deg){[1,-1].forEach(function(sg){
+      var a=deg*Math.PI/180,x=pN[0]+20*Math.cos(a),y=pN[1]-sg*20*Math.sin(a), pts=[[x,y]], n=0, ok=false;
+      /* parte dalla superficie del polo N */
+      while(n<6000){var b=campo(x,y),l=Math.hypot(b[0],b[1]);x+=1.0*b[0]/l;y+=1.0*b[1]/l;pts.push([x,y]);n++;
+        if(x>cx-Lm-1&&x<cx+Lm+1&&Math.abs(y-cy)<hm+1){ok=true;break;}
+        if(x<-200||x>640||y<-200||y>450)break;}
+      if(!ok||pts.length<20)return;
+      if(pts.some(function(p){return p[1]<4||p[1]>326||p[0]<4||p[0]>436;}))return;
+      var d='M'+pts.map(function(p){return f(p[0])+','+f(p[1]);}).join(' L');
+      el(G,'path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3});
+      var m=pts[Math.floor(pts.length/2)],m2=pts[Math.floor(pts.length/2)+3];
+      if(m[0]>0&&m[0]<440&&m[1]>0&&m[1]<250)punta(G,m[0],m[1],m2[0]-m[0],m2[1]-m[1],'var(--inchiostro)',6);
+    });});
+    /* magnete: S blu, N rosso; linee interne da S a N */
+    el(S,'rect',{x:cx-Lm,y:cy-hm,width:Lm,height:2*hm,fill:'var(--blu)'});
+    el(S,'rect',{x:cx,y:cy-hm,width:Lm,height:2*hm,fill:'var(--rosso)'});
+    [-8,0,8].forEach(function(dy){el(S,'line',{x1:cx-Lm+4,y1:cy+dy,x2:cx+Lm-4,y2:cy+dy,stroke:'#fff','stroke-width':1.2,opacity:.85});});
+    punta(S,cx+28,cy,1,0,'#fff',5); punta(S,cx-28,cy,1,0,'#fff',5);
+    el(S,'text',{x:cx-Lm+12,y:cy+5,'font-family':'var(--sans)','font-size':14,'font-weight':700,fill:'#fff'},'S');
+    el(S,'text',{x:cx+Lm-22,y:cy+5,'font-family':'var(--sans)','font-size':14,'font-weight':700,fill:'#fff'},'N');
+    /* superficie chiusa attorno al polo N */
+    el(S,'ellipse',{cx:cx+Lm-6,cy:cy,rx:44,ry:40,fill:'none',stroke:'var(--blu)','stroke-width':1.8,'stroke-dasharray':'6,4'});
+    T(S,cx+Lm+40,cy-40,'S',{'font-style':'italic',fill:'var(--blu)'});
+  })();
+
+  /* ---------- 3. circuitazione: B entrante in aumento, E indotto tangente (antiorario) ---------- */
+  (function(){
+    var S=document.getElementById('fig-circ'); if(!S)return;
+    var cx=170,cy=130,r=80;
+    for(var x=30;x<=330;x+=40)for(var y=22;y<=250;y+=38){
+      var d=Math.hypot(x-cx,y-cy); if(Math.abs(d-r)<22)continue;
+      el(S,'path',{d:'M'+(x-4)+','+(y-4)+' L'+(x+4)+','+(y+4)+' M'+(x+4)+','+(y-4)+' L'+(x-4)+','+(y+4),stroke:'var(--grigio)','stroke-width':1.3});}
+    T(S,322,46,'B',{'font-weight':700,fill:'var(--inchiostro)','text-anchor':'end'});
+    el(S,'circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2});
+    T(S,cx+r*Math.cos(-2.4)-14,cy-r*Math.sin(-2.4)+16,'γ',{'font-size':15,'font-style':'italic',fill:'var(--inchiostro)'});
+    /* E tangente in verso antiorario sullo schermo: punto (cx+r cosφ, cy−r sinφ), direzione (−sinφ, −cosφ) */
+    for(var k=0;k<8;k++){var ph=k*Math.PI/4+Math.PI/8;if(k===1)continue;
+      var px=cx+r*Math.cos(ph),py=cy-r*Math.sin(ph),dx=-Math.sin(ph),dy=-Math.cos(ph),Lv=40;
+      el(S,'line',{x1:f(px-dx*Lv/2),y1:f(py-dy*Lv/2),x2:f(px+dx*Lv/2),y2:f(py+dy*Lv/2),stroke:'var(--rosso)','stroke-width':2.8});
+      punta(S,px+dx*Lv/2,py+dy*Lv/2,dx,dy,'var(--rosso)',8);}
+    var ph=5*Math.PI/8; T(S,cx+(r+16)*Math.cos(ph)-26,cy-(r+16)*Math.sin(ph)+4,'E',{'font-weight':700,fill:'var(--rosso)'});
+    /* carica q con spostamento δl, nel punto k=1 */
+    var ph=3*Math.PI/8,px=cx+r*Math.cos(ph),py=cy-r*Math.sin(ph),dx=-Math.sin(ph),dy=-Math.cos(ph);
+    el(S,'line',{x1:f(px+dx*10),y1:f(py+dy*10),x2:f(px+dx*36),y2:f(py+dy*36),stroke:'var(--verde)','stroke-width':2.2});
+    punta(S,px+dx*36,py+dy*36,dx,dy,'var(--verde)',7);
+    T(S,px+dx*30+4,py+dy*30-10,'δl',{fill:'var(--verde)','font-style':'italic'});
+    el(S,'circle',{cx:f(px),cy:f(py),r:8,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.6});
+    el(S,'text',{x:f(px),y:f(py+4.5),'text-anchor':'middle','font-family':'var(--sans)','font-size':12,fill:'var(--rosso)'},'+');
+    T(S,px+12,py+20,'q',{'font-style':'italic',fill:'var(--rosso)'});
+  })();
+})();
+</script>
 </body>
 </html>
