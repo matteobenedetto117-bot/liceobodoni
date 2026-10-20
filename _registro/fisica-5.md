@@ -409,6 +409,8 @@
   schema del condensatore in carica con le due superfici S₁ e S₂ che si appoggiano sullo stesso
   contorno γ, come da disegno di pagina 59; nessuno strumento interattivo (figura puramente
   concettuale, non richiesta la manipolazione di un parametro).
+- Revisione (20/10/2026, regole 13/10): parole 344 → 168 (simboli inline compresi). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 32), tolti sommario e «Nella prossima unità» (rimando all'unità 34), apertura a domanda; legge di Ampère in .def con la corrente concatenata in mezza riga; paradosso in elenco caso → conseguenza (S₁, S₂); derivazione Q = ε₀Φ(E) in una .eq; corrente di spostamento in .def; legge di Ampère-Maxwell in .def rosso (IV equazione); verifica su S₁ e S₂ in elenco; riepilogo delle quattro equazioni in un .def a due righe (tolti i nomi, già nell'unità 32). Titoletti tenuti: paradosso, corrente di spostamento, quattro equazioni. Nessuna comparsa, nessun esempio. Controllo concettuale (SymPy: Q = CΔV = ε₀EA, i = ε₀ dΦ(E)/dt): precisato condensatore piano nel vuoto con E uniforme; corrente di spostamento indicata come i_s (= i nel filo) invece di riusare il simbolo i; su S₁ flusso di E trascurabile esplicitato. Figura rifatta da script: superficie S₂ calcolata che scavalca l'armatura positiva e chiude fra le armature, S₁ piana bordata da γ, campo E dalla + alla −; aggiunto il filo in uscita dall'armatura negativa (prima il circuito si interrompeva). Nessuna figura decorativa.
+
 
 ## Unità 34 — Come si genera un'onda elettromagnetica
 - Parole: circa 287 (prosa, didascalie e riquadri compresi) su 1 pagina di traccia (pagina 62).

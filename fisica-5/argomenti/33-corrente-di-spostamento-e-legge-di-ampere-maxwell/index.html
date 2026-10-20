@@ -5,22 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Corrente di spostamento e legge di Ampère-Maxwell — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>ul{padding-left:var(--r)}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.def p+p{margin-top:0}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.riepilogo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:6px 22px;margin:26px 0}
-.riepilogo p{margin:14px 0;padding:10px 0;border-bottom:1px solid var(--riga)}
-.riepilogo p:last-child{border-bottom:none}
-.riepilogo .nome{font-family:var(--sans);font-size:.82rem;color:var(--grigio);display:block;margin-top:2px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-</style>
-</head>
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+</style></head>
+
 <body>
 <div class="foglio">
 
@@ -28,107 +51,127 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 33</p>
   <h1>Corrente di spostamento e legge di Ampère-Maxwell</h1>
-  <p class="sommario">Manca ancora la quarta equazione di Maxwell. La legge di Ampère, così come la
-  conosciamo, funziona per una corrente costante ma cade in contraddizione su un condensatore in
-  carica: vediamo dove nasce il problema e il termine che Maxwell ha aggiunto per risolverlo.</p>
 </header>
 
-<h2>La legge di Ampère</h2>
+<p>Legge di Ampère attorno al filo di un condensatore in carica: il risultato dipende dalla superficie scelta?</p>
 
-<p>Per un circuito chiuso $\gamma$ la circuitazione del campo magnetico vale</p>
-
-$$\Gamma(\vec B) = \mu_0 i$$
-
-<p>dove $i$ è la corrente concatenata a $\gamma$, cioè quella che attraversa una qualunque
-superficie che ha $\gamma$ come bordo.</p>
+<div class="def"><span class="et">Legge di Ampère</span>
+<p class="eq">$$\Gamma(\vec B) = \mu_0\, i$$</p>
+<p>$i$: corrente concatenata a $\gamma$, che attraversa ogni superficie con bordo $\gamma$.</p></div>
 
 <h2>Il paradosso del condensatore in carica</h2>
 
-<p>Un filo porta corrente $i$ verso un condensatore che si sta caricando, e $\gamma$ è un circuito
-che racchiude il filo. Su $\gamma$ si possono appoggiare due superfici diverse: $S_1$, un disco
-piatto attraversato dal filo, e $S_2$, che si allarga fino a passare fra le armature senza toccare
-il filo.</p>
+<p>Percorso chiuso $\gamma$ attorno al filo, due superfici con bordo $\gamma$:</p>
+
+<ul>
+<li>$S_1$, attraversata dal filo → $\Gamma(\vec B) = \mu_0\, i$;</li>
+<li>$S_2$, che passa fra le armature senza toccare il filo → nessuna corrente, $\Gamma(\vec B) = 0$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f33i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="f33e" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<path d="M170,75 C215,50 250,45 275,35 L275,205 C250,195 215,190 170,165
-  A13,45 0 0 0 170,75 Z" fill="var(--blu-chiaro)" opacity="0.4" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="275" y="26" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">S&#8322;</text>
-<line x1="20" y1="120" x2="170" y2="120" stroke="var(--inchiostro)" stroke-width="2.2" marker-end="url(#f33i)"/>
-<text x="55" y="106" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">i</text>
-<ellipse cx="170" cy="120" rx="13" ry="45" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6" stroke-dasharray="4 4"/>
-<text x="170" y="63" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">&#947;</text>
-<text x="170" y="182" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">S&#8321;</text>
-<line x1="250" y1="50" x2="250" y2="190" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="300" y1="50" x2="300" y2="190" stroke="var(--inchiostro)" stroke-width="3"/>
-<text x="236" y="72" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">+</text>
-<text x="236" y="112" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">+</text>
-<text x="236" y="152" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">+</text>
-<text x="236" y="182" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">+</text>
-<text x="308" y="72" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#8722;</text>
-<text x="308" y="112" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#8722;</text>
-<text x="308" y="152" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#8722;</text>
-<text x="308" y="182" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&#8722;</text>
-<line x1="255" y1="80" x2="293" y2="80" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f33e)"/>
-<line x1="255" y1="120" x2="293" y2="120" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f33e)"/>
-<line x1="255" y1="160" x2="293" y2="160" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#f33e)"/>
-<text x="320" y="84" font-family="var(--sans)" font-size="14" fill="var(--rosso)">E</text>
-</svg>
-<p class="did">La stessa curva $\gamma$ borda due superfici: il disco piatto $S_1$, attraversato dal
-filo, e $S_2$, che si allarga fra le armature senza incontrarlo.</p>
+<svg id="fig-cond" viewBox="70 6 360 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Filo percorso da corrente i verso un condensatore in carica; percorso chiuso gamma attorno al filo, superficie piana S1 attraversata dal filo e superficie S2 che passa fra le armature, dove c'è il campo elettrico E"></svg>
+<p class="did">Stesso bordo $\gamma$: $S_1$ attraversata dal filo, $S_2$ fra le armature</p>
 </div>
 
-<p>Con $S_1$ si ottiene $\Gamma(\vec B) = \mu_0 i$; con $S_2$, che nessuna corrente attraversa,
-$\Gamma(\vec B) = 0$. Ma la circuitazione dipende solo da $\gamma$, non dalla superficie scelta:
-i due risultati non possono essere entrambi giusti.</p>
+<p>La circuitazione dipende solo da $\gamma$: i due risultati dovrebbero coincidere.</p>
 
 <h2>La corrente di spostamento</h2>
 
-<p>Fra le armature il campo elettrico è uniforme, e il suo flusso vale $\Phi(\vec E) = E\cdot A$,
-con $A$ l'area del condensatore. La carica accumulata è</p>
+<p>Condensatore piano nel vuoto, armature di area $A$ a distanza $d$: fra le armature $\vec E$ è uniforme e $\Phi(\vec E) = E\,A$.</p>
 
-$$Q = C\,\Delta V = \frac{\varepsilon_0 A}{d}\cdot (E d) = \varepsilon_0 A E = \varepsilon_0\,\Phi(\vec E)$$
+<p class="eq">$$Q = C\,\Delta V = \frac{\varepsilon_0 A}{d}\cdot E\,d = \varepsilon_0\,\Phi(\vec E)$$</p>
 
-<p>($\Delta V = E d$, quindi il fattore $d$ si semplifica). L'intensità di corrente è per
-definizione $i = dQ/dt$, dunque</p>
+<p>Derivando rispetto al tempo, con $i = dQ/dt$:</p>
 
-$$i = \varepsilon_0\,\frac{d\Phi(\vec E)}{dt}$$
+<div class="def"><span class="et">Corrente di spostamento</span>
+<p class="eq">$$i_s = \varepsilon_0\,\frac{d\Phi(\vec E)}{dt} = i$$</p></div>
 
-<p>Questa grandezza non è cariche in moto attraverso $S_2$, ma ha le stesse dimensioni di una
-corrente: si chiama corrente di spostamento. Aggiungendola alla legge di Ampère si ottiene la
-quarta equazione di Maxwell, la legge di Ampère-Maxwell:</p>
+<p>Non è un moto di cariche, ma ha le dimensioni di una corrente e si somma a $i$:</p>
 
-<div class="formula-box">
-$$\Gamma(\vec B) = \mu_0\!\left(i + \varepsilon_0\frac{d\Phi(\vec E)}{dt}\right)
-= \mu_0 i + \mu_0\varepsilon_0\,\frac{d\Phi(\vec E)}{dt}$$
-</div>
+<div class="def"><span class="et">IV equazione di Maxwell (legge di Ampère-Maxwell)</span>
+<p class="eq principio">$$\Gamma(\vec B) = \mu_0\, i + \mu_0\varepsilon_0\,\frac{d\Phi(\vec E)}{dt}$$</p></div>
 
-<p>Su $S_2$ il primo termine è nullo, ma il secondo no: il conto torna, e il paradosso si scioglie.</p>
+<ul>
+<li>$S_1$ → $\mu_0\, i$ dal primo termine (flusso di $\vec E$ trascurabile);</li>
+<li>$S_2$ → $\mu_0\, i$ dal secondo termine.</li>
+</ul>
 
 <h2>Le quattro equazioni di Maxwell</h2>
 
-<div class="riepilogo">
-<p>$$\Phi(\vec E) = \frac{q}{\varepsilon_0}$$<span class="nome">1. Teorema di Gauss per il campo elettrico</span></p>
-<p>$$\Phi(\vec B) = 0$$<span class="nome">2. Teorema di Gauss per il campo magnetico</span></p>
-<p>$$\Gamma(\vec E) = -\frac{d\Phi(\vec B)}{dt}$$<span class="nome">3. Legge di Faraday-Neumann-Lenz</span></p>
-<p>$$\Gamma(\vec B) = \mu_0 i + \mu_0\varepsilon_0\,\frac{d\Phi(\vec E)}{dt}$$<span class="nome">4. Legge di Ampère-Maxwell</span></p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 34 mostra come da queste quattro equazioni nasce un'onda elettromagnetica che si
-propaga da sola, generata da un'antenna percorsa da corrente alternata.</li>
-</ul>
-</div>
+<div class="def"><span class="et">Equazioni di Maxwell</span>
+<p class="eq">$$\Phi(\vec E) = \frac{q}{\varepsilon_0} \qquad\qquad \Phi(\vec B) = 0$$</p>
+<p class="eq">$$\Gamma(\vec E) = -\frac{d\Phi(\vec B)}{dt} \qquad\qquad \Gamma(\vec B) = \mu_0\, i + \mu_0\varepsilon_0\,\frac{d\Phi(\vec E)}{dt}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../32-le-prime-tre-equazioni-di-maxwell/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Le prime tre equazioni di Maxwell</span></a><a class="successiva" href="../34-come-si-genera-un-onda-elettromagnetica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Come si genera un'onda elettromagnetica</span></a></nav>
 <footer><p>Fisica quinta &middot; Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 33</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script><script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13,stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+
+  /* condensatore in carica: percorso gamma, superfici S1 (piana) e S2 (fra le armature) */
+  (function(){
+    var S=document.getElementById('fig-cond'); if(!S)return;
+    var cy=118, gx=140, grx=12, gry=42;          /* percorso gamma (ellisse in prospettiva) */
+    var xa=250, xb=300, hp=66;                   /* armature: x = xa (+), x = xb (−), da cy−hp a cy+hp */
+    var xs=275, hs=92;                           /* fondo di S2, fra le armature, oltre i bordi */
+    /* bordo superiore di S2: da (gx, cy−gry) a (xs, cy−hs), raccordo con pendenza nulla agli estremi */
+    function bordo(sg){var pts=[],n=40;for(var k=0;k<=n;k++){var u=k/n,s=u*u*(3-2*u);
+      var x=gx+(xs-gx)*Math.sin(u*Math.PI/2), y=cy+sg*(gry+(hs-gry)*s);pts.push([x,y]);}return pts;}
+    var su=bordo(-1), giu=bordo(1).reverse();
+    var d='M'+su.map(function(p){return f(p[0])+','+f(p[1]);}).join(' L')+' L'+giu.map(function(p){return f(p[0])+','+f(p[1]);}).join(' L')+
+      ' A'+grx+','+gry+' 0 0 1 '+gx+','+(cy-gry)+' Z';
+    el(S,'path',{d:d,fill:'var(--blu-chiaro)','fill-opacity':.55,stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'5,4'});
+    /* fili e corrente */
+    el(S,'line',{x1:80,y1:cy,x2:xa,y2:cy,stroke:'var(--inchiostro)','stroke-width':2.2});
+    el(S,'line',{x1:xb,y1:cy,x2:422,y2:cy,stroke:'var(--inchiostro)','stroke-width':2.2});
+    punta(S,100,cy,1,0,'var(--inchiostro)',8); punta(S,385,cy,1,0,'var(--inchiostro)',8);
+    T(S,92,cy-12,'i',{'font-style':'italic','font-size':14,fill:'var(--inchiostro)'});
+    T(S,377,cy-12,'i',{'font-style':'italic','font-size':14,fill:'var(--inchiostro)'});
+    /* S1: disco piano bordato da gamma */
+    el(S,'ellipse',{cx:gx,cy:cy,rx:grx,ry:gry,fill:'var(--blu)','fill-opacity':.18,stroke:'var(--blu)','stroke-width':2});
+    T(S,gx-24,cy-gry-6,'γ',{'font-style':'italic','font-size':15,fill:'var(--blu)'});
+    T(S,gx-8,cy+gry+20,'S₁',{fill:'var(--blu)'});
+    T(S,xs+8,cy-hs-2,'S₂',{fill:'var(--blu)'});
+    /* armature */
+    el(S,'line',{x1:xa,y1:cy-hp,x2:xa,y2:cy+hp,stroke:'var(--inchiostro)','stroke-width':4});
+    el(S,'line',{x1:xb,y1:cy-hp,x2:xb,y2:cy+hp,stroke:'var(--inchiostro)','stroke-width':4});
+    [-48,-16,16,48].forEach(function(dy){
+      T(S,xa-15,cy+dy+5,'+',{fill:'var(--rosso)','text-anchor':'middle'});
+      T(S,xb+15,cy+dy+5,'−',{fill:'var(--blu)','text-anchor':'middle'});});
+    /* campo E fra le armature, dalla + alla − */
+    [-48,-16,16,48].forEach(function(dy){if(dy===16)return;
+      el(S,'line',{x1:xa+5,y1:cy+dy,x2:xb-10,y2:cy+dy,stroke:'var(--rosso)','stroke-width':1.8});
+      punta(S,xb-10,cy+dy,1,0,'var(--rosso)',6);});
+    el(S,'line',{x1:xa+5,y1:cy+16,x2:xb-10,y2:cy+16,stroke:'var(--rosso)','stroke-width':1.8});
+    punta(S,xb-10,cy+16,1,0,'var(--rosso)',6);
+    T(S,xb+28,cy-hp+4,'E',{'font-weight':700,fill:'var(--rosso)'});
+  })();
+})();
+</script>
 </body>
 </html>
