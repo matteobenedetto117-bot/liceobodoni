@@ -5,23 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Studio completo svolto: f(x) = x − x³ — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota,.esame{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.esame{border-left:4px solid var(--verde)}
-.def .et,.nota .et,.esame .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.esame blockquote{margin:10px 0 0;font-style:italic;color:#33465c}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-table.segni{border-collapse:collapse;margin:22px auto;font-family:var(--sans);font-size:.95rem}
-table.segni td{padding:6px 16px;text-align:center;border-bottom:1px solid var(--riga)}
-table.segni td.etichetta{text-align:left;color:var(--grigio);font-size:.85rem}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
 table.segni td.pos{color:var(--blu);font-weight:600}
 table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
 </style>
 </head>
 <body>
@@ -31,86 +85,116 @@ table.segni td.neg{color:var(--rosso);font-weight:600}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Studio di funzione &middot; Unità 29</p>
   <h1>Studio completo svolto: f(x) = x − x³</h1>
-  <p class="sommario">Applichiamo per intero, passo dopo passo, lo schema degli otto passi alla
-  funzione già incontrata come esempio. È l'occasione per vedere in fila, su un solo caso, tutti
-  gli strumenti costruiti nelle unità precedenti: simmetrie, segno, limiti, derivata prima e
-  derivata seconda.</p>
 </header>
 
-<h2>1. Dominio</h2>
-<p>$f(x)=x-x^3$ è un polinomio, quindi $D=\mathbb{R}$.</p>
+<p>Lo schema degli otto passi applicato a $f(x)=x-x^3$:</p>
 
-<h2>2. Simmetrie</h2>
-<p>$$f(-x)=-x+x^3=-(x-x^3)=-f(x)$$</p>
-<p>La funzione è dispari: il grafico è simmetrico rispetto all'origine. Non essendo periodica, il
-passo 3 non si applica.</p>
-
-<h2>4. Intersezioni con gli assi</h2>
-<p>$f(0)=0$: il grafico passa per l'origine.</p>
-<p>$$f(x)=0 \iff x-x^3=0 \iff x(1-x^2)=0 \iff x=0,\ x=\pm1$$</p>
-
-<h2>5. Segno della funzione</h2>
-<p>Poniamo $f(x)&gt;0$, cioè $x(1+x)(1-x)&gt;0$, e studiamo il segno dei tre fattori:</p>
+<div class="passi">
+<div class="passo">
+<p class="spieg"><span class="num">1.</span> Dominio: polinomio</p>
+<p class="eq">$$D=\mathbb{R}$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">2.</span> Simmetrie: dispari, grafico simmetrico rispetto all'origine; non periodica</p>
+<p class="eq">$$f(-x)=-x+x^3=-(x-x^3)=-f(x)$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">3.</span> Intersezioni con gli assi</p>
+<p class="eq">$$f(0)=0 \qquad x-x^3=x(1-x^2)=0 \iff x=0,\ x=\pm1$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">4.</span> Segno di $f(x)=x(1+x)(1-x)$</p>
 <table class="segni">
-<tr><td class="etichetta">$x$</td><td class="neg">&minus;</td><td class="neg">&minus;</td><td class="pos">+</td><td class="pos">+</td></tr>
-<tr><td class="etichetta">$1+x$</td><td class="neg">&minus;</td><td class="pos">+</td><td class="pos">+</td><td class="pos">+</td></tr>
-<tr><td class="etichetta">$1-x$</td><td class="pos">+</td><td class="pos">+</td><td class="pos">+</td><td class="neg">&minus;</td></tr>
-<tr><td class="etichetta">$f(x)$</td><td class="pos">+</td><td class="neg">&minus;</td><td class="pos">+</td><td class="neg">&minus;</td></tr>
-<tr><td></td><td>$x&lt;-1$</td><td>$-1&lt;x&lt;0$</td><td>$0&lt;x&lt;1$</td><td>$x&gt;1$</td></tr>
+<tr class="intervalli"><td class="etichetta"></td><td>$x&lt;-1$</td><td>$-1&lt;x&lt;0$</td><td>$0&lt;x&lt;1$</td><td>$x&gt;1$</td></tr>
+<tr><td class="etichetta">$x$</td><td class="neg">−</td><td class="neg">−</td><td class="pos">+</td><td class="pos">+</td></tr>
+<tr><td class="etichetta">$1+x$</td><td class="neg">−</td><td class="pos">+</td><td class="pos">+</td><td class="pos">+</td></tr>
+<tr><td class="etichetta">$1-x$</td><td class="pos">+</td><td class="pos">+</td><td class="pos">+</td><td class="neg">−</td></tr>
+<tr><td class="etichetta">$f(x)$</td><td class="pos">+</td><td class="neg">−</td><td class="pos">+</td><td class="neg">−</td></tr>
 </table>
-
-<h2>6. Comportamento agli estremi del dominio</h2>
-<p>$f$ è polinomiale, quindi continua su tutto $\mathbb{R}$: nessun asintoto verticale.</p>
-<p>$$\lim_{x\to+\infty}(x-x^3)=-\infty \qquad \lim_{x\to-\infty}(x-x^3)=+\infty$$</p>
-<p>i limiti sono infiniti: nessun asintoto orizzontale. Per l'obliquo controlliamo $m$:</p>
-<p>$$\lim_{x\to+\infty}\frac{f(x)}{x}=\lim_{x\to+\infty}(1-x^2)=-\infty$$</p>
-<p>anche $m$ è infinito: nessun asintoto obliquo.</p>
-
-<h2>7. Derivata prima</h2>
-<p>$$f'(x)=1-3x^2,\qquad D=\mathbb{R}, \qquad f'(x)=0 \iff x=\pm\frac{1}{\sqrt3}$$</p>
-<p>Studiamo il segno: $1-3x^2&gt;0 \iff -\frac1{\sqrt3}&lt;x&lt;\frac1{\sqrt3}$.</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">5.</span> Limiti: $f$ continua su $\mathbb{R}$, nessun asintoto verticale</p>
+<p class="eq">$$\lim_{x\to+\infty}(x-x^3)=-\infty \qquad \lim_{x\to-\infty}(x-x^3)=+\infty$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num"></span> Nessun asintoto orizzontale né obliquo</p>
+<p class="eq">$$\lim_{x\to\pm\infty}\frac{f(x)}{x}=\lim_{x\to\pm\infty}(1-x^2)=-\infty$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">6.</span> Derivata prima</p>
+<p class="eq">$$f'(x)=1-3x^2=0 \iff x=\pm\frac{1}{\sqrt3}$$</p>
 <table class="segni">
-<tr><td class="etichetta">$f'(x)$</td><td class="neg">&minus;</td><td class="pos">+</td><td class="neg">&minus;</td></tr>
-<tr><td></td><td>$x&lt;-\frac1{\sqrt3}$</td><td>$-\frac1{\sqrt3}&lt;x&lt;\frac1{\sqrt3}$</td><td>$x&gt;\frac1{\sqrt3}$</td></tr>
+<tr class="intervalli"><td class="etichetta"></td><td>$x&lt;-\frac{1}{\sqrt3}$</td><td>$-\frac{1}{\sqrt3}&lt;x&lt;\frac{1}{\sqrt3}$</td><td>$x&gt;\frac{1}{\sqrt3}$</td></tr>
+<tr><td class="etichetta">$f'$</td><td class="neg">−</td><td class="pos">+</td><td class="neg">−</td></tr>
+<tr><td class="etichetta">$f$</td><td>↘</td><td>↗</td><td>↘</td></tr>
 </table>
-<p>$f$ decresce, poi cresce, poi decresce di nuovo: $x=-\frac1{\sqrt3}$ è un minimo relativo,
-$x=\frac1{\sqrt3}$ è un massimo relativo, con
-$$f\left(\pm\frac1{\sqrt3}\right)=\pm\frac{2\sqrt3}{9}\approx\pm0{,}4.$$</p>
-
-<h2>8. Derivata seconda e tangente inflessionale</h2>
-<p>$$f''(x)=-6x, \qquad f''(x)=0 \iff x=0$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num"></span> Minimo relativo in $x=-\frac{1}{\sqrt3}$, massimo relativo in $x=\frac{1}{\sqrt3}$</p>
+<p class="eq">$$f\!\left(\pm\frac{1}{\sqrt3}\right)=\pm\frac{2\sqrt3}{9}\approx\pm0{,}4$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">7.</span> Derivata seconda</p>
+<p class="eq">$$f''(x)=-6x=0 \iff x=0$$</p>
 <table class="segni">
-<tr><td class="etichetta">$f''(x)$</td><td class="pos">+</td><td class="neg">&minus;</td></tr>
-<tr><td class="etichetta">concavità</td><td>$\cup$</td><td>$\cap$</td></tr>
-<tr><td></td><td>$x&lt;0$</td><td>$x&gt;0$</td></tr>
+<tr class="intervalli"><td class="etichetta"></td><td>$x&lt;0$</td><td>$x&gt;0$</td></tr>
+<tr><td class="etichetta">$f''$</td><td class="pos">+</td><td class="neg">−</td></tr>
+<tr><td class="etichetta">$f$</td><td>∪</td><td>∩</td></tr>
 </table>
-<p>$x=0$ è un flesso. Poiché $f'(0)=1\neq0$, il flesso è a tangente obliqua: la tangente
-inflessionale ha coefficiente angolare $m=f'(0)=1$ e passa per $(0,f(0))=(0,0)$, quindi
-$$y=x.$$</p>
-<p>Il grafico che riassume questi risultati — minimo, massimo e flesso appena trovati — è quello
-già tracciato nell'unità precedente.</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num"></span> Flesso in $x=0$ con $f'(0)=1\neq0$: flesso obliquo, tangente inflessionale</p>
+<p class="eq">$$y=f(0)+f'(0)\,x=x$$</p>
+</div>
+</div>
 
-<h2>Un quesito d'esame</h2>
-<p>Esame di Stato 2019, sessione ordinaria, liceo scientifico, questionario, quesito 1:</p>
-<div class="esame"><span class="et">Testo</span>
-<blockquote>«Una data funzione è esprimibile nella forma $f(x)=\dfrac{p(x)}{x^2+d}$, dove $d\in\mathbb R$
-e $p(x)$ è un polinomio. Il grafico di $f$ interseca l'asse $x$ nei punti di ascisse $0$ e
-$\frac{12}{5}$ ed ha come asintoti le rette di equazione $x=3$, $x=-3$ e $y=5$. Determinare i
-punti di massimo e di minimo relativi della funzione $f$.»</blockquote></div>
-<p>Gli asintoti verticali $x=\pm3$ danno il denominatore $x^2-9$. L'asintoto orizzontale $y=5$
-richiede che $p(x)$ abbia grado 2 con coefficiente direttivo $5$, quindi $p(x)=5x^2+bx+c$; le
-intersezioni con l'asse $x$ danno $c=0$ e, imponendo $f(12/5)=0$, $b=-12$. Dunque
-$$f(x)=\frac{5x^2-12x}{x^2-9}.$$
-Derivando col criterio del quoziente si ottiene
-$$f'(x)=\frac{6(x-6)(2x-3)}{(x^2-9)^2},$$
-che si annulla in $x=\frac32$ e $x=6$, entrambi nel dominio. Studiando il segno si trova un
-massimo relativo in $x=\frac32$, con $f\!\left(\frac32\right)=1$, e un minimo relativo in $x=6$,
-con $f(6)=4$.</p>
+<h2>Quesito d'esame</h2>
 
+<div class="def"><span class="et">Esame di Stato 2019, liceo scientifico, quesito 1</span>
+<p>«Una data funzione è esprimibile nella forma $f(x)=\dfrac{p(x)}{x^2+d}$, dove $d\in\mathbb R$ e $p(x)$ è un polinomio. Il grafico di $f$ interseca l'asse $x$ nei punti di ascisse $0$ e $\frac{12}{5}$ ed ha come asintoti le rette di equazione $x=3$, $x=-3$ e $y=5$. Determinare i punti di massimo e di minimo relativi della funzione $f$.»</p></div>
+
+<div class="passi">
+<div class="passo">
+<p class="spieg"><span class="num">1.</span> Asintoti verticali $x=\pm3$ → denominatore</p>
+<p class="eq">$$x^2+d=x^2-9$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">2.</span> Asintoto orizzontale $y=5$ → $p$ di grado 2 con coefficiente direttivo 5; zeri $0$ e $\frac{12}{5}$</p>
+<p class="eq">$$p(x)=5x\left(x-\tfrac{12}{5}\right)=5x^2-12x \qquad f(x)=\frac{5x^2-12x}{x^2-9}$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">3.</span> Derivata e suoi zeri (entrambi nel dominio)</p>
+<p class="eq">$$f'(x)=\frac{6(x-6)(2x-3)}{(x^2-9)^2}=0 \iff x=\frac32,\ x=6$$</p>
+</div>
+<div class="passo">
+<p class="spieg"><span class="num">4.</span> Segno di $f'$: positivo per $x&lt;\frac32$ e per $x&gt;6$, negativo per $\frac32&lt;x&lt;6$ ($x\neq3$)</p>
+</div>
+</div>
+
+<div class="es">
+<p class="eq ris">$$\text{massimo relativo } \left(\tfrac32;\,1\right) \qquad \text{minimo relativo } (6;\,4)$$</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../29-schema-generale-in-otto-passi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Schema generale in otto passi</span></a><a class="successiva" href="../31-primitive-integrale-indefinito-proprieta/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Primitive, integrale indefinito, proprietà</span></a></nav>
 <footer><p>Matematica quinta &middot; Studio di funzione &middot; Unità 29</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def .et,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

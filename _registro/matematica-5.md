@@ -657,6 +657,7 @@ teorema del confronto, a pagina 21.
   dell'unità resta quello già disegnato nell'unità 29, qui solo richiamato a parole;
   nessun interattivo, perché la pagina è un elenco di calcoli su un caso già fissato,
   senza un parametro naturale da variare.
+- Revisione (20/10/2026, regole 13/10): parole 346 → 172 (di cui circa 55 nel testo citato del quesito d'esame). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 28), tolti sommario, sette titoletti di passo (ora passi numerati con riga grigia e formula) e il rimando al grafico dell'unità precedente; tabelle dei segni in stile quaderno; quesito d'esame tenuto con testo in .def, soluzione in quattro passi e risultato in riquadro verde. Nessuna correzione (SymPy: zeri di f′, f(±1/√3) = ±2√3/9, limiti, f″; quesito: f′, segno, f(3/2) = 1, f(6) = 4). Nessuna figura (la pagina non ne aveva).
 
 ## Unità 30 — Primitive, integrale indefinito, proprietà
 - Parole: 306 su 3 pagine di traccia (118–120).
