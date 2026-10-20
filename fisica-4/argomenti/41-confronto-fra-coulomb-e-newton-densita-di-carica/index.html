@@ -5,88 +5,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Confronto fra Coulomb e Newton; densità di carica — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.confronto{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid var(--riga);
-  border-radius:10px;margin:24px 0;overflow:hidden}
-.confronto>div{padding:18px 22px}
-.confronto>div:first-child{border-right:1px solid var(--riga)}
-.confronto h3{font-family:var(--sans);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--grigio);margin:0 0 12px}
-.tab-dens{width:100%;border-collapse:collapse;margin:20px 0;font-size:.98rem}
-.tab-dens th,.tab-dens td{border:1px solid var(--riga);padding:10px 14px;text-align:left}
-.tab-dens th{font-family:var(--sans);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;
-  color:var(--grigio);background:#faf8f3}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-@media(max-width:640px){.confronto{grid-template-columns:1fr}.confronto>div:first-child{border-right:none;border-bottom:1px solid var(--riga)}}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 39</p>
-  <h1>Confronto fra Coulomb e Newton; densit&agrave; di carica</h1>
-  <p class="sommario">La legge di Coulomb ha la stessa forma della legge di gravitazione, ma le
-  due forze si comportano in modo diverso. E quando la carica non &egrave; concentrata in un
-  punto ma sparsa su un oggetto, serve un modo per dire quanta carica c'&egrave; in quanto
-  spazio: la densit&agrave; di carica.</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 39</p>
+  <h1>Confronto fra Coulomb e Newton; densità di carica</h1>
 </header>
 
-<h2>Coulomb e Newton a confronto</h2>
+<p>Forza elettrica e forza gravitazionale hanno la stessa struttura: costante × prodotto di due grandezze / quadrato della distanza.</p>
 
-<p>Le due leggi hanno la stessa struttura: una costante per il prodotto di due grandezze,
-diviso il quadrato della distanza.</p>
+<div class="def"><span class="et">Legge di Coulomb (cariche puntiformi nel vuoto)</span>
+<p class="eq">$$F = k\,\frac{|q_1|\,|q_2|}{r^2} \qquad k = 8{,}99\cdot10^{9}\ \frac{\text{N}\cdot\text{m}^2}{\text{C}^2}$$</p>
+<p>Attrattiva o repulsiva, secondo il segno delle cariche.</p></div>
 
-<div class="confronto">
-<div>
-<h3>Legge di Coulomb</h3>
-$$F=k\,\frac{q_1 q_2}{r^2}, \qquad k=8{,}99\cdot10^{9}\ \frac{\text{N}\cdot\text{m}^2}{\text{C}^2}$$
-<p>Pu&ograve; essere attrattiva o repulsiva, a seconda del segno delle cariche.</p>
-</div>
-<div>
-<h3>Legge di gravitazione</h3>
-$$F=G\,\frac{m_1 m_2}{r^2}, \qquad G=6{,}67\cdot10^{-11}\ \frac{\text{N}\cdot\text{m}^2}{\text{kg}^2}$$
-<p>&Egrave; sempre attrattiva: le masse si attraggono soltanto, non esiste una massa negativa.</p>
-</div>
-</div>
+<div class="def"><span class="et">Legge di gravitazione universale (masse puntiformi)</span>
+<p class="eq">$$F = G\,\frac{m_1\,m_2}{r^2} \qquad G = 6{,}67\cdot10^{-11}\ \frac{\text{N}\cdot\text{m}^2}{\text{kg}^2}$$</p>
+<p>Sempre attrattiva.</p></div>
 
-<p>La differenza di comportamento non &egrave; un dettaglio: dipende dal fatto che la carica
-elettrica ha due segni, mentre la massa ne ha uno solo.</p>
-
-<h2>Densit&agrave; di carica</h2>
-
-<p>Quando la carica &egrave; distribuita su un corpo esteso, conviene descriverla come si fa con
-la massa: la densit&agrave; di massa $d=m/V$ dice quanta massa c'&egrave; in ogni unit&agrave; di
-volume. Allo stesso modo si definisce una densit&agrave; per la carica, scegliendo se
-distribuirla nel volume, sulla superficie o lungo una linea, a seconda della forma del corpo.</p>
-
-<table class="tab-dens">
-<tr><th>Grandezza</th><th>Definizione</th><th>Unit&agrave; di misura</th></tr>
-<tr><td>Densit&agrave; volumica di carica</td><td>$\rho=\dfrac{Q}{V}$</td><td>$[\rho]=\dfrac{\text{C}}{\text{m}^3}$</td></tr>
-<tr><td>Densit&agrave; superficiale di carica</td><td>$\sigma=\dfrac{Q}{A}$</td><td>$[\sigma]=\dfrac{\text{C}}{\text{m}^2}$</td></tr>
-<tr><td>Densit&agrave; lineare di carica</td><td>$\lambda=\dfrac{Q}{L}$</td><td>$[\lambda]=\dfrac{\text{C}}{\text{m}}$</td></tr>
-</table>
-
-<p>In ciascun caso $Q$ &egrave; la carica totale del corpo, mentre $V$, $A$ o $L$ sono il volume,
-l'area o la lunghezza su cui quella carica &egrave; distribuita: la densit&agrave; giusta &egrave;
-quella che corrisponde alla forma dell'oggetto — un filo carico usa $\lambda$, una lastra usa
-$\sigma$, un corpo pieno usa $\rho$.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
+<p>La differenza dipende dalle grandezze:</p>
 <ul>
-<li>Come si distribuisce la carica sulla superficie di una sfera conduttrice.</li>
-<li>Il campo elettrico generato da una carica.</li>
+<li>carica → due segni, positiva e negativa;</li>
+<li>massa → un solo segno, sempre positiva.</li>
 </ul>
-</div>
+
+<h2>Densità di carica</h2>
+
+<p>Carica $Q$ distribuita uniformemente su un corpo esteso: come per la densità di massa $d = m/V$, si definisce una densità di carica.</p>
+
+<div class="def"><span class="et">Densità di carica</span>
+<ul>
+<li>volumica (corpo pieno): $\rho = Q/V$, in C/m³;</li>
+<li>superficiale (lastra): $\sigma = Q/A$, in C/m²;</li>
+<li>lineare (filo): $\lambda = Q/L$, in C/m.</li>
+</ul></div>
+
+<p>$V$, $A$, $L$: volume, area, lunghezza su cui è distribuita la carica.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../40-la-legge-di-coulomb/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La legge di Coulomb</span></a><a class="successiva" href="../42-distribuzione-di-carica-su-una-sfera-conduttrice/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Distribuzione di carica su una sfera conduttrice</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 39</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
