@@ -5,17 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Come si genera un'onda elettromagnetica — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.interattivo label{font-family:var(--sans);font-size:.85rem;color:var(--inchiostro);display:block;margin-bottom:6px}
-.interattivo input[type=range]{width:100%}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(320px,60%)}
+.cursore output{min-width:13em;text-align:left}
 </style>
 </head>
 <body>
@@ -25,156 +56,154 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 34</p>
   <h1>Come si genera un'onda elettromagnetica</h1>
-  <p class="sommario">Le quattro equazioni di Maxwell non restano ferme sulla carta: descrivono come
-  un campo che cambia genera l'altro. Vediamo come questo scambio, prodotto dalla corrente alternata
-  in una semplice antenna, generi un'onda elettromagnetica che si propaga da sola nello spazio.</p>
 </header>
 
-<h2>L'antenna percorsa da corrente alternata</h2>
+<p>Antenna (filo verticale) collegata a un generatore di corrente alternata: quali campi produce?</p>
 
-<p>Colleghiamo un'antenna, un filo verticale, a un generatore di corrente alternata. Ai due capi si
-accumulano cariche di segno opposto, che si invertono ogni volta che la corrente $i$ cambia verso:
-la corrente genera un campo magnetico $\vec B$, l'accumulo di cariche un campo elettrico $\vec E$.</p>
+<ul>
+<li>ai capi si accumulano cariche di segno opposto, che si invertono periodicamente;</li>
+<li>la corrente $i$ genera un campo magnetico $\vec B$;</li>
+<li>le cariche accumulate generano un campo elettrico $\vec E$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f34i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="f34e" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<circle cx="55" cy="150" r="18" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<path d="M42,150 q5,-10 6.5,0 q1.5,10 6.5,0 q1.5,-10 6.5,0" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="55" y="184" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">generatore CA</text>
-<line x1="73" y1="150" x2="110" y2="150" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<line x1="110" y1="50" x2="110" y2="250" stroke="var(--inchiostro)" stroke-width="3"/>
-<text x="122" y="46" font-family="var(--sans)" font-size="12" fill="var(--grigio)">antenna</text>
-<g id="f34-corrente">
-<line id="f34-i-linea" x1="110" y1="180" x2="110" y2="150" stroke="var(--inchiostro)" stroke-width="2.2" marker-end="url(#f34i)"/>
-<text x="122" y="172" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">i</text>
-</g>
-<g id="f34-cariche" font-family="var(--sans)" font-size="15" text-anchor="middle">
-<text id="f34-c1" x="97" y="75">+</text>
-<text id="f34-c2" x="97" y="100">+</text>
-<text id="f34-c3" x="97" y="125">+</text>
-<text id="f34-c4" x="97" y="225">&#8722;</text>
-<text id="f34-c5" x="97" y="250">&#8722;</text>
-<text id="f34-c6" x="97" y="275">&#8722;</text>
-</g>
-<g id="f34-campo" transform="translate(280,150)">
-<circle id="f34-Bsimb" cx="0" cy="-40" r="15" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<line id="f34-Bx1" x1="-8" y1="-48" x2="8" y2="-32" stroke="var(--blu)" stroke-width="2"/>
-<line id="f34-Bx2" x1="8" y1="-48" x2="-8" y2="-32" stroke="var(--blu)" stroke-width="2"/>
-<circle id="f34-Bpunto" cx="0" cy="-40" r="4" fill="var(--blu)"/>
-<text x="26" y="-35" font-family="var(--sans)" font-size="14" fill="var(--blu)">B&#8407;</text>
-<line id="f34-Elinea" x1="0" y1="-15" x2="0" y2="35" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f34e)"/>
-<text x="16" y="20" font-family="var(--sans)" font-size="14" fill="var(--verde)">E&#8407;</text>
-</g>
-<text x="230" y="20" font-family="var(--sans)" font-size="11" fill="var(--grigio)">campo nel punto a lato dell'antenna</text>
-</svg>
-<p class="did">Il cursore avanza la fase della corrente: cariche, $\vec E$ e $\vec B$ cambiano insieme.</p>
-<div class="interattivo">
-<label for="f34-slider">Fase della corrente: <span id="f34-fase">0&deg;</span></label>
-<input type="range" id="f34-slider" min="0" max="360" step="5" value="0">
-</div>
+<svg id="fig-antenna" viewBox="0 0 380 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Antenna verticale collegata a un generatore di corrente alternata; cariche ai capi, corrente i nel filo, campi E e B in un punto P a lato dell'antenna"></svg>
+<div class="cursore"><label for="cur-fase">fase</label><input id="cur-fase" type="range" min="0" max="360" step="5" value="45"><output id="val-fase"></output></div>
+<p class="did">Campi nel punto $P$ a lato dell'antenna</p>
 </div>
 
-<script>
-(function(){
-  var slider=document.getElementById('f34-slider');
-  var fase=document.getElementById('f34-fase');
-  var cariche=[document.getElementById('f34-c1'),document.getElementById('f34-c2'),document.getElementById('f34-c3')];
-  var caricheNeg=[document.getElementById('f34-c4'),document.getElementById('f34-c5'),document.getElementById('f34-c6')];
-  var iLinea=document.getElementById('f34-i-linea');
-  var Bsimb=document.getElementById('f34-Bsimb');
-  var Bx1=document.getElementById('f34-Bx1'), Bx2=document.getElementById('f34-Bx2'), Bpunto=document.getElementById('f34-Bpunto');
-  var Elinea=document.getElementById('f34-Elinea');
-  function agg(){
-    var t=parseFloat(slider.value);
-    fase.textContent=t+'°';
-    var c=Math.cos(t*Math.PI/180);
-    var op=0.15+0.85*Math.abs(c);
-    var positivoInAlto = c>=0;
-    var testoTop = positivoInAlto ? '+' : '−';
-    var testoBot = positivoInAlto ? '−' : '+';
-    cariche.forEach(function(el){el.textContent=testoTop; el.style.opacity=op;});
-    caricheNeg.forEach(function(el){el.textContent=testoBot; el.style.opacity=op;});
-    iLinea.style.opacity=op;
-    if(positivoInAlto){
-      iLinea.setAttribute('x1',110); iLinea.setAttribute('y1',180); iLinea.setAttribute('x2',110); iLinea.setAttribute('y2',150);
-    } else {
-      iLinea.setAttribute('x1',110); iLinea.setAttribute('y1',150); iLinea.setAttribute('x2',110); iLinea.setAttribute('y2',180);
-    }
-    Bsimb.style.opacity=op; Bpunto.style.opacity=op; Elinea.style.opacity=op;
-    if(positivoInAlto){
-      // B entrante nel foglio: simbolo a croce
-      Bx1.style.display='inline'; Bx2.style.display='inline'; Bpunto.style.display='none';
-      Elinea.setAttribute('x1',0); Elinea.setAttribute('y1',-15); Elinea.setAttribute('x2',0); Elinea.setAttribute('y2',35-25*(1-Math.abs(c)));
-    } else {
-      // B uscente dal foglio: simbolo a punto
-      Bx1.style.display='none'; Bx2.style.display='none'; Bpunto.style.display='inline';
-      Elinea.setAttribute('x1',0); Elinea.setAttribute('y1',35); Elinea.setAttribute('x2',0); Elinea.setAttribute('y2',-15+25*(1-Math.abs(c)));
-    }
-  }
-  slider.addEventListener('input',agg);
-  agg();
-})();
-</script>
+<p>Nel punto $P$ a lato dell'antenna:</p>
 
-<p>Quando il capo superiore è carico positivamente, il campo magnetico in un punto a lato del filo
-entra nel foglio ($\otimes$) e il campo elettrico, diretto dalla carica positiva verso quella
-negativa, punta verso il basso; quando la corrente si inverte, $\vec B$ esce dal foglio ($\odot$)
-ed $\vec E$ punta verso l'alto.</p>
+<ul>
+<li>corrente verso l'alto → $\vec B$ entrante nel foglio ($\otimes$);</li>
+<li>corrente verso il basso → $\vec B$ uscente dal foglio ($\odot$);</li>
+<li>capo superiore positivo → $\vec E$ verso il basso, dalla carica positiva a quella negativa;</li>
+<li>capo superiore negativo → $\vec E$ verso l'alto.</li>
+</ul>
 
 <h2>Un'onda che si propaga da sola</h2>
 
-<p>Poiché la corrente inverte periodicamente il proprio verso, anche $\vec E$ e $\vec B$ oscillano nel
-tempo, e questa oscillazione si allontana dall'antenna: si è generata un'onda elettromagnetica. In
-ogni punto raggiunto dall'onda, $\vec E$ e $\vec B$ giacciono su piani perpendicolari fra loro, ed
-entrambi sono perpendicolari alla direzione di propagazione.</p>
+<p>$\vec E$ e $\vec B$ oscillano con la corrente e l'oscillazione si allontana dall'antenna: è un'onda elettromagnetica. In ogni punto raggiunto dall'onda:</p>
+
+<ul>
+<li>$\vec E$ e $\vec B$ sono perpendicolari fra loro;</li>
+<li>$\vec E$ e $\vec B$ sono perpendicolari alla direzione di propagazione.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f34prop" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="40" y1="120" x2="470" y2="120" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#f34prop)"/>
-<text x="400" y="145" font-family="var(--sans)" font-size="12" fill="var(--grigio)">direzione di propagazione</text>
-<path id="f34-onda-E" fill="none" stroke="var(--verde)" stroke-width="2.4"/>
-<path id="f34-onda-B" fill="none" stroke="var(--blu)" stroke-width="2.2" stroke-dasharray="1 5" stroke-linecap="round"/>
-<text x="46" y="45" font-family="var(--sans)" font-size="15" fill="var(--verde)">E&#8407;</text>
-<text x="46" y="100" font-family="var(--sans)" font-size="15" fill="var(--blu)">B&#8407;</text>
-</svg>
-<p class="did">$\vec E$ oscilla nel piano del foglio (verde); $\vec B$, sul piano perpendicolare, è qui
-reso con la stessa convenzione entrante/uscente usata sopra (blu).</p>
-</div>
-
-<script>
-(function(){
-  var xmin=40,xmax=470,y0=120,amp=40,lambda=95;
-  function pathSin(amp2,fase){
-    var d='M'+xmin+','+y0;
-    for(var x=xmin;x<=xmax;x+=4){
-      var y=y0-amp2*Math.sin(2*Math.PI*(x-xmin)/lambda+fase);
-      d+=' L'+x+','+y;
-    }
-    return d;
-  }
-  document.getElementById('f34-onda-E').setAttribute('d', pathSin(amp,0));
-  document.getElementById('f34-onda-B').setAttribute('d', pathSin(16,0));
-})();
-</script>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'unità 35 calcola la velocità con cui un'onda elettromagnetica si propaga, a partire da
-$\varepsilon_0$ e $\mu_0$, e la confronta con la velocità della luce.</li>
-</ul>
+<svg id="fig-onda" viewBox="0 10 420 165" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Onda elettromagnetica: campo E che oscilla in un piano verticale, campo B in un piano orizzontale, entrambi perpendicolari alla direzione di propagazione"></svg>
+<p class="did">$\vec E$ (verde) e $\vec B$ (blu) su piani perpendicolari</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../33-corrente-di-spostamento-e-legge-di-ampere-maxwell/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Corrente di spostamento e legge di Ampère-Maxwell</span></a><a class="successiva" href="../35-velocita-di-propagazione-delle-onde-elettromagnetiche/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Velocità di propagazione delle onde elettromagnetiche</span></a></nav>
 <footer><p>Fisica quinta &middot; Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 34</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13,stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w){var g=el(p,'g',{});el(g,'line',{x1:f(x1),y1:f(y1),x2:f(x2),y2:f(y2),stroke:col,'stroke-width':w||2});
+    if(Math.hypot(x2-x1,y2-y1)>3)punta(g,x2,y2,x2-x1,y2-y1,col,7);return g;}
+
+  /* antenna: carica del capo superiore q = Q sin(fase), corrente verso l'alto i = I cos(fase) (i = dq/dt) */
+  (function(){
+    var S=document.getElementById('fig-antenna'); if(!S)return;
+    var cur=document.getElementById('cur-fase'), out=document.getElementById('val-fase');
+    var xa=150, ya=30, yb=240, yc=135, xg=60, px=255, py=135;
+    /* generatore e collegamento al centro dell'antenna */
+    el(S,'line',{x1:xg+18,y1:yc,x2:xa,y2:yc,stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(S,'circle',{cx:xg,cy:yc,r:18,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    var d='M'+(xg-12)+','+yc; for(var k=0;k<=24;k++){var u=k/24;d+=' L'+f(xg-12+24*u)+','+f(yc-7*Math.sin(2*Math.PI*u));}
+    el(S,'path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+    T(S,xg,yc+36,'generatore',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    el(S,'line',{x1:xa,y1:ya,x2:xa,y2:yb,stroke:'var(--inchiostro)','stroke-width':3});
+    T(S,xa+10,ya+4,'antenna',{'font-size':11,fill:'var(--grigio)'});
+    /* punto P */
+    el(S,'circle',{cx:px,cy:py,r:3,fill:'var(--inchiostro)'});
+    T(S,px-16,py+18,'P',{'font-style':'italic',fill:'var(--inchiostro)'});
+    var dyn=el(S,'g',{});
+    function disegna(fase){
+      while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+      var r=fase*Math.PI/180, q=Math.sin(r), i=Math.cos(r);
+      /* cariche ai capi: numero proporzionale a |q| */
+      var n=Math.round(3*Math.abs(q)), su=q>0?'+':'−', giu=q>0?'−':'+';
+      for(var k=0;k<n;k++){
+        T(dyn,xa-14,ya+14+k*20,su,{'text-anchor':'middle','font-size':15,fill:q>0?'var(--rosso)':'var(--blu)'});
+        T(dyn,xa-14,yb-2-k*20,giu,{'text-anchor':'middle','font-size':15,fill:q>0?'var(--blu)':'var(--rosso)'});
+      }
+      /* corrente nel tratto superiore dell'antenna */
+      var L=46*Math.abs(i);
+      if(L>4){var y0=yc-20+(i>0?L/2:-L/2);freccia(dyn,xa+12,y0,xa+12,y0-(i>0?L:-L),'var(--inchiostro)',2.2);
+        T(dyn,xa+20,yc-16,'i',{'font-style':'italic','font-size':14,fill:'var(--inchiostro)'});}
+      /* B in P (dalla corrente): croce = entrante, punto = uscente; raggio proporzionale a |i| */
+      var rb=13*Math.abs(i), bx=px+58, by=py;
+      if(rb>2.5){
+        el(dyn,'circle',{cx:bx,cy:by,r:f(rb),fill:'#fff',stroke:'var(--blu)','stroke-width':2});
+        if(i>0){var a=rb*.6;el(dyn,'line',{x1:f(bx-a),y1:f(by-a),x2:f(bx+a),y2:f(by+a),stroke:'var(--blu)','stroke-width':2});
+          el(dyn,'line',{x1:f(bx+a),y1:f(by-a),x2:f(bx-a),y2:f(by+a),stroke:'var(--blu)','stroke-width':2});}
+        else el(dyn,'circle',{cx:bx,cy:by,r:f(Math.max(2,rb*.3)),fill:'var(--blu)'});
+        T(dyn,bx+20,by+5,'B',{'font-weight':700,fill:'var(--blu)'});
+      } else T(dyn,bx-14,by+5,'B = 0',{'font-weight':700,fill:'var(--blu)'});
+      /* E in P (dalle cariche): verso il basso se il capo superiore è positivo */
+      var le=60*Math.abs(q);
+      if(le>4){freccia(dyn,px,py,px,py+(q>0?le:-le),'var(--verde)',2.4);
+        T(dyn,px+12,py+(q>0?32:-24),'E',{'font-weight':700,fill:'var(--verde)'});}
+      else T(dyn,px+12,py+30,'E = 0',{'font-weight':700,fill:'var(--verde)'});
+      out.textContent=fase+'°: i '+(Math.abs(i)<.05?'nulla':(i>0?'verso l’alto':'verso il basso'))+
+        ', capo superiore '+(Math.abs(q)<.05?'scarico':(q>0?'+':'−'));
+    }
+    cur.addEventListener('input',function(){disegna(+cur.value);});
+    disegna(+cur.value);
+  })();
+
+  /* onda: E lungo y (piano verticale), B lungo z (verso l'osservatore, in prospettiva obliqua), propagazione lungo x */
+  (function(){
+    var S=document.getElementById('fig-onda'); if(!S)return;
+    var x0=45, A=62, y0=86, lam=150, L=2*lam, zx=-0.5, zy=0.55;
+    function P(x,y,z){return [x0+x+z*zx*A, y0-y*A+z*zy*A];}
+    /* piano di B (orizzontale) */
+    var c1=P(0,0,1.15),c2=P(L,0,1.15),c3=P(L,0,-1.15),c4=P(0,0,-1.15);
+    el(S,'path',{d:'M'+[c1,c2,c3,c4].map(function(p){return f(p[0])+','+f(p[1]);}).join(' L')+' Z',fill:'var(--blu-chiaro)','fill-opacity':.45,stroke:'none'});
+    var dE='',dB='';
+    for(var k=0;k<=150;k++){var x=L*k/150,s=Math.sin(2*Math.PI*x/lam);
+      var pe=P(x,s,0),pb=P(x,0,s);dE+=(k?' L':'M')+f(pe[0])+','+f(pe[1]);dB+=(k?' L':'M')+f(pb[0])+','+f(pb[1]);}
+    /* vettori ogni lam/8 */
+    for(var x=lam/8;x<L;x+=lam/8){var s=Math.sin(2*Math.PI*x/lam);if(Math.abs(s)<.2)continue;
+      var o=P(x,0,0),pe=P(x,s,0),pb=P(x,0,s);
+      freccia(S,o[0],o[1],pb[0],pb[1],'var(--blu)',1.3);
+      freccia(S,o[0],o[1],pe[0],pe[1],'var(--verde)',1.3);}
+    el(S,'path',{d:dB,fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    el(S,'path',{d:dE,fill:'none',stroke:'var(--verde)','stroke-width':2.4});
+    var a=P(0,0,0),b=P(L+62,0,0);
+    freccia(S,a[0],a[1],b[0],b[1],'var(--inchiostro)',1.6);
+    T(S,b[0],b[1]+18,'propagazione',{'text-anchor':'end','font-size':11,fill:'var(--grigio)'});
+    var le=P(lam/4,1,0);T(S,le[0]+10,le[1]+4,'E',{'font-weight':700,fill:'var(--verde)'});
+    var lb=P(lam/4,0,1);T(S,lb[0]+10,lb[1]+12,'B',{'font-weight':700,fill:'var(--blu)'});
+  })();
+})();
+</script>
 </body>
 </html>
