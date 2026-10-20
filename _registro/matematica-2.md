@@ -259,6 +259,7 @@
 - Parole: 243 su 1 pagina di traccia (pag. 66 di matematica-2.pdf)
 - Rettifica: nessuna. L'identificazione dei coefficienti dell'esempio 6x²-x+2=0 (a=6, b=-1, c=2) è stata verificata con SymPy e coincide con la traccia.
 - Aggiunta: nessuna oltre a una frase finale che annuncia, in modo qualitativo, che il numero di soluzioni dipenderà da un valore ricavato dai coefficienti (senza nominare il discriminante, introdotto solo nella unità 36).
+- Revisione (20/10/2026, regole 13/10): parole 181 → 78. Pagina mai revisionata: tolti sommario e frase finale con rimando al discriminante (resta «Soluzioni possibili: zero, una oppure due»); tolti i titoletti «La forma normale» ed «Equazioni complete e incomplete» (pagina breve, un solo argomento); forma normale in .def con la condizione a ≠ 0; coefficienti e classificazione in elenco caso → conseguenza; esempio in forma «Dati… Classificare» con una .eq. Nessuna comparsa, nessuna figura. Controllo concettuale: a = 6, b = −1, c = 2 → completa, verificato; nessuna correzione.
 
 ## Unità 33 — Equazioni incomplete: spurie, pure, monomie
 - Parole: 294 su 2 pagine di traccia (67–68)
