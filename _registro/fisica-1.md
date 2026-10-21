@@ -280,6 +280,7 @@
   pagina 56, cioè nell'unità successiva. Lo schema ad albero ATTRITO →
   radente / volvente / viscoso e il dettaglio della zona di contatto sono i due
   disegni della traccia, ridisegnati in SVG.
+- Revisione (21/10/2026, regole 13/10): parole 155 → 83. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 36), aggiunto il piè di pagina, tolti «Dove si continua» e le frasi descrittive; origine microscopica dell'attrito in elenco caso → conseguenza; titoletto «I tre tipi di attrito» → «Tipi di attrito» con i tre tipi in elenco. Correzione: il verso di F_at è opposto al moto (o alla tendenza al moto) rispetto alla superficie, non genericamente «opposto a F». Figure rifatte da script, statiche come nella traccia (scatola con F e F_at, entrambe rosse, e ingrandimento con profili calcolati; schema ad albero con radente → statico/dinamico). Nessun esempio (la traccia non ne ha), nessuna figura decorativa.
 
 ## Unità 38 — Attrito statico e dinamico
 - Parole: 549 su 2 pagine di traccia (pagg. 56–57)
