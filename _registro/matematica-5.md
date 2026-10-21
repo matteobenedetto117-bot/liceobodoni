@@ -726,6 +726,7 @@ teorema del confronto, a pagina 21.
   disegno: la traccia non ne contiene. Nessun interattivo: sono due esempi puntuali
   di una tecnica, senza un parametro naturale da variare. Nessun quesito di maturità:
   l'unità introduce solo la tecnica su casi elementari, come già le unità 31-33.
+- Revisione (21/10/2026, regole 13/10): parole 162 → 82. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 32), tolti sommario e titoletto «Esempi»; apertura a domanda; derivata del prodotto e sua integrazione in due .eq con frasi di raccordo, formula in .def rosso, scelta dei fattori in elenco caso → conseguenza; esempi titolati «Esempio 1» (∫x ln x dx) ed «Esempio 2» (∫ln x dx), ciascuno con una .eq. Correzioni: aggiunta l'ipotesi «f e g derivabili, a derivata continua» (verificati con SymPy D[(x²/2)ln x − x²/4] = x ln x e D[x ln x − x] = ln x). Nessuna comparsa, nessuna figura.
 
 ## Unità 34 — Integrazione per sostituzione
 - Parole: circa 100 su 0,5 pagine di traccia (la metà inferiore di pagina 125, dopo
