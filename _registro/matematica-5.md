@@ -713,6 +713,7 @@ teorema del confronto, a pagina 21.
   di riconoscimento di struttura. Nessun quesito di maturità: l'unità introduce solo la
   tecnica del riconoscimento $f'(x)\cdot g(f(x))$ su casi elementari, senza un problema
   autosufficiente a questo livello.
+- Revisione (21/10/2026, regole 13/10): parole 169 → 95. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 31), tolti sommario e titoletto «Esempi»; apertura a domanda sull'errore ∫(sin x)⁴ dx ≠ (sin x)⁵/5 + C, nota ridotta a una frase e una .eq; regola generale in .def rosso ∫g(f(x))·f'(x) dx = G(f(x)) + C con i due casi usati nella pagina (potenza con α ≠ −1, f'/f → ln|f| con f(x) ≠ 0); aggiustamento della costante in una frase. Esempi da quattro a due: Esempio 1 ∫(2x−3)² dx, Esempio 2 ∫tan x dx e ∫cot x dx (stesso procedimento, due .eq); tolto ∫3x²(x³+2)² dx; tolta la riga ripetuta ∫tan x dx = −ln|cos x| + C. Correzioni: nessuna (verificati con SymPy D[(sin x)⁵/5], (2x−3)³/6, −ln|cos x|, ln|sin x|). Nessuna comparsa, nessuna figura.
 
 ## Unità 33 — Integrazione per parti
 - Parole: 228 su 2 pagine di traccia (126–127).

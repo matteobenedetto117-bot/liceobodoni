@@ -5,17 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Integrali di funzioni composte — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
+.nota .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def .eq+.eq{margin-top:0}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+table.tavola{border-collapse:collapse;width:100%;font-size:1rem}
+table.tavola td{height:calc(2*var(--r));line-height:var(--r);padding:0 10px;border-bottom:1px solid var(--riga);vertical-align:middle}
+table.tavola tr:last-child td{border-bottom:0}
+table.tavola td.cond{font-family:var(--sans);font-size:.85rem;color:var(--grigio);white-space:nowrap}
+.def table.tavola{margin-bottom:calc(var(--r)*.5)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -24,46 +93,62 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Integrali indefiniti &middot; Unità 32</p>
   <h1>Integrali di funzioni composte</h1>
-  <p class="sommario">La tavola degli integrali immediati non basta quando la funzione da
-  integrare è la derivata di una funzione composta: qui serve riconoscere, dentro
-  l'integranda, la struttura $f'(x)\cdot g\big(f(x)\big)$.</p>
 </header>
 
+<p>$\displaystyle\int(\sin x)^4\,dx$ si calcola come una potenza, $\dfrac{(\sin x)^5}{5}+C$?</p>
+
 <div class="nota"><span class="et">Attenzione</span>
-<p>Non si può integrare "per potenze" ignorando l'interno: $\displaystyle\int(\sin x)^4\,dx$
-non è $\dfrac{(\sin x)^5}{5}+C$. Basta derivare per controllare:
-$$D\left[\frac{(\sin x)^5}{5}\right]=\frac55(\sin x)^4\cdot\cos x=(\sin x)^4\cos x,$$
-non $(\sin x)^4$ da solo. Quel risultato è la primitiva di $(\sin x)^4\cos x$, non di
-$(\sin x)^4$.</p></div>
+<p>No: derivando si ottiene $(\sin x)^4\cos x$, non $(\sin x)^4$.</p>
+<p class="eq">$$D\left[\frac{(\sin x)^5}{5}\right]=\frac55(\sin x)^4\cdot\cos x=(\sin x)^4\cos x$$</p></div>
 
-<p>Perché la primitiva torni giusta, l'integranda deve contenere anche il fattore $\cos x$,
-cioè la derivata della funzione più interna $\sin x$:
-$$\int\underbrace{(\sin x)^4}_{[f(x)]^4}\underbrace{\cos x}_{f'(x)}\,dx=\frac{(\sin x)^5}{5}+C.$$
-In generale, per integrare una funzione composta è necessario che la funzione integranda sia
-moltiplicata per la derivata della funzione più interna.</p>
+<p>La primitiva torna se c'è anche il fattore $\cos x$, derivata della funzione interna $\sin x$:</p>
 
-<h2>Esempi</h2>
+<p class="eq">$$\int\underbrace{(\sin x)^4}_{[f(x)]^4}\,\underbrace{\cos x}_{f'(x)}\,dx=\frac{(\sin x)^5}{5}+C$$</p>
 
-<p>Con $f(x)=x^3+2$ e $f'(x)=3x^2$ già presente come fattore:
-$$\int\underbrace{3x^2}_{f'(x)}\underbrace{(x^3+2)^2}_{[f(x)]^2}\,dx=\frac{(x^3+2)^3}{3}+C.$$</p>
+<div class="def"><span class="et">Integrale di una funzione composta</span>
+<p class="eq principio">$$\int g\big(f(x)\big)\cdot f'(x)\,dx=G\big(f(x)\big)+C$$</p>
+<p>con $G$ primitiva di $g$. Casi più usati:</p>
+<ul>
+<li>$\displaystyle\int[f(x)]^\alpha f'(x)\,dx=\frac{[f(x)]^{\alpha+1}}{\alpha+1}+C$, $\;\alpha\neq-1$;</li>
+<li>$\displaystyle\int\frac{f'(x)}{f(x)}\,dx=\ln|f(x)|+C$, $\;f(x)\neq0$.</li>
+</ul></div>
 
-<p>Se il fattore $f'(x)$ non compare già con il coefficiente giusto, lo si costruisce
-moltiplicando e dividendo per la costante mancante. Con $f(x)=2x-3$, $f'(x)=2$:
-$$\int(2x-3)^2\,dx=\int\frac{2(2x-3)^2}{2}\,dx=\frac12\int2(2x-3)^2\,dx
-=\frac12\cdot\frac{(2x-3)^3}{3}+C=\frac{(2x-3)^3}{6}+C.$$</p>
+<p>Se $f'(x)$ manca solo di un fattore costante, si moltiplica e si divide per quella costante.</p>
 
-<p>Lo stesso schema, con $f(x)=\cos x$ al denominatore, dà un logaritmo invece di una
-potenza:
-$$\int\tan x\,dx=\int\frac{\sin x}{\cos x}\,dx=-\int\underbrace{\frac{-\sin x}{\cos x}}_{f'(x)/f(x)}\,dx=-\ln|\cos x|+C.$$
-$$\int\tan x\,dx=-\ln|\cos x|+C$$</p>
+<h2>Esempio 1</h2>
 
-<p>E analogamente per la cotangente, con $f(x)=\sin x$:
-$$\int\cot x\,dx=\ln|\sin x|+C.$$</p>
+<p>Calcolare $\displaystyle\int(2x-3)^2\,dx$, con $f(x)=2x-3$, $f'(x)=2$.</p>
 
+<p class="eq">$$\int(2x-3)^2\,dx=\frac12\int2(2x-3)^2\,dx=\frac12\cdot\frac{(2x-3)^3}{3}+C=\frac{(2x-3)^3}{6}+C$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Calcolare $\displaystyle\int\tan x\,dx$ e $\displaystyle\int\cot x\,dx$, con $f(x)=\cos x$ e $f(x)=\sin x$.</p>
+
+<p class="eq">$$\int\tan x\,dx=-\int\frac{-\sin x}{\cos x}\,dx=-\ln|\cos x|+C$$</p>
+<p class="eq">$$\int\cot x\,dx=\int\frac{\cos x}{\sin x}\,dx=\ln|\sin x|+C$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../32-integrali-immediati/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Integrali immediati</span></a><a class="successiva" href="../34-integrazione-per-parti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Integrazione per parti</span></a></nav>
 <footer><p>Matematica quinta &middot; Integrali indefiniti &middot; Unità 32</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
