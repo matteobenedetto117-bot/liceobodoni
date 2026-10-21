@@ -289,6 +289,7 @@
 - Parole: 170 su circa 1,5 pagine di traccia (fine pag. 74, dopo il secondo esempio dell'unità 38, fino a metà pag. 75, prima dell'intestazione "Scomposizione di un trinomio di secondo grado")
 - Rettifica: nessuna. Le due derivazioni (somma = -b/a con cancellazione dei due ±√Δ, prodotto = c/a tramite differenza di quadrati b²-Δ=4ac) sono state verificate con SymPy e coincidono con la traccia.
 - Aggiunta: un esempio numerico (x²-3x+2=0, radici 1 e 2), perché la traccia non ne contiene nessuno in questa unità e la regola lo consente in questo caso.
+- Revisione (21/10/2026, regole 13/10): parole 136 → 43. Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 36); apertura a domanda con la condizione Δ ≥ 0; tolti sommario, «Nella prossima unità», titoletto «Le due relazioni» e le frasi di commento; riquadri .regola sostituiti da due frasi di raccordo e due .eq (somma, prodotto); relazioni finali in .def rosso; Esempio con quesito in una riga e una .eq. Nessuna comparsa da togliere. Controllo concettuale: x₁+x₂ = −b/a, x₁x₂ = c/a e le soluzioni 1, 2 di x²−3x+2 = 0 riverificate con SymPy; nessuna correzione. Nessuna figura; nessun esempio tolto.
 
 ## Unità 38 — Scomposizione del trinomio di secondo grado
 - Parole: 249 su circa 2,5 pagine di traccia (da metà pag. 75, dopo l'intestazione "Scomposizione di un trinomio di secondo grado", a pag. 77, prima dell'intestazione "Equazioni numeriche fratte" a inizio pag. 78)
