@@ -762,6 +762,7 @@ teorema del confronto, a pagina 21.
   più ampi di studio di funzione). Nessun disegno: la traccia non ne contiene. Nessun
   interattivo: sono casi e esempi puntuali di una tecnica, senza un parametro naturale
   da far variare.
+- Revisione (21/10/2026, regole 13/10): parole 265 → 92. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 34), tolti il sommario (la condizione «numeratore di grado minore del denominatore» è passata nella domanda d'apertura) e i titoletti numerati dei casi 1–3; casi in elenco caso → conseguenza, ∫f'/f dx = ln|f| + C in .def; titoletti «Δ>0», «Δ=0», «Δ<0» (da h3 a h2); passaggi in .eq una sotto l'altra. Esempi da tre a due: tolto l'Esempio 1 (∫1/((2x+1)²+1) dx = ½ arctan(2x+1) + C); l'ex Esempio 3 ora parte da ∫2x/(x²+4x+5) dx con la scomposizione 2x = (2x+4) − 4. Correzioni: nessuna (tutte le primitive verificate con SymPy); ln|x²+4x+5| scritto senza valore assoluto (argomento sempre positivo). Nessuna comparsa, nessuna figura.
 
 ## Unità 36 — Teorema della media e valore medio
 - Parole: 332 su 1,5 pagine di traccia (134 intera, e la parte iniziale di 135 fino a
