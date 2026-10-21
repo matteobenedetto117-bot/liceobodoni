@@ -6,13 +6,47 @@
 <title>Calore, temperatura ed equilibrio termico — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -23,58 +57,97 @@
   <h1>Calore, temperatura ed equilibrio termico</h1>
 </header>
 
-<h2>Il calore</h2>
+<p>Due corpi a contatto, a temperature diverse: che cosa si scambiano, e fino a quando?</p>
 
-<p>Il <strong>calore</strong> è l'energia trasferita tra due oggetti a
-causa della loro differenza di temperatura. Non è quindi una
-proprietà che un corpo possiede, ma energia che si sposta da un corpo
-all'altro proprio mentre lo scambio avviene.</p>
+<div class="def"><span class="et">Calore</span>
+<p>Energia trasferita fra due corpi a causa della loro differenza di temperatura.</p></div>
 
-<h2>Scambio di calore ed equilibrio termico</h2>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Il calore non è posseduto da un corpo: è energia in transito, solo durante lo scambio.</p></div>
 
-<p>Se due oggetti in contatto termico hanno una temperatura diversa,
-il calore fluisce spontaneamente da quello più caldo a quello più
-freddo, finché non raggiungono la stessa temperatura. A quel punto lo
-scambio si ferma e i due oggetti si dicono in <strong>equilibrio
-termico</strong>.</p>
+<p>Due corpi in contatto termico, a temperature diverse:</p>
+
+<ul>
+<li>il calore passa spontaneamente dal più caldo al più freddo;</li>
+<li>lo scambio continua finché le temperature diventano uguali;</li>
+<li>temperature uguali → nessuno scambio: <strong>equilibrio termico</strong>.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f44v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rosso)"/></marker>
-</defs>
-<text x="60" y="20" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">prima dell'equilibrio</text>
-<rect x="20" y="40" width="60" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="50" y="75" font-size="15" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">A</text>
-<rect x="100" y="40" width="60" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="130" y="75" font-size="15" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">B</text>
-<line x1="83" y1="70" x2="97" y2="70" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f44v)"/>
-<text x="90" y="60" font-size="11" fill="var(--rosso)" font-family="var(--sans)" text-anchor="middle">calore</text>
-<text x="50" y="118" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">T&#8321; &gt; T&#8322;</text>
-
-<text x="410" y="20" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">equilibrio termico</text>
-<rect x="360" y="40" width="60" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="390" y="75" font-size="15" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">A</text>
-<rect x="440" y="40" width="60" height="60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="470" y="75" font-size="15" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">B</text>
-<text x="430" y="118" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">T&#8321; = T&#8322;</text>
-</svg>
-<p class="did">A sinistra, A è più caldo di B: il calore passa da A a
-B. A destra, le due temperature si sono eguagliate e lo scambio è
-cessato: A e B sono in equilibrio termico.</p>
+<svg id="g-eq" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due blocchi A e B a contatto: le temperature si avvicinano fino all'equilibrio termico"></svg>
+<div class="cursore"><label for="c-eq">tempo</label><input id="c-eq" type="range" min="0" max="5" step="0.1" value="0"><span class="val" id="v-eq"></span></div>
+<p class="did">Corpi uguali A e B a contatto: calore da A a B finché $T_A = T_B$</p>
 </div>
 
-<h2>La temperatura</h2>
-
-<p>La <strong>temperatura</strong> è la grandezza fisica che
-determina se due corpi sono in equilibrio termico oppure no: due corpi
-alla stessa temperatura non si scambiano calore fra loro, due corpi a
-temperatura diversa sì, e in quel caso il calore va sempre dal più
-caldo al più freddo.</p>
+<div class="def"><span class="et">Temperatura</span>
+<p>Grandezza che stabilisce se due corpi sono in equilibrio termico: stessa temperatura → nessuno scambio di calore.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../43-conservazione-dell-energia-con-la-forza-elastica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Conservazione dell'energia con la forza elastica</span></a><a class="successiva" href="../45-scale-di-temperatura/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Scale di temperatura</span></a></nav>
 <footer><p>Fisica seconda &middot; Calore e termologia &middot; Unità 34</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+
+  /* due corpi uguali: T_A,B = T_eq ± (ΔT0/2)·e^(−t/τ), tempo in unità di τ */
+  var s=document.getElementById('g-eq');if(!s)return;
+  var c=document.getElementById('c-eq'),out=document.getElementById('v-eq');
+  var d=el(s,'defs',{}),mk=el(d,'marker',{id:'m34c',markerWidth:9,markerHeight:9,refX:5,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+  el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:'var(--rosso)'});
+  var Y0=60,L=80,XA=130,XB=210;          /* blocchi da Y0 a Y0+L, A fra 130 e 210, B fra 210 e 290 */
+  var TA0=0.9,TB0=0.3,TEQ=(TA0+TB0)/2,BH=100,Yb=150,XTA=95,XTB=325,BW=12;
+  /* fondo dei blocchi: blu per freddo, rosso per caldo (opacità dalla temperatura) */
+  var fA=[el(s,'rect',{x:XA,y:Y0,width:L,height:L,fill:'var(--blu)'}),el(s,'rect',{x:XA,y:Y0,width:L,height:L,fill:'var(--rosso)'})];
+  var fB=[el(s,'rect',{x:XB,y:Y0,width:L,height:L,fill:'var(--blu)'}),el(s,'rect',{x:XB,y:Y0,width:L,height:L,fill:'var(--rosso)'})];
+  el(s,'rect',{x:XA,y:Y0,width:L,height:L,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+  el(s,'rect',{x:XB,y:Y0,width:L,height:L,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6});
+  txt(s,XA+L/2,Y0+L/2+6,'A',{fill:'var(--inchiostro)','font-size':16});
+  txt(s,XB+L/2,Y0+L/2+6,'B',{fill:'var(--inchiostro)','font-size':16});
+  /* termometri a barra ai lati */
+  [[XTA,'A'],[XTB,'B']].forEach(function(q){
+    el(s,'rect',{x:q[0]-BW/2,y:Yb-BH,width:BW,height:BH,fill:'#fff',stroke:'var(--grigio)','stroke-width':1});
+    var t=txt(s,q[0],Yb+16,'T',{fill:'var(--inchiostro)','font-size':13,'font-style':'italic'});pedice(t,q[1]);
+  });
+  var bA=el(s,'rect',{x:XTA-BW/2+2,width:BW-4,fill:'var(--rosso)'});
+  var bB=el(s,'rect',{x:XTB-BW/2+2,width:BW-4,fill:'var(--rosso)'});
+  /* freccia del calore attraverso il contatto */
+  var fq=el(s,'line',{x1:XB-26,x2:XB+22,y1:Y0-16,y2:Y0-16,stroke:'var(--rosso)','marker-end':'url(#m34c)'});
+  var tq=txt(s,XB,Y0-28,'calore',{fill:'var(--rosso)','font-size':12});
+  var teq=txt(s,XB,Y0-20,'equilibrio termico',{fill:'var(--verde)','font-size':13,'font-weight':700});
+  function disegna(){
+    var t=+c.value,f=Math.exp(-t),TA=TEQ+(TA0-TEQ)*f,TB=TEQ-(TEQ-TB0)*f,eq=f<0.01;
+    if(eq){TA=TB=TEQ;}
+    set(fA[1],{opacity:(TA*0.55).toFixed(3)});set(fA[0],{opacity:((1-TA)*0.45).toFixed(3)});
+    set(fB[1],{opacity:(TB*0.55).toFixed(3)});set(fB[0],{opacity:((1-TB)*0.45).toFixed(3)});
+    set(bA,{y:Yb-BH*TA,height:BH*TA});set(bB,{y:Yb-BH*TB,height:BH*TB});
+    set(fq,{'stroke-width':(1+5*f).toFixed(2),visibility:eq?'hidden':'visible'});
+    set(tq,{visibility:eq?'hidden':'visible'});set(teq,{visibility:eq?'visible':'hidden'});
+    out.innerHTML=eq?'<i>T</i><sub>A</sub> = <i>T</i><sub>B</sub> · <span class="ok">equilibrio termico</span>':'<i>T</i><sub>A</sub> &gt; <i>T</i><sub>B</sub> · calore da A a B';
+  }
+  c.addEventListener('input',disegna);disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

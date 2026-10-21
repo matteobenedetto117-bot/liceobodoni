@@ -229,6 +229,7 @@ La statica dei fluidi (unità 01–08, pagine 1–17 degli appunti) è stata spo
 - Parole: circa 210 (testo effettivo, esclusi occhiello e testata) su 1 pagina di traccia (pagina 79)
 - Rettifica: nessuna, le definizioni di calore e temperatura sono corrette così come scritte, verificate contro la definizione standard (calore come energia trasferita per differenza di temperatura; temperatura come grandezza che determina l'equilibrio termico). Nessun calcolo numerico da verificare in questa unità.
 - Aggiunta: una frase che chiarisce che il calore non è una proprietà posseduta da un corpo ma energia in transito, resa esplicita perché la traccia lo lascia implicito nella definizione; il diagramma dei due blocchi A e B è stato ridisegnato in SVG con le due situazioni (scambio in corso ed equilibrio raggiunto) già presenti nella traccia.
+- Revisione (21/10/2026, regole 13/10): parole 140 → 95. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 33); apertura a domanda; tolti i tre titoletti; calore e temperatura in due .def, «non è posseduto da un corpo» in una .nota di una frase; scambio ed equilibrio in elenco caso → conseguenza. Controllo concettuale: nessuna correzione. Figura rifatta da script con cursore sul tempo (corpi uguali, temperature T_eq ± ΔT₀/2·e^(−t/τ), freccia del calore che si assottiglia, «equilibrio termico» in verde alla fine). Nessun esempio (la traccia non ne ha), nessuna figura decorativa.
 
 ## Unità 35 — Scale di temperatura
 - Parole: 222 su 1 pagina di traccia (pagina 80)
