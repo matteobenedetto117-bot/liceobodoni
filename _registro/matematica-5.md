@@ -742,6 +742,7 @@ teorema del confronto, a pagina 21.
   disegno: la traccia non ne contiene. Nessun interattivo: un solo esempio puntuale
   non offre un parametro naturale da far variare. Nessun quesito di maturità: l'unità
   è troppo breve e circoscritta a un'unica tecnica su un caso elementare.
+- Revisione (21/10/2026, regole 13/10): parole 125 → 61. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 33), tolto il sommario; apertura a domanda; il procedimento del sommario in elenco numerato di quattro passi (porre t, riscrivere x e dx, integrare in t, tornare a x); esempio con dati e sostituzione in una riga, passaggi in una .eq e ritorno alla variabile x in una seconda .eq; tenuto il titoletto «Esempio». Correzioni: esplicitata la condizione x ≥ 0 richiesta da t = √x (per t ≥ 0 si ha |t+1| = t+1, il che giustifica il passaggio ln|t+1| → ln(√x+1)); verificati con SymPy 2t/(1+t) = 2 − 2/(t+1) e D[2√x − 2ln(√x+1)] = 1/(1+√x). Nessuna comparsa, nessuna figura.
 
 ## Unità 35 — Integrazione di funzioni razionali fratte
 - Parole: 339 su 5 pagine di traccia (127–131; la parte superiore di pagina 127
