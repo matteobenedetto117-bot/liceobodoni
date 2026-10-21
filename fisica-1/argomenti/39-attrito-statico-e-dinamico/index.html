@@ -5,21 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Attrito statico e dinamico — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:560px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-table.conf{border-collapse:collapse;width:100%;margin:22px 0;font-size:.96rem}
-table.conf th,table.conf td{border:1px solid var(--riga);padding:10px 14px;vertical-align:top}
-table.conf th{background:var(--blu-chiaro);font-family:var(--sans);font-size:.9rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -30,158 +57,160 @@ table.conf th{background:var(--blu-chiaro);font-family:var(--sans);font-size:.9r
   <h1>Attrito statico e dinamico</h1>
 </header>
 
-<table class="conf">
-<tr><th>Attrito statico</th><th>Attrito dinamico</th></tr>
-<tr>
-  <td>Si oppone al distacco di un corpo da una superficie.<br>
-  <em>Oggetto in partenza.</em></td>
-  <td>Si oppone al moto di un corpo su una superficie quando è già in moto.<br>
-  <em>Oggetto già partito.</em></td>
-</tr>
-</table>
-
-<h2>Il modulo della forza di attrito</h2>
-
-<p>Il modulo della forza di attrito si calcola con</p>
-
-$$F_{at} = \mu \, F_{\perp}$$
-
-<p>dove $\mu$ è il <strong>coefficiente di attrito</strong> e $F_{\perp}$ è la
-<strong>forza premente</strong>, cioè la forza con cui il corpo schiaccia la
-superficie. Questa relazione dà la forza di attrito <em>massima</em>.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
-  <defs>
-    <marker id="r1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
-    </marker>
-  </defs>
-  <line x1="30" y1="130" x2="230" y2="130" stroke="#222" stroke-width="2.5"/>
-  <rect x="90" y="88" width="80" height="42" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="130" y1="100" x2="130" y2="172" stroke="#c0392b" stroke-width="2.6" marker-end="url(#r1)"/>
-  <text x="140" y="166" fill="#c0392b" font-weight="bold" font-size="15">F</text>
-  <text x="151" y="171" fill="#c0392b" font-size="11">&#8869;</text>
-
-  <text x="300" y="98" font-size="19">F</text>
-  <text x="312" y="103" font-size="12">at</text>
-  <text x="325" y="98" font-size="19">= &#956; F</text>
-  <text x="392" y="103" font-size="12">&#8869;</text>
-
-  <line x1="330" y1="112" x2="322" y2="140" stroke="#1e7a45" stroke-width="1.6"/>
-  <text x="270" y="158" fill="#1e7a45" font-size="11.5" letter-spacing="1">COEFFICIENTE</text>
-  <text x="280" y="174" fill="#1e7a45" font-size="11.5" letter-spacing="1">DI ATTRITO</text>
-
-  <line x1="382" y1="112" x2="400" y2="140" stroke="#2b6ea8" stroke-width="1.6"/>
-  <text x="404" y="158" fill="#2b6ea8" font-size="11.5" letter-spacing="1">FORZA</text>
-  <text x="404" y="174" fill="#2b6ea8" font-size="11.5" letter-spacing="1">PREMENTE</text>
-</svg>
-<figcaption>I due fattori da cui dipende il modulo della forza di attrito.</figcaption>
-</figure>
-
-<p>Il coefficiente di attrito $\mu$ — che si distingue in $\mu_s$ per l'attrito
-statico e $\mu_d$ per quello dinamico — è un numero <strong>senza dimensioni</strong>:
-non ha unità di misura, perché è il rapporto fra due forze. Dipende da quanta
-possibilità hanno di scivolare l'una sull'altra le due superfici a contatto.</p>
+<p>Corpo appoggiato su una superficie: quanto vale la forza di attrito radente?</p>
 
 <ul>
-  <li>$\mu$ <strong>alto</strong>: superfici ruvide, che fanno fatica a scorrere.</li>
-  <li>$\mu$ <strong>basso</strong>: superfici lisce, che scorrono con facilità.</li>
+<li><strong>attrito statico</strong> → si oppone al distacco: corpo fermo, in partenza;</li>
+<li><strong>attrito dinamico</strong> → si oppone al moto: corpo già in movimento.</li>
 </ul>
 
-<p>Le due formule sono quindi</p>
-
-$$F_s = \mu_s \, F_{\perp} \qquad\qquad F_d = \mu_d \, F_{\perp}$$
-
-<p>e fra i due coefficienti vale sempre $\mu_d &lt; \mu_s$: staccare un oggetto
-fermo costa più fatica che tenerlo in movimento una volta partito.</p>
-
-<h2>La forza premente</h2>
-
-<p>La forza premente $\vec{F}_{\perp}$ è la forza che l'oggetto appoggiato sul
-piano — orizzontale o inclinato — esercita perpendicolarmente alla superficie su
-cui poggia. Non è sempre uguale al peso: dipende da quali altre forze agiscono
-sul corpo.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
-  <defs>
-    <marker id="r2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
-    </marker>
-    <marker id="v2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1e7a45"/>
-    </marker>
-    <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2b6ea8"/>
-    </marker>
-  </defs>
-
-  <line x1="30" y1="86" x2="230" y2="86" stroke="#222" stroke-width="2.5"/>
-  <rect x="90" y="48" width="80" height="38" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="130" y1="58" x2="130" y2="124" stroke="#c0392b" stroke-width="2.6" marker-end="url(#r2)"/>
-  <text x="140" y="118" fill="#c0392b" font-weight="bold" font-size="15">F</text>
-  <text x="151" y="123" fill="#c0392b" font-size="11">&#8869;</text>
-  <text x="262" y="48" font-size="13">Corpo appoggiato su piano</text>
-  <text x="262" y="68" font-size="13">orizzontale, senza forze esterne</text>
-  <text x="300" y="104" font-size="19">F</text>
-  <text x="312" y="109" font-size="12">&#8869;</text>
-  <text x="322" y="104" font-size="19">= F</text>
-  <text x="358" y="109" font-size="12">P</text>
-
-  <line x1="30" y1="226" x2="230" y2="226" stroke="#222" stroke-width="2.5"/>
-  <rect x="90" y="188" width="80" height="38" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="130" y1="150" x2="130" y2="184" stroke="#1e7a45" stroke-width="2.6" marker-end="url(#v2)"/>
-  <text x="138" y="164" fill="#1e7a45" font-weight="bold" font-size="15">F</text>
-  <line x1="118" y1="198" x2="118" y2="248" stroke="#2b6ea8" stroke-width="2.2" marker-end="url(#b2)"/>
-  <text x="92" y="250" fill="#2b6ea8" font-weight="bold" font-size="14">F</text>
-  <text x="103" y="255" fill="#2b6ea8" font-size="10">P</text>
-  <line x1="142" y1="198" x2="142" y2="274" stroke="#c0392b" stroke-width="2.6" marker-end="url(#r2)"/>
-  <text x="152" y="268" fill="#c0392b" font-weight="bold" font-size="15">F</text>
-  <text x="163" y="273" fill="#c0392b" font-size="11">&#8869;</text>
-  <text x="262" y="190" font-size="13">Corpo appoggiato con una forza</text>
-  <text x="262" y="210" font-size="13">esterna F che preme verso il basso</text>
-  <text x="300" y="248" font-size="19">F</text>
-  <text x="312" y="253" font-size="12">&#8869;</text>
-  <text x="322" y="248" font-size="19">= F</text>
-  <text x="358" y="253" font-size="12">P</text>
-  <text x="368" y="248" font-size="19">+ F</text>
-</svg>
-<figcaption>Senza forze esterne la forza premente coincide con il peso; una forza
-che spinge verso il basso si somma ad esso.</figcaption>
-</figure>
-
-<div class="nota">
-<strong>Attenzione.</strong> La forza premente non è una forza nuova: è il nome
-che diamo alla componente perpendicolare al piano di ciò che schiaccia il corpo
-contro la superficie. Confonderla sempre con il peso porta a sbagliare tutti i
-casi in cui c'è una forza esterna, o in cui il piano non è orizzontale.
+<div class="fig">
+<svg id="g-fattori" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Blocco appoggiato con la forza premente; formula della forza di attrito con i suoi due fattori"></svg>
+<p class="did">I due fattori della forza di attrito</p>
 </div>
 
-<h2>Un calcolo</h2>
+<p>Il modulo dipende dal coefficiente di attrito $\mu$ e dalla forza premente $F_\perp$, perpendicolare alla superficie:</p>
 
-<p>Una cassa di massa $m = 25\ \mathrm{kg}$ viene trascinata sul pavimento
-orizzontale; il coefficiente di attrito dinamico fra cassa e pavimento è
-$\mu_d = 0{,}30$. Poiché non ci sono altre forze che premono la cassa contro il
-pavimento, la forza premente coincide con il peso:</p>
+<div class="def"><span class="et">Forza di attrito</span>
+<p class="eq principio">$$F_s = \mu_s\,F_\perp \qquad\qquad F_d = \mu_d\,F_\perp$$</p></div>
 
-$$F_{\perp} = F_P = m\,g = 25\ \mathrm{kg} \cdot 9{,}8\ \frac{\mathrm{N}}{\mathrm{kg}} = 245\ \mathrm{N}$$
+<ul>
+<li>$F_s$ → valore <em>massimo</em> dell'attrito statico;</li>
+<li>$F_d$ → attrito durante il moto;</li>
+<li>$\mu$ → numero puro (rapporto fra due forze), senza unità di misura;</li>
+<li>superfici ruvide → $\mu$ alto; superfici lisce → $\mu$ basso;</li>
+<li>stesse superfici → $\mu_d &lt; \mu_s$.</li>
+</ul>
 
-$$F_d = \mu_d \, F_{\perp} = 0{,}30 \cdot 245\ \mathrm{N} = 73{,}5\ \mathrm{N} \approx 74\ \mathrm{N}$$
+<h2>Forza premente</h2>
 
-<p>Il risultato è in newton perché $\mu_d$ è un numero puro: moltiplicando una
-forza per un numero si ottiene ancora una forza.</p>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>La formula $F_s = \mu_s F_{\perp}$ dà il valore <em>massimo</em> dell'attrito
-statico, non il suo valore in ogni istante. Nella prossima unità vediamo perché,
-e che cosa succede quando la forza applicata resta al di sotto di quel massimo.
-Il caso in cui la forza esterna è inclinata, e quello del piano inclinato, li
-affronteremo studiando l'equilibrio.</p>
+<div class="fig">
+<svg id="g-premente" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Blocco di peso 245 N su un piano orizzontale, premuto da una forza esterna F verso il basso; la forza premente è la somma"></svg>
+<div class="cursore"><label for="c-premente">forza esterna $F$</label><input id="c-premente" type="range" min="0" max="150" step="5" value="0"><span class="val" id="v-premente"></span></div>
+<p class="did">Piano orizzontale, $F_P = 245\ \text{N}$, forza esterna $F$ verso il basso</p>
 </div>
+
+<ul>
+<li>nessun'altra forza → $F_\perp = F_P$;</li>
+<li>forza esterna $F$ verso il basso → $F_\perp = F_P + F$.</li>
+</ul>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>La forza premente non coincide sempre con il peso: con forze esterne o su un piano inclinato è diversa.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: cassa trascinata su pavimento orizzontale, $m = 25\ \text{kg}$, $\mu_d = 0{,}30$. Calcolare $F_d$.</p>
+
+<p class="eq">$$F_d = \mu_d\,F_\perp = \mu_d\,m\,g = 0{,}30 \cdot 25\ \text{kg} \cdot 9{,}8\ \tfrac{\text{N}}{\text{kg}} \approx 74\ \text{N}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../38-le-forze-di-attrito-radente-volvente-viscoso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Le forze di attrito: radente, volvente, viscoso</span></a><a class="successiva" href="../40-forza-di-attrito-statico-massima/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forza di attrito statico massima</span></a></nav>
+<footer><p>Fisica prima &middot; Forza peso, forza elastica e attrito &middot; Unità 38</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;return sp;}
+  function freccia(s,id,col){var d=el(s,'defs',{});var mk=el(d,'marker',{id:id,markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:col});return d;}
+  var INK='var(--inchiostro)',R='var(--rosso)';
+  function piano(s,x1,x2,y){
+    el(s,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:INK,'stroke-width':2});
+    for(var x=x1+6;x<=x2;x+=18)el(s,'line',{x1:x,y1:y,x2:x-8,y2:y+8,stroke:'var(--grigio)','stroke-width':1});
+  }
+  function nome(s,x,y,ped,a){var t=txt(s,x,y,'F',Object.assign({fill:R,'font-size':14,'font-style':'italic','font-weight':700},a||{}));pedice(t,ped);return t;}
+
+  /* blocco con la forza premente e formula con i due fattori */
+  (function(){
+    var s=document.getElementById('g-fattori');if(!s)return;
+    freccia(s,'m38a',R);
+    var Yp=80;
+    piano(s,20,180,Yp);
+    el(s,'rect',{x:60,y:Yp-40,width:80,height:40,fill:'#fff',stroke:INK,'stroke-width':1.8});
+    el(s,'line',{x1:100,y1:Yp,x2:100,y2:Yp+62,stroke:R,'stroke-width':2.4,'marker-end':'url(#m38a)'});
+    nome(s,114,Yp+52,'⊥',{'text-anchor':'start'});
+    /* formula */
+    var t=txt(s,300,60,'',{fill:INK,'font-size':20,'font-family':'serif'});
+    var a=el(t,'tspan',{'font-style':'italic'});a.textContent='F';
+    var b=el(t,'tspan',{'font-size':13,dy:5});b.textContent='at';
+    var c=el(t,'tspan',{dy:-5});c.textContent=' = ';
+    var m=el(t,'tspan',{'font-style':'italic',fill:'var(--verde)'});m.textContent='μ';
+    var f=el(t,'tspan',{'font-style':'italic',fill:'var(--blu)'});f.textContent=' F';
+    var p=el(t,'tspan',{'font-size':13,dy:5,fill:'var(--blu)'});p.textContent='⊥';
+    /* didascalie dei fattori, posizionate sui due simboli */
+    requestAnimationFrame(function(){
+      try{
+        var xm=t.getStartPositionOfChar(t.textContent.indexOf('μ')).x+5,xf=t.getStartPositionOfChar(t.textContent.lastIndexOf('F')).x+8;
+        lab(xm,xf);
+      }catch(e){lab(300,330);}
+    });
+    function lab(xm,xf){
+      el(s,'line',{x1:xm,y1:72,x2:xm-22,y2:104,stroke:'var(--verde)','stroke-width':1.4});
+      txt(s,xm-30,120,'coefficiente',{fill:'var(--verde)','font-size':11,'letter-spacing':1});
+      txt(s,xm-30,135,'di attrito',{fill:'var(--verde)','font-size':11,'letter-spacing':1});
+      el(s,'line',{x1:xf,y1:72,x2:xf+22,y2:104,stroke:'var(--blu)','stroke-width':1.4});
+      txt(s,xf+30,120,'forza',{fill:'var(--blu)','font-size':11,'letter-spacing':1});
+      txt(s,xf+30,135,'premente',{fill:'var(--blu)','font-size':11,'letter-spacing':1});
+    }
+  })();
+
+  /* forza premente con forza esterna variabile; scala 0,245 px/N */
+  (function(){
+    var s=document.getElementById('g-premente');if(!s)return;
+    var c=document.getElementById('c-premente'),out=document.getElementById('v-premente');
+    freccia(s,'m38b',R);
+    var K=0.245,FP=245,Yp=100,X1=110,X2=200,H=40;
+    piano(s,50,260,Yp);
+    el(s,'rect',{x:X1,y:Yp-H,width:X2-X1,height:H,fill:'#fff',stroke:INK,'stroke-width':1.8});
+    /* peso: dal centro del blocco */
+    var xP=135,yP=Yp-H/2;
+    el(s,'line',{x1:xP,y1:yP,x2:xP,y2:yP+K*FP,stroke:R,'stroke-width':2.4,'marker-end':'url(#m38b)'});
+    el(s,'circle',{cx:xP,cy:yP,r:2.5,fill:R});
+    nome(s,xP-8,yP+K*FP-2,'P',{'text-anchor':'end'});
+    /* forza esterna sulla faccia superiore */
+    var xF=160;
+    var aF=el(s,'line',{x1:xF,x2:xF,y2:Yp-H,stroke:R,'stroke-width':2.4,'marker-end':'url(#m38b)'});
+    var tF=txt(s,xF+10,0,'F',{fill:R,'font-size':14,'font-style':'italic','font-weight':700,'text-anchor':'start'});
+    /* forza premente: agisce sul piano, sotto il blocco */
+    var xN=185;
+    var aN=el(s,'line',{x1:xN,x2:xN,y1:Yp,stroke:R,'stroke-width':2.4,'marker-end':'url(#m38b)'});
+    var tN=nome(s,xN+10,0,'⊥',{'text-anchor':'start'});
+    /* valori a destra */
+    var v1=txt(s,290,70,'',{fill:INK,'font-size':13,'text-anchor':'start'});
+    var v2=txt(s,290,92,'',{fill:INK,'font-size':13,'text-anchor':'start'});
+    var v3=txt(s,290,114,'',{fill:R,'font-size':13,'font-weight':700,'text-anchor':'start'});
+    function riga(t,a,b){while(t.firstChild)t.removeChild(t.firstChild);var i=el(t,'tspan',{'font-style':'italic'});i.textContent='F';if(a){var p=el(t,'tspan',{'font-size':10,dy:3});p.textContent=a;}var r=el(t,'tspan',{dy:a?-3:0});r.textContent=' = '+b;}
+    function disegna(){
+      var F=+c.value,N=FP+F;
+      set(aF,{y1:Yp-H-K*F,visibility:F>0?'visible':'hidden'});
+      set(tF,{y:Yp-H-K*F/2+5,visibility:F>0?'visible':'hidden'});
+      set(aN,{y2:Yp+K*N});set(tN,{y:Yp+K*N-4});
+      riga(v1,'P',FP+' N');riga(v2,'',F+' N');riga(v3,'⊥',N+' N');
+      out.innerHTML='<i>F</i> = '+F+' N · <i>F</i><sub>⊥</sub> = '+N+' N'+(F===0?' · <span class="ok">F<sub>⊥</sub> = F<sub>P</sub></span>':'');
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

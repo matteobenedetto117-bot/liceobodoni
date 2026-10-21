@@ -295,6 +295,7 @@
   Nessuno strumento interattivo. Un solo riquadro, sull'errore tipico di
   identificare sempre la forza premente con il peso. I due schemi della traccia
   (blocco con F_⊥, e i due casi di forza premente) sono ridisegnati in SVG.
+- Revisione (21/10/2026, regole 13/10): titolo invariato; parole 549 → 134. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 37), aggiunto il piè di pagina, tolti «Dove si continua» (con il rimando all'unità successiva) e la frase sul risultato in newton; tabella statico/dinamico diventata elenco caso → conseguenza; apertura a domanda; F_s = μ_s F⊥ e F_d = μ_d F⊥ in un .def rosso, proprietà di μ in elenco; titoletti «Il modulo della forza di attrito» e «Un calcolo» tolti (resta «Esempio»), «La forza premente» → «Forza premente»; nota in una frase; esempio in forma Dati/Calcolare con una sola .eq (≈ 74 N riverificato con Python). Correzioni: «questa relazione dà la forza di attrito massima» valeva solo per l'attrito statico, ora F_s è il valore massimo dello statico e F_d l'attrito durante il moto; «vale sempre μ_d < μ_s» → «stesse superfici → μ_d < μ_s». Figure ridisegnate da script: blocco con F⊥ e formula con i due fattori (statica); forza premente con cursore sulla forza esterna F (0–150 N, F_P = 245 N come nell'esempio), che sostituisce i due pannelli (F = 0 → F⊥ = F_P). Nessun esempio tolto; la prima figura è quasi decorativa (ripete la formula del .def).
 
 ## Unità 39 — Forza di attrito statico massima
 - Parole: 297 su 1 pagina di traccia (pag. 58), comprese intestazione,
