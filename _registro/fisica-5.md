@@ -447,6 +447,7 @@
   scritto in traccia (compresa la semplificazione di $\varepsilon_0$ a pagina 65, corretta).
 - Aggiunta: nessuna. Pagina puramente formulare, nessun disegno nella traccia da ridisegnare,
   nessuno strumento interattivo (non richiesto e non pertinente a un contenuto di sole formule).
+- Revisione (21/10/2026, regole 13/10): parole 203 → 93. Pagina mai revisionata, riscritta: apertura a domanda; tolti sommario, «Nella prossima unità» (con il rimando all'unità 37), titoletti «Il legame fra E e B» e «Densità di energia dell'onda» e frasi di commento; proprietà dei campi (perpendicolari, in fase, legati da c) in elenco; E = cB in .def; u_E e u_B in una .eq; sostituzione condensata in una .eq; u = ε₀E² = B²/μ₀ in .eq principio; unità di misura J/m³ in .def a sé. Nessuna comparsa da togliere. Controllo concettuale: u_E = u_B e u = ε₀E² = B²/μ₀ riverificati con SymPy; nessuna correzione. Nessuna figura (pagina formulare), nessun esempio.
 
 ## Unità 37 — Intensità e vettore di Poynting
 - Parole: 382 (prosa, didascalie e riquadri compresi) su 2 pagine di traccia (pagine 66-67).
