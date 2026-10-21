@@ -5,18 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Conservazione dell'energia con la forza elastica — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.risultato{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;border-left:4px solid var(--verde)}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0}
-.esempio h3{margin-top:0;font-size:1rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,132 +57,175 @@
   <h1>Conservazione dell'energia con la forza elastica</h1>
 </header>
 
-<h2>I tre istanti della compressione</h2>
-
-<p>Una pallina si muove verso una molla libera; la tocca, la comprime
-di un tratto $x$ e in quell'istante si ferma; infine viene respinta e
-si allontana con la stessa velocità con cui era arrivata. In tutto il
-processo agisce solo la forza elastica, che è conservativa, quindi
-$E_{TOT}=U+K$ resta costante nei tre istanti.</p>
+<p>Pallina contro una molla libera, attriti trascurabili: come si trasforma l'energia durante la compressione?</p>
 
 <div class="fig">
-<svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f43v" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<text x="10" y="18" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">1</text>
-<circle cx="40" cy="60" r="11" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="55" y1="60" x2="90" y2="60" stroke="var(--verde)" stroke-width="2" marker-end="url(#f43v)"/>
-<text x="65" y="50" font-size="12" fill="var(--verde)" font-family="var(--sans)">v</text>
-<path d="M150,60 L158,50 L166,70 L174,50 L182,70 L190,50 L198,60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="198" y="35" width="10" height="50" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="208" y1="20" x2="208" y2="100" stroke="var(--grigio)" stroke-width="4" opacity=".35"/>
-
-<text x="230" y="18" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">2</text>
-<circle cx="330" cy="60" r="11" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="315" y="48" font-size="12" fill="var(--rosso)" font-family="var(--sans)">v=0</text>
-<path d="M341,60 L347,50 L353,70 L359,50 L365,70 L371,50 L377,60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="377" y="35" width="10" height="50" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="387" y1="20" x2="387" y2="100" stroke="var(--grigio)" stroke-width="4" opacity=".35"/>
-<line x1="341" y1="110" x2="377" y2="110" stroke="var(--rosso)" stroke-width="1.2"/>
-<line x1="341" y1="104" x2="341" y2="116" stroke="var(--rosso)" stroke-width="1.2"/>
-<line x1="377" y1="104" x2="377" y2="116" stroke="var(--rosso)" stroke-width="1.2"/>
-<text x="350" y="128" font-size="12" fill="var(--rosso)" font-family="var(--sans)">x</text>
-
-<text x="420" y="18" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">3</text>
-<circle cx="460" cy="60" r="11" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="445" y1="60" x2="410" y2="60" stroke="var(--verde)" stroke-width="2" marker-end="url(#f43v)"/>
-<text x="415" y="50" font-size="12" fill="var(--verde)" font-family="var(--sans)">v</text>
-<path d="M520,60 L528,50 L536,70 L544,50 L552,70 L560,50 L568,60" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="568" y="35" width="10" height="50" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="578" y1="20" x2="578" y2="100" stroke="var(--grigio)" stroke-width="4" opacity=".35"/>
-</svg>
-<p class="did">1: la pallina arriva con velocità $v$, molla a riposo.
-2: la molla è compressa di $x$, la pallina è momentaneamente ferma. 3:
-la pallina è respinta e si allontana di nuovo con velocità $v$.</p>
+<svg id="g-molla" viewBox="0 0 420 146" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Pallina che comprime una molla; barre di energia potenziale elastica, cinetica e totale"></svg>
+<div class="cursore"><label for="c-molla">compressione</label><input id="c-molla" type="range" min="0" max="0.049" step="0.001" value="0"><span class="val" id="v-molla"></span></div>
+<p class="did">$m = 0{,}2\ \text{kg}$, $v = 3\ \text{m/s}$, $k = 750\ \text{N/m}$: compressione 1 → 2; nel ritorno 2 → 3 stessi valori, $\vec v$ opposta</p>
 </div>
 
-<p>Scriviamo l'energia totale nei tre istanti, ricordando che
-l'energia potenziale elastica vale $U=\tfrac12kx^2$:</p>
+<ul>
+<li>istante 1, molla a riposo → $U = 0$, $K = \tfrac12 mv^2$;</li>
+<li>istante 2, compressione massima $x$ → $U = \tfrac12 kx^2$, $K = 0$;</li>
+<li>istante 3, molla di nuovo a riposo → $U = 0$, $K = \tfrac12 mv^2$.</li>
+</ul>
 
-$$\text{1)}\ U=0,\ K=\tfrac12mv^2 \qquad \text{2)}\ U=\tfrac12kx^2,\ K=0 \qquad \text{3)}\ U=0,\ K=\tfrac12mv^2$$
+<p>Lavora solo la forza elastica, conservativa: $E_{TOT} = U + K$ è la stessa nei tre istanti. Uguagliando 1 e 2:</p>
 
-<div class="risultato">
-<p>Fra 1 e 2 l'energia cinetica si è trasformata interamente in
-energia potenziale elastica; fra 2 e 3 avviene il percorso inverso.
-Uguagliando 1 e 2:</p>
-$$\tfrac12mv^2=\tfrac12kx^2$$
-</div>
+<div class="def"><span class="et">Compressione massima</span>
+<p class="eq principio">$$\tfrac12 mv^2 = \tfrac12 kx^2 \qquad\qquad x = \sqrt{\frac{mv^2}{k}}$$</p></div>
 
-<div class="esempio">
-<h3>Esempio 1 — compressione massima</h3>
-<p>Una pallina di massa $m=0{,}2\ \text{kg}$ arriva a $v=3\ \text{m/s}$
-contro una molla di costante $k=750\ \text{N/m}$. Dall'uguaglianza fra
-1 e 2, isolando $x$:</p>
-$$x=\sqrt{\dfrac{mv^2}{k}}=\sqrt{\dfrac{0{,}2\cdot 3^2}{750}}\approx 0{,}049\ \text{m}$$
-</div>
+<h2>Esempio 1</h2>
 
-<h2>Quando entra in gioco anche l'altezza</h2>
+<p>Dati: $m = 0{,}2\ \text{kg}$, $\;v = 3\ \text{m/s}$, $\;k = 750\ \text{N/m}$. Calcolare la compressione massima $x$.</p>
 
-<p>Se nel percorso la pallina cambia anche quota, nell'energia totale
-compare pure il termine gravitazionale $mgh$: la conservazione
-riguarda sempre l'energia totale, qualunque sia la combinazione di
-forze conservative in gioco.</p>
+<p class="eq">$$x = \sqrt{\frac{mv^2}{k}} = \sqrt{\frac{0{,}2\ \text{kg}\cdot(3\ \text{m/s})^2}{750\ \text{N/m}}} \approx 0{,}049\ \text{m}$$</p>
+
+<h2>Con un dislivello</h2>
+
+<p>Se la pallina cambia quota, in $E_{TOT}$ compare anche l'energia potenziale gravitazionale $mgh$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f43v2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--verde)"/></marker>
-</defs>
-<path d="M20,170 L160,170 Q 230,170 260,60 Q 290,170 360,170 L470,170" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="45" cy="160" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="58" y1="160" x2="88" y2="160" stroke="var(--verde)" stroke-width="2" marker-end="url(#f43v2)"/>
-<text x="30" y="145" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">1</text>
-<text x="62" y="145" font-size="11" fill="var(--verde)" font-family="var(--sans)">v&#8321;</text>
-<circle cx="260" cy="52" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="273" y1="52" x2="303" y2="52" stroke="var(--verde)" stroke-width="2" marker-end="url(#f43v2)"/>
-<text x="248" y="38" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">2</text>
-<text x="277" y="40" font-size="11" fill="var(--verde)" font-family="var(--sans)">v&#8322;</text>
-<line x1="260" y1="60" x2="260" y2="170" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-<text x="264" y="115" font-size="11" fill="var(--grigio)" font-family="var(--sans)">h</text>
-<path d="M418,170 L426,160 L434,180 L442,160 L450,180 L458,160 L466,170" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="466" y="145" width="10" height="50" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="476" y1="130" x2="476" y2="210" stroke="var(--grigio)" stroke-width="4" opacity=".35"/>
-<circle cx="405" cy="170" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="392" y="195" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">3</text>
-<text x="400" y="130" font-size="11" fill="var(--rosso)" font-family="var(--sans)">x</text>
-</svg>
-<p class="did">1: partenza al suolo con $v_1$. 2: cima del dosso,
-altezza $h$, velocità $v_2$. 3: la pallina torna al suolo e comprime
-la molla di $x$, fermandosi.</p>
+<svg id="g-dosso" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px" role="img" aria-label="Pallina che supera un dosso di altezza h e comprime una molla"></svg>
+<div class="did-parti" style="--n:3">
+<p class="did">1: suolo, velocità $v_1$</p>
+<p class="did">2: cima del dosso, quota $h$, velocità $v_2$</p>
+<p class="did">3: suolo, molla compressa di $x$, $v_3 = 0$</p>
+</div>
 </div>
 
-<div class="esempio">
-<h3>Esempio 2 — dosso e molla</h3>
-<p>Con $m=59\ \text{kg}$, $v_1=8\ \text{m/s}$, $h=2{,}5\ \text{m}$ e
-$k=750\ \text{N/m}$, troviamo prima $v_2$ in cima al dosso, dal
-confronto fra 1 e 2:</p>
-$$\tfrac12mv_1^2=mgh+\tfrac12mv_2^2 \ \Rightarrow\ v_2=\sqrt{v_1^2-2gh}\approx 3{,}87\ \text{m/s}$$
-<p>Per la compressione della molla conviene confrontare direttamente 1
-e 3, senza passare da $v_2$: il dosso non compie lavoro netto sul
-percorso completo, quindi la quota finale è di nuovo zero e $v_3=0$
-perché la molla ferma la pallina:</p>
-$$\tfrac12mv_1^2=\tfrac12kx^2 \ \Rightarrow\ x=\sqrt{\dfrac{mv_1^2}{k}}\approx 2{,}24\ \text{m}$$
-</div>
+<h2>Esempio 2</h2>
 
-<div class="esempio">
-<h3>Esempio 3 — salita fino alla molla</h3>
-<p>Una pallina con $v=9\ \text{m/s}$ sale una rampa fino a una
-piattaforma alta $h=2{,}2\ \text{m}$, dove una molla ($k=750\
-\text{N/m}$, $m=59\ \text{kg}$) la ferma comprimendosi di $x$. Qui la
-quota finale non è più zero, quindi nell'energia totale resta anche
-il termine $mgh$:</p>
-$$\tfrac12mv^2=mgh+\tfrac12kx^2 \ \Rightarrow\ x=\sqrt{\dfrac{mv^2-2mgh}{k}}\approx 1{,}73\ \text{m}$$
-</div>
+<p>Dati: $m = 59\ \text{kg}$, $\;v_1 = 8\ \text{m/s}$, $\;h = 2{,}5\ \text{m}$, $\;k = 750\ \text{N/m}$. Calcolare $v_2$ e la compressione $x$.</p>
+
+<p class="eq">$$\tfrac12 mv_1^2 = mgh + \tfrac12 mv_2^2 \;\Rightarrow\; v_2 = \sqrt{v_1^2 - 2gh} = \sqrt{(8\ \text{m/s})^2 - 2\cdot 9{,}81\ \text{m/s}^2\cdot 2{,}5\ \text{m}} \approx 3{,}9\ \text{m/s}$$</p>
+
+<p>Fra 1 e 3 la quota è la stessa e $v_3 = 0$:</p>
+
+<p class="eq">$$\tfrac12 mv_1^2 = \tfrac12 kx^2 \;\Rightarrow\; x = \sqrt{\frac{mv_1^2}{k}} = \sqrt{\frac{59\ \text{kg}\cdot(8\ \text{m/s})^2}{750\ \text{N/m}}} \approx 2{,}2\ \text{m}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../42-conservazione-dell-energia-meccanica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Conservazione dell'energia meccanica</span></a><a class="successiva" href="../44-calore-temperatura-ed-equilibrio-termico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Calore, temperatura ed equilibrio termico</span></a></nav>
 <footer><p>Fisica seconda &middot; Lavoro ed energia &middot; Unità 33</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0(,0*)?$/.test(s))s=s.slice(1);return s.replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+  function freccia(s,id,col){var d=el(s,'defs',{});var mk=el(d,'marker',{id:id,markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:col});}
+  /* molla a zigzag fra xa (estremo libero) e xb (muro) */
+  function zig(xa,xb,Yc,n){
+    var a=xa+5,b=xb-5,h=(b-a)/n,p='M'+xa+','+Yc+' L'+a+','+Yc;
+    for(var j=0;j<n;j++)p+=' L'+(a+h*(j+.5)).toFixed(1)+','+(Yc+(j%2?8:-8));
+    return p+' L'+b+','+Yc+' L'+xb+','+Yc;
+  }
+  function muro(s,X,Yc){
+    el(s,'line',{x1:X,y1:Yc-30,x2:X,y2:Yc+20,stroke:'var(--inchiostro)','stroke-width':2.4});
+    for(var i=0;i<5;i++)el(s,'line',{x1:X,y1:Yc-26+i*10,x2:X+8,y2:Yc-34+i*10,stroke:'var(--grigio)','stroke-width':1});
+  }
+
+  /* pallina che comprime la molla: U = kx²/2, K = E - U */
+  (function(){
+    var s=document.getElementById('g-molla');if(!s)return;
+    var c=document.getElementById('c-molla'),out=document.getElementById('v-molla');
+    var m=0.2,v0=3,k=750,E=0.5*m*v0*v0,XMAX=Math.sqrt(m*v0*v0/k);
+    var Yg=104,Yc=Yg-12,XW=392,XR=250,PX=1430,R=12,BX=[40,84,128],BW=24,BH=80;
+    freccia(s,'m33v','var(--verde)');freccia(s,'m33x','var(--grigio)');
+    el(s,'line',{x1:180,y1:Yg,x2:XW,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.4});
+    muro(s,XW,Yc);
+    el(s,'line',{x1:XR,y1:Yc-40,x2:XR,y2:Yg+6,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(s,XR,Yc-46,'riposo');
+    var molla=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'});
+    var palla=el(s,'circle',{cy:Yc,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    var fv=el(s,'line',{y1:Yc-R-12,y2:Yc-R-12,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m33v)'});
+    var tv=txt(s,0,Yc-R-18,'v',{fill:'var(--verde)','font-size':14,'font-style':'italic','font-weight':700});
+    var fx=el(s,'line',{y1:Yg+16,y2:Yg+16,stroke:'var(--grigio)','stroke-width':1.6,'marker-end':'url(#m33x)'});
+    var tx=txt(s,0,Yg+34,'x',{'font-size':13,'font-style':'italic'});
+    /* barre */
+    el(s,'line',{x1:BX[0]-BW/2-6,y1:Yg,x2:BX[2]+BW/2+6,y2:Yg,stroke:'var(--inchiostro)','stroke-width':1.2});
+    var bU=el(s,'rect',{x:BX[0]-BW/2,width:BW,fill:'var(--blu)',opacity:.85});
+    var bK=el(s,'rect',{x:BX[1]-BW/2,width:BW,fill:'var(--verde)',opacity:.85});
+    el(s,'rect',{x:BX[2]-BW/2,y:Yg-BH,width:BW,height:BH,fill:'var(--inchiostro)',opacity:.8});
+    txt(s,BX[0],Yg+18,'U',{fill:'var(--blu)','font-size':13,'font-style':'italic','font-weight':700});
+    txt(s,BX[1],Yg+18,'K',{fill:'var(--verde)','font-size':13,'font-style':'italic','font-weight':700});
+    var te=txt(s,BX[2],Yg+18,'E',{fill:'var(--inchiostro)','font-size':13,'font-style':'italic','font-weight':700});pedice(te,'TOT');
+    function disegna(){
+      var x=Math.min(+c.value,XMAX),U=0.5*k*x*x,K=Math.max(0,E-U),v=Math.sqrt(2*K/m);
+      if(+c.value>=0.049){x=XMAX;U=E;K=0;v=0;}
+      var xe=XR+x*PX,xc=xe-R;
+      set(molla,{d:zig(xe,XW,Yc,10)});set(palla,{cx:xc});
+      var lv=v*15,on=lv>8;
+      set(fv,{x1:xc-lv/2,x2:xc+lv/2,visibility:on?'visible':'hidden'});
+      set(tv,{x:xc,visibility:on?'visible':'hidden'});
+      if(!on){tv.textContent='v = 0';set(tv,{visibility:'visible',x:xc});}else tv.textContent='v';
+      var onx=x*PX>10;
+      set(fx,{x1:XR,x2:xe-2,visibility:onx?'visible':'hidden'});set(tx,{x:(XR+xe)/2,visibility:onx?'visible':'hidden'});
+      var hU=BH*U/E,hK=BH*K/E;
+      set(bU,{y:Yg-hU,height:hU});set(bK,{y:Yg-hK,height:hK});
+      out.innerHTML='x = '+num(x,3)+' m · U = '+num(U,2)+' J · K = '+num(K,2)+' J · E<sub>TOT</sub> = '+num(E,2)+' J'+(v===0?' · <span class="ok">v = 0</span>':'');
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+
+  /* dosso di altezza h e molla: profilo calcolato */
+  (function(){
+    var s=document.getElementById('g-dosso');if(!s)return;
+    freccia(s,'m33d','var(--verde)');freccia(s,'m33e','var(--grigio)');
+    var Yg=166,H=100,XA=170,XB=330,XC=(XA+XB)/2,XW=470,XR=380,XS=420,R=10;
+    function y(x){return (x<XA||x>XB)?Yg:Yg-H*(1-Math.cos(2*Math.PI*(x-XA)/(XB-XA)))/2;}
+    var p='';for(var x=20;x<=XW;x+=2)p+=(p?' L':'M')+x+','+y(x).toFixed(1);
+    el(s,'path',{d:p,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8});
+    muro(s,XW,Yg-R);
+    /* molla compressa: estremo in XS, riposo in XR */
+    var Yc=Yg-R,a=XS+5,b=XW-5,n=10,h=(b-a)/n,q='M'+XS+','+Yc+' L'+a+','+Yc;
+    for(var j=0;j<n;j++)q+=' L'+(a+h*(j+.5)).toFixed(1)+','+(Yc+(j%2?8:-8));
+    el(s,'path',{d:q+' L'+b+','+Yc+' L'+XW+','+Yc,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'});
+    el(s,'line',{x1:XR,y1:Yc-34,x2:XR,y2:Yg+6,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(s,XR-6,Yc-44,'riposo');
+    el(s,'line',{x1:XR,y1:Yg+14,x2:XS+2,y2:Yg+14,stroke:'var(--grigio)','stroke-width':1.6,'marker-end':'url(#m33e)'});
+    txt(s,(XR+XS)/2,Yg+30,'x',{'font-size':13,'font-style':'italic'});
+    /* palline nei tre istanti */
+    [[60,'1','v','1'],[XC,'2','v','2'],[XS-R,'3','','']].forEach(function(d){
+      var cx=d[0],cy=y(cx)-R;
+      el(s,'circle',{cx:cx,cy:cy,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+      txt(s,cx,cy+4,d[1],{fill:'var(--blu)','font-size':11,'font-weight':700});
+      if(d[2]){
+        el(s,'line',{x1:cx+R+4,y1:cy,x2:cx+R+34,y2:cy,stroke:'var(--verde)','stroke-width':2.4,'marker-end':'url(#m33d)'});
+        var t=txt(s,cx+R+19,cy-8,'v',{fill:'var(--verde)','font-size':13,'font-style':'italic','font-weight':700});pedice(t,d[3]);
+      }else{
+        var t3=txt(s,cx,cy-R-16,'v',{fill:'var(--verde)','font-size':12,'font-style':'italic'});pedice(t3,'3');
+        var t3b=el(t3,'tspan',{dy:-3,'font-style':'normal'});t3b.textContent=' = 0';
+      }
+    });
+    /* quota h */
+    var xh=XA-14;
+    el(s,'line',{x1:xh,y1:Yg-H,x2:xh,y2:Yg,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    el(s,'line',{x1:xh-5,y1:Yg-H,x2:XC-R-3,y2:Yg-H,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(s,xh-8,Yg-H/2+4,'h',{'text-anchor':'end','font-size':13,'font-style':'italic'});
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
