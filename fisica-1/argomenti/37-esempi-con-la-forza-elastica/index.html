@@ -5,18 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Esempi con la forza elastica — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:520px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.cursore .ok{color:var(--verde);font-weight:700}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,94 +56,101 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Esempi con la forza elastica</h1>
 </header>
 
-<h2>Esempio 1 &middot; dall'allungamento alla forza</h2>
+<p>Legge di Hooke $F_{el} = kx$: come si ricava la forza dall'allungamento, e l'allungamento da una massa appesa?</p>
 
-<p>Una molla di costante elastica $k = 150\ \text{N/m}$ viene allungata di
-$3\ \text{cm}$. Quanto vale la forza elastica?</p>
+<h2>Esempio 1</h2>
 
-<p>Portiamo l'allungamento in metri, perché la costante è espressa in newton al metro:</p>
+<p>Dati: $k = 150\ \text{N/m}$, $\;x = 3\ \text{cm} = 0{,}03\ \text{m}$. Calcolare $F_{el}$.</p>
 
-$$x = 3\ \text{cm} = 0{,}03\ \text{m}$$
+<p class="eq">$$F_{el} = k\,x = 150\ \frac{\text{N}}{\text{m}}\cdot 0{,}03\ \text{m} = 4{,}5\ \text{N}$$</p>
 
-<p>Ora basta applicare la legge di Hooke:</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Con $x = 3$ senza conversione in metri si otterrebbe 450 N, cento volte troppo.</p></div>
 
-$$F_{el} = k \cdot x = 150\ \frac{\text{N}}{\text{m}} \cdot 0{,}03\ \text{m} = 4{,}5\ \text{N}$$
+<h2>Esempio 2</h2>
 
-<p>I metri si semplificano e resta il newton, l'unità di una forza.</p>
+<p>Dati: molla appesa al soffitto, $k = 360\ \text{N/m}$, $\;m = 0{,}71\ \text{kg}$. Calcolare l'allungamento $x$ con il corpo fermo.</p>
 
-<div class="nota">
-<p><strong>Attenzione.</strong> Sostituendo $x = 3$ senza convertire si otterrebbe
-450 N, cento volte troppo.</p>
+<div class="fig">
+<svg id="g-appesa" viewBox="0 0 300 264" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px" role="img" aria-label="Corpo appeso a una molla: forza elastica verso l'alto e forza peso verso il basso"></svg>
+<div class="cursore"><label for="c-m">massa</label><input id="c-m" type="range" min="0.2" max="1" step="0.01" value="0.71"><span class="val" id="v-m"></span></div>
+<p class="did">Corpo fermo: $\vec F_{el}$ verso l'alto e $\vec F_P$ verso il basso, stesso modulo</p>
 </div>
 
-<h2>Esempio 2 &middot; dalla forza all'allungamento</h2>
+<p>Corpo fermo → le due forze si fanno equilibrio:</p>
 
-<p>A una molla appesa al soffitto, di costante $k = 360\ \text{N/m}$, attacchiamo un
-corpo di massa $0{,}71\ \text{kg}$. Di quanto si allunga la molla quando il corpo
-resta fermo?</p>
-
-<figure class="dis">
-<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="12">
-  <defs>
-    <marker id="rosso" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
-    </marker>
-    <marker id="verde" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1e7a45"/>
-    </marker>
-    <pattern id="mattoni" width="10" height="10" patternUnits="userSpaceOnUse">
-      <path d="M0,10 L10,0" stroke="#555" stroke-width="1.2"/>
-    </pattern>
-  </defs>
-
-  <rect x="110" y="26" width="160" height="14" fill="url(#mattoni)" stroke="#333" stroke-width="1.6"/>
-  <line x1="110" y1="40" x2="270" y2="40" stroke="#333" stroke-width="2"/>
-  <text x="278" y="38" font-size="11" fill="#555">soffitto</text>
-
-  <line x1="190" y1="40" x2="190" y2="58" stroke="#222" stroke-width="2"/>
-  <path d="M190,58 l-15,10 l30,14 l-30,14 l30,14 l-30,14 l30,14 l-15,10"
-        fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="190" y1="138" x2="190" y2="156" stroke="#222" stroke-width="2"/>
-  <text x="212" y="100" font-size="13">k = 360 N/m</text>
-
-  <rect x="168" y="156" width="44" height="52" fill="#fff" stroke="#222" stroke-width="2"/>
-  <text x="222" y="188" font-size="13">m = 0,71 kg</text>
-
-  <line x1="140" y1="132" x2="140" y2="76" stroke="#1e7a45" stroke-width="2.6" marker-end="url(#verde)"/>
-  <text x="104" y="74" fill="#1e7a45" font-weight="bold" font-size="14">F</text>
-  <text x="115" y="78" fill="#1e7a45" font-size="10">el</text>
-
-  <line x1="190" y1="212" x2="190" y2="272" stroke="#c0392b" stroke-width="2.6" marker-end="url(#rosso)"/>
-  <text x="200" y="266" fill="#c0392b" font-weight="bold" font-size="14">F</text>
-  <text x="211" y="270" fill="#c0392b" font-size="10">P</text>
-</svg>
-<figcaption>Sul corpo appeso agiscono due forze opposte: la forza elastica della molla,
-verso l'alto, e la forza peso, verso il basso.</figcaption>
-</figure>
-
-<p>Il corpo è fermo: è questo il dato che permette di risolvere. Le due forze si
-fanno equilibrio, quindi hanno lo stesso modulo.</p>
-
-$$F_{el} = F_P \qquad \Longrightarrow \qquad k \cdot x = m \cdot g$$
-
-<p>A sinistra il modulo della forza elastica, a destra quello della forza peso.
-Ricaviamo $x$ dividendo entrambi i membri per $k$:</p>
-
-$$x = \frac{m \cdot g}{k}$$
-
-$$x = \frac{0{,}71\ \text{kg} \cdot 9{,}81\ \text{N/kg}}{360\ \text{N/m}} = 0{,}019\ \text{m} = 1{,}9\ \text{cm}$$
-
-<p>Anche qui le unità tornano: kilogrammi e newton si semplificano e resta un metro,
-cioè una lunghezza.</p>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>L'idea del secondo esempio &mdash; corpo fermo, quindi forze che si equilibrano
-&mdash; sarà resa generale con l'equilibrio del punto materiale. Prima incontriamo
-un'altra forza: l'attrito.</p>
-</div>
+<p class="eq">$$F_{el} = F_P \;\Rightarrow\; k\,x = m\,g \;\Rightarrow\; x = \frac{m\,g}{k}$$</p>
+<p class="eq">$$x = \frac{0{,}71\ \text{kg}\cdot 9{,}81\ \text{N/kg}}{360\ \text{N/m}} \approx 0{,}019\ \text{m} = 1{,}9\ \text{cm}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../36-la-forza-elastica-e-la-legge-di-hooke/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La forza elastica e la legge di Hooke</span></a><a class="successiva" href="../38-le-forze-di-attrito-radente-volvente-viscoso/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Le forze di attrito: radente, volvente, viscoso</span></a></nav>
+<footer><p>Fisica prima &middot; Forza peso, forza elastica e attrito &middot; Unità 36</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function num(v,d){var s=v.toFixed(d).replace('.',',');if(/^-0(,0*)?$/.test(s))s=s.slice(1);return s.replace(/^-/,'−');}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function pedice(t,s){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=s;}
+
+  /* corpo appeso: equilibrio k x = m g */
+  (function(){
+    var s=document.getElementById('g-appesa');if(!s)return;
+    var c=document.getElementById('c-m'),out=document.getElementById('v-m');
+    var k=360,g=9.81,XC=130,YS=24,L0=70,PX=2000,BW=40,BH=34,FN=7;
+    var d=el(s,'defs',{});
+    var mk=el(d,'marker',{id:'m36r',markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:'var(--rosso)'});
+    var mx=el(d,'marker',{id:'m36g',markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(mx,'path',{d:'M0,0 L8,4 L0,8 Z',fill:'var(--grigio)'});
+    /* soffitto */
+    el(s,'line',{x1:XC-60,y1:YS,x2:XC+60,y2:YS,stroke:'var(--inchiostro)','stroke-width':2.4});
+    for(var i=0;i<12;i++)el(s,'line',{x1:XC-58+i*10,y1:YS,x2:XC-50+i*10,y2:YS-8,stroke:'var(--grigio)','stroke-width':1});
+    /* posizione di riposo dell'estremo */
+    el(s,'line',{x1:XC+26,y1:YS+L0,x2:XC+110,y2:YS+L0,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+    txt(s,XC+112,YS+L0+4,'riposo',{'text-anchor':'start'});
+    var molla=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'});
+    var corpo=el(s,'rect',{x:XC-BW/2,width:BW,height:BH,rx:3,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    var tm=txt(s,XC,0,'m',{fill:'var(--blu)','font-size':13,'font-style':'italic','font-weight':700});
+    var fx=el(s,'line',{x1:XC+70,x2:XC+70,y1:YS+L0,stroke:'var(--grigio)','stroke-width':1.6,'marker-end':'url(#m36g)'});
+    var tx=txt(s,XC+80,0,'x',{'text-anchor':'start','font-size':13,'font-style':'italic'});
+    var fe=el(s,'line',{x1:XC-BW/2-14,x2:XC-BW/2-14,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m36r)'});
+    var te=txt(s,XC-BW/2-22,0,'F',{'text-anchor':'end',fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(te,'el');
+    var fp=el(s,'line',{x1:XC,x2:XC,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#m36r)'});
+    var tp=txt(s,XC+10,0,'F',{'text-anchor':'start',fill:'var(--rosso)','font-size':14,'font-style':'italic','font-weight':700});pedice(tp,'P');
+    function disegna(){
+      var m=+c.value,F=m*g,x=F/k,ye=YS+L0+x*PX,n=10,a=YS+6,b=ye-6,h=(b-a)/n,p='M'+XC+','+YS+' L'+XC+','+a;
+      for(var j=0;j<n;j++)p+=' L'+(XC+(j%2?10:-10))+','+(a+h*(j+.5)).toFixed(1);
+      set(molla,{d:p+' L'+XC+','+b+' L'+XC+','+ye});
+      set(corpo,{y:ye});set(tm,{y:ye+BH/2+5});
+      var on=x*PX>16;set(fx,{y2:ye-2,visibility:on?'visible':'hidden'});set(tx,{y:(YS+L0+ye)/2+4,visibility:on?'visible':'hidden'});
+      var lf=F*FN,ym=ye+BH/2;
+      set(fe,{y1:ym,y2:ym-lf});set(te,{y:ym-lf/2+4});
+      set(fp,{y1:ye+BH,y2:ye+BH+lf});set(tp,{y:ye+BH+lf/2+4});
+      out.innerHTML='m = '+num(m,2)+' kg · F<sub>P</sub> = '+num(F,1)+' N · x = '+num(x*100,1)+' cm';
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
