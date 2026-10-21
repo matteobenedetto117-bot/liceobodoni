@@ -5,17 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Formula ridotta — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-</style>
-</head>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+</style></head>
 <body>
 <div class="foglio">
 
@@ -23,85 +52,67 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni di secondo grado &middot; Unità 35</p>
   <h1>Formula ridotta</h1>
-  <p class="sommario">Quando il coefficiente centrale dell'equazione è un numero pari,
-  non è necessario applicare la formula generale nella sua versione più pesante: si può
-  dimezzare quel coefficiente prima di calcolare, e i numeri che si maneggiano restano
-  più piccoli.</p>
 </header>
 
-<h2>La formula ridotta</h2>
+<p>Equazione $ax^2+bx+c=0$, $a\neq0$, con $b$ pari: come si semplificano i calcoli?</p>
 
-<p>Data l'equazione in forma normale $ax^2+bx+c=0$, se $b$ è divisibile per $2$ si pone</p>
+<div class="def"><span class="et">Metà del coefficiente b</span>
+<p class="eq">$$\beta=\frac{b}{2}$$</p></div>
 
-<div class="regola">
-<p>$$\beta=\frac{b}{2}.$$</p>
-</div>
+<div class="def"><span class="et">Discriminante ridotto</span>
+<p class="eq">$$\frac{\Delta}{4}=\beta^2-ac$$</p></div>
 
-<p>Il numero $\beta$ prende il posto di $b$ nei due passi già visti con la formula
-generale. Prima si calcola</p>
-
-<div class="regola">
-<p>$$\frac{\Delta}{4}=\beta^2-ac,$$</p>
-<p>che decide il numero di soluzioni con le stesse regole di sempre: se $\frac{\Delta}{4}&lt;0$
-nessuna soluzione, se $\frac{\Delta}{4}=0$ una soluzione, se $\frac{\Delta}{4}&gt;0$ due
-soluzioni distinte.</p>
-</div>
-
-<p>Poi, se $\dfrac{\Delta}{4}\ge0$, si calcolano le soluzioni con</p>
-
-<div class="regola">
-<p>$$x=\frac{-\beta\pm\sqrt{\Delta/4}}{a}.$$</p>
-</div>
-
-<h2>Esempio</h2>
-
-<div class="esempio">
-<p>$3x^2-10x+7=0$, con $a=3$, $b=-10$, $c=7$: $\beta=-5$.</p>
-<p>$$\frac{\Delta}{4}=(-5)^2-3\cdot7=25-21=4.$$</p>
-<p>$$x=\frac{5\pm\sqrt4}{3}\ \Rightarrow\ x_1=\frac{5+2}{3}=\frac73,\qquad
-x_2=\frac{5-2}{3}=1.$$</p>
-<p>Si verifica con la formula intera: $\Delta=100-84=16$,
-$x=\dfrac{10\pm\sqrt{16}}{6}=\dfrac{10\pm4}{6}$, che dà gli stessi $x_1=\dfrac73$ e
-$x_2=1$.</p>
-</div>
-
-<h2>Equazioni incomplete con quadrato di binomio</h2>
-
-<p>Alcune equazioni incomplete si presentano già scritte come il quadrato di un
-binomio uguagliato a un numero. In questo caso non serve nessuna formula: basta
-isolare il quadrato e porre $y$ uguale al binomio.</p>
-
-<div class="regola">
-<p>Se l'equazione ha la forma $(ax+b)^2=k$ con $k\ge0$, si pone $y=ax+b$:</p>
-<p>$$y^2=k\ \Rightarrow\ y=\pm\sqrt k,$$</p>
-<p>e infine si torna a $x$ risolvendo separatamente le due equazioni di primo grado
-che restano.</p>
-</div>
-
-<div class="esempio">
-<p>$(x+3)^2=36$, $y=x+3$: $y^2=36\Rightarrow y=\pm6$.</p>
-<p>$y=6\Rightarrow x+3=6\Rightarrow x_1=3$;&nbsp;&nbsp;
-$y=-6\Rightarrow x+3=-6\Rightarrow x_2=-9$.</p>
-</div>
-
-<div class="esempio">
-<p>$(x-1)^2-22=3$, cioè $(x-1)^2=25$. Con $y=x-1$: $y^2=25\Rightarrow y=\pm5$.</p>
-<p>$y=5\Rightarrow x-1=5\Rightarrow x_1=6$;&nbsp;&nbsp;
-$y=-5\Rightarrow x-1=-5\Rightarrow x_2=-4$.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Quando $\dfrac{\Delta}{4}$ (o $\Delta$) risulta il quadrato di un binomio con
-radicali, la radice si semplifica riconoscendo quel quadrato: è il caso delle
-equazioni con radicali nel discriminante.</li>
+<li>$\dfrac{\Delta}{4}&lt;0$ → nessuna soluzione reale;</li>
+<li>$\dfrac{\Delta}{4}=0$ → due soluzioni coincidenti, $x_1=x_2=-\dfrac{\beta}{a}$;</li>
+<li>$\dfrac{\Delta}{4}&gt;0$ → due soluzioni distinte.</li>
 </ul>
-</div>
+
+<p>Se $\dfrac{\Delta}{4}\ge0$, $\beta$ prende il posto di $b$ nella formula risolutiva:</p>
+
+<div class="def"><span class="et">Formula ridotta</span>
+<p class="eq principio">$$x_{1,2}=\frac{-\beta\pm\sqrt{\Delta/4}}{a}$$</p></div>
+
+<h2>Esempio 1</h2>
+
+<p>Risolvere $3x^2-10x+7=0$ ($\beta=-5$).</p>
+
+<p class="eq">$$\frac{\Delta}{4}=(-5)^2-3\cdot7=4 \qquad x_{1,2}=\frac{5\pm2}{3}\ \Rightarrow\ x_1=\frac73,\quad x_2=1$$</p>
+
+<h2>Equazioni con quadrato di binomio</h2>
+
+<p>Equazione della forma $(ax+b)^2=k$ con $k\ge0$:</p>
+<ul>
+<li>si pone $y=ax+b$ → $y^2=k$ → $y=\pm\sqrt k$;</li>
+<li>si risolvono le due equazioni di primo grado $ax+b=\sqrt k$ e $ax+b=-\sqrt k$.</li>
+</ul>
+
+<h2>Esempio 2</h2>
+
+<p>Risolvere $(x-1)^2-22=3$.</p>
+
+<p class="eq">$$(x-1)^2=25 \ \Rightarrow\ x-1=\pm5 \ \Rightarrow\ x_1=6,\quad x_2=-4$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../36-formula-risolutiva-e-discriminante/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Formula risolutiva e discriminante</span></a><a class="successiva" href="../38-equazioni-con-radicali-nel-discriminante/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni con radicali nel discriminante</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni di secondo grado &middot; Unità 35</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

@@ -277,6 +277,7 @@
 - Parole: 310 su 2 pagine di traccia (71–72)
 - Rettifica: nessuna. Il discriminante ridotto e le soluzioni dell'esempio 3x²-10x+7=0 (β=-5, Δ/4=4, x1=7/3, x2=1, coerenti col calcolo con la formula intera Δ=16) e delle due equazioni con quadrato di binomio ((x+3)²=36 con x1=3, x2=-9; (x-1)²-22=3 con x1=6, x2=-4) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna oltre a una frase che spiega che β prende il posto di b nei due passi già visti, per collegare la formula ridotta a quella generale.
+- Revisione (20/10/2026, regole 13/10): parole 251 → 87. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 34), tolti sommario, «Nella prossima unità» (rimando all'unità 36) e il titoletto «La formula ridotta»; apertura a domanda con a ≠ 0; β e Δ/4 in .def; tre casi in elenco caso → conseguenza («una soluzione» → «due soluzioni coincidenti, x₁ = x₂ = −β/a», come nell'unità 34); formula ridotta in .def rosso; tolta la verifica con la formula intera (ripetizione); procedimento per (ax+b)² = k in due voci d'elenco; titoletti «Esempio 1», «Equazioni con quadrato di binomio», «Esempio 2». Esempi da tre a due: tolto (x+3)² = 36 (x₁ = 3, x₂ = −9). Nessuna comparsa, nessuna figura. Controllo concettuale (SymPy): Δ/4 = 4, x₁ = 7/3, x₂ = 1; (x−1)² = 25 → x₁ = 6, x₂ = −4; nessuna correzione.
 
 ## Unità 36 — Equazioni con radicali nel discriminante
 - Parole: 180 su circa 1,3 pagine di traccia (pagina 73, più il secondo esempio in cima a pagina 74, prima dell'intestazione "Somma e prodotto delle soluzioni")
