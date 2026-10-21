@@ -5,89 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dielettrici e costante dielettrica relativa — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-table.valori{border-collapse:collapse;margin:22px auto;font-family:var(--sans);font-size:.96rem}
-table.valori th,table.valori td{border:1px solid var(--riga);padding:8px 22px;text-align:center}
-table.valori th{background:var(--blu-chiaro)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 42</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 42</p>
   <h1>Dielettrici e costante dielettrica relativa</h1>
-  <p class="sommario">Finora le cariche sono state pensate nel vuoto. Se invece sono immerse
-  in una sostanza isolante, il campo elettrico e la forza di Coulomb fra loro cambiano: questa
-  unit&agrave; dice di quanto.</p>
 </header>
 
-<h2>Cariche immerse in un isolante</h2>
-
-<p>Supponiamo che due cariche non si trovino nel vuoto ma immerse in una sostanza
-<strong>dielettrica</strong>, cio&egrave; isolante &mdash; per esempio vetro, carta o acqua.
-La domanda &egrave; come cambiano, in questa situazione, il campo elettrico e la forza di
-Coulomb fra le due cariche.</p>
+<p>Due cariche immerse in un isolante (dielettrico), per esempio carta, vetro o acqua: come cambiano forza e campo rispetto al vuoto?</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg">
-<circle cx="70" cy="70" r="6" fill="var(--rosso)"/>
-<text x="70" y="95" text-anchor="middle" font-family="var(--sans)" font-size="13">q&#8321;</text>
-<circle cx="350" cy="70" r="6" fill="var(--rosso)"/>
-<text x="350" y="95" text-anchor="middle" font-family="var(--sans)" font-size="13">q&#8322;</text>
-<polyline points="90,70 120,30 150,100 180,20 210,110 240,25 270,105 300,35 330,70"
-  fill="none" stroke="var(--blu)" stroke-width="2"/>
-<text x="210" y="130" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">sostanza dielettrica (per esempio vetro)</text>
-</svg>
-<p class="did">Due cariche puntiformi immerse in un dielettrico anzich&eacute; nel vuoto.</p>
+<svg id="g-diel" viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due cariche di segno opposto alla stessa distanza, nel vuoto e immerse in carta, vetro o acqua: la forza di attrazione si riduce di un fattore pari alla costante dielettrica relativa"></svg>
+<div class="cursore"><label for="s-d">sostanza</label>
+<input type="range" id="s-d" min="0" max="3" step="1" value="0">
+<span class="val" id="v-d"></span></div>
+<p class="did">Stesse cariche, stessa distanza; $F_0$ = forza nel vuoto</p>
 </div>
 
-<h2>La costante dielettrica relativa</h2>
+<p>Ogni dielettrico ha una propria costante dielettrica relativa $\varepsilon_r$:</p>
 
-<p>Ogni sostanza dielettrica ha una propria <strong>costante dielettrica relativa</strong>
-$\varepsilon_r$, che dice di quanto quella sostanza riduce il campo elettrico e la forza di
-Coulomb rispetto al vuoto. &Egrave; un numero puro, senza unit&agrave; di misura, e vale sempre
-$\varepsilon_r>1$.</p>
-
-<table class="valori">
-<tr><th>sostanza</th><th>carta</th><th>vetro</th><th>acqua</th></tr>
-<tr><th>$\varepsilon_r$</th><td>3,7</td><td>5,6</td><td>80,4</td></tr>
-</table>
-
-<h2>Come si modificano le formule</h2>
-
-<p>In ogni equazione dell'elettrostatica, quando le cariche sono immerse in un dielettrico, si
-moltiplica $\varepsilon_0$ per la $\varepsilon_r$ della sostanza presente:</p>
-
-<div class="formula-box">
-$$F_C=\frac{1}{4\pi\varepsilon_0\varepsilon_r}\cdot\frac{q_1q_2}{r^2}\qquad\text{forza di Coulomb}$$
-$$E=\frac{Q}{4\pi\varepsilon_0\varepsilon_r r^2}\qquad\text{campo elettrico}$$
-</div>
-
-<p>Poich&eacute; $\varepsilon_r>1$, il denominatore cresce e sia la forza sia il campo
-risultano pi&ugrave; deboli che nel vuoto: con l'acqua, per esempio, la forza fra due cariche
-si riduce a circa un centesimo di quella che avrebbero nel vuoto alla stessa distanza.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
+<div class="def"><span class="et">Costante dielettrica relativa</span>
 <ul>
-<li>Il flusso del campo elettrico attraverso una superficie.</li>
-<li>Il teorema di Gauss e il suo uso per calcolare il campo di distribuzioni di carica estese.</li>
-</ul>
-</div>
+<li>numero puro, senza unità di misura;</li>
+<li>$\varepsilon_r &gt; 1$ (vuoto: $\varepsilon_r = 1$);</li>
+<li>carta 3,7; vetro 5,6; acqua 80,4.</li>
+</ul></div>
+
+<p>Dielettrico omogeneo intorno alle cariche: nelle formule $\varepsilon_0$ diventa $\varepsilon_0\varepsilon_r$.</p>
+
+<div class="def"><span class="et">Forza di Coulomb in un dielettrico</span>
+<p class="eq principio">$$F=\frac{1}{4\pi\varepsilon_0\varepsilon_r}\cdot\frac{|q_1|\,|q_2|}{r^2}$$</p></div>
+
+<div class="def"><span class="et">Campo di una carica puntiforme in un dielettrico</span>
+<p class="eq principio">$$E=\frac{1}{4\pi\varepsilon_0\varepsilon_r}\cdot\frac{|q|}{r^2}$$</p></div>
+
+<p>Rispetto al vuoto, a parità di cariche e distanza:</p>
+
+<p class="eq">$$F=\frac{F_0}{\varepsilon_r}\qquad\qquad E=\frac{E_0}{\varepsilon_r}$$</p>
+
+<p>$\varepsilon_r &gt; 1$ → forza e campo più deboli che nel vuoto (in acqua circa 80 volte).</p>
 
 <nav class="nav-unita"><a class="precedente" href="../43-il-campo-elettrico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il campo elettrico</span></a><a class="successiva" href="../45-flusso-del-campo-elettrico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Flusso del campo elettrico</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 42</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=s;return t;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  function freccia(s,id,col){var d=el(s,'defs',{}),m=el(d,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+  function carica(p,x,y,segno,et){var g=el(p,'g',{transform:'translate('+x+','+y+')'});var c=segno>0?'var(--rosso)':'var(--blu)';
+    el(g,'circle',{r:11,fill:'#fff',stroke:c,'stroke-width':1.8});txt(g,0,5,segno>0?'+':'−',{fill:c,'font-size':14,'font-weight':700});
+    txt(g,0,30,et,{fill:'var(--inchiostro)','font-size':12});return g;}
+  /* forza di attrazione F = F0/εr fra due cariche alla stessa distanza */
+  var s=document.getElementById('g-diel'),c=document.getElementById('s-d'),v=document.getElementById('v-d');
+  if(s&&c){
+    var S=[['vuoto',1],['carta',3.7],['vetro',5.6],['acqua',80.4]];
+    freccia(s,'mr','var(--rosso)');freccia(s,'mg','var(--grigio)');
+    var bg=el(s,'rect',{x:20,y:14,width:380,height:132,rx:8,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.2});
+    var et=txt(s,32,34,'',{'text-anchor':'start',fill:'var(--blu)','font-size':12});
+    var X1=120,X2=300,Y=72,L0=70;
+    var f1=el(s,'line',{y1:Y,y2:Y,stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#mr)'});
+    var f2=el(s,'line',{y1:Y,y2:Y,stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#mr)'});
+    txt(s,X1+20,Y-16,'F',{fill:'var(--rosso)','font-weight':700,'font-size':12});
+    txt(s,X2-20,Y-16,'F',{fill:'var(--rosso)','font-weight':700,'font-size':12});
+    carica(s,X1,Y,1,'q₁');carica(s,X2,Y,-1,'q₂');
+    el(s,'line',{x1:X1,y1:126,x2:X2,y2:126,stroke:'var(--grigio)','stroke-width':1});
+    el(s,'line',{x1:X1,y1:120,x2:X1,y2:132,stroke:'var(--grigio)','stroke-width':1});
+    el(s,'line',{x1:X2,y1:120,x2:X2,y2:132,stroke:'var(--grigio)','stroke-width':1});
+    txt(s,(X1+X2)/2,121,'r',{fill:'var(--grigio)','font-size':12,'font-style':'italic'});
+    function agg(){
+      var i=+c.value,er=S[i][1],L=L0/er;
+      set(bg,{opacity:i===0?0:[0,.55,.8,1][i]});et.textContent=i===0?'':S[i][0];
+      set(f1,{x1:X1+12,x2:X1+12+L});set(f2,{x1:X2-12,x2:X2-12-L});
+      v.innerHTML=S[i][0]+': ε<sub>r</sub> = '+num(er,er===1?0:1)+' &nbsp; F = '+(er===1?'F₀':'F₀/'+num(er,1)+' ≈ '+num(1/er,er>50?3:2)+' F₀');
+    }
+    c.addEventListener('input',agg);agg();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
