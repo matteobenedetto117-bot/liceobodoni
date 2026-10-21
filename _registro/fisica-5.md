@@ -438,6 +438,7 @@
 - Aggiunta: nessuna. Pagina puramente testuale/storica, nessun disegno nella traccia da
   ridisegnare, nessuno strumento interattivo (non richiesto e non pertinente a un contenuto
   storico-concettuale).
+- Revisione (20/10/2026, regole 13/10): parole 147 → 75. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 34), tolti sommario e i titoletti «Il calcolo di Maxwell» e «La conferma di Hertz»; apertura a domanda; ε₀ e μ₀ in elenco con i valori; c = 1/√(ε₀μ₀) in .def rosso, sostituzione numerica in .eq; Fizeau e Hertz in elenco caso → conseguenza, tolti gli anni (cenni storici). Nessuna comparsa, nessun esempio, nessuna figura. Controllo concettuale (Python: 1/√(8,854·10⁻¹²·4π·10⁻⁷) ≈ 2,998·10⁸ m/s): conclusione «le onde elettromagnetiche sono luce» → «la luce è un'onda elettromagnetica» (non tutte le onde e.m. sono luce visibile); μ₀ indicato come ≈ 4π×10⁻⁷ T·m/A (non più esatto dal 2019); la misura di Fizeau dà la velocità della luce «circa uguale» a c. Da verificare sulla fonte: la pagina datava al 1851 la misura di Fizeau della velocità della luce (di solito 1849; nel 1851 è l'esperimento sull'acqua in moto), data tolta.
 
 ## Unità 36 — Campi, densità di energia in un'onda
 - Parole: 251 su 2 pagine di traccia (pagine 64-65).
