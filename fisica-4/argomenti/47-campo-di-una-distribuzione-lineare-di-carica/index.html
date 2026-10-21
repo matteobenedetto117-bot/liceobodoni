@@ -5,176 +5,192 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campo di una distribuzione lineare di carica — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.due-figure{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin:26px 0}
-.due-figure .fig{margin:0;flex:1;min-width:220px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 45</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 45</p>
   <h1>Campo di una distribuzione lineare di carica</h1>
-  <p class="sommario">Il teorema di Gauss appena introdotto permette di calcolare il campo
-  elettrico di una carica distribuita, senza sommare il contributo di ogni singola carica.
-  Il primo caso, e il pi&ugrave; semplice, &egrave; quello di un filo rettilineo di
-  lunghezza infinita, carico uniformemente.</p>
 </header>
 
-<h2>La simmetria della distribuzione</h2>
-
-<p>Consideriamo un filo rettilineo di lunghezza infinita, carico positivamente con
-<strong>densit&agrave; lineare di carica</strong> $\lambda$ (in C/m). Per la simmetria del
-filo, il campo elettrico in un punto a distanza $r$ pu&ograve; avere solo componente
-perpendicolare al filo: due elementi di carica simmetrici rispetto al piede della
-perpendicolare generano in quel punto due contributi le cui componenti parallele al filo si
-annullano a vicenda, mentre le componenti perpendicolari si sommano.</p>
+<p>Filo rettilineo infinito, carico positivamente con densità lineare di carica $\lambda$ (C/m): quanto vale il campo elettrico a distanza $r$?</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-</marker>
-<marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--grigio)"/>
-</marker>
-</defs>
-<line x1="20" y1="150" x2="400" y2="150" stroke="var(--inchiostro)" stroke-width="2"/>
-<g font-family="var(--sans)" font-size="14" fill="var(--rosso)">
-<text x="130" y="145">+</text><text x="205" y="145">+</text><text x="280" y="145">+</text>
-</g>
-<circle cx="135" cy="150" r="4" fill="var(--inchiostro)"/>
-<circle cx="210" cy="150" r="4" fill="var(--inchiostro)"/>
-<circle cx="285" cy="150" r="4" fill="var(--inchiostro)"/>
-<text x="135" y="172" text-anchor="middle" font-family="var(--sans)" font-size="13">2</text>
-<text x="210" y="172" text-anchor="middle" font-family="var(--sans)" font-size="13">1</text>
-<text x="285" y="172" text-anchor="middle" font-family="var(--sans)" font-size="13">3</text>
-<g stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#arrE)">
-<line x1="135" y1="150" x2="204" y2="62"/>
-<line x1="285" y1="150" x2="216" y2="62"/>
-<line x1="210" y1="150" x2="210" y2="55"/>
-</g>
-<g stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4,3">
-<line x1="135" y1="150" x2="204" y2="150"/>
-<line x1="204" y1="150" x2="204" y2="62"/>
-<line x1="285" y1="150" x2="216" y2="150"/>
-<line x1="216" y1="150" x2="216" y2="62"/>
-</g>
-<text x="168" y="168" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">x si annullano</text>
-<line x1="210" y1="45" x2="210" y2="20" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#arrG)"/>
-<text x="222" y="30" font-family="var(--sans)" font-size="14" fill="var(--verde)">E risultante</text>
-<text x="20" y="20" font-family="var(--sans)" font-size="13" fill="var(--grigio)">le componenti y (perpendicolari al filo) si sommano</text>
-</svg>
-<p class="did">Le componenti parallele al filo dei contributi di 2 e 3 si cancellano; quelle
-perpendicolari si sommano: il campo risultante &egrave; sempre radiale.</p>
+<svg id="g-simm" viewBox="0 0 420 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due elementi di carica 2 e 3 simmetrici rispetto al punto 1 del filo: nel punto P le componenti parallele al filo dei loro campi si annullano, quelle perpendicolari si sommano"></svg>
+<div class="cursore"><label for="cur-d">distanza di 2 e 3 da 1</label><input id="cur-d" type="range" min="20" max="110" step="1" value="60"><span class="val" id="val-d">0,60 r</span></div>
+<p class="did">Componenti parallele al filo: si annullano; perpendicolari: si sommano</p>
 </div>
 
-<h2>La superficie gaussiana</h2>
-
-<p>Per applicare il teorema di Gauss scegliamo, come superficie chiusa, un cilindro di
-raggio $r$ e lunghezza $L$ con il filo lungo il proprio asse.</p>
+<p>Per simmetria il campo è radiale, perpendicolare al filo. Superficie gaussiana: cilindro di raggio $r$ e lunghezza $L$, con il filo sull'asse.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<ellipse cx="150" cy="130" rx="20" ry="72" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<ellipse cx="340" cy="130" rx="20" ry="72" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<line x1="150" y1="58" x2="340" y2="58" stroke="var(--blu)" stroke-width="2"/>
-<line x1="150" y1="202" x2="340" y2="202" stroke="var(--blu)" stroke-width="2"/>
-<line x1="40" y1="130" x2="450" y2="130" stroke="var(--inchiostro)" stroke-width="2"/>
-<g font-family="var(--sans)" font-size="13" fill="var(--rosso)">
-<text x="60" y="124">+</text><text x="100" y="124">+</text><text x="180" y="124">+</text>
-<text x="240" y="124">+</text><text x="300" y="124">+</text><text x="400" y="124">+</text>
-</g>
-<g stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#arrR)">
-<line x1="150" y1="58" x2="150" y2="25"/>
-<line x1="245" y1="60" x2="255" y2="27"/>
-<line x1="340" y1="58" x2="340" y2="25"/>
-<line x1="150" y1="202" x2="150" y2="235"/>
-<line x1="245" y1="200" x2="255" y2="233"/>
-<line x1="340" y1="202" x2="340" y2="235"/>
-<line x1="360" y1="130" x2="393" y2="130"/>
-</g>
-<text x="368" y="122" font-family="var(--sans)" font-size="14" fill="var(--rosso)">r</text>
-<line x1="150" y1="222" x2="340" y2="222" stroke="var(--grigio)" stroke-width="1.4"/>
-<text x="245" y="240" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--grigio)">L</text>
-<text x="20" y="20" font-family="var(--sans)" font-size="13" fill="var(--grigio)">filo di lunghezza infinita, densit&agrave; &lambda;</text>
-</svg>
-<p class="did">Il cilindro gaussiano ha il filo lungo l'asse: il campo &egrave;
-perpendicolare alla superficie laterale in ogni punto, ed &egrave; parallelo alle due basi
-&mdash; non vi passa flusso attraverso di esse.</p>
+<svg id="g-cil" viewBox="0 0 440 268" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Cilindro gaussiano di raggio r e lunghezza L con il filo carico sull'asse e il campo radiale sulla superficie laterale"></svg>
+<p class="did">Cilindro gaussiano con il filo sull'asse</p>
 </div>
 
-<p>Il campo &egrave; sempre perpendicolare alla superficie laterale (quindi parallelo al
-vettore area), mentre non attraversa le due basi: le cariche da un lato del cilindro sono
-compensate da quelle simmetriche dall'altro lato. Il flusso si riduce al solo contributo
-della superficie laterale:</p>
+<ul>
+<li>superficie laterale → $\vec E$ perpendicolare alla superficie, $\theta=0$;</li>
+<li>basi → $\vec E$ parallelo alle basi, flusso nullo.</li>
+</ul>
 
-<div class="formula-box">
-$$\Phi(\vec E)=E\cdot A,\qquad A=2\pi r L,\qquad \Phi(\vec E)=E\cdot 2\pi r L$$
-</div>
+<p class="eq">$$\Phi(\vec E)=E\cdot A,\qquad A=2\pi r L,\qquad \Phi(\vec E)=E\cdot 2\pi r L$$</p>
 
-<h2>Il calcolo del campo</h2>
+<p>Per il teorema di Gauss, con carica racchiusa $q=\lambda L$:</p>
 
-<p>Per il teorema di Gauss, $\Phi(\vec E)=q/\varepsilon_0$, dove $q$ &egrave; la carica
-racchiusa nel cilindro: $q=\lambda L$, cio&egrave; la densit&agrave; lineare per la
-lunghezza di filo contenuta. Uguagliando le due espressioni del flusso:</p>
+<p class="eq">$$E\cdot 2\pi r L=\frac{\lambda L}{\varepsilon_0}$$</p>
 
-<div class="formula-box">
-$$E\cdot 2\pi r L=\frac{\lambda L}{\varepsilon_0}$$
-</div>
-
-<p>La lunghezza $L$ si semplifica &mdash; segno che il risultato non dipende dalla
-superficie gaussiana scelta, come deve essere &mdash; e resta:</p>
-
-<div class="riquadro">
-<span class="etichetta">Campo di un filo infinito carico</span>
-$$E=\frac{\lambda}{2\pi r \varepsilon_0}$$
-</div>
-
-<p>il campo elettrico generato da un filo rettilineo di lunghezza infinita, in un punto a
-distanza $r$ dal filo.</p>
+<div class="def"><span class="et">Campo di un filo rettilineo infinito carico uniformemente</span>
+<p class="eq principio">$$E=\frac{\lambda}{2\pi\varepsilon_0\, r}$$</p></div>
 
 <h2>Esempio</h2>
 
-<p>Un filo ha densit&agrave; lineare di carica $\lambda=15\ \text{C/m}$. Il campo elettrico
-a distanza $r=2\ \text{m}$ dal filo vale</p>
+<p>Dati: $\lambda=15\ \text{C/m}$, $\;r=2\ \text{m}$. Calcolare $E$.</p>
 
-<div class="formula-box">
-$$E=\frac{\lambda}{2\pi r \varepsilon_0}=\frac{15}{2\pi\cdot 2\cdot 8{,}85\cdot10^{-12}}
-\approx 1{,}35\cdot10^{11}\ \text{N/C}$$
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
-<ul>
-<li>Lo stesso metodo applicato a una distribuzione piana infinita di carica, con un
-cilindro gaussiano attraverso il piano.</li>
-<li>Il campo fra le armature di un condensatore piano, somma dei campi di due piani
-carichi di segno opposto.</li>
-</ul>
-</div>
+<p class="eq">$$E=\frac{\lambda}{2\pi\varepsilon_0\, r}=\frac{15\ \text{C/m}}{2\pi\cdot 8{,}85\times10^{-12}\ \frac{\text{C}^2}{\text{N}\cdot\text{m}^2}\cdot 2\ \text{m}}\approx 1{,}3\times10^{11}\ \text{N/C}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../46-teorema-di-gauss/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema di Gauss</span></a><a class="successiva" href="../48-campo-di-una-distribuzione-piana-infinita/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Campo di una distribuzione piana infinita</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 45</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)',stroke:'#fff','stroke-width':4,'paint-order':'stroke'},a||{}));t.textContent=s;return t;}
+  function freccia(s,id,col){var d=el(s,'defs',{}),m=el(d,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+  function carica(s,x,y,r){r=r||7;el(s,'circle',{cx:x,cy:y,r:r,fill:'var(--rosso)'});txt(s,x,y+4,'+',{fill:'#fff',stroke:'none','font-size':r+5,'font-weight':700});}
+  function fmt(v,c){return v.toFixed(c).replace('.',',');}
+
+  /* 1. simmetria: campi in P di due elementi simmetrici 2 e 3 */
+  var s=document.getElementById('g-simm');
+  if(s){
+    freccia(s,'ms-r','var(--rosso)');freccia(s,'ms-v','var(--verde)');
+    var X1=210,YF=255,R=100,PY=YF-R,K=70;
+    el(s,'line',{x1:15,y1:YF,x2:405,y2:YF,stroke:'var(--inchiostro)','stroke-width':3});
+    txt(s,385,YF-10,'λ',{fill:'var(--inchiostro)','font-size':14});
+    el(s,'line',{x1:X1,y1:YF,x2:X1,y2:PY,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+    txt(s,X1-10,(YF+PY)/2+4,'r',{'text-anchor':'end'});
+    var dyn=el(s,'g',{});
+    carica(s,X1,YF,6);txt(s,X1,YF+22,'1',{fill:'var(--inchiostro)'});
+    el(s,'circle',{cx:X1,cy:PY,r:3.5,fill:'var(--inchiostro)'});
+    var cur=document.getElementById('cur-d'),val=document.getElementById('val-d');
+    function disegna(){
+      var d=+cur.value;while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+      var n=Math.hypot(d,R),L=K*R*R/(n*n),ux=d/n,uy=R/n;
+      [[-1,'2'],[1,'3']].forEach(function(c){
+        var cx=X1+c[0]*d;
+        el(dyn,'line',{x1:cx,y1:YF,x2:X1,y2:PY,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'2,4'});
+        /* campo in P, diretto lontano dalla carica */
+        var tx=X1-c[0]*L*ux,ty=PY-L*uy;
+        el(dyn,'line',{x1:X1,y1:PY,x2:tx,y2:PY,stroke:'var(--grigio)','stroke-width':1.6,'stroke-dasharray':'5,3'});
+        el(dyn,'line',{x1:tx,y1:PY,x2:tx,y2:ty,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'2,3'});
+        el(dyn,'line',{x1:X1,y1:PY,x2:tx.toFixed(1),y2:ty.toFixed(1),stroke:'var(--rosso)','stroke-width':2,'marker-end':'url(#ms-r)'});
+        txt(dyn,tx-c[0]*8,ty+4,c[1]==='2'?'E₂':'E₃',{fill:'var(--rosso)','text-anchor':c[0]<0?'start':'end','font-size':13});
+        carica(dyn,cx,YF,6);txt(dyn,cx,YF+22,c[1],{fill:'var(--inchiostro)'});
+      });
+      var T=2*L*uy;
+      el(dyn,'line',{x1:X1,y1:PY,x2:X1,y2:(PY-T).toFixed(1),stroke:'var(--verde)','stroke-width':2.6,'marker-end':'url(#ms-v)'});
+      txt(dyn,X1,PY-T-8,'E₂ + E₃',{fill:'var(--verde)','font-weight':700});
+      txt(dyn,X1+8,PY+16,'P',{fill:'var(--inchiostro)','text-anchor':'start'});
+      val.textContent=fmt(d/R,2)+' r';
+    }
+    cur.addEventListener('input',disegna);disegna();
+  }
+
+  /* 2. cilindro gaussiano */
+  var g=document.getElementById('g-cil');
+  if(g){
+    freccia(g,'mc-r','var(--rosso)');
+    var XA=130,XB=320,CY=125,RY=70,RX=20;
+    el(g,'path',{d:'M'+XA+','+(CY-RY)+' A'+RX+','+RY+' 0 0 0 '+XA+','+(CY+RY),fill:'none',stroke:'var(--blu)','stroke-width':2});
+    el(g,'path',{d:'M'+XA+','+(CY-RY)+' A'+RX+','+RY+' 0 0 1 '+XA+','+(CY+RY),fill:'none',stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'4,3'});
+    el(g,'ellipse',{cx:XB,cy:CY,rx:RX,ry:RY,fill:'#eef3f8','fill-opacity':.6,stroke:'var(--blu)','stroke-width':2});
+    el(g,'line',{x1:XA,y1:CY-RY,x2:XB,y2:CY-RY,stroke:'var(--blu)','stroke-width':2});
+    el(g,'line',{x1:XA,y1:CY+RY,x2:XB,y2:CY+RY,stroke:'var(--blu)','stroke-width':2});
+    el(g,'line',{x1:20,y1:CY,x2:420,y2:CY,stroke:'var(--inchiostro)','stroke-width':3});
+    [50,90,170,225,280,370,405].forEach(function(x){txt(g,x,CY-6,'+',{fill:'var(--rosso)','font-size':14,'font-weight':700});});
+    [XA+30,(XA+XB)/2,XB-30].forEach(function(x){
+      el(g,'line',{x1:x,y1:CY-RY,x2:x,y2:CY-RY-38,stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#mc-r)'});
+      el(g,'line',{x1:x,y1:CY+RY,x2:x,y2:CY+RY+38,stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#mc-r)'});
+    });
+    txt(g,XB-30+12,CY-RY-26,'E',{fill:'var(--rosso)','text-anchor':'start','font-weight':700});
+    el(g,'line',{x1:(XA+XB)/2,y1:CY,x2:(XA+XB)/2,y2:CY+RY,stroke:'var(--verde)','stroke-width':2});
+    txt(g,(XA+XB)/2+10,CY+RY/2+5,'r',{fill:'var(--verde)','text-anchor':'start','font-weight':700});
+    el(g,'line',{x1:XA,y1:CY+RY+50,x2:XB,y2:CY+RY+50,stroke:'var(--grigio)','stroke-width':1.2});
+    el(g,'line',{x1:XA,y1:CY+RY+44,x2:XA,y2:CY+RY+56,stroke:'var(--grigio)','stroke-width':1.2});
+    el(g,'line',{x1:XB,y1:CY+RY+44,x2:XB,y2:CY+RY+56,stroke:'var(--grigio)','stroke-width':1.2});
+    txt(g,(XA+XB)/2,CY+RY+50+17,'L',{fill:'var(--grigio)'});
+    txt(g,400,CY+22,'λ',{fill:'var(--inchiostro)','font-size':14});
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
