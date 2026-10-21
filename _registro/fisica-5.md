@@ -462,6 +462,7 @@
   66), e lo schema dell'onda con $\vec E$, $\vec B$ e la terna ortogonale $(\vec B,\vec S,\vec E)$
   (pagina 67); nessuno strumento interattivo, perché la figura è puramente geometrica e non c'è un
   parametro naturale da far variare.
+- Revisione (21/10/2026, regole 13/10): parole 320 → 85. Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 36); apertura a domanda; tolti sommario, «Nella prossima unità» (con il rimando all'unità 38), titoletto «Intensità di un'onda» e frasi di commento; intensità in .def; ΔU = uV, V = Ax, x = cΔt in elenco; I = uc in una .eq; I = uc = ε₀E²c = cB²/μ₀ in .eq principio; aggiunta l'unità di misura W/m² in .def a sé; titoletto «Vettore di Poynting» con S = E∧B/μ₀ in .def, direzione/verso/modulo in elenco, S = cB²/μ₀ in .eq, S = I in .eq principio. Nessuna comparsa da togliere. Controllo concettuale (SymPy): catena u = ε₀E² = B²/μ₀, I = uc = ε₀E²c = cB²/μ₀ ed EB/μ₀ = cB²/μ₀ riverificate. Correzioni nella figura dell'onda: E e B erano disegnati sfasati di un quarto di periodo (ora in fase) e la terna mostrava E e B sulla stessa retta (verso opposto); ora E lungo y, B lungo z (prospettiva obliqua), S = E∧B lungo x. Figure rifatte da script, statiche (torcia con volume V = Ax e quota x = cΔt; onda con vettore S). Nessun esempio (la traccia non ne ha).
 
 ## Unità 38 — Quantità di moto e pressione di radiazione
 - Parole: 381 su 2 pagine di traccia (pagine 68-69).

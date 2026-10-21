@@ -5,18 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Intensità e vettore di Poynting — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-</style>
-</head>
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+</style></head>
 <body>
 <div class="foglio">
 
@@ -24,136 +52,147 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 37</p>
   <h1>Intensità e vettore di Poynting</h1>
-  <p class="sommario">Un'onda elettromagnetica trasporta energia mentre si propaga. L'intensità
-  misura quanta energia attraversa una superficie in un certo tempo; il vettore di Poynting
-  raccoglie in un'unica grandezza vettoriale sia questo valore, sia la direzione in cui l'onda si
-  sta propagando.</p>
 </header>
 
-<h2>Intensità di un'onda</h2>
+<p>Onda che attraversa una superficie di area $A$ perpendicolare alla propagazione: quanta energia trasporta?</p>
 
-<p>Consideriamo un fascio di luce, emesso da una torcia, che attraversa una superficie di area $A$
-perpendicolare alla direzione di propagazione. Nel tempo $\Delta t$ l'onda percorre una distanza
-$x$, trasportando attraverso quella superficie un'energia $\Delta U$. L'<strong>intensità</strong>
-dell'onda è l'energia trasportata per unità di tempo e di superficie:</p>
-
-<div class="formula-box">
-$$I=\frac{\Delta U}{A\,\Delta t}$$
-</div>
+<div class="def"><span class="et">Intensità</span>
+<p>Energia trasportata per unità di tempo e di superficie:</p>
+<p class="eq">$$I=\frac{\Delta U}{A\,\Delta t}$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fx37a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<rect x="40" y="80" width="90" height="40" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="85" y="140" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">torcia</text>
-<rect x="130" y="92" width="180" height="16" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.5"/>
-<text x="220" y="86" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--blu)">luce</text>
-<ellipse cx="310" cy="100" rx="8" ry="26" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<text x="326" y="80" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">A</text>
-<line x1="130" y1="150" x2="310" y2="150" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fx37a)"/>
-<line x1="310" y1="150" x2="130" y2="150" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fx37a)"/>
-<text x="220" y="170" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">x</text>
-</svg>
-<p class="did">Nel tempo $\Delta t$ la luce percorre la distanza $x$, riempiendo un volume $V=Ax$
-davanti alla superficie di area $A$.</p>
+<svg id="fig-torcia" viewBox="20 40 380 135" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Torcia che emette un fascio di luce; nel tempo Δt la luce percorre la distanza x = cΔt e riempie il volume V = Ax davanti alla superficie di area A"></svg>
+<p class="did">Nel tempo $\Delta t$: distanza $x=c\,\Delta t$, volume $V=Ax$</p>
 </div>
 
-<p>L'energia $\Delta U$ che attraversa la superficie è quella contenuta nel volume $V$ spazzato
-dall'onda, cioè $\Delta U=uV$, dove $u$ è la densità di energia dell'onda. Poiché quel volume è
-$V=Ax$ e la distanza percorsa nel tempo $\Delta t$ è $x=c\,\Delta t$, sostituendo si ottiene</p>
-
-<p>$$I=\frac{u\,A\,x}{A\,\Delta t}=\frac{u\,A\,(c\,\Delta t)}{A\,\Delta t}$$</p>
-
-<p>I fattori $A$ e $\Delta t$ si semplificano, e resta</p>
-
-<div class="formula-box">
-$$I=uc$$
-</div>
-
-<p>Sostituendo l'espressione della densità di energia $u=\dfrac12\varepsilon_0E^2+\dfrac{1}{2\mu_0}B^2$,
-l'intensità in funzione dei campi diventa</p>
-
-<div class="formula-box">
-$$I=\frac12\varepsilon_0E^2c+\frac{1}{2\mu_0}B^2c$$
-</div>
-
-<h2>Il vettore di Poynting</h2>
-
-<p>Il <strong>vettore di Poynting</strong> raccoglie intensità, direzione e verso di propagazione
-in un'unica grandezza vettoriale, definita dal prodotto vettoriale fra il campo elettrico e il
-campo magnetico:</p>
-
-<div class="formula-box">
-$$\vec S=\frac{1}{\mu_0}\,\vec E\wedge\vec B$$
-</div>
-
-<p>dove $\mu_0$ è la permeabilità magnetica del vuoto. Essendo $\vec E$ e $\vec B$ perpendicolari
-fra loro in ogni istante, $\vec S$ è a sua volta perpendicolare a entrambi: la sua direzione è
-quella lungo cui l'onda si propaga.</p>
-
-<div class="fig">
-<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fe37" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="fb37" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="fs37" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="60" y1="70" x2="480" y2="70" stroke="var(--grigio)" stroke-width="1.3"/>
-<path d="M60,70 q20,-24 40,0 q20,24 40,0 q20,-24 40,0 q20,24 40,0" fill="none" stroke="var(--verde)" stroke-width="2"/>
-<path d="M60,70 q20,-15 40,-15 q20,0 40,15 q20,15 40,15 q20,0 40,-15" fill="none" stroke="var(--blu)" stroke-width="2" opacity=".8"/>
-<line x1="420" y1="70" x2="480" y2="70" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#fs37)"/>
-<text x="486" y="66" font-family="var(--sans)" font-size="13" fill="var(--rosso)">direzione di propagazione</text>
-<text x="70" y="34" font-family="var(--sans)" font-size="13" fill="var(--verde)">E</text>
-<text x="70" y="112" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-
-<g transform="translate(120,175)">
-<line x1="0" y1="0" x2="0" y2="-42" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#fb37)"/>
-<text x="-14" y="-46" font-family="var(--sans)" font-size="13" fill="var(--blu)">B</text>
-<line x1="0" y1="0" x2="60" y2="0" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#fs37)"/>
-<text x="66" y="4" font-family="var(--sans)" font-size="13" fill="var(--rosso)">S</text>
-<line x1="0" y1="0" x2="0" y2="42" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#fe37)"/>
-<text x="-14" y="56" font-family="var(--sans)" font-size="13" fill="var(--verde)">E</text>
-<rect x="-4" y="-4" width="8" height="8" fill="none" stroke="var(--grigio)" stroke-width="1"/>
-</g>
-</svg>
-<p class="did">$\vec E$ e $\vec B$ oscillano su piani fra loro perpendicolari; la terna $(\vec B,\vec
-S,\vec E)$ a destra mostra come le tre direzioni siano mutuamente ortogonali, con $\vec S$ orientato
-come la propagazione dell'onda.</p>
-</div>
-
-<p>Il modulo di $\vec S$, essendo $\vec E$ e $\vec B$ perpendicolari ($\sin90^\circ=1$), è</p>
-
-<p>$$S=\frac{1}{\mu_0}EB\sin90^\circ=\frac{1}{\mu_0}EB$$</p>
-
-<p>e usando $E=cB$,</p>
-
-<div class="formula-box">
-$$S=\frac{1}{\mu_0}(cB)B=\frac{c}{\mu_0}B^2$$
-</div>
-
-<p>che è la stessa espressione trovata sopra per $I$ in funzione di $B$. In generale, sostituendo
-anche $B=E/c$ nella formula di $I$ in funzione dei campi, tutte le forme si equivalgono:</p>
-
-<div class="formula-box">
-$$I=\frac12\varepsilon_0E^2c+\frac{1}{2\mu_0}B^2c=\varepsilon_0E^2c=\frac{c}{\mu_0}B^2$$
-</div>
-
-<p>Il modulo del vettore di Poynting coincide dunque con l'intensità dell'onda, $S=I$; la sua
-direzione e il suo verso indicano la direzione di propagazione dell'onda.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
+<p>L'energia che attraversa $A$ è quella contenuta nel volume $V$:</p>
 <ul>
-<li>Un'onda elettromagnetica trasporta anche quantità di moto: nell'unità 38 vediamo come questa
-si traduca in una pressione di radiazione, con il caso particolare di una superficie riflettente.</li>
+<li>$\Delta U=uV$, con $u$ densità di energia dell'onda;</li>
+<li>$V=Ax$;</li>
+<li>$x=c\,\Delta t$.</li>
 </ul>
+
+<p class="eq">$$I=\frac{u\,A\,c\,\Delta t}{A\,\Delta t}=uc$$</p>
+
+<p>Con $u=\dfrac12\varepsilon_0E^2+\dfrac{1}{2\mu_0}B^2=\varepsilon_0E^2=\dfrac{B^2}{\mu_0}$:</p>
+
+<div class="def"><span class="et">Intensità di un'onda elettromagnetica</span>
+<p class="eq principio">$$I=uc=\varepsilon_0E^2c=\frac{c}{\mu_0}B^2$$</p></div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>Watt al metro quadrato: $1\ \text{W/m}^2=1\ \text{J/(s}\cdot\text{m}^2)$</p></div>
+
+<h2>Vettore di Poynting</h2>
+
+<p>Intensità, direzione e verso di propagazione in un'unica grandezza vettoriale:</p>
+
+<div class="def"><span class="et">Vettore di Poynting</span>
+<p class="eq">$$\vec S=\frac{1}{\mu_0}\,\vec E\wedge\vec B$$</p></div>
+
+<ul>
+<li>direzione: perpendicolare sia a $\vec E$ sia a $\vec B$, cioè quella di propagazione;</li>
+<li>verso: quello di propagazione dell'onda;</li>
+<li>modulo: $\vec E\perp\vec B$ → $S=\dfrac{EB}{\mu_0}$.</li>
+</ul>
+
+<div class="fig">
+<svg id="fig-poynting" viewBox="0 10 420 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Onda elettromagnetica: E oscilla in un piano verticale, B in un piano orizzontale, in fase; il vettore S è diretto nel verso di propagazione"></svg>
+<p class="did">$\vec E$ (verde) e $\vec B$ (blu) in fase, su piani perpendicolari; $\vec S$ (rosso) nel verso di propagazione</p>
 </div>
+
+<p>Con $E=cB$:</p>
+
+<p class="eq">$$S=\frac{1}{\mu_0}(cB)\,B=\frac{c}{\mu_0}B^2$$</p>
+
+<div class="def"><span class="et">Modulo del vettore di Poynting</span>
+<p class="eq principio">$$S=I$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../36-campi-densita-di-energia-in-un-onda/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campi, densità di energia in un'onda</span></a><a class="successiva" href="../38-quantita-di-moto-e-pressione-di-radiazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Quantità di moto e pressione di radiazione</span></a></nav>
 <footer><p>Fisica quinta &middot; Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 37</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function el(p,t,a,txt){var e=document.createElementNS(NS,t);set(e,a);if(txt!=null)e.textContent=txt;p.appendChild(e);return e;}
+  function f(n){return (+n).toFixed(1);}
+  function T(p,x,y,txt,a){var b={x:x,y:y,'font-family':'var(--sans)','font-size':13,stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'};for(var k in a)b[k]=a[k];return el(p,'text',b,txt);}
+  function punta(p,x,y,dx,dy,col,s){var l=Math.hypot(dx,dy)||1;dx/=l;dy/=l;s=s||6;var w=s*.58;
+    return el(p,'path',{d:'M'+f(x+dx*s)+','+f(y+dy*s)+' L'+f(x-dx*s*.4-dy*w)+','+f(y-dy*s*.4+dx*w)+' L'+f(x-dx*s*.4+dy*w)+','+f(y-dy*s*.4-dx*w)+' Z',fill:col});}
+  function freccia(p,x1,y1,x2,y2,col,w,s){var g=el(p,'g',{});el(g,'line',{x1:f(x1),y1:f(y1),x2:f(x2),y2:f(y2),stroke:col,'stroke-width':w||2});
+    if(Math.hypot(x2-x1,y2-y1)>3)punta(g,x2,y2,x2-x1,y2-y1,col,s||7);return g;}
+
+  /* torcia, fascio cilindrico di sezione A, volume V = A x spazzato nel tempo Δt */
+  (function(){
+    var S=document.getElementById('fig-torcia'); if(!S)return;
+    var yc=72, r=26, rx=9, xt=110, xa=330;
+    /* torcia */
+    el(S,'rect',{x:30,y:yc-13,width:56,height:26,rx:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(S,'path',{d:'M86,'+(yc-13)+' L'+xt+','+(yc-r)+' L'+xt+','+(yc+r)+' L86,'+(yc+13)+' Z',fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    T(S,58,yc+34,'torcia',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'});
+    /* volume V = A x (cilindro) */
+    el(S,'path',{d:'M'+xt+','+(yc-r)+' L'+xa+','+(yc-r)+' A'+rx+' '+r+' 0 0 1 '+xa+','+(yc+r)+' L'+xt+','+(yc+r)+' Z',fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4});
+    el(S,'ellipse',{cx:xt,cy:yc,rx:rx,ry:r,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4});
+    T(S,(xt+xa)/2,yc+5,'V = A x',{'text-anchor':'middle',fill:'var(--blu)'});
+    /* superficie A */
+    el(S,'ellipse',{cx:xa,cy:yc,rx:rx,ry:r,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.2});
+    T(S,xa+16,yc-r+4,'A',{'font-style':'italic','font-weight':700,fill:'var(--inchiostro)'});
+    /* verso di propagazione */
+    freccia(S,xa+14,yc,xa+54,yc,'var(--inchiostro)',1.6);
+    T(S,xa+34,yc+20,'c',{'text-anchor':'middle','font-style':'italic',fill:'var(--inchiostro)'});
+    /* quota x = c Δt */
+    var yq=yc+r+30;
+    el(S,'line',{x1:xt,y1:yc+r+4,x2:xt,y2:yq+6,stroke:'var(--grigio)','stroke-width':1});
+    el(S,'line',{x1:xa,y1:yc+r+4,x2:xa,y2:yq+6,stroke:'var(--grigio)','stroke-width':1});
+    freccia(S,(xt+xa)/2,yq,xt+1,yq,'var(--rosso)',1.6,6);
+    freccia(S,(xt+xa)/2,yq,xa-1,yq,'var(--rosso)',1.6,6);
+    T(S,(xt+xa)/2,yq+22,'x = c Δt',{'text-anchor':'middle',fill:'var(--rosso)'});
+  })();
+
+  /* onda: E lungo y, B lungo z (verso l'osservatore, prospettiva obliqua), in fase; S = E∧B/μ0 lungo x */
+  (function(){
+    var S=document.getElementById('fig-poynting'); if(!S)return;
+    var x0=40, A=58, y0=82, lam=140, L=2*lam, zx=-0.5, zy=0.55;
+    function P(x,y,z){return [x0+x+z*zx*A, y0-y*A+z*zy*A];}
+    var c1=P(0,0,1.15),c2=P(L,0,1.15),c3=P(L,0,-1.15),c4=P(0,0,-1.15);
+    el(S,'path',{d:'M'+[c1,c2,c3,c4].map(function(p){return f(p[0])+','+f(p[1]);}).join(' L')+' Z',fill:'var(--blu-chiaro)','fill-opacity':.45,stroke:'none'});
+    var dE='',dB='';
+    for(var k=0;k<=160;k++){var x=L*k/160,s=Math.sin(2*Math.PI*x/lam);
+      var pe=P(x,s,0),pb=P(x,0,s);dE+=(k?' L':'M')+f(pe[0])+','+f(pe[1]);dB+=(k?' L':'M')+f(pb[0])+','+f(pb[1]);}
+    for(var x=lam/8;x<L;x+=lam/8){var s=Math.sin(2*Math.PI*x/lam);if(Math.abs(s)<.2)continue;
+      var o=P(x,0,0),pe=P(x,s,0),pb=P(x,0,s);
+      freccia(S,o[0],o[1],pb[0],pb[1],'var(--blu)',1.3);
+      freccia(S,o[0],o[1],pe[0],pe[1],'var(--verde)',1.3);}
+    el(S,'path',{d:dB,fill:'none',stroke:'var(--blu)','stroke-width':2.2});
+    el(S,'path',{d:dE,fill:'none',stroke:'var(--verde)','stroke-width':2.4});
+    var a=P(0,0,0),b=P(L+18,0,0);
+    el(S,'line',{x1:f(a[0]),y1:f(a[1]),x2:f(b[0]),y2:f(b[1]),stroke:'var(--grigio)','stroke-width':1.2});
+    /* vettore S */
+    var s1=P(L+18,0,0),s2=P(L+78,0,0);
+    freccia(S,s1[0],s1[1],s2[0],s2[1],'var(--rosso)',2.6,8);
+    T(S,s2[0]-6,s2[1]-10,'S',{'text-anchor':'middle','font-weight':700,fill:'var(--rosso)'});
+    var le=P(lam/4,1,0);T(S,le[0]+10,le[1]+4,'E',{'font-weight':700,fill:'var(--verde)'});
+    var lb=P(lam/4,0,1);T(S,lb[0]+10,lb[1]+12,'B',{'font-weight':700,fill:'var(--blu)'});
+  })();
+})();
+</script>
 </body>
 </html>
