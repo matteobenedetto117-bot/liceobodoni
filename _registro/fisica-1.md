@@ -327,6 +327,7 @@
   parole richiedeva molte più righe di quante il vincolo ne conceda. Un solo
   riquadro, sull'errore di leggere «punto materiale» come «corpo piccolo».
   Nessuno strumento interattivo.
+- Revisione (22/10/2026, regole 13/10): titolo invariato; parole 201 → 93. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 39), aggiunto il piè di pagina. Apertura a domanda; definizione di equilibrio statico in .def; caso fermo/fermo per un istante in elenco caso → conseguenza; punto materiale e corpo esteso in elenco; nota sull'errore tipico in una frase. Tolti il titoletto «L'equilibrio statico», la sezione «Dove si continua», la spiegazione in più frasi delle due richieste e la frase sulla spinta al centro o al bordo (ora nella didascalia del pannello). Nessuna comparsa. Controllo concettuale: l'esempio del sasso precisato come «lanciato verso l'alto» (con un lancio obliquo nel punto più alto il sasso non è fermo). Figura ridisegnata in SVG da script in due pannelli con didascalie separate (colori dalle variabili, forze rosse, F_P per il peso). Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 41 — Condizione di equilibrio e reazione vincolare
 - Parole: 259 su 1 pagina di traccia (pag. 60), esclusi i blocchi di formula.

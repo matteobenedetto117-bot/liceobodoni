@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equilibrio statico, punto materiale e corpo esteso — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:560px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,66 +58,80 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Equilibrio statico, punto materiale e corpo esteso</h1>
 </header>
 
-<h2>L'equilibrio statico</h2>
+<p>Quando un corpo è in equilibrio, e quando lo si può trattare come un punto?</p>
 
-<p>Un corpo è in <strong>equilibrio statico</strong> se è in quiete e vi rimane
-permanentemente.</p>
+<div class="def"><span class="et">Equilibrio statico</span>
+<p>Un corpo è in equilibrio statico se è in quiete e vi rimane permanentemente.</p></div>
 
-<p>Le due richieste vanno lette insieme: non basta che il corpo sia fermo
-adesso, deve restarlo. Un sasso lanciato in aria, nell'istante più alto della
-salita, è fermo — ma un attimo dopo scende: è in quiete, non in equilibrio.</p>
+<ul>
+<li>fermo e resta fermo → equilibrio;</li>
+<li>fermo per un solo istante (sasso lanciato verso l'alto, nel punto più alto) → non in equilibrio.</li>
+</ul>
 
-<h2>Punti materiali e corpi estesi</h2>
+<h2>Punto materiale e corpo esteso</h2>
 
-<p>Un <strong>punto materiale</strong> è un oggetto le cui dimensioni sono
-trascurabili e la cui struttura interna è irrilevante per descrivere gli effetti
-dell'insieme delle forze che agiscono su di esso. Oggetti di questo tipo li
-possiamo trattare come punti dotati di massa: tutte le forze si considerano
-applicate nello stesso punto.</p>
-
-<p>Un <strong>corpo esteso</strong> è invece un oggetto le cui dimensioni e la
-cui struttura non possono essere trascurate. Qui conta anche <em>dove</em> una
-forza è applicata: la stessa spinta, al centro o a un bordo, produce effetti
-diversi.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <text x="70" y="30" fill="#444">punto materiale</text>
-  <circle cx="140" cy="105" r="6" fill="#222"/>
-  <line x1="140" y1="105" x2="70" y2="105" stroke="#1a7f37" stroke-width="2.2" marker-end="url(#fr)"/>
-  <line x1="140" y1="105" x2="210" y2="105" stroke="#1a7f37" stroke-width="2.2" marker-end="url(#fr)"/>
-  <line x1="140" y1="105" x2="140" y2="170" stroke="#1552b5" stroke-width="2.2" marker-end="url(#fr)"/>
-  <text x="120" y="190" fill="#1552b5">Fp</text>
-  <text x="60" y="130" fill="#444" font-size="12">tutte le forze nello stesso punto</text>
-  <line x1="280" y1="20" x2="280" y2="185" stroke="#ccc" stroke-width="1"/>
-  <text x="360" y="30" fill="#444">corpo esteso</text>
-  <rect x="330" y="80" width="170" height="50" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="300" y1="92" x2="328" y2="92" stroke="#c0392b" stroke-width="2.2" marker-end="url(#fr)"/>
-  <line x1="300" y1="122" x2="328" y2="122" stroke="#c0392b" stroke-width="2.2" marker-end="url(#fr)"/>
-  <text x="336" y="160" fill="#444" font-size="12">conta il punto di applicazione</text>
-</svg>
-<figcaption>Due modelli dello stesso oggetto: a sinistra le dimensioni si
-trascurano, a destra no.</figcaption>
-</figure>
-
-<div class="nota">
-<strong>Da non sbagliare.</strong> Punto materiale non vuol dire piccolo: vuol
-dire piccolo <em>rispetto al problema</em>.
+<div class="fig">
+<div class="did-parti" style="--n:2">
+<div><svg id="g-punto" viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:210px" role="img" aria-label="Punto materiale con tre forze applicate nello stesso punto"></svg><p class="did">Punto materiale: forze tutte nello stesso punto</p></div>
+<div><svg id="g-esteso" viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:210px" role="img" aria-label="Corpo esteso con due forze uguali applicate in punti diversi"></svg><p class="did">Corpo esteso: conta il punto di applicazione</p></div>
+</div>
 </div>
 
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Resta da tradurre l'equilibrio in una condizione sulle forze: è la prossima
-unità, per il punto materiale. Per il corpo esteso servirà anche il momento
-torcente, nel blocco sull'equilibrio del corpo rigido.</p>
-</div>
+<ul>
+<li>punto materiale → dimensioni trascurabili e struttura interna irrilevante per gli effetti delle forze;</li>
+<li>corpo esteso → dimensioni e struttura non trascurabili.</li>
+</ul>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Punto materiale non vuol dire piccolo, ma piccolo rispetto al problema.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../40-forza-di-attrito-statico-massima/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Forza di attrito statico massima</span></a><a class="successiva" href="../42-condizione-di-equilibrio-e-reazione-vincolare/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Condizione di equilibrio e reazione vincolare</span></a></nav>
+<footer><p>Fisica prima &middot; Statica del punto materiale &middot; Unità 40</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--inchiostro)'},a||{}));t.textContent=s;return t;}
+  function lab(p,x,y,base,sub,col){var t=txt(p,x,y,'',{'font-style':'italic',fill:col});t.textContent=base;if(sub){var s=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});s.textContent=sub;}return t;}
+  function nuovo(id){var s=document.getElementById(id);var d=el(s,'defs',{});
+    var mk=el(d,'marker',{id:'m-'+id,markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});
+    el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:'var(--rosso)'});return s;}
+  function freccia(s,x1,y1,x2,y2){el(s,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#m-'+s.id+')'});}
+  /* punto materiale: tre forze applicate nello stesso punto */
+  var s=nuovo('g-punto');if(!s)return;
+  var P={x:100,y:65};
+  freccia(s,P.x,P.y,P.x-70,P.y); lab(s,P.x-55,P.y-10,'F','1','var(--rosso)');
+  freccia(s,P.x,P.y,P.x+70,P.y); lab(s,P.x+55,P.y-10,'F','2','var(--rosso)');
+  freccia(s,P.x,P.y,P.x,P.y+80); lab(s,P.x+18,P.y+74,'F','P','var(--rosso)');
+  el(s,'circle',{cx:P.x,cy:P.y,r:5.5,fill:'var(--inchiostro)'});
+  /* corpo esteso: due forze uguali in punti diversi */
+  s=nuovo('g-esteso');
+  var R={x:75,y:35,w:105,h:100};
+  el(s,'rect',{x:R.x,y:R.y,width:R.w,height:R.h,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.6});
+  [R.y+12,R.y+R.h/2].forEach(function(y){
+    freccia(s,R.x-55,y,R.x-1,y); el(s,'circle',{cx:R.x,cy:y,r:3,fill:'var(--rosso)'});
+    lab(s,R.x-30,y-9,'F','','var(--rosso)');
+  });
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
