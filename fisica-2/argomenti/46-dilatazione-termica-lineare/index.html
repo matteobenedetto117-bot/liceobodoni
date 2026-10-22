@@ -5,18 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dilatazione termica lineare — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0;text-align:left}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,64 +59,102 @@
   <h1>Dilatazione termica lineare</h1>
 </header>
 
-<h2>La legge della dilatazione lineare</h2>
-
-<p>Consideriamo una sbarra di lunghezza iniziale $L_0$ alla temperatura $T_0$. Se la
-temperatura aumenta di $\Delta T$, la sbarra si allunga di una quantità $\Delta L$
-proporzionale sia a $L_0$ sia a $\Delta T$: raddoppiando la variazione di temperatura
-raddoppia anche l'allungamento.</p>
+<p>Sbarra di lunghezza $L_0$ alla temperatura $T_0$: di quanto si allunga se la temperatura aumenta di $\Delta T$?</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f46a" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-
-<line x1="80" y1="24" x2="300" y2="24" stroke="var(--inchiostro)" stroke-width="1" marker-start="url(#f46a)" marker-end="url(#f46a)"/>
-<text x="190" y="18" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">L&#8320;</text>
-
-<rect x="80" y="34" width="220" height="22" fill="#dbe6f0" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="470" y="49" font-size="14" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="start">T&#8320;</text>
-
-<rect x="80" y="104" width="220" height="22" fill="#dbe6f0" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="300" y="104" width="16" height="22" fill="var(--rosso)" fill-opacity=".35" stroke="var(--rosso)" stroke-width="1.2" stroke-dasharray="3,2"/>
-<text x="322" y="119" font-size="13" fill="var(--rosso)" font-family="var(--sans)" text-anchor="start">&#916;L</text>
-<text x="470" y="119" font-size="14" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="start">T&#8320;+&#916;T</text>
-
-<rect x="80" y="174" width="220" height="22" fill="#dbe6f0" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="300" y="174" width="32" height="22" fill="var(--rosso)" fill-opacity=".35" stroke="var(--rosso)" stroke-width="1.2" stroke-dasharray="3,2"/>
-<text x="338" y="189" font-size="13" fill="var(--rosso)" font-family="var(--sans)" text-anchor="start">2&#916;L</text>
-<text x="470" y="189" font-size="14" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="start">T&#8320;+2&#916;T</text>
-</svg>
-<p class="did">La stessa sbarra a tre temperature crescenti: l'allungamento passa da $\Delta L$
-a $2\Delta L$, in proporzione a $\Delta T$.</p>
+<svg id="g-sbarra" viewBox="0 0 420 175" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Sbarra alla temperatura iniziale e la stessa sbarra scaldata di ΔT, con l'allungamento ΔL"></svg>
+<div class="cursore"><label for="c-sbarra">$\Delta T$</label><input id="c-sbarra" type="range" min="0" max="100" step="5" value="50"><span class="val" id="v-sbarra"></span></div>
+<p class="did">Sbarra d'acciaio, $L_0 = 1\ \text{m}$ (allungamento ingrandito)</p>
 </div>
 
-<div class="formula-box">
-$$\Delta L = \alpha\, L_0\, \Delta T$$
-</div>
+<p>L'allungamento $\Delta L$ risulta direttamente proporzionale a:</p>
+<ul>
+<li>la lunghezza iniziale $L_0$;</li>
+<li>la variazione di temperatura $\Delta T$.</li>
+</ul>
 
-<p>Il coefficiente $\alpha$ è il <strong>coefficiente di dilatazione termica lineare</strong>:
-dipende dal materiale e si misura in $\text{K}^{-1}$. $L_0$ è la lunghezza alla temperatura di
-partenza $T_0$. $\Delta T$ è la variazione di temperatura, e vale lo stesso in kelvin o in gradi
-Celsius, perché è una differenza.</p>
+<p>Le due dipendenze si riassumono in un'unica relazione:</p>
 
-<h2>Esempio: un ponte in acciaio</h2>
+<div class="def"><span class="et">Dilatazione termica lineare</span>
+<p class="eq principio">$$\Delta L = \alpha\,L_0\,\Delta T$$</p></div>
 
-<p>Un ponte in acciaio lungo $L_0 = 301$ m viene costruito a $T_0 = 22$ °C, con coefficiente
-$\alpha = 1{,}2\times10^{-5}\ \text{K}^{-1}$. Di quanto cambia la sua lunghezza se la
-temperatura scende a $0$ °C?</p>
+<ul>
+<li>$\alpha$ → coefficiente di dilatazione termica lineare, dipende dal materiale;</li>
+<li>$L_0$ → lunghezza alla temperatura iniziale $T_0$;</li>
+<li>$\Delta T$ → stesso valore in K e in °C;</li>
+<li>$\Delta T &lt; 0$ → $\Delta L &lt; 0$: la sbarra si accorcia.</li>
+</ul>
 
-<p>La variazione di temperatura è $\Delta T = 22$ °C $= 22$ K. Applichiamo la legge:</p>
+<div class="def"><span class="et">Unità di misura</span>
+<p>Coefficiente $\alpha$: $\text{K}^{-1}$</p></div>
 
-$$\Delta L = \alpha L_0 \Delta T = 1{,}2\times10^{-5} \cdot 301 \cdot 22 \approx 0{,}079\ \text{m} \approx 8\ \text{cm}$$
+<h2>Esempio</h2>
 
-<p>Poiché la temperatura scende, il ponte si accorcia: a $0$ °C è circa 8 cm più corto che a
-$22$ °C.</p>
+<p>Dati: ponte in acciaio, $L_0 = 301\ \text{m}$ a $22$ °C, $\alpha = 1{,}2\times10^{-5}\ \text{K}^{-1}$, temperatura finale $0$ °C. Calcolare $\Delta L$.</p>
+
+<p class="eq">$$\Delta L = \alpha\,L_0\,\Delta T = 1{,}2\times10^{-5}\ \text{K}^{-1}\cdot 301\ \text{m}\cdot(-22\ \text{K}) \approx -7{,}9\times10^{-2}\ \text{m} = -7{,}9\ \text{cm}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../45-scale-di-temperatura/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Scale di temperatura</span></a><a class="successiva" href="../47-dilatazione-termica-volumica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Dilatazione termica volumica</span></a></nav>
 <footer><p>Fisica seconda &middot; Calore e termologia &middot; Unità 36</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--inchiostro)'},a||{}));t.textContent=s;return t;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+
+  /* sbarra d'acciaio: L0 = 1 m disegnato 220 px; allungamento ingrandito, 40 px per mm */
+  var s=document.getElementById('g-sbarra');if(!s)return;
+  var c=document.getElementById('c-sbarra'),out=document.getElementById('v-sbarra');
+  var ALFA=1.2e-5,L0=1,X0=30,LPX=220,KMM=40,H=24,Y1=50,Y2=120;
+  var d=el(s,'defs',{});
+  var mk=el(d,'marker',{id:'m46',markerWidth:8,markerHeight:8,refX:4,refY:4,orient:'auto-start-reverse',markerUnits:'userSpaceOnUse'});
+  el(mk,'path',{d:'M0,1 L7,4 L0,7 Z',fill:'var(--inchiostro)'});
+  /* quota di L0 */
+  el(s,'line',{x1:X0,y1:Y1-14,x2:X0+LPX,y2:Y1-14,stroke:'var(--inchiostro)','stroke-width':1,'marker-start':'url(#m46)','marker-end':'url(#m46)'});
+  var tq=txt(s,X0+LPX/2,Y1-20,'',{'font-size':13,'font-style':'italic'});
+  tq.textContent='L';var sp=el(tq,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent='0';
+  /* sbarra a T0 */
+  el(s,'rect',{x:X0,y:Y1,width:LPX,height:H,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.4});
+  var t0=txt(s,X0+LPX+62,Y1+H/2+5,'',{'font-size':13,'text-anchor':'start','font-style':'italic'});
+  t0.textContent='T';sp=el(t0,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent='0';
+  /* sbarra scaldata */
+  el(s,'rect',{x:X0,y:Y2,width:LPX,height:H,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.4});
+  var dl=el(s,'rect',{x:X0+LPX,y:Y2,height:H,fill:'var(--rosso)','fill-opacity':.35,stroke:'var(--rosso)','stroke-width':1.2});
+  el(s,'line',{x1:X0+LPX,y1:Y1+H,x2:X0+LPX,y2:Y2+H+8,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'});
+  var tdl=txt(s,0,Y2+H+20,'ΔL',{'font-size':13,fill:'var(--rosso)','font-weight':700});
+  var t1=txt(s,X0+LPX+62,Y2+H/2+5,'',{'font-size':13,'text-anchor':'start'});
+  function disegna(){
+    var dT=+c.value, dLmm=ALFA*L0*dT*1000, w=KMM*dLmm;
+    set(dl,{width:w.toFixed(1),opacity:w>0.5?1:0});
+    set(tdl,{x:(X0+LPX+w/2).toFixed(1),opacity:w>8?1:0});
+    t1.textContent='';var a=el(t1,'tspan',{'font-style':'italic'});a.textContent='T';
+    var b=el(t1,'tspan',{'font-size':10,dy:3});b.textContent='0';
+    var e=el(t1,'tspan',{dy:-3});e.textContent=' + '+dT+' K';
+    out.textContent='ΔT = '+dT+' K · ΔL = '+num(dLmm,2)+' mm';
+  }
+  c.addEventListener('input',disegna);disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
