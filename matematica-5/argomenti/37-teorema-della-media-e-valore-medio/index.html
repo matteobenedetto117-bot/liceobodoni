@@ -5,24 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema della media e valore medio — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px;margin:26px 0;max-width:520px}
-.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
+.nota .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def .eq+.eq{margin-top:0}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+table.tavola{border-collapse:collapse;width:100%;font-size:1rem}
+table.tavola td{height:calc(2*var(--r));line-height:var(--r);padding:0 10px;border-bottom:1px solid var(--riga);vertical-align:middle}
+table.tavola tr:last-child td{border-bottom:0}
+table.tavola td.cond{font-family:var(--sans);font-size:.85rem;color:var(--grigio);white-space:nowrap}
+.def table.tavola{margin-bottom:calc(var(--r)*.5)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -31,87 +93,31 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Integrale definito e applicazioni &middot; Unità 36</p>
   <h1>Teorema della media e valore medio</h1>
-  <p class="sommario">Su un intervallo chiuso, l'area sotto il grafico di una funzione continua
-  è sempre uguale all'area di un rettangolo opportuno, con base l'ampiezza dell'intervallo e
-  altezza il valore della funzione in un punto interno. È il contenuto del teorema della media,
-  che permette anche di definire il valore medio di una funzione su un intervallo.</p>
 </header>
 
+<p>Funzione $f$ continua in $[a,b]$: esiste un rettangolo di base $b-a$ con area uguale a $\int_a^b f(x)\,dx$?</p>
+
 <div class="def"><span class="et">Teorema della media</span>
-Se $f(x)$ è una funzione continua in un intervallo $[a,b]$, esiste almeno un punto $z\in[a,b]$
-tale che
-$$\int_a^b f(x)\,dx = (b-a)\,f(z).$$
+<p>Se $f$ è continua in $[a,b]$, esiste almeno un punto $z\in[a,b]$ tale che:</p>
+<p class="eq principio">$$\int_a^b f(x)\,dx=(b-a)\,f(z)$$</p></div>
+
+<div class="fig">
+<svg id="g-rett" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Regione sotto il grafico di f in [a,b] e rettangolo di base b−a e altezza f(z) con la stessa area"></svg>
+<p class="did">Rettangolo di base $b-a$ e altezza $f(z)$: stessa area della regione sotto la curva</p>
 </div>
 
-<p>Il membro di destra è l'area di un rettangolo che ha per base $b-a$, l'ampiezza
-dell'intervallo, e per altezza $f(z)$: il teorema garantisce che quel rettangolo ha
-esattamente la stessa area della regione compresa fra il grafico di $f$ e l'asse $x$,
-anche se il punto $z$ non è noto a priori.</p>
+<p>Dividendo per $b-a$:</p>
 
-<figure class="figuraunica">
-<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Area sotto la curva uguale all'area del rettangolo di altezza f(z)">
-<defs>
-<pattern id="tratteggio" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="8" height="8" fill="#e8eff6"/>
-  <line x1="0" y1="0" x2="0" y2="8" stroke="#1f4e79" stroke-width="1.1"/>
-</pattern>
-<marker id="frecciaS" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-  <path d="M0,0 L6,3 L0,6 Z" fill="#16283d"/>
-</marker>
-</defs>
-<line x1="60" y1="260" x2="450" y2="260" stroke="#16283d" stroke-width="1.6" marker-end="url(#frecciaS)"/>
-<line x1="60" y1="260" x2="60" y2="20" stroke="#16283d" stroke-width="1.6" marker-end="url(#frecciaS)"/>
-<text x="440" y="252" font-size="14" fill="#16283d" font-style="italic">x</text>
-<text x="44" y="30" font-size="14" fill="#16283d" font-style="italic">y</text>
+<div class="def"><span class="et">Valore medio di $f$ in $[a,b]$</span>
+<p class="eq principio">$$f(z)=\frac{\displaystyle\int_a^b f(x)\,dx}{b-a}$$</p></div>
 
-<rect x="100" y="150" width="280" height="110" fill="url(#tratteggio)" stroke="#1f4e79" stroke-width="1.2"/>
+<p>Retta $y=f(z)$: area rossa (curva sotto la retta) e area blu (curva sopra) uguali solo nel punto $z$ del teorema.</p>
 
-<line x1="60" y1="150" x2="380" y2="150" stroke="#6d7280" stroke-width="1.2" stroke-dasharray="5,4"/>
-<line x1="100" y1="260" x2="100" y2="150" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<line x1="230" y1="260" x2="230" y2="150" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<line x1="380" y1="260" x2="380" y2="150" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-
-<path d="M100,232 C170,232 190,150 230,150 C270,150 320,80 380,66" fill="none" stroke="#16283d" stroke-width="2.4"/>
-
-<circle cx="230" cy="150" r="4.5" fill="#16283d"/>
-
-<text x="83" y="145" font-size="14" fill="#16283d">f(z)</text>
-<text x="95" y="278" font-size="14" fill="#16283d" font-style="italic">a</text>
-<text x="225" y="278" font-size="14" fill="#16283d" font-style="italic">z</text>
-<text x="375" y="278" font-size="14" fill="#16283d" font-style="italic">b</text>
-
-<line x1="330" y1="118" x2="360" y2="190" stroke="#b3392f" stroke-width="1.2" marker-end="url(#frecciaS)"/>
-<text x="300" y="106" font-size="13" fill="#b3392f">f(z)&middot;(b&minus;a)</text>
-<text x="300" y="122" font-size="12" fill="#4a5a6d">area di un rettangolo</text>
-</svg>
-<figcaption>Il rettangolo tratteggiato, di base $[a,b]$ e altezza $f(z)$, ha la stessa
-area della regione sotto la curva.</figcaption>
-</figure>
-
-<p>Invertendo l'uguaglianza del teorema si ottiene
-$$f(z)=\frac{\displaystyle\int_a^b f(x)\,dx}{b-a},$$
-e questo valore si chiama <strong>valore medio</strong> della funzione $f(x)$ in $[a,b]$: è
-l'altezza costante che, distribuita su tutto l'intervallo, restituisce la stessa area del
-grafico di $f$.</p>
-
-<p>C'è un altro modo di leggere lo stesso fatto. Tracciata la retta orizzontale di altezza
-$f(z)$, il grafico di $f$ le sta sotto per una parte dell'intervallo e sopra per l'altra:
-l'area "persa" rispetto al rettangolo, in rosso, e l'area "guadagnata", in blu, sono
-equivalenti proprio nel punto $z$ garantito dal teorema.</p>
-
-<div class="widget">
-  <div class="controlli">
-    <label>Punto $z$ nell'intervallo $[0,4]$
-      <input type="range" id="s-z" min="0" max="4" step="0.02" value="1">
-      <span>$z$ = <span class="val" id="v-z"></span></span>
-    </label>
-  </div>
-  <div id="g-media" style="height:340px"></div>
-  <p class="leggenda">La curva è $f(x)=1+0{,}15x^2$ su $[0,4]$. Sposta $z$ e osserva l'area
-  rossa (dove la curva sta sotto la retta $y=f(z)$) e l'area blu (dove le sta sopra): sono
-  uguali in un solo punto, quello garantito dal teorema.</p>
+<div class="fig">
+<svg id="g-media" viewBox="0 0 420 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico di f(x)=1+0,15x² in [0,4] con la retta y=f(z) e le due aree, rossa e blu, fra curva e retta"></svg>
+<div class="cursore"><label for="s-z">$z$</label><input id="s-z" type="range" min="0" max="4" step="0.02" value="1"><span class="val" id="v-z"></span></div>
+<p class="did">$f(x)=1+0{,}15x^2$ in $[0,4]$: aree uguali per $z=4/\sqrt3\approx2{,}31$</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../36-integrazione-di-funzioni-razionali-fratte/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Integrazione di funzioni razionali fratte</span></a><a class="successiva" href="../38-teorema-fondamentale-del-calcolo-integrale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema fondamentale del calcolo integrale</span></a></nav>
 <footer><p>Matematica quinta &middot; Integrale definito e applicazioni &middot; Unità 36</p></footer>
@@ -120,41 +126,132 @@ equivalenti proprio nel punto $z$ garantito dal teorema.</p>
 
 <script>
 (function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+/* poligono fra la curva f e la retta y=h su [p,q] */
+function fascia(P,f,h,p,q,n){var s='';for(var i=0;i<=n;i++){var x=p+i*(q-p)/n;s+=(i?'L':'M')+P.X(x).toFixed(1)+' '+P.Y(f(x)).toFixed(1)+' ';}
+  return s+'L'+P.X(q).toFixed(1)+' '+P.Y(h).toFixed(1)+' L'+P.X(p).toFixed(1)+' '+P.Y(h).toFixed(1)+' Z';}
+function f(x){return 1+0.15*x*x;}
+var A=0,B=4,Z=4/Math.sqrt(3);  /* integrale = 36/5, valor medio = 9/5 (SymPy) */
+
+/* 1. rettangolo equivalente */
+(function(){
+  var P=new Piano(document.getElementById('g-rett'),[-0.3,4.6],[0,3.9],{l:30,r:26,t:24,b:30});
+  P.assi([]);
+  var fz=f(Z), x0=P.X(0), y0=P.Y(0);
+  P.add(el('path',{d:fascia(P,f,0,A,B,120),fill:'var(--blu-chiaro)',stroke:'none'}),'sotto');
+  P.add(el('rect',{x:P.X(A),y:P.Y(fz),width:P.X(B)-P.X(A),height:y0-P.Y(fz),fill:'none',stroke:'var(--rosso)','stroke-width':2}),'sopra');
+  P.curva(f,-0.3,4.6,300,'var(--blu)');
+  [B,Z].forEach(function(v){P.add(el('line',{x1:P.X(v),y1:y0,x2:P.X(v),y2:P.Y(v===Z?fz:f(B)),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'}),'sopra');});
+  P.add(el('circle',{cx:P.X(Z),cy:P.Y(fz),r:4.5,fill:'var(--inchiostro)'}),'testo');
+  P.add(txt(P.X(A)+4,y0+18,'a',{'font-style':'italic',fill:'var(--inchiostro)','font-size':14}),'testo');
+  P.add(txt(P.X(Z),y0+18,'z',{'text-anchor':'middle','font-style':'italic',fill:'var(--inchiostro)','font-size':14}),'testo');
+  P.add(txt(P.X(B),y0+18,'b',{'text-anchor':'middle','font-style':'italic',fill:'var(--inchiostro)','font-size':14}),'testo');
+  P.add(txt(x0-6,P.Y(fz)+4,'f(z)',{'text-anchor':'end',fill:'var(--rosso)','font-size':13}),'testo');
+  P.add(txt(P.X(1.1),P.Y(fz)-10,'(b − a)·f(z)',{'text-anchor':'middle',fill:'var(--rosso)','font-size':13}),'testo');
+  P.add(txt(P.X(4.15),P.Y(f(4.15))-6,'f',{'text-anchor':'start',fill:'var(--blu)','font-size':14,'font-style':'italic'}),'testo');
+})();
+
+/* 2. aree rossa e blu al variare di z */
+(function(){
+  var P=new Piano(document.getElementById('g-media'),[-0.3,4.5],[0,4.2],{l:30,r:26,t:40,b:30});
+  P.assi([1,2,3,4],[1,2,3,4]);
+  var rossa=P.add(el('path',{fill:'var(--rosso)','fill-opacity':.35,stroke:'none'}),'sotto');
+  var blu=P.add(el('path',{fill:'var(--blu)','fill-opacity':.35,stroke:'none'}),'sotto');
+  P.curva(f,-0.3,4.5,300,'var(--inchiostro)');
+  var retta=P.add(el('line',{x1:P.X(A),x2:P.X(B),stroke:'var(--grigio)','stroke-width':1.3,'stroke-dasharray':'5,4'}),'sopra');
+  var vert=P.add(el('line',{y1:P.Y(0),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'}),'sopra');
+  var pt=P.add(el('circle',{r:5,fill:'var(--rosso)'}),'testo');
+  var scritta=P.add(txt(P.X(2),18,'',{'text-anchor':'middle','font-size':13}),'testo');
   var sz=document.getElementById('s-z'), vz=document.getElementById('v-z');
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-  function f(x){return 1+0.15*x*x;}
-  function xs(a,b,n){var r=[];for(var i=0;i<=n;i++)r.push(a+i*(b-a)/n);return r;}
-  var a=0, b=4;
-  var xc=xs(a,b,160);
   function agg(){
-    var z=parseFloat(sz.value), fz=f(z);
-    vz.textContent=fmt(z);
-    var xl=xs(a,z,60), xr=xs(z,b,60);
-    var diff=3.2-0.6*z*z; // integrale - f(z)*(b-a), verificato con SymPy
-    var vicino=Math.abs(diff)<0.08;
-    Plotly.react('g-media',[
-      {x:xl,y:xl.map(function(){return fz;}),mode:'lines',line:{width:0},hoverinfo:'skip',showlegend:false},
-      {x:xl,y:xl.map(f),fill:'tonexty',fillcolor:'rgba(179,57,47,0.35)',
-        mode:'lines',line:{width:0},hoverinfo:'skip',showlegend:false},
-      {x:xr,y:xr.map(function(){return fz;}),mode:'lines',line:{width:0},hoverinfo:'skip',showlegend:false},
-      {x:xr,y:xr.map(f),fill:'tonexty',fillcolor:'rgba(31,78,121,0.35)',
-        mode:'lines',line:{width:0},hoverinfo:'skip',showlegend:false},
-      {x:xc,y:xc.map(f),mode:'lines',line:{color:'#16283d',width:2.4},hoverinfo:'skip'},
-      {x:[a,b],y:[fz,fz],mode:'lines',line:{color:'#6d7280',width:1.3,dash:'dot'},hoverinfo:'skip'},
-      {x:[z,z],y:[0,fz],mode:'lines',line:{color:'#6d7280',width:1,dash:'dot'},hoverinfo:'skip'},
-      {x:[z],y:[fz],mode:'markers',marker:{size:9,color:'#16283d'},
-        text:['f(z) = '+fmt(fz)],hovertemplate:'%{text}<extra></extra>'}
-    ],{
-      margin:{l:44,r:14,t:26,b:34},showlegend:false,
-      paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
-      xaxis:{title:'x',range:[a,b],gridcolor:'#e6e0d4'},
-      yaxis:{title:'y',range:[0,4.5],gridcolor:'#e6e0d4'},
-      annotations:[{x:2,y:4.2,
-        text:vicino?'qui le due aree sono (quasi) uguali: questo è il punto z del teorema':'area rossa &minus; area blu = '+fmt(diff),
-        showarrow:false,font:{size:12,color:vicino?'#2f6b4f':'#b3392f'}}]
-    },{displayModeBar:false,responsive:true});
+    var z=+sz.value, fz=f(z), diff=3.2-0.6*z*z; /* area blu − area rossa */
+    rossa.setAttribute('d',z>0?fascia(P,f,fz,A,z,80):'');
+    blu.setAttribute('d',z<B?fascia(P,f,fz,z,B,80):'');
+    retta.setAttribute('y1',P.Y(fz));retta.setAttribute('y2',P.Y(fz));
+    vert.setAttribute('x1',P.X(z));vert.setAttribute('x2',P.X(z));vert.setAttribute('y2',P.Y(fz));
+    pt.setAttribute('cx',P.X(z));pt.setAttribute('cy',P.Y(fz));
+    var ug=Math.abs(diff)<0.04;
+    scritta.textContent=ug?'area blu ≈ area rossa':'area blu − area rossa = '+num(diff);
+    scritta.setAttribute('fill',ug?'var(--verde)':'var(--grigio)');scritta.setAttribute('font-weight',ug?700:400);
+    vz.innerHTML='z = '+num(z)+(ug?' &nbsp;<span class="ok">aree uguali</span>':'');
   }
   sz.addEventListener('input',agg); agg();
+})();
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>

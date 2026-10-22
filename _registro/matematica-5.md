@@ -783,6 +783,7 @@ teorema del confronto, a pagina 21.
   statico, in SVG. Nessun quesito di maturità: il teorema della media, isolato, non è
   materia di quesito a sé; il suo uso più frequente è dentro il calcolo di valori medi
   in problemi di studio di funzione, argomento delle unità successive.
+- Revisione (22/10/2026, regole 13/10): parole 255 → 61. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 35), tolti il sommario e i commenti al rettangolo e al valore medio; apertura a domanda; teorema in .def con la condizione «f continua in [a,b]» e la formula in .eq rossa; valore medio in .def rosso, introdotto da «Dividendo per b − a»; lettura con le due aree in una frase. Correzioni: la scritta del grafico interattivo riportava «area rossa − area blu = 3,2 − 0,6z²», ma quella espressione è area blu − area rossa (verificato con SymPy: area blu − area rossa = 16/5 − 3z²/5; integrale 36/5, valor medio 9/5, z = 4/√3); ora «area blu − area rossa». Nessuna comparsa. Figure rifatte da script in SVG (tolto Plotly): rettangolo equivalente calcolato su f(x) = 1 + 0,15x² in [0,4] con z = 4/√3 (prima curva tracciata a occhio); aree rossa e blu con cursore su z (0–4), «aree uguali» in verde vicino a z ≈ 2,31. Nessun esempio (la traccia non ne ha), nessuna figura decorativa.
 
 ## Unità 37 — Teorema fondamentale del calcolo integrale
 - Parole: 414 su circa 1,85 pagine di traccia equivalenti (metà finale di pag. 135, da
