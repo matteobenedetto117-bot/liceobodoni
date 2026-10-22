@@ -5,15 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni numeriche fratte — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-</style>
-</head>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+</style></head>
 <body>
 <div class="foglio">
 
@@ -21,46 +52,47 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni di secondo grado &middot; Unità 39</p>
   <h1>Equazioni numeriche fratte</h1>
-  <p class="sommario">Quando l'incognita compare anche in un denominatore, un'equazione di secondo
-  grado nasconde un'insidia in più: certi valori annullano un denominatore e vanno esclusi in
-  partenza, anche se risolvono l'equazione ottenuta eliminando le frazioni.</p>
 </header>
 
-<h2>Perché servono le condizioni di esistenza</h2>
-<p>In un'equazione fratta nessun denominatore può annullarsi: prima di ogni calcolo scriviamo
-quindi le condizioni di esistenza (CE), i valori esclusi. Poi portiamo tutti i termini a sinistra,
-riduciamo a denominatore comune e risolviamo l'equazione che compare al numeratore, uguagliata a
-zero — il denominatore serve solo a trovare le CE, non entra nell'equazione da risolvere. Alla
-fine confrontiamo le soluzioni con le CE: chi le viola va scartato.</p>
+<p>Incognita anche al denominatore: quali soluzioni sono accettabili?</p>
+
+<ol>
+<li>condizioni di esistenza (CE): ogni denominatore $\neq0$;</li>
+<li>tutti i termini al primo membro;</li>
+<li>denominatore comune;</li>
+<li>numeratore uguagliato a zero e risolto (il denominatore serve solo per le CE);</li>
+<li>confronto con le CE: si scartano i valori esclusi.</li>
+</ol>
 
 <h2>Esempio</h2>
-<div class="esempio">
-<p>Risolviamo $\dfrac{x}{x-1}+\dfrac{1}{2x}=\dfrac{1}{x-1}$.</p>
-<p><strong>1. Condizioni di esistenza.</strong> I denominatori si annullano per $x=1$ e $x=0$,
-quindi $x\neq1$, $x\neq0$.</p>
-<p><strong>2. Tutto a sinistra.</strong></p>
-<p>$$\dfrac{x}{x-1}+\dfrac{1}{2x}-\dfrac{1}{x-1}=0$$</p>
-<p><strong>3. Denominatore comune</strong> $2x(x-1)$:</p>
-<p>$$\dfrac{2x^2+x-1-2x}{2x(x-1)}=0$$</p>
-<p><strong>4. Risolviamo il numeratore</strong>, uguagliato a zero:</p>
-<p>$$2x^2-x-1=0,\qquad \Delta=1+8=9,\qquad x=\dfrac{1\pm3}{4}$$</p>
-<p>da cui $x_1=1$ e $x_2=-\dfrac12$.</p>
-<p><strong>5. Confronto con le CE.</strong> $x_1=1$ non è accettabile, perché coincide col valore
-escluso; resta $x_2=-\dfrac12$.</p>
-<p>Soluzione: $x=-\dfrac12$.</p>
-</div>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Le equazioni letterali di secondo grado, dove entra un parametro e la discussione riguarda
-anche il segno del discriminante.</li>
-</ul>
-</div>
+<p>Risolvere $\dfrac{x}{x-1}+\dfrac{1}{2x}=\dfrac{1}{x-1}$.</p>
+
+<p class="eq">$$\text{CE: }\ x\neq1,\quad x\neq0$$</p>
+<p class="eq">$$\frac{x}{x-1}+\frac{1}{2x}-\frac{1}{x-1}=0\ \Rightarrow\ \frac{2x^2+x-1-2x}{2x(x-1)}=0$$</p>
+<p class="eq">$$2x^2-x-1=0,\quad \Delta=1+8=9,\quad x=\frac{1\pm3}{4}\ \Rightarrow\ x_1=1,\ \ x_2=-\frac12$$</p>
+<p class="eq">$$x_1=1\ \text{non accettabile (CE)}\qquad\Rightarrow\qquad x=-\frac12$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../40-scomposizione-del-trinomio-di-secondo-grado/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Scomposizione del trinomio di secondo grado</span></a><a class="successiva" href="../42-equazioni-letterali-e-discussione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni letterali e discussione</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni di secondo grado &middot; Unità 39</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
