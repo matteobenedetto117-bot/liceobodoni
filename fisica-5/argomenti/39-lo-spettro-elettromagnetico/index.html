@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lo spettro elettromagnetico — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-</style>
-</head>
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{min-width:7.5em;text-align:left}
+</style></head>
 <body>
 <div class="foglio">
 
@@ -24,148 +55,142 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 39</p>
   <h1>Lo spettro elettromagnetico</h1>
-  <p class="sommario">Le onde elettromagnetiche sono onde a tutti gli effetti: per esse vale
-  perciò la stessa relazione che lega velocità, lunghezza d'onda e frequenza di qualunque onda
-  periodica. Applicata alla luce, questa relazione genera lo spettro elettromagnetico.</p>
 </header>
 
-<h2>La relazione fra lunghezza d'onda e frequenza</h2>
-
-<p>Per un'onda periodica la velocità di propagazione è il rapporto fra la lunghezza d'onda
-$\lambda$ — la distanza fra due creste successive — e il periodo $T$, il tempo di
-un'oscillazione completa. Poiché la frequenza è $f=1/T$, la stessa relazione si scrive anche
-come prodotto:</p>
-
-<div class="formula-box">
-$$v=\frac{\lambda}{T}=\lambda f$$
-</div>
+<p>Onda elettromagnetica nel vuoto: come sono legate lunghezza d'onda e frequenza?</p>
 
 <div class="fig">
-<svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg">
-<line x1="26" y1="140" x2="280" y2="140" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="26" y1="150" x2="26" y2="20" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="10" y="26" font-family="var(--serif)" font-size="15" fill="var(--inchiostro)">y</text>
-<text x="266" y="158" font-family="var(--serif)" font-size="15" fill="var(--inchiostro)">x</text>
-<path d="M26,100 Q46,140 66,100 Q86,60 106,100 Q126,140 146,100" stroke="var(--inchiostro)" stroke-width="2" fill="none"/>
-<line x1="26" y1="52" x2="106" y2="52" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="26" y1="46" x2="26" y2="58" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="106" y1="46" x2="106" y2="58" stroke="var(--rosso)" stroke-width="2"/>
-<text x="58" y="42" font-family="var(--serif)" font-size="17" fill="var(--rosso)">&#955;</text>
-</svg>
-<p class="did">Una lunghezza d'onda $\lambda$ è la distanza fra due punti dell'onda nella stessa
-fase, per esempio due creste successive.</p>
+<svg id="fig-onda" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px"></svg>
+<p class="did">$\lambda$: distanza fra due creste successive</p>
 </div>
 
-<p>Per la luce, che si propaga nel vuoto alla velocità $c$ già incontrata nell'unità precedente,
-questa relazione diventa:</p>
-
-<div class="formula-box">
-$$c=\lambda f$$
-</div>
-
-<p>Poiché $c$ è costante, lunghezza d'onda e frequenza non sono indipendenti: se una cresce,
-l'altra deve diminuire nella stessa proporzione.</p>
-
-<div class="formula-box">
-$$\lambda\uparrow \Rightarrow f\downarrow \qquad\qquad \lambda\downarrow \Rightarrow f\uparrow$$
-</div>
-
-<h2>Lo spettro elettromagnetico</h2>
-
-<p>Ordinando le onde elettromagnetiche per frequenza crescente — e quindi per lunghezza d'onda
-decrescente — si ottiene lo <strong>spettro elettromagnetico</strong>, che va dalle onde radio,
-di frequenza più bassa, ai raggi gamma, di frequenza più alta.</p>
-
-<div class="fig">
-<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<pattern id="hatch39" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-<line x1="0" y1="0" x2="0" y2="8" stroke="var(--inchiostro)" stroke-width="1.6"/>
-</pattern>
-</defs>
-
-<text x="60" y="24" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">frequenza (Hz)</text>
-<text x="60" y="290" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">&#955; (m)</text>
-
-<!-- bande -->
-<rect x="60" y="120" width="114" height="46" fill="var(--grigio)" fill-opacity=".28" stroke="var(--inchiostro)" stroke-width="1"/>
-<rect x="174" y="120" width="172" height="46" fill="var(--blu)" fill-opacity=".22" stroke="var(--inchiostro)" stroke-width="1"/>
-<rect x="346" y="120" width="139" height="46" fill="var(--rosso)" fill-opacity=".22" stroke="var(--inchiostro)" stroke-width="1"/>
-<rect x="485" y="120" width="50" height="46" fill="url(#hatch39)" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="535" y="120" width="68" height="46" fill="var(--blu)" fill-opacity=".40" stroke="var(--inchiostro)" stroke-width="1"/>
-<rect x="603" y="120" width="171" height="46" fill="var(--grigio)" fill-opacity=".55" stroke="var(--inchiostro)" stroke-width="1"/>
-<rect x="774" y="120" width="86" height="46" fill="var(--inchiostro)" fill-opacity=".75" stroke="var(--inchiostro)" stroke-width="1"/>
-
-<!-- tick di frequenza -->
-<g font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">
-<line x1="117.1" y1="55" x2="117.1" y2="120" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="103" y="48">10<tspan dy="-6" font-size="8">8</tspan></text>
-<line x1="231.4" y1="55" x2="231.4" y2="120" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="217" y="48">10<tspan dy="-6" font-size="8">10</tspan></text>
-<line x1="345.7" y1="55" x2="345.7" y2="120" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="331" y="48">10<tspan dy="-6" font-size="8">12</tspan></text>
-<line x1="460.0" y1="55" x2="460.0" y2="120" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="446" y="48">10<tspan dy="-6" font-size="8">14</tspan></text>
-<line x1="574.3" y1="55" x2="574.3" y2="120" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="560" y="48">10<tspan dy="-6" font-size="8">16</tspan></text>
-<line x1="688.6" y1="55" x2="688.6" y2="120" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="674" y="48">10<tspan dy="-6" font-size="8">18</tspan></text>
-<line x1="802.9" y1="55" x2="802.9" y2="120" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="788" y="48">10<tspan dy="-6" font-size="8">20</tspan></text>
-</g>
-
-<!-- tick di lunghezza d'onda: stesso ordine di grandezza, in verso opposto -->
-<g font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">
-<line x1="117.1" y1="166" x2="117.1" y2="210" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="106" y="224">1</text>
-<line x1="231.4" y1="166" x2="231.4" y2="210" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="212" y="224">10<tspan dy="-6" font-size="8">&#8722;2</tspan></text>
-<line x1="345.7" y1="166" x2="345.7" y2="210" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="326" y="224">10<tspan dy="-6" font-size="8">&#8722;4</tspan></text>
-<line x1="460.0" y1="166" x2="460.0" y2="210" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="441" y="224">10<tspan dy="-6" font-size="8">&#8722;6</tspan></text>
-<line x1="574.3" y1="166" x2="574.3" y2="210" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="555" y="224">10<tspan dy="-6" font-size="8">&#8722;8</tspan></text>
-<line x1="688.6" y1="166" x2="688.6" y2="210" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="665" y="224">10<tspan dy="-6" font-size="8">&#8722;10</tspan></text>
-<line x1="802.9" y1="166" x2="802.9" y2="210" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="779" y="224">10<tspan dy="-6" font-size="8">&#8722;12</tspan></text>
-</g>
-
-<!-- nomi delle bande -->
-<g font-family="var(--sans)" font-size="12.5" fill="var(--inchiostro)" text-anchor="middle">
-<text x="117" y="140">ONDE</text>
-<text x="117" y="154">RADIO</text>
-<text x="260" y="147">MICROONDE</text>
-<text x="415" y="147">INFRAROSSI</text>
-<text x="510" y="180" font-size="11">VISIBILE</text>
-<text x="569" y="140">ULTRA-</text>
-<text x="569" y="153">VIOLETTI</text>
-<text x="688" y="147">RAGGI X</text>
-<text x="817" y="140">RAGGI</text>
-<text x="817" y="153">GAMMA</text>
-</g>
-
-<!-- onde: lunga a bassa frequenza, corta ad alta frequenza -->
-<path d="M64,260 Q95,230 126,260 Q157,290 188,260" stroke="var(--inchiostro)" stroke-width="2" fill="none"/>
-<path d="M780,250 L790,270 L800,250 L810,270 L820,250 L830,270 L840,250 L850,270" stroke="var(--inchiostro)" stroke-width="2" fill="none"/>
-</svg>
-<p class="did">Frequenza (in alto, in Hz) e lunghezza d'onda (in basso, in m) crescono in versi
-opposti. La banda visibile, larghissima nel disegno per restare leggibile, occupa in realtà una
-striscia sottilissima dello spettro.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Con lo spettro elettromagnetico si chiude la parte di programma sulle equazioni di Maxwell.
-L'unità 40 segna il passaggio dalla fisica classica alla fisica moderna.</li>
+<li>lunghezza d'onda $\lambda$: distanza fra due punti successivi nella stessa fase;</li>
+<li>periodo $T$: durata di un'oscillazione completa;</li>
+<li>frequenza $f=1/T$: oscillazioni al secondo.</li>
 </ul>
+
+<p>In un periodo l'onda avanza di una lunghezza d'onda:</p>
+
+<p class="eq">$$v=\frac{\lambda}{T}=\lambda f$$</p>
+
+<div class="def"><span class="et">Onde elettromagnetiche nel vuoto ($v=c$)</span>
+<p class="eq principio">$$c=\lambda f\qquad\qquad \lambda=\frac{c}{f}$$</p></div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>Hertz (Hz): $\;1\ \text{Hz}=1\ \text{s}^{-1}$</p></div>
+
+<p>Con $c$ costante, $\lambda$ e $f$ sono inversamente proporzionali:</p>
+<ul>
+<li>$\lambda$ maggiore → $f$ minore;</li>
+<li>$\lambda$ minore → $f$ maggiore.</li>
+</ul>
+
+<h2>Lo spettro</h2>
+
+<p>Onde elettromagnetiche ordinate per frequenza crescente, cioè per lunghezza d'onda decrescente:</p>
+
+<div class="fig">
+<svg id="fig-spettro" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="cur-f">$f$</label><input id="cur-f" type="range" min="7" max="21" step="0.05" value="14.7"><span class="val" id="val-f"></span></div>
+<p class="did">$f$ in alto, $\lambda=c/f$ in basso: crescono in versi opposti. Confini fra le bande indicativi; visibile: $\lambda$ circa da 750 nm a 400 nm.</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../38-quantita-di-moto-e-pressione-di-radiazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Quantità di moto e pressione di radiazione</span></a><a class="successiva" href="../40-dalla-fisica-classica-alla-fisica-moderna/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Dalla fisica classica alla fisica moderna</span></a></nav>
 <footer><p>Fisica quinta &middot; Equazioni di Maxwell e onde elettromagnetiche &middot; Unità 39</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}),p);t.textContent=s;return t;}
+  function pot(p,x,y,base,esp,a){var t=txt(p,x,y,base,a);var s=el('tspan',{dy:-6,'font-size':8},t);s.textContent=esp;return t;}
+  function sinus(x0,x1,y0,A,lam,fase){var d='',n=Math.max(60,Math.round((x1-x0)/1.5));for(var i=0;i<=n;i++){var x=x0+(x1-x0)*i/n,y=y0-A*Math.cos(2*Math.PI*(x-fase)/lam);d+=(i?'L':'M')+x.toFixed(1)+','+y.toFixed(1);}return d;}
+  function freccia(svg,id,col){var d=svg.querySelector('defs')||el('defs',{},svg);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+
+  /* --- onda con lunghezza d'onda segnata fra due creste --- */
+  var O=document.getElementById('fig-onda');
+  if(O){
+    freccia(O,'fo','var(--inchiostro)');
+    var x0=30,x1=300,y0=95,A=35,lam=100,c1=60;
+    el('line',{x1:x0,y1:y0,x2:x1+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#fo)'},O);
+    el('line',{x1:x0,y1:142,x2:x0,y2:20,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#fo)'},O);
+    txt(O,x0+8,24,'y',{'font-family':'var(--serif)','font-size':14});
+    txt(O,x1+2,y0+18,'x',{'font-family':'var(--serif)','font-size':14});
+    el('path',{d:sinus(x0,x1,y0,A,lam,c1),fill:'none',stroke:'var(--blu)','stroke-width':2.2},O);
+    var yc=y0-A-14;
+    [c1,c1+lam].forEach(function(x){el('line',{x1:x,y1:y0-A,x2:x,y2:yc-6,stroke:'var(--rosso)','stroke-width':1,'stroke-dasharray':'3,3'},O);});
+    el('line',{x1:c1,y1:yc,x2:c1+lam,y2:yc,stroke:'var(--rosso)','stroke-width':2},O);
+    [c1,c1+lam].forEach(function(x){el('line',{x1:x,y1:yc-6,x2:x,y2:yc+6,stroke:'var(--rosso)','stroke-width':2},O);});
+    txt(O,c1+lam/2,yc-8,'λ',{'font-family':'var(--serif)','font-size':15,fill:'var(--rosso)','text-anchor':'middle'});
+  }
+
+  /* --- spettro: asse logaritmico della frequenza, λ = c/f calcolata --- */
+  var S=document.getElementById('fig-spettro'), cur=document.getElementById('cur-f'), val=document.getElementById('val-f');
+  if(S){
+    var C=2.998e8, LC=Math.log10(C), L0=7, L1=21, X0=110, X1=880;
+    function X(l){return X0+(X1-X0)*(l-L0)/(L1-L0);}
+    var yb=118, hb=46;
+    var bande=[
+      {n:['ONDE','RADIO'],a:7,b:9,f:'var(--grigio)',o:.28},
+      {n:['MICROONDE'],a:9,b:12,f:'var(--blu)',o:.22},
+      {n:['INFRAROSSI'],a:12,b:Math.log10(C/750e-9),f:'var(--rosso)',o:.22},
+      {n:null,a:Math.log10(C/750e-9),b:Math.log10(C/400e-9),f:'url(#trat39)',o:1},
+      {n:['ULTRA-','VIOLETTI'],a:Math.log10(C/400e-9),b:16.5,f:'var(--blu)',o:.40},
+      {n:['RAGGI X'],a:16.5,b:19.5,f:'var(--grigio)',o:.55},
+      {n:['RAGGI','GAMMA'],a:19.5,b:21,f:'var(--inchiostro)',o:.75}
+    ];
+    var d=el('defs',{},S), pt=el('pattern',{id:'trat39',width:5,height:5,patternTransform:'rotate(45)',patternUnits:'userSpaceOnUse'},d);
+    el('line',{x1:0,y1:0,x2:0,y2:5,stroke:'var(--inchiostro)','stroke-width':1.6},pt);
+    var gB=el('g',{},S), gT=el('g',{},S);
+    bande.forEach(function(b){
+      el('rect',{x:X(b.a).toFixed(1),y:yb,width:(X(b.b)-X(b.a)).toFixed(1),height:hb,fill:b.f,'fill-opacity':b.o,stroke:'var(--inchiostro)','stroke-width':1},gB);
+      if(b.n){var xm=(X(b.a)+X(b.b))/2, chiaro=b.o>.6;
+        b.n.forEach(function(r,i){txt(gT,xm,yb+hb/2+4+(i-(b.n.length-1)/2)*14,r,{'text-anchor':'middle','font-size':12.5,fill:chiaro?'#fff':'var(--inchiostro)'});});}
+    });
+    var xv=(X(bande[3].a)+X(bande[3].b))/2;
+    txt(gT,xv,yb-6,'VISIBILE',{'text-anchor':'middle','font-size':11});
+    /* tick di frequenza */
+    txt(S,10,50,'f (Hz)',{'font-size':13});
+    for(var n=8;n<=20;n+=2){el('line',{x1:X(n),y1:58,x2:X(n),y2:yb,stroke:'var(--inchiostro)','stroke-width':1},S);pot(S,X(n)-10,50,'10',String(n));}
+    /* tick di lunghezza d'onda: λ = 10^k m cade in f = c/λ */
+    txt(S,10,226,'λ (m)',{'font-size':13});
+    for(var k=0;k>=-12;k-=2){var xl=X(LC-k);el('line',{x1:xl,y1:yb+hb,x2:xl,y2:206,stroke:'var(--inchiostro)','stroke-width':1},S);
+      if(k===0)txt(S,xl,226,'1',{'text-anchor':'middle'});else pot(S,xl-13,226,'10','−'+(-k));}
+    /* onde di confronto: lunga a sinistra, corta a destra */
+    el('path',{d:sinus(X(7.2),X(9.6),268,16,62,X(7.2)),fill:'none',stroke:'var(--inchiostro)','stroke-width':2},S);
+    el('path',{d:sinus(X(18.6),X(20.9),268,16,9,X(18.6)),fill:'none',stroke:'var(--inchiostro)','stroke-width':2},S);
+    /* cursore */
+    var mk=el('line',{y1:yb,y2:yb+hb+4,stroke:'var(--rosso)','stroke-width':2.4},S);
+    var dot=el('circle',{cy:yb+hb/2,r:4.5,fill:'var(--rosso)'},S);
+    var rd=txt(S,X1,22,'',{'text-anchor':'end','font-size':13,fill:'var(--rosso)'});
+    function sci(l){var e=Math.floor(l+1e-9),m=Math.pow(10,l-e);if(m>=9.95){m=1;e++;}return m.toFixed(1).replace('.',',')+'×10'+sup(e);}
+    function sup(e){var s='⁰¹²³⁴⁵⁶⁷⁸⁹',r=String(e).split('').map(function(c){return c==='-'?'⁻':s[+c];}).join('');return r;}
+    function banda(l){for(var i=0;i<bande.length;i++)if(l>=bande[i].a&&l<=bande[i].b+1e-9)return bande[i].n?bande[i].n.join(' ').replace('- ',''):'VISIBILE';return '';}
+    function dis(l){var x=X(l);mk.setAttribute('x1',x.toFixed(1));mk.setAttribute('x2',x.toFixed(1));dot.setAttribute('cx',x.toFixed(1));
+      rd.textContent='λ = '+sci(LC-l)+' m · '+banda(l).toLowerCase();
+      if(val)val.textContent=sci(l)+' Hz';}
+    if(cur){cur.addEventListener('input',function(){dis(+cur.value);});dis(+cur.value);}
+  }
+})();
+</script>
 </body>
 </html>
