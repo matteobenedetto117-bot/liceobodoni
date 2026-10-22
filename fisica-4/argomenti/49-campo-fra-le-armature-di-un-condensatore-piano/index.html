@@ -5,141 +5,176 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campo fra le armature di un condensatore piano — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 47</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 47</p>
   <h1>Campo fra le armature di un condensatore piano</h1>
-  <p class="sommario">Un condensatore piano &egrave; formato da due armature affacciate con
-  cariche opposte. Sommando i campi delle due armature, prese come piani infiniti,
-  troviamo il campo nello spazio fra di esse e all'esterno.</p>
 </header>
 
-<h2>Sovrapposizione dei due campi</h2>
+<p>Due armature piane e parallele, con densità di carica $+\sigma$ e $-\sigma$, prese come piani infiniti: quanto vale il campo fuori e fra le armature?</p>
 
-<p>Le due armature sono piane, parallele e cariche con densit&agrave; superficiale
-opposta, $+\sigma$ e $-\sigma$. Ciascuna, presa da sola, genera il campo di un piano
-infinito ricavato in precedenza: $E_+=\sigma/(2\varepsilon_0)$, uscente dall'armatura
-positiva, e $E_-=\sigma/(2\varepsilon_0)$, entrante verso l'armatura negativa. Il campo
-totale nelle due regioni si trova sommando vettorialmente i due contributi.</p>
+<p>Ciascuna armatura genera il campo di un piano infinito:</p>
 
-<div class="fig">
-<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrC49r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-</marker>
-<marker id="arrC49v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--verde)"/>
-</marker>
-</defs>
-<rect x="150" y="30" width="160" height="200" fill="var(--blu-chiaro)"/>
-<line x1="150" y1="20" x2="150" y2="240" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="310" y1="20" x2="310" y2="240" stroke="var(--inchiostro)" stroke-width="3"/>
-<g font-family="var(--sans)" font-size="15" fill="var(--rosso)">
-<text x="135" y="55">+</text><text x="135" y="90">+</text><text x="135" y="125">+</text>
-<text x="135" y="160">+</text><text x="135" y="195">+</text>
-</g>
-<g font-family="var(--sans)" font-size="15" fill="var(--blu)">
-<text x="317" y="55">&minus;</text><text x="317" y="90">&minus;</text><text x="317" y="125">&minus;</text>
-<text x="317" y="160">&minus;</text><text x="317" y="195">&minus;</text>
-</g>
-<g stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#arrC49r)">
-<line x1="165" y1="80" x2="295" y2="80"/>
-<line x1="165" y1="130" x2="295" y2="130"/>
-<line x1="165" y1="180" x2="295" y2="180"/>
-</g>
-<text x="230" y="215" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">E interno: i due campi si sommano</text>
-<g stroke="var(--verde)" stroke-width="2.2" marker-end="url(#arrC49v)">
-<line x1="130" y1="130" x2="60" y2="130"/>
-</g>
-<g stroke="var(--blu)" stroke-width="2.2" marker-end="url(#arrC49v)">
-<line x1="60" y1="150" x2="130" y2="150"/>
-</g>
-<text x="95" y="105" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">fuori: si annullano</text>
-<g stroke="var(--verde)" stroke-width="2.2" marker-end="url(#arrC49v)">
-<line x1="330" y1="150" x2="400" y2="150"/>
-</g>
-<g stroke="var(--blu)" stroke-width="2.2" marker-end="url(#arrC49v)">
-<line x1="400" y1="130" x2="330" y2="130"/>
-</g>
-<text x="365" y="105" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">fuori: si annullano</text>
-</svg>
-<p class="did">All'esterno il campo dell'armatura positiva e quello dell'armatura negativa
-sono opposti e si cancellano; fra le armature hanno invece lo stesso verso e si sommano.</p>
-</div>
-
-<h2>Il campo nelle due regioni</h2>
-
-<p>All'esterno delle armature i due campi hanno verso opposto:</p>
-
-<div class="formula-box">
-$$E_{est}=E_+-E_-=\frac{\sigma}{2\varepsilon_0}-\frac{\sigma}{2\varepsilon_0}=0$$
-</div>
-
-<p>Fra le armature hanno invece lo stesso verso, dall'armatura positiva verso quella
-negativa, e si sommano:</p>
-
-<div class="formula-box">
-$$E_{int}=E_++E_-=\frac{\sigma}{2\varepsilon_0}+\frac{\sigma}{2\varepsilon_0}=\frac{\sigma}{\varepsilon_0}$$
-</div>
-
-<div class="riquadro">
-<span class="etichetta">Campo fra le armature di un condensatore piano</span>
-$$E=\frac{\sigma}{\varepsilon_0}$$
-</div>
-
-<p>Il valore non dipende dal punto in cui lo calcoliamo: il campo fra le armature &egrave;
-uniforme, stessa intensit&agrave; e stessa direzione in ogni punto dello spazio interno.</p>
-
-<div class="fig">
-<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrU49" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="70" y1="15" x2="70" y2="115" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="230" y1="15" x2="230" y2="115" stroke="var(--inchiostro)" stroke-width="3"/>
-<text x="55" y="20" font-family="var(--sans)" font-size="14" fill="var(--rosso)">+</text>
-<text x="238" y="20" font-family="var(--sans)" font-size="14" fill="var(--blu)">&minus;</text>
-<g stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#arrU49)">
-<line x1="85" y1="35" x2="215" y2="35"/>
-<line x1="85" y1="65" x2="215" y2="65"/>
-<line x1="85" y1="95" x2="215" y2="95"/>
-</g>
-<text x="150" y="128" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">campo elettrico uniforme</text>
-</svg>
-<p class="did">Frecce parallele, tutte della stessa lunghezza: cos&igrave; si rappresenta un
-campo uniforme.</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Il campo di una sfera conduttrice carica, dentro e fuori dalla sua superficie.</li>
-<li>Il campo di una sfera isolante carica, con la carica distribuita nel volume.</li>
+<li>armatura positiva → $E_+=\dfrac{\sigma}{2\varepsilon_0}$, uscente;</li>
+<li>armatura negativa → $E_-=\dfrac{\sigma}{2\varepsilon_0}$, entrante.</li>
 </ul>
+
+<div class="fig">
+<svg id="g-somma" viewBox="0 0 460 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Campi delle due armature e campo totale in un punto P, fuori o fra le armature"></svg>
+<div class="cursore"><label for="cur-p">posizione di P</label><input id="cur-p" type="range" min="0" max="100" step="1" value="50"><span class="val" id="val-p">fra le armature</span></div>
+<p class="did">Campi $E_+$, $E_-$ e campo totale $E$ nel punto P</p>
+</div>
+
+<p>Il campo totale è la somma vettoriale dei due contributi:</p>
+
+<ul>
+<li>all'esterno → versi opposti, si annullano;</li>
+<li>fra le armature → stesso verso, dalla positiva alla negativa, si sommano.</li>
+</ul>
+
+<p class="eq">$$E_{est}=E_+-E_-=\frac{\sigma}{2\varepsilon_0}-\frac{\sigma}{2\varepsilon_0}=0$$</p>
+<p class="eq">$$E_{int}=E_++E_-=\frac{\sigma}{2\varepsilon_0}+\frac{\sigma}{2\varepsilon_0}=\frac{\sigma}{\varepsilon_0}$$</p>
+
+<div class="def"><span class="et">Campo fra le armature di un condensatore piano</span>
+<p class="eq principio">$$E=\frac{\sigma}{\varepsilon_0}$$</p></div>
+
+<p>Il campo fra le armature è uniforme: stessa intensità, direzione e verso in ogni punto.</p>
+
+<div class="fig">
+<svg id="g-unif" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px" role="img" aria-label="Frecce parallele e di uguale lunghezza dall'armatura positiva alla negativa"></svg>
+<p class="did">Campo uniforme fra le armature</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../48-campo-di-una-distribuzione-piana-infinita/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campo di una distribuzione piana infinita</span></a><a class="successiva" href="../50-campo-di-una-sfera-conduttrice-carica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Campo di una sfera conduttrice carica</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 47</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)',stroke:'#fff','stroke-width':4,'paint-order':'stroke'},a||{}));t.textContent=s;return t;}
+  function freccia(s,id,col){var d=el(s,'defs',{}),m=el(d,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+  function armatura(s,x,y0,y1,seg,col,fondo,eti){
+    el(s,'rect',{x:x-7,y:y0,width:14,height:y1-y0,fill:fondo,stroke:col,'stroke-width':1.6,rx:2});
+    for(var y=y0+18;y<y1-6;y+=26)txt(s,x,y+5,seg,{fill:col,'font-size':14,'font-weight':700,stroke:'none'});
+    txt(s,x,y0-8,eti,{fill:col,'font-weight':700,stroke:'none'});
+  }
+
+  /* 1. somma dei due campi nel punto P */
+  var s=document.getElementById('g-somma');
+  if(s){
+    freccia(s,'ms-r','var(--rosso)');freccia(s,'ms-b','var(--blu)');freccia(s,'ms-v','var(--verde)');
+    var XP=160,XN=300,L=34,YA=70,YB=110,YT=160;
+    armatura(s,XP,28,195,'+','var(--rosso)','#f6e4e2','+σ');
+    armatura(s,XN,28,195,'−','var(--blu)','var(--blu-chiaro)','−σ');
+    var dyn=el(s,'g',{}),cur=document.getElementById('cur-p'),val=document.getElementById('val-p');
+    function vett(x,y,dx,col,m,nome){
+      el(dyn,'line',{x1:x,y1:y,x2:x+dx,y2:y,stroke:col,'stroke-width':2.4,'marker-end':'url(#'+m+')'});
+      txt(dyn,x+dx/2,y-9,nome,{fill:col,'font-weight':700});
+    }
+    function posizione(v){
+      if(v<=33)return {x:40+70*v/33,reg:-1};
+      if(v<=66)return {x:178+44*(v-34)/32,reg:0};
+      return {x:350+70*(v-67)/33,reg:1};
+    }
+    function disegna(){
+      while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+      var p=posizione(+cur.value),x=p.x;
+      el(dyn,'line',{x1:x,y1:48,x2:x,y2:178,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+      txt(dyn,x,44,'P',{fill:'var(--inchiostro)','font-weight':700});
+      var dp=(x<XP)?-L:L, dn=(x<XN)?L:-L;
+      vett(x,YA,dp,'var(--rosso)','ms-r','E₊');
+      vett(x,YB,dn,'var(--blu)','ms-b','E₋');
+      [YA,YB,YT].forEach(function(y){el(dyn,'circle',{cx:x,cy:y,r:3,fill:'var(--inchiostro)'});});
+      if(p.reg===0){vett(x,YT,dp+dn,'var(--verde)','ms-v','E');}
+      else{txt(dyn,x,YT+5,'E = 0',{fill:'var(--verde)','font-weight':700});}
+      val.innerHTML=p.reg===0?'fra le armature: <span class="ok">E = σ/ε₀</span>':(p.reg<0?'fuori, a sinistra: E = 0':'fuori, a destra: E = 0');
+    }
+    cur.addEventListener('input',disegna);disegna();
+  }
+
+  /* 2. campo uniforme */
+  var u=document.getElementById('g-unif');
+  if(u){
+    freccia(u,'mu-i','var(--inchiostro)');
+    armatura(u,70,24,140,'+','var(--rosso)','#f6e4e2','+σ');
+    armatura(u,230,24,140,'−','var(--blu)','var(--blu-chiaro)','−σ');
+    [44,68,92,116].forEach(function(y){el(u,'line',{x1:84,y1:y+6,x2:212,y2:y+6,stroke:'var(--inchiostro)','stroke-width':1.8,'marker-end':'url(#mu-i)'});});
+    txt(u,150,40,'E',{fill:'var(--inchiostro)','font-weight':700});
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
