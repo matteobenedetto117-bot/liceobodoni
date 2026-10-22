@@ -5,26 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema fondamentale del calcolo integrale — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px;margin:26px 0;max-width:520px}
-.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
+.nota .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def .eq+.eq{margin-top:0}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+table.tavola{border-collapse:collapse;width:100%;font-size:1rem}
+table.tavola td{height:calc(2*var(--r));line-height:var(--r);padding:0 10px;border-bottom:1px solid var(--riga);vertical-align:middle}
+table.tavola tr:last-child td{border-bottom:0}
+table.tavola td.cond{font-family:var(--sans);font-size:.85rem;color:var(--grigio);white-space:nowrap}
+.def table.tavola{margin-bottom:calc(var(--r)*.5)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -33,94 +93,59 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Integrale definito e applicazioni &middot; Unità 37</p>
   <h1>Teorema fondamentale del calcolo integrale</h1>
-  <p class="sommario">Se lasciamo scorrere l'estremo superiore di un integrale definito,
-  otteniamo una funzione che accumula l'area vista finora. Il teorema fondamentale del
-  calcolo integrale dice come cambia questa area: al ritmo dato dalla funzione di partenza.
-  Da qui discende anche il modo pratico di calcolare un integrale definito.</p>
 </header>
 
-<div class="def"><span class="et">Definizione — funzione integrale</span>
-Data $f(x)$ continua in $[a,b]$, per ogni $x\in[a,b]$ chiamiamo
-$$F(x)=\int_a^x f(t)\,dt$$
-<strong>funzione integrale</strong>: è l'area compresa fra il grafico di $f$ e l'asse $x$,
-da $a$ fino al punto variabile $x$.</div>
+<p>Funzione $f$ continua in $[a,b]$: come varia l'area sotto il grafico da $a$ a un estremo variabile $x$?</p>
 
-<figure class="figuraunica">
-<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Area accumulata da a a x sotto il grafico di f">
-<defs>
-<pattern id="tratteggio38" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="8" height="8" fill="#f6e4e2"/>
-  <line x1="0" y1="0" x2="0" y2="8" stroke="#b3392f" stroke-width="1.1"/>
-</pattern>
-<marker id="frecciaS38" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-  <path d="M0,0 L6,3 L0,6 Z" fill="#16283d"/>
-</marker>
-</defs>
-<line x1="50" y1="220" x2="450" y2="220" stroke="#16283d" stroke-width="1.6" marker-end="url(#frecciaS38)"/>
-<line x1="50" y1="220" x2="50" y2="20" stroke="#16283d" stroke-width="1.6" marker-end="url(#frecciaS38)"/>
-<text x="440" y="212" font-size="14" fill="#16283d" font-style="italic">x</text>
-<text x="34" y="30" font-size="14" fill="#16283d" font-style="italic">y</text>
-<path id="area38" fill="url(#tratteggio38)" stroke="none"/>
-<path id="curva38" fill="none" stroke="#16283d" stroke-width="2.4"/>
-<line id="linx38" y1="220" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="88" y="238" font-size="14" fill="#16283d" font-style="italic">a</text>
-<text id="lblx38" font-size="14" fill="#16283d" font-style="italic">x</text>
-</svg>
-<figcaption>La regione tratteggiata è $F(x)=\int_a^x f(t)\,dt$: cresce man mano che $x$ si
-sposta verso destra.</figcaption>
-</figure>
+<div class="def"><span class="et">Funzione integrale</span>
+<p>Per $f$ continua in $[a,b]$ e $x\in[a,b]$:</p>
+<p class="eq principio">$$F(x)=\int_a^x f(t)\,dt$$</p></div>
+
+<div class="fig">
+<svg id="g-integrale" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Area tratteggiata sotto il grafico di f da a fino all'estremo variabile x"></svg>
+<div class="cursore"><label for="s-x">$x$</label><input id="s-x" type="range" min="1" max="5" step="0.05" value="3"><span class="val" id="v-x"></span></div>
+<p class="did">$f(t)=0{,}15t^2+0{,}5$, $a=1$: area tratteggiata $=F(x)$</p>
+</div>
 
 <div class="def"><span class="et">Teorema fondamentale del calcolo integrale</span>
-Se $f(x)$ è continua in $[a,b]$, allora $F(x)$ è derivabile in ogni punto $x$ dell'intervallo
-ed è
-$$F'(x)=f(x).$$
-Cioè $F(x)$ è una primitiva di $f(x)$.</div>
-
-<p>Il significato è tutto nella derivata: la velocità con cui l'area accumulata cresce, in un
-punto $x$, è proprio l'altezza $f(x)$ della curva in quel punto. Dove $f$ è grande l'area
-cresce in fretta, dove $f$ è vicina a zero l'area quasi non cambia.</p>
-
-<div class="widget">
-  <div class="controlli">
-    <label>Estremo $x$ nell'intervallo $[0,5]$
-      <input type="range" id="s-x38" min="0.2" max="5" step="0.05" value="2.5">
-      <span>$x$ = <span class="val" id="v-x38"></span></span>
-    </label>
-  </div>
-  <p class="leggenda">La curva è $f(t)=0{,}15t^2+0{,}5$. Sposta $x$: l'area rossa mostra
-  $F(x)=0{,}05x^3+0{,}5x$, e la sua velocità di crescita in quel punto vale esattamente
-  $f(x)$, il valore indicato dall'altezza della curva.</p>
-  <p class="leggenda">$F(x)=$ <span class="val" id="v-Fx38"></span> &nbsp;&middot;&nbsp;
-  $f(x)=$ <span class="val" id="v-fx38"></span></p>
-</div>
+<p>Se $f$ è continua in $[a,b]$, $F$ è derivabile in ogni $x\in[a,b]$ e:</p>
+<p class="eq principio">$$F'(x)=f(x)$$</p>
+<p>cioè $F$ è una primitiva di $f$.</p></div>
 
 <h2>Calcolo dell'integrale definito</h2>
 
-<p>Il teorema apre la strada al calcolo pratico di un integrale definito: se $F(x)$ è una
-qualunque primitiva di $f(x)$, non necessariamente la funzione integrale da $a$, vale la
-<strong>formula di Newton-Leibniz</strong>
-$$\int_a^b f(x)\,dx = F(b)-F(a).$$
-La costante additiva di una primitiva qualsiasi non conta, perché nella differenza si
-elide: se $F(x)=x^2+c$ è una primitiva di $2x$,
-$$\int_a^b 2x\,dx=\Big[x^2+c\Big]_a^b=(b^2+c)-(a^2+c)=b^2-a^2.$$</p>
+<p>Per $f$ continua in $[a,b]$ e $F$ primitiva qualsiasi di $f$:</p>
 
-<h2>Esempi</h2>
+<div class="def"><span class="et">Formula di Newton-Leibniz</span>
+<p class="eq principio">$$\int_a^b f(x)\,dx=F(b)-F(a)$$</p></div>
 
-<p>$$\int_1^5 2\,dx=\Big[2x\Big]_1^5=2(5-1)=8$$
-$$\int_3^4 \frac1x\,dx=\Big[\ln x\Big]_3^4=\ln4-\ln3$$
-$$\int_0^1(x^2+2x+1)\,dx=\left[\frac{x^3}{3}+x^2+x\right]_0^1=\frac13+1+1=\frac73$$</p>
+<p>La costante additiva della primitiva si elide:</p>
 
-<div class="nota"><span class="et">Quesito d'esame — Liceo scientifico, ordinamento, sessione ordinaria 2002, quesito 7</span>
-<p>Calcolare la derivata, rispetto a $x$, della funzione $f(x)$ tale che
-$$f(x)=\int_x^{x+1}\ln t\,dt,\qquad x&gt;0.$$</p>
-<p><em>Svolgimento.</em> Spezziamo l'integrale in un punto fisso, per esempio $t=1$:
-$$f(x)=\int_1^{x+1}\ln t\,dt-\int_1^x\ln t\,dt.$$
-Per il teorema fondamentale, il primo pezzo ha derivata $\ln(x+1)$ rispetto a $x+1$
-moltiplicata per la derivata di $x+1$, cioè $\ln(x+1)\cdot1$; il secondo ha derivata
-$\ln x$. Quindi
-$$f'(x)=\ln(x+1)-\ln x=\ln\frac{x+1}{x}.$$</p>
+<p class="eq">$$\int_a^b 2x\,dx=\Big[x^2+c\Big]_a^b=(b^2+c)-(a^2+c)=b^2-a^2$$</p>
+
+<h2>Esempio 1</h2>
+
+<p class="eq">$$\int_3^4 \frac1x\,dx=\Big[\ln x\Big]_3^4=\ln4-\ln3$$</p>
+
+<h2>Esempio 2</h2>
+
+<p class="eq">$$\int_0^1(x^2+2x+1)\,dx=\left[\frac{x^3}{3}+x^2+x\right]_0^1=\frac13+1+1=\frac73$$</p>
+
+<h2>Quesito d'esame</h2>
+
+<div class="def"><span class="et">Esame di Stato 2002, liceo scientifico (ordinamento), quesito 7</span>
+<p>Calcolare la derivata, rispetto a $x$, della funzione $f(x)=\displaystyle\int_x^{x+1}\ln t\,dt$, con $x&gt;0$.</p></div>
+
+<div class="passi">
+<div class="passo">
+<p class="spieg"><span class="num">1.</span> Estremo fisso $t=1$</p>
+<p class="eq">$$f(x)=\int_1^{x+1}\ln t\,dt-\int_1^x\ln t\,dt$$</p>
 </div>
-
+<div class="passo">
+<p class="spieg"><span class="num">2.</span> Teorema fondamentale e derivata della funzione composta</p>
+<p class="eq">$$f'(x)=\ln(x+1)\cdot1-\ln x=\ln\frac{x+1}{x}$$</p>
+</div>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../37-teorema-della-media-e-valore-medio/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema della media e valore medio</span></a><a class="successiva" href="../39-calcolo-delle-aree/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Calcolo delle aree</span></a></nav>
 <footer><p>Matematica quinta &middot; Integrale definito e applicazioni &middot; Unità 37</p></footer>
@@ -129,38 +154,115 @@ $$f'(x)=\ln(x+1)-\ln x=\ln\frac{x+1}{x}.$$</p>
 
 <script>
 (function(){
-  var x0=50,y0=220,x1=450,y1=20;
-  var a=0,b=5,ymax=4.5;
-  function f(t){return 0.15*t*t+0.5;}
-  function F(x){return 0.05*x*x*x+0.5*x;}
-  function px(t){return x0+(t-a)/(b-a)*(x1-x0);}
-  function py(v){return y0-(v/ymax)*(y0-y1);}
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-
-  var curva=document.getElementById('curva38');
-  var pts=[]; var n=100;
-  for(var i=0;i<=n;i++){var t=a+i*(b-a)/n; pts.push(px(t)+','+py(f(t)));}
-  curva.setAttribute('d','M'+pts.join(' L'));
-
-  var sx=document.getElementById('s-x38'), vx=document.getElementById('v-x38');
-  var vFx=document.getElementById('v-Fx38'), vfx=document.getElementById('v-fx38');
-  var area=document.getElementById('area38'), linx=document.getElementById('linx38');
-  var lblx=document.getElementById('lblx38');
-
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+function f(t){return 0.15*t*t+0.5;}
+var A=1;
+function F(x){return 0.05*(x*x*x-A*A*A)+0.5*(x-A);}  /* integrale di f da 1 a x (SymPy) */
+(function(){
+  var svg=document.getElementById('g-integrale');
+  var P=new Piano(svg,[-0.3,5.6],[0,4.6],{l:30,r:26,t:30,b:30});
+  P.assi([]);
+  var defs=svg.querySelector('defs');
+  var pat=el('pattern',{id:'tratt-int',width:8,height:8,patternTransform:'rotate(45)',patternUnits:'userSpaceOnUse'});
+  pat.appendChild(el('rect',{width:8,height:8,fill:'#f6e4e2'}));
+  pat.appendChild(el('line',{x1:0,y1:0,x2:0,y2:8,stroke:'var(--rosso)','stroke-width':1.1}));
+  defs.appendChild(pat);
+  var area=P.add(el('path',{fill:'url(#tratt-int)',stroke:'none'}),'sotto');
+  P.curva(f,-0.3,5.6,300,'var(--inchiostro)');
+  var y0=P.Y(0);
+  P.add(el('line',{x1:P.X(A),y1:y0,x2:P.X(A),y2:P.Y(f(A)),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'}),'sopra');
+  var vert=P.add(el('line',{y1:y0,stroke:'var(--rosso)','stroke-width':1.2,'stroke-dasharray':'4,3'}),'sopra');
+  var pt=P.add(el('circle',{r:5,fill:'var(--rosso)'}),'testo');
+  P.add(txt(P.X(A),y0+18,'a',{'text-anchor':'middle','font-style':'italic',fill:'var(--inchiostro)','font-size':14}),'testo');
+  var lx=P.add(txt(0,y0+18,'x',{'text-anchor':'middle','font-style':'italic',fill:'var(--rosso)','font-size':14}),'testo');
+  P.add(txt(P.X(3.55),P.Y(f(3.55))-12,'f',{'text-anchor':'end',fill:'var(--inchiostro)','font-size':14,'font-style':'italic'}),'testo');
+  var sx=document.getElementById('s-x'), vx=document.getElementById('v-x');
   function agg(){
-    var x=parseFloat(sx.value);
-    vx.textContent=fmt(x);
-    vFx.textContent=fmt(F(x));
-    vfx.textContent=fmt(f(x));
-    var ap=[]; var m=60;
-    for(var i=0;i<=m;i++){var t=a+i*(x-a)/m; ap.push(px(t)+','+py(f(t)));}
-    var d='M'+px(a)+','+py(0)+' L'+ap.join(' L')+' L'+px(x)+','+py(0)+' Z';
-    area.setAttribute('d',d);
-    linx.setAttribute('x1',px(x)); linx.setAttribute('x2',px(x));
-    linx.setAttribute('y2',py(f(x)));
-    lblx.setAttribute('x',px(x)-4); lblx.setAttribute('y',238);
+    var x=+sx.value, s='';
+    var n=80;for(var i=0;i<=n;i++){var t=A+i*(x-A)/n;s+=(i?'L':'M')+P.X(t).toFixed(1)+' '+P.Y(f(t)).toFixed(1)+' ';}
+    area.setAttribute('d',x>A?s+'L'+P.X(x).toFixed(1)+' '+y0+' L'+P.X(A).toFixed(1)+' '+y0+' Z':'');
+    vert.setAttribute('x1',P.X(x));vert.setAttribute('x2',P.X(x));vert.setAttribute('y2',P.Y(f(x)));
+    pt.setAttribute('cx',P.X(x));pt.setAttribute('cy',P.Y(f(x)));
+    lx.setAttribute('x',P.X(x));lx.setAttribute('opacity',x-A<0.25?0:1);
+    vx.innerHTML='x = '+num(x)+' &nbsp; F(x) = '+num(F(x))+' &nbsp; f(x) = '+num(f(x));
   }
   sx.addEventListener('input',agg); agg();
+})();
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>

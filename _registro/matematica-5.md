@@ -806,6 +806,7 @@ teorema del confronto, a pagina 21.
   di prova $f(t)=0{,}15t^2+0{,}5$ non tratta dalla traccia (che non fissa una $f$
   esplicita per quel disegno), sullo stesso principio già usato nei widget delle unità 08
   e 37.
+- Revisione (22/10/2026, regole 13/10): parole 303 → 116. Pagina mai revisionata: impaginazione a quaderno (stile, aiuto Piano e script dell'unità 36), tolti sommario e la spiegazione a parole del teorema («Il significato è tutto nella derivata…»); apertura a domanda; funzione integrale, teorema fondamentale e formula di Newton-Leibniz in tre .def rosse con le ipotesi (f continua in [a,b]); costante additiva in una .eq; titoletti «Calcolo dell'integrale definito», «Esempio 1», «Esempio 2», «Quesito d'esame»; quesito d'esame tenuto, svolgimento in due passi numerati. Esempi da tre a due: tolto ∫₁⁵ 2 dx = 8. Nessuna correzione al testo (SymPy: ∫₃⁴ 1/x dx = ln4 − ln3, ∫₀¹(x²+2x+1)dx = 7/3, f′(x) = ln((x+1)/x)). Correzione alla figura: l'etichetta «a» era lontana dall'inizio dell'area (che partiva dall'origine); ora a = 1 e l'area parte da a. Plotly (caricato e non usato) tolto; figura rifatta da script con cursore su x (1–5), area tratteggiata e valori F(x) = x³/20 + x/2 − 11/20 (SymPy) e f(x) a fianco. Nessuna comparsa, nessuna figura decorativa.
 
 ## Unità 38 — Calcolo delle aree
 - Parole: 598 su circa 4,85 pagine di traccia (dal punto medio di pag. 137, dove inizia
