@@ -474,6 +474,7 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Nessun
   disegno nella traccia da ridisegnare (pagine puramente formulari) e nessuno strumento
   interattivo, perché non c'è un parametro naturale da far variare.
+- Revisione (22/10/2026, regole 13/10): parole 280 → 74. Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 37); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando all'unità 39), il titoletto «Quantità di moto trasportata dall'onda» e le frasi di raccordo lunghe; casi assorbente/riflettente in elenco caso → conseguenza (p = U/c, p = 2U/c); ΔU = IAΔt = ucAΔt e Δp = uAΔt in elenco; F_m = uA e P_R = u in una .eq; P_R = u = I/c in .eq principio; aggiunta l'unità di misura Pa in .def a sé. Nessuna comparsa da togliere. Controllo concettuale (SymPy): catena ΔU → Δp → F_m → P_R riverificata. Correzioni: esplicitate le ipotesi «superficie assorbente» e «perpendicolare alla propagazione» per P_R = I/c; tolto «visibile» dalla frase finale (la pressione di radiazione riguarda ogni onda elettromagnetica, non solo la luce visibile). Nessuna figura né esempio (la traccia non ne ha).
 
 ## Unità 39 — Lo spettro elettromagnetico
 - Parole: 286 su 2 pagine di traccia (pagine 70-71).
