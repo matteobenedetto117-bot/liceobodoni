@@ -5,130 +5,178 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campo di una distribuzione piana infinita — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 46</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 46</p>
   <h1>Campo di una distribuzione piana infinita</h1>
-  <p class="sommario">Applichiamo lo stesso metodo usato per il filo infinito a un'altra
-  distribuzione con una simmetria semplice: un piano infinito uniformemente carico.</p>
 </header>
 
-<h2>La superficie gaussiana</h2>
+<p>Piano infinito, carico positivamente con densità superficiale di carica $\sigma$ (C/m²): quanto vale il campo elettrico a distanza $d$ dal piano?</p>
 
-<p>Consideriamo un piano infinito carico positivamente, con densit&agrave; superficiale di
-carica $\sigma$ (in C/m&sup2;). Per la simmetria del piano il campo pu&ograve; avere solo
-componente perpendicolare ad esso: le componenti parallele al piano generate da cariche
-simmetriche si annullano a vicenda, mentre quelle perpendicolari si sommano. Il campo esce
-quindi dal piano in verso opposto sui due lati.</p>
+<p>Per simmetria il campo è perpendicolare al piano, uscente su entrambi i lati. Superficie gaussiana: cilindro perpendicolare al piano, con due basi di area $A$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrE48" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<polygon points="150,30 310,30 350,230 190,230" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="2"/>
-<g font-family="var(--sans)" font-size="15" fill="var(--rosso)">
-<text x="200" y="80">+</text><text x="240" y="90">+</text><text x="280" y="100">+</text>
-<text x="210" y="150">+</text><text x="255" y="160">+</text><text x="220" y="200">+</text>
-</g>
-<ellipse cx="270" cy="130" rx="34" ry="90" fill="none" stroke="var(--grigio)" stroke-width="1.6" stroke-dasharray="5,4"/>
-<line x1="90" y1="70" x2="90" y2="190" stroke="var(--grigio)" stroke-width="1.6" stroke-dasharray="5,4"/>
-<line x1="450" y1="70" x2="450" y2="190" stroke="var(--grigio)" stroke-width="1.6" stroke-dasharray="5,4"/>
-<line x1="90" y1="70" x2="450" y2="70" stroke="var(--grigio)" stroke-width="1.6" stroke-dasharray="5,4"/>
-<line x1="90" y1="190" x2="450" y2="190" stroke="var(--grigio)" stroke-width="1.6" stroke-dasharray="5,4"/>
-<g stroke="var(--rosso)" stroke-width="2" marker-end="url(#arrE48)">
-<line x1="270" y1="130" x2="90" y2="130"/>
-<line x1="270" y1="130" x2="450" y2="130"/>
-</g>
-<text x="150" y="120" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">E</text>
-<text x="400" y="120" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">E</text>
-<text x="270" y="245" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">piano infinito, densit&agrave; &sigma;</text>
-<text x="130" y="55" font-family="var(--sans)" font-size="13" fill="var(--grigio)">superficie gaussiana: cilindro attraversato dal piano</text>
-</svg>
-<p class="did">Il cilindro gaussiano attraversa il piano perpendicolarmente: il campo esce
-dalle due basi (area $A$ ciascuna) e non attraversa la superficie laterale.</p>
+<svg id="g-piano" viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Piano carico attraversato perpendicolarmente da un cilindro gaussiano: il campo esce dalle due basi"></svg>
+<p class="did">Cilindro gaussiano attraversato dal piano</p>
 </div>
 
-<p>Sulle due basi il campo &egrave; perpendicolare alla superficie, quindi
-$\cos\alpha=1$; sulla superficie laterale il campo &egrave; parallelo e non contribuisce al
-flusso. Il flusso totale &egrave; allora la somma dei contributi delle due basi, ciascuna di
-area $A$:</p>
-
-<div class="formula-box">
-$$\Phi(\vec E)=E\cdot A\cdot\cos\alpha=E\cdot 2A$$
-</div>
-
-<h2>Il calcolo del campo</h2>
-
-<p>Per il teorema di Gauss, $\Phi(\vec E)=q/\varepsilon_0$. Dalla densit&agrave;
-superficiale $\sigma=q/A$ ricaviamo $q=\sigma A$. Uguagliando le due espressioni del
-flusso:</p>
-
-<div class="formula-box">
-$$E\cdot 2A=\frac{\sigma A}{\varepsilon_0}$$
-</div>
-
-<p>L'area $A$ si semplifica, e resta:</p>
-
-<div class="riquadro">
-<span class="etichetta">Campo di un piano infinito carico</span>
-$$E=\frac{\sigma}{2\varepsilon_0}$$
-</div>
-
-<p>Il risultato non dipende dalla distanza dal piano: il campo generato da una superficie
-piana uniformemente carica &egrave; lo stesso vicino e lontano dal piano.</p>
-
-<div class="fig">
-<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrF48" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="60" y1="20" x2="60" y2="120" stroke="var(--inchiostro)" stroke-width="3"/>
-<g font-family="var(--sans)" font-size="15" fill="var(--rosso)">
-<text x="45" y="45">+</text><text x="45" y="75">+</text><text x="45" y="105">+</text>
-</g>
-<line x1="80" y1="70" x2="150" y2="70" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#arrF48)"/>
-<text x="115" y="60" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">E&#8321;</text>
-<line x1="330" y1="70" x2="400" y2="70" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#arrF48)"/>
-<text x="365" y="60" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--verde)">E&#8322;</text>
-<text x="240" y="100" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">E&#8321; = E&#8322; qualunque sia la distanza dal piano</text>
-</svg>
-<p class="did">Due frecce di uguale lunghezza a distanze diverse dal piano: il campo
-&egrave; uniforme.</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Il campo fra le armature di un condensatore piano, somma dei campi di due piani
-carichi di segno opposto.</li>
-<li>Il campo di una sfera conduttrice e di una sfera isolante cariche.</li>
+<li>basi → $\vec E$ perpendicolare alla superficie, $\cos\alpha=1$;</li>
+<li>superficie laterale → $\vec E$ parallelo alla superficie, flusso nullo.</li>
 </ul>
+
+<p class="eq">$$\Phi(\vec E)=2\cdot E\cdot A\cdot\cos\alpha=E\cdot 2A$$</p>
+
+<p>Per il teorema di Gauss, con carica racchiusa $q=\sigma A$:</p>
+
+<p class="eq">$$E\cdot 2A=\frac{\sigma A}{\varepsilon_0}$$</p>
+
+<div class="def"><span class="et">Campo di un piano infinito carico uniformemente</span>
+<p class="eq principio">$$E=\frac{\sigma}{2\varepsilon_0}$$</p></div>
+
+<p>Il campo non dipende dalla distanza dal piano: è uniforme.</p>
+
+<div class="fig">
+<svg id="g-dist" viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Campo in due punti a distanze diverse dal piano: le due frecce hanno la stessa lunghezza"></svg>
+<div class="cursore"><label for="cur-d2">distanza $d_2$</label><input id="cur-d2" type="range" min="30" max="290" step="1" value="180"><span class="val" id="val-d2">3,0 d₁</span></div>
+<p class="did">$E_1=E_2$ a ogni distanza dal piano</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../47-campo-di-una-distribuzione-lineare-di-carica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campo di una distribuzione lineare di carica</span></a><a class="successiva" href="../49-campo-fra-le-armature-di-un-condensatore-piano/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Campo fra le armature di un condensatore piano</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 46</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)',stroke:'#fff','stroke-width':4,'paint-order':'stroke'},a||{}));t.textContent=s;return t;}
+  function freccia(s,id,col){var d=el(s,'defs',{}),m=el(d,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+  function fmt(v,c){return v.toFixed(c).replace('.',',');}
+
+  /* 1. piano carico e cilindro gaussiano */
+  var g=document.getElementById('g-piano');
+  if(g){
+    freccia(g,'mp-r','var(--rosso)');
+    var CY=130,XL=110,XR=360,RY=48,RX=15;
+    /* cilindro: parte dietro il piano */
+    el(g,'line',{x1:XL,y1:CY-RY,x2:XR,y2:CY-RY,stroke:'var(--blu)','stroke-width':2});
+    el(g,'line',{x1:XL,y1:CY+RY,x2:XR,y2:CY+RY,stroke:'var(--blu)','stroke-width':2});
+    el(g,'path',{d:'M'+XL+','+(CY-RY)+' A'+RX+','+RY+' 0 0 1 '+XL+','+(CY+RY),fill:'none',stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'4,3'});
+    el(g,'path',{d:'M'+XL+','+(CY-RY)+' A'+RX+','+RY+' 0 0 0 '+XL+','+(CY+RY),fill:'none',stroke:'var(--blu)','stroke-width':2});
+    /* piano (di sbieco) */
+    el(g,'polygon',{points:'195,18 275,48 275,242 195,212',fill:'var(--blu-chiaro)','fill-opacity':.75,stroke:'var(--inchiostro)','stroke-width':1.6});
+    [[212,40],[255,52],[212,95],[258,105],[212,200],[258,212]].forEach(function(p){txt(g,p[0],p[1],'+',{fill:'var(--rosso)','font-size':15,'font-weight':700,stroke:'none'});});
+    txt(g,290,40,'σ',{fill:'var(--inchiostro)','font-size':15,'text-anchor':'start'});
+    /* cilindro: parte davanti al piano */
+    el(g,'line',{x1:275,y1:CY-RY,x2:XR,y2:CY-RY,stroke:'var(--blu)','stroke-width':2});
+    el(g,'line',{x1:275,y1:CY+RY,x2:XR,y2:CY+RY,stroke:'var(--blu)','stroke-width':2});
+    el(g,'ellipse',{cx:XR,cy:CY,rx:RX,ry:RY,fill:'#eef3f8','fill-opacity':.7,stroke:'var(--blu)','stroke-width':2});
+    /* campo uscente dalle basi */
+    [CY-26,CY,CY+26].forEach(function(y){
+      el(g,'line',{x1:XL-RX+2,y1:y,x2:XL-RX-55,y2:y,stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#mp-r)'});
+      el(g,'line',{x1:XR+RX-2,y1:y,x2:XR+RX+55,y2:y,stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#mp-r)'});
+    });
+    txt(g,XL-RX-35,CY-38,'E',{fill:'var(--rosso)','font-weight':700});
+    txt(g,XR+RX+35,CY-38,'E',{fill:'var(--rosso)','font-weight':700});
+    txt(g,XL,CY+RY+22,'A',{fill:'var(--blu)','font-weight':700});
+    txt(g,XR,CY+RY+22,'A',{fill:'var(--blu)','font-weight':700});
+  }
+
+  /* 2. campo alla distanza d1 e d2 */
+  var s=document.getElementById('g-dist');
+  if(s){
+    freccia(s,'md-v','var(--verde)');
+    var X0=50,D1=60,LE=60,Y1=50,Y2=115;
+    el(s,'line',{x1:X0,y1:12,x2:X0,y2:150,stroke:'var(--inchiostro)','stroke-width':3});
+    [30,70,110,145].forEach(function(y){txt(s,X0-14,y+5,'+',{fill:'var(--rosso)','font-size':15,'font-weight':700,stroke:'none'});});
+    function riga(y,d,nome,dn,par){
+      el(par,'line',{x1:X0,y1:y+16,x2:X0+d,y2:y+16,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'});
+      txt(par,X0+d/2,y+30,dn,{'font-size':12});
+      el(par,'circle',{cx:X0+d,cy:y,r:3.5,fill:'var(--inchiostro)'});
+      el(par,'line',{x1:X0+d+5,y1:y,x2:X0+d+LE,y2:y,stroke:'var(--verde)','stroke-width':2.6,'marker-end':'url(#md-v)'});
+      txt(par,X0+d+LE/2,y-9,nome,{fill:'var(--verde)','font-weight':700});
+    }
+    riga(Y1,D1,'E₁','d₁',s);
+    var dyn=el(s,'g',{}),cur=document.getElementById('cur-d2'),val=document.getElementById('val-d2');
+    function disegna(){
+      while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+      var d=+cur.value;riga(Y2,d,'E₂','d₂',dyn);
+      val.textContent=fmt(d/D1,1)+' d₁';
+    }
+    cur.addEventListener('input',disegna);disegna();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
