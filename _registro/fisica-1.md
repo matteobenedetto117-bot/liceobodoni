@@ -311,6 +311,7 @@
   situazione. Nessuno strumento interattivo. I due schemi della pagina (forza
   esterna inclinata con le sue componenti, e blocco con F, F_s e F_p = F_⊥)
   sono ridisegnati in SVG.
+- Revisione (22/10/2026, regole 13/10): titolo invariato; parole 257 → 159. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 38), aggiunto il piè di pagina. Apertura a domanda; i tre casi F < / = / > μ_s F⊥ in elenco caso → conseguenza al posto del paragrafo sul massimo; F_s^max = μ_s F⊥ in .def rosso; nota in una frase; forza inclinata sotto il titoletto «Forza inclinata» con F⊥ = F_P + F sen α in .eq e condizioni esplicitate (α sull'orizzontale, forza diretta verso il piano); tabella dei quattro tentativi trasformata in elenco sotto «Esempio». Tolti il titoletto «Il massimo dell'attrito statico», la frase di commento alla tabella e «Dove si continua». Nessuna comparsa. Controllo concettuale: nessuna correzione (0,4 · 100 N = 40 N; F_s = min(F, 40 N) per 10, 30, 40, 50 N). Figure ridisegnate in SVG da script: forza inclinata con componenti e F⊥ in scala (F_P + F_y); blocco spinto con cursore F (0–60 N), attrito che segue F fino a 40 N e scritta «in moto» in verde oltre la soglia. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 40 — Equilibrio statico, punto materiale e corpo esteso
 - Parole: 267 su 1 pagina di traccia (pag. 59), comprese intestazione, sommario

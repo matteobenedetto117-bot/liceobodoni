@@ -5,21 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Forza di attrito statico massima — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:560px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-table.conf{border-collapse:collapse;width:100%;margin:22px 0;font-size:.96rem}
-table.conf th,table.conf td{border:1px solid var(--riga);padding:10px 14px;text-align:center}
-table.conf th{background:var(--blu-chiaro);font-family:var(--sans);font-size:.9rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -30,103 +58,150 @@ table.conf th{background:var(--blu-chiaro);font-family:var(--sans);font-size:.9r
   <h1>Forza di attrito statico massima</h1>
 </header>
 
-<p>Se la forza esterna è inclinata di un angolo $\alpha$, a premere sul piano è
-la sua sola componente verticale $F_y = F\,\operatorname{sen}\alpha$:</p>
+<p>Corpo fermo su un piano, spinto da una forza $F$: quanto vale l'attrito statico?</p>
 
-$$F_{\perp} = F_P + F_y = F_P + F\,\operatorname{sen}\alpha$$
+<ul>
+<li>$F$ minore di $\mu_s F_\perp$ → corpo fermo, attrito uguale e opposto a $F$;</li>
+<li>$F$ uguale a $\mu_s F_\perp$ → corpo sul punto di partire;</li>
+<li>$F$ maggiore di $\mu_s F_\perp$ → corpo in moto.</li>
+</ul>
 
-<figure class="dis">
-<svg viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
-  <defs>
-    <marker id="fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <line x1="60" y1="140" x2="470" y2="140" stroke="#222" stroke-width="2"/>
-  <rect x="180" y="100" width="130" height="40" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="200" y1="40" x2="248" y2="100" stroke="#1a7f37" stroke-width="2.4" marker-end="url(#fv)"/>
-  <text x="182" y="36" fill="#1a7f37">F</text>
-  <line x1="248" y1="58" x2="306" y2="58" stroke="#1a7f37" stroke-width="1.8" marker-end="url(#fv)"/>
-  <text x="312" y="62" fill="#1a7f37">Fx</text>
-  <line x1="248" y1="58" x2="248" y2="100" stroke="#1a7f37" stroke-width="1.8" marker-end="url(#fv)"/>
-  <text x="254" y="90" fill="#1a7f37">Fy</text>
-  <path d="M238,70 A22,22 0 0 0 246,52" fill="none" stroke="#1a7f37" stroke-width="1"/>
-  <text x="222" y="70" fill="#1a7f37">α</text>
-  <line x1="220" y1="112" x2="220" y2="165" stroke="#1552b5" stroke-width="2" marker-end="url(#fv)"/>
-  <text x="196" y="162" fill="#1552b5">Fp</text>
-  <line x1="266" y1="112" x2="266" y2="196" stroke="#c0392b" stroke-width="2.4" marker-end="url(#fv)"/>
-  <text x="274" y="192" fill="#c0392b">F⊥</text>
-  <text x="350" y="120" fill="#444">F⊥ = Fp + F sen α</text>
-</svg>
-<figcaption>Della forza inclinata preme solo la componente verticale.</figcaption>
-</figure>
+<p>L'attrito si adegua alla forza applicata fino a un valore massimo:</p>
 
-<h2>Il massimo dell'attrito statico</h2>
+<div class="def"><span class="et">Attrito statico massimo</span>
+<p class="eq principio">$$F_s^{\,\max} = \mu_s\,F_\perp$$</p></div>
 
-<p>La formula</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>$\mu_s F_\perp$ è una soglia, non il valore dell'attrito in ogni situazione.</p></div>
 
-$$F_s = \mu_s \, F_{\perp}$$
+<h2>Forza inclinata</h2>
 
-<p>non dà l'attrito presente in un certo istante: dà il <strong>valore
-massimo</strong> che può raggiungere. Il motivo è che l'attrito può soltanto
-opporsi al moto, e non generarlo. Finché le forze esterne non arrivano a quel
-valore il corpo non si muove, e la forza di attrito è uguale e contraria alla
-forza applicata: cresce insieme a essa, quanto basta a tenere fermo il corpo.
-Superato il massimo, l'attrito non riesce più a compensarla e il corpo parte.</p>
-
-<div class="nota">
-<strong>Da non sbagliare.</strong> Usare $\mu_s F_{\perp}$ come valore
-dell'attrito in ogni situazione è l'errore più comune: quel prodotto è una soglia.
+<div class="fig">
+<svg id="g-inclinata" viewBox="0 0 420 215" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Blocco su un piano spinto da una forza inclinata verso il piano, con le componenti orizzontale e verticale, il peso e la forza premente"></svg>
+<p class="did">Forza inclinata di $\alpha$ sull'orizzontale, diretta verso il piano</p>
 </div>
+
+<p>Oltre al peso preme sul piano la componente verticale $F_y = F\operatorname{sen}\alpha$:</p>
+
+<p class="eq">$$F_\perp = F_P + F_y = F_P + F\operatorname{sen}\alpha$$</p>
 
 <h2>Esempio</h2>
 
-<figure class="dis">
-<svg viewBox="0 0 560 175" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="13">
-  <defs>
-    <marker id="fv2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <line x1="60" y1="110" x2="470" y2="110" stroke="#222" stroke-width="2"/>
-  <rect x="230" y="70" width="120" height="40" fill="none" stroke="#222" stroke-width="2"/>
-  <line x1="150" y1="84" x2="228" y2="84" stroke="#1a7f37" stroke-width="2.4" marker-end="url(#fv2)"/>
-  <text x="180" y="74" fill="#1a7f37">F</text>
-  <line x1="228" y1="104" x2="150" y2="104" stroke="#c0392b" stroke-width="2.4" marker-end="url(#fv2)"/>
-  <text x="180" y="128" fill="#c0392b">Fs</text>
-  <line x1="290" y1="82" x2="290" y2="155" stroke="#1552b5" stroke-width="2.2" marker-end="url(#fv2)"/>
-  <text x="300" y="150" fill="#1552b5">Fp = F⊥</text>
-</svg>
-<figcaption>Piano e spinta orizzontali: la forza premente coincide con il peso.</figcaption>
-</figure>
+<p>Dati: piano orizzontale, $F_P = F_\perp = 100\ \text{N}$, $\mu_s = 0{,}4$, spinta orizzontale crescente. Calcolare l'attrito per $F = 10,\ 30,\ 40,\ 50\ \text{N}$.</p>
 
-<p>Un corpo su un piano orizzontale ha peso $F_P = 100\ \mathrm{N}$, e quindi
-$F_{\perp} = 100\ \mathrm{N}$; il coefficiente di attrito statico è
-$\mu_s = 0{,}4$. Il massimo vale allora</p>
+<p class="eq">$$F_s^{\,\max} = \mu_s\,F_\perp = 0{,}4\cdot 100\ \text{N} = 40\ \text{N}$$</p>
 
-$$F_s^{\,\max} = \mu_s \, F_{\perp} = 0{,}4 \cdot 100\ \mathrm{N} = 40\ \mathrm{N}$$
+<ul>
+<li>$F = 10\ \text{N}$ → $F_s = 10\ \text{N}$, fermo;</li>
+<li>$F = 30\ \text{N}$ → $F_s = 30\ \text{N}$, fermo;</li>
+<li>$F = 40\ \text{N}$ → $F_s = 40\ \text{N}$, sul punto di partire;</li>
+<li>$F = 50\ \text{N}$ → $F_s = 40\ \text{N}$, in moto.</li>
+</ul>
 
-<p>Spingiamo con forze crescenti.</p>
-
-<table class="conf">
-<tr><th>Forza applicata $F$</th><th>Forza di attrito $F_s$</th><th>Il corpo</th></tr>
-<tr><td>$10\ \mathrm{N}$</td><td>$10\ \mathrm{N}$</td><td>resta fermo</td></tr>
-<tr><td>$30\ \mathrm{N}$</td><td>$30\ \mathrm{N}$</td><td>resta fermo</td></tr>
-<tr><td>$40\ \mathrm{N}$</td><td>$40\ \mathrm{N}$</td><td>è sul punto di partire</td></tr>
-<tr><td>$50\ \mathrm{N}$</td><td>$40\ \mathrm{N}$</td><td>si mette in moto</td></tr>
-</table>
-
-<p>Nelle prime tre righe l'attrito si adegua alla spinta e la annulla; nella
-quarta non va oltre $40\ \mathrm{N}$, restano $10\ \mathrm{N}$ non compensati e
-il corpo si muove.</p>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Che le forze si annullino a vicenda quando il corpo resta fermo è la
-condizione di equilibrio, da cui parte la prossima unità.</p>
+<div class="fig">
+<svg id="g-spinta" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Blocco spinto da una forza orizzontale crescente, con la forza di attrito statico che la compensa fino a 40 N"></svg>
+<div class="cursore"><label for="c-spinta">$F$</label><input id="c-spinta" type="range" min="0" max="60" step="5" value="30"><span class="val" id="v-spinta"></span></div>
+<p class="did">$F_P = 100\ \text{N}$, $\mu_s = 0{,}4$</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../39-attrito-statico-e-dinamico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Attrito statico e dinamico</span></a><a class="successiva" href="../41-equilibrio-statico-punto-materiale-e-corpo-esteso/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equilibrio statico, punto materiale e corpo esteso</span></a></nav>
+<footer><p>Fisica prima &middot; Forza peso, forza elastica e attrito &middot; Unità 39</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':12,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--inchiostro)'},a||{}));t.textContent=s;return t;}
+  function nome(p,x,y,ped,col,a){var t=txt(p,x,y,'F',Object.assign({fill:col,'font-size':14,'font-style':'italic','font-weight':700},a||{}));if(ped){var sp=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});sp.textContent=ped;}return t;}
+  function freccia(s,id,col){var d=el(s,'defs',{});var mk=el(d,'marker',{id:id,markerWidth:9,markerHeight:9,refX:7,refY:4,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,0 L8,4 L0,8 Z',fill:col});}
+  function vett(s,x1,y1,x2,y2,col,id,w,das){var a={x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w||2.4,'marker-end':'url(#'+id+')'};if(das)a['stroke-dasharray']=das;return el(s,'line',a);}
+  function piano(s,x1,x2,y){
+    el(s,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'var(--inchiostro)','stroke-width':2});
+    for(var x=x1+6;x<=x2;x+=18)el(s,'line',{x1:x,y1:y,x2:x-8,y2:y+8,stroke:'var(--grigio)','stroke-width':1});
+  }
+  var R='var(--rosso)',B='var(--blu)',G='var(--grigio)';
+
+  /* forza inclinata: F = 70 px a 40° sull'orizzontale, verso il basso; peso 40 px; F_perp = peso + F_y (stessa scala) */
+  (function(){
+    var s=document.getElementById('g-inclinata');if(!s)return;
+    freccia(s,'m40r',R);freccia(s,'m40g',G);freccia(s,'m40b',B);
+    var Yp=118,X1=150,X2=250,H=40,al=40*Math.PI/180,LF=70,LP=40;
+    piano(s,60,360,Yp);
+    el(s,'rect',{x:X1,y:Yp-H,width:X2-X1,height:H,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    /* F applicata sullo spigolo superiore sinistro, punta sul blocco */
+    var px=X1+20,py=Yp-H, Fx=LF*Math.cos(al), Fy=LF*Math.sin(al), ox=px-Fx, oy=py-Fy;
+    vett(s,ox,oy,px,py,R,'m40r');
+    nome(s,ox-6,oy-4,'',R,{'text-anchor':'end'});
+    /* componenti tratteggiate a partire dalla coda */
+    vett(s,ox,oy,ox+Fx,oy,G,'m40g',1.6,'5,3');
+    vett(s,ox+Fx,oy,ox+Fx,oy+Fy,G,'m40g',1.6,'5,3');
+    nome(s,ox+Fx/2,oy-7,'x',G,{'font-weight':400});
+    nome(s,ox+Fx+8,oy+Fy/2+4,'y',G,{'font-weight':400,'text-anchor':'start'});
+    /* angolo alfa alla coda */
+    var r=26;
+    el(s,'path',{d:'M'+(ox+r)+','+oy+' A'+r+' '+r+' 0 0 1 '+(ox+r*Math.cos(al)).toFixed(1)+','+(oy+r*Math.sin(al)).toFixed(1),fill:'none',stroke:G,'stroke-width':1.2});
+    txt(s,ox+r+9,oy+16,'α',{fill:G,'font-size':13});
+    /* peso dal centro del blocco */
+    var cx=(X1+X2)/2+15,cy=Yp-H/2;
+    el(s,'circle',{cx:cx,cy:cy,r:2.5,fill:B});
+    vett(s,cx,cy,cx,cy+LP,B,'m40b');
+    nome(s,cx-8,cy+LP-4,'P',B,{'text-anchor':'end'});
+    /* forza premente sul piano: F_P + F_y */
+    var nx=X2-12;
+    vett(s,nx,Yp,nx,Yp+LP+Fy,R,'m40r');
+    nome(s,nx+8,Yp+LP+Fy-6,'⊥',R,{'text-anchor':'start'});
+  })();
+
+  /* spinta orizzontale crescente: scala 2 px/N, massimo 40 N */
+  (function(){
+    var s=document.getElementById('g-spinta');if(!s)return;
+    var c=document.getElementById('c-spinta'),out=document.getElementById('v-spinta');
+    freccia(s,'m40s',R);freccia(s,'m40v',B);freccia(s,'m40k','var(--verde)');
+    var K=2,MAX=40,Yp=110,W=90,H=40,XB=200;
+    piano(s,40,400,Yp);
+    var g=el(s,'g',{});
+    el(g,'rect',{x:XB,y:Yp-H,width:W,height:H,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    var aF=vett(g,XB,Yp-H/2-8,XB,Yp-H/2-8,R,'m40s');
+    var tF=nome(g,0,Yp-H/2-16,'',R,{'text-anchor':'middle'});
+    var aS=vett(g,XB,Yp-4,XB,Yp-4,B,'m40v');
+    var tS=nome(g,0,Yp+22,'s',B,{'text-anchor':'middle'});
+    var aV=vett(g,XB+W/2-20,Yp-H-14,XB+W/2+20,Yp-H-14,'var(--verde)','m40k',2);
+    var tV=txt(g,XB+W/2+28,Yp-H-10,'v',{fill:'var(--verde)','font-size':13,'font-style':'italic','font-weight':700,'text-anchor':'start'});
+    var st=txt(s,210,155,'',{'font-size':13,'font-weight':700});
+    function disegna(){
+      var F=+c.value, Fs=Math.min(F,MAX), dx=F>MAX?40:0;
+      set(g,{transform:'translate('+dx+',0)'});
+      /* F spinge da sinistra: punta sulla faccia sinistra */
+      set(aF,{x1:XB-K*F,x2:XB,opacity:F>0?1:0});set(tF,{x:XB-K*F/2,opacity:F>0?1:0});
+      /* attrito sulla base, verso sinistra */
+      set(aS,{x1:XB+W/2,x2:XB+W/2-K*Fs,opacity:Fs>0?1:0});set(tS,{x:XB+W/2-K*Fs/2,opacity:Fs>0?1:0});
+      set(aV,{opacity:F>MAX?1:0});set(tV,{opacity:F>MAX?1:0});
+      st.textContent=F<MAX?'fermo':(F===MAX?'sul punto di partire':'in moto');
+      set(st,{fill:F>MAX?'var(--verde)':'var(--inchiostro)'});
+      out.innerHTML='F = '+F+' N · F<sub>s</sub> = '+Fs+' N'+(F>MAX?' · <span class="ok">in moto</span>':'');
+    }
+    c.addEventListener('input',disegna);disegna();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
