@@ -5,178 +5,197 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Campo di una sfera conduttrice carica — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.riquadro{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;text-align:center;font-size:1.2rem;font-weight:600;color:var(--rosso)}
-.riquadro .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rosso);font-weight:600;margin-bottom:6px}
-.due-caso{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin:22px 0}
-.due-caso .cella{background:var(--blu-chiaro);border-radius:10px;padding:14px 22px;text-align:center;font-size:1.1rem;flex:1;min-width:200px}
-.due-caso .cella .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blu);font-weight:600;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 48</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 48</p>
   <h1>Campo di una sfera conduttrice carica</h1>
-  <p class="sommario">In un conduttore le cariche libere si respingono e si dispongono
-  sulla superficie. Usando il teorema di Gauss su due superfici sferiche, una interna e
-  una esterna al conduttore, troviamo il campo elettrico in ogni punto dello spazio.</p>
 </header>
 
-<h2>Dove si dispone la carica</h2>
+<p>Sfera conduttrice di raggio $R$ con carica $Q$: quanto vale il campo elettrico dentro e fuori?</p>
 
-<p>Se carichiamo una sfera conduttrice, le cariche in eccesso si respingono a vicenda e si
-allontanano il pi&ugrave; possibile l'una dall'altra: l'unico modo &egrave; distribuirsi
-sulla superficie esterna della sfera. All'interno del conduttore, dunque, non resta
-carica.</p>
+<p>In un conduttore le cariche in eccesso si respingono e si dispongono sulla superficie esterna.</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrS50" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<circle cx="95" cy="95" r="70" fill="none" stroke="var(--inchiostro)" stroke-width="2.5"/>
-<g fill="var(--rosso)" font-family="var(--sans)" font-size="16" font-weight="600">
-<text x="70" y="70">+</text><text x="105" y="60">+</text><text x="60" y="105">+</text>
-<text x="100" y="115">+</text><text x="80" y="130">+</text><text x="120" y="90">+</text>
-<text x="60" y="60">+</text>
-</g>
-<line x1="180" y1="95" x2="230" y2="95" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#arrS50)"/>
-<circle cx="325" cy="95" r="70" fill="none" stroke="var(--blu)" stroke-width="2.5"/>
-<g fill="var(--rosso)" font-family="var(--sans)" font-size="16" font-weight="600">
-<text x="315" y="32">+</text><text x="380" y="55">+</text><text x="392" y="100">+</text>
-<text x="365" y="150">+</text><text x="300" y="163">+</text><text x="255" y="120">+</text>
-<text x="255" y="65">+</text>
-</g>
-</svg>
-<p class="did">Le cariche libere si respingono e migrano tutte sulla superficie: dentro il
-conduttore il campo elettrico deve essere nullo, altrimenti le cariche continuerebbero a
-muoversi.</p>
-</div>
-
-<h2>Due superfici gaussiane</h2>
-
-<p>Per calcolare il campo dentro e fuori dalla sfera conduttrice, di raggio $R$ e carica
-totale $Q$, scegliamo come superficie gaussiana una sfera concentrica: di raggio $r&lt;R$
-per il calcolo all'interno, di raggio $r&gt;R$ per il calcolo all'esterno. La simmetria
-sferica garantisce che $\vec E$ sia radiale e costante in modulo su ciascuna di queste
-superfici, come gi&agrave; nella derivazione del teorema di Gauss.</p>
-
-<div class="fig">
-<svg viewBox="0 0 340 300" xmlns="http://www.w3.org/2000/svg">
-<circle cx="170" cy="150" r="130" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<circle cx="170" cy="150" r="85" fill="none" stroke="var(--verde)" stroke-width="2"/>
-<circle cx="170" cy="150" r="60" fill="none" stroke="var(--rosso)" stroke-width="2.5"/>
-<g fill="var(--rosso)" font-family="var(--sans)" font-size="14" font-weight="600">
-<text x="155" y="95">+</text><text x="205" y="105">+</text><text x="222" y="150">+</text>
-<text x="205" y="195">+</text><text x="155" y="212">+</text><text x="118" y="195">+</text>
-<text x="100" y="150">+</text><text x="118" y="105">+</text>
-</g>
-<line x1="170" y1="150" x2="170" y2="90" stroke="var(--rosso)" stroke-width="2"/>
-<text x="176" y="120" font-family="var(--sans)" font-size="14" fill="var(--rosso)">R</text>
-<line x1="170" y1="150" x2="230" y2="150" stroke="var(--verde)" stroke-width="2"/>
-<text x="192" y="143" font-family="var(--sans)" font-size="14" fill="var(--verde)">r &lt; R</text>
-<line x1="170" y1="150" x2="170" y2="20" stroke="var(--blu)" stroke-width="2"/>
-<text x="176" y="55" font-family="var(--sans)" font-size="14" fill="var(--blu)">r &gt; R</text>
-<text x="200" y="30" font-family="var(--sans)" font-size="12" fill="var(--grigio)">superficie esterna</text>
-<text x="55" y="240" font-family="var(--sans)" font-size="12" fill="var(--grigio)">superficie interna</text>
-</svg>
-<p class="did">La carica &egrave; tutta sulla superficie rossa, di raggio $R$. La superficie
-verde, dentro il conduttore, non racchiude carica; quella blu, fuori, la racchiude tutta.</p>
-</div>
-
-<h2>Campo all'interno, $r &lt; R$</h2>
-
-<p>La superficie gaussiana interna non contiene alcuna carica, perch&eacute; tutta la
-carica si trova sulla superficie del conduttore, a distanza $R$ dal centro, e $r&lt;R$.
-Per il teorema di Gauss il flusso &egrave; allora nullo:</p>
-
-<div class="formula-box">
-$$\Phi(\vec E)=\frac{q_{int}}{\varepsilon_0}=\frac{0}{\varepsilon_0}=0 \quad\Longrightarrow\quad \vec E=0$$
-</div>
-
-<p>Il campo elettrico &egrave; nullo in ogni punto interno al conduttore.</p>
-
-<h2>Campo all'esterno, $r &gt; R$</h2>
-
-<p>Sulla superficie gaussiana esterna il campo &egrave; perpendicolare alla superficie e
-costante in modulo, quindi il flusso &egrave; semplicemente $E$ per l'area della sfera di
-raggio $r$:</p>
-
-<div class="formula-box">
-$$\Phi(\vec E)=E\cdot 4\pi r^2$$
-</div>
-
-<p>Questa volta la superficie racchiude tutta la carica $Q$ del conduttore, e il teorema
-di Gauss d&agrave;:</p>
-
-<div class="formula-box">
-$$\Phi(\vec E)=\frac{Q}{\varepsilon_0}$$
-</div>
-
-<p>Uguagliando le due espressioni del flusso e isolando $E$:</p>
-
-<div class="formula-box">
-$$E\cdot 4\pi r^2=\frac{Q}{\varepsilon_0} \quad\Longrightarrow\quad E=\frac{Q}{4\pi\varepsilon_0 r^2}$$
-</div>
-
-<p>Il raggio $R$ della sfera non compare pi&ugrave; nel risultato: da fuori, una sfera
-conduttrice carica genera lo stesso campo di una carica puntiforme $Q$ posta nel suo
-centro.</p>
-
-<div class="riquadro">
-<span class="etichetta">Campo di una sfera conduttrice carica, raggio R e carica Q</span>
-<div class="due-caso">
-<div class="cella"><span class="etichetta">r &lt; R</span>$E=0$</div>
-<div class="cella"><span class="etichetta">r &gt; R</span>$E=\dfrac{Q}{4\pi\varepsilon_0 r^2}$</div>
+<svg id="g-cariche" viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Cariche positive prima sparse nella sfera, poi tutte sulla superficie"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Carica appena depositata</p>
+<p class="did">Equilibrio: carica sulla superficie</p>
 </div>
 </div>
 
-<div class="fig">
-<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="arrG50" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="50" y1="190" x2="360" y2="190" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#arrG50)"/>
-<line x1="50" y1="190" x2="50" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#arrG50)"/>
-<text x="365" y="185" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">r</text>
-<text x="30" y="25" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">E</text>
-<line x1="50" y1="188" x2="120" y2="188" stroke="var(--verde)" stroke-width="2.5"/>
-<path d="M120,188 Q 160,188 200,90 T 340,55" fill="none" stroke="var(--verde)" stroke-width="2.5"/>
-<line x1="120" y1="190" x2="120" y2="184" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="3,3"/>
-<line x1="120" y1="188" x2="120" y2="60" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="3,3"/>
-<circle cx="120" cy="188" r="3.5" fill="var(--rosso)"/>
-<text x="112" y="208" font-family="var(--sans)" font-size="13" fill="var(--rosso)">R</text>
-</svg>
-<p class="did">Il campo &egrave; nullo dentro il conduttore, poi decresce come $1/r^2$ a
-partire dalla superficie, con una discontinuit&agrave; nel valore in $r=R$.</p>
-</div>
+<p>Superficie gaussiana: sfera concentrica di raggio $r$, su cui $\vec E$ è radiale e costante in modulo per simmetria.</p>
 
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Il campo di una sfera isolante carica, dove la carica &egrave; distribuita in tutto
-il volume e non solo sulla superficie.</li>
+<li>$r&lt;R$ → carica racchiusa nulla;</li>
+<li>$r&gt;R$ → carica racchiusa $Q$.</li>
 </ul>
+
+<div class="fig">
+<svg id="g-gauss" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px" role="img" aria-label="Sfera conduttrice di raggio R e superficie gaussiana di raggio r variabile"></svg>
+<div class="cursore"><label for="cur-r">r</label><input id="cur-r" type="range" min="10" max="180" step="1" value="60"><span class="val" id="val-r"></span></div>
+<p class="did">Conduttore (rosso) e superficie gaussiana (tratteggiata)</p>
+</div>
+
+<p>All'interno, per il teorema di Gauss:</p>
+
+<p class="eq">$$\Phi(\vec E)=\frac{q_{int}}{\varepsilon_0}=0 \quad\Longrightarrow\quad E=0$$</p>
+
+<p>All'esterno il flusso, per definizione e per il teorema di Gauss, vale:</p>
+
+<p class="eq">$$\Phi(\vec E)=E\cdot 4\pi r^2=\frac{Q}{\varepsilon_0} \quad\Longrightarrow\quad E=\frac{Q}{4\pi\varepsilon_0 r^2}$$</p>
+
+<div class="def"><span class="et">Campo di una sfera conduttrice carica</span>
+<p class="eq principio">$$E=\begin{cases}0 &amp; r&lt;R\\[4pt] \dfrac{Q}{4\pi\varepsilon_0 r^2} &amp; r&gt;R\end{cases}$$</p></div>
+
+<p>All'esterno il campo è quello di una carica puntiforme $Q$ posta nel centro.</p>
+
+<div class="fig">
+<svg id="g-er" viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px" role="img" aria-label="Grafico di E in funzione di r: nullo fino a R, poi decrescente come 1 su r al quadrato"></svg>
+<p class="did">$E$ nullo fino a $R$, poi decrescente come $1/r^2$; salto in $r=R$</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../49-campo-fra-le-armature-di-un-condensatore-piano/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Campo fra le armature di un condensatore piano</span></a><a class="successiva" href="../51-campo-di-una-sfera-isolante-carica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Campo di una sfera isolante carica</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 48</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)',stroke:'#fff','stroke-width':4,'paint-order':'stroke'},a||{}));t.textContent=s;return t;}
+  function freccia(s,id,col){var d=el(s,'defs',{}),m=el(d,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+  function piu(p,x,y,fs){txt(p,x,y+fs*.36,'+',{fill:'var(--rosso)','font-size':fs,'font-weight':700,stroke:'none'});}
+
+  /* 1. cariche: sparse nel volume, poi sulla superficie */
+  var c=document.getElementById('g-cariche');
+  if(c){
+    freccia(c,'mc-i','var(--inchiostro)');
+    var R=62,X1=95,X2=325,Y=85;
+    el(c,'circle',{cx:X1,cy:Y,r:R,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2.2});
+    el(c,'circle',{cx:X2,cy:Y,r:R,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2.2});
+    /* posizioni interne fisse (raggio relativo, angolo in gradi) */
+    [[.25,20],[.55,80],[.45,200],[.7,150],[.6,300],[.3,250],[.75,20],[.15,120],[.5,350],[.65,230]].forEach(function(p){
+      var a=p[1]*Math.PI/180;piu(c,X1+p[0]*R*Math.cos(a),Y-p[0]*R*Math.sin(a),15);});
+    for(var k=0;k<10;k++){var a=2*Math.PI*k/10+.3;piu(c,X2+(R-9)*Math.cos(a),Y-(R-9)*Math.sin(a),15);}
+    el(c,'line',{x1:180,y1:Y,x2:236,y2:Y,stroke:'var(--inchiostro)','stroke-width':2,'marker-end':'url(#mc-i)'});
+  }
+
+  /* 2. superficie gaussiana di raggio r variabile */
+  var g=document.getElementById('g-gauss');
+  if(g){
+    var CX=150,CY=125,RC=60;
+    el(g,'circle',{cx:CX,cy:CY,r:RC,fill:'#fdf6f5',stroke:'var(--rosso)','stroke-width':2.4});
+    for(var k=0;k<12;k++){var a=2*Math.PI*k/12+.26;piu(g,CX+(RC-8)*Math.cos(a),CY-(RC-8)*Math.sin(a),12);}
+    var aR=200*Math.PI/180;
+    el(g,'line',{x1:CX,y1:CY,x2:CX+RC*Math.cos(aR),y2:CY-RC*Math.sin(aR),stroke:'var(--rosso)','stroke-width':1.4});
+    txt(g,CX+34*Math.cos(aR),CY-34*Math.sin(aR)-7,'R',{fill:'var(--rosso)','font-weight':700});
+    var dyn=el(g,'g',{}),cur=document.getElementById('cur-r'),val=document.getElementById('val-r');
+    function disegna(){
+      while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+      var q=+cur.value/100,r=q*RC,dentro=q<1,col=dentro?'var(--verde)':'var(--blu)';
+      el(dyn,'circle',{cx:CX,cy:CY,r:r,fill:'none',stroke:col,'stroke-width':2,'stroke-dasharray':'6,4'});
+      var a=-30*Math.PI/180;
+      el(dyn,'line',{x1:CX,y1:CY,x2:CX+r*Math.cos(a),y2:CY-r*Math.sin(a),stroke:col,'stroke-width':1.6});
+      el(dyn,'circle',{cx:CX,cy:CY,r:2.5,fill:'var(--inchiostro)'});
+      var m=dentro?r/2:(RC+r)/2;txt(dyn,CX+m*Math.cos(a)+4,CY-m*Math.sin(a)+16,'r',{fill:col,'font-weight':700});
+      var rs=q.toFixed(1).replace('.',',');
+      val.innerHTML=Math.abs(q-1)<0.005?'r = R':(dentro?'r = '+rs+' R: <span class="ok">q racchiusa = 0, E = 0</span>':'r = '+rs+' R: q racchiusa = Q');
+    }
+    cur.addEventListener('input',disegna);disegna();
+  }
+
+  /* 3. grafico E(r), calcolato */
+  var e=document.getElementById('g-er');
+  if(e){
+    freccia(e,'me-i','var(--inchiostro)');
+    var OX=50,OY=190,U=60,H=140;           /* U px per R, H px per E(R) */
+    function X(r){return OX+U*r;} function Y(v){return OY-H*v;}
+    el(e,'line',{x1:OX,y1:OY,x2:355,y2:OY,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#me-i)'});
+    el(e,'line',{x1:OX,y1:OY,x2:OX,y2:22,stroke:'var(--inchiostro)','stroke-width':1.5,'marker-end':'url(#me-i)'});
+    txt(e,362,OY+5,'r',{fill:'var(--inchiostro)'});txt(e,OX-14,30,'E',{fill:'var(--inchiostro)'});
+    el(e,'line',{x1:X(1),y1:OY,x2:X(1),y2:Y(1),stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4,4'});
+    el(e,'line',{x1:OX,y1:Y(1),x2:X(1),y2:Y(1),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'2,4'});
+    txt(e,X(1),OY+18,'R',{fill:'var(--rosso)','font-weight':700});
+    txt(e,X(1)+10,Y(1)+4,'Q/(4πε₀R²)',{'text-anchor':'start','font-size':11});
+    el(e,'line',{x1:OX,y1:OY,x2:X(1),y2:OY,stroke:'var(--blu)','stroke-width':3});
+    var d='';for(var i=0;i<=120;i++){var r=1+i*(4.9-1)/120;d+=(i?'L':'M')+X(r).toFixed(1)+','+Y(1/(r*r)).toFixed(1);}
+    el(e,'path',{d:d,fill:'none',stroke:'var(--blu)','stroke-width':3});
+    el(e,'circle',{cx:X(1),cy:OY,r:3.5,fill:'#fff',stroke:'var(--blu)','stroke-width':1.6});
+    el(e,'circle',{cx:X(1),cy:Y(1),r:3.5,fill:'var(--blu)'});
+    txt(e,X(3),Y(1/9)-14,'E = Q/(4πε₀r²)',{fill:'var(--blu)','font-size':12});
+    txt(e,X(.5),OY-10,'E = 0',{fill:'var(--blu)','font-size':12});
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
