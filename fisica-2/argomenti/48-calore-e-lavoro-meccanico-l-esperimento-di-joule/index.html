@@ -5,18 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calore e lavoro meccanico: l'esperimento di Joule — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0;text-align:left}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,103 +59,113 @@
   <h1>Calore e lavoro meccanico: l'esperimento di Joule</h1>
 </header>
 
-<h2>L'esperimento di Joule</h2>
-
-<p>Due masse uguali $m$ sono collegate, tramite corde che passano su due carrucole, a un
-albero munito di pale immerso nell'acqua di un <strong>calorimetro</strong>: un contenitore
-isolato termicamente, dotato di un termometro per misurare la temperatura dell'acqua.
-Scendendo di un'altezza $h$, le masse fanno ruotare l'albero, e le pale agitano l'acqua.</p>
+<p>Due masse $m$ scendono di un'altezza $h$ e fanno ruotare un albero con pale immerso nell'acqua di un calorimetro (contenitore isolato termicamente, con termometro).</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg">
-  <line x1="130" y1="30" x2="510" y2="30" stroke="#16283d" stroke-width="5"/>
-  <line x1="130" y1="30" x2="130" y2="10" stroke="#16283d" stroke-width="5"/>
-  <line x1="510" y1="30" x2="510" y2="10" stroke="#16283d" stroke-width="5"/>
-
-  <circle cx="170" cy="30" r="15" fill="#fff" stroke="#1f4e79" stroke-width="3"/>
-  <circle cx="470" cy="30" r="15" fill="#fff" stroke="#1f4e79" stroke-width="3"/>
-
-  <line x1="170" y1="45" x2="170" y2="170" stroke="#16283d" stroke-width="2"/>
-  <rect x="146" y="170" width="48" height="48" fill="#eeebe3" stroke="#16283d" stroke-width="2"/>
-  <text x="170" y="200" font-family="var(--sans)" font-size="18" text-anchor="middle" fill="#16283d">m</text>
-
-  <line x1="470" y1="45" x2="470" y2="170" stroke="#16283d" stroke-width="2"/>
-  <rect x="446" y="170" width="48" height="48" fill="#eeebe3" stroke="#16283d" stroke-width="2"/>
-  <text x="470" y="200" font-family="var(--sans)" font-size="18" text-anchor="middle" fill="#16283d">m</text>
-
-  <line x1="170" y1="15" x2="320" y2="120" stroke="#6d7280" stroke-width="2" stroke-dasharray="5 4"/>
-  <line x1="470" y1="15" x2="320" y2="120" stroke="#6d7280" stroke-width="2" stroke-dasharray="5 4"/>
-
-  <rect x="220" y="120" width="200" height="230" rx="10" fill="#fff" stroke="#16283d" stroke-width="3"/>
-  <path d="M228,132 l16,16 M256,124 l16,16 M284,124 l16,16 M312,124 l16,16 M340,124 l16,16 M368,124 l16,16 M396,124 l16,16"
-        stroke="#dfd9cc" stroke-width="3"/>
-
-  <path d="M230,230 q10,-10 20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0
-           L410,342 L230,342 Z" fill="#cfe0ee" opacity="0.75"/>
-
-  <line x1="320" y1="130" x2="320" y2="300" stroke="#b3392f" stroke-width="5"/>
-  <rect x="296" y="240" width="48" height="9" fill="#b3392f" transform="rotate(25 320 244)"/>
-  <rect x="296" y="270" width="48" height="9" fill="#b3392f" transform="rotate(-25 320 274)"/>
-
-  <rect x="358" y="70" width="12" height="70" rx="6" fill="#fff" stroke="#16283d" stroke-width="2"/>
-  <circle cx="364" cy="140" r="9" fill="#b3392f" stroke="#16283d" stroke-width="2"/>
-
-  <line x1="198" y1="30" x2="198" y2="170" stroke="#6d7280" stroke-width="1"/>
-  <line x1="192" y1="30" x2="204" y2="30" stroke="#6d7280" stroke-width="1"/>
-  <line x1="192" y1="170" x2="204" y2="170" stroke="#6d7280" stroke-width="1"/>
-  <text x="204" y="104" font-family="var(--sans)" font-size="15" fill="#6d7280">h</text>
-
-  <text x="170" y="235" font-family="var(--sans)" font-size="13" text-anchor="middle" fill="#6d7280">pesetti</text>
-  <text x="470" y="235" font-family="var(--sans)" font-size="13" text-anchor="middle" fill="#6d7280">pesetti</text>
-  <text x="320" y="365" font-family="var(--sans)" font-size="13" text-anchor="middle" fill="#6d7280">calorimetro</text>
-  <text x="382" y="90" font-family="var(--sans)" font-size="13" fill="#6d7280">termometro</text>
-  <text x="255" y="215" font-family="var(--sans)" font-size="13" fill="#1f4e79">acqua</text>
-  <text x="326" y="230" font-family="var(--sans)" font-size="13" fill="#b3392f">pale</text>
-</svg>
-<p class="did">Le masse scendono di $h$ trascinate dal filo sulle carrucole; l'albero con le
-pale ruota e agita l'acqua isolata nel calorimetro, dove un termometro misura il
-riscaldamento.</p>
+<svg id="g-joule" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px" role="img" aria-label="Apparato di Joule: due masse che scendono fanno ruotare le pale nell'acqua di un calorimetro"></svg>
+<div class="cursore"><label for="cur-joule">discesa</label><input id="cur-joule" type="range" min="0" max="100" step="1" value="0"><span class="val" id="val-joule"></span></div>
+<p class="did">Le masse scendono, le pale agitano l'acqua, il termometro sale.</p>
 </div>
 
-<p>Cadendo, le due masse perdono energia potenziale:</p>
+<ul>
+<li>masse che scendono → perdono energia potenziale;</li>
+<li>pale che ruotano → compiono lavoro sull'acqua;</li>
+<li>acqua agitata → la temperatura aumenta, senza contatto con una sorgente calda.</li>
+</ul>
 
-<div class="formula-box">
-$$\Delta U = -2mgh$$
-</div>
+<p>Energia potenziale persa dalle due masse (energia cinetica e attriti delle carrucole trascurabili) e lavoro delle pale:</p>
 
-<p>(il fattore 2 perché le masse sono due). Questa energia si trasferisce alle pale, che
-compiono sull'acqua un lavoro meccanico</p>
+<p class="eq">$$\Delta U = -2mgh \qquad\qquad L = -\Delta U = 2mgh$$</p>
 
-<div class="formula-box">
-$$L = -\Delta U = 2mgh$$
-</div>
+<p>Il lavoro delle pale produce lo stesso riscaldamento di una quantità di calore uguale:</p>
 
-<p>Il lavoro delle pale si trasforma interamente in energia termica $Q$: l'acqua si scalda
-per attrito con le pale, non per contatto con una sorgente calda, e vale</p>
+<div class="def"><span class="et">Equivalenza fra lavoro e calore</span>
+<p class="eq principio">$$L = Q$$</p></div>
 
-<div class="formula-box">
-$$L = Q$$
-</div>
+<h2>Equivalente meccanico della caloria</h2>
 
-<h2>L'equivalente meccanico della caloria</h2>
+<p>Per innalzare di $1$ K la temperatura di $1$ g d'acqua servono sempre $4{,}186$ J.</p>
 
-<p>Ripetendo con cura l'esperimento, Joule trova che per innalzare di $1$ K la temperatura
-di $1$ g d'acqua occorre sempre la stessa energia:</p>
-
-<div class="formula-box">
-$$Q = 4{,}186\ \text{J}$$
-</div>
-
-<p>Questo valore definisce la <strong>caloria</strong>, l'unità di misura del calore usata
-prima che se ne riconoscesse la natura di energia:</p>
-
-<div class="formula-box">
-$$1\ \text{cal} = 4{,}186\ \text{J}, \qquad 1\ \text{kcal} = 1000\ \text{cal} = 4186\ \text{J}$$
-</div>
+<div class="def"><span class="et">Unità di misura</span>
+<p>Caloria (cal): $\;1\ \text{cal} = 4{,}186\ \text{J}$, $\;1\ \text{kcal} = 1000\ \text{cal} = 4186\ \text{J}$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../47-dilatazione-termica-volumica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Dilatazione termica volumica</span></a><a class="successiva" href="../49-capacita-termica-e-calore-specifico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Capacità termica e calore specifico</span></a></nav>
 <footer><p>Fisica seconda &middot; Calore e termologia &middot; Unità 38</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg', s=document.getElementById('g-joule'); if(!s)return;
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,c,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)'},a||{}));t.textContent=c;return t;}
+  var INK='var(--inchiostro)';
+  /* supporto, tamburo e carrucole */
+  el(s,'line',{x1:90,y1:22,x2:550,y2:22,stroke:INK,'stroke-width':4});
+  var PL={x:130,y:52},PR={x:510,y:52},r=14;
+  [PL,PR].forEach(function(P){el(s,'line',{x1:P.x,y1:22,x2:P.x,y2:P.y,stroke:INK,'stroke-width':2});});
+  el(s,'line',{x1:320,y1:22,x2:320,y2:38,stroke:INK,'stroke-width':2});
+  el(s,'rect',{x:300,y:38,width:40,height:28,rx:4,fill:'var(--blu-chiaro)',stroke:INK,'stroke-width':1.6});
+  /* corde: dal tamburo alle carrucole, poi giu fino alle masse */
+  el(s,'line',{x1:300,y1:PL.y-r,x2:PL.x,y2:PL.y-r,stroke:INK,'stroke-width':1.5});
+  el(s,'line',{x1:340,y1:PR.y-r,x2:PR.x,y2:PR.y-r,stroke:INK,'stroke-width':1.5});
+  [PL,PR].forEach(function(P){el(s,'circle',{cx:P.x,cy:P.y,r:r,fill:'#fff',stroke:'var(--blu)','stroke-width':2.5});el(s,'circle',{cx:P.x,cy:P.y,r:2.5,fill:INK});});
+  var xl=PL.x-r, xr=PR.x+r, y0=110, H=150, M=44;
+  var cl=el(s,'line',{x1:xl,y1:PL.y,x2:xl,y2:y0,stroke:INK,'stroke-width':1.5});
+  var cr=el(s,'line',{x1:xr,y1:PR.y,x2:xr,y2:y0,stroke:INK,'stroke-width':1.5});
+  var ml=el(s,'g',{}), mr=el(s,'g',{});
+  [ml,mr].forEach(function(g){el(g,'rect',{x:-M/2,y:0,width:M,height:M,fill:'#eeebe3',stroke:INK,'stroke-width':1.8});txt(g,0,M/2+5,'m',{'font-size':14,fill:INK,'font-style':'italic'});});
+  /* quota h */
+  var xh=xl-M/2-16;
+  el(s,'line',{x1:xh,y1:y0,x2:xh,y2:y0+H,stroke:'var(--grigio)','stroke-width':1});
+  el(s,'line',{x1:xh-5,y1:y0,x2:xh+5,y2:y0,stroke:'var(--grigio)','stroke-width':1});
+  el(s,'line',{x1:xh-5,y1:y0+H,x2:xh+5,y2:y0+H,stroke:'var(--grigio)','stroke-width':1});
+  txt(s,xh-10,y0+H/2+4,'h',{'font-style':'italic','font-size':14});
+  /* calorimetro e acqua */
+  var C={x:225,y:100,w:190,h:220};
+  el(s,'rect',{x:C.x,y:C.y,width:C.w,height:C.h,rx:10,fill:'#fff',stroke:INK,'stroke-width':3});
+  el(s,'rect',{x:C.x+6,y:150,width:C.w-12,height:C.y+C.h-156,rx:6,fill:'#cfe0ee'});
+  txt(s,C.x+C.w/2,C.y+C.h+20,'calorimetro');
+  txt(s,C.x+36,172,'acqua',{fill:'var(--blu)'});
+  /* albero e pale */
+  el(s,'line',{x1:320,y1:66,x2:320,y2:290,stroke:'var(--rosso)','stroke-width':4});
+  var pale=[el(s,'rect',{y:222,height:12,fill:'var(--rosso)'}),el(s,'rect',{y:266,height:12,fill:'var(--rosso)'})];
+  txt(s,262,250,'pale',{fill:'var(--rosso)'});
+  /* termometro */
+  var T={x:384,top:84,bot:262};
+  el(s,'rect',{x:T.x-6,y:T.top,width:12,height:T.bot-T.top,rx:6,fill:'#fff',stroke:INK,'stroke-width':1.6});
+  var col=el(s,'rect',{x:T.x-2.5,width:5,fill:'var(--rosso)'});
+  el(s,'circle',{cx:T.x,cy:T.bot+8,r:9,fill:'var(--rosso)',stroke:INK,'stroke-width':1.6});
+  txt(s,T.x+16,T.top+10,'termometro',{'text-anchor':'start'});
+  var cur=document.getElementById('cur-joule'), val=document.getElementById('val-joule');
+  function disegna(){
+    var f=cur.value/100, y=y0+f*H;
+    cl.setAttribute('y2',y); cr.setAttribute('y2',y);
+    ml.setAttribute('transform','translate('+xl+','+y+')'); mr.setAttribute('transform','translate('+xr+','+y+')');
+    var phi=f*H/14; /* angolo di rotazione del tamburo */
+    pale.forEach(function(p,i){var w=Math.max(10,60*Math.abs(Math.cos(phi+0.5+i*Math.PI/3)));p.setAttribute('x',320-w/2);p.setAttribute('width',w);});
+    var lc=40+f*90; col.setAttribute('y',T.bot-lc); col.setAttribute('height',lc);
+    var t=(f).toFixed(2).replace('.',',');
+    val.innerHTML=t+' <i>h</i> → <i>L</i> = '+(2*f).toFixed(2).replace('.',',')+' <i>mgh</i>'+(f>=1?' <span class="ok">masse in fondo</span>':'');
+  }
+  cur.addEventListener('input',disegna); disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
