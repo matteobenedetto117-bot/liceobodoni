@@ -5,16 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni letterali e discussione — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.nota{background:#fdf6ec;border:1px solid #e7d9b8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-</style>
-</head>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+/* formula in evidenza dentro un riquadro: regola propria */
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+</style></head>
 <body>
 <div class="foglio">
 
@@ -22,68 +52,54 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni di secondo grado &middot; Unità 40</p>
   <h1>Equazioni letterali e discussione</h1>
-  <p class="sommario">Un'equazione letterale contiene, oltre all'incognita $x$, anche un parametro
-  — una lettera come $a$ — che rappresenta un numero non fissato. Risolvere "in generale" vuol
-  dire dire quante soluzioni ci sono e quali sono, per ogni valore del parametro.</p>
 </header>
 
-<h2>Come si discute un'equazione letterale</h2>
-<p>Se il coefficiente di $x^2$ contiene il parametro, il primo passo è chiedersi per quale valore
-del parametro quel coefficiente si annulla: in quel caso l'equazione degenera in un'equazione di
-primo grado, e va trattata a parte. (Lo stesso accorgimento vale con qualunque coefficiente
-dipendente dal parametro: davanti a un termine come $(a-1)x^2$ si isolerebbe a parte il caso
-$a=1$.) Per tutti gli altri valori si calcola il discriminante $\Delta$ in funzione del
-parametro e se ne studia il segno, perché è il segno di $\Delta$ a decidere se e quante
-soluzioni reali esistono. Dove $\Delta\geq0$ si applica la formula risolutiva, ottenendo le
-soluzioni come espressioni nel parametro.</p>
+<p>Equazione con un parametro $a$: quante e quali soluzioni, al variare di $a$?</p>
 
-<h2>Esempio</h2>
-<div class="esempio">
-<p>Risolviamo $2x+ax^2=3a^2x+6a$ discutendo rispetto al parametro $a$.</p>
-<p><strong>1. Riordiniamo</strong> secondo le potenze di $x$:</p>
-<p>$$ax^2+(2-3a^2)x-6a=0$$</p>
-<p><strong>2. Caso $a=0$.</strong> Il coefficiente di $x^2$ si annulla e l'equazione diventa di
-primo grado: $2x=0$, cioè $x=0$.</p>
-<p><strong>3. Caso $a\neq0$.</strong> Calcoliamo il discriminante:</p>
-<p>$$\Delta=(2-3a^2)^2+4a\cdot6a=9a^4-12a^2+4+24a^2=9a^4+12a^2+4=(3a^2+2)^2$$</p>
-<p><strong>4. Segno di $\Delta$.</strong> Essendo un quadrato, $\Delta$ non è mai negativo; e
-poiché $3a^2+2\geq2$ per ogni $a$, non è mai nemmeno nullo: $\Delta>0$ sempre.</p>
-<p><strong>5. Soluzioni</strong>, sempre reali e distinte per $a\neq0$:</p>
-<p>$$x=\dfrac{-(2-3a^2)\pm(3a^2+2)}{2a}=\dfrac{3a^2-2\pm(3a^2+2)}{2a}$$</p>
-<p>da cui $x_1=\dfrac{6a^2}{2a}=3a$ e $x_2=\dfrac{-4}{2a}=-\dfrac2a$.</p>
-</div>
+<ol>
+<li>coefficiente di $x^2$ dipendente dal parametro → il valore che lo annulla si tratta a parte (equazione di primo grado);</li>
+<li>per gli altri valori: $\Delta$ in funzione del parametro e suo segno;</li>
+<li>dove $\Delta\geq0$: formula risolutiva.</li>
+</ol>
 
-<h2>Secondo esempio</h2>
-<div class="esempio">
-<p>Risolviamo $6x^2-ax-a^2=0$.</p>
-<p>Qui il coefficiente di $x^2$ è $6$, costante: non serve alcuna discussione preliminare,
-perché non dipende da $a$ e non si annulla mai.</p>
-<p><strong>Discriminante:</strong></p>
-<p>$$\Delta=a^2+24a^2=25a^2$$</p>
-<p><strong>Segno.</strong> $25a^2<0$ non accade mai; $25a^2\geq0$ vale sempre. L'equazione ha
-dunque sempre soluzioni reali.</p>
-<p><strong>Soluzioni</strong>, per $\Delta\geq0$:</p>
-<p>$$x=\dfrac{a\pm5a}{12}\quad\Rightarrow\quad x_1=\dfrac{6a}{12}=\dfrac a2,\qquad
-x_2=\dfrac{-4a}{12}=-\dfrac a3$$</p>
-</div>
+<div class="nota"><span class="et">Attenzione</span><p>Il caso che annulla il coefficiente di $x^2$ si controlla per primo: per quel valore non si può dividere per il coefficiente.</p></div>
 
-<div class="nota">
-<strong>Attenzione:</strong> il caso che annulla il coefficiente di $x^2$ va sempre controllato
-per primo, prima ancora di calcolare $\Delta$ — altrimenti si rischia di dividere per un
-coefficiente che, per quel valore del parametro, è zero.
-</div>
+<h2>Esempio 1</h2>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Le equazioni parametriche, dove non interessa risolvere l'equazione ma solo stabilire per
-quali valori del parametro le soluzioni verificano una condizione data.</li>
-</ul>
-</div>
+<p>Risolvere $2x+ax^2=3a^2x+6a$ al variare di $a$.</p>
+
+<p class="eq">$$ax^2+(2-3a^2)x-6a=0$$</p>
+<p class="eq">$$a=0:\quad 2x=0\ \Rightarrow\ x=0$$</p>
+<p class="eq">$$a\neq0:\quad \Delta=(2-3a^2)^2+24a^2=(3a^2+2)^2>0$$</p>
+<p class="eq">$$x=\frac{3a^2-2\pm(3a^2+2)}{2a}\ \Rightarrow\ x_1=3a,\quad x_2=-\frac2a$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Risolvere $6x^2-ax-a^2=0$ (coefficiente di $x^2$ costante: nessun caso a parte).</p>
+
+<p class="eq">$$\Delta=a^2+24a^2=25a^2\geq0\quad\text{per ogni }a$$</p>
+<p class="eq">$$x=\frac{a\pm5a}{12}\ \Rightarrow\ x_1=\frac a2,\quad x_2=-\frac a3\qquad(a=0:\ x_1=x_2=0)$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../41-equazioni-numeriche-fratte/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazioni numeriche fratte</span></a><a class="successiva" href="../43-equazioni-parametriche/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni parametriche</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni di secondo grado &middot; Unità 40</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
