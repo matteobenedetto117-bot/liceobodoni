@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Condizione di equilibrio e reazione vincolare — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:560px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,76 +58,88 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Condizione di equilibrio e reazione vincolare</h1>
 </header>
 
-<h2>Condizione generale di equilibrio per un punto materiale</h2>
+<p>Punto materiale soggetto a più forze: quando è in equilibrio?</p>
 
-<p>Un punto materiale è in equilibrio se la risultante $\vec{R}$ delle forze che
-agiscono su di esso è uguale a zero:</p>
+<div class="def"><span class="et">Condizione di equilibrio del punto materiale</span>
+<p class="eq principio">$$\vec R = \vec 0$$</p></div>
 
-$$\vec{R} = \vec{0}$$
-
-<p>$\vec{R}$ è la somma vettoriale di tutte le forze applicate. Che sia nulla
-non vuol dire che non ci siano forze: vuol dire che si annullano a vicenda.</p>
+<ul>
+<li>$\vec R$ → somma vettoriale di tutte le forze applicate;</li>
+<li>$\vec R = \vec 0$ → le forze si annullano a vicenda, non sono assenti.</li>
+</ul>
 
 <h2>Vincolo e reazione vincolare</h2>
 
-<p>Un <strong>vincolo</strong> è un corpo che impedisce ad altri corpi di
-compiere alcuni movimenti, esercitando una forza chiamata <strong>reazione
-vincolare</strong> $\vec{R}_V$, oppure <strong>forza normale</strong>
-$\vec{F}_N$.</p>
+<div class="def"><span class="et">Vincolo</span>
+<p>Corpo che impedisce ad altri corpi alcuni movimenti, esercitando su di essi una forza: la reazione vincolare $\vec R_V$.</p></div>
 
-<p>Il secondo nome dice come è orientata: perpendicolare alla superficie di
-appoggio.</p>
+<p>Per un corpo appoggiato su una superficie la reazione vincolare è perpendicolare alla superficie: si chiama forza normale $\vec F_N$.</p>
 
-<figure class="dis">
-<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <line x1="120" y1="150" x2="440" y2="150" stroke="#222" stroke-width="2.5"/>
-  <rect x="250" y="100" width="70" height="50" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="285" y1="125" x2="285" y2="40" stroke="#1a7f37" stroke-width="2.6" marker-end="url(#fr)"/>
-  <text x="296" y="48" fill="#1a7f37">F<tspan font-size="10" dy="4">N</tspan></text>
-  <text x="296" y="72" fill="#1a7f37" font-size="12">(reazione vincolare)</text>
-  <line x1="285" y1="125" x2="285" y2="205" stroke="#c0392b" stroke-width="2.6" marker-end="url(#fr)"/>
-  <text x="296" y="200" fill="#c0392b">F<tspan font-size="10" dy="4">p</tspan></text>
-  <text x="130" y="172" fill="#555" font-size="12">superficie di appoggio (il vincolo)</text>
-  <circle cx="285" cy="125" r="3.5" fill="#222"/>
-</svg>
-<figcaption>Stessa direzione, versi opposti, uguale intensità: la somma è
-nulla e il corpo resta fermo.</figcaption>
-</figure>
-
-<div class="nota">
-<strong>Da non sbagliare.</strong> La forza normale non vale sempre $mg$:
-vale quanto serve perché il corpo non sprofondi nell'appoggio. Con altre forze
-in gioco, $F_N$ cambia.
+<div class="fig">
+<svg id="g-vincolo" viewBox="0 0 440 292" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Corpo appoggiato su un piano orizzontale con forza peso verso il basso e forza normale verso l'alto"></svg>
+<div class="cursore"><label for="cur-m">massa</label><input id="cur-m" type="range" min="5" max="15" step="1" value="12"><span class="val" id="val-m"></span></div>
+<p class="did">$F_N$ e $F_p$: stessa direzione, versi opposti, uguale intensità.</p>
 </div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>$F_N$ non vale sempre $mg$: vale quanto serve perché il corpo non sprofondi nell'appoggio.</p></div>
 
 <h2>Esempio</h2>
 
-<p>Un corpo di massa $m = 12\ \text{kg}$ è appoggiato su un piano orizzontale.
-Quanto vale la forza normale?</p>
+<p>Dati: corpo fermo su un piano orizzontale, $m = 12\ \text{kg}$. Calcolare $F_N$.</p>
 
-<p>Proiettiamo la condizione di equilibrio sull'asse verticale orientato verso
-l'alto: $\vec{F}_N$ è concorde e conta con il segno più, $\vec{F}_p$ è discorde e
-conta con il segno meno.</p>
+<p>Asse verticale verso l'alto: $F_N$ con segno $+$, $F_p$ con segno $-$.</p>
 
-$$\vec{F}_p + \vec{F}_N = \vec{0} \quad\longrightarrow\quad -F_p + F_N = 0$$
-
-$$F_N = F_p = mg = 12 \cdot 9{,}8 = 117{,}6\ \text{N} \approx 1{,}2 \cdot 10^2\ \text{N}$$
-
-<p>Il passaggio dai vettori ai moduli è lecito proprio perché l'asse è stato
-scelto e i segni fissati.</p>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Qui le due forze erano già verticali. Nelle prossime unità compaiono forze
-inclinate, da scomporre sui due assi, e il piano inclinato.</p>
-</div>
+<p class="eq">$$\vec F_p + \vec F_N = \vec 0 \quad\longrightarrow\quad -F_p + F_N = 0$$</p>
+<p class="eq">$$F_N = F_p = mg = 12\ \text{kg}\cdot 9{,}8\ \text{m/s}^2 \approx 1{,}2\times10^{2}\ \text{N}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../41-equilibrio-statico-punto-materiale-e-corpo-esteso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equilibrio statico, punto materiale e corpo esteso</span></a><a class="successiva" href="../43-equilibrio-con-forze-inclinate/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equilibrio con forze inclinate</span></a></nav>
+<footer><p>Fisica prima &middot; Statica del punto materiale &middot; Unità 41</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg', s=document.getElementById('g-vincolo'); if(!s)return;
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,x,y,base,sub,col){var t=el(p,'text',{x:x,y:y,'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col});t.textContent=base;var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;return t;}
+  var d=el(s,'defs',{});
+  [['mr','var(--rosso)'],['mv','var(--verde)']].forEach(function(m){var k=el(d,'marker',{id:m[0]+'-v',markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(k,'path',{d:'M0,1 L9,5 L0,9 Z',fill:m[1]});});
+  var cx=220, cy=150, Y=168;
+  el(s,'line',{x1:40,y1:Y,x2:400,y2:Y,stroke:'var(--inchiostro)','stroke-width':2.5});
+  for(var x=48;x<400;x+=16)el(s,'line',{x1:x,y1:Y+1,x2:x-10,y2:Y+11,stroke:'var(--grigio)','stroke-width':1});
+  var t=el(s,'text',{x:60,y:Y+30,'font-size':12,'font-family':'sans-serif',fill:'var(--grigio)'});t.textContent='vincolo';
+  el(s,'rect',{x:cx-34,y:Y-36,width:68,height:36,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.8});
+  var fn=el(s,'line',{x1:cx,y1:cy,x2:cx,y2:cy,stroke:'var(--verde)','stroke-width':2.6,'marker-end':'url(#mv-v)'});
+  var fp=el(s,'line',{x1:cx,y1:cy,x2:cx,y2:cy,stroke:'var(--rosso)','stroke-width':2.6,'marker-end':'url(#mr-v)'});
+  var ln=lab(s,0,0,'F','N','var(--verde)'), lp=lab(s,0,0,'F','p','var(--rosso)');
+  el(s,'circle',{cx:cx,cy:cy,r:3.5,fill:'var(--inchiostro)'});
+  var cur=document.getElementById('cur-m'), val=document.getElementById('val-m'), k=0.8;
+  function disegna(){
+    var m=+cur.value, F=m*9.8, L=F*k;
+    fn.setAttribute('y2',cy-L); fp.setAttribute('y2',cy+L);
+    ln.setAttribute('x',cx+10); ln.setAttribute('y',cy-L+12);
+    lp.setAttribute('x',cx+10); lp.setAttribute('y',cy+L+14);
+    val.innerHTML='<i>m</i> = '+m+' kg → <i>F</i><sub>N</sub> = <i>F</i><sub>p</sub> = '+F.toFixed(0)+' N';
+  }
+  cur.addEventListener('input',disegna); disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

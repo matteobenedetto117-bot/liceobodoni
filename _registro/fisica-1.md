@@ -341,6 +341,7 @@
   e quello dell'esempio, identico al primo, non è ripetuto. Un solo riquadro,
   sull'errore di credere che F_N valga sempre mg. Nessuno strumento
   interattivo.
+- Revisione (23/10/2026, regole 13/10): titolo invariato; parole 214 → 121. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 40). Apertura a domanda; R = 0 in .def (rosso) con il significato in elenco; vincolo in .def; tolti il titoletto «Condizione generale di equilibrio…», la sezione «Dove si continua» con il rimando alle unità successive e le frasi di commento (vettori → moduli). Esempio Dati/Calcolare con due .eq (proiezione, risultato). Controllo concettuale: «reazione vincolare oppure forza normale» reso con «per un corpo appoggiato su una superficie la reazione vincolare è perpendicolare alla superficie: forza normale»; risultato 12·9,8 = 117,6 N scritto con le cifre dei dati, ≈ 1,2×10² N. Nessuna comparsa da togliere. Figura ridisegnata da script con cursore sulla massa (5–15 kg): F_N e F_p uguali e opposte, lunghezze proporzionali a mg. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 42 — Equilibrio con forze inclinate
 - Parole: 544 su 2 pagine di traccia
