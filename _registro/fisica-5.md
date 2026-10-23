@@ -515,6 +515,7 @@
   postulato. Ridisegnato in SVG lo schema dell'auto ferma e dell'auto in moto della traccia, con
   la composizione classica delle velocità barrata per mostrare perché il risultato v+c è
   sbagliato. Nessuno strumento interattivo: pagina puramente concettuale.
+- Revisione (24/10/2026, regole 13/10): parole 245 → 164 (sommario escluso). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 03); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando alla dilatazione dei tempi), il titoletto «I postulati di Einstein», il commento al secondo postulato, il cenno storico sull'etere in paragrafo e la nota «Da ricordare»; postulati in .def (elenco numerato); proiettile/luce in elenco caso → conseguenza; esperimento di Michelson e Morley in elenco previsione → misura → conclusione (titoletto tenuto: argomento distinto). Nessuna comparsa da togliere. Controllo concettuale (nessun calcolo): «il risultato mostrò che l'etere non esiste» → «nessuna differenza misurata; l'ipotesi dell'etere viene abbandonata»; tolte le date «tra il 1883 e il 1887» (l'esperimento noto è del 1887). Figura rifatta da script in SVG con cursore sulla velocità v dell'auto (0–0,9 c): freccia della luce sempre lunga c, freccia tratteggiata c + v della composizione classica «non si osserva». Nessun esempio (la traccia non ne ha).
 
 ## Unità 42 — Dilatazione dei tempi
 - Parole: 486 su 3 pagine di traccia (pagine 75-77).
