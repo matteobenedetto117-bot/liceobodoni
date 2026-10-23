@@ -5,14 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni parametriche — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.nota{background:#fdf6ec;border:1px solid #e7d9b8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -22,60 +49,55 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni di secondo grado &middot; Unità 41</p>
   <h1>Equazioni parametriche</h1>
-  <p class="sommario">Un'equazione di secondo grado con un parametro non va sempre risolta per
-  intero: a volte basta stabilire per quali valori del parametro le soluzioni verificano una
-  condizione assegnata, senza scriverle esplicitamente. È lo scopo di questa unità.</p>
 </header>
 
-<h2>Che cosa si chiede</h2>
-<p>In un'equazione parametrica non interessa trovare le soluzioni una per una: interessa sapere
-per quali valori del parametro esistono soluzioni reali, oppure per quali valori una soluzione
-assegnata verifica l'equazione, oppure ancora per quali valori la somma o il prodotto delle
-soluzioni assumono un valore dato.</p>
+<p>Equazione di secondo grado con un parametro $k$: per quali valori di $k$ le soluzioni verificano una condizione data, senza calcolarle?</p>
 
-<h2>Esistenza di soluzioni reali</h2>
-<div class="esempio">
-<p>Per quali valori di $k$ l'equazione $kx^2-2(k+3)x+k-1=0$ ha soluzioni reali?</p>
-<p>Basta imporre $\Delta\geq0$:</p>
-<p>$$\Delta=4(k+3)^2-4k(k-1)=4(k^2+6k+9)-4k^2+4k=28k+36$$</p>
-<p>$$28k+36\geq0\ \Rightarrow\ k\geq-\dfrac{36}{28}=-\dfrac97$$</p>
-</div>
-
-<h2>Una soluzione assegnata</h2>
-<div class="esempio">
-<p>Quale valore deve avere $k$ perché una soluzione dell'equazione precedente sia $x=-2$? Si
-sostituisce $x=-2$ e si risolve rispetto a $k$:</p>
-<p>$$k(-2)^2-2(k+3)(-2)+k-1=0\ \Rightarrow\ 4k+4(k+3)+k-1=0\ \Rightarrow\ 9k+11=0$$</p>
-<p>da cui $k=-\dfrac{11}9$.</p>
-</div>
-
-<h2>Somma e prodotto delle soluzioni</h2>
-<div class="esempio">
-<p>Nella stessa equazione, per quale valore di $k$: <strong>a)</strong> la somma delle soluzioni
-è $3$? <strong>b)</strong> il prodotto delle soluzioni è $-1$?</p>
-<p><strong>a)</strong> Uso $x_1+x_2=-\dfrac ba$:</p>
-<p>$$-\dfrac ba=\dfrac{2(k+3)}k=3\ \Rightarrow\ 2(k+3)=3k\ \Rightarrow\ k=6$$</p>
-<p><strong>b)</strong> Uso $x_1x_2=\dfrac ca$:</p>
-<p>$$\dfrac{k-1}k=-1\ \Rightarrow\ k-1=-k\ \Rightarrow\ k=\dfrac12$$</p>
-</div>
-
-<div class="nota">
-<strong>Attenzione:</strong> le formule $x_1+x_2=-\dfrac ba$ e $x_1x_2=\dfrac ca$ hanno $a$ al
-denominatore, quindi vanno sempre accompagnate dalla condizione $k\neq0$: per quel valore
-l'equazione perde il termine di secondo grado e la formula non si può applicare.
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>I sistemi di secondo grado, dove un'equazione di questo tipo compare accanto a una di primo
-grado da risolvere per sostituzione.</li>
+<li>soluzioni reali → $\Delta\geq0$;</li>
+<li>soluzione assegnata $x_0$ → si sostituisce $x_0$ e si risolve rispetto a $k$;</li>
+<li>somma assegnata → $x_1+x_2=-\dfrac ba$;</li>
+<li>prodotto assegnato → $x_1x_2=\dfrac ca$.</li>
 </ul>
-</div>
+
+<div class="nota"><span class="et">Attenzione</span><p>Somma e prodotto hanno $a$ al denominatore: valgono solo per $a\neq0$ e con soluzioni reali ($\Delta\geq0$).</p></div>
+
+<h2>Esempio</h2>
+
+<p>Equazione: $kx^2-2(k+3)x+k-1=0$.</p>
+
+<p>a) Soluzioni reali:</p>
+<p class="eq">$$\Delta=4(k+3)^2-4k(k-1)=28k+36\geq0\ \Rightarrow\ k\geq-\frac97$$</p>
+
+<p>b) Una soluzione è $x=-2$:</p>
+<p class="eq">$$4k+4(k+3)+k-1=0\ \Rightarrow\ 9k+11=0\ \Rightarrow\ k=-\frac{11}9$$</p>
+
+<p>c) Somma delle soluzioni uguale a $3$ ($k\neq0$):</p>
+<p class="eq">$$\frac{2(k+3)}k=3\ \Rightarrow\ 2(k+3)=3k\ \Rightarrow\ k=6\quad\text{accettabile}\ \left(k\geq-\tfrac97\right)$$</p>
+
+<p>d) Prodotto delle soluzioni uguale a $-1$ ($k\neq0$):</p>
+<p class="eq">$$\frac{k-1}k=-1\ \Rightarrow\ k-1=-k\ \Rightarrow\ k=\frac12\quad\text{accettabile}\ \left(k\geq-\tfrac97\right)$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../42-equazioni-letterali-e-discussione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazioni letterali e discussione</span></a><a class="successiva" href="../44-sistemi-di-secondo-grado/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sistemi di secondo grado</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni di secondo grado &middot; Unità 41</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
