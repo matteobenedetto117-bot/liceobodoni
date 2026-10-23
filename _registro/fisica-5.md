@@ -505,6 +505,7 @@
   e relatività generale (campi forti, alte velocità), con la divisione fisica classica / fisica
   moderna della traccia. Nessuno strumento interattivo: non c'è un parametro naturale da far
   variare in uno schema puramente concettuale.
+- Revisione (23/10/2026, regole 13/10): parole 179 → 56. Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 39); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando all'unità 41) e i due paragrafi di spiegazione; i tre ambiti (macroscopico con campi deboli e v ≪ c, microscopico, campi forti o v ∼ c) in elenco caso → teoria; relatività ristretta in .def. Nessuna comparsa da togliere. Controllo concettuale: nessun calcolo; contenuto lasciato come nella traccia (la relatività generale indicata per «campi forti oppure v ∼ c», con la ristretta come sua parte senza gravitazione). Figura rifatta da script in SVG (schema meccanica classica → quantistica / relatività generale, divisione fisica classica / moderna), statica; figura solo schematica, quasi decorativa. Nessun esempio.
 
 ## Unità 41 — I postulati di Einstein e l'esperimento di Michelson-Morley
 - Parole: 359 su 2 pagine di traccia (pagine 73-74).
