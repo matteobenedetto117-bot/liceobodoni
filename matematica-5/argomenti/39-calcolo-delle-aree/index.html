@@ -5,28 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calcolo delle aree — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
 .def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.figuraunica{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px;margin:26px 0;max-width:520px}
-.figuraunica figcaption{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:8px;line-height:1.5}
-.galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:22px 0}
-.galleria figure{margin:0;background:#fff;border:1px solid var(--riga);border-radius:10px;padding:10px}
-.galleria figcaption{font-family:var(--sans);font-size:.8rem;color:#4a5a6d;text-align:center;margin-top:6px;line-height:1.4}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
+.nota .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def .eq+.eq{margin-top:0}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+table.tavola{border-collapse:collapse;width:100%;font-size:1rem}
+table.tavola td{height:calc(2*var(--r));line-height:var(--r);padding:0 10px;border-bottom:1px solid var(--riga);vertical-align:middle}
+table.tavola tr:last-child td{border-bottom:0}
+table.tavola td.cond{font-family:var(--sans);font-size:.85rem;color:var(--grigio);white-space:nowrap}
+.def table.tavola{margin-bottom:calc(var(--r)*.5)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -35,256 +93,93 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Integrale definito e applicazioni &middot; Unità 38</p>
   <h1>Calcolo delle aree</h1>
-  <p class="sommario">Sappiamo calcolare un integrale definito; lo usiamo ora per misurare aree
-  vere, quelle che vediamo colorate su un foglio. Il punto delicato è il segno: l'integrale
-  conta con segno negativo la parte di piano sotto l'asse x, mentre un'area è sempre un numero
-  positivo.</p>
 </header>
 
-<p>Prendiamo $f(x)=\sin x$ sull'intervallo $[0,2\pi]$ e chiediamoci quanto vale l'area compresa
-tra la curva e l'asse x. Se calcoliamo l'integrale definito direttamente tra $0$ e $2\pi$:
-$$\int_0^{2\pi}\sin x\,dx=-\cos x\Big|_0^{2\pi}=-\cos2\pi+\cos0=-1+1=0.$$
-Il risultato è nullo perché il tratto sopra l'asse, dove $\sin x$ è positiva, e il tratto
-sotto, dove è negativa, si compensano: l'integrale li somma con segni opposti. Per avere
-l'area dobbiamo invece integrare separatamente sui due tratti e cambiare di segno quello
-negativo:
-$$\int_0^\pi\sin x\,dx-\int_\pi^{2\pi}\sin x\,dx=-\cos x\Big|_0^\pi+\cos x\Big|_\pi^{2\pi}
-=1+1+1+1=4.$$
-L'area vera, quella che vediamo colorata nella figura, vale dunque $4$, non $0$.</p>
+<p>Funzione $f$ continua in $[a,b]$: l'integrale definito misura sempre l'area fra il grafico e l'asse $x$?</p>
 
-<p>La stessa idea vale per qualunque funzione che cambi segno nell'intervallo, non solo per
-il seno. Con $f(x)=x^3$ sull'intervallo $[-1,1]$: negativa a sinistra dello zero, positiva a
-destra. Cambiamo di segno il primo pezzo:
-$$A=-\int_{-1}^0x^3\,dx+\int_0^1x^3\,dx=-\frac{x^4}{4}\bigg|_{-1}^0+\frac{x^4}{4}\bigg|_0^1
-=\frac14+\frac14=\frac12.$$</p>
+<ul>
+<li>$f\ge0$ → integrale uguale all'area;</li>
+<li>$f\le0$ → integrale uguale all'area cambiata di segno;</li>
+<li>$f$ che cambia segno → si spezza l'intervallo negli zeri di $f$ e si cambia segno agli integrali dei tratti negativi.</li>
+</ul>
 
-<div class="galleria">
-<figure>
-<svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico di seno x tra 0 e 2 pi greco, con la parte positiva e la parte negativa">
-<defs>
-<pattern id="hPos39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#f6e4e2"/><line x1="0" y1="0" x2="0" y2="7" stroke="#b3392f" stroke-width="1"/>
-</pattern>
-<pattern id="hNeg39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#e8eff6"/><line x1="0" y1="0" x2="0" y2="7" stroke="#1f4e79" stroke-width="1"/>
-</pattern>
-</defs>
-<line x1="20" y1="90" x2="245" y2="90" stroke="#16283d" stroke-width="1.4"/>
-<line x1="20" y1="150" x2="20" y2="20" stroke="#16283d" stroke-width="1.4"/>
-<path d="M20,90 Q57.5,20 95,90 T170,90" fill="url(#hPos39)" stroke="none"/>
-<path d="M95,90 Q132.5,160 170,90 T245,90" fill="url(#hNeg39)" stroke="none"/>
-<path d="M20,90 Q57.5,20 95,90 T170,90 T245,90" fill="none" stroke="#16283d" stroke-width="2"/>
-<text x="93" y="60" font-size="13" fill="#b3392f">+</text>
-<text x="168" y="122" font-size="13" fill="#1f4e79">&#8722;</text>
-<text x="90" y="104" font-size="12" fill="#16283d" font-style="italic">&#960;</text>
-<text x="228" y="104" font-size="12" fill="#16283d" font-style="italic">2&#960;</text>
-<text x="234" y="84" font-size="12" fill="#16283d" font-style="italic">x</text>
-</svg>
-<figcaption>$f(x)=\sin x$ su $[0,2\pi]$: sopra l'asse l'integrale conta positivo, sotto conta
-negativo.</figcaption>
-</figure>
-<figure>
-<svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico di x al cubo tra meno 1 e 1, con le due regioni tratteggiate in verde">
-<defs>
-<pattern id="hCubo39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
-</pattern>
-</defs>
-<line x1="20" y1="90" x2="245" y2="90" stroke="#16283d" stroke-width="1.4"/>
-<line x1="132" y1="150" x2="132" y2="20" stroke="#16283d" stroke-width="1.4"/>
-<path d="M20,150 C70,150 100,90 132,90 C164,90 194,30 244,30 L244,90 L20,90 Z" fill="url(#hCubo39)" stroke="none"/>
-<path d="M20,150 C70,150 100,90 132,90 C164,90 194,30 244,30" fill="none" stroke="#16283d" stroke-width="2"/>
-<text x="18" y="104" font-size="12" fill="#16283d" font-style="italic">&#8722;1</text>
-<text x="228" y="104" font-size="12" fill="#16283d" font-style="italic">1</text>
-<text x="234" y="84" font-size="12" fill="#16283d" font-style="italic">x</text>
-</svg>
-<figcaption>$f(x)=x^3$ su $[-1,1]$: le due regioni hanno la stessa area, $\tfrac14$ ciascuna.</figcaption>
-</figure>
+<div class="fig">
+<svg id="g-seno" viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico di seno x fra 0 e 2 pi greco: tratto positivo e tratto negativo tratteggiati"></svg>
+<p class="did">$f(x)=\sin x$ in $[0,2\pi]$: tratto positivo e tratto negativo</p>
 </div>
 
-<h2>Area compresa tra due curve</h2>
+<h2>Esempio 1</h2>
 
-<p>Immaginiamo due curve, una sopra l'altra su tutto un intervallo: la regione compresa tra
-loro è delimitata dal basso dalla curva inferiore e dall'alto da quella superiore. Per
-misurarla basta togliere, dall'area sotto la curva superiore, l'area sotto quella
-inferiore.</p>
+<p>Area fra $f(x)=\sin x$ e l'asse $x$ in $[0,2\pi]$. L'integrale su tutto l'intervallo si annulla:</p>
 
-<div class="def"><span class="et">Area tra due curve</span>
-Se $f(x)\ge g(x)$ per ogni $x$ in $[a,b]$, l'area della regione compresa tra le due curve è
-la differenza tra l'area sotto $f$ e quella sotto $g$:
-$$A=\int_a^bf(x)\,dx-\int_a^bg(x)\,dx=\int_a^b\big[f(x)-g(x)\big]\,dx,$$
-dove il secondo passaggio usa la linearità dell'integrale.</div>
+<p class="eq">$$\int_0^{2\pi}\sin x\,dx=\Big[-\cos x\Big]_0^{2\pi}=-1+1=0$$</p>
 
-<figure class="figuraunica">
-<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Area compresa tra due curve f e g su a b">
-<defs>
-<pattern id="hDue39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
-</pattern>
-</defs>
-<line x1="40" y1="190" x2="450" y2="190" stroke="#16283d" stroke-width="1.4"/>
-<line x1="40" y1="190" x2="40" y2="30" stroke="#16283d" stroke-width="1.4"/>
-<path d="M120,190 C160,60 260,50 380,90 L380,190 Z" fill="url(#hDue39)" stroke="none"/>
-<path d="M60,80 C160,20 260,30 420,70" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-<path d="M60,160 C160,150 260,140 420,150" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="120" y1="190" x2="120" y2="130" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<line x1="380" y1="190" x2="380" y2="88" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="113" y="206" font-size="14" fill="#16283d" font-style="italic">a</text>
-<text x="374" y="206" font-size="14" fill="#16283d" font-style="italic">b</text>
-<text x="410" y="62" font-size="14" fill="#b3392f" font-style="italic">f(x)</text>
-<text x="410" y="146" font-size="14" fill="#1f4e79" font-style="italic">g(x)</text>
-</svg>
-<figcaption>La regione verde è $A=\int_a^b[f(x)-g(x)]\,dx$.</figcaption>
-</figure>
+<p class="eq">$$A=\int_0^{\pi}\sin x\,dx-\int_\pi^{2\pi}\sin x\,dx=2-(-2)=4$$</p>
 
-<p>La formula resta valida anche se $f$, $g$, o entrambe scendono sotto l'asse x, dove i
-singoli integrali $\int f$ e $\int g$ non sono più aree ma numeri con segno: possiamo sempre
-traslare le due curve verso l'alto di una quantità $h$ abbastanza grande da renderle
-positive, senza che l'area compresa tra loro cambi, perché
-$$\int_a^b\big[f(x)+h\big]-\big[g(x)+h\big]\,dx=\int_a^b\big[f(x)-g(x)\big]\,dx:$$
-la costante $h$ si elide nella differenza.</p>
+<h2>Area fra due curve</h2>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Traslazione verticale $h$
-      <input type="range" id="s-h39" min="0" max="2.5" step="0.05" value="0">
-      <span>$h$ = <span class="val" id="v-h39"></span></span>
-    </label>
-  </div>
-  <svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le due curve traslate verso l'alto di h, con l'area verde tra loro invariata">
-  <defs>
-  <pattern id="hW39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-    <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
-  </pattern>
-  </defs>
-  <line x1="40" y1="200" x2="450" y2="200" stroke="#16283d" stroke-width="1.4"/>
-  <line x1="40" y1="200" x2="40" y2="20" stroke="#16283d" stroke-width="1.4"/>
-  <path id="areaW39" fill="url(#hW39)" stroke="none"/>
-  <path id="curvaF39" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-  <path id="curvaG39" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-  <text x="405" y="60" font-size="14" fill="#b3392f" font-style="italic">f(x)+h</text>
-  <text x="405" y="190" font-size="14" fill="#1f4e79" font-style="italic">g(x)+h</text>
-  </svg>
-  <p class="leggenda">$f(x)=0{,}1x^2-1$ (rossa) e $g(x)=-1{,}8$ (blu) su $[0,4]$, traslate di
-  $h$. L'area verde tra le due curve resta $A=$ <span class="val" id="v-A39"></span> per ogni
-  $h$: la traslazione sposta entrambe le curve della stessa quantità, e la differenza
-  $f(x)+h-[g(x)+h]$ non dipende da $h$.</p>
+<div class="def"><span class="et">Area fra due curve</span>
+<p>Se $f(x)\ge g(x)$ per ogni $x\in[a,b]$:</p>
+<p class="eq principio">$$A=\int_a^b\big[f(x)-g(x)\big]\,dx$$</p></div>
+
+<div class="fig">
+<svg id="g-due" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Regione tratteggiata fra la curva f sopra e la curva g sotto, da a a b"></svg>
+<p class="did">Regione fra $f$ (sopra) e $g$ (sotto) in $[a,b]$</p>
 </div>
 
-<p>Se le due curve si intersecano in un punto interno $c$, scambiano il ruolo di "sopra" e
-"sotto": dobbiamo spezzare l'integrale in $c$ e invertire l'ordine della differenza nel
-secondo tratto:
-$$A=\int_a^c\big[f(x)-g(x)\big]\,dx+\int_c^b\big[g(x)-f(x)\big]\,dx.$$</p>
+<p>La formula vale anche per curve sotto l'asse $x$: traslando entrambe di $h$, $h$ si elide.</p>
 
-<figure class="figuraunica">
-<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due curve che si intersecano in un punto interno c, con due regioni tratteggiate">
-<defs>
-<pattern id="hInt39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
-</pattern>
-</defs>
-<line x1="40" y1="190" x2="450" y2="190" stroke="#16283d" stroke-width="1.4"/>
-<line x1="40" y1="190" x2="40" y2="30" stroke="#16283d" stroke-width="1.4"/>
-<path d="M80,150 C160,40 200,40 245,95 C290,150 340,150 400,60 L400,190 L80,190 Z" fill="url(#hInt39)" stroke="none"/>
-<path d="M60,160 C160,40 250,40 300,95 C340,140 380,150 420,60" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<path d="M60,60 C120,150 260,150 300,95 C340,50 380,45 420,150" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-<line x1="80" y1="190" x2="80" y2="150" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<line x1="245" y1="190" x2="245" y2="95" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<line x1="400" y1="190" x2="400" y2="60" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="73" y="206" font-size="14" fill="#16283d" font-style="italic">a</text>
-<text x="239" y="206" font-size="14" fill="#16283d" font-style="italic">c</text>
-<text x="393" y="206" font-size="14" fill="#16283d" font-style="italic">b</text>
-</svg>
-<figcaption>Nel primo tratto $f\ge g$, nel secondo $g\ge f$: l'integrale cambia segno
-in $c$.</figcaption>
-</figure>
+<p class="eq">$$\int_a^b\Big(\big[f(x)+h\big]-\big[g(x)+h\big]\Big)\,dx=\int_a^b\big[f(x)-g(x)\big]\,dx$$</p>
 
-<h2>Area compresa tra una curva e l'asse y</h2>
-
-<p>Quando conviene, possiamo leggere l'area anche rispetto all'asse y, esprimendo x in
-funzione di y. Consideriamo $y=\sqrt{2x}$: elevando al quadrato, $y^2=2x$, cioè
-$x=f(y)=\dfrac{y^2}{2}$. L'area compresa tra la curva e l'asse y, per y tra $2$ e $4$, è
-$$A=\int_2^4f(y)\,dy=\int_2^4\frac{y^2}{2}\,dy=\frac{y^3}{6}\bigg|_2^4=\frac{64}{6}-\frac{8}{6}
-=\frac{28}{3}.$$</p>
-
-<figure class="figuraunica">
-<svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Area compresa tra la curva y uguale a radice di 2x e l'asse y, per y tra 2 e 4">
-<defs>
-<pattern id="hY39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
-</pattern>
-</defs>
-<line x1="50" y1="230" x2="270" y2="230" stroke="#16283d" stroke-width="1.4"/>
-<line x1="50" y1="230" x2="50" y2="20" stroke="#16283d" stroke-width="1.4"/>
-<path d="M50,150 C90,140 140,110 172,80 L172,150 L50,150 Z" fill="url(#hY39)" stroke="none"/>
-<path d="M50,230 C110,190 155,120 178,60" fill="none" stroke="#16283d" stroke-width="2.2"/>
-<line x1="50" y1="150" x2="60" y2="150" stroke="#16283d" stroke-width="1.4"/>
-<line x1="50" y1="80" x2="60" y2="80" stroke="#16283d" stroke-width="1.4"/>
-<text x="32" y="154" font-size="13" fill="#16283d" font-style="italic">2</text>
-<text x="32" y="84" font-size="13" fill="#16283d" font-style="italic">4</text>
-<text x="260" y="224" font-size="13" fill="#16283d" font-style="italic">x</text>
-<text x="58" y="30" font-size="13" fill="#16283d" font-style="italic">y</text>
-<text x="100" y="128" font-size="13" fill="#2f6b4f">A</text>
-</svg>
-<figcaption>$x=f(y)=y^2/2$: l'area verde è $\int_2^4f(y)\,dy=28/3$.</figcaption>
-</figure>
-
-<p>In generale, per due curve espresse come $x=f(y)$ e $x=g(y)$, l'area tra loro su $[a,b]$,
-ora intervallo sull'asse y, è
-$$A=\int_a^b\big[f(y)-g(y)\big]\,dy,$$
-esattamente come nel caso orizzontale, con i ruoli di x e y scambiati: ora è $f(y)$ la curva
-più a destra, quella con la x maggiore a parità di y. Se invece la curva
-assume valori negativi, cioè passa a sinistra dell'asse y tra $c$ e $b$, l'integrale va
-spezzato come nel caso di x:
-$$A=\int_a^cf(y)\,dy-\int_c^bf(y)\,dy.$$
-Il principio è sempre lo stesso incontrato per l'asse x: ogni tratto in cui la curva cambia
-segno va isolato e riportato in valore assoluto prima di sommarlo agli altri.</p>
-
-<div class="galleria">
-<figure>
-<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due curve x uguale f di y e x uguale g di y, con l'area tratteggiata tra loro">
-<defs>
-<pattern id="hFG39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#e8eff6"/><line x1="0" y1="0" x2="0" y2="7" stroke="#1f4e79" stroke-width="1"/>
-</pattern>
-</defs>
-<line x1="40" y1="180" x2="230" y2="180" stroke="#16283d" stroke-width="1.4"/>
-<line x1="40" y1="180" x2="40" y2="20" stroke="#16283d" stroke-width="1.4"/>
-<path d="M40,150 C90,130 130,90 150,50 L96,40 C80,80 60,120 40,150 Z" fill="url(#hFG39)" stroke="none"/>
-<path d="M40,150 C90,130 130,90 160,40" fill="none" stroke="#2f6b4f" stroke-width="2.2"/>
-<path d="M40,40 C60,80 80,120 96,150" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-<line x1="40" y1="150" x2="50" y2="150" stroke="#16283d" stroke-width="1.4"/>
-<line x1="40" y1="40" x2="50" y2="40" stroke="#16283d" stroke-width="1.4"/>
-<text x="22" y="154" font-size="12" fill="#16283d" font-style="italic">a</text>
-<text x="22" y="44" font-size="12" fill="#16283d" font-style="italic">b</text>
-<text x="155" y="45" font-size="12" fill="#2f6b4f" font-style="italic">f(y)</text>
-<text x="98" y="165" font-size="12" fill="#b3392f" font-style="italic">g(y)</text>
-</svg>
-<figcaption>Caso generale: $A=\int_a^b[f(y)-g(y)]\,dy$.</figcaption>
-</figure>
-<figure>
-<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Una curva che diventa negativa in y, a sinistra dell'asse y, con la regione da spezzare in c">
-<defs>
-<pattern id="hNegY39" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-  <rect width="7" height="7" fill="#e7f0ea"/><line x1="0" y1="0" x2="0" y2="7" stroke="#2f6b4f" stroke-width="1"/>
-</pattern>
-</defs>
-<line x1="90" y1="180" x2="230" y2="180" stroke="#16283d" stroke-width="1.4"/>
-<line x1="90" y1="180" x2="90" y2="20" stroke="#16283d" stroke-width="1.4"/>
-<path d="M90,150 C70,120 55,90 60,60 L90,60 C88,90 89,120 90,150 Z" fill="url(#hNegY39)" stroke="none"/>
-<path d="M90,150 C70,120 50,80 60,30" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-<line x1="90" y1="150" x2="100" y2="150" stroke="#16283d" stroke-width="1.4"/>
-<line x1="90" y1="60" x2="100" y2="60" stroke="#16283d" stroke-width="1.4"/>
-<line x1="90" y1="60" x2="230" y2="60" stroke="#6d7280" stroke-width="1" stroke-dasharray="4,3"/>
-<text x="72" y="154" font-size="12" fill="#16283d" font-style="italic">a</text>
-<text x="72" y="64" font-size="12" fill="#16283d" font-style="italic">c</text>
-<text x="72" y="34" font-size="12" fill="#16283d" font-style="italic">b</text>
-<text x="45" y="42" font-size="12" fill="#b3392f" font-style="italic">f(y)</text>
-</svg>
-<figcaption>Da $c$ a $b$ la curva è negativa: $A=\int_a^cf(y)\,dy-\int_c^bf(y)\,dy$.</figcaption>
-</figure>
+<div class="fig">
+<svg id="g-trasl" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Le due curve traslate verso l'alto di h, con l'area fra loro invariata"></svg>
+<div class="cursore"><label for="s-h">$h$</label><input id="s-h" type="range" min="0" max="2.5" step="0.05" value="0"><span class="val" id="v-h"></span></div>
+<p class="did">$f(x)=0{,}1x^2-1$, $g(x)=-1{,}8$ in $[0,4]$, traslate di $h$</p>
 </div>
 
+<p>Se $f\ge g$ in $[a,c]$ e $g\ge f$ in $[c,b]$, si spezza l'integrale nel punto d'intersezione $c$:</p>
+
+<p class="eq">$$A=\int_a^c\big[f(x)-g(x)\big]\,dx+\int_c^b\big[g(x)-f(x)\big]\,dx$$</p>
+
+<div class="fig">
+<svg id="g-incr" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Due curve che si intersecano in c, con le due regioni tratteggiate"></svg>
+<p class="did">$f\ge g$ in $[a,c]$, $g\ge f$ in $[c,b]$</p>
+</div>
+
+<h2>Area rispetto all'asse $y$</h2>
+
+<p>Curve $x=f(y)$ e $x=g(y)$ con $f(y)\ge g(y)$ per $y\in[a,b]$ ($f$ è la curva più a destra):</p>
+
+<div class="def"><span class="et">Area rispetto all'asse y</span>
+<p class="eq principio">$$A=\int_a^b\big[f(y)-g(y)\big]\,dy$$</p></div>
+
+<p>Area fra $x=f(y)$ e l'asse $y$, con $f(y)\ge0$ in $[a,c]$ e $f(y)\le0$ in $[c,b]$:</p>
+
+<p class="eq">$$A=\int_a^c f(y)\,dy-\int_c^b f(y)\,dy$$</p>
+
+<div class="fig">
+<div class="pannelli" style="--n:2">
+<svg id="g-fy" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px" role="img" aria-label="Regione fra le curve x uguale f di y e x uguale g di y, per y fra a e b"></svg>
+<svg id="g-neg" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px" role="img" aria-label="Curva x uguale f di y, a destra dell'asse y fra a e c e a sinistra fra c e b"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Regione fra $x=g(y)$ e $x=f(y)$</p>
+<p class="did">$f(y)&lt;0$ in $(c,b]$: integrale cambiato di segno</p>
+</div>
+</div>
+
+<h2>Esempio 2</h2>
+
+<p>Area fra $y=\sqrt{2x}$ e l'asse $y$, per $2\le y\le4$.</p>
+
+<p class="eq">$$y=\sqrt{2x}\ \Longrightarrow\ x=\frac{y^2}{2}$$</p>
+
+<p class="eq">$$A=\int_2^4\frac{y^2}{2}\,dy=\left[\frac{y^3}{6}\right]_2^4=\frac{64}{6}-\frac{8}{6}=\frac{28}{3}$$</p>
+
+<div class="fig">
+<svg id="g-radice" viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Regione fra la curva y uguale radice di 2x e l'asse y, per y fra 2 e 4"></svg>
+<p class="did">$x=y^2/2$, $2\le y\le4$: $A=28/3$</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../38-teorema-fondamentale-del-calcolo-integrale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema fondamentale del calcolo integrale</span></a><a class="successiva" href="../40-volumi-dei-solidi-di-rotazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Volumi dei solidi di rotazione</span></a></nav>
 <footer><p>Matematica quinta &middot; Integrale definito e applicazioni &middot; Unità 38</p></footer>
@@ -293,39 +188,228 @@ segno va isolato e riportato in valore assoluto prima di sommarlo agli altri.</p
 
 <script>
 (function(){
-  var x0=40,y0=200,x1=450,y1=20;
-  var a=0,b=4,ymin=-2.2,ymax=3.3;
-  function f(t){return 0.1*t*t-1;}
-  function g(t){return -1.8;}
-  function px(t){return x0+(t-a)/(b-a)*(x1-x0);}
-  function py(v){return y0-(v-ymin)/(ymax-ymin)*(y0-y1);}
-  function fmt(n){return n.toFixed(2).replace('.',',');}
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
+  }
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
 
-  var A = 16/3;
-  var sh=document.getElementById('s-h39'), vh=document.getElementById('v-h39');
-  var vA=document.getElementById('v-A39');
-  var curvaF=document.getElementById('curvaF39'), curvaG=document.getElementById('curvaG39');
-  var area=document.getElementById('areaW39');
-  vA.textContent=fmt(A);
+function tratt(svg,id,fondo,linea){
+  var d=svg.querySelector('defs');
+  var p=el('pattern',{id:id,width:8,height:8,patternTransform:'rotate(45)',patternUnits:'userSpaceOnUse'});
+  p.appendChild(el('rect',{width:8,height:8,fill:fondo}));
+  p.appendChild(el('line',{x1:0,y1:0,x2:0,y2:8,stroke:linea,'stroke-width':1.1}));
+  d.appendChild(p); return 'url(#'+id+')';
+}
+/* regione fra due funzioni di x (alto, basso) su [a,b] */
+function regX(P,top,bot,a,b,fill){
+  var s='',n=80,i,x;
+  for(i=0;i<=n;i++){x=a+i*(b-a)/n;s+=(i?'L':'M')+P.X(x).toFixed(1)+' '+P.Y(top(x)).toFixed(1)+' ';}
+  for(i=n;i>=0;i--){x=a+i*(b-a)/n;s+='L'+P.X(x).toFixed(1)+' '+P.Y(bot(x)).toFixed(1)+' ';}
+  return P.add(el('path',{d:s+'Z',fill:fill,stroke:'none'}),'sotto');
+}
+/* regione fra due funzioni di y (destra, sinistra) su [a,b] */
+function regY(P,dx,sx,a,b,fill){
+  var s='',n=80,i,y;
+  for(i=0;i<=n;i++){y=a+i*(b-a)/n;s+=(i?'L':'M')+P.X(dx(y)).toFixed(1)+' '+P.Y(y).toFixed(1)+' ';}
+  for(i=n;i>=0;i--){y=a+i*(b-a)/n;s+='L'+P.X(sx(y)).toFixed(1)+' '+P.Y(y).toFixed(1)+' ';}
+  return P.add(el('path',{d:s+'Z',fill:fill,stroke:'none'}),'sotto');
+}
+function curvaY(P,fy,a,b,col){
+  var s='',n=200;for(var i=0;i<=n;i++){var y=a+i*(b-a)/n;s+=(i?'L':'M')+P.X(fy(y)).toFixed(1)+' '+P.Y(y).toFixed(1)+' ';}
+  return P.add(el('path',{d:s,fill:'none',stroke:col,'stroke-width':2.2}),'sopra');
+}
+function tacca(P,x,eti,col){
+  var y0=P.Y(0);
+  P.add(el('line',{x1:P.X(x),y1:y0-4,x2:P.X(x),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}),'testo');
+  P.add(txt(P.X(x),y0+18,eti,{'text-anchor':'middle','font-style':'italic',fill:col||'var(--inchiostro)','font-size':13}),'testo');
+}
+function taccaY(P,y,eti){
+  var x0=P.X(0);
+  P.add(el('line',{x1:x0-4,y1:P.Y(y),x2:x0+4,y2:P.Y(y),stroke:'var(--inchiostro)','stroke-width':1}),'testo');
+  P.add(txt(x0-8,P.Y(y)+4,eti,{'text-anchor':'end','font-style':'italic',fill:'var(--inchiostro)','font-size':13}),'testo');
+}
+function vert(P,x,y,col){P.add(el('line',{x1:P.X(x),y1:P.Y(0),x2:P.X(x),y2:P.Y(y),stroke:col||'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'}),'sopra');}
+function oriz(P,y,x,col){P.add(el('line',{x1:P.X(0),y1:P.Y(y),x2:P.X(x),y2:P.Y(y),stroke:col||'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'}),'sopra');}
+function zero(){return 0;}
 
+/* 1. seno */
+(function(){
+  var svg=document.getElementById('g-seno');
+  var P=new Piano(svg,[-0.4,7.0],[-1.35,1.35],{l:20,r:24,t:26,b:20}); P.assi([]);
+  var pos=tratt(svg,'t-pos','#f6e4e2','var(--rosso)'), neg=tratt(svg,'t-neg','var(--blu-chiaro)','var(--blu)');
+  regX(P,Math.sin,zero,0,Math.PI,pos); regX(P,zero,Math.sin,Math.PI,2*Math.PI,neg);
+  P.curva(Math.sin,-0.4,7.0,300);
+  tacca(P,Math.PI,'π'); tacca(P,2*Math.PI,'2π');
+  P.add(txt(P.X(Math.PI/2),P.Y(0.42)+6,'+',{'text-anchor':'middle',fill:'var(--rosso)','font-size':20,'font-weight':700}),'testo');
+  P.add(txt(P.X(1.5*Math.PI),P.Y(-0.42)+6,'−',{'text-anchor':'middle',fill:'var(--blu)','font-size':20,'font-weight':700}),'testo');
+})();
+
+/* 2. area fra due curve */
+(function(){
+  var svg=document.getElementById('g-due');
+  function f(x){return 3-0.15*(x-3)*(x-3);} function g(x){return 0.8+0.1*x;}
+  var a=1,b=5;
+  var P=new Piano(svg,[-0.3,6.6],[-0.3,3.6],{l:20,r:24,t:26,b:20}); P.assi([]);
+  regX(P,f,g,a,b,tratt(svg,'t-due','#eaf1ea','var(--verde)'));
+  P.curva(f,0.2,5.8,200,'var(--rosso)'); P.curva(g,0.2,5.8,200,'var(--blu)');
+  vert(P,a,f(a)); vert(P,b,f(b)); tacca(P,a,'a'); tacca(P,b,'b');
+  P.add(txt(P.X(3),P.Y(f(3))-10,'f',{'text-anchor':'middle',fill:'var(--rosso)','font-style':'italic','font-size':14}),'testo');
+  P.add(txt(P.X(5.6),P.Y(g(5.6))+18,'g',{'text-anchor':'middle',fill:'var(--blu)','font-style':'italic','font-size':14}),'testo');
+})();
+
+/* 3. traslazione di h */
+(function(){
+  var svg=document.getElementById('g-trasl');
+  function f(x){return 0.1*x*x-1;} function g(x){return -1.8;}
+  var P=new Piano(svg,[-0.3,4.9],[-2.2,3.4],{l:20,r:40,t:26,b:20}); P.assi([]);
+  var pat=tratt(svg,'t-tr','#eaf1ea','var(--verde)');
+  var area=null,cf=null,cg=null,ef=P.add(txt(0,0,'f + h',{fill:'var(--rosso)','font-style':'italic','font-size':13}),'testo'),
+      eg=P.add(txt(0,0,'g + h',{fill:'var(--blu)','font-style':'italic','font-size':13}),'testo');
+  var sh=document.getElementById('s-h'), vh=document.getElementById('v-h');
   function agg(){
-    var h=parseFloat(sh.value);
-    vh.textContent=fmt(h);
-    var n=60, ptsF=[], ptsG=[];
-    for(var i=0;i<=n;i++){
-      var t=a+i*(b-a)/n;
-      ptsF.push(px(t)+','+py(f(t)+h));
-    }
-    for(var i=n;i>=0;i--){
-      var t=a+i*(b-a)/n;
-      ptsG.push(px(t)+','+py(g(t)+h));
-    }
-    curvaF.setAttribute('d','M'+ptsF.join(' L'));
-    var gpts=[]; for(var i=0;i<=n;i++){var t=a+i*(b-a)/n; gpts.push(px(t)+','+py(g(t)+h));}
-    curvaG.setAttribute('d','M'+gpts.join(' L'));
-    area.setAttribute('d','M'+ptsF.join(' L')+' L'+ptsG.join(' L')+' Z');
+    var h=+sh.value;
+    [area,cf,cg].forEach(function(e){if(e)e.parentNode.removeChild(e);});
+    area=regX(P,function(x){return f(x)+h;},function(x){return g(x)+h;},0,4,pat);
+    cf=P.curva(function(x){return f(x)+h;},0,4,120,'var(--rosso)');
+    cg=P.curva(function(x){return g(x)+h;},0,4,120,'var(--blu)');
+    ef.setAttribute('x',P.X(4)+6);ef.setAttribute('y',P.Y(f(4)+h)+4);
+    eg.setAttribute('x',P.X(4)+6);eg.setAttribute('y',P.Y(g(4)+h)+4);
+    vh.innerHTML='h = '+num(h)+' &nbsp; <span class="ok">A = 16/3 ≈ 5,33</span>';
   }
   sh.addEventListener('input',agg); agg();
+})();
+
+/* 4. curve che si intersecano */
+(function(){
+  var svg=document.getElementById('g-incr');
+  function f(x){return 2+0.8*Math.cos(0.8*x);} function g(x){return 1+0.35*x;}
+  var a=0.5,b=5.5,lo=a,hi=b;
+  for(var k=0;k<60;k++){var m=(lo+hi)/2;if(f(m)-g(m)>0)lo=m;else hi=m;}
+  var c=(lo+hi)/2;
+  var P=new Piano(svg,[-0.3,6.6],[-0.3,3.6],{l:20,r:24,t:26,b:20}); P.assi([]);
+  var pat=tratt(svg,'t-in','#eaf1ea','var(--verde)');
+  regX(P,f,g,a,c,pat); regX(P,g,f,c,b,pat);
+  P.curva(f,0.1,6.3,200,'var(--rosso)'); P.curva(g,0.1,6.3,200,'var(--blu)');
+  vert(P,a,f(a)); vert(P,c,f(c)); vert(P,b,g(b));
+  tacca(P,a,'a'); tacca(P,c,'c'); tacca(P,b,'b');
+  P.add(txt(P.X(0.2),P.Y(f(0.2))-8,'f',{fill:'var(--rosso)','font-style':'italic','font-size':14}),'testo');
+  P.add(txt(P.X(0.2),P.Y(g(0.2))-8,'g',{fill:'var(--blu)','font-style':'italic','font-size':14}),'testo');
+})();
+
+/* 5. rispetto all'asse y: due curve */
+(function(){
+  var svg=document.getElementById('g-fy');
+  function f(y){return 0.5+0.25*y*y;} function g(y){return 0.3*y;}
+  var a=1,b=3;
+  var P=new Piano(svg,[-0.3,3.4],[-0.3,3.8],{l:22,r:24,t:26,b:20}); P.assi([]);
+  regY(P,f,g,a,b,tratt(svg,'t-fy','#eaf1ea','var(--verde)'));
+  curvaY(P,f,0,3.3,'var(--rosso)'); curvaY(P,g,0,3.6,'var(--blu)');
+  oriz(P,a,f(a)); oriz(P,b,f(b)); taccaY(P,a,'a'); taccaY(P,b,'b');
+  P.add(txt(P.X(f(3.3))-4,P.Y(3.3)-6,'f',{'text-anchor':'end',fill:'var(--rosso)','font-style':'italic','font-size':14}),'testo');
+  P.add(txt(P.X(g(3.6))+8,P.Y(3.6)+6,'g',{fill:'var(--blu)','font-style':'italic','font-size':14}),'testo');
+})();
+
+/* 6. rispetto all'asse y: curva che diventa negativa */
+(function(){
+  var svg=document.getElementById('g-neg');
+  function f(y){return (2-y)*(0.6+0.1*y);}
+  var a=0.5,c=2,b=3;
+  var P=new Piano(svg,[-1.6,1.6],[-0.3,3.8],{l:20,r:24,t:26,b:20}); P.assi([]);
+  regY(P,f,zero,a,c,tratt(svg,'t-np','#f6e4e2','var(--rosso)'));
+  regY(P,zero,f,c,b,tratt(svg,'t-nn','var(--blu-chiaro)','var(--blu)'));
+  curvaY(P,f,0,3.5,'var(--inchiostro)');
+  oriz(P,a,f(a)); oriz(P,b,f(b));
+  P.add(el('line',{x1:P.X(0)-4,y1:P.Y(c),x2:P.X(0)+4,y2:P.Y(c),stroke:'var(--inchiostro)','stroke-width':1}),'testo');
+  [[a,'a',-1],[c,'c',-1],[b,'b',1]].forEach(function(v){P.add(txt(P.X(0)+8*v[2],P.Y(v[0])+4,v[1],{'text-anchor':v[2]<0?'end':'start','font-style':'italic',fill:'var(--inchiostro)','font-size':13}),'testo');});
+  P.add(txt(P.X(0.45),P.Y(1.15)+6,'+',{'text-anchor':'middle',fill:'var(--rosso)','font-size':18,'font-weight':700}),'testo');
+  P.add(txt(P.X(-0.3),P.Y(2.75)+6,'−',{'text-anchor':'middle',fill:'var(--blu)','font-size':18,'font-weight':700}),'testo');
+  P.add(txt(P.X(f(3.5))-6,P.Y(3.5)+4,'f',{'text-anchor':'end',fill:'var(--inchiostro)','font-style':'italic','font-size':14}),'testo');
+})();
+
+/* 7. y = radice di 2x rispetto all'asse y */
+(function(){
+  var svg=document.getElementById('g-radice');
+  function x(y){return y*y/2;}
+  var P=new Piano(svg,[-0.5,9.6],[-0.3,4.8],{l:24,r:24,t:26,b:20}); P.assi([2,8]);
+  regY(P,x,zero,2,4,tratt(svg,'t-rd','#eaf1ea','var(--verde)'));
+  P.curva(function(t){return Math.sqrt(2*t);},0,9.4,300,'var(--inchiostro)');
+  oriz(P,2,2); oriz(P,4,8); vert(P,2,2); vert(P,8,4);
+  taccaY(P,2,'2'); taccaY(P,4,'4');
+  P.add(txt(P.X(1.6),P.Y(3)+5,'A',{'text-anchor':'middle',fill:'var(--verde)','font-size':14,'font-weight':700}),'testo');
+  P.add(txt(P.X(6.5),P.Y(Math.sqrt(13))+24,'y = √(2x)',{'text-anchor':'start',fill:'var(--inchiostro)','font-size':12}),'testo');
+})();
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
