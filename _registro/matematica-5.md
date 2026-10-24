@@ -865,6 +865,7 @@ teorema del confronto, a pagina 21.
   e su mezza pagina, non è materia di quesito a sé nel percorso della quinta; la traccia
   stessa non sviluppa il caso di intervallo illimitato, quindi la pagina resta limitata al
   solo caso con asintoto verticale che compare nella traccia.
+- Revisione (24/10/2026, regole 13/10): parole 114 → 53 (sommario incluso). Pagina mai revisionata: impaginazione a quaderno (stile, aiuto Piano e script dell'unità 39), tolti sommario e il titoletto «Asintoto verticale in un estremo» (tenuto «Esempio»); apertura a domanda, ipotesi (asintoto in x = b, f integrabile su ogni [a,z] con z < b) in una frase, definizione in .def rosso, esito del limite in elenco caso → conseguenza (la condizione «se il limite è finito» era nella didascalia; aggiunta la voce «limite infinito → non converge»), esempio Dati/Calcolare con F(z) e limite in due .eq. Nessuna correzione (SymPy: F(z) = 3∛z + 3∛2, limite 3∛2 ≈ 3,78). Nessuna comparsa. Figure rifatte da script: grafico generico calcolato (f = 0,6/√(b − x)) con asintoto rosso tratteggiato e area da a a z; grafico dell'esempio calcolato su entrambi i lati dell'asintoto, cursore su z con punto mobile, area e F(z) a fianco («→ 3,78» in verde vicino a 0). Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 41 — Introduzione e problema di Cauchy
 - Parole: 470, unità ex novo (nessuna pagina di traccia: argomento assente dagli
