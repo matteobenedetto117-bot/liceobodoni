@@ -359,6 +359,7 @@
 - Parole: 265 su 1 pagina di traccia (pag. 64, più il disegno della carrucola in testa a pag. 65)
 - Rettifica: nessuna, la traccia è corretta
 - Aggiunta: un solo esempio numerico (m = 4,50 kg, T ≈ 44,1 N), perché in tutta l'unità la traccia non ne contiene nessuno; l'esempio del vaso appeso di pag. 65 appartiene all'unità 45
+- Revisione (24/10/2026, regole 13/10): titolo invariato; parole 170 → 110. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 43). Apertura a domanda; forze su corpo e soffitto in elenco; T⃗ + F⃗p = 0 in .eq, T = F_p = mg in .def rosso; tolte la sezione «Dove si continua» e le frasi che ripetevano la figura; nota in una frase; esempio (m = 4,50 kg, T ≈ 44,1 N, verificato: 44,145 N) spostato in fondo in forma Dati/Calcolare. Precisazione: la carrucola conserva il modulo della tensione con fune di massa trascurabile e carrucola senza attrito (condizione aggiunta). Nessuna comparsa da togliere. Figure ridisegnate da script: corpo appeso con cursore sulla massa (2–10 kg, frecce proporzionali, T = mg a fianco) e fune tesa; carrucola con cursore sulla direzione φ del tratto tirato (0–90°, T = 44,1 N su entrambi i tratti). Nessuna figura decorativa.
 
 ## Unità 45 — Corpo sospeso a due funi
 - Parole: 590 su 2 pagine di traccia (pp. 65–66), di cui 473 di prosa e il resto formule

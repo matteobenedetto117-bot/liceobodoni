@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equilibrio di un corpo appeso e carrucola — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:560px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,100 +58,137 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Equilibrio di un corpo appeso e carrucola</h1>
 </header>
 
-<p>Quando un corpo è appeso al soffitto, la forza peso viene controbilanciata dalla
-<strong>tensione</strong> della fune. Sul soffitto viene applicata la stessa tensione,
-controbilanciata a sua volta dalla reazione vincolare del soffitto.</p>
+<p>Corpo di massa $m$ appeso al soffitto con una fune: quali forze agiscono e quanto è tesa la fune?</p>
 
-<figure class="dis">
-<svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <line x1="120" y1="60" x2="330" y2="60" stroke="#222" stroke-width="3"/>
-  <g stroke="#222" stroke-width="1.5">
-    <line x1="130" y1="60" x2="118" y2="46"/><line x1="160" y1="60" x2="148" y2="46"/>
-    <line x1="190" y1="60" x2="178" y2="46"/><line x1="220" y1="60" x2="208" y2="46"/>
-    <line x1="250" y1="60" x2="238" y2="46"/><line x1="280" y1="60" x2="268" y2="46"/>
-    <line x1="310" y1="60" x2="298" y2="46"/>
-  </g>
-  <line x1="225" y1="60" x2="225" y2="190" stroke="#222" stroke-width="2"/>
-  <rect x="192" y="190" width="66" height="44" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="205" y1="60" x2="205" y2="12" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="168" y="26" fill="#2a6fd6">R<tspan font-size="11" dy="4">v</tspan></text>
-  <line x1="205" y1="60" x2="205" y2="112" stroke="#1a8a3c" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="168" y="100" fill="#1a8a3c">T</text>
-  <line x1="245" y1="190" x2="245" y2="132" stroke="#1a8a3c" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="256" y="148" fill="#1a8a3c">T</text>
-  <line x1="225" y1="234" x2="225" y2="288" stroke="#cc2222" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="232" y="284" fill="#cc2222">F<tspan font-size="11" dy="4">p</tspan></text>
-  <line x1="370" y1="150" x2="500" y2="150" stroke="#222" stroke-width="2"/>
-  <line x1="375" y1="150" x2="425" y2="150" stroke="#1a8a3c" stroke-width="2.5" marker-end="url(#fr)"/>
-  <line x1="495" y1="150" x2="445" y2="150" stroke="#1a8a3c" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="385" y="138" fill="#1a8a3c">T</text>
-  <text x="470" y="138" fill="#1a8a3c">T</text>
-  <text x="372" y="184" fill="#555" font-size="12">la tensione punta verso il centro della fune</text>
-</svg>
-<figcaption>A sinistra: il corpo appeso, con la tensione su entrambi gli estremi
-della fune. A destra: i due vettori tensione di una fune tesa.</figcaption>
-</figure>
+<ul>
+<li>sul corpo: forza peso $\vec F_p$ verso il basso, tensione $\vec T$ verso l'alto;</li>
+<li>sul soffitto: tensione $\vec T$ verso il basso, reazione vincolare $\vec R_v$ verso l'alto.</li>
+</ul>
 
-<p>In generale la tensione si applica a <strong>entrambi</strong> gli estremi della
-fune e punta verso il centro: in basso tira il corpo verso l'alto, in alto tira il
-soffitto verso il basso.</p>
+<div class="fig">
+<svg id="g-appeso" viewBox="0 0 440 470" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Corpo appeso al soffitto con le forze, e fune tesa con la tensione ai due estremi"></svg>
+<div class="cursore"><label for="cur-m">m</label><input id="cur-m" type="range" min="2" max="10" step="0.5" value="4.5"><span class="val" id="val-m"></span></div>
+<div class="did-parti" style="--n:2"><p class="did">Corpo appeso</p><p class="did">Fune tesa: tensione ai due estremi, verso il centro</p></div>
+</div>
 
-<p>Dalla condizione di equilibrio del corpo, con le sole due forze verticali:</p>
+<p>Equilibrio del corpo, con le sole due forze verticali:</p>
 
-$$\vec{T} + \vec{F}_p = \vec{0} \quad\longrightarrow\quad T = F_p = mg$$
+<p class="eq">$$\vec T + \vec F_p = \vec 0$$</p>
 
-<p>Per un corpo di massa $m = 4{,}50\ \text{kg}$ la fune è quindi tesa con</p>
-
-$$T = 4{,}50\ \text{kg} \cdot 9{,}81\ \tfrac{\text{N}}{\text{kg}} \approx 44{,}1\ \text{N}$$
+<div class="def"><span class="et">Tensione della fune</span>
+<p class="eq principio">$$T = F_p = mg$$</p></div>
 
 <h2>Carrucola</h2>
 
-<p>La carrucola è uno strumento che permette di modificare la direzione della
-tensione della fune senza modificarne il modulo.</p>
+<p>Con fune di massa trascurabile e carrucola senza attrito, la carrucola cambia la direzione della tensione, non il modulo.</p>
 
-<figure class="dis">
-<svg viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="fr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <circle cx="300" cy="55" r="28" fill="#fff" stroke="#222" stroke-width="2.5"/>
-  <circle cx="300" cy="55" r="3" fill="#222"/>
-  <path d="M272,55 L160,190" fill="none" stroke="#222" stroke-width="2"/>
-  <path d="M328,55 L328,140" fill="none" stroke="#222" stroke-width="2"/>
-  <rect x="300" y="140" width="66" height="44" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="222" y1="115" x2="262" y2="67" stroke="#1a8a3c" stroke-width="2.5" marker-end="url(#fr2)"/>
-  <text x="212" y="106" fill="#1a8a3c">T</text>
-  <line x1="328" y1="130" x2="328" y2="80" stroke="#1a8a3c" stroke-width="2.5" marker-end="url(#fr2)"/>
-  <text x="338" y="92" fill="#1a8a3c">T</text>
-  <line x1="222" y1="128" x2="172" y2="188" stroke="#cc2222" stroke-width="2.5" marker-end="url(#fr2)"/>
-  <text x="150" y="196" fill="#cc2222">F</text>
-  <line x1="333" y1="184" x2="333" y2="236" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#fr2)"/>
-  <text x="340" y="228" fill="#2a6fd6">F<tspan font-size="11" dy="4">p</tspan></text>
-</svg>
-<figcaption>La fune gira attorno alla carrucola: la tensione ha lo stesso modulo
-sui due tratti, ma direzioni diverse.</figcaption>
-</figure>
-
-<div class="nota">
-<strong>Attenzione.</strong> La carrucola non riduce la forza necessaria: dei due
-vettori tensione cambia la direzione, non il modulo. Chi tira dall'altra parte deve
-comunque esercitare una forza pari a $mg$.
+<div class="fig">
+<svg id="g-carr" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Carrucola: la fune tirata in direzioni diverse, con tensione dello stesso modulo sui due tratti"></svg>
+<div class="cursore"><label for="cur-phi">φ</label><input id="cur-phi" type="range" min="0" max="90" step="1" value="40"><span class="val" id="val-phi"></span></div>
+<p class="did">Stesso modulo $T$ sui due tratti, direzioni diverse</p>
 </div>
 
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Con due funi non verticali le tensioni incognite diventano due, e si ricavano
-scomponendo lungo gli assi: è il caso del corpo sospeso a due funi.</p>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>La carrucola non riduce la forza: chi tira esercita comunque una forza di modulo $mg$.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: corpo appeso, $m = 4{,}50\ \text{kg}$. Calcolare la tensione della fune.</p>
+
+<p class="eq">$$T = mg = 4{,}50\ \text{kg} \cdot 9{,}81\ \text{N/kg} \approx 44{,}1\ \text{N}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../44-equilibrio-sul-piano-inclinato/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equilibrio sul piano inclinato</span></a><a class="successiva" href="../46-corpo-sospeso-a-due-funi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Corpo sospeso a due funi</span></a></nav>
+<footer><p>Fisica prima &middot; Statica del punto materiale &middot; Unità 44</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg', g=9.81;
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,base,sub,col,anc){var t=el(p,'text',{'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':anc||'middle'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  function pos(t,x,y){t.setAttribute('x',x);t.setAttribute('y',y);}
+  function L2(l,x1,y1,x2,y2){l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);}
+  function marcatori(s,id){var d=el(s,'defs',{});[['r','var(--rosso)'],['v','var(--verde)'],['b','var(--blu)']].forEach(function(c){var mk=el(d,'marker',{id:id+c[0],markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:c[1]});});}
+  function vett(s,id,c,col){return el(s,'line',{stroke:col,'stroke-width':2.6,'marker-end':'url(#'+id+c+')'});}
+  function soffitto(s,x1,x2,y){el(s,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'var(--inchiostro)','stroke-width':2.5});for(var x=x1+8;x<=x2;x+=18)el(s,'line',{x1:x,y1:y,x2:x-10,y2:y-10,stroke:'var(--inchiostro)','stroke-width':1.2});}
+  function fmt(v,c){return v.toFixed(c).replace('.',',');}
+
+  /* figura 1: corpo appeso */
+  var s=document.getElementById('g-appeso');
+  if(s){
+    marcatori(s,'ga');
+    var k=9/g; /* px per newton */
+    soffitto(s,40,200,100);
+    el(s,'line',{x1:120,y1:100,x2:120,y2:330,stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'rect',{x:95,y:330,width:50,height:40,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    var vR=vett(s,'ga','b','var(--blu)'), vT1=vett(s,'ga','v','var(--verde)'), vT2=vett(s,'ga','v','var(--verde)'), vP=vett(s,'ga','r','var(--rosso)');
+    var lR=lab(s,'R','v','var(--blu)','end'), lT1=lab(s,'T','','var(--verde)','start'), lT2=lab(s,'T','','var(--verde)','start'), lP=lab(s,'F','p','var(--rosso)','start');
+    /* pannello destro: fune tesa */
+    el(s,'line',{x1:270,y1:240,x2:410,y2:240,stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'circle',{cx:270,cy:240,r:3.5,fill:'var(--inchiostro)'}); el(s,'circle',{cx:410,cy:240,r:3.5,fill:'var(--inchiostro)'});
+    var a1=vett(s,'ga','v','var(--verde)'), a2=vett(s,'ga','v','var(--verde)'); L2(a1,270,240,315,240); L2(a2,410,240,365,240);
+    pos(lab(s,'T','','var(--verde)'),292,228); pos(lab(s,'T','','var(--verde)'),388,228);
+    var cm=document.getElementById('cur-m'), vm=document.getElementById('val-m');
+    var disegna1=function(){
+      var m=+cm.value, L=k*m*g;
+      L2(vR,104,100,104,100-L); pos(lR,96,100-L/2+5);
+      L2(vT1,136,100,136,100+L); pos(lT1,144,100+L/2+5);
+      L2(vT2,136,330,136,330-L); pos(lT2,144,330-L/2+5);
+      L2(vP,120,370,120,370+L); pos(lP,128,370+L/2+5);
+      vm.innerHTML='<i>m</i> = '+fmt(m,1)+' kg → <i>T</i> = <i>mg</i> = '+fmt(m*g,1)+' N';
+    };
+    cm.addEventListener('input',disegna1); disegna1();
+  }
+
+  /* figura 2: carrucola */
+  var c=document.getElementById('g-carr');
+  if(c){
+    marcatori(c,'gc');
+    var cx=260, cy=70, r=26, m2=4.5, Lf=60, Lc=170;
+    soffitto(c,225,295,16);
+    el(c,'line',{x1:cx,y1:16,x2:cx,y2:cy,stroke:'var(--inchiostro)','stroke-width':2});
+    var corda=el(c,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    el(c,'circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.5});
+    el(c,'circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'});
+    el(c,'rect',{x:cx+r-20,y:200,width:40,height:40,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    var tB=vett(c,'gc','v','var(--verde)'); L2(tB,cx+r+10,200,cx+r+10,200-Lf);
+    pos(lab(c,'T','','var(--verde)','start'),cx+r+18,175);
+    var pB=vett(c,'gc','r','var(--rosso)'); L2(pB,cx+r,240,cx+r,240+Lf);
+    pos(lab(c,'F','p','var(--rosso)','start'),cx+r+8,280);
+    var tH=vett(c,'gc','v','var(--verde)'), fH=vett(c,'gc','b','var(--blu)');
+    var lTH=lab(c,'T','','var(--verde)'), lFH=lab(c,'F','','var(--blu)');
+    var mano=el(c,'circle',{r:4,fill:'var(--inchiostro)'});
+    var cp=document.getElementById('cur-phi'), vp=document.getElementById('val-phi');
+    var disegna2=function(){
+      var f=+cp.value*Math.PI/180, dx=-Math.sin(f), dy=Math.cos(f);
+      var Px=cx-r*Math.cos(f), Py=cy-r*Math.sin(f), Hx=Px+Lc*dx, Hy=Py+Lc*dy;
+      corda.setAttribute('d','M'+(cx+r)+',200 L'+(cx+r)+','+cy+' A'+r+','+r+' 0 0 0 '+Px+','+Py+' L'+Hx+','+Hy);
+      mano.setAttribute('cx',Hx); mano.setAttribute('cy',Hy);
+      L2(tH,Hx,Hy,Hx-Lf*dx,Hy-Lf*dy); L2(fH,Hx,Hy,Hx+Lf*dx,Hy+Lf*dy);
+      var nx=-Math.cos(f), ny=-Math.sin(f);
+      pos(lTH,Hx-32*dx+16*nx,Hy-32*dy+16*ny+5); pos(lFH,Hx+34*dx+16*nx,Hy+34*dy+16*ny+5);
+      vp.innerHTML='φ = '+cp.value+'° → <i>T</i> = '+fmt(m2*g,1)+' N su entrambi i tratti';
+    };
+    cp.addEventListener('input',disegna2); disegna2();
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
