@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calore latente e passaggi di stato — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.esempio{background:#f5f7f2;border-left:4px solid #5c7a4a;border-radius:10px;padding:14px 18px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,76 +58,100 @@
   <h1>Calore latente e passaggi di stato</h1>
 </header>
 
-<p>Quando un corpo si trova in prossimità di un passaggio di stato, la sua temperatura non
-cambia anche se continuiamo a fornirgli calore. Questo perché il corpo ha bisogno di una
-certa quantità di calore, necessaria a rompere i legami chimici tra le molecole e a
-consentire il passaggio di stato: quella quantità è il <strong>calore latente</strong>.</p>
+<p>Corpo che cambia stato a pressione costante: che cosa succede alla temperatura se si continua a fornire calore?</p>
 
-<div class="formula-box">
-$$L = \frac{Q}{m}$$
-</div>
+<ul>
+<li>durante il passaggio di stato → temperatura costante;</li>
+<li>il calore fornito serve a rompere i legami fra le molecole, non ad aumentare la temperatura.</li>
+</ul>
 
-<p>Nella formula $Q$ è il calore necessario per il passaggio di stato e $m$ è la massa del
-corpo che lo compie: $L$ si misura quindi in $\text{J/kg}$. Il suo valore dipende dalla
-sostanza e dal tipo di passaggio &mdash; fusione, vaporizzazione, e così via &mdash; ed è
-tabulato caso per caso.</p>
+<p>Il calore necessario per unità di massa è il calore latente:</p>
 
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Immaginiamo di avere $1\ \text{kg}$ di ghiaccio a $-20\,^\circ\text{C}$ e di riscaldarlo
-continuamente, fornendogli calore $Q$ in modo costante. Il grafico di $T$ in funzione di
-$Q$ mostra quattro tratti ben distinti.</p>
+<div class="def"><span class="et">Calore latente</span>
+<p class="eq principio">$$L = \frac{Q}{m} \qquad\qquad Q = m\,L$$</p></div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>$\text{J/kg}$; valore tabulato, dipende dalla sostanza e dal passaggio (fusione, vaporizzazione…).</p></div>
+
+<h2>Esempio</h2>
+
+<p>$1\ \text{kg}$ di ghiaccio a $-20\,^\circ\text{C}$, a pressione atmosferica, riscaldato fornendo calore con continuità: grafico di $T$ in funzione di $Q$.</p>
+
 <div class="fig">
-<svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="u52ax" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
-<path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="60" y1="290" x2="600" y2="290" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u52ax)"/>
-<line x1="60" y1="290" x2="60" y2="30" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#u52ax)"/>
-<text x="606" y="295" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">Q</text>
-<text x="40" y="24" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)">T (&deg;C)</text>
-<line x1="52" y1="230" x2="600" y2="230" stroke="var(--riga)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="30" y="234" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">0</text>
-<line x1="52" y1="90" x2="600" y2="90" stroke="var(--riga)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="24" y="94" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">100</text>
-<text x="30" y="292" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)">-20</text>
-<path d="M80,275 L190,230" fill="none" stroke="var(--rosso)" stroke-width="2.4"/>
-<path d="M190,230 L300,230" fill="none" stroke="var(--blu)" stroke-width="2.4"/>
-<path d="M300,230 L440,90" fill="none" stroke="var(--rosso)" stroke-width="2.4"/>
-<path d="M440,90 L560,90" fill="none" stroke="var(--blu)" stroke-width="2.4"/>
-<circle cx="80" cy="275" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="190" cy="230" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="300" cy="230" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="440" cy="90" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="560" cy="90" r="3.5" fill="var(--inchiostro)"/>
-<text x="105" y="312" font-size="12" fill="var(--rosso)" font-family="var(--sans)" text-anchor="middle">$Q=cm\Delta T$</text>
-<text x="105" y="326" font-size="11" fill="var(--grigio)" font-family="var(--sans)" text-anchor="middle">c ghiaccio</text>
-<text x="245" y="216" font-size="12" fill="var(--blu)" font-family="var(--sans)" text-anchor="middle">$Q=mL$</text>
-<text x="245" y="204" font-size="11" fill="var(--grigio)" font-family="var(--sans)" text-anchor="middle">calore latente di fusione</text>
-<text x="370" y="150" font-size="12" fill="var(--rosso)" font-family="var(--sans)" text-anchor="middle">$Q=cm\Delta T$</text>
-<text x="370" y="164" font-size="11" fill="var(--grigio)" font-family="var(--sans)" text-anchor="middle">c acqua</text>
-<text x="500" y="76" font-size="12" fill="var(--blu)" font-family="var(--sans)" text-anchor="middle">$Q=mL$</text>
-<text x="500" y="64" font-size="11" fill="var(--grigio)" font-family="var(--sans)" text-anchor="middle">calore latente di vaporizzazione</text>
-<text x="245" y="250" font-size="11" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">tutto il ghiaccio diventa acqua</text>
-<text x="500" y="110" font-size="11" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">tutta l'acqua è diventata vapore</text>
-</svg>
-<p class="did">Riscaldando il ghiaccio da $-20\,^\circ\text{C}$, la temperatura sale finché
-non arriva a $0\,^\circ\text{C}$ (tratto rosso). A quel punto resta ferma: tutto il calore
-fornito serve a sciogliere il ghiaccio, non a scaldarlo (tratto blu, $Q=mL$). Diventato
-acqua, il calore torna a farne salire la temperatura fino a $100\,^\circ\text{C}$ (tratto
-rosso), dove resta di nuovo ferma finché l'acqua non è tutta evaporata (tratto blu).</p>
+<svg id="g-lat" viewBox="0 0 440 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Temperatura in funzione del calore fornito, dal ghiaccio a -20 gradi fino all'evaporazione completa"></svg>
+<div class="cursore"><label for="cur-q">Q</label><input id="cur-q" type="range" min="0" max="3054" step="2" value="600"><span class="val" id="val-q"></span></div>
+<p class="did">Tratti in scala (calori specifici e latenti tabulati dell'acqua)</p>
 </div>
-<p>Nei due tratti inclinati la temperatura cambia e vale la legge fondamentale della
-termologia, $Q=cm\Delta T$, con il calore specifico rispettivamente del ghiaccio e
-dell'acqua. Nei due tratti orizzontali la temperatura resta ferma e vale invece
-$Q=mL$, con il calore latente di fusione e poi di vaporizzazione.</p>
-</div>
+
+<ul>
+<li>tratti inclinati → $T$ cambia, $Q = c\,m\,\Delta T$ (con $c$ del ghiaccio, poi dell'acqua);</li>
+<li>tratti orizzontali → $T$ costante, $Q = m\,L$ (fusione a $0\,^\circ\text{C}$, poi vaporizzazione a $100\,^\circ\text{C}$).</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../51-calorimetria-e-temperatura-di-equilibrio/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Calorimetria e temperatura di equilibrio</span></a><a class="successiva" href="../../index.html"><span class="dir">Indice &rarr;</span><span class="tit">Fisica — Seconda</span></a></nav>
 <footer><p>Fisica seconda &middot; Calore e termologia &middot; Unità 42</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,anc,sz){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'start'});t.textContent=s;return t;}
+  var s=document.getElementById('g-lat'); if(!s)return;
+  /* 1 kg di acqua: c ghiaccio 2100, Lf 3,34e5, c acqua 4186, Lv 2,26e6 (J) */
+  var m=1, cg=2100, Lf=3.34e5, ca=4186, Lv=2.26e6;
+  var Q1=m*cg*20/1000, Q2=Q1+m*Lf/1000, Q3=Q2+m*ca*100/1000, Q4=Q3+m*Lv/1000; /* kJ */
+  var x0=62, x1=420, y0=250, qmax=3200;
+  function X(q){return x0+(x1-x0)*q/qmax;}
+  function Y(T){return y0-(T+30)*1.4;}
+  function Tdi(q){if(q<=Q1)return -20+q/(m*cg/1000);if(q<=Q2)return 0;if(q<=Q3)return (q-Q2)/(m*ca/1000);return 100;}
+  var d=el(s,'defs',{}), mk=el(d,'marker',{id:'glax',markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});
+  el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:'var(--inchiostro)'});
+  /* griglia e assi */
+  [-20,0,100].forEach(function(T){el(s,'line',{x1:x0,y1:Y(T),x2:x1,y2:Y(T),stroke:'var(--riga)','stroke-width':1,'stroke-dasharray':'3 3'});txt(s,x0-6,Y(T)+4,(T<0?'−'+(-T):T),'var(--inchiostro)','end',11);});
+  [1000,2000,3000].forEach(function(q){el(s,'line',{x1:X(q),y1:y0,x2:X(q),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1});txt(s,X(q),y0+17,q,'var(--inchiostro)','middle',11);});
+  txt(s,x0-6,y0+17,'0','var(--inchiostro)','end',11);
+  el(s,'line',{x1:x0,y1:y0,x2:x1+12,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#glax)'});
+  el(s,'line',{x1:x0,y1:y0,x2:x0,y2:24,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#glax)'});
+  txt(s,x1+4,y0+30,'Q (kJ)','var(--inchiostro)','end',12);
+  txt(s,x0+8,30,'T (°C)','var(--inchiostro)','start',12);
+  /* curva calcolata */
+  var P=[[0,-20],[Q1,0],[Q2,0],[Q3,100],[Q4,100]];
+  for(var i=0;i<4;i++){el(s,'line',{x1:X(P[i][0]),y1:Y(P[i][1]),x2:X(P[i+1][0]),y2:Y(P[i+1][1]),stroke:(i%2?'var(--blu)':'var(--inchiostro)'),'stroke-width':2.6,'stroke-linecap':'round'});}
+  P.forEach(function(p){el(s,'circle',{cx:X(p[0]),cy:Y(p[1]),r:3,fill:'var(--inchiostro)'});});
+  txt(s,X(Q1)+8,Y(-12),'ghiaccio','var(--grigio)','start',11);
+  txt(s,(X(Q1)+X(Q2))/2,Y(0)-8,'fusione','var(--blu)','middle',11);
+  txt(s,X(Q2+250)+12,Y(55),'acqua','var(--grigio)','start',11);
+  txt(s,(X(Q3)+X(Q4))/2,Y(100)-8,'ebollizione','var(--blu)','middle',11);
+  /* punto mobile */
+  var pt=el(s,'circle',{r:6,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});
+  var cur=document.getElementById('cur-q'), v=document.getElementById('val-q');
+  function stato(q){if(q<Q1)return['ghiaccio',false];if(q<=Q2)return['ghiaccio e acqua',true];if(q<Q3)return['acqua',false];return['acqua e vapore',true];}
+  function dis(){
+    var q=+cur.value, T=Tdi(q), st=stato(q);
+    pt.setAttribute('cx',X(q).toFixed(1));pt.setAttribute('cy',Y(T).toFixed(1));
+    v.innerHTML='<i>Q</i> = '+q+' kJ → <i>T</i> = '+(T<-0.05?'−'+(-T).toFixed(0):T.toFixed(0))+' °C, '+st[0]+(st[1]?' · <span class="ok">T costante</span>':'');
+  }
+  cur.addEventListener('input',dis); dis();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
