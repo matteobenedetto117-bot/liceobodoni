@@ -556,6 +556,7 @@
   Ridisegnati in SVG lo schema Terra-Vega con la distanza propria e il confronto fra distanza
   a riposo e distanza contratta vista dalla navicella. Nessuno strumento interattivo: la curva
   di γ(v) è già stata resa interattiva nell'unità 41 e qui sarebbe stata ridondante.
+- Revisione (24/10/2026, regole 13/10): parole 326 → 104 (sommario incluso). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 42); apertura a domanda; tolti sommario (il limite invalicabile di c è diventato una voce d'elenco), «Nella prossima unità», i titoletti «La distanza propria e il viaggio verso Vega» e «Due punti di vista sulla stessa velocità», i rimandi all'unità precedente, la frase di commento finale; le due espressioni di v in elenco caso → conseguenza; derivazione in una .eq; L = L₀/γ (con L₀ = γL) in .def rosso; conseguenze γ ≥ 1 → L ≤ L₀ e v vicina a c in elenco; esempio in forma Dati/Calcolare. Controllo concettuale (SymPy): γ(0,99c) ≈ 7,0888, L ≈ 3,569 a.l., risultato 3,57 a.l. confermato. Aggiunta la condizione «lunghezze misurate lungo la direzione del moto». Figure rifatte da script: schema Terra–Vega con distanza propria; confronto L₀/L corretto (nella vecchia figura L era circa 0,62·L₀ invece di 0,14·L₀) e reso interattivo con cursore su v (L calcolata, valore a fianco). Nessuna comparsa da togliere, nessun esempio tolto.
 
 ## Unità 45 — Il decadimento dei muoni
 - Parole: 443 su 3 pagine di traccia (pagine 81-83).
