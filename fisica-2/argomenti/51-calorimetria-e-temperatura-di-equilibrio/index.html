@@ -5,18 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Calorimetria e temperatura di equilibrio — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.esempio{background:#f5f7f2;border-left:4px solid #5c7a4a;border-radius:10px;padding:14px 18px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,93 +59,90 @@
   <h1>Calorimetria e temperatura di equilibrio</h1>
 </header>
 
-<h2>Il bilancio calorimetrico</h2>
+<p>Blocchetto a temperatura $T_b$ immerso in acqua a temperatura $T_a &lt; T_b$: a quale temperatura si portano?</p>
 
-<p>Un <strong>calorimetro</strong> è un contenitore isolato termicamente dall'esterno: tutto
-il calore scambiato al suo interno resta al suo interno. Immergiamo nell'acqua, a
-temperatura $T_a$, un blocchetto a temperatura $T_b$, con $T_b > T_a$.</p>
+<ul>
+<li>calorimetro: contenitore isolato termicamente → nessun calore scambiato con l'esterno;</li>
+<li>il blocco cede calore, l'acqua lo riceve, fino alla stessa temperatura $T_{eq}$;</li>
+<li>nessun passaggio di stato.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg">
-<text x="110" y="20" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">prima del contatto</text>
-<rect x="40" y="40" width="140" height="110" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="46" y="70" width="128" height="74" fill="var(--blu-chiaro)" stroke="none"/>
-<line x1="120" y1="30" x2="120" y2="80" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="120" cy="82" r="5" fill="var(--rosso)"/>
-<text x="150" y="60" font-size="12" fill="var(--blu)" font-family="var(--sans)">T&#8320;</text>
-<rect x="85" y="105" width="26" height="26" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="98" y="122" font-size="11" fill="var(--rosso)" font-family="var(--sans)" text-anchor="middle">T&#8271;</text>
-<text x="110" y="172" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">acqua $T_a$ &middot; blocco $T_b$</text>
-
-<text x="410" y="20" font-size="13" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">equilibrio</text>
-<rect x="340" y="40" width="140" height="110" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="346" y="70" width="128" height="74" fill="var(--blu-chiaro)" stroke="none"/>
-<line x1="420" y1="30" x2="420" y2="80" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="420" cy="82" r="5" fill="var(--verde)"/>
-<rect x="385" y="105" width="26" height="26" fill="none" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="450" y="60" font-size="12" fill="var(--verde)" font-family="var(--sans)">T_eq</text>
-<text x="410" y="172" font-size="12" fill="var(--inchiostro)" font-family="var(--sans)" text-anchor="middle">acqua e blocco a $T_{eq}$</text>
-</svg>
-<p class="did">A sinistra, appena immerso, il blocchetto è a $T_b$ e l'acqua a $T_a$: il
-calore passa dal blocco all'acqua. A destra, raggiunto l'equilibrio, entrambi sono alla
-stessa temperatura $T_{eq}$.</p>
+<svg id="g-cal" viewBox="0 0 440 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Calorimetro prima del contatto e all'equilibrio"></svg>
+<div class="did-parti" style="--n:2"><p class="did">Prima: calore dal blocco all'acqua</p><p class="did">Equilibrio: tutto a $T_{eq}$</p></div>
 </div>
 
-<p>Il blocco si raffredda cedendo calore, l'acqua si riscalda ricevendolo:</p>
+<p>Calore scambiato dal blocco ($Q_b &lt; 0$) e dall'acqua ($Q_a &gt; 0$):</p>
 
-<div class="formula-box">
-$$Q_{\text{blocco}} = c_b\,m_b\,(T_{eq}-T_b) \qquad\qquad Q_{\text{acqua}} = c_a\,m_a\,(T_{eq}-T_a)$$
-</div>
+<p class="eq">$$Q_b = c_b\,m_b\,(T_{eq}-T_b) \qquad Q_a = c_a\,m_a\,(T_{eq}-T_a)$$</p>
 
-<p>Il primo è negativo, perché $T_{eq}&lt;T_b$: il blocco perde calore. Il secondo è
-positivo, perché $T_{eq}&gt;T_a$: l'acqua ne guadagna. Poiché il calorimetro è isolato,
-tutto il calore ceduto dal blocco è ricevuto dall'acqua, nessuno si disperde:</p>
+<p>Il calore ceduto dal blocco è ricevuto dall'acqua:</p>
 
-<div class="formula-box">
-$$-Q_{\text{blocco}} = Q_{\text{acqua}}$$
-</div>
+<p class="eq">$$-Q_b = Q_a \quad\Longrightarrow\quad c_b m_b T_b + c_a m_a T_a = T_{eq}\,(c_a m_a + c_b m_b)$$</p>
 
-<p>Sostituendo ed espandendo i prodotti si isolano da una parte i termini con $T_{eq}$:</p>
+<div class="def"><span class="et">Temperatura di equilibrio</span>
+<p class="eq principio">$$T_{eq} = \frac{c_b\,m_b\,T_b + c_a\,m_a\,T_a}{c_a\,m_a + c_b\,m_b}$$</p></div>
 
-<div class="formula-box">
-$$c_b m_b T_b + c_a m_a T_a = T_{eq}\,(c_a m_a + c_b m_b)$$
-</div>
+<p>$T_{eq}$ è la media di $T_a$ e $T_b$ pesata con i prodotti $c\,m$: resta più vicina a quella del corpo con $c\,m$ maggiore.</p>
 
-<p>da cui la <strong>temperatura di equilibrio</strong>:</p>
+<h2>Esempio 1</h2>
 
-<div class="formula-box">
-$$T_{eq} = \frac{c_b\,m_b\,T_b + c_a\,m_a\,T_a}{c_a\,m_a + c_b\,m_b}$$
-</div>
+<p>Dati: acqua, $m_a = 25\ \text{kg}$ a $30\,^\circ\text{C}$ e $m_b = 55\ \text{kg}$ a $68\,^\circ\text{C}$ ($c_a = c_b$). Calcolare $T_{eq}$.</p>
 
-<p>È una media delle due temperature di partenza, pesata non sulle masse soltanto ma sui
-prodotti $c\,m$: il corpo con $c\,m$ maggiore "conta di più" e la temperatura finale gli
-resta più vicina.</p>
+<p class="eq">$$T_{eq} = \frac{m_b T_b + m_a T_a}{m_a + m_b} = \frac{55 \times 341{,}15 + 25 \times 303{,}15}{80}\ \text{K} \approx 329{,}3\ \text{K} \approx 56{,}1\,^\circ\text{C}$$</p>
 
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Mescoliamo $m_a=25\ \text{kg}$ di acqua a $T_a=30\,^\circ\text{C}=303{,}15\ \text{K}$
-con $m_b=55\ \text{kg}$ di acqua a $T_b=68\,^\circ\text{C}=341{,}15\ \text{K}$. Essendo lo
-stesso liquido, $c_a=c_b=c$ e si semplifica nella formula:</p>
-<div class="formula-box">
-$$T_{eq} = \frac{m_b T_b + m_a T_a}{m_a + m_b} = \frac{55\times341{,}15 + 25\times303{,}15}{80} \approx 329{,}3\ \text{K} = 56{,}15\,^\circ\text{C}$$
-</div>
-</div>
+<h2>Esempio 2</h2>
 
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un blocco metallico di $m_b=1\ \text{kg}$ a $T_b=100\,^\circ\text{C}=373{,}15\ \text{K}$,
-con $c_b=234\ \text{J/(kg·K)}$, viene immerso in $m_a=1\ \text{kg}$ di acqua a
-$T_a=0\,^\circ\text{C}=273{,}15\ \text{K}$, con $c_a=4186\ \text{J/(kg·K)}$:</p>
-<div class="formula-box">
-$$T_{eq} = \frac{c_b m_b T_b + c_a m_a T_a}{c_a m_a + c_b m_b} \approx 278{,}4\ \text{K} \approx 5{,}29\,^\circ\text{C}$$
-</div>
-<p>La temperatura finale resta molto vicina a quella iniziale dell'acqua, perché
-$c_a m_a$ è quasi venti volte più grande di $c_b m_b$.</p>
-</div>
+<p>Dati: blocco, $m_b = 1\ \text{kg}$, $T_b = 100\,^\circ\text{C}$, $c_b = 234\ \text{J/(kg·K)}$; acqua, $m_a = 1\ \text{kg}$, $T_a = 0\,^\circ\text{C}$, $c_a = 4186\ \text{J/(kg·K)}$. Calcolare $T_{eq}$.</p>
+
+<p class="eq">$$T_{eq} = \frac{234 \times 373{,}15 + 4186 \times 273{,}15}{4186 + 234}\ \text{K} \approx 278{,}4\ \text{K} \approx 5{,}3\,^\circ\text{C}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../50-legge-fondamentale-della-termologia/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Legge fondamentale della termologia</span></a><a class="successiva" href="../52-calore-latente-e-passaggi-di-stato/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Calore latente e passaggi di stato</span></a></nav>
 <footer><p>Fisica seconda &middot; Calore e termologia &middot; Unità 41</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,x,y,base,sub,col,anc){var t=el(p,'text',{x:x,y:y,'font-size':13,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':anc||'start'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  var s=document.getElementById('g-cal'); if(!s)return;
+  var d=el(s,'defs',{}), mk=el(d,'marker',{id:'gcr',markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});
+  el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:'var(--rosso)'});
+  function calorimetro(x0,colB,colA,eq){
+    /* recipiente: pareti doppie (isolamento) */
+    el(s,'path',{d:'M'+x0+',20 L'+x0+',170 L'+(x0+170)+',170 L'+(x0+170)+',20',fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'path',{d:'M'+(x0+8)+',20 L'+(x0+8)+',162 L'+(x0+162)+',162 L'+(x0+162)+',20',fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2});
+    el(s,'rect',{x:x0+9,y:60,width:152,height:101,fill:'var(--blu-chiaro)'});
+    el(s,'line',{x1:x0+9,y1:60,x2:x0+161,y2:60,stroke:'var(--blu)','stroke-width':1.2});
+    /* blocco */
+    el(s,'rect',{x:x0+30,y:105,width:40,height:40,fill:'#fff',stroke:colB,'stroke-width':2});
+    if(eq){lab(s,x0+50,130,'T','eq',colB,'middle');lab(s,x0+120,95,'T','eq',colA,'middle');}
+    else{lab(s,x0+50,130,'T','b',colB,'middle');lab(s,x0+130,95,'T','a',colA,'middle');}
+  }
+  calorimetro(20,'var(--rosso)','var(--blu)',false);
+  calorimetro(250,'var(--verde)','var(--verde)',true);
+  /* calore dal blocco all'acqua */
+  el(s,'line',{x1:95,y1:125,x2:130,y2:125,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#gcr)'});
+  var q=el(s,'text',{x:112,y:145,'font-size':13,'font-family':'sans-serif','font-style':'italic',fill:'var(--rosso)','text-anchor':'middle'});q.textContent='Q';
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
