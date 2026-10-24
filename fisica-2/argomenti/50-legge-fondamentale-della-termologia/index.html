@@ -5,15 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Legge fondamentale della termologia — Fisica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.esempio{background:#f5f7f2;border-left:4px solid #5c7a4a;border-radius:10px;padding:14px 18px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -24,40 +59,51 @@
   <h1>Legge fondamentale della termologia</h1>
 </header>
 
-<h2>Dalla definizione alla legge</h2>
+<p>Corpo di massa $m$ e calore specifico $c$: quanto calore $Q$ scambia quando la sua temperatura varia di $\Delta T$?</p>
 
-<p>Partiamo dalla definizione di capacità termica, $C = Q/\Delta T$, da cui:</p>
+<p>Dalla definizione di capacità termica, con $C = c\,m$:</p>
 
-<div class="formula-box">
-$$Q = C\,\Delta T$$
-</div>
+<p class="eq">$$Q = C\,\Delta T \qquad C = c\,m$$</p>
 
-<p>Al posto di $C$ sostituiamo $C = cm$, che è la definizione di calore specifico vista
-nell'unità precedente. Si ottiene così la <strong>legge fondamentale della termologia</strong>:</p>
+<div class="def"><span class="et">Legge fondamentale della termologia</span>
+<p class="eq principio">$$Q = c\,m\,\Delta T \qquad\Longrightarrow\qquad \Delta T = \frac{Q}{c\,m}$$</p></div>
 
-<div class="formula-box">
-$$Q = c\,m\,\Delta T$$
-</div>
+<p>Il calore scambiato è direttamente proporzionale a:</p>
 
-<p>Il calore scambiato da un corpo dipende dal materiale di cui è fatto (attraverso $c$),
-da quanto ne abbiamo (attraverso $m$) e da quanto cambia la sua temperatura ($\Delta T$).
-Verifichiamo le unità di misura: $[c\,m\,\Delta T] = \dfrac{\text{J}}{\text{kg}\cdot\text{K}}
-\cdot\text{kg}\cdot\text{K} = \text{J}$, coerente con $Q$.</p>
+<ul>
+<li>il calore specifico $c$ (materiale);</li>
+<li>la massa $m$;</li>
+<li>la variazione di temperatura $\Delta T$.</li>
+</ul>
 
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Forniamo $586\ \text{J}$ di energia a un blocchetto di ferro da $3{,}6\ \text{kg}$. Di
-quanto aumenta la sua temperatura?</p>
-<p>Dati: $c_{\text{ferro}} = 448\ \text{J/(kg·K)}$, $Q = 586\ \text{J}$, $m = 3{,}6\ \text{kg}$.</p>
-<p>Dalla legge fondamentale, isolando $\Delta T$:</p>
-<div class="formula-box">
-$$\Delta T = \frac{Q}{c\,m} = \frac{586}{448 \times 3{,}6} \approx 0{,}36\ \text{K}$$
-</div>
-</div>
+<p class="eq">$$[c\,m\,\Delta T] = \frac{\text{J}}{\text{kg·K}}\cdot\text{kg}\cdot\text{K} = \text{J}$$</p>
+
+<h2>Esempio</h2>
+
+<p>Dati: blocchetto di ferro, $m = 3{,}6\ \text{kg}$, $c = 448\ \text{J/(kg·K)}$, $Q = 586\ \text{J}$. Calcolare $\Delta T$.</p>
+
+<p class="eq">$$\Delta T = \frac{Q}{c\,m} = \frac{586\ \text{J}}{448\ \text{J/(kg·K)} \times 3{,}6\ \text{kg}} \approx 0{,}36\ \text{K}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../49-capacita-termica-e-calore-specifico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Capacità termica e calore specifico</span></a><a class="successiva" href="../51-calorimetria-e-temperatura-di-equilibrio/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Calorimetria e temperatura di equilibrio</span></a></nav>
 <footer><p>Fisica seconda &middot; Calore e termologia &middot; Unità 40</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

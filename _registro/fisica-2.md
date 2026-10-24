@@ -265,6 +265,7 @@ La statica dei fluidi (unità 01–08, pagine 1–17 degli appunti) è stata spo
 - Parole: 241 su 1 pagina di traccia (pagina 87)
 - Rettifica: nessuna, i passaggi della traccia sono corretti così come scritti. Verificato con SymPy: ΔT = Q/(c·m) = 586/(448×3,6) ≈ 0,3633 K ≈ 0,36 K, coerente con la traccia. Formula dimensionalmente coerente (J/(kg·K)·kg·K = J).
 - Aggiunta: nessuna oltre alla riga di verifica dimensionale delle unità di misura, aggiunta per rendere esplicito perché il prodotto c·m·ΔT dà un risultato in joule.
+- Revisione (24/10/2026, regole 13/10): titolo invariato; parole 127 → 74. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 39); apertura a domanda; tolto il titoletto «Dalla definizione alla legge» (resta «Esempio»); Q = CΔT e C = cm in una .eq, Q = cmΔT con formula inversa in .def rosso, dipendenze in elenco «direttamente proporzionale a», verifica dimensionale in .eq; esempio in forma «Dati… Calcolare…» con una sola .eq. Nessuna comparsa da togliere. Nessuna correzione (ΔT = 586/(448·3,6) ≈ 0,363 K → 0,36 K, riverificato con Python). Nessuna figura (la traccia non ne ha), nessun esempio tolto.
 
 ## Unità 41 — Calorimetria e temperatura di equilibrio
 - Parole: circa 330 su 3 pagine di traccia
