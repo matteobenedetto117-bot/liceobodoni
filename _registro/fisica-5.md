@@ -541,6 +541,7 @@
   coincidono con i valori $1{,}155;\,1{,}51;\,2{,}29;\,7{,}09;\,22{,}37$ s della traccia.
 - Aggiunta: nessuna, a parte una riga di commento finale sull'andamento non proporzionale del
   fattore di Lorentz rispetto a $v$.
+- Revisione (24/10/2026, regole 13/10): parole 191 → 80 (sommario incluso). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 42), tolti sommario e «Nella prossima unità»; apertura a domanda, Δt = γΔt₀ con γ in .def rosso, esempio Dati/Calcolare con i cinque calcoli in un'unica .eq allineata, commento finale ridotto a un elenco caso → conseguenza («γ non è direttamente proporzionale a v»). Nessuna comparsa. Controllo concettuale (Python): γ = 1,1547; 1,5119; 2,2942; 7,0888; 22,366; risultati uniformati a tre cifre significative (1,15 s e 22,4 s invece di 1,155 s e 22,37 s). Nessuna figura (la traccia non ne ha), nessun esempio tolto.
 
 ## Unità 44 — Contrazione delle lunghezze
 - Parole: 395 su 2 pagine di traccia (pagine 79-80).

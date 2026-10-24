@@ -5,12 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dilatazione dei tempi: esempi numerici — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.sommario{font-size:1.1rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
-.calcoli{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:6px 22px;margin:26px 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
 </style>
 </head>
 <body>
@@ -20,42 +74,52 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Relatività ristretta &middot; Unità 43</p>
   <h1>Dilatazione dei tempi: esempi numerici</h1>
-  <p class="sommario">Riprendiamo la formula della dilatazione dei tempi e la applichiamo a
-  cinque velocità crescenti, dalla metà della velocità della luce fino a un millesimo di $c$
-  dal limite invalicabile. I numeri mostrano quanto rapidamente il fattore di Lorentz si
-  allontana da 1 quando $v$ si avvicina a $c$.</p>
 </header>
+
+<p>Sulla navicella passa il tempo proprio $\Delta t_0$: quanto tempo misura un osservatore fermo sulla Terra, al crescere della velocità $v$ della navicella?</p>
+
+<div class="def"><span class="et">Dilatazione dei tempi</span>
+<p class="eq principio">$$\Delta t=\gamma\,\Delta t_0\qquad\qquad \gamma=\frac{1}{\sqrt{1-\dfrac{v^2}{c^2}}}$$</p></div>
 
 <h2>Esempio</h2>
 
-<p>Siamo a bordo di una navicella spaziale: nel nostro sistema di riferimento passa un tempo
-proprio $\Delta t_0=1\,\text{s}$. Quanto tempo $\Delta t=\gamma\,\Delta t_0$ misura invece un
-osservatore fermo sulla Terra, alle velocità $v_1=0,50c$, $v_2=0,75c$, $v_3=0,90c$,
-$v_4=0,99c$ e $v_5=0,999c$?</p>
+<p>Dati: $\Delta t_0=1\ \text{s}$, $\;v=0{,}50c;\ 0{,}75c;\ 0{,}90c;\ 0{,}99c;\ 0{,}999c$. Calcolare $\Delta t$.</p>
 
-<div class="calcoli">
-$$\Delta t_1=\frac{1\,\text{s}}{\sqrt{1-0,50^2}}=1,155\,\text{s}$$
-$$\Delta t_2=\frac{1\,\text{s}}{\sqrt{1-0,75^2}}=1,51\,\text{s}$$
-$$\Delta t_3=\frac{1\,\text{s}}{\sqrt{1-0,90^2}}=2,29\,\text{s}$$
-$$\Delta t_4=\frac{1\,\text{s}}{\sqrt{1-0,99^2}}=7,09\,\text{s}$$
-$$\Delta t_5=\frac{1\,\text{s}}{\sqrt{1-0,999^2}}=22,37\,\text{s}$$
-</div>
+<p class="eq">$$\begin{aligned}
+v&=0{,}50\,c: &\Delta t&=\frac{1\ \text{s}}{\sqrt{1-0{,}50^2}}\approx1{,}15\ \text{s}\\
+v&=0{,}75\,c: &\Delta t&=\frac{1\ \text{s}}{\sqrt{1-0{,}75^2}}\approx1{,}51\ \text{s}\\
+v&=0{,}90\,c: &\Delta t&=\frac{1\ \text{s}}{\sqrt{1-0{,}90^2}}\approx2{,}29\ \text{s}\\
+v&=0{,}99\,c: &\Delta t&=\frac{1\ \text{s}}{\sqrt{1-0{,}99^2}}\approx7{,}09\ \text{s}\\
+v&=0{,}999\,c: &\Delta t&=\frac{1\ \text{s}}{\sqrt{1-0{,}999^2}}\approx22{,}4\ \text{s}
+\end{aligned}$$</p>
 
-<p>Da $v_1$ a $v_5$ la velocità cresce di poco più del doppio, ma il tempo misurato da Terra
-passa da poco più di un secondo a quasi ventitré: il fattore di Lorentz non cresce in
-proporzione a $v$, resta vicino a 1 finché $v$ è lontana da $c$, poi esplode quando $v$ vi si
-avvicina.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
+<p>Il fattore $\gamma$ non è direttamente proporzionale a $v$:</p>
 <ul>
-<li>La contrazione delle lunghezze, l'altra conseguenza diretta dei postulati di Einstein.</li>
+<li>$v$ lontana da $c$ → $\gamma$ vicino a 1;</li>
+<li>$v$ vicina a $c$ → $\gamma$ cresce sempre più rapidamente;</li>
+<li>da $0{,}50c$ a $0{,}999c$: velocità circa doppia, $\Delta t$ circa venti volte maggiore.</li>
 </ul>
-</div>
 
 <nav class="nav-unita"><a class="precedente" href="../42-dilatazione-dei-tempi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Dilatazione dei tempi</span></a><a class="successiva" href="../44-contrazione-delle-lunghezze/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Contrazione delle lunghezze</span></a></nav>
 <footer><p>Fisica quinta &middot; Relatività ristretta &middot; Unità 43</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
