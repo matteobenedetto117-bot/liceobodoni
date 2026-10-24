@@ -884,6 +884,7 @@ teorema del confronto, a pagina 21.
   interattivo mostra il fascio di parabole $y=x^2+C$ al variare di $C$ e il punto fisso
   $(0,3)$, per rendere visibile che la condizione iniziale seleziona un solo membro
   della famiglia.
+- Revisione (24/10/2026, regole 13/10): parole 401 → 107 (sommario incluso). Pagina mai revisionata: impaginazione a quaderno (stile, aiuto Piano e script dell'unità 40), tolti sommario, i tre titoletti («Che cos'è un'equazione differenziale», «Integrale generale e integrale particolare», «Il problema di Cauchy»), l'introduzione e il rimando all'unità sulle equazioni a coefficienti costanti; apertura a domanda; definizione in .def rosso, esempi di ordine e integrale generale/particolare in elenco caso → conseguenza; problema di Cauchy in .def rosso con sistema; esempio Dati/Calcolare in una .eq (verificato con SymPy: C = 3). Correzioni: le n condizioni iniziali precisate (valori di y, y′, …, y⁽ⁿ⁻¹⁾ in x₀); unicità della soluzione «sotto opportune ipotesi sull'equazione» (prima affermata senza condizioni). Nessuna comparsa. Figura rifatta da script con l'aiuto Piano: famiglia y = x² + C calcolata, cursore su C (ora 1–5, prima −3–5, per non sovrapporre le curve alle etichette) con «passa per (0, 3)» in verde per C = 3; tolte le etichette P(0, 3) e i valori sull'asse y per evitare sovrapposizioni. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 42 — Primo ordine: y' = f(x) e variabili separabili
 - Parole: 353, unità ex novo (nessuna pagina di traccia: argomento assente dagli
