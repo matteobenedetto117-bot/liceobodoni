@@ -353,6 +353,7 @@
 - Parole: 377 su 2 pagine di traccia (pp. 62–63)
 - Rettifica: nessuna. I valori numerici della traccia sono corretti (Fs = 98 N, FN = 135 N, μs = tan 36° = 0,73), verificati con calcolo.
 - Aggiunta: nessuna. Un solo riquadro di nota, sull'indipendenza del risultato dalla massa, che è una lettura del risultato già presente e non contenuto nuovo.
+- Revisione (24/10/2026, regole 13/10): titolo invariato; parole 270 → 89. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 42); apertura a domanda; scelta degli assi in elenco; componenti del peso ed equazioni sugli assi in due .eq, F_S = mg sinα e F_N = mg cosα in .def rosso; tolti «Dove si continua», il titoletto «Esempio numerico» (ora «Esempio», spostato in fondo), la nota sulla massa (assorbita nel raccordo «massa e g si semplificano»). Correzioni: il coefficiente minimo è scritto come condizione F_S ≤ μ_S F_N ⇒ μ_S ≥ tan α (prima F_S = μ_S F_N); F_N ≈ 135 N scritto 1,3×10² N (due cifre come i dati). Aggiunto il piè di pagina mancante. Figura rifatta da script con vettori in scala (F_p, componenti, F_N, F_S) e cursore sull'angolo α (10–45°), valori di F_S, F_N e μ_S minimo a fianco. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 44 — Equilibrio di un corpo appeso e carrucola
 - Parole: 265 su 1 pagina di traccia (pag. 64, più il disegno della carrucola in testa a pag. 65)

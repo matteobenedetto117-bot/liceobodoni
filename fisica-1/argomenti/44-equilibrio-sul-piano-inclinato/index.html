@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equilibrio sul piano inclinato — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:560px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,100 +58,126 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Equilibrio sul piano inclinato</h1>
 </header>
 
-<p>Sul piano inclinato conviene non tenere gli assi orizzontale e verticale, ma
-appoggiarli al piano: l'asse $x$ lungo la discesa, l'asse $y$ perpendicolare alla
-superficie. Così la forza normale e l'attrito sono già allineati con gli assi, e
-l'unica forza da scomporre è il peso.</p>
+<p>Corpo fermo su un piano inclinato di $\alpha$: quanto valgono attrito statico e forza normale?</p>
 
-<figure class="dis">
-<svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <path d="M70,240 L480,240 L70,100 Z" fill="#f4f6f8" stroke="#222" stroke-width="2.5" stroke-linejoin="round"/>
-  <path d="M195,185 L225,196 L212,231 L182,220 Z" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="203" y1="208" x2="203" y2="283" stroke="#cc2222" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="208" y="281" fill="#cc2222">F<tspan font-size="11" dy="4">p</tspan></text>
-  <line x1="203" y1="208" x2="268" y2="230" stroke="#e06666" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#fr)"/>
-  <text x="258" y="252" fill="#cc2222">F<tspan font-size="11" dy="4">px</tspan></text>
-  <line x1="203" y1="208" x2="178" y2="261" stroke="#e06666" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#fr)"/>
-  <text x="130" y="262" fill="#cc2222">F<tspan font-size="11" dy="4">py</tspan></text>
-  <line x1="268" y1="230" x2="203" y2="283" stroke="#f0b0b0" stroke-width="1.5" stroke-dasharray="3 3"/>
-  <line x1="178" y1="261" x2="203" y2="283" stroke="#f0b0b0" stroke-width="1.5" stroke-dasharray="3 3"/>
-  <line x1="203" y1="208" x2="278" y2="129" stroke="#1a8a3c" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="283" y="127" fill="#1a8a3c">F<tspan font-size="11" dy="4">N</tspan></text>
-  <line x1="203" y1="208" x2="138" y2="186" stroke="#0e9da0" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="112" y="180" fill="#0e9da0">F<tspan font-size="11" dy="4">S</tspan></text>
-  <line x1="350" y1="200" x2="420" y2="224" stroke="#666" stroke-width="1.5" marker-end="url(#fr)"/>
-  <text x="424" y="232" fill="#666">x</text>
-  <line x1="350" y1="200" x2="374" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#fr)"/>
-  <text x="378" y="128" fill="#666">y</text>
-  <path d="M430,240 A70,70 0 0 0 425,216" fill="none" stroke="#1a8a3c" stroke-width="1.5"/>
-  <text x="404" y="234" fill="#1a8a3c" font-size="13">&#945;</text>
-  <path d="M203,258 A50,50 0 0 0 226,247" fill="none" stroke="#cc2222" stroke-width="1.5"/>
-  <text x="212" y="250" fill="#cc2222" font-size="13">&#945;</text>
-</svg>
-<figcaption>Gli assi seguono il piano. L'angolo fra il peso e la perpendicolare al
-piano è lo stesso &#945; dell'inclinazione.</figcaption>
-</figure>
+<ul>
+<li>assi: $x$ lungo il piano, verso la discesa; $y$ perpendicolare al piano;</li>
+<li>$F_N$ e $F_S$ già sugli assi → si scompone solo $F_p$.</li>
+</ul>
 
-<p>Le due componenti del peso valgono allora</p>
-
-$$F_{px} = F_p \sin\alpha = mg\sin\alpha \qquad F_{py} = F_p \cos\alpha = mg\cos\alpha$$
-
-<p>La prima tira il corpo lungo la discesa, la seconda lo schiaccia contro il
-piano. Imponendo la risultante nulla su ciascun asse:</p>
-
-$$x)\quad \vec{F}_{px} + \vec{F}_S = \vec{0} \quad\longrightarrow\quad F_{px} - F_S = 0 \quad\longrightarrow\quad F_S = F_{px}$$
-
-$$y)\quad \vec{F}_N + \vec{F}_{py} = \vec{0} \quad\longrightarrow\quad F_N - F_{py} = 0 \quad\longrightarrow\quad F_N = F_{py}$$
-
-<p>e quindi</p>
-
-$$F_S = mg\sin\alpha \qquad\qquad F_N = mg\cos\alpha$$
-
-<h2>Esempio numerico</h2>
-
-<p>Un corpo di massa $m = 17\ \text{kg}$ è fermo su un piano inclinato di
-$\alpha = 36^\circ$. Quanto valgono l'attrito statico e la forza normale?</p>
-
-$$F_S = 17\ \text{kg} \cdot 9{,}81\ \tfrac{\text{N}}{\text{kg}} \cdot \sin 36^\circ \approx 98\ \text{N}$$
-
-$$F_N = 17\ \text{kg} \cdot 9{,}81\ \tfrac{\text{N}}{\text{kg}} \cdot \cos 36^\circ \approx 135\ \text{N}$$
-
-<h2>Il coefficiente di attrito minimo</h2>
-
-<p>Perché il corpo resti fermo, l'attrito statico disponibile deve arrivare ai
-$98\ \text{N}$ richiesti. Il legame con la forza premente è $F_S = \mu_S F_\perp$,
-e il modulo della forza premente coincide con quello della forza normale, quindi
-$F_S = \mu_S F_N$. Uguagliando le due espressioni di $F_S$:</p>
-
-$$\mu_S \, mg\cos\alpha = mg\sin\alpha$$
-
-<p>La massa e $g$ compaiono da entrambe le parti e si semplificano; dividendo poi
-per $\cos\alpha$ resta</p>
-
-$$\mu_S = \frac{\sin\alpha}{\cos\alpha} = \tan\alpha$$
-
-<p>che è il coefficiente di attrito statico minimo per mantenere il sistema in
-equilibrio. Nel caso di prima, $\mu_S = \tan 36^\circ \approx 0{,}73$.</p>
-
-<div class="nota">
-<strong>Da notare.</strong> Nel risultato non compare la massa: su un dato piano
-inclinato un corpo pesante e uno leggero scivolano alla stessa inclinazione,
-perché peso e attrito crescono insieme. Conta solo l'angolo.
+<div class="fig">
+<svg id="g-piano" viewBox="0 0 440 312" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Corpo fermo su un piano inclinato con forza peso e sue componenti, forza normale e attrito statico"></svg>
+<div class="cursore"><label for="cur-piano">α</label><input id="cur-piano" type="range" min="10" max="45" step="1" value="36"><span class="val" id="val-piano"></span></div>
+<p class="did">Angolo fra $F_p$ e la perpendicolare al piano: $\alpha$</p>
 </div>
 
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Restano i casi in cui la forza inclinata non è il peso ma la tensione di una
-fune: il corpo appeso con la carrucola, e poi il corpo sospeso a due funi, dove le
-incognite diventano due.</p>
-</div>
+<p>Componenti del peso:</p>
+
+<p class="eq">$$F_{px} = mg\sin\alpha \qquad F_{py} = mg\cos\alpha$$</p>
+
+<p>Risultante nulla su ciascun asse:</p>
+
+<p class="eq">$$x)\quad F_{px} - F_S = 0 \qquad\qquad y)\quad F_N - F_{py} = 0$$</p>
+
+<div class="def"><span class="et">Corpo fermo sul piano inclinato</span>
+<p class="eq principio">$$F_S = mg\sin\alpha \qquad F_N = mg\cos\alpha$$</p></div>
+
+<h2>Coefficiente di attrito minimo</h2>
+
+<p>Equilibrio possibile se $F_S \le \mu_S F_N$; massa e $g$ si semplificano:</p>
+
+<p class="eq">$$mg\sin\alpha \le \mu_S\, mg\cos\alpha$$</p>
+
+<div class="def"><span class="et">Attrito statico minimo</span>
+<p class="eq principio">$$\mu_S \ge \tan\alpha$$</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: corpo fermo, $m = 17\ \text{kg}$, $\alpha = 36^\circ$. Calcolare $F_S$, $F_N$ e il $\mu_S$ minimo.</p>
+
+<p class="eq">$$F_S = 17\ \text{kg}\cdot 9{,}81\ \text{N/kg}\cdot\sin 36^\circ \approx 98\ \text{N} \qquad F_N = 17\ \text{kg}\cdot 9{,}81\ \text{N/kg}\cdot\cos 36^\circ \approx 1{,}3\times10^2\ \text{N}$$</p>
+<p class="eq">$$\mu_S \ge \tan 36^\circ \approx 0{,}73$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../43-equilibrio-con-forze-inclinate/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equilibrio con forze inclinate</span></a><a class="successiva" href="../45-equilibrio-di-un-corpo-appeso-e-carrucola/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equilibrio di un corpo appeso e carrucola</span></a></nav>
+<footer><p>Fisica prima &middot; Statica del punto materiale &middot; Unità 43</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,base,sub,col){var t=el(p,'text',{'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':'middle'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  function pos(t,x,y){t.setAttribute('x',x);t.setAttribute('y',y);}
+  var s=document.getElementById('g-piano'); if(!s)return;
+  var m=17, g=9.81, Fp=m*g, k=0.6, L=300, Bx=380, By=245;
+  var d=el(s,'defs',{});
+  [['r','var(--rosso)'],['v','var(--verde)'],['b','var(--blu)'],['g','var(--grigio)']].forEach(function(c){var mk=el(d,'marker',{id:'gp'+c[0],markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:c[1]});});
+  var tri=el(s,'path',{fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2.2,'stroke-linejoin':'round'});
+  var arcB=el(s,'path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3});
+  var tB=el(s,'text',{'font-size':13,'font-family':'sans-serif',fill:'var(--inchiostro)','text-anchor':'middle'});
+  var blk=el(s,'path',{fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+  var ax=el(s,'line',{stroke:'var(--grigio)','stroke-width':1.3,'marker-end':'url(#gpg)'}), ay=el(s,'line',{stroke:'var(--grigio)','stroke-width':1.3,'marker-end':'url(#gpg)'});
+  var tx=el(s,'text',{'font-size':12,'font-family':'sans-serif','font-style':'italic',fill:'var(--grigio)','text-anchor':'middle'});tx.textContent='x';
+  var ty=el(s,'text',{'font-size':12,'font-family':'sans-serif','font-style':'italic',fill:'var(--grigio)','text-anchor':'middle'});ty.textContent='y';
+  function vett(c,col,w,dash){var a={stroke:col,'stroke-width':w,'marker-end':'url(#gp'+c+')'};if(dash)a['stroke-dasharray']='5 4';return el(s,'line',a);}
+  var c1=el(s,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}), c2=el(s,'line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});
+  var vx=vett('r','var(--rosso)',1.8,true), vy=vett('r','var(--rosso)',1.8,true);
+  var vS=vett('b','var(--blu)',2.6), vN=vett('v','var(--verde)',2.6), vP=vett('r','var(--rosso)',2.6);
+  var arcP=el(s,'path',{fill:'none',stroke:'var(--rosso)','stroke-width':1.2});
+  var tP=el(s,'text',{'font-size':12,'font-family':'sans-serif',fill:'var(--rosso)','text-anchor':'middle'});tP.textContent='α';
+  var dot=el(s,'circle',{r:3.5,fill:'var(--inchiostro)'});
+  var lP=lab(s,'F','p','var(--rosso)'), lX=lab(s,'F','px','var(--rosso)'), lY=lab(s,'F','py','var(--rosso)'), lN=lab(s,'F','N','var(--verde)'), lS=lab(s,'F','S','var(--blu)');
+  var cur=document.getElementById('cur-piano'), val=document.getElementById('val-piano');
+  function L2(l,x1,y1,x2,y2){l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);}
+  function disegna(){
+    var a=+cur.value*Math.PI/180, ca=Math.cos(a), sa=Math.sin(a);
+    var Cx=Bx-L*ca, Cy=By-L*sa;
+    tri.setAttribute('d','M'+Cx+','+By+' L'+Bx+','+By+' L'+Cx+','+Cy+' Z');
+    var R=46; arcB.setAttribute('d','M'+(Bx-R)+','+By+' A'+R+','+R+' 0 0 1 '+(Bx-R*ca)+','+(By-R*sa));
+    pos(tB,Bx-R+8,By+17); tB.textContent=cur.value+'°';
+    var dx=ca, dy=sa, nx=sa, ny=-ca; /* d: discesa, n: perpendicolare uscente */
+    var Mx=Cx+0.5*L*ca, My=Cy+0.5*L*sa, h=22, Px=Mx+h*nx, Py=My+h*ny;
+    var q=[[-h,0],[h,0],[h,2*h],[-h,2*h]].map(function(v){return (Mx+v[0]*dx+v[1]*nx)+','+(My+v[0]*dy+v[1]*ny);});
+    blk.setAttribute('d','M'+q.join(' L')+' Z');
+    var Ox=50, Oy=64; /* assi in alto a sinistra */
+    L2(ax,Ox,Oy,Ox+40*dx,Oy+40*dy); L2(ay,Ox,Oy,Ox+40*nx,Oy+40*ny);
+    pos(tx,Ox+52*dx,Oy+52*dy+4); pos(ty,Ox+52*nx,Oy+52*ny+4);
+    var Sx=k*Fp*sa, N=k*Fp*ca, P=k*Fp;
+    L2(vP,Px,Py,Px,Py+P);
+    L2(vx,Px,Py,Px+Sx*dx,Py+Sx*dy); L2(vy,Px,Py,Px-N*nx,Py-N*ny);
+    L2(c1,Px+Sx*dx,Py+Sx*dy,Px,Py+P); L2(c2,Px-N*nx,Py-N*ny,Px,Py+P);
+    L2(vN,Px,Py,Px+N*nx,Py+N*ny); L2(vS,Px,Py,Px-Sx*dx,Py-Sx*dy);
+    dot.setAttribute('cx',Px); dot.setAttribute('cy',Py);
+    var r=30; arcP.setAttribute('d','M'+Px+','+(Py+r)+' A'+r+','+r+' 0 0 1 '+(Px-r*sa)+','+(Py+r*ca));
+    pos(tP,Px-(r+10)*Math.sin(a/2),Py+(r+10)*Math.cos(a/2)+4);
+    arcP.style.display=tP.style.display=a>0.34?'':'none';
+    pos(lP,Px+16,Py+P-12);
+    pos(lX,Px+Sx*dx+14*nx+12,Py+Sx*dy+14*ny+4); lX.style.display=Sx>34?'':'none';
+    pos(lY,Px-N*nx-16,Py-N*ny+12);
+    pos(lN,Px+(N+16)*nx,Py+(N+16)*ny+4);
+    pos(lS,Px-(Sx+16)*dx,Py-(Sx+16)*dy-6);
+    var f=function(v){return v.toFixed(0)+' N';};
+    val.innerHTML='α = '+cur.value+'° → <i>F</i><sub>S</sub> = '+f(Fp*sa)+', <i>F</i><sub>N</sub> = '+f(Fp*ca)+', <i>μ</i><sub>S</sub> ≥ '+Math.tan(a).toFixed(2).replace('.',',');
+  }
+  cur.addEventListener('input',disegna); disegna();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
