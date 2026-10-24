@@ -5,13 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni trinomie e biquadratiche — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
 </style>
 </head>
 <body>
@@ -21,57 +50,57 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni di grado superiore al secondo &middot; Unità 44</p>
   <h1>Equazioni trinomie e biquadratiche</h1>
-  <p class="sommario">Un'equazione trinomia non è binomia, ma contiene comunque solo due
-  potenze della $x$, una il doppio dell'altra, più il termine noto. Con la sostituzione
-  $t=x^m$ diventa un'equazione di secondo grado già nota: la si risolve in $t$ e poi si
-  torna alla $x$.</p>
 </header>
 
-<h2>Forma generale</h2>
-<p>Un'equazione trinomia ha la forma</p>
-<p>$$ax^{2m}+bx^m+c=0\qquad a,b,c,m\neq0$$</p>
-<p>Ponendo $t=x^m$ l'equazione diventa $at^2+bt+c=0$, un'equazione di secondo grado nella
-incognita ausiliaria $t$. Trovate le soluzioni $t_1,t_2$, si risale alla $x$ risolvendo per
-ciascuna $x^m=t_i$: un'equazione binomia, che ha soluzione solo se $t_i\geq0$ quando $m$ è
-pari, mentre se $m$ è dispari la radice $m$-esima esiste comunque.</p>
+<p>Equazione con due potenze di $x$, una di grado doppio dell'altra, e il termine noto: come si riconduce al secondo grado?</p>
 
-<div class="esempio">
-<p>$$5x^{18}+x^9-2=0\qquad t=x^9$$</p>
-<p>$$5t^2+t-2=0\qquad \Delta=1+4\cdot5\cdot2=41\qquad
-t=\dfrac{-1\pm\sqrt{41}}{10}$$</p>
-<p>$$t_1=\dfrac{-1+\sqrt{41}}{10}\qquad t_2=\dfrac{-1-\sqrt{41}}{10}$$</p>
-<p>Qui $m=9$ è dispari, quindi entrambi i valori di $t$ danno una soluzione reale:</p>
-<p>$$x_1=\sqrt[9]{\dfrac{-1+\sqrt{41}}{10}}\qquad
-x_2=\sqrt[9]{\dfrac{-1-\sqrt{41}}{10}}$$</p>
-</div>
+<div class="def"><span class="et">Equazione trinomia</span>
+<p class="eq">$$ax^{2m}+bx^m+c=0\qquad a,b,c\neq0,\ \ m\ \text{intero positivo}$$</p></div>
 
-<h2>Il caso $m=2$: equazione biquadratica</h2>
-<p>Quando $m=2$ l'equazione trinomia si chiama biquadratica e ha la forma
-$$ax^4+bx^2+c=0\qquad a,b,c\neq0$$
-Qui la sostituzione $t=x^2$ impone in più che ciascun valore accettabile di $t$ sia
-non negativo, perché un quadrato non può essere negativo.</p>
+<p>Si pone $t=x^m$:</p>
 
-<div class="esempio">
-<p>$$x^4+31x^2-32=0\qquad t=x^2$$</p>
-<p>$$t^2+31t-32=0\qquad \Delta=31^2+4\cdot32=1089=33^2\qquad
-t=\dfrac{-31\pm33}{2}$$</p>
-<p>$$t_1=\dfrac{-31+33}{2}=1\qquad t_2=\dfrac{-31-33}{2}=-32$$</p>
-<p>Da $t_1=1$: $x^2=1\Rightarrow x=\pm1$. Da $t_2=-32$: $x^2=-32$, impossibile, perché un
-quadrato non è mai negativo.</p>
-<p>$$x_1=1\qquad x_2=-1$$</p>
-</div>
+<p class="eq principio">$$at^2+bt+c=0$$</p>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
+<p>Trovate $t_1$ e $t_2$, si risolve ciascuna equazione binomia $x^m=t_i$:</p>
 <ul>
-<li>Le equazioni risolubili scomponendo il polinomio in fattori, senza passare per una
-sostituzione.</li>
+<li>$m$ dispari → $x=\sqrt[m]{t_i}$ per ogni $t_i$;</li>
+<li>$m$ pari, $t_i&gt;0$ → $x=\pm\sqrt[m]{t_i}$;</li>
+<li>$m$ pari, $t_i&lt;0$ → nessuna soluzione.</li>
 </ul>
-</div>
+
+<p class="eq quesito">$$5x^{18}+x^9-2=0$$</p>
+<p class="eq">$$t=x^9:\quad 5t^2+t-2=0\qquad \Delta=1+40=41\qquad t_{1,2}=\frac{-1\pm\sqrt{41}}{10}$$</p>
+<p class="eq ris">$$m=9\ \text{dispari}:\quad x_{1,2}=\sqrt[9]{\frac{-1\pm\sqrt{41}}{10}}$$</p>
+
+<h2>Equazione biquadratica</h2>
+
+<div class="def"><span class="et">Equazione biquadratica (trinomia con $m=2$)</span>
+<p class="eq">$$ax^4+bx^2+c=0\qquad t=x^2,\ \ \text{accettabili solo i valori}\ t&gt;0$$</p></div>
+
+<p class="eq quesito">$$x^4+31x^2-32=0$$</p>
+<p class="eq">$$t=x^2:\quad t^2+31t-32=0\qquad \Delta=31^2+4\cdot32=1089=33^2\qquad t_{1,2}=\frac{-31\pm33}{2}$$</p>
+<p class="eq ris">$$t_1=1:\ x^2=1\Rightarrow x=\pm1\qquad t_2=-32:\ x^2=-32\ \text{impossibile}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../45-equazioni-binomie/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazioni binomie</span></a><a class="successiva" href="../47-equazioni-risolubili-con-scomposizioni/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni risolubili con scomposizioni</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni di grado superiore al secondo &middot; Unità 44</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
