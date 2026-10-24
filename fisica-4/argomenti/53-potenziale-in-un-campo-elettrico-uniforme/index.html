@@ -5,127 +5,152 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Potenziale in un campo elettrico uniforme — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.quattro-casi{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:22px 0}
-.quattro-casi .cella{background:var(--blu-chiaro);border-radius:10px;padding:12px 16px;text-align:center;font-size:.98rem;flex:1;min-width:140px}
-.quattro-casi .cella .etichetta{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--blu);font-weight:600;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.pannelli{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pannelli svg{width:100%;max-width:150px;margin:0 auto;display:block}
+.pannelli .did{margin:4px 0 0}
+@media(max-width:640px){.pannelli{grid-template-columns:repeat(2,1fr)}}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 51</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 51</p>
   <h1>Potenziale in un campo elettrico uniforme</h1>
-  <p class="sommario">Applichiamo le relazioni fra lavoro, energia potenziale e
-  potenziale al caso pi&ugrave; semplice di campo, quello uniforme, spostando una carica
-  in verso concorde o discorde rispetto al campo.</p>
 </header>
 
-<h2>I quattro casi possibili</h2>
+<p>Carica di modulo $q$ in un campo elettrico uniforme $\vec E$, spostata di un tratto $d$ lungo le linee di campo: quanto valgono $L$, $\Delta U$ e $\Delta V$?</p>
 
-<p>Prendiamo un campo uniforme $\vec E$ e una carica che si sposta di un tratto $d$
-nella stessa direzione del campo o nella direzione opposta. Il segno del lavoro e
-dell'energia potenziale dipende sia dal segno della carica sia dal verso dello
-spostamento: distinguiamo i quattro casi.</p>
+<ul>
+<li>carica positiva → forza $q\vec E$ nel verso del campo;</li>
+<li>carica negativa → forza in verso opposto al campo.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="frE53" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-</marker>
-<marker id="frS53" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--blu)"/>
-</marker>
-</defs>
-
-<g transform="translate(10,0)">
-<line x1="30" y1="20" x2="30" y2="180" stroke="var(--rosso)" stroke-width="2" marker-end="url(#frE53)"/>
-<text x="6" y="16" font-family="var(--sans)" font-size="13" fill="var(--rosso)">E</text>
-<circle cx="95" cy="50" r="6" fill="var(--verde)"/>
-<text x="72" y="44" font-family="var(--sans)" font-size="13" fill="var(--verde)">+q</text>
-<line x1="95" y1="58" x2="95" y2="132" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#frS53)"/>
-<circle cx="95" cy="140" r="3" fill="var(--inchiostro)"/>
-<text x="105" y="98" font-family="var(--sans)" font-size="13" fill="var(--blu)">d</text>
-<text x="60" y="200" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">&#9312;</text>
-</g>
-
-<g transform="translate(180,0)">
-<line x1="30" y1="20" x2="30" y2="180" stroke="var(--rosso)" stroke-width="2" marker-end="url(#frE53)"/>
-<circle cx="95" cy="140" r="6" fill="var(--verde)"/>
-<text x="72" y="160" font-family="var(--sans)" font-size="13" fill="var(--verde)">+q</text>
-<line x1="95" y1="132" x2="95" y2="58" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#frS53)"/>
-<circle cx="95" cy="50" r="3" fill="var(--inchiostro)"/>
-<text x="105" y="98" font-family="var(--sans)" font-size="13" fill="var(--blu)">d</text>
-<text x="60" y="200" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">&#9313;</text>
-</g>
-
-<g transform="translate(350,0)">
-<line x1="30" y1="20" x2="30" y2="180" stroke="var(--rosso)" stroke-width="2" marker-end="url(#frE53)"/>
-<circle cx="95" cy="50" r="6" fill="var(--verde)"/>
-<text x="70" y="44" font-family="var(--sans)" font-size="13" fill="var(--verde)">&minus;q</text>
-<line x1="95" y1="58" x2="95" y2="132" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#frS53)"/>
-<circle cx="95" cy="140" r="3" fill="var(--inchiostro)"/>
-<text x="105" y="98" font-family="var(--sans)" font-size="13" fill="var(--blu)">d</text>
-<text x="60" y="200" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">&#9314;</text>
-</g>
-
-<g transform="translate(520,0)">
-<line x1="30" y1="20" x2="30" y2="180" stroke="var(--rosso)" stroke-width="2" marker-end="url(#frE53)"/>
-<circle cx="95" cy="140" r="6" fill="var(--verde)"/>
-<text x="70" y="160" font-family="var(--sans)" font-size="13" fill="var(--verde)">&minus;q</text>
-<line x1="95" y1="132" x2="95" y2="58" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#frS53)"/>
-<circle cx="95" cy="50" r="3" fill="var(--inchiostro)"/>
-<text x="105" y="98" font-family="var(--sans)" font-size="13" fill="var(--blu)">d</text>
-<text x="60" y="200" font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">&#9315;</text>
-</g>
-</svg>
-<p class="did">Campo $\vec E$ (rosso) e spostamento di un tratto $d$ (blu): concorde con
-$\vec E$ nei casi &#9312; e &#9314;, discorde nei casi &#9313; e &#9315;.</p>
+<div class="pannelli" id="g-casi">
+<div><svg viewBox="0 0 140 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caso 1: carica positiva spostata nel verso del campo"></svg><p class="did">1. $+q$, nel verso di $\vec E$</p></div>
+<div><svg viewBox="0 0 140 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caso 2: carica positiva spostata in verso opposto al campo"></svg><p class="did">2. $+q$, verso opposto</p></div>
+<div><svg viewBox="0 0 140 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caso 3: carica negativa spostata nel verso del campo"></svg><p class="did">3. $-q$, nel verso di $\vec E$</p></div>
+<div><svg viewBox="0 0 140 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caso 4: carica negativa spostata in verso opposto al campo"></svg><p class="did">4. $-q$, verso opposto</p></div>
+</div>
+<p class="did">Campo $\vec E$ (nero), forza (rossa), spostamento $d$ (blu)</p>
 </div>
 
-<div class="quattro-casi">
-<div class="cella"><span class="etichetta">&#9312; +q, concorde</span>$L=qEd$<br>$\Delta U=-qEd$<br>$\Delta V=-Ed$</div>
-<div class="cella"><span class="etichetta">&#9313; +q, discorde</span>$L=-qEd$<br>$\Delta U=qEd$<br>$\Delta V=Ed$</div>
-<div class="cella"><span class="etichetta">&#9314; &minus;q, concorde</span>$L=-qEd$<br>$\Delta U=qEd$<br>$\Delta V=-Ed$</div>
-<div class="cella"><span class="etichetta">&#9315; &minus;q, discorde</span>$L=qEd$<br>$\Delta U=-qEd$<br>$\Delta V=Ed$</div>
-</div>
+<p>Con $\Delta U=-L$ e $\Delta V=\Delta U/(\pm q)$, nei quattro casi:</p>
 
-<p>Lavoro ed energia potenziale cambiano segno con la carica, ma il potenziale no: in
-tutti e quattro i casi $\Delta V$ dipende solo dal verso dello spostamento rispetto a
-$\vec E$, non dal segno di chi si sposta. Muovendosi nel verso del campo il potenziale
-diminuisce, muovendosi nel verso opposto aumenta &mdash; come l'altitudine diminuisce
-scendendo nel verso della forza peso.</p>
+<p class="eq">$$\begin{array}{c|ccc} & L & \Delta U & \Delta V\\ \hline 1 & qEd & -qEd & -Ed\\ 2 & -qEd & qEd & Ed\\ 3 & -qEd & qEd & -Ed\\ 4 & qEd & -qEd & Ed\end{array}$$</p>
 
-<div class="formula-box">
-$$\Delta V=-Ed$$
-</div>
+<p>$L$ e $\Delta U$ dipendono dal segno della carica, $\Delta V$ solo dal verso dello spostamento:</p>
 
-<p>con $d$ misurato nel verso di $\vec E$: la relazione fra differenza di potenziale,
-campo e distanza in un campo uniforme, indipendente dalla carica usata per esplorarlo.</p>
-
-<div class="avanti">
-<h2>Nelle prossime unit&agrave;</h2>
 <ul>
-<li>Il potenziale e l'energia potenziale generati da cariche puntiformi, con
-l'analogia fra campo elettrico e campo gravitazionale.</li>
-<li>La conservazione dell'energia nel campo elettrico.</li>
+<li>spostamento nel verso di $\vec E$ → il potenziale diminuisce;</li>
+<li>spostamento in verso opposto → il potenziale aumenta.</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Differenza di potenziale in un campo uniforme</span>
+<p class="eq principio">$$\Delta V=-E\,d$$</p>
+<p>con $d$ positivo nel verso di $\vec E$, negativo nel verso opposto</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../52-energia-potenziale-elettrica-e-potenziale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia potenziale elettrica e potenziale</span></a><a class="successiva" href="../54-potenziale-generato-da-cariche-puntiformi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Potenziale generato da cariche puntiformi</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 51</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var t=el(p,'text',Object.assign({x:x,y:y,'font-size':13,'font-family':'sans-serif','text-anchor':'middle',fill:'var(--grigio)',stroke:'#fff','stroke-width':4,'paint-order':'stroke'},a||{}));t.textContent=s;return t;}
+  function freccia(s,id,col){var d=el(s,'defs',{}),m=el(d,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});el(m,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col});}
+  var box=document.getElementById('g-casi');
+  if(!box)return;
+  /* casi: segno della carica, verso dello spostamento (+1 = verso di E, cioè verso il basso) */
+  var casi=[[1,1],[1,-1],[-1,1],[-1,-1]];
+  [].slice.call(box.querySelectorAll('svg')).forEach(function(g,i){
+    var sq=casi[i][0],sv=casi[i][1],id='m51-'+i;
+    freccia(g,id+'i','var(--inchiostro)');freccia(g,id+'r','var(--rosso)');freccia(g,id+'b','var(--blu)');
+    /* linee di campo uniformi verso il basso */
+    [18,122].forEach(function(x){el(g,'line',{x1:x,y1:12,x2:x,y2:156,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#'+id+'i)'});});
+    var Y1=40,Y2=130,ys=sv>0?Y1:Y2,ye=sv>0?Y2:Y1,XC=58;
+    /* spostamento d */
+    el(g,'line',{x1:XC,y1:ys+(sv>0?11:-11),x2:XC,y2:ye-(sv>0?4:-4),stroke:'var(--blu)','stroke-width':2.2,'marker-end':'url(#'+id+'b)'});
+    el(g,'circle',{cx:XC,cy:ye,r:3,fill:'var(--blu)'});
+    txt(g,XC-14,(Y1+Y2)/2+5,'d',{fill:'var(--blu)','font-weight':700,'font-style':'italic'});
+    /* forza: verso il basso per carica positiva, verso l'alto per negativa */
+    var fy=sq>0?1:-1;
+    el(g,'line',{x1:XC+20,y1:ys,x2:XC+20,y2:ys+fy*32,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#'+id+'r)'});
+    txt(g,XC+38,ys+fy*22+4,'F',{fill:'var(--rosso)','font-weight':700,'font-style':'italic'});
+    /* carica */
+    el(g,'circle',{cx:XC,cy:ys,r:9,fill:'#fff',stroke:sq>0?'var(--rosso)':'var(--blu)','stroke-width':1.6});
+    txt(g,XC,ys+5,sq>0?'+':'−',{fill:sq>0?'var(--rosso)':'var(--blu)',stroke:'none','font-size':15,'font-weight':700});
+    txt(g,132,30,'E',{fill:'var(--inchiostro)','font-weight':700});
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
