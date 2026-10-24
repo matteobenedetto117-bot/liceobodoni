@@ -5,23 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Corpo sospeso a due funi — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:600px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.strum{border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:26px 0;
-  background:#fff}
-.strum label{font-family:var(--sans);font-size:.9rem;display:block;margin-bottom:8px}
-.strum input[type=range]{width:100%}
-.strum output{font-family:var(--sans);font-weight:600}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -32,212 +58,157 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Corpo sospeso a due funi</h1>
 </header>
 
-<p>Un corpo può essere tenuto fermo da due funi che tirano in direzioni diverse. Le
-tensioni incognite diventano allora due, e una sola equazione non basta più a
-trovarle. Si scompongono tutte le forze lungo due assi perpendicolari e si impone
-l'equilibrio su ciascuno dei due: si ottengono così due equazioni in due incognite.</p>
+<p>Corpo tenuto fermo da due funi che tirano in direzioni diverse: come si calcolano le due tensioni?</p>
 
-<p>La condizione di equilibrio resta quella già vista, scritta fra vettori:</p>
+<div class="def"><span class="et">Condizione di equilibrio</span>
+<p class="eq principio">$$\vec T_1 + \vec T_2 + \vec F_p = \vec 0$$</p></div>
 
-$$\vec{T}_1 + \vec{T}_2 + \vec{F}_p = \vec{0}$$
+<ul>
+<li>forze scomposte lungo due assi perpendicolari $x$ e $y$;</li>
+<li>somma delle componenti nulla su ciascun asse → due equazioni nelle incognite $T_1$, $T_2$.</li>
+</ul>
 
-<p>Proiettata sugli assi, dà due equazioni: la somma delle componenti lungo $x$ è nulla,
-e lo stesso vale lungo $y$.</p>
+<h2>Esempio 1</h2>
 
-<h2>Esempio: vaso appeso</h2>
+<p>Dati: vaso, $m = 6{,}20\ \text{kg}$; fune 1 orizzontale, fune 2 a $\theta = 40^\circ$ con l'orizzontale. Calcolare $T_1$ e $T_2$.</p>
 
-<p>Un vaso di massa $m = 6{,}20\ \text{kg}$ è tenuto da due funi diverse: una
-orizzontale, fissata alla parete, e una obliqua che forma un angolo
-$\theta = 40^\circ$ con l'orizzontale. Cerchiamo le due tensioni.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="f1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <!-- soffitto a mensola -->
-  <line x1="60" y1="60" x2="300" y2="60" stroke="#222" stroke-width="3"/>
-  <g stroke="#222" stroke-width="1.4">
-    <line x1="70" y1="60" x2="58" y2="46"/><line x1="100" y1="60" x2="88" y2="46"/>
-    <line x1="130" y1="60" x2="118" y2="46"/><line x1="160" y1="60" x2="148" y2="46"/>
-    <line x1="190" y1="60" x2="178" y2="46"/><line x1="220" y1="60" x2="208" y2="46"/>
-    <line x1="250" y1="60" x2="238" y2="46"/><line x1="280" y1="60" x2="268" y2="46"/>
-  </g>
-  <!-- parete verticale -->
-  <line x1="300" y1="60" x2="300" y2="260" stroke="#222" stroke-width="3"/>
-  <g stroke="#222" stroke-width="1.4">
-    <line x1="300" y1="90" x2="314" y2="78"/><line x1="300" y1="120" x2="314" y2="108"/>
-    <line x1="300" y1="150" x2="314" y2="138"/><line x1="300" y1="180" x2="314" y2="168"/>
-    <line x1="300" y1="210" x2="314" y2="198"/><line x1="300" y1="240" x2="314" y2="228"/>
-  </g>
-  <!-- funi -->
-  <line x1="60" y1="60" x2="220" y2="194" stroke="#222" stroke-width="2"/>
-  <line x1="220" y1="194" x2="300" y2="194" stroke="#222" stroke-width="2"/>
-  <rect x="190" y="194" width="60" height="42" fill="#fff" stroke="#222" stroke-width="2"/>
-  <!-- vettori -->
-  <line x1="220" y1="194" x2="288" y2="194" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f1)"/>
-  <text x="252" y="186" fill="#cc2222">T<tspan font-size="11" dy="4">1</tspan></text>
-  <line x1="220" y1="194" x2="151" y2="136" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f1)"/>
-  <text x="138" y="128" fill="#cc2222">T<tspan font-size="11" dy="4">2</tspan></text>
-  <line x1="220" y1="236" x2="220" y2="288" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#f1)"/>
-  <text x="228" y="282" fill="#2a6fd6">F<tspan font-size="11" dy="4">p</tspan></text>
-  <path d="M180,194 A40,40 0 0,1 189,169" fill="none" stroke="#1a8a3c" stroke-width="1.6"/>
-  <text x="166" y="182" fill="#1a8a3c" font-size="13">θ</text>
-
-  <!-- diagramma delle componenti -->
-  <line x1="480" y1="60" x2="480" y2="270" stroke="#222" stroke-width="1.6" marker-end="url(#f1)" transform="rotate(180 480 165)"/>
-  <line x1="370" y1="165" x2="590" y2="165" stroke="#222" stroke-width="1.6" marker-end="url(#f1)"/>
-  <text x="487" y="56" font-size="13">y</text><text x="585" y="156" font-size="13">x</text>
-  <line x1="480" y1="165" x2="548" y2="165" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f1)"/>
-  <text x="520" y="158" fill="#cc2222">T<tspan font-size="11" dy="4">1</tspan></text>
-  <line x1="480" y1="165" x2="411" y2="107" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f1)"/>
-  <text x="398" y="100" fill="#cc2222">T<tspan font-size="11" dy="4">2</tspan></text>
-  <line x1="480" y1="165" x2="411" y2="165" stroke="#cc2222" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#f1)"/>
-  <text x="400" y="183" fill="#cc2222" font-size="12">T<tspan font-size="10" dy="3">2x</tspan></text>
-  <line x1="480" y1="165" x2="480" y2="107" stroke="#cc2222" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#f1)"/>
-  <text x="487" y="118" fill="#cc2222" font-size="12">T<tspan font-size="10" dy="3">2y</tspan></text>
-  <line x1="480" y1="165" x2="480" y2="243" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#f1)"/>
-  <text x="488" y="232" fill="#2a6fd6">F<tspan font-size="11" dy="4">p</tspan></text>
-  <path d="M440,165 A40,40 0 0,0 449,190" fill="none" stroke="#1a8a3c" stroke-width="1.6"/>
-  <text x="446" y="152" fill="#1a8a3c" font-size="13">θ</text>
-</svg>
-<figcaption>A sinistra il vaso con le due funi; a destra le tre forze applicate al
-vaso, con la fune obliqua scomposta lungo gli assi.</figcaption>
-</figure>
-
-<p>La fune orizzontale ha già la direzione dell'asse $x$: va scomposta solo la tensione
-obliqua, il cui angolo $\theta$ è misurato rispetto all'orizzontale.</p>
-
-$$T_{2x} = T_2\cos\theta \qquad T_{2y} = T_2\sin\theta$$
-
-<p>Sull'asse $y$ compaiono solo $T_{2y}$, verso l'alto, e la forza peso, verso il basso:
-la componente verticale della fune obliqua regge da sola tutto il peso.</p>
-
-$$T_2\sin\theta = mg \quad\longrightarrow\quad
-T_2 = \frac{mg}{\sin\theta} = \frac{6{,}20\ \text{kg}\cdot 9{,}81\ \frac{\text{N}}{\text{kg}}}{\sin 40^\circ}
-\approx 94{,}6\ \text{N}$$
-
-<p>Sull'asse $x$ le due componenti orizzontali hanno verso opposto e devono avere lo
-stesso modulo:</p>
-
-$$T_1 = T_2\cos\theta = 94{,}6\ \text{N}\cdot\cos 40^\circ \approx 72{,}5\ \text{N}$$
-
-<div class="strum">
-<label for="ang">Angolo della fune obliqua con l'orizzontale:
-<output id="vang">40°</output></label>
-<input type="range" id="ang" min="5" max="85" step="1" value="40">
-<p id="esito" style="font-family:var(--sans);font-size:.95rem;margin:10px 0 0"></p>
-<p style="font-family:var(--sans);font-size:.85rem;color:#555;margin:6px 0 0">
-Con lo stesso vaso: più la fune obliqua si avvicina all'orizzontale, più entrambe le
-tensioni crescono, perché una componente verticale sempre più piccola deve reggere lo
-stesso peso.</p>
+<div class="fig">
+<svg id="g-vaso" viewBox="0 0 440 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Vaso appeso a una fune orizzontale e a una fune obliqua, con il diagramma delle forze"></svg>
+<div class="cursore"><label for="cur-th">θ</label><input id="cur-th" type="range" min="30" max="75" step="1" value="40"><span class="val" id="val-th"></span></div>
+<div class="did-parti" style="--n:2"><p class="did">Vaso e funi</p><p class="did">Forze sul vaso, $T_2$ scomposta</p></div>
 </div>
+
+<p>Si scompone solo $T_2$, con $\theta$ misurato dall'orizzontale:</p>
+
+<p class="eq">$$T_{2x} = T_2\cos\theta \qquad T_{2y} = T_2\sin\theta$$</p>
+<p class="eq">$$y:\ T_2\sin\theta = mg \;\Longrightarrow\; T_2 = \frac{mg}{\sin\theta} = \frac{6{,}20\ \text{kg}\cdot 9{,}81\ \text{N/kg}}{\sin 40^\circ} \approx 94{,}6\ \text{N}$$</p>
+<p class="eq">$$x:\ T_1 = T_2\cos\theta = 94{,}6\ \text{N}\cdot\cos 40^\circ \approx 72{,}5\ \text{N}$$</p>
 
 <h2>Esempio 2</h2>
 
-<p>Un corpo di massa $m = 2{,}7\ \text{kg}$ è appeso al soffitto con due funi: la prima
-forma un angolo di $60^\circ$ con la verticale, la seconda un angolo di $45^\circ$
-dall'altra parte. Qui nessuna delle due tensioni è parallela a un asse, quindi vanno
-scomposte entrambe.</p>
+<p>Dati: $m = 2{,}7\ \text{kg}$; due funi al soffitto, a $60^\circ$ e a $45^\circ$ dalla verticale, da parti opposte. Calcolare $T_1$ e $T_2$.</p>
 
-<figure class="dis">
-<svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="f2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
-    </marker>
-  </defs>
-  <line x1="40" y1="60" x2="290" y2="60" stroke="#222" stroke-width="3"/>
-  <g stroke="#222" stroke-width="1.4">
-    <line x1="50" y1="60" x2="38" y2="46"/><line x1="80" y1="60" x2="68" y2="46"/>
-    <line x1="110" y1="60" x2="98" y2="46"/><line x1="140" y1="60" x2="128" y2="46"/>
-    <line x1="170" y1="60" x2="158" y2="46"/><line x1="200" y1="60" x2="188" y2="46"/>
-    <line x1="230" y1="60" x2="218" y2="46"/><line x1="260" y1="60" x2="248" y2="46"/>
-  </g>
-  <line x1="165" y1="188" x2="54" y2="60" stroke="#222" stroke-width="2"/>
-  <line x1="165" y1="188" x2="239" y2="60" stroke="#222" stroke-width="2"/>
-  <line x1="165" y1="60" x2="165" y2="188" stroke="#222" stroke-width="1.2" stroke-dasharray="5 4"/>
-  <rect x="135" y="188" width="60" height="42" fill="#fff" stroke="#222" stroke-width="2"/>
-  <line x1="165" y1="188" x2="113" y2="128" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f2)"/>
-  <text x="92" y="122" fill="#cc2222">T<tspan font-size="11" dy="4">1</tspan></text>
-  <line x1="165" y1="188" x2="217" y2="98" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f2)"/>
-  <text x="223" y="94" fill="#cc2222">T<tspan font-size="11" dy="4">2</tspan></text>
-  <line x1="165" y1="230" x2="165" y2="284" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#f2)"/>
-  <text x="173" y="278" fill="#2a6fd6">F<tspan font-size="11" dy="4">p</tspan></text>
-  <path d="M165,133 A55,55 0 0,1 117,161" fill="none" stroke="#1a8a3c" stroke-width="1.6"/>
-  <text x="120" y="130" fill="#1a8a3c" font-size="13">60°</text>
-  <path d="M165,133 A55,55 0 0,0 204,149" fill="none" stroke="#1a8a3c" stroke-width="1.6"/>
-  <text x="182" y="128" fill="#1a8a3c" font-size="13">45°</text>
-
-  <line x1="470" y1="60" x2="470" y2="270" stroke="#222" stroke-width="1.6" marker-end="url(#f2)" transform="rotate(180 470 165)"/>
-  <line x1="360" y1="165" x2="580" y2="165" stroke="#222" stroke-width="1.6" marker-end="url(#f2)"/>
-  <text x="477" y="56" font-size="13">y</text><text x="575" y="156" font-size="13">x</text>
-  <line x1="470" y1="165" x2="392" y2="120" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f2)"/>
-  <text x="374" y="113" fill="#cc2222">T<tspan font-size="11" dy="4">1</tspan></text>
-  <line x1="470" y1="165" x2="534" y2="101" stroke="#cc2222" stroke-width="2.5" marker-end="url(#f2)"/>
-  <text x="540" y="97" fill="#cc2222">T<tspan font-size="11" dy="4">2</tspan></text>
-  <line x1="470" y1="165" x2="392" y2="165" stroke="#cc2222" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f2)"/>
-  <text x="384" y="184" fill="#cc2222" font-size="12">T<tspan font-size="10" dy="3">1x</tspan></text>
-  <line x1="470" y1="165" x2="534" y2="165" stroke="#cc2222" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f2)"/>
-  <text x="528" y="184" fill="#cc2222" font-size="12">T<tspan font-size="10" dy="3">2x</tspan></text>
-  <line x1="470" y1="165" x2="470" y2="120" stroke="#cc2222" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#f2)"/>
-  <text x="477" y="132" fill="#cc2222" font-size="12">T<tspan font-size="10" dy="3">1y</tspan></text>
-  <line x1="470" y1="165" x2="470" y2="101" stroke="#cc2222" stroke-width="1.6" stroke-dasharray="5 4"/>
-  <text x="477" y="112" fill="#cc2222" font-size="12">T<tspan font-size="10" dy="3">2y</tspan></text>
-  <line x1="470" y1="165" x2="470" y2="243" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#f2)"/>
-  <text x="478" y="232" fill="#2a6fd6">F<tspan font-size="11" dy="4">p</tspan></text>
-</svg>
-<figcaption>Le due funi e le loro componenti. Gli angoli sono misurati a partire dalla
-verticale: la componente orizzontale contiene il seno, quella verticale il coseno.</figcaption>
-</figure>
-
-<p>Sull'asse $x$ le due componenti orizzontali puntano in verso opposto; sull'asse $y$
-le due componenti verticali sommate reggono il peso:</p>
-
-$$T_1\sin 60^\circ = T_2\sin 45^\circ \qquad\qquad T_1\cos 60^\circ + T_2\cos 45^\circ = mg$$
-
-<p>Dalla prima ricaviamo $T_1$ in funzione di $T_2$ e la sostituiamo nella seconda, così
-resta una sola incognita:</p>
-
-$$T_1 = T_2\,\frac{\sin 45^\circ}{\sin 60^\circ}
-\quad\longrightarrow\quad
-T_2\,\frac{\sin 45^\circ}{\sin 60^\circ}\cos 60^\circ + T_2\cos 45^\circ = mg$$
-
-$$T_2\,(0{,}408 + 0{,}707) = mg \quad\longrightarrow\quad
-T_2 = \frac{2{,}7\ \text{kg}\cdot 9{,}81\ \frac{\text{N}}{\text{kg}}}{1{,}115} \approx 23{,}8\ \text{N}$$
-
-$$T_1 = T_2\,\frac{\sin 45^\circ}{\sin 60^\circ} = 23{,}8\ \text{N}\cdot 0{,}816 \approx 19{,}4\ \text{N}$$
-
-<div class="nota">
-<strong>Da non sbagliare.</strong> Seno e coseno si scambiano di posto a seconda di
-dove è misurato l'angolo. Nel primo esempio $\theta$ è l'angolo con l'orizzontale e la
-componente verticale è $T\sin\theta$; nel secondo gli angoli sono misurati dalla
-verticale e la componente verticale è $T\cos\alpha$. Il coseno va sempre con il cateto
-adiacente all'angolo segnato nel disegno.
+<div class="fig">
+<svg id="g-soff" viewBox="0 0 440 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Corpo appeso al soffitto con due funi oblique, con il diagramma delle forze"></svg>
+<div class="did-parti" style="--n:2"><p class="did">Angoli misurati dalla verticale</p><p class="did">Forze sul corpo e proiezioni sugli assi</p></div>
 </div>
 
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Finora il corpo è trattato come un punto, e basta che la somma delle forze sia nulla.
-Quando le dimensioni contano, una risultante nulla non garantisce più l'equilibrio,
-perché il corpo può mettersi a ruotare: nasce così il momento torcente.</p>
-</div>
+<p>Si scompongono entrambe le tensioni:</p>
+
+<p class="eq">$$x:\ T_1\sin 60^\circ = T_2\sin 45^\circ \qquad y:\ T_1\cos 60^\circ + T_2\cos 45^\circ = mg$$</p>
+<p class="eq">$$T_1 = T_2\,\frac{\sin 45^\circ}{\sin 60^\circ} \;\Longrightarrow\; T_2\,(0{,}408 + 0{,}707) = mg \;\Longrightarrow\; T_2 = \frac{2{,}7\ \text{kg}\cdot 9{,}81\ \text{N/kg}}{1{,}115} \approx 24\ \text{N}$$</p>
+<p class="eq">$$T_1 = T_2\,\frac{\sin 45^\circ}{\sin 60^\circ} \approx 19\ \text{N}$$</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Angolo dall'orizzontale → componente verticale $T\sin\theta$; angolo dalla verticale → componente verticale $T\cos\alpha$.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../45-equilibrio-di-un-corpo-appeso-e-carrucola/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equilibrio di un corpo appeso e carrucola</span></a><a class="successiva" href="../47-momento-torcente/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Momento torcente</span></a></nav>
+<footer><p>Fisica prima &middot; Statica del punto materiale &middot; Unità 45</p></footer>
 </div>
+
 <script>
 (function(){
-  var s=document.getElementById('ang'), o=document.getElementById('vang'),
-      e=document.getElementById('esito'), mg=6.20*9.81;
-  function agg(){
-    var a=+s.value, r=a*Math.PI/180;
-    var T2=mg/Math.sin(r), T1=T2*Math.cos(r);
-    o.textContent=a+'°';
-    e.innerHTML='T<sub>2</sub> = '+T2.toFixed(1)+' N &nbsp;&middot;&nbsp; T<sub>1</sub> = '+T1.toFixed(1)+' N';
+  var NS='http://www.w3.org/2000/svg', g=9.81;
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,base,sub,col,anc,sz){var t=el(p,'text',{'font-size':sz||14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':anc||'middle'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  function txt(p,x,y,s,col,anc,sz){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'middle'});t.textContent=s;return t;}
+  function pos(t,x,y){t.setAttribute('x',x.toFixed?x.toFixed(1):x);t.setAttribute('y',y.toFixed?y.toFixed(1):y);}
+  function L2(l,x1,y1,x2,y2){l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);}
+  function marcatori(s,id){var d=el(s,'defs',{});[['r','var(--rosso)'],['b','var(--blu)'],['i','var(--inchiostro)']].forEach(function(c){var mk=el(d,'marker',{id:id+c[0],markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:c[1]});});}
+  function vett(s,id,c,col,w,dash){var a={stroke:col,'stroke-width':w||2.6,'marker-end':'url(#'+id+c+')'};if(dash)a['stroke-dasharray']=dash;return el(s,'line',a);}
+  function tratteggio(s,x1,x2,y,su){el(s,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'var(--inchiostro)','stroke-width':2.5});for(var x=x1+6;x<=x2;x+=10)el(s,'line',{x1:x,y1:y,x2:x-7,y2:y-7,stroke:'var(--inchiostro)','stroke-width':1.1});}
+  function assi(s,id,O,xl,xr,yt,yb){el(s,'line',{x1:xl,y1:O.y,x2:xr,y2:O.y,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#'+id+'i)'});el(s,'line',{x1:O.x,y1:yb,x2:O.x,y2:yt,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#'+id+'i)'});txt(s,xr-4,O.y+16,'x','var(--inchiostro)','middle',12);txt(s,O.x+10,yt+6,'y','var(--inchiostro)','middle',12);}
+  function fmt(v,c){return v.toFixed(c).replace('.',',');}
+
+  /* figura 1: vaso, fune orizzontale e fune a theta dall'orizzontale */
+  var s=document.getElementById('g-vaso');
+  if(s){
+    marcatori(s,'gv');
+    var mg=6.20*g, k=0.7, P={x:130,y:140}, Lr=110, O={x:335,y:140};
+    /* parete a destra */
+    el(s,'line',{x1:210,y1:40,x2:210,y2:240,stroke:'var(--inchiostro)','stroke-width':2.5});
+    for(var y=46;y<=240;y+=10)el(s,'line',{x1:210,y1:y,x2:217,y2:y-7,stroke:'var(--inchiostro)','stroke-width':1.1});
+    el(s,'line',{x1:P.x,y1:P.y,x2:210,y2:P.y,stroke:'var(--inchiostro)','stroke-width':2});
+    txt(s,180,P.y-7,'1','var(--grigio)','middle',11);
+    var fune=el(s,'line',{stroke:'var(--inchiostro)','stroke-width':2});
+    var gancio=el(s,'g',{}); el(gancio,'line',{x1:-14,y1:0,x2:14,y2:0,stroke:'var(--inchiostro)','stroke-width':2.5});
+    for(var x=-10;x<=14;x+=8)el(gancio,'line',{x1:x,y1:0,x2:x-6,y2:-6,stroke:'var(--inchiostro)','stroke-width':1.1});
+    var n2=txt(s,0,0,'2','var(--grigio)','middle',11);
+    el(s,'line',{x1:P.x,y1:P.y,x2:P.x-44,y2:P.y,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    var arco=el(s,'path',{fill:'none',stroke:'var(--verde)','stroke-width':1.5});
+    var tth=txt(s,0,0,'θ','var(--verde)','middle',12);
+    el(s,'rect',{x:P.x-20,y:P.y,width:40,height:34,rx:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'circle',{cx:P.x,cy:P.y,r:3,fill:'var(--inchiostro)'});
+    /* diagramma delle forze */
+    assi(s,'gv',O,240,435,30,235);
+    var v2x=vett(s,'gv','r','var(--rosso)',1.6,'5 4'), v2y=vett(s,'gv','r','var(--rosso)',1.6,'5 4');
+    var v1=vett(s,'gv','r','var(--rosso)'), v2=vett(s,'gv','r','var(--rosso)'), vp=vett(s,'gv','b','var(--blu)');
+    var l1=lab(s,'T','1','var(--rosso)','start'), l2=lab(s,'T','2','var(--rosso)','end'), l2x=lab(s,'T','2x','var(--rosso)','middle',12), l2y=lab(s,'T','2y','var(--rosso)','start',12), lp=lab(s,'F','p','var(--blu)','start');
+    var Lp=k*mg; L2(vp,O.x,O.y,O.x,O.y+Lp); pos(lp,O.x+7,O.y+Lp/2+5);
+    var ct=document.getElementById('cur-th'), vt=document.getElementById('val-th');
+    var dis1=function(){
+      var th=+ct.value*Math.PI/180, c=Math.cos(th), sn=Math.sin(th);
+      var E={x:P.x-Lr*c,y:P.y-Lr*sn};
+      L2(fune,P.x,P.y,E.x.toFixed(1),E.y.toFixed(1)); gancio.setAttribute('transform','translate('+E.x.toFixed(1)+','+E.y.toFixed(1)+')');
+      pos(n2,P.x-0.55*Lr*c-9*sn,P.y-0.55*Lr*sn+9*c+4);
+      var r=30; arco.setAttribute('d','M'+(P.x-r)+','+P.y+' A'+r+','+r+' 0 0 1 '+(P.x-r*c).toFixed(1)+','+(P.y-r*sn).toFixed(1));
+      pos(tth,P.x-(r+11)*Math.cos(th/2),P.y-(r+11)*Math.sin(th/2)+4);
+      var T2=mg/sn, T1=T2*c, a=k*T1, bx=k*T2*c, by=k*T2*sn;
+      L2(v1,O.x,O.y,O.x+a,O.y); pos(l1,O.x+a+5,O.y-6);
+      L2(v2,O.x,O.y,(O.x-bx).toFixed(1),(O.y-by).toFixed(1)); pos(l2,O.x-bx-5,O.y-by-4);
+      L2(v2x,O.x,O.y,(O.x-bx).toFixed(1),O.y); pos(l2x,Math.min(O.x-bx/2,O.x-18),O.y+18);
+      L2(v2y,O.x,O.y,O.x,(O.y-by).toFixed(1)); pos(l2y,O.x+6,O.y-by+12);
+      vt.innerHTML='θ = '+ct.value+'° → <i>T</i><sub>2</sub> = '+fmt(T2,1)+' N, <i>T</i><sub>1</sub> = '+fmt(T1,1)+' N';
+    };
+    ct.addEventListener('input',dis1); dis1();
   }
-  s.addEventListener('input',agg); agg();
+
+  /* figura 2: due funi al soffitto, 60 e 45 gradi dalla verticale */
+  var t=document.getElementById('g-soff');
+  if(t){
+    marcatori(t,'gs');
+    var mg2=2.7*g, a1=60*Math.PI/180, a2=45*Math.PI/180;
+    var T2=mg2/(Math.sin(a2)/Math.sin(a1)*Math.cos(a1)+Math.cos(a2)), T1=T2*Math.sin(a2)/Math.sin(a1);
+    var h=80, Q={x:30+h*Math.tan(a1),y:40+h};
+    tratteggio(t,20,Q.x+h*Math.tan(a2)+15,40);
+    el(t,'line',{x1:Q.x,y1:Q.y,x2:Q.x-h*Math.tan(a1),y2:40,stroke:'var(--inchiostro)','stroke-width':2});
+    el(t,'line',{x1:Q.x,y1:Q.y,x2:Q.x+h*Math.tan(a2),y2:40,stroke:'var(--inchiostro)','stroke-width':2});
+    el(t,'line',{x1:Q.x,y1:Q.y,x2:Q.x,y2:42,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    var r=38;
+    el(t,'path',{d:'M'+Q.x+','+(Q.y-r)+' A'+r+','+r+' 0 0 0 '+(Q.x-r*Math.sin(a1)).toFixed(1)+','+(Q.y-r*Math.cos(a1)).toFixed(1),fill:'none',stroke:'var(--verde)','stroke-width':1.5});
+    el(t,'path',{d:'M'+Q.x+','+(Q.y-r)+' A'+r+','+r+' 0 0 1 '+(Q.x+r*Math.sin(a2)).toFixed(1)+','+(Q.y-r*Math.cos(a2)).toFixed(1),fill:'none',stroke:'var(--verde)','stroke-width':1.5});
+    txt(t,Q.x-(r+14)*Math.sin(a1/2),Q.y-(r+14)*Math.cos(a1/2)+4,'60°','var(--verde)','middle',12);
+    txt(t,Q.x+(r+14)*Math.sin(a2/2),Q.y-(r+14)*Math.cos(a2/2)+4,'45°','var(--verde)','middle',12);
+    txt(t,Q.x-0.62*h*Math.tan(a1)-10,Q.y-0.62*h+14,'1','var(--grigio)','middle',11);
+    txt(t,Q.x+0.62*h*Math.tan(a2)+10,Q.y-0.62*h+14,'2','var(--grigio)','middle',11);
+    el(t,'rect',{x:Q.x-20,y:Q.y,width:40,height:34,rx:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    el(t,'circle',{cx:Q.x,cy:Q.y,r:3,fill:'var(--inchiostro)'});
+    /* diagramma delle forze, 3 px/N */
+    var k2=3, O2={x:350,y:135};
+    assi(t,'gs',O2,265,435,30,240);
+    var A={x:O2.x-k2*T1*Math.sin(a1),y:O2.y-k2*T1*Math.cos(a1)}, B={x:O2.x+k2*T2*Math.sin(a2),y:O2.y-k2*T2*Math.cos(a2)};
+    [[A.x,A.y,A.x,O2.y],[A.x,A.y,O2.x,A.y],[B.x,B.y,B.x,O2.y],[B.x,B.y,O2.x,B.y]].forEach(function(c){el(t,'line',{x1:c[0],y1:c[1],x2:c[2],y2:c[3],stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'});});
+    L2(vett(t,'gs','r','var(--rosso)'),O2.x,O2.y,A.x.toFixed(1),A.y.toFixed(1)); pos(lab(t,'T','1','var(--rosso)','end'),A.x-5,A.y-4);
+    L2(vett(t,'gs','r','var(--rosso)'),O2.x,O2.y,B.x.toFixed(1),B.y.toFixed(1)); pos(lab(t,'T','2','var(--rosso)','start'),B.x+5,B.y-4);
+    var Lp2=k2*mg2; L2(vett(t,'gs','b','var(--blu)'),O2.x,O2.y,O2.x,O2.y+Lp2); pos(lab(t,'F','p','var(--blu)','start'),O2.x+7,O2.y+Lp2/2+5);
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
