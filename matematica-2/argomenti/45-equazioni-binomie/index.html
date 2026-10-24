@@ -5,14 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni binomie — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.nota{background:#fdf6ec;border:1px solid #e7d9b8;border-radius:10px;padding:14px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
 </style>
 </head>
 <body>
@@ -22,51 +50,62 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni di grado superiore al secondo &middot; Unità 43</p>
   <h1>Equazioni binomie</h1>
-  <p class="sommario">Un'equazione binomia è la più semplice equazione di grado superiore al
-  secondo: contiene solo il termine con la $x$ elevata a una potenza e un termine noto. Si
-  risolve isolando $x^n$ e poi estraendo la radice $n$-esima, con un'attenzione in più quando
-  l'esponente è pari.</p>
 </header>
 
-<h2>Forma generale</h2>
-<p>Un'equazione binomia ha la forma</p>
-<p>$$ax^n+b=0\qquad a,b\in\mathbb{R},\ \ a,b\neq0$$</p>
-<p>cioè un binomio in cui compaiono solo la potenza $x^n$ e il termine noto, senza potenze
-intermedie. Sono equazioni binomie, ad esempio, $7x^5+2=0$ e $\dfrac15x^4-\dfrac23=0$.</p>
+<p>Equazione con la sola potenza $x^n$ e il termine noto: quando ha soluzioni, e quante?</p>
+
+<div class="def"><span class="et">Equazione binomia</span>
+<p class="eq">$$ax^n+b=0\qquad a,b\in\mathbb{R},\ \ a\neq0,\ \ b\neq0$$</p>
+<p>Esempi: $7x^5+2=0$, $\;\dfrac15x^4-\dfrac23=0$.</p></div>
+
+<p>Si isola la potenza:</p>
+
+<p class="eq">$$x^n=-\frac{b}{a}$$</p>
 
 <h2>Caso $n$ pari</h2>
-<p>Isolando la potenza si ottiene $x^n=-\dfrac{b}{a}$. Poiché una potenza pari non può mai
-essere negativa, il segno del secondo membro decide se l'equazione ha soluzione:</p>
-<p>$$\text{se }-\dfrac{b}{a}&lt;0\ \Rightarrow\ \text{impossibile}\qquad\qquad
-\text{se }-\dfrac{b}{a}\geq0\ \Rightarrow\ x=\pm\sqrt[n]{-\dfrac{b}{a}}$$</p>
-<p>Le due soluzioni, quando esistono, sono opposte: se $x_0$ risolve l'equazione, anche
-$-x_0$ la risolve, perché l'esponente pari cancella il segno.</p>
 
-<div class="esempio">
-<p>$$x^8+2=0\ \Rightarrow\ x^8=-2\ \Rightarrow\ \text{impossibile}$$</p>
-<p>$$x^6-64=0\ \Rightarrow\ x^6=64\ \Rightarrow\ x=\pm\sqrt[6]{64}\ \Rightarrow\ x=\pm2$$</p>
-</div>
+<ul>
+<li>$-\dfrac ba&lt;0$ → impossibile (una potenza pari non è mai negativa);</li>
+<li>$-\dfrac ba>0$ → due soluzioni opposte.</li>
+</ul>
+
+<p class="eq principio">$$x=\pm\sqrt[n]{-\frac{b}{a}}$$</p>
+
+<p class="eq quesito">$$x^8+2=0$$</p>
+<p class="eq ris">$$x^8=-2\ \Rightarrow\ \text{impossibile}$$</p>
+
+<p class="eq quesito">$$x^6-64=0$$</p>
+<p class="eq ris">$$x^6=64\ \Rightarrow\ x=\pm\sqrt[6]{64}=\pm2$$</p>
 
 <h2>Caso $n$ dispari</h2>
-<p>Con esponente dispari la radice $n$-esima esiste sempre, di qualunque segno sia il
-radicando, e l'equazione ha sempre un'unica soluzione:</p>
-<p>$$ax^n+b=0\ \Rightarrow\ x^n=-\dfrac{b}{a}\ \Rightarrow\ x=\sqrt[n]{-\dfrac{b}{a}}$$</p>
 
-<div class="esempio">
-<p>$$2x^3+54=0\ \Rightarrow\ x^3=-\dfrac{54}{2}=-27\ \Rightarrow\ x=\sqrt[3]{-27}\ \Rightarrow\ x=-3$$</p>
-</div>
+<p>Radice $n$-esima definita per ogni radicando → sempre una e una sola soluzione:</p>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Le equazioni trinomie e biquadratiche, che si riducono a un'equazione di secondo
-grado con una sostituzione.</li>
-</ul>
-</div>
+<p class="eq principio">$$x=\sqrt[n]{-\frac{b}{a}}$$</p>
+
+<p class="eq quesito">$$2x^3+54=0$$</p>
+<p class="eq ris">$$x^3=-27\ \Rightarrow\ x=\sqrt[3]{-27}=-3$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../44-sistemi-di-secondo-grado/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Sistemi di secondo grado</span></a><a class="successiva" href="../46-equazioni-trinomie-e-biquadratiche/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni trinomie e biquadratiche</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni di grado superiore al secondo &middot; Unità 43</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

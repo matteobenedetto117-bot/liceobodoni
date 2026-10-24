@@ -325,6 +325,7 @@
 - Parole: 230 su circa 1,3 pagine di traccia (pagina 85 e la parte alta di pag. 86, fino all'esempio 2x³+54=0, prima dell'intestazione "Equazioni trinomie" a metà di pag. 86)
 - Rettifica: nessuna. Verificato con SymPy: x⁶-64=0 ⇒ x=±2 (coincide con la traccia); 2x³+54=0 ⇒ x³=-27 ⇒ x=-3 (coincide con la traccia).
 - Aggiunta: nessuna oltre alla frase che spiega perché le due soluzioni del caso pari sono opposte, idea implicita nella traccia (che scrive x=±ⁿ√(-b/a)) ma non motivata a parole.
+- Revisione (24/10/2026, regole 13/10): parole 230 → 60. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 42), tolti sommario, «Nella prossima unità», il titoletto «Forma generale» e le frasi di spiegazione; definizione in .def, x^n = −b/a in .eq, caso pari in elenco caso → conseguenza, formule risolutive in .eq rosse, esempi come quesito (azzurro) e risultato (verde). Tenuti «Caso n pari» e «Caso n dispari». Correzione: nel caso pari la condizione −b/a ≥ 0 diventa −b/a > 0 (con b ≠ 0 il radicando non è mai nullo); scritto a ≠ 0, b ≠ 0 al posto di a, b ≠ 0. Soluzioni verificate (x = ±2, x = −3). Nessuna comparsa, nessuna figura, nessun esempio tolto.
 
 ## Unità 44 — Equazioni trinomie e biquadratiche
 - Parole: 203 su circa 1,5 pagine di traccia (dalla parte bassa di pag. 86, dall'intestazione "Equazioni trinomie", fino alla fine di pag. 87, prima dell'intestazione "Equazioni risolubili con scomposizioni" a inizio pag. 88)
