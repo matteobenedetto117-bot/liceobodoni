@@ -531,6 +531,7 @@
   traccia, mostrando il valore corrente di $\gamma$ e i due limiti per $v\to0$ e $v\to c$: è
   l'unico strumento interattivo dell'unità, e mostra esattamente il grafico già presente sul
   quaderno.
+- Revisione (24/10/2026, regole 13/10): parole 465 → 109 (sommario incluso). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 41); apertura a domanda; tolti sommario, «Nella prossima unità» (rimandi alle unità 43–44), i titoletti «L'orologio a luce», «Lo stesso orologio visto da un sistema in moto», «Il fattore di Lorentz» e i paragrafi di spiegazione; tempo proprio Δt₀ = 2d/c in .def; derivazione con Pitagora in una .eq; Δt = γΔt₀ e γ in .def rosso; limiti v → 0, v → c e γ ≥ 1 in elenco caso → conseguenza (la nota «Attenzione» assorbita nell'elenco); esempio in forma Dati/Calcolare. Controllo concettuale (SymPy): derivazione e valori corretti; dati scritti come d = 3,0 m e c = 3,0×10⁸ m/s, risultati arrotondati alle cifre dei dati (Δt₀ = 2,0×10⁻⁸ s, Δt ≈ 2,1×10⁻⁸ s invece di 2,00 e 2,12). Figure rifatte da script: orologio fermo (tratteggio dello specchio spostato sul retro), orologio in moto con geometria calcolata per v = 0,6c; grafico di γ con cursore su v/c corretto (la linea tratteggiata «γ → 1» era a γ ≈ 4,9: ora asse γ da 0 con riferimento γ = 1 e asintoto v = c). Nessuna comparsa da togliere.
 
 ## Unità 43 — Dilatazione dei tempi: esempi numerici
 - Parole: 191 su 1 pagina di traccia (pagina 78).
