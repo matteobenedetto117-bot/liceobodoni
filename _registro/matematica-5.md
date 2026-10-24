@@ -847,6 +847,7 @@ teorema del confronto, a pagina 21.
   esattamente $\frac13\pi h(R^2+r^2+Rr)$. L'unico strumento interattivo mostra, con un
   cursore su $x_0$, il raggio $f(x_0)=e^{x_0}$ e il volume accumulato dell'esempio 1: usa
   gli stessi dati numerici dell'esempio, senza introdurre una funzione nuova.
+- Revisione (24/10/2026, regole 13/10): parole 378 → 149 (sommario incluso). Pagina mai revisionata: impaginazione a quaderno (stile, aiuto Piano e script dell'unità 38), tolti sommario e frasi introduttive; titoletti tenuti per i tre metodi (asse x, asse y, gusci), «Esempi» diviso in «Esempio 1» ed «Esempio 2» con Dati/Calcolare; le tre formule in .def rosse, gusci in due voci caso → conseguenza. Esempi da tre a due: tolto l'esempio 2 (y = x², rotazione attorno all'asse y, V = 15π/2) e il quesito d'esame 2015 sul tronco di cono (nota). Correzioni: il guscio era descritto con la «superficie laterale 2πx f(x)» sommata a dare il volume → volume del guscio 2πx f(x) dx; aggiunte le ipotesi f ≥ 0 e 0 ≤ a < b per il metodo dei gusci; nella figura dei gusci il guscio era etichettato «a» e «b» come l'intervallo → ora raggio x e altezza f(x). Verificati con SymPy π(e² − e⁻²)/2 ≈ 11,39 e 4π/3. Nessuna comparsa. Figure rifatte da script: regione e solido con sezione per l'asse x; solido con sezione per l'asse y; gusci sulla funzione dell'Esempio 2; strumento interattivo dell'Esempio 1 ridotto a figura con cursore su x₀ (raggio, sezione, πr², V da −1 a x₀).
 
 ## Unità 40 — Integrali impropri
 - Parole: 159 su circa 0,55 pagine di traccia (la parte finale di pag. 144, dalla
