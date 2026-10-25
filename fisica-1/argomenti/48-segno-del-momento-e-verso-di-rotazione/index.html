@@ -5,23 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Segno del momento e verso di rotazione — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:620px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.strum{border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:26px 0;
-  background:#fff}
-.strum label{font-family:var(--sans);font-size:.9rem;display:block;margin-bottom:8px}
-.strum input[type=range]{width:100%}
-.strum output{font-family:var(--sans);font-weight:600}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -32,191 +59,167 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Segno del momento e verso di rotazione</h1>
 </header>
 
-<p>Il modulo $rF\sin\alpha$ dice quanta rotazione una forza produce, ma non in che verso.
-Su un corpo le forze sono di solito più di una, e ognuna tira dalla sua parte: serve un
-modo per metterle insieme. Si attribuisce allora a ogni momento un segno, e il segno del
-totale dice come il corpo gira davvero.</p>
+<p>Più forze su un corpo con un perno: come si sommano i loro momenti e in che verso ruota il corpo?</p>
 
-<figure class="dis">
-<svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#cc2222"/></marker>
-    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a6fd6"/></marker>
-    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1a8a3a"/></marker>
-  </defs>
-  <rect x="150" y="100" width="280" height="24" fill="#eef3fb" stroke="#222" stroke-width="2"/>
-  <circle cx="290" cy="112" r="5" fill="#222"/>
-  <text x="270" y="148" font-size="12">perno</text>
-  <line x1="290" y1="112" x2="396" y2="112" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#ab)"/>
-  <text x="340" y="104" fill="#2a6fd6">r<tspan font-size="11" dy="4">1</tspan></text>
-  <line x1="396" y1="112" x2="432" y2="40" stroke="#cc2222" stroke-width="2.5" marker-end="url(#ar)"/>
-  <text x="438" y="38" fill="#cc2222">F<tspan font-size="11" dy="4">1</tspan></text>
-  <path d="M420,112 A30,30 0 0,0 408,85" fill="none" stroke="#e08b00" stroke-width="1.8"/>
-  <text x="422" y="98" fill="#e08b00" font-size="12">α</text>
-  <text x="452" y="66" font-size="12">senso antiorario</text>
-  <line x1="290" y1="112" x2="186" y2="112" stroke="#1a8a3a" stroke-width="2.5" marker-end="url(#ag)"/>
-  <text x="228" y="104" fill="#1a8a3a">r<tspan font-size="11" dy="4">2</tspan></text>
-  <line x1="186" y1="112" x2="160" y2="186" stroke="#cc2222" stroke-width="2.5" marker-end="url(#ar)"/>
-  <text x="126" y="192" fill="#cc2222">F<tspan font-size="11" dy="4">2</tspan></text>
-  <path d="M164,112 A26,26 0 0,1 172,136" fill="none" stroke="#e08b00" stroke-width="1.8"/>
-  <text x="170" y="142" fill="#e08b00" font-size="12">β</text>
-  <text x="14" y="212" font-size="12">senso orario</text>
-</svg>
-<figcaption>Le due forze tirano il corpo in versi di rotazione opposti: da sole lo
-farebbero girare una in un senso e una nell'altro.</figcaption>
-</figure>
-
-<h2>La convenzione</h2>
-
-<p>Si sceglie il <strong>senso antiorario come positivo</strong>. Un momento che tende a
-far girare il corpo in senso antiorario si scrive allora col segno più, uno che lo fa
-girare in senso orario col segno meno:</p>
-
-$$M_1 = +\,r_1 F_1 \sin\alpha \qquad M_2 = -\,r_2 F_2 \sin\beta$$
-
-<p>Fatto questo, i due momenti sono numeri con segno e si possono sommare come numeri. Il
-momento totale è</p>
-
-$$M_{\text{TOT}} = M_1 + M_2 = r_1 F_1 \sin\alpha - r_2 F_2 \sin\beta$$
-
-<p>e il suo segno risponde alla domanda su come il corpo si mette a girare:</p>
-
-$$M_{\text{TOT}} &gt; 0 \;\Rightarrow\; \text{ruota in senso antiorario}$$
-$$M_{\text{TOT}} &lt; 0 \;\Rightarrow\; \text{ruota in senso orario}$$
-$$M_{\text{TOT}} = 0 \;\Rightarrow\; \text{non ruota}$$
-
-<p>La scelta dell'antiorario come verso positivo è una convenzione: si potrebbe fare
-l'opposto, purché la si tenga per tutti i momenti dello stesso problema.</p>
-
-<h2>Attenzione all'angolo da usare</h2>
-
-<figure class="dis">
-<svg viewBox="0 0 620 250" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="br" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#cc2222"/></marker>
-    <marker id="bb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a6fd6"/></marker>
-  </defs>
-  <circle cx="310" cy="125" r="92" fill="#fbfcfe" stroke="#222" stroke-width="2"/>
-  <circle cx="310" cy="125" r="5" fill="#222"/>
-  <line x1="310" y1="125" x2="386" y2="152" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#bb)"/>
-  <text x="344" y="150" fill="#2a6fd6">r</text>
-  <line x1="386" y1="152" x2="452" y2="175" stroke="#444" stroke-width="1.3" stroke-dasharray="6 4"/>
-  <line x1="386" y1="152" x2="452" y2="120" stroke="#cc2222" stroke-width="2.5" marker-end="url(#br)"/>
-  <text x="458" y="116" fill="#cc2222">F</text>
-  <path d="M416,163 A32,32 0 0,0 421,138" fill="none" stroke="#1a8a3a" stroke-width="1.8"/>
-  <text x="424" y="158" fill="#1a8a3a" font-size="13">α</text>
-  <line x1="310" y1="125" x2="234" y2="98" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#bb)"/>
-  <text x="264" y="92" fill="#2a6fd6">r'</text>
-  <line x1="234" y1="98" x2="168" y2="75" stroke="#444" stroke-width="1.3" stroke-dasharray="6 4"/>
-  <line x1="234" y1="98" x2="168" y2="130" stroke="#cc2222" stroke-width="2.5" marker-end="url(#br)"/>
-  <text x="150" y="144" fill="#cc2222">F'</text>
-  <path d="M204,87 A32,32 0 0,0 199,112" fill="none" stroke="#1a8a3a" stroke-width="1.8"/>
-  <text x="188" y="106" fill="#1a8a3a" font-size="13">α'</text>
-</svg>
-<figcaption>L'angolo che entra nel seno è quello fra il raggio, prolungato oltre il punto
-di applicazione (tratteggio), e la forza: non l'angolo che la forza forma con una
-direzione qualsiasi del disegno.</figcaption>
-</figure>
-
-<div class="nota">
-<strong>Da non sbagliare.</strong> Il segno non si legge dal fatto che la forza punti in
-su o in giù, ma dal verso in cui quella forza farebbe girare il corpo attorno al perno.
-La stessa forza diretta verso l'alto dà momento positivo se applicata a destra del perno
-e negativo se applicata a sinistra.
+<div class="fig">
+<svg id="g-barra" viewBox="0 0 440 175" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Barra con perno al centro: F1 a destra verso l'alto, F2 a sinistra verso l'alto"></svg>
+<p class="did">$F_1$: rotazione antioraria; $F_2$: rotazione oraria</p>
 </div>
 
-<h2>Esempio: il timone</h2>
+<p>Convenzione, la stessa per tutti i momenti del problema:</p>
+<ul>
+<li>rotazione in senso antiorario → momento positivo;</li>
+<li>rotazione in senso orario → momento negativo.</li>
+</ul>
 
-<p>Le due mani agiscono sul bordo di un timone, alla stessa distanza $r = 0{,}74\
-\text{m}$ dal centro. La mano destra spinge con $F_1 = 72\ \text{N}$ formando un angolo
-di $50^\circ$ col raggio, la sinistra con $F_2 = 58\ \text{N}$ perpendicolarmente.</p>
+<p class="eq">$$M_1 = +\,r_1 F_1 \sin\alpha \qquad\qquad M_2 = -\,r_2 F_2 \sin\beta$$</p>
 
-<figure class="dis">
-<svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="cr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#cc2222"/></marker>
-    <marker id="cb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a6fd6"/></marker>
-    <marker id="co" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#e08b00"/></marker>
-  </defs>
-  <circle cx="300" cy="148" r="78" fill="#fbfcfe" stroke="#222" stroke-width="2"/>
-  <circle cx="300" cy="148" r="4" fill="#222"/>
-  <text x="268" y="236" font-size="12" fill="#555">TIMONE</text>
-  <line x1="300" y1="148" x2="355" y2="93" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#cb)"/>
-  <text x="330" y="140" fill="#2a6fd6">r</text>
-  <line x1="355" y1="93" x2="370" y2="24" stroke="#cc2222" stroke-width="2.5" marker-end="url(#cr)"/>
-  <text x="376" y="22" fill="#cc2222">F<tspan font-size="11" dy="4">1</tspan></text>
-  <path d="M377,82 A26,26 0 0,0 361,60" fill="none" stroke="#1a8a3a" stroke-width="1.8"/>
-  <text x="382" y="70" fill="#1a8a3a" font-size="12">50°</text>
-  <line x1="300" y1="148" x2="245" y2="93" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#cb)"/>
-  <text x="258" y="140" fill="#2a6fd6">r</text>
-  <line x1="245" y1="93" x2="196" y2="44" stroke="#cc2222" stroke-width="2.5" marker-end="url(#cr)"/>
-  <text x="172" y="40" fill="#cc2222">F<tspan font-size="11" dy="4">2</tspan></text>
-  <path d="M223,115 A34,34 0 0,0 223,71" fill="none" stroke="#1a8a3a" stroke-width="1.8"/>
-  <text x="198" y="100" fill="#1a8a3a" font-size="12">90°</text>
-  <path d="M498,110 A30,30 0 1,0 520,80" fill="none" stroke="#e08b00" stroke-width="2" marker-end="url(#co)"/>
-  <text x="512" y="118" fill="#e08b00" font-size="16">+</text>
-  <text x="452" y="158" font-size="12">verso positivo</text>
-</svg>
-<figcaption>La forza a destra spinge il timone in senso antiorario, quella a sinistra in
-senso orario.</figcaption>
-</figure>
+<p>Il momento totale è la somma dei momenti con il loro segno:</p>
 
-<p>Il momento della prima è positivo, quello della seconda negativo:</p>
+<div class="def"><span class="et">Momento totale</span>
+<p class="eq principio">$$M_{\text{TOT}} = M_1 + M_2 = r_1 F_1 \sin\alpha - r_2 F_2 \sin\beta$$</p></div>
 
-$$M_1 = r F_1 \sin 50^\circ = 0{,}74\ \text{m}\cdot 72\ \text{N}\cdot 0{,}766
-\approx 41\ \text{N}\cdot\text{m}$$
+<ul>
+<li>$M_{\text{TOT}} &gt; 0$ → rotazione in senso antiorario;</li>
+<li>$M_{\text{TOT}} &lt; 0$ → rotazione in senso orario;</li>
+<li>$M_{\text{TOT}} = 0$ → nessuna rotazione.</li>
+</ul>
 
-$$M_2 = -\,r F_2 \sin 90^\circ = -\,0{,}74\ \text{m}\cdot 58\ \text{N}\cdot 1
-\approx -43\ \text{N}\cdot\text{m}$$
+<p>Nel seno entra l'angolo fra il raggio, prolungato oltre il punto di applicazione, e la forza.</p>
 
-<p>La seconda forza è più debole, ma essendo perpendicolare al raggio sfrutta tutta la
-sua intensità, perché $\sin 90^\circ = 1$. Sommando:</p>
-
-$$M_{\text{TOT}} = 41\ \text{N}\cdot\text{m} - 43\ \text{N}\cdot\text{m}
-= -2\ \text{N}\cdot\text{m}$$
-
-<p>Il totale è negativo, dunque il timone ruota in senso orario: di poco, perché i due
-momenti quasi si annullano.</p>
-
-<div class="strum">
-<label for="a1">Angolo della forza destra $F_1$: <output id="va1">50°</output>
- &nbsp;(gli altri dati restano quelli dell'esempio)</label>
-<input type="range" id="a1" min="0" max="90" step="1" value="50">
-<p id="esito" style="font-family:var(--sans);margin:10px 0 0"></p>
+<div class="fig">
+<svg id="g-angolo" viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Disco con due forze: l'angolo è misurato fra il raggio prolungato e la forza"></svg>
+<p class="did">Raggio prolungato tratteggiato; $\alpha$ e $\alpha'$ fra raggio e forza</p>
 </div>
 
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Il caso in cui due momenti non si annullano ma si sommano, perché due forze uguali
-sono applicate agli estremi opposti di una barra, è la coppia di forze. Da lì si arriva
-alle due condizioni che tengono fermo un corpo rigido.</p>
+<div class="nota"><span class="et">Da non sbagliare</span>
+<p>Il segno dipende dal verso di rotazione attorno al perno, non dal verso della forza: una forza verso l'alto dà $M&gt;0$ a destra del perno, $M&lt;0$ a sinistra.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: timone, $r = 0{,}74\ \text{m}$; $F_1 = 72\ \text{N}$ a $50^\circ$ dal raggio (antioraria); $F_2 = 58\ \text{N}$ perpendicolare al raggio (oraria). Calcolare $M_{\text{TOT}}$ e il verso di rotazione.</p>
+
+<div class="fig">
+<svg id="g-timone" viewBox="0 0 440 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Timone con due forze sul bordo; il cursore cambia l'angolo di F1"></svg>
+<div class="cursore"><label for="cur-a">α</label><input id="cur-a" type="range" min="0" max="90" step="1" value="50"><span class="val" id="val-a"></span></div>
+<p class="did">$r = 0{,}74\ \text{m}$, $F_1 = 72\ \text{N}$, $F_2 = 58\ \text{N}$</p>
 </div>
+
+<p class="eq">$$M_1 = +\,0{,}74\ \text{m}\cdot 72\ \text{N}\cdot\sin 50^\circ \approx 41\ \text{N}\cdot\text{m} \qquad M_2 = -\,0{,}74\ \text{m}\cdot 58\ \text{N}\cdot\sin 90^\circ \approx -43\ \text{N}\cdot\text{m}$$</p>
+<p class="eq">$$M_{\text{TOT}} = 41\ \text{N}\cdot\text{m} - 43\ \text{N}\cdot\text{m} = -2\ \text{N}\cdot\text{m}\ \Rightarrow\ \text{senso orario}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../47-momento-torcente/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Momento torcente</span></a><a class="successiva" href="../49-momento-di-una-coppia-di-forze/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Momento di una coppia di forze</span></a></nav>
+<footer><p>Fisica prima &middot; Equilibrio del corpo rigido &middot; Unità 47</p></footer>
 </div>
+
 <script>
 (function(){
-  var s=document.getElementById('a1'), o=document.getElementById('va1'),
-      e=document.getElementById('esito');
-  function agg(){
-    var a=+s.value, M1=0.74*72*Math.sin(a*Math.PI/180), M2=-0.74*58;
-    var T=M1+M2;
-    o.textContent=a+'°';
-    var v = T>0.05 ? 'ruota in senso antiorario'
-          : (T<-0.05 ? 'ruota in senso orario' : 'non ruota');
-    e.innerHTML='M<sub>1</sub> = '+M1.toFixed(1).replace('.',',')+' N·m'
-      +' &nbsp; M<sub>2</sub> = '+M2.toFixed(1).replace('.',',')+' N·m'
-      +' &nbsp; M<sub>TOT</sub> = '+T.toFixed(1).replace('.',',')+' N·m → '+v;
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,x,y,base,sub,col,anc){var t=el(p,'text',{x:x,y:y,'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':anc||'middle',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  function txt(p,x,y,s,col,anc,sz){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'middle',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});t.textContent=s;return t;}
+  function pos(t,x,y){t.setAttribute('x',(+x).toFixed(1));t.setAttribute('y',(+y).toFixed(1));}
+  function L2(l,x1,y1,x2,y2){l.setAttribute('x1',(+x1).toFixed(1));l.setAttribute('y1',(+y1).toFixed(1));l.setAttribute('x2',(+x2).toFixed(1));l.setAttribute('y2',(+y2).toFixed(1));return l;}
+  function marcatori(s,id){var d=el(s,'defs',{});[['r','var(--rosso)'],['b','var(--blu)'],['g','var(--grigio)']].forEach(function(c){var mk=el(d,'marker',{id:id+c[0],markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:c[1]});});}
+  function vett(s,id,c,col,w,dash){var a={stroke:col,'stroke-width':w||2.6,'marker-end':'url(#'+id+c+')'};if(dash)a['stroke-dasharray']=dash;return el(s,'line',a);}
+  function tratt(s,x1,y1,x2,y2){return L2(el(s,'line',{stroke:'var(--grigio)','stroke-width':1.3,'stroke-dasharray':'5 4'}),x1,y1,x2,y2);}
+  /* punto a distanza d nella direzione th (gradi, antiorario, y verso l'alto) */
+  function pt(P,d,th){var t=th*Math.PI/180;return {x:P.x+d*Math.cos(t),y:P.y-d*Math.sin(t)};}
+  /* arco da th1 a th2 (antiorario) centrato in P */
+  function arco(P,R,th1,th2){var A=pt(P,R,th1),B=pt(P,R,th2);return 'M'+A.x.toFixed(1)+','+A.y.toFixed(1)+' A'+R+','+R+' 0 0 '+(th2>th1?0:1)+' '+B.x.toFixed(1)+','+B.y.toFixed(1);}
+  function fmt(v,c){return v.toFixed(c).replace('.',',').replace('-','−');}
+  /* freccia curva di rotazione attorno a P */
+  function giro(s,P,R,th1,th2,col,id,c){var A=pt(P,R,th1),B=pt(P,R,th2);var p=el(s,'path',{d:'M'+A.x.toFixed(1)+','+A.y.toFixed(1)+' A'+R+','+R+' 0 '+(Math.abs(th2-th1)>180?1:0)+' 0 '+B.x.toFixed(1)+','+B.y.toFixed(1),fill:'none',stroke:col,'stroke-width':1.6,'marker-end':'url(#'+id+c+')'});return p;}
+
+  /* figura 1: barra con perno, F1 antioraria a destra, F2 oraria a sinistra */
+  var s=document.getElementById('g-barra');
+  if(s){
+    marcatori(s,'b1');
+    var y=110, O={x:220,y:y};
+    el(s,'rect',{x:60,y:y-12,width:320,height:24,rx:3,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'circle',{cx:O.x,cy:y,r:5,fill:'var(--inchiostro)'});
+    txt(s,O.x,y+32,'perno','var(--grigio)','middle',11);
+    var P1={x:330,y:y}, P2={x:110,y:y};
+    L2(vett(s,'b1','b','var(--blu)',2.2),O.x,y,P1.x,y); lab(s,275,y-18,'r','1','var(--blu)');
+    L2(vett(s,'b1','b','var(--blu)',2.2),O.x,y,P2.x,y); lab(s,165,y-18,'r','2','var(--blu)');
+    tratt(s,P1.x,y,P1.x+60,y); tratt(s,P2.x,y,P2.x-60,y);
+    var T1=pt(P1,78,65), T2=pt(P2,78,120);
+    L2(vett(s,'b1','r','var(--rosso)'),P1.x,y,T1.x,T1.y); lab(s,T1.x+10,T1.y+6,'F','1','var(--rosso)','start');
+    L2(vett(s,'b1','r','var(--rosso)'),P2.x,y,T2.x,T2.y); lab(s,T2.x-10,T2.y+6,'F','2','var(--rosso)','end');
+    el(s,'path',{d:arco(P1,26,0,65),fill:'none',stroke:'var(--verde)','stroke-width':1.6}); var a1=pt(P1,38,32); txt(s,a1.x,a1.y+4,'α','var(--verde)','middle',13);
+    el(s,'path',{d:arco(P2,26,180,120),fill:'none',stroke:'var(--verde)','stroke-width':1.6}); var a2=pt(P2,38,150); txt(s,a2.x,a2.y+4,'β','var(--verde)','middle',13);
+    el(s,'circle',{cx:P1.x,cy:y,r:3,fill:'var(--rosso)'}); el(s,'circle',{cx:P2.x,cy:y,r:3,fill:'var(--rosso)'});
   }
-  s.addEventListener('input',agg); agg();
+
+  /* figura 2: angolo fra raggio prolungato e forza */
+  var g=document.getElementById('g-angolo');
+  if(g){
+    marcatori(g,'b2');
+    var C={x:220,y:120};
+    el(g,'circle',{cx:C.x,cy:C.y,r:92,fill:'#fbfcfe',stroke:'var(--inchiostro)','stroke-width':2});
+    el(g,'circle',{cx:C.x,cy:C.y,r:4.5,fill:'var(--inchiostro)'});
+    [[-20,50,'','α'],[160,50,"'","α'"]].forEach(function(c){
+      var th=c[0], P=pt(C,80,th), E=pt(C,150,th), T=pt(P,70,th+c[1]);
+      L2(vett(g,'b2','b','var(--blu)',2.2),C.x,C.y,P.x,P.y);
+      var mr=pt(C,44,th); lab(g,mr.x+(th<90?0:0),mr.y+(th<90?18:-8),'r'+c[2],'','var(--blu)');
+      tratt(g,P.x,P.y,E.x,E.y);
+      L2(vett(g,'b2','r','var(--rosso)'),P.x,P.y,T.x,T.y);
+      var lt=pt(P,84,th+c[1]); lab(g,lt.x,lt.y+5,'F'+c[2],'','var(--rosso)');
+      el(g,'path',{d:arco(P,28,th,th+c[1]),fill:'none',stroke:'var(--verde)','stroke-width':1.6});
+      var la=pt(P,40,th+c[1]/2); txt(g,la.x,la.y+5,c[3],'var(--verde)','middle',13);
+      el(g,'circle',{cx:P.x,cy:P.y,r:3,fill:'var(--rosso)'});
+    });
+  }
+
+  /* figura 3: timone, angolo di F1 variabile */
+  var t=document.getElementById('g-timone');
+  if(t){
+    marcatori(t,'b3');
+    var C={x:190,y:165}, R=80, L1=75, L2v=75*58/72;
+    el(t,'circle',{cx:C.x,cy:C.y,r:R,fill:'#fbfcfe',stroke:'var(--inchiostro)','stroke-width':2});
+    el(t,'circle',{cx:C.x,cy:C.y,r:4,fill:'var(--inchiostro)'});
+    var P1=pt(C,R,45), P2=pt(C,R,135);
+    L2(vett(t,'b3','b','var(--blu)',2.2),C.x,C.y,P1.x,P1.y); var m1=pt(C,40,45); lab(t,m1.x+10,m1.y+10,'r','','var(--blu)');
+    L2(vett(t,'b3','b','var(--blu)',2.2),C.x,C.y,P2.x,P2.y); var m2=pt(C,40,135); lab(t,m2.x-10,m2.y+10,'r','','var(--blu)');
+    var E1=pt(C,R+60,45); tratt(t,P1.x,P1.y,E1.x,E1.y);
+    var E2=pt(C,R+40,135); tratt(t,P2.x,P2.y,E2.x,E2.y);
+    var T2=pt(P2,L2v,45); L2(vett(t,'b3','r','var(--rosso)'),P2.x,P2.y,T2.x,T2.y); lab(t,T2.x+4,T2.y-8,'F','2','var(--rosso)','start');
+    var q=pt(P2,11,135), q2=pt(q,11,45), q3=pt(P2,11,45);
+    el(t,'path',{d:'M'+q.x.toFixed(1)+','+q.y.toFixed(1)+' L'+q2.x.toFixed(1)+','+q2.y.toFixed(1)+' L'+q3.x.toFixed(1)+','+q3.y.toFixed(1),fill:'none',stroke:'var(--verde)','stroke-width':1.4});
+    var f1=vett(t,'b3','r','var(--rosso)'), lf1=lab(t,0,0,'F','1','var(--rosso)','start');
+    var ar=el(t,'path',{fill:'none',stroke:'var(--verde)','stroke-width':1.6}), ta=txt(t,0,0,'α','var(--verde)','middle',13);
+    el(t,'circle',{cx:P1.x,cy:P1.y,r:3,fill:'var(--rosso)'}); el(t,'circle',{cx:P2.x,cy:P2.y,r:3,fill:'var(--rosso)'});
+    /* verso positivo */
+    var V={x:375,y:200}; giro(t,V,22,-60,200,'var(--grigio)','b3','g'); txt(t,V.x,V.y+5,'+','var(--grigio)','middle',16); txt(t,V.x,V.y+44,'verso positivo','var(--grigio)','middle',11);
+    var cur=document.getElementById('cur-a'), val=document.getElementById('val-a');
+    var dis=function(){
+      var a=+cur.value, T=pt(P1,L1,45+a);
+      L2(f1,P1.x,P1.y,T.x,T.y); var lp=pt(pt(P1,L1*0.7,45+a),16,a-45); pos(lf1,lp.x,lp.y+5); lf1.setAttribute('text-anchor','middle');
+      ar.setAttribute('d',arco(P1,24,45,45+a)); ar.style.display=a<4?'none':'';
+      var la=pt(P1,36,45+a/2); pos(ta,la.x,la.y+5); ta.style.display=a<14?'none':'';
+      var M1=0.74*72*Math.sin(a*Math.PI/180), M2=-0.74*58, Mt=M1+M2;
+      var v=Mt>0.05?'<span class="ok">antiorario</span>':(Mt<-0.05?'orario':'nessuna rotazione');
+      val.innerHTML='α = '+a+'° → <i>M</i><sub>TOT</sub> = '+fmt(Mt,1)+' N·m, '+v;
+    };
+    cur.addEventListener('input',dis); dis();
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
