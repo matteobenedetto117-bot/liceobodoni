@@ -596,6 +596,7 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro. Nessun
   disegno nella traccia, quindi nessuno SVG aggiunto; nessuno strumento interattivo, la pagina è
   interamente algebrica.
+- Revisione (25/10/2026, regole 13/10): parole 208 → 78 (sommario e «Nella prossima unità» inclusi prima, formule escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 46); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando al cono di luce), i titoletti «Due eventi simultanei in S», «La differenza fra i due istanti», «Che cosa dice questo risultato» e il riquadro di commento; formule in .eq con frasi di raccordo di una riga; Δt' = γ(v/c²)(x₁ − x₂) in .def rosso; casi x₁ ≠ x₂ / x₁ = x₂ in elenco caso → conseguenza. Controllo concettuale (SymPy: differenza t₂' − t₁' verificata, residuo nullo); nessuna correzione. Nessuna comparsa, nessuna figura (la pagina non ne aveva), nessun esempio.
 
 ## Unità 48 — Il cono di luce e gli invarianti relativistici
 - Parole: 472 su 3 pagine di traccia (pagine 88–90, limitatamente alla parte che classifica
