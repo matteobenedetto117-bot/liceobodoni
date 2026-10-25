@@ -908,6 +908,7 @@ teorema del confronto, a pagina 21.
   unità, come già accaduto per le unità 39 e 41. L'unico strumento interattivo mostra
   il fascio di curve y=Ce^(x²) al variare di C, incluso il caso singolare C=0, e il
   punto fisso (0,1) che seleziona la soluzione del problema di Cauchy.
+- Revisione (25/10/2026, regole 13/10): parole 298 → 94 (sommario escluso). Pagina mai revisionata: impaginazione a quaderno (stile, aiuto Piano e script dell'unità 41), tolti sommario e frasi di introduzione e commento; titoletti ridotti a «Caso y' = f(x)», «Variabili separabili», «Esempio»; apertura a domanda; integrale generale di y' = f(x) e forma y' = f(x)g(y) in .def rossi; separazione e integrazione in una .eq; soluzione costante da g(y₀) = 0 in .nota di una frase; esempio y' = 2xy, y(0) = 1 in formato Dati/Calcolare con due .eq (verificato con SymPy: y = Ce^(x²), C = 1). Tolta la nota «la costante va determinata dopo l'integrale generale» (ripete il procedimento mostrato dall'esempio). Precisato «F primitiva di f su un intervallo». Nessuna correzione concettuale. Nessuna comparsa. Figura rifatta da script con l'aiuto Piano dentro .fig: famiglia y = Ce^(x²) calcolata, cursore su C (−2…2) con «passa per (0, 1)» in verde per C = 1 e «soluzione costante y = 0» per C = 0; tolte l'etichetta P(0, 1) e la legenda testuale. Nessun esempio tolto, nessuna figura decorativa.
 
 ## Unità 43 — Equazioni lineari del primo ordine
 - Parole: 287, unità ex novo (nessuna pagina di traccia: argomento assente dagli

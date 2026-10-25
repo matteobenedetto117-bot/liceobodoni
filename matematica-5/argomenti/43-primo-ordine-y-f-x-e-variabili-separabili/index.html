@@ -5,24 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Primo ordine: y' = f(x) e variabili separabili — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.nota{background:var(--blu-chiaro);border:1px solid var(--riga);border-radius:10px;padding:14px 18px;margin:22px 0;font-family:var(--sans);font-size:.9rem;line-height:1.55}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.widget .due{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:center}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.leggenda.ok{color:var(--verde);font-weight:600}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-@media (max-width:600px){.widget .due{grid-template-columns:1fr}}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
+.nota .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def .eq+.eq{margin-top:0}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+table.tavola{border-collapse:collapse;width:100%;font-size:1rem}
+table.tavola td{height:calc(2*var(--r));line-height:var(--r);padding:0 10px;border-bottom:1px solid var(--riga);vertical-align:middle}
+table.tavola tr:last-child td{border-bottom:0}
+table.tavola td.cond{font-family:var(--sans);font-size:.85rem;color:var(--grigio);white-space:nowrap}
+.def table.tavola{margin-bottom:calc(var(--r)*.5)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -31,80 +93,46 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Equazioni differenziali &middot; Unità 42</p>
   <h1>Primo ordine: y' = f(x) e variabili separabili</h1>
-  <p class="sommario">Sono i due tipi di equazione differenziale che si incontrano più
-  spesso: il primo si risolve con una sola integrazione, il secondo separando la $x$ e
-  la $y$ nei due membri prima di integrare.</p>
 </header>
 
-<h2>Il caso più semplice: y' = f(x)</h2>
+<p>Equazione del primo ordine: quando basta integrare, direttamente o dopo aver separato $x$ e $y$?</p>
 
-<p>Se l'equazione ha la forma $y'=f(x)$, la funzione incognita $y$ non compare a destra:
-risolvere l'equazione significa allora cercare le primitive di $f(x)$, cosa che sappiamo
-già fare.</p>
+<h2>Caso $y'=f(x)$</h2>
 
-<div class="def"><span class="et">Soluzione di y' = f(x)</span>
-Se $y'=f(x)$, l'integrale generale è
-$$y=\int f(x)\,dx=F(x)+C,$$
-dove $F$ è una primitiva di $f$ e $C$ è la costante arbitraria.</div>
+<div class="def"><span class="et">Integrale generale di y' = f(x)</span>
+<p class="eq principio">$$y=\int f(x)\,dx=F(x)+C$$</p>
+<p>con $F$ primitiva di $f$ su un intervallo, $C$ costante arbitraria</p></div>
 
-<p>Per esempio, se $y'=3x^2-2$, integrando si ottiene subito $y=x^3-2x+C$.</p>
+<p>Per $y'=3x^2-2$:</p>
 
-<h2>Equazioni a variabili separabili</h2>
+<p class="eq">$$y=\int\left(3x^2-2\right)dx=x^3-2x+C$$</p>
 
-<p>Molte equazioni del primo ordine non hanno questa forma, perché $y$ compare anche a
-destra dell'uguale. Se però il secondo membro si scompone nel prodotto di una funzione
-della sola $x$ e di una funzione della sola $y$, si può isolare ogni variabile dalla
-parte dell'uguale che le compete, e integrare i due membri separatamente.</p>
+<h2>Variabili separabili</h2>
 
 <div class="def"><span class="et">Equazione a variabili separabili</span>
-Un'equazione della forma
-$$y'=f(x)\,g(y)$$
-si dice a variabili separabili. Scrivendo $y'=\dfrac{dy}{dx}$ e supponendo $g(y)\neq0$,
-si separano le variabili
-$$\frac{dy}{g(y)}=f(x)\,dx,$$
-e si integrano i due membri, ciascuno rispetto alla propria variabile:
-$$\int\frac{dy}{g(y)}=\int f(x)\,dx.$$
-Se esiste un valore $y_0$ con $g(y_0)=0$, la funzione costante $y=y_0$ è anch'essa una
-soluzione dell'equazione, anche se il procedimento sopra, dividendo per $g(y)$, non la
-mostra.</div>
+<p class="eq principio">$$y'=f(x)\,g(y)$$</p></div>
 
-<p>Risolviamo $y'=2xy$, con $f(x)=2x$ e $g(y)=y$. Per $y\neq0$:
-$$\frac{dy}{y}=2x\,dx\ \Longrightarrow\ \int\frac{dy}{y}=\int2x\,dx\ \Longrightarrow\
-\ln|y|=x^2+C_1.$$
-Esponenziando entrambi i membri e ponendo $C=\pm e^{C_1}$, con $C\in\mathbb R$, si
-raccoglie tutto nell'integrale generale
-$$y=Ce^{x^2},$$
-che comprende anche la soluzione costante $y=0$, ottenuta per $C=0$: qui non è dunque
-una soluzione a parte da aggiungere. Se imponiamo la condizione iniziale $y(0)=1$,
-sostituendo si ottiene $1=Ce^{0}=C$, quindi $C=1$ e la soluzione del problema di Cauchy
-è $y=e^{x^2}$.</p>
+<p>Per $g(y)\neq0$ si separano le variabili e si integrano i due membri:</p>
 
-<div class="nota">La costante va sempre determinata <em>dopo</em> aver scritto
-l'integrale generale, mai prima: è la condizione iniziale a scegliere, fra tutte le
-curve della famiglia, quella richiesta.</div>
+<p class="eq">$$\frac{dy}{g(y)}=f(x)\,dx\;\Longrightarrow\;\int\frac{dy}{g(y)}=\int f(x)\,dx$$</p>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Costante $C$
-      <input type="range" id="s-C43" min="-2" max="2" step="0.25" value="-1.25">
-      <span>$C$ = <span class="val" id="v-C43"></span></span>
-    </label>
-  </div>
-  <div class="due">
-  <svg viewBox="0 0 280 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Famiglia di curve y=C e^(x^2) con un punto fisso in (0,1)">
-  <line x1="30" y1="100" x2="260" y2="100" stroke="#16283d" stroke-width="1.4"/>
-  <line x1="145" y1="170" x2="145" y2="14" stroke="#16283d" stroke-width="1.4"/>
-  <g id="fascio43" stroke="#c9c2b2" stroke-width="1.1" fill="none"></g>
-  <path id="curva43" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-  <circle cx="145" cy="93" r="4" fill="#1f4e79"/>
-  <text x="152" y="90" font-size="12" fill="#1f4e79">P(0, 1)</text>
-  <text x="248" y="116" font-size="12" fill="#16283d" font-style="italic">x</text>
-  <text x="127" y="22" font-size="12" fill="#16283d" font-style="italic">y</text>
-  </svg>
-  <p class="leggenda" id="v-testo43" style="margin:0"></p>
-  </div>
+<div class="nota"><p>Se $g(y_0)=0$, anche la funzione costante $y=y_0$ è soluzione: la divisione per $g(y)$ la esclude.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: $y'=2xy$, $\;y(0)=1$. Calcolare l'integrale generale e la soluzione del problema di Cauchy.</p>
+
+<p class="eq">$$\frac{dy}{y}=2x\,dx\;\Longrightarrow\;\ln|y|=x^2+C_1\;\Longrightarrow\;y=Ce^{x^2},\quad C\in\mathbb R$$</p>
+
+<p>$C=\pm e^{C_1}$; il valore $C=0$ dà la soluzione costante $y=0$.</p>
+
+<p class="eq">$$1=Ce^{0}\;\Rightarrow\;C=1,\qquad y=e^{x^2}$$</p>
+
+<div class="fig">
+<svg id="g-fam" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px" role="img" aria-label="Famiglia di curve y = C e^(x²) e punto (0, 1)"></svg>
+<div class="cursore"><label for="s-C">$C$</label><input id="s-C" type="range" min="-2" max="2" step="0.25" value="-1.25"><span class="val" id="v-C"></span></div>
+<p class="did">Integrale generale $y=Ce^{x^2}$; punto rosso: condizione $y(0)=1$</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../42-introduzione-e-problema-di-cauchy/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Introduzione e problema di Cauchy</span></a><a class="successiva" href="../44-equazioni-lineari-del-primo-ordine/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni lineari del primo ordine</span></a></nav>
 <footer><p>Matematica quinta &middot; Equazioni differenziali &middot; Unità 42</p></footer>
@@ -113,44 +141,101 @@ curve della famiglia, quella richiesta.</div>
 
 <script>
 (function(){
-  var x0=30,y0=100,x1=260,y1=14;
-  var xmin=-1.35,xmax=1.35,ymin=-13,ymax=13;
-  function f(t,C){return C*Math.exp(t*t);}
-  function px(t){return x0+(t-xmin)/(xmax-xmin)*(x1-x0);}
-  function py(v){var vv=Math.max(ymin,Math.min(v,ymax));return y0-(vv-ymin)/(ymax-ymin)*(y0-y1);}
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-
-  var fascio=document.getElementById('fascio43');
-  [-2,-1,1,2].forEach(function(C){
-    var n=50,pts=[];
-    for(var i=0;i<=n;i++){var t=xmin+i*(xmax-xmin)/n; pts.push(px(t)+','+py(f(t,C)));}
-    var p=document.createElementNS('http://www.w3.org/2000/svg','path');
-    p.setAttribute('d','M'+pts.join(' L'));
-    fascio.appendChild(p);
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
   });
-
-  var s=document.getElementById('s-C43'), vC=document.getElementById('v-C43');
-  var curva=document.getElementById('curva43');
-  var testo=document.getElementById('v-testo43');
-
-  function agg(){
-    var C=parseFloat(s.value);
-    vC.textContent=fmt(C);
-    var n=70,pts=[];
-    for(var i=0;i<=n;i++){var t=xmin+i*(xmax-xmin)/n; pts.push(px(t)+','+py(f(t,C)));}
-    curva.setAttribute('d','M'+pts.join(' L'));
-    if(Math.abs(C-1)<0.01){
-      testo.textContent='La curva passa per P(0, 1): questa è la soluzione del problema di Cauchy, y = e^{x²}.';
-      testo.className='leggenda ok';
-    }else if(Math.abs(C)<0.01){
-      testo.textContent='C = 0 dà la soluzione costante y = 0, che il procedimento con la divisione per y non mostrerebbe da sola.';
-      testo.className='leggenda';
-    }else{
-      testo.textContent='Con questo valore di C la curva non passa per P(0, 1): è un altro integrale particolare, non quello richiesto.';
-      testo.className='leggenda';
-    }
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
   }
-  s.addEventListener('input',agg); agg();
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+
+
+/* famiglia y = C e^{x^2}, punto (0,1) */
+var g=document.getElementById('g-fam');
+if(g){
+  var P=new Piano(g,[-1.5,1.5],[-7,7],{l:20,r:24,t:22,b:12});
+  P.assi([-1,1],[],'x','y');
+  [-2,-1,1,2].forEach(function(C){P.curva(function(x){return C*Math.exp(x*x);},-1.5,1.5,300,'var(--grigio)',1.1).setAttribute('opacity','.55');});
+  var cv=P.curva(function(x){return 0;},-1.5,1.5,300,'var(--blu)',2.6);
+  P.add(el('circle',{cx:P.X(0),cy:P.Y(1),r:4.5,fill:'var(--rosso)'}),'testo');
+  var s=document.getElementById('s-C'),v=document.getElementById('v-C');
+  function agg(){
+    var C=+s.value;
+    cv.setAttribute('d',P.d(function(x){return C*Math.exp(x*x);},-1.5,1.5,300));
+    v.innerHTML='C = '+num(C,2)+(Math.abs(C-1)<1e-9?' <span class="ok">passa per (0, 1): y = e<sup>x²</sup></span>':Math.abs(C)<1e-9?' (soluzione costante y = 0)':'');
+  }
+  s.addEventListener('input',agg);agg();
+}
+})();
+</script>
+
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
