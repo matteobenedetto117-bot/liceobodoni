@@ -5,129 +5,160 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dielettrico ed energia immagazzinata — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.pannelli{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.pannelli svg{width:100%;max-width:260px;margin:0 auto;display:block}
+.pannelli .did{margin:4px 0 0}
+@media(max-width:640px){.pannelli{grid-template-columns:1fr}}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 55</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 55</p>
   <h1>Dielettrico ed energia immagazzinata</h1>
-  <p class="sommario">Tra le armature di un condensatore si pu&ograve;
-  inserire un materiale isolante, il dielettrico, che ne cambia la
-  capacit&agrave;. Il condensatore inoltre immagazzina energia insieme alla
-  carica che accumula: vediamo come si calcola e come si distribuisce nello
-  spazio occupato dal campo elettrico.</p>
 </header>
 
-<h2>Il dielettrico</h2>
-
-<p>Se al posto del vuoto inseriamo tra le armature un materiale isolante,
-caratterizzato da una <strong>costante dielettrica relativa</strong>
-$\varepsilon_r$, la capacit&agrave; aumenta nello stesso rapporto:</p>
-
-<div class="formula-box">
-$$C=\frac{A\,\varepsilon_0\,\varepsilon_r}{d}$$
-</div>
-
-<p>$\varepsilon_r$ &egrave; un numero puro, sempre maggiore di 1, che dipende
-dal materiale interposto: a parit&agrave; di area e distanza tra le armature,
-un dielettrico migliore d&agrave; una capacit&agrave; maggiore.</p>
+<p>Fra le armature, al posto del vuoto, un materiale isolante (dielettrico): come cambia la capacità?</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<pattern id="hatch57" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-<line x1="0" y1="0" x2="0" y2="10" stroke="var(--blu)" stroke-width="1.4"/>
-</pattern>
-<marker id="fr57" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<rect x="150" y="30" width="14" height="150" fill="var(--rosso)" opacity=".85"/>
-<rect x="280" y="30" width="14" height="150" fill="var(--inchiostro)" opacity=".85"/>
-<rect x="164" y="30" width="116" height="150" fill="url(#hatch57)" opacity=".55"/>
-<rect x="164" y="30" width="116" height="150" fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-<text x="157" y="22" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">+Q</text>
-<text x="287" y="22" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">&minus;Q</text>
-<line x1="380" y1="60" x2="300" y2="45" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#fr57)"/>
-<text x="384" y="63" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">armatura</text>
-<line x1="380" y1="150" x2="260" y2="135" stroke="var(--blu)" stroke-width="1.2" marker-end="url(#fr57)"/>
-<text x="384" y="153" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--blu)">dielettrico</text>
-</svg>
-<p class="did">Un materiale isolante con costante dielettrica relativa
-$\varepsilon_r$ riempie lo spazio tra le armature.</p>
+<svg id="g-diel" viewBox="0 0 440 215" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Condensatore con un dielettrico fra le armature; il cursore cambia la costante dielettrica relativa"></svg>
+<div class="cursore"><label for="cur-er">ε<sub>r</sub></label><input id="cur-er" type="range" min="1" max="6" step="0.5" value="3"><span class="val" id="val-er"></span></div>
+<p class="did">Dielettrico fra le armature: $C = \varepsilon_r C_0$</p>
 </div>
 
-<h2>Energia immagazzinata da un condensatore</h2>
+<div class="def"><span class="et">Capacità con dielettrico</span>
+<p class="eq principio">$$C=\frac{A\,\varepsilon_0\,\varepsilon_r}{d}=\varepsilon_r\,C_0$$</p>
+<p>$\varepsilon_r$: costante dielettrica relativa, numero puro maggiore di 1; dielettrico che riempie lo spazio fra le armature.</p></div>
 
-<p>Caricare un condensatore richiede lavoro, perch&eacute; ogni carica
-spostata incontra una differenza di potenziale via via crescente. Quel
-lavoro resta immagazzinato come energia elettrica:</p>
+<h2>Energia immagazzinata</h2>
 
-<div class="formula-box">
-$$U=\frac12\,Q\,\Delta V$$
-</div>
+<p>Il lavoro per caricare il condensatore resta immagazzinato come energia elettrica:</p>
 
-<p>Dalla definizione di capacit&agrave; $C=Q/\Delta V$ ricaviamo altre due
-forme della stessa energia, utili a seconda del dato che conosciamo.
-Sostituendo $\Delta V=Q/C$:</p>
+<div class="def"><span class="et">Energia del condensatore</span>
+<p class="eq principio">$$U=\frac12\,Q\,\Delta V$$</p></div>
 
-$$U=\frac12\,Q\,\Delta V=\frac12\,Q\cdot\frac{Q}{C}=\frac12\,\frac{Q^2}{C}$$
+<p>Con $C=Q/\Delta V$ si ottengono altre due forme:</p>
 
-<p>Sostituendo invece $Q=C\,\Delta V$:</p>
+<p class="eq">$$\Delta V=\frac{Q}{C}\ \Rightarrow\ U=\frac12\,\frac{Q^2}{C} \qquad\qquad Q=C\,\Delta V\ \Rightarrow\ U=\frac12\,C\,\Delta V^2$$</p>
 
-$$U=\frac12\,Q\,\Delta V=\frac12\,(C\,\Delta V)\,\Delta V=\frac12\,C\,\Delta V^2$$
+<h2>Densità di energia</h2>
 
-<h2>Densit&agrave; di energia elettrica</h2>
+<p>Condensatore piano nel vuoto; volume occupato dal campo $V=A\,d$:</p>
 
-<p>L'energia non sta sulle armature ma nel campo elettrico che riempie lo
-spazio tra loro. La <strong>densit&agrave; di energia</strong> &egrave; il
-rapporto tra l'energia immagazzinata e il volume occupato dal campo,
-$u=U/V$. Nel condensatore piano quel volume &egrave; $V=A\,d$. Esprimiamo
-$Q$ e $\Delta V$ in funzione del campo, usando $E=\sigma/\varepsilon_0=
-Q/(A\varepsilon_0)$ e $\Delta V=Ed$:</p>
+<p class="eq">$$Q=E\,A\,\varepsilon_0,\quad \Delta V=E\,d \ \Rightarrow\ U=\frac12\,(E\,A\,\varepsilon_0)(E\,d)=\frac12\,\varepsilon_0E^2\,(A\,d)$$</p>
 
-$$Q=E\,A\,\varepsilon_0, \qquad \Delta V=E\,d$$
+<div class="def"><span class="et">Densità di energia elettrica</span>
+<p class="eq principio">$$u=\frac{U}{V}=\frac12\,\varepsilon_0\,E^2$$</p></div>
 
-<p>Sostituendo in $U=\frac12 Q\,\Delta V$:</p>
-
-$$U=\frac12\,(E\,A\,\varepsilon_0)(E\,d)=\frac12\,\varepsilon_0 E^2\,(A\,d)
-=\frac12\,\varepsilon_0 E^2\,V$$
-
-<p>Dividendo per il volume $V$, questo si semplifica e resta solo il campo:</p>
-
-<div class="formula-box">
-$$u=\frac{U}{V}=\frac12\,\varepsilon_0\,E^2$$
-</div>
-
-<p>La densit&agrave; di energia dipende solo dal campo elettrico nel punto
-considerato: dove il campo &egrave; pi&ugrave; intenso, l&igrave; &egrave;
-immagazzinata pi&ugrave; energia per unit&agrave; di volume.</p>
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
-<ul>
-<li>Dal condensatore passiamo ai circuiti: corrente elettrica e resistenza.</li>
-<li>Il condensatore ricomparir&agrave; pi&ugrave; avanti, quando lo inseriremo
-nei circuiti insieme a resistenze, caricato e scaricato da una corrente, e
-poi collegato in serie o in parallelo con altri condensatori.</li>
-</ul>
-</div>
+<p>Dipende solo dal campo: campo più intenso → più energia per unità di volume.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../56-i-condensatori-e-la-capacita/index.html"><span class="dir">&larr; Precedente</span><span class="tit">I condensatori e la capacità</span></a><a class="successiva" href="../58-la-corrente-elettrica-e-la-resistenza/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La corrente elettrica e la resistenza</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 55</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,anc,sz,it){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'middle'});if(it)t.setAttribute('font-style','italic');t.textContent=s;return t;}
+  function fmt(v,c){return v.toFixed(c).replace('.',',');}
+
+  /* armature con dielettrico; la fitta del tratteggio cresce con εr */
+  var s=document.getElementById('g-diel');
+  if(s){
+    var d=el(s,'defs',{});
+    var mk=el(d,'marker',{id:'d57',markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:'var(--grigio)'});
+    var pat=el(d,'pattern',{id:'h57',width:10,height:10,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+    var pl=el(pat,'line',{x1:0,y1:0,x2:0,y2:10,stroke:'var(--blu)','stroke-width':1.4});
+    var xa=150, xb=270, y0=40, y1=180;
+    var diel=el(s,'rect',{x:xa+6,y:y0,width:xb-xa-12,height:y1-y0,fill:'url(#h57)',stroke:'var(--blu)','stroke-width':1.4});
+    el(s,'rect',{x:xa-6,y:y0,width:12,height:y1-y0,fill:'var(--rosso)','fill-opacity':.85});
+    el(s,'rect',{x:xb-6,y:y0,width:12,height:y1-y0,fill:'var(--inchiostro)','fill-opacity':.85});
+    txt(s,xa,y0-12,'+Q','var(--rosso)','middle',13,true);
+    txt(s,xb,y0-12,'−Q','var(--inchiostro)','middle',13,true);
+    el(s,'line',{x1:335,y1:62,x2:xb+10,y2:55,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#d57)'});
+    txt(s,340,66,'armatura','var(--inchiostro)','start',12);
+    var fd=el(s,'line',{x1:335,y1:150,x2:xb-30,y2:140,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#d57)'});
+    var td=txt(s,340,154,'dielettrico','var(--blu)','start',12);
+    var tv=txt(s,(xa+xb)/2,(y0+y1)/2+5,'vuoto','var(--grigio)','middle',12);
+    txt(s,(xa+xb)/2,y1+24,'d','var(--inchiostro)','middle',13,true);
+    var cur=document.getElementById('cur-er'), val=document.getElementById('val-er');
+    var dis=function(){
+      var e=+cur.value, vuoto=e===1;
+      var w=16-2*e; pat.setAttribute('width',w); pat.setAttribute('height',w); pl.setAttribute('y2',w);
+      diel.style.display=vuoto?'none':''; fd.style.display=vuoto?'none':''; td.style.display=vuoto?'none':''; tv.style.display=vuoto?'':'none';
+      val.innerHTML='ε<sub>r</sub> = '+fmt(e,1)+' → <i>C</i> = '+fmt(e,1)+'&#8239;<i>C</i><sub>0</sub>'+(vuoto?' (vuoto)':'');
+    };
+    cur.addEventListener('input',dis); dis();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
