@@ -5,17 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interpretazione grafica di equazioni e sistemi di secondo grado — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.tre-fig{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:18px 0}
-.tre-fig figure{margin:0;text-align:center}
-.tre-fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
 </style>
 </head>
 <body>
@@ -25,89 +62,146 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Disequazioni di secondo grado &middot; Unità 47</p>
   <h1>Interpretazione grafica di equazioni e sistemi di secondo grado</h1>
-  <p class="sommario">Risolvere un'equazione di secondo grado con la formula e leggerla sul
-  grafico della parabola sono la stessa cosa vista in due modi. Questa doppia lettura è ciò
-  che permette, nella prossima unità, di risolvere le disequazioni di secondo grado guardando
-  dove la parabola sta sopra o sotto l'asse $x$.</p>
 </header>
 
-<h2>Equazione di secondo grado come intersezione con l'asse $x$</h2>
+<p>Parabola $y=ax^2+bx+c$ e asse $x$: in quanti punti si incontrano?</p>
 
-<p>Cerchiamo i punti comuni fra la parabola $y=ax^2+bx+c$ e l'asse delle ascisse, cioè la retta
-$y=0$:</p>
+<p>I punti comuni sono le soluzioni del sistema con la retta $y=0$:</p>
 
-<div class="regola"><p>$$\begin{cases} y=ax^2+bx+c \\ y=0 \end{cases} \ \Longrightarrow\
-ax^2+bx+c=0$$</p></div>
+<p class="eq">$$\begin{cases} y=ax^2+bx+c \\ y=0 \end{cases}\ \Longrightarrow\ ax^2+bx+c=0$$</p>
 
-<p>Le soluzioni dell'equazione di secondo grado sono dunque le ascisse dei punti in cui la
-parabola incontra l'asse $x$. Il numero di soluzioni, che già conosciamo dal segno del
-discriminante $\Delta$, corrisponde al numero di intersezioni:</p>
-
-<div class="tre-fig">
-<figure>
-<svg viewBox="0 0 150 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="8" y1="100" x2="142" y2="100" stroke="#16283d" stroke-width="1.2"/>
-<line x1="75" y1="120" x2="75" y2="10" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 18 30 Q 75 115 132 30" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="45" cy="100" r="3.4" fill="#2f6b4f"/>
-<circle cx="105" cy="100" r="3.4" fill="#2f6b4f"/>
-</svg>
-<figcaption>$\Delta>0$ &middot; 2 soluzioni</figcaption>
-</figure>
-<figure>
-<svg viewBox="0 0 150 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="8" y1="100" x2="142" y2="100" stroke="#16283d" stroke-width="1.2"/>
-<line x1="75" y1="120" x2="75" y2="10" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 18 60 Q 75 100 132 60" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="75" cy="100" r="3.4" fill="#2f6b4f"/>
-</svg>
-<figcaption>$\Delta=0$ &middot; 1 soluzione</figcaption>
-</figure>
-<figure>
-<svg viewBox="0 0 150 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="8" y1="100" x2="142" y2="100" stroke="#16283d" stroke-width="1.2"/>
-<line x1="75" y1="120" x2="75" y2="10" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 18 20 Q 75 130 132 20" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-</svg>
-<figcaption>$\Delta&lt;0$ &middot; 0 soluzioni</figcaption>
-</figure>
-</div>
-
-<h2>Sistema fra una parabola e una retta</h2>
-
-<p>Lo stesso ragionamento vale se al posto dell'asse $x$ mettiamo una retta qualunque
-$y=mx+q$: risolvere il sistema significa trovare i punti comuni a parabola e retta, cioè i
-punti del piano che stanno su entrambe.</p>
-
-<div class="regola"><p>$$\begin{cases} y=ax^2+bx+c \\ y=mx+q \end{cases}$$</p></div>
+<p>Le soluzioni dell'equazione sono le ascisse delle intersezioni con l'asse $x$:</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="15" y1="180" x2="305" y2="180" stroke="#16283d" stroke-width="1.2"/>
-<line x1="55" y1="200" x2="55" y2="15" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 40 190 Q 160 20 280 190" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="35" y1="195" x2="300" y2="45" stroke="#b3392f" stroke-width="2"/>
-<circle cx="86" cy="128" r="4" fill="#16283d"/>
-<circle cx="238" cy="88" r="4" fill="#16283d"/>
-<text x="60" y="150" font-size="12" fill="#16283d">soluzioni del sistema</text>
-</svg>
+<div class="tre-svg">
+<svg id="g-d1" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Parabola che taglia l'asse x in due punti"></svg>
+<svg id="g-d0" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Parabola tangente all'asse x"></svg>
+<svg id="g-dn" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Parabola che non incontra l'asse x"></svg>
+</div>
+<div class="did-parti" style="--n:3"><p class="did">$\Delta&gt;0$</p><p class="did">$\Delta=0$</p><p class="did">$\Delta&lt;0$</p></div>
 </div>
 
-<p>Anche qui i punti trovati risolvendo il sistema, per sostituzione come già fatto con i
-sistemi di primo grado, sono esattamente i punti dove il grafico della retta e quello della
-parabola si toccano o si incrociano.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Useremo questa lettura grafica per risolvere le disequazioni di secondo grado, leggendo
-dal segno di $a$ e dal segno di $\Delta$ dove la parabola sta sopra o sotto l'asse $x$.</li>
+<li>$\Delta&gt;0$ → due intersezioni: due soluzioni;</li>
+<li>$\Delta=0$ → parabola tangente all'asse $x$: una soluzione (doppia);</li>
+<li>$\Delta&lt;0$ → nessuna intersezione: nessuna soluzione reale.</li>
 </ul>
+
+<h2>Sistema parabola–retta</h2>
+
+<p>Con una retta qualunque $y=mx+q$, le soluzioni del sistema sono i punti comuni a parabola e retta:</p>
+
+<p class="eq">$$\begin{cases} y=ax^2+bx+c \\ y=mx+q \end{cases}$$</p>
+
+<div class="fig">
+<svg id="g-sis" viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Parabola y = −x² + 4x e retta y = x + q; il cursore sposta la retta e mostra i punti comuni"></svg>
+<div class="cursore"><label for="c-q">$q$</label><input id="c-q" type="range" min="-4" max="12" step="1" value="4"><span class="val" id="v-q"></span></div>
+<p class="did">Parabola $y=-x^2+4x$, retta $y=x+q$; in rosso le soluzioni del sistema</p>
 </div>
+
+<p>Si risolve per sostituzione: il numero di punti comuni (due, uno o nessuno) dipende dal segno del $\Delta$ dell'equazione ottenuta.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../48-la-parabola-vertice-asse-concavita/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La parabola: vertice, asse, concavità</span></a><a class="successiva" href="../50-disequazioni-di-secondo-grado-intere/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disequazioni di secondo grado intere</span></a></nav>
 <footer><p>Matematica seconda &middot; Disequazioni di secondo grado &middot; Unità 47</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+Piano.prototype.curva=function(f,a,dove,N){var X=this.X,Y=this.Y,x0=this.xr[0],x1=this.xr[1],d='';N=N||200;
+  for(var i=0;i<=N;i++){var x=x0+(x1-x0)*i/N,y=f(x);if(!isFinite(y)||Math.abs(y)>1e3)continue;d+=(d?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);}
+  var p=el('path',Object.assign({d:d,fill:'none','stroke-width':2.2},a));return dove===null?p:this.add(p,dove);};
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+
+/* ---------- tre casi del discriminante ---------- */
+[['g-d1',function(x){return 0.8*x*x-0.8;},[-1,1]],['g-d0',function(x){return 0.8*x*x;},[0]],['g-dn',function(x){return 0.8*x*x+0.6;},[]]].forEach(function(c){
+  var svg=document.getElementById(c[0]); if(!svg)return;
+  var P=new Piano(svg,[-2.2,2.2],[-1.2,2.4],{l:14,r:16,t:16,b:10}); P.assi([],[]);
+  P.curva(c[1],{stroke:'var(--blu)'},'sopra');
+  c[2].forEach(function(x){P.add(el('circle',{cx:P.X(x),cy:P.Y(0),r:4,fill:'var(--rosso)'}),'sopra');});
+});
+
+/* ---------- sistema parabola y = -x^2 + 4x, retta y = x + q ---------- */
+(function(){
+  var svg=document.getElementById('g-sis'),cur=document.getElementById('c-q'),v=document.getElementById('v-q'); if(!svg)return;
+  var P=new Piano(svg,[-1.4,5.2],[-2.6,6.2],{l:20,r:20,t:20,b:20}); P.assi([1,2,3,4],[-2,2,4]);
+  var X=P.X,Y=P.Y;
+  P.curva(function(x){return -x*x+4*x;},{stroke:'var(--blu)'},'sotto',240);
+  var rt=P.add(el('line',{stroke:'var(--rosso)','stroke-width':2}),'sopra');
+  var p1=P.add(el('circle',{r:4.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5}),'sopra'),
+      p2=P.add(el('circle',{r:4.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5}),'sopra');
+  function dis(){var q=(+cur.value)/4, d=9-4*q;
+    set(rt,{x1:X(-2),y1:Y(-2+q),x2:X(6),y2:Y(6+q)});
+    /* -x^2+4x = x+q  ->  x^2-3x+q = 0 */
+    var k, s;
+    if(d>1e-9){var r=Math.sqrt(d),a=(3-r)/2,b=(3+r)/2;
+      set(p1,{cx:X(a),cy:Y(a+q),opacity:1});set(p2,{cx:X(b),cy:Y(b+q),opacity:1});s='2 punti comuni';}
+    else if(Math.abs(d)<=1e-9){set(p1,{cx:X(1.5),cy:Y(1.5+q),opacity:1});set(p2,{opacity:0});s='<span class="ok">retta tangente</span>: 1 punto';}
+    else{set(p1,{opacity:0});set(p2,{opacity:0});s='nessun punto comune';}
+    v.innerHTML='q = '+n(q)+' &nbsp; '+s;}
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
