@@ -5,18 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le trasformazioni di Lorentz — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.riquadro{background:var(--carta);border:1px solid var(--riga);border-left:4px solid var(--rosso);
-  border-radius:6px;padding:12px 16px;margin:22px 0;font-family:var(--sans);font-size:.92rem}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,147 +76,102 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Relatività ristretta &middot; Unità 46</p>
   <h1>Le trasformazioni di Lorentz</h1>
-  <p class="sommario">Dilatazione dei tempi e contrazione delle lunghezze descrivono due
-  effetti separati. Le trasformazioni di Lorentz li raccolgono in un'unica coppia di formule,
-  che permettono di convertire le coordinate spaziali e temporali di uno stesso evento fra due
-  sistemi di riferimento in moto relativo.</p>
 </header>
 
-<h2>Due sistemi di riferimento in moto relativo</h2>
-
-<p>Consideriamo un sistema $S$, di coordinate $x,y$, e un sistema $S'$, di coordinate $x',y'$,
-che si muove rispetto a $S$ con velocità $v$ lungo la direzione dell'asse $x$. I due sistemi
-hanno assi paralleli e coincidono nell'istante $t=0$.</p>
+<p>Sistema $S'$ in moto con velocità $v$ lungo l'asse $x$ di $S$, assi paralleli, sistemi coincidenti a $t=0$: come si passa dalle coordinate di un evento in $S$ a quelle in $S'$?</p>
 
 <div class="fig">
-<svg viewBox="0 0 480 170" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr46a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="60" y1="150" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="60" y1="150" x2="420" y2="150" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="46" y="24" font-family="var(--serif)" font-size="14" fill="var(--inchiostro)">y</text>
-<text x="416" y="146" font-family="var(--serif)" font-size="14" fill="var(--inchiostro)">x</text>
-<line x1="100" y1="150" x2="100" y2="35" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="100" y1="150" x2="380" y2="150" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="86" y="40" font-family="var(--serif)" font-size="14" fill="var(--rosso)">y'</text>
-<text x="376" y="146" font-family="var(--serif)" font-size="14" fill="var(--rosso)">x'</text>
-<line x1="150" y1="70" x2="220" y2="70" stroke="var(--verde)" stroke-width="2" marker-end="url(#fr46a)"/>
-<text x="180" y="58" text-anchor="middle" font-family="var(--serif)" font-size="13" fill="var(--verde)">v</text>
-</svg>
-<p class="did">$S'$ si muove rispetto a $S$ con velocità $v$ lungo $x$; i due sistemi
-coincidono all'istante $t=0$.</p>
+<svg id="fig-s1" viewBox="0 0 400 170" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sistema S' in moto con velocità v rispetto a S"></svg>
+<p class="did">$S'$ in moto con velocità $v$ rispetto a $S$</p>
 </div>
 
-<h2>Il caso classico</h2>
+<p>Per $v\ll c$, trasformazioni di Galileo:</p>
 
-<p>Per $v$ molto minore di $c$ vale la relatività galileiana:</p>
+<p class="eq">$$x'=x-vt\qquad t'=t$$</p>
 
-$$x=x'+vt,\qquad t=t'$$
+<p>Per $v$ prossimo a $c$, la lunghezza $x'$, misurata in $S'$, in $S$ risulta contratta ($L=L_0/\gamma$):</p>
 
-<p>da cui, invertendo la prima equazione:</p>
+<p class="eq">$$x=\frac{x'}{\gamma}+vt\;\Rightarrow\;x'=\gamma(x-vt)$$</p>
 
-$$x'=x-vt$$
-
-<h2>Il caso relativistico</h2>
-
-<p>Passiamo al caso $v$ prossimo a $c$. Sappiamo dalla contrazione delle lunghezze che
-$L=L_0/\gamma$: una lunghezza misurata da un osservatore in moto è quella propria divisa per
-$\gamma$. Applicando questa correzione alla relazione classica fra $x$ e $x'$:</p>
-
-$$x=\frac{x'}{\gamma}+vt \quad\Rightarrow\quad \frac{x'}{\gamma}=x-vt$$
-
-<div class="formula-box">
-$$x'=\gamma(x-vt)$$
-</div>
-
-<p>Per scrivere anche la relazione inversa, da $x'$ a $x$, basta cambiare il segno della
-velocità: chi si trova nel sistema $S'$ si considera fermo, e vede $S$ muoversi con velocità
-$v$ in verso opposto.</p>
+<p>Per $S'$, è $S$ a muoversi con velocità $v$ nel verso opposto:</p>
 
 <div class="fig">
-<svg viewBox="0 0 480 170" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr46b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M8,0 L0,4 L8,8 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="100" y1="150" x2="100" y2="35" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="100" y1="150" x2="420" y2="150" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="86" y="40" font-family="var(--serif)" font-size="14" fill="var(--rosso)">y'</text>
-<text x="416" y="146" font-family="var(--serif)" font-size="14" fill="var(--rosso)">x'</text>
-<line x1="60" y1="150" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="60" y1="150" x2="380" y2="150" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="46" y="24" font-family="var(--serif)" font-size="14" fill="var(--inchiostro)">y</text>
-<text x="376" y="146" font-family="var(--serif)" font-size="14" fill="var(--inchiostro)">x</text>
-<line x1="220" y1="70" x2="150" y2="70" stroke="var(--verde)" stroke-width="2" marker-end="url(#fr46b)"/>
-<text x="185" y="58" text-anchor="middle" font-family="var(--serif)" font-size="13" fill="var(--verde)">v</text>
-</svg>
-<p class="did">Dal punto di vista di $S'$, fermo, è $S$ a muoversi con velocità $v$ nel verso
-opposto.</p>
+<svg id="fig-s2" viewBox="0 0 400 170" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sistema S in moto con velocità v in verso opposto rispetto a S'"></svg>
+<p class="did">$S$ in moto con velocità $v$ in verso opposto rispetto a $S'$</p>
 </div>
 
-<p>Questa simmetria dà la trasformazione reciproca, insieme a quella già trovata:</p>
+<p class="eq">$$x=\gamma(x'+vt')$$</p>
 
-$$x'=\gamma(x-vt),\qquad x=\gamma(x'+vt')$$
+<h2>Trasformazione del tempo</h2>
 
-<h2>La trasformazione del tempo</h2>
+<p>Si ricava $t$ da $x'=\gamma(x-vt)$ e si sostituisce $x=\gamma(x'+vt')$:</p>
 
-<p>Dalla prima equazione ricaviamo $t$ in funzione di $x$ e $x'$:</p>
+<p class="eq">$$t=\frac{x}{v}-\frac{x'}{v\gamma}=\gamma t'+\gamma x'\left(\frac1v-\frac{1}{v\gamma^2}\right)$$</p>
 
-$$x'=\gamma x-v\gamma t \;\Rightarrow\; t=\frac{x}{v}-\frac{x'}{v\gamma}$$
+<p class="eq">$$\frac{1}{\gamma^2}=1-\frac{v^2}{c^2}\;\Rightarrow\;\frac1v-\frac{1}{v\gamma^2}=\frac{v}{c^2}$$</p>
 
-<p>e sostituiamo $x=\gamma(x'+vt')$:</p>
+<div class="def"><span class="et">Trasformazioni di Lorentz</span>
+<p class="eq principio">$$\begin{cases}x'=\gamma(x-vt)\\[4pt] t'=\gamma\left(t-\dfrac{v}{c^2}\,x\right)\end{cases}\qquad\begin{cases}x=\gamma(x'+vt')\\[4pt] t=\gamma\left(t'+\dfrac{v}{c^2}\,x'\right)\end{cases}$$</p>
+<p>con $\gamma=\dfrac{1}{\sqrt{1-v^2/c^2}}$</p></div>
 
-$$t=\frac{\gamma(x'+vt')}{v}-\frac{x'}{v\gamma}=\frac{\gamma x'}{v}+\gamma t'-\frac{x'}{v\gamma}
-=x'\gamma\left(\frac{1}{v}-\frac{1}{v\gamma^2}\right)+\gamma t'$$
-
-<p>Il termine fra parentesi si semplifica usando $1/\gamma^2=1-v^2/c^2$:</p>
-
-$$\frac{1}{v}-\frac{1-v^2/c^2}{v}=\frac{v^2/c^2}{v}=\frac{v}{c^2}$$
-
-<p>quindi:</p>
-
-<div class="formula-box">
-$$t=\gamma\left(t'+\frac{v}{c^2}x'\right)$$
-</div>
-
-<p>e, con lo stesso procedimento applicato al sistema scambiato:</p>
-
-<div class="formula-box">
-$$t'=\gamma\left(t-\frac{v}{c^2}x\right)$$
-</div>
-
-<p>Le quattro equazioni ricavate permettono di passare da un sistema all'altro in entrambe le
-direzioni:</p>
-
-<table style="width:100%;border-collapse:collapse;margin:20px 0;font-family:var(--sans);font-size:.95rem">
-<tr><th style="text-align:left;border-bottom:1px solid var(--riga);padding:6px 8px">Da $S'$ a $S$</th>
-<th style="text-align:left;border-bottom:1px solid var(--riga);padding:6px 8px">Da $S$ a $S'$</th></tr>
-<tr><td style="padding:6px 8px">$x=\gamma(x'+vt')$</td><td style="padding:6px 8px">$x'=\gamma(x-vt)$</td></tr>
-<tr><td style="padding:6px 8px">$t=\gamma\!\left(t'+\dfrac{v}{c^2}x'\right)$</td>
-<td style="padding:6px 8px">$t'=\gamma\!\left(t-\dfrac{v}{c^2}x\right)$</td></tr>
-</table>
-
-<div class="riquadro">
-Le trasformazioni di Lorentz sostituiscono quelle galileiane quando $v$ non è più trascurabile
-rispetto a $c$: per $v\ll c$, $\gamma\approx1$ e il termine $vx/c^2$ si annulla, tornando alle
-formule classiche $x'=x-vt$, $t'=t$.
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>La simultaneità dipende dal sistema di riferimento: applicando le trasformazioni appena
-ricavate, due eventi simultanei in un sistema non lo sono più in un altro.</li>
+<li>$v\ll c$ → $\gamma\approx1$ e $vx/c^2$ trascurabile: si ritrovano $x'=x-vt$, $t'=t$.</li>
 </ul>
-</div>
 
 <nav class="nav-unita"><a class="precedente" href="../45-il-decadimento-dei-muoni/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il decadimento dei muoni</span></a><a class="successiva" href="../47-la-simultaneita-dipende-dal-sistema-di-riferimento/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La simultaneità dipende dal sistema di riferimento</span></a></nav>
 <footer><p>Fisica quinta &middot; Relatività ristretta &middot; Unità 46</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(S,n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);(p||S).appendChild(e);return e;}
+  function txt(S,x,y,s,col,a){var t=el(S,'text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:col},a||{}));t.textContent=s;return t;}
+  function freccia(S,id,col){var d=S.querySelector('defs')||el(S,'defs',{}),m=el(S,'marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'},d);el(S,'path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+  /* assi: origine (ox,oy), lunghezze lx, ly */
+  function assi(S,ox,oy,lx,ly,col,mk,ex,ey){
+    el(S,'line',{x1:ox,y1:oy,x2:ox+lx,y2:oy,stroke:col,'stroke-width':1.6,'marker-end':'url(#'+mk+')'});
+    el(S,'line',{x1:ox,y1:oy,x2:ox,y2:oy-ly,stroke:col,'stroke-width':1.6,'marker-end':'url(#'+mk+')'});
+    txt(S,ox+lx+8,oy+5,ex,col,{'font-style':'italic'});
+    txt(S,ox-12,oy-ly+6,ey,col,{'text-anchor':'middle','font-style':'italic'});
+    txt(S,ox-12,oy+18,ex==='x'?'O':'O′',col,{'text-anchor':'middle','font-size':12});
+  }
+  function disegna(id,mobile){
+    var S=document.getElementById(id); if(!S)return;
+    freccia(S,id+'i','var(--inchiostro)'); freccia(S,id+'r','var(--rosso)'); freccia(S,id+'v','var(--verde)');
+    var oy=135;
+    /* sistema fermo in nero a sinistra, sistema in moto in rosso spostato a destra di vt */
+    if(mobile==='Sp'){
+      assi(S,60,oy,290,115,'var(--inchiostro)',id+'i','x','y');
+      assi(S,150,oy-6,160,95,'var(--rosso)',id+'r','x′','y′');
+      el(S,'line',{x1:175,y1:62,x2:240,y2:62,stroke:'var(--verde)','stroke-width':2.2,'marker-end':'url(#'+id+'v)'});
+      txt(S,207,52,'v','var(--verde)',{'text-anchor':'middle','font-style':'italic'});
+    }else{
+      assi(S,150,oy,160,115,'var(--rosso)',id+'r','x′','y′');
+      assi(S,60,oy-6,290,95,'var(--inchiostro)',id+'i','x','y');
+      el(S,'line',{x1:240,y1:62,x2:175,y2:62,stroke:'var(--verde)','stroke-width':2.2,'marker-end':'url(#'+id+'v)'});
+      txt(S,207,52,'v','var(--verde)',{'text-anchor':'middle','font-style':'italic'});
+    }
+  }
+  disegna('fig-s1','Sp'); disegna('fig-s2','S');
+})();
+</script>
 </body>
 </html>
