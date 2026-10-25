@@ -5,19 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La parabola: vertice, asse, concavità — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:14px 0}
-.esempio p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.due-fig{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:18px 0}
-.due-fig figure{margin:0;text-align:center}
-.due-fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -27,89 +61,158 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Disequazioni di secondo grado &middot; Unità 46</p>
   <h1>La parabola: vertice, asse, concavità</h1>
-  <p class="sommario">Le equazioni di primo grado in $x$ e $y$ hanno come grafico una retta.
-  Le equazioni di secondo grado hanno come grafico una curva diversa, la <strong>parabola</strong>:
-  imparare a leggerne la forma dall'equazione è il passo che serve per affrontare le
-  disequazioni di secondo grado.</p>
 </header>
 
-<div class="regola"><p>$$y = ax^2+bx+c, \qquad a\neq0$$ è l'equazione di una parabola, così come
-$$y = mx+q$$ è l'equazione di una retta.</p></div>
+<p>Equazione di secondo grado in $x$ e $y$: qual è il suo grafico e come se ne leggono le caratteristiche dai coefficienti?</p>
+
+<div class="def"><span class="et">Parabola</span>
+<p class="eq principio">$$y=ax^2+bx+c\qquad a\neq0$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="210" x2="340" y2="210" stroke="#16283d" stroke-width="1.4"/>
-<text x="330" y="228" font-size="13" fill="#16283d">x</text>
-<line x1="60" y1="240" x2="60" y2="20" stroke="#16283d" stroke-width="1.4"/>
-<text x="66" y="26" font-size="13" fill="#16283d">y</text>
-<line x1="200" y1="245" x2="200" y2="20" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="5 4"/>
-<text x="206" y="32" font-size="12" fill="#2f6b4f">asse di simmetria</text>
-<path d="M 90 230 Q 200 20 310 230" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="200" cy="105" r="3.6" fill="#1f4e79"/>
-<text x="208" y="102" font-size="12" fill="#1f4e79">V (vertice)</text>
-<circle cx="128" cy="210" r="3.6" fill="#b3392f"/>
-<circle cx="272" cy="210" r="3.6" fill="#b3392f"/>
-<text x="90" y="200" font-size="12" fill="#b3392f">intersezioni con asse x</text>
-<circle cx="200" cy="196" r="3.6" fill="#b3392f"/>
-<text x="150" y="255" font-size="12" fill="#b3392f">intersezione con asse y</text>
-</svg>
+<svg id="g-par" viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Parabola con vertice V(1; −1), asse di simmetria x = 1 e intersezioni con gli assi; il cursore cambia il coefficiente a"></svg>
+<div class="cursore"><label for="c-a">$a$</label><input id="c-a" type="range" min="0" max="7" step="1" value="7"><span class="val" id="v-a"></span></div>
+<p class="did">Vertice fisso $V(1;\,-1)$; in verde l'asse, in rosso le intersezioni con gli assi</p>
 </div>
 
-<p>Il vertice $V$ è il punto più basso della curva (o più alto, se la parabola è rivolta verso il
-basso); l'asse di simmetria è la retta verticale che passa per $V$ e divide la parabola in due
-metà speculari. Le loro coordinate si ricavano dai coefficienti $a$, $b$, $c$ dell'equazione:</p>
+<ul>
+<li>vertice $V$: punto più basso (o più alto) della curva;</li>
+<li>asse di simmetria: retta verticale per $V$;</li>
+<li>ordinata di $V$: si sostituisce $x=-\dfrac{b}{2a}$ nell'equazione.</li>
+</ul>
 
-<div class="regola"><p>$$V\left(-\frac{b}{2a},\ -\frac{\Delta}{4a}\right), \qquad \Delta=b^2-4ac$$</p>
-<p>Asse di simmetria: $$x=-\frac{b}{2a}$$</p></div>
-
-<p>L'ascissa del vertice è la stessa dell'asse di simmetria: la parabola è simmetrica rispetto a
-quella retta, quindi il suo punto più estremo cade proprio lì. L'ordinata si ottiene sostituendo
-questo valore di $x$ nell'equazione, e il risultato si scrive in funzione del discriminante
-$\Delta$ già noto dalle equazioni di secondo grado.</p>
+<div class="def"><span class="et">Vertice e asse di simmetria</span>
+<p class="eq principio">$$V\left(-\frac{b}{2a};\ -\frac{\Delta}{4a}\right)\qquad\quad x=-\frac{b}{2a}$$</p>
+<p>con $\Delta=b^2-4ac$</p></div>
 
 <h2>Concavità</h2>
 
-<p>Il segno del coefficiente $a$ decide da che parte si apre la parabola:</p>
-
-<div class="due-fig">
-<figure>
-<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="10" y1="100" x2="150" y2="100" stroke="#16283d" stroke-width="1.2"/>
-<line x1="80" y1="120" x2="80" y2="10" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 20 30 Q 80 115 140 30" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-</svg>
-<figcaption>$a>0$ &middot; concavità verso l'alto</figcaption>
-</figure>
-<figure>
-<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="10" y1="100" x2="150" y2="100" stroke="#16283d" stroke-width="1.2"/>
-<line x1="80" y1="120" x2="80" y2="10" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 20 90 Q 80 5 140 90" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-</svg>
-<figcaption>$a&lt;0$ &middot; concavità verso il basso</figcaption>
-</figure>
-</div>
-
-<div class="esempio">
-<p><strong>Esempio.</strong> Data $y=2x^2-4x+1$: qui $a=2$, $b=-4$, $c=1$, quindi
-$\Delta=(-4)^2-4\cdot2\cdot1=8$.</p>
-<p>Asse di simmetria: $x=-\dfrac{-4}{2\cdot2}=1$.</p>
-<p>Vertice: $V\left(1,\ -\dfrac{8}{4\cdot2}\right)=V(1,-1)$.</p>
-<p>Poiché $a=2>0$, la parabola ha concavità verso l'alto.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
+<p>Il verso dipende dal segno di $a$:</p>
 <ul>
-<li>Come le soluzioni di un'equazione di secondo grado si leggano come intersezioni della
-parabola con l'asse $x$, e come le soluzioni di un sistema di secondo grado si leggano come
-intersezioni fra una parabola e una retta.</li>
+<li>$a&gt;0$ → concavità verso l'alto, $V$ punto più basso;</li>
+<li>$a&lt;0$ → concavità verso il basso, $V$ punto più alto.</li>
 </ul>
+
+<div class="fig">
+<div class="due-svg">
+<svg id="g-su" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Parabola con concavità verso l'alto"></svg>
+<svg id="g-giu" viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:200px" role="img" aria-label="Parabola con concavità verso il basso"></svg>
 </div>
+<div class="did-parti" style="--n:2"><p class="did">$a&gt;0$: verso l'alto</p><p class="did">$a&lt;0$: verso il basso</p></div>
+</div>
+
+<h2>Esempio</h2>
+
+<p>Dati: $y=2x^2-4x+1$. Calcolare asse, vertice e concavità.</p>
+
+<p class="eq quesito">$$a=2\qquad b=-4\qquad c=1\qquad \Delta=(-4)^2-4\cdot2\cdot1=8$$</p>
+<p class="eq">$$x=-\frac{-4}{2\cdot2}=1\qquad y_V=-\frac{8}{4\cdot2}=-1$$</p>
+<p class="eq ris">$$\text{asse } x=1\qquad V(1;\,-1)\qquad a&gt;0:\ \text{concavità verso l'alto}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../47-equazioni-risolubili-con-scomposizioni/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazioni risolubili con scomposizioni</span></a><a class="successiva" href="../49-interpretazione-grafica-di-equazioni-e-sistemi-di-secondo-gr/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Interpretazione grafica di equazioni e sistemi di secondo grado</span></a></nav>
 <footer><p>Matematica seconda &middot; Disequazioni di secondo grado &middot; Unità 46</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=Y(0), x0=X(0);
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+2,y0+18,'x',{fill:'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-4,'y',{fill:'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+17,n(v),{'text-anchor':'middle','font-size':11}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,n(v),{'text-anchor':'end','font-size':11}));
+  });
+  return this;
+};
+Piano.prototype.add=function(e,dove){(dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e);return e;};
+Piano.prototype.curva=function(f,a,dove,N){var X=this.X,Y=this.Y,x0=this.xr[0],x1=this.xr[1],d='';N=N||200;
+  for(var i=0;i<=N;i++){var x=x0+(x1-x0)*i/N,y=f(x);if(!isFinite(y)||Math.abs(y)>1e3)continue;d+=(d?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);}
+  var p=el('path',Object.assign({d:d,fill:'none','stroke-width':2.2},a));return dove===null?p:this.add(p,dove);};
+function riallinea(){if(window.allineaQuaderno)window.allineaQuaderno();}
+
+/* ---------- parabola y = a(x-1)^2 - 1 con a variabile ---------- */
+(function(){
+  var svg=document.getElementById('g-par'),cur=document.getElementById('c-a'),v=document.getElementById('v-a'); if(!svg)return;
+  var A=[-2,-1.5,-1,-0.5,0.5,1,1.5,2];
+  var P=new Piano(svg,[-1.6,3.6],[-3.6,4.6],{l:20,r:20,t:20,b:20}); P.assi([-1,1,2,3],[-3,-1,1,3]);
+  var X=P.X,Y=P.Y;
+  P.add(el('line',{x1:X(1),y1:Y(-5),x2:X(1),y2:Y(6),stroke:'var(--verde)','stroke-width':1.6,'stroke-dasharray':'6 4'}),'sotto');
+  P.add(txt(X(1)+6,Y(4.15),'asse x = 1',{'font-size':12,fill:'var(--verde)'}),'testo');
+  var cv=P.add(el('path',{fill:'none',stroke:'var(--blu)','stroke-width':2.4}),'sopra');
+  var r1=P.add(el('circle',{r:4,fill:'var(--rosso)'}),'sopra'), r2=P.add(el('circle',{r:4,fill:'var(--rosso)'}),'sopra');
+  var py=P.add(el('circle',{r:4,fill:'var(--rosso)'}),'sopra');
+  P.add(el('circle',{cx:X(1),cy:Y(-1),r:4.5,fill:'var(--inchiostro)'}),'sopra');
+  var tV=P.add(txt(0,0,'V',{'font-size':13,fill:'var(--inchiostro)','font-weight':600}),'testo');
+  function coef(a){var b=-2*a,c=a-1,s='y = '+(a===1?'':a===-1?'−':n(a))+'x²';
+    s+=(b<0?' − ':' + ')+(Math.abs(b)===1?'':n(Math.abs(b)))+'x';
+    if(c!==0)s+=(c<0?' − ':' + ')+n(Math.abs(c));return s;}
+  function dis(){var a=A[+cur.value];
+    var p=P.curva(function(x){return a*(x-1)*(x-1)-1;},{},null,240); set(cv,{d:p.getAttribute('d')});
+    if(a>0){var d=1/Math.sqrt(a); set(r1,{cx:X(1-d),cy:Y(0),opacity:1}); set(r2,{cx:X(1+d),cy:Y(0),opacity:1});}
+    else{set(r1,{opacity:0});set(r2,{opacity:0});}
+    set(py,{cx:X(0),cy:Y(a-1)});
+    set(tV,a>0?{x:X(1)+8,y:Y(-1)+17}:{x:X(1)-18,y:Y(-1)-6});
+    v.innerHTML='a = '+n(a)+' &nbsp; '+coef(a)+' &nbsp; <span class="ok">'+(a>0?'verso l\u2019alto':'verso il basso')+'</span>';}
+  cur.addEventListener('input',function(){dis();riallinea();}); dis();
+})();
+
+/* ---------- concavità ---------- */
+[['g-su',function(x){return 0.8*x*x-0.8;},'var(--blu)'],['g-giu',function(x){return -0.8*x*x+1.4;},'var(--blu)']].forEach(function(c){
+  var svg=document.getElementById(c[0]); if(!svg)return;
+  var P=new Piano(svg,[-2.2,2.2],[-1.4,2.2],{l:14,r:16,t:16,b:10}); P.assi([],[]);
+  P.curva(c[1],{stroke:c[2]},'sopra');
+});
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
