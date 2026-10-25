@@ -5,152 +5,199 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I condensatori e la capacità — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.pannelli{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.pannelli svg{width:100%;max-width:260px;margin:0 auto;display:block}
+.pannelli .did{margin:4px 0 0}
+@media(max-width:640px){.pannelli{grid-template-columns:1fr}}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Elettrostatica &middot; Unit&agrave; 54</p>
-  <h1>I condensatori e la capacit&agrave;</h1>
-  <p class="sommario">Un condensatore &egrave; un dispositivo che accumula
-  cariche elettriche uguali e opposte quando viene collegato a un generatore.
-  Introduciamo la grandezza che misura quanta carica accumula a parit&agrave;
-  di tensione, e la calcoliamo nel caso pi&ugrave; semplice: due piastre piane
-  parallele.</p>
+  <p class="occhiello">Elettrostatica &middot; Unità 54</p>
+  <h1>I condensatori e la capacità</h1>
 </header>
 
-<h2>Il condensatore e la capacit&agrave;</h2>
+<p>Due armature conduttrici affacciate, collegate a una batteria: quanta carica accumulano?</p>
 
-<p>Un condensatore a facce piane parallele &egrave; formato da due piastre
-conduttrici affacciate, dette <strong>armature</strong>. Collegandole a una
-batteria, questa genera tra le armature una differenza di potenziale
-$\Delta V$: di conseguenza le armature si caricano con cariche uguali e
-opposte $+Q$ e $-Q$, distribuite con densit&agrave; superficiale $+\sigma$ e
-$-\sigma$, e tra loro nasce un campo elettrico uniforme $\vec E$.</p>
-
-<div class="fig">
-<svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fe" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-</defs>
-<line x1="150" y1="30" x2="150" y2="190" stroke="var(--rosso)" stroke-width="3"/>
-<line x1="260" y1="30" x2="260" y2="190" stroke="var(--inchiostro)" stroke-width="3"/>
-<text x="150" y="20" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">+Q</text>
-<text x="260" y="20" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">&minus;Q</text>
-<g font-family="var(--sans)" font-size="16" fill="var(--rosso)">
-<text x="138" y="55">+</text><text x="138" y="90">+</text><text x="138" y="125">+</text><text x="138" y="160">+</text>
-</g>
-<g font-family="var(--sans)" font-size="16" fill="var(--inchiostro)">
-<text x="266" y="55">&minus;</text><text x="266" y="90">&minus;</text><text x="266" y="125">&minus;</text><text x="266" y="160">&minus;</text>
-</g>
-<line x1="165" y1="50" x2="245" y2="50" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fe)"/>
-<line x1="165" y1="85" x2="245" y2="85" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fe)"/>
-<line x1="165" y1="120" x2="245" y2="120" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fe)"/>
-<line x1="165" y1="155" x2="245" y2="155" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fe)"/>
-<text x="205" y="40" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">E</text>
-<path d="M150,190 C150,225 175,225 175,225 L235,225 C235,225 260,225 260,190" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="185" y="215" width="40" height="20" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="180" y="230" text-anchor="end" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">+</text>
-<text x="230" y="230" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&minus;</text>
-<text x="205" y="252" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">batteria</text>
-<text x="205" y="205" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">&Delta;V</text>
-</svg>
-<p class="did">La batteria genera tra le armature una differenza di
-potenziale $\Delta V$; le armature si caricano e tra loro nasce un campo
-elettrico uniforme $\vec E$.</p>
-</div>
-
-<p>Se raddoppio $\Delta V$, la carica $Q$ raddoppia: il loro rapporto resta
-costante, ed &egrave; questa costante che definiamo capacit&agrave; del
-condensatore.</p>
-
-<div class="formula-box">
-$$C=\frac{Q}{\Delta V}$$
-</div>
-
-<p>$Q$ &egrave; la carica presente su ciascuna armatura (in valore assoluto),
-$\Delta V$ la differenza di potenziale tra le armature. La capacit&agrave; non
-dipende da $Q$ n&eacute; da $\Delta V$, ma solo dalla geometria del
-condensatore, come vediamo subito nel caso pi&ugrave; semplice.</p>
-
-<h2>Capacit&agrave; di un condensatore a facce piane parallele</h2>
-
-<p>Consideriamo due piastre di area $A$ poste a distanza $d$. Il campo
-elettrico tra armature affacciate vale $E=\sigma/\varepsilon_0$, con
-$\sigma=Q/A$; la differenza di potenziale &egrave; legata al campo uniforme da
-$\Delta V=Ed$:</p>
-
-<div class="fig">
-<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fe2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/>
-</marker>
-<marker id="fd" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<rect x="120" y="30" width="14" height="150" fill="var(--rosso)" opacity=".85"/>
-<rect x="260" y="30" width="14" height="150" fill="var(--inchiostro)" opacity=".85"/>
-<text x="127" y="22" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">+Q</text>
-<text x="267" y="22" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">&minus;Q</text>
-<line x1="140" y1="60" x2="254" y2="60" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fe2)"/>
-<line x1="140" y1="105" x2="254" y2="105" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fe2)"/>
-<line x1="140" y1="150" x2="254" y2="150" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fe2)"/>
-<text x="197" y="45" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">E</text>
-<text x="90" y="105" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">A</text>
-<line x1="127" y1="195" x2="267" y2="195" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fd)" marker-start="url(#fd)"/>
-<text x="197" y="212" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">d</text>
-</svg>
-<p class="did">Armature di area $A$ a distanza $d$: il campo &egrave;
-uniforme tra le piastre.</p>
-</div>
-
-$$E=\frac{\sigma}{\varepsilon_0}=\frac{Q}{A\varepsilon_0}, \qquad
-\Delta V=Ed=\frac{Qd}{A\varepsilon_0}$$
-
-<p>Sostituendo nella definizione di capacit&agrave;, la carica $Q$ si
-semplifica:</p>
-
-$$C=\frac{Q}{\Delta V}=\frac{Q}{\dfrac{Qd}{A\varepsilon_0}}$$
-
-<div class="formula-box">
-$$C=\frac{A\,\varepsilon_0}{d}$$
-</div>
-
-<p>La capacit&agrave; di un condensatore a facce piane parallele dipende solo
-dall'area $A$ delle armature, dalla loro distanza $d$ e dal mezzo tra le
-piastre (attraverso $\varepsilon_0$): cresce se le armature sono pi&ugrave;
-grandi o pi&ugrave; vicine.</p>
-
-<p>Dalla definizione $C=Q/\Delta V$ ricaviamo l'unit&agrave; di misura della
-capacit&agrave;:</p>
-
-$$[C]=\frac{[Q]}{[\Delta V]}=\frac{\text{C}}{\text{V}}=\text{F}\ (\text{farad})$$
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
 <ul>
-<li>Il condensatore con un dielettrico tra le armature e l'energia immagazzinata.</li>
+<li>batteria → differenza di potenziale $\Delta V$ fra le armature;</li>
+<li>armature → cariche $+Q$ e $-Q$, densità superficiali $+\sigma$ e $-\sigma$;</li>
+<li>fra le armature → campo elettrico uniforme $\vec E$.</li>
 </ul>
+
+<div class="fig">
+<svg id="g-cond" viewBox="0 0 440 252" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Condensatore collegato a una batteria: aumentando la differenza di potenziale aumenta la carica sulle armature"></svg>
+<div class="cursore"><label for="cur-dv">&Delta;V</label><input id="cur-dv" type="range" min="1" max="4" step="1" value="1"><span class="val" id="val-dv"></span></div>
+<p class="did">$\Delta V$ raddoppia → $Q$ ed $E$ raddoppiano</p>
 </div>
+
+<p>Il rapporto fra $Q$ e $\Delta V$ resta costante e definisce la capacità del condensatore:</p>
+
+<div class="def"><span class="et">Capacità</span>
+<p class="eq principio">$$C=\frac{Q}{\Delta V}$$</p>
+<p>$Q$: carica di ciascuna armatura, in modulo.</p></div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>Farad (F): $\;1\ \text{F}=1\ \dfrac{\text{C}}{\text{V}}$</p></div>
+
+<h2>Condensatore a facce piane parallele</h2>
+
+<p>Armature di area $A$ a distanza $d$, nel vuoto, effetti di bordo trascurabili.</p>
+
+<div class="fig">
+<svg id="g-piane" viewBox="0 0 440 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Armature piane parallele di area A a distanza d: avvicinandole la capacità aumenta"></svg>
+<div class="cursore"><label for="cur-d">d</label><input id="cur-d" type="range" min="50" max="200" step="25" value="100"><span class="val" id="val-d"></span></div>
+<p class="did">$d$ dimezzata → $C$ doppia</p>
+</div>
+
+<p>Dal campo uniforme fra le armature si ricava $\Delta V$:</p>
+
+<p class="eq">$$E=\frac{\sigma}{\varepsilon_0}=\frac{Q}{A\,\varepsilon_0} \qquad \Delta V=E\,d=\frac{Q\,d}{A\,\varepsilon_0}$$</p>
+
+<p>Sostituendo in $C=Q/\Delta V$, la carica si semplifica:</p>
+
+<div class="def"><span class="et">Capacità del condensatore piano</span>
+<p class="eq principio">$$C=\frac{A\,\varepsilon_0}{d}$$</p></div>
+
+<p>La capacità dipende solo dalla geometria:</p>
+<ul>
+<li>area $A$ maggiore → $C$ maggiore;</li>
+<li>distanza $d$ minore → $C$ maggiore.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../55-conservazione-dell-energia-nel-campo-elettrico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Conservazione dell'energia nel campo elettrico</span></a><a class="successiva" href="../57-dielettrico-ed-energia-immagazzinata/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Dielettrico ed energia immagazzinata</span></a></nav>
 <footer><p>Fisica quarta &middot; Elettrostatica &middot; Unit&agrave; 54</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,anc,sz,it){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'middle'});if(it)t.setAttribute('font-style','italic');t.textContent=s;return t;}
+  function fmt(v,c){return v.toFixed(c).replace('.',',');}
+  function freccia(d,id,col){var mk=el(d,'marker',{id:id,markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto-start-reverse',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:col});}
+
+  /* figura 1: condensatore collegato alla batteria, carica proporzionale a ΔV */
+  var s=document.getElementById('g-cond');
+  if(s){
+    var d=el(s,'defs',{}); freccia(d,'c1v','var(--verde)');
+    var xa=170, xb=270, y0=40, y1=180;
+    el(s,'line',{x1:xa,y1:y0,x2:xa,y2:y1,stroke:'var(--rosso)','stroke-width':4});
+    el(s,'line',{x1:xb,y1:y0,x2:xb,y2:y1,stroke:'var(--inchiostro)','stroke-width':4});
+    txt(s,xa,y0-12,'+Q','var(--rosso)','middle',13,true);
+    txt(s,xb,y0-12,'−Q','var(--inchiostro)','middle',13,true);
+    txt(s,(xa+xb)/2,y0-12,'E','var(--verde)','middle',13,true);
+    /* circuito e batteria (tratto lungo = polo +) */
+    var yb=212, xp=212, xm=228;
+    el(s,'polyline',{points:xa+','+y1+' '+xa+','+yb+' '+xp+','+yb,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(s,'polyline',{points:xm+','+yb+' '+xb+','+yb+' '+xb+','+y1,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4});
+    el(s,'line',{x1:xp,y1:yb-13,x2:xp,y2:yb+13,stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(s,'line',{x1:xm,y1:yb-7,x2:xm,y2:yb+7,stroke:'var(--inchiostro)','stroke-width':4});
+    txt(s,xp-8,yb-8,'+','var(--inchiostro)','middle',12);
+    txt(s,(xp+xm)/2,yb+30,'ΔV','var(--inchiostro)','middle',12,true);
+    var gq=el(s,'g',{});
+    var cur=document.getElementById('cur-dv'), val=document.getElementById('val-dv');
+    var dis=function(){
+      var k=+cur.value, n=2*k;
+      while(gq.firstChild)gq.removeChild(gq.firstChild);
+      for(var i=0;i<n;i++){var y=y0+(y1-y0)*(i+.5)/n+4;el(gq,'line',{x1:xa+8,y1:y-4,x2:xb-8,y2:y-4,stroke:'var(--verde)','stroke-width':1.6,'marker-end':'url(#c1v)'});txt(gq,xa-12,y,'+','var(--rosso)','middle',13);txt(gq,xb+12,y,'−','var(--inchiostro)','middle',13);}
+      val.innerHTML='&Delta;<i>V</i> = '+k+'&#8239;&Delta;<i>V</i><sub>0</sub> → <i>Q</i> = '+k+'&#8239;<i>Q</i><sub>0</sub>';
+    };
+    cur.addEventListener('input',dis); dis();
+  }
+
+  /* figura 2: armature piane di area A a distanza d; C = C0·d0/d */
+  var p=document.getElementById('g-piane');
+  if(p){
+    var d2=el(p,'defs',{}); freccia(d2,'c2v','var(--verde)'); freccia(d2,'c2i','var(--inchiostro)');
+    var cx=205, ya=50, yb2=180, dx=34, dy=28;
+    var g=el(p,'g',{});
+    var cd=document.getElementById('cur-d'), vd=document.getElementById('val-d');
+    var lastra=function(x,col){el(g,'polygon',{points:x+','+ya+' '+(x+dx)+','+(ya-dy)+' '+(x+dx)+','+(yb2-dy)+' '+x+','+yb2,fill:col,'fill-opacity':.18,stroke:col,'stroke-width':2});};
+    var dis2=function(){
+      var pc=+cd.value, w=pc*1.1, x1=cx-w/2, x2=cx+w/2;
+      while(g.firstChild)g.removeChild(g.firstChild);
+      lastra(x1,'var(--rosso)'); lastra(x2,'var(--inchiostro)');
+      txt(g,x1+dx/2,ya-dy-8,'+Q','var(--rosso)','middle',13,true);
+      txt(g,x2+dx/2,ya-dy-8,'−Q','var(--inchiostro)','middle',13,true);
+      txt(g,x1-12,(ya+yb2)/2-dy/2+4,'A','var(--inchiostro)','end',13,true);
+      [85,125].forEach(function(y){el(g,'line',{x1:x1+dx/2+6,y1:y,x2:x2+dx/2-6,y2:y,stroke:'var(--verde)','stroke-width':1.6,'marker-end':'url(#c2v)'});});
+      el(g,'line',{x1:x1,y1:yb2+18,x2:x2,y2:yb2+18,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-start':'url(#c2i)','marker-end':'url(#c2i)'});
+      txt(g,cx,yb2+36,'d','var(--inchiostro)','middle',13,true);
+      var f=pc/100, c=100/pc;
+      vd.innerHTML='<i>d</i> = '+fmt(f,2)+'&#8239;<i>d</i><sub>0</sub> → <i>C</i> = '+fmt(c,2)+'&#8239;<i>C</i><sub>0</sub>';
+    };
+    cd.addEventListener('input',dis2); dis2();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
