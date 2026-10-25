@@ -5,24 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni lineari del primo ordine — Matematica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.nota{background:var(--blu-chiaro);border:1px solid var(--riga);border-radius:10px;padding:14px 18px;margin:22px 0;font-family:var(--sans);font-size:.9rem;line-height:1.55}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.widget .due{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:center}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:12px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:230px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
-.leggenda.ok{color:var(--verde);font-weight:600}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-@media (max-width:600px){.widget .due{grid-template-columns:1fr}}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def,.def{padding:0 18px}
+.foglio>.def,.foglio>.nota{margin-top:var(--r)}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.def+p,.foglio>.eq+p,.foglio>.fig+p{margin-top:var(--r)}
+.foglio>ol+.def{margin-top:var(--r)}
+.pannelli svg{max-width:300px;margin:0 auto}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.pannelli{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:14px;align-items:end}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti,.pannelli{grid-template-columns:1fr}}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.fig{margin-top:var(--r)}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left}
+.ok{color:var(--verde);font-weight:600}
+.es{display:grid;grid-template-columns:1fr;gap:0 14px;align-items:center;margin-top:var(--r)}
+.es .quesito{grid-column:1;margin:0}
+.es .ris{grid-column:1 / -1}
+.es .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;
+  font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.es .ris{background:#eaf1ea}
+.foglio .es .ris{margin-top:calc(var(--r)*.5)}
+.foglio .passo .eq{background:#fff;border:1px solid var(--riga);border-radius:10px;
+  padding:calc(var(--r)*.5) 22px;font-size:1.1rem;text-align:center;margin-top:0;overflow-x:auto}
+.foglio .passo .spieg{font-family:var(--sans);font-size:.82rem;color:var(--grigio);
+  line-height:var(--r);margin-top:var(--r)}
+.passo .num{display:inline-block;min-width:1.5rem;color:var(--blu);font-weight:600}
+.def .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.leg{font-family:var(--sans);font-size:.9rem;color:var(--grigio)}
+.def ul{margin:0;padding-left:1.4rem}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio .passo table.segni{margin-top:var(--r)}
+.def ul{padding-bottom:calc(var(--r)*.5)}
+.nota .mini{text-align:center}
+.foglio>table.segni{margin-top:var(--r)}
+.def ul li{line-height:var(--r)}
+.nota .eq{text-align:center;margin:0 0 calc(var(--r)*.5);background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.def .eq+.eq{margin-top:0}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+table.tavola{border-collapse:collapse;width:100%;font-size:1rem}
+table.tavola td{height:calc(2*var(--r));line-height:var(--r);padding:0 10px;border-bottom:1px solid var(--riga);vertical-align:middle}
+table.tavola tr:last-child td{border-bottom:0}
+table.tavola td.cond{font-family:var(--sans);font-size:.85rem;color:var(--grigio);white-space:nowrap}
+.def table.tavola{margin-bottom:calc(var(--r)*.5)}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
@@ -31,76 +93,54 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quinta</a></nav>
   <p class="occhiello">Equazioni differenziali &middot; Unità 43</p>
   <h1>Equazioni lineari del primo ordine</h1>
-  <p class="sommario">Un'equazione differenziale lineare del primo ordine ha la forma
-  $y'+a(x)y=b(x)$. Se $b(x)=0$ è omogenea e si risolve separando le variabili; se
-  $b(x)\neq0$ serve un metodo apposito, il fattore integrante, che trasforma il primo
-  membro nella derivata di un prodotto.</p>
 </header>
 
-<h2>Il caso omogeneo</h2>
+<p>Equazione $y'+a(x)\,y=b(x)$, con $a$ e $b$ continue su un intervallo: come si trova l'integrale generale?</p>
 
-<p>Un'equazione lineare omogenea ha la forma $y'+a(x)y=0$: è già a variabili
-separabili, perché si può scrivere $y'=-a(x)y$.</p>
+<ul>
+<li>$b(x)=0$ → omogenea, a variabili separabili;</li>
+<li>$b(x)\neq0$ → completa, si risolve con il fattore integrante.</li>
+</ul>
 
-<div class="def"><span class="et">Equazione lineare omogenea</span>
-Data $y'+a(x)y=0$, separando le variabili ($y\neq0$) si ottiene
-$$\frac{dy}{y}=-a(x)\,dx\ \Longrightarrow\ \ln|y|=-\int a(x)\,dx+C_1,$$
-da cui l'integrale generale
-$$y=Ce^{-\int a(x)\,dx}.$$</div>
+<h2>Caso omogeneo</h2>
 
-<p>Per $y'+3y=0$ si ha $a(x)=3$, costante, quindi $\int a(x)\,dx=3x$ e l'integrale
-generale è $y=Ce^{-3x}$.</p>
+<p>Per $y\neq0$ si separano le variabili:</p>
 
-<h2>Il caso completo: il fattore integrante</h2>
+<p class="eq">$$\frac{dy}{y}=-a(x)\,dx\;\Longrightarrow\;\ln|y|=-\int a(x)\,dx+C_1$$</p>
 
-<p>Quando $b(x)\neq0$ l'equazione non è più separabile, perché a destra compare $b(x)$
-da solo, non moltiplicato per $y$. Il metodo consiste nel moltiplicare l'intera
-equazione per una funzione $\mu(x)$, scelta apposta perché il primo membro diventi la
-derivata di un prodotto $\mu(x)\,y$.</p>
+<div class="def"><span class="et">Integrale generale di y' + a(x)y = 0</span>
+<p class="eq principio">$$y=Ce^{-\int a(x)\,dx},\quad C\in\mathbb R$$</p></div>
 
-<div class="def"><span class="et">Fattore integrante</span>
-Posto
-$$\mu(x)=e^{\int a(x)\,dx},$$
-si verifica che $\mu'(x)=a(x)\mu(x)$, e quindi
-$$\big(\mu(x)\,y\big)'=\mu(x)\,y'+\mu(x)\,a(x)\,y=\mu(x)\big(y'+a(x)y\big)=\mu(x)\,b(x).$$
-Integrando entrambi i membri si ottiene $\mu(x)\,y=\displaystyle\int \mu(x)\,b(x)\,dx+C$,
-e infine
-$$y=\frac{1}{\mu(x)}\left[\int \mu(x)\,b(x)\,dx+C\right].$$</div>
+<p>Per $y'+3y=0$:</p>
 
-<p>Risolviamo $y'+2y=4x$: qui $a(x)=2$ e $b(x)=4x$, quindi $\mu(x)=e^{2x}$.
-Moltiplicando per $\mu(x)$:
-$$\big(e^{2x}y\big)'=4x\,e^{2x}.$$
-Il secondo membro si integra per parti (derivando $4x$ e integrando $e^{2x}$):
-$$\int 4x\,e^{2x}\,dx=(2x-1)e^{2x}+C.$$
-Dunque $e^{2x}y=(2x-1)e^{2x}+C$, e dividendo per $e^{2x}$:
-$$y=2x-1+Ce^{-2x}.$$</p>
+<p class="eq">$$a(x)=3\;\Rightarrow\;y=Ce^{-3x}$$</p>
 
-<div class="nota">Il termine $Ce^{-2x}$ è la stessa famiglia di soluzioni
-dell'equazione omogenea associata $y'+2y=0$: l'integrale generale della completa è
-sempre la somma di una soluzione particolare (qui $2x-1$) e dell'integrale generale
-dell'omogenea.</div>
+<h2>Caso completo</h2>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Costante $C$
-      <input type="range" id="s-C44" min="-2" max="2" step="0.25" value="1.5">
-      <span>$C$ = <span class="val" id="v-C44"></span></span>
-    </label>
-  </div>
-  <div class="due">
-  <svg viewBox="0 0 280 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Famiglia di curve y=2x-1+C e^(-2x) che si avvicinano alla retta y=2x-1">
-  <line x1="20" y1="100" x2="260" y2="100" stroke="#16283d" stroke-width="1.4"/>
-  <line x1="140" y1="178" x2="140" y2="10" stroke="#16283d" stroke-width="1.4"/>
-  <path d="M20,150 L260,58" stroke="#8a9bab" stroke-width="1.6" stroke-dasharray="4 3" fill="none"/>
-  <text x="235" y="68" font-size="11" fill="#5b6b7d">y=2x&minus;1</text>
-  <path id="curva44" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-  <text x="248" y="116" font-size="12" fill="#16283d" font-style="italic">x</text>
-  <text x="122" y="20" font-size="12" fill="#16283d" font-style="italic">y</text>
-  </svg>
-  <p class="leggenda" id="v-testo44" style="margin:0"></p>
-  </div>
+<p>Si moltiplicano i due membri per il fattore integrante $\mu(x)=e^{\int a(x)\,dx}$, che soddisfa $\mu'=a\,\mu$:</p>
+
+<p class="eq">$$\big(\mu\,y\big)'=\mu\,y'+a\,\mu\,y=\mu(x)\,b(x)$$</p>
+
+<p>Integrando i due membri:</p>
+
+<div class="def"><span class="et">Integrale generale di y' + a(x)y = b(x)</span>
+<p class="eq principio">$$y=\frac{1}{\mu(x)}\left[\int \mu(x)\,b(x)\,dx+C\right]$$</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: $y'+2y=4x$. Calcolare l'integrale generale.</p>
+
+<p class="eq">$$\mu=e^{2x}\;\Rightarrow\;\big(e^{2x}y\big)'=4x\,e^{2x}\;\Rightarrow\;e^{2x}y=\int 4x\,e^{2x}\,dx=(2x-1)e^{2x}+C$$</p>
+
+<p class="eq">$$y=2x-1+Ce^{-2x}$$</p>
+
+<div class="nota"><p>Integrale generale della completa = soluzione particolare ($2x-1$) + integrale generale dell'omogenea associata ($Ce^{-2x}$).</p></div>
+
+<div class="fig">
+<svg id="g-lin" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px" role="img" aria-label="Famiglia di curve y = 2x − 1 + C e^(−2x) e retta y = 2x − 1"></svg>
+<div class="cursore"><label for="s-C">$C$</label><input id="s-C" type="range" min="-2" max="2" step="0.25" value="1.5"><span class="val" id="v-C"></span></div>
+<p class="did">Integrale generale $y=2x-1+Ce^{-2x}$; rosso tratteggiato: $y=2x-1$</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../43-primo-ordine-y-f-x-e-variabili-separabili/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Primo ordine: y' = f(x) e variabili separabili</span></a><a class="successiva" href="../45-secondo-ordine-a-coefficienti-costanti-e-modelli-applicativi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Secondo ordine a coefficienti costanti e modelli applicativi</span></a></nav>
 <footer><p>Matematica quinta &middot; Equazioni differenziali &middot; Unità 43</p></footer>
@@ -109,32 +149,102 @@ dell'omogenea.</div>
 
 <script>
 (function(){
-  var x0=20,y0=100,x1=260,y1=10;
-  var xmin=-1.3,xmax=2.3,ymin=-6,ymax=6;
-  function f(t,C){return 2*t-1+C*Math.exp(-2*t);}
-  function px(t){return x0+(t-xmin)/(xmax-xmin)*(x1-x0);}
-  function py(v){var vv=Math.max(ymin,Math.min(v,ymax));return y0-(vv-ymin)/(ymax-ymin)*(y0-y1);}
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-
-  var s=document.getElementById('s-C44'), vC=document.getElementById('v-C44');
-  var curva=document.getElementById('curva44');
-  var testo=document.getElementById('v-testo44');
-
-  function agg(){
-    var C=parseFloat(s.value);
-    vC.textContent=fmt(C);
-    var n=80,pts=[];
-    for(var i=0;i<=n;i++){var t=xmin+i*(xmax-xmin)/n; pts.push(px(t)+','+py(f(t,C)));}
-    curva.setAttribute('d','M'+pts.join(' L'));
-    if(Math.abs(C)<0.01){
-      testo.textContent='Con C = 0 la curva coincide con la soluzione particolare y = 2x − 1: nessun contributo dall\'omogenea.';
-      testo.className='leggenda ok';
-    }else{
-      testo.textContent='Qualunque sia C, per x grande il termine Ce^(−2x) si spegne e la curva si avvicina alla retta y = 2x − 1.';
-      testo.className='leggenda';
-    }
+var NS='http://www.w3.org/2000/svg', nid=0;
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)'},a||{}));e.textContent=s;return e;}
+function num(v,d){var s=v.toFixed(d===undefined?2:d);if(/^-0[,.]?0*$/.test(s))s=s.slice(1);return s.replace('.',',').replace('-','−');}
+function Piano(svg,xr,yr,m){
+  var vb=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  this.svg=svg;this.W=vb[2];this.H=vb[3];this.xr=xr;this.yr=yr;this.m=m;
+  var W=this.W,H=this.H;
+  this.X=function(x){return m.l+(x-xr[0])/(xr[1]-xr[0])*(W-m.l-m.r);};
+  this.Y=function(y){return H-m.b-(y-yr[0])/(yr[1]-yr[0])*(H-m.t-m.b);};
+  this.clip='clip'+(++nid);
+  var d=el('defs',{}), cp=el('clipPath',{id:this.clip});
+  cp.appendChild(el('rect',{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b}));
+  d.appendChild(cp);
+  var mk=el('marker',{id:'fr'+nid,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+  mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));
+  d.appendChild(mk); this.mark='url(#fr'+nid+')';
+  svg.appendChild(d);
+  this.sotto=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sotto);
+  this.assiG=el('g',{}); svg.appendChild(this.assiG);
+  this.sopra=el('g',{'clip-path':'url(#'+this.clip+')'}); svg.appendChild(this.sopra);
+  this.testo=el('g',{}); svg.appendChild(this.testo);
+}
+Piano.prototype.assi=function(tx,ty,etx,ety){
+  var g=this.assiG, X=this.X, Y=this.Y, m=this.m, W=this.W, H=this.H;
+  var y0=(this.yr[0]<0&&this.yr[1]>0)?Y(0):H-m.b;
+  var x0=(this.xr[0]<0&&this.xr[1]>0)?X(0):m.l;
+  g.appendChild(el('line',{x1:m.l-6,y1:y0,x2:W-m.r+8,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(el('line',{x1:x0,y1:H-m.b+6,x2:x0,y2:m.t-8,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':this.mark}));
+  g.appendChild(txt(W-m.r+6,y0+18,etx===undefined?'x':etx,{'fill':'var(--inchiostro)'}));
+  g.appendChild(txt(x0+8,m.t-10,ety===undefined?'y':ety,{'fill':'var(--inchiostro)'}));
+  (tx||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:X(v),y1:y0-4,x2:X(v),y2:y0+4,stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(X(v),y0+18,String(v).replace('.',',').replace('-','−'),{'text-anchor':'middle'}));
+  });
+  (ty||[]).forEach(function(v){
+    g.appendChild(el('line',{x1:x0-4,y1:Y(v),x2:x0+4,y2:Y(v),stroke:'var(--inchiostro)','stroke-width':1}));
+    g.appendChild(txt(x0-8,Y(v)+4,String(v).replace('.',',').replace('-','−'),{'text-anchor':'end'}));
+  });
+  return this;
+};
+Piano.prototype.d=function(f,a,b,n){
+  var X=this.X,Y=this.Y,yr=this.yr,dy=(yr[1]-yr[0]),lo=yr[0]-dy,hi=yr[1]+dy,s='',giu=true;
+  for(var i=0;i<=n;i++){
+    var x=a+i*(b-a)/n, y=f(x);
+    if(!isFinite(y)||y<lo||y>hi){giu=true;continue;}
+    s+=(giu?'M':'L')+X(x).toFixed(1)+' '+Y(y).toFixed(1)+' '; giu=false;
   }
-  s.addEventListener('input',agg); agg();
+  return s;
+};
+Piano.prototype.curva=function(f,a,b,n,col,w,dash){
+  var o={d:this.d(f,a,b,n||400),fill:'none',stroke:col||'var(--inchiostro)',
+    'stroke-width':w||2.2,'stroke-linejoin':'round'};
+  if(dash)o['stroke-dasharray']=dash;
+  var p=el('path',o); this.sopra.appendChild(p); return p;
+};
+Piano.prototype.add=function(e,dove){ (dove==='sotto'?this.sotto:dove==='testo'?this.testo:this.sopra).appendChild(e); return e; };
+
+
+/* famiglia y = 2x - 1 + C e^{-2x} */
+var g=document.getElementById('g-lin');
+if(g){
+  var P=new Piano(g,[-1.2,2.4],[-5,5],{l:20,r:24,t:22,b:12});
+  P.assi([-1,1,2],[4],'x','y');
+  function f(C){return function(x){return 2*x-1+C*Math.exp(-2*x);};}
+  [-2,-1,1,2].forEach(function(C){P.curva(f(C),-1.2,2.4,300,'var(--grigio)',1.1).setAttribute('opacity','.55');});
+  P.curva(f(0),-1.2,2.4,50,'var(--rosso)',1.6,'6 4');
+  var cv=P.curva(f(1.5),-1.2,2.4,300,'var(--blu)',2.6);
+  var s=document.getElementById('s-C'),v=document.getElementById('v-C');
+  function agg(){
+    var C=+s.value;
+    cv.setAttribute('d',P.d(f(C),-1.2,2.4,300));
+    v.innerHTML='C = '+num(C,2)+(Math.abs(C)<1e-9?' <span class="ok">soluzione particolare y = 2x − 1</span>':'');
+  }
+  s.addEventListener('input',agg);agg();
+}
+})();
+</script>
+
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,.es,.passo .spieg,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.05)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
