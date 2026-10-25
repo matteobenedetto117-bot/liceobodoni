@@ -383,6 +383,7 @@
 - Parole: 240 su 1 pagina di traccia
 - Rettifica: nessuna. La traccia descrive le due forze come "concordi": nella pagina è resa come concordanza dei momenti (le forze sono antiparallele, come nel disegno della traccia), senza segnalare nulla al lettore.
 - Aggiunta: un solo esempio numerico (d = 0,80 m, F = 25 N, α = 60°, M = 17 N·m), perché la traccia dell'unità non contiene alcun esempio.
+- Revisione (25/10/2026, regole 13/10): titolo invariato; parole 240 → 89. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 47). Apertura a domanda; caratteristiche della coppia in elenco (forze uguali e opposte, stesso angolo α, parti opposte del polo → stesso senso di rotazione); braccio d/2 e momenti concordi in una frase; M₁ = M₂ e somma in una .eq; M_TOT = dF sinα in .def rosso; nota «Da non sbagliare» in una frase; esempio in forma Dati/Calcolare con una sola .eq (Python: 17,32 → 17 N·m). Tolti il titoletto «Un caso numerico» (ora «Esempio»), la sezione «Dove si continua» e le frasi di commento; aggiunto il piè di pagina mancante. Nessuna correzione concettuale (verso delle forze nel disegno controllato: entrambe antiorarie), nessuna comparsa da togliere, nessun esempio tolto. Figura rifatta da script: barra con le due forze, quote d/2, verso di rotazione, cursore su α (0–90°, d = 0,80 m e F = 25 N come nell'esempio, M_TOT a fianco con «nullo»/«massimo» in verde). Nessuna figura decorativa.
 
 ## Unità 49 — Condizioni di equilibrio di un corpo rigido
 - Parole: 430 su 2 pagine di traccia
