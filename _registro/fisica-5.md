@@ -612,6 +612,7 @@
   Ridisegnato in SVG il diagramma di Minkowski con il cono di luce e i quattro punti A, B, C,
   D della traccia. Nessuno strumento interattivo: la pagina è un diagramma statico e una
   derivazione algebrica.
+- Revisione (25/10/2026, regole 13/10): parole 368 → 156 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 47); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando alla quantità di moto relativistica), il titoletto «Il cono di luce» e i paragrafi di spiegazione; B, C, D in elenco caso → conseguenza; resta il titoletto «Intervallo spazio-temporale»; Δs² = c²Δt² − Δx² in .def rosso con «invariante relativistico»; derivazione in tre .eq con frasi di raccordo di una riga; classificazione per segno in elenco. Nessuna comparsa. Controllo concettuale (SymPy): c²t'² − x'² = c²t² − x² con differenza nulla; correzione: nello sviluppo intermedio il termine (v²/c²)x² era scritto con segno meno, ora con segno più (il passaggio successivo era già corretto). Figura rifatta da script: cono completo (prima disegnate solo le semirette verso x > 0, mancavano metà del cono futuro e passato), interno del cono ombreggiato, eventi A, B, C, D nelle posizioni di prima; resa interattiva con cursore sulla posizione di un evento P a ct = 2,5 (Δs² e tipo di distanza a fianco, in verde tipo tempo/luce). Nessun esempio, nessuna figura decorativa.
 
 ## Unità 49 — Quantità di moto relativistica
 - Parole: 205 su 1 pagina di traccia (pagina 90).

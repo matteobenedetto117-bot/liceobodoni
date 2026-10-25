@@ -5,18 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Il cono di luce e gli invarianti relativistici — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.riquadro{background:var(--carta);border:1px solid var(--riga);border-left:4px solid var(--rosso);
-  border-radius:6px;padding:12px 16px;margin:22px 0;font-family:var(--sans);font-size:.92rem}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
+.cursore{flex-wrap:wrap}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:11em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+ul,.foglio>.def+ul,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,109 +80,117 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Relatività ristretta &middot; Unità 48</p>
   <h1>Il cono di luce e gli invarianti relativistici</h1>
-  <p class="sommario">Le trasformazioni di Lorentz permettono di passare dalle coordinate di un
-  evento in un sistema di riferimento a quelle in un altro. Il diagramma di Minkowski mostra a
-  colpo d'occhio quali eventi possono influenzarsi a vicenda; l'intervallo spazio-temporale è la
-  grandezza che, a differenza di spazio e tempo separati, resta la stessa in ogni sistema.</p>
 </header>
 
-<h2>Il cono di luce</h2>
+<p>Evento $A$ nell'origine del piano $x$, $ct$ (diagramma di Minkowski): quali eventi possono avere con $A$ un rapporto di causa-effetto?</p>
 
-<p>Rappresentiamo un evento $A$ nell'origine di un piano con l'asse verticale $ct$ (il tempo
-moltiplicato per $c$, così da avere le stesse unità di una lunghezza) e l'asse orizzontale $x$.
-Le rette $ct=x$ e $ct=-x$, inclinate a 45°, sono i percorsi di due segnali luminosi che passano
-per $A$: formano il cono di luce.</p>
+<p>Le rette $ct=x$ e $ct=-x$ (a 45°) sono i percorsi dei segnali luminosi che passano per $A$: formano il cono di luce.</p>
 
 <div class="fig">
-<svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr48a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--inchiostro)"/>
-</marker>
-<marker id="fr48b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="90" y1="240" x2="90" y2="24" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fr48a)"/>
-<line x1="90" y1="240" x2="436" y2="240" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fr48a)"/>
-<text x="70" y="30" font-family="var(--serif)" font-size="15" fill="var(--inchiostro)">ct</text>
-<text x="440" y="245" font-family="var(--serif)" font-size="15" fill="var(--inchiostro)">x</text>
-<line x1="90" y1="240" x2="308" y2="22" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr48b)"/>
-<line x1="90" y1="240" x2="308" y2="458" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr48b)"/>
-<text x="300" y="16" font-family="var(--serif)" font-size="14" fill="var(--rosso)">ct = x</text>
-<text x="292" y="472" font-family="var(--serif)" font-size="14" fill="var(--rosso)">ct = -x</text>
-<text x="130" y="90" font-family="var(--sans)" font-size="13" fill="var(--grigio)">eventi futuri</text>
-<text x="120" y="410" font-family="var(--sans)" font-size="13" fill="var(--grigio)">eventi passati</text>
-<circle cx="90" cy="240" r="4" fill="var(--inchiostro)"/>
-<text x="76" y="258" font-family="var(--serif)" font-size="14" fill="var(--inchiostro)">A</text>
-<circle cx="112" cy="182" r="4" fill="var(--blu)"/>
-<text x="118" y="180" font-family="var(--serif)" font-size="14" fill="var(--blu)">B</text>
-<circle cx="230" cy="100" r="4" fill="var(--blu)"/>
-<text x="238" y="98" font-family="var(--serif)" font-size="14" fill="var(--blu)">C</text>
-<circle cx="270" cy="220" r="4" fill="var(--blu)"/>
-<text x="278" y="218" font-family="var(--serif)" font-size="14" fill="var(--blu)">D</text>
-<path d="M180,268 q-20,-10 -75,-20" fill="none" stroke="var(--verde)" stroke-width="1.3" marker-end="url(#fr48a)"/>
-<text x="165" y="280" font-family="var(--sans)" font-size="12" fill="var(--verde)">qui e ora</text>
-</svg>
-<p class="did">Il cono di luce nel piano $ct,x$: dentro il cono, gli eventi a distanza di tipo
-tempo da $A$ (come $B$); sulla sua superficie, quelli a distanza di tipo luce (come $C$); fuori,
-quelli a distanza di tipo spazio (come $D$).</p>
+<svg id="g-cono" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Cono di luce dell'evento A con gli eventi B, C, D e un evento P mobile"></svg>
+<div class="cursore"><label for="c-x">$x_P$</label><input id="c-x" type="range" min="-50" max="50" step="1" value="10"><span class="val" id="v-x"></span></div>
+<p class="did">$B$ dentro il cono, $C$ sul cono, $D$ fuori; evento $P$ a $ct=2{,}5$ (unità arbitrarie)</p>
 </div>
 
-<p>Dentro il cono, fra l'asse $ct$ e le due rette, si trovano gli eventi che $A$ può ancora
-influenzare in futuro o che possono aver influenzato $A$ in passato: un segnale può collegarli
-viaggiando più lento della luce. Fuori dal cono nessun segnale può raggiungere $A$: nessuno dei
-due eventi può essere causa dell'altro.</p>
-
-<p>Il punto $B$, vicino all'asse $ct$, è a <strong>distanza di tipo tempo</strong> da $A$: $A$
-può essere causa di $B$. Il punto $C$, sulla retta $ct=x$, è a <strong>distanza di tipo
-luce</strong>: $A$ può essere causa di $C$ se $A$ è l'invio di un segnale luminoso. Il punto $D$,
-fuori dal cono, è a <strong>distanza di tipo spazio</strong>: $A$ e $D$ non possono avere un
-rapporto di causa-effetto.</p>
-
-<h2>L'intervallo spazio-temporale</h2>
-
-<p>Fra due eventi definiamo la grandezza</p>
-
-$$\Delta s^2=c^2\Delta t^2-\Delta x^2$$
-
-<p>Il suo valore non dipende dal sistema di riferimento in cui viene calcolato: è un
-<strong>invariante relativistico</strong>. Lo verifichiamo applicando le trasformazioni di
-Lorentz $x'=\gamma(x-vt)$ e $ct'=\gamma\!\left(ct-\dfrac{v}{c}x\right)$ a due eventi, uno
-nell'origine e l'altro in $(t,x)$:</p>
-
-$$c^2t'^2-x'^2=\gamma^2\left(ct-\frac{v}{c}x\right)^{2}-\gamma^2(x-vt)^2
-=\gamma^2\Big[c^2t^2-\tfrac{v^2}{c^2}x^2-x^2-v^2t^2\Big]$$
-
-<p>(i doppi prodotti $2vtx$, di segno opposto nei due quadrati, si elidono). Raccogliendo:</p>
-
-$$=\gamma^2\Big[(c^2-v^2)t^2-\Big(1-\frac{v^2}{c^2}\Big)x^2\Big]
-=\frac{1}{1-v^2/c^2}\Big[\Big(1-\frac{v^2}{c^2}\Big)c^2t^2-\Big(1-\frac{v^2}{c^2}\Big)x^2\Big]
-=c^2t^2-x^2$$
-
-<p>Lo stesso valore calcolato in $S$: $\Delta s^2$ non cambia passando da un sistema di
-riferimento all'altro.</p>
-
-<p>Il suo segno classifica la distanza fra due eventi, allo stesso modo dei punti $A$, $B$, $C$,
-$D$ del cono di luce:</p>
-
-$$\Delta s^2>0 \;\Rightarrow\; c^2\Delta t^2>\Delta x^2 \quad \text{distanza di tipo tempo}$$
-
-$$\Delta s^2=0 \;\Rightarrow\; c^2\Delta t^2=\Delta x^2 \quad \text{distanza di tipo luce}$$
-
-$$\Delta s^2<0 \;\Rightarrow\; c^2\Delta t^2<\Delta x^2 \quad \text{distanza di tipo spazio}$$
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>La quantità di moto relativistica $p=\gamma mv$, e il suo confronto con l'espressione
-classica $p=mv$ al crescere della velocità.</li>
+<li>$B$ dentro il cono → distanza di tipo tempo: $A$ può essere causa di $B$;</li>
+<li>$C$ sul cono → distanza di tipo luce: $A$ può essere causa di $C$ se $A$ è l'invio di un segnale luminoso;</li>
+<li>$D$ fuori dal cono → distanza di tipo spazio: nessun rapporto di causa-effetto.</li>
 </ul>
-</div>
+
+<h2>Intervallo spazio-temporale</h2>
+
+<div class="def"><span class="et">Intervallo spazio-temporale</span>
+<p class="eq principio">$$\Delta s^2=c^2\Delta t^2-\Delta x^2$$</p>
+<p>Invariante relativistico: stesso valore in ogni sistema di riferimento inerziale.</p></div>
+
+<p>Verifica con le trasformazioni di Lorentz, per due eventi in $O$ e in $(x,\,t)$:</p>
+
+<p class="eq">$$x'=\gamma(x-vt) \qquad ct'=\gamma\left(ct-\frac{v}{c}\,x\right)$$</p>
+
+<p>Sviluppando i quadrati, i doppi prodotti $2vtx$ si elidono:</p>
+
+<p class="eq">$$c^2t'^2-x'^2=\gamma^2\left[\left(ct-\frac{v}{c}x\right)^2-(x-vt)^2\right]=\gamma^2\left[c^2t^2-v^2t^2-x^2+\frac{v^2}{c^2}x^2\right]$$</p>
+
+<p class="eq">$$=\frac{1}{1-v^2/c^2}\left(1-\frac{v^2}{c^2}\right)\left(c^2t^2-x^2\right)=c^2t^2-x^2$$</p>
+
+<p>Il segno di $\Delta s^2$ classifica la distanza fra i due eventi:</p>
+
+<ul>
+<li>$\Delta s^2&gt;0$ ($c^2\Delta t^2&gt;\Delta x^2$) → tipo tempo;</li>
+<li>$\Delta s^2=0$ ($c^2\Delta t^2=\Delta x^2$) → tipo luce;</li>
+<li>$\Delta s^2&lt;0$ ($c^2\Delta t^2&lt;\Delta x^2$) → tipo spazio.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../47-la-simultaneita-dipende-dal-sistema-di-riferimento/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La simultaneità dipende dal sistema di riferimento</span></a><a class="successiva" href="../49-quantita-di-moto-relativistica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Quantità di moto relativistica</span></a></nav>
 <footer><p>Fisica quinta &middot; Relatività ristretta &middot; Unità 48</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--serif)','font-size':14,fill:'var(--inchiostro)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+function n(v,d){return v.toFixed(d).replace('.',',').replace('-','\u2212');}
+var svg=document.getElementById('g-cono'); if(!svg)return;
+var O={x:220,y:210}, s=36, L=5;
+function X(x){return O.x+s*x;} function Y(ct){return O.y-s*ct;}
+var d=el('defs',{}), mk=el('marker',{id:'fr48',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'})); d.appendChild(mk); svg.appendChild(d);
+/* interno del cono (futuro e passato) */
+svg.appendChild(el('path',{d:'M'+X(-L)+','+Y(L)+' L'+X(0)+','+Y(0)+' L'+X(L)+','+Y(L)+' Z',fill:'var(--blu-chiaro)',opacity:.7}));
+svg.appendChild(el('path',{d:'M'+X(-L)+','+Y(-L)+' L'+X(0)+','+Y(0)+' L'+X(L)+','+Y(-L)+' Z',fill:'var(--blu-chiaro)',opacity:.7}));
+/* assi */
+svg.appendChild(el('line',{x1:X(-5.6),y1:Y(0),x2:X(5.6),y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fr48)'}));
+svg.appendChild(el('line',{x1:X(0),y1:Y(-5.2),x2:X(0),y2:Y(5.3),stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fr48)'}));
+svg.appendChild(txt(X(5.6)-4,Y(0)+20,'x'));
+svg.appendChild(txt(X(0)+8,Y(5.3)+6,'ct'));
+/* cono di luce */
+svg.appendChild(el('line',{x1:X(-L),y1:Y(-L),x2:X(L),y2:Y(L),stroke:'var(--rosso)','stroke-width':1.8}));
+svg.appendChild(el('line',{x1:X(-L),y1:Y(L),x2:X(L),y2:Y(-L),stroke:'var(--rosso)','stroke-width':1.8}));
+svg.appendChild(txt(X(4.3)+10,Y(4.3)+4,'ct = x',{fill:'var(--rosso)','font-size':13}));
+svg.appendChild(txt(X(-4.3)-10,Y(4.3)+4,'ct = \u2212x',{fill:'var(--rosso)','font-size':13,'text-anchor':'end'}));
+svg.appendChild(txt(X(0)+10,Y(4.4),'futuro',{fill:'var(--grigio)','font-family':'var(--sans)','font-size':12}));
+svg.appendChild(txt(X(0)+10,Y(-4.4)+8,'passato',{fill:'var(--grigio)','font-family':'var(--sans)','font-size':12}));
+/* eventi */
+svg.appendChild(el('circle',{cx:X(0),cy:Y(0),r:4.5,fill:'var(--inchiostro)'}));
+svg.appendChild(txt(X(0)-16,Y(0)+18,'A'));
+[['B',0.5,1.5,10,4],['C',3.5,3.5,10,10],['D',4.5,0.5,-4,-10]].forEach(function(p){
+  svg.appendChild(el('circle',{cx:X(p[1]),cy:Y(p[2]),r:4.5,fill:'var(--blu)'}));
+  svg.appendChild(txt(X(p[1])+p[3],Y(p[2])+p[4],p[0],{fill:'var(--blu)'}));
+});
+/* evento mobile P */
+var CT=2.5;
+svg.appendChild(el('line',{x1:X(-L),y1:Y(CT),x2:X(L),y2:Y(CT),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 4'}));
+var seg=svg.appendChild(el('line',{stroke:'var(--verde)','stroke-width':1.6,'stroke-dasharray':'6 4'}));
+var P=svg.appendChild(el('circle',{r:5.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5}));
+var tP=svg.appendChild(txt(0,0,'P',{fill:'var(--rosso)'}));
+var cur=document.getElementById('c-x'), v=document.getElementById('v-x');
+function dis(){var x=(+cur.value)/10, ds=CT*CT-x*x, tipo;
+  set(P,{cx:X(x),cy:Y(CT)}); set(tP,{x:X(x)+(x<0?-18:9),y:Y(CT)-9});
+  set(seg,{x1:X(0),y1:Y(0),x2:X(x),y2:Y(CT),opacity:ds>=-1e-9?1:0});
+  if(Math.abs(ds)<1e-9)tipo='<span class="ok">tipo luce</span>';else if(ds>0)tipo='<span class="ok">tipo tempo</span>';else tipo='tipo spazio';
+  v.innerHTML='\u0394s\u00b2 = '+n(ds,2)+' &nbsp; '+tipo;}
+cur.addEventListener('input',dis); dis();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
