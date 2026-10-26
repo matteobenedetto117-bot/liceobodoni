@@ -5,17 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fissione nucleare — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
-.fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.formula-box .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
+.fig svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
+.cursore{flex-wrap:wrap}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:11em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+ul,.foglio>.def+ul,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,68 +80,120 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Relatività ristretta &middot; Unità 51</p>
   <h1>Fissione nucleare</h1>
-  <p class="sommario">Un neutrone che colpisce un nucleo pesante può spezzarlo in due nuclei più
-  leggeri: è la fissione, il processo che alimenta le centrali nucleari trasformando una piccola
-  perdita di massa in un'energia enorme.</p>
 </header>
 
-<p>Un neutrone colpisce un nucleo di uranio 235. Il nucleo si spezza in due frammenti più leggeri
-— un nucleo di bario 141 e uno di kripton 92 — liberando insieme tre neutroni.</p>
+<p>Un neutrone colpisce un nucleo di uranio 235: che cosa succede?</p>
 
 <div class="fig">
-<svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<circle cx="30" cy="70" r="4" fill="var(--inchiostro)"/>
-<line x1="34" y1="72" x2="95" y2="115" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fn)"/>
-<text x="20" y="55" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">neutrone</text>
-<circle cx="130" cy="130" r="42" fill="none" stroke="var(--blu)" stroke-width="1.8"/>
-<text x="130" y="185" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--blu)">uranio 235</text>
-<line x1="172" y1="130" x2="260" y2="130" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fn)"/>
-<circle cx="360" cy="90" r="30" fill="none" stroke="var(--rosso)" stroke-width="1.8"/>
-<text x="360" y="135" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--rosso)">bario 141</text>
-<circle cx="360" cy="185" r="26" fill="none" stroke="var(--verde)" stroke-width="1.8"/>
-<text x="360" y="222" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--verde)">kripton 92</text>
-<circle cx="440" cy="50" r="3" fill="var(--inchiostro)"/>
-<line x1="392" y1="75" x2="435" y2="52" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fn)"/>
-<circle cx="470" cy="95" r="3" fill="var(--inchiostro)"/>
-<line x1="392" y1="90" x2="465" y2="95" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fn)"/>
-<circle cx="450" cy="215" r="3" fill="var(--inchiostro)"/>
-<line x1="386" y1="200" x2="445" y2="215" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fn)"/>
-<text x="480" y="150" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">3 neutroni</text>
-</svg>
-<p class="did">Il neutrone incidente viene assorbito dal nucleo di uranio 235, che si spezza in
-un nucleo di bario 141 e uno di kripton 92, liberando tre neutroni.</p>
+<svg id="g-fis" viewBox="0 0 520 236" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px" role="img" aria-label="Un neutrone colpisce un nucleo di uranio 235, che si spezza in un nucleo di bario 141, uno di kripton 92 e tre neutroni"></svg>
+<button type="button" class="btn-anim" id="btn-fis" aria-label="Avvia">&#9654;</button>
+<p class="did">Uranio 235 + neutrone → bario 141 + kripton 92 + 3 neutroni</p>
 </div>
 
-<p>La massa complessiva dei prodotti è inferiore alla massa dei reagenti di partenza: fra $\text{U}^{235}+n$
-e $\text{Ba}^{141}+\text{Kr}^{92}+3n$ c'è una variazione di massa $\Delta m$. I neutroni liberati
-nella scissione possono a loro volta colpire altri nuclei di uranio, innescando una reazione a
-catena.</p>
+<p>Il nucleo si spezza in due nuclei più leggeri e libera tre neutroni:</p>
 
-<p>All'energia liberata nella reazione corrisponde, come per ogni variazione di massa, la relazione</p>
+<p class="eq">$${}^{235}_{\ 92}\text{U}+{}^{1}_{0}n\;\longrightarrow\;{}^{141}_{\ 56}\text{Ba}+{}^{92}_{36}\text{Kr}+3\,{}^{1}_{0}n$$</p>
 
-<div class="formula-box">
-$$E=\Delta m\,c^2$$
-</div>
-
-<p>In un reattore, un chilogrammo di uranio produce circa $3\times10^6\ \text{kWh}$ di energia:
-la stessa quantità di carbone ne fornisce appena $1\ \text{kWh}$ — un rapporto di milioni a uno,
-segno di quanta energia sia racchiusa nel nucleo.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>L'energia cinetica relativistica, cioè la parte di $E$ che dipende dal moto.</li>
+<li>numero di massa e numero atomico si conservano: $235+1=141+92+3$, $\;92=56+36$;</li>
+<li>massa dei prodotti minore della massa dei reagenti → difetto di massa $\Delta m$;</li>
+<li>neutroni liberati → possono colpire altri nuclei di uranio: reazione a catena.</li>
 </ul>
-</div>
+
+<p>Al difetto di massa corrisponde l'energia liberata nella reazione:</p>
+
+<div class="def"><span class="et">Energia liberata</span>
+<p class="eq principio">$$E=\Delta m\,c^2$$</p></div>
+
+<p>Energia ricavata da 1 kg di combustibile:</p>
+<ul>
+<li>uranio, in un reattore → circa $3\times10^6\ \text{kWh}$;</li>
+<li>carbone → circa $1\ \text{kWh}$.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../50-energia-relativistica-ed-energia-a-riposo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia relativistica ed energia a riposo</span></a><a class="successiva" href="../52-energia-cinetica-relativistica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia cinetica relativistica</span></a></nav>
 <footer><p>Fisica quinta &middot; Relatività ristretta &middot; Unità 51</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,'text-anchor':'middle',
+  fill:'var(--inchiostro)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+var svg=document.getElementById('g-fis'); if(!svg)return;
+var defs=el('defs',{}),mk=el('marker',{id:'fr-n',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));defs.appendChild(mk);svg.appendChild(defs);
+var U={x:170,y:118,r:40};
+/* posizioni iniziali e finali */
+var nIn={x0:28,x1:U.x-U.r-4,y:U.y};
+var BA={x0:U.x+6,y0:U.y-12,x1:350,y1:68,r:30}, KR={x0:U.x+6,y0:U.y+14,x1:350,y1:168,r:26};
+var NEU=[{x1:448,y1:34},{x1:470,y1:118},{x1:448,y1:204}];
+/* elementi */
+var traccia=el('line',{x1:nIn.x0,y1:U.y,x2:nIn.x1,y2:U.y,stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 4'});
+var u=el('circle',{cx:U.x,cy:U.y,r:U.r,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.8});
+var uEt=txt(U.x,U.y+U.r+20,'uranio 235',{fill:'var(--blu)'});
+var n0=el('circle',{r:4,fill:'var(--inchiostro)'}), f0=el('line',{stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#fr-n)'});
+var nEt=txt(nIn.x0+10,U.y-14,'neutrone');
+var ba=el('circle',{r:BA.r,fill:'#f6e4e2',stroke:'var(--rosso)','stroke-width':1.8});
+var kr=el('circle',{r:KR.r,fill:'#e3efe8',stroke:'var(--verde)','stroke-width':1.8});
+var baEt=txt(BA.x1,BA.y1+BA.r+20,'bario 141',{fill:'var(--rosso)'}), krEt=txt(KR.x1,KR.y1+KR.r+20,'kripton 92',{fill:'var(--verde)'});
+var ns=NEU.map(function(){return [el('circle',{r:3.5,fill:'var(--inchiostro)'}),el('line',{stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fr-n)'})];});
+var nsEt=txt(452,160,'3 neutroni',{'text-anchor':'start'});
+[traccia,u,uEt,ba,kr,n0,f0,nEt,baEt,krEt,nsEt].forEach(function(e){svg.appendChild(e);});
+ns.forEach(function(p){svg.appendChild(p[0]);svg.appendChild(p[1]);});
+function freccia(l,x,y,dx,dy,L){var m=Math.hypot(dx,dy)||1;dx/=m;dy/=m;
+  l.setAttribute('x1',x+dx*6);l.setAttribute('y1',y+dy*6);l.setAttribute('x2',x+dx*L);l.setAttribute('y2',y+dy*L);}
+function vis(e,v){e.style.opacity=v;}
+function lerp(a,b,s){return a+(b-a)*s;}
+function liscio(s){s=Math.max(0,Math.min(1,s));return s*s*(3-2*s);}
+/* t in [0,1]: 0–0.35 neutrone in arrivo; 0.35–0.5 nucleo deformato; 0.5–1 scissione */
+function disegna(t){
+  var a=liscio(t/0.35), xn=lerp(nIn.x0,nIn.x1,a);
+  n0.setAttribute('cx',t>=1?nIn.x0:xn);n0.setAttribute('cy',U.y);
+  freccia(f0,t>=1?nIn.x0:xn,U.y,1,0,24);
+  vis(n0,(t<0.35||t>=1)?1:0);vis(f0,(t<0.35||t>=1)?1:0);vis(nEt,(t<0.35||t>=1)?1:0);
+  vis(traccia,t>=1?1:0);
+  var d=liscio((t-0.35)/0.15);
+  if(t<0.5){u.setAttribute('rx',U.r);u.setAttribute('r',U.r);u.setAttribute('transform','translate('+U.x+','+U.y+') scale('+(1+0.25*d)+','+(1-0.15*d)+') translate('+(-U.x)+','+(-U.y)+')');
+    u.setAttribute('stroke-dasharray','');u.setAttribute('fill','var(--blu-chiaro)');}
+  else{u.setAttribute('transform','');u.setAttribute('stroke-dasharray','5 4');u.setAttribute('fill','none');}
+  var s=liscio((t-0.5)/0.5), on=t>=0.5?1:0;
+  ba.setAttribute('cx',lerp(BA.x0,BA.x1,s));ba.setAttribute('cy',lerp(BA.y0,BA.y1,s));
+  kr.setAttribute('cx',lerp(KR.x0,KR.x1,s));kr.setAttribute('cy',lerp(KR.y0,KR.y1,s));
+  vis(ba,on);vis(kr,on);
+  ns.forEach(function(p,i){var x0=U.x+20,y0=U.y,x=lerp(x0,NEU[i].x1,s),y=lerp(y0,NEU[i].y1,s);
+    p[0].setAttribute('cx',x);p[0].setAttribute('cy',y);freccia(p[1],x,y,NEU[i].x1-x0,NEU[i].y1-y0,22);vis(p[0],on);vis(p[1],on);});
+  var et=t>=0.9?1:0;vis(baEt,et);vis(krEt,et);vis(nsEt,et);
+}
+disegna(1);
+var btn=document.getElementById('btn-fis'),rid=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,id=null;
+btn.addEventListener('click',function(){
+  if(rid){disegna(1);return;}
+  if(id)cancelAnimationFrame(id);
+  var t0=null,DUR=3200;btn.disabled=true;
+  function passo(ts){if(t0===null)t0=ts;var t=Math.min((ts-t0)/DUR,1);disegna(t<1?t:1);
+    if(t<1)id=requestAnimationFrame(passo);else{id=null;btn.disabled=false;btn.innerHTML='&#8634;';btn.setAttribute('aria-label','Ricomincia');}}
+  id=requestAnimationFrame(passo);
+});
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

@@ -647,6 +647,7 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG lo schema della
   traccia (neutrone incidente, nucleo di uranio 235, scissione in bario 141 e kripton 92 con tre
   neutroni liberati). Nessuno strumento interattivo: pagina breve, un solo schema statico.
+- Revisione (26/10/2026, regole 13/10): parole 175 → 92 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 50); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando all'energia cinetica) e i paragrafi di spiegazione; equazione della reazione U-235 + n → Ba-141 + Kr-92 + 3n in .eq; conservazione di A e Z, difetto di massa e reazione a catena in elenco caso → conseguenza; E = Δm c² in .def rosso; confronto uranio/carbone in elenco. Nessun titoletto, nessun esempio (assente anche prima). Nessuna comparsa. Controllo concettuale: bilancio 235 + 1 = 141 + 92 + 3 e 92 = 56 + 36 verificato. Figura rifatta da script con ▶ (neutrone in arrivo, nucleo che si deforma, scissione in bario, kripton e tre neutroni); stato finale statico con tutte le etichette. Da valutare: «carbone circa 1 kWh/kg» lasciato come in traccia (il potere calorifico tipico del carbone, circa 25–30 MJ/kg, corrisponde a 7–8 kWh termici).
 
 ## Unità 52 — Energia cinetica relativistica
 - Parole: 164 su 1 pagina di traccia (pagina 93).
