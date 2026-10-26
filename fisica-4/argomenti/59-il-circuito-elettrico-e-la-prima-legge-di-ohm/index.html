@@ -5,15 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Il circuito elettrico e la prima legge di Ohm — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
 </style>
 </head>
 <body>
@@ -21,123 +59,143 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 57</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 57</p>
   <h1>Il circuito elettrico e la prima legge di Ohm</h1>
-  <p class="sommario">Corrente e resistenza, definite separatamente nell'unit&agrave;
-  precedente, prendono senso dentro un circuito: un percorso chiuso in cui un
-  generatore mantiene le cariche in movimento. La prima legge di Ohm lega fra
-  loro la differenza di potenziale, la corrente e la resistenza.</p>
 </header>
 
-<h2>Il circuito elettrico</h2>
-
-<p>Un circuito elementare &egrave; formato da un generatore, un interruttore e
-una resistenza, collegati lungo un percorso chiuso. Il generatore mantiene fra
-i suoi terminali una differenza di potenziale $\Delta V$, detta <strong>forza
-elettromotrice</strong> e indicata con $\varepsilon$: &egrave; questa
-differenza di potenziale a mettere in moto le cariche nel circuito.
-L'interruttore permette di aprire o chiudere il percorso: a circuito aperto
-la corrente &egrave; nulla, $i=0$, e le cariche restano ferme; a circuito
-chiuso $i\neq0$ e le cariche si muovono lungo tutto il percorso.</p>
+<p>Generatore, interruttore e resistenza collegati in un percorso chiuso: che cosa mette in moto le cariche?</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr59a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="70" y1="50" x2="210" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="260" y1="50" x2="390" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="210" cy="50" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="260" cy="50" r="3.5" fill="var(--inchiostro)"/>
-<line x1="210" y1="50" x2="252" y2="24" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="390,50 415,65 365,80 415,95 365,110 415,125 365,140 390,170"
-  fill="none" stroke="var(--inchiostro)" stroke-width="2.2" stroke-linejoin="round"/>
-<line x1="390" y1="170" x2="70" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="170" x2="70" y2="125" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="95" x2="70" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="50" y1="100" x2="90" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="58" y1="120" x2="82" y2="120" stroke="var(--inchiostro)" stroke-width="4"/>
-<text x="98" y="103" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">+</text>
-<text x="98" y="124" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">&minus;</text>
-<line x1="110" y1="50" x2="150" y2="50" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr59a)"/>
-<text x="130" y="38" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i</text>
-<text x="231" y="15" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">interruttore</text>
-<text x="15" y="115" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">generatore</text>
-<text x="15" y="130" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">(fem &#949;)</text>
-<text x="428" y="112" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">resistenza R</text>
-</svg>
-<p class="did">Generatore, interruttore e resistenza collegati in un percorso
-chiuso: a circuito chiuso la corrente $i$ percorre l'intero circuito.</p>
+<svg id="g-circ" viewBox="0 0 480 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:440px;display:block;margin:0 auto" role="img" aria-label="Circuito con generatore, interruttore e resistenza; il tasto chiude l'interruttore e le cariche si mettono in moto"></svg>
+<button type="button" class="btn-anim" id="btn-circ" aria-label="Avvia">&#9654;</button>
+<p class="did">Circuito elementare: interruttore aperto, poi chiuso</p>
 </div>
+
+<ul>
+<li>generatore → mantiene fra i terminali una differenza di potenziale $\Delta V$ e mette in moto le cariche;</li>
+<li>interruttore → apre o chiude il circuito;</li>
+<li>resistenza $R$.</li>
+</ul>
+
+<div class="def"><span class="et">Forza elettromotrice</span>
+<p>$\varepsilon$: differenza di potenziale $\Delta V$ mantenuta dal generatore.</p></div>
+
+<ul>
+<li>circuito aperto → $i = 0$, cariche ferme;</li>
+<li>circuito chiuso → $i \neq 0$, cariche in movimento.</li>
+</ul>
 
 <h2>Prima legge di Ohm</h2>
 
-<p>La differenza di potenziale $\Delta V$ agli estremi di un filo percorso da
-corrente &egrave; data dalla <strong>prima legge di Ohm</strong>:</p>
+<p>Differenza di potenziale agli estremi di un filo percorso dalla corrente $i$:</p>
 
-<div class="formula-box">
-$$\Delta V=iR$$
-</div>
+<div class="def"><span class="et">Prima legge di Ohm</span>
+<p class="eq principio">$$\Delta V = iR \qquad\qquad i = \frac{\Delta V}{R}$$</p></div>
 
-<p>dove $i$ &egrave; l'intensit&agrave; di corrente che scorre nel filo e $R$
-&egrave; la resistenza del filo. Dalla stessa relazione ricaviamo anche</p>
-
-<div class="formula-box">
-$$i=\frac{\Delta V}{R}$$
-</div>
+<div class="def"><span class="et">Unità di misura</span>
+<p>Ohm ($\Omega$): $\;1\ \Omega = 1\ \dfrac{\text{V}}{\text{A}}$</p></div>
 
 <h2>Esempio</h2>
 
-<p>Consideriamo un circuito con un generatore da $12$ V collegato a una
-resistenza di $150\ \Omega$. La corrente che scorre nel circuito &egrave;</p>
-
-<div class="formula-box">
-$$i=\frac{\Delta V}{R}=\frac{12\ \mathrm{V}}{150\ \Omega}=0{,}08\ \mathrm{A}$$
-</div>
+<p>Dati: $\Delta V = 12\ \text{V}$, $\;R = 150\ \Omega$. Calcolare $i$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 380 170" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr59b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="60" y1="30" x2="300" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="300,30 320,42 282,54 320,66 282,78 320,90 282,102 300,140"
-  fill="none" stroke="var(--inchiostro)" stroke-width="2" stroke-linejoin="round"/>
-<line x1="300" y1="140" x2="60" y2="140" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="140" x2="60" y2="98" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="72" x2="60" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="42" y1="78" x2="78" y2="78" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="48" y1="92" x2="72" y2="92" stroke="var(--inchiostro)" stroke-width="4"/>
-<text x="20" y="88" text-anchor="end" font-family="var(--sans)" font-size="13" fill="var(--grigio)">12 V</text>
-<text x="345" y="72" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">150 &#937;</text>
-<line x1="110" y1="30" x2="150" y2="30" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr59b)"/>
-<text x="130" y="20" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">i</text>
-</svg>
-<p class="did">Circuito dell'esempio: generatore da 12 V e resistenza da
-150 &#937; in serie.</p>
+<svg id="g-es" viewBox="0 0 440 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px" role="img" aria-label="Circuito dell'esempio con generatore da 12 V e resistenza; il cursore cambia la resistenza"></svg>
+<div class="cursore"><label for="cur-r"><i>R</i></label><input id="cur-r" type="range" min="50" max="300" step="10" value="150"><span class="val" id="val-r"></span></div>
+<p class="did">Generatore da 12 V e resistenza in serie</p>
 </div>
 
-<p>Dalla stessa legge segue anche l'unit&agrave; di misura della resistenza:</p>
-
-<div class="formula-box">
-$$[R]=\Omega=\frac{\mathrm{V}}{\mathrm{A}}$$
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
-<ul>
-<li>Ricaviamo la seconda legge di Ohm, che esprime la resistenza $R$ in
-funzione della lunghezza, della sezione e del materiale del filo.</li>
-</ul>
-</div>
+<p class="eq">$$i = \frac{\Delta V}{R} = \frac{12\ \text{V}}{150\ \Omega} = 0{,}080\ \text{A}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../58-la-corrente-elettrica-e-la-resistenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La corrente elettrica e la resistenza</span></a><a class="successiva" href="../60-la-seconda-legge-di-ohm/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La seconda legge di Ohm</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 57</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 57</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,anc,sz){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'middle',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});t.textContent=s;return t;}
+  function marcatori(s,id){var d=el(s,'defs',{});var mk=el(d,'marker',{id:id+'r',markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:'var(--rosso)'});}
+  function filo(s,pts){return el(s,'polyline',{points:pts.map(function(p){return p.join(',');}).join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':2,'stroke-linejoin':'round'});}
+  function zigzag(s,x,y1,y2){var n=6,h=(y2-y1)/(n+1),p=[[x,y1]];for(var i=1;i<=n;i++)p.push([x+(i%2?16:-16),y1+i*h]);p.push([x,y2]);return el(s,'polyline',{points:p.map(function(q){return q.join(',');}).join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':2.2,'stroke-linejoin':'round'});}
+  function pila(s,x,ya,yb){el(s,'line',{x1:x-20,y1:ya,x2:x+20,y2:ya,stroke:'var(--inchiostro)','stroke-width':1.8});el(s,'line',{x1:x-11,y1:yb,x2:x+11,y2:yb,stroke:'var(--inchiostro)','stroke-width':4.5});txt(s,x+28,ya+5,'+','var(--inchiostro)','middle',14);txt(s,x+28,yb+5,'−','var(--inchiostro)','middle',14);}
+  function freccia(s,x1,y,x2){el(s,'line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#'+s.id+'r)'});}
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* circuito con interruttore: aperto, poi chiuso con le cariche in moto */
+  var c=document.getElementById('g-circ'), b=document.getElementById('btn-circ');
+  if(c&&b){
+    marcatori(c,c.id);
+    var L=130,T=50,Rx=370,Bt=180, gA=100, gB=124, s1=225, s2=275, z1=80, z2=150;
+    filo(c,[[L,gB+0],[L,Bt],[Rx,Bt],[Rx,z2]]); filo(c,[[Rx,z1],[Rx,T],[s2,T]]); filo(c,[[s1,T],[L,T],[L,gA]]);
+    zigzag(c,Rx,z1,z2); pila(c,L,gA,gB);
+    el(c,'circle',{cx:s1,cy:T,r:3.5,fill:'var(--inchiostro)'}); el(c,'circle',{cx:s2,cy:T,r:3.5,fill:'var(--inchiostro)'});
+    var leva=el(c,'line',{x1:s1,y1:T,stroke:'var(--inchiostro)','stroke-width':2.2,'stroke-linecap':'round'});
+    txt(c,(s1+s2)/2,20,'interruttore','var(--grigio)','middle',13);
+    txt(c,L-30,gA+10,'generatore','var(--grigio)','end',13); txt(c,L-30,gA+27,'(fem ε)','var(--grigio)','end',13);
+    txt(c,Rx+26,(z1+z2)/2,'resistenza','var(--grigio)','start',13); txt(c,Rx+26,(z1+z2)/2+17,'R','var(--grigio)','start',13).setAttribute('font-style','italic');
+    var fr=el(c,'g',{}); freccia(fr,160,T,200); var ti=txt(fr,180,T-10,'i','var(--rosso)','middle',14); ti.setAttribute('font-style','italic');
+    var stato=txt(c,(L+Rx)/2,215,'','var(--inchiostro)','middle',13);
+    /* percorso delle cariche (verso convenzionale: dal + attraverso il circuito esterno) */
+    var P=[[L,gA],[L,T],[Rx,T],[Rx,Bt],[L,Bt],[L,gB]], seg=[],tot=0;
+    for(var i=0;i<P.length-1;i++){var d=Math.abs(P[i+1][0]-P[i][0])+Math.abs(P[i+1][1]-P[i][1]);seg.push(d);tot+=d;}
+    function su(u){u=((u%tot)+tot)%tot;for(var i=0;i<seg.length;i++){if(u<=seg[i]){var f=u/seg[i];return [P[i][0]+f*(P[i+1][0]-P[i][0]),P[i][1]+f*(P[i+1][1]-P[i][1])];}u-=seg[i];}return P[P.length-1];}
+    var N=18, ch=[]; for(var j=0;j<N;j++)ch.push(el(c,'circle',{r:3.6,fill:'var(--rosso)',opacity:.8}));
+    var D=4500, raf=null, st='fermo';
+    function dis(t){
+      var a=Math.min(1,t/600), th=(-35+35*a)*Math.PI/180;
+      leva.setAttribute('x2',(s1+52*Math.cos(th)).toFixed(1)); leva.setAttribute('y2',(T+52*Math.sin(th)).toFixed(1));
+      var chiuso=a>=1, sh=chiuso?(t-600)*0.06:0;
+      ch.forEach(function(e,j){var q=su(j*tot/N+sh);e.setAttribute('cx',q[0].toFixed(1));e.setAttribute('cy',q[1].toFixed(1));e.setAttribute('opacity',(!chiuso&&q[1]===T&&q[0]>s1-6&&q[0]<s2+6)?0:.8);});
+      fr.setAttribute('opacity',chiuso?1:0);
+      stato.textContent=chiuso?'circuito chiuso: i ≠ 0, cariche in moto':'circuito aperto: i = 0, cariche ferme';
+    }
+    b.addEventListener('click',function(){
+      if(st==='fine'){cancelAnimationFrame(raf);dis(0);st='fermo';b.innerHTML='&#9654;';b.setAttribute('aria-label','Avvia');return;}
+      if(st!=='fermo')return;
+      st='corsa';b.disabled=true;var t0=null;
+      (function passo(t){if(t0===null)t0=t;var dt=ridotto?D:t-t0;dis(Math.min(dt,D));
+        if(dt>=D){st='fine';b.disabled=false;b.innerHTML='&#8634;';b.setAttribute('aria-label','Ricomincia');}
+        else raf=requestAnimationFrame(passo);})(performance.now());
+    });
+    dis(0);
+  }
+
+  /* circuito dell'esempio: R variabile */
+  var e=document.getElementById('g-es');
+  if(e){
+    marcatori(e,e.id);
+    var L2=110,T2=40,R2=320,B2=160,ga=88,gb=110,za=62,zb=138;
+    filo(e,[[L2,gb],[L2,B2],[R2,B2],[R2,zb]]); filo(e,[[R2,za],[R2,T2],[L2,T2],[L2,ga]]);
+    zigzag(e,R2,za,zb); pila(e,L2,ga,gb);
+    txt(e,L2-30,ga+15,'12 V','var(--grigio)','end',13);
+    var tr=txt(e,R2+26,(za+zb)/2+5,'','var(--grigio)','start',13);
+    freccia(e,170,T2,215); var t2=txt(e,192,T2-10,'i','var(--rosso)','middle',14); t2.setAttribute('font-style','italic');
+    var cur=document.getElementById('cur-r'), val=document.getElementById('val-r');
+    function n2(v){return v.toPrecision(2).replace('.',',');}
+    var dis2=function(){var R=+cur.value, i=12/R; tr.textContent=R+' Ω';
+      val.innerHTML='<i>R</i> = '+R+' Ω → <i>i</i> = '+n2(i)+' A';};
+    cur.addEventListener('input',dis2); dis2();
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
