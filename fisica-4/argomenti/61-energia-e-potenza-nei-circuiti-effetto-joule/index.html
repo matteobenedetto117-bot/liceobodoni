@@ -5,13 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Energia e potenza nei circuiti; effetto Joule — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;font-family:var(--sans);font-size:.94rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -19,92 +55,63 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 59</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 59</p>
   <h1>Energia e potenza nei circuiti; effetto Joule</h1>
-  <p class="sommario">Quando la corrente attraversa un circuito, le cariche
-  cedono energia passando da un potenziale a un altro: l'energia scambiata
-  nell'unit&agrave; di tempo &egrave; la potenza elettrica. Vediamo come si
-  calcola, come si dissipa in una resistenza e come si traduce nel consumo
-  che leggiamo in bolletta.</p>
 </header>
 
-<h2>Potenza elettrica in un circuito</h2>
+<p>Una carica $\Delta q$ che attraversa una differenza di potenziale $\Delta V$ varia la sua energia potenziale di:</p>
 
-<p>Una quantit&agrave; di carica $\Delta q$ che si muove attraverso una
-differenza di potenziale $\Delta V$ subisce una variazione di energia
-potenziale pari a:</p>
+<p class="eq">$$\Delta U = \Delta q\,\Delta V$$</p>
 
-<div class="formula-box">
-$$\Delta U=\Delta q\,\Delta V$$
-</div>
+<p>Potenza = energia scambiata nell'unità di tempo, con $\Delta q/\Delta t = i$:</p>
 
-<p>Per definizione, la potenza &egrave; l'energia scambiata nell'unit&agrave;
-di tempo, $P=\Delta U/\Delta t$. Sostituendo l'espressione precedente:</p>
+<p class="eq">$$P = \frac{\Delta U}{\Delta t} = \frac{\Delta q\,\Delta V}{\Delta t} = i\,\Delta V$$</p>
 
-<div class="formula-box">
-$$P=\frac{\Delta U}{\Delta t}=\frac{\Delta q\,\Delta V}{\Delta t}=i\,\Delta V$$
-</div>
+<div class="def"><span class="et">Potenza elettrica di un circuito</span>
+<p class="eq principio">$$P = i\,\Delta V$$</p></div>
 
-<p>dove $\Delta q/\Delta t$ &egrave; proprio la corrente $i$. Si ottiene cos&igrave;
-la <strong>potenza elettrica di un circuito</strong>:</p>
-
-<div class="formula-box">
-$$P=i\,\Delta V$$
-</div>
-
-<p>L'unit&agrave; di misura della potenza &egrave; il <strong>watt</strong>:
-$[P]=\mathrm W=\mathrm V\cdot\mathrm A$. Coerentemente, un joule scambiato in
-un secondo corrisponde a un volt per un ampere: $1\,\mathrm W=1\,\mathrm J/1\,\mathrm s=1\,\mathrm V\cdot1\,\mathrm A$.</p>
+<div class="def"><span class="et">Unità di misura</span>
+<p>Watt (W): $\;1\ \text{W} = 1\ \dfrac{\text{J}}{\text{s}} = 1\ \text{V}\cdot\text{A}$</p></div>
 
 <h2>Effetto Joule</h2>
 
-<p>Ai capi di una resistenza vale la prima legge di Ohm, $\Delta V=iR$.
-Sostituendo in $P=i\,\Delta V$ si ottiene la potenza dissipata da una
-resistenza per <strong>effetto Joule</strong>:</p>
+<p>Ai capi di una resistenza $\Delta V = iR$, cioè $i = \Delta V/R$; sostituendo in $P = i\,\Delta V$:</p>
 
-<div class="formula-box">
-$$P=Ri^2$$
-</div>
-
-<p>Allo stesso modo, scrivendo $i=\Delta V/R$ e sostituendo in
-$P=i\,\Delta V$, la potenza dissipata si esprime anche come:</p>
-
-<div class="formula-box">
-$$P=\frac{\Delta V^2}{R}$$
-</div>
+<div class="def"><span class="et">Potenza dissipata da una resistenza</span>
+<p class="eq principio">$$P = R\,i^2 \qquad\qquad P = \frac{\Delta V^2}{R}$$</p></div>
 
 <h2>Consumo di energia elettrica</h2>
 
-<p>Sulla bolletta relativa al consumo elettrico delle nostre case &egrave;
-riportato il numero di <strong>kilowattora</strong> (kWh) consumati. La
-potenza, espressa in watt, &egrave; energia scambiata ogni secondo
-($\mathrm W=\mathrm J/\mathrm s$); il wattora nasce moltiplicando una potenza
-per un tempo, e per questo &egrave; una misura di energia.</p>
+<p>Energia consumata in un intervallo di tempo $\Delta t$:</p>
 
-<div class="nota">Il wattora &egrave; un'unit&agrave; di <strong>energia</strong>,
-non di potenza: si ottiene moltiplicando una potenza per un intervallo di
-tempo, non dividendo.</div>
+<p class="eq">$$\Delta U = P\,\Delta t$$</p>
 
-<p>Dalla definizione di potenza, l'energia consumata in un intervallo di
-tempo $\Delta t$ vale $\Delta U=P\,\Delta t$. Da qui le equivalenze fra
-wattora e joule:</p>
+<div class="def"><span class="et">Unità di misura (bolletta)</span>
+<p>Kilowattora (kWh): $\;1\ \text{Wh} = 1\ \text{W}\cdot 3600\ \text{s} = 3600\ \text{J}$, $\;1\ \text{kWh} = 10^3\ \text{Wh} = 3{,}6\times10^{6}\ \text{J}$</p></div>
 
-<div class="formula-box">
-$$1\,\mathrm{Wh}=1\,\mathrm W\cdot1\,\mathrm h=1\,\mathrm W\cdot3600\,\mathrm s=3600\ \mathrm J$$
-$$1\,\mathrm{kWh}=1\cdot10^3\,\mathrm{Wh}=3{,}6\cdot10^6\ \mathrm J$$
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
-<ul>
-<li>Le leggi di Kirchhoff, che esprimono la conservazione della carica nei
-nodi e dell'energia nelle maglie di un circuito.</li>
-</ul>
-</div>
+<div class="nota"><span class="et">Da non sbagliare</span>
+<p>Il wattora è un'unità di energia, non di potenza: potenza moltiplicata per tempo.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../60-la-seconda-legge-di-ohm/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La seconda legge di Ohm</span></a><a class="successiva" href="../62-le-leggi-di-kirchhoff/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Le leggi di Kirchhoff</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 59</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 59</p></footer>
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
