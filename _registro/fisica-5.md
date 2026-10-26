@@ -658,6 +658,7 @@
   divergono vicino a c (il grafico è già nella traccia, la spiega solo a parole). Ridisegnato in
   SVG il grafico K–v della traccia, con asintoto tratteggiato in v=c. Nessuno strumento
   interattivo: pagina di una sola facciata, interamente algebrica più un grafico.
+- Revisione (26/10/2026, regole 13/10): parole 102 → 44 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 49); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando al corpo nero) e le frasi di spiegazione; E = E₀ + K e γmc² = mc² + K in una .eq, K = (γ − 1)mc² in .def rosso; limiti v ≪ c e v → c in elenco caso → conseguenza. Nessun titoletto, nessun esempio (assente anche prima). Nessuna comparsa. Controllo concettuale: SymPy, (γ − 1) = β²/2 + 3β⁴/8 + …, quindi K ≈ ½mv² per v ≪ c. Figura rifatta da script: curve calcolate K/(mc²) relativistica e classica (prima Bézier a occhio), asintoto v = c, cursore su v/c con γ e K a fianco e «K ≈ ½mv²» in verde quando lo scarto è sotto l'1%.
 
 ## Unità 53 — Il corpo nero e la legge di Wien
 - Parole: 396 su 2 pagine di traccia (pagine 94–95).
