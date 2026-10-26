@@ -5,17 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disequazioni fratte — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avviso{background:#fbeee9;border-radius:10px;padding:16px 20px;margin:20px 0}
-.avviso p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
+.foglio>.eq+.fig,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>ol+h2,.foglio>ul+h2{margin-top:var(--r)}
+.nota .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.eq+h2,.foglio>.nota+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,289 +66,125 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Disequazioni di secondo grado &middot; Unità 50</p>
   <h1>Disequazioni fratte</h1>
-  <p class="sommario">Quando l'incognita compare anche al denominatore, il segno della
-  frazione dipende sia dal numeratore sia dal denominatore. Studiamo i due segni separatamente
-  e li combiniamo con lo stesso schema già usato per i prodotti di fattori, con un'unica
-  attenzione in più: il denominatore non può mai essere zero.</p>
 </header>
 
-<h2>Il metodo</h2>
+<p>Disequazione $\dfrac{N(x)}{D(x)}\ge0$ (oppure $&gt;0$, $&lt;0$, $\le0$): per quali $x$ è verificata?</p>
 
-<p>Scomponiamo numeratore e denominatore in fattori, poi studiamo il segno di ciascuno
-separatamente, come nello schema dei segni già visto. La differenza rispetto a un prodotto
-di soli polinomi è nel verso da usare: i fattori del numeratore si pongono con lo stesso
-verso, largo o stretto, della disequazione di partenza, perché quando il numeratore è zero
-tutta la frazione è zero. I fattori del denominatore invece si pongono sempre maggiori di
-zero in senso stretto: il denominatore non si annulla mai, quindi il valore che lo annulla
-va sempre escluso dalla soluzione, anche se la disequazione di partenza ammette
-l'uguaglianza.</p>
+<ol>
+<li>scomposizione in fattori di numeratore e denominatore;</li>
+<li>fattori del numeratore → stesso verso della disequazione (largo o stretto);</li>
+<li>fattori del denominatore → sempre $&gt;0$, in senso stretto;</li>
+<li>schema dei segni → segno del quoziente, intervallo per intervallo.</li>
+</ol>
 
-<h2>Un esempio completo</h2>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Gli zeri del denominatore sono sempre esclusi, anche con $\ge$ o $\le$.</p></div>
 
-<p>Risolviamo $\dfrac{x-x^3}{4x^2-25x+6}\le0$. Scomponiamo numeratore e denominatore:
-$$\frac{x(1+x)(1-x)}{(x-6)(4x-1)}\le0.$$
-Studiamo il segno di ciascun fattore: al numeratore $x\ge0$, $x+1\ge0$ dà $x\ge-1$, $1-x\ge0$
-dà $x\le1$; al denominatore, sempre in senso stretto, $x-6>0$ dà $x>6$ e $4x-1>0$ dà
-$x>\frac14$. Riportiamo tutto sulla stessa riga dei numeri e leggiamo il segno del
-quoziente in ogni intervallo:</p>
+<h2>Esempio 1</h2>
+
+<p class="eq quesito">$$\frac{x-x^3}{4x^2-25x+6}\le0$$</p>
+<p class="eq">$$\frac{x(1+x)(1-x)}{(x-6)(4x-1)}\le0$$</p>
+<p class="eq">$$N:\ x\ge0,\quad x\ge-1,\quad x\le1 \qquad D:\ x&gt;6,\quad x&gt;\tfrac14$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="17" y1="30" x2="383" y2="30" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="35.0" cy="30" r="3" fill="#16283d"/>
-<text x="29.0" y="46" font-size="12" fill="#16283d">-1</text>
-<circle cx="117.5" cy="30" r="3" fill="#16283d"/>
-<text x="111.5" y="46" font-size="12" fill="#16283d">0</text>
-<circle cx="200.0" cy="30" r="3" fill="#16283d"/>
-<text x="194.0" y="46" font-size="12" fill="#16283d">1/4</text>
-<circle cx="282.5" cy="30" r="3" fill="#16283d"/>
-<text x="276.5" y="46" font-size="12" fill="#16283d">1</text>
-<circle cx="365.0" cy="30" r="3" fill="#16283d"/>
-<text x="359.0" y="46" font-size="12" fill="#16283d">6</text>
-<text x="2" y="65" font-size="12" fill="#5a6b7d">N</text>
-<line x1="17.0" y1="62" x2="35.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="62" x2="117.5" y2="62" stroke="#b3392f" stroke-width="2.4"/>
-<text x="72.2" y="57" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="117.5" y1="62" x2="200.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="154.8" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="200.0" y1="62" x2="282.5" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="237.2" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="282.5" y1="62" x2="365.0" y2="62" stroke="#b3392f" stroke-width="2.4"/>
-<text x="319.8" y="57" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="62" x2="383.0" y2="62" stroke="#b3392f" stroke-width="2.4"/>
-<text x="370.0" y="57" font-size="12" fill="#b3392f">&#8722;</text>
-<text x="2" y="97" font-size="12" fill="#5a6b7d">D</text>
-<line x1="17.0" y1="94" x2="35.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="89" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="94" x2="117.5" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="72.2" y="89" font-size="12" fill="#2f6b4f">+</text>
-<line x1="117.5" y1="94" x2="200.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="154.8" y="89" font-size="12" fill="#2f6b4f">+</text>
-<line x1="200.0" y1="94" x2="282.5" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="237.2" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="282.5" y1="94" x2="365.0" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="319.8" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="94" x2="383.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="89" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="129" font-size="12" fill="#5a6b7d">quoziente</text>
-<line x1="17.0" y1="126" x2="35.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="121" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="126" x2="117.5" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="72.2" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="117.5" y1="126" x2="200.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="154.8" y="121" font-size="12" fill="#2f6b4f">+</text>
-<line x1="200.0" y1="126" x2="282.5" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="237.2" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="282.5" y1="126" x2="365.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="319.8" y="121" font-size="12" fill="#2f6b4f">+</text>
-<line x1="365.0" y1="126" x2="383.0" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="370.0" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<text x="2" y="144" font-size="12" fill="#5a6b7d">soluzione</text>
-<circle cx="35.0" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="117.5" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="200.0" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-<circle cx="282.5" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="365.0" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-</svg>
-<figcaption>segno del numeratore, del denominatore e del quoziente; i pallini pieni sono i punti dove il numeratore si annulla (inclusi), quelli vuoti dove si annulla il denominatore (esclusi)</figcaption>
+<svg id="g-s1" viewBox="0 0 420 256" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Schema dei segni dei fattori x, 1 + x, 1 − x, x − 6, 4x − 1 e del quoziente; soluzioni in rosso"></svg>
+<p class="did">Linea continua: positivo; tratteggio: negativo; pallino pieno: incluso; vuoto: escluso</p>
 </div>
 
-<p>La frazione è negativa o nulla dove il quoziente è $-$ o tocca uno zero incluso:</p>
+<p class="eq ris">$$-1\le x\le0 \ \vee\ \tfrac14&lt;x\le1 \ \vee\ x&gt;6$$</p>
 
-<div class="regola"><p>$$-1\le x\le0 \ \vee\ \frac14&lt;x\le1 \ \vee\ x>6$$</p></div>
+<h2>Esempio 2</h2>
 
-<h2>Quando la scomposizione ha radici irrazionali</h2>
-
-<p>In $\dfrac{2x^2+5\sqrt2\,x+4}{x^2-2}\le0$ il denominatore si scompone subito come
-differenza di quadrati, $x^2-2=(x+\sqrt2)(x-\sqrt2)$. Il numeratore invece non si scompone a
-vista: applichiamo la formula risolutiva. Con $\Delta=50-32=18$,
-$$x_{1,2}=\frac{-5\sqrt2\pm3\sqrt2}{4} \ \Longrightarrow\ x_1=-2\sqrt2,\ \ x_2=-\frac{\sqrt2}{2},$$
-e poiché il coefficiente direttore è positivo il numeratore è $\ge0$ fuori dalle radici. Lo
-schema dei segni dà:</p>
+<p class="eq quesito">$$\frac{(x-1)^2(x+8)}{x^3-16x}\ge0$$</p>
+<p class="eq">$$\frac{(x-1)^2(x+8)}{x(x-4)(x+4)}\ge0$$</p>
+<p class="eq">$$N:\ (x-1)^2\ge0\ \ \forall x,\quad x\ge-8 \qquad D:\ x&gt;0,\quad x&gt;4,\quad x&gt;-4$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="17" y1="30" x2="383" y2="30" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="35.0" cy="30" r="3" fill="#16283d"/>
-<text x="29.0" y="46" font-size="12" fill="#16283d">-2√2</text>
-<circle cx="145.0" cy="30" r="3" fill="#16283d"/>
-<text x="139.0" y="46" font-size="12" fill="#16283d">-√2</text>
-<circle cx="255.0" cy="30" r="3" fill="#16283d"/>
-<text x="249.0" y="46" font-size="12" fill="#16283d">-√2/2</text>
-<circle cx="365.0" cy="30" r="3" fill="#16283d"/>
-<text x="359.0" y="46" font-size="12" fill="#16283d">√2</text>
-<text x="2" y="65" font-size="12" fill="#5a6b7d">N</text>
-<line x1="17.0" y1="62" x2="35.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="62" x2="145.0" y2="62" stroke="#b3392f" stroke-width="2.4"/>
-<text x="86.0" y="57" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="145.0" y1="62" x2="255.0" y2="62" stroke="#b3392f" stroke-width="2.4"/>
-<text x="196.0" y="57" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="255.0" y1="62" x2="365.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="306.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="365.0" y1="62" x2="383.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="97" font-size="12" fill="#5a6b7d">D</text>
-<line x1="17.0" y1="94" x2="35.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="89" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="94" x2="145.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="86.0" y="89" font-size="12" fill="#2f6b4f">+</text>
-<line x1="145.0" y1="94" x2="255.0" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="196.0" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="255.0" y1="94" x2="365.0" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="306.0" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="94" x2="383.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="89" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="129" font-size="12" fill="#5a6b7d">quoziente</text>
-<line x1="17.0" y1="126" x2="35.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="121" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="126" x2="145.0" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="86.0" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="145.0" y1="126" x2="255.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="196.0" y="121" font-size="12" fill="#2f6b4f">+</text>
-<line x1="255.0" y1="126" x2="365.0" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="306.0" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="126" x2="383.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="121" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="144" font-size="12" fill="#5a6b7d">soluzione</text>
-<circle cx="35.0" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="145.0" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-<circle cx="255.0" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="365.0" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-</svg>
-<figcaption>stesso schema, con le radici del numeratore trovate con la formula risolutiva</figcaption>
+<svg id="g-s2" viewBox="0 0 420 256" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Schema dei segni dei fattori (x − 1)², x + 8, x, x − 4, x + 4 e del quoziente; soluzioni in rosso, punto isolato x = 1"></svg>
+<p class="did">$(x-1)^2$ si annulla in $x=1$ senza cambiare segno: punto isolato</p>
 </div>
 
-<div class="regola"><p>$$-2\sqrt2\le x&lt;-\sqrt2 \ \vee\ -\frac{\sqrt2}{2}\le x&lt;\sqrt2$$</p></div>
-
-<div class="avviso">
-<p><b>Un caso particolare.</b> In $\dfrac{x^2}{x-1}\ge0$ il numeratore $x^2$ non è mai
-negativo: è positivo per ogni $x\ne0$ e si annulla solo in $x=0$. Il denominatore dà
-$x>1$. Il punto $x=0$ va segnato a parte: lì la frazione vale $0$, che soddisfa
-$\ge0$, anche se intorno il quoziente è negativo.</p>
-<div class="fig">
-<svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="17" y1="30" x2="383" y2="30" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="35.0" cy="30" r="3" fill="#16283d"/>
-<text x="29.0" y="46" font-size="12" fill="#16283d">0</text>
-<circle cx="365.0" cy="30" r="3" fill="#16283d"/>
-<text x="359.0" y="46" font-size="12" fill="#16283d">1</text>
-<text x="2" y="65" font-size="12" fill="#5a6b7d">N</text>
-<line x1="17.0" y1="62" x2="35.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="62" x2="365.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="196.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="365.0" y1="62" x2="383.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="97" font-size="12" fill="#5a6b7d">D</text>
-<line x1="17.0" y1="94" x2="35.0" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="22.0" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="35.0" y1="94" x2="365.0" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="196.0" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="94" x2="383.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="89" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="129" font-size="12" fill="#5a6b7d">quoziente</text>
-<line x1="17.0" y1="126" x2="35.0" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="22.0" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="35.0" y1="126" x2="365.0" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="196.0" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="126" x2="383.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="121" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="144" font-size="12" fill="#5a6b7d">soluzione</text>
-<circle cx="35.0" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="365.0" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-</svg>
-<figcaption>il numeratore non cambia mai segno: la soluzione include il punto isolato $x=0$ oltre all'intervallo dove il quoziente è positivo</figcaption>
-</div>
-<div class="regola"><p>$$x=0 \ \vee\ x>1$$</p></div>
-</div>
-
-<h2>Un fattore al quadrato e un punto isolato</h2>
-
-<p>Risolviamo $\dfrac{(x-1)^2(x+8)}{x^3-16x}\ge0$. Scomponiamo il denominatore raccogliendo
-$x$: $x^3-16x=x(x-4)(x+4)$. Al numeratore $(x-1)^2\ge0$ sempre, con uguaglianza in $x=1$, e
-$x+8\ge0$ dà $x\ge-8$; al denominatore, in senso stretto, $x>0$, $x>4$, $x>-4$. Componiamo lo
-schema:</p>
-
-<div class="fig">
-<svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="17" y1="30" x2="383" y2="30" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="35.0" cy="30" r="3" fill="#16283d"/>
-<text x="29.0" y="46" font-size="12" fill="#16283d">-8</text>
-<circle cx="117.5" cy="30" r="3" fill="#16283d"/>
-<text x="111.5" y="46" font-size="12" fill="#16283d">-4</text>
-<circle cx="200.0" cy="30" r="3" fill="#16283d"/>
-<text x="194.0" y="46" font-size="12" fill="#16283d">0</text>
-<circle cx="282.5" cy="30" r="3" fill="#16283d"/>
-<text x="276.5" y="46" font-size="12" fill="#16283d">1</text>
-<circle cx="365.0" cy="30" r="3" fill="#16283d"/>
-<text x="359.0" y="46" font-size="12" fill="#16283d">4</text>
-<text x="2" y="65" font-size="12" fill="#5a6b7d">N</text>
-<line x1="17.0" y1="62" x2="35.0" y2="62" stroke="#b3392f" stroke-width="2.4"/>
-<text x="22.0" y="57" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="35.0" y1="62" x2="117.5" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="72.2" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="117.5" y1="62" x2="200.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="154.8" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="200.0" y1="62" x2="282.5" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="237.2" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="282.5" y1="62" x2="365.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="319.8" y="57" font-size="12" fill="#2f6b4f">+</text>
-<line x1="365.0" y1="62" x2="383.0" y2="62" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="57" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="97" font-size="12" fill="#5a6b7d">D</text>
-<line x1="17.0" y1="94" x2="35.0" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="22.0" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="35.0" y1="94" x2="117.5" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="72.2" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="117.5" y1="94" x2="200.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="154.8" y="89" font-size="12" fill="#2f6b4f">+</text>
-<line x1="200.0" y1="94" x2="282.5" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="237.2" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="282.5" y1="94" x2="365.0" y2="94" stroke="#b3392f" stroke-width="2.4"/>
-<text x="319.8" y="89" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="94" x2="383.0" y2="94" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="89" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="129" font-size="12" fill="#5a6b7d">quoziente</text>
-<line x1="17.0" y1="126" x2="35.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="22.0" y="121" font-size="12" fill="#2f6b4f">+</text>
-<line x1="35.0" y1="126" x2="117.5" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="72.2" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="117.5" y1="126" x2="200.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="154.8" y="121" font-size="12" fill="#2f6b4f">+</text>
-<line x1="200.0" y1="126" x2="282.5" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="237.2" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="282.5" y1="126" x2="365.0" y2="126" stroke="#b3392f" stroke-width="2.4"/>
-<text x="319.8" y="121" font-size="12" fill="#b3392f">&#8722;</text>
-<line x1="365.0" y1="126" x2="383.0" y2="126" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="370.0" y="121" font-size="12" fill="#2f6b4f">+</text>
-<text x="2" y="144" font-size="12" fill="#5a6b7d">soluzione</text>
-<circle cx="35.0" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="117.5" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-<circle cx="200.0" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-<circle cx="282.5" cy="140" r="4.5" fill="#2f6b4f"/>
-<circle cx="365.0" cy="140" r="4.5" fill="white" stroke="#b3392f" stroke-width="1.8"/>
-</svg>
-<figcaption>il fattore al quadrato annulla il numeratore in $x=1$ senza cambiargli segno: resta un punto isolato nella soluzione</figcaption>
-</div>
-
-<p>Il punto $x=1$ cade fra due intervalli in cui il quoziente è negativo, ma lì la
-frazione vale $0$ e va incluso comunque:</p>
-
-<div class="regola"><p>$$x\le-8 \ \vee\ -4&lt;x&lt;0 \ \vee\ x=1 \ \vee\ x>4$$</p></div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Lo stesso schema dei segni, applicato a più disequazioni insieme e intersecato sul
-grafico finale, è alla base dei sistemi di disequazioni.</li>
-</ul>
-</div>
+<p class="eq ris">$$x\le-8 \ \vee\ -4&lt;x&lt;0 \ \vee\ x=1 \ \vee\ x&gt;4$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../51-disequazioni-di-grado-superiore-al-secondo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disequazioni di grado superiore al secondo</span></a><a class="successiva" href="../53-sistemi-di-disequazioni/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sistemi di disequazioni</span></a></nav>
 <footer><p>Matematica seconda &middot; Disequazioni di secondo grado &middot; Unità 50</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+/* schema dei segni di un quoziente: fattori [etichetta, funzione, radice, al denominatore];
+   radici equidistanti (schema non in scala); ok(q) dice se il segno q soddisfa la disequazione */
+function schema(id,F,et,ok,largo){
+  var svg=document.getElementById(id); if(!svg)return;
+  var rad=F.map(function(f){return f[2];}).filter(function(r,i,a){return a.indexOf(r)===i;}).sort(function(a,b){return a-b;});
+  var L=96,R=406,n=rad.length,pas=(R-L)/(n+1);
+  function P(i){return L+(i+1)*pas;}
+  /* x di un punto di prova in ciascun intervallo */
+  var prova=[rad[0]-1];for(var i=0;i<n-1;i++)prova.push((rad[i]+rad[i+1])/2);prova.push(rad[n-1]+1);
+  function seg(k){return [k===0?L:P(k-1),k===n?R:P(k)];}
+  var yA=24,h=34,y0=64,yQ=y0+F.length*h+8;
+  svg.appendChild(el('line',{x1:L,y1:yA,x2:R,y2:yA,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  rad.forEach(function(r,i){
+    svg.appendChild(el('line',{x1:P(i),y1:yA-4,x2:P(i),y2:yQ+8,stroke:'var(--riga)','stroke-width':1}));
+    svg.appendChild(el('circle',{cx:P(i),cy:yA,r:3,fill:'var(--inchiostro)'}));
+    svg.appendChild(txt(P(i),yA+18,et[i],{'text-anchor':'middle',fill:'var(--inchiostro)'}));});
+  function tratto(y,k,pos,col,w){var s=seg(k);return el('line',{x1:s[0],y1:y,x2:s[1],y2:y,stroke:col||(pos?'var(--blu)':'var(--grigio)'),'stroke-width':w||2.2,'stroke-dasharray':pos?'':'5 4'});}
+  F.forEach(function(f,j){var y=y0+j*h;
+    svg.appendChild(txt(6,y+4,f[0],{fill:'var(--inchiostro)','font-size':13,'font-family':'var(--serif)'}));
+    if(j===0||F[j-1][3]!==f[3])svg.appendChild(txt(L-14,y+4,f[3]?'D':'N',{'font-size':11,'text-anchor':'middle'}));
+    if(j>0&&F[j-1][3]!==f[3])svg.appendChild(el('line',{x1:6,y1:y-h/2-2,x2:R,y2:y-h/2-2,stroke:'var(--riga)','stroke-width':1}));
+    for(var k=0;k<=n;k++){var pos=f[1](prova[k])>0,s=seg(k);
+      svg.appendChild(tratto(y,k,pos));
+      svg.appendChild(txt((s[0]+s[1])/2,y-7,pos?'+':'−',{'text-anchor':'middle',fill:pos?'var(--blu)':'var(--grigio)','font-size':13,'font-weight':700}));}
+    var i=rad.indexOf(f[2]);
+    svg.appendChild(el('circle',{cx:P(i),cy:y,r:3.5,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.4}));});
+  svg.appendChild(el('line',{x1:L-8,y1:yQ-20,x2:R,y2:yQ-20,stroke:'var(--inchiostro)','stroke-width':.8}));
+  svg.appendChild(txt(6,yQ+4,'quoziente',{fill:'var(--inchiostro)','font-size':13,'font-weight':700}));
+  for(var k=0;k<=n;k++){var q=F.reduce(function(a,f){return a*f[1](prova[k]);},1),s=seg(k),sod=ok(q);
+    if(sod)svg.appendChild(el('line',{x1:s[0],y1:yQ,x2:s[1],y2:yQ,stroke:'var(--rosso)','stroke-width':5}));
+    else svg.appendChild(tratto(yQ,k,q>0));
+    svg.appendChild(txt((s[0]+s[1])/2,yQ-6,q>0?'+':'−',{'text-anchor':'middle',fill:sod?'var(--rosso)':'var(--grigio)','font-size':13,'font-weight':700}));}
+  /* zeri: del denominatore esclusi; del numeratore inclusi se la disequazione è larga */
+  rad.forEach(function(r,i){var den=F.some(function(f){return f[3]&&f[2]===r;});
+    var inc=!den&&largo;
+    svg.appendChild(el('circle',{cx:P(i),cy:yQ,r:4.5,fill:inc?'var(--rosso)':'#fff',stroke:inc?'#fff':'var(--rosso)','stroke-width':inc?1.5:1.8}));});
+}
+schema('g-s1',[
+  ['x',function(x){return x;},0,false],
+  ['1 + x',function(x){return 1+x;},-1,false],
+  ['1 − x',function(x){return 1-x;},1,false],
+  ['x − 6',function(x){return x-6;},6,true],
+  ['4x − 1',function(x){return 4*x-1;},0.25,true]],
+  ['−1','0','1/4','1','6'],function(q){return q<0;},true);
+schema('g-s2',[
+  ['(x − 1)²',function(x){return (x-1)*(x-1);},1,false],
+  ['x + 8',function(x){return x+8;},-8,false],
+  ['x',function(x){return x;},0,true],
+  ['x − 4',function(x){return x-4;},4,true],
+  ['x + 4',function(x){return x+4;},-4,true]],
+  ['−8','−4','0','1','4'],function(q){return q>0;},true);
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
