@@ -5,119 +5,162 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La corrente elettrica e la resistenza — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
-<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p,.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p,.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5)}
+.def p+ul{margin-top:calc(var(--r)*-.5)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul{margin:var(--r) 0 0}
+.foglio>.def+.def{margin-top:calc(var(--r)*.5)}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
 </style>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 56</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 56</p>
   <h1>La corrente elettrica e la resistenza</h1>
-  <p class="sommario">Fin qui le cariche erano ferme, in equilibrio sui
-  conduttori. Ora le mettiamo in moto: quando cariche si spostano con
-  continuit&agrave; in un filo, si parla di corrente elettrica, il fenomeno
-  su cui si basa ogni circuito.</p>
 </header>
 
-<h2>La corrente elettrica</h2>
-
-<p>In un filo conduttore le cariche libere si spostano tutte nella stessa
-direzione. L'<strong>intensit&agrave; di corrente</strong> misura quanta
-carica attraversa una sezione del filo in un certo intervallo di tempo:</p>
-
-<div class="formula-box">
-$$i=\frac{\Delta q}{\Delta t}$$
-</div>
-
-<p>$\Delta q$ &egrave; la quantit&agrave; di carica che passa attraverso il
-conduttore nell'intervallo di tempo $\Delta t$. L'unit&agrave; di misura
-della corrente &egrave; l'<strong>ampere</strong> (A):</p>
-
-<div class="formula-box">
-$$[i]=\mathrm{A}=\frac{\mathrm{C}}{\mathrm{s}}, \qquad 1\,\mathrm{A}=\frac{1\,\mathrm{C}}{1\,\mathrm{s}}$$
-</div>
+<p>Cariche libere in moto ordinato in un filo conduttore: quanta carica attraversa una sezione del filo nell'unità di tempo?</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 150" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr58a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="40" y1="60" x2="420" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="100" cy="60" r="6" fill="var(--inchiostro)"/>
-<circle cx="190" cy="60" r="6" fill="var(--inchiostro)"/>
-<circle cx="280" cy="60" r="6" fill="var(--inchiostro)"/>
-<circle cx="370" cy="60" r="6" fill="var(--inchiostro)"/>
-<text x="100" y="90" text-anchor="middle" font-family="var(--sans)" font-size="15">q</text>
-<text x="190" y="90" text-anchor="middle" font-family="var(--sans)" font-size="15">q</text>
-<text x="280" y="90" text-anchor="middle" font-family="var(--sans)" font-size="15">q</text>
-<text x="370" y="90" text-anchor="middle" font-family="var(--sans)" font-size="15">q</text>
-<line x1="115" y1="40" x2="150" y2="40" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr58a)"/>
-<line x1="205" y1="40" x2="240" y2="40" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr58a)"/>
-<line x1="295" y1="40" x2="330" y2="40" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr58a)"/>
-<line x1="385" y1="40" x2="420" y2="40" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr58a)"/>
-<text x="20" y="130" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">filo conduttore</text>
-<text x="440" y="130" text-anchor="end" font-family="var(--sans)" font-size="13" fill="var(--rosso)">cariche in movimento</text>
-</svg>
-<p class="did">Le cariche libere del filo si spostano tutte nella stessa
-direzione: la loro portata nel tempo &egrave; l'intensit&agrave; di
-corrente.</p>
+<svg id="g-filo" viewBox="0 0 440 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Filo conduttore con cariche in moto che attraversano una sezione; il cursore cambia l'intensità di corrente"></svg>
+<div class="cursore"><label for="cur-i"><i>i</i></label><input id="cur-i" type="range" min="0.5" max="3" step="0.5" value="1.5"><span class="val" id="val-i"></span></div>
+<p class="did">Cariche in moto attraverso una sezione del filo</p>
 </div>
 
-<h2>La resistenza</h2>
+<div class="def"><span class="et">Intensità di corrente</span>
+<p class="eq principio">$$i=\frac{\Delta q}{\Delta t}$$</p>
+<p>$\Delta q$: carica che attraversa una sezione del conduttore nell'intervallo di tempo $\Delta t$.</p></div>
 
-<p>Non tutti i conduttori lasciano passare la corrente con la stessa
-facilit&agrave;. Una <strong>resistenza</strong> &egrave; una componente del
-circuito in grado di dissipare energia elettrica sotto forma di calore: le
-cariche in movimento urtano continuamente contro il materiale e, in
-quell'attrito, cedono energia. Si indica con $R$ e si misura in
-<strong>ohm</strong> ($\Omega$).</p>
+<div class="def"><span class="et">Unità di misura</span>
+<p>Ampere (A): $\;1\ \text{A} = \dfrac{1\ \text{C}}{1\ \text{s}}$</p></div>
+
+<h2>Resistenza</h2>
 
 <div class="fig">
-<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr58b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="20" y1="55" x2="70" y2="55" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#fr58b)"/>
-<polyline points="70,55 85,30 105,80 125,30 145,80 165,30 185,80 200,55" fill="none" stroke="var(--inchiostro)" stroke-width="2.4" stroke-linejoin="round"/>
-<line x1="200" y1="55" x2="400" y2="55" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#fr58b)"/>
-<text x="30" y="42" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">i</text>
-<text x="390" y="42" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--inchiostro)">i</text>
-<path d="M85,100 Q100,115 90,125 Q80,135 95,145" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<path d="M125,100 Q140,115 130,125 Q120,135 135,145" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<path d="M165,100 Q180,115 170,125 Q160,135 175,145" fill="none" stroke="var(--rosso)" stroke-width="1.6"/>
-<text x="135" y="20" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">resistenza R</text>
-<text x="135" y="163" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)"></text>
-</svg>
-<p class="did">La resistenza genera attrito con le cariche in transito e
-dissipa energia elettrica sotto forma di calore.</p>
+<svg id="g-res" viewBox="0 0 440 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Resistenza percorsa dalla corrente i, che cede calore"></svg>
+<p class="did">Resistenza percorsa da corrente: cede calore</p>
 </div>
 
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
 <ul>
-<li>Componiamo generatore, interruttore e resistenza in un circuito
-elettrico, e introduciamo la prima legge di Ohm, che lega $\Delta V$, $i$
-e $R$.</li>
+<li>resistenza $R$: componente del circuito che dissipa energia elettrica sotto forma di calore;</li>
+<li>cariche in transito → urti con il materiale (attrito) → cessione di energia.</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>Ohm ($\Omega$)</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../57-dielettrico-ed-energia-immagazzinata/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Dielettrico ed energia immagazzinata</span></a><a class="successiva" href="../59-il-circuito-elettrico-e-la-prima-legge-di-ohm/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il circuito elettrico e la prima legge di Ohm</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 56</p></footer>
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 56</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,anc,sz,it){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'middle'});if(it)t.setAttribute('font-style','italic');t.textContent=s;return t;}
+  function fmt(v,c){return v.toFixed(c).replace('.',',');}
+  function marcatore(d,id,col){var mk=el(d,'marker',{id:id,markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:col});}
+  var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* filo con cariche in moto: velocità proporzionale a i */
+  var s=document.getElementById('g-filo');
+  if(s){
+    var d=el(s,'defs',{}); marcatore(d,'f56r','var(--rosso)');
+    var cp=el(d,'clipPath',{id:'c56'}); el(cp,'rect',{x:40,y:52,width:360,height:46});
+    var x0=40, x1=400, yc=75, h=46;
+    el(s,'rect',{x:x0,y:yc-h/2,width:x1-x0,height:h,rx:6,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2});
+    var g=el(s,'g',{'clip-path':'url(#c56)'});
+    var passo=45, Nq=10, ys=[yc-10,yc+10], q=[];
+    for(var n=0;n<Nq;n++){var c=el(g,'g',{});el(c,'circle',{r:6,fill:'var(--inchiostro)'});q.push({e:c,x:x0+n*passo+(n%2?passo/2:0),y:ys[n%2]});}
+    el(s,'ellipse',{cx:220,cy:yc,rx:9,ry:h/2+6,fill:'none',stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5 4'});
+    txt(s,220,yc+h/2+24,'sezione','var(--rosso)','middle',12);
+    el(s,'line',{x1:180,y1:24,x2:260,y2:24,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#f56r)'});
+    txt(s,170,29,'i','var(--rosso)','end',14,true);
+    txt(s,x0,yc+h/2+24,'filo conduttore','var(--grigio)','start',12);
+    txt(s,x1,yc+h/2+24,'cariche q','var(--inchiostro)','end',12);
+    var cur=document.getElementById('cur-i'), val=document.getElementById('val-i'), L=Nq*passo, t0=null;
+    function posa(dx){q.forEach(function(c){var x=x0+((c.x-x0+dx)%L+L)%L-passo/2;c.e.setAttribute('transform','translate('+x.toFixed(1)+','+c.y+')');});}
+    var off=0;
+    function scrivi(){var i=+cur.value;val.innerHTML='<i>i</i> = '+fmt(i,1)+' A → '+fmt(i,1)+' C attraversano la sezione ogni secondo';}
+    function passa(t){if(t0===null)t0=t;var dt=Math.min(t-t0,50)/1000;t0=t;off+=dt*18*(+cur.value);posa(off);requestAnimationFrame(passa);}
+    cur.addEventListener('input',scrivi); scrivi(); posa(0);
+    if(!ridotto)requestAnimationFrame(passa);
+  }
+
+  /* resistenza: tratto a zig-zag, corrente in ingresso e in uscita, calore */
+  var r=document.getElementById('g-res');
+  if(r){
+    var d2=el(r,'defs',{}); marcatore(d2,'f56i','var(--inchiostro)');
+    var ya=60, xa=150, xb=290, n=6, w=(xb-xa)/n, pts=[xa+','+ya];
+    for(var k=0;k<n;k++){pts.push((xa+w*(k+0.25)).toFixed(1)+','+(ya-18));pts.push((xa+w*(k+0.75)).toFixed(1)+','+(ya+18));}
+    pts.push(xb+','+ya);
+    el(r,'line',{x1:30,y1:ya,x2:xa,y2:ya,stroke:'var(--inchiostro)','stroke-width':2});
+    el(r,'line',{x1:xb,y1:ya,x2:410,y2:ya,stroke:'var(--inchiostro)','stroke-width':2});
+    el(r,'polyline',{points:pts.join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':2.4,'stroke-linejoin':'round'});
+    el(r,'line',{x1:50,y1:ya-16,x2:110,y2:ya-16,stroke:'var(--inchiostro)','stroke-width':1.8,'marker-end':'url(#f56i)'});
+    el(r,'line',{x1:330,y1:ya-16,x2:390,y2:ya-16,stroke:'var(--inchiostro)','stroke-width':1.8,'marker-end':'url(#f56i)'});
+    txt(r,80,ya-26,'i','var(--inchiostro)','middle',14,true);
+    txt(r,360,ya-26,'i','var(--inchiostro)','middle',14,true);
+    txt(r,(xa+xb)/2,ya-30,'R','var(--inchiostro)','middle',14,true);
+    for(var j=0;j<3;j++){var cx=xa+25+j*45, y0=ya+32;
+      el(r,'path',{d:'M'+cx+','+y0+' q10,10 0,20 q-10,10 0,20 q10,10 0,20',fill:'none',stroke:'var(--rosso)','stroke-width':1.6});}
+    txt(r,xb+20,ya+62,'calore','var(--rosso)','start',12);
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
