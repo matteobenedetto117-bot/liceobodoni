@@ -5,15 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La seconda legge di Ohm — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -21,88 +55,92 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 58</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 58</p>
   <h1>La seconda legge di Ohm</h1>
-  <p class="sommario">La prima legge di Ohm descrive come si comporta un filo
-  gi&agrave; dato, ma non spiega perch&eacute; quel filo ha proprio quella
-  resistenza. La seconda legge di Ohm risponde a questa domanda, legando la
-  resistenza alla forma del filo e al materiale di cui &egrave; fatto.</p>
 </header>
 
-<h2>La seconda legge di Ohm</h2>
-
-<p>Consideriamo un filo conduttore percorso da corrente, di lunghezza $L$ e
-sezione trasversale di area $A$. La sua resistenza &egrave; data dalla
-<strong>seconda legge di Ohm</strong>:</p>
-
-<div class="formula-box">
-$$R=\rho\,\frac{L}{A}$$
-</div>
-
-<p>dove $\rho$ &egrave; la <strong>resistivit&agrave;</strong>, una grandezza
-che dipende solo dal materiale del filo (il rame e il ferro, per esempio, ne
-hanno una diversa) e che si trova tabulata per i materiali pi&ugrave;
-comuni. Dalla formula si vede che la resistenza cresce con la lunghezza del
-filo e diminuisce se la sezione &egrave; pi&ugrave; larga: un filo lungo e
-sottile oppone pi&ugrave; resistenza al passaggio della corrente di uno corto
-e spesso.</p>
+<p>Filo conduttore di lunghezza $L$ e sezione di area $A$: da che cosa dipende la sua resistenza?</p>
 
 <div class="fig">
-<svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr60a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<pattern id="hatch60" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-<line x1="0" y1="0" x2="0" y2="6" stroke="var(--verde)" stroke-width="1.4"/>
-</pattern>
-</defs>
-<ellipse cx="90" cy="90" rx="22" ry="42" fill="url(#hatch60)" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M90,48 L330,48 A22,42 0 0 1 330,132 L90,132" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="120" y1="30" x2="170" y2="30" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#fr60a)"/>
-<text x="145" y="20" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i</text>
-<text x="90" y="95" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--verde)">A</text>
-<line x1="90" y1="160" x2="330" y2="160" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="90" y1="153" x2="90" y2="167" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="330" y1="153" x2="330" y2="167" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="210" y="182" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">L</text>
-</svg>
-<p class="did">Filo conduttore di lunghezza $L$ e sezione di area $A$,
-percorso da corrente $i$.</p>
+<svg id="g-filo" viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Filo cilindrico percorso da corrente, con sezione A e lunghezza L; il cursore cambia la lunghezza"></svg>
+<div class="cursore"><label for="cur-l"><i>L</i></label><input id="cur-l" type="range" min="0.5" max="3" step="0.25" value="1.75"><span class="val" id="val-l"></span></div>
+<p class="did">Filo di rame, $D = 1{,}10\ \text{mm}$</p>
 </div>
+
+<p>La resistenza risulta:</p>
+<ul>
+<li>direttamente proporzionale alla lunghezza $L$;</li>
+<li>inversamente proporzionale all'area $A$ della sezione;</li>
+<li>dipendente dal materiale, tramite la resistività $\rho$ (valori in tabella).</li>
+</ul>
+
+<p>Le tre dipendenze si riassumono in un'unica relazione:</p>
+
+<div class="def"><span class="et">Seconda legge di Ohm</span>
+<p class="eq principio">$$R = \rho\,\frac{L}{A} \qquad\qquad \rho = \frac{R\,A}{L}$$</p></div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>Resistività: $\;[\rho] = \dfrac{\Omega\cdot\text{m}^2}{\text{m}} = \Omega\cdot\text{m}$</p></div>
 
 <h2>Esempio</h2>
 
-<p>Un filo di rame &egrave; percorso da una corrente $i=1{,}82$ A. Il filo ha
-lunghezza $L=1{,}75$ m e diametro $D=1{,}10$ mm; la resistivit&agrave; del
-rame &egrave; $\rho=1{,}72\cdot10^{-8}\ \Omega\,\mathrm{m}$. Calcoliamo la
-differenza di potenziale ai capi del filo.</p>
+<p>Dati: filo di rame, $i = 1{,}82\ \text{A}$, $\;L = 1{,}75\ \text{m}$, $\;D = 1{,}10\ \text{mm}$, $\;\rho = 1{,}72\times10^{-8}\ \Omega\cdot\text{m}$. Calcolare $R$ e $\Delta V$.</p>
 
-<p>La sezione &egrave; un cerchio di diametro $D$, quindi $A=\pi(D/2)^2$, e la
-resistenza vale:</p>
-
-<div class="formula-box">
-$$R=\rho\,\frac{L}{A}=\rho\,\frac{L}{\pi(D/2)^2}=0{,}0317\ \Omega$$
-</div>
-
-<p>Dalla prima legge di Ohm ricaviamo infine la differenza di potenziale
-cercata:</p>
-
-<div class="formula-box">
-$$\Delta V=iR=1{,}82\ \mathrm{A}\cdot0{,}0317\ \Omega=0{,}0577\ \mathrm{V}$$
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
-<ul>
-<li>Vediamo come energia e potenza si distribuiscono in un circuito, con
-l'effetto Joule e il consumo elettrico misurato in kilowattora.</li>
-</ul>
-</div>
+<p class="eq">$$A = \pi\left(\frac{D}{2}\right)^2 = \pi\,(0{,}550\times10^{-3}\ \text{m})^2 \approx 9{,}50\times10^{-7}\ \text{m}^2$$</p>
+<p class="eq">$$R = \rho\,\frac{L}{A} = \frac{1{,}72\times10^{-8}\ \Omega\cdot\text{m}\cdot 1{,}75\ \text{m}}{9{,}50\times10^{-7}\ \text{m}^2} \approx 0{,}0317\ \Omega$$</p>
+<p class="eq">$$\Delta V = iR = 1{,}82\ \text{A}\cdot 0{,}0317\ \Omega \approx 0{,}0577\ \text{V}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../59-il-circuito-elettrico-e-la-prima-legge-di-ohm/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il circuito elettrico e la prima legge di Ohm</span></a><a class="successiva" href="../61-energia-e-potenza-nei-circuiti-effetto-joule/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia e potenza nei circuiti; effetto Joule</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 58</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 58</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,anc,sz){var t=el(p,'text',{x:x,y:y,'font-size':sz||13,'font-family':'sans-serif','font-style':'italic',fill:col||'var(--inchiostro)','text-anchor':anc||'middle',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});t.textContent=s;return t;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  var s=document.getElementById('g-filo');
+  if(s){
+    var d=el(s,'defs',{}); el(el(d,'marker',{id:'fr',markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L9,5 L0,9 Z',fill:'var(--rosso)'});
+    var x0=50, yc=80, ry=30, rx=11, k=120, rho=1.72e-8, D=1.10e-3, A=Math.PI*D*D/4;
+    var corpo=el(s,'path',{fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'ellipse',{cx:x0,cy:yc,rx:rx,ry:ry,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2});
+    txt(s,x0,yc+5,'A','var(--blu)','middle',14);
+    el(s,'line',{x1:x0+30,y1:yc-ry-14,x2:x0+80,y2:yc-ry-14,stroke:'var(--rosso)','stroke-width':2,'marker-end':'url(#fr)'});
+    txt(s,x0+55,yc-ry-22,'i','var(--rosso)','middle',14);
+    var q=el(s,'line',{y1:140,y2:140,x1:x0,stroke:'var(--blu)','stroke-width':1.3});
+    el(s,'line',{x1:x0,y1:134,x2:x0,y2:146,stroke:'var(--blu)','stroke-width':1.3});
+    var t2=el(s,'line',{y1:134,y2:146,stroke:'var(--blu)','stroke-width':1.3});
+    var tl=txt(s,0,160,'L','var(--blu)','middle',14);
+    var cur=document.getElementById('cur-l'), val=document.getElementById('val-l');
+    var dis=function(){
+      var L=+cur.value, x1=x0+k*L, R=rho*L/A;
+      corpo.setAttribute('d','M'+x0+','+(yc-ry)+' L'+x1.toFixed(1)+','+(yc-ry)+' A'+rx+','+ry+' 0 0 1 '+x1.toFixed(1)+','+(yc+ry)+' L'+x0+','+(yc+ry));
+      q.setAttribute('x2',x1.toFixed(1)); t2.setAttribute('x1',x1.toFixed(1)); t2.setAttribute('x2',x1.toFixed(1));
+      tl.setAttribute('x',((x0+x1)/2).toFixed(1));
+      val.innerHTML='<i>L</i> = '+num(L,2)+' m → <i>R</i> = '+num(R,4)+' Ω';
+    };
+    cur.addEventListener('input',dis); dis();
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
