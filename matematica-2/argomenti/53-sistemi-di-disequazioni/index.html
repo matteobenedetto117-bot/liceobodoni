@@ -5,15 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistemi di disequazioni — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
+.foglio>.eq+.fig,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>ol+h2,.foglio>ul+h2{margin-top:var(--r)}
+.nota .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.eq+h2,.foglio>.nota+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,123 +66,106 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Disequazioni di secondo grado &middot; Unità 51</p>
   <h1>Sistemi di disequazioni</h1>
-  <p class="sommario">Finora abbiamo risolto una disequazione alla volta. Quando serve un
-  valore che soddisfi più condizioni insieme, le mettiamo a sistema esattamente come per le
-  equazioni: si risolve ogni disequazione per conto proprio, poi si cercano i valori comuni
-  a tutte le soluzioni.</p>
 </header>
 
-<h2>Come si legge il grafico</h2>
+<p>Più disequazioni a sistema: per quali $x$ sono verificate tutte insieme?</p>
 
-<p>Riportiamo la soluzione di ogni disequazione su una riga della stessa retta numerica, una
-riga per ciascuna. Non si tracciano linee tratteggiate: su ogni riga compare una linea solo
-dove quella disequazione è verificata, e resta vuota altrove. La soluzione del sistema è
-l'intervallo, o l'unione di intervalli, in cui le linee di tutte le disequazioni sono
-presenti contemporaneamente.</p>
+<ol>
+<li>ogni disequazione risolta separatamente;</li>
+<li>soluzioni su righe distinte della stessa retta: linea solo dove la disequazione è verificata, nessun tratteggio;</li>
+<li>soluzione del sistema → intervalli in cui la linea è presente su tutte le righe.</li>
+</ol>
 
-<h2>Primo esempio</h2>
+<h2>Esempio 1</h2>
 
-<p>Risolviamo il sistema
-$$\begin{cases}x^2-5&lt;0 & (a)\\x^2-4x+4&gt;0 & (b)\\3x+1\ge0 & (c)\end{cases}$$
-risolvendo ciascuna disequazione singolarmente.</p>
-
-<p>(a) $x^2-5&lt;0$: l'equazione associata $x^2=5$ dà $x=\pm\sqrt5$; la parabola ha
-concavità verso l'alto, quindi è negativa fra le radici: $-\sqrt5&lt;x&lt;\sqrt5$.</p>
-
-<p>(b) $x^2-4x+4&gt;0$: il discriminante è $\Delta=16-16=0$, la parabola tocca l'asse in un
-solo punto, $x=2$, e resta positiva ovunque tranne lì: soluzione $x\ne2$.</p>
-
-<p>(c) $3x+1\ge0$ dà $x\ge-\dfrac13$.</p>
+<p class="eq quesito">$$\begin{cases}x^2-5&lt;0 &amp; (a)\\x^2-4x+4&gt;0 &amp; (b)\\3x+1\ge0 &amp; (c)\end{cases}$$</p>
+<p class="eq">$$(a)\ \ x^2&lt;5 \;\Rightarrow\; -\sqrt5&lt;x&lt;\sqrt5$$</p>
+<p class="eq">$$(b)\ \ \Delta=16-16=0,\ \ (x-2)^2&gt;0 \;\Rightarrow\; x\ne2$$</p>
+<p class="eq">$$(c)\ \ x\ge-\tfrac13$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 175" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="56" y1="20" x2="430" y2="20" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="76.0" cy="20" r="4.2" fill="#16283d"/>
-<text x="66.0" y="14" font-size="12" fill="#16283d">-&#8730;5</text>
-<circle cx="187.3" cy="20" r="4.2" fill="#16283d"/>
-<text x="177.3" y="14" font-size="12" fill="#16283d">-1/3</text>
-<circle cx="298.7" cy="20" r="4.2" fill="#16283d"/>
-<text x="288.7" y="14" font-size="12" fill="#16283d">2</text>
-<circle cx="410.0" cy="20" r="4.2" fill="#16283d"/>
-<text x="400.0" y="14" font-size="12" fill="#16283d">&#8730;5</text>
-<text x="4" y="52" font-size="12" fill="#5a6b7d">(a)</text>
-<line x1="76.0" y1="48" x2="410.0" y2="48" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="76.0" cy="48" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<circle cx="410.0" cy="48" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="4" y="80" font-size="12" fill="#5a6b7d">(b)</text>
-<line x1="56.0" y1="76" x2="298.7" y2="76" stroke="#2f6b4f" stroke-width="2.4"/>
-<line x1="298.7" y1="76" x2="430.0" y2="76" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="298.7" cy="76" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="4" y="108" font-size="12" fill="#5a6b7d">(c)</text>
-<line x1="187.3" y1="104" x2="430.0" y2="104" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="187.3" cy="104" r="4.2" fill="#2f6b4f"/>
-<text x="4" y="142" font-size="12" fill="#16283d">sistema</text>
-<line x1="187.3" y1="138" x2="298.7" y2="138" stroke="#2f6b4f" stroke-width="3.2"/>
-<line x1="298.7" y1="138" x2="410.0" y2="138" stroke="#2f6b4f" stroke-width="3.2"/>
-<circle cx="187.3" cy="138" r="4.2" fill="#2f6b4f"/>
-<circle cx="298.7" cy="138" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<circle cx="410.0" cy="138" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-</svg>
-<figcaption>le tre soluzioni riportate sulla stessa retta: il sistema è verificato solo
-dove tutte e tre le linee sono presenti insieme</figcaption>
+<svg id="g-r1" viewBox="0 0 420 176" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Soluzioni di (a), (b), (c) su tre righe; sistema in rosso da −1/3 incluso a radice di 5 escluso, senza x = 2"></svg>
+<p class="did">Pallino pieno: incluso; vuoto: escluso (schema non in scala)</p>
 </div>
 
-<p>La linea è presente su tutte e tre le righe a partire da $-\dfrac13$ (compreso, per la
-c) fino a $\sqrt5$ (escluso, per la a), con l'unica interruzione in $x=2$ imposta dalla b:</p>
+<p class="eq ris">$$-\tfrac13\le x&lt;\sqrt5\ \wedge\ x\ne2$$</p>
 
-<div class="regola"><p>$$-\dfrac13\le x&lt;\sqrt5\ \wedge\ x\ne2$$</p></div>
+<h2>Esempio 2</h2>
 
-<h2>Secondo esempio</h2>
+<p class="eq quesito">$$\begin{cases}x^2+2x-3&lt;0 &amp; (a)\\1-2x\ge0 &amp; (b)\end{cases}$$</p>
+<p class="eq">$$(a)\ \ \Delta=16,\ \ x=\frac{-2\pm4}{2}=\begin{cases}1\\-3\end{cases} \;\Rightarrow\; -3&lt;x&lt;1$$</p>
+<p class="eq">$$(b)\ \ -2x\ge-1 \;\Rightarrow\; x\le\tfrac12$$</p>
 
-<p>Risolviamo
-$$\begin{cases}x^2+2x-3&lt;0 & (a)\\1-2x\ge0 & (b)\end{cases}$$</p>
-
-<p>(a) Il discriminante è $\Delta=4+12=16$, le radici sono $x=\dfrac{-2\pm4}{2}$, cioè
-$x_1=1$ e $x_2=-3$; la parabola è negativa fra le radici: $-3&lt;x&lt;1$.</p>
-
-<p>(b) $1-2x\ge0$ dà $-2x\ge-1$; dividendo per un numero negativo il verso si inverte:
-$x\le\dfrac12$.</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Dividendo per un numero negativo il verso della disequazione si inverte.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 460 145" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="56.0" y1="20" x2="430.0" y2="20" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="76.0" cy="20" r="4.2" fill="#16283d"/>
-<text x="68.0" y="14" font-size="12" fill="#16283d">-3</text>
-<circle cx="243.0" cy="20" r="4.2" fill="#16283d"/>
-<text x="235.0" y="14" font-size="12" fill="#16283d">1/2</text>
-<circle cx="410.0" cy="20" r="4.2" fill="#16283d"/>
-<text x="402.0" y="14" font-size="12" fill="#16283d">1</text>
-<text x="4" y="52" font-size="12" fill="#5a6b7d">(a)</text>
-<line x1="76.0" y1="48" x2="410.0" y2="48" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="76.0" cy="48" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<circle cx="410.0" cy="48" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="4" y="80" font-size="12" fill="#5a6b7d">(b)</text>
-<line x1="56.0" y1="76" x2="243.0" y2="76" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="243.0" cy="76" r="4.2" fill="#2f6b4f"/>
-<text x="4" y="112" font-size="12" fill="#16283d">sistema</text>
-<line x1="76.0" y1="108" x2="243.0" y2="108" stroke="#2f6b4f" stroke-width="3.2"/>
-<circle cx="76.0" cy="108" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<circle cx="243.0" cy="108" r="4.2" fill="#2f6b4f"/>
-</svg>
-<figcaption>l'intersezione delle due soluzioni è il tratto in cui entrambe le linee sono
-presenti</figcaption>
+<svg id="g-r2" viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Soluzioni di (a) e (b) su due righe; sistema in rosso da −3 escluso a 1/2 incluso"></svg>
+<p class="did">Intersezione: tratto con la linea su entrambe le righe</p>
 </div>
 
-<p>L'intersezione delle due soluzioni è</p>
-
-<div class="regola"><p>$$-3&lt;x\le\dfrac12$$</p></div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Lo stesso schema si applica quando una delle disequazioni del sistema è fratta, e
-l'unità successiva riprende in sintesi l'intero metodo della parabola.</li>
-</ul>
-</div>
+<p class="eq ris">$$-3&lt;x\le\tfrac12$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../52-disequazioni-fratte/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disequazioni fratte</span></a><a class="successiva" href="../54-sistemi-fratti-e-riepilogo-del-metodo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sistemi fratti e riepilogo del metodo</span></a></nav>
 <footer><p>Matematica seconda &middot; Disequazioni di secondo grado &middot; Unità 51</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+/* soluzioni su righe della stessa retta; punti equidistanti (schema non in scala).
+   righe: [etichetta, tratti]; tratto [i, j, incluso_i, incluso_j], indici dei punti, -1 = −∞, n = +∞ */
+function righe(id,et,R,sis){
+  var svg=document.getElementById(id); if(!svg)return;
+  var L=80,Rx=406,n=et.length,pas=(Rx-L)/(n+1);
+  function P(i){return i<0?L:(i>=n?Rx:L+(i+1)*pas);}
+  var yA=24,h=34,y0=60,yS=y0+R.length*h+6;
+  svg.appendChild(el('line',{x1:L,y1:yA,x2:Rx,y2:yA,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  et.forEach(function(s,i){
+    svg.appendChild(el('line',{x1:P(i),y1:yA,x2:P(i),y2:yS+8,stroke:'var(--riga)','stroke-width':1}));
+    svg.appendChild(el('circle',{cx:P(i),cy:yA,r:3,fill:'var(--inchiostro)'}));
+    svg.appendChild(txt(P(i),yA-9,s,{'text-anchor':'middle',fill:'var(--inchiostro)'}));});
+  function riga(y,T,col,w){
+    T.forEach(function(t){svg.appendChild(el('line',{x1:P(t[0]),y1:y,x2:P(t[1]),y2:y,stroke:col,'stroke-width':w}));});
+    T.forEach(function(t){[[0,2],[1,3]].forEach(function(q){var i=t[q[0]];if(i<0||i>=n)return;
+      var inc=t[q[1]];svg.appendChild(el('circle',{cx:P(i),cy:y,r:4.5,fill:inc?col:'#fff',stroke:inc?'#fff':col,'stroke-width':inc?1.5:1.8}));});});}
+  R.forEach(function(r,j){var y=y0+j*h;svg.appendChild(txt(8,y+4,r[0],{fill:'var(--inchiostro)','font-size':13}));riga(y,r[1],'var(--blu)',2.4);});
+  svg.appendChild(el('line',{x1:8,y1:yS-18,x2:Rx,y2:yS-18,stroke:'var(--inchiostro)','stroke-width':.8}));
+  svg.appendChild(txt(8,yS+4,'sistema',{fill:'var(--inchiostro)','font-size':13,'font-weight':700}));
+  riga(yS,sis,'var(--rosso)',5);
+}
+/* punti: −√5, −1/3, 2, √5 */
+righe('g-r1',['−√5','−1/3','2','√5'],[
+  ['(a)',[[0,3,false,false]]],
+  ['(b)',[[-1,2,false,false],[2,4,false,false]]],
+  ['(c)',[[1,4,true,false]]]],
+  [[1,2,true,false],[2,3,false,false]]);
+/* punti: −3, 1/2, 1 */
+righe('g-r2',['−3','1/2','1'],[
+  ['(a)',[[0,2,false,false]]],
+  ['(b)',[[-1,1,false,true]]]],
+  [[0,1,false,true]]);
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
