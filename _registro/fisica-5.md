@@ -623,6 +623,7 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento. Ridisegnato in SVG il grafico
   p-v della traccia (retta classica e curva relativistica con asintoto in v=c). Nessuno
   strumento interattivo: pagina breve, un solo grafico statico.
+- Revisione (26/10/2026, regole 13/10): parole 158 → 51 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 48); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando all'energia relativistica) e i paragrafi di spiegazione; p = γmv in .def rosso; limiti v ≪ c e v → c in elenco caso → conseguenza. Nessun titoletto, nessun esempio (assente anche prima). Nessuna comparsa. Controllo concettuale (SymPy): serie p = mv + mv³/(2c²) + …, divergenza per v → c; nessuna correzione. Figura rifatta da script: curva p/(mc) = γ v/c calcolata (prima curva di Bézier a occhio), retta classica p = mv rosso tratteggiato, asintoto v = c; resa interattiva con cursore su v/c (0–0,98; γ e p a fianco, «p ≈ mv» in verde per γ < 1,005). Nessuna figura aggiunta né decorativa.
 
 ## Unità 50 — Energia relativistica ed energia a riposo
 - Parole: 186 su 1 pagina di traccia (pagina 91).

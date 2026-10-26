@@ -5,16 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quantità di moto relativistica — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
+.cursore{flex-wrap:wrap}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:11em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+ul,.foglio>.def+ul,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,60 +80,89 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Relatività ristretta &middot; Unità 49</p>
   <h1>Quantità di moto relativistica</h1>
-  <p class="sommario">La relatività non modifica solo la misura di spazio e tempo: cambia anche
-  come si scrive la quantità di moto, che a velocità prossime a $c$ non è più semplicemente
-  $mv$.</p>
 </header>
 
-<p>In meccanica classica la quantità di moto di un corpo di massa $m$ e velocità $v$ è
-$p=mv$. Un'analisi dettagliata del moto secondo la relatività ristretta mostra che questa
-espressione va corretta con lo stesso fattore di Lorentz $\gamma$ che compare nella dilatazione
-dei tempi e nella contrazione delle lunghezze:</p>
+<p>Corpo di massa $m$ con velocità $v$ vicina a $c$: vale ancora $p=mv$?</p>
 
-<div class="formula-box">
-$$p=\gamma m v=\frac{mv}{\sqrt{1-\dfrac{v^2}{c^2}}}$$
-<p class="did" style="margin-top:10px">quantità di moto relativistica</p>
-</div>
+<p>L'espressione classica va corretta con il fattore di Lorentz $\gamma$:</p>
 
-<p>Per $v$ piccola rispetto a $c$, $\gamma\approx1$ e si ritrova l'espressione classica
-$p\approx mv$. Man mano che $v$ si avvicina a $c$, invece, $\gamma$ cresce senza limite e con
-esso $p$: a differenza del caso classico, dove $p$ cresce in proporzione diretta a $v$, la
-quantità di moto relativistica diverge quando $v\to c$.</p>
+<div class="def"><span class="et">Quantità di moto relativistica</span>
+<p class="eq principio">$$p=\gamma mv=\frac{mv}{\sqrt{1-\dfrac{v^2}{c^2}}}$$</p></div>
+
+<ul>
+<li>$v\ll c$ → $\gamma\approx1$, $p\approx mv$ (meccanica classica);</li>
+<li>$v\to c$ → $\gamma$ cresce senza limite, $p\to\infty$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr49" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="60" y1="300" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fr49)"/>
-<line x1="60" y1="300" x2="440" y2="300" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fr49)"/>
-<text x="38" y="26" font-family="var(--serif)" font-size="15" fill="var(--inchiostro)">p</text>
-<text x="444" y="305" font-family="var(--serif)" font-size="15" fill="var(--inchiostro)">v</text>
-<line x1="330" y1="300" x2="330" y2="30" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4,4"/>
-<text x="322" y="316" font-family="var(--serif)" font-size="14" fill="var(--grigio)">c</text>
-<line x1="60" y1="300" x2="330" y2="190" stroke="#d08a1f" stroke-width="2"/>
-<text x="336" y="188" font-family="var(--sans)" font-size="12.5" fill="#d08a1f">meccanica classica</text>
-<path d="M60,300 C 180,280 280,240 305,150 C 318,100 324,55 328,32"
-      fill="none" stroke="var(--blu)" stroke-width="2.2"/>
-<text x="150" y="145" font-family="var(--sans)" font-size="12.5" fill="var(--blu)">relatività speciale</text>
-</svg>
-<p class="did">Quantità di moto in funzione della velocità: la retta arancione è
-l'andamento classico $p=mv$, la curva blu è l'andamento relativistico, che diverge per
-$v\to c$.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'energia relativistica $E=\gamma mc^2$ e l'energia a riposo $E_0=mc^2$.</li>
-</ul>
+<svg id="g-p" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Quantità di moto in funzione della velocità: retta classica p = mv e curva relativistica p = γmv con asintoto v = c; il cursore muove un punto sulla curva"></svg>
+<div class="cursore"><label for="c-v">$v/c$</label><input id="c-v" type="range" min="0" max="98" step="1" value="60"><span class="val" id="v-v"></span></div>
+<p class="did">Curva blu: $p=\gamma mv$; tratteggio rosso: $p=mv$; $p$ in unità di $mc$</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../48-il-cono-di-luce-e-gli-invarianti-relativistici/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il cono di luce e gli invarianti relativistici</span></a><a class="successiva" href="../50-energia-relativistica-ed-energia-a-riposo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia relativistica ed energia a riposo</span></a></nav>
 <footer><p>Fisica quinta &middot; Relatività ristretta &middot; Unità 49</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--serif)','font-size':14,fill:'var(--inchiostro)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+function n(v,d){return v.toFixed(d).replace('.',',');}
+var svg=document.getElementById('g-p'); if(!svg)return;
+/* piano: v/c da 0 a 1,15; p/(mc) da 0 a 6 */
+var L=46,R=394,T=22,B=262, XM=1.15, YM=6;
+function X(b){return L+b/XM*(R-L);} function Y(p){return B-p/YM*(B-T);}
+function g(b){return 1/Math.sqrt(1-b*b);}
+var d=el('defs',{}), mk=el('marker',{id:'fr49',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});
+mk.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'})); d.appendChild(mk); svg.appendChild(d);
+/* assi e tacche */
+svg.appendChild(el('line',{x1:L,y1:B,x2:R+14,y2:B,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fr49)'}));
+svg.appendChild(el('line',{x1:L,y1:B,x2:L,y2:T-10,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fr49)'}));
+svg.appendChild(txt(R+8,B+20,'v/c'));
+svg.appendChild(txt(L+8,T-2,'p/(mc)'));
+[0.5,1].forEach(function(b){svg.appendChild(el('line',{x1:X(b),y1:B-4,x2:X(b),y2:B+4,stroke:'var(--inchiostro)'}));svg.appendChild(txt(X(b),B+18,n(b,b<1?1:0),{'text-anchor':'middle','font-family':'var(--sans)','font-size':11,fill:'var(--grigio)'}));});
+[2,4,6].forEach(function(p){svg.appendChild(el('line',{x1:L-4,y1:Y(p),x2:L+4,y2:Y(p),stroke:'var(--inchiostro)'}));svg.appendChild(txt(L-8,Y(p)+4,String(p),{'text-anchor':'end','font-family':'var(--sans)','font-size':11,fill:'var(--grigio)'}));});
+/* asintoto v = c */
+svg.appendChild(el('line',{x1:X(1),y1:B,x2:X(1),y2:T,stroke:'var(--rosso)','stroke-width':1.2,'stroke-dasharray':'3 4',opacity:.8}));
+svg.appendChild(txt(X(1)+6,T+12,'v = c',{fill:'var(--rosso)','font-size':12}));
+/* retta classica p = mv (p/(mc) = v/c) */
+svg.appendChild(el('line',{x1:X(0),y1:Y(0),x2:X(1),y2:Y(1),stroke:'var(--rosso)','stroke-width':1.8,'stroke-dasharray':'7 5'}));
+svg.appendChild(txt(X(1)+6,Y(1)+4,'p = mv',{fill:'var(--rosso)','font-size':12}));
+/* curva relativistica, campionata fino a p/(mc) = YM */
+var bmax=YM/Math.sqrt(1+YM*YM), dd='';
+for(var i=0;i<=300;i++){var t=i/300, b=bmax*(1-Math.pow(1-t,3)); dd+=(i?'L':'M')+X(b).toFixed(1)+','+Y(g(b)*b).toFixed(1);}
+svg.appendChild(el('path',{d:dd,fill:'none',stroke:'var(--blu)','stroke-width':2.4}));
+svg.appendChild(txt(X(0.955)-6,Y(4.2),'p = γmv',{fill:'var(--blu)','font-size':12,'text-anchor':'end'}));
+/* punto mobile */
+var gv=svg.appendChild(el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'}));
+var pc=svg.appendChild(el('circle',{r:4,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.6}));
+var P=svg.appendChild(el('circle',{r:5.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5}));
+var cur=document.getElementById('c-v'), v=document.getElementById('v-v');
+function dis(){var b=(+cur.value)/100, G=g(b), p=G*b;
+  set(gv,{x1:X(b),y1:B,x2:X(b),y2:Y(p)}); set(pc,{cx:X(b),cy:Y(b)}); set(P,{cx:X(b),cy:Y(p)});
+  v.innerHTML='γ = '+n(G,2)+' &nbsp; p = '+n(p,2)+' mc &nbsp; '+(G<1.005?'<span class="ok">p ≈ mv</span>':'');}
+cur.addEventListener('input',dis); dis();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
