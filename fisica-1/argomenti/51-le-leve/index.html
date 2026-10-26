@@ -5,18 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Le leve — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:640px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,136 +59,136 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Le leve</h1>
 </header>
 
-<p>Una leva è un meccanismo costituito da un'asta rigida che può ruotare attorno a un
-punto fisso detto <strong>fulcro</strong>. Su una leva agiscono due forze:</p>
+<p>Leva: asta rigida che può ruotare attorno a un punto fisso, il <strong>fulcro</strong>. Quando le forze applicate si fanno equilibrio?</p>
 
-<ul>
-  <li>la <strong>forza resistente</strong> $\vec{F}_R$, quella che vorremmo vincere;</li>
-  <li>la <strong>forza motrice</strong> $\vec{F}_M$, quella che applichiamo noi.</li>
-</ul>
-
-<figure class="dis">
-<svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="mr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#cc2222"/></marker>
-    <marker id="mm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a6fd6"/></marker>
-  </defs>
-  <line x1="110" y1="60" x2="510" y2="110" stroke="#222" stroke-width="4"/>
-  <rect x="112" y="34" width="46" height="30" fill="#ddd" stroke="#222" stroke-width="1.6"/>
-  <polygon points="310,112 292,150 328,150" fill="#fff" stroke="#222" stroke-width="2"/>
-  <text x="336" y="146" font-size="13" fill="#555">fulcro</text>
-  <line x1="135" y1="66" x2="135" y2="130" stroke="#cc2222" stroke-width="2.5" marker-end="url(#mr)"/>
-  <text x="112" y="150" fill="#cc2222">F&#8407;<tspan font-size="11" dy="4">R</tspan></text>
-  <line x1="500" y1="60" x2="500" y2="106" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#mm)"/>
-  <text x="510" y="52" fill="#2a6fd6">F&#8407;<tspan font-size="11" dy="4">M</tspan></text>
-</svg>
-<figcaption>Una leva reale: l'asta appoggiata sul fulcro, il carico da sollevare a
-sinistra e la spinta applicata a destra.</figcaption>
-</figure>
-
-<p>Per studiarla la schematizziamo come un'asta orizzontale. Oltre alle due forze compare
-la spinta $\vec{F}_N$ con cui il fulcro sostiene l'asta, diretta verso l'alto. Chiamiamo
-<strong>bracci</strong> $b_R$ e $b_M$ le distanze fra il fulcro e i punti di applicazione
-delle due forze.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 620 250" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="sr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#cc2222"/></marker>
-    <marker id="sm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a6fd6"/></marker>
-    <marker id="sn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1a8a3a"/></marker>
-    <marker id="so" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#e08b00"/></marker>
-  </defs>
-  <line x1="110" y1="92" x2="500" y2="92" stroke="#222" stroke-width="4"/>
-  <polygon points="290,96 272,134 308,134" fill="#fff" stroke="#222" stroke-width="2"/>
-  <circle cx="290" cy="92" r="6" fill="#222"/>
-  <line x1="120" y1="92" x2="120" y2="152" stroke="#cc2222" stroke-width="2.5" marker-end="url(#sr)"/>
-  <text x="96" y="130" fill="#cc2222">F&#8407;<tspan font-size="11" dy="4">R</tspan></text>
-  <line x1="480" y1="92" x2="480" y2="152" stroke="#2a6fd6" stroke-width="2.5" marker-end="url(#sm)"/>
-  <text x="490" y="130" fill="#2a6fd6">F&#8407;<tspan font-size="11" dy="4">M</tspan></text>
-  <line x1="290" y1="92" x2="290" y2="30" stroke="#1a8a3a" stroke-width="2.5" marker-end="url(#sn)"/>
-  <text x="300" y="36" fill="#1a8a3a">F&#8407;<tspan font-size="11" dy="4">N</tspan></text>
-  <line x1="120" y1="192" x2="290" y2="192" stroke="#2a6fd6" stroke-width="1.4"/>
-  <line x1="290" y1="192" x2="480" y2="192" stroke="#2a6fd6" stroke-width="1.4"/>
-  <line x1="120" y1="185" x2="120" y2="199" stroke="#2a6fd6" stroke-width="1.4"/>
-  <line x1="290" y1="185" x2="290" y2="199" stroke="#2a6fd6" stroke-width="1.4"/>
-  <line x1="480" y1="185" x2="480" y2="199" stroke="#2a6fd6" stroke-width="1.4"/>
-  <text x="186" y="182" fill="#2a6fd6" font-size="14">b<tspan font-size="11" dy="3">R</tspan></text>
-  <text x="378" y="182" fill="#2a6fd6" font-size="14">b<tspan font-size="11" dy="3">M</tspan></text>
-  <text x="128" y="218" font-size="12" fill="#555">braccio della forza resistente</text>
-  <text x="352" y="218" font-size="12" fill="#555">braccio della forza motrice</text>
-  <path d="M560,74 A24,24 0 1,0 578,48" fill="none" stroke="#e08b00" stroke-width="2" marker-end="url(#so)"/>
-  <text x="572" y="82" fill="#e08b00" font-size="16">+</text>
-</svg>
-<figcaption>Lo schema della leva, con i bracci e il verso positivo di rotazione.</figcaption>
-</figure>
-
-<h2>Equilibrio rispetto alla traslazione</h2>
-
-<p>Le tre forze sono verticali: le due che premono verso il basso e la spinta del fulcro
-verso l'alto. Perché la risultante sia nulla deve valere</p>
-
-$$F_N = F_R + F_M$$
-
-<h2>Equilibrio rispetto alla rotazione</h2>
-
-<p>Prendiamo il fulcro come polo, così il momento di $\vec{F}_N$ è nullo perché il suo
-braccio è zero. Le altre due forze sono perpendicolari all'asta, quindi in entrambi i
-momenti compare $\sin 90^\circ = 1$; i segni sono opposti perché le due forze farebbero
-girare l'asta in versi contrari:</p>
-
-$$-\,F_M\, b_M \sin 90^\circ + F_R\, b_R \sin 90^\circ = 0
-\;\Longrightarrow\; -\,F_M b_M + F_R b_R = 0$$
-
-$$\boxed{\;F_R\, b_R = F_M\, b_M\;}$$
-
-<p>È la <strong>condizione di equilibrio di una leva</strong>: una forza piccola può
-equilibrarne una grande, purché agisca con un braccio proporzionalmente più lungo.</p>
-
-<h2>Leve vantaggiose, svantaggiose e indifferenti</h2>
-
-<p>La classificazione guarda a quanta forza dobbiamo applicare rispetto a quella da
-vincere; per la condizione di equilibrio, questo equivale a confrontare i due bracci.</p>
-
-<ul>
-  <li><strong>vantaggiosa</strong> se $F_M &lt; F_R$, quindi se $b_M &gt; b_R$;</li>
-  <li><strong>svantaggiosa</strong> se $F_M &gt; F_R$, quindi se $b_M &lt; b_R$;</li>
-  <li><strong>indifferente</strong> se $F_M = F_R$, quindi se $b_M = b_R$.</li>
-</ul>
-
-<div class="nota">
-<strong>Da non sbagliare.</strong> Vantaggiosa non vuol dire che si fa meno fatica in
-tutto: si applica una forza minore, ma lungo uno spostamento maggiore. Il guadagno è sulla
-forza, non sul lavoro.
+<div class="fig">
+<svg id="g-reale" viewBox="0 0 440 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Asta inclinata appoggiata sul fulcro, con il carico a sinistra e la spinta a destra"></svg>
+<p class="did">Leva reale: carico a sinistra, spinta a destra</p>
 </div>
+
+<ul>
+<li>forza resistente $\vec F_R$ → quella da vincere;</li>
+<li>forza motrice $\vec F_M$ → quella applicata;</li>
+<li>spinta del fulcro $\vec F_N$, verso l'alto;</li>
+<li>bracci $b_R$, $b_M$ → distanze dal fulcro dei punti di applicazione.</li>
+</ul>
+
+<div class="fig">
+<svg id="g-schema" viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Schema della leva con le tre forze e i bracci; il cursore sposta il punto di applicazione della forza motrice"></svg>
+<div class="cursore"><label for="cur-b">b<sub>M</sub></label><input id="cur-b" type="range" min="0.15" max="0.8" step="0.05" value="0.8"><span class="val" id="val-b"></span></div>
+<p class="did">Schema: forze perpendicolari all'asta; verso antiorario positivo</p>
+</div>
+
+<p>Traslazione: forze tutte verticali, risultante nulla.</p>
+
+<p class="eq">$$F_N = F_R + F_M$$</p>
+
+<p>Rotazione, polo nel fulcro ($\vec F_N$ ha braccio nullo, $\sin 90^\circ = 1$):</p>
+
+<p class="eq">$$-\,F_M\,b_M + F_R\,b_R = 0$$</p>
+
+<div class="def"><span class="et">Condizione di equilibrio della leva</span>
+<p class="eq principio">$$F_R\,b_R = F_M\,b_M$$</p></div>
+
+<p>Dal confronto fra i bracci:</p>
+<ul>
+<li>$b_M &gt; b_R$ → $F_M &lt; F_R$: leva vantaggiosa;</li>
+<li>$b_M &lt; b_R$ → $F_M &gt; F_R$: leva svantaggiosa;</li>
+<li>$b_M = b_R$ → $F_M = F_R$: leva indifferente.</li>
+</ul>
+
+<div class="nota"><span class="et">Da non sbagliare</span>
+<p>Leva vantaggiosa: forza minore, ma spostamento maggiore. Il guadagno è sulla forza, non sul lavoro.</p></div>
 
 <h2>Esempio</h2>
 
-<p>Una leva sostiene una forza resistente $F_R = 300\ \text{N}$ applicata a
-$b_R = 0{,}20\ \text{m}$ dal fulcro, mentre la forza motrice agisce a
-$b_M = 0{,}80\ \text{m}$. Dalla condizione di equilibrio:</p>
+<p>Dati: $F_R = 300\ \text{N}$, $\;b_R = 0{,}20\ \text{m}$, $\;b_M = 0{,}80\ \text{m}$. Calcolare $F_M$ e $F_N$.</p>
 
-$$F_M = \frac{F_R\, b_R}{b_M}
-= \frac{300\ \text{N} \cdot 0{,}20\ \text{m}}{0{,}80\ \text{m}} = 75\ \text{N}$$
-
-<p>Essendo $F_M &lt; F_R$, la leva è vantaggiosa. Il fulcro deve allora sostenere
-$F_N = F_R + F_M = 300\ \text{N} + 75\ \text{N} = 375\ \text{N}$.</p>
-
-<div class="avanti">
-<h2>Dove si continua</h2>
-<p>Finora il fulcro è sempre stato in mezzo, ma non è l'unica disposizione possibile:
-nella prossima unità le leve si classificano in tre generi secondo la posizione del
-fulcro rispetto alle due forze, e si vede quali generi risultano sempre vantaggiosi e
-quali sempre svantaggiosi.</p>
-</div>
+<p class="eq">$$F_M = \frac{F_R\,b_R}{b_M} = \frac{300\ \text{N}\cdot 0{,}20\ \text{m}}{0{,}80\ \text{m}} = 75\ \text{N} \quad (\text{vantaggiosa})$$</p>
+<p class="eq">$$F_N = F_R + F_M = 300\ \text{N} + 75\ \text{N} = 375\ \text{N}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../50-condizioni-di-equilibrio-di-un-corpo-rigido/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Condizioni di equilibrio di un corpo rigido</span></a><a class="successiva" href="../52-leve-di-primo-secondo-e-terzo-genere/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Leve di primo, secondo e terzo genere</span></a></nav>
+<footer><p>Fisica prima &middot; Equilibrio del corpo rigido &middot; Unità 50</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,x,y,base,sub,col,anc){var t=el(p,'text',{x:x,y:y,'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':anc||'middle',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  function txt(p,x,y,s,col,anc,sz){var t=el(p,'text',{x:x,y:y,'font-size':sz||12,'font-family':'sans-serif',fill:col||'var(--inchiostro)','text-anchor':anc||'middle',stroke:'#fff','stroke-width':3,'paint-order':'stroke'});t.textContent=s;return t;}
+  function pos(t,x,y){t.setAttribute('x',(+x).toFixed(1));t.setAttribute('y',(+y).toFixed(1));}
+  function L2(l,x1,y1,x2,y2){l.setAttribute('x1',(+x1).toFixed(1));l.setAttribute('y1',(+y1).toFixed(1));l.setAttribute('x2',(+x2).toFixed(1));l.setAttribute('y2',(+y2).toFixed(1));return l;}
+  function marcatori(s,id){var d=el(s,'defs',{});[['r','var(--rosso)'],['b','var(--blu)'],['g','var(--grigio)'],['v','var(--verde)']].forEach(function(c){var mk=el(d,'marker',{id:id+c[0],markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'});el(mk,'path',{d:'M0,1 L9,5 L0,9 Z',fill:c[1]});});}
+  function vett(s,id,c,col,w){return el(s,'line',{stroke:col,'stroke-width':w||2.6,'marker-end':'url(#'+id+c+')'});}
+  function pt(P,d,th){var t=th*Math.PI/180;return {x:P.x+d*Math.cos(t),y:P.y-d*Math.sin(t)};}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+
+  /* leva reale: asta inclinata sul fulcro */
+  var r=document.getElementById('g-reale');
+  if(r){
+    marcatori(r,'r');
+    var A={x:50,y:62}, B={x:400,y:112}, yb=function(x){return A.y+(x-A.x)*(B.y-A.y)/(B.x-A.x);};
+    var xf=215, ang=Math.atan2(B.y-A.y,B.x-A.x)*180/Math.PI;
+    el(r,'line',{x1:A.x,y1:A.y,x2:B.x,y2:B.y,stroke:'var(--inchiostro)','stroke-width':5,'stroke-linecap':'round'});
+    el(r,'rect',{x:58,y:yb(81)-34,width:46,height:30,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.6,transform:'rotate('+ang.toFixed(2)+' 81 '+yb(81).toFixed(1)+')'});
+    var yf=yb(xf)+3;
+    el(r,'polygon',{points:xf+','+yf.toFixed(1)+' '+(xf-18)+','+(yf+36).toFixed(1)+' '+(xf+18)+','+(yf+36).toFixed(1),fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    txt(r,xf+26,yf+32,'fulcro','var(--grigio)','start',12);
+    L2(vett(r,'r','r','var(--rosso)'),81,yb(81)+4,81,yb(81)+62);
+    lab(r,62,yb(81)+50,'F','R','var(--rosso)');
+    L2(vett(r,'r','r','var(--rosso)'),390,yb(390)-56,390,yb(390)-4);
+    lab(r,372,yb(390)-36,'F','M','var(--rosso)');
+  }
+
+  /* schema: asta orizzontale, fulcro fisso, b_M variabile */
+  var s=document.getElementById('g-schema');
+  if(s){
+    marcatori(s,'s');
+    var k=340, sc=0.2, y=160, O={x:140,y:y}, FR=300, bR=0.20, x1=O.x-bR*k;
+    el(s,'rect',{x:40,y:y-8,width:385,height:16,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'polygon',{points:O.x+','+(y+8)+' '+(O.x-18)+','+(y+40)+' '+(O.x+18)+','+(y+40),fill:'#fff',stroke:'var(--inchiostro)','stroke-width':2});
+    el(s,'circle',{cx:O.x,cy:y,r:4,fill:'var(--inchiostro)'});
+    var C={x:400,y:44}, P1=pt(C,16,-30), P2=pt(C,16,200);
+    el(s,'path',{d:'M'+P1.x.toFixed(1)+','+P1.y.toFixed(1)+' A16,16 0 1 0 '+P2.x.toFixed(1)+','+P2.y.toFixed(1),fill:'none',stroke:'var(--grigio)','stroke-width':1.6,'marker-end':'url(#sg)'});
+    txt(s,C.x,C.y+5,'+','var(--grigio)','middle',14);
+    var yq=268;
+    var q=el(s,'line',{stroke:'var(--blu)','stroke-width':1.3});
+    var t1=el(s,'line',{stroke:'var(--blu)','stroke-width':1.3}), t2=el(s,'line',{stroke:'var(--blu)','stroke-width':1.3}), t3=el(s,'line',{stroke:'var(--blu)','stroke-width':1.3});
+    var qR=lab(s,(x1+O.x)/2,yq+20,'b','R','var(--blu)'), qM=lab(s,0,yq+20,'b','M','var(--blu)');
+    var fr=vett(s,'s','r','var(--rosso)'), fm=vett(s,'s','r','var(--rosso)'), fn=vett(s,'s','v','var(--verde)');
+    var lr=lab(s,0,0,'F','R','var(--rosso)'), lm=lab(s,0,0,'F','M','var(--rosso)'), ln=lab(s,0,0,'F','N','var(--verde)','start');
+    el(s,'circle',{cx:x1,cy:y,r:3,fill:'var(--rosso)'}); var pm=el(s,'circle',{r:3,fill:'var(--rosso)',cy:y});
+    var cur=document.getElementById('cur-b'), val=document.getElementById('val-b');
+    var dis=function(){
+      var bM=+cur.value, x2=O.x+bM*k, FM=FR*bR/bM, FN=FR+FM;
+      L2(q,x1,yq,x2,yq); L2(t1,x1,yq-6,x1,yq+6); L2(t2,O.x,yq-6,O.x,yq+6); L2(t3,x2,yq-6,x2,yq+6);
+      pos(qM,(O.x+x2)/2,yq+20); pm.setAttribute('cx',x2.toFixed(1));
+      L2(fr,x1,y+8,x1,y+8+sc*FR); L2(fm,x2,y+8,x2,y+8+sc*FM); L2(fn,O.x,y-8,O.x,y-8-sc*FN);
+      pos(lr,x1-18,y+8+sc*FR/2+5); pos(lm,x2-18,y+8+Math.max(sc*FM/2,14)+5); pos(ln,O.x+10,y-8-sc*FN/2+5);
+      var tipo=Math.abs(bM-bR)<1e-9?'indifferente':(bM>bR?'<span class="ok">vantaggiosa</span>':'svantaggiosa');
+      val.innerHTML='<i>b</i><sub>M</sub> = '+num(bM,2)+' m → <i>F</i><sub>M</sub> = '+Math.round(FM)+' N, <i>F</i><sub>N</sub> = '+Math.round(FN)+' N · '+tipo;
+    };
+    cur.addEventListener('input',dis); dis();
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
