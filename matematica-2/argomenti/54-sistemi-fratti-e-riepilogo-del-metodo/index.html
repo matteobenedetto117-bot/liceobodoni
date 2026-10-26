@@ -5,17 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistemi fratti e riepilogo del metodo — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.nota{background:#fbf3e6;border-left:3px solid var(--rosso);border-radius:6px;padding:12px 18px;margin:20px 0}
-.nota p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
+.foglio>.eq+.fig,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>ol+h2,.foglio>ul+h2{margin-top:var(--r)}
+.nota .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.eq+h2,.foglio>.nota+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,139 +66,128 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Disequazioni di secondo grado &middot; Unità 52</p>
   <h1>Sistemi fratti e riepilogo del metodo</h1>
-  <p class="sommario">Chiudiamo l'area delle disequazioni di secondo grado con un breve
-  ripasso del metodo della parabola su tre esempi, e con un caso nuovo: un sistema in cui
-  una delle disequazioni è fratta. Si risolve come i sistemi già visti, con una riga in più
-  per trattare numeratore e denominatore separatamente.</p>
 </header>
 
-<h2>Ripasso: il metodo della parabola</h2>
+<p>Disequazione di secondo grado: la soluzione si legge dalla parabola $y=ax^2+bx+c$.</p>
 
-<p>Il procedimento resta sempre lo stesso: si porta tutto a un membro, si guarda il segno
-di $a$ e il segno di $\Delta$ sull'equazione associata, si disegna una bozza della parabola
-e si legge la soluzione dal disegno.</p>
+<h2>Metodo della parabola</h2>
 
-<p>Consideriamo $x^2-2x-3\ge0$: $\Delta=4+12=16>0$, due soluzioni, e $a=1>0$, concavità
-verso l'alto. Risolvendo l'equazione associata $x^2-2x-3=0$ si ha
-$x_{1,2}=\dfrac{2\pm4}{2}$, cioè $x_1=3$ e $x_2=-1$.</p>
+<ol>
+<li>tutto a un membro: $ax^2+bx+c$ confrontato con $0$;</li>
+<li>segno di $a$ → concavità; $\Delta$ → radici dell'equazione associata;</li>
+<li>$&gt;0$ → parabola sopra l'asse; $&lt;0$ → parabola sotto l'asse.</li>
+</ol>
 
-<div class="fig">
-<svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="15" y1="105" x2="245" y2="105" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 45 35 Q 130 165 215 35" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="90" cy="105" r="3.6" fill="#2f6b4f"/>
-<circle cx="150" cy="105" r="3.6" fill="#2f6b4f"/>
-<text x="82" y="122" font-size="13" fill="#16283d">-1</text>
-<text x="144" y="122" font-size="13" fill="#16283d">3</text>
-<text x="30" y="60" font-size="14" fill="#b3392f">+</text>
-<text x="125" y="95" font-size="14" fill="#b3392f">-</text>
-<text x="222" y="60" font-size="14" fill="#b3392f">+</text>
-</svg>
-<figcaption>fuori dalle radici la parabola sta sopra l'asse, fra le radici sta sotto</figcaption>
-</div>
+<h2>Esempio 1</h2>
 
-<p>Cerchiamo dove vale $\ge0$, cioè dove la parabola sta sopra l'asse: la parte esterna
-alle radici.</p>
-
-<div class="regola"><p>$$x\le-1\ \vee\ x\ge3$$</p></div>
-
-<p>Con $x^2-4\ge0$ lo schema è identico: $\Delta=16$, equazione associata $x^2=4$ con due
-soluzioni $x=\pm2$, concavità verso l'alto, quindi la parabola sta sopra l'asse fuori dalle
-radici.</p>
+<p class="eq quesito">$$x^2-2x-3\ge0 \qquad\qquad x^2-2x-3&lt;0$$</p>
+<p class="eq">$$a=1&gt;0,\quad \Delta=4+12=16,\quad x=\frac{2\pm4}{2}=\begin{cases}3\\-1\end{cases}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="12" y1="85" x2="188" y2="85" stroke="#16283d" stroke-width="1.2"/>
-<path d="M 40 25 Q 100 105 160 25" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="70" cy="85" r="3.2" fill="#2f6b4f"/>
-<circle cx="130" cy="85" r="3.2" fill="#2f6b4f"/>
-<text x="63" y="100" font-size="12" fill="#16283d">-2</text>
-<text x="126" y="100" font-size="12" fill="#16283d">2</text>
-</svg>
-<figcaption>stesso schema di prima, con radici in $-2$ e $2$</figcaption>
+<svg id="g-par" viewBox="0 0 420 196" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Parabola y = x² − 2x − 3 con radici −1 e 3: sopra l'asse fuori dalle radici, sotto l'asse fra le radici"></svg>
+<p class="did">Fuori dalle radici: sopra l'asse; fra le radici: sotto</p>
 </div>
 
-<div class="regola"><p>$$x\le-2\ \vee\ x\ge2$$</p></div>
-
-<p>Riprendiamo ora la stessa parabola del primo esempio, $x^2-2x-3$, ma con il verso
-opposto: $x^2-2x-3&lt;0$, cioè $(x-3)(x+1)&lt;0$. Le radici sono le stesse di prima, $-1$ e
-$3$, ma questa volta cerchiamo dove la parabola sta sotto l'asse, cioè fra le radici:</p>
-
-<div class="regola"><p>$$-1&lt;x&lt;3$$</p></div>
+<p class="eq ris">$$x^2-2x-3\ge0:\quad x\le-1\ \vee\ x\ge3$$</p>
+<p class="eq ris">$$x^2-2x-3&lt;0:\quad -1&lt;x&lt;3$$</p>
 
 <h2>Sistemi con una disequazione fratta</h2>
 
-<p>Se un sistema contiene una disequazione fratta, il procedimento non cambia: si risolve
-ogni disequazione per conto proprio — quella fratta con lo studio separato del segno di
-numeratore e denominatore, le altre con la parabola — e poi si intersecano le soluzioni
-sulla stessa retta, come nei sistemi già visti.</p>
+<p>Ogni disequazione si risolve per conto proprio, quella fratta con il segno di numeratore e denominatore; poi si intersecano le soluzioni.</p>
 
-<p>Risolviamo
-$$\begin{cases}\dfrac1{x-2}\ge0 & (a)\\3x^2-11x-42>0 & (b)\end{cases}$$</p>
+<h2>Esempio 2</h2>
 
-<p>(a) Il numeratore è $1$, sempre positivo: la condizione $1\ge0$ vale per ogni $x$ reale.
-Resta il denominatore, che va posto strettamente maggiore di zero — mai maggiore o uguale,
-perché annullerebbe la frazione: $x-2>0$, cioè $x>2$. Con numeratore sempre positivo, il
-segno della frazione coincide con quello del denominatore: la disequazione è verificata per
-$x>2$.</p>
+<p class="eq quesito">$$\begin{cases}\dfrac1{x-2}\ge0 &amp; (a)\\[4pt]3x^2-11x-42&gt;0 &amp; (b)\end{cases}$$</p>
+<p class="eq">$$(a)\ \ 1&gt;0\ \text{per ogni }x \;\Rightarrow\; x-2&gt;0 \;\Rightarrow\; x&gt;2$$</p>
+<p class="eq">$$(b)\ \ \Delta=121+504=625,\ \ x=\frac{11\pm25}{6}=\begin{cases}6\\-\tfrac73\end{cases} \;\Rightarrow\; x&lt;-\tfrac73\ \vee\ x&gt;6$$</p>
 
-<p>(b) Il discriminante è $\Delta=121+4\cdot3\cdot42=625=25^2$, quindi
-$x_{1,2}=\dfrac{11\pm25}{6}$, cioè $x_1=6$ e $x_2=-\dfrac73$. La concavità è verso l'alto
-($a=3>0$), quindi la parabola sta sopra l'asse fuori dalle radici:
-$x&lt;-\dfrac73\ \vee\ x>6$.</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Denominatore strettamente positivo, mai $\ge0$: per $x=2$ la frazione non esiste.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 460 145" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="40" y1="20" x2="430" y2="20" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="100" cy="20" r="4.2" fill="#16283d"/>
-<text x="82" y="14" font-size="12" fill="#16283d">-7/3</text>
-<circle cx="230" cy="20" r="4.2" fill="#16283d"/>
-<text x="222" y="14" font-size="12" fill="#16283d">2</text>
-<circle cx="350" cy="20" r="4.2" fill="#16283d"/>
-<text x="342" y="14" font-size="12" fill="#16283d">6</text>
-<text x="4" y="52" font-size="12" fill="#5a6b7d">(a)</text>
-<line x1="230" y1="48" x2="430" y2="48" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="230" cy="48" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="432" y="52" font-size="13" fill="#2f6b4f">&#8594;</text>
-<text x="4" y="80" font-size="12" fill="#5a6b7d">(b)</text>
-<line x1="18" y1="76" x2="100" y2="76" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="6" y="80" font-size="13" fill="#2f6b4f"></text>
-<circle cx="100" cy="76" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="350" y1="76" x2="430" y2="76" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="350" cy="76" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="432" y="80" font-size="13" fill="#2f6b4f">&#8594;</text>
-<text x="4" y="112" font-size="12" fill="#16283d">sistema</text>
-<line x1="350" y1="108" x2="430" y2="108" stroke="#2f6b4f" stroke-width="3.2"/>
-<circle cx="350" cy="108" r="4.2" fill="white" stroke="#2f6b4f" stroke-width="1.8"/>
-<text x="432" y="112" font-size="13" fill="#2f6b4f">&#8594;</text>
-</svg>
-<figcaption>la riga (a) è piena solo a destra di 2, la riga (b) a sinistra di -7/3 e a
-destra di 6: insieme sono piene solo oltre 6</figcaption>
+<svg id="g-r1" viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Soluzioni di (a) e (b) su due righe; sistema in rosso per x maggiore di 6"></svg>
+<p class="did">Intersezione: tratto con la linea su entrambe le righe (schema non in scala)</p>
 </div>
 
-<p>La riga (a) è piena solo a destra di $2$; la riga (b) è piena a sinistra di $-\dfrac73$ e
-a destra di $6$. L'unico tratto in cui entrambe le righe sono piene è a destra di $6$:</p>
+<p class="eq ris">$$x&gt;6$$</p>
 
-<div class="regola"><p>$$x>6$$</p></div>
-
-<div class="nota"><p>Attenzione al caso in cui il numeratore è una costante di segno
-fissato. Con $\dfrac{-2}{x+1}>0$ il numeratore vale sempre $-2$, quindi la condizione sul
-numeratore non è mai verificata: la sua riga di segno è tutta negativa. La frazione è
-positiva solo quando anche il denominatore è negativo, cioè per $x&lt;-1$: qui la
-soluzione dipende dal denominatore da solo, non da un'intersezione di due condizioni.</p></div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Le equazioni irrazionali useranno un procedimento per certi versi simile: condizioni
-di esistenza da porre prima, un passaggio che trasforma l'equazione, e un sistema finale in
-cui rientra tutto quanto trovato lungo la strada.</li>
-</ul>
-</div>
+<div class="nota"><span class="et">Numeratore costante negativo</span>
+<p>$\dfrac{-2}{x+1}&gt;0$ → frazione positiva solo con denominatore negativo: $x&lt;-1$.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../53-sistemi-di-disequazioni/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Sistemi di disequazioni</span></a><a class="successiva" href="../55-equazioni-irrazionali-con-un-radicale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni irrazionali con un radicale</span></a></nav>
 <footer><p>Matematica seconda &middot; Disequazioni di secondo grado &middot; Unità 52</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+/* --- parabola y = x² − 2x − 3, calcolata --- */
+(function(){
+  var svg=document.getElementById('g-par'); if(!svg)return;
+  var x0=-3,x1=5,y0=-4.5,y1=7, L=30,R=390,T=12,B=184;
+  function X(x){return L+(x-x0)/(x1-x0)*(R-L);} function Y(y){return B-(y-y0)/(y1-y0)*(B-T);}
+  function f(x){return x*x-2*x-3;}
+  svg.appendChild(el('line',{x1:L,y1:Y(0),x2:R,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  svg.appendChild(txt(R-4,Y(0)-8,'x',{fill:'var(--inchiostro)','font-size':13}));
+  var d='',primo=true;
+  for(var i=0;i<=400;i++){var x=x0+(x1-x0)*i/400,y=f(x);
+    if(y>y1){primo=true;continue;}
+    d+=(primo?'M':'L')+X(x).toFixed(1)+','+Y(y).toFixed(1);primo=false;}
+  svg.appendChild(el('path',{d:d,fill:'none',stroke:'var(--blu)','stroke-width':2.4}));
+  [-1,3].forEach(function(r){
+    svg.appendChild(el('circle',{cx:X(r),cy:Y(0),r:4,fill:'var(--verde)'}));
+    svg.appendChild(txt(X(r)+(r<0?-10:10),Y(0)+18,r<0?'−1':'3',{'text-anchor':'middle',fill:'var(--inchiostro)','font-size':13}));});
+  svg.appendChild(txt(X(-2.2),Y(2.2),'+',{'text-anchor':'middle',fill:'var(--rosso)','font-size':18,'font-weight':700}));
+  svg.appendChild(txt(X(4.2),Y(2.2),'+',{'text-anchor':'middle',fill:'var(--rosso)','font-size':18,'font-weight':700}));
+  svg.appendChild(txt(X(1),Y(-1.8),'−',{'text-anchor':'middle',fill:'var(--rosso)','font-size':18,'font-weight':700}));
+})();
+/* soluzioni su righe della stessa retta; punti equidistanti (schema non in scala).
+   righe: [etichetta, tratti]; tratto [i, j, incluso_i, incluso_j], indici dei punti, -1 = −∞, n = +∞ */
+function righe(id,et,R,sis){
+  var svg=document.getElementById(id); if(!svg)return;
+  var L=80,Rx=406,n=et.length,pas=(Rx-L)/(n+1);
+  function P(i){return i<0?L:(i>=n?Rx:L+(i+1)*pas);}
+  var yA=24,h=34,y0=60,yS=y0+R.length*h+6;
+  svg.appendChild(el('line',{x1:L,y1:yA,x2:Rx,y2:yA,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  et.forEach(function(s,i){
+    svg.appendChild(el('line',{x1:P(i),y1:yA,x2:P(i),y2:yS+8,stroke:'var(--riga)','stroke-width':1}));
+    svg.appendChild(el('circle',{cx:P(i),cy:yA,r:3,fill:'var(--inchiostro)'}));
+    svg.appendChild(txt(P(i),yA-9,s,{'text-anchor':'middle',fill:'var(--inchiostro)'}));});
+  function riga(y,T,col,w){
+    T.forEach(function(t){svg.appendChild(el('line',{x1:P(t[0]),y1:y,x2:P(t[1]),y2:y,stroke:col,'stroke-width':w}));});
+    T.forEach(function(t){[[0,2],[1,3]].forEach(function(q){var i=t[q[0]];if(i<0||i>=n)return;
+      var inc=t[q[1]];svg.appendChild(el('circle',{cx:P(i),cy:y,r:4.5,fill:inc?col:'#fff',stroke:inc?'#fff':col,'stroke-width':inc?1.5:1.8}));});});}
+  R.forEach(function(r,j){var y=y0+j*h;svg.appendChild(txt(8,y+4,r[0],{fill:'var(--inchiostro)','font-size':13}));riga(y,r[1],'var(--blu)',2.4);});
+  svg.appendChild(el('line',{x1:8,y1:yS-18,x2:Rx,y2:yS-18,stroke:'var(--inchiostro)','stroke-width':.8}));
+  svg.appendChild(txt(8,yS+4,'sistema',{fill:'var(--inchiostro)','font-size':13,'font-weight':700}));
+  riga(yS,sis,'var(--rosso)',5);
+}
+/* punti: −7/3, 2, 6 */
+righe('g-r1',['−7/3','2','6'],[
+  ['(a)',[[1,3,false,false]]],
+  ['(b)',[[-1,0,false,false],[2,3,false,false]]]],
+  [[2,3,false,false]]);
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
