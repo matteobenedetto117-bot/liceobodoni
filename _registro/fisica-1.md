@@ -389,6 +389,8 @@
 - Parole: 430 su 2 pagine di traccia
 - Rettifica: nessuna. Verificati con SymPy F₂ = r₁F₁/r₂ = 140 N e F_N = F₁ + F₂ = 240 N, e i segni dei momenti (M₁ = +70 N·m, M₂ = −70 N·m) con la convenzione antioraria positiva dell'unità 47.
 - Aggiunta: nessun contenuto nuovo. Sono state esplicitate solo due cose già implicite nella traccia: che la somma vettoriale delle forze va fatta componente per componente, e che il momento di F_N è nullo perché il braccio è zero.
+- Revisione (26/10/2026, regole 13/10): titolo invariato; parole 290 → 106 (formule e didascalie escluse). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 48). Apertura a domanda; le due condizioni (F_TOT = 0 componente per componente, M_TOT = 0 con segno) in un'unica .def in elenco; nota «Da non sbagliare» in due frasi brevi; esempio in forma Dati/Calcolare con tre .eq (momenti, F₂ = 140 N, F_N = 240 N; SymPy). Tolti i titoletti «1) Equilibrio rispetto alla traslazione», «2) Equilibrio rispetto alla rotazione», la sezione «Dove si continua» e le frasi di spiegazione; aggiunto il piè di pagina mancante. Nessuna correzione concettuale (versi delle forze e segni dei momenti controllati), nessuna comparsa, nessun esempio tolto. Figure rifatte da script: due pannelli traslazione/rotazione; asta sul cuneo con frecce proporzionali alle forze, quote r₁ e r₂ in scala, verso positivo, cursore su F₁ (50–150 N, F₂ e F_N a fianco). Nessuna figura decorativa.
+
 
 ## Unità 50 — Le leve
 - Parole: 508 su 2 pagine di traccia (pag. 73–74)
