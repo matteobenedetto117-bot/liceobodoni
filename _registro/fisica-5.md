@@ -635,6 +635,7 @@
 - Aggiunta: nessuna, a parte le poche parole di collegamento fra un passaggio e l'altro.
   Nessun disegno nella traccia (solo formule racchiuse in riquadro), quindi nessuno SVG
   aggiunto; nessuno strumento interattivo, la pagina è interamente algebrica.
+- Revisione (26/10/2026, regole 13/10): parole 170 → 70 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 49); apertura a domanda; tolti sommario, «Nella prossima unità» (rimandi a fissione ed energia cinetica) e i paragrafi di spiegazione; E = γmc² ed E₀ = mc² in .def rosso; significato dei simboli in elenco; titoletto «Esempio» con dati in una riga e due .eq (E₀ e tempo di accensione della lampadina). Nessuna comparsa. Controllo concettuale (SymPy): E₀ = 0,12 kg·(3,0×10⁸ m/s)² = 1,08×10¹⁶ J ≈ 1,1×10¹⁶ J; t = E₀/P = 1,08×10¹⁴ s ≈ 3,4×10⁶ anni (valore già corretto in pagina); aggiunto in .eq il passaggio t = E₀/P prima solo a parole; nessuna correzione. Nessuna figura (assente anche prima).
 
 ## Unità 51 — Fissione nucleare
 - Parole: 227 su 1 pagina di traccia (pagina 92).
