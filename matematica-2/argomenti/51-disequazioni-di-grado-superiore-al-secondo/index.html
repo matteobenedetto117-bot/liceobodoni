@@ -5,17 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disequazioni di grado superiore al secondo — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avviso{background:#fbeee9;border-radius:10px;padding:16px 20px;margin:20px 0}
-.avviso p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
+.foglio>.eq+.fig,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>ol+h2,.foglio>ul+h2{margin-top:var(--r)}
+.nota .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.eq+h2,.foglio>.nota+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,110 +66,132 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Disequazioni di secondo grado &middot; Unità 49</p>
   <h1>Disequazioni di grado superiore al secondo</h1>
-  <p class="sommario">Quando il polinomio ha grado maggiore di due non c'è più una parabola
-  a cui appoggiarsi. Scomponiamo allora l'espressione in fattori più semplici, studiamo il
-  segno di ciascuno separatamente e li componiamo in un unico schema.</p>
 </header>
 
-<h2>Il metodo: uno schema per ogni fattore</h2>
+<p>Disequazione $P(x)\ge0$ (oppure $&gt;0$, $&lt;0$, $\le0$) con $P$ di grado maggiore di due: per quali $x$ è verificata?</p>
 
-<p>Consideriamo $x^5-x^4-6x^3\ge0$. Raccogliamo $x^3$ e scomponiamo il trinomio residuo:
-$$x^3(x^2-x-6)\ge0 \quad\Longrightarrow\quad x^3(x-3)(x+2)\ge0.$$
-Ogni fattore va posto maggiore o uguale a zero per conto proprio: $x^3\ge0$ dà $x\ge0$;
-$x-3\ge0$ dà $x\ge3$; $x+2\ge0$ dà $x\ge-2$. A questo punto non basta più il segno di un
-solo fattore: bisogna vedere come si combinano i tre, intervallo per intervallo. Lo schema
-dei segni mette una riga per fattore e, in basso, la riga del prodotto:</p>
+<ol>
+<li>scomposizione di $P(x)$ in fattori;</li>
+<li>segno di ciascun fattore (fattore $&gt;0$, oppure $\ge0$);</li>
+<li>schema dei segni → segno del prodotto, intervallo per intervallo.</li>
+</ol>
+
+<h2>Schema dei segni</h2>
+
+<p class="eq quesito">$$x^5-x^4-6x^3\ge0$$</p>
+<p class="eq">$$x^3(x^2-x-6)\ge0 \;\Rightarrow\; x^3(x+2)(x-3)\ge0$$</p>
+<p class="eq">$$x^3\ge0 \Rightarrow x\ge0 \qquad x+2\ge0 \Rightarrow x\ge-2 \qquad x-3\ge0 \Rightarrow x\ge3$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="30" x2="380" y2="30" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="90" cy="30" r="3" fill="#16283d"/>
-<circle cx="190" cy="30" r="3" fill="#16283d"/>
-<circle cx="330" cy="30" r="3" fill="#16283d"/>
-<text x="83" y="46" font-size="12" fill="#16283d">-2</text>
-<text x="186" y="46" font-size="12" fill="#16283d">0</text>
-<text x="326" y="46" font-size="12" fill="#16283d">3</text>
-
-<text x="2" y="68" font-size="12" fill="#5a6b7d">x³</text>
-<line x1="35" y1="65" x2="190" y2="65" stroke="#b3392f" stroke-width="2.4"/>
-<line x1="190" y1="65" x2="380" y2="65" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="105" y="60" font-size="12" fill="#b3392f">&#8722;</text>
-<text x="280" y="60" font-size="12" fill="#2f6b4f">+</text>
-
-<text x="2" y="100" font-size="12" fill="#5a6b7d">x&#8722;3</text>
-<line x1="35" y1="97" x2="330" y2="97" stroke="#b3392f" stroke-width="2.4"/>
-<line x1="330" y1="97" x2="380" y2="97" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="170" y="92" font-size="12" fill="#b3392f">&#8722;</text>
-<text x="352" y="92" font-size="12" fill="#2f6b4f">+</text>
-
-<text x="2" y="132" font-size="12" fill="#5a6b7d">x+2</text>
-<line x1="35" y1="129" x2="90" y2="129" stroke="#b3392f" stroke-width="2.4"/>
-<line x1="90" y1="129" x2="380" y2="129" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="55" y="124" font-size="12" fill="#b3392f">&#8722;</text>
-<text x="230" y="124" font-size="12" fill="#2f6b4f">+</text>
-
-<text x="2" y="172" font-size="12" fill="#16283d" font-weight="bold">prodotto</text>
-<line x1="60" y1="167" x2="90" y2="167" stroke="#b3392f" stroke-width="3.2"/>
-<line x1="90" y1="167" x2="190" y2="167" stroke="#2f6b4f" stroke-width="4.2"/>
-<line x1="190" y1="167" x2="330" y2="167" stroke="#b3392f" stroke-width="3.2"/>
-<line x1="330" y1="167" x2="380" y2="167" stroke="#2f6b4f" stroke-width="4.2"/>
-<text x="60" y="187" font-size="12" fill="#b3392f">&#8722;</text>
-<text x="130" y="187" font-size="12" fill="#2f6b4f">+</text>
-<text x="255" y="187" font-size="12" fill="#b3392f">&#8722;</text>
-<text x="350" y="187" font-size="12" fill="#2f6b4f">+</text>
-</svg>
-<figcaption>segno di ciascun fattore e, in basso, segno del prodotto in ogni intervallo</figcaption>
+<svg id="g-segni" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Schema dei segni dei fattori x³, x + 2, x − 3 e del prodotto; il cursore sposta una retta verticale sullo schema"></svg>
+<div class="cursore"><label for="c-x">$x$</label><input id="c-x" type="range" min="-35" max="45" step="1" value="-10"><span class="val" id="v-x"></span></div>
+<p class="did">Linea continua: fattore positivo; tratteggio: negativo; in rosso le soluzioni</p>
 </div>
 
-<p>Il prodotto è positivo o nullo dove la riga finale segna $+$ o passa per uno zero, cioè
-sugli intervalli evidenziati in verde:</p>
-
-<div class="regola"><p>$$-2\le x\le0 \ \vee\ x\ge3$$</p></div>
+<p class="eq ris">$$-2\le x\le0 \ \vee\ x\ge3$$</p>
 
 <h2>Fattori con esponente dispari</h2>
 
-<p>Un cubo ha lo stesso segno della sua base, quindi $(x+4)^3(x-8)^3&lt;0$ si studia come se
-i fattori fossero $x+4$ e $x-8$ senza l'esponente: $x+4>0$ per $x>-4$, $x-8>0$ per $x>8$. Il
-prodotto è negativo fra le due radici:</p>
+<p>Una potenza con esponente dispari ha lo stesso segno della base:</p>
 
-<div class="regola"><p>$$-4&lt;x&lt;8$$</p></div>
+<p class="eq quesito">$$(x+4)^3(x-8)^3&lt;0$$</p>
+<p class="eq">$$x+4&gt;0 \Rightarrow x&gt;-4 \qquad x-8&gt;0 \Rightarrow x&gt;8$$</p>
+<p class="eq ris">$$-4&lt;x&lt;8$$</p>
 
-<h2>Fattori sempre positivi si eliminano</h2>
+<h2>Fattori di segno costante</h2>
 
-<p>In $(x^2+4)(x-2)(x+7)>0$ il fattore $x^2+4$ è somma di un quadrato e di un numero
-positivo: non si annulla mai ed è sempre positivo, quindi non incide sul segno del prodotto
-e possiamo trascurarlo nello schema, che si riduce a quello di $(x-2)(x+7)$:</p>
-
-<div class="regola"><p>$$x&lt;-7 \ \vee\ x>2$$</p></div>
-
-<h2>Fattori sempre negativi o nulli</h2>
-
-<p>In $(-x^2-3)(x+2)^2(x+1)(x-1)>0$ il fattore $-x^2-3$ è sempre negativo (è
-l'opposto di una somma di quadrato e numero positivo), e $(x+2)^2$ è sempre positivo tranne
-che in $x=-2$, dove si annulla insieme a tutto il prodotto. Un fattore costantemente
-negativo ribalta il segno che avrebbero gli altri due da soli: il prodotto $(x+1)(x-1)$
-sarebbe positivo fuori da $-1$ e $1$, quindi qui, ribaltato, è positivo dentro:</p>
-
-<div class="regola"><p>$$-1&lt;x&lt;1$$</p></div>
-
-<div class="avviso">
-<p><b>Un errore da evitare.</b> In $x^2-9\ge0$ non si può scrivere $x^2\ge9$ e poi
-"$x\ge3$" o "$x\ge\pm3$": elevare a radice quadrata non si comporta come dividere. Bisogna
-scomporre e studiare il segno dei fattori, come sempre:
-$$(x+3)(x-3)\ge0 \;\Longrightarrow\; x\le-3 \ \vee\ x\ge3.$$</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Lo stesso schema dei segni, applicato al numeratore e al denominatore separatamente,
-è la chiave delle disequazioni fratte.</li>
+<li>fattore sempre positivo (come $x^2+4$) → si trascura;</li>
+<li>fattore sempre negativo (come $-x^2-3$) → inverte il segno del prodotto;</li>
+<li>quadrato $(x-a)^2$ → positivo, nullo solo in $x=a$.</li>
 </ul>
-</div>
+
+<p class="eq quesito">$$(x^2+4)(x-2)(x+7)&gt;0$$</p>
+<p class="eq">$$x^2+4&gt;0 \ \ \forall x \;\Rightarrow\; (x-2)(x+7)&gt;0$$</p>
+<p class="eq ris">$$x&lt;-7 \ \vee\ x&gt;2$$</p>
+
+<p class="eq quesito">$$(-x^2-3)(x+2)^2(x+1)(x-1)&gt;0$$</p>
+<p class="eq">$$-x^2-3&lt;0 \ \ \forall x \qquad (x+2)^2&gt;0 \ \text{per}\ x\ne-2 \;\Rightarrow\; (x+1)(x-1)&lt;0$$</p>
+<p class="eq ris">$$-1&lt;x&lt;1$$</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>$x^2\ge9$ non dà $x\ge3$ né $x\ge\pm3$: si scompone e si studia il segno dei fattori.</p>
+<p class="eq">$$x^2-9\ge0 \;\Rightarrow\; (x+3)(x-3)\ge0 \;\Rightarrow\; x\le-3 \ \vee\ x\ge3$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../50-disequazioni-di-secondo-grado-intere/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disequazioni di secondo grado intere</span></a><a class="successiva" href="../52-disequazioni-fratte/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disequazioni fratte</span></a></nav>
 <footer><p>Matematica seconda &middot; Disequazioni di secondo grado &middot; Unità 49</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function n(v){return String(v).replace('.',',').replace('-','−');}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+var svg=document.getElementById('g-segni'); if(!svg)return;
+/* fattori: [etichetta, funzione, radice] */
+var F=[['x³',function(x){return x*x*x;},0],['x + 2',function(x){return x+2;},-2],['x − 3',function(x){return x-3;},3]];
+function prod(x){return F.reduce(function(a,f){return a*f[1](x);},1);}
+var x0=-3.5, x1=4.5, L=86, R=404;
+function X(x){return L+(x-x0)/(x1-x0)*(R-L);}
+var radici=[-2,0,3], yA=26, righe=[70,108,146], yP=190;
+/* asse dei numeri */
+svg.appendChild(el('line',{x1:L,y1:yA,x2:R,y2:yA,stroke:'var(--inchiostro)','stroke-width':1.2}));
+radici.forEach(function(r){
+  svg.appendChild(el('line',{x1:X(r),y1:yA-4,x2:X(r),y2:yP+6,stroke:'var(--riga)','stroke-width':1}));
+  svg.appendChild(el('circle',{cx:X(r),cy:yA,r:3,fill:'var(--inchiostro)'}));
+  svg.appendChild(txt(X(r),yA+18,n(r),{'text-anchor':'middle',fill:'var(--inchiostro)'}));
+});
+/* intervalli fra le radici */
+var bordi=[x0].concat(radici,[x1]);
+function tratto(y,a,b,pos,extra){
+  return el('line',Object.assign({x1:X(a),y1:y,x2:X(b),y2:y,stroke:pos?'var(--blu)':'var(--grigio)','stroke-width':2.2,'stroke-dasharray':pos?'':'5 4'},extra||{}));}
+F.forEach(function(f,i){
+  var y=righe[i];
+  svg.appendChild(txt(6,y+4,f[0],{fill:'var(--inchiostro)','font-size':13,'font-family':'var(--serif)'}));
+  for(var k=0;k<bordi.length-1;k++){var a=bordi[k],b=bordi[k+1],m=(a+b)/2,pos=f[1](m)>0;
+    svg.appendChild(tratto(y,a,b,pos));
+    svg.appendChild(txt(X(m),y-7,pos?'+':'−',{'text-anchor':'middle',fill:pos?'var(--blu)':'var(--grigio)','font-size':13,'font-weight':700}));}
+  svg.appendChild(el('circle',{cx:X(f[2]),cy:y,r:3.5,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.4}));
+  svg.appendChild(txt(X(f[2])+5,y+15,'0',{'font-size':10}));
+});
+/* riga del prodotto */
+svg.appendChild(el('line',{x1:L-6,y1:yP-20,x2:R,y2:yP-20,stroke:'var(--inchiostro)','stroke-width':.8}));
+svg.appendChild(txt(6,yP+4,'prodotto',{fill:'var(--inchiostro)','font-size':13,'font-weight':700}));
+for(var k=0;k<bordi.length-1;k++){var a=bordi[k],b=bordi[k+1],m=(a+b)/2,pos=prod(m)>0;
+  if(pos)svg.appendChild(el('line',{x1:X(a),y1:yP,x2:X(b),y2:yP,stroke:'var(--rosso)','stroke-width':5}));
+  else svg.appendChild(tratto(yP,a,b,false));
+  svg.appendChild(txt(X(m),yP-6,pos?'+':'−',{'text-anchor':'middle',fill:pos?'var(--rosso)':'var(--grigio)','font-size':13,'font-weight':700}));}
+radici.forEach(function(r){svg.appendChild(el('circle',{cx:X(r),cy:yP,r:4.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5}));});
+/* retta mobile */
+var gl=svg.appendChild(el('line',{y1:yA,y2:yP+10,stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'4 3'}));
+var pt=svg.appendChild(el('circle',{cy:yA,r:5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5}));
+var cur=document.getElementById('c-x'), v=document.getElementById('v-x');
+function sg(y){return Math.abs(y)<1e-9?'0':(y>0?'+':'−');}
+function dis(){var x=(+cur.value)/10, p=prod(x);
+  set(gl,{x1:X(x),x2:X(x)}); set(pt,{cx:X(x)});
+  v.innerHTML='x = '+n(x)+' &nbsp; '+F.map(function(f){return sg(f[1](x));}).join(' · ')+' → '+sg(p)+' &nbsp; '+(p>=-1e-9?'<span class="ok">verificata</span>':'non verificata');}
+cur.addEventListener('input',dis); dis();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
