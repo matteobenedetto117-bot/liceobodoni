@@ -5,19 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Relazione di laboratorio: verifica del principio di Archimede — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.scheda{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:22px 0}
-.scheda h3{font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blu);margin:0 0 8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -29,127 +59,137 @@
   <h1>Relazione di laboratorio: verifica del principio di Archimede</h1>
 </header>
 
-<h2>Obiettivo</h2>
-<p>Verificare sperimentalmente il principio di Archimede, confrontando il valore della spinta
-ottenuto da una misura diretta con quello ottenuto da un calcolo teorico.</p>
+<p>Obiettivo: confrontare la spinta misurata con il dinamometro con quella calcolata da $F_A = d\,g\,V$.</p>
 
-<h2>Strumenti</h2>
-<p>Un dinamometro, di cui vanno lette portata e sensibilità sulla scala, per pesare il corpo in
-aria e in acqua. Un cilindro graduato, anch'esso di portata e sensibilità note, per misurare il
-volume del corpo dal dislivello che l'acqua subisce quando il corpo vi si immerge.</p>
+<ul>
+<li>dinamometro (portata, sensibilità $e_{F_p}$) → peso in aria e in acqua;</li>
+<li>cilindro graduato (portata, sensibilità) → volume $V$ del corpo.</li>
+</ul>
 
-<h2>Procedura</h2>
-<p>Agganciamo il corpo al dinamometro e leggiamo il peso in aria $F_{p1}$. Immergiamo poi lo
-stesso corpo in un contenitore d'acqua, tenendolo appeso al dinamometro senza che tocchi le
-pareti o il fondo, e leggiamo il nuovo peso $F_{p2}$, minore del precedente perché l'acqua
-esercita sul corpo una spinta verso l'alto.</p>
+<h2>Misura diretta</h2>
 
 <div class="fig">
-<svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="30" x2="180" y2="30" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="60" y1="30" x2="20" y2="70" stroke="var(--inchiostro)" stroke-width="2"/>
-<rect x="46" y="70" width="6" height="8" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M46,78 q3,6 0,12 q-3,6 0,12 q3,6 0,12 q-3,6 0,12" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="38" y="126" width="20" height="20" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="55" y1="100" x2="90" y2="100" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="96" y="104" font-family="var(--sans)" font-style="italic" font-size="14" fill="var(--rosso)">F<tspan dy="3" font-size="10">p1</tspan><tspan dy="-3"> = 0,22 N</tspan></text>
-<text x="100" y="24" font-family="var(--sans)" font-size="13" fill="var(--grigio)">in aria</text>
-<line x1="280" y1="30" x2="440" y2="30" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="320" y1="30" x2="280" y2="70" stroke="var(--inchiostro)" stroke-width="2"/>
-<rect x="306" y="70" width="6" height="8" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M306,78 q3,6 0,12 q-3,6 0,12 q3,6 0,12 q-3,6 0,12" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="270" y="120" width="80" height="90" fill="var(--blu)" opacity=".14" stroke="var(--blu)" stroke-width="1.3"/>
-<line x1="270" y1="120" x2="350" y2="120" stroke="var(--blu)" stroke-width="1.6"/>
-<rect x="298" y="126" width="20" height="20" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="315" y1="100" x2="380" y2="100" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="386" y="104" font-family="var(--sans)" font-style="italic" font-size="14" fill="var(--rosso)">F<tspan dy="3" font-size="10">p2</tspan><tspan dy="-3"> = 0,18 N</tspan></text>
-<text x="350" y="24" font-family="var(--sans)" font-size="13" fill="var(--grigio)">in acqua</text>
-</svg>
-<p class="did">A parità di corpo, il dinamometro segna un peso minore quando il corpo è immerso:
-la differenza è dovuta alla spinta di Archimede.</p>
+<svg id="g-din" viewBox="0 0 440 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:440px" role="img" aria-label="Corpo appeso al dinamometro in aria e immerso in acqua: la molla si allunga meno in acqua"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">In aria</p>
+<p class="did">In acqua, senza toccare pareti e fondo</p>
+</div>
 </div>
 
-<p>Il volume del corpo si ricava invece dal cilindro graduato: leggiamo il livello dell'acqua
-prima di immergere il corpo e di nuovo dopo, e la differenza fra le due letture è il volume $V$
-del corpo, uguale al volume d'acqua che ha spostato.</p>
+<ul>
+<li>corpo appeso in aria → lettura $F_{p1}$ (peso);</li>
+<li>corpo immerso → lettura $F_{p2} &lt; F_{p1}$ (peso apparente), per la spinta verso l'alto.</li>
+</ul>
+
+<p>La spinta è la differenza delle due letture:</p>
+
+<p class="eq">$$F_A = F_{p1} - F_{p2} = 0{,}22\ \text{N} - 0{,}18\ \text{N} = 0{,}04\ \text{N}$$</p>
+
+<p>Due letture dello stesso dinamometro: le incertezze si sommano.</p>
+
+<p class="eq">$$e_{F_A} = 2\,e_{F_p}$$</p>
+
+<h2>Calcolo teorico</h2>
 
 <div class="fig">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<rect x="30" y="20" width="70" height="180" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="30" y="110" width="70" height="90" fill="var(--blu)" opacity=".18"/>
-<line x1="30" y1="110" x2="100" y2="110" stroke="var(--blu)" stroke-width="1.6"/>
-<text x="10" y="10" font-family="var(--sans)" font-size="13" fill="var(--grigio)">prima</text>
-<rect x="190" y="20" width="70" height="180" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="190" y="80" width="70" height="120" fill="var(--blu)" opacity=".18"/>
-<line x1="190" y1="80" x2="260" y2="80" stroke="var(--blu)" stroke-width="1.6"/>
-<rect x="212" y="90" width="26" height="40" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="170" y="10" font-family="var(--sans)" font-size="13" fill="var(--grigio)">dopo</text>
-<line x1="270" y1="80" x2="270" y2="110" stroke="var(--rosso)" stroke-width="1.3"/>
-<line x1="264" y1="80" x2="276" y2="80" stroke="var(--rosso)" stroke-width="1.3"/>
-<line x1="264" y1="110" x2="276" y2="110" stroke="var(--rosso)" stroke-width="1.3"/>
-<text x="279" y="99" font-family="var(--sans)" font-style="italic" font-size="14" fill="var(--rosso)">V</text>
-</svg>
-<p class="did">Il dislivello fra le due letture è il volume $V$ del corpo immerso.</p>
+<svg id="g-cil" viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px" role="img" aria-label="Cilindro graduato prima e dopo l'immersione del corpo: il livello sale del volume V"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Prima</p>
+<p class="did">Dopo: dislivello = $V$</p>
+</div>
 </div>
 
-<h2>Dati e calcoli</h2>
+<p>Con il volume $V$ letto sul cilindro graduato, $d = 1000$ kg/m³ (acqua) e $g = 9{,}81$ N/kg valori noti:</p>
 
-<div class="scheda">
-<h3>Misura sperimentale</h3>
-<p>La spinta misurata è la differenza fra il peso in aria e il peso in acqua:</p>
-<div class="formula-box">$$F_A = F_{p1} - F_{p2} = 0{,}22\ \text{N} - 0{,}18\ \text{N} = 0{,}04\ \text{N}$$</div>
-<p>L'incertezza su una differenza di due misure è la somma delle incertezze di ciascuna; poiché
-entrambe le letture vengono dallo stesso dinamometro, con la stessa sensibilità $e_{F_p}$:</p>
-<div class="formula-box">$$e_{F_A} = 2\,e_{F_p}$$</div>
-</div>
+<p class="eq">$$F_A = d\,g\,V \qquad\qquad e_{F_A} = d\,g\,e_V$$</p>
 
-<div class="scheda">
-<h3>Calcolo teorico</h3>
-<p>Dalla formula ricavata nell'unità precedente, con la densità dell'acqua
-$d = 1000\ \text{kg/m}^3$ e $g = 9{,}81\ \text{N/kg}$, e il volume $V$ letto sul cilindro
-graduato:</p>
-<div class="formula-box">$$F_A = d\,g\,V$$</div>
-<p>L'incertezza dipende solo dalla sensibilità $e_V$ del cilindro graduato, perché $d$ e $g$
-sono valori noti:</p>
-<div class="formula-box">$$e_{F_A} = d\,g\,e_V$$</div>
-</div>
-
-<h2>Grafico di compatibilità</h2>
-<p>Riportiamo su uno stesso asse i due intervalli $F_A \pm e_{F_A}$, quello della misura diretta
-e quello del calcolo teorico. Le due misure sono compatibili se gli intervalli si
-sovrappongono.</p>
+<h2>Compatibilità</h2>
 
 <div class="fig">
-<svg viewBox="0 0 460 130" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fafr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M7,0 L0,3.5 L7,7 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="20" y1="70" x2="440" y2="70" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fafr)"/>
-<text x="446" y="75" font-family="var(--sans)" font-style="italic" font-size="14" fill="var(--inchiostro)">F<tspan dy="3" font-size="10">A</tspan></text>
-<line x1="120" y1="50" x2="120" y2="90" stroke="var(--rosso)" stroke-width="1.6"/>
-<line x1="190" y1="50" x2="190" y2="90" stroke="var(--rosso)" stroke-width="1.6"/>
-<circle cx="155" cy="70" r="3.5" fill="var(--rosso)"/>
-<rect x="170" y="55" width="80" height="30" fill="var(--blu)" opacity=".22"/>
-<line x1="250" y1="50" x2="250" y2="90" stroke="var(--verde)" stroke-width="1.6"/>
-<line x1="330" y1="50" x2="330" y2="90" stroke="var(--verde)" stroke-width="1.6"/>
-<circle cx="290" cy="70" r="3.5" fill="var(--verde)"/>
-<text x="140" y="112" font-family="var(--sans)" font-size="12" fill="var(--rosso)">misura</text>
-<text x="270" y="112" font-family="var(--sans)" font-size="12" fill="var(--verde)">calcolo teorico</text>
-</svg>
-<p class="did">La zona in cui i due intervalli si intersecano (in blu) è la regione di
-compatibilità fra la misura diretta e il calcolo teorico.</p>
+<svg id="g-comp" viewBox="0 0 440 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:440px" role="img" aria-label="Due intervalli sull'asse della spinta che si sovrappongono"></svg>
+<p class="did">Intervalli $F_A \pm e_{F_A}$; in blu la sovrapposizione</p>
 </div>
 
-<h2>Conclusioni</h2>
-<p>Se gli intervalli si sovrappongono, come nel disegno, la misura è compatibile con il
-principio di Archimede: la spinta osservata pesando il corpo in aria e in acqua coincide, entro
-l'incertezza sperimentale, con quella calcolata dalla densità del fluido e dal volume immerso. Se
-invece i due intervalli risultassero disgiunti, la misura non sarebbe compatibile, e andrebbe
-ricercata la causa nello strumento o nella procedura.</p>
+<ul>
+<li>intervalli sovrapposti → misura compatibile con il principio di Archimede;</li>
+<li>intervalli disgiunti → misura non compatibile: cercare la causa nello strumento o nella procedura.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../56-principio-di-archimede/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Principio di Archimede</span></a><a class="successiva" href="../57-galleggiamento-di-un-corpo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Galleggiamento di un corpo</span></a></nav>
 <footer><p>Fisica prima &middot; Statica dei fluidi &middot; Unità 56</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');t.innerHTML=s;return t;}
+  function sub(b,s){return b+'<tspan font-size="9" dy="3">'+s+'</tspan>';}
+  var ink='var(--inchiostro)';
+  /* figura 1: allungamento della molla = K·lettura (0,22 N e 0,18 N) */
+  var s=document.getElementById('g-din');
+  if(s){var K=300,Y0=24,A=26,LATO=34;
+    function dinamometro(cx,F,lab){
+      el(s,'line',{x1:cx-70,y1:Y0,x2:cx+70,y2:Y0,stroke:ink,'stroke-width':3});
+      el(s,'rect',{x:cx-5,y:Y0,width:10,height:10,fill:'none',stroke:ink,'stroke-width':1.4});
+      var y1=Y0+10,l=A+K*F,n=10,d='M'+cx+','+y1,k;
+      for(k=0;k<n;k++)d+=' L'+(cx+(k%2?-7:7))+','+(y1+l*(k+.5)/n).toFixed(1);
+      d+=' L'+cx+','+(y1+l);el(s,'path',{d:d,fill:'none',stroke:ink,'stroke-width':1.4,'stroke-linejoin':'round'});
+      var yb=y1+l+6;el(s,'line',{x1:cx,y1:y1+l,x2:cx,y2:yb,stroke:ink,'stroke-width':1.4});
+      el(s,'rect',{x:cx-LATO/2,y:yb,width:LATO,height:LATO,fill:'#fff',stroke:ink,'stroke-width':1.8});
+      txt(s,cx+16,y1+l/2+4,lab,'var(--rosso)',{it:1,fs:14});
+      return yb;}
+    dinamometro(110,0.22,sub('F','p1')+'<tspan dy="-3"> = 0,22 N</tspan>');
+    var yb=dinamometro(320,0.18,sub('F','p2')+'<tspan dy="-3"> = 0,18 N</tspan>');
+    var top=yb-22;
+    el(s,'rect',{x:262,y:top,width:116,height:240-top,fill:'var(--blu-chiaro)'});
+    el(s,'line',{x1:262,y1:top,x2:378,y2:top,stroke:'var(--blu)','stroke-width':1.6});
+    el(s,'path',{d:'M262,'+(top-24)+' L262,240 L378,240 L378,'+(top-24),fill:'none',stroke:ink,'stroke-width':2});
+    el(s,'rect',{x:320-LATO/2,y:yb,width:LATO,height:LATO,fill:'#fff',stroke:ink,'stroke-width':1.8});}
+  /* figura 2: cilindri graduati, tacche ogni 10 unità; V = 4 tacche */
+  var c=document.getElementById('g-cil');
+  if(c){var YF=210,YT=20,W=64,L0=120,DV=40;
+    function cil(x,liv,corpo){
+      el(c,'rect',{x:x,y:liv,width:W,height:YF-liv,fill:'var(--blu-chiaro)'});
+      el(c,'line',{x1:x,y1:liv,x2:x+W,y2:liv,stroke:'var(--blu)','stroke-width':1.6});
+      for(var y=YF-10;y>YT+10;y-=10)el(c,'line',{x1:x,y1:y,x2:x+((YF-y)%50?8:14),y2:y,stroke:'var(--grigio)','stroke-width':.8});
+      el(c,'path',{d:'M'+x+','+YT+' L'+x+','+YF+' L'+(x+W)+','+YF+' L'+(x+W)+','+YT,fill:'none',stroke:ink,'stroke-width':1.8});
+      if(corpo)el(c,'rect',{x:x+18,y:YF-50,width:28,height:40,fill:'#fff',stroke:ink,'stroke-width':1.6});}
+    cil(50,L0,false);cil(200,L0-DV,true);
+    el(c,'line',{x1:50+W,y1:L0,x2:200,y2:L0,stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'3 3'});
+    el(c,'line',{x1:276,y1:L0-DV+1,x2:276,y2:L0-1,stroke:'var(--rosso)','stroke-width':1.4});
+    el(c,'line',{x1:270,y1:L0-DV,x2:282,y2:L0-DV,stroke:'var(--rosso)','stroke-width':1.4});
+    el(c,'line',{x1:270,y1:L0,x2:282,y2:L0,stroke:'var(--rosso)','stroke-width':1.4});
+    txt(c,288,L0-DV/2+5,'V','var(--rosso)',{it:1,fs:14});}
+  /* figura 3: intervalli schematici */
+  var g=document.getElementById('g-comp');
+  if(g){var d=el(g,'defs',{});el(el(d,'marker',{id:'fa',markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:ink});
+    var Y=60,m=[110,230],t=[190,320];
+    el(g,'rect',{x:t[0],y:Y-14,width:m[1]-t[0],height:28,fill:'var(--blu)',opacity:.22});
+    el(g,'line',{x1:20,y1:Y,x2:410,y2:Y,stroke:ink,'stroke-width':1.6,'marker-end':'url(#fa)'});
+    txt(g,414,Y+5,sub('F','A'),ink,{it:1,fs:14});
+    function intv(a,col,yl,lab){el(g,'line',{x1:a[0],y1:Y-20,x2:a[0],y2:Y+20,stroke:col,'stroke-width':1.8});el(g,'line',{x1:a[1],y1:Y-20,x2:a[1],y2:Y+20,stroke:col,'stroke-width':1.8});
+      el(g,'line',{x1:a[0],y1:yl,x2:a[1],y2:yl,stroke:col,'stroke-width':1.4});el(g,'circle',{cx:(a[0]+a[1])/2,cy:Y,r:3.5,fill:col});
+      txt(g,(a[0]+a[1])/2,yl+(yl<Y?-6:15),lab,col,{fs:12,anc:'middle'});}
+    intv(m,'var(--rosso)',Y-20,'misura diretta');intv(t,'var(--verde)',Y+20,'calcolo teorico');}
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
