@@ -687,6 +687,7 @@
   scritto nella traccia.
 - Aggiunta: nessuna. Ridisegnato in SVG lo schizzo della traccia con l'area tratteggiata sotto la
   curva I(f), a illustrare l'integrale A∫I(f)df = P. Nessuno strumento interattivo.
+- Revisione (27/10/2026, regole 13/10): parole 185 → 126 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 54); apertura a domanda; P = A∫I(f)df in .eq; legge di Stefan-Boltzmann e quantizzazione E = nhf in .def rosso; distribuzione di Planck in .def; integrale e valore di σ in due .eq; tolti sommario, «Nella prossima unità», le frasi storiche («A inizio Novecento…», «ipotesi radicale», «esattamente il valore già misurato…») e le didascalie lunghe; tenuto il titoletto «Ipotesi di Planck» (argomento distinto). Nessuna comparsa, nessun esempio. Controllo concettuale: σ = 2π⁵k⁴/(15c²h³) = 5,670×10⁻⁸ W m⁻² K⁻⁴ riverificato con SymPy e con l'integrale numerico della distribuzione a 5000 K; nessuna correzione. Figura rifatta da script: curva di Planck calcolata a T = 5000 K (stessi assi dell'unità 54) con l'area P/A colorata, al posto della curva di Bézier tracciata a occhio; statica.
 
 ## Unità 56 — L'effetto fotoelettrico
 - Parole: 398 su 2-3 pagine di traccia (pagine 99–101, l'ultima molto breve).
