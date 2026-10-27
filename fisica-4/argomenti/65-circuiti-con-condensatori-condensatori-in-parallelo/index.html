@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Circuiti con condensatori; condensatori in parallelo — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.fig-riga{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px}
-.fig-riga svg{max-width:42%;height:auto}
-.freccia{font-size:1.8rem;color:var(--grigio)}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,129 +55,109 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 63</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 63</p>
   <h1>Circuiti con condensatori; condensatori in parallelo</h1>
-  <p class="sommario">Oltre alle resistenze, in un circuito possiamo trovare
-  dei <strong>condensatori</strong>. Il loro comportamento &egrave; diverso:
-  non lasciano passare corrente indefinitamente, ma accumulano carica fino a
-  un equilibrio. Vediamo che cosa succede quando pi&ugrave; condensatori sono
-  collegati in parallelo.</p>
 </header>
 
-<h2>Condensatori in un circuito</h2>
-
-<p>Su ciascuna armatura del condensatore si accumula una carica $Q$: positiva
-su un'armatura, negativa sull'altra. Quando il condensatore &egrave; carico,
-cio&egrave; ha raggiunto l'equilibrio, non scorre pi&ugrave; corrente in quel
-ramo del circuito.</p>
+<p>Condensatore collegato a un generatore: che cosa succede nel suo ramo?</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg">
-<line x1="30" y1="30" x2="30" y2="130" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="14" y1="68" x2="46" y2="68" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="19" y1="86" x2="41" y2="86" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="30" y1="30" x2="200" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="30" y1="130" x2="200" y2="130" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="200" y1="30" x2="200" y2="70" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="170" y1="70" x2="230" y2="70" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="170" y1="90" x2="230" y2="90" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="200" y1="90" x2="200" y2="130" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="150" y="64" font-family="var(--sans)" font-size="15" fill="var(--rosso)">+ + + +</text>
-<text x="150" y="103" font-family="var(--sans)" font-size="15" fill="var(--blu)">&#8211; &#8211; &#8211; &#8211;</text>
-<text x="4" y="82" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">&#916;V</text>
-</svg>
-<p class="did">Condensatore all'equilibrio: carica $+Q$ su un'armatura,
-$-Q$ sull'altra, nessuna corrente nel ramo.</p>
+<svg id="g-cond" viewBox="0 0 280 170" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px" role="img" aria-label="Condensatore carico collegato a un generatore: carica +Q e −Q sulle armature"></svg>
+<p class="did">Condensatore carico: $+Q$ e $-Q$ sulle armature</p>
 </div>
+
+<ul>
+<li>sulle armature si accumula la carica $+Q$ e $-Q$;</li>
+<li>condensatore carico (equilibrio) → nessuna corrente nel ramo.</li>
+</ul>
 
 <h2>Condensatori in parallelo</h2>
 
-<p>Consideriamo tre condensatori $C_1$, $C_2$, $C_3$ collegati agli stessi
-due nodi del circuito. Come gi&agrave; visto per le resistenze in parallelo,
-la differenza di potenziale $\Delta V$ del generatore si applica uguale a
-<strong>tutti</strong> i condensatori:</p>
-
-<div class="formula-box">
-$$C_1=\frac{Q_1}{\Delta V}\qquad C_2=\frac{Q_2}{\Delta V}\qquad C_3=\frac{Q_3}{\Delta V}$$
+<div class="fig">
+<svg id="g-par" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px" role="img" aria-label="Tre condensatori in parallelo sostituiti da un unico condensatore equivalente"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Tre condensatori in parallelo</p>
+<p class="did">Condensatore equivalente $C_{eq}$</p>
+</div>
 </div>
 
-<div class="fig fig-riga">
-<svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="30" y1="40" x2="30" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="14" y1="95" x2="46" y2="95" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="19" y1="112" x2="41" y2="112" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="30" y1="40" x2="230" y2="40" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="30" y1="170" x2="230" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="100" y1="40" x2="100" y2="90" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="80" y1="90" x2="120" y2="90" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="80" y1="105" x2="120" y2="105" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="100" y1="105" x2="100" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="165" y1="40" x2="165" y2="90" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="145" y1="90" x2="185" y2="90" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="145" y1="105" x2="185" y2="105" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="165" y1="105" x2="165" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="230" y1="40" x2="230" y2="90" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="210" y1="90" x2="250" y2="90" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="210" y1="105" x2="250" y2="105" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="230" y1="105" x2="230" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="103" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">C&#8321;</text>
-<text x="168" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">C&#8322;</text>
-<text x="233" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">C&#8323;</text>
-<text x="4" y="108" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">&#916;V</text>
-</svg>
-<span class="freccia">&rarr;</span>
-<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="30" y1="40" x2="30" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="14" y1="95" x2="46" y2="95" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="19" y1="112" x2="41" y2="112" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="30" y1="40" x2="120" y2="40" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="30" y1="170" x2="120" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="120" y1="40" x2="120" y2="90" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="100" y1="90" x2="140" y2="90" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="100" y1="105" x2="140" y2="105" stroke="var(--inchiostro)" stroke-width="3"/>
-<line x1="120" y1="105" x2="120" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="145" y="100" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">C<tspan font-size="10" dy="4">eq</tspan></text>
-<text x="4" y="108" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">&#916;V</text>
-</svg>
-<p class="did">Tre condensatori in parallelo (a sinistra) sostituiti
-dall'unico condensatore equivalente $C_{eq}$ (a destra).</p>
-</div>
+<p>Collegati agli stessi due nodi, i tre condensatori hanno la stessa $\Delta V$:</p>
 
-<p>Nel condensatore equivalente si accumula la carica totale, cio&egrave;
-la somma delle cariche sui tre condensatori:</p>
+<p class="eq">$$C_1=\frac{Q_1}{\Delta V}\qquad C_2=\frac{Q_2}{\Delta V}\qquad C_3=\frac{Q_3}{\Delta V}$$</p>
 
-<div class="formula-box">
-$$C_{eq}=\frac{Q_{TOT}}{\Delta V}\qquad\text{con}\qquad Q_{TOT}=Q_1+Q_2+Q_3$$
-</div>
+<p>Sul condensatore equivalente si accumula la carica totale:</p>
 
-<p>Sostituendo $Q_1=C_1\Delta V$, $Q_2=C_2\Delta V$, $Q_3=C_3\Delta V$:</p>
+<p class="eq">$$C_{eq}=\frac{Q_{TOT}}{\Delta V}\qquad Q_{TOT}=Q_1+Q_2+Q_3$$</p>
+<p class="eq">$$C_{eq}=\frac{Q_1}{\Delta V}+\frac{Q_2}{\Delta V}+\frac{Q_3}{\Delta V}=C_1+C_2+C_3$$</p>
 
-<div class="formula-box">
-$$C_{eq}=\frac{Q_1+Q_2+Q_3}{\Delta V}=\frac{Q_1}{\Delta V}+\frac{Q_2}{\Delta V}+\frac{Q_3}{\Delta V}=C_1+C_2+C_3$$
-</div>
+<div class="def"><span class="et">Condensatori in parallelo</span>
+<p class="eq principio">$$C_{eq}=C_1+C_2+C_3+\dots$$</p></div>
 
-<p>Per un numero qualsiasi di condensatori in parallelo, la capacit&agrave;
-equivalente &egrave; la somma delle singole capacit&agrave;:</p>
-
-<div class="formula-box">
-$$C_{eq}=C_1+C_2+C_3+\dots$$
-</div>
-
-<p>La regola &egrave; l'opposto di quella delle resistenze: per i
-condensatori in parallelo si sommano direttamente le capacit&agrave;, non i
-reciproci.</p>
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
-<ul>
-<li>Vediamo il caso dei <strong>condensatori in serie</strong>, dove a
-sommarsi sono invece i reciproci delle capacit&agrave;.</li>
-</ul>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>In parallelo si sommano le capacità, non i loro reciproci (al contrario delle resistenze).</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../64-resistenze-in-parallelo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Resistenze in parallelo</span></a><a class="successiva" href="../66-condensatori-in-serie/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Condensatori in serie</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 63</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 63</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function lab(p,x,y,base,sub,col,anc){var t=el(p,'text',{x:x,y:y,'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':anc||'middle'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  var filo={stroke:'var(--inchiostro)','stroke-width':2,fill:'none'};
+  function linea(p,pts){el(p,'path',Object.assign({d:'M'+pts.map(function(q){return q.join(',');}).join(' L'),'stroke-linejoin':'round'},filo));}
+  /* condensatore verticale in x, armature a yc-G/2 e yc+G/2 */
+  var G=14,LA=40;
+  function cond(p,x,ya,yb,carica){var yc=(ya+yb)/2;linea(p,[[x,ya],[x,yc-G/2]]);linea(p,[[x,yc+G/2],[x,yb]]);
+    el(p,'line',{x1:x-LA/2,y1:yc-G/2,x2:x+LA/2,y2:yc-G/2,stroke:'var(--inchiostro)','stroke-width':3});
+    el(p,'line',{x1:x-LA/2,y1:yc+G/2,x2:x+LA/2,y2:yc+G/2,stroke:'var(--inchiostro)','stroke-width':3});
+    if(carica){var dx=[-15,-7,7,15];for(var k=0;k<4;k++){var xx=x+dx[k];
+      el(p,'text',{x:xx,y:yc-G/2-5,'font-size':13,'font-family':'sans-serif',fill:'var(--rosso)','text-anchor':'middle'}).textContent='+';
+      el(p,'text',{x:xx,y:yc+G/2+14,'font-size':13,'font-family':'sans-serif',fill:'var(--blu)','text-anchor':'middle'}).textContent='−';}}
+    return yc;}
+  function gen(p,x,yp,ym){el(p,'line',{x1:x-18,y1:yp,x2:x+18,y2:yp,stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(p,'line',{x1:x-9,y1:ym,x2:x+9,y2:ym,stroke:'var(--inchiostro)','stroke-width':5});
+    el(p,'text',{x:x+24,y:yp-3,'font-size':13,'font-family':'sans-serif',fill:'var(--inchiostro)'}).textContent='+';
+    el(p,'text',{x:x+24,y:ym+13,'font-size':13,'font-family':'sans-serif',fill:'var(--inchiostro)'}).textContent='−';}
+  function nodo(p,x,y){el(p,'circle',{cx:x,cy:y,r:3.5,fill:'var(--inchiostro)'});}
+  /* figura 1 */
+  var s=document.getElementById('g-cond');
+  if(s){var XL=70,XR=200,YT=30,YB=150;
+    linea(s,[[XL,84],[XL,YT],[XR,YT]]);linea(s,[[XL,96],[XL,YB],[XR,YB]]);gen(s,XL,84,96);
+    var yc=cond(s,XR,YT,YB,true);
+    lab(s,XR+30,yc-G/2+4,'+Q',null,'var(--rosso)','start');lab(s,XR+30,yc+G/2+12,'−Q',null,'var(--blu)','start');
+    lab(s,XL-24,95,'ΔV',null,'var(--inchiostro)','end');}
+  /* figura 2 */
+  var e=document.getElementById('g-par');
+  if(e){var YT2=30,YB2=180,xs=[130,210,290],XL2=60;
+    linea(e,[[XL2,99],[XL2,YT2],[290,YT2]]);linea(e,[[XL2,111],[XL2,YB2],[290,YB2]]);gen(e,XL2,99,111);
+    xs.forEach(function(x,k){cond(e,x,YT2,YB2,false);lab(e,x+24,(YT2+YB2)/2+5,'C',''+(k+1),'var(--inchiostro)','start');
+      if(k<2){nodo(e,x,YT2);nodo(e,x,YB2);}});
+    lab(e,XL2-24,110,'ΔV',null,'var(--inchiostro)','end');
+    el(e,'text',{x:355,y:112,'font-size':26,'font-family':'sans-serif',fill:'var(--grigio)','text-anchor':'middle'}).textContent='→';
+    var X2=420,X3=500;
+    linea(e,[[X2,99],[X2,YT2],[X3,YT2]]);linea(e,[[X2,111],[X2,YB2],[X3,YB2]]);gen(e,X2,99,111);
+    cond(e,X3,YT2,YB2,false);lab(e,X3+24,(YT2+YB2)/2+5,'C','eq','var(--inchiostro)','start');
+    lab(e,X2-24,110,'ΔV',null,'var(--inchiostro)','end');}
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
