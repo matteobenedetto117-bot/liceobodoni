@@ -5,14 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'esperimento della doppia fenditura — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
+.cursore{flex-wrap:wrap}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:11em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+ul,.foglio>.def+ul,.foglio>.eq+ul{margin-top:var(--r)}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.def+h2,.foglio>.eq+h2,.foglio>.fig+h2{margin-top:var(--r)}
+.due-svg{display:grid;grid-template-columns:1.7fr 1fr;gap:12px;align-items:center}
+@media(max-width:640px){.due-svg{grid-template-columns:1fr}}
+.foglio>.nota+p,.foglio>.def+.nota,.foglio>ul+.def,.foglio>ul+.nota{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -22,87 +85,123 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Meccanica quantistica &middot; Unità 57</p>
   <h1>L'esperimento della doppia fenditura</h1>
-  <p class="sommario">Abbiamo appena descritto la luce come un fascio di fotoni, particelle che
-  urtano gli elettroni uno alla volta. Più di un secolo prima, però, Young aveva mostrato con un
-  esperimento semplicissimo che la luce si comporta come un'onda. Le due immagini della luce
-  sembrano inconciliabili.</p>
 </header>
 
-<h2>L'esperimento di Young, 1801</h2>
+<p>Luce attraverso due fenditure vicine: che cosa si osserva su uno schermo?</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fk57a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<circle cx="55" cy="150" r="9" fill="#c98a1f"/>
-<g stroke="#c98a1f" stroke-width="1.6">
-<line x1="55" y1="122" x2="55" y2="108"/>
-<line x1="55" y1="178" x2="55" y2="192"/>
-<line x1="27" y1="150" x2="13" y2="150"/>
-<line x1="35" y1="130" x2="24" y2="119"/>
-<line x1="35" y1="170" x2="24" y2="181"/>
-</g>
-<rect x="150" y="60" width="8" height="70" fill="var(--inchiostro)"/>
-<rect x="150" y="150" width="8" height="90" fill="var(--inchiostro)"/>
-<text x="118" y="46" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">barriera</text>
-<g fill="none" stroke="#c98a1f" stroke-width="1.6">
-<path d="M158,140 A20,20 0 0,1 178,120"/>
-<path d="M158,140 A40,40 0 0,1 198,100"/>
-<path d="M158,140 A60,60 0 0,1 218,80"/>
-<path d="M158,140 A20,20 0 0,0 178,160"/>
-<path d="M158,140 A40,40 0 0,0 198,180"/>
-<path d="M158,140 A60,60 0 0,0 218,200"/>
-</g>
-<rect x="270" y="60" width="8" height="55" fill="var(--inchiostro)"/>
-<rect x="270" y="128" width="8" height="24" fill="var(--inchiostro)"/>
-<rect x="270" y="165" width="8" height="24" fill="var(--inchiostro)"/>
-<rect x="270" y="202" width="8" height="98" fill="var(--inchiostro)"/>
-<text x="240" y="46" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">doppia fenditura</text>
-<line x1="280" y1="140" x2="330" y2="95" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fk57a)"/>
-<line x1="280" y1="177" x2="330" y2="235" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fk57a)"/>
-<path d="M360,80 Q368,70 376,80 T392,80 T408,80 T424,80" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<path d="M360,95 Q368,85 376,95 T392,95 T408,95 T424,95" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<text x="432" y="90" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">+</text>
-<path d="M450,88 Q462,64 474,88 T498,88 T522,88" fill="none" stroke="var(--verde)" stroke-width="2.6"/>
-<text x="450" y="112" font-family="var(--sans)" font-size="12" fill="var(--verde)">interferenza costruttiva</text>
-<path d="M360,225 Q368,215 376,225 T392,225 T408,225 T424,225" fill="none" stroke="var(--blu)" stroke-width="2"/>
-<path d="M360,225 Q368,235 376,225 T392,225 T408,225 T424,225" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<text x="432" y="230" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">=</text>
-<line x1="450" y1="225" x2="522" y2="225" stroke="var(--grigio)" stroke-width="2.6"/>
-<text x="450" y="248" font-family="var(--sans)" font-size="12" fill="var(--grigio)">interferenza distruttiva</text>
-</svg>
-<p class="did">La sorgente illumina una prima fenditura, da cui si propagano fronti d'onda
-circolari; questi raggiungono una seconda barriera con due fenditure vicine, ciascuna delle quali
-diventa a sua volta sorgente d'onda. Dove le due onde arrivano in fase si sommano (interferenza
-costruttiva), dove arrivano in opposizione di fase si annullano (interferenza distruttiva).</p>
+<div class="due-svg">
+<svg id="g-young" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" style="width:100%" role="img" aria-label="Sorgente, fenditura singola, doppia fenditura con onde circolari e schermo con frange chiare e scure"></svg>
+<svg id="g-somma" viewBox="0 0 240 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:260px;margin:auto" role="img" aria-label="Somma di due onde in fase e di due onde in opposizione di fase"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Frange sullo schermo</p>
+<p class="did">Somma delle due onde</p>
+</div>
 </div>
 
-<p>Il risultato che si osserva su uno schermo posto oltre le due fenditure è una successione di
-bande chiare e scure: chiare dove le onde interferiscono costruttivamente, scure dove
-interferiscono distruttivamente.</p>
+<p>Ogni fenditura diventa sorgente di onde, che sullo schermo si sovrappongono:</p>
 
-<h2>Onda o corpuscolo?</h2>
-
-<p>Con l'esperimento di Young si dimostra che la luce è un'onda: la figura a bande chiare e scure
-è tipica delle onde, non dei corpuscoli. Ma l'ipotesi di Planck, confermata dagli esperimenti
-sull'effetto fotoelettrico visti nell'unità precedente, ci ha mostrato che la luce è fatta di
-corpuscoli, i fotoni. Stando alle evidenze sperimentali, la luce dovrebbe dunque essere
-contemporaneamente sia onda sia corpuscolo.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>L'ipotesi di De Broglie estenderà questo doppio comportamento a tutte le particelle, non solo
-alla luce, con l'esperimento di Davisson e Germer.</li>
+<li>onde in fase → interferenza costruttiva, frangia chiara;</li>
+<li>onde in opposizione di fase → interferenza distruttiva, frangia scura.</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Esperimento di Young</span>
+<p>Frange di interferenza → la luce si comporta come un'onda.</p></div>
+
+<p>Due evidenze sperimentali opposte:</p>
+
+<ul>
+<li>interferenza → comportamento ondulatorio;</li>
+<li>effetto fotoelettrico → comportamento corpuscolare (fotoni).</li>
+</ul>
+
+<div class="nota"><span class="et">Doppia natura</span>
+<p>La luce manifesta sia proprietà ondulatorie sia proprietà corpuscolari.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../56-l-effetto-fotoelettrico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">L'effetto fotoelettrico</span></a><a class="successiva" href="../58-l-ipotesi-di-de-broglie-e-l-esperimento-di-davisson-germer/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">L'ipotesi di De Broglie e l'esperimento di Davisson-Germer</span></a></nav>
 <footer><p>Fisica quinta &middot; Meccanica quantistica &middot; Unità 57</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+var ORO='#b07a18';
+
+/* apparato di Young: fronti d'onda calcolati (passo = lunghezza d'onda) e intensità sullo schermo */
+(function(){
+  var svg=document.getElementById('g-young'); if(!svg)return;
+  var LAM=12, xs=30, ys=135, x1=100, x2=170, yA=115, yB=155, xS=342, top=40, bot=232;
+  var defs=el('defs',{}), cp=el('clipPath',{id:'cl57a'}), cq=el('clipPath',{id:'cl57b'});
+  cp.appendChild(el('rect',{x:x1+3,y:top,width:x2-x1-6,height:bot-top})); cq.appendChild(el('rect',{x:x2+3,y:top,width:xS-x2-5,height:bot-top}));
+  defs.appendChild(cp); defs.appendChild(cq); svg.appendChild(defs);
+  /* sorgente */
+  svg.appendChild(el('circle',{cx:xs,cy:ys,r:8,fill:ORO}));
+  for(var k=0;k<8;k++){var a=k*Math.PI/4;svg.appendChild(el('line',{x1:xs+12*Math.cos(a),y1:ys+12*Math.sin(a),x2:xs+19*Math.cos(a),y2:ys+19*Math.sin(a),stroke:ORO,'stroke-width':1.6}));}
+  svg.appendChild(txt(xs,ys+36,'sorgente',{'text-anchor':'middle','font-size':11}));
+  /* fronti dalla fenditura singola */
+  var g1=el('g',{'clip-path':'url(#cl57a)',fill:'none',stroke:ORO,'stroke-width':1.3});
+  for(var r=LAM;r<x2-x1;r+=LAM)g1.appendChild(el('circle',{cx:x1,cy:ys,r:r}));
+  svg.appendChild(g1);
+  /* fronti dalle due fenditure */
+  var g2=el('g',{'clip-path':'url(#cl57b)',fill:'none','stroke-width':1});
+  for(r=LAM;r<xS-x2+40;r+=LAM){g2.appendChild(el('circle',{cx:x2,cy:yA,r:r,stroke:'var(--blu)','stroke-opacity':.45}));g2.appendChild(el('circle',{cx:x2,cy:yB,r:r,stroke:'var(--blu)','stroke-opacity':.45}));}
+  svg.appendChild(g2);
+  /* barriere */
+  function barriera(x,aperture){var y=top,w=6;aperture.forEach(function(ya){svg.appendChild(el('rect',{x:x-w/2,y:y,width:w,height:ya-4-y,fill:'var(--inchiostro)'}));y=ya+4;});svg.appendChild(el('rect',{x:x-w/2,y:y,width:w,height:bot-y,fill:'var(--inchiostro)'}));}
+  barriera(x1,[ys]); barriera(x2,[yA,yB]);
+  svg.appendChild(txt(x1,top-8,'fenditura',{'text-anchor':'middle','font-size':11}));
+  svg.appendChild(txt(x2+10,top-8,'doppia fenditura',{'text-anchor':'middle','font-size':11}));
+  /* schermo e frange: I = cos^2(pi*(r1-r2)/lambda) */
+  svg.appendChild(el('line',{x1:xS,y1:top,x2:xS,y2:bot,stroke:'var(--inchiostro)','stroke-width':2}));
+  svg.appendChild(txt(xS+20,top-8,'schermo',{'text-anchor':'middle','font-size':11}));
+  var d='',n=0;
+  for(var y=top;y<=bot;y+=1){
+    var r1=Math.hypot(xS-x2,y-yA), r2=Math.hypot(xS-x2,y-yB), I=Math.pow(Math.cos(Math.PI*(r1-r2)/LAM),2);
+    svg.appendChild(el('rect',{x:xS+3,y:y-0.5,width:14,height:1.2,fill:'#f2c94c','fill-opacity':I.toFixed(3)}));
+    d+=(n++?'L':'M')+(xS+22+44*I).toFixed(1)+','+y;
+  }
+  svg.appendChild(el('rect',{x:xS+3,y:top,width:14,height:bot-top,fill:'none',stroke:'var(--grigio)','stroke-width':.8}));
+  svg.appendChild(el('path',{d:d,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6}));
+  svg.appendChild(el('line',{x1:xS+22,y1:top,x2:xS+22,y2:bot,stroke:'var(--grigio)','stroke-width':.8}));
+  svg.appendChild(txt(xS+44,bot+16,'intensità',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'}));
+})();
+
+/* somma di due onde: in fase e in opposizione di fase */
+(function(){
+  var svg=document.getElementById('g-somma'); if(!svg)return;
+  function onda(x0,x1,y0,A,fase,col,w){var d='';for(var k=0;k<=60;k++){var x=x0+(x1-x0)*k/60;d+=(k?'L':'M')+x.toFixed(1)+','+(y0-A*Math.sin(2*Math.PI*1.5*k/60+fase)).toFixed(1);}svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w}));}
+  function riga(y,fase2,col2,titolo,esito,colE){
+    svg.appendChild(txt(120,y-48,titolo,{'text-anchor':'middle','font-size':12}));
+    onda(10,90,y-14,9,0,'var(--blu)',1.8); onda(10,90,y+14,9,fase2,col2,1.8);
+    svg.appendChild(txt(108,y+5,'=',{'font-size':16,'text-anchor':'middle'}));
+    var A=fase2?0:18; onda(126,226,y,A,0,colE,2.6);
+    svg.appendChild(txt(176,y+40,esito,{'text-anchor':'middle','font-size':11,fill:colE}));
+  }
+  riga(68,0,'var(--blu)','in fase','costruttiva','var(--verde)');
+  riga(194,Math.PI,'var(--rosso)','in opposizione di fase','distruttiva','var(--grigio)');
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

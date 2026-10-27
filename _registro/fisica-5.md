@@ -710,6 +710,7 @@
   singola con fronti d'onda circolari, doppia fenditura, e i due esiti di interferenza
   costruttiva e distruttiva. Nessuno strumento interattivo: pagina di una sola facciata,
   concettuale.
+- Revisione (27/10/2026, regole 13/10): parole 171 → 74 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 56); apertura a domanda; tolti sommario, «Nella prossima unità» (rimando a De Broglie), i titoletti «L'esperimento di Young, 1801» e «Onda o corpuscolo?», la data, il rimando all'unità precedente e la didascalia lunga; interferenza costruttiva/distruttiva in elenco caso → conseguenza; conclusione di Young in .def; le due evidenze (interferenza → onda, effetto fotoelettrico → fotoni) in elenco; doppia natura in .nota, riformulata («manifesta sia proprietà ondulatorie sia corpuscolari» al posto di «dovrebbe essere contemporaneamente onda e corpuscolo»). Nessuna comparsa, nessun esempio, nessuna formula. Figura rifatta da script, statica, in due pannelli: apparato (sorgente, fenditura, doppia fenditura con fronti d'onda a passo λ) con frange e curva d'intensità sullo schermo calcolate da I = cos²(πΔr/λ) sulla geometria disegnata; somma di due onde in fase (ampiezza doppia) e in opposizione di fase (nulla), sinusoidi calcolate.
 
 ## Unità 58 — L'ipotesi di De Broglie e l'esperimento di Davisson-Germer
 - Parole: 261 su 1 pagina di traccia (pagina 103).
