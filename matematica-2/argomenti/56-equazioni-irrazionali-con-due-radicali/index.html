@@ -5,13 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni irrazionali con due radicali — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
+.foglio>.eq+.fig,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>ol+h2,.foglio>ul+h2{margin-top:var(--r)}
+.nota .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.eq+h2,.foglio>.nota+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -21,95 +66,59 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni e disequazioni irrazionali e con valori assoluti &middot; Unità 54</p>
   <h1>Equazioni irrazionali con due radicali</h1>
-  <p class="sommario">Quando l'incognita compare sotto due radici quadrate diverse, il
-  metodo visto per un solo radicale si adatta: cambia soprattutto il modo in cui si trattano
-  le condizioni di esistenza.</p>
 </header>
 
-<h2>Il procedimento</h2>
+<p>Incognita sotto due radici quadrate: come si trattano le condizioni di esistenza?</p>
 
-<p>Consideriamo un'equazione della forma $\sqrt{A(x)}=\sqrt{B(x)}$. Ripetiamo
-l'impostazione già vista per un solo radicale: poniamo le condizioni di esistenza di
-entrambi i radicandi ed eleviamo al quadrato.</p>
+<div class="def"><span class="et">Due radicali</span>
+<p class="eq principio">$$\sqrt{A(x)}=\sqrt{B(x)} \iff \begin{cases}A(x)\ge0 &\text{(C.E.)}\\B(x)\ge0 &\text{(C.E.)}\\A(x)=B(x)\end{cases}$$</p></div>
 
-$$\begin{cases}A(x)\ge0 &\text{(C.E.)}\\B(x)\ge0 &\text{(C.E.)}\\A(x)=B(x)\end{cases}$$
+<p>Le condizioni di esistenza non si riassorbono nell'equazione: $A(x)=B(x)$ non garantisce $A(x)\ge0$ e $B(x)\ge0$.</p>
 
-<p>C'è però una differenza importante rispetto al caso di un solo radicale: qui la prima
-condizione di esistenza <strong>non</strong> si riassorbe nell'equazione. Se
-$A(x)=B(x)$, questo non garantisce affatto che i due siano non negativi, quindi entrambe le
-condizioni vanno risolte per conto proprio, non solo verificate a posteriori sulle
-soluzioni. Il procedimento si organizza in tre passi.</p>
+<ol>
+<li>sistema delle condizioni di esistenza;</li>
+<li>equazione $A(x)=B(x)$;</li>
+<li>soluzioni dell'equazione che rispettano il sistema.</li>
+</ol>
 
-<div class="regola">
-<p>1) Risolviamo il sistema delle due condizioni di esistenza, $A(x)\ge0$ e $B(x)\ge0$.</p>
-<p>2) Risolviamo l'equazione $A(x)=B(x)$, ottenuta elevando al quadrato.</p>
-<p>3) Controlliamo quali soluzioni dell'equazione rispettano il sistema trovato al passo 1.</p>
-</div>
+<h2>Esempio 1</h2>
 
-<h3>Esempio</h3>
+<p class="eq quesito">$$\sqrt{x+4}=\sqrt{x^2-16}$$</p>
+<p class="eq">$$\begin{cases}x+4\ge0\\x^2-16\ge0\end{cases} \;\Rightarrow\; \begin{cases}x\ge-4\\x\le-4\ \vee\ x\ge4\end{cases} \;\Rightarrow\; x=-4\ \vee\ x\ge4$$</p>
+<p class="eq">$$x+4=x^2-16 \;\Rightarrow\; x^2-x-20=0 \;\Rightarrow\; (x-5)(x+4)=0$$</p>
+<p class="eq ris">$$x_1=-4 \qquad x_2=5$$</p>
 
-<p>Risolviamo $\sqrt{x+4}=\sqrt{x^2-16}$, con $A(x)=x+4$ e $B(x)=x^2-16$.</p>
+<h2>Esempio 2</h2>
 
-<p>Condizioni di esistenza:</p>
+<p>Termine fuori radice: prima si isola un radicale, poi si eleva al quadrato.</p>
 
-$$\begin{cases}x+4\ge0\\x^2-16\ge0\end{cases}\ \Rightarrow\ \begin{cases}x\ge-4\\x\le-4\ \lor\ x\ge4\end{cases}$$
-
-<p>Intersecando le due condizioni resta $x=-4$ oppure $x\ge4$.</p>
-
-<p>Risolviamo ora l'equazione $A(x)=B(x)$:</p>
-
-$$x+4=x^2-16 \ \Rightarrow\ x^2-x-20=0 \ \Rightarrow\ (x-5)(x+4)=0$$
-
-<p>da cui $x_1=5$ e $x_2=-4$. Entrambe rispettano la condizione $x=-4\ \lor\ x\ge4$ trovata
-sopra, quindi sono entrambe accettabili:</p>
-
-<div class="regola"><p>$$x_1=5 \qquad x_2=-4$$</p></div>
-
-<h3>Un caso con un termine fuori radice</h3>
-
-<p>Se nell'equazione compare anche un termine senza radice, conviene prima isolare un
-radicale da solo su un membro, così da ritrovarsi nella forma vista sopra prima di elevare
-al quadrato. Risolviamo $\sqrt{-x^2+2x+8}-2=\sqrt{4-x^2}$.</p>
-
-<p>Condizioni di esistenza sui due radicandi:</p>
-
-$$\begin{cases}-x^2+2x+8\ge0\\4-x^2\ge0\end{cases}\ \Rightarrow\ \begin{cases}-2\le x\le4\\-2\le x\le2\end{cases}\ \Rightarrow\ -2\le x\le2$$
-
-<p>Isoliamo il primo radicale portando il $-2$ a destra dell'uguale:</p>
-
-$$\sqrt{-x^2+2x+8}=2+\sqrt{4-x^2}$$
-
-<p>Eleviamo al quadrato entrambi i membri, ricordando che a destra c'è un binomio:</p>
-
-$$-x^2+2x+8=4+4\sqrt{4-x^2}+4-x^2$$
-
-<p>I termini in $-x^2$ si elidono; isolando il radicale rimasto si ottiene
-$2x=4\sqrt{4-x^2}$, cioè $2\sqrt{4-x^2}=x$. Perché questa uguaglianza sia possibile serve
-$x\ge0$, dato che una radice quadrata non è mai negativa: è una condizione di esistenza in
-più, generata da questo secondo passaggio.</p>
-
-$$\begin{cases}x\ge0\\4(4-x^2)=x^2\end{cases}$$
-
-<p>Insieme alla condizione $-2\le x\le2$ trovata all'inizio, resta $0\le x\le2$. Risolviamo
-l'equazione:</p>
-
-$$16-4x^2=x^2 \ \Rightarrow\ 5x^2=16 \ \Rightarrow\ x^2=\frac{16}{5} \ \Rightarrow\ x=\pm\frac{4\sqrt5}{5}$$
-
-<p>Solo la soluzione positiva rispetta $0\le x\le2$:</p>
-
-<div class="regola"><p>$$x=\frac{4\sqrt5}{5}$$</p></div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Lo stesso schema di condizioni di esistenza torna, in forma adattata, per le
-disequazioni irrazionali.</li>
-</ul>
-</div>
+<p class="eq quesito">$$\sqrt{-x^2+2x+8}-2=\sqrt{4-x^2}$$</p>
+<p class="eq">$$\begin{cases}-x^2+2x+8\ge0\\4-x^2\ge0\end{cases} \;\Rightarrow\; \begin{cases}-2\le x\le4\\-2\le x\le2\end{cases} \;\Rightarrow\; -2\le x\le2$$</p>
+<p class="eq">$$\sqrt{-x^2+2x+8}=2+\sqrt{4-x^2} \;\Rightarrow\; -x^2+2x+8=4+4\sqrt{4-x^2}+4-x^2$$</p>
+<p class="eq">$$2x=4\sqrt{4-x^2} \;\Rightarrow\; x=2\sqrt{4-x^2} \;\Rightarrow\; \begin{cases}0\le x\le2\\x^2=4(4-x^2)\end{cases}$$</p>
+<p class="eq">$$5x^2=16 \;\Rightarrow\; x=-\frac{4\sqrt5}{5}\ \text{(non accettabile)}\ \vee\ x=\frac{4\sqrt5}{5}$$</p>
+<p class="eq ris">$$x=\frac{4\sqrt5}{5}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../55-equazioni-irrazionali-con-un-radicale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazioni irrazionali con un radicale</span></a><a class="successiva" href="../57-disequazioni-irrazionali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disequazioni irrazionali</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni e disequazioni irrazionali e con valori assoluti &middot; Unità 54</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
