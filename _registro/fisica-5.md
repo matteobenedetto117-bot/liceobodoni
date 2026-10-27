@@ -678,6 +678,7 @@
   f→0 sia per f→∞, coerente con quanto disegnato nel grafico della traccia.
 - Aggiunta: nessuna. Ridisegnato in SVG il grafico delle tre curve (Rayleigh-Jeans, sperimentale,
   Wien) della traccia. Nessuno strumento interattivo: pagina breve, un solo grafico statico.
+- Revisione (27/10/2026, regole 13/10): parole 116 → 94. Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 53); tolti sommario e «Nella prossima unità»; apertura a domanda; legge di Rayleigh-Jeans in .def rosso, distribuzione di Wien in .def; confronto con i dati in elenco caso → conseguenza (basse/alte frequenze) per entrambe; tolte le frasi di commento finale e la didascalia lunga. Correzione: nella distribuzione di Wien la stessa costante K compariva sia come fattore sia nell'esponente (I = K f³ e^(−Kf/T)), dimensionalmente incoerente; scritto I = a f³ e^(−bf/T) con a, b costanti. Verificato numericamente (T = 5000 K) che Rayleigh-Jeans coincide con la curva sperimentale per f → 0 e diverge, e che Wien coincide alle alte frequenze e se ne discosta alle basse. Figura rifatta da script con curve calcolate (sperimentale = distribuzione di Planck, Rayleigh-Jeans, Wien), fascia dell'ultravioletto, statica. Nessuna comparsa, nessun esempio, nessuna figura decorativa.
 
 ## Unità 55 — Legge di Stefan-Boltzmann e ipotesi di Planck
 - Parole: 253 su 2 pagine di traccia (pagine 97–98).
