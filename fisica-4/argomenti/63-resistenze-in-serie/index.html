@@ -5,155 +5,159 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Resistenze in serie — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.fig-riga{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px}
-.fig-riga svg{max-width:42%;height:auto}
-.freccia{font-size:1.8rem;color:var(--grigio)}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-</head>
 <body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 61</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 61</p>
   <h1>Resistenze in serie</h1>
-  <p class="sommario">Quando in un circuito ci sono pi&ugrave; resistenze,
-  spesso conviene sostituirle con un'unica resistenza che produce lo stesso
-  effetto sulla corrente. Vediamo il primo caso, quello in cui le resistenze
-  si susseguono lungo un unico percorso: sono <strong>in serie</strong>.</p>
 </header>
 
-<h2>Un esempio con due generatori</h2>
-
-<p>Applichiamo ancora la legge delle maglie, questa volta a una maglia con
-due generatori e due resistenze in serie: $R_1=4\ \Omega$,
-$\Delta V_1=9$ V, $R_2=2\ \Omega$, $\Delta V_2=6$ V. Percorrendo la maglia
-nel verso di $i$ si incontrano nell'ordine il primo generatore, la prima
-resistenza, il secondo generatore (in verso opposto) e la seconda
-resistenza:</p>
-
-<div class="formula-box">
-$$+\Delta V_1-iR_1-\Delta V_2-iR_2=0$$
-</div>
+<p>Resistenze una di seguito all'altra lungo un unico percorso: quale unica resistenza le sostituisce?</p>
 
 <div class="fig">
-<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr63a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="60" y1="30" x2="130" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="130,30 145,18 160,42 175,18 190,42 205,18 220,30" fill="none" stroke="var(--inchiostro)" stroke-width="2" stroke-linejoin="round"/>
-<line x1="220" y1="30" x2="320" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="320" y1="30" x2="320" y2="90" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="304" y1="100" x2="336" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="310" y1="120" x2="330" y2="120" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="320" y1="130" x2="320" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="320" y1="170" x2="60" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="170" x2="60" y2="90" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="42" y1="100" x2="78" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="48" y1="120" x2="72" y2="120" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="60" y1="30" x2="60" y2="90" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="170" y="14" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--grigio)">R&#8321;</text>
-<text x="20" y="108" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">&#916;V&#8321;</text>
-<text x="345" y="108" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">&#916;V&#8322;</text>
-<text x="320" y="188" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--grigio)">R&#8322;</text>
-<polyline points="270,170 285,158 300,182 315,158 330,170" fill="none" stroke="var(--inchiostro)" stroke-width="2" stroke-linejoin="round"/>
-<path d="M 175 90 A 35 35 0 1 1 174 90" fill="none" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fr63a)"/>
-<text x="175" y="95" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i</text>
-</svg>
-<p class="did">Maglia con due generatori e due resistenze in serie, percorsa
-dalla corrente $i$.</p>
+<svg id="g-serie" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px" role="img" aria-label="Tre resistenze in serie con un generatore, sostituite da un'unica resistenza equivalente"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Tre resistenze in serie</p>
+<p class="did">Resistenza equivalente $R_{eq}$</p>
+</div>
 </div>
 
-<p>Isolando $i$:</p>
-
-<div class="formula-box">
-$$i=\frac{\Delta V_1-\Delta V_2}{R_1+R_2}=\frac{9-6}{4+2}=0{,}50\ \mathrm A$$
-</div>
-
-<h2>Resistenze in serie</h2>
-
-<p>Consideriamo ora una sola maglia con un generatore e tre resistenze
-$R_1$, $R_2$, $R_3$ attraversate dalla stessa corrente $i$, una di seguito
-all'altra: sono <strong>resistenze in serie</strong>. La legge delle
-maglie d&agrave;:</p>
-
-<div class="formula-box">
-$$\Delta V-iR_1-iR_2-iR_3=0 \quad\Rightarrow\quad \Delta V=i(R_1+R_2+R_3)$$
-</div>
-
-<p>Il termine fra parentesi &egrave; la <strong>resistenza equivalente</strong>
-$R_{eq}$: un'unica resistenza che, al posto delle tre, fa passare la stessa
-corrente $i$ per la stessa $\Delta V$, $\Delta V=iR_{eq}$.</p>
-
-<div class="fig fig-riga">
-<svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="50" y1="30" x2="80" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="80,30 88,20 96,40 104,20 112,40 120,30" fill="none" stroke="var(--inchiostro)" stroke-width="2" stroke-linejoin="round"/>
-<line x1="120" y1="30" x2="130" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="130,30 138,20 146,40 154,20 162,40 170,30" fill="none" stroke="var(--inchiostro)" stroke-width="2" stroke-linejoin="round"/>
-<line x1="170" y1="30" x2="180" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="180,30 188,20 196,40 204,20 212,40 220,30" fill="none" stroke="var(--inchiostro)" stroke-width="2" stroke-linejoin="round"/>
-<line x1="220" y1="30" x2="290" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="290" y1="30" x2="290" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="290" y1="170" x2="50" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="50" y1="170" x2="50" y2="110" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="32" y1="100" x2="68" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="38" y1="90" x2="62" y2="90" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="50" y1="90" x2="50" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="100" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">R&#8321;</text>
-<text x="150" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">R&#8322;</text>
-<text x="200" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">R&#8323;</text>
-<text x="10" y="85" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">&#916;V</text>
-</svg>
-<span class="freccia">&rarr;</span>
-<svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="50" y1="30" x2="110" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="110,30 122,18 134,42 146,18 158,42 170,18 180,30" fill="none" stroke="var(--inchiostro)" stroke-width="2" stroke-linejoin="round"/>
-<line x1="180" y1="30" x2="180" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="180" y1="170" x2="50" y2="170" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="50" y1="170" x2="50" y2="110" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="32" y1="100" x2="68" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="38" y1="90" x2="62" y2="90" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="50" y1="90" x2="50" y2="30" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="145" y="14" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">R<tspan font-size="10" dy="4">eq</tspan></text>
-<text x="10" y="85" text-anchor="start" font-family="var(--sans)" font-size="13" fill="var(--grigio)">&#916;V</text>
-</svg>
-<p class="did">Tre resistenze in serie (a sinistra) sostituite dall'unica
-resistenza equivalente $R_{eq}$ (a destra).</p>
-</div>
-
-<div class="formula-box">
-$$R_{eq}=R_1+R_2+R_3+\dots$$
-</div>
-
-<p>Dato un numero qualsiasi di resistenze in serie, la resistenza
-equivalente del circuito &egrave; pari alla somma delle singole
-resistenze.</p>
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
 <ul>
-<li>Troviamo la resistenza equivalente per resistenze in
-<strong>parallelo</strong>, attraversate da correnti diverse ma con la
-stessa differenza di potenziale ai capi.</li>
+<li>in serie → stessa corrente $i$ in $R_1$, $R_2$, $R_3$.</li>
 </ul>
+
+<p>Legge delle maglie, percorsa nel verso di $i$:</p>
+
+<p class="eq">$$\Delta V - iR_1 - iR_2 - iR_3 = 0 \quad\Rightarrow\quad \Delta V = i\,(R_1 + R_2 + R_3)$$</p>
+
+<p>Resistenza equivalente: con la stessa $\Delta V$ è percorsa dalla stessa $i$:</p>
+
+<p class="eq">$$\Delta V = i\,R_{eq}$$</p>
+
+<div class="def"><span class="et">Resistenze in serie</span>
+<p class="eq principio">$$R_{eq} = R_1 + R_2 + R_3 + \dots$$</p></div>
+
+<h2>Esempio</h2>
+
+<div class="fig">
+<svg id="g-es" viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Maglia con due generatori in versi opposti e due resistenze in serie, percorsa dalla corrente i"></svg>
+<p class="did">Due generatori in versi opposti, due resistenze in serie</p>
 </div>
+
+<p>Dati: $\Delta V_1 = 9$ V, $R_1 = 4\ \Omega$, $\Delta V_2 = 6$ V, $R_2 = 2\ \Omega$. Calcolare $i$.</p>
+
+<p class="eq">$$+\Delta V_1 - iR_1 - \Delta V_2 - iR_2 = 0$$</p>
+<p class="eq">$$i = \frac{\Delta V_1 - \Delta V_2}{R_1 + R_2} = \frac{9\ \text{V} - 6\ \text{V}}{4\ \Omega + 2\ \Omega} = 0{,}50\ \text{A}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../62-le-leggi-di-kirchhoff/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Le leggi di Kirchhoff</span></a><a class="successiva" href="../64-resistenze-in-parallelo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Resistenze in parallelo</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 61</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 61</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function marc(s,id,col){var d=el(s,'defs',{});el(el(d,'marker',{id:id,markerWidth:10,markerHeight:10,refX:8,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,5 L0,9 Z',fill:col});}
+  function lab(p,x,y,base,sub,col,anc){var t=el(p,'text',{x:x,y:y,'font-size':14,'font-family':'sans-serif','font-style':'italic',fill:col,'text-anchor':anc||'middle'});t.textContent=base;if(sub){var u=el(t,'tspan',{'font-size':10,dy:3,'font-style':'normal'});u.textContent=sub;}return t;}
+  var filo={stroke:'var(--inchiostro)','stroke-width':2,fill:'none'};
+  function linea(p,pts){el(p,'path',Object.assign({d:'M'+pts.map(function(q){return q.join(',');}).join(' L'),'stroke-linejoin':'round'},filo));}
+  /* resistenza orizzontale fra xa e xb a quota y */
+  function resH(p,xa,xb,y){var d='M'+xa+','+y,n=6,w=(xb-xa)/n,k;for(k=0;k<n;k++)d+=' L'+(xa+w*(k+.5)).toFixed(1)+','+(y+(k%2?10:-10));d+=' L'+xb+','+y;el(p,'path',Object.assign({d:d,'stroke-linejoin':'round'},filo));}
+  /* generatore verticale in x, piastra + (lunga) a yp, − (corta) a ym */
+  function gen(p,x,yp,ym,pl){el(p,'line',{x1:x-18,y1:yp,x2:x+18,y2:yp,stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(p,'line',{x1:x-9,y1:ym,x2:x+9,y2:ym,stroke:'var(--inchiostro)','stroke-width':5});
+    var sx=pl?x-24:x+24,an=pl?'end':'start';
+    el(p,'text',{x:sx,y:yp-3,'font-size':13,'font-family':'sans-serif',fill:'var(--inchiostro)','text-anchor':an}).textContent='+';
+    el(p,'text',{x:sx,y:ym+13,'font-size':13,'font-family':'sans-serif',fill:'var(--inchiostro)','text-anchor':an}).textContent='−';}
+  function freccia(p,x1,y1,x2,y2,id){el(p,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#'+id+')'});}
+  /* serie ed equivalente */
+  var s=document.getElementById('g-serie');
+  if(s){marc(s,'ms','var(--rosso)');
+    var XL=50,XR=270,YT=40,YB=170,GP=98,GM=110;
+    linea(s,[[XL,GP],[XL,YT],[80,YT]]);resH(s,80,120,YT);linea(s,[[120,YT],[135,YT]]);resH(s,135,175,YT);linea(s,[[175,YT],[190,YT]]);resH(s,190,230,YT);
+    linea(s,[[230,YT],[XR,YT],[XR,YB],[XL,YB],[XL,GM]]);gen(s,XL,GP,GM,false);
+    lab(s,100,YT-16,'R','1','var(--inchiostro)');lab(s,155,YT-16,'R','2','var(--inchiostro)');lab(s,210,YT-16,'R','3','var(--inchiostro)');
+    lab(s,XL-24,GP+12,'ΔV',null,'var(--inchiostro)','end');
+    freccia(s,130,YB,90,YB,'ms');lab(s,110,YB+20,'i',null,'var(--rosso)');
+    el(s,'text',{x:300,y:112,'font-size':26,'font-family':'sans-serif',fill:'var(--grigio)','text-anchor':'middle'}).textContent='→';
+    var X2=370,X3=520;
+    linea(s,[[X2,GP],[X2,YT],[415,YT]]);resH(s,415,475,YT);linea(s,[[475,YT],[X3,YT],[X3,YB],[X2,YB],[X2,GM]]);gen(s,X2,GP,GM,false);
+    lab(s,445,YT-16,'R','eq','var(--inchiostro)');lab(s,X2-24,GP+12,'ΔV',null,'var(--inchiostro)','end');
+    freccia(s,465,YB,425,YB,'ms');lab(s,445,YB+20,'i',null,'var(--rosso)');}
+  /* esempio: due generatori in versi opposti */
+  var m=document.getElementById('g-es');
+  if(m){marc(m,'me','var(--rosso)');
+    var L=70,R=320,T=40,B=175,P=100,Q=112;
+    linea(m,[[L,P],[L,T],[150,T]]);resH(m,150,230,T);linea(m,[[230,T],[R,T],[R,P]]);gen(m,R,P,Q,false);
+    linea(m,[[R,Q],[R,B],[230,B]]);resH(m,150,230,B);linea(m,[[150,B],[L,B],[L,Q]]);gen(m,L,P,Q,true);
+    lab(m,190,T-16,'R','1','var(--inchiostro)');lab(m,190,B+28,'R','2','var(--inchiostro)');
+    lab(m,L-38,P+12,'ΔV','1','var(--inchiostro)','end');lab(m,R+38,P+12,'ΔV','2','var(--inchiostro)','start');
+    freccia(m,255,T,300,T,'me');lab(m,278,T-10,'i',null,'var(--rosso)');
+    freccia(m,125,B,90,B,'me');lab(m,108,B+20,'i',null,'var(--rosso)');}
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
