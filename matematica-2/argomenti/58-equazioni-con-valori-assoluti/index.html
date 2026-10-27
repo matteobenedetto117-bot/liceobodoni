@@ -5,15 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni con valori assoluti — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
+.foglio>.eq+.fig,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>ol+h2,.foglio>ul+h2{margin-top:var(--r)}
+.nota .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.eq+h2,.foglio>.nota+h2{margin-top:var(--r)}
+.foglio>.eq+.nota,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>.def+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,93 +68,105 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni e disequazioni irrazionali e con valori assoluti &middot; Unità 56</p>
   <h1>Equazioni con valori assoluti</h1>
-  <p class="sommario">Il valore assoluto toglie il segno a un numero, ma per calcolarlo su
-  un'espressione con la $x$ dobbiamo sapere quel segno prima di poterlo togliere. Per questo
-  ogni equazione con un valore assoluto si spezza in due casi, secondo il segno di ciò che
-  sta dentro le stanghette.</p>
 </header>
 
-<h2>La definizione per casi</h2>
-
-<p>Il grafico di $y=|x|$ è fatto da due semirette: quella di $y=x$ per $x\ge0$, e la sua
-simmetrica $y=-x$ per $x&lt;0$.</p>
+<p>Equazione con $|A(x)|$: come si toglie il valore assoluto?</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="30" y1="180" x2="230" y2="180" stroke="#16283d" stroke-width="1.2"/>
-<line x1="130" y1="190" x2="130" y2="20" stroke="#16283d" stroke-width="1.2"/>
-<text x="220" y="195" font-size="12" fill="#16283d">x</text>
-<text x="136" y="28" font-size="12" fill="#16283d">y</text>
-<line x1="130" y1="180" x2="200" y2="40" stroke="#2f6b4f" stroke-width="2.4"/>
-<line x1="130" y1="180" x2="60" y2="40" stroke="#2f6b4f" stroke-width="2.4"/>
-<text x="150" y="52" font-size="12" fill="#2f6b4f">y = |x|</text>
-</svg>
-<figcaption>per $x\ge0$ il grafico coincide con $y=x$, per $x&lt;0$ con $y=-x$: due
-semirette che si incontrano nell'origine</figcaption>
+<svg id="g-abs" viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px" role="img" aria-label="Grafico di y uguale al valore assoluto di x: due semirette che si incontrano nell'origine"></svg>
+<div class="cursore"><label for="cur-x">$x$</label><input id="cur-x" type="range" min="-4" max="4" step="0.1" value="-2"><span class="val" id="val-x"></span></div>
+<p class="did">$x\ge0$: $y=x$; $\;x&lt;0$: $y=-x$</p>
 </div>
 
-<p>La stessa idea vale per un'espressione $A(x)$ qualunque al posto della $x$:</p>
+<div class="def"><span class="et">Valore assoluto</span>
+<p class="eq principio">$$|A(x)|=\begin{cases}A(x) &amp; \text{se } A(x)\ge0\\-A(x) &amp; \text{se } A(x)&lt;0\end{cases}$$</p></div>
 
-$$|A(x)|=\begin{cases}A(x) &amp; \text{se } A(x)\ge0\\-A(x) &amp; \text{se } A(x)&lt;0\end{cases}$$
-
-<p>Per esempio, $|x^2-1|$ vale $x^2-1$ dove $x^2-1\ge0$, e $-(x^2-1)$ dove $x^2-1&lt;0$: per
-togliere il valore assoluto dobbiamo prima sapere in quale delle due zone si trova la $x$
-che cerchiamo, e questo è proprio ciò che rende un'equazione con valore assoluto uno
-sdoppiamento in due sistemi, uno per ciascun segno.</p>
+<ul>
+<li>$A(x)\ge0$ → si toglie il modulo senza cambiare segni;</li>
+<li>$A(x)&lt;0$ → si toglie cambiando i segni di $A(x)$;</li>
+<li>soluzioni → unione di quelle dei due sistemi.</li>
+</ul>
 
 <h2>Esempio</h2>
 
-<p>Risolviamo $1+|x^2-4x|=x+7$. L'espressione dentro le stanghette è $A(x)=x^2-4x$, quindi
-distinguiamo i due casi secondo il suo segno.</p>
+<p class="eq quesito">$$1+|x^2-4x|=x+7$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="30" y1="20" x2="270" y2="20" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="90" cy="20" r="4.2" fill="#16283d"/>
-<text x="82" y="14" font-size="12" fill="#16283d">0</text>
-<circle cx="190" cy="20" r="4.2" fill="#16283d"/>
-<text x="182" y="14" font-size="12" fill="#16283d">4</text>
-<line x1="30" y1="48" x2="90" y2="48" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="90" cy="48" r="4.2" fill="#2f6b4f"/>
-<line x1="190" y1="48" x2="270" y2="48" stroke="#2f6b4f" stroke-width="2.4"/>
-<circle cx="190" cy="48" r="4.2" fill="#2f6b4f"/>
-<text x="4" y="52" font-size="12" fill="#5a6b7d">x²-4x≥0</text>
-</svg>
-<figcaption>segno di $x^2-4x=x(x-4)$: non negativo per $x\le0\ \lor\ x\ge4$</figcaption>
+<svg id="g-segno" viewBox="0 0 380 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px" role="img" aria-label="Segno di x al quadrato meno 4x: non negativo per x minore o uguale a 0 e per x maggiore o uguale a 4, negativo fra 0 e 4"></svg>
+<p class="did">Segno di $x^2-4x=x(x-4)$</p>
 </div>
 
-<p><strong>Caso (a)</strong>, $x^2-4x\ge0$: togliamo il valore assoluto senza cambiare i
-segni.</p>
+<p class="eq">$$\text{(a)}\ \begin{cases}x^2-4x\ge0\\1+x^2-4x=x+7\end{cases} \;\Rightarrow\; \begin{cases}x\le0\ \vee\ x\ge4\\x^2-5x-6=0\end{cases} \;\Rightarrow\; x=-1\ \vee\ x=6\ \text{(accettabili)}$$</p>
+<p class="eq">$$\text{(b)}\ \begin{cases}x^2-4x&lt;0\\1-x^2+4x=x+7\end{cases} \;\Rightarrow\; \begin{cases}0&lt;x&lt;4\\x^2-3x+6=0\end{cases} \;\Rightarrow\; \Delta=-15&lt;0,\ \text{nessuna soluzione}$$</p>
 
-$$\begin{cases}x^2-4x\ge0\\1+x^2-4x=x+7\end{cases}\ \Rightarrow\ \begin{cases}x\le0\ \lor\ x\ge4\\x^2-5x-6=0\end{cases}$$
-
-<p>L'equazione associata si scompone in $(x-6)(x+1)=0$, quindi $x=6$ oppure $x=-1$: entrambe
-rispettano la condizione $x\le0\ \lor\ x\ge4$, e sono accettabili.</p>
-
-<p><strong>Caso (b)</strong>, $x^2-4x&lt;0$: togliamo il valore assoluto cambiando tutti i
-segni.</p>
-
-$$\begin{cases}x^2-4x&lt;0\\1-x^2+4x=x+7\end{cases}\ \Rightarrow\ \begin{cases}0&lt;x&lt;4\\x^2-3x+6=0\end{cases}$$
-
-<p>Qui $\Delta=9-24=-15$, negativo: l'equazione non ha soluzioni reali, e il caso (b) non
-contribuisce nulla.</p>
-
-<p>Mettendo insieme le soluzioni dei due sistemi:</p>
-
-<div class="regola"><p>$$x=-1\ \lor\ x=6$$</p></div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Lo stesso sdoppiamento in due casi si applica alle disequazioni con valori assoluti,
-con l'unione finale degli insiemi soluzione al posto della semplice raccolta dei valori
-trovati.</li>
-</ul>
-</div>
+<p class="eq ris">$$x=-1\ \vee\ x=6$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../57-disequazioni-irrazionali/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disequazioni irrazionali</span></a><a class="successiva" href="../59-disequazioni-con-valori-assoluti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disequazioni con valori assoluti</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni e disequazioni irrazionali e con valori assoluti &middot; Unità 56</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function num(v){return (Math.round(v*10)/10).toFixed(1).replace('.',',').replace('-','−');}
+
+/* y = |x| con punto mobile */
+(function(){
+  var svg=document.getElementById('g-abs'), cur=document.getElementById('cur-x'), val=document.getElementById('val-x'); if(!svg)return;
+  var cx=180, cy=200, u=36;
+  function X(x){return cx+x*u;} function Y(y){return cy-y*u;}
+  var d=el('defs',{}),m=el('marker',{id:'fa58',markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});m.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:'var(--inchiostro)'}));d.appendChild(m);svg.appendChild(d);
+  for(var i=-4;i<=4;i++){if(!i)continue;svg.appendChild(el('line',{x1:X(i),y1:cy-3,x2:X(i),y2:cy+3,stroke:'var(--inchiostro)'}));svg.appendChild(txt(X(i),cy+16,String(i).replace('-','−'),{'text-anchor':'middle','font-size':11}));}
+  svg.appendChild(el('line',{x1:X(-4.6),y1:cy,x2:X(4.6),y2:cy,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#fa58)'}));
+  svg.appendChild(el('line',{x1:cx,y1:cy+8,x2:cx,y2:Y(5),stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#fa58)'}));
+  svg.appendChild(txt(X(4.6),cy+16,'x',{fill:'var(--inchiostro)','font-style':'italic','font-size':13}));
+  svg.appendChild(txt(cx+8,Y(5)+6,'y',{fill:'var(--inchiostro)','font-style':'italic','font-size':13}));
+  svg.appendChild(el('path',{d:'M'+X(-4.4)+','+Y(4.4)+' L'+cx+','+cy+' L'+X(4.4)+','+Y(4.4),fill:'none',stroke:'var(--inchiostro)','stroke-width':2.4}));
+  svg.appendChild(txt(X(3.3)+6,Y(2.6),'y = x',{fill:'var(--blu)','font-size':12}));
+  svg.appendChild(txt(X(-3.3)-6,Y(2.6),'y = −x',{'text-anchor':'end',fill:'var(--blu)','font-size':12}));
+  var p=el('circle',{r:5.5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5}); svg.appendChild(p);
+  function dis(x){p.setAttribute('cx',X(x).toFixed(1));p.setAttribute('cy',Y(Math.abs(x)).toFixed(1));
+    val.innerHTML='x = '+num(x)+' → |x| = '+(x>=0?'<span class="ok">x</span>':'<span class="ok">−x</span>')+' = '+num(Math.abs(x));}
+  if(cur){cur.addEventListener('input',function(){dis(+cur.value);});dis(+cur.value);}
+})();
+
+/* segno di x^2 - 4x */
+(function(){
+  var svg=document.getElementById('g-segno'); if(!svg)return;
+  var L=110,R=366,p0=170,p4=300,yA=24,y1=58,y2=88;
+  svg.appendChild(el('line',{x1:L,y1:yA,x2:R,y2:yA,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  [[p0,'0'],[p4,'4']].forEach(function(q){
+    svg.appendChild(el('line',{x1:q[0],y1:yA,x2:q[0],y2:y2+8,stroke:'var(--riga)'}));
+    svg.appendChild(el('circle',{cx:q[0],cy:yA,r:3,fill:'var(--inchiostro)'}));
+    svg.appendChild(txt(q[0],yA-9,q[1],{'text-anchor':'middle',fill:'var(--inchiostro)'}));});
+  svg.appendChild(txt(8,y1+4,'(a)  ≥ 0',{fill:'var(--inchiostro)','font-size':13}));
+  svg.appendChild(txt(8,y2+4,'(b)  < 0',{fill:'var(--inchiostro)','font-size':13}));
+  [[L,p0],[p4,R]].forEach(function(s){svg.appendChild(el('line',{x1:s[0],y1:y1,x2:s[1],y2:y1,stroke:'var(--blu)','stroke-width':2.4}));});
+  [p0,p4].forEach(function(x){svg.appendChild(el('circle',{cx:x,cy:y1,r:4.5,fill:'var(--blu)',stroke:'#fff','stroke-width':1.5}));});
+  svg.appendChild(el('line',{x1:p0,y1:y2,x2:p4,y2:y2,stroke:'var(--rosso)','stroke-width':2.4}));
+  [p0,p4].forEach(function(x){svg.appendChild(el('circle',{cx:x,cy:y2,r:4.5,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.8}));});
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
