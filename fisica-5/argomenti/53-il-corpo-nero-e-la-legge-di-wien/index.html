@@ -5,22 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Il corpo nero e la legge di Wien — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border:1px solid var(--blu);border-radius:10px;
-  padding:18px 22px;margin:26px 0;text-align:center}
-.formula-box .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:26px 0}
-.interattivo .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.interattivo label{font-family:var(--sans);font-size:.9rem;color:var(--inchiostro)}
-.interattivo input[type=range]{width:100%;margin:10px 0}
-.interattivo .lettura{font-family:var(--sans);font-size:1rem;color:var(--blu);font-weight:600}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
+.cursore{flex-wrap:wrap}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:11em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+ul,.foglio>.def+ul,.foglio>.eq+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -30,137 +80,138 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Meccanica quantistica &middot; Unità 53</p>
   <h1>Il corpo nero e la legge di Wien</h1>
-  <p class="sommario">Il corpo nero è il modello che la fisica usa per studiare la radiazione
-  termica, cioè la luce che un oggetto emette soltanto in virtù della sua temperatura. Il
-  tentativo di descriverne lo spettro con le leggi della fisica classica fallisce, ed è da
-  questo fallimento che nasce la meccanica quantistica.</p>
 </header>
 
-<p>Un corpo nero è un corpo capace di assorbire tutta la radiazione che incide su di esso, a
-qualunque frequenza. I corpi capaci di assorbire la radiazione sono anche capaci di emetterla:
-un corpo nero ideale, riscaldato, emette luce su tutto lo spettro elettromagnetico, cioè a tutte
-le frequenze, anche se non in egual misura.</p>
+<p>Corpo riscaldato: come si distribuisce sulle frequenze la radiazione che emette?</p>
+
+<div class="def"><span class="et">Corpo nero</span>
+<p>Corpo che assorbe tutta la radiazione incidente, a qualunque frequenza. Riscaldato, emette a tutte le frequenze, non in egual misura.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fk53a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<rect x="70" y="30" width="140" height="140" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="70" y1="88" x2="70" y2="112" stroke="#fff" stroke-width="3"/>
-<line x1="10" y1="100" x2="66" y2="100" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fk53a)"/>
-<path d="M72,100 L165,55 L110,155 L165,100" fill="none" stroke="var(--rosso)" stroke-width="1.3" stroke-dasharray="4 3"/>
-<text x="18" y="90" font-family="var(--sans)" font-size="12" fill="var(--rosso)">apertura</text>
-<text x="140" y="195" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)" text-anchor="middle">corpo nero</text>
-</svg>
-<p class="did">Un corpo nero si realizza con una cavità che comunica con l'esterno attraverso una
-piccola apertura: la radiazione che vi entra si riflette molte volte sulle pareti interne prima di
-essere assorbita, e la probabilità che ne esca è trascurabile.</p>
+<svg id="g-cav" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px" role="img" aria-label="Cavità con una piccola apertura: un raggio entra e si riflette più volte sulle pareti interne"></svg>
+<p class="did">Cavità con piccola apertura: la radiazione entrata viene assorbita dopo molte riflessioni e quasi non esce</p>
 </div>
 
-<p>Sperimentalmente si scalda un corpo nero e se ne misura l'intensità della luce emessa $I$ in
-funzione della frequenza $f$, per diverse temperature $T$. Ripetendo la misura a
-$T_1=3000\ \text{K}$, $T_2=6000\ \text{K}$ e $T_3=12000\ \text{K}$ si ottengono tre curve.</p>
+<p>Si misura l'intensità $I$ emessa in funzione della frequenza $f$, a diverse temperature $T$:</p>
 
 <div class="fig">
-<svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fk53b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="60" y1="280" x2="520" y2="280" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fk53b)"/>
-<line x1="60" y1="280" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fk53b)"/>
-<text x="530" y="285" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">f</text>
-<text x="42" y="22" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">I</text>
-<line x1="300" y1="270" x2="300" y2="40" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="480" y1="270" x2="480" y2="40" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<text x="390" y="34" font-family="var(--sans)" font-size="12" fill="var(--grigio)" text-anchor="middle">visibile</text>
-<text x="300" y="296" font-family="var(--sans)" font-size="12" fill="var(--rosso)" text-anchor="middle">rosso</text>
-<text x="480" y="296" font-family="var(--sans)" font-size="12" fill="var(--blu)" text-anchor="middle">violetto</text>
-<path d="M60,270 C110,270 130,215 161,208 C210,195 260,235 340,255 C400,268 460,272 490,273" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M60,275 C150,275 220,150 263,140 C320,127 390,190 450,235 C475,252 495,262 510,266" fill="none" stroke="#c9862b" stroke-width="2"/>
-<path d="M60,278 C230,278 380,90 466,70 C485,88 500,120 510,150" fill="none" stroke="var(--verde)" stroke-width="2"/>
-<text x="165" y="222" font-family="var(--sans)" font-size="12" fill="var(--rosso)">3000 K</text>
-<text x="268" y="122" font-family="var(--sans)" font-size="12" fill="#c9862b">6000 K</text>
-<text x="410" y="65" font-family="var(--sans)" font-size="12" fill="var(--verde)">12000 K</text>
-<circle id="marker53" cx="263" cy="140" r="5" fill="var(--blu)"/>
-<line id="guida53" x1="263" y1="140" x2="263" y2="280" stroke="var(--blu)" stroke-width="1" stroke-dasharray="3 3"/>
-</svg>
-<p class="did">All'aumentare della temperatura la curva si alza e il suo picco si sposta verso
-frequenze maggiori: alle temperature più basse l'emissione è concentrata sotto il visibile, a
-quelle più alte si sposta verso il violetto.</p>
+<svg id="g-cn" viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Intensità emessa in funzione della frequenza a 3000 K, 6000 K e 12000 K; il cursore sulla temperatura sposta il punto di massimo"></svg>
+<div class="cursore"><label for="c-t">$T$</label><input id="c-t" type="range" min="3000" max="12000" step="100" value="6000"><span class="val" id="v-t" style="min-width:20em"></span></div>
+<p class="did">$T_1=3000$ K, $T_2=6000$ K, $T_3=12000$ K; $I$ in scala logaritmica; puntini: posizione del picco</p>
 </div>
 
-<p>Dal confronto fra le tre curve emergono tre fatti:</p>
+<p>Dal confronto delle curve:</p>
 <ul>
-<li>la distribuzione dell'intensità sulle frequenze dipende solo dalla temperatura;</li>
-<li>se $T$ aumenta, aumenta l'area sotto la curva, quindi aumenta l'energia totale emessa dal
-corpo;</li>
-<li>se $T$ aumenta, il picco di intensità si sposta su frequenze maggiori.</li>
+<li>distribuzione dell'intensità sulle frequenze → dipende solo da $T$;</li>
+<li>$T$ maggiore → curva più alta, più energia emessa in totale (area sotto la curva);</li>
+<li>$T$ maggiore → picco a frequenze maggiori.</li>
 </ul>
 
-<p>L'ultima osservazione si può scrivere come legge quantitativa, nota come legge dello
-spostamento di Wien:</p>
+<p>Lo spostamento del picco segue una legge lineare:</p>
 
-<div class="formula-box">
-$$f_{picco} = \left(5{,}88\times10^{10}\ \text{s}^{-1}\text{K}^{-1}\right)\cdot T$$
-<p class="did">$f_{picco}$ è la frequenza a cui l'intensità è massima; $T$ è la temperatura
-assoluta, in kelvin.</p>
-</div>
-
-<div class="interattivo">
-<label for="tSlider53">Temperatura del corpo nero: <span id="tVal53" class="lettura">6000 K</span></label>
-<input type="range" id="tSlider53" min="3000" max="12000" step="100" value="6000">
-<p>Frequenza del picco: <span id="fVal53" class="lettura">3,53 &times; 10<sup>14</sup> Hz</span></p>
-<p class="did">Sposta il cursore per vedere come il picco della curva, secondo la legge di Wien,
-si sposta verso frequenze maggiori al crescere della temperatura.</p>
-</div>
-
-<script>
-(function(){
-  var slider = document.getElementById('tSlider53');
-  var tVal = document.getElementById('tVal53');
-  var fVal = document.getElementById('fVal53');
-  var marker = document.getElementById('marker53');
-  var guida = document.getElementById('guida53');
-  var BETA = 5.88e10;
-  function xFromF(f){ return 60 + (f/8e14)*460; }
-  function yFromT(T){
-    if (T<=6000){ return 208 + (140-208)*(T-3000)/(6000-3000); }
-    return 140 + (70-140)*(T-6000)/(12000-6000);
-  }
-  function aggiorna(){
-    var T = parseFloat(slider.value);
-    var f = BETA*T;
-    tVal.textContent = T.toFixed(0) + ' K';
-    fVal.textContent = (f/1e14).toFixed(2).replace('.', ',') + ' × 10<sup>14</sup> Hz';
-    fVal.innerHTML = (f/1e14).toFixed(2).replace('.', ',') + ' &times; 10<sup>14</sup> Hz';
-    var x = xFromF(f);
-    var y = yFromT(T);
-    marker.setAttribute('cx', x);
-    marker.setAttribute('cy', y);
-    guida.setAttribute('x1', x); guida.setAttribute('x2', x);
-    guida.setAttribute('y1', y);
-  }
-  slider.addEventListener('input', aggiorna);
-  aggiorna();
-})();
-</script>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>La catastrofe ultravioletta: perché la fisica classica non riesce a spiegare la forma della
-curva a tutte le frequenze.</li>
-</ul>
-</div>
+<div class="def"><span class="et">Legge dello spostamento di Wien</span>
+<p class="eq principio">$$f_{picco}=\left(5{,}88\times10^{10}\ \text{s}^{-1}\text{K}^{-1}\right)\cdot T$$</p>
+<p>$f_{picco}$: frequenza di intensità massima; $T$: temperatura assoluta, in kelvin.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../52-energia-cinetica-relativistica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia cinetica relativistica</span></a><a class="successiva" href="../54-la-catastrofe-ultravioletta/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La catastrofe ultravioletta</span></a></nav>
 <footer><p>Fisica quinta &middot; Meccanica quantistica &middot; Unità 53</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;}
+function n(v,d){return v.toFixed(d).replace('.',',');}
+function freccia(svg,id,col){var d=el('defs',{}),m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});m.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col}));d.appendChild(m);svg.appendChild(d);}
+
+/* --- cavità: raggio con riflessioni speculari calcolate --- */
+(function(){
+  var svg=document.getElementById('g-cav'); if(!svg)return;
+  var x0=80,y0=30,x1=230,y1=170, ya=88, yb=112;
+  freccia(svg,'fk53a','var(--rosso)');
+  svg.appendChild(el('rect',{x:x0,y:y0,width:x1-x0,height:y1-y0,fill:'#f4f1ea',stroke:'var(--inchiostro)','stroke-width':2}));
+  svg.appendChild(el('line',{x1:x0,y1:ya,x2:x0,y2:yb,stroke:'#fff','stroke-width':4}));
+  svg.appendChild(el('line',{x1:14,y1:96,x2:x0-4,y2:96,stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#fk53a)'}));
+  /* direzione iniziale e riflessioni sulle pareti */
+  var px=x0,py=96,dx=Math.cos(-0.62),dy=Math.sin(-0.62),pts=[[px,py]];
+  for(var k=0;k<6;k++){
+    var tx=dx>0?(x1-px)/dx:(x0-px)/dx, ty=dy>0?(y1-py)/dy:(y0-py)/dy, t=Math.min(tx,ty);
+    px+=dx*t; py+=dy*t; pts.push([px,py]); if(tx<ty)dx=-dx; else dy=-dy;
+  }
+  for(var i=0;i<pts.length-1;i++)
+    svg.appendChild(el('line',{x1:pts[i][0],y1:pts[i][1],x2:pts[i+1][0],y2:pts[i+1][1],stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'4 3',opacity:(1-i/pts.length).toFixed(2)}));
+  svg.appendChild(txt(14,84,'apertura',{fill:'var(--rosso)'}));
+  svg.appendChild(txt((x0+x1)/2,y1+20,'cavità',{'text-anchor':'middle'}));
+})();
+
+/* --- curve I(f) a tre temperature, forma calcolata (Planck, unità arbitrarie) --- */
+(function(){
+  var svg=document.getElementById('g-cn'); if(!svg)return;
+  var h=6.62607015e-34,kB=1.380649e-23,W=5.88e10;
+  var L=56,R=412,T=24,B=250, FM=9e14;
+  function I(f,t){var x=h*f/(kB*t);return f*f*f/Math.expm1(x);}
+  function lg(v){return Math.log(v)/Math.LN10;}
+  var top=lg(I(W*12000,12000))+0.3, bot=top-2.7;
+  function X(f){return L+f/FM*(R-L);} function Y(l){return B-(l-bot)/(top-bot)*(B-T);}
+  freccia(svg,'fk53b','var(--inchiostro)');
+  /* banda del visibile 4,0–7,5 ×10¹⁴ Hz */
+  var gr=el('linearGradient',{id:'vis53',x1:0,x2:1,y1:0,y2:0});
+  [['0','#d9534f'],['.25','#e8a33a'],['.45','#e3d24a'],['.62','#5cb85c'],['.8','#4a7fd0'],['1','#8a5cc7']].forEach(function(s){gr.appendChild(el('stop',{offset:s[0],'stop-color':s[1]}));});
+  svg.querySelector('defs').appendChild(gr);
+  svg.appendChild(el('rect',{x:X(4.0e14),y:T,width:X(7.5e14)-X(4.0e14),height:B-T,fill:'url(#vis53)',opacity:.13}));
+  svg.appendChild(txt((X(4.0e14)+X(7.5e14))/2,B-8,'visibile',{'text-anchor':'middle',fill:'var(--grigio)','font-size':11}));
+  /* assi */
+  svg.appendChild(el('line',{x1:L,y1:B,x2:R+16,y2:B,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fk53b)'}));
+  svg.appendChild(el('line',{x1:L,y1:B,x2:L,y2:T-12,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fk53b)'}));
+  svg.appendChild(txt(R+6,B+30,'f',{'font-size':14,'font-style':'italic'}));
+  svg.appendChild(txt(L-16,T-4,'I',{'font-size':14,'font-style':'italic'}));
+  [2,4,6,8].forEach(function(v){svg.appendChild(el('line',{x1:X(v*1e14),y1:B-4,x2:X(v*1e14),y2:B+4,stroke:'var(--inchiostro)'}));svg.appendChild(txt(X(v*1e14),B+17,String(v),{'text-anchor':'middle',fill:'var(--grigio)','font-size':11}));});
+  svg.appendChild(txt(R-2,B+30,'(10¹⁴ Hz)',{'text-anchor':'end',fill:'var(--grigio)','font-size':11}));
+  /* luogo dei picchi */
+  var dl='';
+  for(var j=0;j<=60;j++){var tt=2500+j*(13000-2500)/60,fp=W*tt;if(fp>FM)break;dl+=(j?'L':'M')+X(fp).toFixed(1)+','+Y(lg(I(fp,tt))).toFixed(1);}
+  svg.appendChild(el('path',{d:dl,fill:'none',stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'2 4'}));
+  /* tre curve */
+  [[3000,'var(--rosso)'],[6000,'#c9862b'],[12000,'var(--verde)']].forEach(function(c){
+    var t=c[0],d='',su=false;
+    for(var i=1;i<=450;i++){var f=FM*i/450,l=lg(I(f,t));
+      if(l<bot){su=false;continue;}
+      d+=(su?'L':'M')+X(f).toFixed(1)+','+Y(l).toFixed(1);su=true;}
+    svg.appendChild(el('path',{d:d,fill:'none',stroke:c[1],'stroke-width':2.2}));
+    var fp=W*t,yp=Y(lg(I(fp,t)));
+    svg.appendChild(el('circle',{cx:X(fp),cy:yp,r:3,fill:c[1]}));
+    if(t<12000){var fl=1.5*fp;svg.appendChild(txt(X(fl)+4,Y(lg(I(fl,t)))-8,t+' K',{fill:c[1]}));}
+    else svg.appendChild(txt(X(fp)-8,yp-9,t+' K',{'text-anchor':'end',fill:c[1]}));
+  });
+  /* punto mobile sul picco */
+  var gv=svg.appendChild(el('line',{stroke:'var(--blu)','stroke-width':1,'stroke-dasharray':'3 3'}));
+  var P=svg.appendChild(el('circle',{r:5.5,fill:'var(--blu)',stroke:'#fff','stroke-width':1.5}));
+  var cur=document.getElementById('c-t'), v=document.getElementById('v-t');
+  function dis(){var t=+cur.value,fp=W*t,x=X(fp),y=Y(lg(I(fp,t))),vis=fp>=4.0e14&&fp<=7.5e14;
+    set(gv,{x1:x,y1:y,x2:x,y2:B}); set(P,{cx:x,cy:y});
+    v.innerHTML=t+' K &nbsp; f<sub>picco</sub> = '+n(fp/1e14,2)+'×10<sup>14</sup> Hz &nbsp; '+(vis?'<span class="ok">picco nel visibile</span>':'');}
+  cur.addEventListener('input',dis); dis();
+})();
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

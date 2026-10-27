@@ -669,6 +669,7 @@
   tre curve di intensità della traccia. Aggiunto un cursore interattivo sulla temperatura che
   applica la legge di Wien già enunciata, spostando un indicatore sul grafico esistente: non
   introduce contenuto nuovo, solo una lettura dinamica della formula.
+- Revisione (27/10/2026, regole 13/10): parole 248 → 111 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 52); apertura a domanda; corpo nero in .def; i tre fatti sperimentali in elenco caso → conseguenza; legge di Wien in .def rosso con il significato dei simboli in una riga; tolti sommario, «Nella prossima unità» (rimando alla catastrofe ultravioletta), la didascalia lunga e i paragrafi di spiegazione. Nessun titoletto, nessun esempio (assente anche prima). Nessuna comparsa. Controllo concettuale (Python): il massimo di f³/(e^{hf/kT} − 1) è a hf/kT = 2,821, cioè 5,88×10¹⁰ Hz/K · T; f_picco = 1,76 / 3,53 / 7,06 ×10¹⁴ Hz a 3000 / 6000 / 12000 K; nessuna correzione al testo. Figure rifatte da script: cavità con riflessioni speculari calcolate; curve d'intensità calcolate con la forma di Planck (prima Bézier a occhio) in scala logaritmica, perché in scala lineare il picco a 3000 K sarebbe 1/64 di quello a 12000 K; banda del visibile 4,0–7,5×10¹⁴ Hz; cursore su T che muove il punto lungo il luogo dei picchi, con f_picco a fianco e «picco nel visibile» in verde (T ≳ 6800 K).
 
 ## Unità 54 — La catastrofe ultravioletta
 - Parole: 218 su 1 pagina di traccia (pagina 96).
