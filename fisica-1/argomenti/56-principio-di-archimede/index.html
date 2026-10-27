@@ -5,18 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Principio di Archimede — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:640px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,114 +59,121 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Principio di Archimede</h1>
 </header>
 
-<h2>Il cubetto immerso</h2>
+<p>Cubetto di lato $L$ immerso in un fluido in equilibrio di densità $d$, faccia superiore alla profondità $h$: quale forza risultante esercita il fluido?</p>
 
-<p>Consideriamo un cubetto di lato \(L\) immerso in un fluido di densità \(d\). La sua
-faccia superiore sta alla profondità \(h\), quella inferiore alla profondità \(h+L\).</p>
-
-<figure class="dis">
-<svg viewBox="0 0 580 270" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c8362b"/></marker>
-    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a6fd6"/></marker>
-  </defs>
-  <path d="M40,50 L40,225 A90,18 0 0 0 220,225 L220,50" fill="#dceaf7" opacity=".8" stroke="#333" stroke-width="2"/>
-  <ellipse cx="130" cy="50" rx="90" ry="18" fill="none" stroke="#2a6fd6" stroke-width="2"/>
-  <rect x="98" y="118" width="64" height="64" fill="#fff" stroke="#333" stroke-width="2"/>
-  <line x1="130" y1="100" x2="130" y2="116" stroke="#c8362b" stroke-width="2.5" marker-end="url(#r)"/>
-  <text x="138" y="106" fill="#c8362b">F₁</text>
-  <line x1="130" y1="200" x2="130" y2="184" stroke="#c8362b" stroke-width="2.5" marker-end="url(#r)"/>
-  <text x="138" y="206" fill="#c8362b">F₂</text>
-  <line x1="78" y1="150" x2="96" y2="150" stroke="#c8362b" stroke-width="2.5" marker-end="url(#r)"/>
-  <line x1="182" y1="150" x2="164" y2="150" stroke="#c8362b" stroke-width="2.5" marker-end="url(#r)"/>
-  <text x="52" y="144" fill="#c8362b">F₃</text>
-  <text x="186" y="144" fill="#c8362b">F₄</text>
-  <line x1="250" y1="50" x2="250" y2="118" stroke="#2a6fd6" stroke-width="2" marker-start="url(#b)" marker-end="url(#b)"/>
-  <text x="258" y="88" fill="#2a6fd6">h</text>
-  <line x1="290" y1="50" x2="290" y2="182" stroke="#2a6fd6" stroke-width="2" marker-start="url(#b)" marker-end="url(#b)"/>
-  <text x="298" y="120" fill="#2a6fd6">h + L</text>
-  <text x="360" y="90" fill="#333">cubetto di lato L</text>
-  <text x="360" y="112" fill="#333">immerso nel fluido</text>
-  <text x="360" y="140" fill="#2a6fd6">densità del fluido: d</text>
-  <text x="240" y="30" fill="#2a6fd6">superficie libera</text>
-</svg>
-<figcaption>Le due facce orizzontali si trovano a profondità diverse, quindi le pressioni
-che le premono sono diverse.</figcaption>
-</figure>
-
-<p>Le forze laterali \(F_3\) e \(F_4\) sono uguali fra loro e si annullano una con l'altra,
-perché le loro facce si trovano alla stessa profondità e quindi subiscono la stessa
-pressione. Restano in gioco solo la faccia superiore e quella inferiore.</p>
-
-<h2>Le due pressioni e le due forze</h2>
-
-<p>Per la legge di Stevino, alle due profondità il fluido preme con</p>
-
-<p>$$p_1 = d\,g\,h \qquad\qquad p_2 = d\,g\,(h+L)$$</p>
-
-<p>Da \(p=\dfrac{F}{A}\) si ricava \(F = p\,A\), e la faccia del cubetto ha area
-\(A=L^2\):</p>
-
-<p>$$F_1 = p_1 L^2 = d\,g\,h\,L^2 \qquad\qquad F_2 = p_2 L^2 = d\,g\,(h+L)\,L^2$$</p>
-
-<p>Sviluppiamo il prodotto nella seconda, e riconosciamo che \(L^3\) è il volume \(V\) del
-cubetto:</p>
-
-<p>$$F_2 = d\,g\,h\,L^2 + d\,g\,L^3 = d\,g\,h\,L^2 + d\,g\,V$$</p>
-
-<h2>La spinta</h2>
-
-<p>\(F_2\) punta verso l'alto e \(F_1\) verso il basso: la forza risultante è la loro
-differenza, e il termine \(d\,g\,h\,L^2\) se ne va.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="r2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c8362b"/></marker>
-  </defs>
-  <rect x="150" y="60" width="62" height="52" fill="#fff" stroke="#333" stroke-width="2"/>
-  <line x1="181" y1="20" x2="181" y2="56" stroke="#c8362b" stroke-width="2.5" marker-end="url(#r2)"/>
-  <text x="190" y="36" fill="#c8362b">F₁ &nbsp;verso il basso</text>
-  <line x1="181" y1="152" x2="181" y2="116" stroke="#c8362b" stroke-width="2.5" marker-end="url(#r2)"/>
-  <text x="190" y="146" fill="#c8362b">F₂ &nbsp;verso l'alto, più intensa</text>
-</svg>
-<figcaption>Poiché \(F_2 &gt; F_1\), la risultante è diretta verso l'alto.</figcaption>
-</figure>
-
-<p>$$F_2 - F_1 = \big(d\,g\,h\,L^2 + d\,g\,V\big) - d\,g\,h\,L^2 = d\,g\,V$$</p>
-
-<p>$$\boxed{\;F_A = d\,g\,V\;}$$</p>
-
-<p>Questa è la <strong>forza di Archimede</strong>. Nella formula \(d\) è la densità del
-<em>fluido</em> in \(\mathrm{kg/m^3}\), \(g = 9{,}81\ \mathrm{N/kg}\), e \(V\) è il volume
-del <em>corpo immerso</em> in \(\mathrm{m^3}\); il prodotto si misura in newton.</p>
-
-<p>Il prodotto \(d\,V\) è la massa di un volume di fluido pari a quello del corpo, e
-moltiplicato per \(g\) ne dà il peso: la spinta ha l'intensità del peso del fluido spostato
-dal corpo. Il risultato, ricavato per un cubetto, vale per un corpo di forma qualunque.</p>
-
-<div class="nota">
-<strong>Attenzione a quali dati entrano nella formula.</strong> La densità è quella del
-fluido, non quella del corpo; il volume invece è quello del corpo. Scambiarli è l'errore
-più frequente.
+<div class="fig">
+<svg id="g-cubo" viewBox="0 0 360 270" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Cubetto immerso: forze del fluido sulle sei facce, più intense in basso"></svg>
+<div class="cursore"><label for="cur-h">profondità $h$</label><input id="cur-h" type="range" min="30" max="110" step="1" value="50"><span class="val" id="val-h"></span></div>
+<p class="did">Acqua, cubetto di lato 10 cm</p>
 </div>
 
-<h2>Un conto</h2>
+<ul>
+<li>facce laterali, stessa profondità → $F_3 = F_4$, si annullano;</li>
+<li>faccia superiore, profondità $h$ → $F_1$ verso il basso;</li>
+<li>faccia inferiore, profondità $h + L$ → $F_2$ verso l'alto, più intensa.</li>
+</ul>
 
-<p>Un cubetto di lato \(L = 10\ \mathrm{cm} = 0{,}10\ \mathrm{m}\) è immerso in acqua,
-\(d = 1000\ \mathrm{kg/m^3}\). Il suo volume è</p>
+<p>Per la legge di Stevino, con $F = p\,A$ e $A = L^2$:</p>
 
-<p>$$V = L^3 = (0{,}10)^3 = 1{,}0\cdot 10^{-3}\ \mathrm{m^3}$$</p>
+<p class="eq">$$F_1 = d\,g\,h\,L^2 \qquad\qquad F_2 = d\,g\,(h+L)\,L^2 = d\,g\,h\,L^2 + d\,g\,L^3$$</p>
 
-<p>$$F_A = 1000 \cdot 9{,}81 \cdot 1{,}0\cdot 10^{-3} = 9{,}8\ \mathrm{N}$$</p>
+<p>Con $V = L^3$ volume del cubetto, la risultante è diretta verso l'alto:</p>
 
-<p>La spinta non dipende dal materiale del cubetto né dalla profondità: nella formula
-finale \(h\) non compare più.</p>
+<p class="eq">$$F_2 - F_1 = d\,g\,V$$</p>
+
+<div class="fig">
+<svg id="g-ris" viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px" role="img" aria-label="Forze sulle facce orizzontali e loro risultante verso l'alto"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Forze sulle facce orizzontali</p>
+<p class="did">Risultante $F_A = F_2 - F_1$</p>
+</div>
+</div>
+
+<div class="def"><span class="et">Forza di Archimede</span>
+<p class="eq principio">$$F_A = d\,g\,V$$</p></div>
+
+<ul>
+<li>$d$ densità del fluido (kg/m³), costante;</li>
+<li>$V$ volume immerso del corpo (m³);</li>
+<li>$g = 9{,}81$ N/kg; $F_A$ in newton.</li>
+</ul>
+
+<p>$d\,V$ è la massa del fluido spostato: la spinta è uguale al peso del fluido spostato, per un corpo di forma qualunque.</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Densità del fluido, non del corpo; volume del corpo.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: cubetto di lato $L = 0{,}10$ m in acqua, $d = 1000$ kg/m³. Calcolare $F_A$.</p>
+
+<p class="eq">$$F_A = d\,g\,L^3 = 1000\ \tfrac{\text{kg}}{\text{m}^3}\cdot 9{,}81\ \tfrac{\text{N}}{\text{kg}}\cdot (0{,}10\ \text{m})^3 = 9{,}8\ \text{N}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../55-legge-di-stevino/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Legge di Stevino</span></a><a class="successiva" href="../56-relazione-di-laboratorio-archimede/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Relazione di laboratorio: verifica del principio di Archimede</span></a></nav>
+<footer><p>Fisica prima &middot; Statica dei fluidi &middot; Unità 55</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');t.innerHTML=s;return t;}
+  function marc(s,id,col,dop){var d=el(s,'defs',{});el(el(d,'marker',{id:id,markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:dop?'auto-start-reverse':'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:col});}
+  function quota(p,x,y1,y2,id,col){el(p,'line',{x1:x,y1:y1+1,x2:x,y2:y2-1,stroke:col,'stroke-width':1.4,'marker-start':'url(#'+id+')','marker-end':'url(#'+id+')'});}
+  function forza(p,x1,y1,x2,y2,id,w){el(p,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--rosso)','stroke-width':w||2.4,'marker-end':'url(#'+id+')'});}
+  function sub(b,s){return b+'<tspan font-size="9" dy="3">'+s+'</tspan>';}
+  /* figura 1: 1 unità = 2 mm; L = 50 unità = 10 cm; lunghezza delle frecce = K·profondità */
+  var s=document.getElementById('g-cubo');
+  if(s){marc(s,'fc','var(--rosso)');marc(s,'qc','var(--blu)',true);
+    var X0=30,X1=220,YS=40,YF=258,L=50,CX=125,K=0.3,M=0.002;
+    el(s,'rect',{x:X0,y:YS,width:X1-X0,height:YF-YS,fill:'var(--blu-chiaro)'});
+    el(s,'line',{x1:X0,y1:YS,x2:X1,y2:YS,stroke:'var(--blu)','stroke-width':1.6});
+    el(s,'path',{d:'M'+X0+',14 L'+X0+','+YF+' L'+X1+','+YF+' L'+X1+',14',fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    txt(s,X0+6,YF-8,'fluido, densità <tspan font-style="italic">d</tspan>','var(--blu)',{fs:12});
+    var g=el(s,'g',{}),cur=document.getElementById('cur-h'),val=document.getElementById('val-h');
+    var dis=function(){var h=+cur.value,yt=YS+h,yb=yt+L,l1=K*h,l2=K*(h+L),l3=K*(h+L/2),ym=yt+L/2,xa=CX-L/2,xb=CX+L/2;
+      while(g.firstChild)g.removeChild(g.firstChild);
+      el(g,'rect',{x:xa,y:yt,width:L,height:L,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+      forza(g,CX,yt-l1-2,CX,yt-2,'fc');txt(g,CX+8,Math.min(yt-l1/2+3,yt-6),sub('F','1'),'var(--rosso)',{it:1});
+      forza(g,CX,yb+l2+2,CX,yb+2,'fc');txt(g,CX+8,yb+l2/2+6,sub('F','2'),'var(--rosso)',{it:1});
+      forza(g,xa-l3-2,ym,xa-2,ym,'fc');txt(g,xa-l3/2-2,ym-8,sub('F','3'),'var(--rosso)',{it:1,anc:'middle'});
+      forza(g,xb+l3+2,ym,xb+2,ym,'fc');txt(g,xb+l3/2+2,ym-8,sub('F','4'),'var(--rosso)',{it:1,anc:'middle'});
+      el(g,'line',{x1:xb+1,y1:yt,x2:266,y2:yt,stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'3 3'});
+      el(g,'line',{x1:xb+1,y1:yb,x2:304,y2:yb,stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'3 3'});
+      quota(g,262,YS,yt,'qc','var(--blu)');txt(g,254,(YS+yt)/2+5,'h','var(--blu)',{it:1,fs:14,anc:'end'});
+      quota(g,300,YS,yb,'qc','var(--blu)');txt(g,306,(YS+yb)/2+5,'h + L','var(--blu)',{it:1,fs:13});
+      var f1=1000*9.81*h*M*Math.pow(L*M,2),f2=1000*9.81*(h+L)*M*Math.pow(L*M,2);
+      val.innerHTML='h = '+num(h*M*100,0)+' cm · F<sub>1</sub> = '+num(f1,1)+' N · F<sub>2</sub> = '+num(f2,1)+' N · <span class="ok">F<sub>2</sub> − F<sub>1</sub> = '+num(f2-f1,1)+' N</span>';};
+    cur.addEventListener('input',dis);dis();}
+  /* figura 2: h = 10 cm, scala 3 unità per newton */
+  var r=document.getElementById('g-ris');
+  if(r){marc(r,'fr','var(--rosso)');
+    var C=3,f1=9.81,f2=19.62,yt=70,yb=120;
+    el(r,'rect',{x:115,y:yt,width:50,height:50,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    forza(r,140,yt-C*f1-2,140,yt-2,'fr');txt(r,150,yt-C*f1/2+4,sub('F','1'),'var(--rosso)',{it:1});
+    forza(r,140,yb+C*f2+2,140,yb+2,'fr');txt(r,150,yb+C*f2/2+6,sub('F','2'),'var(--rosso)',{it:1});
+    el(r,'text',{x:280,y:102,'font-size':26,'font-family':'sans-serif',fill:'var(--grigio)','text-anchor':'middle'}).textContent='→';
+    el(r,'rect',{x:395,y:yt,width:50,height:50,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.8});
+    forza(r,420,yt+25,420,yt+25-C*(f2-f1)-25,'fr',3.2);txt(r,430,yt-12,sub('F','A'),'var(--rosso)',{it:1,fs:14});}
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

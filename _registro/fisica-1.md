@@ -427,6 +427,7 @@
 
 ## Unità 55 — Principio di Archimede
 - Spostamento da fisica seconda (22/09/2026): aggiunta dall'unità 03 di seconda la lettura della spinta come peso del fluido spostato e la validità per corpi di forma qualunque. Tolta la sezione «Dove si continua».
+- Revisione (27/10/2026, regole 13/10): titolo invariato; parole 301 → 152 (formule e didascalie escluse). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 54), aggiunto il piè di pagina. Apertura con domanda; forze sulle sei facce in elenco caso → conseguenza; F₁, F₂ in una .eq, F₂ − F₁ = dgV in .eq; F_A = dgV in .def rosso; significato e unità dei simboli in elenco; peso del fluido spostato e forma qualunque in una frase; nota «Attenzione» in una frase; «Un conto» diventato «Esempio» (cubetto di 10 cm in acqua, 9,8 N) in una sola .eq. Tolti i titoletti «Il cubetto immerso», «Le due pressioni e le due forze», «La spinta», i paragrafi di spiegazione e il commento finale. Correzioni: precisati «fluido in equilibrio», densità costante e «volume immerso» del corpo. Calcoli verificati (F₂ − F₁ = dgL³; 9,81 N → 9,8 N). Figure rifatte da script: cubetto con frecce di lunghezza proporzionale alla profondità e cursore su h (F₁ e F₂ crescono, F₂ − F₁ = 9,8 N costante); forze sulle facce orizzontali e risultante F_A in due pannelli.
 
 ## Unità 56 — Relazione di laboratorio: verifica del principio di Archimede
 - Parole: 570 su 3 pagine di traccia (pagine 6-8, come indicato dalla nota della classe).
