@@ -5,19 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Legge di Stevino — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:640px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
-</head>
 <body>
 <div class="foglio">
 
@@ -27,175 +58,170 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Legge di Stevino</h1>
 </header>
 
-<h2>La pressione sul fondo del recipiente</h2>
+<p>Fluido in equilibrio, di densità $d$, fino all'altezza $h$ sopra un fondo di area $A$: quale pressione sul fondo?</p>
 
-<p>Consideriamo un barattolo cilindrico pieno di fluido. Il fondo è una superficie di
-area \(A\), e il fluido vi sta sopra fino a un'altezza \(h\).</p>
-
-<figure class="dis">
-<svg viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="q" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a6fd6"/></marker>
-  </defs>
-  <path d="M120,60 L120,195 A80,20 0 0 0 280,195 L280,60 A80,20 0 0 1 120,60 z" fill="#dceaf7" opacity=".85"/>
-  <ellipse cx="200" cy="40" rx="80" ry="20" fill="#fff" stroke="#333" stroke-width="2"/>
-  <path d="M120,40 L120,195 A80,20 0 0 0 280,195 L280,40" fill="none" stroke="#333" stroke-width="2"/>
-  <ellipse cx="200" cy="60" rx="80" ry="20" fill="none" stroke="#2a6fd6" stroke-width="2"/>
-  <ellipse cx="200" cy="195" rx="80" ry="20" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="5 4"/>
-  <line x1="310" y1="60" x2="310" y2="195" stroke="#2a6fd6" stroke-width="2" marker-start="url(#q)" marker-end="url(#q)"/>
-  <text x="320" y="132" fill="#2a6fd6">h &nbsp;altezza del fluido</text>
-  <line x1="200" y1="215" x2="200" y2="232" stroke="#333" stroke-width="1.5"/>
-  <text x="212" y="238" fill="#333">A &nbsp;area del fondo</text>
-  <text x="300" y="48" fill="#555" font-size="13">superficie libera</text>
-</svg>
-<figcaption>Il fluido contenuto è un cilindro di base \(A\) e altezza \(h\): tutto il suo
-peso grava sul fondo.</figcaption>
-</figure>
-
-<p>La forza che preme sul fondo è il peso del fluido soprastante, ed è perpendicolare al
-fondo. Partiamo dalla definizione di pressione e sostituiamo la forza peso:</p>
-
-<p>$$P=\frac{F_\perp}{A}=\frac{F_P}{A}=\frac{m\,g}{A}$$</p>
-
-<p>La massa \(m\) del fluido non è un dato comodo, perché cambia con il recipiente. La
-scriviamo attraverso la densità \(d\) e il volume \(V\):</p>
-
-<p>$$m=d\cdot V \qquad\Longrightarrow\qquad P=\frac{d\cdot V\cdot g}{A}$$</p>
-
-<p>Il volume del cilindro di fluido è area di base per altezza, \(V=A\cdot h\). Sostituendo,
-l'area compare una volta sopra e una volta sotto e si semplifica:</p>
-
-<p>$$P=\frac{d\cdot A\cdot h\cdot g}{A}$$</p>
-
-<p>$$\boxed{\;P = d\,g\,h\;}$$</p>
-
-<p>Qui \(d\) è la densità del fluido (in kg/m³), \(h\) l'altezza del fluido sopra il punto
-considerato (in m) e \(g=9{,}81\ \mathrm{N/kg}\). Il risultato è in pascal.</p>
-
-<div class="nota">
-<strong>L'area è sparita.</strong> Un barattolo stretto e uno largo, riempiti dello stesso
-fluido fino alla stessa altezza, hanno sul fondo la stessa pressione. Conta l'altezza, non
-quanto fluido c'è.
+<div class="fig">
+<svg id="g-cilindro" viewBox="0 0 320 235" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Cilindro di fluido di altezza h e area di base A; il peso del fluido preme sul fondo"></svg>
+<div class="cursore"><label for="cur-area">area del fondo</label><input id="cur-area" type="range" min="0.4" max="1" step="0.05" value="1"><span class="val" id="val-area"></span></div>
+<p class="did">Cilindro di fluido di base $A$ e altezza $h$</p>
 </div>
 
-<h2>Sopra il fluido c'è l'aria</h2>
+<p>Sul fondo preme il peso del fluido soprastante, perpendicolare al fondo:</p>
 
-<p>Il recipiente non è isolato: sopra di esso sta una colonna di un altro fluido, l'aria
-dell'atmosfera, che arriva fino ai confini dell'atmosfera stessa. Anche quella colonna pesa,
-e preme sulla superficie libera del liquido con la <strong>pressione atmosferica</strong></p>
+<p class="eq">$$P = \frac{F_\perp}{A} = \frac{m\,g}{A}$$</p>
 
-<p>$$P_{\text{atm}} = 1{,}013\cdot 10^{5}\ \mathrm{Pa}$$</p>
+<p>Con $m = d\,V$ e $V = A\,h$, l'area si semplifica:</p>
 
-<figure class="dis">
-<svg viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1e8a4c"/></marker>
-  </defs>
-  <path d="M120,75 L120,180 A70,18 0 0 0 260,180 L260,75 A70,18 0 0 1 120,75 z" fill="#dceaf7" opacity=".85"/>
-  <ellipse cx="190" cy="58" rx="70" ry="18" fill="#fff" stroke="#333" stroke-width="2"/>
-  <path d="M120,58 L120,180 A70,18 0 0 0 260,180 L260,58" fill="none" stroke="#333" stroke-width="2"/>
-  <ellipse cx="190" cy="75" rx="70" ry="18" fill="none" stroke="#2a6fd6" stroke-width="2"/>
-  <line x1="145" y1="18" x2="145" y2="62" stroke="#1e8a4c" stroke-width="2" marker-end="url(#v)"/>
-  <line x1="190" y1="12" x2="190" y2="58" stroke="#1e8a4c" stroke-width="2" marker-end="url(#v)"/>
-  <line x1="235" y1="18" x2="235" y2="62" stroke="#1e8a4c" stroke-width="2" marker-end="url(#v)"/>
-  <text x="275" y="30" fill="#1e8a4c">colonna d'aria</text>
-  <text x="275" y="50" fill="#1e8a4c">P atmosferica</text>
-  <text x="275" y="140" fill="#2a6fd6">fluido di densità d</text>
-</svg>
-<figcaption>Sulla superficie libera preme l'aria; sul fondo si ritrova quella spinta più
-quella del liquido.</figcaption>
-</figure>
+<p class="eq">$$P = \frac{d\,A\,h\,g}{A}$$</p>
 
-<p>Questa pressione si somma a quella calcolata prima, e si ottiene la forma completa della
-<strong>legge di Stevino</strong>:</p>
+<div class="def"><span class="et">Pressione dovuta al fluido</span>
+<p class="eq principio">$$P = d\,g\,h$$</p></div>
 
-<p>$$\boxed{\;P = P_{\text{atm}} + d\,g\,h\;}$$</p>
+<ul>
+<li>$d$ densità del fluido (kg/m³), costante;</li>
+<li>$h$ altezza del fluido sopra il punto considerato (m);</li>
+<li>$g = 9{,}81$ N/kg; $P$ in pascal.</li>
+</ul>
 
-<h2>Un conto</h2>
+<div class="nota"><span class="et">Attenzione</span>
+<p>$P$ non dipende dall'area del fondo: stessa altezza di fluido → stessa pressione.</p></div>
 
-<p>A \(h=2\ \mathrm{m}\) sotto il pelo dell'acqua, con \(d=1000\ \mathrm{kg/m^3}\):</p>
+<h2>Pressione atmosferica</h2>
 
-<p>$$d\,g\,h = 1000\cdot 9{,}81\cdot 2 = 1{,}96\cdot 10^{4}\ \mathrm{Pa}$$</p>
+<p>Sulla superficie libera preme l'aria:</p>
 
-<p>$$P = 1{,}013\cdot 10^{5} + 0{,}196\cdot 10^{5} = 1{,}21\cdot 10^{5}\ \mathrm{Pa}$$</p>
+<p class="eq">$$P_\text{atm} \approx 1{,}013\cdot 10^{5}\ \text{Pa}\ \text{(al livello del mare)}$$</p>
 
-<p>Due metri d'acqua aggiungono circa un quinto della pressione atmosferica.</p>
+<div class="fig">
+<svg id="g-atm" viewBox="0 0 400 215" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="La colonna d'aria preme sulla superficie libera del fluido con la pressione atmosferica"></svg>
+<p class="did">Aria sulla superficie libera</p>
+</div>
 
-<h2>Differenza di pressione tra due punti</h2>
+<div class="def"><span class="et">Legge di Stevino</span>
+<p class="eq principio">$$P = P_\text{atm} + d\,g\,h$$</p></div>
 
-<p>Se nel fluido prendiamo due punti a profondità diverse \(h_1\) e \(h_2\), la legge di Stevino dà
-per ciascuno una pressione propria:</p>
+<h2>Differenza di pressione fra due punti</h2>
 
-<p>$$p_1 = dgh_1 \qquad\qquad p_2 = dgh_2$$</p>
+<div class="fig">
+<svg id="g-punti" viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px" role="img" aria-label="Due punti nello stesso fluido alle profondità h1 e h2, con dislivello fisso"></svg>
+<div class="cursore"><label for="cur-prof">profondità</label><input id="cur-prof" type="range" min="0" max="1" step="0.02" value="0.3"><span class="val" id="val-prof"></span></div>
+<p class="did">Acqua, $\Delta h = 1{,}0$ m fisso</p>
+</div>
 
-<figure class="dis">
-<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fh2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="30" y1="30" x2="150" y2="30" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<path d="M30,30 L30,190 L150,190 L150,30" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="30" y="60" width="120" height="130" fill="var(--blu)" opacity=".18"/>
-<line x1="30" y1="60" x2="150" y2="60" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="70" cy="95" r="3.2" fill="var(--rosso)"/>
-<text x="80" y="99" font-family="var(--sans)" font-size="12" fill="var(--rosso)">1</text>
-<circle cx="70" cy="150" r="3.2" fill="var(--verde)"/>
-<text x="80" y="154" font-family="var(--sans)" font-size="12" fill="var(--verde)">2</text>
-<line x1="168" y1="60" x2="168" y2="95" stroke="var(--rosso)" stroke-width="1.2" marker-start="url(#fh2)" marker-end="url(#fh2)"/>
-<text x="180" y="81" font-family="var(--sans)" font-style="italic" font-size="13" fill="var(--rosso)">h&#8321;</text>
-<line x1="192" y1="60" x2="192" y2="150" stroke="var(--verde)" stroke-width="1.2" marker-start="url(#fh2)" marker-end="url(#fh2)"/>
-<text x="204" y="108" font-family="var(--sans)" font-style="italic" font-size="13" fill="var(--verde)">h&#8322;</text>
-</svg>
-<figcaption>Il punto 2 è più profondo del punto 1: \(h_2 > h_1\), quindi \(p_2 > p_1\).</figcaption>
-</figure>
+<p class="eq">$$\Delta p = p_2 - p_1 = d\,g\,h_2 - d\,g\,h_1 = d\,g\,(h_2 - h_1)$$</p>
 
-<p>La loro differenza è</p>
+<div class="def"><span class="et">Differenza di pressione</span>
+<p class="eq principio">$$\Delta p = d\,g\,\Delta h$$</p></div>
 
-<p>$$\Delta p = p_2 - p_1 = dgh_2 - dgh_1 = dg(h_2-h_1)$$</p>
+<p>$\Delta p$ dipende solo dal dislivello $\Delta h$, non dalla profondità dei due punti.</p>
 
-<p>$$\Delta p = dg\,\Delta h$$</p>
+<h2>Esempio 1</h2>
 
-<p>La differenza di pressione tra due punti di uno stesso fluido dipende solo dal dislivello
-\(\Delta h\) che li separa, non dalla loro profondità assoluta.</p>
+<p>Dati: acqua, $d = 1000$ kg/m³, $h = 2$ m. Calcolare $d\,g\,h$ e $P$.</p>
 
-<h2>Esempio: le facce di un cubetto</h2>
+<p class="eq">$$d\,g\,h = 1000\cdot 9{,}81\cdot 2\ \text{Pa} = 1{,}96\cdot 10^{4}\ \text{Pa}$$</p>
+<p class="eq">$$P = 1{,}013\cdot 10^{5}\ \text{Pa} + 0{,}196\cdot 10^{5}\ \text{Pa} = 1{,}21\cdot 10^{5}\ \text{Pa}$$</p>
 
-<p>Un cubetto di lato \(l = 20\ \text{cm}\) è immerso in acqua. Qual è la differenza di pressione
-tra la sua faccia superiore e la sua faccia inferiore?</p>
+<h2>Esempio 2</h2>
 
-<figure class="dis">
-<svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fh3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="20" y1="20" x2="160" y2="20" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<path d="M20,20 L20,180 L160,180 L160,20" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<rect x="20" y="45" width="140" height="135" fill="var(--blu)" opacity=".18"/>
-<line x1="20" y1="45" x2="160" y2="45" stroke="var(--blu)" stroke-width="1.6"/>
-<rect x="65" y="95" width="50" height="50" fill="#fff" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="90" y="88" text-anchor="middle" font-family="var(--sans)" font-style="italic" font-size="13" fill="var(--inchiostro)">l</text>
-<text x="70" y="112" font-family="var(--sans)" font-size="11" fill="var(--rosso)">1</text>
-<text x="70" y="140" font-family="var(--sans)" font-size="11" fill="var(--verde)">2</text>
-<line x1="178" y1="45" x2="178" y2="95" stroke="var(--rosso)" stroke-width="1.2" marker-start="url(#fh3)" marker-end="url(#fh3)"/>
-<text x="188" y="73" font-family="var(--sans)" font-style="italic" font-size="12" fill="var(--rosso)">h&#8321;</text>
-<line x1="198" y1="45" x2="198" y2="145" stroke="var(--verde)" stroke-width="1.2" marker-start="url(#fh3)" marker-end="url(#fh3)"/>
-<text x="206" y="99" font-family="var(--sans)" font-style="italic" font-size="12" fill="var(--verde)">h&#8322;</text>
-</svg>
-<figcaption>Le due facce orizzontali del cubetto sono a profondità \(h_1\) e \(h_2\), con
-\(h_2 - h_1 = l\).</figcaption>
-</figure>
+<div class="fig">
+<svg id="g-cubo" viewBox="0 0 240 205" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:300px" role="img" aria-label="Cubetto di lato l immerso in acqua; le facce orizzontali sono alle profondità h1 e h2"></svg>
+<p class="did">$h_2 - h_1 = l$</p>
+</div>
 
-<p>Il dislivello tra le due facce è proprio il lato del cubetto, \(\Delta h = l\), quindi</p>
+<p>Dati: cubetto immerso in acqua, lato $l = 20$ cm. Calcolare $\Delta p$ fra faccia inferiore e superiore.</p>
 
-<p>$$\Delta p = dg\,\Delta h = dgl$$</p>
-
-<p>Con la densità dell'acqua \(d = 1000\ \text{kg/m}^3\) e \(g = 9{,}81\ \text{N/kg}\):</p>
-
-<p>$$\Delta p = 1000\ \text{kg/m}^3 \cdot 9{,}81\ \text{N/kg} \cdot 0{,}20\ \text{m} = 1962\ \text{Pa}$$</p>
+<p class="eq">$$\Delta p = d\,g\,l = 1000\ \tfrac{\text{kg}}{\text{m}^3}\cdot 9{,}81\ \tfrac{\text{N}}{\text{kg}}\cdot 0{,}20\ \text{m} = 1962\ \text{Pa}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../54-la-pressione-nei-fluidi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La pressione nei fluidi</span></a><a class="successiva" href="../56-principio-di-archimede/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Principio di Archimede</span></a></nav>
+<footer><p>Fisica prima &middot; Statica dei fluidi &middot; Unità 54</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function num(v,d){return v.toFixed(d).replace('.',',');}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');t.innerHTML=s;return t;}
+  function marc(s,id,col,dop){var d=el(s,'defs',{});el(el(d,'marker',{id:id,markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:dop?'auto-start-reverse':'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:col});}
+  function quota(p,x,y1,y2,id,col){el(p,'line',{x1:x,y1:y1+1,x2:x,y2:y2-1,stroke:col,'stroke-width':1.4,'marker-start':'url(#'+id+')','marker-end':'url(#'+id+')'});}
+  /* cilindro in prospettiva: centro cx, raggio rx, bordo yb, pelo libero ys, fondo yf */
+  function cilindro(g,cx,rx,yb,ys,yf){var ry=rx*0.24;
+    el(g,'path',{d:'M'+(cx-rx)+','+ys+' L'+(cx-rx)+','+yf+' A'+rx+','+ry+' 0 0 0 '+(cx+rx)+','+yf+' L'+(cx+rx)+','+ys+' A'+rx+','+ry+' 0 0 0 '+(cx-rx)+','+ys+' Z',fill:'var(--blu-chiaro)'});
+    el(g,'ellipse',{cx:cx,cy:ys,rx:rx,ry:ry,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6});
+    el(g,'ellipse',{cx:cx,cy:yb,rx:rx,ry:ry,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(g,'path',{d:'M'+(cx-rx)+','+yb+' L'+(cx-rx)+','+yf+' A'+rx+','+ry+' 0 0 0 '+(cx+rx)+','+yf+' L'+(cx+rx)+','+yb,fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    el(g,'path',{d:'M'+(cx-rx)+','+yf+' A'+rx+','+ry+' 0 0 1 '+(cx+rx)+','+yf,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2,'stroke-dasharray':'5 4'});}
+  /* figura 1 */
+  var s=document.getElementById('g-cilindro');
+  if(s){marc(s,'q1','var(--blu)',true);marc(s,'f1','var(--rosso)');
+    var g=el(s,'g',{}),cur=document.getElementById('cur-area'),val=document.getElementById('val-area');
+    var CX=140,YB=42,YS=62,YF=180;
+    quota(s,268,YS,YF,'q1','var(--blu)');txt(s,280,126,'h','var(--blu)',{it:1,fs:14});
+    var dis=function(){var k=+cur.value,rx=100*k;while(g.firstChild)g.removeChild(g.firstChild);
+      cilindro(g,CX,rx,YB,YS,YF);
+      el(g,'line',{x1:CX,y1:100,x2:CX,y2:YF-4,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#f1)'});
+      txt(g,CX+8,132,'peso','var(--rosso)',{fs:12});
+      txt(g,CX,YF+rx*0.24+22,'A','var(--inchiostro)',{it:1,fs:14,anc:'middle'});
+      val.innerHTML='A e peso ×'+num(k*k,2)+' · <span class="ok">P invariata</span>';};
+    cur.addEventListener('input',dis);dis();}
+  /* figura 2 */
+  var a=document.getElementById('g-atm');
+  if(a){marc(a,'f2','var(--rosso)');
+    cilindro(a,140,80,72,90,170);
+    [100,140,180].forEach(function(x){el(a,'line',{x1:x,y1:14,x2:x,y2:84,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#f2)'});});
+    txt(a,240,40,'aria','var(--rosso)');txt(a,240,58,'P<tspan font-size="10" dy="3">atm</tspan>','var(--rosso)',{it:1});
+    txt(a,240,138,'fluido, densità <tspan font-style="italic">d</tspan>','var(--blu)');}
+  /* figura 3 */
+  var p=document.getElementById('g-punti');
+  if(p){marc(p,'q3','var(--inchiostro)',true);
+    var X0=30,X1=170,YT=18,YP=48,YF3=212,K=0.02,DH=50; /* 1 unità = 2 cm; Δh = 50 unità = 1,0 m */
+    el(p,'rect',{x:X0,y:YP,width:X1-X0,height:YF3-YP,fill:'var(--blu-chiaro)'});
+    el(p,'line',{x1:X0,y1:YP,x2:X1,y2:YP,stroke:'var(--blu)','stroke-width':1.6});
+    el(p,'path',{d:'M'+X0+','+YT+' L'+X0+','+YF3+' L'+X1+','+YF3+' L'+X1+','+YT,fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    var g3=el(p,'g',{}),c3=document.getElementById('cur-prof'),v3=document.getElementById('val-prof');
+    var d3=function(){var y1=YP+20+(+c3.value)*(YF3-YP-DH-34),y2=y1+DH;while(g3.firstChild)g3.removeChild(g3.firstChild);
+      el(g3,'circle',{cx:90,cy:y1,r:4,fill:'var(--rosso)'});txt(g3,100,y1+5,'1','var(--rosso)',{fs:12});
+      el(g3,'circle',{cx:90,cy:y2,r:4,fill:'var(--verde)'});txt(g3,100,y2+5,'2','var(--verde)',{fs:12});
+      el(g3,'line',{x1:X1+4,y1:y1,x2:228,y2:y1,stroke:'var(--rosso)','stroke-width':.8,'stroke-dasharray':'3 3'});
+      el(g3,'line',{x1:X1+4,y1:y2,x2:260,y2:y2,stroke:'var(--verde)','stroke-width':.8,'stroke-dasharray':'3 3'});
+      quota(g3,222,YP,y1,'q3','var(--rosso)');txt(g3,200,(YP+y1)/2+5,'h<tspan font-size="9" dy="3">1</tspan>','var(--rosso)',{it:1,anc:'middle'});
+      quota(g3,254,YP,y2,'q3','var(--verde)');txt(g3,272,(YP+y2)/2+5,'h<tspan font-size="9" dy="3">2</tspan>','var(--verde)',{it:1,anc:'middle'});
+      var h1=(y1-YP)*K,h2=(y2-YP)*K,p1=1000*9.81*h1/1000,p2=1000*9.81*h2/1000;
+      v3.innerHTML='p<sub>1</sub> = '+num(p1,1)+' kPa · p<sub>2</sub> = '+num(p2,1)+' kPa · <span class="ok">Δp = '+num(p2-p1,1)+' kPa</span>';};
+    c3.addEventListener('input',d3);d3();}
+  /* figura 4 */
+  var c=document.getElementById('g-cubo');
+  if(c){marc(c,'q4','var(--inchiostro)',true);
+    el(c,'rect',{x:20,y:45,width:140,height:145,fill:'var(--blu-chiaro)'});
+    el(c,'line',{x1:20,y1:45,x2:160,y2:45,stroke:'var(--blu)','stroke-width':1.6});
+    el(c,'path',{d:'M20,18 L20,190 L160,190 L160,18',fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    el(c,'rect',{x:65,y:95,width:50,height:50,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(c,'line',{x1:65,y1:95,x2:115,y2:95,stroke:'var(--rosso)','stroke-width':3});
+    el(c,'line',{x1:65,y1:145,x2:115,y2:145,stroke:'var(--verde)','stroke-width':3});
+    txt(c,52,124,'l','var(--inchiostro)',{it:1,fs:14,anc:'middle'});
+    el(c,'line',{x1:116,y1:95,x2:176,y2:95,stroke:'var(--rosso)','stroke-width':.8,'stroke-dasharray':'3 3'});
+    el(c,'line',{x1:116,y1:145,x2:206,y2:145,stroke:'var(--verde)','stroke-width':.8,'stroke-dasharray':'3 3'});
+    quota(c,178,45,95,'q4','var(--rosso)');txt(c,186,75,'h<tspan font-size="9" dy="3">1</tspan>','var(--rosso)',{it:1});
+    quota(c,208,45,145,'q4','var(--verde)');txt(c,216,100,'h<tspan font-size="9" dy="3">2</tspan>','var(--verde)',{it:1});}
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
