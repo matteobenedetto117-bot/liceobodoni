@@ -5,15 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disequazioni con valori assoluti — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio h3,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def p+p{margin-top:0}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:var(--r)}
+.foglio li{line-height:var(--r)}
+.foglio>ul+p,.foglio>ol+p{margin-top:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.eq mjx-container{margin:0!important}
+.eq{overflow-x:auto}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq.ris{background:#eaf1ea}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.due-svg{display:grid;grid-template-columns:1fr 1fr;gap:12px;justify-items:center}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input[type=range]{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:14em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+p,.foglio>.def+p,.foglio>.def+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tre-svg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;justify-items:center}
+.foglio>.eq+.fig,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>ol+h2,.foglio>ul+h2{margin-top:var(--r)}
+.nota .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem}
+.foglio>.eq+h2,.foglio>.nota+h2{margin-top:var(--r)}
+.foglio>.eq+.nota,.foglio>.fig+.eq{margin-top:var(--r)}
+.foglio>.def+h2{margin-top:var(--r)}
+.foglio>.fig+h2,.foglio>.eq+.eq.ris{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,105 +69,101 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equazioni e disequazioni irrazionali e con valori assoluti &middot; Unità 57</p>
   <h1>Disequazioni con valori assoluti</h1>
-  <p class="sommario">Il procedimento è lo stesso delle equazioni con valore assoluto: si spezza
-  in due casi secondo il segno dell'espressione dentro le stanghette. Cambia solo l'ultimo passo:
-  ogni caso restituisce un intervallo, non un numero isolato, quindi le soluzioni dei due casi
-  vanno unite invece che semplicemente raccolte.</p>
 </header>
 
-<h2>Lo stesso schema, con l'unione finale</h2>
+<p>Disequazione con $|A(x)|$: stessi due casi delle equazioni.</p>
 
-<p>Anche qui non conosciamo subito il segno di ciò che sta dentro il valore assoluto, quindi
-distinguiamo due casi: nel primo imponiamo che l'espressione sia non negativa e togliamo il
-valore assoluto senza cambiare segni; nel secondo imponiamo che sia negativa e cambiamo tutti
-i segni. In entrambi i casi risolviamo il sistema fra la condizione di segno e la disequazione
-che ne risulta.</p>
+<ul>
+<li>$A(x)\ge0$ → si toglie il modulo senza cambiare segni;</li>
+<li>$A(x)&lt;0$ → si toglie cambiando i segni di $A(x)$;</li>
+<li>ogni caso → sistema fra condizione di segno e disequazione;</li>
+<li>soluzioni → unione degli insiemi dei due sistemi.</li>
+</ul>
 
 <h2>Esempio</h2>
 
-<p>Risolviamo $x+|2x^2+4x|\ge3$. Poniamo $A(x)=2x^2+4x$ e distinguiamo i due casi secondo il
-suo segno.</p>
+<p class="eq quesito">$$x+|2x^2+4x|\ge3$$</p>
 
-<p><strong>Caso (a)</strong>, $A(x)\ge0$: togliamo il valore assoluto senza cambiare segni.</p>
-
-$$\begin{cases}2x^2+4x\ge0\\x+2x^2+4x\ge3\end{cases}$$
-
-<p>La prima condizione è $2x(x+2)\ge0$, verificata per $x\le-2\ \lor\ x\ge0$. La seconda diventa
-$2x^2+5x-3\ge0$: con $\Delta=25+24=49$ si ha $x_{1,2}=\dfrac{-5\pm7}{4}$, cioè $x=-3$ oppure
-$x=\dfrac12$, quindi $x\le-3\ \lor\ x\ge\dfrac12$.</p>
+<p class="eq">$$\text{(a)}\ \begin{cases}2x^2+4x\ge0\\x+2x^2+4x\ge3\end{cases} \;\Rightarrow\; \begin{cases}x\le-2\ \vee\ x\ge0\\2x^2+5x-3\ge0\end{cases} \;\Rightarrow\; \begin{cases}x\le-2\ \vee\ x\ge0\\x\le-3\ \vee\ x\ge\frac12\end{cases}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="30" x2="280" y2="30" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="100" cy="30" r="4" fill="#16283d"/><text x="92" y="24" font-size="12">-2</text>
-<circle cx="160" cy="30" r="4" fill="#16283d"/><text x="156" y="24" font-size="12">0</text>
-<line x1="20" y1="30" x2="100" y2="30" stroke="#2f6b4f" stroke-width="3"/>
-<line x1="160" y1="30" x2="280" y2="30" stroke="#2f6b4f" stroke-width="3"/>
-<text x="20" y="46" font-size="11" fill="#5a6b7d">2x²+4x&#8805;0</text>
-
-<line x1="20" y1="90" x2="280" y2="90" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="70" cy="90" r="4" fill="#16283d"/><text x="60" y="84" font-size="12">-3</text>
-<circle cx="190" cy="90" r="4" fill="#16283d"/><text x="184" y="84" font-size="12">1/2</text>
-<line x1="20" y1="90" x2="70" y2="90" stroke="#1f4e79" stroke-width="3"/>
-<line x1="190" y1="90" x2="280" y2="90" stroke="#1f4e79" stroke-width="3"/>
-<text x="20" y="106" font-size="11" fill="#5a6b7d">2x²+5x-3&#8805;0</text>
-
-<line x1="20" y1="130" x2="280" y2="130" stroke="#16283d" stroke-width="1.2"/>
-<line x1="20" y1="130" x2="70" y2="130" stroke="#b3392f" stroke-width="3.5"/>
-<line x1="190" y1="130" x2="280" y2="130" stroke="#b3392f" stroke-width="3.5"/>
-<text x="20" y="146" font-size="11" fill="#b3392f">intersezione</text>
-</svg>
-<figcaption>intersecando le due condizioni resta $x\le-3\ \lor\ x\ge\frac12$</figcaption>
+<svg id="g-caso-a" viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Intersezione di x minore o uguale a meno 2 o x maggiore o uguale a 0 con x minore o uguale a meno 3 o x maggiore o uguale a un mezzo"></svg>
+<p class="did">Caso (a): $x\le-3\ \vee\ x\ge\frac12$</p>
 </div>
 
-<p><strong>Caso (b)</strong>, $A(x)&lt;0$: togliamo il valore assoluto cambiando tutti i segni.</p>
+<p class="eq">$$\text{(b)}\ \begin{cases}2x^2+4x&lt;0\\x-2x^2-4x\ge3\end{cases} \;\Rightarrow\; \begin{cases}-2&lt;x&lt;0\\2x^2+3x+3\le0\end{cases} \;\Rightarrow\; \Delta=-15&lt;0,\ \text{nessuna soluzione}$$</p>
 
-$$\begin{cases}2x^2+4x&lt;0\\x-2x^2-4x\ge3\end{cases}$$
+<p class="eq ris">$$x\le-3\ \vee\ x\ge\frac12$$</p>
 
-<p>La prima condizione dà $-2&lt;x&lt;0$. La seconda diventa $2x^2+3x+3\le0$: qui
-$\Delta=9-24=-15$, negativo, e il coefficiente di $x^2$ è positivo, quindi la parabola resta
-sempre sopra l'asse delle ascisse e non esiste alcun $x$ che la renda $\le0$. Il caso (b) non
-ha soluzioni.</p>
+<h2>Unione di due insiemi</h2>
 
-<div class="regola"><p>Unendo i due casi, la soluzione è
-$$x\le-3\ \lor\ x\ge\frac12$$</p></div>
+<p>Si disegnano sulla stessa retta e si prende ciò che è coperto da almeno uno dei due:</p>
 
-<h2>Unire due insiemi di soluzioni</h2>
-
-<p>Quando i due casi restituiscono ciascuno un'unione di intervalli, conviene disegnarli sulla
-stessa retta e prendere tutto ciò che è coperto da almeno uno dei due, invece di ragionare
-solo a parole. Per esempio, unendo $x&lt;-1\ \lor\ x&gt;3$ e $x\le-4\ \lor\ x\ge2$:</p>
+<p class="eq">$$\left(x&lt;-1\ \vee\ x&gt;3\right)\ \cup\ \left(x\le-4\ \vee\ x\ge2\right)$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="20" y1="20" x2="300" y2="20" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="70" cy="20" r="4" fill="#16283d"/><text x="60" y="14" font-size="12">-4</text>
-<circle cx="130" cy="20" r="4" fill="#16283d"/><text x="122" y="14" font-size="12">-1</text>
-<line x1="20" y1="20" x2="130" y2="20" stroke="#2f6b4f" stroke-width="3"/>
-<text x="20" y="36" font-size="11" fill="#5a6b7d">x&lt;-1  (unione con x&#8804;-4)</text>
-
-<line x1="20" y1="65" x2="300" y2="65" stroke="#16283d" stroke-width="1.2"/>
-<circle cx="230" cy="65" r="4" fill="#16283d"/><text x="222" y="59" font-size="12">2</text>
-<circle cx="270" cy="65" r="4" fill="#16283d"/><text x="262" y="59" font-size="12">3</text>
-<line x1="230" y1="65" x2="300" y2="65" stroke="#1f4e79" stroke-width="3"/>
-<text x="150" y="81" font-size="11" fill="#5a6b7d">x&#8805;2  (unione con x&gt;3)</text>
-</svg>
-<figcaption>il risultato copre tutto ciò che è colorato in almeno una delle due righe:
-$x&lt;-1\ \lor\ x\ge2$</figcaption>
+<svg id="g-unione" viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Unione di x minore di meno 1 o x maggiore di 3 con x minore o uguale a meno 4 o x maggiore o uguale a 2"></svg>
+<p class="did">Unione: $x&lt;-1\ \vee\ x\ge2$</p>
 </div>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Le stesse tecniche di segno e di unione tornano nello studio della circonferenza, dove le
-condizioni su un sistema di due equazioni sostituiscono quelle su un'equazione e una
-disequazione.</li>
-</ul>
-</div>
+<p class="eq ris">$$x&lt;-1\ \vee\ x\ge2$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../58-equazioni-con-valori-assoluti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazioni con valori assoluti</span></a><a class="successiva" href="../60-circonferenza-e-cerchio-definizioni-e-prime-proprieta/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Circonferenza e cerchio: definizioni e prime proprietà</span></a></nav>
 <footer><p>Matematica seconda &middot; Equazioni e disequazioni irrazionali e con valori assoluti &middot; Unità 57</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,
+  fill:'var(--grigio)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+
+/* righe dei numeri: ogni riga è un elenco di intervalli [a, b, a chiuso?, b chiuso?] (null = infinito) */
+function rette(id,xmin,xmax,punti,righe){
+  var svg=document.getElementById(id); if(!svg)return;
+  var L=118,R=404,y0=26,dy=46;
+  function X(v){return L+(v-xmin)/(xmax-xmin)*(R-L);}
+  punti.forEach(function(q){svg.appendChild(el('line',{x1:X(q[0]),y1:y0-6,x2:X(q[0]),y2:y0+2*dy+6,stroke:'var(--riga)'}));});
+  righe.forEach(function(rg,i){
+    var y=y0+i*dy;
+    svg.appendChild(el('line',{x1:L,y1:y,x2:R,y2:y,stroke:'var(--inchiostro)','stroke-width':1.2}));
+    svg.appendChild(txt(6,y+4,rg.nome,{fill:rg.col,'font-size':12}));
+    rg.int.forEach(function(s){
+      var a=s[0]===null?L:X(s[0]), b=s[1]===null?R:X(s[1]);
+      svg.appendChild(el('line',{x1:a,y1:y,x2:b,y2:y,stroke:rg.col,'stroke-width':rg.w||3}));
+      [[s[0],s[2]],[s[1],s[3]]].forEach(function(e){if(e[0]===null)return;
+        svg.appendChild(el('circle',{cx:X(e[0]),cy:y,r:4.5,fill:e[1]?rg.col:'#fff',stroke:rg.col,'stroke-width':1.8}));});
+    });
+  });
+  punti.forEach(function(q){svg.appendChild(txt(X(q[0]),y0-10,q[1],{'text-anchor':'middle',fill:'var(--inchiostro)','font-size':12}));});
+}
+rette('g-caso-a',-5,2,[[-3,'−3'],[-2,'−2'],[0,'0'],[0.5,'½']],[
+  {nome:'2x²+4x ≥ 0',col:'var(--verde)',int:[[null,-2,0,1],[0,null,1,0]]},
+  {nome:'2x²+5x−3 ≥ 0',col:'var(--blu)',int:[[null,-3,0,1],[0.5,null,1,0]]},
+  {nome:'intersezione',col:'var(--rosso)',w:4,int:[[null,-3,0,1],[0.5,null,1,0]]}]);
+rette('g-unione',-6,5,[[-4,'−4'],[-1,'−1'],[2,'2'],[3,'3']],[
+  {nome:'x<−1 ∨ x>3',col:'var(--verde)',int:[[null,-1,0,0],[3,null,0,0]]},
+  {nome:'x≤−4 ∨ x≥2',col:'var(--blu)',int:[[null,-4,0,1],[2,null,1,0]]},
+  {nome:'unione',col:'var(--rosso)',w:4,int:[[null,-1,0,0],[2,null,1,0]]}]);
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
