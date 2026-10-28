@@ -721,6 +721,7 @@
   fenditura per la luce. Ridisegnato in SVG lo schema della traccia: fascio di elettroni, doppia
   fenditura, schermo con le bande di interferenza. Nessuno strumento interattivo: pagina di una
   sola facciata, concettuale.
+- Revisione (28/10/2026, regole 13/10): parole 196 → 92 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 57); tolti sommario, «Nella prossima unità», i titoletti con le date («L'ipotesi di De Broglie, 1924», «L'esperimento di Davisson e Germer, 1929») e le frasi descrittive; domanda d'apertura, ipotesi e λ = h/p in .def rosso, h e p = mv (per v ≪ c) in elenco. Correzione concettuale: la pagina attribuiva a Davisson e Germer (datato 1929) un esperimento di doppia fenditura con elettroni; l'esperimento (1927) è la diffrazione di elettroni da un cristallo di nichel: ora scritto così, la doppia fenditura resta come seconda evidenza (frange di interferenza). Figura rifatta da script: frange e intensità calcolate con λ = h/(mv), cursore sulla velocità degli elettroni (1,0–4,0 ×10⁶ m/s → λ 0,73–0,18 nm).
 
 ## Unità 59 — Il principio di indeterminazione di Heisenberg
 - Parole: 525 su 3 pagine di traccia (pagine 104–106).
