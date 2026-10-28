@@ -734,6 +734,7 @@
   con rivelatori (elettrone localizzato, cumulo), che nella traccia comparivano come due disegni
   separati. Un riquadro "Da ricordare" per l'enunciato del principio. Nessuno strumento
   interattivo: contenuto concettuale, due schemi statici sufficienti.
+- Revisione (28/10/2026, regole 13/10): parole 427 → 147 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 58); domanda d'apertura; tolti sommario, «Nella prossima unità» (rimando ai modelli atomici), i titoletti «Un elettrone alla volta», «Un tentativo di localizzare l'elettrone», «L'osservazione cambia il risultato» e i paragrafi descrittivi; esiti senza/con rivelatori e che cosa si conosce nei due casi in elenco caso → conseguenza; principio in .def con Δx·Δp ≥ h/(4π) in rosso; Δx, Δp, h in elenco. Precisazione: «più si restringe l'una, più cresce necessariamente l'altra» → «più piccola è Δx, più grande è il valore minimo di Δp» (la relazione fissa un limite inferiore). Nessuna comparsa, nessun esempio (assente anche prima). Figure rifatte da script: doppia fenditura un elettrone alla volta con ▶ (700 arrivi campionati da I = cos²(πΔr/λ) con inviluppo, curva d'intensità calcolata); confronto in due pannelli, senza rivelatori (frange) e con rivelatori (due cumuli dietro le fenditure; prima era disegnato un unico cumulo).
 
 ## Unità 60 — Modelli atomici: Thomson e Rutherford
 - Parole: 472 su 2 pagine di traccia (pagine 107–108).

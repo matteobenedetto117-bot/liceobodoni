@@ -5,17 +5,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Il principio di indeterminazione di Heisenberg — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:#eef4fa;border:1px solid var(--blu);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
+.cursore{flex-wrap:wrap}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:11em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+ul,.foglio>.def+ul,.foglio>.eq+ul{margin-top:var(--r)}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.def+h2,.foglio>.eq+h2,.foglio>.fig+h2{margin-top:var(--r)}
+.due-svg{display:grid;grid-template-columns:1.7fr 1fr;gap:12px;align-items:center}
+@media(max-width:640px){.due-svg{grid-template-columns:1fr}}
+.foglio>.nota+p,.foglio>.def+.nota,.foglio>ul+.def,.foglio>ul+.nota{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,176 +85,158 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Meccanica quantistica &middot; Unità 59</p>
   <h1>Il principio di indeterminazione di Heisenberg</h1>
-  <p class="sommario">Ripetiamo l'esperimento di Davisson e Germer emettendo un elettrone alla
-  volta, e proviamo a scoprire da quale fenditura passa ciascuno. Il tentativo di osservarlo
-  cambia il risultato dell'esperimento, e ci porta a uno dei risultati più importanti della fisica
-  del Novecento.</p>
 </header>
 
-<h2>Un elettrone alla volta</h2>
-
-<p>Ripetiamo l'esperimento della doppia fenditura emettendo un solo elettrone per volta, invece di
-un fascio. Ci aspettiamo di vedere, sullo schermo, un cumulo di elettroni in corrispondenza delle
-due fenditure e nessuna figura di interferenza, perché ogni elettrone dovrebbe passare da una
-fenditura sola. Invece, sorprendentemente, l'esperimento dà lo stesso esito di prima: sullo
-schermo si forma di nuovo la figura a bande chiare e scure tipica dell'interferenza, anche se gli
-elettroni arrivano uno alla volta.</p>
+<p>Doppia fenditura con un elettrone alla volta: da quale fenditura passa ciascun elettrone?</p>
 
 <div class="fig">
-<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fk59a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<rect x="36" y="98" width="66" height="28" rx="3" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="69" y="117" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--inchiostro)">e&#8315;</text>
-<text x="69" y="86" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">un elettrone alla volta</text>
-<line x1="102" y1="112" x2="156" y2="112" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fk59a)"/>
-
-<rect x="232" y="16" width="8" height="64" fill="var(--inchiostro)"/>
-<rect x="232" y="92" width="8" height="22" fill="var(--inchiostro)"/>
-<rect x="232" y="126" width="8" height="22" fill="var(--inchiostro)"/>
-<rect x="232" y="160" width="8" height="64" fill="var(--inchiostro)"/>
-<text x="236" y="242" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">doppia fenditura</text>
-
-<line x1="240" y1="103" x2="466" y2="46" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-<line x1="240" y1="137" x2="466" y2="194" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3,3"/>
-
-<g>
-<rect x="466" y="10" width="16" height="17" fill="var(--inchiostro)"/>
-<rect x="466" y="27" width="16" height="12" fill="#f3ead6"/>
-<rect x="466" y="39" width="16" height="17" fill="var(--inchiostro)"/>
-<rect x="466" y="56" width="16" height="12" fill="#f3ead6"/>
-<rect x="466" y="68" width="16" height="22" fill="var(--inchiostro)"/>
-<rect x="466" y="90" width="16" height="14" fill="#f3ead6"/>
-<rect x="466" y="104" width="16" height="30" fill="var(--inchiostro)"/>
-<rect x="466" y="134" width="16" height="14" fill="#f3ead6"/>
-<rect x="466" y="148" width="16" height="22" fill="var(--inchiostro)"/>
-<rect x="466" y="170" width="16" height="12" fill="#f3ead6"/>
-<rect x="466" y="182" width="16" height="17" fill="var(--inchiostro)"/>
-<rect x="466" y="199" width="16" height="12" fill="#f3ead6"/>
-<rect x="466" y="211" width="16" height="17" fill="var(--inchiostro)"/>
-<rect x="466" y="10" width="16" height="218" fill="none" stroke="var(--riga)" stroke-width="1.4"/>
-</g>
-<text x="500" y="100" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">frange di</text>
-<text x="500" y="116" font-family="var(--sans)" font-size="13" fill="var(--inchiostro)">interferenza</text>
-<line x1="497" y1="108" x2="484" y2="108" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fk59a)"/>
-</svg>
-<p class="did">Gli elettroni arrivano sullo schermo uno alla volta, ma il loro accumulo ricostruisce
-comunque la figura a bande dell'interferenza.</p>
+<svg id="g-uno" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Elettroni inviati uno alla volta su una doppia fenditura: sullo schermo si accumulano in frange di interferenza"></svg>
+<button type="button" class="btn-anim" id="btn-uno" aria-label="Avvia">&#9654;</button>
+<p class="did">Un elettrone alla volta: l'accumulo forma le frange di interferenza</p>
 </div>
 
-<h2>Un tentativo di localizzare l'elettrone</h2>
+<p>Si ripete l'esperimento con un rivelatore davanti a ogni fenditura:</p>
 
-<p>Per scoprire da quale fenditura passa ciascun elettrone, posizioniamo un rivelatore davanti a
-ciascuna delle due fenditure e ripetiamo l'esperimento. I risultati sono due: ogni elettrone
-emesso viene segnalato da un solo rivelatore, quindi passa effettivamente da una fenditura sola,
-come ci aspettavamo; ma sullo schermo la figura di interferenza scompare, e al suo posto si forma
-di nuovo il cumulo di elettroni in corrispondenza delle due fenditure.</p>
-
-<div class="fig">
-<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fk59b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-<path d="M0,0 L8,4 L0,8 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-
-<text x="150" y="24" text-anchor="middle" font-family="var(--sans)" font-size="13" font-weight="600" fill="var(--blu)">senza rivelatori</text>
-<rect x="16" y="118" width="60" height="26" rx="3" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="46" y="136" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">e&#8315;</text>
-<line x1="76" y1="131" x2="122" y2="131" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fk59b)"/>
-<rect x="150" y="60" width="7" height="50" fill="var(--inchiostro)"/>
-<rect x="150" y="118" width="7" height="16" fill="var(--inchiostro)"/>
-<rect x="150" y="140" width="7" height="16" fill="var(--inchiostro)"/>
-<rect x="150" y="162" width="7" height="50" fill="var(--inchiostro)"/>
-<path d="M122,131 Q160,105 240,105" fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-<path d="M122,131 Q160,157 240,157" fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-<text x="180" y="96" font-family="var(--sans)" font-size="10.5" fill="var(--blu)">si sdoppia</text>
-<g>
-<rect x="240" y="46" width="13" height="15" fill="var(--inchiostro)"/>
-<rect x="240" y="61" width="13" height="10" fill="#f3ead6"/>
-<rect x="240" y="71" width="13" height="15" fill="var(--inchiostro)"/>
-<rect x="240" y="86" width="13" height="10" fill="#f3ead6"/>
-<rect x="240" y="96" width="13" height="20" fill="var(--inchiostro)"/>
-<rect x="240" y="116" width="13" height="12" fill="#f3ead6"/>
-<rect x="240" y="128" width="13" height="26" fill="var(--inchiostro)"/>
-<rect x="240" y="154" width="13" height="12" fill="#f3ead6"/>
-<rect x="240" y="166" width="13" height="20" fill="var(--inchiostro)"/>
-<rect x="240" y="186" width="13" height="10" fill="#f3ead6"/>
-<rect x="240" y="196" width="13" height="15" fill="var(--inchiostro)"/>
-<rect x="240" y="211" width="13" height="10" fill="#f3ead6"/>
-<rect x="240" y="221" width="13" height="15" fill="var(--inchiostro)"/>
-<rect x="240" y="46" width="13" height="190" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-</g>
-<text x="256" y="255" font-family="var(--sans)" font-size="11.5" fill="var(--inchiostro)">interferenza</text>
-
-<line x1="320" y1="20" x2="320" y2="280" stroke="var(--riga)" stroke-width="1"/>
-
-<text x="480" y="24" text-anchor="middle" font-family="var(--sans)" font-size="13" font-weight="600" fill="var(--rosso)">con rivelatori</text>
-<rect x="346" y="118" width="60" height="26" rx="3" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="376" y="136" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">e&#8315;</text>
-<line x1="406" y1="131" x2="452" y2="131" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fk59b)"/>
-<rect x="480" y="60" width="7" height="50" fill="var(--inchiostro)"/>
-<rect x="480" y="118" width="7" height="16" fill="var(--inchiostro)"/>
-<rect x="480" y="140" width="7" height="16" fill="var(--inchiostro)"/>
-<rect x="480" y="162" width="7" height="50" fill="var(--inchiostro)"/>
-<rect x="465" y="122" width="10" height="10" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<rect x="465" y="146" width="10" height="10" fill="none" stroke="var(--rosso)" stroke-width="1.4"/>
-<path d="M452,131 Q470,131 545,131" fill="none" stroke="var(--blu)" stroke-width="1.4" marker-end="url(#fk59b)"/>
-<circle cx="500" cy="131" r="3" fill="var(--blu)"/>
-<g>
-<rect x="580" y="60" width="13" height="150" fill="var(--inchiostro)"/>
-<rect x="580" y="46" width="13" height="190" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-</g>
-<text x="586" y="255" font-family="var(--sans)" font-size="11.5" fill="var(--inchiostro)">cumulo</text>
-</svg>
-<p class="did">Senza rivelatori l'elettrone non è localizzato, si sdoppia alle fenditure e
-interferisce con se stesso. Con i rivelatori diventa una particella localizzata che passa da una
-sola fenditura: l'interferenza scompare e resta il cumulo.</p>
-</div>
-
-<h2>L'osservazione cambia il risultato</h2>
-
-<p>Quando non ci sono rivelatori, l'elettrone non è localizzato: si trova contemporaneamente in
-una regione ampia di spazio. Arrivando alle fenditure "si sdoppia", passa per entrambe e
-interferisce con se stesso, come un'onda — da qui la figura a bande sullo schermo. Se invece
-posizioniamo i rivelatori, l'elettrone diventa una particella localizzata, passa da una fenditura
-sola e non interagisce più con se stesso: l'interferenza scompare.</p>
-
-<p>Confrontiamo che cosa sappiamo nei due casi. Senza rivelatori, misurando la distanza fra le
-bande chiare ricaviamo la lunghezza d'onda $\lambda$ dell'elettrone, e quindi la sua quantità di
-moto $p = h/\lambda$: conosciamo bene $p$, ma non sappiamo da quale fenditura sia passato, cioè
-non conosciamo la sua posizione. Con i rivelatori conosciamo bene la posizione dell'elettrone, ma
-avendo perso la figura di interferenza non possiamo più ricavare $\lambda$, e quindi non
-conosciamo $p$.</p>
-
-<div class="nota">
-<span class="et">Da ricordare</span>
-<p>È impossibile conoscere simultaneamente, con precisione arbitraria, la posizione e la quantità
-di moto di una particella. Questo è il principio di indeterminazione di Heisenberg.</p>
-</div>
-
-<div class="formula-box">
-$$\Delta p \cdot \Delta x \geq \frac{h}{4\pi}$$
-</div>
-
-<p>dove $\Delta x$ è l'incertezza sulla posizione, $\Delta p$ l'incertezza sulla quantità di moto
-ed $h$ la costante di Planck: più si restringe l'una, più cresce necessariamente l'altra.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Passiamo ai primi modelli atomici — quello di Thomson e l'esperimento di Rutherford — che
-storicamente precedono questi risultati, ma che ora possiamo leggere sapendo già che elettrone e
-particella non sono la stessa cosa in ogni situazione.</li>
+<li>senza rivelatori → frange di interferenza: l'elettrone non è localizzato, passa per entrambe le fenditure e interferisce con se stesso;</li>
+<li>con i rivelatori → ogni elettrone è segnalato da un solo rivelatore; l'interferenza scompare, restano due cumuli dietro le fenditure.</li>
 </ul>
+
+<div class="fig">
+<svg id="g-riv" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Confronto: senza rivelatori frange di interferenza, con rivelatori due cumuli"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Senza rivelatori: interferenza</p>
+<p class="did">Con rivelatori: due cumuli</p>
 </div>
+</div>
+
+<p>Che cosa si conosce nei due casi:</p>
+
+<ul>
+<li>senza rivelatori → dalla distanza fra le frange si ricava $\lambda$, quindi $p = h/\lambda$; posizione (fenditura) ignota;</li>
+<li>con i rivelatori → posizione nota; senza frange, $\lambda$ e $p$ restano ignote.</li>
+</ul>
+
+<div class="def"><span class="et">Principio di indeterminazione di Heisenberg</span>
+<p>Non si possono conoscere simultaneamente, con precisione arbitraria, la posizione e la quantità di moto di una particella:</p>
+<p class="eq principio">$$\Delta x \cdot \Delta p \geq \frac{h}{4\pi}$$</p></div>
+
+<ul>
+<li>$\Delta x$: incertezza sulla posizione;</li>
+<li>$\Delta p$: incertezza sulla quantità di moto;</li>
+<li>$h \approx 6{,}63\times10^{-34}\ \text{J}\cdot\text{s}$: costante di Planck.</li>
+</ul>
+
+<p>Più piccola è $\Delta x$, più grande è il valore minimo di $\Delta p$, e viceversa.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../58-l-ipotesi-di-de-broglie-e-l-esperimento-di-davisson-germer/index.html"><span class="dir">&larr; Precedente</span><span class="tit">L'ipotesi di De Broglie e l'esperimento di Davisson-Germer</span></a><a class="successiva" href="../60-modelli-atomici-thomson-e-rutherford/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Modelli atomici: Thomson e Rutherford</span></a></nav>
 <footer><p>Fisica quinta &middot; Meccanica quantistica &middot; Unità 59</p></footer>
 
 </div>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)',stroke:'#fff','stroke-width':3,'stroke-linejoin':'round','paint-order':'stroke'},a||{}));e.textContent=s;return e;}
+var ridotto=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* generatore pseudo-casuale con seme fisso: stesso disegno a ogni apertura */
+function rng(s){return function(){s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+/* apparato: sorgente, barriera con due fenditure, schermo; restituisce la geometria */
+function apparato(svg,o){
+  var g=el('g',{});svg.appendChild(g);
+  g.appendChild(el('rect',{x:o.x0,y:o.ys-12,width:40,height:24,rx:3,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.5}));
+  g.appendChild(txt(o.x0+20,o.ys+5,'e⁻',{'text-anchor':'middle','font-size':13}));
+  var w=6,y=o.top;[o.yA,o.yB].forEach(function(ya){g.appendChild(el('rect',{x:o.xF-w/2,y:y,width:w,height:ya-4-y,fill:'var(--inchiostro)'}));y=ya+4;});
+  g.appendChild(el('rect',{x:o.xF-w/2,y:y,width:w,height:o.bot-y,fill:'var(--inchiostro)'}));
+  g.appendChild(el('rect',{x:o.xS,y:o.top,width:o.wS,height:o.bot-o.top,fill:'#fff',stroke:'var(--grigio)','stroke-width':.8}));
+  return g;
+}
+/* intensita' sullo schermo (unita' arbitrarie, massimo 1) */
+function Iint(o,y){var r1=Math.hypot(o.xS-o.xF,y-o.yA),r2=Math.hypot(o.xS-o.xF,y-o.yB),u=(y-o.ys)/o.sig;return Math.pow(Math.cos(Math.PI*(r1-r2)/o.lam),2)*Math.exp(-u*u/2);}
+function Icum(o,y){
+  var k=o.kC, s=0;
+  [o.yA,o.yB].forEach(function(ya){var yc=o.ys+(ya-o.ys)*k,u=(y-yc)/o.sigC;s+=Math.exp(-u*u/2);});return s;
+}
+function profilo(svg,o,f,col){
+  var d='',n=0,M=0,y;for(y=o.top;y<=o.bot;y++)M=Math.max(M,f(o,y));
+  for(y=o.top;y<=o.bot;y++){d+=(n++?'L':'M')+(o.xS+o.wS+4+o.hP*f(o,y)/M).toFixed(1)+','+y;}
+  svg.appendChild(el('line',{x1:o.xS+o.wS+4,y1:o.top,x2:o.xS+o.wS+4,y2:o.bot,stroke:'var(--grigio)','stroke-width':.8}));
+  svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':1.5}));
+  return M;
+}
+/* campionamento per rigetto di n punti con densita' f */
+function campioni(o,f,M,n,r){var P=[];while(P.length<n){var y=o.top+r()*(o.bot-o.top);if(r()*M<=f(o,y))P.push([o.xS+2+r()*(o.wS-4),y]);}return P;}
+
+/* --- figura 1: un elettrone alla volta --- */
+var S1=document.getElementById('g-uno'), B1=document.getElementById('btn-uno');
+if(S1&&B1){
+  var o={x0:12,ys:125,xF:140,yA:110,yB:140,xS:300,wS:22,top:30,bot:220,lam:9,sig:48,hP:60};
+  apparato(S1,o);
+  S1.appendChild(txt(o.x0+20,o.ys-20,'un elettrone',{'text-anchor':'middle','font-size':11}));
+  S1.appendChild(txt(o.x0+20,o.ys+28,'alla volta',{'text-anchor':'middle','font-size':11}));
+  S1.appendChild(txt(o.xF,o.top-10,'doppia fenditura',{'text-anchor':'middle','font-size':11}));
+  S1.appendChild(txt(o.xS+o.wS/2,o.top-10,'schermo',{'text-anchor':'middle','font-size':11}));
+  var M1=profilo(S1,o,Iint,'var(--grigio)');
+  S1.appendChild(txt(o.xS+o.wS+4+o.hP/2+14,o.top-10,'intensità',{'text-anchor':'middle','font-size':11,fill:'var(--grigio)'}));
+  var punti=campioni(o,Iint,M1,700,rng(59));
+  var gp=el('g',{});S1.appendChild(gp);
+  var pal=el('circle',{r:3.2,fill:'var(--rosso)',opacity:0});S1.appendChild(pal);
+  var cont=txt(o.xS+o.wS/2,o.bot+14,'',{'text-anchor':'middle','font-size':11});S1.appendChild(cont);
+  var nod=punti.map(function(p){return el('circle',{cx:p[0].toFixed(1),cy:p[1].toFixed(1),r:1.3,fill:'var(--blu)'});});
+  var D=7000,raf=null,stato='fermo',mostrati=0;
+  function dis(t){
+    var n=Math.round(punti.length*Math.pow(Math.min(1,t/D),1.6));
+    while(mostrati<n){gp.appendChild(nod[mostrati]);mostrati++;}
+    while(mostrati>n){mostrati--;gp.removeChild(nod[mostrati]);}
+    if(t>0&&t<D&&n>0){var p=punti[n-1];pal.setAttribute('cx',p[0].toFixed(1));pal.setAttribute('cy',p[1].toFixed(1));pal.setAttribute('opacity',1);}
+    else pal.setAttribute('opacity',0);
+    cont.textContent=n?n+' elettroni':'';
+  }
+  B1.addEventListener('click',function(){
+    if(stato==='fine'){cancelAnimationFrame(raf);dis(0);stato='fermo';B1.innerHTML='&#9654;';B1.setAttribute('aria-label','Avvia');return;}
+    if(stato!=='fermo')return;
+    stato='corsa';B1.disabled=true;var t0=null;
+    (function passo(t){if(t0===null)t0=t;var dt=ridotto?D:t-t0;dis(Math.min(dt,D));
+      if(dt>=D){stato='fine';B1.disabled=false;B1.innerHTML='&#8634;';B1.setAttribute('aria-label','Ricomincia');}
+      else raf=requestAnimationFrame(passo);})(performance.now());
+  });
+  dis(0);
+}
+
+/* --- figura 2: senza e con rivelatori --- */
+var S2=document.getElementById('g-riv');
+if(S2){
+  [{dx:0,f:Iint,riv:false,tit:'senza rivelatori',col:'var(--blu)'},{dx:215,f:Icum,riv:true,tit:'con rivelatori',col:'var(--rosso)'}].forEach(function(c,i){
+    var o={x0:4+c.dx,ys:115,xF:80+c.dx,yA:102,yB:128,xS:150+c.dx,wS:14,top:30,bot:200,lam:6.5,sig:30,sigC:9,kC:2,hP:34};
+    S2.appendChild(txt(100+c.dx,16,c.tit,{'text-anchor':'middle','font-size':12,'font-weight':600,fill:c.col}));
+    apparato(S2,o);
+    var M=profilo(S2,o,c.f,'var(--grigio)'), P=campioni(o,c.f,M,450,rng(7+i)), g=el('g',{});
+    P.forEach(function(p){g.appendChild(el('circle',{cx:p[0].toFixed(1),cy:p[1].toFixed(1),r:1.1,fill:'var(--blu)'}));});
+    S2.appendChild(g);
+    if(c.riv){[o.yA,o.yB].forEach(function(ya){S2.appendChild(el('rect',{x:o.xF+5,y:ya-5,width:10,height:10,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.5}));});
+      S2.appendChild(txt(o.xF+10,o.bot+14,'rivelatori',{'text-anchor':'middle','font-size':11,fill:'var(--rosso)'}));
+      S2.appendChild(el('line',{x1:o.xF+10,y1:o.bot+2,x2:o.xF+10,y2:o.yB+7,stroke:'var(--rosso)','stroke-width':.8,'stroke-dasharray':'3,3'}));}
+    if(i===0)S2.appendChild(el('line',{x1:207,y1:8,x2:207,y2:212,stroke:'var(--riga)','stroke-width':1}));
+  });
+}
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
