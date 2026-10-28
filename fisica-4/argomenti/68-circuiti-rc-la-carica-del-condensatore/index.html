@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Circuiti RC: la carica del condensatore — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.controlli{font-family:var(--sans);font-size:.9rem;margin:14px 0 0;max-width:420px;margin-left:auto;margin-right:auto}
-.controlli input[type=range]{width:100%}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,149 +55,148 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Corrente elettrica e circuiti &middot; Unit&agrave; 66</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 66</p>
   <h1>Circuiti RC: la carica del condensatore</h1>
-  <p class="sommario">Chiudendo un interruttore su un circuito con una
-  resistenza e un condensatore, la carica non compare di colpo sulle
-  armature: cresce nel tempo, sempre pi&ugrave; lentamente via via che si
-  avvicina al valore massimo che il generatore pu&ograve; fornire.</p>
 </header>
 
-<div class="fig">
-<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="rc68a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-
-<!-- pannello a: interruttore aperto -->
-<line x1="40" y1="190" x2="40" y2="152" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="26" y1="152" x2="54" y2="152" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="32" y1="140" x2="48" y2="140" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="40" y1="140" x2="40" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="14" y="150" text-anchor="end" font-family="var(--sans)" font-size="14" fill="var(--grigio)">&#949;</text>
-<line x1="40" y1="50" x2="90" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="90" cy="50" r="3" fill="var(--inchiostro)"/>
-<line x1="90" y1="50" x2="138" y2="34" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="150" cy="50" r="3" fill="var(--inchiostro)"/>
-<line x1="150" y1="50" x2="180" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="180,50 188,38 196,62 204,38 212,62 220,38 228,50" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="204" y="24" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--grigio)">R</text>
-<line x1="228" y1="50" x2="240" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="240" y1="50" x2="240" y2="112" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="222" y1="112" x2="258" y2="112" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="222" y1="126" x2="258" y2="126" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="270" y="123" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">C</text>
-<line x1="240" y1="126" x2="240" y2="190" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="40" y1="190" x2="240" y2="190" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="140" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">(a) t = 0, interruttore aperto: i(0) = 0, q(0) = 0</text>
-
-<line x1="300" y1="20" x2="300" y2="200" stroke="var(--riga)" stroke-width="1"/>
-
-<!-- pannello b: interruttore chiuso -->
-<line x1="380" y1="190" x2="380" y2="152" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="366" y1="152" x2="394" y2="152" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="372" y1="140" x2="388" y2="140" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="380" y1="140" x2="380" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="354" y="150" text-anchor="end" font-family="var(--sans)" font-size="14" fill="var(--grigio)">&#949;</text>
-<line x1="380" y1="50" x2="430" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="430" cy="50" r="3" fill="var(--inchiostro)"/>
-<line x1="430" y1="50" x2="490" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<circle cx="490" cy="50" r="3" fill="var(--inchiostro)"/>
-<line x1="398" y1="50" x2="418" y2="50" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#rc68a)"/>
-<text x="408" y="38" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i</text>
-<line x1="490" y1="50" x2="520" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="520,50 528,38 536,62 544,38 552,62 560,38 568,50" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="544" y="24" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--grigio)">R</text>
-<line x1="568" y1="50" x2="580" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="580" y1="50" x2="580" y2="112" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="562" y1="112" x2="598" y2="112" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="580" y="104" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">+</text>
-<line x1="562" y1="126" x2="598" y2="126" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="580" y="142" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--rosso)">&#8722;</text>
-<text x="610" y="123" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">C</text>
-<line x1="580" y1="126" x2="580" y2="190" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="380" y1="190" x2="580" y2="190" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="480" y="205" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">(b) interruttore chiuso: scorre i, si accumula q sulle armature</text>
-</svg>
-<p class="did">Prima della chiusura (a) non c&rsquo;&egrave; n&eacute; corrente n&eacute; carica. Appena l&rsquo;interruttore si chiude (b) una corrente $i$ comincia a scorrere nel circuito e una carica $q$ si accumula sulle armature del condensatore, positiva su una piastra e negativa sull&rsquo;altra.</p>
-</div>
-
-<p>Si pu&ograve; dimostrare che la carica sul condensatore al tempo $t$ vale</p>
-
-<div class="formula-box">
-$$q(t)=C\varepsilon\left(1-e^{-\frac{t}{\tau}}\right)\qquad \tau=RC$$
-</div>
-
-<p>Verifichiamo la condizione iniziale: per $t=0$ si ha $q(0)=C\varepsilon(1-e^{0})=C\varepsilon(1-1)=0$, come deve essere. Per $t$ molto grande l&rsquo;esponenziale tende a zero e la carica tende al valore massimo, quello di un condensatore completamente carico:</p>
-
-<div class="formula-box">
-$$\lim_{t\to\infty} q(t)=C\varepsilon=Q \qquad (Q=C\,\Delta V)$$
-</div>
+<p>Generatore $\varepsilon$, resistenza $R$, condensatore $C$ scarico: chiuso l'interruttore, come cresce la carica $q$ sulle armature?</p>
 
 <div class="fig">
-<div id="rc68-plot" style="max-width:560px;margin:0 auto"></div>
-<div class="controlli">
-<label for="rc68-tau">&tau; = <span id="rc68-tau-val">3</span> (unit&agrave; arbitrarie) &mdash; confronto con &tau; = 1,5 in grigio</label>
-<input type="range" id="rc68-tau" min="1" max="6" step="0.5" value="3">
+<svg id="g-rc" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Circuito RC con interruttore aperto e con interruttore chiuso"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">$t = 0$, interruttore aperto: $i = 0$, $q = 0$</p>
+<p class="did">Interruttore chiuso: scorre $i$, si accumula $q$</p>
 </div>
-<p class="did">La carica cresce rapidamente all&rsquo;inizio e poi sempre pi&ugrave; lentamente, avvicinandosi senza mai raggiungerlo esattamente al valore $C\varepsilon$ (linea tratteggiata). Pi&ugrave; &tau; &egrave; grande, pi&ugrave; tempo impiega il circuito ad arrivare vicino al massimo: muovi il cursore e confronta la curva blu con quella grigia di riferimento.</p>
-</div>
-
-<p>La quantit&agrave; $\tau=RC$ si chiama costante di tempo del circuito: fissa la scala temporale con cui la carica cresce, indipendentemente dai valori di $\varepsilon$. Dopo un tempo pari a $\tau$ la carica ha raggiunto</p>
-
-<div class="formula-box">
-$$q(\tau)=C\varepsilon\,(1-e^{-1})\approx 0{,}632\,C\varepsilon \quad\text{cio&egrave; il 63,2\% della carica massima}$$
 </div>
 
-<p>dopo $2\tau$ &egrave; all&rsquo;86,5% e dopo $5\tau$ al 99,3%: in pratica, dopo cinque costanti di tempo il condensatore si considera completamente carico.</p>
+<p>Carica sul condensatore al tempo $t$:</p>
 
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
+<div class="def"><span class="et">Carica del condensatore</span>
+<p class="eq principio">$$q(t)=C\varepsilon\left(1-e^{-t/\tau}\right)\qquad \tau=RC$$</p></div>
+
 <ul>
-<li>Dalla carica passiamo alla corrente che scorre nel circuito RC durante la fase di carica: anch&rsquo;essa segue una legge esponenziale, ma decrescente, massima all&rsquo;istante iniziale.</li>
+<li>$t=0$ → $q(0)=C\varepsilon\,(1-e^{0})=0$;</li>
+<li>$t\to\infty$ → $e^{-t/\tau}\to0$ → $q\to C\varepsilon=Q$, condensatore carico ($Q=C\,\Delta V$ con $\Delta V=\varepsilon$).</li>
 </ul>
+
+<div class="fig">
+<svg id="g-q" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico della carica in funzione del tempo per due costanti di tempo"></svg>
+<div class="cursore"><label for="cur-tau">$\tau$</label><input id="cur-tau" type="range" min="1" max="6" step="0.5" value="3"><span class="val" id="val-tau">3,0 s</span></div>
+<p class="did">In rosso tratteggiato: $\tau = 1{,}5$ s e asintoto $C\varepsilon$</p>
 </div>
+
+<p>$\tau=RC$ è la costante di tempo: più $\tau$ è grande, più lenta è la carica.</p>
+
+<p class="eq">$$q(\tau)=C\varepsilon\,(1-e^{-1})\approx0{,}632\,C\varepsilon$$</p>
+
+<ul>
+<li>$t=\tau$ → 63,2% di $C\varepsilon$;</li>
+<li>$t=2\tau$ → 86,5%;</li>
+<li>$t=5\tau$ → 99,3%: condensatore considerato carico.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../67-kirchhoff-applicato-a-circuiti-complessi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Kirchhoff applicato a circuiti complessi</span></a><a class="successiva" href="../69-circuiti-rc-la-corrente/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Circuiti RC: la corrente</span></a></nav>
-<footer><p>Fisica quarta &middot; Corrente elettrica e circuiti &middot; Unit&agrave; 66</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 66</p></footer>
 </div>
 
 <script>
 (function(){
-  var tMax = 20;
-  var N = 120;
-  var t = [];
-  for (var i=0;i<=N;i++) t.push(tMax*i/N);
-  function q(tau){ return t.map(function(x){ return 1-Math.exp(-x/tau); }); }
-
-  function traces(tau){
-    return [
-      {x:t, y:q(1.5), mode:'lines', name:'&tau; = 1,5', line:{color:'#9aa1ad', width:2, dash:'dot'}},
-      {x:t, y:q(tau), mode:'lines', name:'&tau; = '+tau, line:{color:'#1f4e79', width:2.4}},
-      {x:[0,tMax], y:[1,1], mode:'lines', name:'C&#949;', line:{color:'#b3392f', width:1.2, dash:'dash'}}
-    ];
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');if(a&&a.b)t.setAttribute('font-weight','700');t.innerHTML=s;return t;}
+  function sub(b,s){return b+'<tspan font-size="9" dy="3">'+s+'</tspan>';}
+  function f(v,n){return v.toFixed(n).replace('.',',');}
+  var filo={stroke:'var(--inchiostro)','stroke-width':2,fill:'none','stroke-linejoin':'round'};
+  function linea(p,pts){el(p,'path',Object.assign({d:'M'+pts.map(function(q){return q.join(',');}).join(' L')},filo));}
+  function res(p,xa,ya,xb,yb){var n=6,pts=[[xa,ya]],dx=xb-xa,dy=yb-ya,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    for(var i=0;i<n;i++){var t=(i+.5)/n,s=(i%2?-1:1)*9;pts.push([xa+dx*t-uy*s,ya+dy*t+ux*s]);}pts.push([xb,yb]);linea(p,pts);}
+  /* generatore verticale: polo + (lungo, sottile) in alto a yp, polo - (corto, spesso) a yp+12 */
+  function gen(p,x,yp){el(p,'line',{x1:x-16,y1:yp,x2:x+16,y2:yp,stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(p,'line',{x1:x-8,y1:yp+12,x2:x+8,y2:yp+12,stroke:'var(--inchiostro)','stroke-width':5});
+    txt(p,x+20,yp-2,'+','var(--inchiostro)');txt(p,x+20,yp+22,'−','var(--inchiostro)');}
+  /* figura 1: due pannelli */
+  var s=document.getElementById('g-rc');
+  if(s){
+    var d=el(s,'defs',{});
+    el(el(d,'marker',{id:'fi',markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:'var(--rosso)'});
+    el(s,'line',{x1:280,y1:20,x2:280,y2:185,stroke:'var(--riga)','stroke-width':1});
+    [0,280].forEach(function(o,k){
+      var XL=o+50,XR=o+220,YT=45,YB=175,yg=104,yc=104;
+      /* generatore a sinistra */
+      linea(s,[[XL,YB],[XL,yg+12]]);gen(s,XL,yg);linea(s,[[XL,yg],[XL,YT],[o+90,YT]]);
+      txt(s,XL-22,yg+10,'ε','var(--grigio)',{anc:'end',it:1,fs:14});
+      /* interruttore */
+      el(s,'circle',{cx:o+90,cy:YT,r:3,fill:'var(--inchiostro)'});el(s,'circle',{cx:o+122,cy:YT,r:3,fill:'var(--inchiostro)'});
+      if(k===0)linea(s,[[o+90,YT],[o+118,YT-16]]);else linea(s,[[o+90,YT],[o+122,YT]]);
+      /* resistenza */
+      linea(s,[[o+122,YT],[o+140,YT]]);res(s,o+140,YT,o+184,YT);linea(s,[[o+184,YT],[XR,YT],[XR,yc-7]]);
+      txt(s,o+162,YT-16,'R','var(--grigio)',{anc:'middle',it:1,fs:14});
+      /* condensatore */
+      el(s,'line',{x1:XR-18,y1:yc-7,x2:XR+18,y2:yc-7,stroke:'var(--inchiostro)','stroke-width':2.4});
+      el(s,'line',{x1:XR-18,y1:yc+7,x2:XR+18,y2:yc+7,stroke:'var(--inchiostro)','stroke-width':2.4});
+      linea(s,[[XR,yc+7],[XR,YB],[XL,YB]]);
+      txt(s,XR+24,yc+5,'C','var(--grigio)',{anc:'start',it:1,fs:14});
+      if(k===1){
+        txt(s,XR-24,yc-6,'+q','var(--rosso)',{anc:'end',fs:12});txt(s,XR-24,yc+16,'−q','var(--rosso)',{anc:'end',fs:12});
+        el(s,'line',{x1:XL+8,y1:YT-10,x2:XL+32,y2:YT-10,stroke:'var(--rosso)','stroke-width':2,'marker-end':'url(#fi)'});
+        txt(s,XL+20,YT-16,'i','var(--rosso)',{anc:'middle',it:1,fs:14});
+      }
+    });
   }
-  var layout = {
-    margin:{l:44,r:16,t:10,b:36},
-    xaxis:{title:'t', range:[0,tMax], zeroline:true, zerolinecolor:'#16283d', showgrid:false, tickfont:{size:10}},
-    yaxis:{title:'q / Cε', range:[0,1.12], zeroline:true, zerolinecolor:'#16283d', showgrid:false, tickfont:{size:10}},
-    showlegend:false,
-    font:{family:'Segoe UI, sans-serif', size:11}
-  };
-  Plotly.newPlot('rc68-plot', traces(3), layout, {displayModeBar:false, responsive:true});
-
-  var slider = document.getElementById('rc68-tau');
-  var label = document.getElementById('rc68-tau-val');
-  slider.addEventListener('input', function(){
-    var tau = parseFloat(slider.value);
-    label.textContent = tau;
-    Plotly.react('rc68-plot', traces(tau), layout, {displayModeBar:false, responsive:true});
-  });
+  /* figura 2: q(t) calcolata, cursore su tau */
+  var g=document.getElementById('g-q'),cur=document.getElementById('cur-tau'),out=document.getElementById('val-tau');
+  if(g&&cur){
+    var X0=50,Y0=200,TM=20,KX=350/TM,KY=150;
+    function X(t){return X0+KX*t;} function Y(q){return Y0-KY*q;}
+    function curva(tau){var p='';for(var i=0;i<=200;i++){var t=TM*i/200;p+=(i?' L':'M')+X(t).toFixed(1)+','+Y(1-Math.exp(-t/tau)).toFixed(1);}return p;}
+    var d2=el(g,'defs',{});
+    el(el(d2,'marker',{id:'fa',markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:'var(--inchiostro)'});
+    el(g,'line',{x1:X0,y1:Y0,x2:X(TM)+14,y2:Y0,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fa)'});
+    el(g,'line',{x1:X0,y1:Y0,x2:X0,y2:Y(1)-22,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fa)'});
+    txt(g,X(TM)+14,Y0-8,'t (s)','var(--inchiostro)',{anc:'end',it:1});
+    txt(g,X0+8,Y(1)-14,'q','var(--inchiostro)',{it:1,fs:14});
+    [0,5,10,15,20].forEach(function(t){el(g,'line',{x1:X(t),y1:Y0,x2:X(t),y2:Y0+4,stroke:'var(--inchiostro)'});txt(g,X(t),Y0+18,String(t),'var(--grigio)',{anc:'middle',fs:11});});
+    el(g,'line',{x1:X0,y1:Y(1),x2:X(TM),y2:Y(1),stroke:'var(--rosso)','stroke-width':1.2,'stroke-dasharray':'6 4'});
+    txt(g,X0-6,Y(1)+4,'Cε','var(--rosso)',{anc:'end',it:1});
+    el(g,'path',{d:curva(1.5),fill:'none',stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5 4'});
+    var dyn=el(g,'g',{});
+    /* legenda in basso a destra */
+    el(g,'line',{x1:300,y1:156,x2:324,y2:156,stroke:'var(--blu)','stroke-width':2.6});txt(g,330,160,'τ','var(--inchiostro)',{it:1,fs:12});
+    el(g,'line',{x1:300,y1:176,x2:324,y2:176,stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5 4'});txt(g,330,180,'τ = 1,5 s','var(--inchiostro)',{fs:12});
+    function disegna(){
+      var tau=+cur.value; while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+      el(dyn,'path',{d:curva(tau),fill:'none',stroke:'var(--blu)','stroke-width':2.6});
+      var q1=1-Math.exp(-1);
+      el(dyn,'line',{x1:X(tau),y1:Y0,x2:X(tau),y2:Y(q1),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+      el(dyn,'line',{x1:X0,y1:Y(q1),x2:X(tau),y2:Y(q1),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+      el(dyn,'circle',{cx:X(tau),cy:Y(q1),r:4.5,fill:'var(--rosso)'});
+      txt(dyn,X(tau)+5,Y0-6,'τ','var(--inchiostro)',{it:1,fs:13});
+      var lb=txt(dyn,X(tau)+8,Y(q1)+16,'63,2%','var(--rosso)',{fs:12});lb.setAttribute('stroke','#fff');lb.setAttribute('stroke-width','3');lb.setAttribute('paint-order','stroke');
+      if(5*tau<=TM){var x5=X(5*tau);
+        el(dyn,'circle',{cx:x5,cy:Y(1-Math.exp(-5)),r:4.5,fill:'var(--verde)'});
+        txt(dyn,Math.min(x5,X(TM)-14),Y(1)+22,'5τ: carico','var(--verde)',{anc:'middle',b:1,fs:12});}
+      out.textContent=f(tau,1)+' s';
+    }
+    cur.addEventListener('input',disegna); disegna();
+  }
 })();
 </script>
-
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
