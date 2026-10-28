@@ -5,18 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vasi comunicanti — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:640px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,125 +59,138 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Vasi comunicanti</h1>
 </header>
 
-<h2>Un solo liquido</h2>
+<p>Due vasi collegati alla base, con lo stesso liquido: a che altezza si dispone il liquido nei due rami?</p>
 
-<p>Versando acqua in vasi comunicanti come in figura, accade che il liquido si livella
-a una stessa altezza <span>\(h\)</span> nei due rami.</p>
+<div class="fig">
+<svg id="g-uno" viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Tubo a U con acqua allo stesso livello nei due rami"></svg>
+<p class="did">Stesso liquido: stesso livello nei due rami</p>
+</div>
 
-<figure class="dis">
-<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
-  </defs>
-  <!-- acqua -->
-  <path d="M182,110 L182,240 L438,240 L438,110 L398,110 L398,200 L222,200 L222,110 Z"
-        fill="#9ecbf0" opacity="0.65"/>
-  <!-- pareti -->
-  <path d="M180,80 L180,242 L440,242 L440,80 M220,80 L220,202 L400,202 L400,80"
-        fill="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- superfici libere -->
-  <path d="M182,110 L218,110 M402,110 L438,110" stroke="#1f6fb2" stroke-width="2.5"/>
-  <!-- punti A e B -->
-  <circle cx="200" cy="236" r="5" fill="#333"/><text x="192" y="264">A</text>
-  <circle cx="420" cy="236" r="5" fill="#333"/><text x="412" y="264">B</text>
-  <!-- quota h -->
-  <path d="M140,236 L140,110" stroke="#333" stroke-width="1.6" marker-start="url(#fr)" marker-end="url(#fr)"/>
-  <text x="118" y="178">h</text>
-  <path d="M140,236 L180,236 M140,110 L180,110" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="470" y="106" fill="#1f6fb2">acqua</text>
-  <path d="M466,100 L444,108" stroke="#1f6fb2" stroke-width="1.6" marker-end="url(#fr)"/>
-</svg>
-<figcaption>Il liquido si dispone allo stesso livello nei due rami.</figcaption>
-</figure>
+<p>Pressione in $A$ e $B$, alla stessa quota (legge di Stevino):</p>
 
-<p>Questo succede perché al fondo dei vasi, nei punti <span>\(A\)</span> e
-<span>\(B\)</span>, la pressione deve essere uguale. Per la legge di Stevino su ciascuno
-grava la pressione atmosferica più il peso della colonna sovrastante,</p>
+<p class="eq">$$p_A = p_{atm} + d\,g\,h_A \qquad p_B = p_{atm} + d\,g\,h_B$$</p>
 
-<p>$$p_A = p_{\mathrm{atm}} + d\,g\,h \qquad p_B = p_{\mathrm{atm}} + d\,g\,h$$</p>
-
-<p>e da <span>\(p_A = p_B\)</span> segue che l'altezza della colonna è la stessa nei due
-rami. Non contano la forma né l'ampiezza dei vasi: conta solo l'altezza del liquido.</p>
+<ul>
+<li>liquido fermo → $p_A = p_B$ → $h_A = h_B$;</li>
+<li>forma e ampiezza dei vasi → non contano.</li>
+</ul>
 
 <h2>Due liquidi diversi</h2>
 
-<p>Supponiamo ora di aggiungere olio nella colonna di destra. L'olio galleggia
-sull'acqua, e i due rami non hanno più lo stesso livello.</p>
+<p>Olio di densità $d_2$ versato nel ramo destro, sopra l'acqua di densità $d_1$:</p>
 
-<figure class="dis">
-<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="f2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
-  </defs>
-  <!-- liquido d1 (acqua) -->
-  <path d="M182,114 L182,250 L438,250 L438,140 L398,140 L398,210 L222,210 L222,114 Z"
-        fill="#9ecbf0" opacity="0.65"/>
-  <!-- liquido d2 (olio) nel ramo destro -->
-  <rect x="402" y="96" width="36" height="44" fill="#f0b95e" opacity="0.8"/>
-  <!-- pareti -->
-  <path d="M180,70 L180,252 L440,252 L440,70 M220,72 L220,212 L400,212 L400,72"
-        fill="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- livello di separazione, riferimento comune -->
-  <path d="M170,140 L450,140" stroke="#555" stroke-width="1.2" stroke-dasharray="6 4"/>
-  <!-- superfici libere -->
-  <path d="M182,114 L218,114" stroke="#1f6fb2" stroke-width="2.5"/>
-  <path d="M402,96 L438,96" stroke="#d98613" stroke-width="2.5"/>
-  <!-- punti -->
-  <circle cx="200" cy="246" r="5" fill="#333"/><text x="192" y="276">A</text>
-  <circle cx="420" cy="246" r="5" fill="#333"/><text x="412" y="276">B</text>
-  <!-- quote -->
-  <path d="M140,140 L140,114" stroke="#333" stroke-width="1.6" marker-start="url(#f2)" marker-end="url(#f2)"/>
-  <text x="108" y="133">h₁</text>
-  <path d="M140,246 L140,140" stroke="#333" stroke-width="1.6" marker-start="url(#f2)" marker-end="url(#f2)"/>
-  <text x="124" y="200">h</text>
-  <path d="M492,140 L492,96" stroke="#333" stroke-width="1.6" marker-start="url(#f2)" marker-end="url(#f2)"/>
-  <text x="500" y="124">h₂</text>
-  <path d="M492,246 L492,140" stroke="#333" stroke-width="1.6" marker-start="url(#f2)" marker-end="url(#f2)"/>
-  <text x="500" y="200">h</text>
-  <path d="M440,246 L492,246" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
-  <!-- etichette densità -->
-  <text x="236" y="182" fill="#1f6fb2">d₁</text>
-  <text x="452" y="88" fill="#d98613">d₂</text>
-  <text x="172" y="62" fill="#2e7d32" font-size="12">p atm</text>
-  <text x="392" y="62" fill="#2e7d32" font-size="12">p atm</text>
-</svg>
-<figcaption>Sopra il livello di separazione, la colonna <span>\(h_1\)</span> di densità
-<span>\(d_1\)</span> e la colonna <span>\(h_2\)</span> di densità
-<span>\(d_2\)</span>.</figcaption>
-</figure>
-
-<p>Anche adesso <span>\(p_A = p_B\)</span>, e si sommano i contributi delle colonne
-attraversate scendendo da ciascuna superficie libera:</p>
-
-<p>$$p_A = p_{\mathrm{atm}} + d_1 g h_1 + d_1 g h \qquad
-p_B = p_{\mathrm{atm}} + d_2 g h_2 + d_1 g h$$</p>
-
-<p>Uguagliando, la pressione atmosferica e il termine <span>\(d_1 g h\)</span>, comune ai
-due membri, si semplificano, e si semplifica anche <span>\(g\)</span>:</p>
-
-<p>$$d_1 g h_1 = d_2 g h_2 \qquad\Longrightarrow\qquad \boxed{\,d_1 h_1 = d_2 h_2\,}$$</p>
-
-<p>È la relazione tra le altezze di fluidi diversi: il prodotto densità per altezza è lo
-stesso nei due rami, quindi il liquido meno denso forma la colonna più alta.</p>
-
-<div class="nota">
-<strong>Da dove si misurano le altezze.</strong> <span>\(h_1\)</span> e
-<span>\(h_2\)</span> si contano dal livello in cui i due liquidi si toccano, non dal fondo:
-altrimenti il termine comune non si semplifica.
+<div class="fig">
+<svg id="g-due" viewBox="0 0 400 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Tubo a U con acqua e olio: colonne h1 e h2 sopra il livello di separazione"></svg>
+<div class="cursore"><label for="cur-d2">$d_2$</label><input id="cur-d2" type="range" min="600" max="1000" step="10" value="920"><span class="val" id="val-d2">920 kg/m³</span></div>
+<p class="did">$d_1 = 1000$ kg/m³, $h_2 = 5{,}00$ cm; altezze dal livello di separazione</p>
 </div>
+
+<p>Scendendo da ciascuna superficie libera fino ad $A$ e a $B$:</p>
+
+<p class="eq">$$p_A = p_{atm} + d_1 g h_1 + d_1 g h \qquad p_B = p_{atm} + d_2 g h_2 + d_1 g h$$</p>
+
+<p>Da $p_A = p_B$ si semplificano $p_{atm}$, $d_1 g h$ e $g$:</p>
+
+<div class="def"><span class="et">Vasi comunicanti con due liquidi</span>
+<p class="eq principio">$$d_1\,h_1 = d_2\,h_2$$</p></div>
+
+<ul>
+<li>liquido meno denso → colonna più alta.</li>
+</ul>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>$h_1$ e $h_2$ si misurano dal livello di separazione fra i due liquidi, non dal fondo.</p></div>
 
 <h2>Esempio</h2>
 
-<p>Nel ramo di destra versiamo un olio di densità \(d_2 = 920\ \text{kg/m}^3\), mentre il liquido di
-base è acqua, \(d_1 = 1000\ \text{kg/m}^3\). La colonna d'olio è alta \(h_2 = 5{,}00\ \text{cm}\).
-Quanto vale il dislivello \(x = h_2 - h_1\) fra le due superfici libere?</p>
+<p>Dati: $d_1 = 1000$ kg/m³ (acqua), $d_2 = 920$ kg/m³ (olio), $h_2 = 5{,}00$ cm. Calcolare il dislivello $x = h_2 - h_1$.</p>
 
-<p>$$h_1 = \frac{d_2 h_2}{d_1} = \frac{920\cdot 5{,}00}{1000}\ \text{cm} = 4{,}60\ \text{cm}$$</p>
-<p>$$x = h_2 - h_1 = 5{,}00\ \text{cm} - 4{,}60\ \text{cm} = 0{,}40\ \text{cm}$$</p>
+<p class="eq">$$h_1 = \frac{d_2\,h_2}{d_1} = \frac{920 \cdot 5{,}00}{1000}\ \text{cm} = 4{,}60\ \text{cm}$$</p>
+
+<p class="eq">$$x = h_2 - h_1 = 5{,}00\ \text{cm} - 4{,}60\ \text{cm} = 0{,}40\ \text{cm}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../58-pressione-atmosferica-ed-esperimento-di-torricelli/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Pressione atmosferica ed esperimento di Torricelli</span></a><a class="successiva" href="../60-principio-di-pascal-e-torchio-idraulico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Principio di Pascal e torchio idraulico</span></a></nav>
+<footer><p>Fisica prima &middot; Statica dei fluidi &middot; Unità 59</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');if(a&&a.b)t.setAttribute('font-weight','700');t.innerHTML=s;return t;}
+  function sub(b,s){return b+'<tspan font-size="9" dy="3">'+s+'</tspan>';}
+  var ACQ='#9ecbf0', OLIO='#f0c36e';
+  /* tubo a U: rami larghi 36, pareti esterne 110 e 310, fondo interno 222, esterno 262 */
+  var XL0=110,XL1=146,XR0=274,XR1=310,YI=222,YE=262,YT=50;
+  function tubo(s){el(s,'path',{d:'M'+XL0+','+YT+' L'+XL0+','+YE+' L'+XR1+','+YE+' L'+XR1+','+YT+' M'+XL1+','+YT+' L'+XL1+','+YI+' L'+XR0+','+YI+' L'+XR0+','+YT,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.2,'stroke-linejoin':'round'});}
+  function acqua(s,yL,yR){return el(s,'path',{d:'M'+XL0+','+yL+' L'+XL0+','+YE+' L'+XR1+','+YE+' L'+XR1+','+yR+' L'+XR0+','+yR+' L'+XR0+','+YI+' L'+XL1+','+YI+' L'+XL1+','+yL+' Z',fill:ACQ});}
+  function quota(s,x,y1,y2,lab,lato){var g=el(s,'g',{});
+    el(g,'line',{x1:x,y1:y1,x2:x,y2:y2,stroke:'var(--inchiostro)','stroke-width':1.2});
+    [y1,y2].forEach(function(y){el(g,'line',{x1:x-5,y1:y,x2:x+5,y2:y,stroke:'var(--inchiostro)','stroke-width':1.2});});
+    txt(g,lato<0?x-8:x+8,(y1+y2)/2+5,lab,'var(--inchiostro)',{anc:lato<0?'end':'start',it:1,fs:14});return g;}
+  function punti(s,y){[[128,'A'],[292,'B']].forEach(function(p){el(s,'circle',{cx:p[0],cy:y,r:4,fill:'var(--inchiostro)'});txt(s,p[0],y+0,p[1],'var(--inchiostro)',{anc:'middle',fs:13}).setAttribute('y',YE+18);});}
+  /* figura 1: stesso liquido */
+  var s1=document.getElementById('g-uno');
+  if(s1){var yl=110,yA=248;
+    acqua(s1,yl,yl);tubo(s1);
+    el(s1,'line',{x1:XL0,y1:yl,x2:XL1,y2:yl,stroke:'var(--blu)','stroke-width':2.5});
+    el(s1,'line',{x1:XR0,y1:yl,x2:XR1,y2:yl,stroke:'var(--blu)','stroke-width':2.5});
+    el(s1,'line',{x1:XL1,y1:yl,x2:XR0,y2:yl,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'5 4'});
+    punti(s1,yA);
+    el(s1,'line',{x1:80,y1:yA,x2:XL0,y2:yA,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    el(s1,'line',{x1:80,y1:yl,x2:XL0,y2:yl,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    quota(s1,80,yl,yA,sub('h','A'),-1);
+    el(s1,'line',{x1:XR1,y1:yA,x2:340,y2:yA,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    el(s1,'line',{x1:XR1,y1:yl,x2:340,y2:yl,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+    quota(s1,340,yl,yA,sub('h','B'),1);
+    txt(s1,210,yl-10,sub('p','atm'),'var(--rosso)',{anc:'middle',it:1});
+  }
+  /* figura 2: acqua e olio, h2 fissa, h1 = d2 h2 / d1 calcolata */
+  var s2=document.getElementById('g-due'),cur=document.getElementById('cur-d2'),out=document.getElementById('val-d2');
+  if(s2&&cur){
+    var K=12, H2=5.00, D1=1000, yS=150, yA=248;   /* K unità del disegno per cm */
+    var gA=el(s2,'g',{}); tubo(s2);
+    var gD=el(s2,'g',{});
+    function f(v,n){return v.toFixed(n).replace('.',',');}
+    function disegna(){
+      var d2=+cur.value, h1=d2*H2/D1, yL=yS-K*h1, yO=yS-K*H2, x=H2-h1;
+      while(gA.firstChild)gA.removeChild(gA.firstChild);
+      while(gD.firstChild)gD.removeChild(gD.firstChild);
+      acqua(gA,yL,yS);
+      el(gA,'rect',{x:XR0,y:yO,width:XR1-XR0,height:yS-yO,fill:OLIO});
+      el(gD,'line',{x1:XL0,y1:yL,x2:XL1,y2:yL,stroke:'var(--blu)','stroke-width':2.5});
+      el(gD,'line',{x1:XR0,y1:yO,x2:XR1,y2:yO,stroke:'#c98a1a','stroke-width':2.5});
+      el(gD,'line',{x1:66,y1:yS,x2:354,y2:yS,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'6 4'});
+      [[66,XL0,yL],[66,XL0,yA],[XR1,354,yO],[XR1,354,yA]].forEach(function(q){el(gD,'line',{x1:q[0],y1:q[2],x2:q[1],y2:q[2],stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});});
+      quota(gD,72,yL,yS,sub('h','1'),-1); quota(gD,72,yS,yA,'h',-1);
+      quota(gD,348,yO,yS,sub('h','2'),1); quota(gD,348,yS,yA,'h',1);
+      punti(gD,yA);
+      txt(gD,210,YI+28,sub('d','1'),'var(--blu)',{anc:'middle',it:1,fs:14});
+      txt(gD,292,yO-8,sub('d','2'),'#b07410',{anc:'middle',it:1,fs:14});
+      txt(gD,210,90,sub('h','1')+' = '+f(h1,2)+' cm','var(--inchiostro)',{anc:'middle'});
+      var t=txt(gD,210,110,x<0.005?'stesso livello':'dislivello '+f(x,2)+' cm',x<0.005?'var(--verde)':'var(--inchiostro)',{anc:'middle',b:x<0.005});
+      out.textContent=d2+' kg/m³';
+    }
+    cur.addEventListener('input',disegna); disegna();
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
