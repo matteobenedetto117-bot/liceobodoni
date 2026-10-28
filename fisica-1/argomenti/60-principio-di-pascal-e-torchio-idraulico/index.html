@@ -5,20 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Principio di Pascal e torchio idraulico — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:640px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
-</head>
-<body>
+</head><body>
 <div class="foglio">
 
 <header class="testata">
@@ -27,129 +58,121 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Principio di Pascal e torchio idraulico</h1>
 </header>
 
-<h2>Il principio di Pascal</h2>
+<p>Fluido chiuso in un recipiente: che cosa succede alla pressione aggiunta premendo in un punto?</p>
 
-<p>Una pressione esterna applicata a un fluido racchiuso in un recipiente si trasmette
-inalterata in ogni punto del fluido.</p>
+<div class="def"><span class="et">Principio di Pascal</span>
+<p>Una pressione esterna applicata a un fluido racchiuso in un recipiente si trasmette inalterata in ogni punto del fluido e sulle pareti.</p></div>
 
-<p>«Inalterata» è la parola che conta: la pressione non si distribuisce dividendosi fra i
-punti, e non si smorza allontanandosi dal punto in cui è stata applicata. Se premendo si
-aggiunge una pressione <span>\(p\)</span>, ogni punto del fluido si trova con
-<span>\(p\)</span> in più di prima, comprese le pareti del recipiente.</p>
+<ul>
+<li>pressione aggiunta $p$ → ogni punto ha $p$ in più;</li>
+<li>nessuna divisione fra i punti, nessuna attenuazione con la distanza.</li>
+</ul>
 
-<figure class="dis">
-<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c33"/></marker>
-  </defs>
-  <path d="M60,150 L580,150" stroke="#333" stroke-width="2.5"/>
-  <circle cx="180" cy="128" r="22" fill="none" stroke="#333" stroke-width="2.5"/>
-  <ellipse cx="400" cy="138" rx="30" ry="12" fill="#bfe3c0" stroke="#333" stroke-width="2.5"/>
-  <path d="M400,78 L400,120" stroke="#c33" stroke-width="2.5" marker-end="url(#fr)"/>
-  <text x="410" y="90" fill="#c33">F</text>
-  <text x="140" y="184">palla libera</text>
-  <text x="348" y="184">palla schiacciata</text>
-</svg>
-<figcaption>Premendo sulla palla, l'aria che contiene trasmette la pressione aggiunta a
-tutta la superficie interna: la palla si deforma ovunque, non solo sotto la mano.</figcaption>
-</figure>
-
-<h2>Il torchio idraulico</h2>
-
-<p>Il torchio idraulico è un recipiente pieno d'acqua con due aperture di area diversa,
-chiuse da due pedane mobili. Su quella piccola, di area <span>\(A_1\)</span>, applichiamo
-una forza <span>\(\vec F_1\)</span>; su quella grande, di area <span>\(A_2\)</span>, si
-trova la macchina da sollevare, che preme verso il basso con il proprio peso
-<span>\(\vec F_P\)</span>.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="fv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2a8a3e"/></marker>
-    <marker id="fr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#c33"/></marker>
-    <marker id="fn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker>
-  </defs>
-  <path d="M92,148 L92,270 L448,270 L448,128 L330,128 L330,230 L150,230 L150,148 Z"
-        fill="#9ecbf0" opacity="0.55"/>
-  <path d="M90,112 L90,272 L450,272 L450,102 M150,112 L150,232 L330,232 L330,102"
-        fill="none" stroke="#333" stroke-width="2.5" stroke-linejoin="round"/>
-  <rect x="92" y="136" width="58" height="12" fill="#ddd" stroke="#333" stroke-width="2"/>
-  <text x="158" y="148">A₁</text>
-  <path d="M121,82 L121,130" stroke="#2a8a3e" stroke-width="2.5" marker-end="url(#fv)"/>
-  <text x="92" y="76" fill="#2a8a3e">F₁</text>
-  <rect x="330" y="116" width="118" height="12" fill="#ddd" stroke="#333" stroke-width="2"/>
-  <text x="458" y="128">A₂</text>
-  <rect x="344" y="74" width="92" height="30" fill="#f2f2f2" stroke="#333" stroke-width="2"/>
-  <circle cx="364" cy="106" r="7" fill="none" stroke="#333" stroke-width="2"/>
-  <circle cx="416" cy="106" r="7" fill="none" stroke="#333" stroke-width="2"/>
-  <path d="M390,40 L390,70" stroke="#c33" stroke-width="2.5" marker-end="url(#fr2)"/>
-  <text x="398" y="50" fill="#c33">F_P</text>
-  <path d="M348,152 L348,132 M372,152 L372,132 M396,152 L396,132 M420,152 L420,132 M444,152 L444,132"
-        stroke="#2a8a3e" stroke-width="2" marker-end="url(#fv)"/>
-  <text x="344" y="178" fill="#2a8a3e">F₂ (spinta del fluido)</text>
-  <text x="186" y="304" fill="#1f6fb2">acqua</text>
-  <path d="M228,296 L262,276" stroke="#1f6fb2" stroke-width="1.6" marker-end="url(#fn)"/>
-</svg>
-<figcaption>La forza applicata sulla pedana piccola genera una pressione che il fluido
-trasmette alla pedana grande, dove diventa la spinta F₂.</figcaption>
-</figure>
-
-<p>La forza <span>\(F_1\)</span> applicata sulla pedana di area <span>\(A_1\)</span> genera
-nel fluido la pressione</p>
-
-<p>$$p = \frac{F_1}{A_1}$$</p>
-
-<p>Per il principio di Pascal la stessa pressione si distribuisce in tutto il fluido,
-compresa la pedana su cui è posizionata la macchina. Lì il fluido preme su un'area
-<span>\(A_2\)</span>, e la forza che vi genera è <span>\(F_2\)</span>:</p>
-
-<p>$$p = \frac{F_2}{A_2}$$</p>
-
-<p>La pressione è la stessa nei due punti, quindi i due rapporti sono uguali:</p>
-
-<p>$$\boxed{\;\frac{F_1}{A_1} = \frac{F_2}{A_2}\;}$$</p>
-
-<p>ed è la condizione di equilibrio del torchio idraulico. Ricavando
-<span>\(F_2\)</span>,</p>
-
-<p>$$F_2 = \frac{A_2 F_1}{A_1} = \frac{A_2}{A_1}\,F_1$$</p>
-
-<p>Se <span>\(A_2 &gt; A_1\)</span> il fattore <span>\(A_2/A_1\)</span> è maggiore di uno e
-la forza è amplificata: <span>\(F_2\)</span> può controbilanciare il peso
-<span>\(F_P\)</span> della macchina anche partendo da una <span>\(F_1\)</span> molto più
-piccola.</p>
-
-<div class="nota">
-<strong>Che cosa non si amplifica.</strong> A essere uguale nei due rami è la pressione,
-non la forza: la forza cresce solo perché cresce l'area su cui quella pressione agisce. Il
-rapporto <span>\(A_2/A_1\)</span> dice di quanto.
+<div class="fig">
+<svg id="g-palla" viewBox="0 0 460 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Palla libera e palla schiacciata da una forza F"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Palla libera</p>
+<p class="did">Palla schiacciata: si deforma ovunque</p>
+</div>
 </div>
 
-<h2>Esempio: l'auto sollevata</h2>
+<h2>Torchio idraulico</h2>
 
-<p>Vogliamo tenere in equilibrio un'auto di massa <span>\(m = 1300\ \mathrm{kg}\)</span>.
-Il suo peso vale</p>
+<p>Recipiente pieno d'acqua con due pedane mobili, di area $A_1$ (piccola) e $A_2$ (grande):</p>
 
-<p>$$F_P = mg = 1300\ \mathrm{kg} \cdot 9{,}81\ \mathrm{N/kg} = 12\,753\ \mathrm{N}$$</p>
+<div class="fig">
+<svg id="g-torchio" viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Torchio idraulico: forza F1 sulla pedana piccola, spinta F2 del fluido sulla pedana grande, peso FP dell'auto"></svg>
+<p class="did">$F_1$ su $A_1$; $F_2$: spinta del fluido su $A_2$; $F_P$: peso dell'auto</p>
+</div>
 
-<p>Le due pedane hanno aree <span>\(A_1 = 0{,}5\ \mathrm{m^2}\)</span> e
-<span>\(A_2 = 12\ \mathrm{m^2}\)</span>. Perché l'auto resti in equilibrio la spinta del
-fluido deve pareggiarne il peso, cioè <span>\(F_2 = F_P\)</span>. Dalla condizione di
-equilibrio</p>
+<p>Pressione generata da $F_1$ e, per il principio di Pascal, uguale su $A_2$:</p>
 
-<p>$$\frac{F_1}{A_1} = \frac{F_2}{A_2} \qquad\Longrightarrow\qquad
-F_1 = \frac{A_1 F_2}{A_2} = \frac{0{,}5\ \mathrm{m^2} \cdot 12\,753\ \mathrm{N}}{12\ \mathrm{m^2}}
-= 531\ \mathrm{N}$$</p>
+<p class="eq">$$p = \frac{F_1}{A_1} \qquad\qquad p = \frac{F_2}{A_2}$$</p>
 
-<p>Con <span>\(F_1 = 531\ \mathrm{N}\)</span> si tiene in equilibrio un'auto da
-<span>\(12\,753\ \mathrm{N}\)</span>: la forza richiesta è ventiquattro volte più piccola,
-tante volte quante <span>\(A_2\)</span> è più grande di <span>\(A_1\)</span>.</p>
+<div class="def"><span class="et">Condizione di equilibrio del torchio</span>
+<p class="eq principio">$$\frac{F_1}{A_1} = \frac{F_2}{A_2} \qquad\qquad F_2 = \frac{A_2}{A_1}\,F_1$$</p></div>
+
+<ul>
+<li>$A_2 &gt; A_1$ → $F_2 &gt; F_1$: forza amplificata del fattore $A_2/A_1$.</li>
+</ul>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>Uguale nei due rami è la pressione, non la forza: la forza cresce perché cresce l'area.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: $m = 1300$ kg, $A_1 = 0{,}5$ m², $A_2 = 12$ m². Calcolare $F_1$ che tiene l'auto in equilibrio ($F_2 = F_P$).</p>
+
+<p class="eq">$$F_P = m\,g = 1300\ \text{kg} \cdot 9{,}81\ \text{N/kg} = 12\,753\ \text{N}$$</p>
+
+<p class="eq">$$F_1 = \frac{A_1}{A_2}\,F_2 = \frac{0{,}5\ \text{m}^2}{12\ \text{m}^2} \cdot 12\,753\ \text{N} \approx 531\ \text{N}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../59-vasi-comunicanti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Vasi comunicanti</span></a><a class="successiva" href="../../index.html"><span class="dir">Indice &rarr;</span><span class="tit">Fisica — Prima</span></a></nav>
+<footer><p>Fisica prima &middot; Statica dei fluidi &middot; Unità 60</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');if(a&&a.b)t.setAttribute('font-weight','700');t.innerHTML=s;return t;}
+  function sub(b,s){return b+'<tspan font-size="9" dy="3">'+s+'</tspan>';}
+  function freccia(s,id){var d=el(s,'defs',{});el(el(d,'marker',{id:id,markerWidth:10,markerHeight:10,refX:9,refY:5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L9,5 L0,9 Z',fill:'var(--rosso)'});}
+  function forza(s,x1,y1,x2,y2,id){el(s,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#'+id+')'});}
+  var ACQ='#9ecbf0', LIQ='#bfe3c0';
+  /* figura 1: palla libera e schiacciata */
+  var s1=document.getElementById('g-palla');
+  if(s1){freccia(s1,'fp1');
+    var YG=124;
+    el(s1,'line',{x1:30,y1:YG,x2:200,y2:YG,stroke:'var(--inchiostro)','stroke-width':2});
+    el(s1,'line',{x1:260,y1:YG,x2:430,y2:YG,stroke:'var(--inchiostro)','stroke-width':2});
+    el(s1,'circle',{cx:115,cy:YG-26,r:26,fill:LIQ,stroke:'var(--inchiostro)','stroke-width':2});
+    el(s1,'ellipse',{cx:345,cy:YG-15,rx:38,ry:15,fill:LIQ,stroke:'var(--inchiostro)','stroke-width':2});
+    forza(s1,345,30,345,YG-32,'fp1');
+    txt(s1,355,52,'F','var(--rosso)',{it:1,b:1,fs:14});
+  }
+  /* figura 2: torchio idraulico */
+  var s2=document.getElementById('g-torchio');
+  if(s2){freccia(s2,'fp2');
+    var L0=70,L1=120,R0=250,R1=390,YC=190,YB=232,TOP=60,y1=112,y2=124;
+    el(s2,'path',{d:'M'+L0+','+y1+' L'+L0+','+YB+' L'+R1+','+YB+' L'+R1+','+y2+' L'+R0+','+y2+' L'+R0+','+YC+' L'+L1+','+YC+' L'+L1+','+y1+' Z',fill:ACQ});
+    el(s2,'path',{d:'M'+L0+','+TOP+' L'+L0+','+YB+' L'+R1+','+YB+' L'+R1+','+TOP+' M'+L1+','+TOP+' L'+L1+','+YC+' L'+R0+','+YC+' L'+R0+','+TOP,fill:'none',stroke:'var(--inchiostro)','stroke-width':2.4,'stroke-linejoin':'round'});
+    /* pedane */
+    el(s2,'rect',{x:L0+1,y:y1-10,width:L1-L0-2,height:10,fill:'#ddd',stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(s2,'rect',{x:R0+1,y:y2-10,width:R1-R0-2,height:10,fill:'#ddd',stroke:'var(--inchiostro)','stroke-width':1.6});
+    txt(s2,L0-8,y1-1,sub('A','1'),'var(--inchiostro)',{anc:'end',it:1,fs:14});
+    txt(s2,R1+8,y2-1,sub('A','2'),'var(--inchiostro)',{it:1,fs:14});
+    /* auto */
+    var xc=(R0+R1)/2;
+    el(s2,'rect',{x:xc-42,y:y2-40,width:84,height:22,rx:4,fill:'#f2f2f2',stroke:'var(--inchiostro)','stroke-width':1.6});
+    el(s2,'path',{d:'M'+(xc-24)+','+(y2-40)+' L'+(xc-14)+','+(y2-54)+' L'+(xc+16)+','+(y2-54)+' L'+(xc+26)+','+(y2-40),fill:'#f2f2f2',stroke:'var(--inchiostro)','stroke-width':1.6});
+    [xc-26,xc+26].forEach(function(x){el(s2,'circle',{cx:x,cy:y2-17,r:7,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6});});
+    /* forze */
+    var xm=(L0+L1)/2;
+    forza(s2,xm,22,xm,y1-14,'fp2'); txt(s2,xm+10,40,sub('F','1'),'var(--rosso)',{it:1,b:1,fs:14});
+    forza(s2,xc,4,xc,y2-58,'fp2'); txt(s2,xc+10,22,sub('F','P'),'var(--rosso)',{it:1,b:1,fs:14});
+    [R0+25,R0+55,R0+85,R0+115].forEach(function(x){forza(s2,x,y2+36,x,y2+4,'fp2');});
+    txt(s2,xc,y2+56,sub('F','2'),'var(--rosso)',{anc:'middle',it:1,b:1,fs:14});
+    txt(s2,(L1+R0)/2,YC+28,'acqua','var(--blu)',{anc:'middle',fs:12});
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
