@@ -761,6 +761,7 @@
   disperse sullo schermo. Le tre serie (Lyman, Balmer, Paschen) presentate come nella traccia, in
   forma di tabella breve. Nessuno strumento interattivo: pagina di una sola facciata, senza
   grandezze da far variare.
+- Revisione (28/10/2026, regole 13/10): parole 231 → 117 (sommario e «Nella prossima unità» inclusi prima, formule e didascalie escluse). Pagina mai revisionata, riscritta: impaginazione a quaderno (stile e script dell'unità 60); apertura a domanda; spettro di emissione in elenco; formula di Rydberg in riquadro rosso, condizione n' < n in elenco, costante R in .def; tabella delle serie trasformata in elenco n' → serie, regione. Tolti sommario (rimando a Rutherford e Bohr), «Nella prossima unità», paragrafo descrittivo dell'esperimento, titoletto «Lo spettro di emissione di un gas»; titoletti ridotti a «Formula di Rydberg (idrogeno)». Nessun esempio (assente anche prima), nessuna comparsa. Correzioni concettuali: nella figura il prisma deviava il violetto meno del rosso (righe in ordine inverso): ora il violetto è deviato di più; serie di Balmer «visibile» → «visibile (le righe con n grande nel vicino ultravioletto)», verificato: righe 656, 486, 434, 410 nm, limite della serie 364,6 nm; Lyman 121,5–91,2 nm (UV), Paschen 1875–820 nm (IR). Figura rifatta da script: righe di Balmer n = 3…6 calcolate con la formula, percorso dei raggi nel prisma calcolato con la legge di Snell (dispersione esagerata); statica. Nessuna figura decorativa.
 
 ## Unità 62 — Il modello atomico di Bohr
 - Parole: 368 su 2 pagine di traccia (pagine 110–111).
