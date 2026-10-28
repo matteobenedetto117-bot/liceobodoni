@@ -791,6 +791,7 @@
   altrimenti solo letterale, come richiesto dalla cura delle grandezze per la fisica. Nessun
   disegno: la pagina 112 non ne contiene (lo schema delle forze è già stato incluso in chiusura
   dell'unità 61), quindi nessuno è stato aggiunto qui.
+- Revisione (28/10/2026, regole 13/10): parole 241 → 80 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 62); domanda d'apertura; tolti sommario, «Nella prossima unità», i titoletti «La quantizzazione del momento angolare», «Il sistema e la sua soluzione», «Il raggio della prima orbita» (resta «Esempio») e le frasi di commento; le due condizioni in elenco, derivazione in tre .eq, r_n = r_1 n² in .def rosso, r_2 = 4r_1 e r_3 = 9r_1 in elenco; esempio in forma «Dati… Calcolare r_1» con una .eq. Simbolo della costante di Coulomb K → k, come nell'unità 62. Controllo concettuale (SymPy): soluzione del sistema r_n = h²n²/(4π² m_e k e²), v = 2πke²/(nh); r_1 = 5,293×10⁻¹¹ m (risultato ora a 4 cifre come i dati, prima 5,29×10⁻¹¹ m). Nessuna comparsa, nessuna figura (assente anche prima), nessun esempio tolto.
 
 ## Unità 64 — L'energia delle orbite e la costante di Rydberg
 - Parole: circa 400 (esclusi i simboli delle formule) su 2 pagine di traccia (pagine 113–114).
