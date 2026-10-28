@@ -5,162 +5,184 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Circuiti RC: la corrente — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.0/plotly.min.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.controlli{font-family:var(--sans);font-size:.9rem;margin:14px 0 0;max-width:420px;margin-left:auto;margin-right:auto}
-.controlli input[type=range]{width:100%}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-</head>
-<body>
+</head><body>
 <div class="foglio">
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 67</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 67</p>
   <h1>Circuiti RC: la corrente</h1>
-  <p class="sommario">Nello stesso circuito, mentre la carica sul condensatore
-  cresce verso il massimo, la corrente che la fa crescere si comporta in modo
-  opposto: parte al valore pi&ugrave; alto possibile e si spegne via via che il
-  condensatore si carica.</p>
 </header>
 
-<p>Prima di scrivere la legge della corrente verifichiamo le unit&agrave; di misura di $\tau=RC$. Dalla prima legge di Ohm, $R=\dfrac{\Delta V}{i}=\dfrac{\Delta V}{Q/t}=\dfrac{\Delta V\cdot t}{Q}$, e la capacit&agrave; vale $C=\dfrac{Q}{\Delta V}$:</p>
+<p>Circuito RC in carica: come varia la corrente $i$ dopo la chiusura dell'interruttore?</p>
 
-<div class="formula-box">
-$$[R]=\frac{\mathrm{V\cdot s}}{\mathrm{C}} \qquad [C]=\frac{\mathrm{C}}{\mathrm{V}} \qquad [R\cdot C]=\frac{\mathrm{V\cdot s}}{\mathrm{C}}\cdot\frac{\mathrm{C}}{\mathrm{V}}=\mathrm{s}$$
-</div>
+<p>Unità di misura di $\tau = RC$, da $R = \dfrac{\Delta V}{i} = \dfrac{\Delta V\cdot t}{Q}$ e $C = \dfrac{Q}{\Delta V}$:</p>
 
-<p>&tau; ha le dimensioni di un tempo, come deve essere.</p>
+<p class="eq">$$[R]=\frac{\mathrm{V\cdot s}}{\mathrm{C}} \qquad [C]=\frac{\mathrm{C}}{\mathrm{V}} \qquad [RC]=\frac{\mathrm{V\cdot s}}{\mathrm{C}}\cdot\frac{\mathrm{C}}{\mathrm{V}}=\mathrm{s}$$</p>
 
-<p>La corrente nel circuito RC segue la legge</p>
+<div class="def"><span class="et">Corrente nel circuito RC</span>
+<p class="eq principio">$$i(t)=\frac{\varepsilon}{R}\,e^{-t/\tau}$$</p></div>
 
-<div class="formula-box">
-$$i(t)=\frac{\varepsilon}{R}\,e^{-t/\tau}$$
-</div>
-
-<p>Appena si chiude l&rsquo;interruttore, a $t=0$, si ha $i(0)=\varepsilon/R$: &egrave; il valore pi&ugrave; alto che la corrente raggiunge, perch&eacute; in quell&rsquo;istante il condensatore &egrave; ancora scarico e non oppone resistenza al passaggio di carica. Al crescere di $t$ l&rsquo;esponenziale tende a zero, e con esso la corrente:</p>
-
-<div class="formula-box">
-$$\lim_{t\to\infty} i(t)=\frac{\varepsilon}{R}\,e^{-t/\tau}=0$$
-</div>
-
-<div class="fig">
-<svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="rc69a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="rc69b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-
-<!-- pila -->
-<line x1="60" y1="200" x2="60" y2="145" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="46" y1="145" x2="74" y2="145" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="40" y1="128" x2="80" y2="128" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="60" y1="128" x2="60" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="32" y="140" text-anchor="end" font-family="var(--sans)" font-size="14" fill="var(--grigio)">&#949;</text>
-
-<!-- filo superiore e freccia i -->
-<line x1="60" y1="60" x2="150" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="78" y1="60" x2="112" y2="60" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#rc69a)"/>
-<text x="95" y="46" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i</text>
-
-<!-- resistore -->
-<polyline points="150,60 158,48 166,72 174,48 182,72 190,48 198,60" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="174" y="34" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--grigio)">R</text>
-
-<!-- filo verso condensatore -->
-<line x1="198" y1="60" x2="300" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="300" y1="60" x2="300" y2="100" stroke="var(--inchiostro)" stroke-width="2"/>
-
-<!-- condensatore -->
-<line x1="280" y1="100" x2="320" y2="100" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="280" y1="116" x2="320" y2="116" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="334" y="112" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">C</text>
-<line x1="300" y1="116" x2="300" y2="200" stroke="var(--inchiostro)" stroke-width="2"/>
-
-<!-- filo inferiore -->
-<line x1="60" y1="200" x2="300" y2="200" stroke="var(--inchiostro)" stroke-width="2"/>
-
-<!-- verso di percorrenza della maglia -->
-<path d="M 150,150 A 42,42 0 1 1 149,150" fill="none" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#rc69b)"/>
-
-<text x="180" y="222" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">interruttore chiuso: la corrente i scorre nel verso indicato dalla maglia</text>
-</svg>
-<p class="did">Percorrendo la maglia nel verso della freccia rossa, la somma delle differenze di potenziale &egrave; nulla: $\varepsilon-Ri(t)-\Delta V_C=0$.</p>
-</div>
-
-<p>Il valore iniziale $i(0)=\varepsilon/R$ si ritrova anche applicando la legge delle maglie di Kirchhoff. Percorrendo la maglia si ottiene $\varepsilon-Ri(t)-\Delta V_C=0$, e poich&eacute; la tensione ai capi del condensatore vale $\Delta V_C=q(t)/C$:</p>
-
-<div class="formula-box">
-$$\varepsilon-Ri(t)-\frac{q(t)}{C}=0$$
-</div>
-
-<p>All&rsquo;istante $t=0$ la carica &egrave; ancora nulla, $q(0)=0$, e l&rsquo;equazione si riduce a $\varepsilon-Ri(0)=0$, da cui $i(0)=\varepsilon/R$: lo stesso risultato trovato sopra.</p>
-
-<div class="fig">
-<div id="rc69-plot" style="max-width:560px;margin:0 auto"></div>
-<div class="controlli">
-<label for="rc69-tau">&tau; = <span id="rc69-tau-val">3</span> (unit&agrave; arbitrarie) &mdash; confronto con &tau; = 1,5 in grigio</label>
-<input type="range" id="rc69-tau" min="1" max="6" step="0.5" value="3">
-</div>
-<p class="did">La corrente parte dal valore massimo $\varepsilon/R$ e decresce verso zero. Pi&ugrave; &tau; &egrave; grande, pi&ugrave; lentamente si spegne: muovi il cursore e confronta la curva blu con quella grigia di riferimento.</p>
-</div>
-
-<div class="avanti">
-<h2>Chiusura del programma di fisica quarta</h2>
 <ul>
-<li>Con la corrente nel circuito RC si chiude il percorso di corrente elettrica e circuiti, e con esso il programma dell&rsquo;anno.</li>
+<li>$t=0$ → $i(0)=\varepsilon/R$, valore massimo;</li>
+<li>$t\to\infty$ → $e^{-t/\tau}\to0$ → $i\to0$.</li>
 </ul>
+
+<div class="fig">
+<svg id="g-i" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Grafico della corrente in funzione del tempo per due costanti di tempo"></svg>
+<div class="cursore"><label for="cur-tau">$\tau$</label><input id="cur-tau" type="range" min="1" max="6" step="0.5" value="3"><span class="val" id="val-tau">3,0 s</span></div>
+<p class="did">In rosso tratteggiato: $\tau = 1{,}5$ s</p>
 </div>
+
+<h2>Verifica con la legge delle maglie</h2>
+
+<div class="fig">
+<svg id="g-maglia" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px" role="img" aria-label="Circuito RC chiuso con verso di percorrenza della maglia"></svg>
+<p class="did">Maglia percorsa nel verso della freccia</p>
+</div>
+
+<p>Legge delle maglie, con $\Delta V_C = q(t)/C$:</p>
+
+<p class="eq">$$\varepsilon-R\,i(t)-\frac{q(t)}{C}=0$$</p>
+
+<ul>
+<li>$t=0$ → $q(0)=0$ → $\varepsilon-R\,i(0)=0$ → $i(0)=\varepsilon/R$.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../68-circuiti-rc-la-carica-del-condensatore/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Circuiti RC: la carica del condensatore</span></a><a class="successiva" href="../../index.html"><span class="dir">Indice &rarr;</span><span class="tit">Fisica — Quarta</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 67</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 67</p></footer>
 </div>
 
 <script>
 (function(){
-  var tMax = 20;
-  var N = 120;
-  var t = [];
-  for (var i=0;i<=N;i++) t.push(tMax*i/N);
-  function i_of_t(tau){ return t.map(function(x){ return Math.exp(-x/tau); }); }
-
-  function traces(tau){
-    return [
-      {x:t, y:i_of_t(1.5), mode:'lines', name:'&tau; = 1,5', line:{color:'#9aa1ad', width:2, dash:'dot'}},
-      {x:t, y:i_of_t(tau), mode:'lines', name:'&tau; = '+tau, line:{color:'#1f4e79', width:2.4}}
-    ];
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');if(a&&a.b)t.setAttribute('font-weight','700');t.innerHTML=s;return t;}
+  function f(v,n){return v.toFixed(n).replace('.',',');}
+  var filo={stroke:'var(--inchiostro)','stroke-width':2,fill:'none','stroke-linejoin':'round'};
+  function linea(p,pts){el(p,'path',Object.assign({d:'M'+pts.map(function(q){return q.join(',');}).join(' L')},filo));}
+  function res(p,xa,ya,xb,yb){var n=6,pts=[[xa,ya]],dx=xb-xa,dy=yb-ya,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    for(var i=0;i<n;i++){var t=(i+.5)/n,s=(i%2?-1:1)*9;pts.push([xa+dx*t-uy*s,ya+dy*t+ux*s]);}pts.push([xb,yb]);linea(p,pts);}
+  function gen(p,x,yp){el(p,'line',{x1:x-16,y1:yp,x2:x+16,y2:yp,stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(p,'line',{x1:x-8,y1:yp+12,x2:x+8,y2:yp+12,stroke:'var(--inchiostro)','stroke-width':5});
+    txt(p,x+20,yp-2,'+','var(--inchiostro)');txt(p,x+20,yp+22,'−','var(--inchiostro)');}
+  function marker(s,id,col){var d=el(s,'defs',{});el(el(d,'marker',{id:id,markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:col});}
+  /* figura 1: i(t) calcolata, cursore su tau */
+  var g=document.getElementById('g-i'),cur=document.getElementById('cur-tau'),out=document.getElementById('val-tau');
+  if(g&&cur){
+    var X0=50,Y0=200,TM=20,KX=350/TM,KY=150;
+    function X(t){return X0+KX*t;} function Y(v){return Y0-KY*v;}
+    function curva(tau){var p='';for(var i=0;i<=200;i++){var t=TM*i/200;p+=(i?' L':'M')+X(t).toFixed(1)+','+Y(Math.exp(-t/tau)).toFixed(1);}return p;}
+    marker(g,'fa','var(--inchiostro)');
+    el(g,'line',{x1:X0,y1:Y0,x2:X(TM)+14,y2:Y0,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fa)'});
+    el(g,'line',{x1:X0,y1:Y0,x2:X0,y2:Y(1)-22,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fa)'});
+    txt(g,X(TM)+14,Y0+18,'t (s)','var(--inchiostro)',{anc:'end',it:1});
+    txt(g,X0+8,Y(1)-14,'i','var(--inchiostro)',{it:1,fs:14});
+    [0,5,10,15,20].forEach(function(t){el(g,'line',{x1:X(t),y1:Y0,x2:X(t),y2:Y0+4,stroke:'var(--inchiostro)'});if(t<TM)txt(g,X(t),Y0+18,String(t),'var(--grigio)',{anc:'middle',fs:11});});
+    el(g,'line',{x1:X0-4,y1:Y(1),x2:X0,y2:Y(1),stroke:'var(--inchiostro)'});
+    txt(g,X0-6,Y(1)+4,'ε/R','var(--inchiostro)',{anc:'end',it:1});
+    el(g,'path',{d:curva(1.5),fill:'none',stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5 4'});
+    var dyn=el(g,'g',{});
+    el(g,'line',{x1:300,y1:36,x2:324,y2:36,stroke:'var(--blu)','stroke-width':2.6});txt(g,330,40,'τ','var(--inchiostro)',{it:1,fs:12});
+    el(g,'line',{x1:300,y1:56,x2:324,y2:56,stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'5 4'});txt(g,330,60,'τ = 1,5 s','var(--inchiostro)',{fs:12});
+    function disegna(){
+      var tau=+cur.value; while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+      el(dyn,'path',{d:curva(tau),fill:'none',stroke:'var(--blu)','stroke-width':2.6});
+      var v1=Math.exp(-1);
+      el(dyn,'line',{x1:X(tau),y1:Y0,x2:X(tau),y2:Y(v1),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+      el(dyn,'line',{x1:X0,y1:Y(v1),x2:X(tau),y2:Y(v1),stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});
+      el(dyn,'circle',{cx:X(tau),cy:Y(v1),r:4.5,fill:'var(--rosso)'});
+      txt(dyn,X(tau)+5,Y0-6,'τ','var(--inchiostro)',{it:1,fs:13});
+      var lb=txt(dyn,X(tau)+8,Y(v1)-8,'36,8%','var(--rosso)',{fs:12});lb.setAttribute('stroke','#fff');lb.setAttribute('stroke-width','3');lb.setAttribute('paint-order','stroke');
+      if(5*tau<=TM){var x5=X(5*tau);
+        el(dyn,'circle',{cx:x5,cy:Y(Math.exp(-5)),r:4.5,fill:'var(--verde)'});
+        var l5=txt(dyn,Math.min(x5,X(TM)-20),Y0-26,'5τ: i ≈ 0','var(--verde)',{anc:'middle',b:1,fs:12});l5.setAttribute('stroke','#fff');l5.setAttribute('stroke-width','3');l5.setAttribute('paint-order','stroke');}
+      out.textContent=f(tau,1)+' s';
+    }
+    cur.addEventListener('input',disegna); disegna();
   }
-  var layout = {
-    margin:{l:44,r:16,t:10,b:36},
-    xaxis:{title:'t', range:[0,tMax], zeroline:true, zerolinecolor:'#16283d', showgrid:false, tickfont:{size:10}},
-    yaxis:{title:'i / (ε/R)', range:[0,1.08], zeroline:true, zerolinecolor:'#16283d', showgrid:false, tickfont:{size:10}},
-    showlegend:false,
-    font:{family:'Segoe UI, sans-serif', size:11}
-  };
-  Plotly.newPlot('rc69-plot', traces(3), layout, {displayModeBar:false, responsive:true});
-
-  var slider = document.getElementById('rc69-tau');
-  var label = document.getElementById('rc69-tau-val');
-  slider.addEventListener('input', function(){
-    var tau = parseFloat(slider.value);
-    label.textContent = tau;
-    Plotly.react('rc69-plot', traces(tau), layout, {displayModeBar:false, responsive:true});
-  });
+  /* figura 2: circuito chiuso con verso della maglia */
+  var s=document.getElementById('g-maglia');
+  if(s){
+    marker(s,'fi','var(--rosso)');
+    var XL=50,XR=230,YT=45,YB=175,yg=104,yc=104;
+    linea(s,[[XL,YB],[XL,yg+12]]);gen(s,XL,yg);linea(s,[[XL,yg],[XL,YT],[110,YT]]);
+    txt(s,XL-22,yg+10,'ε','var(--grigio)',{anc:'end',it:1,fs:14});
+    res(s,110,YT,160,YT);linea(s,[[160,YT],[XR,YT],[XR,yc-7]]);
+    txt(s,135,YT-16,'R','var(--grigio)',{anc:'middle',it:1,fs:14});
+    el(s,'line',{x1:XR-18,y1:yc-7,x2:XR+18,y2:yc-7,stroke:'var(--inchiostro)','stroke-width':2.4});
+    el(s,'line',{x1:XR-18,y1:yc+7,x2:XR+18,y2:yc+7,stroke:'var(--inchiostro)','stroke-width':2.4});
+    linea(s,[[XR,yc+7],[XR,YB],[XL,YB]]);
+    txt(s,XR+24,yc+5,'C','var(--grigio)',{it:1,fs:14});
+    txt(s,XR-24,yc-6,'+q','var(--rosso)',{anc:'end',fs:12});txt(s,XR-24,yc+16,'−q','var(--rosso)',{anc:'end',fs:12});
+    el(s,'line',{x1:XL+14,y1:YT-10,x2:XL+40,y2:YT-10,stroke:'var(--rosso)','stroke-width':2,'marker-end':'url(#fi)'});
+    txt(s,XL+27,YT-16,'i','var(--rosso)',{anc:'middle',it:1,fs:14});
+    /* verso di percorrenza: arco orario al centro */
+    var cx=140,cy=112,r=30,a0=-150*Math.PI/180,a1=150*Math.PI/180;
+    el(s,'path',{d:'M'+(cx+r*Math.cos(a0)).toFixed(1)+','+(cy+r*Math.sin(a0)).toFixed(1)+' A'+r+' '+r+' 0 1 1 '+(cx+r*Math.cos(a1)).toFixed(1)+','+(cy+r*Math.sin(a1)).toFixed(1),fill:'none',stroke:'var(--rosso)','stroke-width':1.6,'marker-end':'url(#fi)'});
+  }
 })();
 </script>
-
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
