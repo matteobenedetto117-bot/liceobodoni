@@ -806,6 +806,7 @@
 - Aggiunta: nessuna oltre alle poche righe di collegamento fra i passaggi (perché E_c = ½·(Ke²/r_n),
   perché il segno meno indica legame, perché ΔE = hc/λ). Nessun disegno: le pagine 113–114 non ne
   contengono, solo passaggi algebrici.
+- Revisione (28/10/2026, regole 13/10): parole circa 330 → 100 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 63); domanda d'apertura; tolti sommario, «Nella prossima unità», la nota «Perché conta», il titoletto «L'energia dell'n-esima orbita» (resta «La costante di Rydberg», argomento distinto), i rimandi alle unità precedenti e le frasi di commento; conseguenze del segno di E_n in elenco caso → conseguenza; E_n e la formula di Rydberg in .def rosso. Simbolo della costante di Coulomb K → k, come nelle unità 62–63. Condizione resa esplicita: n' < n (emissione; salto inverso → assorbimento). Controllo concettuale (SymPy): E_n = −2π²m_e k²e⁴/(h²n²), E_1 = −13,606 eV, R = 2π²m_e k²e⁴/(h³c) = 1,0974×10⁷ m⁻¹: valori della pagina corretti. Nessuna comparsa, nessuna figura (assente anche prima), nessun esempio tolto.
 
 ## Unità 65 — L'interpretazione delle orbite: Schrödinger e De Broglie
 - Parole: circa 320 su 1,2 pagine di traccia (seconda metà di pagina 114 e pagina 115; la prima

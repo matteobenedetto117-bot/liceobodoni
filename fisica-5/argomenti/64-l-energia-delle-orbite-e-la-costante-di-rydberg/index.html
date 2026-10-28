@@ -5,77 +5,142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'energia delle orbite e la costante di Rydberg — Fisica quinta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:#eef4fa;border:1px solid var(--blu);border-radius:10px;padding:16px 22px;margin:20px 0;text-align:center}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.avanti{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.avanti{border-top:0;margin-top:0;padding-top:0}
+.foglio>ul{margin:var(--r) 0 0}
+.avanti ul{margin:0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
 .avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
 .avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.btn-anim{font-family:var(--sans);color:#fff;background:var(--blu);border:0;border-radius:8px;padding:6px 0;width:3rem;font-size:1.1rem;margin:8px 4px 0;cursor:pointer}
+.btn-anim:hover{background:#163a5b}
+.btn-anim:focus-visible{outline:3px solid var(--rosso);outline-offset:2px}
+.btn-anim:disabled{opacity:.5;cursor:default}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.def ol{margin:0;padding:0 0 calc(var(--r)*.5) var(--r)}
+.def li{line-height:var(--r)}
+.cursore output{min-width:5.5em;text-align:left}
+.def .eq.principio,.foglio>.eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.eq{overflow-x:auto}
+.def p.eq+p{margin-top:0}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>.nota+.fig,.foglio>.eq+.fig{margin-top:var(--r)}
+.cursore{flex-wrap:wrap}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;text-align:left;min-width:11em}
+.ok{color:var(--verde);font-weight:600}
+.foglio>.fig+ul,.foglio>.def+ul,.foglio>.eq+ul{margin-top:var(--r)}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.foglio>.def+h2,.foglio>.eq+h2,.foglio>.fig+h2{margin-top:var(--r)}
+.due-svg{display:grid;grid-template-columns:1.7fr 1fr;gap:12px;align-items:center}
+@media(max-width:640px){.due-svg{grid-template-columns:1fr}}
+.foglio>.nota+p,.foglio>.def+.nota,.foglio>ul+.def,.foglio>ul+.nota{margin-top:var(--r)}
+.def ul{margin:0;padding:0 0 calc(var(--r)*.5) 1.4rem}
+.foglio>.nota+h2,.foglio>ul+h2,.foglio>.fig+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
 <div class="foglio">
+
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quinta</a></nav>
   <p class="occhiello">Meccanica quantistica &middot; Unità 64</p>
   <h1>L'energia delle orbite e la costante di Rydberg</h1>
-  <p class="sommario">Dal raggio $r_n$ e dalla velocità dell'elettrone sulla $n$-esima orbita
-  ricaviamo ora la sua energia totale. Il risultato spiega, per la prima volta a partire da un
-  modello fisico e non da un'osservazione, perché l'idrogeno emette luce solo a lunghezze d'onda
-  ben precise.</p>
 </header>
 
-<h2>L'energia dell'n-esima orbita</h2>
-<p>L'energia totale dell'elettrone è la somma di energia cinetica $E_c$ ed energia potenziale
-elettrica $U$ (per non confondere l'energia cinetica con la costante di Coulomb, indicata con
-$K$ come nell'unità precedente, scriviamo $E_c$ invece di $K$):</p>
-<div class="formula-box">$$E_n = E_c + U = \frac{1}{2}m_e v^2 - \frac{Ke^2}{r_n}$$</div>
-<p>L'equilibrio fra forza centripeta e forza elettrica, già scritto in precedenza, dà
-$m_e v^2 = Ke^2/r_n$: l'energia cinetica vale quindi la metà del valore assoluto di $U$, e
-l'energia totale si riduce a una sola frazione:</p>
-<div class="formula-box">$$E_n = \frac{1}{2}\cdot\frac{Ke^2}{r_n} - \frac{Ke^2}{r_n} = -\frac{Ke^2}{2r_n}$$</div>
-<p>Sostituendo il raggio $r_n = \dfrac{h^2}{4\pi^2 m_e K e^2}\,n^2$ trovato in precedenza:</p>
-<div class="formula-box">$$E_n = -\left(\frac{2\pi^2 m_e K^2 e^4}{h^2}\right)\frac{1}{n^2}, \qquad n = 1, 2, 3,\dots$$</div>
-<p>Con i valori numerici di $m_e$, $K$, $e$ e $h$ il coefficiente vale $13{,}6\ \text{eV}$
-(ricordando che $1\ \text{eV} = 1{,}6\times10^{-19}\ \text{J}$), quindi:</p>
-<div class="formula-box">$$E_n = -13{,}6\ \text{eV}\cdot\frac{1}{n^2}$$</div>
-<p>Il segno negativo dice che l'elettrone è legato al nucleo: per allontanarlo del tutto
-bisognerebbe fornire energia. Il livello fondamentale $n=1$ è il più legato, $-13{,}6\ \text{eV}$;
-salendo di livello $|E_n|$ diminuisce, e per $n\to\infty$ l'energia tende a zero, cioè
-all'elettrone libero.</p>
+<p>Atomo di idrogeno, elettrone sull'orbita $n$-esima: quanto vale l'energia totale $E_n$?</p>
+
+<p class="eq">$$E_n = E_c + U = \frac{1}{2}m_e v^2 - \frac{k e^2}{r_n}$$</p>
+
+<p>Dall'equilibrio delle forze, $m_e v^2 = k e^2/r_n$, quindi $E_c = \tfrac{1}{2}|U|$:</p>
+
+<p class="eq">$$E_n = \frac{k e^2}{2r_n} - \frac{k e^2}{r_n} = -\frac{k e^2}{2r_n}$$</p>
+
+<p>Sostituendo $r_n = \dfrac{h^2}{4\pi^2 m_e k e^2}\,n^2$:</p>
+
+<div class="def"><span class="et">Energia delle orbite di Bohr</span>
+<p class="eq principio">$$E_n = -\frac{2\pi^2 m_e k^2 e^4}{h^2}\cdot\frac{1}{n^2} \approx -\frac{13{,}6\ \text{eV}}{n^2} \qquad n = 1, 2, 3, \dots$$</p></div>
+
+<ul>
+<li>$E_n &lt; 0$ → elettrone legato al nucleo;</li>
+<li>$n = 1$ → livello fondamentale, $E_1 \approx -13{,}6\ \text{eV}$;</li>
+<li>$n \to \infty$ → $E_n \to 0$ (elettrone libero).</li>
+</ul>
 
 <h2>La costante di Rydberg</h2>
-<p>La formula empirica delle righe spettrali dell'idrogeno era già stata scritta come
-$1/\lambda = R(1/n'^2 - 1/n^2)$. Vogliamo ora ritrovarla a partire dalle energie appena
-calcolate. Un salto fra due orbite assorbe o emette un fotone di energia $\Delta E = hc/\lambda$
-(dalla relazione $\Delta E = hf$ già vista nell'effetto fotoelettrico, con $c = \lambda f$).
-Le energie delle due orbite coinvolte sono:</p>
-<div class="formula-box">$$E_n = -\left(\frac{2\pi^2 m_e K^2 e^4}{h^2}\right)\frac{1}{n^2}, \qquad
-E_{n'} = -\left(\frac{2\pi^2 m_e K^2 e^4}{h^2}\right)\frac{1}{n'^2}$$</div>
-<p>e la loro differenza in valore assoluto vale:</p>
-<div class="formula-box">$$|\Delta E| = \left(\frac{2\pi^2 m_e K^2 e^4}{h^2}\right)\left(\frac{1}{n'^2} - \frac{1}{n^2}\right)$$</div>
-<p>Uguagliando $hc/\lambda$ a questa espressione e dividendo per $hc$:</p>
-<div class="formula-box">$$\frac{1}{\lambda} = \left(\frac{2\pi^2 m_e K^2 e^4}{h^3 c}\right)\left(\frac{1}{n'^2} - \frac{1}{n^2}\right)$$</div>
-<p>Il coefficiente fra parentesi ha esattamente la forma della costante $R$ della formula empirica.
-Sostituendo i valori numerici si ottiene $R \approx 1{,}097\times10^{7}\ \text{m}^{-1}$, che
-coincide, entro l'approssimazione dei dati usati, con la costante di Rydberg misurata
-sperimentalmente.</p>
 
-<div class="nota"><span class="et">Perché conta</span>Il modello di Bohr non si limita a
-descrivere le orbite: da poche ipotesi arriva a un numero, $R$, che si può confrontare
-direttamente con la misura. L'accordo è la prova più forte a favore del modello.</div>
+<p>Salto dall'orbita $n$ all'orbita $n' &lt; n$ → fotone emesso (salto inverso → fotone assorbito), con energia:</p>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Il modello di Bohr resta un'immagine intuitiva ma non l'unica possibile: vediamo come
-Schrödinger e De Broglie reinterpretano le orbite, spiegando comunque perché l'atomo è stabile.</li>
-</ul>
-</div>
+<p class="eq">$$\frac{hc}{\lambda} = E_n - E_{n'} = \frac{2\pi^2 m_e k^2 e^4}{h^2}\left(\frac{1}{n'^2} - \frac{1}{n^2}\right)$$</p>
+
+<p>Dividendo per $hc$ si ritrova la formula empirica delle righe:</p>
+
+<div class="def"><span class="et">Costante di Rydberg</span>
+<p class="eq principio">$$\frac{1}{\lambda} = R\left(\frac{1}{n'^2} - \frac{1}{n^2}\right) \qquad R = \frac{2\pi^2 m_e k^2 e^4}{h^3 c} \approx 1{,}097\times10^{7}\ \text{m}^{-1}$$</p></div>
+
+<p>Valore calcolato in accordo con quello misurato.</p>
+
 <nav class="nav-unita"><a class="precedente" href="../63-il-raggio-delle-orbite-di-bohr/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il raggio delle orbite di Bohr</span></a><a class="successiva" href="../65-l-interpretazione-delle-orbite-schrodinger-e-de-broglie/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">L'interpretazione delle orbite: Schrödinger e De Broglie</span></a></nav>
 <footer><p>Fisica quinta &middot; Meccanica quantistica &middot; Unità 64</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
