@@ -5,16 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kirchhoff applicato a circuiti complessi — Fisica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.fig{margin:26px 0;text-align:center}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#f6e4e2;border-radius:10px;padding:14px 20px;margin:22px 0;font-family:var(--sans);font-size:.94rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -22,113 +55,113 @@
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Fisica quarta</a></nav>
-  <p class="occhiello">Circuiti elettrici &middot; Unit&agrave; 65</p>
+  <p class="occhiello">Circuiti elettrici &middot; Unità 65</p>
   <h1>Kirchhoff applicato a circuiti complessi</h1>
-  <p class="sommario">Con due maglie e due generatori la sola legge dei nodi
-  non basta pi&ugrave; a trovare le correnti: serve mettere insieme la legge
-  dei nodi e la legge delle maglie in un sistema di equazioni, una per
-  ciascuna corrente incognita.</p>
 </header>
 
+<p>Circuito a due maglie con due generatori: non si riduce a serie o parallelo. Quanto valgono le correnti $i_1$, $i_2$, $i_3$?</p>
+
 <div class="fig">
-<svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr67a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<line x1="40" y1="230" x2="320" y2="230" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="40" y1="230" x2="40" y2="150" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="26" y1="150" x2="54" y2="150" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="32" y1="138" x2="48" y2="138" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="40" y1="138" x2="40" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="16" y="98" text-anchor="end" font-family="var(--sans)" font-size="14" fill="var(--grigio)">11 V</text>
-<line x1="40" y1="50" x2="110" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="110,50 118,38 126,62 134,38 142,62 150,38 158,50" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="158" y1="50" x2="200" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="134" y="26" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--grigio)">6 &#937;</text>
-<circle cx="200" cy="50" r="4" fill="var(--inchiostro)"/>
-<text x="200" y="34" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">N</text>
-<line x1="200" y1="230" x2="200" y2="190" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="200,190 188,182 212,174 188,166 212,158 200,150" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="222" y="172" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">7 &#937;</text>
-<line x1="200" y1="150" x2="200" y2="122" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="188" y1="118" x2="212" y2="118" stroke="var(--inchiostro)" stroke-width="4"/>
-<line x1="192" y1="106" x2="208" y2="106" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="200" y1="106" x2="200" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="222" y="90" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">5 V</text>
-<line x1="200" y1="50" x2="320" y2="50" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="320" y1="50" x2="320" y2="100" stroke="var(--inchiostro)" stroke-width="2"/>
-<polyline points="320,100 308,108 332,116 308,124 332,132 320,140" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="340" y="122" text-anchor="start" font-family="var(--sans)" font-size="14" fill="var(--grigio)">2 &#937;</text>
-<line x1="320" y1="140" x2="320" y2="230" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="60" y1="50" x2="90" y2="50" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#fr67a)"/>
-<text x="75" y="38" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i&#8321;</text>
-<line x1="240" y1="50" x2="270" y2="50" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#fr67a)"/>
-<text x="255" y="38" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i&#8322;</text>
-<line x1="200" y1="230" x2="200" y2="200" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#fr67a)"/>
-<text x="182" y="215" text-anchor="middle" font-family="var(--sans)" font-size="14" fill="var(--rosso)">i&#8323;</text>
-<text x="120" y="200" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--grigio)">A</text>
-<text x="270" y="200" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--grigio)">B</text>
-<text x="330" y="248" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="var(--grigio)">C</text>
-</svg>
-<p class="did">Le due maglie A e B condividono il ramo centrale, quello del
-generatore da 5 V e della resistenza da 7 &#937;. Nel nodo N entrano
-$i_1$ e $i_3$, esce $i_2$.</p>
+<svg id="g-circ" viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Circuito a due maglie A e B con ramo centrale in comune"></svg>
+<p class="did">Maglie A e B con il ramo centrale in comune; C: maglia esterna</p>
 </div>
 
-<p>Il circuito ha due maglie e tre correnti incognite, $i_1$, $i_2$ e
-$i_3$, una per ramo: non &egrave; pi&ugrave; riducibile a serie o
-parallelo, quindi va risolto con Kirchhoff. Dal nodo N si legge subito la
-prima equazione:</p>
+<p>Legge dei nodi in N:</p>
 
-<div class="formula-box">
-$$i_1+i_3=i_2$$
-</div>
+<p class="eq">$$i_1+i_3=i_2$$</p>
 
-<p>Le altre due equazioni vengono dalla legge delle maglie, percorrendo A e
-B nel verso delle correnti disegnate e sommando le variazioni di
-potenziale incontrate: un generatore d&agrave; $+\varepsilon$ se lo si
-attraversa dal polo $-$ al polo $+$, una resistenza d&agrave; $-Ri$ se la
-si percorre nel verso della corrente che vi scorre.</p>
+<p>Legge delle maglie, percorrendo A e B in senso orario:</p>
 
-<div class="formula-box">
-$$\text{maglia A:}\quad 11-6i_1-5+7i_3=0$$
-$$\text{maglia B:}\quad -7i_3+5-2i_2=0$$
-</div>
-
-<p>Una terza maglia, quella esterna C che gira intorno a tutto il
-circuito, dà $11-6i_1-2i_2=0$: non aggiunge un'informazione nuova, perché
-è la somma di A e B, ma è un controllo comodo sul risultato finale.</p>
-
-<p>Le tre equazioni, con $i_2=i_1+i_3$ sostituita nella seconda,
-formano un sistema lineare nelle due incognite rimaste $i_1$ e $i_3$.
-Risolvendolo:</p>
-
-<div class="formula-box">
-$$i_1=\frac{89}{68}\approx1{,}31\ \mathrm A \qquad
-i_2=\frac{107}{68}\approx1{,}57\ \mathrm A \qquad
-i_3=\frac{9}{34}\approx0{,}26\ \mathrm A$$
-</div>
-
-<p>Il segno positivo di tutte e tre le correnti conferma che i versi
-scelti nel disegno sono quelli reali; se una corrente fosse uscita
-negativa, scorrerebbe semplicemente in verso opposto a quello ipotizzato.
-Sostituendo i valori nella maglia C di controllo si ottiene $0$, come
-deve essere.</p>
-
-<div class="avanti">
-<h2>Nella prossima unit&agrave;</h2>
 <ul>
-<li>Passiamo dai circuiti in corrente costante a un circuito che cambia
-nel tempo: la carica di un condensatore attraverso una resistenza, con
-l'andamento esponenziale e la costante di tempo.</li>
+<li>generatore da $-$ a $+$ → $+\varepsilon$; da $+$ a $-$ → $-\varepsilon$;</li>
+<li>resistenza nel verso della corrente → $-Ri$; in verso opposto → $+Ri$.</li>
 </ul>
-</div>
+
+<p class="eq">$$\text{A:}\quad 11-6i_1-5+7i_3=0 \qquad\qquad \text{B:}\quad -7i_3+5-2i_2=0$$</p>
+
+<p>Con $i_2=i_1+i_3$ restano due equazioni in $i_1$ e $i_3$:</p>
+
+<p class="eq">$$\begin{cases} 6-6i_1+7i_3=0 \\ 5-2i_1-9i_3=0 \end{cases}$$</p>
+
+<div class="def"><span class="et">Soluzione</span>
+<p class="eq principio">$$i_1=\tfrac{89}{68}\ \text{A}\approx1{,}31\ \text{A} \qquad i_2=\tfrac{107}{68}\ \text{A}\approx1{,}57\ \text{A} \qquad i_3=\tfrac{9}{34}\ \text{A}\approx0{,}26\ \text{A}$$</p></div>
+
+<p>Controllo con la maglia esterna C (somma di A e B):</p>
+
+<p class="eq">$$11-6i_1-2i_2=11-\tfrac{534}{68}-\tfrac{214}{68}=0$$</p>
+
+<ul>
+<li>corrente positiva → verso scelto corretto;</li>
+<li>corrente negativa → verso opposto a quello disegnato.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../66-condensatori-in-serie/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Condensatori in serie</span></a><a class="successiva" href="../68-circuiti-rc-la-carica-del-condensatore/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Circuiti RC: la carica del condensatore</span></a></nav>
-<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unit&agrave; 65</p></footer>
-
+<footer><p>Fisica quarta &middot; Circuiti elettrici &middot; Unità 65</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');t.innerHTML=s;return t;}
+  function sub(b,s){return b+'<tspan font-size="9" dy="3">'+s+'</tspan>';}
+  var filo={stroke:'var(--inchiostro)','stroke-width':2,fill:'none','stroke-linejoin':'round'};
+  function linea(p,pts){el(p,'path',Object.assign({d:'M'+pts.map(function(q){return q.join(',');}).join(' L')},filo));}
+  /* resistenza a zig-zag fra due punti (orizzontale o verticale) */
+  function res(p,xa,ya,xb,yb){var n=6,pts=[[xa,ya]],dx=xb-xa,dy=yb-ya,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    for(var i=0;i<n;i++){var t=(i+.5)/n,s=(i%2?-1:1)*9;pts.push([xa+dx*t-uy*s,ya+dy*t+ux*s]);}pts.push([xb,yb]);linea(p,pts);}
+  /* generatore verticale: polo + (lungo, sottile) in alto a yp, polo - (corto, spesso) in basso a yp+12 */
+  function gen(p,x,yp){el(p,'line',{x1:x-16,y1:yp,x2:x+16,y2:yp,stroke:'var(--inchiostro)','stroke-width':1.8});
+    el(p,'line',{x1:x-8,y1:yp+12,x2:x+8,y2:yp+12,stroke:'var(--inchiostro)','stroke-width':5});
+    txt(p,x+20,yp-2,'+','var(--inchiostro)');txt(p,x+20,yp+22,'−','var(--inchiostro)');}
+  function freccia(p,x1,y1,x2,y2){el(p,'line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--rosso)','stroke-width':2,'marker-end':'url(#fi)'});}
+  var s=document.getElementById('g-circ');
+  if(s){
+    var XL=60,XM=200,XR=320,YT=50,YB=210;
+    var d=el(s,'defs',{});
+    el(el(d,'marker',{id:'fi',markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:'var(--rosso)'});
+    /* ramo sinistro: generatore 11 V (+ in alto) */
+    linea(s,[[XL,YB],[XL,136]]);gen(s,XL,124);linea(s,[[XL,124],[XL,YT],[105,YT]]);
+    txt(s,XL-24,134,'11 V','var(--grigio)',{anc:'end'});
+    /* 6 ohm in alto a sinistra */
+    res(s,105,YT,155,YT);linea(s,[[155,YT],[XR,YT],[XR,110]]);
+    txt(s,130,YT-16,'6 Ω','var(--grigio)',{anc:'middle'});
+    /* ramo destro: 2 ohm */
+    res(s,XR,110,XR,150);linea(s,[[XR,150],[XR,YB],[XL,YB]]);
+    txt(s,XR+16,134,'2 Ω','var(--grigio)');
+    /* ramo centrale: dal basso 7 ohm, poi generatore 5 V (+ in alto) */
+    linea(s,[[XM,YB],[XM,190]]);res(s,XM,190,XM,150);linea(s,[[XM,150],[XM,118]]);gen(s,XM,106);linea(s,[[XM,106],[XM,YT]]);
+    txt(s,XM+16,174,'7 Ω','var(--grigio)');txt(s,XM-24,116,'5 V','var(--grigio)',{anc:'end'});
+    /* nodi */
+    [[XM,YT],[XM,YB]].forEach(function(q){el(s,'circle',{cx:q[0],cy:q[1],r:4,fill:'var(--inchiostro)'});});
+    txt(s,XM,YT-10,'N','var(--inchiostro)',{anc:'middle'});
+    /* correnti */
+    freccia(s,68,YT-10,96,YT-10);txt(s,82,YT-16,sub('i','1'),'var(--rosso)',{anc:'middle',it:1,fs:14});
+    freccia(s,238,YT-10,272,YT-10);txt(s,255,YT-16,sub('i','2'),'var(--rosso)',{anc:'middle',it:1,fs:14});
+    freccia(s,XM-12,94,XM-12,64);txt(s,XM-20,84,sub('i','3'),'var(--rosso)',{anc:'end',it:1,fs:14});
+    /* maglie */
+    txt(s,130,140,'A','var(--grigio)',{anc:'middle',fs:15});
+    txt(s,262,140,'B','var(--grigio)',{anc:'middle',fs:15});
+    txt(s,342,232,'C','var(--grigio)',{anc:'middle',fs:14});
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
