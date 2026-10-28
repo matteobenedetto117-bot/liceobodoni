@@ -777,6 +777,7 @@
   è stata inclusa come chiusura della pagina (senza risolverla per il raggio, che è materia
   dell'unità 62) per rispettare esattamente il confine fra le due unità. Nessuno strumento
   interattivo: contenuto concettuale con due sole formule numeriche.
+- Revisione (28/10/2026, regole 13/10): parole 311 → 143 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script dell'unità 61); tolti sommario, «Nella prossima unità», titoletti «Le quattro ipotesi di Bohr» e «Assorbimento ed emissione: due esempi», frasi di commento; domanda d'apertura, ipotesi in .def con elenco numerato, L_n = nh/(2π) e |ΔE| = hf in riquadro rosso, assorbimento/emissione in elenco caso → conseguenza; titoletti «Salti fra orbite» e «Orbita circolare» (argomenti distinti). Precisazione: «e carica dell'elettrone» → «e carica elementare» (la carica dell'elettrone è −e). Figura rifatta da script, statica: raggi delle orbite proporzionali a n², lunghezze d'onda calcolate con la formula di Rydberg (121,5 → 122 nm; 656,3 → 656 nm), una didascalia per pannello. Nessun esempio (assente anche prima), nessuna comparsa, nessuna figura decorativa.
 
 ## Unità 63 — Il raggio delle orbite di Bohr
 - Parole: circa 220 su 1 pagina di traccia (pagina 112).
