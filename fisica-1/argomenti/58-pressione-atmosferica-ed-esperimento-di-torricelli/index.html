@@ -5,18 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pressione atmosferica ed esperimento di Torricelli — Fisica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:12px 18px;margin:22px 0;
-  font-size:.96rem}
-.nota strong{color:var(--blu)}
-figure.dis{margin:26px auto;max-width:640px;text-align:center}
-figure.dis svg{width:100%;height:auto;background:#fff;border:1px solid var(--riga);
-  border-radius:10px}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.nota{display:flow-root;background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px;padding:0 18px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p,.nota p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def ul{margin:0;padding-bottom:calc(var(--r)*.5);padding-left:var(--r)}
+.foglio>.fig,.foglio>.def,.foglio>.nota,.foglio>ul,.foglio>ol{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.foglio>.eq{margin-top:var(--r);text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem;overflow-x:auto}
+.foglio>.eq+.eq{margin-top:calc(var(--r)*.5)}
+.def .eq{text-align:center;background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;margin:0 0 calc(var(--r)*.5);font-size:1.1rem;overflow-x:auto}
+.foglio>.eq.principio,.def .eq.principio{background:#f6e4e2;color:var(--rosso);font-weight:600}
+.eq mjx-container{margin:0!important}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4;flex-wrap:wrap}
+.cursore input{width:min(260px,50%)}
+.cursore .val{font-variant-numeric:tabular-nums}
+.foglio>ul{padding-left:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:12px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>ul+p,.foglio>.def+p,.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+ul{margin-top:var(--r)}
+.cursore .ok{color:var(--verde);font-weight:700}
+.foglio>.eq+p,.foglio>.eq+ul,.foglio>.eq+.nota{margin-top:var(--r)}
+.foglio>.eq+h2,.foglio>ul+.fig{margin-top:var(--r)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" id="MathJax-script" async></script>
 </head>
 <body>
 <div class="foglio">
@@ -27,108 +59,94 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:#555;margin
   <h1>Pressione atmosferica ed esperimento di Torricelli</h1>
 </header>
 
-<h2>L'esperimento</h2>
+<p>Provetta piena di mercurio, rovesciata in un piatto di mercurio: fin dove scende il liquido?</p>
 
-<p>Torricelli riempie di mercurio un piatto, lasciato aperto sul lato superiore. Riempie
-poi di mercurio una provetta e la rovescia nel piatto, con l'imboccatura sotto il livello
-del liquido. La provetta rilascia una parte del mercurio nel piatto e in alto rimane
-vuota.</p>
-
-<p>La colonna d'aria atmosferica preme sulla superficie libera del mercurio nel piatto e
-spinge il liquido a risalire nella provetta. Il mercurio non scende quindi fino al
-livello del piatto: si ferma a una certa altezza <span>\(h\)</span>.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
-  <defs>
-    <marker id="gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#2e8b57"/></marker>
-    <marker id="nr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
-  </defs>
-
-  <!-- piatto -->
-  <path d="M120,250 L120,268 L520,268 L520,250" fill="none" stroke="#333" stroke-width="2.5"/>
-  <rect x="120" y="250" width="400" height="18" fill="#b9bcc4"/>
-
-  <!-- provetta rovesciata -->
-  <path d="M250,40 L250,268 M290,40 L290,268 M250,40 L290,40" fill="none" stroke="#333" stroke-width="2.5"/>
-  <!-- mercurio nella provetta -->
-  <rect x="252" y="95" width="36" height="173" fill="#b9bcc4"/>
-  <!-- vuoto -->
-  <rect x="252" y="42" width="36" height="53" fill="#fff"/>
-  <text x="305" y="62" fill="#333">vuoto</text>
-  <line x1="300" y1="58" x2="272" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#nr)"/>
-
-  <!-- quota h -->
-  <line x1="215" y1="95" x2="215" y2="250" stroke="#333" stroke-width="1.5"/>
-  <line x1="208" y1="95" x2="222" y2="95" stroke="#333" stroke-width="1.5"/>
-  <line x1="208" y1="250" x2="222" y2="250" stroke="#333" stroke-width="1.5"/>
-  <text x="188" y="178" fill="#333">h</text>
-  <line x1="215" y1="95" x2="252" y2="95" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
-  <line x1="215" y1="250" x2="252" y2="250" stroke="#333" stroke-width="1" stroke-dasharray="4 3"/>
-
-  <!-- pressione atmosferica -->
-  <line x1="150" y1="205" x2="150" y2="245" stroke="#2e8b57" stroke-width="2.5" marker-end="url(#gr)"/>
-  <line x1="185" y1="205" x2="185" y2="245" stroke="#2e8b57" stroke-width="2.5" marker-end="url(#gr)"/>
-  <line x1="350" y1="205" x2="350" y2="245" stroke="#2e8b57" stroke-width="2.5" marker-end="url(#gr)"/>
-  <line x1="400" y1="205" x2="400" y2="245" stroke="#2e8b57" stroke-width="2.5" marker-end="url(#gr)"/>
-  <line x1="450" y1="205" x2="450" y2="245" stroke="#2e8b57" stroke-width="2.5" marker-end="url(#gr)"/>
-  <line x1="495" y1="205" x2="495" y2="245" stroke="#2e8b57" stroke-width="2.5" marker-end="url(#gr)"/>
-  <text x="395" y="196" fill="#2e8b57">p<tspan baseline-shift="sub" font-size="10">atm</tspan></text>
-
-  <text x="530" y="262" fill="#333">mercurio</text>
-</svg>
-<figcaption>La provetta rovesciata nel piatto: in alto il vuoto, in basso il mercurio
-sostenuto dalla pressione dell'aria che preme sul piatto.</figcaption>
-</figure>
-
-<h2>Perché la colonna si ferma</h2>
-
-<p>All'altezza del livello del piatto la pressione della colonna di mercurio contenuta
-nella provetta è uguale alla pressione atmosferica: le due si fanno equilibrio, e il
-mercurio smette di scendere. Sopra la colonna c'è il vuoto, che non preme, quindi la
-pressione del liquido dipende soltanto dalla sua altezza.</p>
-
-<p>La pressione della colonna si calcola con la legge di Stevino, dove \(d\) è la densità
-del mercurio e \(h\) l'altezza misurata dal livello del piatto:</p>
-
-<p>$$p = d\,g\,h$$</p>
-
-<div class="nota">
-<strong>Perché proprio il mercurio.</strong> È il liquido più denso di uso comune, e per
-questo la colonna che fa equilibrio all'aria è alta meno di un metro. Con l'acqua, circa
-tredici volte meno densa, la stessa pressione richiederebbe una colonna di oltre dieci
-metri.
+<div class="fig">
+<svg id="g-torr" viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px" role="img" aria-label="Provetta rovesciata nel piatto di mercurio, con il vuoto in alto e la colonna alta h"></svg>
+<p class="did">In alto il vuoto; $h = 760$ mm dal livello del piatto</p>
 </div>
 
-<h2>Il valore misurato</h2>
+<ul>
+<li>sopra la colonna: vuoto → pressione trascurabile;</li>
+<li>sulla superficie libera del piatto: pressione atmosferica $p_{atm}$;</li>
+<li>il mercurio scende finché, al livello del piatto, la pressione della colonna è uguale a $p_{atm}$.</li>
+</ul>
 
-<p>Torricelli misura</p>
+<p>Pressione della colonna (legge di Stevino), con $d$ densità del mercurio e $h$ altezza dal livello del piatto:</p>
 
-<p>$$h = 760\ \mathrm{mm} = 0{,}760\ \mathrm{m}$$</p>
+<div class="def"><span class="et">Pressione atmosferica</span>
+<p class="eq principio">$$p_{atm} = d\,g\,h$$</p></div>
 
-<p>e con la densità del mercurio \(d = 1{,}36\cdot 10^{4}\ \mathrm{kg/m^3}\) e
-\(g = 9{,}81\ \mathrm{N/kg}\):</p>
+<div class="nota"><span class="et">Perché il mercurio</span>
+<p>È il liquido più denso di uso comune: colonna sotto il metro; con l'acqua servirebbero più di 10 m.</p></div>
 
-<p>$$p = 1{,}36\cdot 10^{4}\ \mathrm{\tfrac{kg}{m^3}} \cdot 9{,}81\ \mathrm{\tfrac{N}{kg}}
-\cdot 0{,}760\ \mathrm{m} \approx 1{,}01\cdot 10^{5}\ \mathrm{Pa}$$</p>
+<h2>Esempio</h2>
 
-<p>Le unità si combinano in \(\mathrm{N/m^2}\), cioè pascal, come deve essere per una
-pressione. Questo è il valore della pressione atmosferica al livello del mare, che si
-assume pari a</p>
+<p>Dati: $h = 0{,}760$ m, $d = 1{,}36\cdot10^{4}$ kg/m³, $g = 9{,}81$ N/kg. Calcolare $p_{atm}$.</p>
 
-<p>$$p_{\mathrm{atm}} = 1{,}013\cdot 10^{5}\ \mathrm{Pa}$$</p>
+<p class="eq">$$p_{atm} = d\,g\,h = 1{,}36\cdot10^{4} \cdot 9{,}81 \cdot 0{,}760\ \text{Pa} \approx 1{,}01\cdot10^{5}\ \text{Pa}$$</p>
+
+<p>Valore assunto al livello del mare:</p>
+
+<p class="eq">$$p_{atm} = 1{,}013\cdot10^{5}\ \text{Pa}$$</p>
 
 <h2>Unità di misura della pressione</h2>
 
-<p>Il valore della pressione atmosferica standard dà il nome a un'unità di misura pratica,
-l'atmosfera, insieme ad altre unità equivalenti in uso:</p>
-
-<p>$$1\ \text{atm} = 1{,}013\cdot10^5\ \text{Pa} \qquad 1\ \text{bar} = 10^5\ \text{Pa}$$</p>
-<p>$$1\ \text{atm} = 760\ \text{mmHg} = 760\ \text{torr}$$</p>
+<div class="def"><span class="et">Unità pratiche</span>
+<p class="eq">$$1\ \text{atm} = 1{,}013\cdot10^{5}\ \text{Pa} = 760\ \text{mmHg} = 760\ \text{torr} \qquad 1\ \text{bar} = 10^{5}\ \text{Pa}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../57-galleggiamento-di-un-corpo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Galleggiamento di un corpo</span></a><a class="successiva" href="../59-vasi-comunicanti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Vasi comunicanti</span></a></nav>
+<footer><p>Fisica prima &middot; Statica dei fluidi &middot; Unità 58</p></footer>
 </div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,col,a){var t=el(p,'text',{x:x,y:y,'font-size':a&&a.fs||13,'font-family':'sans-serif',fill:col,'text-anchor':a&&a.anc||'start'});if(a&&a.it)t.setAttribute('font-style','italic');t.innerHTML=s;return t;}
+  function sub(b,s){return b+'<tspan font-size="9" dy="3">'+s+'</tspan>';}
+  var s=document.getElementById('g-torr');
+  if(s){
+    /* scala: 0,2 unità del disegno per mm; provetta lunga 900 mm, colonna h = 760 mm */
+    var k=0.2,L=900,h=760,yl=220,yf=240,x0=150,x1=184,yb=232;
+    var yt=yl-k*L, ym=yl-k*h;
+    var d=el(s,'defs',{});
+    el(el(d,'marker',{id:'fp',markerWidth:9,markerHeight:9,refX:8,refY:4.5,orient:'auto',markerUnits:'userSpaceOnUse'}),'path',{d:'M0,1 L8,4.5 L0,8 Z',fill:'var(--rosso)'});
+    /* piatto con mercurio */
+    el(s,'rect',{x:60,y:yl,width:240,height:yf-yl,fill:'#b9bcc4'});
+    el(s,'path',{d:'M60,'+(yl-12)+' L60,'+yf+' L300,'+yf+' L300,'+(yl-12),fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    /* provetta: mercurio fino a ym, vuoto sopra */
+    el(s,'rect',{x:x0,y:ym,width:x1-x0,height:yb-ym,fill:'#b9bcc4'});
+    el(s,'path',{d:'M'+x0+','+yb+' L'+x0+','+yt+' L'+x1+','+yt+' L'+x1+','+yb,fill:'none',stroke:'var(--inchiostro)','stroke-width':2});
+    txt(s,x1+10,yt+(ym-yt)/2+4,'vuoto','var(--grigio)');
+    /* quota h */
+    var xq=120;
+    el(s,'line',{x1:xq,y1:ym,x2:xq,y2:yl,stroke:'var(--inchiostro)','stroke-width':1.2});
+    [ym,yl].forEach(function(y){el(s,'line',{x1:xq-6,y1:y,x2:xq+6,y2:y,stroke:'var(--inchiostro)','stroke-width':1.2});
+      el(s,'line',{x1:xq+6,y1:y,x2:x0,y2:y,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'});});
+    txt(s,xq-8,(ym+yl)/2+5,'h','var(--inchiostro)',{anc:'end',it:1,fs:14});
+    /* pressione atmosferica sul piatto */
+    [75,100,210,240,270].forEach(function(x){el(s,'line',{x1:x,y1:yl-40,x2:x,y2:yl-3,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#fp)'});});
+    txt(s,240,yl-48,sub('p','atm'),'var(--rosso)',{anc:'middle',it:1,fs:14});
+  }
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
