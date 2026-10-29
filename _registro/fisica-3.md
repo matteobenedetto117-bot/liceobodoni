@@ -27,6 +27,7 @@
 - Parole: 239 su 1 pagina di traccia (pagina 10)
 - Rettifica: nessuna, il passaggio algebrico (sostituzione di t=x/v0x nell'equazione di y) è stato verificato con SymPy e coincide con il risultato riquadrato nella traccia
 - Aggiunta: nessuna, solo il richiamo esplicito che l'equazione ottenuta è di secondo grado in x (da cui il nome "moto parabolico"), osservazione già implicita nel titolo dell'unità 04
+- Revisione (29/10/2026, regole 13/10): parole circa 170 → 51 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 03); tolti sommario, titoletti «Il caso del lancio dal suolo» ed «Eliminazione del tempo», rimando all'unità precedente e frasi di spiegazione; apertura con domanda; sostituzione t = x/v₀ₓ e risultato in una sola .eq, equazione della traiettoria in .def; proprietà della parabola in elenco caso → conseguenza. Nessuna comparsa. Aggiunta la condizione v₀ₓ ≠ 0 (necessaria per ricavare t). Calcolo verificato con SymPy. Figura rifatta da script e resa interattiva: cursore α da 15° a 75° con v₀ = 20 m/s, parabola calcolata con l'equazione, coefficienti mostrati nel disegno; prima parabola a occhio (Bézier).
 
 ## Unità 06 — Altezza massima e tempo di volo
 - Parole: 318 su 2 pagine di traccia (pagine 11–12)

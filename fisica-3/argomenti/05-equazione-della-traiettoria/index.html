@@ -5,15 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazione della traiettoria — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,73 +61,95 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Cinematica in due dimensioni &middot; Unità 05</p>
   <h1>Equazione della traiettoria</h1>
-  <p class="sommario">Le due leggi orarie ci dicono dove si trova il proiettile a ogni istante,
-  ma non mostrano direttamente la forma del percorso. Per vedere quella forma dobbiamo
-  eliminare il tempo ed esprimere $y$ in funzione di $x$.</p>
 </header>
 
-<h2>Il caso del lancio dal suolo</h2>
+<p>Proiettile lanciato dall'origine con velocità $\vec v_0$ inclinata di $\alpha$: che forma ha la traiettoria?</p>
 
-<p>Consideriamo il caso più semplice: il proiettile parte dall'origine degli assi, con velocità
-iniziale $\vec v_0$ inclinata di un angolo $\alpha$. Le leggi orarie dell'unità precedente si
-riducono a queste, senza i termini $x_0$ e $y_0$:</p>
-
-<div class="formula-box">
-$$x\begin{cases} a_x = 0 \\ v_x = v_{0x} \\ x = v_{0x}\,t \end{cases}
+<p class="eq">$$x\begin{cases} a_x = 0 \\ v_x = v_{0x} \\ x = v_{0x}\,t \end{cases}
 \qquad\qquad
-y\begin{cases} a_y = -g \\ v_y = v_{0y} - g t \\ y = v_{0y}\,t - \dfrac12 g t^2 \end{cases}$$
-</div>
+y\begin{cases} a_y = -g \\ v_y = v_{0y} - g t \\ y = v_{0y}\,t - \dfrac12 g t^2 \end{cases}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m5a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="m5b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="40" y1="185" x2="330" y2="185" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#m5a)"/>
-<line x1="40" y1="185" x2="40" y2="25" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#m5a)"/>
-<text x="336" y="190" font-family="var(--serif)" font-style="italic" font-size="14">x</text>
-<text x="28" y="20" font-family="var(--serif)" font-style="italic" font-size="14">y</text>
-<path d="M40,185 Q170,30 300,185" fill="none" stroke="var(--grigio)" stroke-width="1.6" stroke-dasharray="5,4"/>
-<circle cx="40" cy="185" r="3" fill="var(--inchiostro)"/>
-<line x1="40" y1="185" x2="115" y2="115" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#m5b)"/>
-<text x="122" y="112" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">v&#8407;<tspan baseline-shift="sub" font-size="70%">0</tspan></text>
-<path d="M75,185 A35,35 0 0,0 63,159" fill="none" stroke="var(--blu)" stroke-width="1.3"/>
-<text x="70" y="172" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--blu)">&#945;</text>
-</svg>
-<p class="did">Il proiettile parte dall'origine con velocità $\vec v_0$ inclinata di $\alpha$: la
-traiettoria tratteggiata è il grafico di $y$ in funzione di $x$ che vogliamo ricavare.</p>
+<svg id="f-tr" viewBox="0 0 360 205" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Traiettoria parabolica di un proiettile lanciato dall'origine con velocità v0 inclinata di un angolo alfa"></svg>
+<div class="cursore"><label for="cur-a">α</label><input id="cur-a" type="range" min="15" max="75" step="1" value="45"><span id="val-a">45°</span></div>
+<p class="did">$v_0 = 20$ m/s, $g = 9{,}8$ m/s²: traiettoria calcolata con l'equazione</p>
 </div>
 
-<h2>Eliminazione del tempo</h2>
+<p>Si ricava $t$ dalla legge di $x$ (con $v_{0x} \neq 0$) e si sostituisce nella legge di $y$:</p>
 
-<p>Le due leggi orarie condividono la stessa $t$: per avere $y$ in funzione di $x$ basta
-ricavare $t$ da una delle due e sostituirlo nell'altra. Conviene usare quella di $x$, che è più
-semplice:</p>
+<p class="eq">$$t = \frac{x}{v_{0x}} \quad\Rightarrow\quad y = v_{0y}\,\frac{x}{v_{0x}} - \frac12 g\,\frac{x^2}{v_{0x}^2}$$</p>
 
-<div class="formula-box">
-$$\begin{cases} y = v_{0y}\,t - \dfrac12 g t^2 \\[4pt] x = v_{0x}\,t \ \Rightarrow\ t = \dfrac{x}{v_{0x}} \end{cases}$$
-</div>
+<div class="def"><span class="et">Equazione della traiettoria</span>
+<p class="eq">$$y = \frac{v_{0y}}{v_{0x}}\,x - \frac{g}{2v_{0x}^2}\,x^2$$</p></div>
 
-<p>Sostituendo questa $t$ nell'equazione di $y$:</p>
-
-<div class="formula-box">
-$$y = v_{0y}\,\frac{x}{v_{0x}} - \frac12 g\,\frac{x^2}{v_{0x}^2}$$
-</div>
-
-<p>che, raccogliendo le potenze di $x$, diventa l'equazione della traiettoria:</p>
-
-<div class="formula-box">
-$$y = \frac{v_{0y}}{v_{0x}}\,x - \frac{g}{2v_{0x}^2}\,x^2$$
-</div>
-
-<p>È un'equazione di secondo grado in $x$, con $y$ nulla per $x=0$: il grafico è una parabola
-con la concavità verso il basso, ed è per questo che il moto si chiama parabolico.</p>
-
+<ul>
+<li>secondo grado in $x$ → parabola;</li>
+<li>coefficiente di $x^2$ negativo → concavità verso il basso;</li>
+<li>$x = 0$ → $y = 0$.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../04-il-moto-parabolico-impostazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il moto parabolico: impostazione</span></a><a class="successiva" href="../06-altezza-massima-e-tempo-di-volo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Altezza massima e tempo di volo</span></a></nav>
 <footer><p>Fisica terza &middot; Cinematica in due dimensioni &middot; Unità 05</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function vtxt(s,p,str,col,sub){var g=el('g',{},s);
+  var e=txt(g,p,str,{'font-family':'var(--serif)','font-style':'italic','font-size':15,fill:col});
+  var w=8,c=str.length>1?p[0]+4:p[0];
+  el('path',{d:'M'+(c-w/2)+','+(p[1]-10)+' h'+w+' m-3,-2.5 l3,2.5 l-3,2.5',fill:'none',stroke:col,'stroke-width':1.1},g);
+  if(sub)txt(g,[c+w/2+3,p[1]+5],sub,{'font-family':'var(--serif)','font-style':'italic','font-size':11,fill:col});
+  g.move=function(x,y){g.setAttribute('transform','translate('+(x-p[0]).toFixed(1)+','+(y-p[1]).toFixed(1)+')');};
+  return g;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function freccia(s,p,q,col,id,w){return el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:col,'stroke-width':w||2.2,'marker-end':'url(#'+id+')'},s);}
+function assi(s,O,xmax,ymin){marc(s,'ax'+s.id,'var(--inchiostro)');
+  freccia(s,O,[xmax,O[1]],'var(--inchiostro)','ax'+s.id,1.4);freccia(s,O,[O[0],ymin],'var(--inchiostro)','ax'+s.id,1.4);
+  txt(s,[xmax+2,O[1]+14],'x',{'font-style':'italic'});txt(s,[O[0]-14,ymin+2],'y',{'font-style':'italic'});txt(s,[O[0]-12,O[1]+12],'O');}
+function dot(s,p){el('circle',{cx:p[0],cy:p[1],r:3.4,fill:'var(--inchiostro)'},s);}
+/* traiettoria y = tanα·x − g/(2 v0² cos²α)·x², v0 = 20 m/s; 6,5 px/m */
+var s=document.getElementById('f-tr'),O=[40,180],k=6.5,g=9.8,v0=20;
+assi(s,O,335,22);marc(s,'r1','var(--rosso)');
+var cv=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':2},s);
+var arco=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':1.2},s);
+var fv=freccia(s,O,O,'var(--rosso)','r1',2.6);el('circle',{cx:O[0],cy:O[1],r:3.4,fill:'var(--inchiostro)'},s);
+var lv=vtxt(s,[0,0],'v','var(--rosso)','0');
+var la=txt(s,[0,0],'α',{'font-family':'var(--serif)','font-style':'italic','font-size':13,fill:'var(--blu)'});
+var eqn=txt(s,[340,30],'',{'text-anchor':'end','font-size':12});
+var cur=document.getElementById('cur-a'),val=document.getElementById('val-a');
+function f(z,n){return z.toFixed(n).replace('.',',');}
+function dis(){var a=parseFloat(cur.value)*Math.PI/180,c=Math.cos(a),sn=Math.sin(a),A=sn/c,B=g/(2*v0*v0*c*c),X=A/B;
+  var d='';for(var i=0;i<=100;i++){var x=X*i/100,y=A*x-B*x*x;d+=(i?'L':'M')+(O[0]+k*x).toFixed(1)+','+(O[1]-k*y).toFixed(1);}
+  cv.setAttribute('d',d);
+  var Lv=60,T=[O[0]+Lv*c,O[1]-Lv*sn];fv.setAttribute('x2',T[0].toFixed(1));fv.setAttribute('y2',T[1].toFixed(1));
+  if(a<0.45)lv.move(T[0]+4,T[1]-14);else lv.move(T[0]+16,T[1]+14);
+  var r=28;arco.setAttribute('d','M'+(O[0]+r)+','+O[1]+' A'+r+','+r+' 0 0,0 '+(O[0]+r*c).toFixed(1)+','+(O[1]-r*sn).toFixed(1));
+  la.setAttribute('x',(O[0]+40*Math.cos(a/2)).toFixed(1));la.setAttribute('y',(O[1]-40*Math.sin(a/2)).toFixed(1));
+  eqn.textContent='y = '+f(A,2)+'·x − '+f(B,4)+'·x²';
+  var ok=a>=25*Math.PI/180;arco.setAttribute('opacity',ok?1:0);la.setAttribute('opacity',ok?1:0);
+  val.textContent=cur.value+'°';}
+cur.addEventListener('input',dis);dis();
+})();
+</script>
 </body>
 </html>
