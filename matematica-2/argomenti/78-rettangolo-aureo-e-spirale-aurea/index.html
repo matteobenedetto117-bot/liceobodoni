@@ -5,15 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rettangolo aureo e spirale aurea — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.foglio>ol{margin:var(--r) 0 0;padding-left:1.6rem}
+.foglio>ol+p,.foglio>ol+div{margin-top:var(--r)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
 </style>
 </head>
 <body>
@@ -23,119 +57,157 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Similitudine &middot; Unità 76</p>
   <h1>Rettangolo aureo e spirale aurea</h1>
-  <p class="sommario">Dalla sezione aurea di un segmento si passa a un
-  rettangolo con le stesse proporzioni. Tagliando via un quadrato se ne
-  ottiene sempre un altro simile: ripetendo il taglio si disegna la
-  spirale aurea.</p>
 </header>
 
-<h2>Rettangolo aureo</h2>
+<p>Rettangolo $ABCD$ con lato minore $AB$ e lato maggiore $AD$: quando i due lati sono nella proporzione della sezione aurea?</p>
 
-<div class="regola">
-<p><strong>Definizione.</strong> Un rettangolo aureo è un rettangolo in
-cui un lato è la sezione aurea dell'altro. Chiamati $AB$ e $AD$ due lati
-consecutivi, con $AB$ il più corto, vale</p>
-$$AD : AB = AB : (AD-AB).$$
-</div>
-
-<p>È la stessa proporzione della sezione aurea di un segmento, applicata
-ora ai due lati del rettangolo invece che a due parti di uno stesso
-segmento: $AD$ sta ad $AB$ come $AB$ sta alla differenza $AD-AB$.</p>
+<div class="def"><span class="et">Definizione</span>
+<p>Un rettangolo è aureo se il lato minore $AB$ è la sezione aurea del lato maggiore $AD$.</p>
+<p class="eq">$$AD : AB = AB : (AD-AB)$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<rect x="30" y="25" width="260" height="160.6" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="30" y1="25" x2="30" y2="185.6" stroke="var(--verde)" stroke-width="4"/>
-<text x="18" y="22" font-size="15">B</text>
-<text x="284" y="22" font-size="15">C</text>
-<text x="284" y="198" font-size="15">D</text>
-<text x="18" y="198" font-size="15">A</text>
-<text x="8" y="108" font-size="13" fill="var(--verde)">AB</text>
-<text x="150" y="204" font-size="13">AD</text>
-</svg>
-<figcaption>$AB$, il lato colorato, è la sezione aurea di $AD$</figcaption>
+<svg id="f-rett" viewBox="0 0 200 250" style="width:100%;max-width:200px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rettangolo aureo ABCD con il lato minore AB in verde"></svg>
+<p class="did">$AB$ (in verde): sezione aurea di $AD$</p>
 </div>
 
-<p>Se $AB = 21\text{ cm}$, quanto misura $AD$? Posto $x = AD$:</p>
+<h2>Esempio</h2>
 
-$$x : 21 = 21 : (x-21) \quad\Rightarrow\quad x(x-21) = 441$$
+<p>Dati: $AB = 21\text{ cm}$. Calcolare $x = AD$.</p>
 
-<p>cioè $x^2 - 21x - 441 = 0$. Il discriminante è</p>
+<p class="eq">$$x : 21 = 21 : (x-21) \ \Rightarrow\ x(x-21) = 441 \ \Rightarrow\ x^2 - 21x - 441 = 0$$</p>
 
-$$\Delta = 441 + 4\cdot441 = 2205 = 21^2\cdot5,$$
+<p class="eq">$$\Delta = 441 + 4\cdot441 = 2205 = 21^2\cdot5 \ \Rightarrow\ x_{1,2} = \frac{21 \pm 21\sqrt5}{2}$$</p>
 
-<p>quindi $\sqrt\Delta = 21\sqrt5$ e</p>
+<p>Soluzione negativa non accettabile per una lunghezza:</p>
 
-$$x_{1,2} = \frac{21 \pm 21\sqrt5}{2}.$$
+<p class="eq">$$AD = \frac{21+21\sqrt5}{2} \approx 33{,}98\text{ cm}$$</p>
 
-<p>La soluzione negativa non ha senso per una lunghezza; resta</p>
+<h2>Rettangolo aureo più un quadrato</h2>
 
-$$AD = \frac{21+21\sqrt5}{2} \approx 33{,}98\text{ cm}.$$
-
-<h2>Accostando un quadrato si ottiene ancora un rettangolo aureo</h2>
-
-<p>Al rettangolo aureo $ABCD$ (il quadrato a sinistra nel disegno) si
-accosta un quadrato di lato $AD$: si ottiene un rettangolo più grande
-$BCPQ$, di lati $BQ$ e $AD$.</p>
+<p>Sul lato maggiore $AD$ si costruisce il quadrato $ADPQ$: si ottiene il rettangolo $BCPQ$, di lati $BQ = AB + AD$ e $AD$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<rect x="40" y="40" width="340" height="140" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="180" y1="40" x2="180" y2="180" stroke="var(--inchiostro)" stroke-width="2"/>
-<text x="26" y="34" font-size="15">C</text>
-<text x="174" y="34" font-size="15">D</text>
-<text x="374" y="34" font-size="15">P</text>
-<text x="26" y="198" font-size="15">B</text>
-<text x="174" y="198" font-size="15">A</text>
-<text x="374" y="198" font-size="15">Q</text>
-</svg>
-<figcaption>quadrato $BCDA$ più rettangolo $ADPQ$</figcaption>
+<svg id="f-quad" viewBox="0 0 300 210" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quadrato ADPQ accostato al rettangolo aureo ABCD"></svg>
+<p class="did">Rettangolo aureo $ABCD$ e quadrato $ADPQ$</p>
 </div>
 
-<p>Nel quadrato, $AQ \cong AD$. Partendo dalla proporzione aurea del
-rettangolo grande $BQ:AD = AD:(BQ-AD)$ e scrivendo $BQ = AB+AQ$:</p>
+<p>Invertendo e poi componendo la proporzione aurea di $ABCD$:</p>
 
-$$(AB+AQ):AD = AD:(AB+AQ-AD)$$
+<p class="eq">$$AB : AD = (AD-AB) : AB \ \Rightarrow\ (AB+AD) : AD = AD : AB$$</p>
 
-<p>Sostituendo $AQ$ con $AD$:</p>
-
-$$(AB+AD):AD = AD:AB.$$
-
-<p>Questa è di nuovo, per la proprietà del comporre, la stessa proporzione
-aurea di partenza: dice che anche il rettangolo $BQPC$, più grande di
-$ABCD$, è un rettangolo aureo. Per questo si può ripetere il taglio
-all'infinito, sempre accostando un quadrato.</p>
+<div class="def"><span class="et">Proprietà</span>
+<p>Anche $BCPQ$ è un rettangolo aureo: il lato minore $AD$ è la sezione aurea del lato maggiore $BQ$.</p></div>
 
 <h2>Spirale aurea</h2>
 
-<p>Ripetendo la costruzione — un quadrato via via più piccolo dentro il
-rettangolo rimanente — e tracciando in ogni quadrato un quarto di
-circonferenza, si ottiene una curva continua: la spirale aurea.</p>
+<p>Viceversa, da un rettangolo aureo si toglie un quadrato:</p>
+
+<ul>
+<li>resta un rettangolo aureo più piccolo;</li>
+<li>si ripete il taglio sul rettangolo rimasto;</li>
+<li>in ogni quadrato si traccia un quarto di circonferenza di raggio uguale al lato.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<rect x="30" y="30" width="197.77" height="197.77" fill="none" stroke="var(--inchiostro)" stroke-width="1.5"/>
-<rect x="227.77" y="105.54" width="122.23" height="122.23" fill="none" stroke="var(--inchiostro)" stroke-width="1.5"/>
-<rect x="274.46" y="30" width="75.54" height="75.54" fill="none" stroke="var(--inchiostro)" stroke-width="1.5"/>
-<rect x="227.77" y="30" width="46.69" height="46.69" fill="none" stroke="var(--inchiostro)" stroke-width="1.5"/>
-<rect x="227.77" y="76.69" width="28.85" height="28.85" fill="none" stroke="var(--inchiostro)" stroke-width="1.5"/>
-<rect x="256.63" y="87.71" width="17.83" height="17.83" fill="none" stroke="var(--inchiostro)" stroke-width="1.5"/>
-<path d="M 30,30 A 197.77,197.77 0 0,1 227.77,227.77 A 122.23,122.23 0 0,1 350,105.54 A 75.54,75.54 0 0,1 274.46,30 A 46.69,46.69 0 0,1 227.77,76.69 A 28.85,28.85 0 0,1 256.63,105.54 A 17.83,17.83 0 0,1 274.46,87.71" fill="none" stroke="var(--verde)" stroke-width="3"/>
-</svg>
-<figcaption>quadrati sempre più piccoli e, in ognuno, un quarto di
-circonferenza: insieme formano la spirale aurea</figcaption>
-</div>
-
-<div class="avanti">
-<h2>Fine del percorso</h2>
-<p>Con questa unità si chiude il percorso di matematica di seconda: dalle
-funzioni ai sistemi lineari, dai radicali alla geometria della
-circonferenza e della similitudine.</p>
+<svg id="f-spir" viewBox="0 0 360 236" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quadrati sempre più piccoli in un rettangolo aureo e spirale aurea"></svg>
+<p class="did">Quarti di circonferenza uno di seguito all'altro: spirale aurea (in verde)</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../77-sezione-aurea/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Sezione aurea</span></a><a class="successiva" href="../../index.html"><span class="dir">Indice &rarr;</span><span class="tit">Matematica — Seconda</span></a></nav>
 <footer><p>Matematica seconda &middot; Rettangolo aureo e spirale aurea &middot; Unità 76</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio>ol,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':14,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function rad(g){return g*Math.PI/180;}
+function add(p,q,k){k=k===undefined?1:k;return [p[0]+k*q[0],p[1]+k*q[1]];}
+function sub(p,q){return [p[0]-q[0],p[1]-q[1]];}
+function len(v){return Math.hypot(v[0],v[1]);}
+function uni(v){var l=len(v);return [v[0]/l,v[1]/l];}
+function dir(g){return [Math.cos(rad(g)),-Math.sin(rad(g))];}
+function C(s,cx,cy,R,a){a=a||{};
+  el('circle',Object.assign({cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2},a),s);
+  var o={O:[cx,cy],R:R,P:function(g,k){return add([cx,cy],dir(g),k===undefined?R:k);},
+    lab:function(g,str,k,at){txt(s,o.P(g,R+(k||15)),str,at);}};
+  return o;}
+function seg(s,p,q,a){return el('line',Object.assign({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':1.8,'stroke-linecap':'round'},a||{}),s);}
+function retta(s,p,q,e1,e2,a){var u=uni(sub(q,p));return seg(s,add(p,u,-e1),add(q,u,e2),a);}
+function dot(s,p,col,r){el('circle',{cx:p[0],cy:p[1],r:r||3.5,fill:col||'var(--inchiostro)'},s);}
+function tacca(s,p,q,n,f){f=f===undefined?.5:f;var m=add(p,sub(q,p),f),u=uni(sub(q,p)),nn=[-u[1]*6,u[0]*6];
+  for(var i=0;i<n;i++){var c=add(m,u,(i-(n-1)/2)*4);seg(s,add(c,nn,-1),add(c,nn),{stroke:'var(--verde)','stroke-width':2});}}
+function retto(s,V,p,q,k){k=k||9;var u=uni(sub(p,V)),v=uni(sub(q,V)),a=add(V,u,k),b=add(a,v,k),c=add(V,v,k);
+  el('path',{d:'M'+a+' L'+b+' L'+c,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3},s);}
+function angArc(s,V,p,q,k,a){var a1=Math.atan2(p[1]-V[1],p[0]-V[0]),a2=Math.atan2(q[1]-V[1],q[0]-V[0]),d=a2-a1;
+  while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;var pts=[];
+  for(var i=0;i<=24;i++){var t=a1+d*i/24;pts.push([V[0]+k*Math.cos(t),V[1]+k*Math.sin(t)]);}
+  el('polyline',Object.assign({points:pts.join(' '),fill:'none',stroke:'var(--rosso)','stroke-width':1.8},a||{}),s);
+  var m=a1+d/2;return function(kk){return [V[0]+kk*Math.cos(m),V[1]+kk*Math.sin(m)];};}
+function arcPts(c,g0,g1,n){n=n||48;var pts=[];for(var i=0;i<=n;i++)pts.push(c.P(g0+(g1-g0)*i/n));return pts;}
+function arco(s,c,g0,g1,a){el('polyline',Object.assign({points:arcPts(c,g0,g1).join(' '),fill:'none',stroke:'var(--verde)','stroke-width':4},a||{}),s);}
+window.G={el:el,txt:txt,add:add,sub:sub,len:len,uni:uni,dir:dir,C:C,seg:seg,retta:retta,dot:dot,tacca:tacca,retto:retto,angArc:angArc,arcPts:arcPts,arco:arco};
+})();
+</script>
+<script>
+(function(){var g=G,phi=(1+Math.sqrt(5))/2;
+/* 1. rettangolo aureo: AD verticale, AB orizzontale, AD/AB = φ */
+var s=document.getElementById('f-rett');
+var b=120,h=b*phi,x0=40,y0=(250-h)/2;
+var A=[x0,y0+h],B=[x0+b,y0+h],C=[x0+b,y0],D=[x0,y0];
+g.el('polygon',{points:[A,B,C,D].join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':2},s);
+g.seg(s,A,B,{stroke:'var(--verde)','stroke-width':4});
+g.txt(s,[A[0]-12,A[1]+10],'A');g.txt(s,[B[0]+12,B[1]+10],'B');g.txt(s,[C[0]+12,C[1]-10],'C');g.txt(s,[D[0]-12,D[1]-10],'D');
+
+/* 2. quadrato ADPQ a sinistra di AD; Q, A, B allineati */
+s=document.getElementById('f-quad');
+var L=150;b=L/phi;var W=L+b;x0=(300-W)/2;y0=30;
+var Q=[x0,y0+L],P=[x0,y0],A2=[x0+L,y0+L],D2=[x0+L,y0],B2=[x0+W,y0+L],C2=[x0+W,y0];
+g.el('rect',{x:x0,y:y0,width:L,height:L,fill:'var(--blu-chiaro)',stroke:'none'},s);
+g.el('polygon',{points:[Q,B2,C2,P].join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':2},s);
+g.seg(s,A2,D2,{'stroke-width':2});
+g.seg(s,A2,B2,{stroke:'var(--verde)','stroke-width':4});
+g.txt(s,[Q[0]-10,Q[1]+12],'Q');g.txt(s,[P[0]-10,P[1]-10],'P');g.txt(s,[A2[0],A2[1]+15],'A');g.txt(s,[D2[0],D2[1]-12],'D');
+g.txt(s,[B2[0]+10,B2[1]+12],'B');g.txt(s,[C2[0]+10,C2[1]-10],'C');
+g.txt(s,[x0+L/2,y0+L/2],'quadrato',{'font-size':12,fill:'var(--grigio)'});
+
+/* 3. spirale: si tolgono quadrati (sinistra, alto, destra, basso, ...) */
+s=document.getElementById('f-spir');
+var H=200,Wr=H*phi,r={x0:(360-Wr)/2,y0:18,x1:(360-Wr)/2+Wr,y1:18+H},pts=[];
+g.el('rect',{x:r.x0,y:r.y0,width:Wr,height:H,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8},s);
+function quarto(cx,cy,R,a0,a1){for(var i=0;i<=30;i++){var t=a0+(a1-a0)*i/30;pts.push([cx+R*Math.cos(t),cy+R*Math.sin(t)]);}}
+var PI=Math.PI;
+for(var k=0;k<8;k++){
+  var d=k%4,q;
+  if(d===0){q=r.y1-r.y0;g.el('rect',{x:r.x0,y:r.y0,width:q,height:q,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2},s);
+    quarto(r.x0+q,r.y1,q,PI,1.5*PI);r.x0+=q;}
+  else if(d===1){q=r.x1-r.x0;g.el('rect',{x:r.x0,y:r.y0,width:q,height:q,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2},s);
+    quarto(r.x0,r.y0+q,q,1.5*PI,2*PI);r.y0+=q;}
+  else if(d===2){q=r.y1-r.y0;g.el('rect',{x:r.x1-q,y:r.y0,width:q,height:q,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2},s);
+    quarto(r.x1-q,r.y0,q,0,.5*PI);r.x1-=q;}
+  else{q=r.x1-r.x0;g.el('rect',{x:r.x0,y:r.y1-q,width:q,height:q,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2},s);
+    quarto(r.x1,r.y1-q,q,.5*PI,PI);r.y1-=q;}
+}
+g.el('polyline',{points:pts.map(function(p){return p[0].toFixed(2)+','+p[1].toFixed(2);}).join(' '),fill:'none',stroke:'var(--verde)','stroke-width':3,'stroke-linejoin':'round'},s);
+})();
+</script>
 </body>
 </html>
