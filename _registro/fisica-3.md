@@ -9,6 +9,7 @@
 - Parole: 336 su circa 1,4 pagine di traccia (fine pagina 3, pagina 4, inizio pagina 5)
 - Rettifica: nessuna
 - Aggiunta: nessuna
+- Revisione (29/10/2026, regole 13/10): parole circa 258 → 134 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 01); tolti sommario, titoletto «Accelerazione media e istantanea» e frasi di spiegazione ripetute; accelerazione media e istantanea in .def, a⃗ = a⃗∥ + a⃗⊥ in .eq, effetti delle due componenti in elenco caso → conseguenza; i due esempi qualitativi trasformati in elenco «Due casi particolari». Nessuna comparsa. Correzioni concettuali: «a⊥ fa cambiare la direzione della traiettoria» → «la direzione della velocità»; nella prima figura a⃗ₘ era disegnata in verso diverso da Δv⃗ (ora parallela e concorde). Figure rifatte da script: prima figura calcolata (Δv⃗ fra le punte, a⃗ₘ = 0,55·Δv⃗); seconda resa interattiva (cursore t su traiettoria con a⃗ costante verso il basso: v⃗ tangente calcolata, a⃗∥ e a⃗⊥ come proiezioni, a⃗∥ opposta a v⃗ in salita, nulla nel punto più alto con scritta verde, concorde in discesa); prima punto fuori dalla curva e v⃗ non tangente.
 
 ## Unità 03 — Composizione dei moti
 - Parole: 436 su circa 2,3 pagine di traccia (pagina 5 dalla parte "Composizione dei moti", pagina 6, inizio pagina 7)
