@@ -33,6 +33,7 @@
 - Parole: 318 su 2 pagine di traccia (pagine 11–12)
 - Rettifica: nessuna, entrambe le derivazioni (t di salita = v0y/g, y_max = v0y²/(2g), tv = 2v0y/g) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+- Revisione (29/10/2026, regole 13/10): parole circa 154 → 85 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 05); tolti sommario e frasi di spiegazione; apertura con domanda che esplicita la condizione «ricade alla stessa quota» (ipotesi per t_v); condizione v_y = 0 e t_s in una .eq, sostituzione in una .eq, altezza massima in .def; i due fattori di t_v in elenco caso → conseguenza, tempo di volo in .def (con t_v = 2t_s). Titoletti «Altezza massima» e «Tempo di volo» mantenuti (due risultati distinti). Nessuna comparsa. Nessuna correzione concettuale; calcoli verificati con SymPy. Figura rifatta da script e resa interattiva: parabola calcolata (v₀ₓ = 12 m/s, v₀ᵧ = 14 m/s, g = 9,8 m/s²; y_max ≈ 10,0 m, t_v ≈ 2,86 s), cursore t che muove il proiettile con v⃗ tangente, valori di t, v_y, y nel disegno, scritte verdi «v_y = 0: altezza massima» e «y = 0: tempo di volo»; prima parabola a occhio (Bézier).
 
 ## Unità 07 — Gittata e angolo di gittata massima
 - Parole: 277 su circa 1,5 pagine di traccia (pagina 13, inizio pagina 14 fino alla nota sulla resistenza dell'aria)
