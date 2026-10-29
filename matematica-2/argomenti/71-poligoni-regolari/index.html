@@ -5,13 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Poligoni regolari — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.foglio>ol{margin:var(--r) 0 0;padding-left:1.6rem}
+.foglio>ol+p,.foglio>ol+div{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -21,76 +55,101 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Poligoni inscritti e circoscritti &middot; Unità 69</p>
   <h1>Poligoni regolari</h1>
-  <p class="sommario">Un poligono con tutti i lati e tutti gli angoli congruenti fra loro
-  possiede sempre una circonferenza inscritta e una circonferenza circoscritta, con lo
-  stesso centro. Nell'esagono regolare questa simmetria produce un legame molto semplice
-  fra lato e raggio.</p>
 </header>
 
-<h2>Poligono regolare</h2>
+<p>Poligono con tutti i lati e tutti gli angoli congruenti: quali circonferenze gli sono associate?</p>
 
-<p>Fra tutti i poligoni con lo stesso numero di lati, quelli regolari sono i più
-simmetrici: nessuna direzione è privilegiata, perché lati e angoli sono tutti uguali fra
-loro.</p>
+<div class="def"><span class="et">Definizione</span>
+<p>Poligono regolare: tutti i lati congruenti e tutti gli angoli congruenti.</p></div>
 
-<div class="regola">
-<p><strong>Definizione.</strong> Un poligono si dice <em>regolare</em> se ha tutti i lati
-congruenti e tutti gli angoli congruenti.</p>
-</div>
-
-<h2>Circonferenza inscritta e circoscritta</h2>
-
-<p>Questa simmetria garantisce l'esistenza di due circonferenze legate al poligono.</p>
-
-<div class="regola">
-<p><strong>Teorema.</strong> Dato un poligono regolare, esistono la sua circonferenza
-inscritta e la sua circonferenza circoscritta, e hanno lo stesso centro.</p>
-</div>
-
-<p>Quel centro comune è il <strong>centro del poligono</strong>. Il raggio della
-circonferenza circoscritta, dal centro a un vertice, è il <strong>raggio del
-poligono</strong>; il raggio della circonferenza inscritta, dal centro al punto medio di
-un lato, è l'<strong>apotema</strong>.</p>
+<div class="def"><span class="et">Teorema</span>
+<p>Ogni poligono regolare ha una circonferenza inscritta e una circonferenza circoscritta, con lo stesso centro.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif" width="260">
-<circle cx="100" cy="100" r="70" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M 100 30 L 160.6 65 L 160.6 135 L 100 170 L 39.4 135 L 39.4 65 Z" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="100" y1="100" x2="100" y2="30" stroke="var(--verde)" stroke-width="1.6"/>
-<line x1="100" y1="100" x2="160.6" y2="100" stroke="#c9821f" stroke-width="1.6"/>
-<circle cx="100" cy="30" r="2.4" fill="var(--inchiostro)"/><text x="93" y="20" font-size="12">A</text>
-<circle cx="160.6" cy="65" r="2.4" fill="var(--inchiostro)"/><text x="166" y="62" font-size="12">B</text>
-<circle cx="160.6" cy="135" r="2.4" fill="var(--inchiostro)"/><text x="166" y="140" font-size="12">C</text>
-<circle cx="100" cy="170" r="2.4" fill="var(--inchiostro)"/><text x="93" y="188" font-size="12">D</text>
-<circle cx="39.4" cy="135" r="2.4" fill="var(--inchiostro)"/><text x="18" y="140" font-size="12">E</text>
-<circle cx="39.4" cy="65" r="2.4" fill="var(--inchiostro)"/><text x="18" y="62" font-size="12">F</text>
-<circle cx="100" cy="100" r="2.8" fill="var(--inchiostro)"/><text x="105" y="97" font-size="12">O</text>
-<text x="102" y="66" font-size="12" fill="var(--verde)">raggio</text>
-<text x="118" y="93" font-size="12" fill="#c9821f">apotema</text>
-</svg>
-<figcaption>l'esagono regolare ABCDEF: O è il centro comune alle due circonferenze; in
-verde il raggio (centro&ndash;vertice), in arancio l'apotema (centro&ndash;punto medio del
-lato)</figcaption>
+<svg id="f-esa" viewBox="0 0 200 200" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Esagono regolare ABCDEF con circonferenza circoscritta e inscritta, raggio OA e apotema OM"></svg>
+<p class="did">Esagono regolare $ABCDEF$ di centro $O$: raggio $OA$, apotema $OM$</p>
 </div>
 
-<h2>Il lato dell'esagono regolare</h2>
-
-<p>Nell'esagono regolare il legame fra lato e raggio è particolarmente semplice.</p>
-
-<div class="regola">
-<p><strong>Teorema.</strong> In un esagono regolare, il lato è congruente al raggio.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Torniamo all'equivalenza delle superfici, con il primo teorema di Euclide.</li>
+<li>centro $O$ → centro comune delle due circonferenze;</li>
+<li>raggio → segmento dal centro a un vertice (raggio della circonferenza circoscritta);</li>
+<li>apotema → segmento dal centro al punto medio di un lato (raggio della circonferenza inscritta).</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Teorema</span>
+<p>In un esagono regolare il lato è congruente al raggio.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../70-quadrilateri-inscritti-e-circoscritti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Quadrilateri inscritti e circoscritti</span></a><a class="successiva" href="../72-equivalenza-delle-superfici-e-primo-teorema-di-euclide/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equivalenza delle superfici e primo teorema di Euclide</span></a></nav>
 <footer><p>Matematica seconda &middot; Poligoni regolari &middot; Unità 69</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio>ol,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':14,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function rad(g){return g*Math.PI/180;}
+function add(p,q,k){k=k===undefined?1:k;return [p[0]+k*q[0],p[1]+k*q[1]];}
+function sub(p,q){return [p[0]-q[0],p[1]-q[1]];}
+function len(v){return Math.hypot(v[0],v[1]);}
+function uni(v){var l=len(v);return [v[0]/l,v[1]/l];}
+function dir(g){return [Math.cos(rad(g)),-Math.sin(rad(g))];}
+function C(s,cx,cy,R,a){a=a||{};
+  el('circle',Object.assign({cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2},a),s);
+  var o={O:[cx,cy],R:R,P:function(g,k){return add([cx,cy],dir(g),k===undefined?R:k);},
+    lab:function(g,str,k,at){txt(s,o.P(g,R+(k||15)),str,at);}};
+  return o;}
+function seg(s,p,q,a){return el('line',Object.assign({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':1.8,'stroke-linecap':'round'},a||{}),s);}
+function retta(s,p,q,e1,e2,a){var u=uni(sub(q,p));return seg(s,add(p,u,-e1),add(q,u,e2),a);}
+function dot(s,p,col,r){el('circle',{cx:p[0],cy:p[1],r:r||3.5,fill:col||'var(--inchiostro)'},s);}
+function tacca(s,p,q,n,f){f=f===undefined?.5:f;var m=add(p,sub(q,p),f),u=uni(sub(q,p)),nn=[-u[1]*6,u[0]*6];
+  for(var i=0;i<n;i++){var c=add(m,u,(i-(n-1)/2)*4);seg(s,add(c,nn,-1),add(c,nn),{stroke:'var(--verde)','stroke-width':2});}}
+function retto(s,V,p,q,k){k=k||9;var u=uni(sub(p,V)),v=uni(sub(q,V)),a=add(V,u,k),b=add(a,v,k),c=add(V,v,k);
+  el('path',{d:'M'+a+' L'+b+' L'+c,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3},s);}
+function angArc(s,V,p,q,k,a){var a1=Math.atan2(p[1]-V[1],p[0]-V[0]),a2=Math.atan2(q[1]-V[1],q[0]-V[0]),d=a2-a1;
+  while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;var pts=[];
+  for(var i=0;i<=24;i++){var t=a1+d*i/24;pts.push([V[0]+k*Math.cos(t),V[1]+k*Math.sin(t)]);}
+  el('polyline',Object.assign({points:pts.join(' '),fill:'none',stroke:'var(--rosso)','stroke-width':1.8},a||{}),s);
+  var m=a1+d/2;return function(kk){return [V[0]+kk*Math.cos(m),V[1]+kk*Math.sin(m)];};}
+function arcPts(c,g0,g1,n){n=n||48;var pts=[];for(var i=0;i<=n;i++)pts.push(c.P(g0+(g1-g0)*i/n));return pts;}
+function arco(s,c,g0,g1,a){el('polyline',Object.assign({points:arcPts(c,g0,g1).join(' '),fill:'none',stroke:'var(--verde)','stroke-width':4},a||{}),s);}
+window.G={el:el,txt:txt,add:add,sub:sub,len:len,uni:uni,dir:dir,C:C,seg:seg,retta:retta,dot:dot,tacca:tacca,retto:retto,angArc:angArc,arcPts:arcPts,arco:arco};
+})();
+</script>
+<script>
+(function(){var g=G;
+var s=document.getElementById('f-esa'),R=70,c=g.C(s,100,100,R),ang=[90,30,-30,-90,-150,150],N=['A','B','C','D','E','F'];
+var a=R*Math.cos(Math.PI/6);
+g.el('circle',{cx:100,cy:100,r:a,fill:'none',stroke:'var(--grigio)','stroke-width':1.3,'stroke-dasharray':'4 3'},s);
+var P=ang.map(function(x){return c.P(x);}),O=[100,100],M=[(P[1][0]+P[2][0])/2,(P[1][1]+P[2][1])/2];
+g.el('polygon',{points:P.join(' '),fill:'none',stroke:'var(--blu)','stroke-width':2.2,'stroke-linejoin':'round'},s);
+g.seg(s,O,P[0],{stroke:'var(--verde)','stroke-width':2.4});
+g.seg(s,O,M,{stroke:'var(--rosso)','stroke-width':2.4});
+g.retto(s,M,P[1],O,7);
+g.tacca(s,O,P[0],1);g.tacca(s,P[0],P[1],1);
+P.forEach(function(p,i){g.dot(s,p);c.lab(ang[i],N[i],12);});
+g.dot(s,O);g.txt(s,[92,110],'O');
+g.dot(s,M,'var(--inchiostro)',2.6);g.txt(s,[148,89],'M',{'font-size':13});
+g.txt(s,[109,74],'raggio',{fill:'var(--verde)','font-size':12,'text-anchor':'start'});
+g.txt(s,[128,112],'apotema',{fill:'var(--rosso)','font-size':12});
+})();
+</script>
 </body>
 </html>
