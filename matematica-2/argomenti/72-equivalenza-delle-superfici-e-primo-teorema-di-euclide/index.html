@@ -5,15 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Primo teorema di Euclide — Matematica seconda</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.regola{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:20px 0}
-.regola p{margin:6px 0}
-.fig{text-align:center;margin:18px 0}
-.fig figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+h3{font-size:1.15rem;line-height:var(--r);margin:0;font-weight:600}
+.foglio h3{margin-top:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.fig .did{line-height:1.4}
+.foglio>ul{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.def .eq,.nota .eq{text-align:center;margin:0}
+.foglio>ol{margin:var(--r) 0 0;padding-left:1.6rem}
+.foglio>ol+p,.foglio>ol+div{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,66 +55,105 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica seconda</a></nav>
   <p class="occhiello">Equivalenza: Euclide e Pitagora &middot; Unità 70</p>
   <h1>Primo teorema di Euclide</h1>
-  <p class="sommario">Due figure possono avere forma diversa e occupare comunque la
-  stessa porzione di piano: diciamo allora che sono equivalenti. Il primo teorema di
-  Euclide lega con questa idea un cateto di un triangolo rettangolo alla sua
-  proiezione sull'ipotenusa.</p>
 </header>
 
-<h2>Superfici equivalenti</h2>
+<p>Triangolo rettangolo: che relazione c'è fra un cateto e la sua proiezione sull'ipotenusa?</p>
 
-<p>Un quadrato e un rettangolo possono avere forma diversa e occupare comunque la stessa
-area del piano: quando questo accade, le due superfici si dicono equivalenti.</p>
+<div class="def"><span class="et">Definizione</span>
+<p>Superfici equivalenti: superfici con la stessa estensione (si scrive $\doteq$).</p></div>
 
-<div class="regola">
-<p><strong>Definizione.</strong> Due superfici si dicono <em>equivalenti</em> se hanno la
-stessa estensione.</p>
-</div>
+<p>Triangolo $ABC$ rettangolo in $C$, $H$ piede della perpendicolare da $C$ all'ipotenusa $AB$:</p>
 
-<h2>Il teorema</h2>
-
-<div class="regola">
-<p><strong>Teorema (primo teorema di Euclide).</strong> In un triangolo rettangolo, il
-quadrato costruito su un cateto è equivalente al rettangolo che ha per lati la
-proiezione di quel cateto sull'ipotenusa e l'ipotenusa stessa.</p>
-</div>
-
-<p>Nel triangolo rettangolo $ABC$, retto in $C$, sia $H$ il piede della perpendicolare
-da $C$ ad $AB$: $AH$ è la proiezione del cateto $AC$ sull'ipotenusa. Il quadrato $Q$ è
-costruito su $AC$; il rettangolo $R$ ha per lati $AH$ e $AB$.</p>
+<ul>
+<li>$AH$ → proiezione del cateto $AC$ sull'ipotenusa;</li>
+<li>$Q$ → quadrato costruito su $AC$;</li>
+<li>$R$ → rettangolo di lati $AH$ e $AB$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="-20 -40 360 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<polygon points="100,150 172,54 4,78 76,-18" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.8"/>
-<text x="118" y="112" font-size="13" fill="var(--blu)">Q</text>
-<polygon points="100,150 172,150 172,350 100,350" fill="#f6e3df" stroke="var(--rosso)" stroke-width="1.8"/>
-<text x="126" y="255" font-size="13" fill="var(--rosso)">R</text>
-<polygon points="100,150 300,150 172,54" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="172" y1="54" x2="172" y2="150" stroke="var(--verde)" stroke-width="1.6" stroke-dasharray="4 3"/>
-<path d="M 164 150 L 164 142 L 172 142" fill="none" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M 163 62 L 155 68 L 161 76" fill="none" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<circle cx="100" cy="150" r="3" fill="var(--inchiostro)"/><text x="82" y="168" font-size="13">A</text>
-<circle cx="300" cy="150" r="3" fill="var(--inchiostro)"/><text x="306" y="168" font-size="13">B</text>
-<circle cx="172" cy="54" r="3" fill="var(--inchiostro)"/><text x="166" y="38" font-size="13">C</text>
-<circle cx="172" cy="150" r="3" fill="var(--inchiostro)"/><text x="180" y="140" font-size="13">H</text>
-<circle cx="4" cy="78" r="3" fill="var(--blu)"/><text x="-16" y="82" font-size="13" fill="var(--blu)">D</text>
-<circle cx="76" cy="-18" r="3" fill="var(--blu)"/><text x="80" y="-24" font-size="13" fill="var(--blu)">E</text>
-<circle cx="100" cy="350" r="3" fill="var(--rosso)"/><text x="82" y="368" font-size="13" fill="var(--rosso)">L</text>
-<circle cx="172" cy="350" r="3" fill="var(--rosso)"/><text x="180" y="368" font-size="13" fill="var(--rosso)">M</text>
-</svg>
-<figcaption>il quadrato $Q$ sul cateto $AC$ e il rettangolo $R$ di lati $AH$ e $AB$
-(condiviso il lato $AH$ con la base del triangolo): tesi, $Q \doteq R$</figcaption>
+<svg id="f-euclide" viewBox="0 0 290 345" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo ABC rettangolo in C con il quadrato Q sul cateto AC e il rettangolo R di lati AH e AB"></svg>
+<p class="did">Quadrato $Q$ sul cateto $AC$, rettangolo $R$ di lati $AH$ e $AB$</p>
 </div>
 
-<p>L'equivalenza delle due superfici si traduce in un'uguaglianza fra le aree, $AC^2$ per
-$Q$ e $AH\cdot AB$ per $R$:</p>
-
-$$AC^2 = AH \cdot AB$$
-
+<div class="def"><span class="et">Primo teorema di Euclide</span>
+<p>In un triangolo rettangolo il quadrato costruito su un cateto è equivalente al rettangolo che ha per lati l'ipotenusa e la proiezione di quel cateto sull'ipotenusa.</p>
+<p class="eq">$$Q \doteq R \qquad\qquad AC^2 = AH \cdot AB$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../71-poligoni-regolari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Poligoni regolari</span></a><a class="successiva" href="../73-teorema-di-pitagora-e-triangoli-rettangoli-particolari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema di Pitagora e triangoli rettangoli particolari</span></a></nav>
 <footer><p>Matematica seconda &middot; Primo teorema di Euclide &middot; Unità 70</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio h3,.foglio p:not(.did),.foglio>ul,.foglio>ol,.foglio nav.briciole,.nota .et,.def .et,.fig,.nota,.def,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':14,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function rad(g){return g*Math.PI/180;}
+function add(p,q,k){k=k===undefined?1:k;return [p[0]+k*q[0],p[1]+k*q[1]];}
+function sub(p,q){return [p[0]-q[0],p[1]-q[1]];}
+function len(v){return Math.hypot(v[0],v[1]);}
+function uni(v){var l=len(v);return [v[0]/l,v[1]/l];}
+function dir(g){return [Math.cos(rad(g)),-Math.sin(rad(g))];}
+function C(s,cx,cy,R,a){a=a||{};
+  el('circle',Object.assign({cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':2},a),s);
+  var o={O:[cx,cy],R:R,P:function(g,k){return add([cx,cy],dir(g),k===undefined?R:k);},
+    lab:function(g,str,k,at){txt(s,o.P(g,R+(k||15)),str,at);}};
+  return o;}
+function seg(s,p,q,a){return el('line',Object.assign({x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':1.8,'stroke-linecap':'round'},a||{}),s);}
+function retta(s,p,q,e1,e2,a){var u=uni(sub(q,p));return seg(s,add(p,u,-e1),add(q,u,e2),a);}
+function dot(s,p,col,r){el('circle',{cx:p[0],cy:p[1],r:r||3.5,fill:col||'var(--inchiostro)'},s);}
+function tacca(s,p,q,n,f){f=f===undefined?.5:f;var m=add(p,sub(q,p),f),u=uni(sub(q,p)),nn=[-u[1]*6,u[0]*6];
+  for(var i=0;i<n;i++){var c=add(m,u,(i-(n-1)/2)*4);seg(s,add(c,nn,-1),add(c,nn),{stroke:'var(--verde)','stroke-width':2});}}
+function retto(s,V,p,q,k){k=k||9;var u=uni(sub(p,V)),v=uni(sub(q,V)),a=add(V,u,k),b=add(a,v,k),c=add(V,v,k);
+  el('path',{d:'M'+a+' L'+b+' L'+c,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3},s);}
+function angArc(s,V,p,q,k,a){var a1=Math.atan2(p[1]-V[1],p[0]-V[0]),a2=Math.atan2(q[1]-V[1],q[0]-V[0]),d=a2-a1;
+  while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;var pts=[];
+  for(var i=0;i<=24;i++){var t=a1+d*i/24;pts.push([V[0]+k*Math.cos(t),V[1]+k*Math.sin(t)]);}
+  el('polyline',Object.assign({points:pts.join(' '),fill:'none',stroke:'var(--rosso)','stroke-width':1.8},a||{}),s);
+  var m=a1+d/2;return function(kk){return [V[0]+kk*Math.cos(m),V[1]+kk*Math.sin(m)];};}
+function arcPts(c,g0,g1,n){n=n||48;var pts=[];for(var i=0;i<=n;i++)pts.push(c.P(g0+(g1-g0)*i/n));return pts;}
+function arco(s,c,g0,g1,a){el('polyline',Object.assign({points:arcPts(c,g0,g1).join(' '),fill:'none',stroke:'var(--verde)','stroke-width':4},a||{}),s);}
+window.G={el:el,txt:txt,add:add,sub:sub,len:len,uni:uni,dir:dir,C:C,seg:seg,retta:retta,dot:dot,tacca:tacca,retto:retto,angArc:angArc,arcPts:arcPts,arco:arco};
+})();
+</script>
+<script>
+(function(){var g=G;
+var s=document.getElementById('f-euclide');
+var AB=160,ca=0.6,sa=0.8,AC=AB*ca;            /* cos A = AC/AB: triangolo 3-4-5 */
+var A=[100,163],B=g.add(A,[AB,0]),C=g.add(A,[AC*ca,-AC*sa]),H=[C[0],A[1]];
+var n=[-AC*sa,-AC*ca];                          /* lato del quadrato, perpendicolare ad AC, verso l'esterno */
+var D=g.add(A,n),E=g.add(C,n),L=g.add(A,[0,AB]),M=g.add(H,[0,AB]);
+g.el('polygon',{points:[A,C,E,D].join(' '),fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.8,'stroke-linejoin':'round'},s);
+g.el('polygon',{points:[A,H,M,L].join(' '),fill:'#f6e4e2',stroke:'var(--rosso)','stroke-width':1.8,'stroke-linejoin':'round'},s);
+g.el('polygon',{points:[A,B,C].join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':2,'stroke-linejoin':'round'},s);
+g.seg(s,C,H,{stroke:'var(--verde)','stroke-width':1.6,'stroke-dasharray':'4 3'});
+g.retto(s,C,A,B,9);g.retto(s,H,C,B,8);
+[A,B,C,H].forEach(function(p){g.dot(s,p);});
+[D,E].forEach(function(p){g.dot(s,p,'var(--blu)');});
+[L,M].forEach(function(p){g.dot(s,p,'var(--rosso)');});
+g.txt(s,[A[0]-10,A[1]+12],'A');g.txt(s,[B[0]+10,B[1]+12],'B');g.txt(s,[C[0]+10,C[1]-12],'C');g.txt(s,[H[0]+10,H[1]+12],'H');
+g.txt(s,[D[0]-12,D[1]],'D',{fill:'var(--blu)'});g.txt(s,[E[0],E[1]-12],'E',{fill:'var(--blu)'});
+g.txt(s,[L[0]-12,L[1]],'L',{fill:'var(--rosso)'});g.txt(s,[M[0]+12,M[1]],'M',{fill:'var(--rosso)'});
+g.txt(s,[(A[0]+E[0])/2,(A[1]+E[1])/2],'Q',{fill:'var(--blu)','font-size':16});
+g.txt(s,[(A[0]+M[0])/2,(A[1]+M[1])/2],'R',{fill:'var(--rosso)','font-size':16});
+})();
+</script>
 </body>
 </html>
