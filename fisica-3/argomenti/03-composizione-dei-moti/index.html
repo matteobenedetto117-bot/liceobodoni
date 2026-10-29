@@ -5,19 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Composizione dei moti — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:18px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -27,125 +61,134 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Cinematica in due dimensioni &middot; Unità 03</p>
   <h1>Composizione dei moti</h1>
-  <p class="sommario">Un moto nel piano si può sempre pensare come due moti più semplici, uno
-  lungo l'asse x e uno lungo l'asse y, che avvengono insieme e in modo indipendente. Sommando i
-  due risultati si ricostruisce il moto complessivo.</p>
 </header>
 
-<h2>Le due componenti della velocità</h2>
+<p>Corpo con velocità costante $\vec v$, inclinata di un angolo $\theta$ sull'asse $x$: il moto nel piano si scompone in due moti lungo gli assi.</p>
 
-<p>Se un corpo si muove con velocità costante $\vec v$, diretta con un angolo $\theta$ rispetto
-all'asse x, questa velocità si scompone in una componente orizzontale e in una verticale:</p>
-
-<div class="formula-box">
-$$v_x = v\cos\theta \qquad\qquad v_y = v\sin\theta$$
-</div>
+<p class="eq">$$v_x = v\cos\theta \qquad\qquad v_y = v\sin\theta$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="cm1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="cm2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="cm3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="cm4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="40" y1="170" x2="290" y2="170" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#cm1)"/>
-<line x1="40" y1="170" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#cm1)"/>
-<text x="296" y="175" font-family="var(--serif)" font-style="italic" font-size="14">x</text>
-<text x="28" y="18" font-family="var(--serif)" font-style="italic" font-size="14">y</text>
-<line x1="40" y1="170" x2="230" y2="170" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#cm3)"/>
-<line x1="40" y1="170" x2="40" y2="75" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#cm3)"/>
-<line x1="40" y1="170" x2="230" y2="75" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#cm2)"/>
-<line x1="230" y1="75" x2="270" y2="55" stroke="var(--rosso)" stroke-width="1.4" stroke-dasharray="3,3"/>
-<path d="M78,170 A38,38 0 0,0 96,142" fill="none" stroke="var(--blu)" stroke-width="1.3"/>
-<text x="82" y="158" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--blu)">&#952;</text>
-<text x="235" y="70" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">v&#8407;</text>
-<text x="234" y="185" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">v&#8407;&#8339;</text>
-<text x="14" y="80" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">v&#8407;&#7863;</text>
-</svg>
-<p class="did">La velocità $\vec v$ si scompone in una componente $v_x$ lungo l'asse x e una
-$v_y$ lungo l'asse y; la linea tratteggiata prosegue nella direzione del moto.</p>
+<svg id="f-comp" viewBox="0 0 340 218" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velocità v inclinata di un angolo theta e sue componenti lungo gli assi x e y"></svg>
+<div class="cursore"><label for="cur-th">θ</label><input id="cur-th" type="range" min="0" max="90" step="1" value="30"><span id="val-th">30°</span></div>
+<p class="did">Componenti $v_x$ e $v_y$ (verde) di $\vec v$ (rosso), con $v = 5{,}0$ m/s</p>
 </div>
 
-<p>I due moti lungo x e lungo y sono indipendenti l'uno dall'altro: ciascuno è un moto rettilineo
-uniforme, e si applica a ciascuno la stessa legge oraria vista per il moto in una dimensione,
-$x = x_0 + vt$, scritta separatamente per le due coordinate:</p>
+<p>I due moti sono indipendenti e ciascuno è rettilineo uniforme:</p>
 
-<div class="formula-box">
-$$\begin{cases} x = x_0 + v_x t \\ y = y_0 + v_y t \end{cases}$$
-</div>
+<div class="def"><span class="et">Leggi orarie (velocità costante)</span>
+<p class="eq">$$\begin{cases} x = x_0 + v_x t \\ y = y_0 + v_y t \end{cases}$$</p></div>
 
-<p>La composizione dei due moti lungo x e y fornisce il moto bidimensionale complessivo.</p>
+<h2>Esempio</h2>
 
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un corpo parte da un'altezza $h = 19{,}5$&nbsp;m con velocità costante $v = 3{,}10$&nbsp;m/s,
-diretta con un angolo $\theta = 20^\circ$ sotto l'orizzontale. Vogliamo il tempo impiegato a
-raggiungere la quota zero e la distanza totale percorsa.</p>
+<p>Dati: $h = 19{,}5$ m, $v = 3{,}10$ m/s costante, $\theta = 20^\circ$ sotto l'orizzontale. Calcolare il tempo per arrivare a quota zero e la distanza percorsa.</p>
 
 <div class="fig">
-<svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="ex1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="ex2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="ex3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="50" y1="30" x2="50" y2="180" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="50" y1="180" x2="310" y2="180" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#ex1)"/>
-<text x="316" y="185" font-family="var(--serif)" font-style="italic" font-size="14">x</text>
-<line x1="30" y1="180" x2="70" y2="180" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="30" y1="35" x2="70" y2="35" stroke="var(--inchiostro)" stroke-width="1.3"/>
-<line x1="34" y1="180" x2="34" y2="35" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="2,3"/>
-<text x="10" y="112" font-family="var(--sans)" font-size="13">h</text>
-<circle cx="50" cy="35" r="3" fill="var(--inchiostro)"/>
-<line x1="50" y1="35" x2="140" y2="35" stroke="var(--verde)" stroke-width="2" marker-end="url(#ex3)"/>
-<line x1="50" y1="35" x2="50" y2="75" stroke="var(--verde)" stroke-width="2" marker-end="url(#ex3)"/>
-<line x1="50" y1="35" x2="270" y2="150" stroke="var(--rosso)" stroke-width="2.2" stroke-dasharray="5,4" marker-end="url(#ex2)"/>
-<path d="M85,35 A35,35 0 0,1 95,60" fill="none" stroke="var(--blu)" stroke-width="1.2"/>
-<text x="90" y="52" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--blu)">&#952;</text>
-<text x="145" y="30" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">v&#8407;&#8339;</text>
-<text x="55" y="60" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">v&#8407;&#7863;</text>
-<text x="160" y="80" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">v&#8407;</text>
-<circle cx="270" cy="180" r="3" fill="var(--inchiostro)"/>
-</svg>
-<p class="did">Il corpo scende in linea retta con velocità costante: le componenti $v_x$
-(orizzontale) e $v_y$ (verticale, verso il basso) restano fisse per tutto il tragitto.</p>
+<svg id="f-es" viewBox="0 0 340 185" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corpo che parte dall'altezza h e scende in linea retta con velocità costante inclinata di 20 gradi sotto l'orizzontale"></svg>
+<p class="did">Disegno in scala; quota $y$ misurata dal suolo, verso l'alto</p>
 </div>
 
-<p>Misurando $y$ verso il basso a partire dal punto di partenza, la quota è
-$y = h - v\sin\theta\, t$. Poniamo $y = 0$ per trovare l'istante in cui si arriva alla quota
-zero:</p>
+<p>La quota è $y = h - v\sin\theta\,t$; si pone $y = 0$:</p>
 
-<div class="formula-box">
-$$t = \dfrac{h}{v\sin\theta} = \dfrac{19{,}5\ \text{m}}{3{,}10\ \text{m/s} \cdot \sin 20^\circ}
-\approx 18{,}4\ \text{s}$$
-</div>
+<p class="eq">$$t = \frac{h}{v\sin\theta} = \frac{19{,}5\ \text{m}}{3{,}10\ \text{m/s}\cdot\sin 20^\circ} \approx 18{,}4\ \text{s}$$</p>
 
-<p>La distanza orizzontale percorsa in questo tempo è:</p>
+<p class="eq">$$x = v\cos\theta\,t = 3{,}10\ \text{m/s}\cdot\cos 20^\circ\cdot 18{,}4\ \text{s} \approx 53{,}6\ \text{m}$$</p>
 
-<div class="formula-box">
-$$x = v\cos\theta\, t = 3{,}10\ \text{m/s} \cdot \cos 20^\circ \cdot 18{,}4\ \text{s}
-\approx 53{,}6\ \text{m}$$
-</div>
+<p class="eq">$$\Delta S = \sqrt{\Delta x^2+\Delta y^2} = \sqrt{(53{,}6\ \text{m})^2+(19{,}5\ \text{m})^2} \approx 57{,}0\ \text{m}$$</p>
 
-<p>Lo spostamento verticale è $\Delta y = -19{,}5$&nbsp;m e quello orizzontale
-$\Delta x = 53{,}6$&nbsp;m. La distanza totale percorsa è il modulo dello spostamento:</p>
-
-<div class="formula-box">
-$$\Delta S = \sqrt{\Delta x^2 + \Delta y^2} \approx 57{,}0\ \text{m}$$
-</div>
-</div>
-
-<div class="nota">
-<span class="et">Da notare</span>
-<p>Qui la velocità resta costante: non c'è ancora accelerazione, e la traiettoria è un segmento
-di retta. Per questo la distanza percorsa coincide con il modulo dello spostamento.</p>
-</div>
-
+<div class="nota"><span class="et">Da notare</span>
+<p>Velocità costante → traiettoria rettilinea: la distanza percorsa coincide con il modulo dello spostamento.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../02-il-vettore-accelerazione-e-le-sue-componenti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il vettore accelerazione e le sue componenti</span></a><a class="successiva" href="../04-il-moto-parabolico-impostazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il moto parabolico: impostazione</span></a></nav>
 <footer><p>Fisica terza &middot; Cinematica in due dimensioni &middot; Unità 03</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function vtxt(s,p,str,col,sub){var g=el('g',{},s);
+  var e=txt(g,p,str,{'font-family':'var(--serif)','font-style':'italic','font-size':15,fill:col});
+  var w=8,c=str.length>1?p[0]+4:p[0];
+  el('path',{d:'M'+(c-w/2)+','+(p[1]-10)+' h'+w+' m-3,-2.5 l3,2.5 l-3,2.5',fill:'none',stroke:col,'stroke-width':1.1},g);
+  if(sub)txt(g,[c+w/2+3,p[1]+5],sub,{'font-family':'var(--serif)','font-style':'italic','font-size':11,fill:col});
+  g.move=function(x,y){g.setAttribute('transform','translate('+(x-p[0]).toFixed(1)+','+(y-p[1]).toFixed(1)+')');};
+  return g;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function freccia(s,p,q,col,id,w){return el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:col,'stroke-width':w||2.2,'marker-end':'url(#'+id+')'},s);}
+function assi(s,O,xmax,ymin){marc(s,'ax'+s.id,'var(--inchiostro)');
+  freccia(s,O,[xmax,O[1]],'var(--inchiostro)','ax'+s.id,1.4);freccia(s,O,[O[0],ymin],'var(--inchiostro)','ax'+s.id,1.4);
+  txt(s,[xmax+2,O[1]+14],'x',{'font-style':'italic'});txt(s,[O[0]-14,ymin+2],'y',{'font-style':'italic'});txt(s,[O[0]-12,O[1]+12],'O');}
+function dot(s,p){el('circle',{cx:p[0],cy:p[1],r:3.4,fill:'var(--inchiostro)'},s);}
+var tr='stroke-dasharray';
+
+
+/* 1. componenti con cursore: v = 5,0 m/s, 30 px per m/s */
+var s=document.getElementById('f-comp'),O=[40,185],Lv=145;
+assi(s,O,300,20);marc(s,'r1','var(--rosso)');marc(s,'g1','var(--verde)');
+var px=el('line',{stroke:'var(--grigio)','stroke-width':1.1,'stroke-dasharray':'4 4'},s),py=el('line',{stroke:'var(--grigio)','stroke-width':1.1,'stroke-dasharray':'4 4'},s);
+var arco=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':1.3},s);
+var fx=freccia(s,O,O,'var(--verde)','g1',2.4),fy=freccia(s,O,O,'var(--verde)','g1',2.4),fv=freccia(s,O,O,'var(--rosso)','r1',2.6);
+dot(s,O);
+var lv=vtxt(s,[0,0],'v','var(--rosso)'),lx=vtxt(s,[0,0],'v','var(--verde)','x'),ly=vtxt(s,[0,0],'v','var(--verde)','y');
+var lt=txt(s,[0,0],'θ',{'font-family':'var(--serif)','font-style':'italic',fill:'var(--blu)'});
+function riga(y,nome,sub,col){var e=txt(s,[230,y],'',{'text-anchor':'start',fill:col});var a=el('tspan',{},e);a.textContent=nome;if(sub){var b=el('tspan',{'baseline-shift':'sub','font-size':10},e);b.textContent=sub;}var c=el('tspan',{},e);return c;}
+var t1=riga(30,'v','','var(--rosso)'),t2=riga(52,'v','x','var(--verde)'),t3=riga(74,'v','y','var(--verde)');
+var cur=document.getElementById('cur-th'),val=document.getElementById('val-th');
+function L(l,p,q){l.setAttribute('x1',p[0].toFixed(1));l.setAttribute('y1',p[1].toFixed(1));l.setAttribute('x2',q[0].toFixed(1));l.setAttribute('y2',q[1].toFixed(1));}
+function vis(e,on){e.setAttribute('opacity',on?1:0);}
+function f1(z){return z.toFixed(1).replace('.',',');}
+function dis(){var th=parseFloat(cur.value),r=th*Math.PI/180,c=Math.cos(r),sn=Math.sin(r);
+  var T=[O[0]+Lv*c,O[1]-Lv*sn],Tx=[T[0],O[1]],Ty=[O[0],T[1]];
+  L(fv,O,T);L(fx,O,Tx);L(fy,O,Ty);L(px,T,Tx);L(py,T,Ty);
+  var okx=th<89,oky=th>1;vis(fx,okx);vis(lx,okx);vis(fy,oky);vis(ly,oky);vis(px,okx&&oky);vis(py,okx&&oky);
+  var ra=36,A=[O[0]+ra*c,O[1]-ra*sn];arco.setAttribute('d','M'+(O[0]+ra)+','+O[1]+' A'+ra+','+ra+' 0 0,0 '+A[0].toFixed(1)+','+A[1].toFixed(1));
+  vis(arco,th>=8);vis(lt,th>=8);
+  lt.setAttribute('x',(O[0]+50*Math.cos(r/2)).toFixed(1));lt.setAttribute('y',(O[1]-50*Math.sin(r/2)).toFixed(1));
+  if(th<60)lv.move(T[0]+12*c-10*sn,T[1]-12*sn-10*c);else lv.move(T[0]+14,T[1]+6);
+  lx.move(O[0]+Lv*c/2,O[1]+18);ly.move(O[0]-20,O[1]-Lv*sn/2);
+  t1.textContent=' = 5,0 m/s';t2.textContent=' = '+f1(5*c)+' m/s';t3.textContent=' = '+f1(5*sn)+' m/s';
+  val.textContent=th+'°';}
+cur.addEventListener('input',dis);dis();
+
+/* 2. esempio in scala: 4,5 px per metro; h = 19,5 m, x = 53,6 m */
+s=document.getElementById('f-es');var sc=4.5,G=[50,150],H=19.5,Xf=19.5/Math.tan(20*Math.PI/180);
+marc(s,'ax2','var(--inchiostro)');marc(s,'r2','var(--rosso)');marc(s,'g2','var(--verde)');
+freccia(s,[G[0]-10,G[1]],[322,G[1]],'var(--inchiostro)','ax2',1.4);txt(s,[326,G[1]+14],'x',{'font-style':'italic'});
+var S=[G[0],G[1]-sc*H],E=[G[0]+sc*Xf,G[1]];
+el('line',{x1:G[0],y1:G[1],x2:S[0],y2:S[1],stroke:'var(--inchiostro)','stroke-width':1.4},s);
+el('line',{x1:S[0],y1:S[1],x2:E[0],y2:E[1],stroke:'var(--grigio)','stroke-width':1.4,'stroke-dasharray':'5 4'},s);
+el('line',{x1:26,y1:S[1],x2:G[0],y2:S[1],stroke:'var(--grigio)','stroke-width':1},s);
+el('line',{x1:30,y1:S[1],x2:30,y2:G[1],stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'2 3'},s);
+txt(s,[18,(S[1]+G[1])/2],'h',{'font-family':'var(--serif)','font-style':'italic'});
+var r20=20*Math.PI/180,Lv2=90,V=[S[0]+Lv2*Math.cos(r20),S[1]+Lv2*Math.sin(r20)];
+freccia(s,S,[V[0],S[1]],'var(--verde)','g2',2.2);freccia(s,S,[S[0],V[1]],'var(--verde)','g2',2.2);
+freccia(s,S,V,'var(--rosso)','r2',2.6);
+el('path',{d:'M'+(S[0]+36)+','+S[1]+' A36,36 0 0,1 '+(S[0]+36*Math.cos(r20)).toFixed(1)+','+(S[1]+36*Math.sin(r20)).toFixed(1),fill:'none',stroke:'var(--blu)','stroke-width':1.2},s);
+txt(s,[S[0]+50*Math.cos(r20/2),S[1]+50*Math.sin(r20/2)-1],'θ',{'font-family':'var(--serif)','font-style':'italic','font-size':12,fill:'var(--blu)'});
+dot(s,S);dot(s,E);
+vtxt(s,[S[0]+Lv2*Math.cos(r20)/2,S[1]-14],'v','var(--verde)','x');
+vtxt(s,[S[0]+12,S[1]+26],'v','var(--verde)','y');
+vtxt(s,[V[0]-14,V[1]+16],'v','var(--rosso)');
+txt(s,[E[0],G[1]+16],'53,6 m',{'font-size':11,fill:'var(--grigio)'});
+})();
+</script>
 </body>
 </html>

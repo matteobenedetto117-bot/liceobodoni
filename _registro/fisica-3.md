@@ -15,6 +15,7 @@
 - Parole: 436 su circa 2,3 pagine di traccia (pagina 5 dalla parte "Composizione dei moti", pagina 6, inizio pagina 7)
 - Rettifica: nessuna, i calcoli dell'esempio (t≈18,4 s; x≈53,6 m; ΔS≈57,0 m) sono stati verificati e coincidono con la traccia
 - Aggiunta: nessuna
+- Revisione (29/10/2026, regole 13/10): parole circa 263 → 92 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno; tolti sommario, titoletto «Le due componenti della velocità», frase sulla legge oraria in una dimensione e frase di commento sulla composizione; leggi orarie in .def «Leggi orarie (velocità costante)»; esempio in forma Dati/Calcolare con tre .eq (t, x, ΔS con sostituzione numerica). Nessuna comparsa. Correzione concettuale: «misurando y verso il basso a partire dal punto di partenza, la quota è y = h − v sinθ·t» era incoerente; ora quota y misurata dal suolo verso l'alto (didascalia della figura). Calcoli verificati: t ≈ 18,4 s, x ≈ 53,6 m, ΔS ≈ 57,0 m. Figure rifatte da script: componenti di v⃗ con cursore θ (0°–90°, valori di vₓ e v_y per v = 5,0 m/s); figura dell'esempio in scala (4,5 px/m, inclinazione di 20° calcolata; prima la retta non arrivava al suolo nel punto x).
 
 ## Unità 04 — Il moto parabolico: impostazione
 - Parole: 327 su circa 1,5 pagine di traccia (fine pagina 7, pagina 8)
