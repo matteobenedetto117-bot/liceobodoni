@@ -5,20 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gittata e angolo di gittata massima — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.tabella-verifica{margin:22px auto;border-collapse:collapse;font-family:var(--sans);font-size:.95rem}
-.tabella-verifica th,.tabella-verifica td{padding:8px 20px;border-bottom:1px solid var(--riga);text-align:center}
-.tabella-verifica th{color:var(--grigio);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.tabella-verifica{margin:var(--r) auto 0;border-collapse:collapse;font-family:var(--sans);font-size:.95rem;line-height:var(--r)}
+.tabella-verifica th,.tabella-verifica td{padding:0 18px;height:var(--r);border-bottom:1px solid var(--riga);text-align:center}
+.tabella-verifica th{color:var(--grigio);font-weight:600;font-size:.78rem}
 .tabella-verifica td.max{color:var(--rosso);font-weight:600}
-.nota{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:8px;padding:14px 18px;margin:26px 0;font-size:.96rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>table+*{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -28,35 +66,24 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Cinematica in due dimensioni &middot; Unità 07</p>
   <h1>Gittata e angolo di gittata massima</h1>
-  <p class="sommario">Con l'altezza massima e il tempo di volo già trovati, possiamo chiederci
-  quanto lontano atterra il proiettile rispetto al punto di lancio. Questa distanza orizzontale
-  si chiama gittata, e vediamo ora come dipende dalla velocità iniziale e dall'angolo di lancio.</p>
 </header>
 
-<div class="formula-box">
-$$x\begin{cases} a_x = 0 \\ v_x = v_{0x} \\ x = v_{0x}\,t \end{cases}
+<p>Proiettile lanciato da quota zero che ricade alla stessa quota: a quale distanza orizzontale atterra?</p>
+
+<p class="eq">$$x\begin{cases} a_x = 0 \\ v_x = v_{0x} \\ x = v_{0x}\,t \end{cases}
 \qquad\qquad
-y\begin{cases} a_y = -g \\ v_y = v_{0y} - g t \\ y = v_{0y}\,t - \dfrac12 g t^2 \end{cases}$$
-</div>
+y\begin{cases} a_y = -g \\ v_y = v_{0y} - g t \\ y = v_{0y}\,t - \dfrac12 g t^2 \end{cases}$$</p>
 
-<p>La gittata $X_G$ è la posizione $x$ nell'istante in cui il proiettile ricade a quota zero,
-cioè quando $t = t_v$, il tempo di volo trovato nell'unità precedente. Basta allora sostituire
-$t_v$ nella legge oraria di $x$:</p>
+<p>La gittata $X_G$ è la posizione $x$ all'istante $t_v = 2v_{0y}/g$ (tempo di volo):</p>
 
-<div class="formula-box">
-$$X_G = v_{0x}\,t_v = v_{0x}\cdot\frac{2v_{0y}}{g} \quad\Longrightarrow\quad
-X_G = \frac{2\,v_{0x}v_{0y}}{g}$$
-</div>
+<p class="eq">$$X_G = v_{0x}\,t_v = v_{0x}\cdot\frac{2v_{0y}}{g} = \frac{2\,v_{0x}v_{0y}}{g}$$</p>
 
-<p>Scrivendo le componenti iniziali tramite il modulo $v_0$ e l'angolo di lancio $\alpha$, con
-$v_{0x} = v_0\cos\alpha$ e $v_{0y} = v_0\sin\alpha$, la gittata diventa:</p>
+<p>Con $v_{0x} = v_0\cos\alpha$ e $v_{0y} = v_0\sin\alpha$:</p>
 
-<div class="formula-box">
-$$X_G = \frac{2v_0^{\,2}}{g}\cos\alpha\sin\alpha$$
-</div>
+<div class="def"><span class="et">Gittata</span>
+<p class="eq">$$X_G = \frac{2v_0^{\,2}}{g}\cos\alpha\sin\alpha$$</p></div>
 
-<p>A parità di $v_0$, tutto dipende dal prodotto $\cos\alpha\sin\alpha$. Fissando $v_0$ e
-calcolando questo prodotto per alcuni angoli si vede dove sta il massimo:</p>
+<p>A parità di $v_0$ la gittata dipende solo dal prodotto $\cos\alpha\sin\alpha$:</p>
 
 <table class="tabella-verifica">
 <tr><th>$\alpha$</th><th>20°</th><th>30°</th><th>45°</th><th>60°</th><th>70°</th></tr>
@@ -64,42 +91,84 @@ calcolando questo prodotto per alcuni angoli si vede dove sta il massimo:</p>
 </table>
 
 <div class="fig">
-<svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m7a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="30" y1="200" x2="380" y2="200" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#m7a)"/>
-<line x1="30" y1="200" x2="30" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#m7a)"/>
-<text x="386" y="205" font-family="var(--serif)" font-style="italic" font-size="14">x</text>
-<text x="18" y="16" font-family="var(--serif)" font-style="italic" font-size="14">y</text>
-<path d="M30,200 Q125,156 220,200" fill="none" stroke="#3a6fb0" stroke-width="1.8"/>
-<path d="M30,200 Q125,-110 220,200" fill="none" stroke="#3a6fb0" stroke-width="1.8"/>
-<path d="M30,200 Q155,110 280,200" fill="none" stroke="var(--verde)" stroke-width="1.8"/>
-<path d="M30,200 Q155,-60 280,200" fill="none" stroke="var(--verde)" stroke-width="1.8"/>
-<path d="M30,200 Q180,20 330,200" fill="none" stroke="var(--rosso)" stroke-width="2.4"/>
-<text x="60" y="192" font-family="var(--sans)" font-size="11" fill="#3a6fb0">20°</text>
-<text x="100" y="38" font-family="var(--sans)" font-size="11" fill="#3a6fb0">70°</text>
-<text x="150" y="146" font-family="var(--sans)" font-size="11" fill="var(--verde)">30°</text>
-<text x="205" y="63" font-family="var(--sans)" font-size="11" fill="var(--verde)">60°</text>
-<text x="205" y="102" font-family="var(--sans)" font-size="11" fill="var(--rosso)">45°</text>
-</svg>
-<p class="did">Traiettorie con la stessa velocità iniziale $v_0$ e angoli diversi: a 45°
-(in rosso) la gittata è massima; 20° e 70° (blu) atterrano nello stesso punto, così come
-30° e 60° (verde) — sono coppie di angoli complementari, tanto più alte quanto più l'angolo
-si avvicina a 90°.</p>
+<svg id="f-gi" viewBox="0 0 378 212" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Traiettorie con la stessa velocità iniziale per un angolo alfa e per il suo complementare; il cursore cambia alfa"></svg>
+<div class="cursore"><label for="cur-a">α</label><input id="cur-a" type="range" min="15" max="75" step="1" value="30"><span id="val-a">30°</span></div>
+<p class="did">$v_0 = 20$ m/s: in blu l'angolo $\alpha$, in rosso tratteggiato $90° - \alpha$</p>
 </div>
 
-<p>Il confronto conferma due fatti, entrambi leggibili anche dalla tabella: l'angolo di gittata
-massima è $45°$, e due angoli complementari, cioè che sommano a $90°$, danno la stessa gittata
-(20° e 70°, 30° e 60°).</p>
+<ul>
+<li>$\alpha = 45°$ → gittata massima;</li>
+<li>angoli complementari ($\alpha$ e $90° - \alpha$) → stessa gittata.</li>
+</ul>
 
-<div class="nota">In presenza di resistenza dell'aria l'angolo di gittata massima non è più
-$45°$ ma scende a circa $35°$.</div>
-
+<div class="nota"><p>Con la resistenza dell'aria l'angolo di gittata massima non è più $45°$, ma circa $35°$.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../06-altezza-massima-e-tempo-di-volo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Altezza massima e tempo di volo</span></a><a class="successiva" href="../08-velocita-finale-del-proiettile/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Velocità finale del proiettile</span></a></nav>
 <footer><p>Fisica terza &middot; Cinematica in due dimensioni &middot; Unità 07</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function vtxt(s,p,str,col,sub){var g=el('g',{},s);
+  var e=txt(g,p,str,{'font-family':'var(--serif)','font-style':'italic','font-size':15,fill:col});
+  var w=8,c=str.length>1?p[0]+4:p[0];
+  el('path',{d:'M'+(c-w/2)+','+(p[1]-10)+' h'+w+' m-3,-2.5 l3,2.5 l-3,2.5',fill:'none',stroke:col,'stroke-width':1.1},g);
+  if(sub)txt(g,[c+w/2+3,p[1]+5],sub,{'font-family':'var(--serif)','font-style':'italic','font-size':11,fill:col});
+  g.move=function(x,y){g.setAttribute('transform','translate('+(x-p[0]).toFixed(1)+','+(y-p[1]).toFixed(1)+')');};
+  return g;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function freccia(s,p,q,col,id,w){return el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:col,'stroke-width':w||2.2,'marker-end':'url(#'+id+')'},s);}
+function assi(s,O,xmax,ymin){marc(s,'ax'+s.id,'var(--inchiostro)');
+  freccia(s,O,[xmax,O[1]],'var(--inchiostro)','ax'+s.id,1.4);freccia(s,O,[O[0],ymin],'var(--inchiostro)','ax'+s.id,1.4);
+  txt(s,[xmax+2,O[1]+14],'x',{'font-style':'italic'});txt(s,[O[0]-14,ymin+2],'y',{'font-style':'italic'});txt(s,[O[0]-12,O[1]+12],'O');}
+function dot(s,p){el('circle',{cx:p[0],cy:p[1],r:3.4,fill:'var(--inchiostro)'},s);}
+/* v0 = 20 m/s, g = 9,8 m/s²; 7,5 px/m */
+var s=document.getElementById('f-gi'),O=[30,185],k=7.5,g=9.8,v0=20;
+assi(s,O,358,20);
+var c1=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':2.2},s);
+var c2=el('path',{fill:'none',stroke:'var(--rosso)','stroke-width':1.8,'stroke-dasharray':'6,4'},s);
+var tk=el('line',{stroke:'var(--inchiostro)','stroke-width':1.4},s);
+var lx=txt(s,[0,0],'X',{'font-family':'var(--serif)','font-style':'italic','font-size':13});
+var lg=txt(s,[0,0],'G',{'font-size':9});
+var r1=txt(s,[362,16],'',{'text-anchor':'end','font-size':12,fill:'var(--blu)'});
+var r2=txt(s,[362,33],'',{'text-anchor':'end','font-size':12,fill:'var(--rosso)'});
+var r3=txt(s,[362,50],'',{'text-anchor':'end','font-size':12,fill:'var(--verde)'});
+function rich(e,str){e.textContent='';str.split(/(_\{[^}]*\})/).forEach(function(q){if(!q)return;var t=el('tspan',q.charAt(0)==='_'?{'baseline-shift':'sub','font-size':'75%'}:{},e);t.textContent=q.charAt(0)==='_'?q.slice(2,-1):q;});}
+function f(z,n){return z.toFixed(n).replace('.',',');}
+function tr(a){var c=Math.cos(a),sn=Math.sin(a),X=2*v0*v0*c*sn/g,d='';
+  for(var i=0;i<=100;i++){var x=X*i/100,y=x*sn/c-g*x*x/(2*v0*v0*c*c);d+=(i?'L':'M')+(O[0]+k*x).toFixed(1)+','+(O[1]-k*Math.max(0,y)).toFixed(1);}
+  return [d,X];}
+var cur=document.getElementById('cur-a'),val=document.getElementById('val-a');
+function dis(){var A=parseInt(cur.value,10),a=A*Math.PI/180,t1=tr(a),t2=tr(Math.PI/2-a);
+  c1.setAttribute('d',t1[0]);c2.setAttribute('d',t2[0]);
+  var xp=O[0]+k*t1[1];tk.setAttribute('x1',xp);tk.setAttribute('x2',xp);tk.setAttribute('y1',O[1]-4);tk.setAttribute('y2',O[1]+4);
+  lx.setAttribute('x',xp-3);lx.setAttribute('y',O[1]+15);lg.setAttribute('x',xp+5);lg.setAttribute('y',O[1]+19);
+  rich(r1,'α = '+A+'°:  X_{G} = '+f(t1[1],1)+' m');
+  rich(r2,'90° − α = '+(90-A)+'°:  X_{G} = '+f(t2[1],1)+' m');
+  r3.textContent=A===45?'gittata massima':'';
+  val.textContent=A+'°';}
+cur.addEventListener('input',dis);dis();
+})();
+</script>
 </body>
 </html>
