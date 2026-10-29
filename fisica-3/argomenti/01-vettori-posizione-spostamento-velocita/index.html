@@ -5,15 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vettori posizione, spostamento, velocità — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
 </style>
 </head>
 <body>
@@ -23,140 +58,142 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Cinematica in due dimensioni &middot; Unità 01</p>
   <h1>Vettori posizione, spostamento, velocità</h1>
-  <p class="sommario">Un moto nel piano non si descrive più con un solo numero, come nel moto
-  rettilineo: serve un vettore. Definiamo gli strumenti &mdash; posizione, spostamento,
-  velocità &mdash; che useremo per trattare qualunque traiettoria, dal moto parabolico al moto
-  circolare.</p>
 </header>
+
+<p>Punto $P$ in moto nel piano: posizione, spostamento e velocità sono vettori.</p>
 
 <h2>Vettore posizione</h2>
 
-<p>Fissato un punto O di riferimento, la posizione di un punto P si indica con il vettore
-$\vec r$, che va da O a P e ha per componenti le coordinate di P:</p>
+<p>Fissata l'origine $O$, la posizione di $P$ è il vettore $\vec r$ che va da $O$ a $P$, di componenti le coordinate di $P$:</p>
 
-<div class="formula-box">
-$$\vec r = (x;\,y)$$
-</div>
-
-<p>Ad esempio, un punto P di coordinate $(6;\,5)$ ha vettore posizione $\vec r = (6;\,5)$: il
-vettore indica la posizione di P rispetto a O. Il suo modulo, cioè la distanza di P da O, si
-ricava con Pitagora:</p>
-
-<div class="formula-box">
-$$r = \sqrt{x^2+y^2}$$
-</div>
+<p class="eq">$$\vec r = (x;\,y) \qquad\qquad r = \sqrt{x^2+y^2}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="40" y1="220" x2="320" y2="220" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="40" y1="220" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="324" y="224" font-family="var(--sans)" font-size="13">x</text>
-<text x="30" y="16" font-family="var(--sans)" font-size="13">y</text>
-<line x1="40" y1="220" x2="234" y2="220" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f1)"/>
-<line x1="40" y1="220" x2="40" y2="60" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#f1)"/>
-<line x1="40" y1="220" x2="234" y2="60" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#f1)"/>
-<circle cx="234" cy="60" r="3.4" fill="var(--inchiostro)"/>
-<text x="244" y="56" font-family="var(--sans)" font-size="13">P</text>
-<text x="140" y="130" font-family="var(--serif)" font-style="italic" font-size="15" fill="var(--rosso)">r&#8407;</text>
-<text x="140" y="234" text-anchor="middle" font-family="var(--sans)" font-size="12">6</text>
-<text x="22" y="140" text-anchor="middle" font-family="var(--sans)" font-size="12">5</text>
-</svg>
-<p class="did">Il vettore posizione $\vec r$ va dall'origine O al punto P e ha per componenti le
-coordinate di P.</p>
+<svg id="f-pos" viewBox="0 0 300 250" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vettore posizione dall'origine O al punto P di coordinate 6 e 5"></svg>
+<p class="did">$P = (6;\,5)$: $\vec r = (6;\,5)$</p>
 </div>
 
 <h2>Vettore spostamento</h2>
 
-<p>Se il punto si muove da una posizione $P_1$ a una posizione $P_2$, lo spostamento è il vettore
-che collega le due posizioni, indipendentemente dal percorso seguito:</p>
+<p>Da $P_1$ a $P_2$, indipendentemente dal percorso seguito:</p>
 
-<div class="formula-box">
-$$\vec{\Delta r} = \vec r_2 - \vec r_1$$
-</div>
-
-<p>Con $\vec r_1 = (x_1;\,y_1)$ e $\vec r_2 = (x_2;\,y_2)$, le componenti dello spostamento sono
-le differenze delle coordinate:</p>
-
-<div class="formula-box">
-$$\vec{\Delta r} = (\Delta x;\,\Delta y) = (x_2-x_1;\,y_2-y_1)$$
-</div>
+<p class="eq">$$\Delta\vec r = \vec r_2 - \vec r_1 = (x_2-x_1;\,y_2-y_1)$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="f2v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="40" y1="210" x2="320" y2="210" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="40" y1="210" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="40" y1="210" x2="110" y2="70" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f1)"/>
-<line x1="40" y1="210" x2="250" y2="150" stroke="var(--rosso)" stroke-width="2" marker-end="url(#f1)"/>
-<line x1="110" y1="70" x2="250" y2="150" stroke="var(--verde)" stroke-width="2.4" marker-end="url(#f2v)"/>
-<circle cx="110" cy="70" r="3.4" fill="var(--inchiostro)"/>
-<circle cx="250" cy="150" r="3.4" fill="var(--inchiostro)"/>
-<text x="98" y="60" font-family="var(--sans)" font-size="13">P&#8321;</text>
-<text x="258" y="146" font-family="var(--sans)" font-size="13">P&#8322;</text>
-<text x="170" y="98" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">&#916;r&#8407;</text>
-<text x="65" y="150" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">r&#8407;&#8321;</text>
-<text x="185" y="192" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">r&#8407;&#8322;</text>
-</svg>
-<p class="did">Lo spostamento $\vec{\Delta r}$ va da $P_1$ a $P_2$: è la differenza fra i due
-vettori posizione.</p>
+<svg id="f-spo" viewBox="0 0 300 220" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vettori posizione di P1 e P2 e vettore spostamento da P1 a P2"></svg>
+<p class="did">Spostamento $\Delta\vec r$ (in verde) da $P_1$ a $P_2$</p>
 </div>
 
-<h2>Velocità media</h2>
+<h2>Velocità</h2>
 
-<p>La velocità media nell'intervallo di tempo $\Delta t$ impiegato per andare da $P_1$ a $P_2$ è
-il rapporto fra lo spostamento e il tempo impiegato:</p>
+<div class="def"><span class="et">Velocità media</span>
+<p class="eq">$$\vec v_m = \frac{\Delta\vec r}{\Delta t}$$</p>
+<p>Stessa direzione e verso di $\Delta\vec r$; non dipende dalla forma della traiettoria.</p></div>
 
-<div class="formula-box">
-$$\vec v_m = \dfrac{\vec{\Delta r}}{\Delta t}$$
-</div>
+<p>Per $\Delta t \to 0$, $P_2$ si avvicina a $P_1$ e la corda tende alla tangente:</p>
 
-<p>È ancora un vettore, con la stessa direzione e verso dello spostamento $\vec{\Delta r}$: non
-tiene conto della forma della traiettoria fra $P_1$ e $P_2$, solo di dove il punto è partito e
-dove è arrivato.</p>
-
-<h2>Velocità istantanea</h2>
-
-<p>Se si prende $\Delta t$ sempre più piccolo, tendente a zero, $P_2$ si avvicina a $P_1$ e il
-vettore $\vec{\Delta r}/\Delta t$ si dispone lungo la direzione tangente alla traiettoria nel
-punto considerato. Questo vettore limite è la velocità istantanea:</p>
-
-<div class="formula-box">
-$$\vec v = \dfrac{\vec{\Delta r}}{\Delta t}, \qquad \Delta t \to 0$$
-</div>
+<div class="def"><span class="et">Velocità istantanea</span>
+<p class="eq">$$\vec v = \frac{\Delta\vec r}{\Delta t}, \qquad \Delta t \to 0$$</p>
+<p>Tangente alla traiettoria, nel verso del moto.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="f3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="f3b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<path d="M30,170 Q170,10 310,90" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<circle cx="30" cy="170" r="2.6" fill="var(--rosso)"/>
-<circle cx="90" cy="105" r="2.6" fill="var(--rosso)"/>
-<circle cx="140" cy="70" r="2.6" fill="var(--rosso)"/>
-<circle cx="190" cy="55" r="2.6" fill="var(--rosso)"/>
-<line x1="0" y1="170" x2="30" y2="170" stroke="var(--rosso)" stroke-width="1.6" opacity=".55"/>
-<line x1="0" y1="105" x2="90" y2="105" stroke="var(--rosso)" stroke-width="1.6" opacity=".55"/>
-<line x1="0" y1="70" x2="140" y2="70" stroke="var(--rosso)" stroke-width="1.6" opacity=".55"/>
-<circle cx="190" cy="55" r="3.4" fill="var(--inchiostro)"/>
-<line x1="190" y1="55" x2="248" y2="42" stroke="var(--blu)" stroke-width="2.6" marker-end="url(#f3b)"/>
-<text x="256" y="38" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--blu)">v&#8407;</text>
-<text x="170" y="188" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">&#916;t sempre più piccolo</text>
-</svg>
-<p class="did">Al diminuire di $\Delta t$ la corda fra due posizioni successive tende alla
-tangente: la velocità istantanea è tangente alla traiettoria.</p>
+<svg id="f-vel" viewBox="0 0 360 220" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velocità media lungo la corda da P1 a P2 e velocità istantanea tangente in P1"></svg>
+<div class="cursore"><label for="cur-dt">Δt</label><input id="cur-dt" type="range" min="0.1" max="2.5" step="0.05" value="2"><span id="val-dt">2,00 s</span></div>
+<p class="did">$\vec v_m$ (rosso) lungo la corda $P_1P_2$; $\vec v$ (blu) tangente in $P_1$</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../../index.html"><span class="dir">&larr; Indice</span><span class="tit">Fisica — Terza</span></a><a class="successiva" href="../02-il-vettore-accelerazione-e-le-sue-componenti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il vettore accelerazione e le sue componenti</span></a></nav>
 <footer><p>Fisica terza &middot; Cinematica in due dimensioni &middot; Unità 01</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function vtxt(s,p,str,col,sub){var g=el('g',{},s);
+  var e=txt(g,p,str,{'font-family':'var(--serif)','font-style':'italic','font-size':15,fill:col});
+  var w=8,c=str.length>1?p[0]+4:p[0];
+  el('path',{d:'M'+(c-w/2)+','+(p[1]-10)+' h'+w+' m-3,-2.5 l3,2.5 l-3,2.5',fill:'none',stroke:col,'stroke-width':1.1},g);
+  if(sub)txt(g,[c+w/2+3,p[1]+5],sub,{'font-family':'var(--serif)','font-style':'italic','font-size':11,fill:col});
+  g.move=function(x,y){g.setAttribute('transform','translate('+(x-p[0]).toFixed(1)+','+(y-p[1]).toFixed(1)+')');};
+  return g;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function freccia(s,p,q,col,id,w){return el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:col,'stroke-width':w||2.2,'marker-end':'url(#'+id+')'},s);}
+function assi(s,O,xmax,ymin){marc(s,'ax'+s.id,'var(--inchiostro)');
+  freccia(s,O,[xmax,O[1]],'var(--inchiostro)','ax'+s.id,1.4);freccia(s,O,[O[0],ymin],'var(--inchiostro)','ax'+s.id,1.4);
+  txt(s,[xmax+2,O[1]+14],'x',{'font-style':'italic'});txt(s,[O[0]-14,ymin+2],'y',{'font-style':'italic'});txt(s,[O[0]-12,O[1]+12],'O');}
+function dot(s,p){el('circle',{cx:p[0],cy:p[1],r:3.4,fill:'var(--inchiostro)'},s);}
+var tr='stroke-dasharray';
+
+/* 1. posizione: P = (6; 5), 30 px per unità */
+var s=document.getElementById('f-pos'),u=30,O=[50,210];
+function Pt(x,y){return [O[0]+u*x,O[1]-u*y];}
+assi(s,O,280,20);marc(s,'r1','var(--rosso)');
+var P=Pt(6,5);
+el('line',{x1:P[0],y1:P[1],x2:P[0],y2:O[1],stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 4'},s);
+el('line',{x1:P[0],y1:P[1],x2:O[0],y2:P[1],stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 4'},s);
+freccia(s,O,P,'var(--rosso)','r1',2.4);dot(s,P);
+txt(s,[P[0]+12,P[1]-10],'P');txt(s,[P[0],O[1]+14],'6');txt(s,[O[0]-12,P[1]],'5');
+vtxt(s,[O[0]+u*3-12,O[1]-u*2.5-12],'r','var(--rosso)');
+
+/* 2. spostamento: P1 = (2; 5), P2 = (7; 2), 30 px per unità */
+s=document.getElementById('f-spo');O=[50,190];
+assi(s,O,280,15);marc(s,'r2','var(--rosso)');marc(s,'v2','var(--verde)');
+var P1=Pt(2,5),P2=Pt(7,2);
+freccia(s,O,P1,'var(--rosso)','r2');freccia(s,O,P2,'var(--rosso)','r2');freccia(s,P1,P2,'var(--verde)','v2',2.6);
+dot(s,P1);dot(s,P2);
+txt(s,[P1[0]-6,P1[1]-14],'P₁');txt(s,[P2[0]+16,P2[1]-4],'P₂');
+vtxt(s,[O[0]+u*1-16,O[1]-u*2.5-4],'r','var(--rosso)','1');
+vtxt(s,[O[0]+u*3.5+4,O[1]-u*1+16],'r','var(--rosso)','2');
+vtxt(s,[O[0]+u*4.5+12,O[1]-u*3.5-14],'Δr','var(--verde)');
+
+/* 3. velocità media e istantanea: traiettoria x = 30 + 60t, y = 170 − 120t + 25t² */
+s=document.getElementById('f-vel');marc(s,'vr','var(--rosso)');marc(s,'vb','var(--blu)');
+function X(t){return [30+60*t,170-120*t+25*t*t];}
+var pts=[];for(var i=0;i<=100;i++)pts.push(X(5*i/100).map(function(z){return z.toFixed(1);}).join(','));
+el('polyline',{points:pts.join(' '),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8},s);
+var t1=1,A=X(t1),k=0.8,vt=[60,-120+50*t1];
+var corda=el('line',{stroke:'var(--grigio)','stroke-width':1.4,'stroke-dasharray':'5 4'},s);
+var vb=freccia(s,A,[A[0]+k*vt[0],A[1]+k*vt[1]],'var(--blu)','vb',2.6);
+var vm=freccia(s,A,A,'var(--rosso)','vr',2.4);
+var p2=el('circle',{r:3.4,fill:'var(--inchiostro)'},s);dot(s,A);
+txt(s,[A[0]+14,A[1]+14],'P₁');var l2=txt(s,[0,0],'P₂');
+var lb=vtxt(s,[A[0]+k*vt[0]-14,A[1]+k*vt[1]-14],'v','var(--blu)');
+var lm=vtxt(s,[0,0],'v','var(--rosso)','m');
+var ok=txt(s,[300,40],'vₘ ≈ v',{'font-size':14,fill:'var(--verde)','font-weight':600});
+var cur=document.getElementById('cur-dt'),val=document.getElementById('val-dt');
+function dis(){var dt=parseFloat(cur.value),B=X(t1+dt);
+  corda.setAttribute('x1',A[0]);corda.setAttribute('y1',A[1]);corda.setAttribute('x2',B[0]);corda.setAttribute('y2',B[1]);
+  var m=[k*(B[0]-A[0])/dt,k*(B[1]-A[1])/dt],T=[A[0]+m[0],A[1]+m[1]];
+  vm.setAttribute('x2',T[0].toFixed(1));vm.setAttribute('y2',T[1].toFixed(1));
+  var L=Math.hypot(m[0],m[1]),n=[m[1]/L,-m[0]/L];
+  lm.move(T[0]-n[0]*18+m[0]/L*6,T[1]-n[1]*18+m[1]/L*6);
+  p2.setAttribute('cx',B[0]);p2.setAttribute('cy',B[1]);
+  var tg=[60,-120+50*(t1+dt)],Lt=Math.hypot(tg[0],tg[1]);
+  l2.setAttribute('x',(B[0]+tg[1]/Lt*16).toFixed(1));l2.setAttribute('y',(B[1]-tg[0]/Lt*16).toFixed(1));
+  var ang=Math.abs(Math.atan2(m[1],m[0])-Math.atan2(vt[1],vt[0]))*180/Math.PI;
+  ok.setAttribute('opacity',ang<3?1:0);
+  val.textContent=dt.toFixed(2).replace('.',',')+' s';}
+cur.addEventListener('input',dis);dis();
+})();
+</script>
 </body>
 </html>

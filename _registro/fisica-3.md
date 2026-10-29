@@ -3,6 +3,7 @@
 - Parole: 427 su 2 pagine di traccia
 - Rettifica: nessuna
 - Aggiunta: nessuna, solo qualche parola di commento ai passaggi già presenti
+- Revisione (29/10/2026, regole 13/10): parole circa 270 → 93 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica quinta unità 03); tolti sommario e frasi di spiegazione ripetute (esempio P = (6; 5) portato nella didascalia, frase sul calcolo del modulo); formule in .eq (r e modulo sulla stessa riga, Δr con le componenti in una riga), velocità media e istantanea in .def con le loro proprietà in mezza riga; titoletti «Vettore posizione», «Vettore spostamento», «Velocità» (prima quattro). Notazione uniformata a Δr⃗ (prima vettore sopra «Δr»). Nessuna comparsa. Nessuna correzione concettuale. Figure rifatte da script: posizione con P = (6; 5) in scala; spostamento con P₁ = (2; 5), P₂ = (7; 2); figura della velocità istantanea resa interattiva (cursore Δt da 2,5 a 0,1: P₂ scorre sulla traiettoria calcolata, v⃗ₘ lungo la corda, v⃗ tangente in P₁, scritta verde «vₘ ≈ v» quando la direzione differisce meno di 3°); prima segmenti orizzontali rossi senza significato chiaro.
 
 ## Unità 02 — Il vettore accelerazione e le sue componenti
 - Parole: 336 su circa 1,4 pagine di traccia (fine pagina 3, pagina 4, inizio pagina 5)
