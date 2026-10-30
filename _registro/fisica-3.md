@@ -107,11 +107,14 @@
 - Parole: 457 su 2 pagine di traccia (pagine 34–35: velocità dell'ombra come componente orizzontale di v_T con il grafico velocità-tempo, e accelerazione come componente orizzontale di a_cp con il grafico accelerazione-tempo)
 - Rettifica: nessuna, le relazioni v=-v_T sinθ=-Aω sin(ωt), v_max=Aω, a=-a_cp cosθ=-Aω² cos(ωt), a_max=Aω² sono state verificate con SymPy (derivando x=A cos(ωt) due volte) e coincidono con la traccia
 - Aggiunta: nessuna; i punti numerati ①②③④ sul grafico e nella mini-circonferenza riproducono solo la corrispondenza di fase già presente in pagina 34
+- Revisione (30/10/2026, regole 13/10): parole circa 289 → 99 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 17); tolti sommario e frasi di spiegazione; apertura con domanda; titoletti «Velocità del moto armonico» → «Velocità», «Accelerazione del moto armonico» → «Accelerazione»; v⃗_T e a⃗_cp di P e componenti orizzontali in elenco; v = −v_T sin θ = −Aω sin(ωt) con v_max = Aω e a = −a_cp cos θ = −Aω² cos(ωt) con a_max = Aω² in .def (verificate con SymPy derivando x = A cos(ωt)); valori agli estremi e al centro in elenco caso → conseguenza. Nessuna comparsa. Correzione: nella figura finale la legenda scambiava i colori (la curva blu, indicata come «velocità», era x(t); la verde, indicata come «posizione», era v(t)); ora etichette x, v, a in fondo alle curve. Figure rifatte da script: scomposizione di v⃗_T e di a⃗_cp con cursore θ (0°–360°, componente dell'ombra sull'asse e valore a fianco); grafico v(t) calcolato con x(t) di riferimento, punti 1–4 e posizioni di P; grafico x, v, a calcolato (andamento qualitativo). Nessun esempio (non c'era).
+
 
 ## Unità 19 — Dinamica del moto armonico: l'oscillatore
 - Parole: 386 (conteggio grezzo, comprensivo di testata/rimandi) su circa 1,5 pagine di traccia (pagina 36 intera e la parte superiore di pagina 37, fino al box T=2π√(m/k), prima che inizi "Massa verticale")
 - Rettifica: nessuna, la definizione di oscillatore armonico (F=ma, F=-kx), la sostituzione con a=-Aω²cos(ωt) e x=A cos(ωt) [gia note dalle unità 17-18], e le formule ω=√(k/m), T=2π√(m/k) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+
 
 ## Unità 20 — Massa appesa a una molla verticale
 - Parole: 282 (conteggio grezzo, comprensivo di testata/rimandi) su circa 1 pagina di traccia (la parte inferiore di pagina 37, da "Massa verticale", e la parte superiore di pagina 38, fino a "le oscillazioni sono uguali a quelle di una molla orizzontale", prima che inizi "Pendolo Semplice")

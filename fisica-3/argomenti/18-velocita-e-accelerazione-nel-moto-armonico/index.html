@@ -5,15 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Velocità e accelerazione nel moto armonico — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.figura{margin:26px 0;text-align:center}
-.figura svg{max-width:100%;height:auto}
-.figura p.didascalia{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,209 +61,175 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Moto armonico &middot; Unità 18</p>
   <h1>Velocità e accelerazione nel moto armonico</h1>
-  <p class="sommario">Il punto che percorre la circonferenza ha velocità e accelerazione costanti in
-  modulo, ma quello che l'ombra sull'asse mostra è solo la loro componente orizzontale, che cambia
-  istante per istante. Ricaviamo le due leggi orarie decomponendo, come già fatto per la posizione,
-  i vettori del moto circolare sull'asse.</p>
 </header>
 
-<h2>Velocità del moto armonico</h2>
+<p>Ombra di $P$ in moto armonico, $x=A\cos(\omega t)$: come variano nel tempo la sua velocità e la sua accelerazione?</p>
 
-<p>Il punto $P$ si muove sulla circonferenza con velocità tangenziale $v_T$, costante in modulo e
-sempre perpendicolare al raggio $CP$. Ciò che compare sull'asse è solo la componente orizzontale di
-$v_T$: quando il raggio forma con l'asse l'angolo $\theta=\omega t$, quella componente vale
-$v=-v_T\sin\theta$, con il segno meno perché, nella posizione disegnata, la componente punta verso le
-$x$ negative.</p>
+<h2>Velocità</h2>
 
-<div class="figura">
-<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fr18a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-    <marker id="fr18b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--blu)"/>
-    </marker>
-    <marker id="fr18c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-    </marker>
-  </defs>
+<ul>
+<li>$P$ → velocità tangenziale $\vec v_T$, costante in modulo, perpendicolare al raggio;</li>
+<li>ombra → componente orizzontale di $\vec v_T$.</li>
+</ul>
 
-  <line x1="20" y1="45" x2="300" y2="45" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fr18a)"/>
-  <text x="65" y="33" font-size="13" text-anchor="middle" font-family="var(--sans)">-A</text>
-  <text x="150" y="33" font-size="13" text-anchor="middle" font-family="var(--sans)">O</text>
-  <text x="219.6" y="33" font-size="13" text-anchor="middle" font-family="var(--rosso)" fill="var(--rosso)">x</text>
-  <text x="235" y="33" font-size="13" text-anchor="middle" font-family="var(--sans)">A</text>
-
-  <line x1="65" y1="45" x2="65" y2="70" stroke="var(--riga)" stroke-width="1.2" stroke-dasharray="3 3"/>
-  <line x1="235" y1="45" x2="235" y2="70" stroke="var(--riga)" stroke-width="1.2" stroke-dasharray="3 3"/>
-
-  <circle cx="150" cy="155" r="85" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-
-  <line x1="150" y1="155" x2="219.6" y2="106.2" stroke="var(--verde)" stroke-width="1.8"/>
-  <path d="M 175,155 A 25 25 0 0 0 170.5,140.7" fill="none" stroke="var(--verde)" stroke-width="1.2"/>
-  <text x="178" y="150" font-size="12" font-family="var(--serif)" font-style="italic" fill="var(--verde)">&#952;</text>
-
-  <line x1="219.6" y1="106.2" x2="219.6" y2="45" stroke="var(--riga)" stroke-width="1.2" stroke-dasharray="3 3"/>
-  <path d="M 219.6,86.2 A 20 20 0 0 1 208.1,89.8" fill="none" stroke="var(--blu)" stroke-width="1.1"/>
-  <text x="209" y="80" font-size="12" font-family="var(--serif)" font-style="italic" fill="var(--blu)">&#952;</text>
-
-  <line x1="219.6" y1="106.2" x2="179.5" y2="48.9" stroke="var(--blu)" stroke-width="2" marker-end="url(#fr18b)"/>
-  <text x="184" y="68" font-size="13" font-family="var(--serif)" font-style="italic" fill="var(--blu)">v<tspan baseline-shift="sub" font-size="9">T</tspan></text>
-
-  <line x1="179.5" y1="48.9" x2="219.6" y2="48.9" stroke="var(--blu)" stroke-width="1.2" stroke-dasharray="4 3"/>
-  <text x="199" y="42" font-size="11.5" text-anchor="middle" font-family="var(--serif)" font-style="italic" fill="var(--blu)">v<tspan baseline-shift="sub" font-size="8">T</tspan>sin&#952;</text>
-
-  <circle cx="219.6" cy="106.2" r="4" fill="var(--rosso)"/>
-
-  <line x1="219.6" y1="45" x2="179.5" y2="45" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr18c)"/>
-  <text x="199" y="60" font-size="13" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">v</text>
-</svg>
-<p class="didascalia">La componente orizzontale di $v_T$ è quella che l'ombra possiede come velocità;
-il triangolo mostra $v_T\sin\theta$, cioè $|v|$.</p>
+<div class="fig">
+<svg id="f-vel" viewBox="0 0 330 292" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velocità dell'ombra come componente orizzontale della velocità tangenziale"></svg>
+<div class="cursore"><label for="cur-v">θ</label><input id="cur-v" type="range" min="0" max="360" step="5" value="35"><span id="val-v">35°</span></div>
+<p class="did">$\vec v_T$ di $P$ (blu) e velocità $v$ dell'ombra (rosso)</p>
 </div>
 
-<p>Poiché $v_T=\omega r=\omega A$, sostituendo si ottiene la legge oraria della velocità:</p>
+<p>Con $\theta=\omega t$ e $v_T=\omega A$:</p>
 
-<div class="formula-box">$$v=-A\omega\sin(\omega t)$$</div>
+<div class="def"><span class="et">Velocità nel moto armonico</span>
+<p class="eq">$$v=-v_T\sin\theta=-A\omega\sin(\omega t)\qquad v_{max}=A\omega$$</p></div>
 
-<p>Il grafico di $v(t)$ è ancora periodico di periodo $T$, ma sfasato di un quarto di periodo rispetto
-a $x(t)$: la velocità è nulla dove la posizione è agli estremi (punti ① e ③ in figura) ed è massima in
-modulo dove la posizione passa per il centro (punti ② e ④).</p>
-
-<div class="figura">
-<svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fr18d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-  </defs>
-  <line x1="15" y1="100" x2="292" y2="100" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fr18d)"/>
-  <line x1="25" y1="175" x2="25" y2="25" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fr18d)"/>
-  <text x="298" y="104" font-size="13" font-family="var(--serif)" font-style="italic">t</text>
-  <text x="18" y="20" font-size="13" font-family="var(--serif)" font-style="italic">v</text>
-  <line x1="25" y1="45" x2="292" y2="45" stroke="var(--riga)" stroke-width="1" stroke-dasharray="2 3"/>
-  <line x1="25" y1="155" x2="292" y2="155" stroke="var(--riga)" stroke-width="1" stroke-dasharray="2 3"/>
-  <text x="9" y="49" font-size="11.5" font-family="var(--serif)" font-style="italic">A&#969;</text>
-  <text x="2" y="159" font-size="11.5" font-family="var(--serif)" font-style="italic">-A&#969;</text>
-
-  <polyline points="25.0,45.0 30.6,46.9 36.1,52.4 41.7,61.1 47.2,72.5 52.8,85.8 58.4,100.0 63.9,114.2 69.5,127.5 75.1,138.9 80.6,147.6 86.2,153.1 91.8,155.0 97.3,153.1 102.9,147.6 108.4,138.9 114.0,127.5 119.6,114.2 125.1,100.0 130.7,85.8 136.2,72.5 141.8,61.1 147.4,52.4 152.9,46.9 158.5,45.0 164.1,46.9 169.6,52.4 175.2,61.1 180.8,72.5 186.3,85.8 191.9,100.0 197.4,114.2 203.0,127.5 208.6,138.9 214.1,147.6 219.7,153.1 225.2,155.0 230.8,153.1 236.4,147.6 241.9,138.9 247.5,127.5 253.1,114.2 258.6,100.0 264.2,85.8 269.8,72.5 275.3,61.1 280.9,52.4 286.4,46.9 292.0,45.0"
-    fill="none" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.55"/>
-
-  <polyline points="25.0,100.0 30.6,114.2 36.1,127.5 41.7,138.9 47.2,147.6 52.8,153.1 58.4,155.0 63.9,153.1 69.5,147.6 75.1,138.9 80.6,127.5 86.2,114.2 91.8,100.0 97.3,85.8 102.9,72.5 108.4,61.1 114.0,52.4 119.6,46.9 125.1,45.0 130.7,46.9 136.2,52.4 141.8,61.1 147.4,72.5 152.9,85.8 158.5,100.0 164.1,114.2 169.6,127.5 175.2,138.9 180.8,147.6 186.3,153.1 191.9,155.0 197.4,153.1 203.0,147.6 208.6,138.9 214.1,127.5 219.7,114.2 225.2,100.0 230.8,85.8 236.4,72.5 241.9,61.1 247.5,52.4 253.1,46.9 258.6,45.0 264.2,46.9 269.8,52.4 275.3,61.1 280.9,72.5 286.4,85.8 292.0,100.0"
-    fill="none" stroke="var(--verde)" stroke-width="2.2"/>
-
-  <text x="25" y="112" font-size="12" fill="var(--rosso)">&#9312;</text>
-  <text x="52" y="167" font-size="12" fill="var(--rosso)">&#9313;</text>
-  <text x="86" y="112" font-size="12" fill="var(--rosso)">&#9314;</text>
-  <text x="119" y="57" font-size="12" fill="var(--rosso)">&#9315;</text>
-
-  <circle cx="160" cy="225" r="18" fill="none" stroke="var(--inchiostro)" stroke-width="1.2"/>
-  <circle cx="178" cy="225" r="2.6" fill="var(--rosso)"/>
-  <circle cx="160" cy="207" r="2.6" fill="var(--rosso)"/>
-  <circle cx="142" cy="225" r="2.6" fill="var(--rosso)"/>
-  <circle cx="160" cy="243" r="2.6" fill="var(--rosso)"/>
-  <text x="184" y="228" font-size="10.5" fill="var(--rosso)">1</text>
-  <text x="160" y="200" font-size="10.5" text-anchor="middle" fill="var(--rosso)">2</text>
-  <text x="132" y="228" font-size="10.5" fill="var(--rosso)">3</text>
-  <text x="160" y="255" font-size="10.5" text-anchor="middle" fill="var(--rosso)">4</text>
-  <path d="M 172,213 A 18 18 0 0 0 160,207" fill="none" stroke="var(--grigio)" stroke-width="1.1" marker-end="url(#fr18d)"/>
-</svg>
-<p class="didascalia">In verde $v(t)$, in blu tratteggiato $x(t)$ come riferimento; sotto, i quattro
-punti della rotazione a cui corrispondono i punti numerati sul grafico.</p>
+<div class="fig">
+<svg id="f-vt" viewBox="0 0 320 232" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico della velocità v(t) confrontato con x(t)"></svg>
+<p class="did">$v(t)$ (verde) e $x(t)$ (blu tratteggiato); sotto, le posizioni di $P$ nei punti 1–4</p>
 </div>
 
-<div class="formula-box">$$v_{max}=A\omega$$</div>
+<ul>
+<li>estremi $x=\pm A$ (punti 1 e 3) → $v=0$;</li>
+<li>centro $x=0$ (punti 2 e 4) → $|v|=A\omega$.</li>
+</ul>
 
-<h2>Accelerazione del moto armonico</h2>
+<h2>Accelerazione</h2>
 
-<p>Lo stesso punto $P$ ha anche un'accelerazione centripeta $a_{cp}$, diretta sempre verso il centro
-$C$ e costante in modulo. La sua componente orizzontale è quella che l'ombra percepisce come
-accelerazione: $a=-a_{cp}\cos\theta$, ancora con il segno meno perché, nella posizione disegnata, la
-componente punta verso il centro, cioè verso le $x$ negative.</p>
+<ul>
+<li>$P$ → accelerazione centripeta $\vec a_{cp}$, costante in modulo, diretta verso il centro;</li>
+<li>ombra → componente orizzontale di $\vec a_{cp}$.</li>
+</ul>
 
-<div class="figura">
-<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fr18e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-    <marker id="fr18f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-    </marker>
-  </defs>
-
-  <line x1="20" y1="45" x2="300" y2="45" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fr18e)"/>
-  <text x="65" y="33" font-size="13" text-anchor="middle" font-family="var(--sans)">-A</text>
-  <text x="150" y="33" font-size="13" text-anchor="middle" font-family="var(--sans)">O</text>
-  <text x="219.6" y="33" font-size="13" text-anchor="middle" font-family="var(--rosso)" fill="var(--rosso)">x</text>
-  <text x="235" y="33" font-size="13" text-anchor="middle" font-family="var(--sans)">A</text>
-
-  <circle cx="150" cy="155" r="85" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-  <line x1="150" y1="155" x2="219.6" y2="106.2" stroke="var(--verde)" stroke-width="1.8"/>
-  <circle cx="219.6" cy="106.2" r="4" fill="var(--inchiostro)"/>
-
-  <line x1="219.6" y1="106.2" x2="162.3" y2="146.4" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr18f)"/>
-  <text x="178" y="135" font-size="12.5" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">a<tspan baseline-shift="sub" font-size="8">cp</tspan></text>
-
-  <line x1="219.6" y1="106.2" x2="162.3" y2="106.2" stroke="var(--rosso)" stroke-width="1.2" stroke-dasharray="4 3"/>
-  <text x="190" y="100" font-size="11" text-anchor="middle" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">a<tspan baseline-shift="sub" font-size="8">cp</tspan>cos&#952;</text>
-  <line x1="162.3" y1="106.2" x2="162.3" y2="146.4" stroke="var(--riga)" stroke-width="1.2" stroke-dasharray="3 3"/>
-
-  <path d="M 199.6,106.2 A 20 20 0 0 1 203.2,117.7" fill="none" stroke="var(--blu)" stroke-width="1.1"/>
-  <text x="199" y="123" font-size="12" font-family="var(--serif)" font-style="italic" fill="var(--blu)">&#952;</text>
-
-  <line x1="219.6" y1="45" x2="162.3" y2="45" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr18f)"/>
-  <text x="188" y="60" font-size="13" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">a</text>
-</svg>
-<p class="didascalia">$a_{cp}$ punta sempre verso il centro; la sua componente orizzontale
-$a_{cp}\cos\theta$ è l'accelerazione dell'ombra.</p>
+<div class="fig">
+<svg id="f-acc" viewBox="0 0 330 292" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Accelerazione dell'ombra come componente orizzontale dell'accelerazione centripeta"></svg>
+<div class="cursore"><label for="cur-a">θ</label><input id="cur-a" type="range" min="0" max="360" step="5" value="35"><span id="val-a">35°</span></div>
+<p class="did">$\vec a_{cp}$ di $P$ (blu) e accelerazione $a$ dell'ombra (rosso)</p>
 </div>
 
-<p>Con $a_{cp}=r\omega^2=A\omega^2$, sostituendo si ottiene la legge oraria dell'accelerazione:</p>
+<p>Con $a_{cp}=\omega^2 A$:</p>
 
-<div class="formula-box">$$a=-A\omega^2\cos(\omega t)$$</div>
+<div class="def"><span class="et">Accelerazione nel moto armonico</span>
+<p class="eq">$$a=-a_{cp}\cos\theta=-A\omega^2\cos(\omega t)\qquad a_{max}=A\omega^2$$</p></div>
 
-<p>L'accelerazione è quindi massima in modulo — e vale $a_{max}=A\omega^2$ — proprio dove la velocità
-è nulla, cioè agli estremi dell'oscillazione, ed è nulla dove la velocità è massima, cioè al centro. Il
-segno meno indica inoltre che l'accelerazione è sempre diretta verso il centro dell'oscillazione,
-qualunque sia la posizione di $P$.</p>
+<ul>
+<li>estremi → $|a|=A\omega^2$ e $v=0$;</li>
+<li>centro → $a=0$ e $|v|=A\omega$;</li>
+<li>$a$ sempre diretta verso il centro $O$.</li>
+</ul>
 
-<div class="figura">
-<svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fr18g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-  </defs>
-  <line x1="15" y1="100" x2="292" y2="100" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fr18g)"/>
-  <line x1="25" y1="175" x2="25" y2="25" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#fr18g)"/>
-  <text x="298" y="104" font-size="13" font-family="var(--serif)" font-style="italic">t</text>
-  <text x="16" y="20" font-size="13" font-family="var(--serif)" font-style="italic">a</text>
-  <line x1="25" y1="45" x2="292" y2="45" stroke="var(--riga)" stroke-width="1" stroke-dasharray="2 3"/>
-  <line x1="25" y1="155" x2="292" y2="155" stroke="var(--riga)" stroke-width="1" stroke-dasharray="2 3"/>
-  <text x="4" y="49" font-size="11" font-family="var(--serif)" font-style="italic">A&#969;<tspan font-size="8" baseline-shift="super">2</tspan></text>
-  <text x="0" y="159" font-size="11" font-family="var(--serif)" font-style="italic">-A&#969;<tspan font-size="8" baseline-shift="super">2</tspan></text>
-
-  <polyline points="25.0,45.0 30.6,46.9 36.1,52.4 41.7,61.1 47.2,72.5 52.8,85.8 58.4,100.0 63.9,114.2 69.5,127.5 75.1,138.9 80.6,147.6 86.2,153.1 91.8,155.0 97.3,153.1 102.9,147.6 108.4,138.9 114.0,127.5 119.6,114.2 125.1,100.0 130.7,85.8 136.2,72.5 141.8,61.1 147.4,52.4 152.9,46.9 158.5,45.0 164.1,46.9 169.6,52.4 175.2,61.1 180.8,72.5 186.3,85.8 191.9,100.0 197.4,114.2 203.0,127.5 208.6,138.9 214.1,147.6 219.7,153.1 225.2,155.0 230.8,153.1 236.4,147.6 241.9,138.9 247.5,127.5 253.1,114.2 258.6,100.0 264.2,85.8 269.8,72.5 275.3,61.1 280.9,52.4 286.4,46.9 292.0,45.0"
-    fill="none" stroke="var(--blu)" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.5"/>
-  <polyline points="25.0,100.0 30.6,114.2 36.1,127.5 41.7,138.9 47.2,147.6 52.8,153.1 58.4,155.0 63.9,153.1 69.5,147.6 75.1,138.9 80.6,127.5 86.2,114.2 91.8,100.0 97.3,85.8 102.9,72.5 108.4,61.1 114.0,52.4 119.6,46.9 125.1,45.0 130.7,46.9 136.2,52.4 141.8,61.1 147.4,72.5 152.9,85.8 158.5,100.0 164.1,114.2 169.6,127.5 175.2,138.9 180.8,147.6 186.3,153.1 191.9,155.0 197.4,153.1 203.0,147.6 208.6,138.9 214.1,127.5 219.7,114.2 225.2,100.0 230.8,85.8 236.4,72.5 241.9,61.1 247.5,52.4 253.1,46.9 258.6,45.0 264.2,46.9 269.8,52.4 275.3,61.1 280.9,72.5 286.4,85.8 292.0,100.0"
-    fill="none" stroke="var(--verde)" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.5"/>
-  <polyline points="25.0,155.0 30.6,153.1 36.1,147.6 41.7,138.9 47.2,127.5 52.8,114.2 58.4,100.0 63.9,85.8 69.5,72.5 75.1,61.1 80.6,52.4 86.2,46.9 91.8,45.0 97.3,46.9 102.9,52.4 108.4,61.1 114.0,72.5 119.6,85.8 125.1,100.0 130.7,114.2 136.2,127.5 141.8,138.9 147.4,147.6 152.9,153.1 158.5,155.0 164.1,153.1 169.6,147.6 175.2,138.9 180.8,127.5 186.3,114.2 191.9,100.0 197.4,85.8 203.0,72.5 208.6,61.1 214.1,52.4 219.7,46.9 225.2,45.0 230.8,46.9 236.4,52.4 241.9,61.1 247.5,72.5 253.1,85.8 258.6,100.0 264.2,114.2 269.8,127.5 275.3,138.9 280.9,147.6 286.4,153.1 292.0,155.0"
-    fill="none" stroke="var(--rosso)" stroke-width="2.2"/>
-
-  <text x="255" y="55" font-size="10.5" font-family="var(--sans)" fill="var(--rosso)">accelerazione</text>
-  <text x="255" y="70" font-size="10.5" font-family="var(--sans)" fill="var(--blu)">velocità</text>
-  <text x="255" y="85" font-size="10.5" font-family="var(--sans)" fill="var(--verde)">posizione</text>
-</svg>
-<p class="didascalia">Le tre grandezze sfasate fra loro di un quarto di periodo ciascuna: dove una è
-all'estremo, la successiva è nulla.</p>
+<div class="fig">
+<svg id="f-xva" viewBox="0 0 320 180" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafici di posizione, velocità e accelerazione nel moto armonico"></svg>
+<p class="did">$x(t)$, $v(t)$, $a(t)$ (andamento): ciascuna sfasata di un quarto di periodo rispetto alla precedente</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../17-il-moto-armonico-e-la-sua-legge-oraria/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il moto armonico e la sua legge oraria</span></a><a class="successiva" href="../19-dinamica-del-moto-armonico-l-oscillatore/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Dinamica del moto armonico: l'oscillatore</span></a></nav>
 <footer><p>Fisica terza &middot; Moto armonico &middot; Unità 18</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function rich(e,str){e.textContent='';str.split(/(_\{[^}]*\})/).forEach(function(q){if(!q)return;var t=el('tspan',q.charAt(0)==='_'?{'baseline-shift':'sub','font-size':'75%'}:{},e);t.textContent=q.charAt(0)==='_'?q.slice(2,-1):q;});}
+function f(z,n){return (z<-0.0049?'−':'')+Math.abs(z).toFixed(n).replace('.',',');}
+function pol(O,R,a){return [O[0]+R*Math.cos(a),O[1]-R*Math.sin(a)];}
+function arco(O,R,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)/0.03)),d='';for(var i=0;i<=n;i++){var p=pol(O,R,a0+(a1-a0)*i/n);d+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}return d;}
+function set(e,p,q){e.setAttribute('x1',p[0]);e.setAttribute('y1',p[1]);e.setAttribute('x2',q[0]);e.setAttribute('y2',q[1]);}
+function pos(e,p){e.setAttribute('x',p[0]);e.setAttribute('y',p[1]);}
+var it={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+/* scomposizione: vettore di P (blu) e componente orizzontale sull'asse (rosso), cursore theta */
+function scomp(id,curId,valId,tipo){
+var s=document.getElementById(id),O=[165,170],R=85,yA=30,L=tipo==='v'?62:58,pre=id;
+marc(s,pre+'-k','var(--inchiostro)');marc(s,pre+'-b','var(--blu)');marc(s,pre+'-r','var(--rosso)');
+el('line',{x1:40,y1:yA,x2:305,y2:yA,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#'+pre+'-k)'},s);
+txt(s,[316,yA],'x',{'font-family':'var(--serif)','font-style':'italic','font-size':14});
+[[-1,'−A'],[0,'O'],[1,'A']].forEach(function(c){var x=O[0]+c[0]*R;el('line',{x1:x,y1:yA-4,x2:x,y2:yA+4,stroke:'var(--inchiostro)','stroke-width':1.2},s);txt(s,[x,yA-14],c[1],{'font-family':'var(--serif)','font-style':'italic','font-size':13});});
+el('circle',{cx:O[0],cy:O[1],r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4},s);
+el('circle',{cx:O[0],cy:O[1],r:2.4,fill:'var(--inchiostro)'},s);
+var rag=el('line',{stroke:'var(--verde)','stroke-width':1.4},s);
+var arcTh=el('path',{fill:'none',stroke:'var(--verde)','stroke-width':1.2},s);
+var lTh=txt(s,[0,0],'θ',{'font-family':'var(--serif)','font-style':'italic','font-size':13,fill:'var(--verde)'});
+var proj=el('line',{stroke:'var(--riga)','stroke-width':1.2,'stroke-dasharray':'3 3'},s);
+var projT=el('line',{stroke:'var(--blu)','stroke-width':1.1,'stroke-dasharray':'3 3'},s);
+var vec=el('line',{stroke:'var(--blu)','stroke-width':2.2,'marker-end':'url(#'+pre+'-b)'},s);
+var com=el('line',{stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#'+pre+'-r)'},s);
+var Pp=el('circle',{r:4,fill:'var(--rosso)'},s),Sh=el('circle',{r:4,fill:'var(--rosso)',cy:yA},s);
+var lP=txt(s,[0,0],'P',{'font-family':'var(--serif)','font-style':'italic','font-size':13,fill:'var(--rosso)'});
+var lV=txt(s,[0,0],'',{'font-family':'var(--serif)','font-style':'italic','font-size':13,fill:'var(--blu)'});rich(lV,tipo==='v'?'v_{T}':'a_{cp}');
+var lC=txt(s,[0,0],tipo,{'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600,fill:'var(--rosso)'});
+var rd=txt(s,[6,278],'',{'text-anchor':'start','font-size':12,fill:'var(--rosso)'});
+var cur=document.getElementById(curId),val=document.getElementById(valId);
+function dis(){var d=parseFloat(cur.value),th=d*Math.PI/180,P=pol(O,R,th),u,c;
+  if(tipo==='v'){u=[-Math.sin(th),-Math.cos(th)];c=-Math.sin(th);}else{u=[-Math.cos(th),Math.sin(th)];c=-Math.cos(th);}
+  var T=[P[0]+L*u[0],P[1]+L*u[1]];
+  set(rag,O,P);set(vec,P,T);set(proj,P,[P[0],yA]);set(projT,T,[T[0],yA]);
+  Pp.setAttribute('cx',P[0]);Pp.setAttribute('cy',P[1]);Sh.setAttribute('cx',P[0]);
+  var lc=Math.abs(L*c);com.style.display=lc>5?'':'none';set(com,[P[0],yA],[T[0],yA]);
+  pos(lC,[(P[0]+T[0])/2,yA+14]);lC.style.display=lc>14?'':'none';
+  var r=[Math.cos(th),-Math.sin(th)];pos(lP,[P[0]+15*r[0],P[1]+15*r[1]]);
+  /* etichetta del vettore: a lato della punta, perpendicolare al vettore, dalla parte opposta a P-raggio */
+  var n=[-u[1],u[0]];if(tipo==='v'){if(n[0]*r[0]+n[1]*r[1]<0)n=[-n[0],-n[1]];}else{if(n[1]>0)n=[-n[0],-n[1]];}
+  var kf=tipo==='v'?0.62:0.4,m=[P[0]+kf*L*u[0],P[1]+kf*L*u[1]];pos(lV,[m[0]+15*n[0],m[1]+15*n[1]]);
+  arcTh.setAttribute('d',d>2&&d<358?arco(O,20,0,th):'');pos(lTh,pol(O,32,th/2));lTh.style.display=d>=25&&d<=335?'':'none';
+  rich(rd,(tipo==='v'?'v = −v_{T} sin θ = ':'a = −a_{cp} cos θ = ')+f(c,2)+(tipo==='v'?' v_{T}':' a_{cp}'));
+  val.textContent=d+'°';}
+cur.addEventListener('input',dis);dis();
+}
+scomp('f-vel','cur-v','val-v','v');
+scomp('f-acc','cur-a','val-a','a');
+/* grafico di funzione periodica su due periodi */
+function curva(s,x0,y0,Ap,Tp,fn,a){var d='';for(var i=0;i<=240;i++){var t=2*Tp*i/240;d+=(i?'L':'M')+(x0+t).toFixed(1)+','+(y0-Ap*fn(2*Math.PI*t/Tp)).toFixed(1);}return el('path',Object.assign({d:d,fill:'none'},a),s);}
+function assi(s,id,x0,y0,yb,yt,lab){marc(s,id,'var(--inchiostro)');
+  el('line',{x1:x0-8,y1:y0,x2:300,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#'+id+')'},s);
+  el('line',{x1:x0,y1:yb,x2:x0,y2:yt,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#'+id+')'},s);
+  txt(s,[309,y0],'t',{'font-family':'var(--serif)','font-style':'italic','font-size':14});
+  if(lab)txt(s,[x0+12,yt-2],lab,{'font-family':'var(--serif)','font-style':'italic','font-size':14});}
+/* v(t) con x(t) di riferimento e punti 1-4 */
+(function(){
+var s=document.getElementById('f-vt'),x0=38,y0=85,Ap=50,Tp=125;
+assi(s,'fvt-k',x0,y0,150,14,'v');
+[[Ap,'Aω'],[-Ap,'−Aω']].forEach(function(c){el('line',{x1:x0,y1:y0-c[0],x2:x0+2*Tp,y2:y0-c[0],stroke:'var(--riga)','stroke-width':1,'stroke-dasharray':'2 3'},s);txt(s,[x0-6,y0-c[0]],c[1],{'font-family':'var(--serif)','font-style':'italic','font-size':12,'text-anchor':'end'});});
+curva(s,x0,y0,Ap,Tp,Math.cos,{stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'5 4',opacity:.7});
+curva(s,x0,y0,Ap,Tp,function(z){return -Math.sin(z);},{stroke:'var(--verde)','stroke-width':2.4});
+var pts=[[0,0,[9,-11]],[1,-1,[0,13]],[2,0,[9,11]],[3,1,[0,-12]]];
+pts.forEach(function(p,i){var X=x0+p[0]*Tp/4,Y=y0-p[1]*Ap;el('circle',{cx:X,cy:Y,r:3.6,fill:'var(--rosso)'},s);txt(s,[X+p[2][0],Y+p[2][1]],String(i+1),{'font-size':12,'font-weight':700,fill:'var(--rosso)'});});
+/* posizioni di P sulla circonferenza */
+var C=[175,195],r=20;el('circle',{cx:C[0],cy:C[1],r:r,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2},s);
+marc(s,'fvt-g','var(--grigio)');el('path',{d:arco(C,r+7,0.25,1.25),fill:'none',stroke:'var(--grigio)','stroke-width':1.1,'marker-end':'url(#fvt-g)'},s);
+[0,1,2,3].forEach(function(i){var a=i*Math.PI/2,p=pol(C,r,a),q=pol(C,r+(i%2?11:12),a);el('circle',{cx:p[0],cy:p[1],r:3,fill:'var(--rosso)'},s);txt(s,q,String(i+1),{'font-size':11,'font-weight':700,fill:'var(--rosso)'});});
+})();
+/* x(t), v(t), a(t) */
+(function(){
+var s=document.getElementById('f-xva'),x0=30,y0=88,Ap=55,Tp=125;
+assi(s,'fxa-k',x0,y0,160,14,null);
+curva(s,x0,y0,Ap,Tp,Math.cos,{stroke:'var(--blu)','stroke-width':1.5,'stroke-dasharray':'5 4'});
+curva(s,x0,y0,Ap,Tp,function(z){return -Math.sin(z);},{stroke:'var(--verde)','stroke-width':1.5,'stroke-dasharray':'5 4'});
+curva(s,x0,y0,Ap,Tp,function(z){return -Math.cos(z);},{stroke:'var(--rosso)','stroke-width':2.4});
+var xe=x0+2*Tp+10;
+txt(s,[xe,y0-Ap],'x',{'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600,fill:'var(--blu)','text-anchor':'start'});
+txt(s,[xe,y0-11],'v',{'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600,fill:'var(--verde)','text-anchor':'start'});
+txt(s,[xe,y0+Ap],'a',{'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600,fill:'var(--rosso)','text-anchor':'start'});
+})();
+})();
+</script>
 </body>
 </html>
