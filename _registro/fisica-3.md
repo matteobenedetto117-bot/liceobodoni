@@ -114,6 +114,7 @@
 - Parole: 386 (conteggio grezzo, comprensivo di testata/rimandi) su circa 1,5 pagine di traccia (pagina 36 intera e la parte superiore di pagina 37, fino al box T=2π√(m/k), prima che inizi "Massa verticale")
 - Rettifica: nessuna, la definizione di oscillatore armonico (F=ma, F=-kx), la sostituzione con a=-Aω²cos(ωt) e x=A cos(ωt) [gia note dalle unità 17-18], e le formule ω=√(k/m), T=2π√(m/k) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+- Revisione (30/10/2026, regole 13/10): parole circa 225 → 94 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 17); tolti sommario, titoletti «L'oscillatore armonico» e «Pulsazione e periodo dell'oscillatore», frasi di spiegazione e il cenno alla molla non orizzontale (rimando all'unità successiva); apertura con domanda; definizione di oscillatore armonico in .def («direttamente proporzionale»); casi molla allungata/compressa in elenco; F = ma, F = −kx in .eq; sostituzione e m ω² = k in una .eq; ω = √(k/m), T = 2π√(m/k) in .def (verificate con SymPy); dipendenze di T in elenco. Nessuna comparsa. Nessuna correzione concettuale. Figure rifatte da script: sistema massa-molla (tolte le scritte lunghe, ora nella didascalia); molla allungata e compressa unite in una figura con cursore x (−A…A: molla, spostamento, F_el opposta, stato a fianco). Nessun esempio (non c'era).
 
 
 ## Unità 20 — Massa appesa a una molla verticale

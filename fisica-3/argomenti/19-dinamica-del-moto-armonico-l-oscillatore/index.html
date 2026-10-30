@@ -5,15 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dinamica del moto armonico: l'oscillatore — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.figura{margin:26px 0;text-align:center}
-.figura svg{max-width:100%;height:auto}
-.figura p.didascalia{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,107 +61,122 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Moto armonico &middot; Unità 19</p>
   <h1>Dinamica del moto armonico: l'oscillatore</h1>
-  <p class="sommario">Finora il moto armonico è stato descritto solo come cinematica: un'ombra che
-  segue nel tempo le leggi $x=A\cos(\omega t)$, $v=-A\omega\sin(\omega t)$, $a=-A\omega^2\cos(\omega t)$,
-  senza chiedersi quale forza lo produca. Cerchiamo ora quella forza, e da essa ricaviamo pulsazione e
-  periodo in funzione delle sole proprietà fisiche del sistema.</p>
 </header>
 
-<h2>L'oscillatore armonico</h2>
+<p>Blocco attaccato a una molla, su un piano orizzontale senza attrito: quale forza produce il moto armonico, e con quale periodo?</p>
 
-<div class="figura">
-<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fr19a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-  </defs>
-  <line x1="40" y1="55" x2="40" y2="115" stroke="var(--inchiostro)" stroke-width="1.6"/>
-  <line x1="40" y1="60" x2="30" y2="70" stroke="var(--inchiostro)" stroke-width="1.1"/>
-  <line x1="40" y1="75" x2="30" y2="85" stroke="var(--inchiostro)" stroke-width="1.1"/>
-  <line x1="40" y1="90" x2="30" y2="100" stroke="var(--inchiostro)" stroke-width="1.1"/>
-  <line x1="40" y1="105" x2="30" y2="115" stroke="var(--inchiostro)" stroke-width="1.1"/>
-  <polyline points="40,85 55,70 70,100 85,70 100,100 115,70 130,85 148,85"
-    fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-  <rect x="148" y="65" width="46" height="40" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-  <text x="171" y="90" font-size="15" text-anchor="middle" font-family="var(--serif)" font-style="italic">m</text>
-  <text x="95" y="55" font-size="13" text-anchor="middle" font-family="var(--serif)" font-style="italic" fill="var(--blu)">k</text>
-  <text x="95" y="128" font-size="12.5" text-anchor="middle" font-family="var(--sans)" fill="var(--grigio)">costante elastica della molla</text>
-  <line x1="200" y1="85" x2="240" y2="85" stroke="var(--riga)" stroke-width="1.1" marker-end="url(#fr19a)"/>
-  <text x="245" y="89" font-size="12.5" font-family="var(--sans)" fill="var(--grigio)">massa del blocchetto</text>
-</svg>
-<p class="didascalia">Un blocco di massa $m$ vincolato a una molla di costante elastica $k$, libero di
-scorrere senza attrito su un piano orizzontale.</p>
+<div class="fig">
+<svg id="f-osc" viewBox="0 0 320 110" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Blocco di massa m attaccato a una molla di costante elastica k"></svg>
+<p class="did">Massa $m$, molla di costante elastica $k$, piano senza attrito</p>
 </div>
 
-<p>Un <em>oscillatore armonico</em> è un sistema su cui agisce una forza proporzionale allo spostamento
-$x$ dalla posizione di equilibrio, e diretta sempre in verso opposto rispetto a tale spostamento: se il
-blocco si allontana dall'equilibrio in un verso, la forza lo richiama verso il centro.</p>
+<div class="def"><span class="et">Oscillatore armonico</span>
+<p>Sistema soggetto a una forza direttamente proporzionale allo spostamento $x$ dalla posizione di equilibrio e di verso opposto.</p></div>
 
-<div class="figura">
-<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fr19b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--verde)"/>
-    </marker>
-  </defs>
+<ul>
+<li>molla allungata ($x&gt;0$) → forza verso sinistra;</li>
+<li>molla compressa ($x&lt;0$) → forza verso destra;</li>
+<li>in entrambi i casi → forza di richiamo verso l'equilibrio.</li>
+</ul>
 
-  <line x1="30" y1="15" x2="30" y2="45" stroke="var(--inchiostro)" stroke-width="1.4"/>
-  <line x1="30" y1="18" x2="22" y2="26" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="30" y1="30" x2="22" y2="38" stroke="var(--inchiostro)" stroke-width="1"/>
-  <polyline points="30,30 42,20 54,40 66,20 78,40 90,20 100,30 150,30"
-    fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-  <rect x="150" y="18" width="30" height="24" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-  <text x="165" y="35" font-size="12" text-anchor="middle" font-family="var(--serif)" font-style="italic">m</text>
-  <line x1="150" y1="9" x2="112" y2="9" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fr19b)"/>
-  <text x="130" y="4" font-size="12" text-anchor="middle" font-family="var(--serif)" font-style="italic" fill="var(--verde)">F<tspan baseline-shift="sub" font-size="8">el</tspan></text>
-  <text x="112" y="58" font-size="12.5" text-anchor="middle" font-family="var(--sans)" fill="var(--rosso)">+A</text>
-
-  <line x1="30" y1="95" x2="30" y2="125" stroke="var(--inchiostro)" stroke-width="1.4"/>
-  <line x1="30" y1="98" x2="22" y2="106" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="30" y1="110" x2="22" y2="118" stroke="var(--inchiostro)" stroke-width="1"/>
-  <polyline points="30,110 38,100 46,120 54,100 62,120 70,110 76,110"
-    fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-  <rect x="76" y="98" width="30" height="24" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-  <text x="91" y="115" font-size="12" text-anchor="middle" font-family="var(--serif)" font-style="italic">m</text>
-  <line x1="106" y1="89" x2="144" y2="89" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fr19b)"/>
-  <text x="126" y="84" font-size="12" text-anchor="middle" font-family="var(--serif)" font-style="italic" fill="var(--verde)">F<tspan baseline-shift="sub" font-size="8">el</tspan></text>
-  <text x="91" y="140" font-size="12.5" text-anchor="middle" font-family="var(--sans)" fill="var(--rosso)">-A</text>
-</svg>
-<p class="didascalia">Molla allungata ($x=+A$): la forza elastica $F_{el}$ richiama il blocco verso
-l'equilibrio. Molla compressa ($x=-A$): $F_{el}$ spinge di nuovo verso l'equilibrio. In entrambi i
-casi la forza è opposta allo spostamento.</p>
+<div class="fig">
+<svg id="f-hooke" viewBox="0 0 320 166" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forza elastica opposta allo spostamento del blocco"></svg>
+<div class="cursore"><label for="cur-x">x</label><input id="cur-x" type="range" min="-1" max="1" step="0.05" value="0.6"><span id="val-x">0,60 A</span></div>
+<p class="did">$F_{el}$ sempre opposta allo spostamento $x$</p>
 </div>
 
-<p>Questa è la legge di Hooke, combinata con la seconda legge di Newton:</p>
+<p>Seconda legge di Newton e legge di Hooke:</p>
 
-<div class="formula-box">$$F=ma \qquad\qquad F=-kx$$</div>
+<p class="eq">$$F=ma\qquad F=-kx$$</p>
 
-<h2>Pulsazione e periodo dell'oscillatore</h2>
+<p>Da $ma=-kx$, con $a=-A\omega^2\cos(\omega t)$ e $x=A\cos(\omega t)$:</p>
 
-<p>Uguagliando le due espressioni della forza si ottiene $ma=-kx$. Per il moto armonico conosciamo
-già $a=-A\omega^2\cos(\omega t)$ e $x=A\cos(\omega t)$; sostituendo:</p>
+<p class="eq">$$m\bigl(-A\omega^2\cos\omega t\bigr)=-k\bigl(A\cos\omega t\bigr)\;\Rightarrow\; m\omega^2=k$$</p>
 
-<div class="formula-box">$$m\bigl(-A\omega^2\cos\omega t\bigr)=-k\bigl(A\cos\omega t\bigr)$$</div>
+<div class="def"><span class="et">Pulsazione e periodo dell'oscillatore</span>
+<p class="eq">$$\omega=\sqrt{\frac{k}{m}}\qquad T=2\pi\sqrt{\frac{m}{k}}$$</p></div>
 
-<p>Il fattore $A\cos(\omega t)$ compare, con lo stesso segno, su entrambi i lati e si semplifica — non
-è mai identicamente nullo. Resta $m\omega^2=k$, da cui la pulsazione dell'oscillatore armonico:</p>
-
-<div class="formula-box">$$\omega=\sqrt{\dfrac{k}{m}}$$</div>
-
-<p>Dipende solo dalla massa e dalla costante elastica, non dall'ampiezza $A$. Da $\omega=2\pi/T$ segue
-il periodo:</p>
-
-<div class="formula-box">$$T=2\pi\sqrt{\dfrac{m}{k}}$$</div>
-
-<p>Una molla più rigida (k grande) fa oscillare il blocco più in fretta; una massa maggiore lo rallenta.
-Il risultato non dipende dal fatto che la molla sia orizzontale: lo stesso ragionamento si applica a
-qualunque sistema in cui compaia una forza di richiamo proporzionale allo spostamento.</p>
-
+<ul>
+<li>non dipendono dall'ampiezza $A$;</li>
+<li>molla più rigida ($k$ maggiore) → $T$ minore;</li>
+<li>massa maggiore → $T$ maggiore.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../18-velocita-e-accelerazione-nel-moto-armonico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Velocità e accelerazione nel moto armonico</span></a><a class="successiva" href="../20-massa-appesa-a-una-molla-verticale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Massa appesa a una molla verticale</span></a></nav>
 <footer><p>Fisica terza &middot; Moto armonico &middot; Unità 19</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function rich(e,str){e.textContent='';str.split(/(_\{[^}]*\})/).forEach(function(q){if(!q)return;var t=el('tspan',q.charAt(0)==='_'?{'baseline-shift':'sub','font-size':'75%'}:{},e);t.textContent=q.charAt(0)==='_'?q.slice(2,-1):q;});}
+function f(z,n){return (z<-0.0049?'−':'')+Math.abs(z).toFixed(n).replace('.',',');}
+function pol(O,R,a){return [O[0]+R*Math.cos(a),O[1]-R*Math.sin(a)];}
+function arco(O,R,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)/0.03)),d='';for(var i=0;i<=n;i++){var p=pol(O,R,a0+(a1-a0)*i/n);d+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}return d;}
+function set(e,p,q){e.setAttribute('x1',p[0]);e.setAttribute('y1',p[1]);e.setAttribute('x2',q[0]);e.setAttribute('y2',q[1]);}
+function pos(e,p){e.setAttribute('x',p[0]);e.setAttribute('y',p[1]);}
+var it={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+/* parete, pavimento, molla a zig-zag calcolata, blocco */
+function parete(s,x,y0,y1){el('line',{x1:x,y1:y0,x2:x,y2:y1,stroke:'var(--inchiostro)','stroke-width':1.6},s);
+  for(var y=y0+4;y<y1;y+=10)el('line',{x1:x,y1:y,x2:x-8,y2:y+8,stroke:'var(--inchiostro)','stroke-width':1},s);}
+function zig(x0,x1,y,h,n){var d='M'+x0+','+y,t0=10,L=x1-x0-2*t0;d+=' L'+(x0+t0)+','+y;
+  for(var i=0;i<n;i++){d+=' L'+(x0+t0+L*(i+0.25)/n).toFixed(1)+','+(y-h)+' L'+(x0+t0+L*(i+0.75)/n).toFixed(1)+','+(y+h);}
+  d+=' L'+(x1-t0)+','+y+' L'+x1+','+y;return d;}
+/* sistema */
+(function(){
+var s=document.getElementById('f-osc'),yP=88,hB=40,xB=180,wB=48;
+parete(s,30,30,yP);el('line',{x1:30,y1:yP,x2:300,y2:yP,stroke:'var(--inchiostro)','stroke-width':1.4},s);
+el('path',{d:zig(30,xB,yP-hB/2,11,8),fill:'none',stroke:'var(--blu)','stroke-width':1.6},s);
+el('rect',{x:xB,y:yP-hB,width:wB,height:hB,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+txt(s,[xB+wB/2,yP-hB/2],'m',{'font-family':'var(--serif)','font-style':'italic','font-size':16});
+txt(s,[105,yP-hB/2-22],'k',{'font-family':'var(--serif)','font-style':'italic','font-size':15,fill:'var(--blu)'});
+})();
+/* forza elastica con cursore x */
+(function(){
+var s=document.getElementById('f-hooke'),yP=100,hB=36,wB=40,xe=170,Ax=60,Fk=90;
+marc(s,'fh-r','var(--rosso)');marc(s,'fh-k','var(--inchiostro)');
+parete(s,30,48,yP);el('line',{x1:30,y1:yP,x2:300,y2:yP,stroke:'var(--inchiostro)','stroke-width':1.4},s);
+el('line',{x1:xe,y1:40,x2:xe,y2:yP+34,stroke:'var(--grigio)','stroke-width':1.1,'stroke-dasharray':'4 3'},s);
+txt(s,[xe,yP+44],'O',{'font-family':'var(--serif)','font-style':'italic','font-size':12,fill:'var(--grigio)'});
+var molla=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':1.5},s);
+var blk=el('rect',{y:yP-hB,width:wB,height:hB,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+var lm=txt(s,[0,yP-hB/2],'m',{'font-family':'var(--serif)','font-style':'italic','font-size':14});
+var spo=el('line',{y1:yP+12,y2:yP+12,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#fh-k)'},s);
+var lx=txt(s,[0,yP+25],'x',{'font-family':'var(--serif)','font-style':'italic','font-size':13});
+var fo=el('line',{y1:yP-hB-12,y2:yP-hB-12,stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#fh-r)'},s);
+var lF=txt(s,[0,yP-hB-25],'',{'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600,fill:'var(--rosso)'});rich(lF,'F_{el}');
+var st=txt(s,[160,158],'',{'font-size':12,fill:'var(--grigio)'});
+var cur=document.getElementById('cur-x'),val=document.getElementById('val-x');
+function dis(){var q=parseFloat(cur.value),xc=xe+q*Ax,x0=xc-wB/2;
+  molla.setAttribute('d',zig(30,x0,yP-hB/2,10,8));blk.setAttribute('x',x0);pos(lm,[xc,yP-hB/2]);
+  var on=Math.abs(q)>0.22;spo.style.display=fo.style.display=lF.style.display=lx.style.display=on?'':'none';
+  set(spo,[xe,yP+12],[xc,yP+12]);pos(lx,[xc+(q>0?10:-10),yP+12]);
+  set(fo,[xc,yP-hB-12],[xc-q*Fk,yP-hB-12]);pos(lF,[xc-q*Fk/2,yP-hB-25]);
+  st.textContent=q>0.04?'molla allungata: forza verso O':(q<-0.04?'molla compressa: forza verso O':'equilibrio: forza nulla');
+  val.textContent=f(q,2)+' A';}
+cur.addEventListener('input',dis);dis();
+})();
+})();
+</script>
 </body>
 </html>
