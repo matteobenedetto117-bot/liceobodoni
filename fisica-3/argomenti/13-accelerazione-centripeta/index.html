@@ -5,16 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Accelerazione centripeta — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:var(--blu-chiaro);border-left:3px solid var(--blu);border-radius:6px;padding:12px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,115 +61,150 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Moto circolare &middot; Unità 13</p>
   <h1>Accelerazione centripeta</h1>
-  <p class="sommario">Nel moto circolare uniforme la velocità ha modulo costante, ma la sua
-  direzione cambia in continuazione: c'è dunque un'accelerazione, anche se il moto è
-  "uniforme". Vediamo quanto vale e verso dove punta.</p>
 </header>
 
-<div class="fig">
-<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="ma13a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="ma13b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<circle cx="150" cy="150" r="90" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="150" cy="150" r="2.4" fill="var(--inchiostro)"/>
-<!-- punto in alto -->
-<line x1="150" y1="60" x2="150" y2="90" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#ma13b)"/>
-<line x1="150" y1="60" x2="200" y2="60" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#ma13a)"/>
-<!-- punto a destra -->
-<line x1="240" y1="150" x2="210" y2="150" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#ma13b)"/>
-<line x1="240" y1="150" x2="240" y2="100" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#ma13a)"/>
-<!-- punto in basso -->
-<line x1="150" y1="240" x2="150" y2="210" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#ma13b)"/>
-<line x1="150" y1="240" x2="100" y2="240" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#ma13a)"/>
-<!-- punto a sinistra -->
-<line x1="60" y1="150" x2="90" y2="150" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#ma13b)"/>
-<line x1="60" y1="150" x2="60" y2="200" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#ma13a)"/>
-<text x="205" y="56" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">v</text>
-<text x="152" y="82" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--blu)">a<tspan baseline-shift="sub" font-size="9">cp</tspan></text>
-<text x="244" y="95" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">v</text>
-<text x="188" y="147" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--blu)">a<tspan baseline-shift="sub" font-size="9">cp</tspan></text>
-<text x="90" y="256" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">v</text>
-<text x="126" y="234" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--blu)">a<tspan baseline-shift="sub" font-size="9">cp</tspan></text>
-<text x="30" y="205" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">v</text>
-<text x="66" y="147" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--blu)">a<tspan baseline-shift="sub" font-size="9">cp</tspan></text>
-</svg>
-<p class="did">In ogni punto della traiettoria $\vec v$ è tangente alla circonferenza e
-$\vec a_{cp}$ è diretta verso il centro: cambia direzione punto per punto, ma punta sempre lì.</p>
-</div>
+<p>Nel moto circolare uniforme $v=\omega r$ è costante: c'è comunque un'accelerazione?</p>
 
-<p>Poiché nel moto circolare uniforme $\omega$ è costante e $v=\omega r$, anche il modulo di
-$\vec v$ resta costante: eppure un'accelerazione c'è, perché è la direzione di $\vec v$ a
-cambiare istante per istante. Questa accelerazione è sempre diretta verso il centro della
-circonferenza, e per questo si chiama <b>accelerazione centripeta</b>.</p>
-
-<h2>Quanto vale</h2>
-
-<p>Consideriamo due punti 1 e 2 molto vicini sulla traiettoria, separati dall'angolo
-$\Delta\theta$ e dalla corda $\Delta s$. I raggi che li congiungono al centro hanno entrambi
-lunghezza $r$: il triangolo che formano è isoscele, con angolo al vertice $\Delta\theta$. Anche
-i vettori velocità $\vec v_1$ e $\vec v_2$, essendo tangenti, ruotano dello stesso angolo
-$\Delta\theta$ passando da 1 a 2; riportati con la coda in comune, individuano un secondo
-triangolo isoscele, di lati $v$ e vertice $\Delta\theta$, la cui base è $\Delta \vec v=\vec
-v_2-\vec v_1$.</p>
+<ul>
+<li>modulo di $\vec v$ costante;</li>
+<li>direzione di $\vec v$ (tangente) variabile → accelerazione non nulla;</li>
+<li>accelerazione sempre diretta verso il centro → <b>accelerazione centripeta</b> $\vec a_{cp}$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="ma13c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="ma13d" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<!-- triangolo dei raggi -->
-<circle cx="110" cy="120" r="80" fill="none" stroke="var(--riga)" stroke-width="1.4"/>
-<line x1="110" y1="120" x2="30" y2="90" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#ma13c)"/>
-<line x1="110" y1="120" x2="45" y2="165" stroke="var(--inchiostro)" stroke-width="1.8" marker-end="url(#ma13c)"/>
-<line x1="30" y1="90" x2="45" y2="165" stroke="var(--rosso)" stroke-width="2"/>
-<text x="60" y="100" font-family="var(--serif)" font-style="italic" font-size="13">r</text>
-<text x="65" y="150" font-family="var(--serif)" font-style="italic" font-size="13">r</text>
-<text x="10" y="132" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--rosso)">&Delta;s</text>
-<text x="112" y="114" font-family="var(--serif)" font-style="italic" font-size="12">&Delta;&theta;</text>
-<text x="8" y="80" font-family="var(--sans)" font-size="12">1</text>
-<text x="20" y="182" font-family="var(--sans)" font-size="12">2</text>
-<!-- triangolo delle velocita -->
-<line x1="320" y1="180" x2="380" y2="40" stroke="var(--verde)" stroke-width="2" marker-end="url(#ma13d)"/>
-<line x1="320" y1="180" x2="440" y2="150" stroke="var(--verde)" stroke-width="2" marker-end="url(#ma13d)"/>
-<line x1="380" y1="40" x2="440" y2="150" stroke="var(--rosso)" stroke-width="2" marker-end="url(#ma13c)"/>
-<text x="335" y="100" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">v<tspan baseline-shift="sub" font-size="9">1</tspan></text>
-<text x="395" y="170" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">v<tspan baseline-shift="sub" font-size="9">2</tspan></text>
-<text x="410" y="90" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--rosso)">&Delta;v</text>
-<text x="322" y="175" font-family="var(--serif)" font-style="italic" font-size="12">&Delta;&theta;</text>
-</svg>
-<p class="did">Il triangolo dei raggi (lati $r$, $r$, base $\Delta s$) e il triangolo delle
-velocità (lati $v$, $v$, base $\Delta v$) sono simili: stesso angolo al vertice $\Delta\theta$
-e stesso rapporto fra i lati uguali e la base.</p>
+<svg id="f-acp" viewBox="0 0 300 280" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velocità tangente e accelerazione centripeta in quattro punti della circonferenza"></svg>
+<p class="did">Verso antiorario: $\vec v$ tangente, $\vec a_{cp}$ verso il centro</p>
 </div>
 
-<p>Dalla similitudine dei due triangoli segue la proporzione fra basi e lati:</p>
+<h2>Modulo</h2>
 
-<div class="formula-box">$$\Delta s:r=\Delta v:v \quad\Longrightarrow\quad \Delta s\cdot v=\Delta v\cdot r$$</div>
+<p>Due punti 1 e 2 vicini, separati dall'angolo $\Delta\theta$:</p>
 
-<p>Dividendo entrambi i membri per $\Delta t$ e passando al limite, $\dfrac{\Delta s}{\Delta
-t}$ diventa la velocità $v$ e $\dfrac{\Delta v}{\Delta t}$ diventa per definizione
-l'accelerazione centripeta $a_{cp}$:</p>
+<ul>
+<li>triangolo dei raggi: lati $r$, $r$, base $\Delta s$ (corda);</li>
+<li>triangolo delle velocità: lati $v$, $v$, base $\Delta v=|\vec v_2-\vec v_1|$;</li>
+<li>stesso angolo al vertice $\Delta\theta$ → triangoli simili.</li>
+</ul>
 
-<div class="formula-box">$$\frac{\Delta v}{\Delta t}=\frac{\Delta s}{\Delta t}\cdot\frac{v}{r}
-\quad\Longrightarrow\quad a_{cp}=v\cdot\frac{v}{r}=\frac{v^2}{r}$$</div>
+<div class="fig">
+<svg id="f-sim" viewBox="0 0 460 230" style="width:100%;max-width:460px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo dei raggi e triangolo delle velocità per l'angolo scelto con il cursore"></svg>
+<div class="cursore"><label for="cur-sim">Δθ</label><input id="cur-sim" type="range" min="0.3" max="1.2" step="0.05" value="0.8"><span id="val-sim">0,80 rad</span></div>
+<div class="did-parti" style="--n:2"><p class="did">Raggi: $r$, $r$, $\Delta s$</p><p class="did">Velocità: $v$, $v$, $\Delta v$</p></div>
+</div>
 
-<p>Sostituendo $v=\omega r$ si ottiene una seconda forma, utile quando si conosce la velocità
-angolare invece della velocità tangenziale:</p>
+<p class="eq">$$\Delta s:r=\Delta v:v \quad\Longrightarrow\quad \Delta v\cdot r=\Delta s\cdot v$$</p>
 
-<div class="formula-box">$$a_{cp}=\frac{v^2}{r}=\frac{(\omega r)^2}{r}=\omega^2 r$$</div>
+<p>Si divide per $\Delta t$; per $\Delta t\to 0$, $\dfrac{\Delta s}{\Delta t}\to v$ e $\dfrac{\Delta v}{\Delta t}\to a_{cp}$:</p>
 
-<div class="nota">Le due espressioni sono equivalenti: $a_{cp}=\dfrac{v^2}{r}$ se si conosce
-$v$, $a_{cp}=\omega^2 r$ se si conosce $\omega$. Entrambe danno un'accelerazione in
-$\text{m/s}^2$, coerentemente con $[v^2/r]=\text{m}^2\text{s}^{-2}/\text{m}=\text{m/s}^2$ e
-$[\omega^2 r]=\text{s}^{-2}\cdot\text{m}=\text{m/s}^2$.</div>
+<p class="eq">$$a_{cp}\cdot r=v\cdot v$$</p>
 
+<div class="def"><span class="et">Accelerazione centripeta</span>
+<p class="eq">$$a_{cp}=\frac{v^2}{r}=\omega^2 r$$</p></div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>$[a_{cp}]=\text{m/s}^2$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../12-moto-circolare-uniforme-e-velocita-tangenziale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Moto circolare uniforme e velocità tangenziale</span></a><a class="successiva" href="../14-periodo-frequenza-e-legge-oraria-del-moto-circolare-uniforme/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Periodo, frequenza e legge oraria del moto circolare uniforme</span></a></nav>
 <footer><p>Fisica terza &middot; Moto circolare &middot; Unità 13</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function freccia(s,p,q,col,id,w){return el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:col,'stroke-width':w||2.2,'marker-end':'url(#'+id+')'},s);}
+function rich(e,str){e.textContent='';str.split(/(_\{[^}]*\})/).forEach(function(q){if(!q)return;var t=el('tspan',q.charAt(0)==='_'?{'baseline-shift':'sub','font-size':'75%'}:{},e);t.textContent=q.charAt(0)==='_'?q.slice(2,-1):q;});}
+function f(z,n){return (z<-0.0049?'−':'')+Math.abs(z).toFixed(n).replace('.',',');}
+function pol(O,R,a){return [O[0]+R*Math.cos(a),O[1]-R*Math.sin(a)];}
+function arco(O,R,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)/0.03)),d='';for(var i=0;i<=n;i++){var p=pol(O,R,a0+(a1-a0)*i/n);d+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}return d;}
+function assi(s,O,x0,x1,y0,y1){marc(s,'ax'+s.id,'var(--inchiostro)');
+  freccia(s,[x0,O[1]],[x1,O[1]],'var(--inchiostro)','ax'+s.id,1.3);freccia(s,[O[0],y0],[O[0],y1],'var(--inchiostro)','ax'+s.id,1.3);
+  txt(s,[x1+2,O[1]+13],'x',{'font-family':'var(--serif)','font-style':'italic','font-size':14});txt(s,[O[0]-12,y1+2],'y',{'font-family':'var(--serif)','font-style':'italic','font-size':14});}
+/* v e a_cp in quattro punti, verso antiorario */
+(function(){
+var s=document.getElementById('f-acp'),O=[150,140],R=88;
+marc(s,'ac-v','var(--verde)');marc(s,'ac-a','var(--blu)');
+el('circle',{cx:O[0],cy:O[1],r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4},s);
+el('circle',{cx:O[0],cy:O[1],r:2.6,fill:'var(--inchiostro)'},s);
+[30,120,210,300].forEach(function(g){var t=g*Math.PI/180,P=pol(O,R,t),Lv=52,La=38;
+  var T=[P[0]-Lv*Math.sin(t),P[1]-Lv*Math.cos(t)],C=pol(O,R-La,t);
+  freccia(s,P,T,'var(--verde)','ac-v');freccia(s,P,C,'var(--blu)','ac-a');
+  el('circle',{cx:P[0],cy:P[1],r:3.6,fill:'var(--inchiostro)'},s);
+  var nx=Math.cos(t),ny=-Math.sin(t);
+  txt(s,[T[0]+nx*11,T[1]+ny*11],'v',{'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600,fill:'var(--verde)'});
+  var m=pol(O,R-La/2,t),tx=-Math.sin(t),ty=-Math.cos(t);
+  var e=txt(s,[m[0]-tx*14,m[1]-ty*14],'',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--blu)'});rich(e,'a_{cp}');
+});
+})();
+/* triangoli simili, cursore Δθ */
+(function(){
+var s=document.getElementById('f-sim'),C=[118,112],R=88,t1=150*Math.PI/180,O2=[318,26],Lv=150;
+marc(s,'sm-v','var(--verde)');marc(s,'sm-r','var(--rosso)');marc(s,'sm-k','var(--inchiostro)');
+el('circle',{cx:C[0],cy:C[1],r:R,fill:'none',stroke:'var(--riga)','stroke-width':1.4},s);
+el('circle',{cx:C[0],cy:C[1],r:2.6,fill:'var(--inchiostro)'},s);
+var P1=pol(C,R,t1);
+el('line',{x1:C[0],y1:C[1],x2:P1[0],y2:P1[1],stroke:'var(--inchiostro)','stroke-width':1.8},s);
+var r2=el('line',{x1:C[0],y1:C[1],stroke:'var(--inchiostro)','stroke-width':1.8},s);
+var ch=el('line',{stroke:'var(--rosso)','stroke-width':2.2},s);
+var a1=el('path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.1},s);
+el('circle',{cx:P1[0],cy:P1[1],r:3.4,fill:'var(--inchiostro)'},s);
+var p2=el('circle',{r:3.4,fill:'var(--inchiostro)'},s);
+var n1=txt(s,pol(C,R+13,t1),'1',{'font-size':12}),n2=txt(s,[0,0],'2',{'font-size':12});
+var lr1=txt(s,[0,0],'r',{'font-family':'var(--serif)','font-style':'italic','font-size':14}),lr2=txt(s,[0,0],'r',{'font-family':'var(--serif)','font-style':'italic','font-size':14});
+var ls=txt(s,[0,0],'Δs',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--rosso)'});
+var ld=txt(s,[0,0],'Δθ',{'font-family':'var(--serif)','font-style':'italic','font-size':12});
+var v1=el('line',{x1:O2[0],y1:O2[1],stroke:'var(--verde)','stroke-width':2.2,'marker-end':'url(#sm-v)'},s);
+var v2=el('line',{x1:O2[0],y1:O2[1],stroke:'var(--verde)','stroke-width':2.2,'marker-end':'url(#sm-v)'},s);
+var dv=el('line',{stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#sm-r)'},s);
+var a2=el('path',{fill:'none',stroke:'var(--inchiostro)','stroke-width':1.1},s);
+var lv1=txt(s,[0,0],'',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--verde)'});rich(lv1,'v_{1}');
+var lv2=txt(s,[0,0],'',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--verde)'});rich(lv2,'v_{2}');
+var ldv=txt(s,[0,0],'Δv',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--rosso)'});
+var ld2=txt(s,[0,0],'Δθ',{'font-family':'var(--serif)','font-style':'italic','font-size':12});
+var tv=txt(s,[455,214],'',{'text-anchor':'end','font-size':12});
+var cur=document.getElementById('cur-sim'),val=document.getElementById('val-sim');
+function D(p){return (p[0]).toFixed(1)+','+(p[1]).toFixed(1);}
+function dis(){var d=parseFloat(cur.value),t2=t1+d,P2=pol(C,R,t2);
+  r2.setAttribute('x2',P2[0]);r2.setAttribute('y2',P2[1]);p2.setAttribute('cx',P2[0]);p2.setAttribute('cy',P2[1]);
+  ch.setAttribute('x1',P1[0]);ch.setAttribute('y1',P1[1]);ch.setAttribute('x2',P2[0]);ch.setAttribute('y2',P2[1]);
+  a1.setAttribute('d',arco(C,22,t1,t2));
+  var q=pol(C,R+13,t2);n2.setAttribute('x',q[0]);n2.setAttribute('y',q[1]);
+  q=pol(C,R*0.55,t1);lr1.setAttribute('x',q[0]+11*Math.cos(t1-Math.PI/2));lr1.setAttribute('y',q[1]-11*Math.sin(t1-Math.PI/2));
+  q=pol(C,R*0.55,t2);lr2.setAttribute('x',q[0]+11*Math.cos(t2+Math.PI/2));lr2.setAttribute('y',q[1]-11*Math.sin(t2+Math.PI/2));
+  q=pol(C,R*Math.cos(d/2)-14,t1+d/2);ls.setAttribute('x',q[0]);ls.setAttribute('y',q[1]);
+  q=pol(C,17,t1+d/2+Math.PI);ld.setAttribute('x',q[0]);ld.setAttribute('y',q[1]);
+  /* velocità: direzione tangente antioraria, angolo θ+90° */
+  var b1=t1+Math.PI/2,b2=t2+Math.PI/2,V1=pol(O2,Lv,b1),V2=pol(O2,Lv,b2);
+  v1.setAttribute('x2',V1[0]);v1.setAttribute('y2',V1[1]);v2.setAttribute('x2',V2[0]);v2.setAttribute('y2',V2[1]);
+  dv.setAttribute('x1',V1[0]);dv.setAttribute('y1',V1[1]);dv.setAttribute('x2',V2[0]);dv.setAttribute('y2',V2[1]);
+  a2.setAttribute('d',arco(O2,30,b1,b2));
+  q=pol(O2,Lv*0.55,b1);lv1.setAttribute('x',q[0]-13);lv1.setAttribute('y',q[1]);
+  q=pol(O2,Lv*0.55,b2);lv2.setAttribute('x',q[0]+12);lv2.setAttribute('y',q[1]-8);
+  q=pol(O2,Lv*Math.cos(d/2)+14,t1+d/2+Math.PI/2);ldv.setAttribute('x',q[0]);ldv.setAttribute('y',q[1]);
+  q=pol(O2,14,t1+d/2-Math.PI/2);ld2.setAttribute('x',q[0]);ld2.setAttribute('y',q[1]);
+  var k=2*Math.sin(d/2);tv.textContent='Δs/r = Δv/v = '+f(k,2);val.textContent=f(d,2)+' rad';}
+cur.addEventListener('input',dis);dis();
+})();
+})();
+</script>
 </body>
 </html>

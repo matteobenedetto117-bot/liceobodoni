@@ -75,6 +75,7 @@
 - Parole: 345 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,4 pagine di traccia (pagina 23 e la parte iniziale di pagina 24, fino al box a_cp=ω²r prima che inizi "Altre grandezze del MCU")
 - Rettifica: nessuna, la derivazione (similitudine dei triangoli Δs:r=Δv:v, a_cp=v²/r, e la forma equivalente a_cp=ω²r ottenuta sostituendo v=ωr) è stata verificata con SymPy e coincide con la traccia
 - Aggiunta: nessuna
+- Revisione (30/10/2026, regole 13/10): parole circa 243 → 85 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno; tolti sommario, nota sulle due espressioni equivalenti e spiegazioni; apertura con domanda, proprietà di v⃗ e a⃗_cp in elenco, triangoli simili in elenco, titoletto «Quanto vale» → «Modulo»; proporzione e passaggio al limite in .eq, a_cp = v²/r = ω²r e unità m/s² in .def (limite verificato con SymPy). Correzioni: nella prima figura le velocità non avevano tutte lo stesso verso di rotazione (in due punti orario, in due antiorario): ora tutte antiorarie; nella seconda figura v⃗₁ e v⃗₂ avevano lunghezze diverse e non erano perpendicolari ai raggi (triangolo delle velocità non isoscele né simile a quello dei raggi). Figure rifatte da script; la seconda con cursore Δθ (0,3–1,2 rad: triangoli calcolati, Δs/r = Δv/v nel disegno).
 
 ## Unità 14 — Periodo, frequenza e legge oraria del moto circolare uniforme
 - Parole: 303 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,6 pagine di traccia (da "Altre grandezze del MCU" a metà pagina 24 fino alla fine di pagina 25)
