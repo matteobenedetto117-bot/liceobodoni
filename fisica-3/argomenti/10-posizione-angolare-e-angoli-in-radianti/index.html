@@ -5,24 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Posizione angolare e angoli in radianti — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.nota{background:var(--blu-chiaro);border-left:3px solid var(--blu);border-radius:6px;padding:12px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:26px 0}
-.interattivo .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blu);display:block;margin-bottom:10px}
-.interattivo .righe{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;margin-top:14px;font-family:var(--sans);font-size:.92rem}
-.interattivo input[type=range]{width:260px;vertical-align:middle}
-.letture{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--sans);font-size:.92rem;margin-top:6px}
-.letture b{color:var(--blu)}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -32,149 +61,139 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Moto circolare &middot; Unità 10</p>
   <h1>Posizione angolare e angoli in radianti</h1>
-  <p class="sommario">Il moto circolare è il moto di un punto che si sposta lungo una
-  circonferenza. Per descriverlo conviene abbandonare le due coordinate $x$ e $y$ e usare un
-  solo numero, l'angolo che individua il punto sulla traiettoria.</p>
 </header>
 
-<h2>Posizione angolare</h2>
+<p>Punto che si muove su una circonferenza di raggio $r$, centro nell'origine: come si individua la sua posizione con un solo numero?</p>
 
-<p>Fissiamo il centro della circonferenza nell'origine e prendiamo l'asse $x$ come direzione di
-riferimento: quando il punto sta su questo asse, l'angolo vale zero. La <b>posizione angolare</b>
-$\theta$ è l'angolo compreso tra l'asse $x$ e il raggio che congiunge il centro al punto; per
-convenzione è positivo se misurato in verso antiorario, negativo in verso orario.</p>
+<div class="def"><span class="et">Posizione angolare</span>
+<p>$\theta$: angolo fra l'asse $x$ e il raggio che porta al punto.</p></div>
+
+<ul>
+<li>verso antiorario → $\theta$ positivo;</li>
+<li>verso orario → $\theta$ negativo;</li>
+<li>punto sul semiasse $x$ positivo → $\theta = 0$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="ma" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="30" y1="150" x2="390" y2="150" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#ma)"/>
-<line x1="150" y1="260" x2="150" y2="20" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#ma)"/>
-<text x="396" y="155" font-family="var(--serif)" font-style="italic" font-size="14">x</text>
-<text x="138" y="16" font-family="var(--serif)" font-style="italic" font-size="14">y</text>
-<circle cx="150" cy="150" r="90" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="150" y1="150" x2="240" y2="150" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="150" y1="150" x2="213.6" y2="76.9" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M 180 150 A 30 30 0 0 0 172.9 121.7" fill="none" stroke="var(--verde)" stroke-width="1.6"/>
-<text x="192" y="135" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">&theta;</text>
-<text x="196" y="112" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">r</text>
-<circle cx="213.6" cy="76.9" r="3.4" fill="var(--inchiostro)"/>
-<path d="M 150 100 A 50 50 0 0 1 178 105" fill="none" stroke="var(--verde)" stroke-width="1.2" marker-end="url(#ma)"/>
-<text x="150" y="88" font-family="var(--sans)" font-size="12" fill="var(--verde)">(+)</text>
-<path d="M 150 200 A 50 50 0 0 0 178 195" fill="none" stroke="var(--grigio)" stroke-width="1.2" marker-end="url(#ma)"/>
-<text x="150" y="222" font-family="var(--sans)" font-size="12" fill="var(--grigio)">(&minus;)</text>
-</svg>
-<p class="did">La posizione angolare $\theta$ è l'angolo tra l'asse $x$ e il raggio $r$ che porta
-al punto; positivo in senso antiorario, negativo in senso orario. Per $\theta=0$ il punto sta
-sull'asse $x$.</p>
+<svg id="f-pos" viewBox="0 0 360 256" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto su una circonferenza di raggio 2,0 m; il cursore cambia la posizione angolare e mostra coordinate e arco percorso"></svg>
+<div class="cursore"><label for="cur-th">θ</label><input id="cur-th" type="range" min="0" max="360" step="1" value="60"><span id="val-th">60°</span></div>
+<p class="did">$r = 2{,}0$ m: coordinate e arco percorso al variare di $\theta$</p>
 </div>
 
-<p>Conoscere il raggio $r$ della traiettoria e l'angolo $\theta$ equivale a conoscere la
-posizione del punto: le coordinate cartesiane si ottengono proiettando $r$ sui due assi.</p>
+<p>Le coordinate si ottengono proiettando il raggio sugli assi:</p>
 
-<div class="formula-box">$$x=r\cos\theta \qquad\qquad y=r\sin\theta$$</div>
+<p class="eq">$$x = r\cos\theta \qquad\qquad y = r\sin\theta$$</p>
 
 <h2>Angoli in radianti</h2>
 
-<p>Invece dei gradi conviene misurare l'angolo con un'unità legata direttamente alla lunghezza
-percorsa sulla circonferenza: il <b>radiante</b>. Se il punto percorre un arco di lunghezza $l$,
-l'angolo corrispondente in radianti è il rapporto tra l'arco e il raggio:</p>
+<p>L'angolo in radianti è il rapporto fra l'arco percorso $l$ e il raggio $r$:</p>
 
-<div class="formula-box">$$\theta(\text{rad})=\frac{l}{r}$$</div>
+<div class="def"><span class="et">Radiante</span>
+<p class="eq">$$\theta\,(\text{rad}) = \frac{l}{r}$$</p></div>
 
-<p>Essendo il rapporto fra due lunghezze, il radiante è un numero puro, senza unità di misura:</p>
-
-<div class="formula-box">$$[\theta(\text{rad})]=\frac{\text{m}}{\text{m}}=1 \quad\text{(adimensionale)}$$</div>
+<div class="def"><span class="et">Unità di misura</span>
+<p>Radiante (rad), numero puro: $\;[\theta] = \dfrac{\text{m}}{\text{m}} = 1$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="60" y1="150" x2="60" y2="60" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="60" y1="150" x2="140" y2="118" stroke="var(--rosso)" stroke-width="2"/>
-<text x="42" y="112" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">r</text>
-<text x="108" y="150" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">r</text>
-<path d="M 60 90 A 60 60 0 0 1 96 105" fill="none" stroke="var(--verde)" stroke-width="1.4"/>
-<text x="66" y="82" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">&theta;</text>
-<path d="M60,60 A90,90 0 0 1 140,118" fill="none" stroke="var(--verde)" stroke-width="2.4"/>
-<text x="104" y="72" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">l</text>
-</svg>
-<p class="did">Se l'arco percorso $l$ è lungo esattamente quanto il raggio $r$, l'angolo
-corrispondente vale $1$ radiante, circa $57{,}3^\circ$.</p>
+<svg id="f-rad" viewBox="0 0 230 196" style="width:100%;max-width:280px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arco lungo quanto il raggio: angolo di un radiante"></svg>
+<p class="did">$l = r$: $\theta = 1$ rad $\approx 57{,}3°$</p>
 </div>
 
-<p>Se il punto compie un giro completo, l'arco percorso è l'intera circonferenza, $l=2\pi r$:
-un angolo giro misura allora</p>
+<p>Giro completo: l'arco è l'intera circonferenza, $l = 2\pi r$:</p>
 
-<div class="formula-box">$$\theta(\text{giro})=\frac{2\pi r}{r}=2\pi\ \text{rad}$$</div>
+<p class="eq">$$\theta_{\text{giro}} = \frac{2\pi r}{r} = 2\pi\ \text{rad} = 360°$$</p>
 
-<p>Poiché $360^\circ$ e $2\pi$ rad misurano lo stesso angolo giro, vale la proporzione
-$\theta^\circ : 360^\circ = \theta_{\text{rad}} : 2\pi$, da cui si passa da un'unità
-all'altra:</p>
+<p>Dalla proporzione $\theta° : 360° = \theta_{\text{rad}} : 2\pi$:</p>
 
-<div class="formula-box">$$\theta_{\text{rad}}=\theta^\circ\cdot\frac{\pi}{180^\circ} \qquad\qquad \theta^\circ=\frac{180^\circ}{\pi}\cdot\theta_{\text{rad}}$$</div>
-
-<div class="interattivo">
-<span class="et">Da provare</span>
-<p style="margin:0 0 4px;font-size:.95rem">Il cursore muove il punto lungo una circonferenza di
-raggio $r=2$ m: si vede come cambiano le coordinate $x,y$ e come l'arco percorso $l=r\theta$
-cresce insieme all'angolo, in gradi e in radianti.</p>
-<svg id="cerchio" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg" style="max-width:320px">
-<defs>
-<marker id="mi" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<line x1="20" y1="140" x2="300" y2="140" stroke="var(--riga)" stroke-width="1.2" marker-end="url(#mi)"/>
-<line x1="160" y1="250" x2="160" y2="20" stroke="var(--riga)" stroke-width="1.2" marker-end="url(#mi)"/>
-<circle cx="160" cy="140" r="100" fill="none" stroke="var(--blu)" stroke-width="1.6"/>
-<path id="arco" d="" fill="none" stroke="var(--verde)" stroke-width="3"/>
-<line id="raggio" x1="160" y1="140" x2="260" y2="140" stroke="var(--rosso)" stroke-width="2"/>
-<circle id="punto" cx="260" cy="140" r="4.5" fill="var(--inchiostro)"/>
-</svg>
-<div class="righe">
-<label for="ang">&theta; = <span id="valDeg">0</span>&deg;</label>
-<input id="ang" type="range" min="0" max="360" value="0" step="1">
-</div>
-<div class="letture">
-<span>&theta; = <b><span id="valRad">0,00</span></b> rad</span>
-<span>x = <b><span id="valX">2,00</span></b> m</span>
-<span>y = <b><span id="valY">0,00</span></b> m</span>
-<span>l = r&theta; = <b><span id="valL">0,00</span></b> m</span>
-</div>
-</div>
-<script>
-(function(){
-  var cx=160, cy=140, R=100, r=2;
-  var slider=document.getElementById('ang');
-  function fmt(v){ return v.toFixed(2).replace('.',','); }
-  function aggiorna(){
-    var deg=parseFloat(slider.value);
-    var rad=deg*Math.PI/180;
-    var px=cx+R*Math.cos(rad), py=cy-R*Math.sin(rad);
-    document.getElementById('raggio').setAttribute('x2', px);
-    document.getElementById('raggio').setAttribute('y2', py);
-    document.getElementById('punto').setAttribute('cx', px);
-    document.getElementById('punto').setAttribute('cy', py);
-    var passi=Math.max(2, Math.round(deg/3));
-    var d='M '+(cx+R)+' '+cy;
-    for(var i=1;i<=passi;i++){
-      var a=rad*i/passi;
-      d+=' L '+(cx+R*Math.cos(a))+' '+(cy-R*Math.sin(a));
-    }
-    document.getElementById('arco').setAttribute('d', deg>0? d : '');
-    document.getElementById('valDeg').textContent=Math.round(deg);
-    document.getElementById('valRad').textContent=fmt(rad);
-    document.getElementById('valX').textContent=fmt(r*Math.cos(rad));
-    document.getElementById('valY').textContent=fmt(r*Math.sin(rad));
-    document.getElementById('valL').textContent=fmt(r*rad);
-  }
-  slider.addEventListener('input', aggiorna);
-  aggiorna();
-})();
-</script>
-
+<div class="def"><span class="et">Conversione gradi–radianti</span>
+<p class="eq">$$\theta_{\text{rad}} = \theta°\cdot\frac{\pi}{180°} \qquad\qquad \theta° = \theta_{\text{rad}}\cdot\frac{180°}{\pi}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../09-lancio-orizzontale-da-un-altezza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Lancio orizzontale da un'altezza</span></a><a class="successiva" href="../11-velocita-angolare/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Velocità angolare</span></a></nav>
 <footer><p>Fisica terza &middot; Moto circolare &middot; Unità 10</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function freccia(s,p,q,col,id,w){return el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:col,'stroke-width':w||2.2,'marker-end':'url(#'+id+')'},s);}
+function rich(e,str){e.textContent='';str.split(/(_\{[^}]*\})/).forEach(function(q){if(!q)return;var t=el('tspan',q.charAt(0)==='_'?{'baseline-shift':'sub','font-size':'75%'}:{},e);t.textContent=q.charAt(0)==='_'?q.slice(2,-1):q;});}
+function f(z,n){return (z<-0.0049?'−':'')+Math.abs(z).toFixed(n).replace('.',',');}
+function pol(O,R,a){return [O[0]+R*Math.cos(a),O[1]-R*Math.sin(a)];}
+function arco(O,R,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)/0.03)),d='';for(var i=0;i<=n;i++){var p=pol(O,R,a0+(a1-a0)*i/n);d+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}return d;}
+function assi(s,O,x0,x1,y0,y1){marc(s,'ax'+s.id,'var(--inchiostro)');
+  freccia(s,[x0,O[1]],[x1,O[1]],'var(--inchiostro)','ax'+s.id,1.3);freccia(s,[O[0],y0],[O[0],y1],'var(--inchiostro)','ax'+s.id,1.3);
+  txt(s,[x1+2,O[1]+13],'x',{'font-family':'var(--serif)','font-style':'italic','font-size':14});txt(s,[O[0]-12,y1+2],'y',{'font-family':'var(--serif)','font-style':'italic','font-size':14});}
+/* figura 1: r = 2,0 m (95 px); cursore θ da 0° a 360° */
+(function(){
+var s=document.getElementById('f-pos'),O=[128,132],R=95,r=2.0;
+assi(s,O,18,248,250,14);
+el('circle',{cx:O[0],cy:O[1],r:R,fill:'none',stroke:'var(--blu)','stroke-width':1.6},s);
+marc(s,'mpv','var(--verde)');marc(s,'mpg','var(--grigio)');
+var a=el('path',{d:arco(O,R+13,0.30,0.62),fill:'none',stroke:'var(--verde)','stroke-width':1.3,'marker-end':'url(#mpv)'},s);
+txt(s,pol(O,R+26,0.50),'+',{fill:'var(--verde)','font-size':14,'font-weight':700});
+el('path',{d:arco(O,R+13,-0.30,-0.62),fill:'none',stroke:'var(--grigio)','stroke-width':1.3,'marker-end':'url(#mpg)'},s);
+txt(s,pol(O,R+26,-0.50),'−',{fill:'var(--grigio)','font-size':14,'font-weight':700});
+var dx=el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'},s),dy=el('line',{stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'},s);
+var arc=el('path',{fill:'none',stroke:'var(--verde)','stroke-width':3.2},s);
+var ath=el('path',{fill:'none',stroke:'var(--verde)','stroke-width':1.4},s);
+var rag=el('line',{x1:O[0],y1:O[1],stroke:'var(--rosso)','stroke-width':2},s);
+var pt=el('circle',{r:4.2,fill:'var(--inchiostro)'},s);
+var lt=txt(s,[0,0],'θ',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--verde)'});
+var lr=txt(s,[0,0],'r',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--rosso)'});
+var ll=txt(s,[0,0],'l',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--verde)'});
+var t1=txt(s,[352,16],'',{'text-anchor':'end','font-size':12}),t2=txt(s,[352,33],'',{'text-anchor':'end','font-size':12}),
+    t3=txt(s,[352,50],'',{'text-anchor':'end','font-size':12,fill:'var(--blu)'}),t4=txt(s,[352,67],'',{'text-anchor':'end','font-size':12,fill:'var(--blu)'}),
+    t5=txt(s,[352,84],'',{'text-anchor':'end','font-size':12,fill:'var(--verde)'});
+function set(l,p,q){l.setAttribute('x1',p[0]);l.setAttribute('y1',p[1]);l.setAttribute('x2',q[0]);l.setAttribute('y2',q[1]);}
+var cur=document.getElementById('cur-th'),val=document.getElementById('val-th');
+function dis(){var deg=parseInt(cur.value,10),th=deg*Math.PI/180,P=pol(O,R,th);
+  set(rag,O,P);pt.setAttribute('cx',P[0]);pt.setAttribute('cy',P[1]);
+  set(dx,P,[P[0],O[1]]);set(dy,P,[O[0],P[1]]);
+  arc.setAttribute('d',deg>0?arco(O,R,0,th):'');ath.setAttribute('d',deg>0?arco(O,26,0,th):'');
+  var m=th/2;if(Math.abs(Math.sin(m))<0.18||Math.abs(Math.cos(m))<0.18)m+=0.2;
+  lt.style.display=deg>=25?'':'none';var q=pol(O,40,m);lt.setAttribute('x',q[0]);lt.setAttribute('y',q[1]);
+  var M=pol(O,R*0.6,th),n=[-Math.sin(th),-Math.cos(th)];lr.setAttribute('x',M[0]+11*n[0]);lr.setAttribute('y',M[1]+11*n[1]);
+  ll.style.display=deg>=50?'':'none';var L=pol(O,R-12,th/2);if(deg>=50){ll.setAttribute('x',L[0]);ll.setAttribute('y',L[1]);}
+  t1.textContent='θ = '+deg+'°';t2.textContent='θ = '+f(th,2)+' rad';
+  t3.textContent='x = '+f(r*Math.cos(th),2)+' m';t4.textContent='y = '+f(r*Math.sin(th),2)+' m';
+  t5.textContent='l = rθ = '+f(r*th,2)+' m';val.textContent=deg+'°';}
+cur.addEventListener('input',dis);dis();
+})();
+/* figura 2: arco l = r, angolo di 1 rad */
+(function(){
+var s=document.getElementById('f-rad'),O=[50,180],R=150,a0=Math.PI/2,a1=Math.PI/2-1;
+var A=pol(O,R,a0),B=pol(O,R,a1);
+el('line',{x1:O[0],y1:O[1],x2:A[0],y2:A[1],stroke:'var(--rosso)','stroke-width':2},s);
+el('line',{x1:O[0],y1:O[1],x2:B[0],y2:B[1],stroke:'var(--rosso)','stroke-width':2},s);
+el('path',{d:arco(O,R,a1,a0),fill:'none',stroke:'var(--verde)','stroke-width':3},s);
+el('path',{d:arco(O,34,a1,a0),fill:'none',stroke:'var(--verde)','stroke-width':1.4},s);
+txt(s,pol(O,50,(a0+a1)/2),'θ',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--verde)'});
+txt(s,[O[0]-12,(O[1]+A[1])/2],'r',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--rosso)'});
+var M=pol(O,R*0.55,a1);txt(s,[M[0]+8,M[1]+10],'r',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--rosso)'});
+txt(s,pol(O,R+14,(a0+a1)/2),'l',{'font-family':'var(--serif)','font-style':'italic','font-size':14,fill:'var(--verde)'});
+el('circle',{cx:O[0],cy:O[1],r:3,fill:'var(--inchiostro)'},s);
+})();
+})();
+</script>
 </body>
 </html>

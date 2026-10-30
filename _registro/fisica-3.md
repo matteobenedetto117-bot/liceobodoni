@@ -57,6 +57,7 @@
 - Parole: 349 su 2 pagine di traccia (pagine 19–20)
 - Rettifica: nessuna, le relazioni (x=r cosθ, y=r sinθ, θ(rad)=l/r, angolo giro=2π rad, θrad=θ°·π/180°) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna; lo strumento interattivo con il cursore per l'angolo visualizza solo relazioni già presenti nella traccia (coordinate del punto e arco percorso)
+- Revisione (30/10/2026, regole 13/10): parole circa 340 → 121 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 09); tolti sommario, titoletto «Posizione angolare» e frasi di spiegazione; apertura con domanda; posizione angolare in .def, segno di θ in elenco caso → conseguenza; coordinate in .eq; radiante in .def, unità di misura (numero puro) in .def a sé; angolo giro in .eq; conversione gradi–radianti in .def. Titoletto «Angoli in radianti» mantenuto. Nessuna comparsa. Nessuna correzione concettuale (1 rad ≈ 57,3°, θ_giro = 2π rad verificati con SymPy). Figure rifatte da script: la figura della posizione angolare e il riquadro «Da provare» (che ripeteva la stessa figura con il cursore) unite in un'unica figura interattiva (cursore θ da 0° a 360°, r = 2,0 m: raggio, arco l in verde, proiezioni sugli assi, versi + e −, valori di θ in gradi e radianti, x, y, l nel disegno); figura del radiante calcolata con angolo di esattamente 1 rad (prima circa 68° e raggi di lunghezza diversa).
 
 ## Unità 11 — Velocità angolare
 - Parole: 242 su 1 pagina di traccia (pagina 21)
