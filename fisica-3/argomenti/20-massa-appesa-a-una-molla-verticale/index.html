@@ -5,15 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Massa appesa a una molla verticale — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.figura{margin:26px 0;text-align:center}
-.figura svg{max-width:100%;height:auto}
-.figura p.didascalia{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,100 +62,108 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Moto armonico &middot; Unità 20</p>
   <h1>Massa appesa a una molla verticale</h1>
-  <p class="sommario">Se la molla dell'oscillatore è verticale e vi appendiamo una massa, il peso la
-  allunga e sposta il punto attorno a cui avviene l'oscillazione. Vediamo dove si trova questo nuovo
-  equilibrio e come cambia, se cambia, il moto.</p>
 </header>
 
-<h2>La nuova posizione di equilibrio</h2>
+<p>Massa $m$ appesa a una molla verticale di costante elastica $k$: dove si trova la nuova posizione di equilibrio?</p>
 
-<div class="figura">
-<svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fr20a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-    <marker id="fr20b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--verde)"/>
-    </marker>
-    <marker id="fr20c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-    </marker>
-  </defs>
-
-  <!-- asse y -->
-  <line x1="40" y1="200" x2="40" y2="18" stroke="var(--inchiostro)" stroke-width="1.3" marker-end="url(#fr20a)"/>
-  <text x="30" y="20" font-size="13" text-anchor="middle" font-family="var(--serif)" font-style="italic">y</text>
-
-  <!-- soffitto -->
-  <line x1="70" y1="30" x2="210" y2="30" stroke="var(--inchiostro)" stroke-width="1.6"/>
-  <line x1="76" y1="30" x2="68" y2="40" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="96" y1="30" x2="88" y2="40" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="116" y1="30" x2="108" y2="40" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="136" y1="30" x2="128" y2="40" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="156" y1="30" x2="148" y2="40" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="176" y1="30" x2="168" y2="40" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="196" y1="30" x2="188" y2="40" stroke="var(--inchiostro)" stroke-width="1"/>
-
-  <!-- molla a riposo, senza massa, fino a 0 -->
-  <polyline points="100,30 100,38 90,44 110,50 90,56 110,62 100,68 100,76"
-    fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-  <line x1="60" y1="76" x2="230" y2="76" stroke="var(--riga)" stroke-width="1.3" stroke-dasharray="4 3"/>
-  <text x="52" y="80" font-size="12.5" text-anchor="end" font-family="var(--sans)" fill="var(--grigio)">0</text>
-  <text x="100" y="20" font-size="11.5" text-anchor="middle" font-family="var(--sans)" fill="var(--grigio)">a riposo</text>
-
-  <!-- molla allungata, con massa, fino a y0 -->
-  <polyline points="170,30 170,40 158,48 182,56 158,64 182,72 170,80 170,120"
-    fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-  <rect x="150" y="120" width="40" height="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.5"/>
-  <text x="170" y="140" font-size="13" text-anchor="middle" font-family="var(--serif)" font-style="italic">m</text>
-  <line x1="60" y1="150" x2="230" y2="150" stroke="var(--riga)" stroke-width="1.3" stroke-dasharray="4 3"/>
-  <text x="52" y="154" font-size="12.5" text-anchor="end" font-family="var(--sans)" fill="var(--grigio)">y&#8320;</text>
-  <text x="170" y="20" font-size="11.5" text-anchor="middle" font-family="var(--sans)" fill="var(--grigio)">con massa</text>
-
-  <!-- doppia freccia allungamento -->
-  <line x1="245" y1="76" x2="245" y2="150" stroke="var(--rosso)" stroke-width="1.3" marker-start="url(#fr20c)" marker-end="url(#fr20c)"/>
-  <text x="253" y="117" font-size="12.5" font-family="var(--sans)" fill="var(--rosso)">allungamento</text>
-
-  <!-- forze sulla massa -->
-  <line x1="170" y1="120" x2="170" y2="95" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#fr20b)"/>
-  <text x="178" y="98" font-size="12.5" font-family="var(--serif)" font-style="italic" fill="var(--verde)">F<tspan baseline-shift="sub" font-size="8.5">el</tspan></text>
-  <line x1="170" y1="150" x2="170" y2="175" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#fr20a)"/>
-  <text x="178" y="180" font-size="12.5" font-family="var(--serif)" font-style="italic">mg</text>
-</svg>
-<p class="didascalia">A sinistra la molla a riposo, senza massa, ferma al livello $y=0$. A destra la
-stessa molla con la massa appesa: si allunga finché la forza elastica $F_{el}$ non bilancia il peso
-$mg$, e la nuova posizione di equilibrio è $y_0$.</p>
+<div class="fig">
+<svg id="f-vert" viewBox="0 0 320 232" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Molla a riposo e molla allungata dal peso della massa appesa"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Senza massa: estremo in $y=0$</p>
+<p class="did">Con la massa: equilibrio in $y_0$</p>
+</div>
 </div>
 
-<p>Una massa appesa a una molla verticale oscilla attorno alla propria posizione di equilibrio, così
-come il blocco sul piano orizzontale — solo che qui l'equilibrio non coincide più con la lunghezza a
-riposo della molla, perché il peso la tiene allungata. In quel punto la forza elastica deve bilanciare
-esattamente la forza peso:</p>
+<p>All'equilibrio la forza elastica bilancia il peso:</p>
 
-<div class="formula-box">$$-ky_0=mg$$</div>
+<p class="eq">$$-ky_0=mg$$</p>
 
-<p>da cui la posizione di equilibrio</p>
+<div class="def"><span class="et">Posizione di equilibrio</span>
+<p class="eq">$$y_0=-\frac{mg}{k}$$</p></div>
 
-<div class="formula-box">$$y_0=-\dfrac{mg}{k}$$</div>
-
-<p>Il segno meno dice semplicemente che $y_0$ sta sotto il punto $y=0$ preso come riferimento (dove la
-molla starebbe se non vi fosse appesa la massa). Per tutti gli altri aspetti — pulsazione, periodo,
-legge oraria — le oscillazioni attorno a $y_0$ sono identiche a quelle di una molla orizzontale: cambia
-solo il punto attorno a cui si oscilla, non il tipo di moto.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Il pendolo semplice, dove la forza di richiamo non viene da una molla ma dalla componente del peso
-lungo la traiettoria, e dove per piccoli angoli si ritrova la stessa forma di oscillatore armonico con
-$k$ sostituito da $mg/L$ — unità 21.</li>
+<li>$y_0&lt;0$ → equilibrio sotto il livello $y=0$ della molla senza massa;</li>
+<li>oscillazioni attorno a $y_0$ → uguali a quelle della molla orizzontale, con $\omega=\sqrt{k/m}$.</li>
 </ul>
-</div>
 
 <nav class="nav-unita"><a class="precedente" href="../19-dinamica-del-moto-armonico-l-oscillatore/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Dinamica del moto armonico: l'oscillatore</span></a><a class="successiva" href="../21-il-pendolo-semplice/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Il pendolo semplice</span></a></nav>
 <footer><p>Fisica terza &middot; Moto armonico &middot; Unità 20</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function rich(e,str){e.textContent='';str.split(/(_\{[^}]*\})/).forEach(function(q){if(!q)return;var t=el('tspan',q.charAt(0)==='_'?{'baseline-shift':'sub','font-size':'75%'}:{},e);t.textContent=q.charAt(0)==='_'?q.slice(2,-1):q;});}
+function f(z,n){return (z<-0.0049?'−':'')+Math.abs(z).toFixed(n).replace('.',',');}
+function pol(O,R,a){return [O[0]+R*Math.cos(a),O[1]-R*Math.sin(a)];}
+function arco(O,R,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)/0.03)),d='';for(var i=0;i<=n;i++){var p=pol(O,R,a0+(a1-a0)*i/n);d+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}return d;}
+function set(e,p,q){e.setAttribute('x1',p[0]);e.setAttribute('y1',p[1]);e.setAttribute('x2',q[0]);e.setAttribute('y2',q[1]);}
+function pos(e,p){e.setAttribute('x',p[0]);e.setAttribute('y',p[1]);}
+var it={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+/* parete, pavimento, molla a zig-zag calcolata, blocco */
+function parete(s,x,y0,y1){el('line',{x1:x,y1:y0,x2:x,y2:y1,stroke:'var(--inchiostro)','stroke-width':1.6},s);
+  for(var y=y0+4;y<y1;y+=10)el('line',{x1:x,y1:y,x2:x-8,y2:y+8,stroke:'var(--inchiostro)','stroke-width':1},s);}
+function zig(x0,x1,y,h,n){var d='M'+x0+','+y,t0=10,L=x1-x0-2*t0;d+=' L'+(x0+t0)+','+y;
+  for(var i=0;i<n;i++){d+=' L'+(x0+t0+L*(i+0.25)/n).toFixed(1)+','+(y-h)+' L'+(x0+t0+L*(i+0.75)/n).toFixed(1)+','+(y+h);}
+  d+=' L'+(x1-t0)+','+y+' L'+x1+','+y;return d;}
+(function(){
+var s=document.getElementById('f-vert');
+marc(s,'fv-r','var(--rosso)');marc(s,'fv-k','var(--inchiostro)');
+var yS=30,y0r=92,ye=152,xa=120,xb=210,hM=32,wM=42,nS=8;
+/* asse y verso l'alto */
+el('line',{x1:44,y1:222,x2:44,y2:18,stroke:'var(--inchiostro)','stroke-width':1.3,'marker-end':'url(#fv-k)'},s);
+txt(s,[34,20],'y',{'font-family':'var(--serif)','font-style':'italic','font-size':14});
+/* soffitto */
+el('line',{x1:82,y1:yS,x2:250,y2:yS,stroke:'var(--inchiostro)','stroke-width':1.6},s);
+for(var x=90;x<250;x+=14)el('line',{x1:x,y1:yS,x2:x-8,y2:yS-8,stroke:'var(--inchiostro)','stroke-width':1},s);
+/* molla verticale a zig-zag calcolata (stesse spire, passo diverso) */
+function zigv(x,y0,y1,h,n,t1){var d='M'+x+','+y0,t0=8,Ls=y1-y0-t0-t1;d+=' L'+x+','+(y0+t0);
+  for(var i=0;i<n;i++){d+=' L'+(x-h)+','+(y0+t0+Ls*(i+0.25)/n).toFixed(1)+' L'+(x+h)+','+(y0+t0+Ls*(i+0.75)/n).toFixed(1);}
+  d+=' L'+x+','+(y1-t1)+' L'+x+','+y1;return d;}
+el('path',{d:zigv(xa,yS,y0r,9,nS,8),fill:'none',stroke:'var(--blu)','stroke-width':1.5},s);
+el('circle',{cx:xa,cy:y0r,r:2.6,fill:'var(--blu)'},s);
+el('path',{d:zigv(xb,yS,ye,9,nS,34),fill:'none',stroke:'var(--blu)','stroke-width':1.5},s);
+/* livelli 0 e y0 */
+[[y0r,'0'],[ye,'y_{0}']].forEach(function(q){
+  el('line',{x1:44,y1:q[0],x2:290,y2:q[0],stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'},s);
+  el('line',{x1:40,y1:q[0],x2:48,y2:q[0],stroke:'var(--inchiostro)','stroke-width':1.3},s);
+  var e=txt(s,[34,q[0]],'',{'font-family':'var(--serif)','font-style':'italic','font-size':13,'text-anchor':'end'});rich(e,q[1]);});
+/* massa */
+el('rect',{x:xb-wM/2,y:ye,width:wM,height:hM,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+var yc=ye+hM/2;
+txt(s,[xb-9,yc],'m',{'font-family':'var(--serif)','font-style':'italic','font-size':15});
+/* forze applicate al centro della massa */
+el('line',{x1:xb+8,y1:yc,x2:xb+8,y2:yc-44,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#fv-r)'},s);
+el('line',{x1:xb+8,y1:yc,x2:xb+8,y2:yc+44,stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#fv-r)'},s);
+el('circle',{cx:xb+8,cy:yc,r:2.4,fill:'var(--rosso)'},s);
+var lF=txt(s,[xb+16,yc-36],'',Object.assign({},it,{fill:'var(--rosso)','text-anchor':'start','font-size':14}));rich(lF,'F_{el}');
+txt(s,[xb+16,yc+38],'mg',Object.assign({},it,{fill:'var(--rosso)','text-anchor':'start','font-size':14}));
+/* allungamento */
+el('line',{x1:272,y1:y0r+3,x2:272,y2:ye-3,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-start':'url(#fv-k)','marker-end':'url(#fv-k)'},s);
+s.querySelector('#fv-k').setAttribute('orient','auto-start-reverse');
+var la=txt(s,[280,(y0r+ye)/2],'',{'font-family':'var(--serif)','font-style':'italic','font-size':13,'text-anchor':'start'});rich(la,'|y_{0}|');
+})();
+})();
+</script>
 </body>
 </html>
