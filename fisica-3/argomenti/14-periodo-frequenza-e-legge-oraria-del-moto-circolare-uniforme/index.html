@@ -5,13 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Periodo, frequenza e legge oraria del moto circolare uniforme — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:var(--blu-chiaro);border-left:3px solid var(--blu);border-radius:6px;padding:12px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -21,50 +61,56 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Moto circolare &middot; Unità 14</p>
   <h1>Periodo, frequenza e legge oraria del moto circolare uniforme</h1>
-  <p class="sommario">Oltre alla velocità angolare, il moto circolare uniforme si descrive con
-  due grandezze legate al tempo di percorrenza: il periodo e la frequenza. Da queste, insieme a
-  $\omega$, si ricava anche la legge che dà la posizione angolare in ogni istante.</p>
 </header>
 
-<h2>Periodo e frequenza</h2>
+<p>Moto circolare uniforme: quanto dura un giro, quanti giri in un secondo?</p>
 
-<p>Il <b>periodo</b> $T$ è il tempo necessario per compiere un giro completo. La
-<b>frequenza</b> $f$ è il numero di giri completi compiuti in un secondo: le due grandezze sono
-l'una il reciproco dell'altra.</p>
+<ul>
+<li><b>periodo</b> $T$ → tempo di un giro completo;</li>
+<li><b>frequenza</b> $f$ → numero di giri completi in un secondo.</li>
+</ul>
 
-<div class="formula-box">$$f=\frac{1}{T} \qquad\qquad T=\frac{1}{f}$$</div>
+<div class="def"><span class="et">Periodo e frequenza</span>
+<p class="eq">$$f=\frac{1}{T} \qquad\qquad T=\frac{1}{f}$$</p></div>
 
-<p>Il periodo si misura in secondi, la frequenza nel suo reciproco, l'hertz:</p>
+<div class="def"><span class="et">Unità di misura</span>
+<p>$[T]=\text{s}$; &nbsp; $[f]=\text{Hz}=\text{s}^{-1}$ (hertz)</p></div>
 
-<div class="nota">$[T]=\text{s}$, &nbsp; $[f]=\text{Hz}=\text{s}^{-1}=\dfrac{1}{\text{s}}$.</div>
+<p>In un giro l'angolo percorso è $2\pi$ e il tempo è $T$:</p>
 
-<h2>Periodo, frequenza e velocità angolare</h2>
+<p class="eq">$$\omega=\frac{2\pi}{T}=2\pi f$$</p>
 
-<p>In un giro completo l'angolo percorso è $2\pi$ (l'intera circonferenza in radianti) e il
-tempo impiegato è, per definizione, il periodo $T$. Poiché $\omega$ è il rapporto fra angolo
-percorso e tempo impiegato:</p>
+<h2>Legge oraria</h2>
 
-<div class="formula-box">$$\omega=\frac{2\pi}{T}=2\pi f$$</div>
+<p>$\omega$ costante coincide con la velocità angolare media; con $t_0=0$ e posizione iniziale $\theta_0$:</p>
 
-<h2>Legge oraria del moto circolare uniforme</h2>
+<p class="eq">$$\omega=\frac{\theta-\theta_0}{t} \quad\Longrightarrow\quad \theta-\theta_0=\omega t$$</p>
 
-<p>Nel moto circolare uniforme $\omega$ è costante, quindi coincide con il proprio valore
-medio: $\omega=\dfrac{\theta-\theta_0}{t-t_0}$, dove $\theta_0$ è la posizione angolare
-all'istante iniziale $t_0$. Scegliendo $t_0=0$ come istante iniziale, l'espressione si
-semplifica e si può risolvere rispetto a $\theta$:</p>
+<div class="def"><span class="et">Legge oraria del moto circolare uniforme</span>
+<p class="eq">$$\theta=\theta_0+\omega t$$</p></div>
 
-<div class="formula-box">$$\omega=\frac{\theta-\theta_0}{t} \quad\Longrightarrow\quad
-\theta-\theta_0=\omega t \quad\Longrightarrow\quad \theta=\theta_0+\omega t$$</div>
-
-<p>È la <b>legge oraria del moto circolare uniforme</b>: dà la posizione angolare a ogni
-istante, note la posizione iniziale $\theta_0$ e la velocità angolare $\omega$. Ha la stessa
-forma della legge oraria del moto rettilineo uniforme, con $\theta$ al posto di $x$ e $\omega$
-al posto di $v$.</p>
-
+<p>Stessa forma della legge oraria del moto rettilineo uniforme: $\theta$ al posto di $x$, $\omega$ al posto di $v$.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../13-accelerazione-centripeta/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Accelerazione centripeta</span></a><a class="successiva" href="../15-moto-circolare-non-uniforme-e-accelerazione-angolare/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Moto circolare non uniforme e accelerazione angolare</span></a></nav>
 <footer><p>Fisica terza &middot; Moto circolare &middot; Unità 14</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

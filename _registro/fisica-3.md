@@ -81,6 +81,7 @@
 - Parole: 303 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,6 pagine di traccia (da "Altre grandezze del MCU" a metà pagina 24 fino alla fine di pagina 25)
 - Rettifica: nessuna, le relazioni (f=1/T, T=1/f, ω=2π/T=2πf, [T]=s, [f]=Hz=s⁻¹) e la legge oraria θ=θ₀+ωt, ricavata da ω=(θ-θ₀)/t con t₀=0, sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+- Revisione (30/10/2026, regole 13/10): parole circa 224 → 93 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 13); tolti sommario, titoletti «Periodo e frequenza» e «Periodo, frequenza e velocità angolare» e frasi di spiegazione; apertura con domanda; periodo e frequenza in elenco caso → definizione, f = 1/T e T = 1/f in .def, unità di misura (s, Hz = s⁻¹) in .def; ω = 2π/T = 2πf in .eq con frase di raccordo; titoletto «Legge oraria del moto circolare uniforme» → «Legge oraria»; ipotesi ω costante e t₀ = 0 mantenute, passaggio in .eq, θ = θ₀ + ωt in .def; analogia col moto rettilineo uniforme ridotta a mezza riga. Nessuna comparsa. Nessuna correzione concettuale (relazioni e legge oraria verificate con SymPy). Nessuna figura (non presenti prima). Nessun esempio (non presente prima).
 
 ## Unità 15 — Moto circolare non uniforme e accelerazione angolare
 - Parole: 395 su 2 pagine di traccia (pagine 26–27)
