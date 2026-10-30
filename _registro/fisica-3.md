@@ -51,6 +51,7 @@
 - Parole: 342 su circa 2,5 pagine di traccia (metà pagina 16, pagine 17–18)
 - Rettifica: nessuna, tutte le derivazioni (traiettoria y=h-½g x²/v0², tv=√(2h/g), XG=v0√(2h/g), vfy=-√(2gh), vf=√(v0²+2gh)) sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: un esempio numerico (v0=8,0 m/s, h=5,0 m), indispensabile perché la traccia non ne contiene nessuno per questo caso particolare
+- Revisione (30/10/2026, regole 13/10): parole circa 238 → 103 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 07); tolti sommario, rimando all'unità precedente e frasi di spiegazione; leggi orarie in .eq a sistema come nelle unità 06–07; traiettoria, tempo di volo e gittata, velocità d'impatto in .def; y_max = h e arrivo al suolo in elenco; .nota ridotta a una frase. Nessuna comparsa. Correzione: nell'esempio v_f ≈ 12,7 m/s → 13 m/s (cifre significative dei dati, v₀ = 8,0 m/s e h = 5,0 m); formule verificate con SymPy (t_v = √(2h/g), v_f = √(v₀² + 2gh)). Figura rifatta da script e resa interattiva: cursore t da 0 a t_v (v₀ = 8,0 m/s, h = 5,0 m, dati dell'esempio), parabola calcolata, v⃗ con v_x (verde) e v_y (rossa), valori nel disegno, scritta verde all'impatto; prima parabola a occhio (Bézier).
 
 ## Unità 10 — Posizione angolare e angoli in radianti
 - Parole: 349 su 2 pagine di traccia (pagine 19–20)
