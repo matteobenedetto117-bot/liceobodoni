@@ -100,6 +100,8 @@
 - Parole: 373 su 2 pagine di traccia (pagine 32–33: il moto armonico come proiezione del moto circolare uniforme con la lampada, la legge oraria x=A cos(ωt)=A cos(2πt/T), e le definizioni di ampiezza, periodo, pulsazione e frequenza)
 - Rettifica: nessuna, le relazioni x=A cos(ωt), ω=2π/T, f=1/T, ω=2πf, f=ω/2π sono state verificate con SymPy e coincidono con la traccia
 - Aggiunta: nessuna; la traccia non contiene esempi svolti in questa unità e non ne è stato aggiunto nessuno
+- Revisione (30/10/2026, regole 13/10): parole circa 281 → 110 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 15); tolti sommario, titoletti «Il moto armonico come proiezione», «Legge oraria» e «Le grandezze del moto armonico» e frasi di spiegazione; apertura con domanda; comportamento dell'ombra in elenco caso → conseguenza; legge oraria in .def (ipotesi ω costante e θ = 0 a t = 0 esplicitate); grandezze A, T, ω, f in elenco; relazioni fra ω, T, f in una .eq (verificate con SymPy). Nessuna comparsa. Correzione: la pulsazione era descritta come «quanto rapidamente si passa da +A a −A», ora «velocità angolare di P». Aggiunte le unità di misura (rad/s, Hz) nell'elenco. Figure rifatte da script: proiezione con cursore θ (0°–360°: raggio, A cos θ, ombra sull'asse, valore di x a fianco); grafico x(t) calcolato su due periodi, con A, −A e T. Nessun esempio (non c'era).
+
 
 ## Unità 18 — Velocità e accelerazione nel moto armonico
 - Parole: 457 su 2 pagine di traccia (pagine 34–35: velocità dell'ombra come componente orizzontale di v_T con il grafico velocità-tempo, e accelerazione come componente orizzontale di a_cp con il grafico accelerazione-tempo)
