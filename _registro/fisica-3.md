@@ -69,6 +69,7 @@
 - Parole: 241 su circa 1 pagina di traccia più poche righe iniziali della pagina successiva (pagina 22, e l'annotazione [v]=m/s in cima alla pagina 23 prima dell'inizio dell'unità 13)
 - Rettifica: nessuna, la relazione v=r·ω (da v=Δl/Δt, Δl=rΔθ) e la coerenza dimensionale [ω]=s⁻¹, [v]=m/s sono state verificate algebricamente e coincidono con la traccia
 - Aggiunta: nessuna
+- Revisione (30/10/2026, regole 13/10): parole circa 201 → 57 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 11); tolti sommario, titoletto «Moto circolare uniforme» e frasi di spiegazione; apertura con domanda; MCU in .def, segno di ω in elenco caso → conseguenza, 1 rad/s = 1 s⁻¹ in .eq, derivazione v = Δl/Δt = rω in una .eq, velocità tangenziale e unità di misura in .def. Nessuna comparsa. Nessuna correzione concettuale (v = ωr verificata). Figure rifatte da script: convenzione dei segni in due pannelli (antiorario ω > 0, orario ω < 0); figura della velocità tangenziale resa interattiva con cursore Δθ (0,3–2,0 rad, r = 2,0 m: arco Δl, v⃗ tangente, Δl = rΔθ nel disegno). Nessun esempio (non presente prima).
 
 ## Unità 13 — Accelerazione centripeta
 - Parole: 345 (metodo di conteggio grezzo, comprensivo di testata/rimandi) su circa 1,4 pagine di traccia (pagina 23 e la parte iniziale di pagina 24, fino al box a_cp=ω²r prima che inizi "Altre grandezze del MCU")
