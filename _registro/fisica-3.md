@@ -63,6 +63,7 @@
 - Parole: 242 su 1 pagina di traccia (pagina 21)
 - Rettifica: nessuna, la relazione ω_m=Δθ/Δt e l'esempio numerico (Δθ=3 rad, Δt=5 s → ω_m=0,6 rad/s) sono stati verificati con SymPy e coincidono con la traccia
 - Aggiunta: nessuna
+- Revisione (30/10/2026, regole 13/10): parole circa 146 → 60 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 09); tolti sommario, titoletti «Spostamento angolare» e «Velocità angolare media» e frasi di spiegazione; apertura con domanda; spostamento angolare e velocità angolare media in .def, analogia con v_m in una frase di raccordo, unità di misura (rad/s) in .def; esempio in forma Dati/Calcolare con una .eq. Nessuna comparsa. Nessuna correzione al testo (ω_m = 0,6 rad/s verificato). Figura rifatta da script e resa interattiva: θ_i = 30° fissa, cursore θ_f da 45° a 330°, raggi iniziale (verde) e finale (rosso), arco Δθ in blu sulla circonferenza, valori in gradi e radianti nel disegno; prima mancava il raggio della posizione iniziale e gli archi non coincidevano con gli angoli disegnati.
 
 ## Unità 12 — Moto circolare uniforme e velocità tangenziale
 - Parole: 241 su circa 1 pagina di traccia più poche righe iniziali della pagina successiva (pagina 22, e l'annotazione [v]=m/s in cima alla pagina 23 prima dell'inizio dell'unità 13)
