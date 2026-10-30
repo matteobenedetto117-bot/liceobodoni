@@ -45,6 +45,7 @@
 - Parole: 279 su 1 pagina di traccia (pagina 15, più le due righe finali dell'esempio a inizio pagina 16 prima dell'unità 09)
 - Rettifica: nessuna, la derivazione (vfy=v0y-g·tv=-v0y, vf=sqrt(v0x²+v0y²)=v0) e i valori numerici dell'esempio (v0=9,0 m/s, α=32°: ymax≈1,2 m, tv≈0,97 s, XG≈7,4 m, t1≈0,42 s, y1≈1,1 m) sono stati verificati con SymPy/calcolo numerico e coincidono con la traccia
 - Aggiunta: nessuna
+- Revisione (30/10/2026, regole 13/10): parole circa 188 → 96 (sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di fisica terza unità 07); tolti sommario e frasi di commento; apertura con domanda e condizione «ricade alla stessa quota»; le due componenti in elenco, v_fy = −v_0y e il modulo in .eq, v_f = v_0 in .def, conseguenze in elenco caso → conseguenza; esempio in forma Dati/Calcolare con v₀ₓ e v₀ᵧ esplicitate (quattro .eq; valori verificati: y_max ≈ 1,2 m, t_v ≈ 0,97 s, X_G ≈ 7,4 m, t₁ ≈ 0,42 s, y₁ ≈ 1,1 m). Nessuna comparsa. Nessuna correzione concettuale (v_f = v_0 verificato con SymPy). Figura rifatta da script e resa interattiva: cursore α da 15° a 75° (v₀ = 9,0 m/s), traiettoria calcolata, v⃗₀ al lancio e v⃗_f con v_fx (verde) e v_fy (rossa) all'arrivo, valori nel disegno; prima parabola a occhio (Bézier) con vettori non in scala.
 
 ## Unità 09 — Lancio orizzontale da un'altezza
 - Parole: 342 su circa 2,5 pagine di traccia (metà pagina 16, pagine 17–18)
