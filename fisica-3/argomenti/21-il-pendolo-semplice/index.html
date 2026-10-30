@@ -5,17 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Il pendolo semplice — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.figura{margin:26px 0;text-align:center}
-.figura svg{max-width:100%;height:auto}
-.figura p.didascalia{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,168 +62,160 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Moto armonico &middot; Unità 21</p>
   <h1>Il pendolo semplice</h1>
-  <p class="sommario">Il pendolo semplice è un altro sistema che oscilla attorno a una posizione di
-  equilibrio, questa volta per effetto della sola forza peso, senza alcuna molla. Vogliamo vedere se,
-  come per la molla, anche questo moto è armonico, e ricavarne pulsazione e periodo.</p>
 </header>
 
-<h2>Le forze sul pendolo</h2>
+<p>Massa puntiforme $m$ appesa a un filo inestensibile di lunghezza $L$: il moto attorno alla verticale è armonico?</p>
 
-<p>Consideriamo un filo inestensibile di lunghezza $L$, fissato a un estremo e con una massa
-puntiforme $m$ appesa all'altro. Indichiamo con $\theta$ l'angolo che il filo forma con la verticale,
-e con $l$ l'arco di circonferenza corrispondente a quell'angolo: per definizione di angolo in radianti,</p>
-
-<div class="formula-box">$$l=L\theta$$</div>
-
-<div class="figura">
-<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fpA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--verde)"/>
-    </marker>
-    <marker id="fpB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-    </marker>
-    <marker id="fpC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-  </defs>
-
-  <!-- soffitto -->
-  <line x1="30" y1="20" x2="100" y2="20" stroke="var(--inchiostro)" stroke-width="1.6"/>
-  <line x1="36" y1="20" x2="28" y2="30" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="50" y1="20" x2="42" y2="30" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="64" y1="20" x2="56" y2="30" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="78" y1="20" x2="70" y2="30" stroke="var(--inchiostro)" stroke-width="1"/>
-  <line x1="92" y1="20" x2="84" y2="30" stroke="var(--inchiostro)" stroke-width="1"/>
-
-  <!-- verticale di riferimento tratteggiata -->
-  <line x1="60" y1="20" x2="60" y2="175" stroke="var(--riga)" stroke-width="1.3" stroke-dasharray="4 3"/>
-
-  <!-- arco l dalla verticale al filo -->
-  <path d="M 60 170 A 150 150 0 0 1 130 152" fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-  <text x="92" y="180" font-size="12.5" font-family="var(--serif)" font-style="italic" fill="var(--blu)">l</text>
-
-  <!-- filo inclinato -->
-  <line x1="60" y1="20" x2="130" y2="152" stroke="var(--inchiostro)" stroke-width="1.5"/>
-  <text x="82" y="75" font-size="13" font-family="var(--serif)" font-style="italic">L</text>
-
-  <!-- angolo theta al perno -->
-  <path d="M 60 46 A 26 26 0 0 1 71 49" fill="none" stroke="var(--grigio)" stroke-width="1.1"/>
-  <text x="76" y="46" font-size="12.5" font-family="var(--serif)" font-style="italic" fill="var(--grigio)">&#952;</text>
-
-  <!-- massa -->
-  <circle cx="130" cy="152" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-  <text x="130" y="156" font-size="12.5" text-anchor="middle" font-family="var(--serif)" font-style="italic">m</text>
-
-  <!-- tensione T lungo il filo verso il perno -->
-  <line x1="122" y1="138" x2="88" y2="76" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#fpA)"/>
-  <text x="82" y="66" font-size="12.5" font-family="var(--serif)" font-style="italic" fill="var(--verde)">T</text>
-
-  <!-- peso mg verticale verso il basso -->
-  <line x1="130" y1="161" x2="130" y2="205" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#fpB)"/>
-  <text x="138" y="200" font-size="12.5" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">mg</text>
-
-  <!-- componente tangenziale mg sin(theta), verso l'equilibrio -->
-  <line x1="130" y1="152" x2="72" y2="163" stroke="var(--rosso)" stroke-width="1.4" stroke-dasharray="3 2" marker-end="url(#fpC)"/>
-  <text x="60" y="176" font-size="11.5" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">mg sin&#952;</text>
-
-  <!-- componente radiale mg cos(theta), lungo il filo -->
-  <line x1="130" y1="152" x2="155" y2="192" stroke="var(--rosso)" stroke-width="1.4" stroke-dasharray="3 2" marker-end="url(#fpC)"/>
-  <text x="162" y="196" font-size="11.5" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">mg cos&#952;</text>
-</svg>
-<p class="didascalia">Il peso $mg$ si scompone lungo il filo (componente $mg\cos\theta$, bilanciata
-dalla tensione $T$) e perpendicolarmente al filo (componente $mg\sin\theta$, non bilanciata: è lei a
-richiamare la massa verso l'equilibrio). L'arco $l$ misura lo spostamento dalla posizione più bassa.</p>
+<div class="fig">
+<svg id="f-pend" viewBox="0 0 320 262" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forze sul pendolo: tensione del filo e peso scomposto lungo il filo e perpendicolarmente"></svg>
+<div class="cursore"><label for="cur-th">θ</label><input id="cur-th" type="range" min="15" max="35" step="1" value="25"><span id="val-th">25°</span></div>
+<p class="did">Massa nella posizione estrema ($v=0$); arco $l$ dalla posizione di equilibrio</p>
 </div>
 
-<p>Sulla massa agiscono la tensione del filo, diretta verso il punto di sospensione, e il peso $mg$,
-verticale. Conviene scomporre il peso lungo il filo e perpendicolarmente ad esso. La componente lungo
-il filo è bilanciata dalla tensione, che mantiene il filo teso:</p>
+<p>Arco corrispondente all'angolo $\theta$, in radianti:</p>
 
-<div class="formula-box">$$T=mg\cos\theta$$</div>
+<p class="eq">$$l=L\theta$$</p>
 
-<p>La componente perpendicolare al filo, invece, non è bilanciata da nulla: è lei a richiamare la
-massa verso il basso, cioè verso l'equilibrio. La forza risultante lungo la direzione del moto è</p>
+<p>Il peso si scompone lungo il filo e perpendicolarmente al filo:</p>
 
-<div class="formula-box">$$F=-mg\sin\theta$$</div>
+<ul>
+<li>lungo il filo: $mg\cos\theta$ e tensione $T$ → forza centripeta; agli estremi ($v=0$) $T=mg\cos\theta$;</li>
+<li>perpendicolare al filo: $mg\sin\theta$ → forza di richiamo verso l'equilibrio.</li>
+</ul>
 
-<p>Il segno meno indica che la forza è sempre diretta in verso opposto allo spostamento, come nella
-molla.</p>
+<p class="eq">$$F=-mg\sin\theta$$</p>
 
 <h2>Piccole oscillazioni</h2>
 
-<p>Il problema è che $\sin\theta$ non è proporzionale a $\theta$: la forza $F=-mg\sin\theta$ non ha,
-in generale, la forma $F=-kx$ di un oscillatore armonico. Ma per angoli piccoli, misurati in radianti,
-il grafico di $y=\sin\theta$ è quasi indistinguibile da quello della retta $y=\theta$, ed è lecito
-approssimare</p>
+<p>Per angoli piccoli, in radianti, $\sin\theta$ e $\theta$ quasi coincidono:</p>
 
-<div class="figura">
-<svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <marker id="fpAx" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="var(--inchiostro)"/>
-    </marker>
-  </defs>
-  <line x1="40" y1="160" x2="40" y2="10" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#fpAx)"/>
-  <line x1="30" y1="160" x2="160" y2="160" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#fpAx)"/>
-  <text x="24" y="18" font-size="11" font-family="var(--sans)" fill="var(--grigio)">y</text>
-  <text x="158" y="174" font-size="11" font-family="var(--sans)" fill="var(--grigio)">&#952;</text>
-
-  <circle cx="40" cy="160" r="16" fill="var(--blu-chiaro)" opacity="0.7"/>
-
-  <line x1="40" y1="160" x2="136" y2="64" stroke="var(--rosso)" stroke-width="1.5"/>
-  <text x="140" y="60" font-size="12" font-family="var(--serif)" font-style="italic" fill="var(--rosso)">y=&#952;</text>
-
-  <polyline points="40,160 48,152.05 56,144.42 64,137.42 72,131.30 80,126.34 88,122.72 96,120.58 104,120.02 112,121.05 120,123.63 128,127.66 136,133.0"
-    fill="none" stroke="var(--verde)" stroke-width="1.8"/>
-  <text x="140" y="132" font-size="12" font-family="var(--serif)" font-style="italic" fill="var(--verde)">y=sin&#952;</text>
-</svg>
-<p class="didascalia">Vicino all'origine (cerchio azzurro) la curva $y=\sin\theta$ e la retta $y=\theta$
-sono quasi sovrapposte; si separano solo per angoli più grandi.</p>
+<div class="fig">
+<svg id="f-sin" viewBox="0 0 320 196" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafici di y uguale seno di theta e di y uguale theta"></svg>
+<p class="did">Zona azzurra: angoli piccoli, curve quasi sovrapposte</p>
 </div>
 
-<div class="formula-box">$$\sin\theta\approx\theta \qquad (\theta \text{ piccolo, in radianti})$$</div>
+<p class="eq">$$\sin\theta\approx\theta\qquad(\theta\text{ piccolo, in radianti})$$</p>
 
-<p>Con questa approssimazione la forza diventa $F=-mg\theta$. Sostituendo $\theta=l/L$ ricavato
-sopra:</p>
+<p>Con $\theta=l/L$:</p>
 
-<div class="formula-box">$$F=-mg\cdot\dfrac{l}{L}=-\dfrac{mg}{L}\,l$$</div>
+<p class="eq">$$F=-mg\,\frac{l}{L}=-\frac{mg}{L}\,l$$</p>
 
-<h2>Pulsazione e periodo del pendolo</h2>
+<p>È la forza di un oscillatore armonico, con $k\to mg/L$ e $x\to l$:</p>
 
-<p>Questa è di nuovo la forza di un oscillatore armonico, $F=-kx$, con la costante elastica $k$
-sostituita da $mg/L$ e lo spostamento $x$ sostituito dall'arco $l$, misurato a partire dalla posizione
-di equilibrio. Possiamo riusare le formule già trovate per pulsazione e periodo, sostituendo $k$ con
-$mg/L$:</p>
+<p class="eq">$$\omega=\sqrt{\frac{k}{m}}\;\longrightarrow\;\omega=\sqrt{\frac{mg/L}{m}}=\sqrt{\frac{g}{L}}$$</p>
 
-<div class="formula-box">$$\omega=\sqrt{\dfrac{k}{m}} \;\longrightarrow\; \omega=\sqrt{\dfrac{mg/L}{m}}=\sqrt{\dfrac{g}{L}}$$</div>
+<div class="def"><span class="et">Pulsazione e periodo del pendolo</span>
+<p class="eq">$$\omega=\sqrt{\frac{g}{L}}\qquad T=2\pi\sqrt{\frac{L}{g}}$$</p></div>
 
-<p>e di conseguenza il periodo</p>
-
-<div class="formula-box">$$T=2\pi\sqrt{\dfrac{L}{g}}$$</div>
-
-<p>Pulsazione e periodo dipendono solo dalla lunghezza del filo e dall'accelerazione di gravità: non
-dipendono né dalla massa appesa né, per piccole oscillazioni, dall'ampiezza.</p>
-
-<div class="nota">
-<span class="et">Da notare</span>
-<p>In questa unità il simbolo $T$ indica due grandezze diverse: la tensione del filo, una forza in
-newton, e il periodo di oscillazione, un tempo in secondi. Il contesto le distingue, ma vale la pena
-tenerne conto.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Le tre leggi della dinamica, punto di partenza per lo studio dei sistemi di riferimento e delle
-forze apparenti — unità 22.</li>
+<li>non dipendono dalla massa $m$;</li>
+<li>per piccole oscillazioni, non dipendono dall'ampiezza.</li>
 </ul>
-</div>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>$T$ indica sia la tensione del filo (in N) sia il periodo (in s).</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../20-massa-appesa-a-una-molla-verticale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Massa appesa a una molla verticale</span></a><a class="successiva" href="../22-le-tre-leggi-della-dinamica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Le tre leggi della dinamica</span></a></nav>
 <footer><p>Fisica terza &middot; Moto armonico &middot; Unità 21</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,p,str,a){var e=el('text',Object.assign({x:p[0],y:p[1],'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),s);e.textContent=str;return e;}
+function marc(s,id,col){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function rich(e,str){e.textContent='';str.split(/(_\{[^}]*\})/).forEach(function(q){if(!q)return;var t=el('tspan',q.charAt(0)==='_'?{'baseline-shift':'sub','font-size':'75%'}:{},e);t.textContent=q.charAt(0)==='_'?q.slice(2,-1):q;});}
+function f(z,n){return (z<-0.0049?'−':'')+Math.abs(z).toFixed(n).replace('.',',');}
+function pol(O,R,a){return [O[0]+R*Math.cos(a),O[1]-R*Math.sin(a)];}
+function arco(O,R,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)/0.03)),d='';for(var i=0;i<=n;i++){var p=pol(O,R,a0+(a1-a0)*i/n);d+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}return d;}
+function set(e,p,q){e.setAttribute('x1',p[0]);e.setAttribute('y1',p[1]);e.setAttribute('x2',q[0]);e.setAttribute('y2',q[1]);}
+function pos(e,p){e.setAttribute('x',p[0]);e.setAttribute('y',p[1]);}
+var it={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+/* parete, pavimento, molla a zig-zag calcolata, blocco */
+function parete(s,x,y0,y1){el('line',{x1:x,y1:y0,x2:x,y2:y1,stroke:'var(--inchiostro)','stroke-width':1.6},s);
+  for(var y=y0+4;y<y1;y+=10)el('line',{x1:x,y1:y,x2:x-8,y2:y+8,stroke:'var(--inchiostro)','stroke-width':1},s);}
+function zig(x0,x1,y,h,n){var d='M'+x0+','+y,t0=10,L=x1-x0-2*t0;d+=' L'+(x0+t0)+','+y;
+  for(var i=0;i<n;i++){d+=' L'+(x0+t0+L*(i+0.25)/n).toFixed(1)+','+(y-h)+' L'+(x0+t0+L*(i+0.75)/n).toFixed(1)+','+(y+h);}
+  d+=' L'+(x1-t0)+','+y+' L'+x1+','+y;return d;}
+(function(){
+var s=document.getElementById('f-pend'),P=[150,30],L=160,G=64,rm=9;
+marc(s,'fp-r','var(--rosso)');marc(s,'fp-k','var(--inchiostro)');
+el('line',{x1:100,y1:P[1],x2:200,y2:P[1],stroke:'var(--inchiostro)','stroke-width':1.6},s);
+for(var x=108;x<200;x+=13)el('line',{x1:x,y1:P[1],x2:x-8,y2:P[1]-8,stroke:'var(--inchiostro)','stroke-width':1},s);
+el('line',{x1:P[0],y1:P[1],x2:P[0],y2:P[1]+L+2,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4 3'},s);
+function Q(a,r){return [P[0]+r*Math.sin(a),P[1]+r*Math.cos(a)];}
+function arc(a0,a1,r){var n=40,d='';for(var i=0;i<=n;i++){var p=Q(a0+(a1-a0)*i/n,r);d+=(i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1);}return d;}
+var g=el('g',{},s);
+var traj=el('path',{fill:'none',stroke:'var(--riga)','stroke-width':1.2,'stroke-dasharray':'2 3'},g);
+var arcL=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':2},g);
+var arcT=el('path',{fill:'none',stroke:'var(--grigio)','stroke-width':1.1},g);
+var filo=el('line',{stroke:'var(--inchiostro)','stroke-width':1.5},g);
+var Tv=el('line',{stroke:'var(--inchiostro)','stroke-width':2,'marker-end':'url(#fp-k)'},g);
+var cmp1=el('line',{stroke:'var(--rosso)','stroke-width':1.5,'stroke-dasharray':'4 2','marker-end':'url(#fp-r)'},g);
+var cmp2=el('line',{stroke:'var(--rosso)','stroke-width':1.5,'stroke-dasharray':'4 2','marker-end':'url(#fp-r)'},g);
+var pes=el('line',{stroke:'var(--rosso)','stroke-width':2.2,'marker-end':'url(#fp-r)'},g);
+var mas=el('circle',{r:rm,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},g);
+var lm=txt(g,[0,0],'m',{'font-family':'var(--serif)','font-style':'italic','font-size':12});
+var ser={'font-family':'var(--serif)','font-style':'italic','font-size':13};
+var lL=txt(g,[0,0],'L',ser),lT=txt(g,[0,0],'T',Object.assign({},ser,{'font-weight':600}));
+var lth=txt(g,[0,0],'θ',Object.assign({},ser,{fill:'var(--grigio)'}));
+var ll=txt(g,[0,0],'l',Object.assign({},ser,{fill:'var(--blu)','font-weight':600}));
+var lp=txt(g,[0,0],'mg',Object.assign({},ser,{fill:'var(--rosso)','text-anchor':'end'}));
+var ls=txt(g,[0,0],'mg sin θ',Object.assign({},ser,{fill:'var(--rosso)','text-anchor':'end','font-size':12}));
+var lc=txt(g,[0,0],'mg cos θ',Object.assign({},ser,{fill:'var(--rosso)','text-anchor':'start','font-size':12}));
+var cur=document.getElementById('cur-th'),val=document.getElementById('val-th');
+function dis(){var d=parseFloat(cur.value),a=d*Math.PI/180,sn=Math.sin(a),cs=Math.cos(a),M=Q(a,L);
+  traj.setAttribute('d',arc(-a,a,L));arcL.setAttribute('d',arc(0,a,L));arcT.setAttribute('d',arc(0,a,30));
+  set(filo,P,M);pos(mas,[0,0]);mas.setAttribute('cx',M[0]);mas.setAttribute('cy',M[1]);pos(lm,M);
+  /* tensione verso il perno, modulo mg cos θ (massa ferma) */
+  var t0=Q(a,L-rm),t1=Q(a,L-rm-G*cs);set(Tv,t0,t1);
+  var mT=Q(a,L-rm-G*cs/2);pos(lT,[mT[0]+11*cs,mT[1]-11*sn]);
+  var mL=Q(a,0.32*L);pos(lL,[mL[0]+11*cs,mL[1]-11*sn]);
+  var mt=Q(a/2,42);pos(lth,mt);
+  var mp=Q(a/2,L-34);pos(ll,mp);
+  /* peso e componenti */
+  var E=[M[0],M[1]+G];set(pes,M,E);pos(lp,[E[0]-6,E[1]-4]);
+  var Cr=[M[0]+G*cs*sn,M[1]+G*cs*cs];set(cmp2,M,Cr);pos(lc,[Cr[0]+6,Cr[1]+2]);
+  var Ct=[M[0]-G*sn*cs,M[1]+G*sn*sn];set(cmp1,M,Ct);pos(ls,[Ct[0]-4,Ct[1]+16]);
+  val.textContent=d+'°';}
+cur.addEventListener('input',dis);dis();
+})();
+(function(){
+var s=document.getElementById('f-sin'),x0=44,y0=170,sx=150,sy=100,tm=1.62;
+marc(s,'fs-k','var(--inchiostro)');
+function X(t){return x0+sx*t;}function Y(v){return y0-sy*v;}
+el('rect',{x:X(0),y:Y(0.3),width:sx*0.3,height:sy*0.3,fill:'var(--blu-chiaro)'},s);
+el('line',{x1:x0,y1:y0,x2:X(tm)+14,y2:y0,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#fs-k)'},s);
+el('line',{x1:x0,y1:y0,x2:x0,y2:Y(1.6)-8,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#fs-k)'},s);
+txt(s,[x0+12,Y(1.6)-4],'y',{'font-family':'var(--serif)','font-style':'italic','font-size':13});
+txt(s,[X(tm)+12,y0-12],'θ (rad)',{'font-size':11,fill:'var(--grigio)','text-anchor':'end'});
+[0.5,1,1.5].forEach(function(t){el('line',{x1:X(t),y1:y0-3,x2:X(t),y2:y0+3,stroke:'var(--inchiostro)'},s);txt(s,[X(t),y0+14],f(t,1),{'font-size':11,fill:'var(--grigio)'});
+  el('line',{x1:x0-3,y1:Y(t),x2:x0+3,y2:Y(t),stroke:'var(--inchiostro)'},s);txt(s,[x0-8,Y(t)],f(t,1),{'font-size':11,fill:'var(--grigio)','text-anchor':'end'});});
+el('line',{x1:X(0),y1:Y(0),x2:X(1.6),y2:Y(1.6),stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'6 4'},s);
+var d='';for(var i=0;i<=160;i++){var t=tm*i/160;d+=(i?'L':'M')+X(t).toFixed(1)+','+Y(Math.sin(t)).toFixed(1);}
+el('path',{d:d,fill:'none',stroke:'var(--blu)','stroke-width':2},s);
+txt(s,[X(1.35),Y(1.35)-4],'y = θ',{'font-family':'var(--serif)','font-style':'italic','font-size':13,fill:'var(--rosso)','text-anchor':'end'});
+txt(s,[X(1.25),Y(Math.sin(1.25))+16],'y = sin θ',{'font-family':'var(--serif)','font-style':'italic','font-size':13,fill:'var(--blu)'});
+})();
+})();
+</script>
 </body>
 </html>
