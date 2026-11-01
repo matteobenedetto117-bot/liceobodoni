@@ -5,12 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Relatività galileiana e sistemi di riferimento — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -20,42 +62,50 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Dinamica e sistemi di riferimento &middot; Unità 23</p>
   <h1>Relatività galileiana e sistemi di riferimento</h1>
-  <p class="sommario">Le tre leggi della dinamica valgono nei sistemi di riferimento inerziali, ma
-  non tutti i sistemi lo sono. Vediamo come si riconosce un sistema inerziale e che cosa succede alle
-  leggi della dinamica quando ci si sposta su uno che non lo è.</p>
 </header>
 
-<h2>Principio di relatività galileiana</h2>
+<p>Le leggi della dinamica valgono in ogni sistema di riferimento?</p>
 
-<p>Le leggi della dinamica hanno la stessa forma in tutti i sistemi di riferimento inerziali: nessun
-esperimento meccanico condotto all'interno di un sistema inerziale permette di distinguerlo da un
-altro sistema inerziale.</p>
+<div class="def"><span class="et">Principio di relatività galileiana</span>
+<p>Le leggi della dinamica hanno la stessa forma in tutti i sistemi di riferimento inerziali: nessun esperimento meccanico permette di distinguere un sistema inerziale da un altro.</p></div>
 
-<h2>Sistemi di riferimento inerziali</h2>
+<p>Come si riconosce un sistema inerziale:</p>
 
-<p>Per individuare un sistema di riferimento inerziale si verifica che un oggetto non soggetto a
-forze rimanga in quiete: se ciò accade, il sistema è inerziale. Una volta individuato un sistema
-inerziale se ne trovano infiniti altri, fermi rispetto al primo oppure in moto rettilineo uniforme
-rispetto ad esso: sono tutti ugualmente inerziali.</p>
-
-<h2>Sistemi di riferimento non inerziali</h2>
-
-<p>Un sistema di riferimento non inerziale si muove di moto accelerato rispetto a un sistema
-inerziale. In un sistema non inerziale la prima legge della dinamica non è valida: un corpo non
-soggetto a forze può comunque apparire in moto accelerato, semplicemente perché è l'osservatore a
-essere accelerato. La seconda e la terza legge restano valide solo se si introducono le forze
-apparenti, che vedremo nella prossima unità.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Le forze apparenti: il caso dell'autobus che accelera e dell'osservatore a bordo — unità 24.</li>
+<li>corpo fermo con forza risultante nulla che resta fermo → sistema inerziale;</li>
+<li>sistema fermo o in moto rettilineo uniforme rispetto a un sistema inerziale → anch'esso inerziale.</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Sistema non inerziale</span>
+<p>Sistema di riferimento in moto accelerato rispetto a un sistema inerziale.</p></div>
+
+<p>In un sistema non inerziale:</p>
+
+<ul>
+<li>prima legge → non valida: un corpo con forza risultante nulla può apparire accelerato;</li>
+<li>seconda e terza legge → valide solo introducendo le forze apparenti.</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../22-le-tre-leggi-della-dinamica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Le tre leggi della dinamica</span></a><a class="successiva" href="../24-forze-apparenti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forze apparenti</span></a></nav>
 <footer><p>Fisica terza &middot; Dinamica e sistemi di riferimento &middot; Unità 23</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
