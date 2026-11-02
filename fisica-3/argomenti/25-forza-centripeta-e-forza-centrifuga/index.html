@@ -5,15 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Forza centripeta e forza centrifuga — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,112 +64,114 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Dinamica e sistemi di riferimento &middot; Unità 25</p>
   <h1>Forza centripeta e forza centrifuga</h1>
-  <p class="sommario">Un'automobile che affronta una curva ha già, per quanto visto, un'accelerazione
-  diretta verso il centro. Chiediamoci ora quale forza la produce, e come cambia la descrizione a
-  seconda che si osservi la curva da fermi oppure seduti dentro l'automobile stessa.</p>
 </header>
 
-<h2>La forza centripeta</h2>
-
-<p>Consideriamo un corpo di massa $m$ che si muove di moto circolare uniforme — cioè con il modulo
-della velocità costante, per distinguerlo dal caso accelerato — lungo una traiettoria di raggio $r$.
-Sappiamo già che questo moto comporta un'accelerazione centripeta $\vec a_{cp}$, diretta verso il
-centro. Per la seconda legge della dinamica, un'accelerazione richiede una forza: affinché un
-oggetto si muova di moto circolare, su di esso deve essere applicata una forza, anch'essa diretta
-verso il centro. La chiamiamo forza centripeta.</p>
-
-<div class="formula-box">$$F_{cp}=ma_{cp}=m\frac{v^2}{r}\qquad\qquad F_{cp}=m\omega^2 r$$</div>
+<p>Corpo di massa $m$ in moto circolare uniforme su una circonferenza di raggio $r$: quale forza lo mantiene sulla traiettoria?</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m25v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="m25b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<circle cx="160" cy="160" r="95" fill="none" stroke="var(--inchiostro)" stroke-width="1.4" stroke-dasharray="5 4"/>
-<line x1="160" y1="160" x2="160" y2="65" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="167" y="118" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">r</text>
-<circle cx="160" cy="160" r="2.6" fill="var(--inchiostro)"/>
-<text x="168" y="178" font-family="var(--sans)" font-size="12" fill="var(--grigio)">O</text>
-<circle cx="160" cy="65" r="7" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="160" y1="72" x2="160" y2="90" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="160" y1="82" x2="146" y2="72" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="160" y1="90" x2="151" y2="106" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="160" y1="90" x2="169" y2="106" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="172" y1="65" x2="222" y2="65" stroke="var(--verde)" stroke-width="2" marker-end="url(#m25v)"/>
-<text x="226" y="69" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">v</text>
-<line x1="160" y1="88" x2="160" y2="122" stroke="var(--blu)" stroke-width="2" marker-end="url(#m25b)"/>
-<text x="166" y="112" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--blu)">a<tspan baseline-shift="sub" font-size="9">cp</tspan></text>
-<text x="20" y="30" font-family="var(--sans)" font-size="11.5" fill="var(--grigio)">moto circolare uniforme</text>
-</svg>
-<p class="did">Il modulo di $\vec v$ resta costante, ma la sua direzione cambia continuamente: per
-questo esiste un'accelerazione $\vec a_{cp}$ diretta verso il centro $O$, prodotta dalla forza
-centripeta $\vec F_{cp}$.</p>
+<svg id="f-mcu" viewBox="30 0 230 250" style="width:100%;max-width:320px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Moto circolare uniforme: velocità tangente, forza e accelerazione centripeta verso il centro"></svg>
+<p class="did">$\vec v$ tangente; $\vec F_{cp}$ e $\vec a_{cp}$ verso il centro $O$</p>
 </div>
 
-<h2>Due punti di vista: da terra e dall'automobile</h2>
-
-<p>Immaginiamo un'automobile che percorre una curva. Chi osserva da terra — un sistema di
-riferimento inerziale — vede sull'automobile una sola forza, la forza centripeta $\vec F_{cp}$,
-diretta verso il centro della curva. Per lui la forza risultante non è nulla, ed è proprio quella
-che produce l'accelerazione centripeta:</p>
-
-<div class="formula-box">$$\vec F_{tot}=\vec F_{cp}\ \ (\text{non nulla})\qquad\qquad \vec a=\frac{\vec F_{tot}}{m}=\frac{\vec F_{cp}}{m}=\vec a_{cp}$$</div>
-
-<p>Chi è seduto dentro l'automobile, invece, si considera fermo rispetto al proprio sedile: per lui
-la risultante delle forze deve essere nulla. Come già visto per l'autobus e per l'ascensore, deve
-allora introdurre una forza apparente diretta verso l'esterno della curva, la forza centrifuga
-$\vec F_{cf}$, bilanciata dalla reazione vincolare $\vec R_v$ del sedile a cui si tiene:</p>
-
-<div class="formula-box">$$\vec F_{tot}=\vec F_{cf}+\vec R_v=0\qquad\qquad \vec a=0$$</div>
-
-<div class="fig">
-<svg viewBox="0 0 620 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m25g2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="m25r2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="m25b2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<path d="M 10,190 A 150,150 0 0,1 160,50" fill="none" stroke="var(--inchiostro)" stroke-width="1.3" stroke-dasharray="4 4"/>
-<rect x="120" y="70" width="90" height="46" rx="6" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="140" cy="118" r="8" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="192" cy="118" r="8" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="165" y1="93" x2="130" y2="70" stroke="var(--verde)" stroke-width="2" marker-end="url(#m25g2)"/>
-<text x="100" y="66" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">F<tspan baseline-shift="sub" font-size="8">cp</tspan></text>
-<text x="122" y="140" font-family="var(--sans)" font-size="10.5" fill="var(--grigio)">osservatore a terra</text>
-<rect x="410" y="70" width="90" height="46" rx="6" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="430" cy="118" r="8" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="482" cy="118" r="8" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="456" cy="88" r="6" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="456" y1="94" x2="456" y2="106" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="470" y1="93" x2="500" y2="70" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m25r2)"/>
-<text x="500" y="64" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">F<tspan baseline-shift="sub" font-size="8">cf</tspan></text>
-<line x1="442" y1="99" x2="412" y2="122" stroke="var(--blu)" stroke-width="2" marker-end="url(#m25b2)"/>
-<text x="386" y="140" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--blu)">R<tspan baseline-shift="sub" font-size="8">v</tspan></text>
-<text x="405" y="158" font-family="var(--sans)" font-size="10.5" fill="var(--grigio)">osservatore in automobile</text>
-</svg>
-<p class="did">Da terra si vede la sola forza reale $\vec F_{cp}$ verso il centro. Dentro
-l'automobile, che si considera ferma, compaiono invece la forza apparente $\vec F_{cf}$ verso
-l'esterno della curva e la reazione $\vec R_v$ del sedile a cui ci si tiene, che la bilancia.</p>
-</div>
-
-<p>Le due forze $F_{cp}$ e $F_{cf}$ hanno lo stesso modulo: la forza centrifuga non è altro che la
-forza apparente dovuta alla stessa forza centripeta che fa curvare l'automobile, vista dal sistema
-di riferimento non inerziale che si muove con essa.</p>
-
-<div class="formula-box">$$F_{cp}=F_{cf}$$</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Una nuova grandezza vettoriale legata alla velocità di un corpo, la quantità di moto, e la
-seconda legge della dinamica riscritta nella sua forma più generale — unità 26.</li>
+<li>modulo di $\vec v$ costante, direzione variabile → accelerazione centripeta $\vec a_{cp}$;</li>
+<li>$\vec a_{cp}$ verso il centro → forza risultante verso il centro.</li>
 </ul>
+
+<div class="def"><span class="et">Forza centripeta</span>
+<p class="eq">$$F_{cp}=ma_{cp}=m\frac{v^2}{r}\qquad\qquad F_{cp}=m\omega^2 r$$</p></div>
+
+<h2>Automobile in curva</h2>
+
+<p>Passeggero di un'automobile in curva, visto da due osservatori:</p>
+
+<div class="fig">
+<svg id="f-curva" viewBox="0 0 560 210" style="width:100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Passeggero di un'automobile in curva visto da terra e visto dall'automobile"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Da terra: $\vec F_{cp}$ (dal sedile) verso il centro</p>
+<p class="did">In automobile: $\vec F_{cf}$ verso l'esterno, bilanciata da $\vec R_v$</p>
 </div>
+</div>
+
+<ul>
+<li>osservatore a terra (inerziale) → $\vec F_{tot}=\vec F_{cp}$, $\;\vec a=\vec a_{cp}$;</li>
+<li>osservatore in automobile (non inerziale) → $\vec F_{tot}=\vec F_{cf}+\vec R_v=0$, $\;\vec a=0$.</li>
+</ul>
+
+<div class="def"><span class="et">Forza centrifuga</span>
+<p>Forza apparente verso l'esterno della curva, con lo stesso modulo della forza centripeta.</p>
+<p class="eq">$$F_{cf}=F_{cp}=m\frac{v^2}{r}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../24-forze-apparenti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Forze apparenti</span></a><a class="successiva" href="../26-quantita-di-moto-e-seconda-legge-della-dinamica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Quantità di moto e seconda legge della dinamica</span></a></nav>
 <footer><p>Fisica terza &middot; Dinamica e sistemi di riferimento &middot; Unità 25</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function omino(s,cx,yt,h){var k=h/88,w={stroke:'var(--inchiostro)','stroke-width':1.6,fill:'none','stroke-linecap':'round'};
+el('circle',Object.assign({cx:cx,cy:yt+8*k,r:8*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+16*k,x2:cx,y2:yt+55*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx-12*k,y2:yt+44*k},w),s);el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx+12*k,y2:yt+44*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx-10*k,y2:yt+h},w),s);el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx+10*k,y2:yt+h},w),s);}
+
+var s=document.getElementById('f-mcu');
+marc(s,'c-r','var(--rosso)');marc(s,'c-b','var(--blu)');marc(s,'c-v','var(--verde)');
+var cx=140,cy=140,R=100,th=50*Math.PI/180,px=cx+R*Math.cos(th),py=cy-R*Math.sin(th);
+el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4,'stroke-dasharray':'5 4'},s);
+el('line',{x1:cx,y1:cy,x2:px,y2:py,stroke:'var(--grigio)','stroke-width':1.2},s);
+var ux=Math.cos(th),uy=-Math.sin(th),tx=-Math.sin(th),ty=-Math.cos(th),nx=-uy,ny=ux;
+lab(s,(cx+px)/2-12*nx-10,(cy+py)/2-12*ny+6,'r','','var(--grigio)');
+el('circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'},s);txt(s,cx-12,cy+12,'O',{fill:'var(--grigio)'});
+var Lv=70,Lf=55,La=38,o=9;
+freccia(s,px,py,px+Lv*tx,py+Lv*ty,'var(--verde)','c-v');lab(s,px+(Lv+12)*tx,py+(Lv+12)*ty,'v','','var(--verde)');
+freccia(s,px+o*nx,py+o*ny,px+o*nx-Lf*ux,py+o*ny-Lf*uy,'var(--rosso)','c-r');
+lab(s,px+(o+16)*nx-(Lf-8)*ux,py+(o+16)*ny-(Lf-8)*uy,'F','cp','var(--rosso)');
+freccia(s,px-o*nx,py-o*ny,px-o*nx-La*ux,py-o*ny-La*uy,'var(--blu)','c-b');
+lab(s,px-(o+16)*nx-(La-2)*ux,py-(o+16)*ny-(La-2)*uy,'a','cp','var(--blu)');
+el('circle',{cx:px,cy:py,r:6,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);txt(s,px+12*ux+4,py+12*uy-6,'m',{'font-size':12,fill:'var(--grigio)'});
+
+var t=document.getElementById('f-curva');
+marc(t,'k-r','var(--rosso)');
+[0,290].forEach(function(ox,i){
+  var Ox=ox+30,Oy=190,Rc=170,a=48*Math.PI/180,P=[Ox+Rc*Math.cos(a),Oy-Rc*Math.sin(a)];
+  var d='M'+(Ox+Rc*Math.cos(0.12))+','+(Oy-Rc*Math.sin(0.12))+' A'+Rc+','+Rc+' 0 0,0 '+(Ox+Rc*Math.cos(1.42))+','+(Oy-Rc*Math.sin(1.42));
+  el('path',{d:d,fill:'none',stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'5 4'},t);
+  el('circle',{cx:Ox,cy:Oy,r:3,fill:'var(--inchiostro)'},t);txt(t,Ox-10,Oy-10,'O',{fill:'var(--grigio)'});
+  var g=el('g',{transform:'translate('+P[0]+','+P[1]+') rotate('+(-(a*180/Math.PI)+90)+')'},t);
+  el('rect',{x:-20,y:-34,width:40,height:68,rx:9,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},g);
+  el('circle',{cx:0,cy:0,r:7,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},g);
+  var ux=Math.cos(a),uy=-Math.sin(a),L=58;
+  if(i==0){freccia(t,P[0]-9*ux,P[1]-9*uy,P[0]-L*ux,P[1]-L*uy,'var(--rosso)','k-r');lab(t,P[0]-(L-6)*ux-22,P[1]-(L-6)*uy+2,'F','cp','var(--rosso)');}
+  else{freccia(t,P[0]-9*ux,P[1]-9*uy,P[0]-L*ux,P[1]-L*uy,'var(--rosso)','k-r');lab(t,P[0]-(L-6)*ux-22,P[1]-(L-6)*uy+2,'R','v','var(--rosso)');
+    freccia(t,P[0]+9*ux,P[1]+9*uy,P[0]+L*ux,P[1]+L*uy,'var(--rosso)','k-r',true);lab(t,P[0]+(L+4)*ux+20,P[1]+(L+4)*uy+4,'F','cf','var(--rosso)');}
+});
+
+})();
+</script>
 </body>
 </html>
