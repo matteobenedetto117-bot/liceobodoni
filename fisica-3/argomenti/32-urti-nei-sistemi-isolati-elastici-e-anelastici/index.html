@@ -5,15 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Urti nei sistemi isolati: elastici e anelastici — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,84 +64,79 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 32</p>
   <h1>Urti nei sistemi isolati: elastici e anelastici</h1>
-  <p class="sommario">Quando due corpi si urtano in un sistema isolato, la quantità di moto
-  totale si conserva sempre. L'energia cinetica invece si conserva solo in alcuni casi: questa
-  differenza è ciò che distingue un urto elastico da uno anelastico.</p>
 </header>
 
-<h2>Prima e dopo l'urto</h2>
-
-<p>Consideriamo due corpi 1 e 2 che si avvicinano lungo la stessa retta e si urtano. Dopo
-l'urto possono restare attaccati, muovendosi come un corpo solo, oppure separarsi di nuovo,
-ciascuno con la propria velocità. Il primo caso è un urto anelastico, il secondo un urto
-elastico.</p>
+<p>Due corpi 1 e 2 si urtano in un sistema isolato: che cosa si conserva?</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m32a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<text x="10" y="24" font-family="var(--sans)" font-size="12" fill="var(--grigio)">prima dell'urto</text>
-<circle cx="90" cy="50" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="86" y="55" font-family="var(--sans)" font-size="12">1</text>
-<line x1="110" y1="50" x2="150" y2="50" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m32a)"/>
-<circle cx="330" cy="50" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="326" y="55" font-family="var(--sans)" font-size="12">2</text>
-<line x1="310" y1="50" x2="270" y2="50" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m32a)"/>
-
-<text x="10" y="115" font-family="var(--sans)" font-size="12" fill="var(--grigio)">dopo, urto anelastico</text>
-<circle cx="195" cy="140" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="225" cy="140" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="191" y="145" font-family="var(--sans)" font-size="12">1</text>
-<text x="221" y="145" font-family="var(--sans)" font-size="12">2</text>
-<line x1="241" y1="140" x2="271" y2="140" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m32a)"/>
-<text x="230" y="128" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--rosso)">v</text>
-
-<text x="10" y="205" font-family="var(--sans)" font-size="12" fill="var(--grigio)">dopo, urto elastico</text>
-<circle cx="90" cy="230" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="86" y="235" font-family="var(--sans)" font-size="12">1</text>
-<line x1="70" y1="230" x2="30" y2="230" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m32a)"/>
-<circle cx="330" cy="230" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="326" y="235" font-family="var(--sans)" font-size="12">2</text>
-<line x1="350" y1="230" x2="390" y2="230" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m32a)"/>
-</svg>
-<p class="did">I due corpi si avvicinano (in alto). Se l'urto è anelastico restano attaccati e
-proseguono insieme con un'unica velocità $v$ (al centro); se è elastico si separano di nuovo,
-ciascuno con la propria velocità finale (in basso).</p>
+<svg id="f-urti" viewBox="0 0 440 230" style="width:100%;max-width:440px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due corpi prima dell'urto, dopo un urto elastico e dopo un urto completamente anelastico"></svg>
+<p class="did">$m_1=2m_2$; frecce delle velocità in scala</p>
 </div>
 
-<h2>Urti anelastici</h2>
-
-<p>Indichiamo con $\vec P_{1i}$, $\vec P_{2i}$ le quantità di moto dei due corpi prima
-dell'urto e con $\vec P_{1f}$, $\vec P_{2f}$ quelle dopo. In un urto anelastico la quantità
-di moto totale si conserva sempre, ma l'energia cinetica <strong>non</strong> si conserva:
-una parte si trasforma in altre forme di energia. Resta quindi una sola equazione, vettoriale:</p>
-
-<div class="formula-box">$$\vec P_{1i}+\vec P_{2i}=\vec P_{1f}+\vec P_{2f}$$</div>
-
-<h2>Urti elastici</h2>
-
-<p>In un urto elastico si conservano entrambe le grandezze: la quantità di moto e anche
-l'energia cinetica. Le due equazioni insieme permetteranno, come vedremo, di trovare
-separatamente le due velocità finali:</p>
-
-<div class="formula-box">$$\begin{cases}\vec P_{1i}+\vec P_{2i}=\vec P_{1f}+\vec P_{2f}\\[4pt]
-K_{1i}+K_{2i}=K_{1f}+K_{2f}\end{cases}$$</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Il caso degli urti completamente anelastici: i due corpi restano attaccati e si trova
-un'unica velocità finale comune a partire dalla sola conservazione della quantità di moto
-— unità 33.</li>
-<li>Più avanti, gli urti elastici in una dimensione permetteranno di ricavare entrambe le
-velocità finali dal sistema di due equazioni appena scritto — unità 35.</li>
+<li>quantità di moto totale → si conserva sempre;</li>
+<li>energia cinetica totale → si conserva solo negli urti elastici.</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Urto anelastico</span>
+<p>Si conserva solo la quantità di moto; parte dell'energia cinetica si trasforma in altre forme di energia:</p>
+<p class="eq">$$\vec P_{1i}+\vec P_{2i}=\vec P_{1f}+\vec P_{2f}$$</p></div>
+
+<p>Corpi uniti dopo l'urto → urto completamente anelastico.</p>
+
+<div class="def"><span class="et">Urto elastico</span>
+<p>Si conservano quantità di moto ed energia cinetica:</p>
+<p class="eq">$$\begin{cases}\vec P_{1i}+\vec P_{2i}=\vec P_{1f}+\vec P_{2f}\\[4pt]K_{1i}+K_{2i}=K_{1f}+K_{2f}\end{cases}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../31-conservazione-dell-energia-meccanica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Conservazione dell'energia meccanica</span></a><a class="successiva" href="../33-urti-completamente-anelastici/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Urti completamente anelastici</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 32</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+
+var s=document.getElementById('f-urti');
+marc(s,'u-v','var(--blu)');
+var r1=17,r2=12,k=1.1,u=50*k;
+function corpo(x,y,r,n){el('circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);txt(s,x,y,n,{'font-size':12});}
+function riga(y,t){txt(s,10,y-30,t,{'text-anchor':'start','font-size':12,fill:'var(--grigio)'});el('line',{x1:10,y1:y+r1+4,x2:430,y2:y+r1+4,stroke:'var(--riga)','stroke-width':1},s);}
+// prima: v1 = +u, v2 = -u
+var y=50;riga(y,'prima');
+corpo(150,y,r1,'1');freccia(s,150+r1+3,y,150+r1+3+u,y,'var(--blu)','u-v');lab(s,150+r1+3+u/2,y-14,'v','1i','var(--blu)');
+corpo(300,y,r2,'2');freccia(s,300-r2-3,y,300-r2-3-u,y,'var(--blu)','u-v');lab(s,300-r2-3-u/2,y-14,'v','2i','var(--blu)');
+// elastico (m1=2m2): v1f=-u/3, v2f=5u/3
+y=125;riga(y,'dopo: urto elastico');
+corpo(170,y,r1,'1');freccia(s,170-r1-3,y,170-r1-3-u/3,y,'var(--blu)','u-v');lab(s,170-r1-3-u/6-8,y-16,'v','1f','var(--blu)');
+corpo(240,y,r2,'2');freccia(s,240+r2+3,y,240+r2+3+5*u/3,y,'var(--blu)','u-v');lab(s,240+r2+3+5*u/6,y-14,'v','2f','var(--blu)');
+// completamente anelastico: v = u/3
+y=200;riga(y,'dopo: urto completamente anelastico');
+corpo(203,y,r1,'1');corpo(203+r1+r2,y,r2,'2');var xe=203+r1+2*r2+3;freccia(s,xe,y,xe+u/3,y,'var(--blu)','u-v');lab(s,xe+u/6+4,y-14,'v','','var(--blu)');
+})();
+</script>
 </body>
 </html>
