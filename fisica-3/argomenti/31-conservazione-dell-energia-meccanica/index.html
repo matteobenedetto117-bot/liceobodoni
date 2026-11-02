@@ -5,16 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Conservazione dell'energia meccanica — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:6px;padding:12px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,103 +64,112 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 31</p>
   <h1>Conservazione dell'energia meccanica</h1>
-  <p class="sommario">Quando su un corpo agiscono solo forze conservative, l'energia non
-  scompare: passa da cinetica a potenziale e viceversa, ma la loro somma resta la stessa in
-  ogni istante del moto. Questo permette di confrontare due punti qualsiasi della traiettoria
-  senza dover conoscere il moto fra l'uno e l'altro.</p>
 </header>
 
-<h2>L'enunciato</h2>
+<p>Su un corpo agiscono solo forze conservative: che cosa resta costante durante il moto?</p>
 
-<p>Indichiamo con $U$ l'energia potenziale (gravitazionale, elastica, o la loro somma) e con
-$K$ l'energia cinetica. Se sul sistema agiscono solo forze conservative, la somma delle due
-energie nell'istante iniziale è uguale alla somma nell'istante finale:</p>
+<ul>
+<li>$U$ → energia potenziale (gravitazionale, elastica o la loro somma);</li>
+<li>$K$ → energia cinetica.</li>
+</ul>
 
-<div class="formula-box">$$U_i + K_i = U_f + K_f$$</div>
-
-<p>$U_i$ e $K_i$ sono l'energia potenziale e cinetica nell'istante iniziale, $U_f$ e $K_f$ le
-stesse energie nell'istante finale.</p>
+<div class="def"><span class="et">Conservazione dell'energia meccanica</span>
+<p>Solo forze conservative:</p>
+<p class="eq">$$U_i+K_i=U_f+K_f$$</p></div>
 
 <h2>Esempio</h2>
 
-<p>Un blocco di massa $m = 2\,\text{kg}$ parte con velocità $v_1 = 10\,\text{m/s}$ su un
-piano orizzontale privo di attrito, sale un dosso fino all'altezza $h = 0{,}8\,\text{m}$ e
-prosegue in piano fino a comprimere una molla di costante elastica $k = 700\,\text{N/m}$,
-fissata a una parete. Cerchiamo la velocità $v_2$ in cima al dosso (punto 2) e la
-compressione $x$ della molla (punto 3).</p>
+<p>Dati: blocco $m=2\ \text{kg}$, $v_1=10\ \text{m/s}$, piano senza attrito, dosso $h=0{,}8\ \text{m}$, molla $k=700\ \text{N/m}$. Calcolare $v_2$ in cima al dosso e la compressione massima $x$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m31a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="10" y1="180" x2="130" y2="180" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<path d="M130,180 Q175,180 175,140 Q175,100 220,100" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="220" y1="100" x2="470" y2="100" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="200" y1="180" x2="200" y2="100" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="194" y1="180" x2="206" y2="180" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="194" y1="100" x2="206" y2="100" stroke="var(--grigio)" stroke-width="1"/>
-<text x="209" y="145" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--grigio)">h</text>
-<text x="120" y="196" font-family="var(--sans)" font-size="11" fill="var(--grigio)">0,8 m</text>
-<line x1="470" y1="55" x2="470" y2="180" stroke="var(--inchiostro)" stroke-width="2.4"/>
-<line x1="470" y1="60" x2="484" y2="48" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="470" y1="80" x2="484" y2="68" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="470" y1="100" x2="484" y2="88" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<path d="M410,100 l8,-11 l11,22 l11,-22 l11,22 l11,-22 l8,11" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="60" cy="168" r="11" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="56" y="172" font-family="var(--sans)" font-size="11">1</text>
-<line x1="76" y1="168" x2="105" y2="168" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m31a)"/>
-<text x="76" y="158" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--rosso)">v<tspan baseline-shift="sub" font-size="9">1</tspan></text>
-<circle cx="285" cy="88" r="11" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="281" y="92" font-family="var(--sans)" font-size="11">2</text>
-<line x1="301" y1="88" x2="330" y2="88" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m31a)"/>
-<text x="301" y="78" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--rosso)">v<tspan baseline-shift="sub" font-size="9">2</tspan></text>
-<circle cx="404" cy="88" r="11" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="400" y="92" font-family="var(--sans)" font-size="11">3</text>
-<text x="425" y="120" font-family="var(--sans)" font-size="11" fill="var(--grigio)">k</text>
-</svg>
-<p class="did">Il blocco parte nel punto 1 con velocità $v_1$, sale il dosso fino al punto 2
-all'altezza $h$, e prosegue in piano fino a comprimere la molla nel punto 3.</p>
+<svg id="f-dosso" viewBox="0 0 520 200" style="width:100%;max-width:520px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Blocco che sale un dosso di altezza h e comprime una molla"></svg>
+<div class="did-parti" style="--n:3">
+<p class="did">1: quota $0$, velocità $v_1$</p>
+<p class="did">2: quota $h$, velocità $v_2$</p>
+<p class="did">3: molla compressa di $x$, blocco fermo</p>
+</div>
 </div>
 
-<p>Scriviamo l'energia potenziale e cinetica nei tre punti, prendendo come riferimento
-$U=0$ alla quota del punto 1 e molla a riposo:</p>
+<p>Riferimento: $U=0$ alla quota del punto 1, molla a riposo.</p>
 
-<div class="formula-box">$$\text{punto 1:}\quad U_1=0,\ \ K_1=\tfrac12 m v_1^2 \qquad\qquad
-\text{punto 2:}\quad U_2=mgh,\ \ K_2=\tfrac12 m v_2^2$$</div>
-<div class="formula-box">$$\text{punto 3:}\quad U_3=mgh+\tfrac12 kx^2,\ \ K_3=0$$</div>
-
-<p>Nel punto 3 l'energia cinetica è nulla perché, alla massima compressione, il blocco è
-momentaneamente fermo.</p>
-
-<p>Uguagliando punto 1 e punto 2 troviamo $v_2$:</p>
-
-<div class="formula-box">$$\frac12 m v_1^2 = mgh + \frac12 m v_2^2 \;\Longrightarrow\;
-m v_1^2 = 2mgh + m v_2^2 \;\Longrightarrow\; v_2=\sqrt{v_1^2-2gh}$$</div>
-
-<div class="formula-box">$$v_2=\sqrt{10^2-2\cdot9{,}8\cdot0{,}8}\approx9{,}2\,\text{m/s}$$</div>
-
-<p>Fra il punto 2 e il punto 3 l'altezza non cambia più: il termine $mgh$ compare da
-entrambe le parti e si semplifica, e resta l'energia cinetica che si trasforma tutta in
-energia elastica:</p>
-
-<div class="formula-box">$$mgh+\frac12 m v_2^2 = mgh+\frac12 kx^2 \;\Longrightarrow\;
-\frac12 m v_2^2=\frac12 kx^2 \;\Longrightarrow\; x=\sqrt{\frac{m v_2^2}{k}}$$</div>
-
-<div class="formula-box">$$x=\sqrt{\frac{2\cdot9{,}2^2}{700}}\approx0{,}5\,\text{m}$$</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Passiamo dal caso di un solo corpo a quello di due corpi che interagiscono in un urto,
-distinguendo che cosa si conserva sempre (la quantità di moto) da ciò che si conserva solo in
-alcuni casi (l'energia cinetica) — unità 32.</li>
+<li>punto 1 → $U_1=0$, $K_1=\tfrac12mv_1^2$;</li>
+<li>punto 2 → $U_2=mgh$, $K_2=\tfrac12mv_2^2$;</li>
+<li>punto 3 → $U_3=mgh+\tfrac12kx^2$, $K_3=0$.</li>
 </ul>
-</div>
+
+<p class="eq">$$\frac12mv_1^2=mgh+\frac12mv_2^2\;\Longrightarrow\;v_2=\sqrt{v_1^2-2gh}=\sqrt{10^2-2\cdot9{,}8\cdot0{,}8}\ \frac{\text{m}}{\text{s}}\approx9{,}2\ \frac{\text{m}}{\text{s}}$$</p>
+
+<p>Fra 2 e 3 la quota non cambia: $mgh$ si semplifica.</p>
+
+<p class="eq">$$\frac12mv_2^2=\frac12kx^2\;\Longrightarrow\;x=v_2\sqrt{\frac mk}=9{,}2\ \frac{\text{m}}{\text{s}}\cdot\sqrt{\frac{2\ \text{kg}}{700\ \text{N/m}}}\approx0{,}5\ \text{m}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../30-energia-potenziale-gravitazionale-ed-elastica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia potenziale gravitazionale ed elastica</span></a><a class="successiva" href="../32-urti-nei-sistemi-isolati-elastici-e-anelastici/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Urti nei sistemi isolati: elastici e anelastici</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 31</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function omino(s,cx,yt,h){var k=h/88,w={stroke:'var(--inchiostro)','stroke-width':1.6,fill:'none','stroke-linecap':'round'};
+el('circle',Object.assign({cx:cx,cy:yt+8*k,r:8*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+16*k,x2:cx,y2:yt+55*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx-12*k,y2:yt+44*k},w),s);el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx+12*k,y2:yt+44*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx-10*k,y2:yt+h},w),s);el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx+10*k,y2:yt+h},w),s);}
+
+
+var s=document.getElementById('f-dosso');
+marc(s,'d-v','var(--blu)');marc(s,'d-q','var(--grigio)');
+var yb=170,yt=90,xa=150,xc=250,xw=470;
+// profilo calcolato: raccordo cosinusoidale fra le due quote
+function yp(x){if(x<=xa)return yb;if(x>=xc)return yt;var u=(x-xa)/(xc-xa);return yb-(yb-yt)*(1-Math.cos(Math.PI*u))/2;}
+var p='M10,'+yb;for(var x=10;x<=xw;x+=2)p+=' L'+x+','+yp(x).toFixed(2);
+el('path',{d:p,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.8},s);
+// parete
+el('line',{x1:xw,y1:yt-55,x2:xw,y2:yb+10,stroke:'var(--inchiostro)','stroke-width':2.4},s);
+for(var i=0;i<4;i++)el('line',{x1:xw,y1:yt-45+i*16,x2:xw+12,y2:yt-57+i*16,stroke:'var(--inchiostro)','stroke-width':1.2},s);
+// quota h
+var xq=xc+20;
+el('line',{x1:xc-10,y1:yb,x2:xq+8,y2:yb,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'},s);
+el('line',{x1:xq,y1:yb-2,x2:xq,y2:yt+3,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#d-q)'},s);
+el('line',{x1:xq,y1:yt+3,x2:xq,y2:yb-2,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#d-q)'},s);
+lab(s,xq+12,(yb+yt)/2,'h','','var(--inchiostro)');
+// molla compressa (punto 3)
+var bw=30,x3=395,sx1=x3+bw,a=10,n=7,dl=(xw-sx1-8)/n,q='M'+sx1+','+(yt-15)+' L'+(sx1+4)+','+(yt-15);
+for(i=0;i<n;i++)q+=' L'+(sx1+4+dl*(i+.25))+','+(yt-15-a)+' L'+(sx1+4+dl*(i+.75))+','+(yt-15+a);
+q+=' L'+(xw-4)+','+(yt-15)+' L'+xw+','+(yt-15);
+el('path',{d:q,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5,'stroke-linejoin':'round'},s);
+lab(s,(sx1+xw)/2,yt-40,'k','','var(--inchiostro)');
+// blocchi
+function blocco(x,n){var y=yp(x);el('rect',{x:x,y:y-bw,width:bw,height:bw,rx:3,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);txt(s,x+bw/2,y-bw/2,n,{'font-size':12});}
+blocco(40,'1');blocco(300,'2');blocco(x3,'3');
+freccia(s,76,yb-15,120,yb-15,'var(--blu)','d-v');lab(s,98,yb-30,'v','1','var(--blu)');
+freccia(s,334,yt-15,372,yt-15,'var(--blu)','d-v');lab(s,356,yt-30,'v','2','var(--blu)');
+})();
+</script>
 </body>
 </html>
