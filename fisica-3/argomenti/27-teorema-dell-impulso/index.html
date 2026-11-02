@@ -5,17 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema dell'impulso — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,97 +64,110 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 27</p>
   <h1>Teorema dell'impulso</h1>
-  <p class="sommario">Negli urti la forza che due corpi si scambiano non è costante: cresce,
-  raggiunge un massimo e torna a zero in un intervallo di tempo brevissimo. Il teorema
-  dell'impulso permette di descrivere l'effetto di questa forza senza conoscerne l'andamento
-  esatto, sostituendola con un valore medio costante nello stesso intervallo.</p>
 </header>
 
-<div class="fig">
-<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
-<line x1="40" y1="190" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="46" y="26" font-family="var(--sans)" font-size="12" fill="var(--grigio)">F</text>
-<line x1="40" y1="190" x2="320" y2="190" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="308" y="206" font-family="var(--sans)" font-size="12" fill="var(--grigio)">t</text>
-<path d="M70,190 L280,190 L280,120 L70,120 Z" fill="var(--verde)" fill-opacity=".18" stroke="var(--verde)" stroke-width="1.6"/>
-<path d="M70,190 C110,190 100,55 150,55 C200,55 210,150 240,150 C260,150 265,190 280,190 Z" fill="var(--rosso)" fill-opacity=".14" stroke="var(--rosso)" stroke-width="1.8"/>
-<text x="150" y="46" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">F(t)</text>
-<text x="284" y="116" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">F media</text>
-<line x1="70" y1="205" x2="280" y2="205" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="70" y1="200" x2="70" y2="210" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="280" y1="200" x2="280" y2="210" stroke="var(--grigio)" stroke-width="1"/>
-<text x="165" y="219" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--grigio)">&#916;t</text>
-</svg>
-<p class="did">La forza reale $F(t)$ varia nel tempo di contatto $\Delta t$ (area rossa). La
-sostituiamo con una forza costante $F_{media}$ (rettangolo verde) scelta in modo che le due
-aree siano uguali: rappresentano entrambe la stessa grandezza fisica.</p>
-</div>
-
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un battitore di baseball colpisce una pallina di massa $m = 0{,}145$ kg che gli arriva
-contro con velocità $v_i = 41{,}7$ m/s. Nell'impatto, che dura $\Delta t = 1{,}20\times10^{-3}$
-s, la forza media applicata alla palla è $F_m = 1{,}13\times10^{4}$ N. Vogliamo la velocità
-$v_f$ della pallina subito dopo il colpo.</p>
+<p>In un urto la forza $F(t)$ fra due corpi varia in un intervallo di tempo $\Delta t$ brevissimo: come se ne descrive l'effetto?</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m27i" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="m27f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="20" y1="65" x2="300" y2="65" stroke="var(--riga)" stroke-width="1"/>
-<circle cx="160" cy="65" r="6" fill="var(--inchiostro)"/>
-<line x1="250" y1="35" x2="170" y2="35" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m27i)"/>
-<text x="255" y="30" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">v<tspan baseline-shift="sub" font-size="70%">i</tspan></text>
-<line x1="150" y1="95" x2="230" y2="95" stroke="var(--verde)" stroke-width="2" marker-end="url(#m27f)"/>
-<text x="234" y="100" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">v<tspan baseline-shift="sub" font-size="70%">f</tspan></text>
-<text x="292" y="60" font-family="var(--sans)" font-size="11" fill="var(--grigio)">+x</text>
-</svg>
-<p class="did">Verso positivo scelto nella direzione in cui la palla riparte dopo il colpo:
-$v_i$ è quindi negativa (arriva in verso opposto) e $v_f$ risulterà positiva.</p>
+<svg id="f-imp" viewBox="10 10 330 205" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forza variabile nel tempo e forza media costante con la stessa area"></svg>
+<p class="did">Area sotto $F(t)$ = area del rettangolo $F_m\cdot\Delta t$</p>
 </div>
 
-<p>Nell'unità precedente abbiamo scritto la seconda legge della dinamica come
-$\vec F_{tot} = \Delta \vec p/\Delta t$. Moltiplicando entrambi i membri per $\Delta t$
-otteniamo la variazione di quantità di moto in funzione della forza media e della durata del
-contatto:</p>
-
-<div class="formula-box">$$\Delta p = F_m \cdot \Delta t = 1{,}13\times10^{4}\ \text{N} \cdot
-1{,}20\times10^{-3}\ \text{s} = 13{,}56\ \text{kg}\cdot\text{m/s}$$</div>
-
-<p>Con il verso positivo scelto sopra, la velocità in arrivo vale $v_i = -41{,}7$ m/s. Dalla
-definizione di quantità di moto, $mv_f - mv_i = \Delta p$, ricaviamo $v_f$:</p>
-
-<div class="formula-box">$$v_f = v_i + \frac{\Delta p}{m} = -41{,}7\ \frac{\text{m}}{\text{s}}
-+ \frac{13{,}56\ \text{kg}\cdot\text{m/s}}{0{,}145\ \text{kg}} \approx 51{,}8\ \frac{\text{m}}{\text{s}}$$</div>
-
-<p>Il segno positivo conferma che la palla riparte in verso opposto a quello con cui era
-arrivata.</p>
-</div>
-
-<h2>Impulso e teorema dell'impulso</h2>
-
-<p>Il prodotto fra la forza media e la durata del contatto è una grandezza a sé, l'impulso
-$\vec I$, che per costruzione coincide con la variazione di quantità di moto:</p>
-
-<div class="formula-box">$$\vec I = \Delta \vec p \qquad\Longrightarrow\qquad
-\Delta \vec p = \vec I = \vec F_m \cdot \Delta t$$</div>
-
-<p>Questa è la forma generale del teorema dell'impulso: vale per qualunque forza variabile nel
-tempo, purché si usi il suo valore medio nell'intervallo considerato.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Applichiamo la stessa relazione a un sistema isolato di due corpi che interagiscono fra
-loro: nasce così la conservazione della quantità di moto — unità 28.</li>
+<li>forza reale $F(t)$ variabile → forza media $F_m$ costante nello stesso $\Delta t$;</li>
+<li>$F_m$ scelta in modo che le due aree siano uguali.</li>
 </ul>
+
+<p>Dalla seconda legge $\vec F_{tot}=\Delta\vec p/\Delta t$, moltiplicando per $\Delta t$:</p>
+
+<div class="def"><span class="et">Impulso</span>
+<p class="eq">$$\vec I=\vec F_m\,\Delta t$$</p></div>
+
+<div class="def"><span class="et">Teorema dell'impulso</span>
+<p>Vale per qualunque forza variabile, usando il suo valore medio nell'intervallo $\Delta t$.</p>
+<p class="eq">$$\Delta\vec p=\vec I=\vec F_m\,\Delta t$$</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: pallina da baseball, $m=0{,}145\ \text{kg}$, $\;v_i=41{,}7\ \text{m/s}$ verso la mazza, $\;\Delta t=1{,}20\times10^{-3}\ \text{s}$, $\;F_m=1{,}13\times10^{4}\ \text{N}$. Calcolare $v_f$ dopo il colpo.</p>
+
+<div class="fig">
+<svg id="f-palla" viewBox="0 0 320 120" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pallina con velocità iniziale verso sinistra e velocità finale verso destra"></svg>
+<p class="did">Verso positivo quello di $\vec v_f$: $\;v_i=-41{,}7\ \text{m/s}$</p>
 </div>
+
+<p class="eq">$$v_f=v_i+\frac{F_m\,\Delta t}{m}=-41{,}7\ \frac{\text{m}}{\text{s}}+\frac{1{,}13\times10^{4}\ \text{N}\cdot1{,}20\times10^{-3}\ \text{s}}{0{,}145\ \text{kg}}\approx 51{,}8\ \frac{\text{m}}{\text{s}}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../26-quantita-di-moto-e-seconda-legge-della-dinamica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Quantità di moto e seconda legge della dinamica</span></a><a class="successiva" href="../28-conservazione-della-quantita-di-moto/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Conservazione della quantità di moto</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 27</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function omino(s,cx,yt,h){var k=h/88,w={stroke:'var(--inchiostro)','stroke-width':1.6,fill:'none','stroke-linecap':'round'};
+el('circle',Object.assign({cx:cx,cy:yt+8*k,r:8*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+16*k,x2:cx,y2:yt+55*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx-12*k,y2:yt+44*k},w),s);el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx+12*k,y2:yt+44*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx-10*k,y2:yt+h},w),s);el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx+10*k,y2:yt+h},w),s);}
+
+
+var s=document.getElementById('f-imp');
+var X0=40,Y0=190,t0=70,t1=280,H=135;
+el('line',{x1:X0,y1:Y0,x2:X0,y2:20,stroke:'var(--inchiostro)','stroke-width':1.2},s);
+el('line',{x1:X0,y1:Y0,x2:320,y2:Y0,stroke:'var(--inchiostro)','stroke-width':1.2},s);
+txt(s,X0-12,26,'F',{fill:'var(--grigio)','font-size':12});txt(s,318,Y0+12,'t',{fill:'var(--grigio)','font-size':12});
+function f(u){return Math.pow(u,1.6)*Math.pow(1-u,2.8);}
+var N=200,mx=0,area=0,i,u;for(i=0;i<=N;i++){u=i/N;mx=Math.max(mx,f(u));}
+for(i=0;i<N;i++){area+=(f(i/N)+f((i+1)/N))/2/N;}
+var media=area/mx;  // valore medio normalizzato al massimo
+var d='M'+t0+','+Y0;for(i=0;i<=N;i++){u=i/N;d+=' L'+(t0+(t1-t0)*u).toFixed(2)+','+(Y0-H*f(u)/mx).toFixed(2);}d+=' Z';
+var ym=Y0-H*media;
+el('rect',{x:t0,y:ym,width:t1-t0,height:Y0-ym,fill:'var(--verde)','fill-opacity':.15,stroke:'var(--verde)','stroke-width':1.6},s);
+el('path',{d:d,fill:'var(--rosso)','fill-opacity':.15,stroke:'var(--rosso)','stroke-width':1.8},s);
+var up=0.6/(0.6+1.4); // posizione del massimo: 1.6/(1.6+2.8)
+up=1.6/4.4;
+lab(s,t0+(t1-t0)*up+34,Y0-H-2,'F(t)','','var(--rosso)');
+lab(s,t1+20,ym,'F','m','var(--verde)');
+el('line',{x1:t0,y1:Y0+12,x2:t1,y2:Y0+12,stroke:'var(--grigio)','stroke-width':1},s);
+el('line',{x1:t0,y1:Y0+7,x2:t0,y2:Y0+17,stroke:'var(--grigio)','stroke-width':1},s);
+el('line',{x1:t1,y1:Y0+7,x2:t1,y2:Y0+17,stroke:'var(--grigio)','stroke-width':1},s);
+el('rect',{x:(t0+t1)/2-14,y:Y0+4,width:28,height:16,fill:'#fff'},s);
+txt(s,(t0+t1)/2,Y0+12,'Δt',{fill:'var(--grigio)','font-size':13});
+var q=document.getElementById('f-palla');
+marc(q,'q-b','var(--blu)');marc(q,'q-v','var(--verde)');marc(q,'q-k','var(--inchiostro)');
+el('line',{x1:20,y1:60,x2:300,y2:60,stroke:'var(--riga)','stroke-width':1},q);
+el('line',{x1:240,y1:104,x2:296,y2:104,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#q-k)'},q);
+txt(q,282,92,'+x',{fill:'var(--grigio)','font-size':12});
+freccia(q,250,32,172,32,'var(--blu)','q-b');lab(q,262,32,'v','i','var(--blu)');
+freccia(q,160,88,250,88,'var(--verde)','q-v');lab(q,146,88,'v','f','var(--verde)');
+el('circle',{cx:160,cy:60,r:8,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},q);
+
+})();
+</script>
 </body>
 </html>
