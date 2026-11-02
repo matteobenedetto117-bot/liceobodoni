@@ -5,23 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Urti bidimensionali — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.nota{border-left:3px solid var(--rosso);background:#fbf3f1;border-radius:0 8px 8px 0;padding:10px 16px;margin:20px 0;font-size:.96rem}
-.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.interattivo label{font-family:var(--sans);font-size:.88rem;color:var(--grigio);display:block;margin-bottom:8px}
-.interattivo input[type=range]{width:100%}
-.valori{display:flex;gap:24px;flex-wrap:wrap;font-family:var(--sans);font-size:.92rem;margin-top:14px}
-.valori span{background:var(--blu-chiaro);padding:6px 12px;border-radius:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -31,152 +65,57 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 37</p>
   <h1>Urti bidimensionali</h1>
-  <p class="sommario">Quando i due corpi di un urto non si muovono sulla stessa retta, la
-  quantità di moto resta comunque conservata, ma è un vettore: va scomposta lungo due assi
-  perpendicolari e conservata componente per componente. Vediamo il caso anelastico, in cui
-  i corpi restano uniti dopo l'urto, e quello elastico, in cui si separano conservando anche
-  l'energia cinetica.</p>
 </header>
 
-<h2>Urti completamente anelastici</h2>
+<p>Due corpi che non si muovono sulla stessa retta si urtano: come si applica la conservazione della quantità di moto?</p>
 
-<p>Se i due corpi non viaggiano sulla stessa retta, la conservazione della quantità di moto
-va scritta due volte, una per l'asse $x$ e una per l'asse $y$: ciascuna componente si
-conserva per conto proprio, indipendentemente dall'altra.</p>
+<p>La quantità di moto è un vettore: si conserva separatamente lungo $x$ e lungo $y$.</p>
 
-<div class="fig">
-<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="ur" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="ug" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="ub" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="40" y1="150" x2="425" y2="150" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#ug)"/>
-<text x="432" y="154" font-family="var(--sans)" font-size="12">x</text>
-<line x1="230" y1="150" x2="230" y2="25" stroke="var(--inchiostro)" stroke-width="1.2" marker-end="url(#ug)"/>
-<text x="222" y="18" font-family="var(--sans)" font-size="12">y</text>
-<line x1="230" y1="150" x2="230" y2="225" stroke="var(--riga)" stroke-width="1.4" stroke-dasharray="3,3"/>
-<rect x="70" y="135" width="30" height="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="76" y="128" font-family="var(--serif)" font-style="italic" font-size="13">m&#8321;</text>
-<line x1="100" y1="150" x2="140" y2="150" stroke="var(--rosso)" stroke-width="2" marker-end="url(#ur)"/>
-<text x="102" y="140" font-family="var(--sans)" font-size="11" fill="var(--rosso)">v&#8321;&#7522;</text>
-<rect x="215" y="195" width="30" height="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="248" y="216" font-family="var(--serif)" font-style="italic" font-size="13">m&#8322;</text>
-<line x1="230" y1="193" x2="230" y2="165" stroke="var(--rosso)" stroke-width="2" marker-end="url(#ur)"/>
-<text x="236" y="185" font-family="var(--sans)" font-size="11" fill="var(--rosso)">v&#8322;&#7522;</text>
-<line x1="230" y1="150" x2="283" y2="54" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#ug)"/>
-<circle cx="283" cy="54" r="7" fill="none" stroke="var(--verde)" stroke-width="1.8"/>
-<text x="292" y="50" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--verde)">m&#8321;+m&#8322;</text>
-<text x="270" y="30" font-family="var(--sans)" font-size="11" fill="var(--verde)">v&#7623;</text>
-<line x1="230" y1="150" x2="283" y2="150" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="3,3"/>
-<text x="245" y="145" font-family="var(--sans)" font-size="10" fill="var(--blu)">v&#7623;&#8339;</text>
-<line x1="283" y1="150" x2="283" y2="54" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="3,3"/>
-<text x="288" y="105" font-family="var(--sans)" font-size="10" fill="var(--blu)">v&#7623;&#7621;</text>
-<path d="M 265,150 A 35,35 0 0,0 247,124" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="252" y="140" font-family="var(--sans)" font-style="italic" font-size="12">&#952;</text>
-</svg>
-<p class="did">I due corpi arrivano lungo assi perpendicolari e restano uniti: il corpo
-risultante parte con velocità $v_f$ inclinata di un angolo $\theta$ rispetto all'asse $x$,
-le cui componenti sono $v_{fx}$ e $v_{fy}$.</p>
-</div>
-
-<p>Imponendo la conservazione della quantità di moto separatamente sui due assi (dopo
-l'urto i due corpi si muovono insieme, con la stessa velocità $v_f$):</p>
-
-<div class="formula-box">$$x:\ \ m_1v_{1i}=(m_1+m_2)\,v_f\cos\theta \qquad\qquad
-y:\ \ m_2v_{2i}=(m_1+m_2)\,v_f\sin\theta$$</div>
-
-<p>Dividendo membro a membro la seconda equazione per la prima, la massa totale e $v_f$ si
-semplificano e resta un'equazione nella sola $\theta$:</p>
-
-<div class="svolgimento">
-<span class="et">Esempio</span>
-<p>Due corpi si muovono su rotaie perpendicolari e si scontrano restando uniti: $m_1=950$
-kg con $v_{1i}=16$ m/s lungo $x$, $m_2=1300$ kg con $v_{2i}=21$ m/s lungo $y$.</p>
-<p>$$\tan\theta=\frac{m_2v_{2i}}{m_1v_{1i}}=\frac{1300\cdot21}{950\cdot16}\approx1{,}80
-\ \ \Rightarrow\ \ \theta\approx61^\circ$$</p>
-<p>Sostituendo nell'equazione lungo $x$:</p>
-<p>$$v_f=\frac{m_1v_{1i}}{(m_1+m_2)\cos\theta}=\frac{950\cdot16}{2250\cdot\cos61^\circ}
-\approx14\ \text{m/s}$$</p>
-</div>
-
-<h2>Urti completamente elastici</h2>
-
-<p>Se il bersaglio $m_2$ è inizialmente fermo e i due corpi restano separati dopo l'urto,
-conservando anche l'energia cinetica, le incognite sono quattro: $v_{1f}$, $v_{2f}$ e i due
-angoli $\theta_1$, $\theta_2$ con cui ripartono. Le equazioni disponibili sono tre —
-quantità di moto lungo $x$, lungo $y$, ed energia cinetica — quindi il sistema si risolve
-solo conoscendo in più uno dei quattro dati.</p>
+<h2>Urto completamente anelastico</h2>
 
 <div class="fig">
-<svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="er" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="eb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="20" y1="100" x2="400" y2="100" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="405" y="104" font-family="var(--sans)" font-size="12">x</text>
-<circle cx="45" cy="100" r="10" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="34" y="86" font-family="var(--serif)" font-style="italic" font-size="12">m&#8321;</text>
-<line x1="58" y1="100" x2="98" y2="100" stroke="var(--rosso)" stroke-width="2" marker-end="url(#er)"/>
-<text x="60" y="90" font-family="var(--sans)" font-size="11" fill="var(--rosso)">v&#8321;&#7522;</text>
-<line x1="105" y1="100" x2="230" y2="55" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#eb)"/>
-<text x="222" y="42" font-family="var(--sans)" font-size="11" fill="var(--blu)">v&#8322;&#7623;</text>
-<circle cx="232" cy="52" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="238" y="45" font-family="var(--serif)" font-style="italic" font-size="12">m&#8322;</text>
-<line x1="105" y1="100" x2="220" y2="145" stroke="var(--rosso)" stroke-width="2.2" marker-end="url(#er)"/>
-<text x="212" y="163" font-family="var(--sans)" font-size="11" fill="var(--rosso)">v&#8321;&#7623;</text>
-<circle cx="222" cy="148" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="228" y="168" font-family="var(--serif)" font-style="italic" font-size="12">m&#8321;</text>
-<path d="M 145,100 A 40,40 0 0,0 133,73" fill="none" stroke="var(--verde)" stroke-width="1"/>
-<text x="140" y="78" font-family="var(--sans)" font-style="italic" font-size="11" fill="var(--verde)">&#952;&#8322;</text>
-<path d="M 145,100 A 40,40 0 0,1 130,128" fill="none" stroke="var(--verde)" stroke-width="1"/>
-<text x="136" y="130" font-family="var(--sans)" font-style="italic" font-size="11" fill="var(--verde)">&#952;&#8321;</text>
-</svg>
-<p class="did">Il proiettile $m_1$ urta il bersaglio $m_2$, fermo; dopo l'urto i due corpi
-ripartono su direzioni diverse, agli angoli $\theta_1$ e $\theta_2$ rispetto alla direzione
-d'arrivo.</p>
+<svg id="f-anel" viewBox="0 0 420 250" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Urto completamente anelastico fra corpi in moto lungo assi perpendicolari"></svg>
+<div class="cursore"><label for="cur-R">$R$</label><input id="cur-R" type="range" min="-0.7" max="0.7" step="0.005" value="0.255"><span class="val" id="val-R">1,80</span></div>
+<p class="did">$R=m_2v_{2i}/(m_1v_{1i})$; direzione di $v_f$: $\tan\theta=R$; lunghezze indicative</p>
 </div>
 
-<div class="formula-box">$$p_x:\ \ m_1v_{1i}=m_1v_{1f}\cos\theta_1+m_2v_{2f}\cos\theta_2$$
-$$p_y:\ \ 0=-m_1v_{1f}\sin\theta_1+m_2v_{2f}\sin\theta_2$$
-$$K:\ \ \tfrac12m_1v_{1i}^2=\tfrac12m_1v_{1f}^2+\tfrac12m_2v_{2f}^2$$</div>
+<p>I corpi restano uniti e ripartono con velocità $v_f$ inclinata di $\theta$ sull'asse $x$:</p>
 
-<p>Se le due masse sono uguali ($m_1=m_2=m$), $m$ si semplifica in tutte e tre le
-equazioni:</p>
+<p class="eq">$$x:\ \ m_1v_{1i}=(m_1+m_2)\,v_f\cos\theta \qquad\qquad y:\ \ m_2v_{2i}=(m_1+m_2)\,v_f\sin\theta$$</p>
 
-<div class="formula-box">$$v_{1i}=v_{1f}\cos\theta_1+v_{2f}\cos\theta_2\qquad
-0=v_{2f}\sin\theta_2-v_{1f}\sin\theta_1\qquad
-v_{1i}^2=v_{1f}^2+v_{2f}^2$$</div>
+<p>Dividendo la seconda equazione per la prima:</p>
 
-<div class="nota">
-<p>I tre vettori $v_{1i}$, $v_{1f}$, $v_{2f}$ formano un triangolo, perché $v_{1i}$ è la
-somma vettoriale di $v_{1f}$ e $v_{2f}$; la terza equazione dice che il lato $v_{1i}$
-soddisfa il teorema di Pitagora rispetto agli altri due. Un triangolo in cui un lato è
-l'ipotenusa degli altri due è rettangolo: l'angolo fra $v_{1f}$ e $v_{2f}$, cioè fra le due
-direzioni finali, vale sempre $90^\circ$.</p>
-<p>$$\theta_1+\theta_2=90^\circ$$</p>
+<div class="def"><span class="et">Urto completamente anelastico, velocità iniziali perpendicolari</span>
+<p class="eq">$$\tan\theta=\frac{m_2v_{2i}}{m_1v_{1i}}\qquad\qquad v_f=\frac{m_1v_{1i}}{(m_1+m_2)\cos\theta}$$</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: $m_1=950\ \text{kg}$, $v_{1i}=16\ \text{m/s}$ lungo $x$; $m_2=1300\ \text{kg}$, $v_{2i}=21\ \text{m/s}$ lungo $y$. Calcolare $\theta$ e $v_f$.</p>
+
+<p class="eq">$$\tan\theta=\frac{1300\cdot21}{950\cdot16}\approx1{,}80\ \Rightarrow\ \theta\approx61^\circ\qquad\qquad v_f=\frac{950\cdot16}{2250\cdot\cos61^\circ}\ \frac{\text{m}}{\text{s}}\approx14\ \frac{\text{m}}{\text{s}}$$</p>
+
+<h2>Urto elastico con bersaglio fermo</h2>
+
+<div class="fig">
+<svg id="f-el" viewBox="0 0 420 200" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Urto elastico bidimensionale con bersaglio fermo"></svg>
+<p class="did">$m_2$ fermo; angoli misurati dalla direzione d'arrivo</p>
 </div>
 
-<div class="interattivo">
-<label for="slider-k">Urto anelastico: rapporto $R=(m_2v_{2i})/(m_1v_{1i})$ =
-<span id="k-val">1,00</span></label>
-<input type="range" id="slider-k" min="-150" max="150" step="1" value="0">
-<div class="valori">
-<span id="th-val">&#952; = 45,0&deg;</span>
-</div>
-</div>
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:-8px">Il
-cursore fa variare $R$ e mostra come cambia l'angolo $\theta=\arctan R$ con cui riparte il
-corpo unito, secondo la formula ricavata sopra.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Per descrivere corpi che ruotano invece di traslare servono due grandezze nuove, il
-momento torcente e il momento angolare, che aprono la dinamica rotazionale (unità 38).</li>
+<li>incognite: $v_{1f}$, $v_{2f}$, $\theta_1$, $\theta_2$;</li>
+<li>equazioni: quantità di moto lungo $x$ e lungo $y$, energia cinetica → serve un dato in più.</li>
 </ul>
-</div>
+
+<p class="eq">$$\begin{aligned}p_x:&amp;\ \ m_1v_{1i}=m_1v_{1f}\cos\theta_1+m_2v_{2f}\cos\theta_2\\[4pt]p_y:&amp;\ \ 0=-m_1v_{1f}\sin\theta_1+m_2v_{2f}\sin\theta_2\\[4pt]K:&amp;\ \ \tfrac12m_1v_{1i}^2=\tfrac12m_1v_{1f}^2+\tfrac12m_2v_{2f}^2\end{aligned}$$</p>
+
+<p>Con masse uguali ($m_1=m_2$) la massa si semplifica:</p>
+
+<p class="eq">$$\vec v_{1i}=\vec v_{1f}+\vec v_{2f}\qquad\qquad v_{1i}^2=v_{1f}^2+v_{2f}^2$$</p>
+
+<p>Il triangolo delle tre velocità soddisfa il teorema di Pitagora, quindi è rettangolo:</p>
+
+<div class="def"><span class="et">Urto elastico fra masse uguali, bersaglio fermo, urto non centrale</span>
+<p class="eq">$$\theta_1+\theta_2=90^\circ$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../36-urti-elastici-con-bersaglio-fermo-i-quattro-casi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Urti elastici con bersaglio fermo: i quattro casi</span></a><a class="successiva" href="../38-momento-torcente-e-momento-angolare/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Momento torcente e momento angolare</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 37</p></footer>
@@ -185,19 +124,83 @@ momento torcente e il momento angolare, che aprono la dinamica rotazionale (unit
 
 <script>
 (function(){
-  var slider=document.getElementById('slider-k');
-  var kVal=document.getElementById('k-val');
-  var thVal=document.getElementById('th-val');
-  function fmt(x,d){return x.toFixed(d).replace('.', ',');}
-  function update(){
-    var t=parseInt(slider.value,10)/100; // -1.5..1.5
-    var R=Math.pow(10,t);
-    var th=Math.atan(R)*180/Math.PI;
-    kVal.textContent=fmt(R,2);
-    thVal.textContent='\u03B8 = '+fmt(th,1)+'\u00B0';
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  slider.addEventListener('input',update);
-  update();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,x1,y1,x2,y2,col,id,w,da){var a={x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w||2.2};if(id)a['marker-end']='url(#'+id+')';if(da)a['stroke-dasharray']=da;return el('line',a,s);}
+function arco(s,cx,cy,r,a0,a1,col){var p0=[cx+r*Math.cos(a0),cy-r*Math.sin(a0)],p1=[cx+r*Math.cos(a1),cy-r*Math.sin(a1)];el('path',{d:'M'+p0+' A'+r+','+r+' 0 0,'+(a1>a0?0:1)+' '+p1,fill:'none',stroke:col,'stroke-width':1.2},s);}
+
+// urto completamente anelastico, cursore su R = m2 v2i / (m1 v1i)
+var s=document.getElementById('f-anel'),cur=document.getElementById('cur-R'),out=document.getElementById('val-R');
+marc(s,'ar','var(--rosso)');marc(s,'ag','var(--inchiostro)');marc(s,'av','var(--verde)');
+var O=[200,160];
+fr(s,30,O[1],395,O[1],'var(--inchiostro)','ag',1.2);txt(s,405,O[1],'x',{'font-size':12});
+fr(s,O[0],O[1],O[0],22,'var(--inchiostro)','ag',1.2);txt(s,O[0]-12,24,'y',{'font-size':12});
+fr(s,O[0],O[1],O[0],205,'var(--riga)',null,1.4,'3,3');
+el('rect',{x:55,y:O[1]-14,width:28,height:28,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+lab(s,69,O[1]-28,'m','1','var(--inchiostro)');
+fr(s,88,O[1],128,O[1],'var(--rosso)','ar');lab(s,108,O[1]-14,'v','1i','var(--rosso)');
+el('rect',{x:O[0]-14,y:208,width:28,height:28,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+lab(s,O[0]+30,222,'m','2','var(--inchiostro)');
+fr(s,O[0],204,O[0],176,'var(--rosso)','ar');lab(s,O[0]+18,190,'v','2i','var(--rosso)');
+var g=el('g',{},s);
+function fmt(x,d){return x.toFixed(d).replace('.',',');}
+function disegna(){
+  while(g.firstChild)g.removeChild(g.firstChild);
+  var R=Math.pow(10,parseFloat(cur.value)),th=Math.atan(R),L=115,c=Math.cos(th),sn=Math.sin(th);
+  out.textContent=fmt(R,2);
+  var T=[O[0]+L*c,O[1]-L*sn];
+  fr(g,O[0],O[1],T[0],O[1],'var(--blu)',null,1.4,'4,3');fr(g,T[0],O[1],T[0],T[1],'var(--blu)',null,1.4,'4,3');
+  if(L*c>28)lab(g,O[0]+L*c/2,O[1]+14,'v','fx','var(--blu)');
+  if(L*sn>28)lab(g,T[0]+16,(O[1]+T[1])/2,'v','fy','var(--blu)');
+  arco(g,O[0],O[1],34,0,th,'var(--inchiostro)');
+  var h=Math.max(th/2,0.14);txt(g,O[0]+48*Math.cos(h),O[1]-48*Math.sin(h),'θ',{'font-family':'var(--serif)','font-style':'italic','font-size':14});
+  fr(g,O[0],O[1],T[0]-9*c,T[1]+9*sn,'var(--verde)','av',2.4);
+  el('circle',{cx:T[0],cy:T[1],r:7,fill:'#fff',stroke:'var(--verde)','stroke-width':1.8},g);
+  lab(g,T[0]-8,T[1]-20,'v','f','var(--verde)');
+  txt(g,T[0]+12,T[1]-12,'m₁+m₂',{'text-anchor':'start','font-family':'var(--serif)','font-style':'italic','font-size':12,fill:'var(--verde)'});
+  txt(g,370,22,'θ ≈ '+Math.round(th*180/Math.PI)+'°',{'font-size':13});
+}
+cur.addEventListener('input',disegna);disegna();
+
+// urto elastico con bersaglio fermo (disegno generico)
+var e=document.getElementById('f-el');
+marc(e,'er','var(--rosso)');marc(e,'eb','var(--blu)');
+var P=[150,100],t1=30*Math.PI/180,t2=42*Math.PI/180;
+fr(e,20,P[1],400,P[1],'var(--riga)',null,1.2,'4,3');
+el('circle',{cx:45,cy:P[1],r:10,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.6},e);lab(e,45,P[1]-22,'m','1','var(--inchiostro)');
+fr(e,58,P[1],110,P[1],'var(--rosso)','er');lab(e,84,P[1]-14,'v','1i','var(--rosso)');
+el('circle',{cx:P[0],cy:P[1],r:11,fill:'#fff',stroke:'var(--blu)','stroke-width':1.6,'stroke-dasharray':'3,2'},e);
+var A=[P[0]+130*Math.cos(t2),P[1]-130*Math.sin(t2)],B=[P[0]+150*Math.cos(t1),P[1]+150*Math.sin(t1)];
+fr(e,P[0]+14*Math.cos(t2),P[1]-14*Math.sin(t2),A[0]-14*Math.cos(t2),A[1]+14*Math.sin(t2),'var(--blu)','eb');
+el('circle',{cx:A[0],cy:A[1],r:11,fill:'#fff',stroke:'var(--blu)','stroke-width':1.6},e);lab(e,A[0]+26,A[1],'m','2','var(--inchiostro)');
+lab(e,P[0]+70*Math.cos(t2)-14,P[1]-70*Math.sin(t2)-12,'v','2f','var(--blu)');
+fr(e,P[0]+14*Math.cos(t1),P[1]+14*Math.sin(t1),B[0]-13*Math.cos(t1),B[1]-13*Math.sin(t1),'var(--rosso)','er');
+el('circle',{cx:B[0],cy:B[1],r:10,fill:'#fff',stroke:'var(--rosso)','stroke-width':1.6},e);lab(e,B[0]+24,B[1],'m','1','var(--inchiostro)');
+lab(e,P[0]+80*Math.cos(t1)-6,P[1]+80*Math.sin(t1)+16,'v','1f','var(--rosso)');
+arco(e,P[0],P[1],44,0,t2,'var(--verde)');arco(e,P[0],P[1],44,0,-t1,'var(--verde)');
+lab(e,P[0]+60*Math.cos(t2/2),P[1]-60*Math.sin(t2/2),'θ','2','var(--verde)');
+lab(e,P[0]+60*Math.cos(t1/2),P[1]+60*Math.sin(t1/2),'θ','1','var(--verde)');
 })();
 </script>
 </body>
