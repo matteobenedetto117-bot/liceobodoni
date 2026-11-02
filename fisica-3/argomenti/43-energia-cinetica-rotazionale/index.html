@@ -5,19 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Energia cinetica rotazionale — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.passi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:22px 0}
-.passi p{margin:8px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--verde);border-radius:6px;padding:14px 20px;margin:24px 0}
-.esempio p{margin:8px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -27,78 +65,90 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Dinamica rotazionale &middot; Unità 43</p>
   <h1>Energia cinetica rotazionale</h1>
-  <p class="sommario">Un corpo che ruota possiede energia cinetica anche se il suo centro non
-  si sposta: pensiamo a una trottola ferma sul posto. Ricaviamo questa energia a partire da
-  quella, già nota, di un punto in moto circolare.</p>
 </header>
 
-<h2>Dal punto materiale al corpo esteso</h2>
+<p>Corpo rigido che ruota attorno a un asse: quanta energia cinetica possiede?</p>
 
-<p>Consideriamo un punto materiale di massa $m$ che si muove di moto circolare a distanza $r$
-dall'asse, con velocità tangenziale $v$. La sua energia cinetica è quella di un qualunque punto
-in moto:</p>
+<p>Punto materiale $m$ a distanza $r$ dall'asse, con $v=r\omega$:</p>
 
-<div class="formula-box">$$K=\frac12 m v^2$$</div>
-
-<p>Nel moto circolare la velocità tangenziale è legata alla velocità angolare da $v=r\omega$.
-Sostituendo:</p>
-
-<div class="passi">
-<p>$$K=\frac12 m (r\omega)^2=\frac12\,(mr^2)\,\omega^2$$</p>
-</div>
-
-<p>Il termine $mr^2$ è il momento di inerzia $I$ del punto materiale rispetto all'asse. In un
-corpo rigido esteso ogni punto ruota con la stessa $\omega$ ma a distanza diversa dall'asse; sommando
-il contributo di tutti i punti si ottiene lo stesso risultato, con l'$I$ complessivo del
-corpo al posto di $mr^2$:</p>
-
-<div class="formula-box">$$K_{ROT}=\frac12 I \omega^2$$</div>
-
-<p>è l'energia cinetica di rotazione, l'analoga di $\frac12 mv^2$ per il moto rotazionale.</p>
+<p class="eq">$$K=\frac12 mv^2=\frac12 m(r\omega)^2=\frac12\,(mr^2)\,\omega^2$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m43a" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="m43b" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="m43c" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<circle cx="150" cy="110" r="68" fill="none" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="3 3"/>
-<circle cx="150" cy="110" r="3" fill="var(--inchiostro)"/>
-<line x1="150" y1="110" x2="210" y2="72" stroke="var(--verde)" stroke-width="2" marker-end="url(#m43a)"/>
-<text x="176" y="85" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">r</text>
-<circle cx="210" cy="72" r="6" fill="var(--blu)"/>
-<text x="220" y="66" font-family="var(--serif)" font-style="italic" font-size="14">m</text>
-<line x1="210" y1="72" x2="252" y2="96" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m43b)"/>
-<text x="256" y="101" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">v</text>
-<path d="M 150,42 A 68,68 0 0,1 202,60" fill="none" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#m43c)"/>
-<text x="168" y="38" font-family="var(--serif)" font-style="italic" font-size="14">&#969;</text>
-<text x="150" y="195" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">punto a distanza r dall'asse: velocità tangenziale v = r&#969;</text>
-</svg>
-<p class="did">Ogni punto del corpo ruota con la stessa $\omega$ ma con una velocità
-tangenziale diversa, proporzionale alla propria distanza dall'asse.</p>
+<svg id="f-punto" viewBox="0 0 300 200" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto materiale in moto circolare con raggio, velocità tangenziale e velocità angolare"></svg>
+<p class="did">Punto a distanza $r$ dall'asse: $v=r\omega$, tangente alla circonferenza</p>
 </div>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Una sfera piena di massa $M=3{,}2\ \text{kg}$ e raggio
-$R=0{,}78\ \text{m}$ ruota con velocità angolare $\omega=2{,}7\ \text{rad/s}$. Qual è la sua
-energia cinetica di rotazione?</p>
-<p>Per la sfera piena $I=\dfrac{2}{5}MR^2$, quindi:</p>
-<p>$$K_{ROT}=\frac12\cdot\frac25 MR^2\omega^2=\frac12\times\frac25\times3{,}2\times0{,}78^2\times2{,}7^2\approx2{,}84\ \text{J}$$</p>
-</div>
+<p>Corpo rigido: tutti i punti hanno la stessa $\omega$; sommando i contributi, $mr^2$ diventa il momento di inerzia $I$ del corpo rispetto all'asse.</p>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>L'energia cinetica di rotazione entra nel bilancio dell'energia meccanica di un corpo
-che rotola, confrontando ad esempio un anello e una sfera sullo stesso piano inclinato:
-unità 44.</li>
-</ul>
-</div>
+<div class="def"><span class="et">Energia cinetica rotazionale</span>
+<p class="eq">$$K_{ROT}=\frac12 I\omega^2$$</p></div>
+
+<h2>Esempio</h2>
+
+<p>Sfera piena che ruota attorno a un asse passante per il centro, $I=\frac25 MR^2$. Dati: $M=3{,}2\ \text{kg}$, $R=0{,}78\ \text{m}$, $\omega=2{,}7\ \text{rad/s}$. Calcolare $K_{ROT}$.</p>
+
+<p class="eq">$$K_{ROT}=\frac12\cdot\frac25 MR^2\omega^2=\frac15\times3{,}2\times0{,}78^2\times2{,}7^2\ \text{J}\approx2{,}8\ \text{J}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../42-seconda-legge-di-newton-per-il-moto-rotazionale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Seconda legge di Newton per il moto rotazionale</span></a><a class="successiva" href="../44-conservazione-dell-energia-con-la-rotazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Conservazione dell'energia con la rotazione</span></a></nav>
 <footer><p>Fisica terza &middot; Dinamica rotazionale &middot; Unità 43</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,x1,y1,x2,y2,col,id,w,da){var a={x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w||2.2};if(id)a['marker-end']='url(#'+id+')';if(da)a['stroke-dasharray']=da;return el('line',a,s);}
+function arco(s,cx,cy,r,a0,a1,col){var p0=[cx+r*Math.cos(a0),cy-r*Math.sin(a0)],p1=[cx+r*Math.cos(a1),cy-r*Math.sin(a1)];el('path',{d:'M'+p0+' A'+r+','+r+' 0 0,'+(a1>a0?0:1)+' '+p1,fill:'none',stroke:col,'stroke-width':1.2},s);}
+function fmt(x,d){return x.toFixed(d).replace('.',',');}
+
+
+
+var s=document.getElementById('f-punto');
+marc(s,'pv','var(--rosso)');marc(s,'pw','var(--inchiostro)');marc(s,'pr','var(--verde)');
+var cx=140,cy=114,r=72,a=35*Math.PI/180;
+function Q(t,d){return [cx+d*Math.cos(t),cy-d*Math.sin(t)];}
+el('circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'4 4'},s);
+el('circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'},s);
+var P=Q(a,r);
+fr(s,cx,cy,P[0]-6*Math.cos(a),P[1]+6*Math.sin(a),'var(--verde)','pr',1.8);
+var M=Q(a,r/2);lab(s,M[0]-10*Math.sin(a),M[1]-10*Math.cos(a)-2,'r','','var(--verde)');
+el('circle',{cx:P[0],cy:P[1],r:6,fill:'var(--blu)'},s);
+var Pm=Q(a,r+16);lab(s,Pm[0]+4,Pm[1]+4,'m','','var(--inchiostro)');
+// velocità tangente, rotazione antioraria: direzione (-sin a, cos a) nel piano matematico
+var L=48,t=[-Math.sin(a),Math.cos(a)],V=[P[0]+L*t[0],P[1]-L*t[1]];
+fr(s,P[0],P[1],V[0],V[1],'var(--rosso)','pv',2.4);
+lab(s,V[0]-12,V[1]+4,'v','','var(--rosso)');
+// angolo retto fra raggio e velocità
+var d=9,A=[P[0]-d*Math.cos(a),P[1]+d*Math.sin(a)],B=[P[0]+d*t[0],P[1]-d*t[1]],C=[A[0]+d*t[0],A[1]-d*t[1]];
+el('path',{d:'M'+A+' L'+C+' L'+B,fill:'none',stroke:'var(--grigio)','stroke-width':1.1},s);
+// velocità angolare: arco antiorario attorno al centro
+var rw=28,b0=200*Math.PI/180,b1=320*Math.PI/180,u=Q(b0,rw),w=Q(b1,rw);
+el('path',{d:'M'+u+' A'+rw+','+rw+' 0 0,0 '+w,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#pw)'},s);
+var W=Q(260*Math.PI/180,rw+14);lab(s,W[0],W[1],'ω','','var(--inchiostro)');
+
+})();
+</script>
 </body>
 </html>
