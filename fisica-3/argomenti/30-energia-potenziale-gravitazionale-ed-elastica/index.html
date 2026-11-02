@@ -5,16 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Energia potenziale gravitazionale ed elastica — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:6px;padding:12px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,102 +64,118 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 30</p>
   <h1>Energia potenziale gravitazionale ed elastica</h1>
-  <p class="sommario">Il lavoro di una forza conservativa non si disperde: quando è negativo,
-  si accumula come energia potenziale, pronta a ridiventare energia cinetica. Scriviamo qui
-  questa energia nei due casi che ci serviranno più spesso, il campo gravitazionale e la
-  molla.</p>
 </header>
 
-<h2>Dal lavoro all'energia potenziale</h2>
+<p>Una forza conservativa compie il lavoro $L$: come varia l'energia potenziale $U$?</p>
 
-<p>La variazione di energia potenziale è, per definizione, l'opposto del lavoro compiuto
-dalla forza conservativa:</p>
-
-<div class="formula-box">$$\Delta U = -L \qquad U_f - U_i = -L$$</div>
+<div class="def"><span class="et">Energia potenziale</span>
+<p class="eq">$$\Delta U=U_f-U_i=-L$$</p></div>
 
 <h2>Energia potenziale gravitazionale</h2>
 
-<p>Un corpo di massa $m$ sale da un'altezza $0$ a un'altezza $h$: lo spostamento $\vec s$ è
-verso l'alto, la forza peso $\vec F_p$ verso il basso, quindi l'angolo fra i due vettori è
-$180^\circ$.</p>
+<p>Corpo di massa $m$ che sale dalla quota $0$ alla quota $h$: $\vec s$ verso l'alto, $\vec F_p$ verso il basso, angolo $180^\circ$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m30a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="m30b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="40" y1="190" x2="40" y2="20" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<polygon points="40,14 35,24 45,24" fill="var(--inchiostro)"/>
-<text x="20" y="195" font-family="var(--sans)" font-size="12">0</text>
-<text x="20" y="65" font-family="var(--sans)" font-size="12">h</text>
-<line x1="35" y1="190" x2="45" y2="190" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="35" y1="60" x2="45" y2="60" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="100" cy="190" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="100" cy="60" r="9" fill="none" stroke="var(--inchiostro)" stroke-width="1.6" stroke-dasharray="3 2"/>
-<text x="115" y="130" font-family="var(--sans)" font-size="12">180&#176;</text>
-<line x1="100" y1="181" x2="100" y2="75" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m30a)"/>
-<text x="108" y="120" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">s</text>
-<line x1="100" y1="199" x2="100" y2="212" stroke="var(--verde)" stroke-width="2" marker-end="url(#m30b)"/>
-<text x="108" y="212" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">F<tspan baseline-shift="sub" font-size="9">p</tspan></text>
-</svg>
-<p class="did">Il corpo sale di $h$ (spostamento $\vec s$ in rosso); la forza peso $\vec
-F_p$ (in verde) resta rivolta verso il basso: l'angolo fra i due vettori è $180^\circ$.</p>
+<svg id="f-grav" viewBox="0 0 260 200" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corpo che sale di h: spostamento verso l'alto, forza peso verso il basso"></svg>
+<p class="did">$\vec s$ e $\vec F_p$ opposti: $\theta=180^\circ$</p>
 </div>
 
-<p>Il lavoro della forza peso è allora negativo, e la variazione di energia potenziale è il
-suo opposto:</p>
+<p class="eq">$$L=F_p\,s\cos180^\circ=-mgh$$</p>
 
-<div class="formula-box">$$L = F_p\,s\,\cos180^\circ = -F_p\,s = -mgh \qquad\Longrightarrow\qquad \Delta U = -L = mgh$$</div>
-
-<div class="formula-box">$$\Delta U = mgh$$</div>
+<div class="def"><span class="et">Energia potenziale gravitazionale</span>
+<p class="eq">$$\Delta U=mgh$$</p></div>
 
 <h2>Energia potenziale elastica</h2>
 
-<p>Per una molla di costante elastica $k$, spostata di $x$ dalla posizione di equilibrio,
-l'energia potenziale elastica vale:</p>
+<p>Molla di costante elastica $k$, deformata di $x$ rispetto alla posizione di equilibrio:</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m30c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<rect x="10" y="30" width="12" height="60" fill="var(--inchiostro)"/>
-<path d="M22,60 l10,-14 l14,28 l14,-28 l14,28 l14,-28 l14,28 l14,-14" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="120" y="40" width="46" height="40" rx="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="166" y1="100" x2="220" y2="100" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="2 2"/>
-<line x1="166" y1="95" x2="166" y2="105" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="220" y1="95" x2="220" y2="105" stroke="var(--grigio)" stroke-width="1"/>
-<text x="185" y="115" font-family="var(--serif)" font-style="italic" font-size="13">x</text>
-<line x1="176" y1="60" x2="215" y2="60" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m30c)"/>
-<text x="225" y="63" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">s</text>
-</svg>
-<p class="did">Spostamento $x$ del blocco rispetto alla posizione di equilibrio della
-molla.</p>
+<svg id="f-molla" viewBox="0 0 340 125" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Molla allungata di x rispetto alla posizione di equilibrio"></svg>
+<p class="did">Deformazione $x$ rispetto alla posizione di equilibrio</p>
 </div>
 
-<div class="formula-box">$$\Delta U_{el} = \frac{1}{2}kx^2$$</div>
+<div class="def"><span class="et">Energia potenziale elastica</span>
+<p class="eq">$$\Delta U_{el}=\frac12kx^2$$</p></div>
 
-<p>dove $k$ è la costante elastica della molla e $x$ lo spostamento rispetto alla posizione
-di equilibrio.</p>
-
-<div class="nota">Sia $mgh$ sia $\tfrac12 kx^2$ sono variazioni di energia potenziale rispetto
-a una posizione di riferimento (rispettivamente $h=0$ e $x=0$): il loro valore dipende da
-dove scegliamo quel riferimento, non è una proprietà assoluta del corpo.</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Mettiamo insieme energia cinetica ed energia potenziale nella conservazione dell'energia
-meccanica, con un esempio che usa entrambe le formule appena scritte — unità 31.</li>
-<li>Da lì passiamo alla classificazione degli urti in elastici e anelastici — unità 32 e
-successive.</li>
-</ul>
-</div>
+<div class="nota"><span class="et">Nota</span>
+<p>Riferimento: $U=0$ a quota $h=0$ e a molla a riposo ($x=0$). Il valore di $U$ dipende dal riferimento, la variazione $\Delta U$ no.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../29-ripasso-lavoro-ed-energia-cinetica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Ripasso: lavoro ed energia cinetica</span></a><a class="successiva" href="../31-conservazione-dell-energia-meccanica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Conservazione dell'energia meccanica</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 30</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function omino(s,cx,yt,h){var k=h/88,w={stroke:'var(--inchiostro)','stroke-width':1.6,fill:'none','stroke-linecap':'round'};
+el('circle',Object.assign({cx:cx,cy:yt+8*k,r:8*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+16*k,x2:cx,y2:yt+55*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx-12*k,y2:yt+44*k},w),s);el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx+12*k,y2:yt+44*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx-10*k,y2:yt+h},w),s);el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx+10*k,y2:yt+h},w),s);}
+
+
+var s=document.getElementById('f-grav');
+marc(s,'g-s','var(--blu)');marc(s,'g-p','var(--rosso)');marc(s,'g-a','var(--inchiostro)');
+var y0=150,yh=45,cx=150;
+el('line',{x1:20,y1:y0+12,x2:240,y2:y0+12,stroke:'var(--grigio)','stroke-width':1},s);
+// quota
+el('line',{x1:50,y1:y0+12,x2:50,y2:22,stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#g-a)'},s);
+[[y0,'0'],[yh,'h']].forEach(function(q){el('line',{x1:45,y1:q[0],x2:55,y2:q[0],stroke:'var(--inchiostro)','stroke-width':1.4},s);
+ el('line',{x1:55,y1:q[0],x2:cx-14,y2:q[0],stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 3'},s);
+ var t=txt(s,34,q[0],q[1],q[1]==='h'?{'font-family':'var(--serif)','font-style':'italic'}:{});});
+// corpo nelle due posizioni
+el('rect',{x:cx-12,y:y0-12,width:24,height:24,rx:3,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+el('rect',{x:cx-12,y:yh-12,width:24,height:24,rx:3,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-dasharray':'4 3'},s);
+// spostamento dal corpo in basso verso l'alto
+freccia(s,cx-30,y0,cx-30,yh+4,'var(--blu)','g-s');lab(s,cx-42,(y0+yh)/2,'s','','var(--blu)');
+el('line',{x1:cx-34,y1:y0,x2:cx-12,y2:y0,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'2 2'},s);
+// forza peso applicata al corpo, verso il basso (disegnata sul corpo in alto e in basso)
+[y0,yh].forEach(function(y){freccia(s,cx,y,cx,y+36,'var(--rosso)','g-p');lab(s,cx+20,y+30,'F','p','var(--rosso)');});
+
+var m=document.getElementById('f-molla');
+marc(m,'m-a','var(--grigio)');
+var xw=30,xeq=200,dx=60,yb=60,bw=44;
+el('rect',{x:xw-14,y:yb-36,width:14,height:72,fill:'var(--inchiostro)'},m);
+el('line',{x1:10,y1:yb+22,x2:330,y2:yb+22,stroke:'var(--grigio)','stroke-width':1},m);
+function molla(x1,x2,y){var n=8,a=11,p='M'+x1+','+y,l=x2-x1,e=10,dl=(l-2*e)/n;p+=' L'+(x1+e)+','+y;
+ for(var i=0;i<n;i++){p+=' L'+(x1+e+dl*(i+.25))+','+(y-a)+' L'+(x1+e+dl*(i+.75))+','+(y+a);}p+=' L'+(x2-e)+','+y+' L'+x2+','+y;
+ return el('path',{d:p,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'},m);}
+molla(xw,xeq+dx,yb);
+// posizione di equilibrio (tratteggiata) e blocco spostato
+el('line',{x1:xeq,y1:yb-34,x2:xeq,y2:yb+22,stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 3'},m);
+el('rect',{x:xeq+dx,y:yb-22,width:bw,height:44,rx:4,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},m);
+// quota x
+var yq=yb+40;
+el('line',{x1:xeq,y1:yb+24,x2:xeq,y2:yq+6,stroke:'var(--grigio)','stroke-width':1},m);
+el('line',{x1:xeq+dx,y1:yb+24,x2:xeq+dx,y2:yq+6,stroke:'var(--grigio)','stroke-width':1},m);
+el('line',{x1:xeq+2,y1:yq,x2:xeq+dx-2,y2:yq,stroke:'var(--grigio)','stroke-width':1.2,'marker-end':'url(#m-a)'},m);
+lab(m,xeq+dx/2,yq+14,'x','','var(--inchiostro)');
+txt(m,xeq,yb-44,'equilibrio',{'font-size':11,fill:'var(--grigio)'});
+})();
+</script>
 </body>
 </html>
