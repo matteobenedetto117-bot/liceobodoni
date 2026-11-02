@@ -5,17 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Conservazione della quantità di moto — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,130 +64,114 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 28</p>
   <h1>Conservazione della quantità di moto</h1>
-  <p class="sommario">Quando due corpi interagiscono senza che intervengano forze esterne, la
-  quantità di moto totale del sistema non cambia: quella che uno perde, l'altro la guadagna
-  esattamente. È il principio che spiega il rinculo di un'arma o il modo in cui due persone
-  su pattini, spingendosi a vicenda, si allontanano a velocità diverse ma con quantità di moto
-  opposte.</p>
 </header>
 
-<h2>Dalla seconda legge alla conservazione</h2>
+<p>Sistema di due corpi che interagiscono: che cosa succede alla quantità di moto totale?</p>
 
-<p>Nell'unità precedente la seconda legge della dinamica è stata scritta come
-$\vec F_{tot} = \Delta \vec p/\Delta t$. Se la risultante delle forze applicate a un corpo è
-nulla, deve annullarsi anche il membro di destra: la quantità di moto non cambia.</p>
+<p>Dalla seconda legge $\vec F_{tot}=\Delta\vec p/\Delta t$, per un singolo corpo:</p>
 
-<div class="formula-box">$$\vec F_{tot}=0 \;\Longrightarrow\; \Delta \vec p = 0
-\;\Longrightarrow\; \vec p_f = \vec p_i$$</div>
+<p class="eq">$$\vec F_{tot}=0\;\Longrightarrow\;\Delta\vec p=0\;\Longrightarrow\;\vec p_f=\vec p_i$$</p>
 
-<p>Il ragionamento si estende a un sistema di due corpi che interagiscono solo fra loro: per
-il terzo principio della dinamica le forze che si scambiano sono uguali e contrarie in ogni
-istante, e la loro somma sul sistema complessivo resta nulla. La quantità di moto totale,
-somma dei due contributi, si conserva:</p>
+<p>Per due corpi:</p>
 
-<div class="formula-box">$$\vec p_{1i}+\vec p_{2i} = \vec p_{1f}+\vec p_{2f}$$</div>
-
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Due canoe ferme e a contatto, di massa $m_1 = 130$ kg e $m_2 = 250$ kg, si separano perché
-i due occupanti si spingono a vicenda con una forza di modulo $F = 46$ N per un intervallo
-$\Delta t = 1{,}20$ s.</p>
-
-<div class="fig">
-<svg viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m28a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="m28b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<line x1="20" y1="120" x2="330" y2="120" stroke="var(--riga)" stroke-width="1.4"/>
-<path d="M20,120 q10,-6 20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0" fill="none" stroke="var(--blu)" stroke-width="1.2" opacity=".5"/>
-<rect x="60" y="86" width="70" height="30" rx="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="95" y="105" font-family="var(--sans)" font-size="12" text-anchor="middle">m&#8321;</text>
-<rect x="200" y="86" width="70" height="30" rx="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="235" y="105" font-family="var(--sans)" font-size="12" text-anchor="middle">m&#8322;</text>
-<line x1="128" y1="72" x2="90" y2="72" stroke="var(--verde)" stroke-width="2" marker-end="url(#m28a)"/>
-<text x="98" y="64" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">F</text>
-<line x1="202" y1="72" x2="240" y2="72" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m28b)"/>
-<text x="222" y="64" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">F</text>
-<line x1="20" y1="140" x2="330" y2="140" stroke="var(--grigio)" stroke-width="1"/>
-<text x="335" y="144" font-family="var(--sans)" font-size="11" fill="var(--grigio)">x</text>
-</svg>
-<p class="did">Le due canoe, inizialmente ferme, si spingono con forze uguali e contrarie: il
-sistema resta isolato, quindi la sua quantità di moto totale, nulla all'inizio, resta nulla.</p>
-</div>
-
-<p>La quantità di moto iniziale del sistema è nulla, e resta nulla anche dopo la spinta:
-$p_{1f}+p_{2f}=0$, cioè le quantità di moto finali sono opposte.</p>
-
-<div class="formula-box">$$p_{1f} = -F\Delta t = -46\ \text{N}\cdot 1{,}20\ \text{s}
-\approx -55{,}2\ \text{kg}\cdot\text{m/s} \qquad
-p_{2f}=+F\Delta t \approx +55{,}2\ \text{kg}\cdot\text{m/s}$$</div>
-
-<p>Da $p = mv$ si ricavano le velocità finali:</p>
-
-<div class="formula-box">$$v_{1f}=\frac{p_{1f}}{m_1}=\frac{-55{,}2}{130}\approx
--0{,}42\ \frac{\text{m}}{\text{s}} \qquad
-v_{2f}=\frac{p_{2f}}{m_2}=\frac{55{,}2}{250}\approx 0{,}22\ \frac{\text{m}}{\text{s}}$$</div>
-
-<p>Le due canoe si allontanano in versi opposti: a parità di quantità di moto, la canoa più
-leggera raggiunge la velocità maggiore in modulo.</p>
-</div>
-
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Una carabina di massa $m_1 = 4{,}2$ kg spara un proiettile di massa
-$m_2 = 5{,}0\times10^{-3}$ kg alla velocità $v_2 = 275$ m/s. Prima dello sparo il sistema è
-fermo, quindi la sua quantità di moto resta nulla anche subito dopo.</p>
-
-<div class="fig">
-<svg viewBox="0 0 340 110" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m28c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="m28d" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<rect x="40" y="45" width="90" height="24" rx="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="85" y="61" font-family="var(--sans)" font-size="11" text-anchor="middle">m&#8321;</text>
-<circle cx="230" cy="57" r="5" fill="var(--inchiostro)"/>
-<text x="230" y="80" font-family="var(--sans)" font-size="11" text-anchor="middle">m&#8322;</text>
-<line x1="65" y1="30" x2="30" y2="30" stroke="var(--verde)" stroke-width="2" marker-end="url(#m28c)"/>
-<text x="45" y="22" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">v<tspan baseline-shift="sub" font-size="70%">1f</tspan></text>
-<line x1="240" y1="30" x2="300" y2="30" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m28d)"/>
-<text x="270" y="22" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">v<tspan baseline-shift="sub" font-size="70%">2</tspan></text>
-<line x1="20" y1="95" x2="320" y2="95" stroke="var(--grigio)" stroke-width="1"/>
-<text x="325" y="99" font-family="var(--sans)" font-size="11" fill="var(--grigio)">x</text>
-</svg>
-<p class="did">Il proiettile parte verso destra con velocità $v_2$; per conservare la
-quantità di moto nulla del sistema, la carabina rincula verso sinistra con velocità
-$v_{1f}$, molto più piccola in modulo perché la sua massa è molto maggiore.</p>
-</div>
-
-<div class="formula-box">$$0 = m_1 v_{1f} + m_2 v_2 \quad\Longrightarrow\quad
-v_{1f} = -\frac{m_2\,v_2}{m_1} = -\frac{5{,}0\times10^{-3}\ \text{kg}\cdot 275\
-\frac{\text{m}}{\text{s}}}{4{,}2\ \text{kg}} \approx -0{,}33\ \frac{\text{m}}{\text{s}}$$</div>
-
-<p>Il segno negativo conferma che la carabina rincula in verso opposto a quello del
-proiettile.</p>
-</div>
-
-<h2>La legge generale</h2>
-
-<p>Le due situazioni sono casi particolari della stessa equazione, valida per qualunque
-sistema isolato di due corpi che interagiscono fra loro:</p>
-
-<div class="formula-box">$$m_1\vec v_{1i} + m_2\vec v_{2i} = m_1\vec v_{1f} + m_2\vec v_{2f}$$</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Ripassiamo il lavoro e l'energia cinetica, passo necessario verso la conservazione
-dell'energia meccanica e la distinzione fra urti elastici e anelastici — unità 29 e
-successive.</li>
+<li>forze interne uguali e contrarie (terzo principio) → risultante nulla;</li>
+<li>risultante delle forze esterne nulla → sistema isolato.</li>
 </ul>
+
+<div class="def"><span class="et">Conservazione della quantità di moto</span>
+<p>Per un sistema isolato di due corpi:</p>
+<p class="eq">$$\vec p_{1i}+\vec p_{2i}=\vec p_{1f}+\vec p_{2f}$$</p>
+<p class="eq">$$m_1\vec v_{1i}+m_2\vec v_{2i}=m_1\vec v_{1f}+m_2\vec v_{2f}$$</p></div>
+
+<h2>Esempio 1</h2>
+
+<p>Dati: due canoe ferme a contatto, $m_1=130\ \text{kg}$, $\;m_2=250\ \text{kg}$; gli occupanti si spingono con $F=46\ \text{N}$ per $\Delta t=1{,}20\ \text{s}$. Calcolare $v_{1f}$ e $v_{2f}$.</p>
+
+<div class="fig">
+<svg id="f-canoe" viewBox="20 20 320 115" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due canoe a contatto spinte da forze uguali e contrarie"></svg>
+<p class="did">Sistema inizialmente fermo: $p_{1f}+p_{2f}=0$</p>
 </div>
+
+<p class="eq">$$p_{2f}=-p_{1f}=F\,\Delta t=46\ \text{N}\cdot1{,}20\ \text{s}\approx55\ \text{kg}\cdot\text{m/s}$$</p>
+
+<p class="eq">$$v_{1f}=\frac{p_{1f}}{m_1}=\frac{-55\ \text{kg}\cdot\text{m/s}}{130\ \text{kg}}\approx-0{,}42\ \frac{\text{m}}{\text{s}}\qquad v_{2f}=\frac{p_{2f}}{m_2}=\frac{55\ \text{kg}\cdot\text{m/s}}{250\ \text{kg}}\approx0{,}22\ \frac{\text{m}}{\text{s}}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: carabina ferma, $m_1=4{,}2\ \text{kg}$; proiettile $m_2=5{,}0\times10^{-3}\ \text{kg}$, $\;v_2=275\ \text{m/s}$. Calcolare la velocità di rinculo $v_{1f}$.</p>
+
+<div class="fig">
+<svg id="f-carabina" viewBox="20 10 320 100" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carabina che rincula verso sinistra e proiettile verso destra"></svg>
+<p class="did">Rinculo in verso opposto al proiettile (frecce non in scala)</p>
+</div>
+
+<p class="eq">$$0=m_1v_{1f}+m_2v_2\;\Longrightarrow\;v_{1f}=-\frac{m_2v_2}{m_1}=-\frac{5{,}0\times10^{-3}\ \text{kg}\cdot275\ \text{m/s}}{4{,}2\ \text{kg}}\approx-0{,}33\ \frac{\text{m}}{\text{s}}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../27-teorema-dell-impulso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema dell'impulso</span></a><a class="successiva" href="../29-ripasso-lavoro-ed-energia-cinetica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Ripasso: lavoro ed energia cinetica</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 28</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function omino(s,cx,yt,h){var k=h/88,w={stroke:'var(--inchiostro)','stroke-width':1.6,fill:'none','stroke-linecap':'round'};
+el('circle',Object.assign({cx:cx,cy:yt+8*k,r:8*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+16*k,x2:cx,y2:yt+55*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx-12*k,y2:yt+44*k},w),s);el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx+12*k,y2:yt+44*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx-10*k,y2:yt+h},w),s);el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx+10*k,y2:yt+h},w),s);}
+
+
+var s=document.getElementById('f-canoe');
+marc(s,'c-f','var(--rosso)');marc(s,'c-k','var(--inchiostro)');
+var d='M20,104';for(var x=20;x<340;x+=20)d+=' q5,-4 10,0 t10,0';
+el('path',{d:d,fill:'none',stroke:'var(--blu)','stroke-width':1.2,opacity:.5},s);
+function canoa(x0,x1,nome){
+el('path',{d:'M'+x0+',80 L'+x1+',80 Q'+(x1-8)+',100 '+(x1-30)+',100 L'+(x0+30)+',100 Q'+(x0+8)+',100 '+x0+',80 Z',fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+lab(s,(x0+x1)/2,90,'m',nome,'var(--inchiostro)');}
+canoa(70,168,'1');canoa(172,300,'2');
+freccia(s,160,62,105,62,'var(--rosso)','c-f');lab(s,128,48,'F','','var(--rosso)');
+freccia(s,180,62,235,62,'var(--rosso)','c-f');lab(s,212,48,'F','','var(--rosso)');
+el('line',{x1:270,y1:124,x2:326,y2:124,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#c-k)'},s);
+txt(s,312,112,'+x',{fill:'var(--grigio)','font-size':12});
+
+var q=document.getElementById('f-carabina');
+marc(q,'r-v','var(--verde)');marc(q,'r-k','var(--inchiostro)');
+el('path',{d:'M40,52 L95,50 L95,64 L80,64 L48,80 L40,80 Z',fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6,'stroke-linejoin':'round'},q);
+el('rect',{x:95,y:50,width:80,height:7,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},q);
+lab(q,82,94,'m','1','var(--inchiostro)');
+el('ellipse',{cx:232,cy:53.5,rx:7,ry:3.5,fill:'var(--inchiostro)'},q);
+lab(q,232,74,'m','2','var(--inchiostro)');
+freccia(q,82,30,58,30,'var(--verde)','r-v');lab(q,105,30,'v','1f','var(--verde)');
+freccia(q,246,53.5,316,53.5,'var(--verde)','r-v');lab(q,280,36,'v','2','var(--verde)');
+el('line',{x1:270,y1:98,x2:326,y2:98,stroke:'var(--inchiostro)','stroke-width':1.2,'marker-end':'url(#r-k)'},q);
+txt(q,312,86,'+x',{fill:'var(--grigio)','font-size':12});
+
+})();
+</script>
 </body>
 </html>
