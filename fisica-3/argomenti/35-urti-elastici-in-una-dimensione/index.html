@@ -5,18 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Urti elastici in una dimensione — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.nota{border-left:3px solid var(--rosso);background:#fbf3f1;border-radius:0 8px 8px 0;padding:10px 16px;margin:20px 0;font-size:.96rem}
-.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,127 +64,98 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 35</p>
   <h1>Urti elastici in una dimensione</h1>
-  <p class="sommario">Nel pendolo balistico i due corpi restavano uniti, e la sola quantità
-  di moto bastava a trovare la velocità comune. In un urto elastico i corpi si separano di
-  nuovo: nessuna energia si perde, quindi valgono insieme la conservazione della quantità di
-  moto e quella dell'energia cinetica, e questo basta a trovare entrambe le velocità
-  finali.</p>
 </header>
 
-<h2>Le due conservazioni</h2>
-
-<p>Consideriamo due corpi di massa $m_1$ e $m_2$ che si muovono sulla stessa retta con
-velocità iniziali $v_{1i}$ e $v_{2i}$, urtano, e ripartono con velocità $v_{1f}$ e
-$v_{2f}$.</p>
+<p>Due corpi sulla stessa retta si urtano e si separano senza perdita di energia: quali sono le velocità finali $v_{1f}$ e $v_{2f}$?</p>
 
 <div class="fig">
-<svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="fb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<text x="10" y="18" font-family="var(--sans)" font-size="13" font-weight="600" fill="var(--inchiostro)">prima dell'urto</text>
-<line x1="0" y1="40" x2="620" y2="40" stroke="var(--riga)" stroke-width="1"/>
-<circle cx="120" cy="40" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="115" y="45" font-family="var(--serif)" font-style="italic" font-size="13">1</text>
-<line x1="140" y1="40" x2="185" y2="40" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr)"/>
-<text x="140" y="30" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--rosso)">v&#8321;&#7522;</text>
-<circle cx="460" cy="40" r="20" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="453" y="46" font-family="var(--serif)" font-style="italic" font-size="13">2</text>
-<line x1="435" y1="40" x2="400" y2="40" stroke="var(--blu)" stroke-width="2" marker-end="url(#fb)"/>
-<text x="395" y="30" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--blu)">v&#8322;&#7522;</text>
-
-<text x="10" y="110" font-family="var(--sans)" font-size="13" font-weight="600" fill="var(--inchiostro)">dopo l'urto</text>
-<line x1="0" y1="132" x2="620" y2="132" stroke="var(--riga)" stroke-width="1"/>
-<circle cx="150" cy="132" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="145" y="137" font-family="var(--serif)" font-style="italic" font-size="13">1</text>
-<line x1="130" y1="132" x2="90" y2="132" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr)"/>
-<text x="85" y="122" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--rosso)">v&#8321;&#7623;</text>
-<circle cx="430" cy="132" r="20" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="423" y="138" font-family="var(--serif)" font-style="italic" font-size="13">2</text>
-<line x1="452" y1="132" x2="500" y2="132" stroke="var(--blu)" stroke-width="2" marker-end="url(#fb)"/>
-<text x="500" y="122" font-family="var(--serif)" font-style="italic" font-size="12" fill="var(--blu)">v&#8322;&#7623;</text>
-</svg>
-<p class="did">Prima dell'urto i due corpi si avvicinano; dopo si allontanano di nuovo,
-ciascuno con una nuova velocità. I versi disegnati sono solo un esempio: nei calcoli ogni
-velocità porta il proprio segno rispetto al verso positivo scelto sulla retta.</p>
+<svg id="f-urto" viewBox="0 0 420 170" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due corpi prima e dopo un urto elastico"></svg>
+<p class="did">Versi d'esempio; nei calcoli velocità con segno rispetto al verso positivo</p>
 </div>
 
-<p>Si conservano la quantità di moto e l'energia cinetica del sistema:</p>
+<p>Si conservano la quantità di moto (1) e l'energia cinetica (2):</p>
 
-<div class="formula-box">$$m_1v_{1i}+m_2v_{2i}=m_1v_{1f}+m_2v_{2f}\qquad(1)$$
-$$\frac12m_1v_{1i}^2+\frac12m_2v_{2i}^2=\frac12m_1v_{1f}^2+\frac12m_2v_{2f}^2\qquad(2)$$</div>
+<p class="eq">$$\begin{aligned}&m_1v_{1i}+m_2v_{2i}=m_1v_{1f}+m_2v_{2f}&&(1)\\[4pt]&\tfrac12m_1v_{1i}^2+\tfrac12m_2v_{2i}^2=\tfrac12m_1v_{1f}^2+\tfrac12m_2v_{2f}^2&&(2)\end{aligned}$$</p>
 
-<h2>Dalle due conservazioni alle velocità finali</h2>
+<p>Raccogliendo le velocità dello stesso corpo, con la differenza di quadrati nella (2):</p>
 
-<p>Raccogliamo in ciascuna equazione le velocità dello stesso corpo. La (1) diventa</p>
+<p class="eq">$$\begin{aligned}&m_1(v_{1i}-v_{1f})=m_2(v_{2f}-v_{2i})&&(1')\\[4pt]&m_1(v_{1i}-v_{1f})(v_{1i}+v_{1f})=m_2(v_{2f}-v_{2i})(v_{2f}+v_{2i})&&(2')\end{aligned}$$</p>
 
-<div class="formula-box">$$m_1(v_{1i}-v_{1f})=m_2(v_{2f}-v_{2i})\qquad(1')$$</div>
+<p>Dividendo la (2') per la (1'), con $v_{1i}\neq v_{1f}$:</p>
 
-<p>e la (2), dopo aver eliminato il fattore $\frac12$ comune, è una differenza di quadrati
-che si scompone in due fattori:</p>
+<p class="eq">$$v_{1i}+v_{1f}=v_{2f}+v_{2i}$$</p>
 
-<div class="formula-box">$$m_1(v_{1i}-v_{1f})(v_{1i}+v_{1f})=m_2(v_{2f}-v_{2i})(v_{2f}+v_{2i})\qquad(2')$$</div>
+<p>Sostituendo $v_{2f}=v_{1i}+v_{1f}-v_{2i}$ nella (1), e scambiando gli indici per $v_{2f}$:</p>
 
-<p>Il primo fattore a sinistra e a destra è lo stesso della $(1')$: dividendo la $(2')$ per
-la $(1')$ quei fattori si cancellano, e resta una relazione fra sole velocità:</p>
+<div class="def"><span class="et">Urto elastico in una dimensione</span>
+<p class="eq">$$v_{1f}=\frac{(m_1-m_2)v_{1i}+2m_2v_{2i}}{m_1+m_2}\qquad\qquad v_{2f}=\frac{(m_2-m_1)v_{2i}+2m_1v_{1i}}{m_1+m_2}$$</p></div>
 
-<div class="formula-box">$$v_{1i}+v_{1f}=v_{2f}+v_{2i}$$</div>
+<h2>Esempio</h2>
 
-<div class="nota">La velocità con cui il corpo 1 si avvicina al corpo 2 (rispetto a lui)
-prima dell'urto è uguale, cambiata di segno, alla velocità con cui si allontana dopo:
-$v_{1i}-v_{2i}=-(v_{1f}-v_{2f})$.</div>
+<p>Dati: $m_1=0{,}2\ \text{kg}$, $v_{1i}=3{,}7\ \text{m/s}$; $m_2=0{,}6\ \text{kg}$, $v_{2i}=-1{,}3\ \text{m/s}$. Calcolare $v_{1f}$ e $v_{2f}$.</p>
 
-<p>Isoliamo $v_{2f}=v_{1i}+v_{1f}-v_{2i}$ e sostituiamo nella $(1)$: si ricava $v_{1f}$, e con
-un procedimento identico, scambiando gli indici, si ricava $v_{2f}$:</p>
-
-<div class="formula-box">$$v_{1f}=\frac{(m_1-m_2)v_{1i}+2m_2v_{2i}}{m_1+m_2}\qquad
-v_{2f}=\frac{(m_2-m_1)v_{2i}+2m_1v_{1i}}{m_1+m_2}$$</div>
-
-<div class="svolgimento">
-<span class="et">Esempio</span>
-<p>Su una guida rettilinea, il corpo 1 ($m_1=0{,}2$ kg) si muove con $v_{1i}=3{,}7$ m/s;
-il corpo 2 ($m_2=0{,}6$ kg) gli viene incontro con $v_{2i}=-1{,}3$ m/s. Le velocità dopo
-l'urto sono</p>
-<p>$$v_{1f}=\frac{(0{,}2-0{,}6)(3{,}7)+2(0{,}6)(-1{,}3)}{0{,}2+0{,}6}=-3{,}8\ \text{m/s}$$</p>
-<p>$$v_{2f}=\frac{(0{,}6-0{,}2)(-1{,}3)+2(0{,}2)(3{,}7)}{0{,}2+0{,}6}=1{,}2\ \text{m/s}$$</p>
-<p>Il segno negativo di $v_{1f}$ dice che il corpo 1 rimbalza indietro; il corpo 2, che
-prima veniva incontro, riparte in avanti a $1{,}2$ m/s.</p>
-</div>
+<p class="eq">$$\begin{aligned}v_{1f}&=\frac{(0{,}2-0{,}6)\cdot3{,}7+2\cdot0{,}6\cdot(-1{,}3)}{0{,}2+0{,}6}\ \frac{\text{m}}{\text{s}}=-3{,}8\ \frac{\text{m}}{\text{s}}\\[4pt]v_{2f}&=\frac{(0{,}6-0{,}2)\cdot(-1{,}3)+2\cdot0{,}2\cdot3{,}7}{0{,}2+0{,}6}\ \frac{\text{m}}{\text{s}}=1{,}2\ \frac{\text{m}}{\text{s}}\end{aligned}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="fb2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-</defs>
-<line x1="20" y1="60" x2="500" y2="60" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<circle cx="150" cy="60" r="15" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="146" y="65" font-family="var(--serif)" font-style="italic" font-size="12">1</text>
-<line x1="112" y1="60" x2="72" y2="60" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr2)"/>
-<text x="60" y="48" font-family="var(--sans)" font-size="11" fill="var(--rosso)">v&#8321;&#7623;=&minus;3,8 m/s</text>
-<circle cx="330" cy="60" r="18" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="324" y="65" font-family="var(--serif)" font-style="italic" font-size="12">2</text>
-<line x1="352" y1="60" x2="410" y2="60" stroke="var(--blu)" stroke-width="2" marker-end="url(#fb2)"/>
-<text x="352" y="48" font-family="var(--sans)" font-size="11" fill="var(--blu)">v&#8322;&#7623;=1,2 m/s</text>
-</svg>
-<p class="did">Le velocità finali dell'esempio: il corpo 1 torna indietro, il corpo 2 continua
-in avanti, più lento di quanto non fosse veloce il corpo 1 in partenza.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Se il corpo 2 è inizialmente fermo ($v_{2i}=0$), le formule di questa unità si
-semplificano in quattro casi tipici secondo il rapporto fra $m_1$ e $m_2$ (unità 36).</li>
-<li>Le stesse due conservazioni, applicate quando le velocità non sono più su una sola
-retta, danno gli urti elastici bidimensionali (unità 37).</li>
-</ul>
+<svg id="f-esempio" viewBox="0 0 420 90" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velocità finali dell'esempio"></svg>
+<p class="did">Dopo l'urto: corpo 1 indietro, corpo 2 in avanti; frecce in scala</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../34-il-pendolo-balistico/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il pendolo balistico</span></a><a class="successiva" href="../36-urti-elastici-con-bersaglio-fermo-i-quattro-casi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Urti elastici con bersaglio fermo: i quattro casi</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 35</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function corpo(s,x,y,r,n){el('circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);txt(s,x,y,n,{'font-family':'var(--serif)','font-style':'italic','font-size':13});}
+// v: velocità con segno (px); il vettore parte dal bordo del corpo nel verso del moto
+function vel(s,x,y,r,v,sub,col,id){var d=v>0?1:-1,x0=x+d*(r+3);freccia(s,x0,y,x0+v,y,col,id);lab(s,x0+v/2,y-r-9,'v',sub,col);}
+
+// figura generale: prima / dopo
+var s=document.getElementById('f-urto');
+marc(s,'u-r','var(--rosso)');marc(s,'u-b','var(--blu)');
+[[0,'prima dell\'urto'],[85,'dopo l\'urto']].forEach(function(r){
+  txt(s,10,r[0]+14,r[1],{'text-anchor':'start','font-size':12,fill:'var(--grigio)'});
+  el('line',{x1:10,y1:r[0]+55,x2:410,y2:r[0]+55,stroke:'var(--riga)','stroke-width':1},s);});
+corpo(s,140,55,14,'1');vel(s,140,55,14,45,'1i','var(--rosso)','u-r');
+corpo(s,290,55,18,'2');vel(s,290,55,18,-40,'2i','var(--blu)','u-b');
+corpo(s,150,140,14,'1');vel(s,150,140,14,-40,'1f','var(--rosso)','u-r');
+corpo(s,280,140,18,'2');vel(s,280,140,18,45,'2f','var(--blu)','u-b');
+
+// figura dell'esempio, in scala (S px per m/s)
+var t=document.getElementById('f-esempio'), S=24;
+marc(t,'e-r','var(--rosso)');marc(t,'e-b','var(--blu)');
+el('line',{x1:10,y1:50,x2:410,y2:50,stroke:'var(--riga)','stroke-width':1},t);
+corpo(t,170,50,14,'1');vel(t,170,50,14,-3.8*S,'1f','var(--rosso)','e-r');
+corpo(t,260,50,18,'2');vel(t,260,50,18,1.2*S,'2f','var(--blu)','e-b');
+txt(t,170-14-3-3.8*S/2,78,'−3,8 m/s',{'font-size':11,fill:'var(--grigio)'});
+txt(t,260+18+3+1.2*S/2,78,'1,2 m/s',{'font-size':11,fill:'var(--grigio)'});
+})();
+</script>
 </body>
 </html>
