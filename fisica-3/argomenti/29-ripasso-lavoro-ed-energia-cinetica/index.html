@@ -5,18 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ripasso: lavoro ed energia cinetica — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:24px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.nota{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:6px;padding:12px 18px;margin:22px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,109 +64,99 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 29</p>
   <h1>Ripasso: lavoro ed energia cinetica</h1>
-  <p class="sommario">Prima di parlare di energia meccanica e di urti serve richiamare due
-  grandezze già incontrate: il lavoro compiuto da una forza e l'energia cinetica di un corpo
-  in moto. Sono legate da un unico teorema, che useremo per tutta la parte che segue.</p>
 </header>
 
-<h2>Il lavoro di una forza</h2>
+<p>Forza costante $\vec F$, spostamento rettilineo $\vec s$: quanto lavoro compie la forza?</p>
 
-<p>Una forza compie lavoro quando il suo punto di applicazione si sposta. Il lavoro si ottiene
-dal prodotto scalare fra il vettore forza e il vettore spostamento, quindi dipende anche
-dall'angolo $\theta$ fra i due:</p>
-
-<div class="formula-box">$$L = \vec F \cdot \vec s = F\,s\,\cos\theta$$</div>
+<div class="def"><span class="et">Lavoro</span>
+<p class="eq">$$L=\vec F\cdot\vec s=F\,s\cos\theta$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m29a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="m29b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<!-- caso theta=0 -->
-<g transform="translate(10,20)">
-<rect x="30" y="60" width="70" height="30" rx="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="30" y1="75" x2="100" y2="75" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m29b)"/>
-<text x="110" y="79" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">s</text>
-<line x1="30" y1="55" x2="100" y2="55" stroke="var(--verde)" stroke-width="2" marker-end="url(#m29a)"/>
-<text x="110" y="58" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">F</text>
-<text x="65" y="130" font-family="var(--sans)" font-size="12" text-anchor="middle">&#952; = 0</text>
-<text x="65" y="150" font-family="var(--serif)" font-size="12" text-anchor="middle">L = F&#8901;s</text>
-</g>
-<!-- caso theta=90 -->
-<g transform="translate(220,20)">
-<rect x="30" y="60" width="70" height="30" rx="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="30" y1="75" x2="100" y2="75" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m29b)"/>
-<text x="110" y="79" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">s</text>
-<line x1="65" y1="60" x2="65" y2="10" stroke="var(--verde)" stroke-width="2" marker-end="url(#m29a)"/>
-<text x="75" y="20" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">F</text>
-<path d="M55,60 A10,10 0 0 1 65,50" fill="none" stroke="var(--grigio)" stroke-width="1"/>
-<text x="65" y="130" font-family="var(--sans)" font-size="12" text-anchor="middle">&#952; = 90&#176;</text>
-<text x="65" y="150" font-family="var(--serif)" font-size="12" text-anchor="middle">L = 0</text>
-</g>
-<!-- caso theta=180 -->
-<g transform="translate(430,20)">
-<rect x="30" y="60" width="70" height="30" rx="4" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="30" y1="75" x2="100" y2="75" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m29b)"/>
-<text x="110" y="79" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">s</text>
-<line x1="100" y1="55" x2="30" y2="55" stroke="var(--verde)" stroke-width="2" marker-end="url(#m29a)"/>
-<text x="8" y="58" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">F</text>
-<text x="65" y="130" font-family="var(--sans)" font-size="12" text-anchor="middle">&#952; = 180&#176;</text>
-<text x="65" y="150" font-family="var(--serif)" font-size="12" text-anchor="middle">L = &minus;F&#8901;s</text>
-</g>
-</svg>
-<p class="did">Lo stesso spostamento $\vec s$ (in rosso) con la forza $\vec F$ (in verde) a
-tre angoli diversi: forza e spostamento concordi, forza perpendicolare allo spostamento,
-forza opposta allo spostamento.</p>
+<svg id="f-lavoro" viewBox="0 0 450 115" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forza e spostamento a 0, 90 e 180 gradi"></svg>
+<div class="did-parti" style="--n:3;max-width:420px;margin:6px auto 0">
+<p class="did">θ = 0°</p>
+<p class="did">θ = 90°</p>
+<p class="did">θ = 180°</p>
+</div>
 </div>
 
-<p>Se $\vec F$ e $\vec s$ sono concordi ($\theta=0$) tutta la forza contribuisce al moto e
-$L=F\,s$; se sono perpendicolari ($\theta=90^\circ$) la forza non fa avanzare né frenare il
-corpo lungo $\vec s$ e $L=0$; se sono opposti ($\theta=180^\circ$) la forza frena il corpo e
-il lavoro è negativo, $L=-F\,s$. L'unità di misura del lavoro è il joule, $1\ \text{J} = 1\
-\text{N}\cdot\text{m}$.</p>
-
-<h2>Energia cinetica e teorema del lavoro</h2>
-
-<p>L'energia cinetica di un corpo di massa $m$ che si muove con velocità $v$ è</p>
-
-<div class="formula-box">$$K = \frac{1}{2}mv^2$$</div>
-
-<p>ed equivale al lavoro necessario per portare quel corpo da fermo alla velocità $v$.
-Più in generale, il lavoro totale compiuto su un corpo è uguale alla variazione della sua
-energia cinetica: è il teorema dell'energia cinetica (o del lavoro).</p>
-
-<div class="formula-box">$$L = \Delta K = K_f - K_i = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2$$</div>
-
-<div class="esempio">
-<span class="et">Esempio</span>
-<p>Un blocco di massa $m = 2{,}0$ kg, inizialmente fermo, viene spinto da una forza costante
-$F = 10$ N concorde con lo spostamento per $s = 2{,}5$ m. Qual è la velocità finale?</p>
-<div class="formula-box">$$L = F\,s = 10\ \text{N}\cdot 2{,}5\ \text{m} = 25\ \text{J}$$</div>
-<p>Per il teorema dell'energia cinetica, con $v_i=0$:</p>
-<div class="formula-box">$$L = \frac{1}{2}mv_f^2 \;\Longrightarrow\; v_f =
-\sqrt{\frac{2L}{m}} = \sqrt{\frac{2\cdot 25\ \text{J}}{2{,}0\ \text{kg}}} = 5{,}0\ \frac{\text{m}}{\text{s}}$$</div>
-</div>
-
-<div class="nota">La forza peso e la forza elastica sono forze conservative: il lavoro che
-compiono non dipende dal percorso seguito, solo dai punti di partenza e di arrivo. Quando
-questo lavoro è positivo aumenta l'energia cinetica del corpo; quando è negativo, l'energia
-non scompare ma si accumula come energia potenziale.</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Definiamo l'energia potenziale gravitazionale ed elastica a partire proprio dal lavoro
-delle forze conservative — unità 30.</li>
-<li>Da lì arriviamo alla conservazione dell'energia meccanica (unità 31) e alla
-classificazione degli urti in elastici e anelastici (unità 32 e successive), dove userò
-insieme energia cinetica e quantità di moto.</li>
+<li>$\theta=0^\circ$, forza concorde con lo spostamento → $L=F\,s$;</li>
+<li>$\theta=90^\circ$ → $L=0$;</li>
+<li>$\theta=180^\circ$, forza opposta allo spostamento → $L=-F\,s$.</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>Joule (J): $1\ \text{J}=1\ \text{N}\cdot\text{m}$</p></div>
+
+<div class="def"><span class="et">Energia cinetica</span>
+<p class="eq">$$K=\frac12mv^2$$</p></div>
+
+<div class="def"><span class="et">Teorema dell'energia cinetica</span>
+<p>$L$ = lavoro totale delle forze applicate al corpo.</p>
+<p class="eq">$$L=\Delta K=\frac12mv_f^2-\frac12mv_i^2$$</p></div>
+
+<div class="def"><span class="et">Forze conservative</span>
+<p>Lavoro indipendente dal percorso, dipende solo dai punti di partenza e di arrivo: forza peso, forza elastica.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: blocco fermo, $m=2{,}0\ \text{kg}$, forza $F=10\ \text{N}$ concorde con lo spostamento $s=2{,}5\ \text{m}$. Calcolare $v_f$.</p>
+
+<p class="eq">$$F\,s=\frac12mv_f^2\;\Longrightarrow\;v_f=\sqrt{\frac{2F\,s}{m}}=\sqrt{\frac{2\cdot10\ \text{N}\cdot2{,}5\ \text{m}}{2{,}0\ \text{kg}}}=5{,}0\ \frac{\text{m}}{\text{s}}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../28-conservazione-della-quantita-di-moto/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Conservazione della quantità di moto</span></a><a class="successiva" href="../30-energia-potenziale-gravitazionale-ed-elastica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia potenziale gravitazionale ed elastica</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 29</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function omino(s,cx,yt,h){var k=h/88,w={stroke:'var(--inchiostro)','stroke-width':1.6,fill:'none','stroke-linecap':'round'};
+el('circle',Object.assign({cx:cx,cy:yt+8*k,r:8*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+16*k,x2:cx,y2:yt+55*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx-12*k,y2:yt+44*k},w),s);el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx+12*k,y2:yt+44*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx-10*k,y2:yt+h},w),s);el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx+10*k,y2:yt+h},w),s);}
+
+
+var s=document.getElementById('f-lavoro');
+marc(s,'l-f','var(--rosso)');marc(s,'l-s','var(--blu)');
+[0,90,180].forEach(function(a,k){
+var ox=k*150;
+if(k>0)el('line',{x1:ox,y1:10,x2:ox,y2:105,stroke:'var(--riga)','stroke-width':1},s);
+el('line',{x1:ox+15,y1:80,x2:ox+135,y2:80,stroke:'var(--grigio)','stroke-width':1},s);
+el('rect',{x:ox+50,y:50,width:40,height:30,rx:3,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+freccia(s,ox+50,96,ox+118,96,'var(--blu)','l-s');lab(s,ox+130,96,'s','','var(--blu)');
+if(a===0){freccia(s,ox+90,65,ox+138,65,'var(--rosso)','l-f');lab(s,ox+120,50,'F','','var(--rosso)');}
+if(a===90){freccia(s,ox+70,50,ox+70,12,'var(--rosso)','l-f');lab(s,ox+84,20,'F','','var(--rosso)');}
+if(a===180){freccia(s,ox+50,65,ox+6,65,'var(--rosso)','l-f');lab(s,ox+20,50,'F','','var(--rosso)');}
+});
+
+})();
+</script>
 </body>
 </html>
