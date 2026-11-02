@@ -5,19 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Conservazione del momento angolare — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.passi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:22px 0}
-.passi p{margin:8px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--verde);border-radius:6px;padding:14px 20px;margin:24px 0}
-.esempio p{margin:8px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -27,98 +65,99 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Dinamica rotazionale &middot; Unità 41</p>
   <h1>Conservazione del momento angolare</h1>
-  <p class="sommario">Quando su un corpo in rotazione il momento delle forze esterne è nullo, la
-  sua velocità angolare può cambiare, ma qualcosa resta costante: il momento angolare totale.
-  È lo stesso principio della conservazione della quantità di moto, applicato alla rotazione.</p>
 </header>
 
-<h2>Dal momento nullo alla conservazione</h2>
+<p>Corpo in rotazione con momento totale delle forze esterne nullo: che cosa resta costante?</p>
 
-<p>Supponiamo che il momento totale delle forze applicate a un corpo sia nullo:</p>
+<p>Da $M_{TOT}=I_{TOT}\,\alpha$ con $\alpha=\dfrac{\omega_f-\omega_i}{\Delta t}$:</p>
 
-<div class="formula-box">$$M_{TOT}=0 \quad\Rightarrow\quad I_{TOT}\,\alpha=0$$</div>
+<p class="eq">$$M_{TOT}=0\;\Rightarrow\;I_{TOT}\,\alpha=0\;\Rightarrow\;I_{TOT}\,\omega_f-I_{TOT}\,\omega_i=0\;\Rightarrow\;L_f-L_i=0$$</p>
 
-<p>Scriviamo l'accelerazione angolare come rapporto incrementale,
-$\alpha=\dfrac{\Delta\omega}{\Delta t}=\dfrac{\omega_f-\omega_i}{\Delta t}$, e moltiplichiamo
-entrambi i membri per $\Delta t$:</p>
+<div class="def"><span class="et">Momento delle forze esterne nullo</span>
+<p class="eq">$$L_f=L_i$$</p></div>
 
-<div class="passi">
-<p>$$I_{TOT}\,\omega_f - I_{TOT}\,\omega_i = 0$$</p>
-</div>
+<p>Se il corpo cambia la distribuzione della massa rispetto all'asse, $I$ cambia ma $L$ resta costante:</p>
 
-<p>I due termini sono il momento angolare finale $L_f$ e quello iniziale $L_i$, quindi</p>
+<div class="def"><span class="et">Conservazione del momento angolare con $I$ variabile</span>
+<p class="eq">$$I_i\,\omega_i=I_f\,\omega_f$$</p></div>
 
-<div class="formula-box">$$L_f-L_i=0 \qquad\Rightarrow\qquad L_f=L_i$$</div>
-
-<p>Se il momento delle forze esterne è nullo, il momento angolare del corpo resta costante nel
-tempo.</p>
-
-<h2>Quando cambia la distribuzione della massa</h2>
-
-<p>La conservazione vale anche quando, nel corso del moto, il corpo cambia la distribuzione
-della propria massa rispetto all'asse di rotazione. In quel caso il momento di inerzia $I$ non
-è più lo stesso all'inizio e alla fine, ma il prodotto $I\omega$, cioè $L$, resta costante:</p>
-
-<div class="formula-box">$$I_i\,\omega_i = I_f\,\omega_f$$</div>
-
-<p>Se $I$ diminuisce, $\omega$ deve aumentare nella stessa proporzione, e viceversa.</p>
+<ul>
+<li>$I$ diminuisce → $\omega$ aumenta;</li>
+<li>$I$ aumenta → $\omega$ diminuisce.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="mw41a" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-<marker id="mw41b" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<circle cx="105" cy="120" r="6" fill="var(--inchiostro)"/>
-<line x1="105" y1="120" x2="180" y2="120" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#mw41a)"/>
-<text x="130" y="112" font-family="var(--serif)" font-style="italic" font-size="13">r&#8320;</text>
-<circle cx="180" cy="120" r="7" fill="var(--blu)"/>
-<circle cx="30" cy="120" r="7" fill="var(--blu)"/>
-<line x1="105" y1="120" x2="30" y2="120" stroke="var(--verde)" stroke-width="1.8"/>
-<path d="M 128,78 A 60,60 0 0,1 178,105" fill="none" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#mw41a)"/>
-<text x="150" y="72" font-family="var(--serif)" font-style="italic" font-size="14">&#969;&#8320;</text>
-<text x="105" y="200" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">braccia aperte: I&#8320; grande, &#969;&#8320; piccola</text>
-
-<line x1="105" y1="120" x2="130" y2="35" stroke="var(--riga)" stroke-width="1.4" stroke-dasharray="4 4"/>
-<path d="M 220,30 L 260,30" stroke="var(--inchiostro)" stroke-width="1.4" marker-end="url(#mw41b)"/>
-<text x="200" y="18" font-family="var(--sans)" font-size="11" fill="var(--grigio)">L costante</text>
-
-<circle cx="335" cy="120" r="6" fill="var(--inchiostro)"/>
-<line x1="335" y1="120" x2="358" y2="120" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#mw41b)"/>
-<text x="345" y="112" font-family="var(--serif)" font-style="italic" font-size="13">r&#8321;</text>
-<circle cx="358" cy="120" r="7" fill="var(--blu)"/>
-<circle cx="312" cy="120" r="7" fill="var(--blu)"/>
-<line x1="335" y1="120" x2="312" y2="120" stroke="var(--verde)" stroke-width="1.8"/>
-<path d="M 345,88 A 33,33 0 0,1 368,102" fill="none" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#mw41b)"/>
-<path d="M 335,80 A 41,41 0 0,1 372,105" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="352" y="70" font-family="var(--serif)" font-style="italic" font-size="14">&#969;&#8321;</text>
-<text x="335" y="200" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">braccia raccolte: I&#8321; piccolo, &#969;&#8321; grande</text>
-</svg>
-<p class="did">Riducendo il raggio a cui è distribuita la massa, il momento di inerzia
-diminuisce e la velocità angolare aumenta: il prodotto $I\omega$ non cambia.</p>
+<svg id="f-patt" viewBox="0 0 420 190" style="width:100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due masse su un'asta che ruota: a raggio minore la rotazione è più veloce"></svg>
+<div class="did-parti" style="--n:2"><p class="did">Braccia aperte: $I_i$, $\omega_i$</p><p class="did">Braccia raccolte: $I_f=I_i/3$, $\omega_f=3\,\omega_i$</p></div>
+<p class="did">Tratteggio: posizione dopo lo stesso intervallo $\Delta t$</p>
 </div>
 
-<div class="esempio">
-<p><strong>Esempio.</strong> Una pattinatrice ruota con le braccia aperte a
-$\omega_i=2{,}0\ \text{rad/s}$, con momento di inerzia $I_i=4{,}2\ \text{kg}\cdot\text{m}^2$.
-Raccogliendo le braccia il suo momento di inerzia scende a
-$I_f=1{,}4\ \text{kg}\cdot\text{m}^2$. Qual è la nuova velocità angolare?</p>
-<p>$$\omega_f=\frac{I_i\,\omega_i}{I_f}=\frac{4{,}2\times2{,}0}{1{,}4}=6{,}0\ \text{rad/s}$$</p>
-<p>Con il momento di inerzia ridotto a un terzo, la velocità angolare triplica.</p>
-</div>
+<h2>Esempio</h2>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>La relazione $M=I\alpha$ fra momento delle forze e accelerazione angolare, in analogia
-con $F=ma$, è il contenuto dell'unità 42.</li>
-<li>Da $L=I\omega$ si ricava anche l'energia cinetica di rotazione, unità 43.</li>
-</ul>
-</div>
+<p>Pattinatrice che raccoglie le braccia. Dati: $I_i=4{,}2\ \text{kg}\cdot\text{m}^2$, $\omega_i=2{,}0\ \text{rad/s}$, $I_f=1{,}4\ \text{kg}\cdot\text{m}^2$. Calcolare $\omega_f$.</p>
+
+<p class="eq">$$\omega_f=\frac{I_i\,\omega_i}{I_f}=\frac{4{,}2\times2{,}0}{1{,}4}\ \text{rad/s}=6{,}0\ \text{rad/s}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../40-momento-di-inerzia-di-un-corpo-esteso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Momento di inerzia di un corpo esteso</span></a><a class="successiva" href="../42-seconda-legge-di-newton-per-il-moto-rotazionale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Seconda legge di Newton per il moto rotazionale</span></a></nav>
 <footer><p>Fisica terza &middot; Dinamica rotazionale &middot; Unità 41</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,x1,y1,x2,y2,col,id,w,da){var a={x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w||2.2};if(id)a['marker-end']='url(#'+id+')';if(da)a['stroke-dasharray']=da;return el('line',a,s);}
+function arco(s,cx,cy,r,a0,a1,col){var p0=[cx+r*Math.cos(a0),cy-r*Math.sin(a0)],p1=[cx+r*Math.cos(a1),cy-r*Math.sin(a1)];el('path',{d:'M'+p0+' A'+r+','+r+' 0 0,'+(a1>a0?0:1)+' '+p1,fill:'none',stroke:col,'stroke-width':1.2},s);}
+function fmt(x,d){return x.toFixed(d).replace('.',',');}
+
+
+var s=document.getElementById('f-patt');
+marc(s,'pw','var(--inchiostro)');
+// due masse su un'asta: I = 2 m r^2; I_f = I_i/3 => r_f = r_i/sqrt(3); angolo spazzato in Delta t proporzionale a omega
+function pannello(cx,cy,r,dth,rw,sub){
+  var a0=12*Math.PI/180,a1=a0+dth*Math.PI/180;
+  function P(a,d){return [cx+d*Math.cos(a),cy-d*Math.sin(a)];}
+  var p=P(a1,r),q=P(a1+Math.PI,r);
+  el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--grigio)','stroke-width':1.4,'stroke-dasharray':'4 4'},s);
+  el('circle',{cx:p[0],cy:p[1],r:6,fill:'none',stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'3 2'},s);
+  el('circle',{cx:q[0],cy:q[1],r:6,fill:'none',stroke:'var(--blu)','stroke-width':1.4,'stroke-dasharray':'3 2'},s);
+  p=P(a0,r);q=P(a0+Math.PI,r);
+  el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:'var(--inchiostro)','stroke-width':2},s);
+  el('circle',{cx:p[0],cy:p[1],r:6,fill:'var(--blu)'},s);el('circle',{cx:q[0],cy:q[1],r:6,fill:'var(--blu)'},s);
+  el('circle',{cx:cx,cy:cy,r:3,fill:'var(--inchiostro)'},s);
+  var n=[-Math.sin(a0),-Math.cos(a0)],m=P(a0,r*.5);
+  lab(s,m[0]+12*n[0],m[1]+12*n[1]+2,'r',sub,'var(--verde)');
+  var b0=a0+4*Math.PI/180,b1=a1-4*Math.PI/180,u=P(b0,rw),v=P(b1,rw);
+  el('path',{d:'M'+u+' A'+rw+','+rw+' 0 '+((b1-b0)>Math.PI?1:0)+',0 '+v,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#pw)'},s);
+  var w=P((b0+b1)/2,rw+16);lab(s,w[0],w[1],'ω',sub,'var(--inchiostro)');
+}
+var ri=78;
+pannello(105,100,ri,30,ri+16,'i');
+pannello(315,100,ri/Math.sqrt(3),90,ri/Math.sqrt(3)+20,'f');
+
+})();
+</script>
 </body>
 </html>
