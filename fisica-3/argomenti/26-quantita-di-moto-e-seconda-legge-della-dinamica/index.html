@@ -5,15 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quantità di moto e seconda legge della dinamica — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -23,85 +64,94 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Quantità di moto e urti &middot; Unità 26</p>
   <h1>Quantità di moto e seconda legge della dinamica</h1>
-  <p class="sommario">Fin qui abbiamo descritto il moto con la sola velocità. Introduciamo ora una
-  grandezza che tiene conto anche della massa del corpo, la quantità di moto: è lo strumento giusto
-  per studiare che cosa succede quando due o più corpi interagiscono fra loro, come negli urti.</p>
 </header>
 
-<h2>La quantità di moto</h2>
+<p>Corpo di massa $m$ con velocità $\vec v$: la quantità di moto tiene conto di entrambe.</p>
 
-<p>Definiamo la quantità di moto di un corpo di massa $m$ che si muove con velocità $\vec v$ come
-il prodotto fra le due grandezze:</p>
-
-<div class="formula-box">$$\vec p = m\,\vec v$$</div>
-
-<p>È una grandezza vettoriale: ha, per costruzione, la stessa direzione e lo stesso verso di
-$\vec v$, mentre il suo modulo è $p=mv$. La sua unità di misura si ricava dal prodotto delle unità
-dei due fattori:</p>
-
-<div class="formula-box">$$[p]=[m]\cdot[v]=\text{kg}\cdot\dfrac{\text{m}}{\text{s}}$$</div>
-
-<p>La quantità di moto è strettamente legata all'energia cinetica di un corpo in moto, ed è la
-grandezza utile per studiare gli urti fra oggetti.</p>
+<div class="def"><span class="et">Quantità di moto</span>
+<p class="eq">$$\vec p = m\,\vec v$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m26v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="m26p" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<line x1="40" y1="180" x2="40" y2="30" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="46" y="34" font-family="var(--sans)" font-size="12" fill="var(--grigio)">y</text>
-<line x1="40" y1="180" x2="260" y2="180" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="252" y="196" font-family="var(--sans)" font-size="12" fill="var(--grigio)">x</text>
-<circle cx="40" cy="180" r="3" fill="var(--inchiostro)"/>
-<text x="46" y="196" font-family="var(--sans)" font-size="12" fill="var(--grigio)">O</text>
-<circle cx="60" cy="170" r="5" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<text x="48" y="160" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--inchiostro)">m</text>
-<line x1="60" y1="170" x2="120" y2="120" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m26v)"/>
-<text x="122" y="112" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">v</text>
-<line x1="60" y1="170" x2="200" y2="60" stroke="var(--verde)" stroke-width="2.2" marker-end="url(#m26p)"/>
-<text x="204" y="54" font-family="var(--serif)" font-style="italic" font-size="15" fill="var(--verde)">p</text>
-</svg>
-<p class="did">Il vettore $\vec p$ ha modulo $p=mv$ e la stessa direzione e verso di $\vec v$.</p>
+<svg id="f-p" viewBox="20 10 250 190" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vettore quantità di moto con la stessa direzione e lo stesso verso della velocità"></svg>
+<p class="did">$\vec p$ e $\vec v$: stessa direzione e stesso verso</p>
 </div>
 
-<h2>La seconda legge della dinamica in termini di quantità di moto</h2>
-
-<p>Consideriamo la variazione della quantità di moto di un corpo fra un istante iniziale e uno
-finale, a massa costante:</p>
-
-<div class="formula-box">$$\Delta \vec p=\vec p_f-\vec p_i=m\vec v_f-m\vec v_i=m(\vec v_f-\vec v_i)=m\,\Delta\vec v$$</div>
-
-<p>Dividiamo entrambi i membri per l'intervallo di tempo $\Delta t$ in cui questa variazione è
-avvenuta:</p>
-
-<div class="formula-box">$$\dfrac{\Delta \vec p}{\Delta t}=\dfrac{m\,\Delta\vec v}{\Delta t}$$</div>
-
-<p>Il rapporto $\Delta\vec v/\Delta t$ è, per definizione, l'accelerazione $\vec a$ del corpo, quindi
-il secondo membro diventa $m\vec a$, che per la seconda legge di Newton è proprio la risultante delle
-forze applicate al corpo, $\vec F_{tot}$:</p>
-
-<div class="formula-box">$$\dfrac{\Delta \vec p}{\Delta t}=m\vec a=\vec F_{tot}$$</div>
-
-<p>Riscriviamo dunque la seconda legge della dinamica in questa forma:</p>
-
-<div class="formula-box">$$\vec F_{tot}=\dfrac{\Delta \vec p}{\Delta t}$$</div>
-
-<p>dove $\vec F_{tot}$ è la somma delle forze che agiscono sul corpo, e il secondo membro è la
-variazione della quantità di moto nel tempo.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Da questa stessa relazione ricaviamo il teorema dell'impulso, che lega la variazione della
-quantità di moto alla forza media applicata in un intervallo di tempo — unità 27.</li>
+<li>grandezza vettoriale, con direzione e verso di $\vec v$;</li>
+<li>modulo $p = mv$.</li>
 </ul>
-</div>
+
+<div class="def"><span class="et">Unità di misura</span>
+<p>$[p]=[m]\cdot[v]=\text{kg}\cdot\text{m/s}$</p></div>
+
+<h2>Seconda legge della dinamica</h2>
+
+<p>Variazione della quantità di moto fra l'istante iniziale e quello finale, a massa costante:</p>
+
+<p class="eq">$$\Delta \vec p=\vec p_f-\vec p_i=m\vec v_f-m\vec v_i=m\,\Delta\vec v$$</p>
+
+<p>Dividendo per $\Delta t$, con $\Delta\vec v/\Delta t=\vec a$ e $m\vec a=\vec F_{tot}$:</p>
+
+<p class="eq">$$\frac{\Delta \vec p}{\Delta t}=\frac{m\,\Delta\vec v}{\Delta t}=m\vec a=\vec F_{tot}$$</p>
+
+<div class="def"><span class="et">Seconda legge della dinamica</span>
+<p>$\vec F_{tot}$: risultante delle forze applicate al corpo.</p>
+<p class="eq">$$\vec F_{tot}=\frac{\Delta \vec p}{\Delta t}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../25-forza-centripeta-e-forza-centrifuga/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Forza centripeta e forza centrifuga</span></a><a class="successiva" href="../27-teorema-dell-impulso/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema dell'impulso</span></a></nav>
 <footer><p>Fisica terza &middot; Quantità di moto e urti &middot; Unità 26</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function freccia(s,x1,y1,x2,y2,col,id,tr){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':2.4,'stroke-dasharray':tr?'5 3':'none','marker-end':'url(#'+id+')'},s);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':15,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function omino(s,cx,yt,h){var k=h/88,w={stroke:'var(--inchiostro)','stroke-width':1.6,fill:'none','stroke-linecap':'round'};
+el('circle',Object.assign({cx:cx,cy:yt+8*k,r:8*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+16*k,x2:cx,y2:yt+55*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx-12*k,y2:yt+44*k},w),s);el('line',Object.assign({x1:cx,y1:yt+26*k,x2:cx+12*k,y2:yt+44*k},w),s);
+el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx-10*k,y2:yt+h},w),s);el('line',Object.assign({x1:cx,y1:yt+55*k,x2:cx+10*k,y2:yt+h},w),s);}
+
+
+var s=document.getElementById('f-p');
+marc(s,'p-v','var(--verde)');marc(s,'p-b','var(--blu)');
+var Ox=40,Oy=180;
+el('line',{x1:Ox,y1:Oy,x2:Ox,y2:22,stroke:'var(--inchiostro)','stroke-width':1.2},s);
+el('line',{x1:Ox,y1:Oy,x2:258,y2:Oy,stroke:'var(--inchiostro)','stroke-width':1.2},s);
+txt(s,Ox-10,26,'y',{fill:'var(--grigio)','font-size':12});txt(s,256,Oy+12,'x',{fill:'var(--grigio)','font-size':12});
+txt(s,Ox-10,Oy+10,'O',{fill:'var(--grigio)','font-size':12});
+var mx=75,my=155,a=38*Math.PI/180,ux=Math.cos(a),uy=-Math.sin(a),nx=-uy,ny=ux,o=7;
+freccia(s,mx-o*nx+8*ux,my-o*ny+8*uy,mx-o*nx+75*ux,my-o*ny+75*uy,'var(--blu)','p-b');
+lab(s,mx-(o+14)*nx+70*ux,my-(o+14)*ny+70*uy,'v','','var(--blu)');
+freccia(s,mx+o*nx+8*ux,my+o*ny+8*uy,mx+o*nx+175*ux,my+o*ny+175*uy,'var(--verde)','p-v');
+lab(s,mx+(o+14)*nx+170*ux,my+(o+14)*ny+170*uy,'p','','var(--verde)');
+el('circle',{cx:mx,cy:my,r:7,fill:'#fff',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+txt(s,mx-18,my-6,'m',{fill:'var(--grigio)','font-size':12});
+
+})();
+</script>
 </body>
 </html>
