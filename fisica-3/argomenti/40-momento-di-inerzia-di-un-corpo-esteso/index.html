@@ -5,17 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Momento di inerzia di un corpo esteso — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.passi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:22px 0}
-.passi p{margin:8px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -25,76 +65,85 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Dinamica rotazionale &middot; Unità 40</p>
   <h1>Momento di inerzia di un corpo esteso</h1>
-  <p class="sommario">Una massa puntiforme in rotazione ha momento di inerzia $I=mr^2$. Un
-  corpo esteso è un insieme di tante masse puntiformi, ciascuna alla propria distanza
-  dall'asse: sommando i loro contributi si ottiene il momento di inerzia dell'intero corpo.</p>
 </header>
 
-<h2>Momento angolare di un corpo esteso in rotazione</h2>
-
-<p>Immaginiamo un disco che ruota con velocità angolare $\omega$, pensato come un insieme di
-masse puntiformi $m_1, m_2, m_3, \dots$ poste a distanze diverse $r_1, r_2, r_3, \dots$
-dal centro.</p>
+<p>Disco che ruota con velocità angolare $\omega$, pensato come insieme di masse puntiformi $m_1, m_2, m_3, \dots$ a distanze $r_1, r_2, r_3, \dots$ dall'asse: quanto vale il suo momento angolare?</p>
 
 <div class="fig">
-<svg viewBox="0 0 340 300" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="mr40" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="mw40" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<circle cx="170" cy="155" r="110" fill="var(--blu-chiaro)" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<circle cx="170" cy="155" r="3" fill="var(--inchiostro)"/>
-<line x1="170" y1="155" x2="260" y2="155" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#mr40)"/>
-<text x="205" y="147" font-family="var(--serif)" font-style="italic" font-size="14">r&#8321;</text>
-<circle cx="260" cy="155" r="4.5" fill="var(--blu)"/>
-<text x="266" y="150" font-family="var(--serif)" font-style="italic" font-size="13">m&#8321;</text>
-<line x1="170" y1="155" x2="128" y2="92" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#mr40)"/>
-<text x="122" y="115" font-family="var(--serif)" font-style="italic" font-size="14">r&#8322;</text>
-<circle cx="128" cy="92" r="4.5" fill="var(--blu)"/>
-<text x="102" y="82" font-family="var(--serif)" font-style="italic" font-size="13">m&#8322;</text>
-<line x1="170" y1="155" x2="108" y2="212" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#mr40)"/>
-<text x="118" y="196" font-family="var(--serif)" font-style="italic" font-size="14">r&#8323;</text>
-<circle cx="108" cy="212" r="4.5" fill="var(--blu)"/>
-<text x="80" y="230" font-family="var(--serif)" font-style="italic" font-size="13">m&#8323;</text>
-<path d="M 210,68 A 110,110 0 0,1 262,110" fill="none" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#mw40)"/>
-<text x="255" y="65" font-family="var(--serif)" font-style="italic" font-size="15">&#969;</text>
-<text x="170" y="280" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">disco pieno</text>
-</svg>
-<p class="did">Il disco, in rotazione con velocità angolare $\omega$, è pensato come somma di
-masse puntiformi $m_i$ a distanze $r_i$ dal centro.</p>
+<svg id="f-disco" viewBox="0 0 340 250" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Disco pieno in rotazione pensato come somma di masse puntiformi"></svg>
+<p class="did">Disco pieno: masse $m_i$ a distanze $r_i$ dal centro, stessa $\omega$</p>
 </div>
 
-<p>Il momento angolare totale è la somma dei momenti angolari delle singole masse. Tutte
-ruotano con la stessa $\omega$, e per ciascuna vale $L_i=I_i\omega$ con $I_i=m_ir_i^2$, come
-visto per la massa puntiforme:</p>
+<p>Per ogni massa $L_i=m_ir_i^2\,\omega$; il momento angolare totale è la somma:</p>
 
-<div class="passi">
-<p>$$L_{TOT}=L_1+L_2+L_3+\dots = I_1\omega+I_2\omega+I_3\omega+\dots$$</p>
-<p>$$L_{TOT}=(I_1+I_2+I_3+\dots)\,\omega = \left(m_1r_1^2+m_2r_2^2+m_3r_3^2+\dots\right)\omega$$</p>
-</div>
+<p class="eq">$$L_{TOT}=L_1+L_2+L_3+\dots=\left(m_1r_1^2+m_2r_2^2+m_3r_3^2+\dots\right)\omega$$</p>
 
-<div class="formula-box">$$L_{TOT}=I_{TOT}\,\omega \qquad \text{con} \qquad I_{TOT}=\sum_i m_ir_i^2$$</div>
+<div class="def"><span class="et">Corpo esteso in rotazione</span>
+<p class="eq">$$L_{TOT}=I_{TOT}\,\omega\qquad\text{con}\qquad I_{TOT}=\sum_i m_ir_i^2$$</p></div>
 
-<p>$I_{TOT}$ è il momento di inerzia del corpo esteso rispetto all'asse di rotazione. Per un
-disco pieno di massa $M$ e raggio $R$ la somma dà</p>
+<div class="def"><span class="et">Disco pieno omogeneo, asse per il centro</span>
+<p class="eq">$$I_{TOT}=\frac{1}{2}MR^2$$</p></div>
 
-<div class="formula-box">$$I_{TOT}=\frac{1}{2}MR^2 \qquad \Rightarrow \qquad L_{TOT}=\frac{1}{2}MR^2\,\omega$$</div>
-
-<p>Il valore di $I_{TOT}$ dipende dalla forma del corpo e da come la massa è distribuita
-rispetto all'asse: un disco pieno, un anello o una sfera della stessa massa e dello stesso
-raggio hanno, in generale, momenti di inerzia diversi.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
+<p>$I_{TOT}$ dipende da:</p>
 <ul>
-<li>Quando il momento delle forze esterne è nullo, il momento angolare totale $L_{TOT}$ si
-conserva: è il contenuto dell'unità 41.</li>
+<li>la massa del corpo;</li>
+<li>la forma e la distribuzione della massa rispetto all'asse.</li>
 </ul>
-</div>
 
 <nav class="nav-unita"><a class="precedente" href="../39-momento-di-inerzia-di-una-massa-puntiforme/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Momento di inerzia di una massa puntiforme</span></a><a class="successiva" href="../41-conservazione-del-momento-angolare/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Conservazione del momento angolare</span></a></nav>
 <footer><p>Fisica terza &middot; Dinamica rotazionale &middot; Unità 40</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,x1,y1,x2,y2,col,id,w,da){var a={x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w||2.2};if(id)a['marker-end']='url(#'+id+')';if(da)a['stroke-dasharray']=da;return el('line',a,s);}
+function arco(s,cx,cy,r,a0,a1,col){var p0=[cx+r*Math.cos(a0),cy-r*Math.sin(a0)],p1=[cx+r*Math.cos(a1),cy-r*Math.sin(a1)];el('path',{d:'M'+p0+' A'+r+','+r+' 0 0,'+(a1>a0?0:1)+' '+p1,fill:'none',stroke:col,'stroke-width':1.2},s);}
+function fmt(x,d){return x.toFixed(d).replace('.',',');}
+
+
+var s=document.getElementById('f-disco');
+marc(s,'dr','var(--verde)');marc(s,'dw','var(--inchiostro)');
+var C=[170,128],R=100;
+el('circle',{cx:C[0],cy:C[1],r:R,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.4},s);
+el('circle',{cx:C[0],cy:C[1],r:3,fill:'var(--inchiostro)'},s);
+var M=[[0.82,15,'1'],[0.58,128,'2'],[0.88,232,'3']];
+M.forEach(function(q){
+  var a=q[1]*Math.PI/180,u=[Math.cos(a),-Math.sin(a)],n=[-u[1],u[0]],d=q[0]*R;
+  var P=[C[0]+d*u[0],C[1]+d*u[1]];
+  fr(s,C[0],C[1],P[0]-7*u[0],P[1]-7*u[1],'var(--verde)','dr',1.8);
+  lab(s,C[0]+d*.5*u[0]+13*n[0],C[1]+d*.5*u[1]+13*n[1],'r',q[2],'var(--verde)');
+  el('circle',{cx:P[0],cy:P[1],r:5,fill:'var(--blu)'},s);
+  lab(s,P[0]-15*n[0]+4*u[0],P[1]-15*n[1]+4*u[1],'m',q[2],'var(--inchiostro)');
+});
+var a0=35*Math.PI/180,a1=70*Math.PI/180,rw=116;
+el('path',{d:'M'+[C[0]+rw*Math.cos(a0),C[1]-rw*Math.sin(a0)]+' A'+rw+','+rw+' 0 0,0 '+[C[0]+rw*Math.cos(a1),C[1]-rw*Math.sin(a1)],fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6,'marker-end':'url(#dw)'},s);
+var am=52*Math.PI/180;lab(s,C[0]+132*Math.cos(am),C[1]-132*Math.sin(am),'ω','','var(--inchiostro)');
+
+})();
+</script>
 </body>
 </html>
