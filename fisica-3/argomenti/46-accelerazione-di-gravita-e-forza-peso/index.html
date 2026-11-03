@@ -5,16 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Accelerazione di gravità e forza peso — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.esempio{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--verde);border-radius:6px;padding:14px 20px;margin:24px 0}
-.esempio p{margin:8px 0}
-.nota{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:6px;padding:14px 20px;margin:24px 0}
-.nota p{margin:8px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -24,56 +65,49 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Gravitazione &middot; Unità 46</p>
   <h1>Accelerazione di gravità e forza peso</h1>
-  <p class="sommario">Il peso di un corpo non è che la forza di gravità che la Terra
-  esercita su di esso. Da qui ricaviamo l'accelerazione $g$, la stessa per qualunque
-  massa vicino alla superficie terrestre.</p>
 </header>
 
-<h2>Da $F=G\,\dfrac{m_1 m_2}{r^2}$ a $F=mg$</h2>
+<p>Corpo di massa $m$ sulla superficie terrestre: da dove viene il suo peso?</p>
 
-<p>Riprendiamo la forza di gravità che la Terra, di massa $M_T$ e raggio $R_T$, esercita
-su un corpo di massa $m$ posto sulla sua superficie:</p>
+<p>Forza di gravità della Terra (massa $M_T$, raggio $R_T$) sul corpo:</p>
 
-<div class="formula-box">$$F=G\,\frac{M_T\,m}{R_T^2}$$</div>
+<p class="eq">$$F=G\,\frac{M_T\,m}{R_T^2}=m\cdot\left(G\,\frac{M_T}{R_T^2}\right)$$</p>
 
-<p>Raccogliamo $m$:</p>
+<p>Il termine fra parentesi non dipende da $m$: è l'accelerazione di gravità $g$.</p>
 
-<div class="formula-box">$$F=m\cdot\left(G\,\frac{M_T}{R_T^2}\right)$$</div>
+<div class="def"><span class="et">Forza peso</span>
+<p class="eq">$$F=mg\qquad\qquad g=G\,\frac{M_T}{R_T^2}$$</p></div>
 
-<p>Il termine fra parentesi non dipende più da $m$: è lo stesso per qualsiasi corpo sulla
-superficie terrestre. Lo chiamiamo accelerazione di gravità $g$, e la forza diventa</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>$g$ non dipende dalla massa: trascurando l'attrito dell'aria, vicino alla superficie terrestre tutti i corpi cadono con la stessa accelerazione.</p></div>
 
-<div class="formula-box">$$F=mg \qquad\text{(forza peso)}$$</div>
+<h2>Esempio</h2>
 
-<p>con</p>
+<p>Dati: $G=6{,}67\times10^{-11}\ \text{N·m}^2/\text{kg}^2$, $M_T=5{,}97\times10^{24}$ kg, $R_T=6{,}37\times10^6$ m. Calcolare $g$.</p>
 
-<div class="formula-box">$$g=G\,\frac{M_T}{R_T^2}$$</div>
-
-<div class="esempio">
-<p>Con $G=6{,}67\times10^{-11}\ \text{N}\,\text{m}^2/\text{kg}^2$,
-$M_T=5{,}97\times10^{24}$ kg e $R_T=6{,}37\times10^6$ m:</p>
-<p>$$g=\frac{6{,}67\times10^{-11}\cdot 5{,}97\times10^{24}}{(6{,}37\times10^6)^2}\approx
-9{,}81\ \text{m/s}^2$$</p>
-</div>
-
-<div class="nota">
-<p>$g$ non dipende dalla massa $m$ del corpo che cade: si è semplificata nel
-raccoglimento. Per questo tutti i corpi, vicino alla superficie terrestre, cadono con
-la stessa accelerazione, indipendentemente dal loro peso.</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Vediamo perché una sfera omogenea, come la Terra, attrae come se tutta la sua massa
-fosse concentrata nel centro: unità 47.</li>
-<li>Poi passiamo ai modelli dei sistemi planetari, da Tolomeo a Copernico, unità 48.</li>
-</ul>
-</div>
+<p class="eq">$$g=G\,\frac{M_T}{R_T^2}=6{,}67\times10^{-11}\times\frac{5{,}97\times10^{24}}{(6{,}37\times10^6)^2}\ \text{m/s}^2\approx9{,}81\ \text{m/s}^2$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../45-la-legge-di-gravitazione-universale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">La legge di gravitazione universale</span></a><a class="successiva" href="../47-forza-gravitazionale-di-una-sfera-uniforme/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Forza gravitazionale di una sfera uniforme</span></a></nav>
 <footer><p>Fisica terza &middot; Gravitazione &middot; Unità 46</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
