@@ -5,18 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fluidi ideali ed equazione di continuità — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-table.tab{border-collapse:collapse;margin:20px auto;font-family:var(--sans);font-size:.95rem;background:#fff}
-table.tab th,table.tab td{border:1px solid var(--riga);padding:8px 18px;text-align:center}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
+.foglio>table.tab{margin:var(--r) auto 0}
+table.tab{border-collapse:collapse;font-family:var(--sans);font-size:.95rem;background:#fff}
+table.tab th,table.tab td{border:1px solid var(--riga);padding:0 18px;line-height:calc(var(--r) - 1px);text-align:center}
 table.tab th{background:var(--blu-chiaro)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.foglio>table+h2,.foglio>table+p{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,17 +70,14 @@ table.tab th{background:var(--blu-chiaro)}
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Fluidodinamica &middot; Unità 56</p>
   <h1>Fluidi ideali ed equazione di continuità</h1>
-  <p class="sommario">Passiamo dai fluidi in quiete al loro moto. Per poterlo trattare in modo
-  semplice fissiamo prima un modello di fluido ideale, poi ricaviamo la relazione che lega la
-  velocità del fluido alla sezione del condotto in cui scorre.</p>
 </header>
 
-<h2>Fluidi ideali e fluidi reali</h2>
+<p>Come cambia la velocità di un fluido in un condotto di sezione variabile?</p>
 
-<p>I fluidi si dividono in liquidi e gas. Un fluido ideale è un modello semplificato che soddisfa
-due condizioni: è incomprimibile, cioè la sua densità non cambia, e non è viscoso, cioè non c'è
-attrito interno né fra il fluido e le pareti del condotto che lo contiene. Nessun fluido reale
-rispetta entrambe le condizioni insieme:</p>
+<div class="def"><span class="et">Fluido ideale</span>
+<p>Fluido incomprimibile (densità costante) e non viscoso (nessun attrito interno né con le pareti del condotto).</p></div>
+
+<p>Nessun fluido reale soddisfa entrambe le condizioni:</p>
 
 <table class="tab">
 <tr><th></th><th>liquidi</th><th>gas</th></tr>
@@ -44,74 +85,89 @@ rispetta entrambe le condizioni insieme:</p>
 <tr><td>non viscoso</td><td>no</td><td>sì</td></tr>
 </table>
 
-<p>I liquidi sono buoni fluidi incomprimibili ma hanno viscosità apprezzabile; i gas sono
-comprimibili ma, in molte condizioni, si comportano come poco viscosi. Useremo l'uno o l'altro
-aspetto del modello a seconda del caso.</p>
-
 <h2>Equazione di continuità</h2>
 
 <div class="fig">
-<svg viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--blu)"/>
-</marker>
-</defs>
-<ellipse cx="60" cy="85" rx="14" ry="55" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<path d="M60,30 L300,55" stroke="var(--inchiostro)" stroke-width="1.6" fill="none"/>
-<path d="M60,140 L300,115" stroke="var(--inchiostro)" stroke-width="1.6" fill="none"/>
-<ellipse cx="300" cy="85" rx="6" ry="30" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="20" y1="70" x2="46" y2="70" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#fr1)"/>
-<line x1="20" y1="100" x2="46" y2="100" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#fr1)"/>
-<line x1="330" y1="85" x2="380" y2="85" stroke="var(--blu)" stroke-width="1.8" marker-end="url(#fr1)"/>
-<text x="30" y="55" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">A&#8321;</text>
-<text x="33" y="120" font-family="var(--sans)" font-size="12" fill="var(--blu)">v&#8321;</text>
-<text x="296" y="75" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">A&#8322;</text>
-<text x="345" y="78" font-family="var(--sans)" font-size="12" fill="var(--blu)">v&#8322;</text>
-</svg>
-<p class="did">Un condotto che si restringe da una sezione ampia $A_1$, dove il fluido entra con
-velocità $v_1$, a una sezione stretta $A_2$, dove esce con velocità $v_2$.</p>
+<svg id="f-cont" viewBox="0 10 440 160" style="width:100%;max-width:540px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Condotto che si restringe: nello stesso tempo il fluido percorre un tratto quattro volte più lungo nella sezione stretta"></svg>
+<p class="did">$A_2 = A_1/4$: nello stesso $\Delta t$, $\Delta x_2 = 4\,\Delta x_1$ e $v_2 = 4\,v_1$</p>
 </div>
 
-<p>La massa di fluido che entra nel tratto di tubo in un certo tempo deve uscirne nello stesso
-tempo: se così non fosse, la massa si accumulerebbe dentro al tubo. Chiamando $\Delta m_1$ e
-$\Delta m_2$ le masse entrata e uscita nell'intervallo $\Delta t$:</p>
+<p>La massa che entra nel tratto di condotto nel tempo $\Delta t$ è uguale a quella che esce (nessun accumulo):</p>
 
-<div class="formula-box">$$\Delta m_1 = \Delta m_2, \qquad \Delta m = d\cdot \Delta V$$</div>
+<p class="eq">$$\Delta m_1 = \Delta m_2 \qquad \Delta m = d\,\Delta V$$</p>
 
-<p>dove $d$ è la densità del fluido e $\Delta V$ il volume che attraversa la sezione. Il volume
-che passa in un tratto di tubo di lunghezza $L$ è il prodotto dell'area della sezione per quella
-lunghezza, e $L$ è a sua volta lo spazio percorso dal fluido alla velocità $v$ nel tempo
-$\Delta t$:</p>
+<p>Il volume che attraversa la sezione $A$ in $\Delta t$ è un cilindro di altezza $\Delta x = v\,\Delta t$:</p>
 
-<div class="formula-box">$$\Delta V_1 = A_1\cdot L = A_1\, v_1\, \Delta t, \qquad
-\Delta V_2 = A_2\cdot L = A_2\, v_2\, \Delta t$$</div>
+<p class="eq">$$\Delta V_1 = A_1\,v_1\,\Delta t \qquad \Delta V_2 = A_2\,v_2\,\Delta t$$</p>
 
-<p>Per un gas, la densità può cambiare da una sezione all'altra ($d_1 \neq d_2$), quindi la
-condizione $\Delta m_1=\Delta m_2$ diventa:</p>
+<p>Sostituendo nella condizione sulle masse e semplificando $\Delta t$:</p>
 
-<div class="formula-box">$$d_1 A_1 v_1 \Delta t = d_2 A_2 v_2 \Delta t \;\Longrightarrow\;
-d_1 A_1 v_1 = d_2 A_2 v_2 \quad \text{(equazione di continuità per i gas)}$$</div>
+<div class="def"><span class="et">Equazione di continuità per i gas</span>
+<p class="eq">$$d_1\,A_1\,v_1 = d_2\,A_2\,v_2 \qquad (d_1 \neq d_2)$$</p></div>
 
-<p>Per un liquido, incomprimibile, la densità è la stessa nelle due sezioni ($d_1=d_2=d$) e si
-semplifica anche quel fattore:</p>
+<div class="def"><span class="et">Equazione di continuità per i liquidi</span>
+<p class="eq">$$A_1\,v_1 = A_2\,v_2 \qquad (d_1 = d_2)$$</p></div>
 
-<div class="formula-box">$$d\, A_1 v_1 \Delta t = d\, A_2 v_2 \Delta t \;\Longrightarrow\;
-A_1 v_1 = A_2 v_2 \quad \text{(equazione di continuità per i liquidi)}$$</div>
+<p>Per un liquido il prodotto $A\,v$ è lo stesso in ogni sezione:</p>
 
-<p>Questa seconda forma è quella che useremo più spesso: dove la sezione si restringe la
-velocità aumenta, e viceversa, in modo che il prodotto $A\cdot v$ resti costante lungo tutto il
-condotto.</p>
+<ul>
+<li>sezione che si restringe → velocità che aumenta;</li>
+<li>sezione che si allarga → velocità che diminuisce.</li>
+</ul>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<p>Dal prodotto $A\cdot v$ definiamo la portata di un fluido e passiamo all'equazione di
-Bernoulli (unità 57).</p>
-</div>
 
 <nav class="nav-unita"><a class="precedente" href="../55-buchi-neri/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Buchi neri</span></a><a class="successiva" href="../57-portata-di-un-fluido/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Portata di un fluido</span></a></nav>
 <footer><p>Fisica terza &middot; Fluidodinamica &middot; Unità 56</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita,.foglio>table';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function lab(s,x,y,base,sub,col,a){var e=el('text',{x:x,y:y,fill:col,'text-anchor':a||'middle','dominant-baseline':'central','font-family':'var(--serif)','font-style':'italic','font-size':13},s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,id,col){var d=el('defs',{},s),m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+function quota(s,x1,x2,y,base,sub){el('line',{x1:x1,y1:y,x2:x2,y2:y,stroke:'var(--inchiostro)','stroke-width':1},s);[x1,x2].forEach(function(x){el('line',{x1:x,y1:y-5,x2:x,y2:y+5,stroke:'var(--inchiostro)','stroke-width':1},s);});lab(s,(x1+x2)/2,y+12,base,sub,'var(--inchiostro)');}
+function fetta(s,x1,x2,c,r,col){var k=.25*r;el('path',{d:'M'+x1+','+(c-r)+' L'+x2+','+(c-r)+' A'+k+','+r+' 0 0 1 '+x2+','+(c+r)+' L'+x1+','+(c+r)+' A'+k+','+r+' 0 0 1 '+x1+','+(c-r)+' Z',fill:'var(--blu-chiaro)',stroke:'none'},s);
+  el('ellipse',{cx:x1,cy:c,rx:k,ry:r,fill:'none',stroke:col||'var(--blu)','stroke-width':col?2.2:1.2},s);el('ellipse',{cx:x2,cy:c,rx:k,ry:r,fill:'none',stroke:'var(--blu)','stroke-width':1.2,'stroke-dasharray':'3,3'},s);}
+/* Condotto: tratto largo (raggio 50) e tratto stretto (raggio 25), A2 = A1/4. Fette di fluido che attraversano le sezioni in Δt: Δx2 = 4 Δx1. */
+var s=document.getElementById('f-cont'),c=90,R1=50,R2=25,dx1=20,dx2=dx1*(R1*R1)/(R2*R2);
+fr(s,'m-v','var(--blu)');
+var xa=20,xb=150,xc=220,xd=420;
+fetta(s,60,60+dx1,c,R1,'var(--rosso)');
+fetta(s,250,250+dx2,c,R2,'var(--rosso)');
+var p='M'+xa+','+(c-R1)+' L'+xb+','+(c-R1)+' L'+xc+','+(c-R2)+' L'+xd+','+(c-R2)+' M'+xa+','+(c+R1)+' L'+xb+','+(c+R1)+' L'+xc+','+(c+R2)+' L'+xd+','+(c+R2);
+el('path',{d:p,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+el('ellipse',{cx:xa,cy:c,rx:.25*R1,ry:R1,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2},s);
+el('ellipse',{cx:xd,cy:c,rx:.25*R2,ry:R2,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2},s);
+var k=.75; // lunghezza delle frecce proporzionale alla velocità
+el('line',{x1:100,y1:c,x2:100+k*dx1,y2:c,stroke:'var(--blu)','stroke-width':2,'marker-end':'url(#m-v)'},s);
+lab(s,100+k*dx1/2,c-12,'v','1','var(--blu)');
+el('line',{x1:345,y1:c,x2:345+k*dx2,y2:c,stroke:'var(--blu)','stroke-width':2,'marker-end':'url(#m-v)'},s);
+lab(s,345+k*dx2/2,c-12,'v','2','var(--blu)');
+lab(s,56,c-R1-10,'A','1','var(--rosso)','end');
+lab(s,246,c-R2-10,'A','2','var(--rosso)','end');
+quota(s,60,60+dx1,c+R1+12,'Δx','1');
+quota(s,250,250+dx2,c+R2+12,'Δx','2');
+
+})();
+</script>
 </body>
 </html>
