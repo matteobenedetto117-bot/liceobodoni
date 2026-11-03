@@ -61,6 +61,15 @@ def hub(classi):
         blocchi.append(
             '<section class="materia"><h2>%s</h2>\n<div class="griglia">\n%s\n</div></section>'
             % (materia, "\n".join(carte)))
+    # seminari: pagine a sé, elencate in _dati/seminari.json
+    fs = os.path.join(RAD, '_dati', 'seminari.json')
+    if os.path.isfile(fs):
+        sem = json.load(open(fs, encoding='utf-8'))
+        carte = ['<a class="classe attiva" href="%s/index.html"><div class="anno">%s</div>'
+                 '<div class="nome">%s</div><span class="stato">slide animate</span></a>'
+                 % (x['percorso'], x['pubblico'], x['titolo']) for x in sem]
+        blocchi.append('<section class="materia"><h2>Seminari</h2>\n<div class="griglia">\n%s\n</div></section>'
+                       % "\n".join(carte))
     return """<!DOCTYPE html>
 <html lang="it">
 <head>
