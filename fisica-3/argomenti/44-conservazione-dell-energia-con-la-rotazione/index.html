@@ -5,23 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Conservazione dell'energia con la rotazione — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.passi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:22px 0}
-.passi p{margin:8px 0}
-.esempio{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--verde);border-radius:6px;padding:14px 20px;margin:24px 0}
-.esempio p{margin:8px 0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:24px 0}
-.interattivo label{font-family:var(--sans);font-size:.85rem;color:var(--grigio);display:block;margin-bottom:8px}
-.interattivo input[type=range]{width:100%}
-.interattivo .valori{font-family:var(--sans);font-size:.85rem;color:var(--inchiostro);margin-top:10px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
+</style>
 </style>
 </head>
 <body>
@@ -31,105 +66,106 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Dinamica rotazionale &middot; Unità 44</p>
   <h1>Conservazione dell'energia con la rotazione</h1>
-  <p class="sommario">Quando un corpo rotola lungo un piano inclinato, la sua energia
-  meccanica comprende anche l'energia cinetica di rotazione appena introdotta. Mettiamola
-  nel bilancio e rispondiamo a una domanda concreta: fra un anello e una sfera, chi arriva
-  prima in fondo?</p>
 </header>
 
-<h2>Il bilancio energetico di un corpo che rotola</h2>
-
-<p>Un corpo parte da fermo in cima a un piano inclinato, ad altezza $h$, e rotola senza
-strisciare fino alla base. In cima non trasla né ruota, quindi la sua energia è solo
-potenziale:</p>
-
-<div class="passi">
-<p>$$U_i=mgh \qquad K_i=0 \qquad K_{ROT,i}=0$$</p>
-</div>
-
-<p>Alla base l'altezza si è azzerata, e il corpo trasla con velocità $v$ e ruota con
-velocità angolare $\omega$:</p>
-
-<div class="passi">
-<p>$$U_f=0 \qquad K_f=\frac12 mv^2 \qquad K_{ROT,f}=\frac12 I\omega^2$$</p>
-</div>
-
-<p>L'energia meccanica totale è la somma delle tre parti, e si conserva:</p>
-
-<div class="formula-box">$$mgh=\frac12 mv^2+\frac12 I\omega^2$$</div>
+<p>Corpo che parte da fermo ad altezza $h$ e rotola senza strisciare lungo un piano inclinato: con quale velocità arriva alla base?</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m44a" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-<marker id="m44b" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<polygon points="30,180 30,40 260,180" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="14" y1="40" x2="14" y2="180" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="10" y1="40" x2="18" y2="40" stroke="var(--grigio)" stroke-width="1.2"/>
-<line x1="10" y1="180" x2="18" y2="180" stroke="var(--grigio)" stroke-width="1.2"/>
-<text x="4" y="114" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--grigio)">h</text>
-<circle cx="46" cy="58" r="16" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="222" cy="163" r="16" fill="none" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M 205,150 A 16,16 0 0,1 228,148" fill="none" stroke="var(--verde)" stroke-width="1.6" marker-end="url(#m44a)"/>
-<text x="196" y="140" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--verde)">&#969;</text>
-<line x1="238" y1="163" x2="264" y2="178" stroke="var(--rosso)" stroke-width="2" marker-end="url(#m44b)"/>
-<text x="266" y="184" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--rosso)">v</text>
-<text x="30" y="200" font-family="var(--sans)" font-size="12" fill="var(--grigio)">fermo: U=mgh</text>
-<text x="200" y="205" font-family="var(--sans)" font-size="12" fill="var(--grigio)">alla base: K + K rotazionale</text>
-</svg>
-<p class="did">Il corpo parte da fermo ad altezza $h$ e arriva alla base traslando con
-$v$ e ruotando con $\omega$.</p>
+<svg id="f-piano" viewBox="0 0 330 215" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corpo che rotola lungo un piano inclinato: fermo in cima, alla base con velocità v e velocità angolare ω"></svg>
+<div class="cursore"><label for="cur-k">$I=k\,mr^2$, $k$</label><input id="cur-k" type="range" min="0" max="1" step="0.01" value="0.4"><span class="val" id="val-k">0,40</span></div>
+<p class="did">$h=1$ m: $v=\sqrt{2gh/(1+k)}$; $k=1$ anello, $k=0{,}4$ sfera piena</p>
 </div>
 
-<h2>Anello e sfera, stessa massa e stesso raggio: chi arriva prima?</h2>
-
-<p>Nella condizione di puro rotolamento vale $v=\omega r$, quindi $\omega^2=v^2/r^2$: la
-sostituiamo nel bilancio per eliminare $\omega$ e confrontare i due corpi solo attraverso
-il loro momento di inerzia.</p>
-
-<div class="esempio">
-<p><strong>Anello</strong>, $I=mr^2$:</p>
-<p>$$mgh=\frac12 mv^2+\frac12\,mr^2\cdot\frac{v^2}{r^2}=\frac12 mv^2+\frac12 mv^2=mv^2$$</p>
-<p>$$v=\sqrt{gh}$$</p>
-<p><strong>Sfera</strong>, $I=\dfrac{2}{5}mr^2$:</p>
-<p>$$mgh=\frac12 mv^2+\frac12\cdot\frac25\,mr^2\cdot\frac{v^2}{r^2}=\frac12 mv^2+\frac15 mv^2=\frac{7}{10}mv^2$$</p>
-<p>$$v=\sqrt{\frac{10}{7}gh}$$</p>
-<p>La sfera arriva alla base più velocemente. Avendo un momento di inerzia minore, ha a
-disposizione più energia cinetica di traslazione: l'anello, per mettersi in rotazione
-attorno al proprio asse, ne deve spendere di più.</p>
-</div>
-
-<div class="interattivo">
-<label for="slider44">Momento di inerzia $I=k\,mr^2$: fai variare $k$ e osserva la velocità alla base $v=\sqrt{\dfrac{2gh}{1+k}}$ (con $g=9{,}81\ \text{m/s}^2$, $h=1\ \text{m}$)</label>
-<input type="range" id="slider44" min="0" max="1" step="0.01" value="0.4">
-<p class="valori" id="valori44">k = 0,40 (sfera) &nbsp;→&nbsp; v = — m/s</p>
-</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Lasciamo la dinamica rotazionale per la gravitazione: la legge di gravitazione
-universale di Newton, unità 45.</li>
+<li>in cima → $U_i=mgh$, $K_i=0$, $K_{ROT,i}=0$;</li>
+<li>alla base → $U_f=0$, $K_f=\frac12 mv^2$, $K_{ROT,f}=\frac12 I\omega^2$.</li>
 </ul>
-</div>
+
+<p>Rotolamento senza strisciare: l'energia meccanica si conserva.</p>
+
+<div class="def"><span class="et">Conservazione dell'energia</span>
+<p class="eq">$$mgh=\frac12 mv^2+\frac12 I\omega^2\qquad v=\omega r$$</p></div>
+
+<h2>Esempio</h2>
+
+<p>Anello ($I=mr^2$) e sfera piena ($I=\frac25 mr^2$), stessa massa e stesso raggio, partono da fermi dalla stessa altezza $h$. Calcolare $v$ alla base.</p>
+
+<p class="eq">$$\text{anello:}\quad mgh=\frac12 mv^2+\frac12 mr^2\,\frac{v^2}{r^2}=mv^2\ \Rightarrow\ v=\sqrt{gh}$$</p>
+
+<p class="eq">$$\text{sfera:}\quad mgh=\frac12 mv^2+\frac12\cdot\frac25 mr^2\,\frac{v^2}{r^2}=\frac{7}{10}mv^2\ \Rightarrow\ v=\sqrt{\frac{10}{7}gh}$$</p>
+
+<p>La sfera arriva prima: $I$ minore → più energia per la traslazione.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../43-energia-cinetica-rotazionale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia cinetica rotazionale</span></a><a class="successiva" href="../45-la-legge-di-gravitazione-universale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La legge di gravitazione universale</span></a></nav>
 <footer><p>Fisica terza &middot; Dinamica rotazionale &middot; Unità 44</p></footer>
 
 </div>
+
 <script>
 (function(){
-  var s=document.getElementById('slider44'), out=document.getElementById('valori44');
-  var g=9.81, h=1;
-  function upd(){
-    var k=parseFloat(s.value);
-    var v=Math.sqrt(2*g*h/(1+k));
-    var nome = Math.abs(k-1)<0.03 ? '(anello)' : (Math.abs(k-0.4)<0.03 ? '(sfera)' : '');
-    out.textContent = 'k = '+k.toFixed(2)+' '+nome+'  →  v = '+v.toFixed(2)+' m/s';
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  s.addEventListener('input', upd);
-  upd();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+var IT={'font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600};
+function lab(s,x,y,base,sub,col){var e=el('text',Object.assign({x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central'},IT),s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--grigio)','text-anchor':'middle','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+function fmt(x,d){return x.toFixed(d).replace('.',',');}
+var s=document.getElementById('f-piano');
+marc(s,'pv','var(--rosso)');marc(s,'pw','var(--inchiostro)');
+var A=[44,40],Bs=[300,180],O=[44,180];           // vertice alto, base destra, angolo retto
+el('polygon',{points:[A,O,Bs].join(' '),fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.5},s);
+var L=Math.hypot(Bs[0]-A[0],Bs[1]-A[1]),d=[(Bs[0]-A[0])/L,(Bs[1]-A[1])/L],n=[d[1],-d[0]]; // n: normale verso l'alto
+// quota h
+el('line',{x1:24,y1:A[1],x2:24,y2:O[1],stroke:'var(--grigio)','stroke-width':1.1},s);
+el('line',{x1:19,y1:A[1],x2:29,y2:A[1],stroke:'var(--grigio)','stroke-width':1.1},s);
+el('line',{x1:19,y1:O[1],x2:29,y2:O[1],stroke:'var(--grigio)','stroke-width':1.1},s);
+lab(s,12,(A[1]+O[1])/2,'h','','var(--grigio)');
+var rc=13;
+function centro(t){return [A[0]+t*L*d[0]+rc*n[0],A[1]+t*L*d[1]+rc*n[1]];}
+// in cima: fermo
+var C0=centro(0.10);
+el('circle',{cx:C0[0],cy:C0[1],r:rc,fill:'#fff',stroke:'var(--blu)','stroke-width':2},s);
+txt(s,C0[0]+30,C0[1]-16,'fermo');
+// alla base
+var C1=centro(0.78);
+el('circle',{cx:C1[0],cy:C1[1],r:rc,fill:'#fff',stroke:'var(--blu)','stroke-width':2},s);
+el('circle',{cx:C1[0],cy:C1[1],r:2,fill:'var(--inchiostro)'},s);
+// ω: arco orario (rotola verso destra-basso)
+var rw=rc+7,a0=150*Math.PI/180,a1=40*Math.PI/180;
+var p0=[C1[0]+rw*Math.cos(a0),C1[1]-rw*Math.sin(a0)],p1=[C1[0]+rw*Math.cos(a1),C1[1]-rw*Math.sin(a1)];
+el('path',{d:'M'+p0+' A'+rw+','+rw+' 0 0,1 '+p1,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#pw)'},s);
+lab(s,C1[0]-4,C1[1]-rw-10,'ω','','var(--inchiostro)');
+var fv=el('line',{x1:C1[0],y1:C1[1],x2:C1[0],y2:C1[1],stroke:'var(--rosso)','stroke-width':2.4,'marker-end':'url(#pv)'},s);
+var lv=lab(s,0,0,'v','','var(--rosso)');
+var tv=txt(s,250,22,'',{'font-size':13,fill:'var(--rosso)'});
+var cur=document.getElementById('cur-k'),val=document.getElementById('val-k');
+function agg(){
+  var k=parseFloat(cur.value),v=Math.sqrt(2*9.81*1/(1+k)),Lv=11*v;
+  var E=[C1[0]+(rc+Lv)*d[0],C1[1]+(rc+Lv)*d[1]],S=[C1[0]+rc*d[0],C1[1]+rc*d[1]];
+  fv.setAttribute('x1',S[0]);fv.setAttribute('y1',S[1]);fv.setAttribute('x2',E[0]);fv.setAttribute('y2',E[1]);
+  lv.setAttribute('x',E[0]+6*n[0]+4);lv.setAttribute('y',E[1]+12*n[1]-2);
+  var nome=Math.abs(k-1)<0.005?' (anello)':(Math.abs(k-0.4)<0.005?' (sfera)':'');
+  val.textContent=fmt(k,2)+nome;
+  tv.textContent='v = '+fmt(v,2)+' m/s';
+}
+cur.addEventListener('input',agg);agg();
 })();
 </script>
 </body>
