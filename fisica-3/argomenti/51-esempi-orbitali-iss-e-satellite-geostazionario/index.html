@@ -5,19 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Esempi orbitali: ISS e satellite geostazionario — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.esempio{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 22px;margin:18px 0}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.grandezze{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:18px 0;font-size:.96rem}
-.grandezze li{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -27,110 +65,137 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Gravitazione &middot; Unità 51</p>
   <h1>Esempi orbitali: ISS e satellite geostazionario</h1>
-  <p class="sommario">La terza legge di Keplero non riguarda solo i pianeti attorno al Sole:
-  vale per qualunque corpo che orbita attorno a un altro per effetto della sola gravità, satelliti
-  artificiali compresi. Applichiamo la formula ricavata nell'unità precedente a due casi concreti,
-  entrambi in orbita attorno alla Terra.</p>
 </header>
 
-<h2>La Stazione Spaziale Internazionale</h2>
+<p>Satellite in orbita circolare a quota $h$ sopra la Terra: raggio dell'orbita $r = R_T + h$.</p>
 
-<div class="esempio">
-<span class="et">Esempio 1</span>
-<p>La ISS orbita a una quota $h$ di $400\ \mathrm{km}$ sopra la superficie terrestre. Quanto tempo
-impiega a compiere un'orbita completa?</p>
-</div>
+<p class="eq">$$T = \frac{2\pi}{\sqrt{G M_T}}\,(R_T+h)^{3/2}$$</p>
+
+<p>Costanti: $R_T = 6{,}37\times10^{6}\ \mathrm{m}$, $M_T = 5{,}97\times10^{24}\ \mathrm{kg}$, $G = 6{,}67\times10^{-11}\ \mathrm{N\,m^2/kg^2}$.</p>
+
+<h2>Esempio 1</h2>
+
+<p>Dati: ISS a quota $h = 4{,}00\times10^{5}\ \mathrm{m}$. Calcolare il periodo $T$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m51a" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--verde)"/></marker>
-</defs>
-<circle cx="100" cy="130" r="70" fill="none" stroke="var(--riga)" stroke-width="1.4"/>
-<text x="100" y="180" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">Terra</text>
-<line x1="100" y1="130" x2="153.6" y2="85" stroke="var(--rosso)" stroke-width="1.8"/>
-<text x="112" y="115" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">R&#8339;</text>
-<line x1="153.6" y1="85" x2="188.6" y2="55.9" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#m51a)"/>
-<text x="185" y="78" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">h</text>
-<circle cx="188.6" cy="55.9" r="4" fill="var(--blu)"/>
-<text x="198" y="52" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">ISS</text>
-</svg>
-<p class="did">La quota $h$ si somma al raggio terrestre $R_T$: il raggio dell'orbita è
-$R_T+h$.</p>
+<svg id="f-iss" viewBox="0 0 300 250" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Terra e orbita della ISS in scala"></svg>
+<p class="did">In scala: $h$ circa 6% di $R_T$</p>
 </div>
 
-<div class="grandezze">
+<p class="eq">$$T = \frac{2\pi\,(6{,}77\times10^{6})^{3/2}}{\sqrt{6{,}67\times10^{-11}\cdot5{,}97\times10^{24}}}\ \mathrm{s} \approx 5{,}55\times10^{3}\ \mathrm{s} \approx 92{,}4\ \mathrm{min}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Satellite geostazionario: resta sempre sopra lo stesso punto della superficie terrestre.</p>
+
 <ul>
-<li>$h = 4\times10^{5}\ \mathrm{m}$ &nbsp;(quota della ISS)</li>
-<li>$R_T = 6{,}37\times10^{6}\ \mathrm{m}$ &nbsp;(raggio terrestre)</li>
-<li>$M_T = 5{,}97\times10^{24}\ \mathrm{kg}$ &nbsp;(massa della Terra)</li>
+<li>orbita circolare nel piano dell'equatore;</li>
+<li>stesso verso di rotazione della Terra;</li>
+<li>periodo uguale a quello di rotazione terrestre: $T \approx 24\ \mathrm{h}$ (più precisamente 23 h 56 min).</li>
 </ul>
-</div>
 
-<p>Il raggio dell'orbita è $r=R_T+h$, quindi basta sostituire nella formula della terza legge di
-Keplero:</p>
-
-<div class="formula-box">$$T = \frac{2\pi}{\sqrt{G M_T}}\,(R_T+h)^{3/2}$$</div>
-
-<p>Con i valori numerici:</p>
-
-<div class="formula-box">$$T \approx 5546\ \mathrm{s} \approx 92{,}4\ \mathrm{min}$$</div>
-
-<h2>Un satellite geostazionario</h2>
-
-<div class="esempio">
-<span class="et">Esempio 2</span>
-<p>Un satellite geostazionario è un satellite con periodo orbitale pari al periodo di rotazione
-terrestre. A quale distanza dal suolo deve trovarsi?</p>
-</div>
+<p>Dati: $T = 8{,}64\times10^{4}\ \mathrm{s}$. Calcolare la quota $h$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="m51b" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="m51c" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="var(--rosso)"/></marker>
-</defs>
-<circle cx="90" cy="150" r="55" fill="none" stroke="var(--riga)" stroke-width="1.4"/>
-<text x="90" y="152" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--inchiostro)">Terra</text>
-<circle cx="90" cy="150" r="120" fill="none" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="4 4"/>
-<line x1="90" y1="150" x2="90" y2="95" stroke="var(--rosso)" stroke-width="1.8"/>
-<text x="72" y="125" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">R&#8339;</text>
-<line x1="90" y1="95" x2="90" y2="30" stroke="var(--verde)" stroke-width="1.8"/>
-<text x="72" y="65" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--verde)">h</text>
-<circle cx="90" cy="30" r="4" fill="var(--blu)"/>
-<line x1="95" y1="93" x2="122" y2="88" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#m51b)"/>
-<text x="126" y="84" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">&#969;</text>
-<line x1="95" y1="28" x2="122" y2="23" stroke="var(--rosso)" stroke-width="1.6" marker-end="url(#m51c)"/>
-<text x="126" y="19" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">&#969;</text>
-</svg>
-<p class="did">Il satellite ruota con la stessa velocità angolare $\omega$ della superficie
-terrestre: resta sempre sopra lo stesso punto.</p>
+<svg id="f-geo" viewBox="0 0 360 360" style="width:100%;max-width:360px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Terra e orbita geostazionaria in scala: il satellite ruota insieme alla Terra"></svg>
+<div class="cursore"><label for="cur-t">$t$</label><input id="cur-t" type="range" min="0" max="24" step="1" value="3"><span class="val" id="val-t">3 h</span></div>
+<p class="did">In scala: $R_T + h \approx 6{,}6\,R_T$; stessa velocità angolare $\omega$</p>
 </div>
 
-<p>Il periodo richiesto è quello di un giorno, $T = 24\ \mathrm{h} = 86400\ \mathrm{s}$. Occorre
-ricavare $R_T+h$ dalla stessa formula, invertendola: elevando entrambi i membri a $2/3$,</p>
+<p>Invertendo la terza legge:</p>
 
-<div class="formula-box">$$T^{2/3} = \left(\frac{2\pi}{\sqrt{G M_T}}\right)^{2/3}(R_T+h)$$</div>
+<p class="eq">$$R_T + h = \left(\frac{T\sqrt{G M_T}}{2\pi}\right)^{2/3} \approx 4{,}22\times10^{7}\ \mathrm{m}$$</p>
 
-<p>da cui</p>
-
-<div class="formula-box">$$R_T+h = \left(\frac{T\sqrt{G M_T}}{2\pi}\right)^{2/3}
-\quad\Longrightarrow\quad
-h = \left(\frac{T\sqrt{G M_T}}{2\pi}\right)^{2/3} - R_T$$</div>
-
-<p>Con i valori numerici:</p>
-
-<div class="formula-box">$$h \approx 35857\times10^{3}\ \mathrm{m} \approx 36000\ \mathrm{km}$$</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<p>Dalla forza gravitazionale passiamo all'energia potenziale gravitazionale, che generalizza
-$\Delta U = mgh$ a distanze qualsiasi dalla Terra (unità 52).</p>
-</div>
+<p class="eq">$$h \approx 4{,}22\times10^{7}\ \mathrm{m} - 6{,}37\times10^{6}\ \mathrm{m} \approx 3{,}59\times10^{7}\ \mathrm{m} \approx 36\,000\ \mathrm{km}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../50-terza-legge-di-keplero/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Terza legge di Keplero</span></a><a class="successiva" href="../52-energia-potenziale-gravitazionale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Energia potenziale gravitazionale</span></a></nav>
 <footer><p>Fisica terza &middot; Gravitazione &middot; Unità 51</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,x,y,t,o){o=o||{};var e=el('text',{x:x,y:y,'text-anchor':o.a||'middle','dominant-baseline':'central','font-family':o.f||'var(--sans)','font-size':o.s||12,fill:o.c||'var(--inchiostro)','font-style':o.i?'italic':'normal'},s);e.textContent=t;return e;}
+function lab(s,x,y,base,sub,col){var e=el('text',{x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central','font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600},s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,id,col){var d=el('defs',{},s),m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+var RT=6.37e6;
+
+/* 1. ISS in scala: R_T = 100, h = 100·4,00e5/6,37e6 */
+(function(){
+  var s=document.getElementById('f-iss'),cx=125,cy=135,R=100,H=R*4.00e5/RT,a=35*Math.PI/180,ux=Math.cos(a),uy=-Math.sin(a);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4},s);
+  el('circle',{cx:cx,cy:cy,r:R+H,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'},s);
+  txt(s,cx-30,cy+45,'Terra',{c:'var(--blu)',s:12});
+  el('circle',{cx:cx,cy:cy,r:2.5,fill:'var(--inchiostro)'},s);
+  el('line',{x1:cx,y1:cy,x2:cx+ux*R,y2:cy+uy*R,stroke:'var(--rosso)','stroke-width':1.8},s);
+  el('line',{x1:cx+ux*R,y1:cy+uy*R,x2:cx+ux*(R+H),y2:cy+uy*(R+H),stroke:'var(--verde)','stroke-width':3},s);
+  var ix=cx+ux*(R+H),iy=cy+uy*(R+H);
+  el('circle',{cx:ix,cy:iy,r:4,fill:'var(--inchiostro)'},s);
+  txt(s,ix+16,iy-12,'ISS',{s:12,a:'start'});
+  var nx=Math.sin(a),ny=Math.cos(a);
+  lab(s,cx+ux*R*0.5+nx*12,cy+uy*R*0.5+ny*12,'R','T','var(--rosso)');
+  // richiamo per h
+  var hx=cx+ux*(R+H/2),hy=cy+uy*(R+H/2);
+  el('line',{x1:hx+nx*3,y1:hy+ny*3,x2:hx+nx*26,y2:hy+ny*26,stroke:'var(--verde)','stroke-width':1},s);
+  lab(s,hx+nx*34,hy+ny*34,'h','','var(--verde)');
+})();
+
+/* 2. Geostazionario in scala: R_T = 24, R_T + h = 6,63·R_T; Terra e satellite ruotano dello stesso angolo */
+(function(){
+  var s=document.getElementById('f-geo'),cur=document.getElementById('cur-t'),val=document.getElementById('val-t');
+  var cx=180,cy=180,R=24,Rs=R*4.2227e7/RT;
+  fr(s,'g-w','var(--rosso)');
+  el('circle',{cx:cx,cy:cy,r:Rs,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,3'},s);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4},s);
+  var g=el('g',{},s);
+  var lR=el('line',{x1:cx,y1:cy,stroke:'var(--rosso)','stroke-width':1.8},g);
+  var lh=el('line',{stroke:'var(--verde)','stroke-width':1.8},g);
+  var P=el('circle',{r:3.5,fill:'var(--rosso)'},g);
+  var sat=el('circle',{r:5,fill:'var(--inchiostro)'},g);
+  var aT=el('path',{fill:'none',stroke:'var(--rosso)','stroke-width':1.4,'marker-end':'url(#g-w)'},g);
+  var aS=el('path',{fill:'none',stroke:'var(--rosso)','stroke-width':1.4,'marker-end':'url(#g-w)'},g);
+  var wT=lab(g,0,0,'ω','','var(--rosso)'),wS=lab(g,0,0,'ω','','var(--rosso)');
+  var tR=lab(g,0,0,'R','T','var(--rosso)'),th=lab(g,0,0,'h','','var(--verde)');
+  function pt(r,t){return [cx+r*Math.cos(t),cy-r*Math.sin(t)];}
+  function arco(r,t0,t1){var p0=pt(r,t0),p1=pt(r,t1);return 'M'+p0[0].toFixed(1)+','+p0[1].toFixed(1)+' A'+r+','+r+' 0 0,0 '+p1[0].toFixed(1)+','+p1[1].toFixed(1);}
+  function put(e,p){e.setAttribute('x',p[0]);e.setAttribute('y',p[1]);}
+  function upd(){
+    var ore=parseInt(cur.value,10),t=ore/24*2*Math.PI+Math.PI/6;
+    var p=pt(R,t),q=pt(Rs,t);
+    lR.setAttribute('x2',p[0]);lR.setAttribute('y2',p[1]);
+    lh.setAttribute('x1',p[0]);lh.setAttribute('y1',p[1]);lh.setAttribute('x2',q[0]);lh.setAttribute('y2',q[1]);
+    P.setAttribute('cx',p[0]);P.setAttribute('cy',p[1]);sat.setAttribute('cx',q[0]);sat.setAttribute('cy',q[1]);
+    aT.setAttribute('d',arco(R+10,t+0.35,t+1.35));
+    aS.setAttribute('d',arco(Rs,t+0.12,t+0.42));
+    put(wT,pt(R+22,t+0.85));put(wS,pt(Rs+13,t+0.27));
+    // etichette dal lato opposto agli archi
+    var nx=Math.sin(t),ny=Math.cos(t);
+    var m=pt(R+(Rs-R)/2,t);put(th,[m[0]+nx*12,m[1]+ny*12]);
+    var mr=pt(R+15,t-1.0);put(tR,mr);
+    val.textContent=ore+' h';
+  }
+  cur.addEventListener('input',upd);upd();
+})();
+})();
+</script>
 </body>
 </html>
