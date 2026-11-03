@@ -5,17 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Forza gravitazionale di una sfera uniforme — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.nota{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:6px;padding:14px 20px;margin:24px 0}
-.nota p{margin:8px 0}
-.figura{margin:28px 0;text-align:center}
-.figura svg{max-width:100%;height:auto}
-.figura p.didascalia{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -25,79 +65,100 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Gravitazione &middot; Unità 47</p>
   <h1>Forza gravitazionale di una sfera uniforme</h1>
-  <p class="sommario">Finora abbiamo scritto la forza esercitata dalla Terra come se
-  tutta la sua massa fosse un unico punto nel centro. Vediamo perché è lecito: una sfera
-  con densità distribuita in modo uniforme attrae dall'esterno esattamente come un punto
-  materiale della stessa massa, posto nel suo centro.</p>
 </header>
 
-<h2>Perché la sfera si comporta come un punto</h2>
+<p>Sfera omogenea di massa $M$ e massa puntiforme $m$ esterna: quanto vale la forza su $m$?</p>
 
-<p>Immaginiamo la sfera scomposta in tanti elementi di massa, come i punti $A$ e $B$
-in figura: ciascuno attrae una massa $m_2$ esterna con una forza diretta verso di sé.
-Sommando tutti i contributi, per simmetria le componenti trasversali si annullano a
-coppie e resta una risultante $F$ diretta lungo la retta che unisce $m_2$ al centro
-della sfera.</p>
+<p>Sfera scomposta in elementi di massa, come $A$ e $B$:</p>
 
-<div class="figura">
-<svg viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="gs1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/></marker>
-<marker id="gs2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/></marker>
-<marker id="gs3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/></marker>
-</defs>
-<circle cx="90" cy="100" r="55" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="90" cy="100" r="2.4" fill="var(--inchiostro)"/>
-<line x1="45" y1="131" x2="300" y2="100" stroke="var(--riga)" stroke-width="1.2" stroke-dasharray="3,3"/>
-<line x1="45" y1="68" x2="300" y2="100" stroke="var(--riga)" stroke-width="1.2" stroke-dasharray="3,3"/>
-<circle cx="45" cy="131" r="3.2" fill="var(--inchiostro)"/>
-<circle cx="45" cy="68" r="3.2" fill="var(--inchiostro)"/>
-<text x="28" y="145" font-family="var(--serif)" font-style="italic" font-size="15">A</text>
-<text x="28" y="62" font-family="var(--serif)" font-style="italic" font-size="15">B</text>
-<circle cx="300" cy="100" r="3.6" fill="var(--inchiostro)"/>
-<text x="306" y="118" font-family="var(--serif)" font-style="italic" font-size="15">m&#8322;</text>
-<line x1="300" y1="100" x2="255" y2="105" stroke="var(--rosso)" stroke-width="2" marker-end="url(#gs1)"/>
-<text x="228" y="122" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">F&#8320;</text>
-<line x1="300" y1="100" x2="255" y2="94" stroke="var(--rosso)" stroke-width="2" marker-end="url(#gs1)"/>
-<text x="228" y="84" font-family="var(--serif)" font-style="italic" font-size="13" fill="var(--rosso)">F&#8329;</text>
-<line x1="300" y1="100" x2="240" y2="100" stroke="var(--blu)" stroke-width="2.6" marker-end="url(#gs2)"/>
-<text x="215" y="145" font-family="var(--serif)" font-style="italic" font-size="15" fill="var(--blu)">F</text>
-<text x="230" y="20" font-family="var(--sans)" font-size="30" text-anchor="middle" fill="var(--grigio)">&#8801;</text>
-<circle cx="400" cy="100" r="16" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="400" cy="100" r="2.2" fill="var(--inchiostro)"/>
-<text x="400" y="140" font-family="var(--serif)" font-style="italic" font-size="15" text-anchor="middle">m&#8321;</text>
-<circle cx="465" cy="100" r="3.6" fill="var(--inchiostro)"/>
-<text x="465" y="140" font-family="var(--serif)" font-style="italic" font-size="15" text-anchor="middle">m&#8322;</text>
-<line x1="416" y1="100" x2="452" y2="100" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#gs2)"/>
-<line x1="461" y1="100" x2="425" y2="100" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#gs2)"/>
-<text x="438" y="88" font-family="var(--serif)" font-style="italic" font-size="14" fill="var(--blu)">F</text>
-</svg>
-<p class="didascalia">A sinistra, i contributi degli elementi si sommano in una
-risultante $F$ verso il centro. A destra, il sistema equivalente: due masse
-puntiformi alla stessa distanza.</p>
-</div>
-
-<p>In sintesi:</p>
-
-<div class="formula-box">La forza risultante esercitata da una sfera su una massa
-puntiforme esterna è la stessa che si avrebbe se tutta la massa della sfera fosse
-concentrata nel suo centro.</div>
-
-<p>È questo risultato, dovuto a Newton, a permetterci di trattare la Terra come una
-massa puntiforme a distanza $R_T$ dal corpo che cade, nella formula di $g$ vista in
-precedenza.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
 <ul>
-<li>Passiamo dai corpi che cadono ai corpi che orbitano: i modelli dei sistemi
-planetari, da Tolomeo a Copernico, unità 48.</li>
+<li>ogni elemento → forza su $m$ diretta verso di sé;</li>
+<li>elementi simmetrici → componenti trasversali opposte, si annullano;</li>
+<li>risultante $F$ → diretta verso il centro della sfera.</li>
 </ul>
+
+<div class="fig">
+<svg id="f-sfera" viewBox="15 22 490 160" style="width:100%;max-width:560px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forze degli elementi A e B di una sfera su una massa esterna e sistema equivalente con la massa nel centro"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Elementi $A$ e $B$: risultante verso il centro</p>
+<p class="did">Sistema equivalente: massa $M$ nel centro</p>
 </div>
+</div>
+
+<p>Per un punto esterno ($r\ge R$, con $r$ distanza dal centro e $R$ raggio della sfera) la sfera agisce come una massa puntiforme posta nel centro:</p>
+
+<div class="def"><span class="et">Forza di una sfera uniforme</span>
+<p class="eq">$$F=G\,\frac{M\,m}{r^2}$$</p></div>
+
+<p>Per la Terra, in superficie $r=R_T$: da qui $g=G\,M_T/R_T^2$.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../46-accelerazione-di-gravita-e-forza-peso/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Accelerazione di gravità e forza peso</span></a><a class="successiva" href="../48-sistemi-planetari-da-tolomeo-a-copernico/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sistemi planetari: da Tolomeo a Copernico</span></a></nav>
 <footer><p>Fisica terza &middot; Gravitazione &middot; Unità 47</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function marc(s,id,c){var d=s.querySelector('defs')||el('defs',{},s);var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:c},m);}
+function lab(s,x,y,base,sub,col){var e=el('text',{x:x,y:y,fill:col,'text-anchor':'middle','dominant-baseline':'central','font-family':'var(--serif)','font-style':'italic','font-size':14,'font-weight':600},s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function freccia(s,x1,y1,x2,y2,col,w,m){el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w,'marker-end':'url(#'+m+')'},s);}
+var s=document.getElementById('f-sfera');
+marc(s,'fr','var(--rosso)');marc(s,'fb','var(--blu)');
+var cx=80,cy=100,R=55,mx=240,my=100,L=50;
+el('circle',{cx:cx,cy:cy,r:R,fill:'var(--blu-chiaro)',stroke:'var(--inchiostro)','stroke-width':1.6},s);
+el('circle',{cx:cx,cy:cy,r:2.4,fill:'var(--inchiostro)'},s);
+lab(s,cx-14,cy+14,'M','','var(--inchiostro)');
+// elementi A (sotto) e B (sopra), simmetrici rispetto all'asse sfera–m
+var el2=[{n:'A',x:cx,y:cy+R,ly:cy+R+14},{n:'B',x:cx,y:cy-R,ly:cy-R-14}];
+var Fx=0,Fy=0,u=[];
+el2.forEach(function(p){
+  var dx=p.x-mx,dy=p.y-my,d=Math.hypot(dx,dy);
+  u.push([dx/d,dy/d]);Fx+=dx/d;Fy+=dy/d; // contributi uguali in modulo (stessa distanza)
+  el('line',{x1:p.x,y1:p.y,x2:mx,y2:my,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'},s);
+  el('circle',{cx:p.x,cy:p.y,r:3.4,fill:'var(--inchiostro)'},s);
+  lab(s,p.x,p.ly,p.n,'','var(--inchiostro)');
+});
+// forze degli elementi (rosse) e risultante (blu), somma vettoriale calcolata
+u.forEach(function(v,i){
+  var x2=mx+L*v[0],y2=my+L*v[1];freccia(s,mx,my,x2,y2,'var(--rosso)',2,'fr');
+  lab(s,x2+4,y2+(v[1]>0?14:-14),'F',el2[i].n,'var(--rosso)');
+});
+var rx=mx+L*Fx,ry=my+L*Fy;
+freccia(s,mx,my,rx,ry,'var(--blu)',2.6,'fb');
+lab(s,rx+20,ry-12,'F','','var(--blu)');
+el('circle',{cx:mx,cy:my,r:3.8,fill:'var(--inchiostro)'},s);
+lab(s,mx+4,my+17,'m','','var(--inchiostro)');
+// sistema equivalente: stessa distanza r, stessa risultante
+var Fm=L*Math.hypot(Fx,Fy),r=mx-cx,ex=320,mx2=ex+r;
+var eq=el('text',{x:280,y:my,'text-anchor':'middle','dominant-baseline':'central','font-family':'var(--sans)','font-size':26,fill:'var(--grigio)'},s);eq.textContent='≡';
+el('line',{x1:ex,y1:my,x2:mx2,y2:my,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'},s);
+el('circle',{cx:ex,cy:my,r:4.2,fill:'var(--inchiostro)'},s);
+lab(s,ex,my+17,'M','','var(--inchiostro)');
+freccia(s,mx2,my,mx2-Fm,my,'var(--blu)',2.6,'fb');
+lab(s,mx2-Fm/2,my-13,'F','','var(--blu)');
+el('circle',{cx:mx2,cy:my,r:3.8,fill:'var(--inchiostro)'},s);
+lab(s,mx2,my+17,'m','','var(--inchiostro)');
+lab(s,(ex+mx2)/2+18,my+17,'r','','var(--grigio)');
+})();
+</script>
 </body>
 </html>
