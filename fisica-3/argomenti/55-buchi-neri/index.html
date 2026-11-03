@@ -5,17 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Buchi neri — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.grandezze{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:18px 0;font-size:.96rem}
-.grandezze li{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -25,70 +65,82 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Gravitazione &middot; Unità 55</p>
   <h1>Buchi neri</h1>
-  <p class="sommario">La velocità di fuga cresce quanto più un corpo è compatto. Chiediamoci
-  che cosa succede quando questa velocità raggiunge il valore limite invalicabile per
-  qualunque cosa, anche per la luce.</p>
 </header>
 
-<h2>Definizione</h2>
+<p>Che cosa succede se la velocità di fuga di un corpo celeste supera la velocità della luce $c = 3{,}00\times10^{8}\ \mathrm{m/s}$?</p>
 
-<p>Un buco nero (o singolarità spazio-temporale) può essere interpretato come un corpo celeste
-la cui velocità di fuga è maggiore della velocità della luce:</p>
-
-<div class="formula-box">$$c = 3\times10^{8}\ \mathrm{m/s}$$</div>
-
-<div class="formula-box">$$\text{se}\quad v_f &gt; c \quad\Longrightarrow\quad \text{il corpo è un buco nero}$$</div>
+<div class="def"><span class="et">Buco nero (descrizione classica)</span>
+<p>Corpo celeste la cui velocità di fuga è maggiore della velocità della luce:</p>
+<p class="eq">$$v_f &gt; c$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fout" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--verde)"/>
-</marker>
-<marker id="fback" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<circle cx="80" cy="90" r="26" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="80" y="94" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--grigio)">v_f &lt; c</text>
-<line x1="106" y1="70" x2="150" y2="35" stroke="var(--verde)" stroke-width="1.8" marker-end="url(#fout)"/>
-<text x="160" y="30" font-family="var(--sans)" font-size="10" fill="var(--verde)">luce fugge</text>
-<circle cx="260" cy="90" r="14" fill="var(--inchiostro)"/>
-<text x="260" y="115" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--grigio)">v_f &gt; c</text>
-<path d="M260,76 C280,50 300,50 288,76" fill="none" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#fback)"/>
-<text x="330" y="55" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--rosso)">luce ricade</text>
-</svg>
-<p class="did">A sinistra un corpo con velocità di fuga inferiore a $c$: la luce emessa dalla
-superficie si allontana. A destra un corpo compresso fino a $v_f&gt;c$: nemmeno la luce riesce
-più a sfuggirgli.</p>
+<svg id="f-bn" viewBox="0 10 360 120" style="width:100%;max-width:540px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Luce che si allontana da un corpo con velocità di fuga minore di c e che ricade su un corpo con velocità di fuga maggiore di c"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">$v_f &lt; c$: la luce si allontana</p>
+<p class="did">Stessa massa, raggio minore: $v_f &gt; c$, la luce ricade</p>
+</div>
 </div>
 
-<h2>Esempio: quale dovrebbe essere il raggio della Terra per diventare un buco nero?</h2>
+<p>Dalla formula della velocità di fuga, ricavando il raggio e ponendo $v_f = c$:</p>
 
-<p>Riprendiamo la formula della velocità di fuga e la risolviamo rispetto al raggio:</p>
+<p class="eq">$$v_f = \sqrt{\frac{2GM}{R}} \quad\Longrightarrow\quad R = \frac{2GM}{v_f^{2}} \quad\Longrightarrow\quad R = \frac{2GM}{c^{2}}$$</p>
 
-<div class="formula-box">
-$$v_f = \sqrt{\frac{2GM}{R}} \qquad v_f^{2} = \frac{2GM}{R} \qquad R = \frac{2GM}{v_f^{2}}$$
-</div>
+<p>Un corpo di massa $M$ con raggio minore di $2GM/c^{2}$ è un buco nero.</p>
 
-<p>La condizione limite si ha quando la velocità di fuga uguaglia proprio la velocità della
-luce, $v_f = c$, con $M$ la massa della Terra già usata nelle unità precedenti:</p>
+<h2>Esempio</h2>
 
-<div class="formula-box">
-$$R = \frac{2GM_T}{c^{2}} \approx 0{,}0088\ \mathrm{m} = 8{,}8\ \mathrm{mm}$$
-</div>
+<p>Dati: $M_T = 5{,}97\times10^{24}\ \mathrm{kg}$, $G = 6{,}67\times10^{-11}\ \mathrm{N\,m^2/kg^2}$. Calcolare il raggio che la Terra dovrebbe avere per diventare un buco nero.</p>
 
-<p>Per trasformarsi in un buco nero, tutta la massa della Terra dovrebbe stare compressa in una
-sfera grande poco più di una biglia.</p>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<p>Chiudiamo qui la gravitazione e passiamo ai fluidi: l'equazione di continuità (unità 56).</p>
-</div>
+<p class="eq">$$R = \frac{2\cdot 6{,}67\times10^{-11}\cdot 5{,}97\times10^{24}}{(3{,}00\times10^{8})^{2}}\ \mathrm{m} \approx 8{,}85\times10^{-3}\ \mathrm{m} = 8{,}85\ \mathrm{mm}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../54-velocita-di-fuga/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Velocità di fuga</span></a><a class="successiva" href="../56-fluidi-ideali-ed-equazione-di-continuita/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Fluidi ideali ed equazione di continuità</span></a></nav>
 <footer><p>Fisica terza &middot; Gravitazione &middot; Unità 55</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,x,y,t,o){o=o||{};var e=el('text',{x:x,y:y,'text-anchor':o.a||'middle','dominant-baseline':'central','font-family':o.f||'var(--sans)','font-size':o.s||12,fill:o.c||'var(--inchiostro)','font-style':o.i?'italic':'normal'},s);e.textContent=t;return e;}
+function lab(s,x,y,base,sub,col,a){var e=el('text',{x:x,y:y,fill:col,'text-anchor':a||'middle','dominant-baseline':'central','font-family':'var(--serif)','font-style':'italic','font-size':13},s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,id,col){var d=el('defs',{},s),m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+
+/* A sinistra corpo esteso (v_f < c): raggio di luce verso l'esterno. A destra stessa massa compressa (v_f > c): il raggio ricade. */
+(function(){
+  var s=document.getElementById('f-bn');
+  fr(s,'m-luce','var(--verde)');fr(s,'m-ric','var(--rosso)');
+  // sinistra
+  var a=90,b=72,R=34;
+  el('circle',{cx:a,cy:b,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4},s);
+  var c=Math.SQRT1_2;
+  el('line',{x1:a+R*c,y1:b-R*c,x2:a+R*c+44,y2:b-R*c-36,stroke:'var(--verde)','stroke-width':2,'marker-end':'url(#m-luce)'},s);
+  txt(s,a+R*c+40,b-R*c-6,'luce',{s:11,c:'var(--verde)',a:'start'});
+  // destra
+  var p=270,q=72;
+  el('circle',{cx:p,cy:q,r:R,fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'},s);
+  el('circle',{cx:p,cy:q,r:8,fill:'var(--inchiostro)'},s);
+  el('path',{d:'M'+(p+6)+','+(q-6)+' C'+(p+34)+','+(q-60)+' '+(p+78)+','+(q-40)+' '+(p+13)+','+(q-2),fill:'none',stroke:'var(--rosso)','stroke-width':2,'marker-end':'url(#m-ric)'},s);
+  txt(s,p+62,q-52,'luce',{s:11,c:'var(--rosso)',a:'start'});
+})();
+})();
+</script>
 </body>
 </html>
