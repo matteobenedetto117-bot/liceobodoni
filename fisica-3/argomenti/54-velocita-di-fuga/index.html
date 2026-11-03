@@ -5,17 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Velocità di fuga — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.grandezze{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:18px 0;font-size:.96rem}
-.grandezze li{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -25,83 +65,103 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Gravitazione &middot; Unità 54</p>
   <h1>Velocità di fuga</h1>
-  <p class="sommario">Lo stesso bilancio di energia usato per il meteorite in caduta, letto al
-  contrario, risponde a una domanda diversa: quanto veloce bisogna lanciare un corpo dalla
-  superficie di un pianeta perché non ricada più.</p>
 </header>
 
-<h2>Definizione</h2>
-
-<p>La velocità di fuga è la velocità minima da imprimere a un corpo perché si allontani dalla
-Terra fino a una distanza dove non risente più della sua attrazione gravitazionale.</p>
+<p>Con quale velocità minima $v_f$ bisogna lanciare un corpo dalla superficie della Terra perché si allontani indefinitamente, senza ricadere?</p>
 
 <div class="fig">
-<svg viewBox="0 0 340 120" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-<path d="M0,0 L10,5 L0,10 z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<circle cx="55" cy="60" r="36" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="55" y="64" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">Terra</text>
-<line x1="55" y1="60" x2="91" y2="60" stroke="var(--verde)" stroke-width="1.3"/>
-<text x="73" y="52" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--verde)">$R_T$</text>
-<line x1="93" y1="60" x2="140" y2="60" stroke="var(--rosso)" stroke-width="2" marker-end="url(#fr1)"/>
-<text x="112" y="45" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--rosso)">v_f</text>
-<line x1="140" y1="60" x2="300" y2="60" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4 4"/>
-<text x="315" y="64" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="var(--grigio)">r&rarr;&infin;</text>
-<circle cx="298" cy="60" r="3.5" fill="var(--inchiostro)"/>
-<text x="298" y="42" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="var(--inchiostro)">v = 0</text>
-</svg>
-<p class="did">Il corpo parte dalla superficie con velocità $v_f$ e arriva a distanza $r\to\infty$
-con velocità nulla: è la condizione limite, quella con energia totale esattamente zero.</p>
+<svg id="f-fuga" viewBox="0 0 360 110" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corpo lanciato dalla superficie terrestre: distanza massima raggiunta al variare della velocità di lancio"></svg>
+<div class="cursore"><label for="cur-v0">$v_0/v_f$</label><input id="cur-v0" type="range" min="0.3" max="1.2" step="0.01" value="0.8"><span class="val" id="val-v0">0,80</span></div>
+<p class="did">Lancio radiale con velocità $v_0$; distanza dal centro in unità di $R_T$</p>
 </div>
 
-<p>Stato iniziale, sulla superficie, con la velocità di fuga $v_f$ da trovare; stato finale, a
-distanza infinita, dove il corpo si è fermato:</p>
-
-<div class="formula-box">
-$$E_{\text{tot},i} = \tfrac{1}{2}mv_f^{2} - G\,\frac{mM_T}{R_T}$$
-$$E_{\text{tot},f} = \tfrac{1}{2}mv^{2} - G\,\frac{mM_T}{r} = 0 \qquad (v=0,\ r\to\infty)$$
-</div>
-
-<p>Per la conservazione dell'energia $E_{\text{tot},i}=E_{\text{tot},f}=0$:</p>
-
-<div class="formula-box">$$\frac{1}{2}mv_f^{2} - G\,\frac{mM_T}{R_T} = 0 \quad\Longrightarrow\quad
-v_f = \sqrt{\frac{2GM_T}{R_T}} \approx 11\,200\ \mathrm{m/s}$$</div>
-
-<p>È lo stesso valore trovato per l'impatto del meteorite: la Terra non distingue un corpo che
-cade da uno che parte, la relazione fra le due velocità è la stessa a parti invertite.</p>
-
-<p>Per un corpo celeste qualsiasi, di massa $M$ e raggio $R$, la formula si generalizza:</p>
-
-<div class="formula-box">$$v_f = \sqrt{\frac{2GM}{R}}$$</div>
-
-<div class="grandezze">
 <ul>
-<li>$M$: massa del corpo celeste, in $\mathrm{kg}$</li>
-<li>$R$: raggio del corpo celeste, in $\mathrm{m}$</li>
+<li>$v_0 &lt; v_f$ → il corpo si ferma a distanza finita e ricade;</li>
+<li>$v_0 \ge v_f$ → il corpo si allontana indefinitamente.</li>
 </ul>
-</div>
 
-<h2>Esempio: velocità di fuga dalla Luna</h2>
+<p>Condizione limite: partenza da $r = R_T$ con velocità $v_f$, arrivo a $r \to \infty$ con velocità nulla, quindi $E_{\text{tot}} = 0$. Con resistenza dell'atmosfera trascurabile:</p>
 
-<p>Con $M_L = 7{,}35\times10^{22}\ \mathrm{kg}$ e $R_L = 1{,}74\times10^{6}\ \mathrm{m}$:</p>
+<p class="eq">$$\frac{1}{2}mv_f^{2} - G\,\frac{M_T m}{R_T} = 0 \quad\Longrightarrow\quad v_f = \sqrt{\frac{2GM_T}{R_T}}$$</p>
 
-<div class="formula-box">$$v_f = \sqrt{\frac{2GM_L}{R_L}} \approx 2370\ \mathrm{m/s}$$</div>
+<p>Per un corpo celeste qualsiasi:</p>
 
-<p>Circa un quinto di quella terrestre: la Luna trattiene molto meno un corpo lanciato dalla sua
-superficie.</p>
+<div class="def"><span class="et">Velocità di fuga</span>
+<p class="eq">$$v_f = \sqrt{\frac{2GM}{R}}$$</p>
+<p>$M$ massa (kg) e $R$ raggio (m) del corpo celeste; $v_f$ non dipende dalla massa $m$ del corpo lanciato.</p></div>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<p>Se la velocità di fuga di un corpo celeste supera la velocità della luce, nessun oggetto —
-nemmeno la luce — riesce più a sfuggirgli: è la condizione che definisce un buco nero (unità 55).</p>
-</div>
+<h2>Esempio 1</h2>
+
+<p>Dati: $M_T = 5{,}97\times10^{24}\ \mathrm{kg}$, $R_T = 6{,}37\times10^{6}\ \mathrm{m}$, $G = 6{,}67\times10^{-11}\ \mathrm{N\,m^2/kg^2}$. Calcolare $v_f$ dalla Terra.</p>
+
+<p class="eq">$$v_f = \sqrt{\frac{2\cdot 6{,}67\times10^{-11}\cdot 5{,}97\times10^{24}}{6{,}37\times10^{6}}}\ \mathrm{m/s} \approx 1{,}12\times10^{4}\ \mathrm{m/s}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $M_L = 7{,}35\times10^{22}\ \mathrm{kg}$, $R_L = 1{,}74\times10^{6}\ \mathrm{m}$. Calcolare $v_f$ dalla Luna.</p>
+
+<p class="eq">$$v_f = \sqrt{\frac{2\cdot 6{,}67\times10^{-11}\cdot 7{,}35\times10^{22}}{1{,}74\times10^{6}}}\ \mathrm{m/s} \approx 2{,}37\times10^{3}\ \mathrm{m/s}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../53-conservazione-dell-energia-nei-fenomeni-gravitazionali/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Conservazione dell'energia nei fenomeni gravitazionali</span></a><a class="successiva" href="../55-buchi-neri/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Buchi neri</span></a></nav>
 <footer><p>Fisica terza &middot; Gravitazione &middot; Unità 54</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,x,y,t,o){o=o||{};var e=el('text',{x:x,y:y,'text-anchor':o.a||'middle','dominant-baseline':'central','font-family':o.f||'var(--sans)','font-size':o.s||12,fill:o.c||'var(--inchiostro)','font-style':o.i?'italic':'normal'},s);e.textContent=t;return e;}
+function lab(s,x,y,base,sub,col,a){var e=el('text',{x:x,y:y,fill:col,'text-anchor':a||'middle','dominant-baseline':'central','font-family':'var(--serif)','font-style':'italic','font-size':13},s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,id,col){var d=el('defs',{},s),m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+
+/* Lancio radiale: r_max = R/(1 - (v0/vf)^2), calcolata dal bilancio di energia */
+(function(){
+  var s=document.getElementById('f-fuga'),cx=50,cy=62,R=30,cur=document.getElementById('cur-v0'),val=document.getElementById('val-v0');
+  fr(s,'m-v0','var(--verde)');fr(s,'m-inf','var(--grigio)');
+  el('line',{x1:cx+R,y1:cy,x2:340,y2:cy,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'},s);
+  for(var k=2;k<=9;k++){var x=cx+k*R;el('line',{x1:x,y1:cy-3,x2:x,y2:cy+3,stroke:'var(--grigio)','stroke-width':1},s);if(k%2===0)txt(s,x,cy+34,String(k),{s:10,c:'var(--grigio)'});}
+  lab(s,cx+R*9.5,cy+34,'r/R','T','var(--grigio)','start');
+  el('circle',{cx:cx,cy:cy,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4},s);
+  txt(s,cx,cy,'Terra',{c:'var(--blu)',s:11});
+  var freccia=el('line',{x1:cx+R+2,y1:cy-20,x2:cx+R+40,y2:cy-20,stroke:'var(--verde)','stroke-width':2.2,'marker-end':'url(#m-v0)'},s);
+  var tv=lab(s,cx+R+20,cy-32,'v','0','var(--verde)');
+  var inf=el('line',{x1:318,y1:cy,x2:342,y2:cy,stroke:'var(--grigio)','stroke-width':1.6,'marker-end':'url(#m-inf)'},s);
+  var corpo=el('circle',{cx:0,cy:cy,r:4.5,fill:'var(--rosso)'},s);
+  var t0=txt(s,0,cy+16,'v = 0',{s:11,a:'start'});
+  var ris=txt(s,cx+R+40,14,'',{s:12,a:'start'});
+  function scrivi(pre,suf,col){while(ris.firstChild)ris.removeChild(ris.firstChild);var t=document.createElementNS(NS,'tspan');t.textContent=pre;ris.appendChild(t);if(suf!==null){t=document.createElementNS(NS,'tspan');t.textContent='R';ris.appendChild(t);t=document.createElementNS(NS,'tspan');t.setAttribute('font-size',9);t.setAttribute('dy',3);t.textContent='T';ris.appendChild(t);t=document.createElementNS(NS,'tspan');t.setAttribute('dy',-3);t.textContent=suf;ris.appendChild(t);}ris.setAttribute('fill',col);}
+  function disegna(){
+    var a=parseFloat(cur.value),L=50*a;
+    freccia.setAttribute('x2',cx+R+2+L);tv.setAttribute('x',cx+R+2+L/2);
+    val.textContent=a.toFixed(2).replace('.',',');
+    var esce=a>=1,rm=esce?Infinity:1/(1-a*a),x;
+    if(rm<=9){x=cx+rm*R;corpo.setAttribute('cx',x);t0.setAttribute('x',x+6);t0.setAttribute('opacity',1);inf.setAttribute('opacity',0);
+      scrivi('distanza massima ≈ '+rm.toFixed(1).replace('.',',')+' ',', poi ricade','var(--inchiostro)');}
+    else{corpo.setAttribute('cx',312);t0.setAttribute('opacity',0);inf.setAttribute('opacity',1);
+      if(esce){scrivi('sfugge: r → ∞',null,'var(--verde)');}
+      else{scrivi('distanza massima ≈ '+rm.toFixed(0)+' ',', poi ricade','var(--inchiostro)');}}
+  }
+  cur.addEventListener('input',disegna);disegna();
+})();
+})();
+</script>
 </body>
 </html>
