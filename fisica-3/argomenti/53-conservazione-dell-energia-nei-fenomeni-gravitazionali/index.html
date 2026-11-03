@@ -5,17 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Conservazione dell'energia nei fenomeni gravitazionali — Fisica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p{margin-top:var(--r)}
+.nota{padding:0 18px}
+.nota p{padding-bottom:calc(var(--r)*.5)}
+.fig .did{line-height:1.4}
+.nota p{line-height:var(--r)}
+.foglio>ul{margin:var(--r) 0 0}
+.foglio li{line-height:var(--r)}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin:10px 0 0}
-.formula-box{background:var(--blu-chiaro);border-radius:10px;padding:16px 22px;margin:22px 0;text-align:center;font-size:1.1rem}
-.grandezze{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:18px 0;font-size:.96rem}
-.grandezze li{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.def{display:flow-root;background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px;padding:0 18px}
+.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def p:not(.eq){padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>.def{margin:var(--r) 0 0}
+.foglio>.def+p,.foglio>ul+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{margin:0}
+.nota{background:#fdf6f5;border-left:4px solid var(--rosso);border-radius:10px}
+.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.foglio>p+ul,.foglio>.fig+ul{margin-top:var(--r)}
+.foglio>.nota+ul,.foglio>.nota+.eq,.foglio>ul+.eq,.foglio>.def+ul{margin-top:var(--r)}
+
+.foglio>.eq+.eq,.foglio>.def+.def,.foglio>.def+.fig,.foglio>.def+.eq,.foglio>ul+.def,.foglio>ul+.fig,.foglio>.eq+.def,.foglio>.eq+.nota,.foglio>.fig+.def{margin-top:var(--r)}
+.cursore .val{min-width:3.6em;text-align:left}
 </style>
 </head>
 <body>
@@ -25,76 +65,92 @@
   <nav class="briciole"><a href="../../index.html">&larr; Fisica terza</a></nav>
   <p class="occhiello">Gravitazione &middot; Unità 53</p>
   <h1>Conservazione dell'energia nei fenomeni gravitazionali</h1>
-  <p class="sommario">Sommando l'energia cinetica all'energia potenziale gravitazionale si ottiene
-  l'energia meccanica totale di un corpo nel campo di una massa. Come nei casi già incontrati,
-  questa somma si conserva: la usiamo per trovare la velocità con cui un meteorite colpisce la
-  Terra.</p>
 </header>
 
-<h2>Energia totale e sua conservazione</h2>
+<p>Corpo di massa $m$ a distanza $r$ dal centro di una massa $M$:</p>
 
-<p>L'energia meccanica totale di un corpo di massa $m$ a distanza $r$ dal centro di una massa $M$
-è la somma dell'energia cinetica e dell'energia potenziale gravitazionale:</p>
+<div class="def"><span class="et">Energia meccanica totale</span>
+<p class="eq">$$E_{\text{tot}} = K + U = \frac{1}{2}mv^{2} - G\,\frac{Mm}{r}$$</p></div>
 
-<div class="formula-box">$$E_{\text{tot}} = K + U = \frac{1}{2}mv^{2} - G\,\frac{Mm}{r}$$</div>
+<p>Se nessun'altra forza compie lavoro, $E_{\text{tot}}$ si conserva:</p>
 
-<p>In assenza di altre forze che compiono lavoro, $E_{\text{tot}}$ si conserva lungo il moto,
-esattamente come l'energia meccanica vista con la gravità uniforme vicino alla superficie.</p>
+<p class="eq">$$E_{\text{tot},i} = E_{\text{tot},f}$$</p>
 
-<h2>Velocità di impatto di un meteorite</h2>
+<h2>Esempio</h2>
 
-<p>Un meteorite è inizialmente fermo a distanza praticamente infinita dalla Terra e cade verso di
-essa. Vogliamo la velocità con cui arriva sulla superficie.</p>
+<p>Dati: meteorite fermo a distanza $r \to \infty$ dalla Terra, resistenza dell'atmosfera trascurabile. Calcolare la velocità di impatto $v$.</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg">
-<circle cx="60" cy="65" r="38" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="60" y="69" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--grigio)">Terra</text>
-<line x1="98" y1="65" x2="280" y2="65" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4 4"/>
-<circle cx="282" cy="65" r="3.5" fill="var(--rosso)"/>
-<text x="240" y="42" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--inchiostro)">meteorite, fermo</text>
-<text x="240" y="56" text-anchor="middle" font-family="var(--sans)" font-size="11" fill="var(--inchiostro)">a distanza infinita</text>
-</svg>
-<p class="did">Stato iniziale: meteorite di massa $m$, velocità nulla, a distanza $r\to\infty$ dal
-centro della Terra.</p>
+<svg id="f-met" viewBox="0 30 360 100" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Meteorite fermo a distanza infinita e all'impatto sulla superficie terrestre"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Stato finale: $r = R_T$</p>
+<p class="did">Stato iniziale: $v_i = 0$, $r_i \to \infty$ (non in scala)</p>
+</div>
 </div>
 
-<p>Nello stato iniziale $v=0$ e $r\to\infty$, quindi $U\to 0$: l'energia totale iniziale è nulla.
-Nello stato finale il meteorite ha raggiunto la superficie, a distanza $R_T$ dal centro, con la
-velocità di impatto $v$ da trovare:</p>
+<p class="eq">$$E_{\text{tot},i} = \tfrac{1}{2}mv_i^{2} - G\,\frac{M_T m}{r_i} = 0 \qquad E_{\text{tot},f} = \tfrac{1}{2}mv^{2} - G\,\frac{M_T m}{R_T}$$</p>
 
-<div class="formula-box">
-$$E_{\text{tot},i} = \tfrac{1}{2}mv_i^{2} - G\frac{mM}{r_i} = 0 \qquad (v_i=0,\ r_i\to\infty)$$
-$$E_{\text{tot},f} = \tfrac{1}{2}mv^{2} - G\,\frac{mM_T}{R_T}$$
-</div>
+<p>Uguagliando, $m$ si semplifica: $v$ non dipende dalla massa del meteorite.</p>
 
-<p>Per la conservazione dell'energia $E_{\text{tot},i}=E_{\text{tot},f}$, quindi</p>
+<p class="eq">$$0 = \frac{1}{2}mv^{2} - G\,\frac{M_T m}{R_T} \quad\Longrightarrow\quad v = \sqrt{\frac{2GM_T}{R_T}}$$</p>
 
-<div class="formula-box">$$0 = \frac{1}{2}mv^{2} - G\,\frac{mM_T}{R_T} \quad\Longrightarrow\quad
-v = \sqrt{\frac{2GM_T}{R_T}}$$</div>
+<p>Costanti: $R_T = 6{,}37\times10^{6}\ \mathrm{m}$, $M_T = 5{,}97\times10^{24}\ \mathrm{kg}$, $G = 6{,}67\times10^{-11}\ \mathrm{N\,m^2/kg^2}$.</p>
 
-<p>La massa $m$ del meteorite si semplifica: la velocità di impatto non dipende da quanto è
-massiccio l'oggetto che cade.</p>
-
-<div class="grandezze">
-<ul>
-<li>$R_T = 6{,}37\times10^{6}\ \mathrm{m}$, &nbsp; $M_T = 5{,}97\times10^{24}\ \mathrm{kg}$</li>
-</ul>
-</div>
-
-<div class="formula-box">$$v = \sqrt{\frac{2GM_T}{R_T}} \approx 1{,}12\times10^{4}\ \mathrm{m/s}
-\approx 11\,200\ \mathrm{m/s}$$</div>
-
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<p>Lo stesso calcolo, letto al contrario, dà la velocità minima con cui lanciare un corpo dalla
-Terra perché sfugga al campo gravitazionale senza più ricadere: è la velocità di fuga (unità 54),
-e non è un caso che il suo valore coincida con quello appena trovato.</p>
-</div>
+<p class="eq">$$v = \sqrt{\frac{2\cdot 6{,}67\times10^{-11}\cdot 5{,}97\times10^{24}}{6{,}37\times10^{6}}}\ \mathrm{m/s} \approx 1{,}12\times10^{4}\ \mathrm{m/s}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../52-energia-potenziale-gravitazionale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Energia potenziale gravitazionale</span></a><a class="successiva" href="../54-velocita-di-fuga/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Velocità di fuga</span></a></nav>
 <footer><p>Fisica terza &middot; Gravitazione &middot; Unità 53</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(s,x,y,t,o){o=o||{};var e=el('text',{x:x,y:y,'text-anchor':o.a||'middle','dominant-baseline':'central','font-family':o.f||'var(--sans)','font-size':o.s||12,fill:o.c||'var(--inchiostro)','font-style':o.i?'italic':'normal'},s);e.textContent=t;return e;}
+function lab(s,x,y,base,sub,col,a){var e=el('text',{x:x,y:y,fill:col,'text-anchor':a||'middle','dominant-baseline':'central','font-family':'var(--serif)','font-style':'italic','font-size':13},s);e.textContent=base;if(sub){var t=el('tspan',{'font-size':10,dy:4},e);t.textContent=sub;}return e;}
+function fr(s,id,col){var d=el('defs',{},s),m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto',markerUnits:'strokeWidth'},d);el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col},m);}
+
+/* Terra, meteorite all'impatto (r = R_T, velocità v verso la Terra) e meteorite fermo lontano */
+(function(){
+  var s=document.getElementById('f-met'),cx=62,cy=80,R=42;
+  fr(s,'m-v','var(--verde)');
+  el('circle',{cx:cx,cy:cy,r:R,fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.4},s);
+  txt(s,cx,cy,'Terra',{c:'var(--blu)',s:11});
+  el('line',{x1:cx+R,y1:cy,x2:328,y2:cy,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'4,4'},s);
+  // interruzione: non in scala
+  [0,7].forEach(function(o){el('line',{x1:236+o,y1:cy+8,x2:242+o,y2:cy-8,stroke:'var(--grigio)','stroke-width':1.2},s);});
+  // stato finale
+  var fx=cx+R+5;
+  el('circle',{cx:fx,cy:cy,r:4.5,fill:'var(--rosso)'},s);
+  el('line',{x1:fx+48,y1:cy-18,x2:fx+10,y2:cy-18,stroke:'var(--verde)','stroke-width':2.2,'marker-end':'url(#m-v)'},s);
+  lab(s,fx+29,cy-31,'v','','var(--verde)');
+  lab(s,fx+8,cy+20,'r = R','T','var(--inchiostro)','start');
+  // stato iniziale
+  el('circle',{cx:330,cy:cy,r:4.5,fill:'var(--rosso)'},s);
+  lab(s,330,cy-24,'v','i','var(--inchiostro)','end');
+  txt(s,335,cy-24,' = 0',{a:'start',s:12});
+  lab(s,322,cy+22,'r','i','var(--inchiostro)','end');
+  txt(s,327,cy+22,'→ ∞',{a:'start',s:12});
+})();
+})();
+</script>
 </body>
 </html>
