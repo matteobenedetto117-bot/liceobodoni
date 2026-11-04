@@ -5,16 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni omogenee di secondo grado in seno e coseno — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -24,80 +55,80 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Equazioni e disequazioni goniometriche &middot; Unità 05</p>
   <h1>Equazioni omogenee di secondo grado in seno e coseno</h1>
-  <p class="sommario">Un'equazione omogenea di secondo grado contiene solo seno e coseno con
-  grado complessivo due in ogni termine, senza termine noto. Si riconosce a vista, e si
-  risolve con un raccoglimento o con una divisione, senza bisogno delle formule
-  parametriche viste per l'equazione lineare.</p>
 </header>
 
-<div class="def">
-<span class="et">Definizione</span>
-$$a\sin^2x+b\sin x\cos x+c\cos^2x=0 \qquad a,b,c\in\mathbb R$$
-<p>Ogni termine ha grado complessivo due in seno e coseno: non compare né un termine di primo
-grado né un termine noto. È questo che rende l'equazione omogenea, e che permette di
-risolverla senza le formule parametriche.</p>
-</div>
+<p>Ogni termine di secondo grado in seno e coseno, nessun termine noto: come ricondursi a equazioni elementari?</p>
 
-<h2>Un coefficiente nullo: si raccoglie</h2>
+<div class="def"><span class="et">Equazione omogenea di secondo grado</span>
+<p class="eq">$$a\sin^2x+b\sin x\cos x+c\cos^2x=0 \qquad a,b,c\in\mathbb R$$</p></div>
 
-<p>Se $a=0$ l'equazione si riduce a $b\sin x\cos x+c\cos^2x=0$. Raccogliamo $\cos x$:</p>
+<h2>Un coefficiente nullo</h2>
 
-$$\cos x\,(b\sin x+c\cos x)=0$$
+<ul>
+<li>$a=0$ → si raccoglie $\cos x$;</li>
+<li>$c=0$ → si raccoglie $\sin x$.</li>
+</ul>
 
-<p>Il prodotto si annulla se $\cos x=0$, cioè $x=\frac\pi2+k\pi$, oppure se
-$b\sin x+c\cos x=0$: un'equazione lineare in seno e coseno, già nota dall'unità precedente.
-Simmetricamente, se $c=0$ l'equazione diventa $a\sin^2x+b\sin x\cos x=0$ e si raccoglie
-$\sin x$:</p>
+<p class="eq">$$\cos x\,(b\sin x+c\cos x)=0 \qquad \sin x\,(a\sin x+b\cos x)=0$$</p>
 
-$$\sin x\,(a\sin x+b\cos x)=0 \;\Longrightarrow\; \sin x=0\ \vee\ a\sin x+b\cos x=0$$
+<p>Ogni fattore dà un'equazione elementare o lineare in seno e coseno.</p>
 
-<p><strong>Esempio.</strong> $\cos x\sin x-\sqrt3\sin^2x=0$ ha $c=0$: raccogliamo $\sin x$.</p>
+<h2>Esempio 1</h2>
 
-$$\sin x\,(\cos x-\sqrt3\sin x)=0$$
+<p>Risolvere $\cos x\sin x-\sqrt3\sin^2x=0$ ($c=0$).</p>
 
-<p>Da $\sin x=0$ viene $x=k\pi$. L'altro fattore, $\cos x-\sqrt3\sin x=0$, si divide per
-$\cos x$: a $x=\frac\pi2$ vale $-\sqrt3\ne0$, quindi non è soluzione e la divisione è lecita.</p>
+<p class="eq">$$\sin x\,(\cos x-\sqrt3\sin x)=0 \;\Longrightarrow\; \sin x=0\ \vee\ \cos x-\sqrt3\sin x=0$$</p>
 
-$$1-\sqrt3\tan x=0 \;\Longrightarrow\; \tan x=\frac{\sqrt3}3 \;\Longrightarrow\; x=\frac\pi6+k\pi$$
+<p>Per $x=\frac\pi2$ il secondo fattore vale $-\sqrt3\ne0$: si divide per $\cos x$.</p>
 
-<h2>Nessun coefficiente nullo: si divide per $\cos^2x$</h2>
+<p class="eq">$$x=k\pi\ \vee\ \tan x=\frac{\sqrt3}3 \;\Longrightarrow\; x=k\pi\ \vee\ x=\frac\pi6+k\pi$$</p>
 
-<p>Se $a\ne0$ e $c\ne0$ non c'è più un fattore comune da raccogliere. Dividiamo allora tutta
-l'equazione per $\cos^2x$, ma prima controlliamo che non si perdano soluzioni: se
-$\cos^2x=0$, cioè $x=\frac\pi2+k\pi$, l'equazione originaria darebbe $a\sin^2x=0$, dunque
-$a=0$. Per ipotesi $a\ne0$, quindi $\cos^2x=0$ non è mai soluzione e si può dividere senza
-rischio.</p>
+<h2>Nessun coefficiente nullo</h2>
 
-$$a\tan^2x+b\tan x+c=0$$
+<ul>
+<li>$x=\frac\pi2+k\pi$ → resta $a\sin^2x=a\ne0$: non è soluzione;</li>
+<li>divisione per $\cos^2x$ → equazione di secondo grado nella tangente.</li>
+</ul>
 
-<div class="nota">
-<span class="et">Errore tipico</span>
-<p>Dividere per $\cos^2x$ senza controllare prima se $x=\frac\pi2+k\pi$ è soluzione: se lo
-fosse, la divisione la farebbe sparire, come già visto per le equazioni lineari.</p>
-</div>
+<p class="eq">$$a\tan^2x+b\tan x+c=0$$</p>
 
-<p><strong>Esempio.</strong> $\sin^2x-(1+\sqrt3)\sin x\cos x+\sqrt3\cos^2x=0$, con $a=1\ne0$
-e $c=\sqrt3\ne0$. Dividiamo per $\cos^2x$:</p>
+<div class="nota"><span class="et">Errore tipico</span>
+<p>Dividere per $\cos^2x$ senza controllare $x=\frac\pi2+k\pi$: se è soluzione, va persa.</p></div>
 
-$$\tan^2x-(1+\sqrt3)\tan x+\sqrt3=0$$
+<h2>Esempio 2</h2>
 
-$$\Delta=(1+\sqrt3)^2-4\sqrt3=4-2\sqrt3=(1-\sqrt3)^2 \qquad
-\tan x=\frac{(1+\sqrt3)\pm(\sqrt3-1)}2$$
+<p>Risolvere $\sin^2x-(1+\sqrt3)\sin x\cos x+\sqrt3\cos^2x=0$ ($a=1$, $c=\sqrt3$).</p>
 
-$$\tan x=1\ \vee\ \tan x=\sqrt3 \qquad\Longrightarrow\qquad x=\frac\pi4+k\pi\ \vee\
-x=\frac\pi3+k\pi$$
+<p class="eq">$$\tan^2x-(1+\sqrt3)\tan x+\sqrt3=0 \qquad \Delta=(1+\sqrt3)^2-4\sqrt3=(1-\sqrt3)^2$$</p>
 
-<h2>Un metodo alternativo: le formule di duplicazione</h2>
+<p class="eq">$$\tan x=1\ \vee\ \tan x=\sqrt3 \;\Longrightarrow\; x=\frac\pi4+k\pi\ \vee\ x=\frac\pi3+k\pi$$</p>
 
-<p>Un'equazione omogenea si può anche trasformare in un'equazione lineare in $\sin2x$ e
-$\cos2x$, sostituendo le formule di duplicazione:</p>
+<h2>Formule di duplicazione</h2>
 
-$$\sin^2x=\frac{1-\cos2x}2 \qquad \cos^2x=\frac{1+\cos2x}2 \qquad \sin x\cos x=\frac{\sin2x}2$$
+<p>In alternativa, l'equazione diventa lineare in $\sin2x$ e $\cos2x$ con:</p>
 
+<p class="eq">$$\sin^2x=\frac{1-\cos2x}2 \qquad \cos^2x=\frac{1+\cos2x}2 \qquad \sin x\cos x=\frac{\sin2x}2$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../04-funzioni-goniometriche-inverse/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Funzioni goniometriche inverse</span></a><a class="successiva" href="../06-disequazioni-goniometriche-elementari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disequazioni goniometriche elementari</span></a></nav>
 <footer><p>Matematica quarta &middot; Equazioni e disequazioni goniometriche &middot; Unità 05</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
