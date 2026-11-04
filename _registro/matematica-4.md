@@ -127,6 +127,7 @@
 - Aggiunta: nessuna in senso stretto. Il riquadro finale sulla biunivocità spiega a parole
   il motivo delle croci sul ramo escluso della parabola e del tratto ristretto del seno,
   entrambi già disegnati nella traccia a pagina 57; non introduce un criterio nuovo.
+- Revisione (04/11/2026, regole 13/10): parole circa 232 → 76 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, titoletti «Simmetria rispetto all'asse y», «Simmetria rispetto all'asse x» (le tre simmetrie ora in un elenco caso → conseguenza), prosa; titoletto «Funzione inversa» tenuto (argomento distinto); definizione del grafico dell'inversa in .def con la condizione di biunivocità; restrizioni sin → arcsin e x² → √x in elenco; nota ridotta a una frase. Nessuna comparsa da togliere, nessun esempio presente. Nessuna correzione concettuale (verificato con SymPy sin(−x) = −sin x, tan(−x) = −tan x, arcsin(sin 0,7) = 0,7, √(1,3²) = 1,3). Figure rifatte da script (prima tracciati fissi): seno e tangente con le simmetriche rispetto all'asse y (curve simmetriche rosse tratteggiate, asintoti grigi), coseno e −cos x, seno ristretto/arcoseno e parabola ristretta/radice con bisettrice tratteggiata e croci sul ramo escluso; legende nelle didascalie. Pagina sotto le 100 parole: contenuto tutto in elenchi e figure, nulla da aggiungere. Nessuna figura decorativa.
 
 ## Unità 15 — Valore assoluto nei grafici
 - Parole: 749 su 3 pagine di traccia (58–60)
