@@ -50,6 +50,7 @@
   non viene ripetuta. I due diagrammi di sintesi (il segno del quoziente sulla circonferenza
   e le due intersezioni di sistemi con cerchi concentrici) ridisegnano in SVG esattamente le
   costruzioni grafiche della traccia (pagine 33, 35 e 36); non introducono un metodo nuovo.
+- Revisione (04/11/2026, regole 13/10): parole circa 261 → 96 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario e prosa; procedimento delle fratte in quattro voci, metodo dei sistemi in tre voci, soluzioni delle singole disequazioni in elenco caso → conseguenza, formule in .eq. Titoletti: «Disequazioni fratte», «Esempio 1», «Sistemi di disequazioni», «Esempio 2». Esempi tenuti: tan x ≥ 1/(2cos x) e il sistema 4sin²x − 3 ≥ 0 ∧ tan x ≥ 1. Esempio tolto (regola dei due esempi): sistema cos x > 0 ∧ cot²x − 3 ≥ 0 ∧ 2sin x − 1 ≤ 0 → −π/6 + 2kπ ≤ x ≤ π/6 + 2kπ, x ≠ 2kπ (con le sue figure). Nessuna comparsa da togliere. Nessuna correzione concettuale (soluzioni verificate per enumerazione numerica con Python). Figure rifatte da script in due figure a tre pannelli: N ≥ 0, D > 0 e segno del quoziente; le due soluzioni del sistema e l'intersezione su archi concentrici, ora con entrambi i rami di periodo π (prima solo quello del primo quadrante). Nessuna figura decorativa.
 
 ## Unità 08 — Triangoli rettangoli: primo e secondo teorema
 - Parole: 369 (prosa, formule e didascalie, SVG esclusi) su 4 pagine di traccia (37–40)
