@@ -5,23 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Posizione reciproca di due piani e distanza punto-piano — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.casi{margin:20px 0;padding-left:0;list-style:none}
-.casi li{margin:14px 0;padding-left:38px;position:relative}
-.casi li b{position:absolute;left:0;color:var(--blu)}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -31,85 +67,118 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Geometria analitica nello spazio &middot; Unità 20</p>
   <h1>Posizione reciproca di due piani e distanza punto-piano</h1>
-  <p class="sommario">Due piani nello spazio possono essere paralleli, coincidenti oppure
-  incidenti lungo una retta. Confrontando i coefficienti delle loro equazioni si riconosce
-  subito il caso, e la stessa idea di vettore normale usata per scrivere un piano permette di
-  misurare quanto un punto ne sia lontano.</p>
 </header>
 
-<h2>Posizione reciproca di due piani</h2>
+<p>Due piani: quanti punti hanno in comune? Sono le soluzioni del sistema</p>
 
-<p>Consideriamo due piani scritti nella forma generale vista nell'unità precedente:</p>
-$$\begin{cases}ax+by+cz+d=0\\ a'x+b'y+c'z+d'=0\end{cases}$$
-<p>Il sistema descrive i punti comuni ai due piani. Il confronto dei coefficienti distingue tre
-casi.</p>
+<p class="eq">$$\begin{cases}ax+by+cz+d=0\\ a'x+b'y+c'z+d'=0\end{cases}$$</p>
 
-<ul class="casi">
-<li><b>1.</b> Se $\dfrac{a}{a'}=\dfrac{b}{b'}=\dfrac{c}{c'}\neq\dfrac{d}{d'}$, il sistema è
-impossibile: i piani sono <b>paralleli e distinti</b>.</li>
-<li><b>2.</b> Se $\dfrac{a}{a'}=\dfrac{b}{b'}=\dfrac{c}{c'}=\dfrac{d}{d'}$, il sistema è sempre
-verificato, per ogni terna $(x,y,z)$ che soddisfi una delle due equazioni: i piani sono
-<b>paralleli e coincidenti</b>.</li>
-<li><b>3.</b> Negli altri casi il sistema ammette infinite soluzioni, tutte appartenenti a una
-retta: i piani sono <b>incidenti</b>. Risolvendo il sistema si ottiene proprio l'equazione della
-retta di intersezione.</li>
+<p>Confronto dei coefficienti (rapporti con denominatore non nullo):</p>
+
+<ul>
+<li>$\dfrac{a}{a'}=\dfrac{b}{b'}=\dfrac{c}{c'}\neq\dfrac{d}{d'}$ → sistema impossibile: piani paralleli e distinti;</li>
+<li>$\dfrac{a}{a'}=\dfrac{b}{b'}=\dfrac{c}{c'}=\dfrac{d}{d'}$ → stessa equazione: piani coincidenti;</li>
+<li>altrimenti → infinite soluzioni su una retta: piani incidenti; il sistema è la retta di intersezione.</li>
 </ul>
 
 <h2>Piani perpendicolari</h2>
 
-<p>Ogni piano ha un vettore normale $\vec n(a;b;c)$, le cui componenti sono i coefficienti della
-sua equazione. Due piani sono perpendicolari esattamente quando lo sono i loro vettori normali,
-cioè quando il prodotto scalare fra $\vec n$ e $\vec n\,'$ è nullo.</p>
+<p>Piani perpendicolari quando lo sono i vettori normali $\vec n(a;b;c)$ e $\vec n\,'(a';b';c')$:</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 300 220" width="100%" style="max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due piani perpendicolari con i rispettivi vettori normali">
-<defs>
-<marker id="ar20" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-</defs>
-<polygon points="35,70 95,20 95,150 35,200" fill="var(--blu-chiaro)" fill-opacity="0.75" stroke="var(--riga)"/>
-<polygon points="20,110 250,90 250,130 20,150" fill="var(--blu-chiaro)" fill-opacity="0.45" stroke="var(--riga)"/>
-<line x1="35" y1="135" x2="90" y2="130" stroke="var(--rosso)" stroke-width="2.4"/>
-<line x1="65" y1="85" x2="65" y2="35" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#ar20)"/>
-<text x="70" y="33" font-size="13" fill="var(--blu)">n&#8407;</text>
-<line x1="150" y1="110" x2="150" y2="55" stroke="var(--blu)" stroke-width="2.2" marker-end="url(#ar20)"/>
-<text x="155" y="52" font-size="13" fill="var(--blu)">n&#8407;&#8242;</text>
-</svg>
-<figcaption>Due piani perpendicolari (in rosso la retta comune) e i loro vettori normali
-$\vec n$, $\vec n\,'$, a loro volta perpendicolari.</figcaption>
-</figure>
-
-<div class="def"><span class="et">Condizione di perpendicolarità fra due piani</span>
-$$aa'+bb'+cc'=0$$
+<div class="fig">
+<svg id="fig-perp" viewBox="0 0 360 250" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due piani perpendicolari con i vettori normali"></svg>
+<p class="did">Retta comune in rosso; $\vec n\perp\vec n\,'$</p>
 </div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>I piani $2x-y+2z+7=0$ e $3x+2y-2z-1=0$ sono perpendicolari?</p>
-$$2\cdot3+(-1)\cdot2+2\cdot(-2)=6-2-4=0$$
-<p>Sì, sono perpendicolari.</p>
-</div>
+<div class="def"><span class="et">Condizione di perpendicolarità</span>
+<p class="eq">$$aa'+bb'+cc'=0$$</p></div>
 
-<h2>Distanza di un punto da un piano</h2>
+<h2>Esempio 1</h2>
 
-<p>Come nel piano cartesiano la distanza di un punto da una retta si scrive con i coefficienti
-dell'equazione, nello spazio la distanza di un punto $A(x_A;y_A;z_A)$ dal piano
-$ax+by+cz+d=0$ si ottiene con una formula analoga, dove al posto delle due sole variabili di
-prima compare anche la $z$:</p>
+<p>Dati: $2x-y+2z+7=0$, $3x+2y-2z-1=0$. Verificare se sono perpendicolari.</p>
+
+<p class="eq">$$2\cdot3+(-1)\cdot2+2\cdot(-2)=6-2-4=0\ \Rightarrow\ \text{perpendicolari}$$</p>
+
+<h2>Distanza punto-piano</h2>
+
+<p>Distanza di $A(x_A;y_A;z_A)$ dal piano $ax+by+cz+d=0$:</p>
 
 <div class="def"><span class="et">Distanza punto-piano</span>
-$$D=\dfrac{|ax_A+by_A+cz_A+d|}{\sqrt{a^2+b^2+c^2}}$$
-</div>
+<p class="eq">$$D=\frac{|ax_A+by_A+cz_A+d|}{\sqrt{a^2+b^2+c^2}}$$</p></div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Distanza di $P(0;1;-1)$ dal piano $\alpha:\ x-y+2z-1=0$:</p>
-$$D=\dfrac{|1\cdot0-1\cdot1+2\cdot(-1)-1|}{\sqrt{1^2+(-1)^2+2^2}}=\dfrac{4}{\sqrt6}=\dfrac23\sqrt6$$
-</div>
+<h2>Esempio 2</h2>
 
+<p>Dati: $P(0;1;-1)$, $\alpha:\ x-y+2z-1=0$. Calcolare la distanza di $P$ da $\alpha$.</p>
+
+<p class="eq">$$D=\frac{|0-1+2\cdot(-1)-1|}{\sqrt{1+1+4}}=\frac{4}{\sqrt6}=\frac23\sqrt6\approx1{,}63$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../19-il-piano-equazione-generale-e-casi-particolari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Il piano: equazione generale e casi particolari</span></a><a class="successiva" href="../21-la-retta-nello-spazio-equazioni-parametriche-e-cartesiane/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">La retta nello spazio: equazioni parametriche e cartesiane</span></a></nav>
 <footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 20</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* proiezione obliqua: y a destra, z in alto, x verso l'osservatore (in basso a sinistra) */
+function Spazio(svg,O,u){
+  this.svg=svg;
+  this.p=function(x,y,z){return [O[0]+u*(y-0.42*x),O[1]-u*(z-0.32*x)];};
+  var d=el('defs',{}),self=this;this.mk={};
+  ['inchiostro','rosso','blu','grigio'].forEach(function(c){
+    var m=el('marker',{id:svg.id+'-'+c,markerUnits:'userSpaceOnUse',markerWidth:12,markerHeight:12,refX:8,refY:4,orient:'auto'});
+    m.appendChild(el('path',{d:'M0,0 L9,4 L0,8 Z',fill:'var(--'+c+')'}));d.appendChild(m);self.mk[c]='url(#'+svg.id+'-'+c+')';});
+  svg.appendChild(d);
+}
+Spazio.prototype.seg=function(a,b,c,w,opz){var P=this.p.apply(this,a),Q=this.p.apply(this,b);
+  var e=el('line',Object.assign({x1:P[0].toFixed(1),y1:P[1].toFixed(1),x2:Q[0].toFixed(1),y2:Q[1].toFixed(1),stroke:'var(--'+c+')','stroke-width':w},opz||{}));this.svg.appendChild(e);return e;};
+Spazio.prototype.freccia=function(a,b,c,w){return this.seg(a,b,c,w,{'marker-end':this.mk[c]});};
+Spazio.prototype.tratt=function(a,b){return this.seg(a,b,'grigio',1.2,{'stroke-dasharray':'4,3'});};
+Spazio.prototype.punto=function(a,c,r){var P=this.p.apply(this,a);this.svg.appendChild(el('circle',{cx:P[0].toFixed(1),cy:P[1].toFixed(1),r:r||3,fill:'var(--'+c+')'}));};
+Spazio.prototype.scritta=function(a,dx,dy,s,opz){var P=this.p.apply(this,a);return txt(this.svg,(P[0]+dx).toFixed(1),(P[1]+dy).toFixed(1),s,opz);};
+Spazio.prototype.assi=function(L){
+  this.freccia([0,0,0],[L[0],0,0],'inchiostro',1.5);this.freccia([0,0,0],[0,L[1],0],'inchiostro',1.5);this.freccia([0,0,0],[0,0,L[2]],'inchiostro',1.5);
+  this.scritta([L[0],0,0],-14,4,'x',{'font-style':'italic'});this.scritta([0,L[1],0],4,-8,'y',{'font-style':'italic'});
+  this.scritta([0,0,L[2]],8,8,'z',{'font-style':'italic'});this.scritta([0,0,0],-16,-6,'O',{'font-size':12});
+};
+window.Spazio=Spazio;
+
+function adatta(svg,m){var b=svg.getBBox();svg.setAttribute('viewBox',[(b.x-m).toFixed(0),(b.y-m).toFixed(0),(b.width+2*m).toFixed(0),(b.height+2*m).toFixed(0)].join(' '));}
+var S=new Spazio(document.getElementById('fig-perp'),[175,150],46);
+function poli(pts,att){var s=pts.map(function(q){return S.p.apply(S,q).map(function(v){return v.toFixed(1);}).join(',');}).join(' ');var e=el('polygon',Object.assign({points:s},att));S.svg.appendChild(e);return e;}
+/* α: z = 0 (orizzontale); α': y = 0 (verticale); retta comune: asse x */
+var st={fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1};
+poli([[2.2,-2.4,0],[2.2,0,0],[-2.2,0,0],[-2.2,-2.4,0]],Object.assign({'fill-opacity':.9},st));
+poli([[2.2,0,-1.2],[2.2,0,2],[-2.2,0,2],[-2.2,0,-1.2]],Object.assign({'fill-opacity':.55},st));
+poli([[2.2,0,0],[2.2,2.4,0],[-2.2,2.4,0],[-2.2,0,0]],Object.assign({'fill-opacity':.9},st));
+S.seg([2.2,0,0],[-2.2,0,0],'rosso',2.6);
+S.freccia([1.2,-1.4,0],[1.2,-1.4,1.5],'blu',2.4);
+S.freccia([-1,0,1.5],[-1,1.4,1.5],'blu',2.4);
+S.scritta([1.2,-1.4,1.5],8,6,'n',{fill:'var(--blu)','font-style':'italic','font-weight':700,'font-size':15});
+S.scritta([-1,1.4,1.5],6,-6,'n′',{fill:'var(--blu)','font-style':'italic','font-weight':700,'font-size':15});
+S.scritta([2.2,2.4,0],-4,18,'α',{'font-style':'italic','font-size':14});
+S.scritta([-2.2,0,2],6,-6,'α′',{'font-style':'italic','font-size':14});
+adatta(S.svg,14);
+
+})();
+</script>
 </body>
 </html>
