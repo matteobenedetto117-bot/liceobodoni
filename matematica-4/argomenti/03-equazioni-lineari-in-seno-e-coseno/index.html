@@ -5,18 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni lineari in seno e coseno — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.figura{text-align:center;margin:20px 0}
-.figura svg{max-width:340px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -26,149 +55,160 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Equazioni e disequazioni goniometriche &middot; Unità 03</p>
   <h1>Equazioni lineari in seno e coseno</h1>
-  <p class="sommario">Un'equazione goniometrica lineare contiene seno e coseno dello stesso
-  angolo, ciascuno moltiplicato per un coefficiente, senza esponenti né prodotti fra le due
-  funzioni. Vediamo tre modi per risolverla: uno algebrico, uno grafico, e uno che la
-  riconduce sempre a un caso elementare.</p>
 </header>
 
-<div class="def">
-<span class="et">Definizione</span>
-$$a\sin x+b\cos x+c=0 \qquad a,b,c\in\mathbb R,\ a\ne0,\ b\ne0$$
-<p>Se $a=0$ oppure $b=0$ l'equazione è già elementare e si risolve come tale.</p>
+<p>Seno e coseno dello stesso angolo, al primo grado: come ricondursi a un'equazione elementare?</p>
+
+<div class="def"><span class="et">Definizione</span>
+<p class="eq">$$a\sin x+b\cos x+c=0 \qquad a,b,c\in\mathbb R,\ a\ne0,\ b\ne0$$</p>
+<p>Con $a=0$ oppure $b=0$: equazione elementare.</p></div>
+
+<h2>Caso $c=0$</h2>
+
+<ul>
+<li>$\cos x=0$, cioè $x=\frac\pi2+k\pi$ → $\pm a=0$, impossibile: nessuna soluzione persa;</li>
+<li>divisione per $\cos x$ → equazione nella sola tangente.</li>
+</ul>
+
+<p class="eq">$$a\tan x+b=0 \;\Longrightarrow\; \tan x=-\frac ba$$</p>
+
+<div class="fig">
+<svg id="f-tan" viewBox="0 0 220 200" style="width:100%;max-width:260px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retta per l'origine inclinata di pi greco terzi sulla circonferenza goniometrica"></svg>
+<p class="did">$\sin x-\sqrt3\cos x=0$: $\tan x=\sqrt3$, $x=\frac\pi3+k\pi$</p>
 </div>
 
-<h2>Il caso $c=0$</h2>
+<h2>Formule parametriche ($c\ne0$)</h2>
 
-<p>Quando $c=0$ l'equazione diventa $a\sin x+b\cos x=0$. Dividiamo per $\cos x$: prima però
-controlliamo che non si perdano soluzioni. Se $\cos x=0$, cioè $x=\frac\pi2+2k\pi$, l'equazione
-darebbe $a\cdot1+b\cdot0=0$, quindi $a=0$: impossibile, perché $a\ne0$. Dividere per $\cos x$
-non fa perdere nulla, e si ottiene un'equazione nella sola tangente:</p>
+<p>Con $t=\tan\frac x2$, valide per $x\ne\pi+2k\pi$:</p>
 
-$$a\tan x+b=0 \;\Longrightarrow\; \tan x=-\frac ba$$
+<p class="eq">$$\sin x=\frac{2t}{1+t^2} \qquad \cos x=\frac{1-t^2}{1+t^2}$$</p>
 
-<p><strong>Esempio.</strong> $\sin x-\sqrt3\cos x=0$, con $a=1,\ b=-\sqrt3$:</p>
+<ul>
+<li>$x=\pi+2k\pi$ → verificato a parte nell'equazione di partenza;</li>
+<li>sostituzione → equazione di secondo grado in $t$.</li>
+</ul>
 
-$$\tan x=\sqrt3 \;\Longrightarrow\; x=\frac\pi3+k\pi$$
+<div class="nota"><span class="et">Errore tipico</span>
+<p>Sostituire senza controllare $x=\pi+2k\pi$: se è soluzione, va persa.</p></div>
 
-<div class="figura">
-<svg viewBox="0 0 200 200">
-<line x1="10" y1="100" x2="190" y2="100" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="100" y1="10" x2="100" y2="190" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="100" cy="100" r="75" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="30" y1="170" x2="170" y2="30" stroke="var(--rosso)" stroke-width="2"/>
-<path d="M 130 100 A 30 30 0 0 0 121 74" fill="none" stroke="var(--blu)" stroke-width="1.4"/>
-<text x="136" y="80" font-size="13" fill="var(--blu)">&pi;/3</text>
-</svg>
+<h2>Esempio 1</h2>
+
+<p>Risolvere $\sin x+\cos x-1=0$. Per $x=\pi$: $0-1-1=-2\ne0$, non è soluzione.</p>
+
+<p class="eq">$$\frac{2t}{1+t^2}+\frac{1-t^2}{1+t^2}-1=0 \;\Longrightarrow\; -2t^2+2t=0 \;\Longrightarrow\; t=0\ \vee\ t=1$$</p>
+
+<p class="eq">$$\tan\tfrac x2=0\ \vee\ \tan\tfrac x2=1 \;\Longrightarrow\; x=2k\pi\ \vee\ x=\tfrac\pi2+2k\pi$$</p>
+
+<h2>Metodo grafico</h2>
+
+<p>Con $X=\cos x$ e $Y=\sin x$, le soluzioni sono le intersezioni di una retta con la circonferenza goniometrica:</p>
+
+<p class="eq">$$\begin{cases}aY+bX+c=0\\ X^2+Y^2=1\end{cases}$$</p>
+
+<ul>
+<li>retta secante → due soluzioni in un giro;</li>
+<li>retta tangente ($\Delta=0$) → una soluzione;</li>
+<li>retta esterna → nessuna soluzione.</li>
+</ul>
+
+<div class="fig">
+<svg id="f-retta" viewBox="0 0 220 200" style="width:100%;max-width:260px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retta X più Y uguale a 1 che interseca la circonferenza in due punti"></svg>
+<p class="did">$X+Y-1=0$ (esempio 1): intersezioni in $x=0$ e $x=\frac\pi2$</p>
 </div>
 
-<h2>Il caso $c\ne0$: le formule parametriche</h2>
+<h2>Angolo aggiunto</h2>
 
-<p>Se $c$ è diverso da zero non basta più un solo passaggio. Ricorriamo alle formule
-parametriche, che esprimono seno e coseno in funzione di $t=\tan\frac x2$:</p>
+<p>La combinazione di seno e coseno diventa un unico seno:</p>
 
-$$\sin x=\frac{2t}{1+t^2} \qquad \cos x=\frac{1-t^2}{1+t^2} \qquad t=\tan\frac x2$$
+<div class="def"><span class="et">Angolo aggiunto</span>
+<p class="eq">$$a\sin x+b\cos x=r\sin(x+\alpha)$$</p>
+<p class="eq">$$r=\sqrt{a^2+b^2} \qquad \cos\alpha=\frac ar,\quad \sin\alpha=\frac br$$</p>
+<p>L'equazione diventa elementare: $r\sin(x+\alpha)+c=0$.</p></div>
 
-<p>Queste formule valgono solo se $x\ne\pi+2k\pi$, perché in quel punto $\tan\frac x2$ non
-esiste. Prima di sostituire dobbiamo perciò controllare se $x=\pi+2k\pi$ è soluzione
-dell'equazione di partenza: se lo è va tenuta a parte, altrimenti la sostituzione la fa
-sparire. Sostituendo, l'equazione diventa di secondo grado in $t$: $a't^2+b't+c'=0$.</p>
+<h2>Esempio 2</h2>
 
-<div class="nota">
-<span class="et">Errore tipico</span>
-<p>Sostituire subito le formule parametriche senza controllare $x=\pi+2k\pi$: se quel valore
-è soluzione, con la sola sostituzione la si perde.</p>
+<p>Risolvere $\sin x-\sqrt3\cos x+1=0$, con $a=1$, $b=-\sqrt3$.</p>
+
+<p class="eq">$$r=\sqrt{1+3}=2 \qquad \cos\alpha=\tfrac12,\ \sin\alpha=-\tfrac{\sqrt3}2 \;\Longrightarrow\; \alpha=-\tfrac\pi3$$</p>
+
+<p class="eq">$$2\sin\!\left(x-\tfrac\pi3\right)+1=0 \;\Longrightarrow\; \sin\!\left(x-\tfrac\pi3\right)=-\tfrac12$$</p>
+
+<p class="eq">$$x-\tfrac\pi3=\tfrac76\pi+2k\pi\ \vee\ x-\tfrac\pi3=\tfrac{11}6\pi+2k\pi \;\Longrightarrow\; x=\tfrac32\pi+2k\pi\ \vee\ x=\tfrac{13}6\pi+2k\pi$$</p>
+
+<div class="fig">
+<svg id="f-agg" viewBox="0 0 270 190" style="width:100%;max-width:310px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angoli sette sesti di pi greco e undici sesti di pi greco, con seno uguale a meno un mezzo"></svg>
+<p class="did">$\sin\left(x-\frac\pi3\right)=-\frac12$: $x-\frac\pi3=\frac76\pi$ o $\frac{11}6\pi$</p>
 </div>
-
-<p><strong>Esempio.</strong> $\sin x+\cos x-1=0$.</p>
-
-<p>1) Verifichiamo $x=\pi+2k\pi$: $\sin\pi+\cos\pi-1=0-1-1=-2\ne0$, non è soluzione.</p>
-
-<p>2) Sostituiamo:</p>
-
-$$\frac{2t}{1+t^2}+\frac{1-t^2}{1+t^2}-1=0 \;\Longrightarrow\; -2t^2+2t=0
-\;\Longrightarrow\; -2t(t-1)=0 \;\Longrightarrow\; t=0\ \vee\ t=1$$
-
-<p>Da $\tan\frac x2=0$ segue $x=2k\pi$; da $\tan\frac x2=1$ segue $\frac x2=\frac\pi4+k\pi$,
-cioè:</p>
-
-$$x=2k\pi \;\vee\; x=\frac\pi2+2k\pi$$
-
-<h2>Il metodo grafico</h2>
-
-<p>L'equazione $a\sin x+b\cos x+c=0$ si può leggere come un sistema fra una retta e la
-circonferenza goniometrica. Ponendo $Y=\sin x$ e $X=\cos x$, diventa $aY+bX+c=0$: l'equazione
-di una retta nel piano $XY$. Il punto $(\cos x,\sin x)$ deve inoltre stare sulla circonferenza
-$X^2+Y^2=1$. Le soluzioni dell'equazione goniometrica sono i punti in cui la retta interseca
-la circonferenza:</p>
-
-$$\begin{cases}a\sin x+b\cos x+c=0\\ \sin^2x+\cos^2x=1\end{cases}$$
-
-<div class="figura">
-<svg viewBox="0 0 220 200">
-<line x1="10" y1="100" x2="210" y2="100" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="110" y1="10" x2="110" y2="190" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="110" cy="100" r="70" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="20" y1="35" x2="200" y2="145" stroke="var(--rosso)" stroke-width="2"/>
-<circle cx="66" cy="70" r="3" fill="var(--rosso)"/>
-<circle cx="176" cy="139" r="3" fill="var(--rosso)"/>
-<text x="205" y="150" font-size="12" fill="var(--rosso)">retta</text>
-</svg>
-</div>
-
-<p><strong>Esempio.</strong> $\sqrt3\sin x+\cos x=2$. Ricaviamo $\cos x$ dalla prima
-equazione e lo sostituiamo nell'identità fondamentale:</p>
-
-$$\cos x=2-\sqrt3\sin x \qquad\Longrightarrow\qquad (2-\sqrt3\sin x)^2+\sin^2x=1$$
-
-$$4\sin^2x-4\sqrt3\sin x+3=0$$
-
-<p>Con $\Delta=48-48=0$ la retta è tangente alla circonferenza: c'è una sola soluzione in un
-giro completo.</p>
-
-$$\sin x=\frac{4\sqrt3}{8}=\frac{\sqrt3}2 \qquad \cos x=2-\sqrt3\cdot\frac{\sqrt3}2=\frac12$$
-
-$$x=\frac\pi3+2k\pi$$
-
-<h2>Il metodo dell'angolo aggiunto</h2>
-
-<p>C'è un terzo modo, che riconduce l'equazione a una forma elementare in un solo passaggio.
-Si può dimostrare che la somma $a\sin x+b\cos x$ si scrive come un unico seno con ampiezza e
-sfasamento diversi:</p>
-
-$$a\sin x+b\cos x=r\sin(x+\alpha) \qquad r=\sqrt{a^2+b^2},\quad \tan\alpha=\frac ba$$
-
-<p>$r$ è l'ampiezza massima che la combinazione può assumere, $\alpha$ è l'angolo da
-aggiungere a $x$. Trovati $r$ e $\alpha$, l'equazione diventa $r\sin(x+\alpha)+c=0$, elementare.</p>
-
-<p><strong>Esempio.</strong> $\sin x-\sqrt3\cos x+1=0$, con $a=1,\ b=-\sqrt3$:</p>
-
-$$r=\sqrt{1+3}=2 \qquad \tan\alpha=\frac{-\sqrt3}1=-\sqrt3 \;\Longrightarrow\; \alpha=-\frac\pi3$$
-
-$$2\sin\!\left(x-\frac\pi3\right)+1=0 \;\Longrightarrow\; \sin\!\left(x-\frac\pi3\right)=-\frac12$$
-
-$$x-\frac\pi3=\frac76\pi+2k\pi \;\Longrightarrow\; x=\frac32\pi+2k\pi$$
-
-$$x-\frac\pi3=\frac{11}6\pi+2k\pi \;\Longrightarrow\; x=\frac{13}6\pi+2k\pi$$
-
-<div class="figura">
-<svg viewBox="0 0 200 200">
-<line x1="10" y1="100" x2="190" y2="100" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="100" y1="10" x2="100" y2="190" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="100" cy="100" r="75" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="25" y1="100" x2="175" y2="100" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="100" y1="100" x2="70" y2="137.5" stroke="var(--verde)" stroke-width="2"/>
-<line x1="100" y1="100" x2="130" y2="137.5" stroke="var(--verde)" stroke-width="2"/>
-<text x="45" y="150" font-size="12" fill="var(--verde)">7&pi;/6</text>
-<text x="132" y="150" font-size="12" fill="var(--verde)">11&pi;/6</text>
-<text x="150" y="95" font-size="12" fill="var(--grigio)">y=&minus;1/2</text>
-</svg>
-</div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../02-angoli-associati-ed-equazioni-riconducibili-a-elementari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Angoli associati ed equazioni riconducibili a elementari</span></a><a class="successiva" href="../04-funzioni-goniometriche-inverse/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Funzioni goniometriche inverse</span></a></nav>
 <footer><p>Matematica quarta &middot; Equazioni e disequazioni goniometriche &middot; Unità 03</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+/* circonferenza goniometrica di centro (cx,cy) e raggio R, con assi */
+function Circ(p,cx,cy,R,m){m=m||14;
+  el('line',{x1:cx-R-m,y1:cy,x2:cx+R+m,y2:cy,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('line',{x1:cx,y1:cy-R-m,x2:cx,y2:cy+R+m,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5},p);
+  return {P:function(t,k){k=k===undefined?R:k;return [cx+k*Math.cos(t),cy-k*Math.sin(t)];},cx:cx,cy:cy,R:R};}
+function raggio(p,c,t,col){var q=c.P(t);
+  el('line',{x1:c.cx,y1:c.cy,x2:q[0],y2:q[1],stroke:col,'stroke-width':2},p);
+  el('circle',{cx:q[0],cy:q[1],r:4,fill:col},p);return q;}
+window.G={el:el,txt:txt,Circ:Circ,raggio:raggio};
+})();
+</script>
+<script>
+(function(){var G=window.G,PI=Math.PI;
+/* 1. tan x = sqrt3: retta per l'origine a pi/3 */
+var s=document.getElementById('f-tan'), c=G.Circ(s,110,100,70,16), a=PI/3;
+var A=c.P(a,92), B=c.P(a+PI,92);
+G.el('line',{x1:B[0],y1:B[1],x2:A[0],y2:A[1],stroke:'var(--rosso)','stroke-width':2},s);
+var P=c.P(a), Q=c.P(a+PI);
+G.el('circle',{cx:P[0],cy:P[1],r:4,fill:'var(--rosso)'},s);G.el('circle',{cx:Q[0],cy:Q[1],r:4,fill:'var(--rosso)'},s);
+var r=24, e=c.P(a,r);
+G.el('path',{d:'M'+(110+r)+' 100 A'+r+' '+r+' 0 0 0 '+e[0].toFixed(1)+' '+e[1].toFixed(1),fill:'none',stroke:'var(--blu)','stroke-width':1.5},s);
+var l=c.P(a/2,38); G.txt(s,l[0],l[1],'π/3',{fill:'var(--blu)','font-size':12,'text-anchor':'middle'});
+var l2=c.P(a+PI,70+16); G.txt(s,l2[0]-14,l2[1]+2,'4π/3',{fill:'var(--rosso)','font-size':12,'text-anchor':'end'});
+/* 2. retta X+Y=1 */
+var s2=document.getElementById('f-retta'), c2=G.Circ(s2,110,100,70,16);
+G.txt(s2,199,100,'X',{'font-size':12});G.txt(s2,96,20,'Y',{'font-size':12,'text-anchor':'end'});
+var R=70, u=function(X,Y){return [110+R*X,100-R*Y];}, p1=u(-0.15,1.15), p2=u(1.15,-0.15);
+G.el('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:'var(--rosso)','stroke-width':2},s2);
+[[1,0],[0,1]].forEach(function(q){var z=u(q[0],q[1]);G.el('circle',{cx:z[0],cy:z[1],r:4,fill:'var(--rosso)'},s2);});
+var z1=u(1,0), z2=u(0,1);
+G.txt(s2,z1[0]+6,z1[1]-12,'x = 0',{'font-size':12,fill:'var(--rosso)'});
+G.txt(s2,z2[0]+8,z2[1]-10,'x = π/2',{'font-size':12,fill:'var(--rosso)'});
+/* 3. sin = -1/2: 7pi/6 e 11pi/6 */
+var s3=document.getElementById('f-agg'), c3=G.Circ(s3,125,95,70,16);
+var yh=95+35;
+G.el('line',{x1:125-82,y1:yh,x2:125+82,y2:yh,stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 3'},s3);
+G.raggio(s3,c3,7*PI/6,'var(--verde)');G.raggio(s3,c3,11*PI/6,'var(--verde)');
+var m1=c3.P(7*PI/6,70), m2=c3.P(11*PI/6,70);
+G.txt(s3,m1[0]-8,m1[1]+16,'7π/6',{'font-size':12,fill:'var(--verde)','text-anchor':'end'});
+G.txt(s3,m2[0]+8,m2[1]+16,'11π/6',{'font-size':12,fill:'var(--verde)'});
+G.txt(s3,125+86,yh,'Y = −1/2',{'font-size':12,fill:'var(--grigio)'});
+})();
+</script>
 </body>
 </html>
