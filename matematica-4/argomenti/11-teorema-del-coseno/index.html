@@ -5,23 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema del coseno — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto}
-.coppia{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start}
-.coppia svg{max-width:230px}
-.box-verde{background:#fff;border:2px solid var(--verde);border-radius:10px;padding:14px 20px;margin:20px 0;text-align:center}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio>.eq+.eq{margin-top:var(--r)}
+.def .eq+.eq{margin-top:0}
 </style>
 </head>
 <body>
@@ -31,107 +57,132 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Trigonometria &middot; Unità 11</p>
   <h1>Teorema del coseno</h1>
-  <p class="sommario">Il teorema dei seni non basta quando non si conosce nessun angolo
-  opposto a un lato noto: se di un triangolo si conoscono due lati e l'angolo compreso,
-  serve un'altra relazione. Il teorema del coseno, o teorema di Carnot, è il teorema di
-  Pitagora generalizzato a un angolo qualunque.</p>
 </header>
 
-<h2>Enunciato</h2>
+<p>Noti due lati e l'angolo compreso, il teorema dei seni non basta: serve una relazione fra i tre lati e un angolo.</p>
 
-<div class="def"><span class="et">Teorema di Carnot</span>
-<p>In un triangolo qualunque, il quadrato di un lato è uguale alla somma dei quadrati
-degli altri due, meno il doppio prodotto di questi due lati per il coseno dell'angolo
-fra essi compreso.</p>
-$$a^2=b^2+c^2-2bc\cos\alpha \qquad b^2=a^2+c^2-2ac\cos\beta \qquad c^2=a^2+b^2-2ab\cos\gamma$$
+<div class="fig">
+<svg id="f-car" viewBox="0 0 260 160" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo ABC con b e c fissi e l'angolo alfa variabile"></svg>
+<div class="cursore"><label for="s-al">$\alpha$</label><input type="range" id="s-al" min="30" max="140" step="1" value="60"><span class="val" id="v-al">60°</span></div>
+<p class="did" id="l-car">b = 4, c = 5</p>
 </div>
 
-<figure class="disegno">
-<svg viewBox="0 0 220 170" width="100%" style="max-width:260px">
-<polygon points="80,20 20,150 190,150" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="72" y="14" font-size="13" fill="var(--inchiostro)">C</text>
-<text x="4" y="160" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="192" y="160" font-size="13" fill="var(--inchiostro)">B</text>
-<text x="45" y="80" font-size="12" fill="var(--inchiostro)">b</text>
-<text x="140" y="80" font-size="12" fill="var(--inchiostro)">a</text>
-<text x="100" y="145" font-size="12" fill="var(--inchiostro)">c</text>
-<text x="72" y="38" font-size="11" fill="var(--rosso)">&gamma;</text>
-<text x="35" y="140" font-size="11" fill="var(--rosso)">&alpha;</text>
-<text x="160" y="140" font-size="11" fill="var(--rosso)">&beta;</text>
-</svg>
-<figcaption>Lati $a$, $b$, $c$ opposti rispettivamente agli angoli $\alpha$, $\beta$,
-$\gamma$ in $A$, $B$, $C$.</figcaption>
-</figure>
+<div class="def"><span class="et">Teorema del coseno (di Carnot)</span>
+<p class="eq">$$a^2=b^2+c^2-2bc\cos\alpha$$</p>
+<p class="eq">$$b^2=a^2+c^2-2ac\cos\beta \qquad c^2=a^2+b^2-2ab\cos\gamma$$</p></div>
 
-<p>Se $\alpha=90^\circ$, $\cos\alpha=0$ e la formula si riduce a $a^2=b^2+c^2$: il teorema
-di Pitagora è il caso particolare del teorema del coseno per un triangolo rettangolo.</p>
+<p>Per $\alpha=90^\circ$, $\cos\alpha=0$: si ritrova il teorema di Pitagora $a^2=b^2+c^2$.</p>
 
 <h2>Dimostrazione</h2>
 
-<p>Si traccia l'altezza $CH$ relativa al lato $c=\overline{AB}$, con $H$ fra $A$ e $B$.
-Nel triangolo rettangolo $ACH$, con angolo $\alpha$ in $A$:</p>
-$$\overline{CH}=b\sin\alpha \qquad \overline{AH}=b\cos\alpha$$
+<p>Altezza $CH$ relativa al lato $AB$, con $H$ fra $A$ e $B$:</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 220 170" width="100%" style="max-width:260px">
-<polygon points="80,20 20,150 190,150" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="80" y1="20" x2="80" y2="150" stroke="var(--rosso)" stroke-width="1.4"/>
-<rect x="74" y="144" width="10" height="10" fill="none" stroke="var(--rosso)" stroke-width="1"/>
-<text x="72" y="14" font-size="13" fill="var(--inchiostro)">C</text>
-<text x="4" y="160" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="192" y="160" font-size="13" fill="var(--inchiostro)">B</text>
-<text x="76" y="164" font-size="12" fill="var(--rosso)">H</text>
-<text x="45" y="80" font-size="12" fill="var(--inchiostro)">b</text>
-<text x="140" y="80" font-size="12" fill="var(--inchiostro)">a</text>
-<text x="35" y="140" font-size="11" fill="var(--rosso)">&alpha;</text>
-</svg>
-<figcaption>Altezza $CH$ dal vertice $C$: divide $c$ in $\overline{AH}=b\cos\alpha$ e
-$\overline{HB}=c-b\cos\alpha$.</figcaption>
-</figure>
-
-<p>Il segmento $\overline{HB}$ è ciò che resta di $c$ tolto $\overline{AH}$:</p>
-$$\overline{HB}=c-\overline{AH}=c-b\cos\alpha$$
-<p>Nel triangolo rettangolo $CHB$ vale Pitagora fra $a$, $\overline{CH}$ e $\overline{HB}$:</p>
-$$a^2=\overline{CH}^2+\overline{HB}^2=(b\sin\alpha)^2+(c-b\cos\alpha)^2$$
-$$a^2=b^2\sin^2\alpha+c^2+b^2\cos^2\alpha-2bc\cos\alpha$$
-<p>Poiché $\sin^2\alpha+\cos^2\alpha=1$, i due termini in $b^2$ si sommano a $b^2$:</p>
-$$a^2=b^2+c^2-2bc\cos\alpha$$
-
-<h2>Esempi</h2>
-
-<div class="esempio"><span class="et">Esempio 1</span>
-<p>Dati $\overline{AC}=b=2$, $\overline{BC}=a=3$ e l'angolo compreso $\gamma=60^\circ$, si
-cerca $c=\overline{AB}$.</p>
-$$c^2=a^2+b^2-2ab\cos\gamma=4+9-2\cdot2\cdot3\cdot\frac12=7 \qquad c=\sqrt7$$
+<div class="fig">
+<svg id="f-alt" viewBox="0 0 230 150" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo ABC con l'altezza CH"></svg>
+<p class="did">$\overline{AH}=b\cos\alpha$; $\overline{HB}=c-b\cos\alpha$</p>
 </div>
 
-<div class="esempio"><span class="et">Esempio 2</span>
-<p>Dati $c=12$, $\alpha=40^\circ$, $\beta=60^\circ$, si trova prima il terzo angolo, poi
-$a$ e $b$ con il teorema dei seni.</p>
-$$\gamma=180^\circ-(40^\circ+60^\circ)=80^\circ$$
-$$\frac{a}{\sin40^\circ}=\frac{c}{\sin80^\circ} \Rightarrow a=\frac{\sin40^\circ}{\sin80^\circ}\cdot12\approx7{,}83$$
-$$\frac{b}{\sin60^\circ}=\frac{c}{\sin80^\circ} \Rightarrow b=\frac{\sin60^\circ}{\sin80^\circ}\cdot12\approx10{,}55$$
-</div>
+<ul>
+<li>triangolo rettangolo $ACH$ → $\overline{CH}=b\sin\alpha$, $\overline{AH}=b\cos\alpha$;</li>
+<li>$\overline{HB}=c-\overline{AH}=c-b\cos\alpha$;</li>
+<li>Pitagora nel triangolo rettangolo $CHB$.</li>
+</ul>
 
-<div class="esempio"><span class="et">Esempio 3</span>
-<p>Dati $b=46$, $c=62$, $\alpha=20^\circ$, si cerca prima il lato mancante $a$ con il
-teorema del coseno, poi l'angolo $\beta$ isolando $\cos\beta$ nella stessa relazione
-scritta per $b^2$.</p>
-$$a=\sqrt{b^2+c^2-2bc\cos\alpha}=\sqrt{46^2+62^2-2\cdot46\cdot62\cos20^\circ}\approx24{,}50$$
-$$\cos\beta=\frac{a^2+c^2-b^2}{2ac}\approx0{,}77 \qquad \beta\approx40^\circ$$
-$$\gamma=180^\circ-(20^\circ+40^\circ)=120^\circ$$
-</div>
+<p class="eq">$$a^2=(b\sin\alpha)^2+(c-b\cos\alpha)^2=b^2(\sin^2\alpha+\cos^2\alpha)+c^2-2bc\cos\alpha$$</p>
+
+<p>Con $\sin^2\alpha+\cos^2\alpha=1$ si ottiene la tesi.</p>
+
+<h2>Esempio 1</h2>
+
+<p>Dati: $a=3$, $b=2$, $\gamma=60^\circ$. Calcolare $c$.</p>
+
+<p class="eq">$$c^2=a^2+b^2-2ab\cos\gamma=9+4-2\cdot3\cdot2\cdot\frac12=7 \qquad c=\sqrt7$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $b=46$, $c=62$, $\alpha=20^\circ$. Calcolare $a$, $\beta$, $\gamma$.</p>
+
+<p class="eq">$$a=\sqrt{46^2+62^2-2\cdot46\cdot62\cos20^\circ}\approx24{,}50$$</p>
+
+<p class="eq">$$\cos\beta=\frac{a^2+c^2-b^2}{2ac}\approx0{,}77 \;\Rightarrow\; \beta\approx40^\circ \qquad \gamma=180^\circ-20^\circ-40^\circ=120^\circ$$</p>
 
 <div class="nota"><span class="et">Seni o coseno</span>
-<p>Per cercare un lato conviene il teorema dei seni; per cercare un angolo conviene il
-teorema del coseno, perché il coseno non ha ambiguità: a differenza del seno, individua
-un solo angolo fra $0^\circ$ e $180^\circ$.</p>
-</div>
-
+<p>Per trovare un angolo conviene il teorema del coseno: fra $0^\circ$ e $180^\circ$ il coseno individua un solo angolo, il seno in generale due.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../10-teorema-dei-seni-e-circonferenza-circoscritta/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema dei seni e circonferenza circoscritta</span></a><a class="successiva" href="../12-risoluzione-dei-triangoli-e-caso-ambiguo/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Risoluzione dei triangoli e caso ambiguo</span></a></nav>
 <footer><p>Matematica quarta &middot; Trigonometria &middot; Unità 11</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+/* circonferenza goniometrica di centro (cx,cy) e raggio R, con assi */
+function Circ(p,cx,cy,R,m){m=m||14;
+  el('line',{x1:cx-R-m,y1:cy,x2:cx+R+m,y2:cy,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('line',{x1:cx,y1:cy-R-m,x2:cx,y2:cy+R+m,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5},p);
+  return {P:function(t,k){k=k===undefined?R:k;return [cx+k*Math.cos(t),cy-k*Math.sin(t)];},cx:cx,cy:cy,R:R};}
+function raggio(p,c,t,col){var q=c.P(t);
+  el('line',{x1:c.cx,y1:c.cy,x2:q[0],y2:q[1],stroke:col,'stroke-width':2},p);
+  el('circle',{cx:q[0],cy:q[1],r:4,fill:col},p);return q;}
+window.G={el:el,txt:txt,Circ:Circ,raggio:raggio};
+})();
+</script>
+<script>
+(function(){var G=window.G,PI=Math.PI,R='var(--rosso)',B='var(--blu)',I='var(--inchiostro)',Gr='var(--grigio)',V='var(--verde)';
+function dir(P,Q){return Math.atan2(P[1]-Q[1],Q[0]-P[0]);}
+function arco(p,X,P1,P2,r,col,lab,lr){var t1=dir(X,P1),d=dir(X,P2)-t1;while(d>PI)d-=2*PI;while(d<-PI)d+=2*PI;var s='',n=24;
+  for(var i=0;i<=n;i++){var t=t1+d*i/n;s+=(i?'L':'M')+(X[0]+r*Math.cos(t)).toFixed(1)+' '+(X[1]-r*Math.sin(t)).toFixed(1);}
+  G.el('path',{d:s,fill:'none',stroke:col,'stroke-width':1.3},p);
+  if(lab){var tm=t1+d/2;G.txt(p,X[0]+lr*Math.cos(tm),X[1]-lr*Math.sin(tm),lab,{'font-size':12,fill:col,'text-anchor':'middle'});}}
+function un(P,Q){var dx=Q[0]-P[0],dy=Q[1]-P[1],l=Math.hypot(dx,dy);return [dx/l,dy/l];}
+function scr(p,P,s,o){return G.txt(p,P[0],P[1],s,Object.assign({'font-size':13,'text-anchor':'middle'},o||{}));}
+function fuori(P,Q,k){var u=un(Q,P);return [P[0]+k*u[0],P[1]+k*u[1]];}
+function lato(p,P,Q,ref,s,col,k){var M=[(P[0]+Q[0])/2,(P[1]+Q[1])/2];scr(p,fuori(M,ref,k||10),s,{fill:col||I,'font-style':'italic'});}
+function f2(v){return v.toFixed(2).replace('.',',');}
+function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+/* triangolo con b = 4, c = 5 fissi e alfa variabile */
+var s=document.getElementById('f-car'),k=26,A=[100,138],PB=[A[0]+5*k,A[1]],g=G.el('g',{},s),
+ inp=document.getElementById('s-al'),va=document.getElementById('v-al'),le=document.getElementById('l-car');
+function dis(){var t=parseFloat(inp.value)*PI/180,PC=[A[0]+4*k*Math.cos(t),A[1]-4*k*Math.sin(t)],Gc=[(A[0]+PB[0]+PC[0])/3,(A[1]+PB[1]+PC[1])/3];vuota(g);
+  G.el('polygon',{points:A+' '+PB+' '+PC,fill:'none',stroke:I,'stroke-width':1.8},g);
+  G.el('line',{x1:PB[0],y1:PB[1],x2:PC[0],y2:PC[1],stroke:R,'stroke-width':2.2},g);
+  arco(g,A,PB,PC,16,R,'α',26);
+  lato(g,PB,PC,Gc,'a',R);lato(g,A,PC,Gc,'b',B);lato(g,A,PB,Gc,'c',B,11);
+  scr(g,fuori(A,Gc,12),'A');scr(g,fuori(PB,Gc,12),'B');scr(g,fuori(PC,Gc,12),'C');
+  var c=Math.cos(t),a=Math.sqrt(16+25-40*c),deg=Math.round(t*180/PI);
+  va.textContent=deg+'°';
+  le.innerHTML='b = 4, c = 5 · cos α = '+f2(c)+' · a = '+f2(a)+(deg===90?' · <span style="color:var(--verde);font-weight:600">Pitagora</span>':'');}
+inp.addEventListener('input',dis);dis();
+/* altezza CH */
+var q=document.getElementById('f-alt'),A2=[22,128],B2=[208,128],C2=[22+120*Math.cos(PI/3),128-120*Math.sin(PI/3)],H2=[C2[0],128],G2=[(A2[0]+B2[0]+C2[0])/3,(A2[1]+B2[1]+C2[1])/3];
+G.el('polygon',{points:A2+' '+B2+' '+C2,fill:'none',stroke:I,'stroke-width':1.8},q);
+G.el('line',{x1:C2[0],y1:C2[1],x2:H2[0],y2:H2[1],stroke:R,'stroke-width':1.6},q);
+G.el('path',{d:'M'+(H2[0]+9)+' '+H2[1]+' L'+(H2[0]+9)+' '+(H2[1]-9)+' L'+H2[0]+' '+(H2[1]-9),fill:'none',stroke:R,'stroke-width':1.1},q);
+arco(q,A2,B2,C2,16,R,'α',26);
+lato(q,A2,C2,G2,'b',B);lato(q,B2,C2,G2,'a',B);
+scr(q,[(A2[0]+H2[0])/2,A2[1]+13],'b cos α',{'font-size':11,fill:Gr});scr(q,[(H2[0]+B2[0])/2,B2[1]+13],'c − b cos α',{'font-size':11,fill:Gr});
+scr(q,[A2[0]-10,A2[1]+2],'A');scr(q,[B2[0]+10,B2[1]+2],'B');scr(q,[C2[0],C2[1]-11],'C');scr(q,[H2[0]-8,H2[1]-10],'H',{fill:R,'font-size':12});
+})();
+</script>
 </body>
 </html>
