@@ -143,6 +143,7 @@
   esattamente la costruzione per casi di sin(|x|-π) già scritta nella traccia,
   mostrando quale dei due rami è attivo e il valore corrispondente; non introduce
   un esempio o una tecnica nuova.
+- Revisione (04/11/2026, regole 13/10): parole circa 454 → 106 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa e titoletti «Il valore assoluto attorno a tutta la funzione», «Il valore assoluto dentro l'argomento»; |f(x)| e f(|x|) in elenco caso → conseguenza; titoletto «Ordine delle trasformazioni» tenuto (argomento distinto) con i due casi in elenco; le due costruzioni per casi diventano «Esempio 1» (sin(|x|−π)) ed «Esempio 2» (cos(|x|+π/2)), sistemi in .eq; osservazione finale ridotta all'identità sin(t−π) = cos(t+π/2) = −sin t; nota ridotta a una frase. Nessuna comparsa da togliere, nessun esempio tolto. Nessuna correzione concettuale (verificato con SymPy: sin(t−π) = cos(t+π/2) = −sin t, cos(−x+π/2) = cos(x−π/2), cos x + 1/2 < 0 per x ∈ (2π/3, 4π/3)). Figure rifatte da script (prima SVG fissi e widget Plotly): |cos x|, sin|x|, due pannelli per l'ordine delle trasformazioni, esempio 1 con cursore su x che muove il punto sulla curva già disegnata e indica il ramo attivo e il valore; legende nelle didascalie. Nessuna figura decorativa.
 
 ## Unità 16 — Trasformazioni di retta, parabola, esponenziale e logaritmo
 - Parole: 809 su 3 pagine di traccia (61–63)
