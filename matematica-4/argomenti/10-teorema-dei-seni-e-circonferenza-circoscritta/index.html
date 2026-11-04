@@ -5,23 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema dei seni e circonferenza circoscritta — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto}
-.coppia{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start}
-.coppia svg{max-width:230px}
-.box-verde{background:#fff;border:2px solid var(--verde);border-radius:10px;padding:14px 20px;margin:20px 0;text-align:center}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -31,162 +55,133 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Trigonometria &middot; Unità 10</p>
   <h1>Teorema dei seni e circonferenza circoscritta</h1>
-  <p class="sommario">Il teorema della corda vale per un solo lato alla volta. Applicandolo
-  ai tre lati di un triangolo qualunque inscritto nella stessa circonferenza si ottiene una
-  legge che lega tutti i lati a tutti gli angoli opposti, con il raggio della circonferenza
-  circoscritta come costante di proporzionalità.</p>
 </header>
 
-<h2>Raggio della circonferenza circoscritta</h2>
+<p>Triangolo $ABC$ qualsiasi: è sempre inscrivibile in una circonferenza, di raggio $r$; ogni lato è una corda vista dal vertice opposto.</p>
 
-<p>Un triangolo qualsiasi $ABC$ è sempre inscrivibile in una circonferenza: ciascun suo
-lato, visto dal vertice opposto, è una corda, e il teorema della corda si applica a
-tutti e tre.</p>
-
-<figure class="disegno">
-<svg viewBox="0 0 220 200" width="100%" style="max-width:230px">
-<circle cx="110" cy="105" r="80" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-<circle cx="110" cy="105" r="2" fill="var(--inchiostro)"/>
-<text x="115" y="102" font-size="11" fill="var(--grigio)">O</text>
-<polygon points="110,25 45,80 95,180" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="105" y="18" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="18" y="82" font-size="13" fill="var(--inchiostro)">B</text>
-<text x="98" y="196" font-size="13" fill="var(--inchiostro)">C</text>
-<text x="70" y="130" font-size="13" fill="var(--inchiostro)">a</text>
-<text x="130" y="105" font-size="13" fill="var(--inchiostro)">b</text>
-<text x="72" y="50" font-size="13" fill="var(--inchiostro)">c</text>
-<text x="98" y="38" font-size="11" fill="var(--rosso)">&alpha;</text>
-<text x="55" y="78" font-size="11" fill="var(--rosso)">&beta;</text>
-<text x="90" y="168" font-size="11" fill="var(--rosso)">&gamma;</text>
-</svg>
-<figcaption>$a$ è la corda vista da $\alpha$, $b$ quella vista da $\beta$, $c$ quella vista
-da $\gamma$.</figcaption>
-</figure>
-
-<p>Dal teorema della corda applicato ai tre lati:</p>
-$$a=2r\sin\alpha \qquad b=2r\sin\beta \qquad c=2r\sin\gamma$$
-<p>da cui, isolando $r$ in ciascuna:</p>
-$$r=\frac{a}{2\sin\alpha} \qquad r=\frac{b}{2\sin\beta} \qquad r=\frac{c}{2\sin\gamma}$$
-
-<h2>Teorema dei seni</h2>
-
-<div class="def"><span class="et">Teorema</span>
-<p>In un triangolo le misure dei lati sono proporzionali ai seni degli angoli opposti.</p>
-$$\frac{a}{\sin\alpha}=\frac{b}{\sin\beta}=\frac{c}{\sin\gamma}$$
+<div class="fig">
+<svg id="f-circ" viewBox="0 0 240 210" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo ABC inscritto in una circonferenza, con il vertice A mobile"></svg>
+<div class="cursore"><label for="s-a">$A$</label><input type="range" id="s-a" min="25" max="155" step="1" value="100"><span class="val" id="v-a">100°</span></div>
+<p class="did" id="l-circ">r = 1</p>
 </div>
 
-<p><strong>Dimostrazione.</strong> Le tre espressioni di $r$ ricavate sopra valgono lo
-stesso numero, quindi sono uguali tra loro:</p>
-$$2r=\frac{a}{\sin\alpha}=\frac{b}{\sin\beta}=\frac{c}{\sin\gamma}$$
+<p>Teorema della corda sui tre lati:</p>
 
-<div class="box-verde">
-$$2r=\frac{a}{\sin\alpha}=\frac{b}{\sin\beta}=\frac{c}{\sin\gamma}$$
-</div>
-<p>Il rapporto comune è proprio il diametro della circonferenza circoscritta: il teorema
-dei seni non lega solo lati e angoli fra loro, ma anche l'intero triangolo alla
-circonferenza che lo contiene.</p>
+<p class="eq">$$a=2r\sin\alpha \qquad b=2r\sin\beta \qquad c=2r\sin\gamma$$</p>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>In un triangolo $ABC$ è noto $\alpha=30^\circ$, l'angolo in $B$ misura $105^\circ$ e
-$a=6$. Si trova prima il terzo angolo, poi il lato $c=\overline{AB}$ opposto a $\gamma$.</p>
-$$\gamma=180^\circ-(30^\circ+105^\circ)=45^\circ$$
-$$\frac{a}{\sin\alpha}=\frac{c}{\sin\gamma}\ \Longrightarrow\
-\frac{6}{\sin30^\circ}=\frac{c}{\sin45^\circ}$$
-$$c=\frac{\sin45^\circ}{\sin30^\circ}\cdot6=\frac{\sqrt2/2}{1/2}\cdot6=6\sqrt2$$
-</div>
+<p>I tre rapporti lato/seno valgono tutti $2r$:</p>
 
-<div class="esempio"><span class="et">Esempio &mdash; distanza Terra-Luna</span>
-<p>Due osservatori $A$ e $B$ stanno sull'equatore, $A$ a longitudine $30^\circ$ Est e $B$
-a longitudine $50^\circ$ Ovest: rispetto al centro $T$ della Terra l'angolo $A\hat TB$
-misura $30^\circ+50^\circ=80^\circ$. Nello stesso istante $A$ vede la Luna allo zenit
-(cioè $T$, $A$ e la Luna $L$ sono allineati) e $B$ la vede $9^\circ$ sopra l'orizzonte.</p>
+<div class="def"><span class="et">Teorema dei seni</span>
+<p class="eq">$$\frac{a}{\sin\alpha}=\frac{b}{\sin\beta}=\frac{c}{\sin\gamma}=2r \qquad\qquad r=\frac{a}{2\sin\alpha}$$</p></div>
 
-<figure class="disegno">
-<div class="coppia">
-<svg viewBox="0 0 240 220" width="100%">
-<circle cx="90" cy="125" r="55" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-<circle cx="90" cy="125" r="2" fill="var(--inchiostro)"/>
-<line x1="90" y1="125" x2="185" y2="125" stroke="var(--grigio)" stroke-width="1" stroke-dasharray="2 3"/>
-<line x1="90" y1="125" x2="127" y2="73" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="90" y1="125" x2="118" y2="174" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="127" y1="73" x2="222" y2="18" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="118" y1="174" x2="222" y2="18" stroke="var(--verde)" stroke-width="1.4"/>
-<text x="130" y="65" font-size="12" fill="var(--inchiostro)">A</text>
-<text x="118" y="190" font-size="12" fill="var(--inchiostro)">B</text>
-<text x="226" y="16" font-size="12" fill="var(--inchiostro)">L</text>
-<text x="97" y="100" font-size="11" fill="var(--rosso)">30&deg;</text>
-<text x="97" y="145" font-size="11" fill="var(--rosso)">50&deg;</text>
-<text x="145" y="68" font-size="11" fill="var(--verde)">9&deg;</text>
-</svg>
-<svg viewBox="0 0 250 185" width="100%">
-<circle cx="40" cy="135" r="2" fill="var(--inchiostro)"/>
-<text x="0" y="110" font-size="11" fill="var(--grigio)">centro Terra</text>
-<line x1="40" y1="135" x2="80" y2="165" stroke="var(--blu)" stroke-width="1.4"/>
-<text x="42" y="163" font-size="11" fill="var(--blu)">r</text>
-<line x1="80" y1="165" x2="225" y2="30" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="40" y1="135" x2="225" y2="30" stroke="var(--rosso)" stroke-width="1.4"/>
-<text x="229" y="28" font-size="12" fill="var(--inchiostro)">L</text>
-<text x="83" y="178" font-size="11" fill="var(--grigio)">B</text>
-<text x="58" y="128" font-size="11" fill="var(--rosso)">80&deg;</text>
-<text x="88" y="150" font-size="11" fill="var(--verde)">99&deg;</text>
-<text x="175" y="55" font-size="11" fill="var(--rosso)">1&deg;</text>
-</svg>
-</div>
-<figcaption>A sinistra, la sezione della Terra con $A$, $B$ e la Luna $L$. A destra, il
-triangolo usato per il calcolo: centro della Terra, $B$ e $L$.</figcaption>
-</figure>
+<h2>Esempio 1</h2>
 
-<p>Nel triangolo centro-$B$-$L$ l'angolo al centro è $A\hat TB=80^\circ$ (perché $T$, $A$,
-$L$ sono allineati), l'angolo in $B$ è $90^\circ+9^\circ=99^\circ$ (l'orizzonte di $B$ è
-perpendicolare al raggio $TB$), e quindi l'angolo in $L$ vale $180^\circ-80^\circ-99^\circ=1^\circ$.
-Con $r=6378\text{ km}$, il teorema dei seni dà la distanza $d=\overline{TL}$:</p>
-$$\frac{r}{\sin1^\circ}=\frac{d}{\sin99^\circ}
-\qquad d=\frac{\sin99^\circ}{\sin1^\circ}\,r\approx 360\,000\text{ km}$$
+<p>Dati: $\alpha=30^\circ$, $\beta=105^\circ$, $a=6$. Calcolare $\gamma$ e $c$.</p>
+
+<p class="eq">$$\gamma=180^\circ-30^\circ-105^\circ=45^\circ \qquad c=\frac{a\sin\gamma}{\sin\alpha}=\frac{6\cdot\frac{\sqrt2}{2}}{\frac12}=6\sqrt2\approx8{,}49$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $A$ e $B$ sull'equatore, longitudini $30^\circ$ E e $50^\circ$ O ($A\hat TB=80^\circ$, $T$ centro della Terra); Luna $L$ allo zenit per $A$, a $9^\circ$ sull'orizzonte per $B$; $r=6378\ \text{km}$. Calcolare $d=\overline{TL}$.</p>
+
+<div class="fig">
+<svg id="f-luna" viewBox="0 0 400 210" style="width:100%;max-width:460px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sezione della Terra con gli osservatori A e B e la Luna L"></svg>
+<p class="did">Schema non in scala</p>
 </div>
 
-<div class="esempio"><span class="et">Esempio &mdash; parallasse trigonometrica</span>
-<p>Osservando una stella vicina da due punti opposti dell'orbita terrestre (il 21 dicembre
-e il 21 giugno), essa appare spostata rispetto alle stelle lontanissime di un angolo di
-parallasse: nel triangolo isoscele Sole-Terra-stella, la metà di quell'angolo, alla stella,
-vale $1''$ (un secondo d'arco).</p>
+<ul>
+<li>$T$, $A$, $L$ allineati → angolo in $T$: $80^\circ$;</li>
+<li>orizzonte di $B$ perpendicolare a $TB$ → angolo in $B$: $90^\circ+9^\circ=99^\circ$;</li>
+<li>angolo in $L$: $180^\circ-80^\circ-99^\circ=1^\circ$.</li>
+</ul>
 
-<figure class="disegno">
-<svg viewBox="0 0 240 190" width="100%" style="max-width:260px">
-<text x="105" y="16" font-size="12" fill="var(--inchiostro)">stella</text>
-<line x1="120" y1="25" x2="50" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="120" y1="25" x2="190" y2="150" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="30" y1="150" x2="210" y2="150" stroke="var(--grigio)" stroke-width="1"/>
-<line x1="120" y1="25" x2="120" y2="150" stroke="var(--blu)" stroke-width="1.2" stroke-dasharray="3 3"/>
-<rect x="113" y="143" width="14" height="14" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="55" y="145" font-size="10" fill="var(--grigio)">21/12</text>
-<text x="178" y="145" font-size="10" fill="var(--grigio)">21/06</text>
-<text x="150" y="170" font-size="11" fill="var(--blu)">r</text>
-<text x="100" y="40" font-size="11" fill="var(--verde)">1&Prime;</text>
-<text x="128" y="40" font-size="11" fill="var(--verde)">1&Prime;</text>
-<text x="148" y="138" font-size="11" fill="var(--rosso)">89,9997&deg;</text>
-</svg>
-<figcaption>Metà triangolo: raggio dell'orbita $r$, angolo retto al centro, angolo di
-$1''$ alla stella, angolo alla base $90^\circ-1''$.</figcaption>
-</figure>
-
-<p>Le conversioni tra gradi e secondi d'arco:</p>
-$$1^\circ=3600'' \qquad 1''=\frac{1}{3600}^\circ\approx2{,}78\cdot10^{-4\,\circ}$$
-<p>L'angolo alla base vale allora $90^\circ-1''\approx89{,}9997^\circ$. Con $r=1{,}50\cdot10^8\text{ km}$
-(distanza Terra-Sole), il teorema dei seni dà la distanza $D$ Terra-stella:</p>
-$$\frac{r}{\sin(2{,}78\cdot10^{-4\,\circ})}=\frac{D}{\sin(89{,}9997^\circ)}
-\qquad D=\frac{\sin89{,}9997^\circ}{\sin(2{,}78\cdot10^{-4\,\circ})}\,r\approx3{,}09\cdot10^{13}\text{ km}$$
-<p>Per confrontare $D$ con una distanza più familiare si usa l'anno luce, la distanza
-percorsa dalla luce ($c=3\cdot10^8\text{ m/s}$) in un anno:</p>
-$$d_L=c\cdot(365\cdot24\cdot60\cdot60\text{ s})\approx9{,}46\cdot10^{15}\text{ m}=9{,}46\cdot10^{12}\text{ km}=1\text{ a.l.}$$
-$$D=\frac{3{,}09\cdot10^{13}\text{ km}}{9{,}46\cdot10^{12}\text{ km/a.l.}}\approx3{,}27\text{ a.l.}$$
-<p>Questa è, per definizione, la distanza di una stella con parallasse di esattamente
-$1''$: si chiama un parsec (pc), e vale circa $3,27$ anni luce.</p>
-</div>
-
+<p class="eq">$$\frac{d}{\sin99^\circ}=\frac{r}{\sin1^\circ} \;\Rightarrow\; d=\frac{6378\ \text{km}\cdot\sin99^\circ}{\sin1^\circ}\approx3{,}6\cdot10^5\ \text{km}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../09-area-di-un-triangolo-e-teorema-della-corda/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Area di un triangolo e teorema della corda</span></a><a class="successiva" href="../11-teorema-del-coseno/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema del coseno</span></a></nav>
 <footer><p>Matematica quarta &middot; Trigonometria &middot; Unità 10</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+/* circonferenza goniometrica di centro (cx,cy) e raggio R, con assi */
+function Circ(p,cx,cy,R,m){m=m||14;
+  el('line',{x1:cx-R-m,y1:cy,x2:cx+R+m,y2:cy,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('line',{x1:cx,y1:cy-R-m,x2:cx,y2:cy+R+m,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5},p);
+  return {P:function(t,k){k=k===undefined?R:k;return [cx+k*Math.cos(t),cy-k*Math.sin(t)];},cx:cx,cy:cy,R:R};}
+function raggio(p,c,t,col){var q=c.P(t);
+  el('line',{x1:c.cx,y1:c.cy,x2:q[0],y2:q[1],stroke:col,'stroke-width':2},p);
+  el('circle',{cx:q[0],cy:q[1],r:4,fill:col},p);return q;}
+window.G={el:el,txt:txt,Circ:Circ,raggio:raggio};
+})();
+</script>
+<script>
+(function(){var G=window.G,PI=Math.PI,R='var(--rosso)',B='var(--blu)',I='var(--inchiostro)',Gr='var(--grigio)',V='var(--verde)';
+function ln(p,P,Q,col,w,da){var a={x1:P[0],y1:P[1],x2:Q[0],y2:Q[1],stroke:col,'stroke-width':w||1.5};if(da)a['stroke-dasharray']=da;return G.el('line',a,p);}
+function dir(P,Q){return Math.atan2(P[1]-Q[1],Q[0]-P[0]);}
+function arco(p,X,P1,P2,r,col,lab,lr,fs){var t1=dir(X,P1),d=dir(X,P2)-t1;while(d>PI)d-=2*PI;while(d<-PI)d+=2*PI;var s='',n=24;
+  for(var i=0;i<=n;i++){var t=t1+d*i/n;s+=(i?'L':'M')+(X[0]+r*Math.cos(t)).toFixed(1)+' '+(X[1]-r*Math.sin(t)).toFixed(1);}
+  G.el('path',{d:s,fill:'none',stroke:col,'stroke-width':1.3},p);
+  if(lab){var tm=t1+d/2;G.txt(p,X[0]+lr*Math.cos(tm),X[1]-lr*Math.sin(tm),lab,{'font-size':fs||12,fill:col,'text-anchor':'middle'});}}
+function un(P,Q){var dx=Q[0]-P[0],dy=Q[1]-P[1],l=Math.hypot(dx,dy);return [dx/l,dy/l];}
+function retto(p,X,P1,P2,l){var u=un(X,P1),v=un(X,P2);G.el('path',{d:'M'+(X[0]+l*u[0])+' '+(X[1]+l*u[1])+' L'+(X[0]+l*u[0]+l*v[0])+' '+(X[1]+l*u[1]+l*v[1])+' L'+(X[0]+l*v[0])+' '+(X[1]+l*v[1]),fill:'none',stroke:I,'stroke-width':1.1},p);}
+function scr(p,P,s,o){return G.txt(p,P[0],P[1],s,Object.assign({'font-size':13,'text-anchor':'middle'},o||{}));}
+function fuori(P,Q,k){var u=un(Q,P);return [P[0]+k*u[0],P[1]+k*u[1]];}
+function lato(p,P,Q,ref,s,col,k){var M=[(P[0]+Q[0])/2,(P[1]+Q[1])/2];scr(p,fuori(M,ref,k||10),s,{fill:col||I,'font-style':'italic'});}
+function pt(c,t){return [c[0]+c[2]*Math.cos(t*PI/180),c[1]-c[2]*Math.sin(t*PI/180)];}
+function f2(v){return v.toFixed(2).replace('.',',');}
+function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+
+/* triangolo inscritto, A mobile */
+var O=[120,108,82],s=document.getElementById('f-circ');
+G.el('circle',{cx:O[0],cy:O[1],r:O[2],fill:'none',stroke:Gr,'stroke-width':1.2},s);
+G.el('circle',{cx:O[0],cy:O[1],r:2.5,fill:I},s);
+var PB=pt(O,210),PC=pt(O,330),g=G.el('g',{},s),inp=document.getElementById('s-a'),va=document.getElementById('v-a'),le=document.getElementById('l-circ');
+function d(P,Q){return Math.hypot(P[0]-Q[0],P[1]-Q[1])/O[2];}
+function ang(X,P,Q){var u=un(X,P),v=un(X,Q);return Math.acos(Math.max(-1,Math.min(1,u[0]*v[0]+u[1]*v[1])));}
+function dis(){var t=parseFloat(inp.value),PA=pt(O,t),Gc=[(PA[0]+PB[0]+PC[0])/3,(PA[1]+PB[1]+PC[1])/3];vuota(g);
+  G.el('polygon',{points:PA+' '+PB+' '+PC,fill:'none',stroke:I,'stroke-width':1.8},g);
+  arco(g,PA,PB,PC,17,R,'α',27);arco(g,PB,PC,PA,17,R,'β',27);arco(g,PC,PA,PB,17,R,'γ',27);
+  lato(g,PB,PC,Gc,'a',B);lato(g,PA,PC,Gc,'b',B);lato(g,PA,PB,Gc,'c',B);
+  scr(g,fuori(PA,O,12),'A');scr(g,fuori(PB,O,12),'B');scr(g,fuori(PC,O,12),'C');
+  var a=d(PB,PC),b=d(PA,PC),c=d(PA,PB),al=ang(PA,PB,PC),be=ang(PB,PA,PC),ga=ang(PC,PA,PB);
+  va.textContent='α = '+Math.round(al*180/PI)+'°';
+  le.textContent='r = 1 · a/sin α = '+f2(a/Math.sin(al))+' · b/sin β = '+f2(b/Math.sin(be))+' · c/sin γ = '+f2(c/Math.sin(ga));}
+inp.addEventListener('input',dis);dis();
+/* Terra-Luna, schema: angolo in T vero (80°), distanze non in scala */
+var q=document.getElementById('f-luna'),Tc=[62,128],Rt=50,tA=20,tB=tA-80,Dl=315;
+var PA2=[Tc[0]+Rt*Math.cos(tA*PI/180),Tc[1]-Rt*Math.sin(tA*PI/180)],PB2=[Tc[0]+Rt*Math.cos(tB*PI/180),Tc[1]-Rt*Math.sin(tB*PI/180)],PL=[Tc[0]+Dl*Math.cos(tA*PI/180),Tc[1]-Dl*Math.sin(tA*PI/180)];
+G.el('circle',{cx:Tc[0],cy:Tc[1],r:Rt,fill:'none',stroke:I,'stroke-width':1.4},q);
+var tg=[Math.cos((tB+90)*PI/180),-Math.sin((tB+90)*PI/180)];
+ln(q,[PB2[0]-40*tg[0],PB2[1]-40*tg[1]],[PB2[0]+90*tg[0],PB2[1]+90*tg[1]],Gr,1,'4 3');
+ln(q,Tc,PL,R,1.8);ln(q,Tc,PB2,B,2);ln(q,PB2,PL,V,1.6);
+G.el('circle',{cx:Tc[0],cy:Tc[1],r:2.5,fill:I},q);G.el('circle',{cx:PL[0],cy:PL[1],r:6,fill:'none',stroke:I,'stroke-width':1.4},q);
+arco(q,Tc,PA2,PB2,20,I,'80°',32,11);
+var H=[PB2[0]+90*tg[0],PB2[1]+90*tg[1]];arco(q,PB2,H,PL,80,V,'',0);scr(q,[PB2[0]+88*tg[0]+6,PB2[1]+88*tg[1]-12],'9°',{fill:V,'font-size':11});
+scr(q,[Tc[0]-11,Tc[1]+3],'T');scr(q,fuori(PA2,Tc,10),'A',{'font-size':12});scr(q,fuori(PB2,Tc,11),'B',{'font-size':12});scr(q,[PL[0]+14,PL[1]-6],'L');
+lato(q,Tc,PB2,PA2,'r',B,8);scr(q,[(Tc[0]+PL[0])/2+4,(Tc[1]+PL[1])/2-12],'d',{fill:R,'font-style':'italic'});
+scr(q,[PB2[0]+92*tg[0]+10,PB2[1]+92*tg[1]+14],'orizzonte',{fill:Gr,'font-size':10});
+})();
+</script>
 </body>
 </html>

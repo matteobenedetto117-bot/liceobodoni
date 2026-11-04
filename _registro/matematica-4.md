@@ -87,6 +87,7 @@
   L, e il triangolo estratto per il calcolo) e il disegno della parallasse ridisegnano in
   SVG esattamente le costruzioni delle pagine 45 e 46; la frase finale sul parsec riprende
   l'annotazione "1 pc" già scritta a margine della traccia a pagina 46.
+- Revisione (04/11/2026, regole 13/10): parole circa 409 → 103 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, titoletto «Raggio della circonferenza circoscritta», prosa, dimostrazione ripetuta e riquadro verde duplicato; teorema dei seni in .def con il rapporto 2r e la formula r = a/(2 sin α). Titoletti: «Esempio 1», «Esempio 2». Esempi tenuti: α = 30°, β = 105°, a = 6 → γ = 45°, c = 6√2 ≈ 8,49; distanza Terra–Luna (angoli 80°, 99°, 1° in elenco) → d ≈ 3,6·10⁵ km (prima «≈ 360 000 km»; calcolo 360 952 km). Esempio tolto: parallasse trigonometrica con la sua figura (angolo 1″, r = 1,50·10⁸ km → D ≈ 3,09·10¹³ km ≈ 3,27 a.l. = 1 parsec). Nessuna correzione concettuale (verifica numerica). Figure rifatte da script: triangolo inscritto con cursore sul vertice A e i tre rapporti lato/seno calcolati (sempre 2,00 con r = 1); schema Terra–Luna in un solo pannello (il secondo ripeteva lo stesso triangolo), angolo di 80° in scala, distanze non in scala (dichiarato in didascalia).
 
 ## Unità 11 — Teorema del coseno
 - Parole: 332 su 3 pagine di traccia (47–49)
