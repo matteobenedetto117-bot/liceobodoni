@@ -5,29 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Risoluzione dei triangoli e caso ambiguo — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.def ul{margin:6px 0 0;padding-left:22px}
-.def li{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.widget{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.controlli{display:flex;flex-wrap:wrap;gap:22px;align-items:center;font-family:var(--sans);font-size:.9rem;margin-bottom:6px}
-.controlli label{display:flex;flex-direction:column;gap:5px;min-width:260px}
-.controlli input[type=range]{width:100%}
-.val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600}
-.stato{font-family:var(--sans);font-size:.92rem;color:var(--inchiostro);margin:10px 0 4px;min-height:1.4em}
-.leggenda{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin-top:10px;line-height:1.5}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
 </style>
 </head>
 <body>
@@ -37,197 +57,121 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Trigonometria &middot; Unità 12</p>
   <h1>Risoluzione dei triangoli e caso ambiguo</h1>
-  <p class="sommario">Risolvere un triangolo vuol dire determinarne tutti i lati e tutti
-  gli angoli a partire dai dati noti, combinando teorema dei seni e teorema del coseno.
-  C'è però una combinazione di dati, due lati e l'angolo opposto a uno di essi, per cui
-  i dati non individuano un solo triangolo: è il caso ambiguo del teorema dei seni.</p>
 </header>
 
-<h2>Il caso ambiguo</h2>
+<p>Risolvere un triangolo: determinarne tutti i lati e tutti gli angoli dai dati noti, con il teorema dei seni e il teorema del coseno.</p>
 
-<p>Siano noti il lato $a$, l'angolo opposto $\alpha$ e un secondo lato $b$; si cerca
-l'angolo $\beta$ opposto a $b$. Dal teorema dei seni,
-$$\sin\beta=\frac{b}{a}\sin\alpha.$$
-Poiché $\beta$ è un angolo di un triangolo, deve essere $0&lt;\sin\beta\le1$: bisogna
-allora vedere quanti angoli fra $0^\circ$ e $180^\circ$ soddisfano l'equazione, e se sono
-compatibili con il triangolo di partenza.</p>
+<p>Noti $a$, $\alpha$ e $b$, l'angolo $\beta$ opposto a $b$ si ricava dal teorema dei seni:</p>
 
-<div class="def"><span class="et">Casi possibili</span>
+<p class="eq">$$\sin\beta=\frac{b}{a}\sin\alpha$$</p>
+
+<p>I dati possono individuare nessuno, uno o due triangoli (caso ambiguo):</p>
+
 <ul>
-<li>Se $\sin\beta=1$, $\beta=90^\circ$: soluzione unica se $\alpha&lt;90^\circ$; nessuna
-soluzione se $\alpha\ge90^\circ$, perché la somma degli angoli supererebbe $180^\circ$.</li>
-<li>Se $0&lt;\sin\beta&lt;1$, l'equazione ha due soluzioni supplementari, $\beta_1$ acuto
-e $\beta_2=180^\circ-\beta_1$ ottuso. Se $\alpha\ge90^\circ$, $\beta_2$ va scartato e resta
-solo $\beta_1$. Se $\alpha&lt;90^\circ$ si confrontano i lati: con $b&lt;a$ è anche
-$\beta&lt;\alpha$, quindi $\beta_2$ non è accettabile e resta $\beta_1$; con $b&gt;a$
-entrambi gli angoli sono accettabili e il problema ha due soluzioni, a meno che non ne
-escluda una qualche altra informazione.</li>
+<li>$\alpha\ge90^\circ$: $b&lt;a$ → una soluzione ($\beta$ acuto); $b\ge a$ → nessuna;</li>
+<li>$\alpha&lt;90^\circ$:
+<ul>
+<li>$\sin\beta&gt;1$ ($a$ minore dell'altezza $b\sin\alpha$) → nessuna soluzione;</li>
+<li>$\sin\beta=1$ → una soluzione, $\beta=90^\circ$;</li>
+<li>$\sin\beta&lt;1$, $b\le a$ → una soluzione, $\beta_1$ acuto;</li>
+<li>$\sin\beta&lt;1$, $b&gt;a$ → due soluzioni, $\beta_1$ acuto e $\beta_2=180^\circ-\beta_1$.</li>
+</ul></li>
 </ul>
+
+<div class="fig">
+<svg id="f-amb" viewBox="0 0 440 190" style="width:100%;max-width:440px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lato b e angolo alfa fissi; cerchio di raggio a con centro C e posizioni possibili di B"></svg>
+<div class="cursore"><label for="s-a">$a$</label><input type="range" id="s-a" min="1.5" max="8" step="0.05" value="4.5"><span class="val" id="v-a">4,50</span></div>
+<p class="did" id="l-amb"></p>
+<p class="did">$b=6$, $\alpha=35^\circ$; cerchio di centro $C$ e raggio $a$: le intersezioni con la semiretta sono le posizioni possibili di $B$</p>
 </div>
 
-<div class="widget">
-  <div class="controlli">
-    <label>Lato $a$ (l'altro lato noto è $b=6$, con $\alpha=35^\circ$)
-      <input type="range" id="s-a" min="1.5" max="8" step="0.05" value="4.5">
-      <span>$a$ = <span class="val" id="v-a"></span></span>
-    </label>
-  </div>
-  <svg id="svg-amb" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img"
-    aria-label="Triangolo con lato a, lato b e angolo alfa: al variare di a cambia il numero di soluzioni">
-    <defs>
-      <marker id="fA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-        <path d="M0,0 L6,3 L0,6 Z" fill="#16283d"/>
-      </marker>
-    </defs>
-    <line x1="80" y1="260" x2="465" y2="260" stroke="#16283d" stroke-width="1.6" marker-end="url(#fA)"/>
-    <text x="452" y="252" font-size="13" fill="#16283d" font-style="italic">x</text>
-    <line id="lin-AC" x1="80" y1="260" stroke="#16283d" stroke-width="2"/>
-    <path id="arco-alfa" fill="none" stroke="#b3392f" stroke-width="1.3"/>
-    <text x="102" y="248" font-size="12" fill="#b3392f">&alpha;</text>
-    <circle id="cir-a" fill="none" stroke="#6d7280" stroke-width="1.2" stroke-dasharray="4,3"/>
-    <line id="seg-CB1" stroke="#1f4e79" stroke-width="2"/>
-    <line id="seg-AB1" stroke="#1f4e79" stroke-width="2"/>
-    <circle id="pt-B1" r="4" fill="#1f4e79"/>
-    <text id="lab-B1" font-size="12" fill="#1f4e79"></text>
-    <line id="seg-CB2" stroke="#b3392f" stroke-width="2" stroke-dasharray="6,4"/>
-    <line id="seg-AB2" stroke="#b3392f" stroke-width="2" stroke-dasharray="6,4"/>
-    <circle id="pt-B2" r="4" fill="#b3392f"/>
-    <text id="lab-B2" font-size="12" fill="#b3392f"></text>
-    <circle cx="80" cy="260" r="3.2" fill="#16283d"/>
-    <text x="64" y="278" font-size="13" fill="#16283d">A</text>
-    <circle id="pt-C" r="3.2" fill="#16283d"/>
-    <text id="lab-C" font-size="13" fill="#16283d">C</text>
-    <text id="lab-b" font-size="12" fill="#16283d"></text>
-  </svg>
-  <p class="stato" id="stato-amb"></p>
-  <p class="leggenda">Il lato $b$ e l'angolo $\alpha$ restano fissi in $A$ e $C$; il cerchio
-  tratteggiato ha raggio $a$ e centro $C$. Le sue intersezioni con la semiretta base sono le
-  possibili posizioni del vertice $B$: da nessuna (cerchio troppo piccolo) a due (cerchio che
-  taglia la semiretta due volte) a una sola (cerchio grande, $a\ge b$).</p>
-</div>
+<h2>Esempio 1</h2>
 
-<h2>Esempi</h2>
+<p>Dati: $c=56{,}2$, $a=39$, $\gamma=59^\circ$. Calcolare $\alpha$.</p>
 
-<div class="esempio"><span class="et">Esempio 4</span>
-<p>Dati $c=56{,}2$, $a=39$, $\gamma=59^\circ$, si cerca l'angolo $\alpha$ opposto ad $a$
-(stessa situazione di sopra, con $c$ al posto di $a$ e $a$ al posto di $b$):</p>
-$$\sin\alpha=\frac{a}{c}\sin\gamma=\frac{39}{56{,}2}\sin59^\circ\approx0{,}59$$
-<p>Qui $\gamma&lt;90^\circ$ e $c&gt;a$, dunque $\alpha&lt;\gamma$: l'unica soluzione
-accettabile è quella acuta,</p>
-$$\alpha=\arcsin(0{,}59)\approx36^\circ,$$
-<p>mentre l'altra soluzione dell'arcoseno, $180^\circ-36^\circ=144^\circ$, va scartata:
-in questo caso $\alpha$ non può superare $\gamma=59^\circ$.</p>
-</div>
+<p class="eq">$$\sin\alpha=\frac{a}{c}\sin\gamma=\frac{39}{56{,}2}\sin59^\circ\approx0{,}59 \;\Rightarrow\; \alpha\approx36^\circ$$</p>
 
-<div class="esempio"><span class="et">Esempio 5</span>
-<p>Dati i tre lati $a=58{,}6$, $b=77$, $c=70$, non c'è ambiguità: il teorema del coseno
-restituisce un solo angolo fra $0^\circ$ e $180^\circ$, perché il coseno individua
-l'angolo univocamente. Si calcolano due angoli con il teorema del coseno e il terzo per
-differenza:</p>
-$$\cos\beta=\frac{a^2+c^2-b^2}{2ac}\approx0{,}293 \ \Rightarrow\ \beta\approx73^\circ$$
-$$\cos\alpha=\frac{b^2+c^2-a^2}{2bc}\approx0{,}686 \ \Rightarrow\ \alpha\approx47^\circ$$
-$$\gamma=180^\circ-\alpha-\beta\approx60^\circ$$
-</div>
+<p>$\gamma&lt;90^\circ$ e $a&lt;c$ → una sola soluzione: $180^\circ-36^\circ=144^\circ$ si scarta.</p>
 
+<h2>Esempio 2</h2>
+
+<p>Dati: $a=58{,}6$, $b=77$, $c=70$. Calcolare $\alpha$, $\beta$, $\gamma$.</p>
+
+<p class="eq">$$\cos\beta=\frac{a^2+c^2-b^2}{2ac}\approx0{,}293 \;\Rightarrow\; \beta\approx73^\circ$$</p>
+
+<p class="eq">$$\cos\alpha=\frac{b^2+c^2-a^2}{2bc}\approx0{,}686 \;\Rightarrow\; \alpha\approx47^\circ \qquad \gamma=180^\circ-\alpha-\beta\approx60^\circ$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../11-teorema-del-coseno/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Teorema del coseno</span></a><a class="successiva" href="../13-traslazioni-dilatazioni-e-contrazioni/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Traslazioni, dilatazioni e contrazioni</span></a></nav>
 <footer><p>Matematica quarta &middot; Trigonometria &middot; Unità 12</p></footer>
 
 </div>
-
 <script>
 (function(){
-  var sa=document.getElementById('s-a'), va=document.getElementById('v-a');
-  var alfa=35*Math.PI/180, b=6, scale=42, Ax=80, Ay=260;
-  var Cx=b*Math.cos(alfa), Cy=b*Math.sin(alfa);
-  var CxS=Ax+scale*Cx, CyS=Ay-scale*Cy;
-  var h=Cy;
-  function fmt(n){return n.toFixed(2).replace('.',',');}
-  function toSvgX(x){return Ax+scale*x;}
-  function ang(P,Q,R){ // angolo in Q fra QP e QR, in gradi
-    var v1x=P.x-Q.x, v1y=P.y-Q.y, v2x=R.x-Q.x, v2y=R.y-Q.y;
-    var dot=v1x*v2x+v1y*v2y, m1=Math.hypot(v1x,v1y), m2=Math.hypot(v2x,v2y);
-    return Math.acos(dot/(m1*m2))*180/Math.PI;
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  document.getElementById('lin-AC').setAttribute('x2',CxS);
-  document.getElementById('lin-AC').setAttribute('y2',CyS);
-  document.getElementById('pt-C').setAttribute('cx',CxS);
-  document.getElementById('pt-C').setAttribute('cy',CyS);
-  document.getElementById('lab-C').setAttribute('x',CxS-6);
-  document.getElementById('lab-C').setAttribute('y',CyS-10);
-  document.getElementById('lab-b').setAttribute('x',(Ax+CxS)/2-28);
-  document.getElementById('lab-b').setAttribute('y',(Ay+CyS)/2-6);
-  document.getElementById('lab-b').textContent='b = 6';
-  var r0=26;
-  var ax0=Ax+r0, ay0=Ay, ax1=Ax+r0*Math.cos(alfa), ay1=Ay-r0*Math.sin(alfa);
-  document.getElementById('arco-alfa').setAttribute('d','M'+ax0+','+ay0+' A'+r0+','+r0+' 0 0 0 '+ax1+','+ay1);
-
-  function agg(){
-    var a=parseFloat(sa.value);
-    va.textContent=fmt(a);
-    var cir=document.getElementById('cir-a');
-    cir.setAttribute('cx',CxS); cir.setAttribute('cy',CyS); cir.setAttribute('r',scale*a);
-
-    var stato=document.getElementById('stato-amb');
-    var eps=0.02;
-    var ids=['seg-CB1','seg-AB1','pt-B1','lab-B1','seg-CB2','seg-AB2','pt-B2','lab-B2'];
-    ids.forEach(function(id){document.getElementById(id).style.display='none';});
-
-    if(a<h-eps){
-      stato.textContent='a = '+fmt(a)+' < altezza ('+fmt(h)+'): il cerchio non tocca la base, nessuna soluzione.';
-      return;
-    }
-    var dx=Math.sqrt(Math.max(a*a-h*h,0));
-    var candidati=[Cx-dx, Cx+dx];
-    var validi=candidati.filter(function(x){return x>1e-6;});
-
-    if(Math.abs(a-h)<eps){
-      var xB=Cx; var B={x:xB,y:0}, A={x:0,y:0}, C={x:Cx,y:Cy};
-      var beta=ang(A,B,C);
-      disegnaTriangolo(1,xB,beta);
-      stato.textContent='a = '+fmt(a)+' ≈ altezza: soluzione unica, β = 90° (triangolo rettangolo in B).';
-      return;
-    }
-
-    if(validi.length===2){
-      var xB1=Math.min(candidati[0],candidati[1]);
-      var xB2=Math.max(candidati[0],candidati[1]);
-      var beta1=ang({x:0,y:0},{x:xB1,y:0},{x:Cx,y:Cy});
-      var beta2=ang({x:0,y:0},{x:xB2,y:0},{x:Cx,y:Cy});
-      disegnaTriangolo(1,xB2,beta2);
-      disegnaTriangolo(2,xB1,beta1);
-      stato.textContent='a = '+fmt(a)+': due soluzioni, β₁ ≈ '+beta2.toFixed(0)+'° (acuto, blu) e β₂ ≈ '+beta1.toFixed(0)+'° (ottuso, rosso tratteggiato).';
-    } else if(validi.length===1){
-      var xB=validi[0];
-      var beta=ang({x:0,y:0},{x:xB,y:0},{x:Cx,y:Cy});
-      disegnaTriangolo(1,xB,beta);
-      stato.textContent='a = '+fmt(a)+' ≥ b: soluzione unica, β ≈ '+beta.toFixed(0)+'° (l\'altra intersezione cade fuori dalla semiretta).';
-    } else {
-      stato.textContent='a = '+fmt(a)+': nessuna posizione valida per B su questa semiretta.';
-    }
-  }
-
-  function disegnaTriangolo(n,xB,betaDeg){
-    var suf=n; var xS=toSvgX(xB);
-    document.getElementById('seg-CB'+suf).setAttribute('x1',CxS);
-    document.getElementById('seg-CB'+suf).setAttribute('y1',CyS);
-    document.getElementById('seg-CB'+suf).setAttribute('x2',xS);
-    document.getElementById('seg-CB'+suf).setAttribute('y2',Ay);
-    document.getElementById('seg-CB'+suf).style.display='';
-    document.getElementById('seg-AB'+suf).setAttribute('x1',Ax);
-    document.getElementById('seg-AB'+suf).setAttribute('y1',Ay);
-    document.getElementById('seg-AB'+suf).setAttribute('x2',xS);
-    document.getElementById('seg-AB'+suf).setAttribute('y2',Ay);
-    document.getElementById('seg-AB'+suf).style.display='';
-    document.getElementById('pt-B'+suf).setAttribute('cx',xS);
-    document.getElementById('pt-B'+suf).setAttribute('cy',Ay);
-    document.getElementById('pt-B'+suf).style.display='';
-    var lab=document.getElementById('lab-B'+suf);
-    lab.setAttribute('x',xS-6); lab.setAttribute('y',Ay+18);
-    lab.textContent='B'+suf; lab.style.display='';
-  }
-
-  sa.addEventListener('input',agg); agg();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+/* circonferenza goniometrica di centro (cx,cy) e raggio R, con assi */
+function Circ(p,cx,cy,R,m){m=m||14;
+  el('line',{x1:cx-R-m,y1:cy,x2:cx+R+m,y2:cy,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('line',{x1:cx,y1:cy-R-m,x2:cx,y2:cy+R+m,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5},p);
+  return {P:function(t,k){k=k===undefined?R:k;return [cx+k*Math.cos(t),cy-k*Math.sin(t)];},cx:cx,cy:cy,R:R};}
+function raggio(p,c,t,col){var q=c.P(t);
+  el('line',{x1:c.cx,y1:c.cy,x2:q[0],y2:q[1],stroke:col,'stroke-width':2},p);
+  el('circle',{cx:q[0],cy:q[1],r:4,fill:col},p);return q;}
+window.G={el:el,txt:txt,Circ:Circ,raggio:raggio};
+})();
+</script>
+<script>
+(function(){var G=window.G,PI=Math.PI,R='var(--rosso)',B='var(--blu)',I='var(--inchiostro)',Gr='var(--grigio)',V='var(--verde)';
+function scr(p,x,y,s,o){return G.txt(p,x,y,s,Object.assign({'font-size':13,'text-anchor':'middle'},o||{}));}
+function f2(v){return v.toFixed(2).replace('.',',');}
+function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+var s=document.getElementById('f-amb'),al=35*PI/180,b=6,k=30,Ax=40,Ay=165,
+ Cx=b*Math.cos(al),Cy=b*Math.sin(al),h=Cy,CX=Ax+k*Cx,CY=Ay-k*Cy;
+function X(x){return Ax+k*x;}
+var cp=G.el('clipPath',{id:'clip-amb'},s);G.el('rect',{x:0,y:0,width:440,height:190},cp);
+var gc=G.el('g',{'clip-path':'url(#clip-amb)'},s),g=G.el('g',{},s);
+G.el('line',{x1:Ax,y1:Ay,x2:430,y2:Ay,stroke:I,'stroke-width':1.5},s);
+G.el('path',{d:'M430 '+Ay+' l-8 -4 l0 8 z',fill:I},s);
+G.el('line',{x1:Ax,y1:Ay,x2:CX,y2:CY,stroke:I,'stroke-width':2},s);
+var r0=24,sd='M'+(Ax+r0)+' '+Ay+' A'+r0+' '+r0+' 0 0 0 '+(Ax+r0*Math.cos(al))+' '+(Ay-r0*Math.sin(al));
+G.el('path',{d:sd,fill:'none',stroke:R,'stroke-width':1.3},s);
+scr(s,Ax+34*Math.cos(al/2),Ay-34*Math.sin(al/2),'α',{fill:R,'font-size':12});
+G.el('circle',{cx:Ax,cy:Ay,r:3,fill:I},s);G.el('circle',{cx:CX,cy:CY,r:3,fill:I},s);
+scr(s,Ax-12,Ay+2,'A');scr(s,CX-4,CY-12,'C');
+scr(s,(Ax+CX)/2-12,(Ay+CY)/2-10,'b = 6',{'font-size':12,'font-style':'italic'});
+var inp=document.getElementById('s-a'),va=document.getElementById('v-a'),le=document.getElementById('l-amb');
+function ang(xB){var u=[-xB,0],v=[Cx-xB,Cy];return Math.acos((u[0]*v[0]+u[1]*v[1])/(Math.hypot(u[0],u[1])*Math.hypot(v[0],v[1])))*180/PI;}
+function tri(xB,col,da,lab,anc){var xs=X(xB),a={x1:CX,y1:CY,x2:xs,y2:Ay,stroke:col,'stroke-width':2};if(da)a['stroke-dasharray']=da;
+  G.el('line',a,g);G.el('circle',{cx:xs,cy:Ay,r:4,fill:col},g);scr(g,xs+(anc==='end'?-4:4),Ay+14,lab,{fill:col,'font-size':12,'text-anchor':anc});}
+function dis(){var a=parseFloat(inp.value);va.textContent=f2(a);vuota(g);vuota(gc);
+  G.el('circle',{cx:CX,cy:CY,r:k*a,fill:'none',stroke:Gr,'stroke-width':1.2,'stroke-dasharray':'4 3'},gc);
+  if(a<h-0.02){le.textContent='a < b sin α = '+f2(h)+': nessuna soluzione';return;}
+  if(Math.abs(a-h)<=0.02){tri(Cx,B,null,'B','start');le.textContent='a = b sin α: una soluzione, β = 90°';return;}
+  var dx=Math.sqrt(a*a-h*h),x1=Cx+dx,x2=Cx-dx;
+  tri(x1,B,null,'B₁','start');
+  if(x2>1e-6){tri(x2,R,'6 4','B₂','end');
+    le.innerHTML='b sin α &lt; a &lt; b: <span style="color:var(--verde);font-weight:600">due soluzioni</span>, β₁ ≈ '+Math.round(ang(x1))+'°, β₂ ≈ '+Math.round(ang(x2))+'°';}
+  else le.textContent='a ≥ b: una soluzione, β ≈ '+Math.round(ang(x1))+'°';}
+inp.addEventListener('input',dis);dis();
 })();
 </script>
 </body>
