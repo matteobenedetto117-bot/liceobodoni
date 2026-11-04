@@ -5,20 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Piano cartesiano nello spazio: distanze, punto medio, baricentro — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
 </style>
 </head>
 <body>
@@ -28,84 +65,106 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Geometria analitica nello spazio &middot; Unità 17</p>
   <h1>Piano cartesiano nello spazio: distanze, punto medio, baricentro</h1>
-  <p class="sommario">Il piano cartesiano si allarga aggiungendo un terzo asse, perpendicolare
-  agli altri due: ogni punto dello spazio è individuato da tre coordinate invece di due. Le
-  formule per distanza, punto medio e baricentro già note nel piano si estendono nello stesso
-  modo, affiancando alle prime due coordinate la terza.</p>
 </header>
 
-<h2>Il punto nello spazio</h2>
+<p>Tre assi $x$, $y$, $z$ a due a due perpendicolari, con origine comune $O$: ogni punto dello spazio è individuato da una terna ordinata di numeri.</p>
 
 <div class="def"><span class="et">Coordinate di un punto</span>
-<p>Si fissano tre assi $x$, $y$, $z$ a due a due perpendicolari, passanti per una stessa
-origine $O$. Un punto $P$ dello spazio è individuato dalla terna ordinata delle sue tre
-coordinate:</p>
-$$P(x_P;\,y_P;\,z_P)$$
-<p>$x_P$ è l'ascissa, $y_P$ l'ordinata, $z_P$ la quota.</p>
+<p class="eq">$$P(x_P;\,y_P;\,z_P)$$</p></div>
+
+<ul>
+<li>$x_P$ → ascissa;</li>
+<li>$y_P$ → ordinata;</li>
+<li>$z_P$ → quota.</li>
+</ul>
+
+<div class="fig">
+<svg id="fig-punto" viewBox="20 30 350 270" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto P di coordinate 3, 4, 3 e le sue proiezioni sugli assi"></svg>
+<p class="did">$P(3;\,4;\,3)$: ascissa in rosso, ordinata in blu, quota in verde</p>
 </div>
 
-<figure class="disegno">
-<svg viewBox="0 0 320 290" width="100%" style="max-width:340px">
-<defs>
-<marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="90" y1="235" x2="88" y2="24" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#ar)"/>
-<line x1="90" y1="235" x2="22" y2="266" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#ar)"/>
-<line x1="90" y1="235" x2="272" y2="186" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#ar)"/>
-<text x="96" y="24" font-size="14" fill="var(--inchiostro)">z</text>
-<text x="6" y="280" font-size="14" fill="var(--inchiostro)">x</text>
-<text x="280" y="182" font-size="14" fill="var(--inchiostro)">y</text>
-<text x="68" y="226" font-size="12" fill="var(--inchiostro)">O</text>
-<line x1="60" y1="249" x2="160" y2="222" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4,3"/>
-<line x1="190" y1="208" x2="160" y2="222" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4,3"/>
-<line x1="160" y1="222" x2="160" y2="100" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4,3"/>
-<line x1="160" y1="100" x2="89" y2="100" stroke="var(--grigio)" stroke-width="1.2" stroke-dasharray="4,3"/>
-<circle cx="60" cy="249" r="2.6" fill="var(--rosso)"/>
-<circle cx="190" cy="208" r="2.6" fill="var(--blu)"/>
-<circle cx="89" cy="100" r="2.6" fill="var(--verde)"/>
-<circle cx="160" cy="100" r="3" fill="var(--inchiostro)"/>
-<text x="166" y="93" font-size="14" fill="var(--inchiostro)">P</text>
-<text x="66" y="247" font-size="12" fill="var(--rosso)">x&#8346;</text>
-<text x="152" y="201" font-size="12" fill="var(--blu)">y&#8346;</text>
-<text x="56" y="97" font-size="12" fill="var(--verde)">z&#8346;</text>
-</svg>
-<figcaption>Le tre coordinate di $P$ lette sui tre assi: ascissa $x_P$ in rosso, ordinata
-$y_P$ in blu, quota $z_P$ in verde.</figcaption>
-</figure>
+<p>Le formule del piano si estendono aggiungendo la terza coordinata.</p>
 
-<h2>Distanza tra due punti</h2>
+<div class="def"><span class="et">Distanza fra due punti</span>
+<p class="eq">$$\overline{AB}=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}$$</p></div>
 
-<p>Nel piano la distanza fra $A(x_A;y_A)$ e $B(x_B;y_B)$ è</p>
-$$\overline{AB}=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$$
-<p>Nello spazio, con $A(x_A;y_A;z_A)$ e $B(x_B;y_B;z_B)$, sotto radice compare anche il
-quadrato della differenza delle quote:</p>
-$$\overline{AB}=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}$$
+<div class="def"><span class="et">Punto medio del segmento $AB$</span>
+<p class="eq">$$x_M=\frac{x_A+x_B}{2}\qquad y_M=\frac{y_A+y_B}{2}\qquad z_M=\frac{z_A+z_B}{2}$$</p></div>
 
-<h2>Punto medio di un segmento</h2>
+<div class="def"><span class="et">Baricentro del triangolo $ABC$</span>
+<p class="eq">$$x_G=\frac{x_A+x_B+x_C}{3}\qquad y_G=\frac{y_A+y_B+y_C}{3}\qquad z_G=\frac{z_A+z_B+z_C}{3}$$</p></div>
 
-<p>Ciascuna coordinata del punto medio $M$ è la media delle coordinate corrispondenti degli
-estremi:</p>
-$$x_M=\frac{x_A+x_B}{2}\qquad y_M=\frac{y_A+y_B}{2}\qquad z_M=\frac{z_A+z_B}{2}$$
+<h2>Esempio</h2>
 
-<h2>Baricentro di un triangolo</h2>
+<p>Dati: $A(1;2;2)$, $B(4;6;2)$, $C(7;4;5)$. Calcolare $\overline{AB}$, il punto medio $M$ di $AB$ e il baricentro $G$ di $ABC$.</p>
 
-<p>Dati i tre vertici $A(x_A;y_A;z_A)$, $B(x_B;y_B;z_B)$, $C(x_C;y_C;z_C)$, il baricentro $G$
-ha per coordinate la media delle tre coordinate omologhe:</p>
-$$x_G=\frac{x_A+x_B+x_C}{3}\qquad y_G=\frac{y_A+y_B+y_C}{3}\qquad z_G=\frac{z_A+z_B+z_C}{3}$$
+<p class="eq">$$\overline{AB}=\sqrt{(4-1)^2+(6-2)^2+(2-2)^2}=\sqrt{9+16}=5$$</p>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Dati $A(1;2;2)$, $B(4;6;2)$, $C(7;4;5)$:</p>
-$$\overline{AB}=\sqrt{(4-1)^2+(6-2)^2+(2-2)^2}=\sqrt{9+16}=5$$
-$$M_{AB}=\left(\frac{1+4}{2};\frac{2+6}{2};\frac{2+2}{2}\right)=(2{,}5;\,4;\,2)$$
-$$G=\left(\frac{1+4+7}{3};\frac{2+6+4}{3};\frac{2+2+5}{3}\right)=(4;\,4;\,3)$$
-</div>
+<p class="eq">$$M=\left(\frac{1+4}{2};\,\frac{2+6}{2};\,\frac{2+2}{2}\right)=(2{,}5;\,4;\,2)$$</p>
 
+<p class="eq">$$G=\left(\frac{1+4+7}{3};\,\frac{2+6+4}{3};\,\frac{2+2+5}{3}\right)=(4;\,4;\,3)$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../16-trasformazioni-di-retta-parabola-esponenziale-e-logaritmo/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Trasformazioni di retta, parabola, esponenziale e logaritmo</span></a><a class="successiva" href="../18-vettori-nello-spazio-e-prodotto-scalare/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Vettori nello spazio e prodotto scalare</span></a></nav>
 <footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 17</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* proiezione obliqua: y a destra, z in alto, x verso l'osservatore (in basso a sinistra) */
+function Spazio(svg,O,u){
+  this.svg=svg;
+  this.p=function(x,y,z){return [O[0]+u*(y-0.42*x),O[1]-u*(z-0.32*x)];};
+  var d=el('defs',{}),self=this;this.mk={};
+  ['inchiostro','rosso','blu','grigio'].forEach(function(c){
+    var m=el('marker',{id:svg.id+'-'+c,markerUnits:'userSpaceOnUse',markerWidth:12,markerHeight:12,refX:8,refY:4,orient:'auto'});
+    m.appendChild(el('path',{d:'M0,0 L9,4 L0,8 Z',fill:'var(--'+c+')'}));d.appendChild(m);self.mk[c]='url(#'+svg.id+'-'+c+')';});
+  svg.appendChild(d);
+}
+Spazio.prototype.seg=function(a,b,c,w,opz){var P=this.p.apply(this,a),Q=this.p.apply(this,b);
+  var e=el('line',Object.assign({x1:P[0].toFixed(1),y1:P[1].toFixed(1),x2:Q[0].toFixed(1),y2:Q[1].toFixed(1),stroke:'var(--'+c+')','stroke-width':w},opz||{}));this.svg.appendChild(e);return e;};
+Spazio.prototype.freccia=function(a,b,c,w){return this.seg(a,b,c,w,{'marker-end':this.mk[c]});};
+Spazio.prototype.tratt=function(a,b){return this.seg(a,b,'grigio',1.2,{'stroke-dasharray':'4,3'});};
+Spazio.prototype.punto=function(a,c,r){var P=this.p.apply(this,a);this.svg.appendChild(el('circle',{cx:P[0].toFixed(1),cy:P[1].toFixed(1),r:r||3,fill:'var(--'+c+')'}));};
+Spazio.prototype.scritta=function(a,dx,dy,s,opz){var P=this.p.apply(this,a);return txt(this.svg,(P[0]+dx).toFixed(1),(P[1]+dy).toFixed(1),s,opz);};
+Spazio.prototype.assi=function(L){
+  this.freccia([0,0,0],[L[0],0,0],'inchiostro',1.5);this.freccia([0,0,0],[0,L[1],0],'inchiostro',1.5);this.freccia([0,0,0],[0,0,L[2]],'inchiostro',1.5);
+  this.scritta([L[0],0,0],-14,4,'x',{'font-style':'italic'});this.scritta([0,L[1],0],4,-8,'y',{'font-style':'italic'});
+  this.scritta([0,0,L[2]],8,8,'z',{'font-style':'italic'});this.scritta([0,0,0],-16,-6,'O',{'font-size':12});
+};
+window.Spazio=Spazio;
+
+var S=new Spazio(document.getElementById('fig-punto'),[130,230],40);
+var x=3,y=4,z=3;
+S.assi([4.6,5.4,4.4]);
+[[[x,0,0],[x,y,0]],[[0,y,0],[x,y,0]],[[x,y,0],[x,y,z]],[[x,0,0],[x,0,z]],[[0,y,0],[0,y,z]],
+ [[0,0,z],[x,0,z]],[[0,0,z],[0,y,z]],[[x,0,z],[x,y,z]],[[0,y,z],[x,y,z]]].forEach(function(s){S.tratt(s[0],s[1]);});
+S.punto([x,0,0],'rosso');S.punto([0,y,0],'blu');S.punto([0,0,z],'verde');S.punto([x,y,z],'inchiostro',3.4);
+S.scritta([x,0,0],6,16,'3',{fill:'var(--rosso)','font-weight':700});
+S.scritta([0,y,0],-4,18,'4',{fill:'var(--blu)','font-weight':700});
+S.scritta([0,0,z],-16,5,'3',{fill:'var(--verde)','font-weight':700});
+S.scritta([x,y,z],8,-6,'P',{'font-size':14,'font-style':'italic','font-weight':700});
+
+})();
+</script>
 </body>
 </html>
