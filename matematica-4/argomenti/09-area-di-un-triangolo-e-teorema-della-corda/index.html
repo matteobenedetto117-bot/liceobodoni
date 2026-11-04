@@ -5,20 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Area di un triangolo e teorema della corda — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto}
-.coppia{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start}
-.coppia svg{max-width:230px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -28,120 +55,163 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Trigonometria &middot; Unità 09</p>
   <h1>Area di un triangolo e teorema della corda</h1>
-  <p class="sommario">Il primo teorema dei triangoli rettangoli, letto come altezza di un
-  triangolo qualsiasi, dà una formula per l'area che non richiede di conoscere l'altezza.
-  La stessa idea, applicata a una circonferenza, lega la lunghezza di una corda al raggio
-  e all'angolo alla circonferenza che la vede.</p>
 </header>
+
+<p>Triangolo qualsiasi: come si calcola l'area conoscendo due lati e l'angolo compreso?</p>
+
+<div class="fig">
+<svg id="f-tri" viewBox="0 0 220 160" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo ABC con lati a, b, c e angoli alfa, beta, gamma"></svg>
+<p class="did">Lato $a$ opposto ad $\alpha$, $b$ a $\beta$, $c$ a $\gamma$</p>
+</div>
 
 <h2>Area di un triangolo</h2>
 
-<div class="def"><span class="et">Teorema</span>
-<p>La misura dell'area di un triangolo è uguale al semiprodotto delle misure di due lati
-e del seno dell'angolo compreso tra essi.</p>
-$$A=\frac12\,bc\sin\alpha \qquad A=\frac12\,ac\sin\beta \qquad A=\frac12\,ab\sin\gamma$$
+<p>Altezza $CH$ relativa al lato $c$:</p>
+
+<ul>
+<li>$\alpha$ acuto → $H$ interno ad $AB$, $\;CH=b\sin\alpha$;</li>
+<li>$\alpha$ retto → $H=A$, $\;CH=b$;</li>
+<li>$\alpha$ ottuso → $H$ esterno ad $AB$, $\;CH=b\sin(180^\circ-\alpha)=b\sin\alpha$.</li>
+</ul>
+
+<div class="fig">
+<svg id="f-alt" viewBox="0 0 440 165" style="width:100%;max-width:520px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Altezza CH nel caso alfa acuto e nel caso alfa ottuso"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">$\alpha$ acuto</p>
+<p class="did">$\alpha$ ottuso: $\sin(180^\circ-\alpha)=\sin\alpha$</p>
+</div>
 </div>
 
-<figure class="disegno">
-<svg viewBox="0 0 220 150" width="100%" style="max-width:220px">
-<polygon points="30,130 190,130 120,20" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="70" y="70" font-size="13" fill="var(--inchiostro)">b</text>
-<text x="160" y="70" font-size="13" fill="var(--inchiostro)">a</text>
-<text x="105" y="145" font-size="13" fill="var(--inchiostro)">c</text>
-<text x="112" y="34" font-size="12" fill="var(--rosso)">&gamma;</text>
-<text x="42" y="122" font-size="12" fill="var(--rosso)">&alpha;</text>
-<text x="170" y="122" font-size="12" fill="var(--rosso)">&beta;</text>
-</svg>
-</figure>
+<p>In ogni caso $CH=b\sin\alpha$; da $A=\frac12\,c\cdot CH$:</p>
 
-<p>Ciascuna formula viene dall'area come metà base per altezza. Tracciando l'altezza dal
-vertice $C$ sul lato $c=AB$, in un triangolo con $\alpha$ acuto l'altezza vale $CH=b\sin\alpha$
-e quindi $A=\frac12\,c\cdot CH=\frac12\,bc\sin\alpha$. Se $\alpha$ è invece ottuso il piede
-$H$ cade fuori dal segmento $AB$, ma $CH=b\sin(180^\circ-\alpha)=b\sin\alpha$: la stessa
-formula vale in entrambi i casi.</p>
-
-<figure class="disegno">
-<div class="coppia">
-<svg viewBox="0 0 200 150" width="100%">
-<polygon points="15,130 175,130 90,20" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="90" y1="130" x2="90" y2="20" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="3 3"/>
-<rect x="83" y="123" width="14" height="14" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="45" y="122" font-size="12" fill="var(--rosso)">&alpha;</text>
-<text x="35" y="80" font-size="13" fill="var(--inchiostro)">b</text>
-<text x="70" y="145" font-size="12" fill="var(--grigio)">H</text>
-<text x="97" y="80" font-size="12" fill="var(--blu)">CH</text>
-<text x="8" y="142" font-size="12" fill="var(--inchiostro)">A</text>
-<text x="180" y="142" font-size="12" fill="var(--inchiostro)">B</text>
-<text x="88" y="14" font-size="12" fill="var(--inchiostro)">C</text>
-</svg>
-<svg viewBox="0 0 220 150" width="100%">
-<polygon points="110,130 210,130 50,30" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="110" y1="130" x2="50" y2="130" stroke="var(--inchiostro)" stroke-width="1" stroke-dasharray="2 3"/>
-<line x1="50" y1="130" x2="50" y2="30" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="3 3"/>
-<rect x="43" y="123" width="14" height="14" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="62" y="122" font-size="11" fill="var(--rosso)">180&deg;-&alpha;</text>
-<text x="70" y="70" font-size="13" fill="var(--inchiostro)">b</text>
-<text x="38" y="145" font-size="12" fill="var(--grigio)">H</text>
-<text x="20" y="85" font-size="12" fill="var(--blu)">CH</text>
-<text x="100" y="145" font-size="12" fill="var(--inchiostro)">A</text>
-<text x="215" y="142" font-size="12" fill="var(--inchiostro)">B</text>
-<text x="42" y="24" font-size="12" fill="var(--inchiostro)">C</text>
-</svg>
-</div>
-<figcaption>Caso $\alpha$ acuto e caso $\alpha$ ottuso: l'altezza $CH$ vale $b\sin\alpha$
-in entrambi, perché $\sin(180^\circ-\alpha)=\sin\alpha$.</figcaption>
-</figure>
+<div class="def"><span class="et">Area di un triangolo</span>
+<p class="eq">$$A=\frac12\,bc\sin\alpha \qquad A=\frac12\,ac\sin\beta \qquad A=\frac12\,ab\sin\gamma$$</p></div>
 
 <h2>Teorema della corda</h2>
 
-<div class="def"><span class="et">Teorema</span>
-<p>In una circonferenza la misura di una corda è uguale al prodotto della misura del
-diametro per il seno di uno degli angoli alla circonferenza che insistono sulla corda.</p>
-$$\overline{AB}=2r\sin\alpha$$
+<p>Corda $AB$ di una circonferenza di raggio $r$, vista da un punto $C$ della circonferenza sotto l'angolo $\alpha$:</p>
+
+<div class="fig">
+<svg id="f-corda" viewBox="0 0 240 200" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corda AB vista da un punto C mobile sulla circonferenza"></svg>
+<div class="cursore"><label for="s-c">$C$</label><input type="range" id="s-c" min="0" max="180" step="1" value="105"><span class="val" id="v-c">α = 50°</span></div>
+<p class="did">$C$ sull'arco maggiore: angolo in $C$ sempre uguale</p>
 </div>
 
-<figure class="disegno">
-<svg viewBox="0 0 200 170" width="100%" style="max-width:200px">
-<circle cx="100" cy="90" r="70" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-<line x1="35" y1="120" x2="70" y2="40" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="35" y1="120" x2="100" y2="90" stroke="var(--blu)" stroke-width="1.2" stroke-dasharray="3 3"/>
-<text x="94" y="86" font-size="11" fill="var(--blu)">r</text>
-<text x="20" y="128" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="66" y="34" font-size="13" fill="var(--inchiostro)">B</text>
-<text x="40" y="108" font-size="12" fill="var(--rosso)">&alpha;</text>
-<text x="10" y="140" font-size="12" fill="var(--inchiostro)">C</text>
-</svg>
-</figure>
+<div class="def"><span class="et">Teorema della corda</span>
+<p class="eq">$$\overline{AB}=2r\sin\alpha$$</p></div>
 
-<p><strong>Dimostrazione.</strong> Sia $D$ il punto diametralmente opposto a $B$, cosicché
-$\overline{BD}=2r$. Gli angoli $A\hat CB$ e $A\hat DB$ sono congruenti perché insistono
-sullo stesso arco $AB$. L'angolo $D\hat AB$ è retto perché insiste su una semicirconferenza.
-Nel triangolo rettangolo $DAB$, con ipotenusa $\overline{DB}=2r$ e angolo $\alpha$ in $D$,
-il primo teorema dà $\overline{AB}=\overline{DB}\sin\alpha=2r\sin\alpha$, c.v.d.</p>
+<p>Con $C$ sull'altro arco l'angolo è $180^\circ-\alpha$: stesso seno, stessa formula.</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 220 220" width="100%" style="max-width:230px">
-<circle cx="110" cy="110" r="85" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-<line x1="40" y1="170" x2="180" y2="70" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="40" y1="170" x2="55" y2="45" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="55" y1="45" x2="180" y2="70" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="40" y1="170" x2="12" y2="130" stroke="var(--inchiostro)" stroke-width="1"/>
-<rect x="34" y="150" width="15" height="15" fill="none" stroke="var(--inchiostro)" stroke-width="1" transform="rotate(-58 41.5 157.5)"/>
-<text x="18" y="182" font-size="13" fill="var(--inchiostro)">A</text>
-<text x="185" y="68" font-size="13" fill="var(--inchiostro)">B</text>
-<text x="45" y="38" font-size="13" fill="var(--inchiostro)">D</text>
-<text x="0" y="122" font-size="13" fill="var(--inchiostro)">C</text>
-<text x="52" y="140" font-size="12" fill="var(--rosso)">&alpha;</text>
-<text x="65" y="62" font-size="12" fill="var(--rosso)">&alpha;</text>
-</svg>
-<figcaption>$D$ è l'opposto di $B$ rispetto al centro: $A\hat CB\cong A\hat DB$ (stesso
-arco), e $D\hat AB=90^\circ$ (angolo su semicirconferenza).</figcaption>
-</figure>
+<p>Dimostrazione, con $D$ diametralmente opposto a $B$:</p>
 
+<ul>
+<li>$\overline{BD}=2r$;</li>
+<li>$A\hat DB=A\hat CB=\alpha$ (stesso arco $AB$);</li>
+<li>$D\hat AB=90^\circ$ (angolo su una semicirconferenza);</li>
+<li>primo teorema nel triangolo rettangolo $DAB$: $\overline{AB}=\overline{BD}\sin\alpha=2r\sin\alpha$.</li>
+</ul>
+
+<div class="fig">
+<svg id="f-dim" viewBox="0 0 240 200" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Costruzione della dimostrazione con il diametro BD"></svg>
+<p class="did">$A\hat DB=A\hat CB$; $\;D\hat AB=90^\circ$</p>
+</div>
 
 <nav class="nav-unita"><a class="precedente" href="../08-triangoli-rettangoli-primo-e-secondo-teorema/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Triangoli rettangoli: primo e secondo teorema</span></a><a class="successiva" href="../10-teorema-dei-seni-e-circonferenza-circoscritta/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema dei seni e circonferenza circoscritta</span></a></nav>
 <footer><p>Matematica quarta &middot; Trigonometria &middot; Unità 09</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+/* circonferenza goniometrica di centro (cx,cy) e raggio R, con assi */
+function Circ(p,cx,cy,R,m){m=m||14;
+  el('line',{x1:cx-R-m,y1:cy,x2:cx+R+m,y2:cy,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('line',{x1:cx,y1:cy-R-m,x2:cx,y2:cy+R+m,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5},p);
+  return {P:function(t,k){k=k===undefined?R:k;return [cx+k*Math.cos(t),cy-k*Math.sin(t)];},cx:cx,cy:cy,R:R};}
+function raggio(p,c,t,col){var q=c.P(t);
+  el('line',{x1:c.cx,y1:c.cy,x2:q[0],y2:q[1],stroke:col,'stroke-width':2},p);
+  el('circle',{cx:q[0],cy:q[1],r:4,fill:col},p);return q;}
+window.G={el:el,txt:txt,Circ:Circ,raggio:raggio};
+})();
+</script>
+<script>
+(function(){var G=window.G,PI=Math.PI,R='var(--rosso)',B='var(--blu)',I='var(--inchiostro)',Gr='var(--grigio)',V='var(--verde)';
+function ln(p,P,Q,col,w,da){var a={x1:P[0],y1:P[1],x2:Q[0],y2:Q[1],stroke:col,'stroke-width':w||1.5};if(da)a['stroke-dasharray']=da;return G.el('line',a,p);}
+function dir(P,Q){return Math.atan2(P[1]-Q[1],Q[0]-P[0]);}
+function arco(p,X,P1,P2,r,col,lab,lr,fs){var t1=dir(X,P1),d=dir(X,P2)-t1;while(d>PI)d-=2*PI;while(d<-PI)d+=2*PI;var s='',n=24;
+  for(var i=0;i<=n;i++){var t=t1+d*i/n;s+=(i?'L':'M')+(X[0]+r*Math.cos(t)).toFixed(1)+' '+(X[1]-r*Math.sin(t)).toFixed(1);}
+  G.el('path',{d:s,fill:'none',stroke:col,'stroke-width':1.3},p);
+  if(lab){var tm=t1+d/2;G.txt(p,X[0]+lr*Math.cos(tm),X[1]-lr*Math.sin(tm),lab,{'font-size':fs||12,fill:col,'text-anchor':'middle'});}}
+function un(P,Q){var dx=Q[0]-P[0],dy=Q[1]-P[1],l=Math.hypot(dx,dy);return [dx/l,dy/l];}
+function retto(p,X,P1,P2,l){var u=un(X,P1),v=un(X,P2);G.el('path',{d:'M'+(X[0]+l*u[0])+' '+(X[1]+l*u[1])+' L'+(X[0]+l*u[0]+l*v[0])+' '+(X[1]+l*u[1]+l*v[1])+' L'+(X[0]+l*v[0])+' '+(X[1]+l*v[1]),fill:'none',stroke:I,'stroke-width':1.1},p);}
+function scr(p,P,s,o){return G.txt(p,P[0],P[1],s,Object.assign({'font-size':13,'text-anchor':'middle'},o||{}));}
+function fuori(P,Q,k){var u=un(Q,P);return [P[0]+k*u[0],P[1]+k*u[1]];}
+function lato(p,P,Q,ref,s,col,k){var M=[(P[0]+Q[0])/2,(P[1]+Q[1])/2];scr(p,fuori(M,ref,k||10),s,{fill:col||I,'font-style':'italic'});}
+function pt(c,t){return [c[0]+c[2]*Math.cos(t*PI/180),c[1]-c[2]*Math.sin(t*PI/180)];}
+function f2(v){return v.toFixed(2).replace('.',',');}
+function vuota(g){while(g.firstChild)g.removeChild(g.firstChild);}
+
+/* notazione */
+var s=document.getElementById('f-tri'),A=[30,135],Bp=[195,135],C=[125,25],Gc=[(A[0]+Bp[0]+C[0])/3,(A[1]+Bp[1]+C[1])/3];
+G.el('polygon',{points:A+' '+Bp+' '+C,fill:'none',stroke:I,'stroke-width':1.8},s);
+arco(s,A,Bp,C,22,R,'α',33);arco(s,Bp,C,A,20,R,'β',31);arco(s,C,A,Bp,18,R,'γ',29);
+lato(s,Bp,C,Gc,'a');lato(s,A,C,Gc,'b');lato(s,A,Bp,Gc,'c',I,11);
+scr(s,fuori(A,Gc,12),'A');scr(s,fuori(Bp,Gc,12),'B');scr(s,fuori(C,Gc,11),'C');
+/* altezza: alfa acuto e ottuso */
+var q=document.getElementById('f-alt');
+function pann(A,Bp,C){var H=[C[0],A[1]],Gc=[(A[0]+Bp[0]+C[0])/3,(A[1]+Bp[1]+C[1])/3];
+  if(H[0]<A[0])ln(q,H,A,Gr,1,'2 3');
+  G.el('polygon',{points:A+' '+Bp+' '+C,fill:'none',stroke:I,'stroke-width':1.8},q);
+  ln(q,C,H,B,2,'4 3');retto(q,H,C,H[0]<A[0]?A:Bp,9);
+  arco(q,A,Bp,C,20,R,'α',30);
+  if(H[0]<A[0])arco(q,A,C,H,14,Gr,'180°−α',47,11);
+  lato(q,A,C,Gc,'b');
+  scr(q,fuori(A,Gc,12),'A');scr(q,fuori(Bp,Gc,12),'B');scr(q,[C[0],C[1]-11],'C');scr(q,[H[0],H[1]+14],'H',{fill:Gr});
+  scr(q,[C[0]+(H[0]<A[0]?-16:16),(C[1]+H[1])/2],'CH',{fill:B,'font-size':12});}
+pann([20,135],[195,135],[95,30]);
+pann([335,135],[425,135],[265,35]);
+/* teorema della corda con C mobile */
+var O=[120,100,80],tA=220,tB=320;
+function base(p){G.el('circle',{cx:O[0],cy:O[1],r:O[2],fill:'none',stroke:I,'stroke-width':1.3},p);
+  G.el('circle',{cx:O[0],cy:O[1],r:2.5,fill:I},p);}
+var c=document.getElementById('f-corda');base(c);
+var PA=pt(O,tA),PB=pt(O,tB);
+ln(c,O,PB,Gr,1,'3 3');scr(c,[O[0]+22,O[1]+6],'r',{fill:Gr,'font-style':'italic','font-size':12});scr(c,[O[0]-9,O[1]-7],'O',{fill:Gr,'font-size':11});
+ln(c,PA,PB,B,3);scr(c,fuori(PA,O,13),'A');scr(c,fuori(PB,O,13),'B');
+var g=G.el('g',{},c),inp=document.getElementById('s-c'),va=document.getElementById('v-c');
+function dis(){var t=parseFloat(inp.value),PC=pt(O,t);vuota(g);
+  ln(g,PC,PA,I,1.6);ln(g,PC,PB,I,1.6);arco(g,PC,PA,PB,20,R,'α',31);
+  G.el('circle',{cx:PC[0],cy:PC[1],r:4,fill:R},g);scr(g,fuori(PC,O,13),'C');
+  var u=un(PC,PA),v=un(PC,PB),ang=Math.acos(u[0]*v[0]+u[1]*v[1])*180/PI;va.textContent='α = '+Math.round(ang)+'°';}
+inp.addEventListener('input',dis);dis();
+/* dimostrazione */
+var d=document.getElementById('f-dim');base(d);
+var PC=pt(O,75),PD=pt(O,140);
+ln(d,PB,PD,I,1.6);ln(d,PD,PA,I,1.6);ln(d,PC,PA,Gr,1.2);ln(d,PC,PB,Gr,1.2);ln(d,PA,PB,B,3);
+retto(d,PA,PD,PB,10);arco(d,PC,PA,PB,20,R,'α',31);arco(d,PD,PA,PB,20,R,'α',31);
+var M=[(PB[0]+PD[0])/2,(PB[1]+PD[1])/2];scr(d,[M[0]+10,M[1]-12],'2r',{'font-style':'italic','font-size':12});
+scr(d,fuori(PA,O,13),'A');scr(d,fuori(PB,O,13),'B');scr(d,fuori(PC,O,13),'C');scr(d,fuori(PD,O,13),'D');
+})();
+</script>
 </body>
 </html>
