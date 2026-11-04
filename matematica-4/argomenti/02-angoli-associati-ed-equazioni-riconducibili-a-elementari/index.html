@@ -5,24 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Angoli associati ed equazioni riconducibili a elementari — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.riquadri{display:flex;gap:20px;flex-wrap:wrap;margin:20px 0}
-.riquadro{flex:1;min-width:170px;text-align:center}
-.riquadro svg{max-width:170px}
-.riquadro p{font-family:var(--sans);font-size:.86rem;color:#4a5a6d;margin:6px 0 0}
-.figura{text-align:center;margin:20px 0}
-.figura svg{max-width:320px}
-.passi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 22px;margin:24px 0}
-.passi li{margin:6px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -32,129 +55,125 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Goniometria &middot; Unità 02</p>
   <h1>Angoli associati ed equazioni riconducibili a elementari</h1>
-  <p class="sommario">Quando l'incognita compare due volte, dentro la stessa funzione
-  goniometrica ma con argomenti diversi, non serve passare per il valore numerico: si
-  confrontano direttamente i due angoli.</p>
 </header>
 
-<h2>Stesso seno</h2>
+<p>Stessa funzione goniometrica ai due membri, con argomenti diversi: si confrontano direttamente gli angoli.</p>
 
-<p>Sulla circonferenza goniometrica due angoli hanno lo stesso seno se sono uguali a meno di
-giri interi, oppure se sono supplementari a meno di giri interi: la regola era</p>
-
-$$\sin\alpha=\sin\alpha' \iff \alpha=\alpha'+2k\pi \;\vee\; \alpha=\pi-\alpha'+2k\pi$$
-
-<div class="figura">
-<svg viewBox="0 0 380 200">
-<line x1="10" y1="100" x2="180" y2="100" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="95" y1="10" x2="95" y2="190" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="95" cy="100" r="75" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="95" y1="100" x2="150" y2="49" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="95" y1="100" x2="40" y2="49" stroke="var(--blu)" stroke-width="2"/>
-<text x="140" y="70" font-size="13" fill="var(--rosso)">&alpha;'</text>
-<text x="50" y="70" font-size="13" fill="var(--blu)">&alpha;</text>
-<line x1="200" y1="100" x2="370" y2="100" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="285" y1="10" x2="285" y2="190" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="285" cy="100" r="75" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="285" y1="100" x2="215" y2="55" stroke="var(--rosso)" stroke-width="2"/>
-<line x1="285" y1="100" x2="330" y2="35" stroke="var(--blu)" stroke-width="2"/>
-<text x="215" y="75" font-size="13" fill="var(--rosso)">&alpha;'</text>
-<text x="300" y="45" font-size="13" fill="var(--blu)">&alpha;</text>
-</svg>
-</div>
-
-<p><strong>Esempio.</strong> Risolviamo $\sin\!\left(\dfrac12x-\dfrac{\pi}{2}\right)=
-\sin\!\left(\dfrac14x-\dfrac{\pi}{4}\right)$. Applichiamo la regola con $\alpha=\frac12x-\frac{\pi}2$
-e $\alpha'=\frac14x-\frac{\pi}4$, distinguendo i due casi:</p>
-
-$$\tfrac12x-\tfrac{\pi}2=\tfrac14x-\tfrac{\pi}4+2k\pi \quad\vee\quad
-\tfrac12x-\tfrac{\pi}2=\pi-\left(\tfrac14x-\tfrac{\pi}4\right)+2k\pi$$
-
-<p>Nel primo caso $\frac14x=\frac{\pi}4+2k\pi$, quindi $x=\pi+8k\pi$. Nel secondo caso
-$\frac34x=\frac74\pi+2k\pi$, quindi:</p>
-
-$$x=\pi+8k\pi \quad\vee\quad x=\tfrac73\pi+\tfrac83k\pi$$
-
-<h2>Stesso coseno</h2>
-
-<p>Due angoli con lo stesso coseno sono uguali oppure opposti, sempre a meno di giri interi:</p>
-
-<div class="def">
-<span class="et">Angoli associati &middot; stesso coseno</span>
-$$\cos\alpha=\cos\alpha' \iff \alpha=\alpha'+2k\pi \;\vee\; \alpha=-\alpha'+2k\pi$$
-</div>
-
-<p><strong>Esempio.</strong> Con $\cos\!\left(\frac34\pi-4x\right)=\cos\!\left(2x-\frac{\pi}3\right)$,
-poniamo $\alpha=\frac34\pi-4x$ e $\alpha'=2x-\frac{\pi}3$:</p>
-
-$$\tfrac34\pi-4x=2x-\tfrac{\pi}3+2k\pi \quad\vee\quad \tfrac34\pi-4x=-\left(2x-\tfrac{\pi}3\right)+2k\pi$$
-
-<p>Il primo caso dà $-6x=-\frac{13}{12}\pi+2k\pi$, cioè $x=\frac{13}{72}\pi-\frac{k}3\pi$. Il
-secondo dà $-2x=-\frac5{12}\pi+2k\pi$, cioè:</p>
-
-$$x=\tfrac{13}{72}\pi-\tfrac{k}3\pi \quad\vee\quad x=\tfrac5{24}\pi-k\pi$$
-
-<h2>Stessa tangente</h2>
-
-<div class="def">
-<span class="et">Angoli associati &middot; stessa tangente</span>
-$$\tan\alpha=\tan\alpha' \iff \alpha=\alpha'+k\pi$$
-</div>
-
-<p>Qui il periodo è $\pi$ e non $2\pi$: basta un'unica famiglia di soluzioni. Va però imposta la
-condizione di esistenza della tangente su entrambi gli angoli:</p>
-
-<div class="nota">
-<span class="et">Condizioni di esistenza</span>
-<p>$\alpha\ne\frac{\pi}2+k\pi$ e $\alpha'\ne\frac{\pi}2+k\pi$, altrimenti la tangente non è
-definita.</p>
-</div>
-
-<p><strong>Esempio.</strong> $\tan x=\tan\!\left(2x+\frac{\pi}4\right) \Rightarrow
-x=2x+\frac{\pi}4+k\pi \Rightarrow -x=\frac{\pi}4+k\pi$, quindi $x=-\frac{\pi}4-k\pi$.</p>
-
-<h2>Quando le funzioni sono diverse</h2>
-
-<p>Se ai due lati dell'uguaglianza non compare la stessa funzione goniometrica, conviene
-ricondursi a uno dei tre casi appena visti tramite le formule degli angoli associati:</p>
-
-<div class="passi">
 <ul>
-<li>$\sin\alpha=\cos\alpha' \;\Rightarrow\; \sin\alpha=\sin\!\left(\frac{\pi}2-\alpha'\right)$</li>
-<li>$\sin\alpha=-\sin\alpha' \;\Rightarrow\; \sin\alpha=\sin(-\alpha')$</li>
-<li>$\sin\alpha=-\cos\alpha' \;\Rightarrow\; \sin\alpha=\sin\!\left(\alpha'-\frac{\pi}2\right)$</li>
-<li>$\cos\alpha=-\cos\alpha' \;\Rightarrow\; \cos\alpha=\cos(\pi-\alpha')$</li>
-<li>$\tan\alpha=-\tan\alpha' \;\Rightarrow\; \tan\alpha=\tan(-\alpha')$</li>
+<li>stesso seno → angoli uguali o supplementari, a meno di giri interi;</li>
+<li>stesso coseno → angoli uguali o opposti, a meno di giri interi;</li>
+<li>stessa tangente → angoli uguali a meno di multipli di $\pi$.</li>
 </ul>
+
+<div class="fig">
+<svg id="f-seno" viewBox="0 0 400 200" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Due coppie di angoli supplementari con lo stesso seno"></svg>
+<div class="did-parti" style="--n:2;max-width:420px;margin:6px auto 0">
+<p class="did">$\alpha'$ nel I quadrante</p>
+<p class="did">$\alpha'$ nel II quadrante</p>
+</div>
 </div>
 
-<h2>Equazioni riconducibili a equazioni elementari</h2>
+<div class="def"><span class="et">Angoli associati</span>
+<p class="eq">$$\sin\alpha=\sin\alpha' \iff \alpha=\alpha'+2k\pi \;\vee\; \alpha=\pi-\alpha'+2k\pi$$</p>
+<p class="eq">$$\cos\alpha=\cos\alpha' \iff \alpha=\alpha'+2k\pi \;\vee\; \alpha=-\alpha'+2k\pi$$</p>
+<p class="eq">$$\tan\alpha=\tan\alpha' \iff \alpha=\alpha'+k\pi$$</p>
+<p>Per la tangente, condizioni di esistenza: $\alpha\ne\frac{\pi}{2}+k\pi$ e $\alpha'\ne\frac{\pi}{2}+k\pi$.</p></div>
 
-<p>Un'equazione con più funzioni goniometriche diverse dello stesso angolo si può, in molti
-casi, ricondurre a una sola funzione incognita.</p>
+<h2>Esempio 1</h2>
 
-<div class="passi">
+<p>Risolvere $\sin\!\left(\frac12x-\frac{\pi}{2}\right)=\sin\!\left(\frac14x-\frac{\pi}{4}\right)$.</p>
+
+<p class="eq">$$\tfrac12x-\tfrac{\pi}2=\tfrac14x-\tfrac{\pi}4+2k\pi \quad\vee\quad \tfrac12x-\tfrac{\pi}2=\pi-\left(\tfrac14x-\tfrac{\pi}4\right)+2k\pi$$</p>
+
+<p class="eq">$$\tfrac14x=\tfrac{\pi}4+2k\pi \quad\vee\quad \tfrac34x=\tfrac74\pi+2k\pi$$</p>
+
+<p class="eq">$$x=\pi+8k\pi \quad\vee\quad x=\tfrac73\pi+\tfrac83k\pi$$</p>
+
+<h2>Funzioni diverse ai due membri</h2>
+
+<p>Con gli angoli associati ci si riconduce alla stessa funzione:</p>
+
+<ul>
+<li>$\sin\alpha=\cos\alpha' \;\Rightarrow\; \sin\alpha=\sin\!\left(\frac{\pi}2-\alpha'\right)$;</li>
+<li>$\sin\alpha=-\sin\alpha' \;\Rightarrow\; \sin\alpha=\sin(-\alpha')$;</li>
+<li>$\sin\alpha=-\cos\alpha' \;\Rightarrow\; \sin\alpha=\sin\!\left(\alpha'-\frac{\pi}2\right)$;</li>
+<li>$\cos\alpha=-\cos\alpha' \;\Rightarrow\; \cos\alpha=\cos(\pi-\alpha')$;</li>
+<li>$\tan\alpha=-\tan\alpha' \;\Rightarrow\; \tan\alpha=\tan(-\alpha')$.</li>
+</ul>
+
+<h2>Equazioni riconducibili a elementari</h2>
+
+<p>Più funzioni goniometriche dello stesso angolo:</p>
+
 <ol>
-<li>Esprimere le diverse funzioni goniometriche mediante una sola di esse, usando le identità
-note.</li>
-<li>Risolvere l'equazione ottenuta rispetto a quella funzione, trattata come un'incognita a sé.</li>
-<li>Risolvere le equazioni elementari così ottenute.</li>
+<li>tutte espresse con una sola funzione, tramite le identità note;</li>
+<li>equazione risolta rispetto a quella funzione, come incognita;</li>
+<li>equazioni elementari risolte.</li>
 </ol>
-</div>
 
-<p><strong>Esempio.</strong> $2\sin^2x+5\cos x-4=0$. Sostituendo $\sin^2x=1-\cos^2x$:</p>
+<h2>Esempio 2</h2>
 
-$$2(1-\cos^2x)+5\cos x-4=0 \;\Longrightarrow\; 2\cos^2x-5\cos x+2=0$$
+<p>Risolvere $2\sin^2x+5\cos x-4=0$, con $\sin^2x=1-\cos^2x$.</p>
 
-<p>Con $\Delta=25-16=9$ si ottiene $\cos x=\dfrac{5\pm3}4$, cioè $\cos x=2$ oppure
-$\cos x=\dfrac12$. Il primo valore è impossibile perché il coseno non supera $1$; resta:</p>
+<p class="eq">$$2(1-\cos^2x)+5\cos x-4=0 \;\Longrightarrow\; 2\cos^2x-5\cos x+2=0$$</p>
 
-$$\cos x=\tfrac12 \;\Longrightarrow\; x=\pm\tfrac{\pi}3+2k\pi$$
+<p class="eq">$$\Delta=25-16=9 \qquad \cos x=\frac{5\pm3}{4} \;\Longrightarrow\; \cos x=2 \;\vee\; \cos x=\tfrac12$$</p>
 
+<p>$\cos x=2$ impossibile (il coseno non supera $1$):</p>
+
+<p class="eq">$$\cos x=\tfrac12 \;\Longrightarrow\; x=\pm\tfrac{\pi}3+2k\pi$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../01-equazioni-goniometriche-elementari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Equazioni goniometriche elementari</span></a><a class="successiva" href="../03-equazioni-lineari-in-seno-e-coseno/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni lineari in seno e coseno</span></a></nav>
 <footer><p>Matematica quarta &middot; Goniometria &middot; Unità 02</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+/* circonferenza goniometrica di centro (cx,cy) e raggio R, con assi */
+function Circ(p,cx,cy,R,m){m=m||14;
+  el('line',{x1:cx-R-m,y1:cy,x2:cx+R+m,y2:cy,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('line',{x1:cx,y1:cy-R-m,x2:cx,y2:cy+R+m,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5},p);
+  return {P:function(t,k){k=k===undefined?R:k;return [cx+k*Math.cos(t),cy-k*Math.sin(t)];},cx:cx,cy:cy,R:R};}
+function raggio(p,c,t,col){var q=c.P(t);
+  el('line',{x1:c.cx,y1:c.cy,x2:q[0],y2:q[1],stroke:col,'stroke-width':2},p);
+  el('circle',{cx:q[0],cy:q[1],r:4,fill:col},p);return q;}
+window.G={el:el,txt:txt,Circ:Circ,raggio:raggio};
+})();
+</script>
+<script>
+(function(){var G=window.G;
+var s=document.getElementById('f-seno');
+[[100,43],[300,147]].forEach(function(z){
+  var c=G.Circ(s,z[0],100,72,14), a1=z[1]*Math.PI/180, a2=Math.PI-a1;
+  var P=c.P(a1), Q=c.P(a2);
+  G.el('line',{x1:Q[0],y1:Q[1],x2:P[0],y2:P[1],stroke:'var(--verde)','stroke-width':1.6,'stroke-dasharray':'5 4'},s);
+  G.raggio(s,c,a1,'var(--rosso)');G.raggio(s,c,a2,'var(--blu)');
+  var L1=c.P(a1,c.R+14), L2=c.P(a2,c.R+14);
+  G.txt(s,L1[0],L1[1],"α'",{fill:'var(--rosso)','text-anchor':'middle'});
+  G.txt(s,L2[0],L2[1],'α',{fill:'var(--blu)','text-anchor':'middle'});
+});
+})();
+</script>
 </body>
 </html>
