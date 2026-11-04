@@ -4,11 +4,13 @@
 - Parole: 631 su 6 pagine di traccia
 - Rettifica: nessuna, i calcoli (sin x=√3/2, cos x=-1/2, tan x=√3/3) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna.
+- Revisione (04/11/2026, regole 13/10): parole circa 516 → 140 (formule $$ e didascalie escluse). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, titoletto «Che cos'è un'equazione goniometrica», prosa ripetuta e nota sulla tangente (ridotta a voce d'elenco); definizione ed esempi/controesempi in elenco, tre forme elementari in .eq, casi in forma caso → conseguenza, soluzione generale di sin e cos in .def con le condizioni −1 ≤ a ≤ 1, −1 ≤ b ≤ 1; titoletti brevi $\sin x=a$, $\cos x=b$, $\tan x=c$, «Angoli con lo stesso seno». Nessuna comparsa da togliere. Correzioni: la figura della tangente mostrava l'angolo π/4 (punto e retta a 45°) invece di π/6; per sin x = 0 la frase «la retta tocca la circonferenza in un solo punto» era errata (due punti, 0 e π): ora «basta una sola famiglia di soluzioni». Calcoli verificati con SymPy. Figure rifatte da script: circonferenza con cursore a in [−1,3; 1,3] (punti x₁, x₂, valori in rad, «impossibile» per |a| > 1), tre casi particolari, cos x = −1/2, tan x = √3/3 con i due punti opposti. Nessun esempio tolto (i tre casi svolti sono legati alle figure), nessuna figura decorativa.
 
 ## Unità 02 — Angoli associati ed equazioni riconducibili a elementari
 - Parole: 335 (prosa, formule escluse) su 5 pagine di traccia
 - Rettifica: nessuna, tutti i passaggi (i due esempi su seno e coseno con angoli associati, l'esempio con tangente, l'esempio 2sin²x+5cosx-4=0) sono stati verificati con SymPy e coincidono con la traccia.
 - Aggiunta: nessuna.
+- Revisione (04/11/2026, regole 13/10): parole circa 283 → 137 (formule $$ e didascalie escluse). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, rimando «la regola era», titoletti «Stesso seno», «Stesso coseno», «Stessa tangente» (le tre regole ora in elenco e in un unico .def «Angoli associati», con le condizioni di esistenza della tangente); tenuti «Funzioni diverse ai due membri», «Equazioni riconducibili a elementari», «Esempio 1», «Esempio 2»; procedimento in tre voci brevi. Esempi tolti (regola dei due esempi): cos(3π/4 − 4x) = cos(2x − π/3) → x = 13π/72 − kπ/3 ∨ x = 5π/24 − kπ, e tan x = tan(2x + π/4) → x = −π/4 − kπ. Nessuna comparsa da togliere. Correzione: nella figura il pannello destro mostrava angoli di circa 147° e 55°, non supplementari (seni diversi); ridisegnata da script con α' = 43°, 147° e α = π − α' (stessa altezza, segmento tratteggiato). Calcoli e identità verificati con SymPy. Nessuna figura decorativa.
 
 ## Unità 03 — Equazioni lineari in seno e coseno
 - Parole: 543 (prosa e formule) su 7 pagine di traccia
