@@ -161,6 +161,7 @@
 - Parole: 348 su circa 1,5 pagine di traccia reale (87–88, la seconda metà di pagina 87 dopo il baricentro dell'unità 17, fino a prima dell'equazione del piano che apre l'unità 19)
 - Rettifica: nessuna. Verificato con SymPy: dati u(2;1;-2) e v(1;-2;0), u+v=(3;-1;-2), |u|=3, u·v=0 (perpendicolari), coincide con quanto riportato in pagina.
 - Aggiunta: un esempio numerico (somma, modulo, prodotto scalare e verifica di perpendicolarità), perché la traccia in queste pagine definisce le operazioni ma non le applica a numeri.
+- Revisione (04/11/2026, regole 13/10): parole circa 243 → 87 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario (con rimando all'unità successiva), prosa e titoletti «Componenti e modulo», «Vettore individuato da due punti»; modulo e somma in una .eq, vettore AB con |AB| = AB in una .eq; titoletto «Prodotto scalare» tenuto; condizione di perpendicolarità in .def con l'ipotesi «vettori non nulli»; esempio con «Dati: … Calcolare …» e due .eq. Nessuna comparsa da togliere, nessun esempio tolto. Nessuna correzione concettuale (ricalcolati u+v = (3; −1; −2), |u| = 3, u·v = 0). Figura rifatta da script (prima SVG fisso con le componenti tracciate a occhio): versori i, j, k e vettore a = (2; 4; 3) con le componenti tratteggiate, proiezione obliqua calcolata. Nessuna figura decorativa.
 
 ## Unità 19 — Il piano: equazione generale e casi particolari
 - Parole: 506 su circa 3 pagine di traccia (seconda metà di pagina 88, pagine 89–90, prima metà di pagina 91)
