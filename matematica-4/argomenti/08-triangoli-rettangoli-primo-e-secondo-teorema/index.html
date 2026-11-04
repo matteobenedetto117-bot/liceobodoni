@@ -5,25 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Triangoli rettangoli: primo e secondo teorema — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:24px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto}
-.coppia{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:flex-start}
-.coppia svg{max-width:230px}
-.problemi{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:22px 0 30px}
-.problema{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px}
-.problema .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rosso);display:block;margin-bottom:8px}
-.problema svg{display:block;margin:6px auto 10px}
-.problema p{margin:5px 0;font-size:.96rem}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -33,181 +55,178 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Trigonometria &middot; Unità 08</p>
   <h1>Triangoli rettangoli: primo e secondo teorema</h1>
-  <p class="sommario">In un triangolo rettangolo un lato è sempre determinato dagli altri
-  dati insieme a un angolo acuto: bastano seno, coseno, tangente o cotangente per
-  ricavarlo. Due teoremi racchiudono tutte le combinazioni possibili e permettono di
-  risolvere il triangolo — cioè trovare tutti i lati e tutti gli angoli — a partire da
-  pochissimi dati.</p>
 </header>
 
-<h2>Notazione</h2>
+<p>Triangolo rettangolo: come si ricavano lati e angoli mancanti con le funzioni goniometriche?</p>
 
-<p>Indichiamo con $\alpha$ e $\beta$ i due angoli acuti e con $\gamma$ l'angolo retto; $a$
-e $b$ sono i cateti, opposti rispettivamente ad $\alpha$ e a $\beta$, e $c$ è l'ipotenusa,
-opposta a $\gamma$.</p>
+<ul>
+<li>$\alpha$, $\beta$ angoli acuti, $\gamma=90^\circ$;</li>
+<li>$a$, $b$ cateti, opposti ad $\alpha$ e a $\beta$;</li>
+<li>$c$ ipotenusa.</li>
+</ul>
 
-<figure class="disegno">
-<svg viewBox="0 0 260 170" width="100%" style="max-width:300px">
-<polygon points="30,150 230,150 230,40" fill="none" stroke="var(--inchiostro)" stroke-width="2"/>
-<path d="M 55 150 L 55 135 L 40 135 M 55 150 L 55 135" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<rect x="212" y="132" width="18" height="18" fill="none" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<path d="M 74 150 A 44 44 0 0 0 55 116" fill="none" stroke="var(--rosso)" stroke-width="1.2"/>
-<path d="M 230 78 A 38 38 0 0 1 199 62" fill="none" stroke="var(--blu)" stroke-width="1.2"/>
-<text x="45" y="140" font-size="13" fill="var(--rosso)">&alpha;</text>
-<text x="207" y="70" font-size="13" fill="var(--blu)">&beta;</text>
-<text x="198" y="143" font-size="11" fill="var(--inchiostro)">&gamma;</text>
-<text x="125" y="168" font-size="13" fill="var(--inchiostro)">b</text>
-<text x="242" y="98" font-size="13" fill="var(--inchiostro)">a</text>
-<text x="110" y="88" font-size="13" fill="var(--inchiostro)">c</text>
-</svg>
-</figure>
+<div class="fig">
+<svg id="f-not" viewBox="0 0 260 160" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo rettangolo con angoli alfa, beta, gamma e lati a, b, c"></svg>
+<p class="did">Notazione</p>
+</div>
 
 <h2>Primo teorema</h2>
 
-<div class="def"><span class="et">Primo teorema dei triangoli rettangoli</span>
-<p>In ogni triangolo rettangolo, ciascun cateto è uguale al prodotto dell'ipotenusa per il
-seno dell'angolo ad esso opposto, oppure per il coseno dell'angolo ad esso adiacente.</p>
-$$a=c\sin\alpha=c\cos\beta \qquad\qquad b=c\cos\alpha=c\sin\beta$$
-</div>
+<p>Cateto = ipotenusa × seno dell'angolo opposto (o coseno dell'angolo adiacente):</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 240 200" width="100%" style="max-width:260px">
-<line x1="10" y1="150" x2="230" y2="150" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="120" y1="20" x2="120" y2="180" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="120" cy="150" r="95" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-<line x1="120" y1="150" x2="197" y2="95" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="197" y1="150" x2="197" y2="95" stroke="var(--rosso)" stroke-width="2.2"/>
-<line x1="120" y1="150" x2="197" y2="150" stroke="var(--blu)" stroke-width="2.2"/>
-<path d="M 150 150 A 30 30 0 0 0 141 128" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="158" y="145" font-size="12" fill="var(--inchiostro)">&alpha;</text>
-<text x="163" y="118" font-size="13" fill="var(--inchiostro)">c</text>
-<text x="204" y="125" font-size="13" fill="var(--rosso)">a</text>
-<text x="157" y="167" font-size="13" fill="var(--blu)">b</text>
-</svg>
-<figcaption>L'ipotenusa è il raggio $c$ della circonferenza goniometrica centrata nel
-vertice di $\alpha$: il punto sulla circonferenza ha coordinate $(c\cos\alpha,\,c\sin\alpha)$,
-cioè proprio i due cateti $b$ e $a$.</figcaption>
-</figure>
+<div class="def"><span class="et">Primo teorema dei triangoli rettangoli</span>
+<p class="eq">$$a=c\sin\alpha=c\cos\beta \qquad b=c\cos\alpha=c\sin\beta$$</p></div>
+
+<div class="fig">
+<svg id="f-primo" viewBox="0 0 240 190" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ipotenusa come raggio di una circonferenza centrata nel vertice di alfa; i cateti sono le coordinate del punto"></svg>
+<div class="cursore"><label for="s-al">$\alpha$</label><input type="range" id="s-al" min="20" max="70" step="1" value="35"><span class="val" id="v-al">35°</span></div>
+<p class="did" id="l-primo">c = 1 · a = c sin α ≈ 0,574 · b = c cos α ≈ 0,819</p>
+<p class="did">Ipotenusa $c$ = raggio: punto $(c\cos\alpha,\;c\sin\alpha)=(b,\;a)$</p>
+</div>
 
 <h2>Secondo teorema</h2>
 
+<p>Cateto = altro cateto × tangente dell'angolo opposto (o cotangente dell'angolo adiacente):</p>
+
 <div class="def"><span class="et">Secondo teorema dei triangoli rettangoli</span>
-<p>In ogni triangolo rettangolo, ciascun cateto è uguale al prodotto dell'altro cateto per
-la tangente dell'angolo ad esso opposto, oppure per la cotangente dell'angolo ad esso
-adiacente.</p>
-$$a=b\tan\alpha=b\cot\beta \qquad\qquad b=a\tan\beta=a\cot\alpha$$
+<p class="eq">$$a=b\tan\alpha=b\cot\beta \qquad b=a\tan\beta=a\cot\alpha$$</p></div>
+
+<div class="fig">
+<svg id="f-secondo" viewBox="0 0 440 190" style="width:100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Segmenti di tangente e di cotangente su circonferenze di raggio b e di raggio a"></svg>
+<div class="did-parti" style="--n:2">
+<p class="did">Raggio $b$: $a=b\tan\alpha$</p>
+<p class="did">Raggio $a$: $b=a\cot\alpha$</p>
+</div>
 </div>
 
-<figure class="disegno">
-<div class="coppia">
-<svg viewBox="0 0 220 200" width="100%">
-<line x1="10" y1="150" x2="210" y2="150" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="110" y1="20" x2="110" y2="180" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="110" cy="150" r="80" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-<line x1="190" y1="150" x2="190" y2="55" stroke="var(--blu)" stroke-width="1.4" stroke-dasharray="3 3"/>
-<line x1="110" y1="150" x2="190" y2="90" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="190" y1="150" x2="190" y2="90" stroke="var(--rosso)" stroke-width="2.2"/>
-<path d="M 140 150 A 30 30 0 0 0 133 129" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="146" y="146" font-size="12" fill="var(--inchiostro)">&alpha;</text>
-<text x="150" y="167" font-size="13" fill="var(--blu)">b</text>
-<text x="197" y="122" font-size="13" fill="var(--rosso)">a</text>
-</svg>
-<svg viewBox="0 0 220 200" width="100%">
-<line x1="10" y1="150" x2="210" y2="150" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="110" y1="20" x2="110" y2="180" stroke="var(--inchiostro)" stroke-width="1"/>
-<circle cx="110" cy="150" r="80" fill="none" stroke="var(--riga)" stroke-width="1.2"/>
-<line x1="10" y1="70" x2="205" y2="70" stroke="var(--rosso)" stroke-width="1.4" stroke-dasharray="3 3"/>
-<line x1="110" y1="150" x2="150" y2="70" stroke="var(--inchiostro)" stroke-width="1.4"/>
-<line x1="110" y1="70" x2="150" y2="70" stroke="var(--blu)" stroke-width="2.2"/>
-<path d="M 110 120 A 30 30 0 0 1 122 124" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="118" y="112" font-size="12" fill="var(--inchiostro)">&alpha;</text>
-<text x="94" y="105" font-size="13" fill="var(--rosso)">a</text>
-<text x="126" y="63" font-size="13" fill="var(--blu)">b</text>
-</svg>
-</div>
-<figcaption>A sinistra $b$ è il raggio della circonferenza: il segmento di tangente
-verticale misura $a=b\tan\alpha$. A destra è $a$ a fare da raggio, e il segmento di
-tangente orizzontale misura $b=a\cot\alpha$.</figcaption>
-</figure>
+<h2>Risoluzione</h2>
 
-<h2>Risoluzione di un triangolo rettangolo</h2>
+<p>Trovare tutti i lati e gli angoli: servono due dati, di cui almeno un lato.</p>
 
-<p>Risolvere un triangolo rettangolo vuol dire trovare tutti i lati e gli angoli mancanti:
-bastano due dati, di cui almeno un lato, applicando i due teoremi e — quando serve
-l'ipotenusa a partire dai due cateti — il teorema di Pitagora.</p>
+<ul>
+<li>primo e secondo teorema;</li>
+<li>$\beta=90^\circ-\alpha$;</li>
+<li>Pitagora: $c^2=a^2+b^2$.</li>
+</ul>
 
-<div class="problemi">
+<h2>Esempio 1</h2>
 
-<div class="problema">
-<span class="et">Esempio 1</span>
-<svg viewBox="0 0 140 100" width="100%" style="max-width:150px">
-<polygon points="15,85 125,85 125,15" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="112" y="72" width="13" height="13" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="65" y="98" font-size="11" fill="var(--blu)">b = 110</text>
-<text x="130" y="52" font-size="11" fill="var(--blu)">a = 40</text>
-<text x="18" y="78" font-size="10" fill="var(--rosso)">&alpha;?</text>
-<text x="108" y="26" font-size="10" fill="var(--rosso)">&beta;?</text>
-<text x="55" y="45" font-size="10" fill="var(--rosso)">c?</text>
-</svg>
-<p>$\tan\alpha=\dfrac{a}b=\dfrac{40}{110} \Rightarrow \alpha=\arctan\dfrac{40}{110}\approx20^\circ$</p>
-<p>$\beta=90^\circ-\alpha\approx70^\circ$</p>
-<p>$c=\sqrt{a^2+b^2}\approx117$</p>
+<p>Dati: $a=40$, $b=110$. Calcolare $\alpha$, $\beta$, $c$.</p>
+
+<div class="fig">
+<svg id="f-es1" viewBox="0 0 220 110" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo con i due cateti noti"></svg>
 </div>
 
-<div class="problema">
-<span class="et">Esempio 2</span>
-<svg viewBox="0 0 140 100" width="100%" style="max-width:150px">
-<polygon points="15,85 125,85 125,15" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="112" y="72" width="13" height="13" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="65" y="98" font-size="11" fill="var(--rosso)">b?</text>
-<text x="130" y="52" font-size="11" fill="var(--blu)">a = 21,13</text>
-<text x="18" y="78" font-size="10" fill="var(--rosso)">&alpha;?</text>
-<text x="108" y="26" font-size="10" fill="var(--rosso)">&beta;?</text>
-<text x="50" y="45" font-size="10" fill="var(--blu)">c = 50</text>
-</svg>
-<p>$\sin\alpha=\dfrac{a}c=\dfrac{21{,}13}{50} \Rightarrow \alpha=\arcsin\dfrac{21{,}13}{50}\approx25^\circ$</p>
-<p>$\beta=90^\circ-\alpha\approx65^\circ$</p>
-<p>$b=\sqrt{c^2-a^2}\approx45{,}3$</p>
+<p class="eq">$$\tan\alpha=\frac ab=\frac{40}{110} \;\Rightarrow\; \alpha\approx20{,}0^\circ \qquad \beta\approx70{,}0^\circ \qquad c=\sqrt{40^2+110^2}\approx117$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $c=28{,}3$, $\alpha=58^\circ$. Calcolare $\beta$, $a$, $b$.</p>
+
+<div class="fig">
+<svg id="f-es2" viewBox="0 0 220 110" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo con ipotenusa e un angolo noti"></svg>
 </div>
 
-<div class="problema">
-<span class="et">Esempio 3</span>
-<svg viewBox="0 0 140 100" width="100%" style="max-width:150px">
-<polygon points="15,85 125,85 125,15" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="112" y="72" width="13" height="13" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="65" y="98" font-size="11" fill="var(--rosso)">b?</text>
-<text x="130" y="52" font-size="11" fill="var(--blu)">a = 8</text>
-<text x="18" y="78" font-size="10" fill="var(--blu)">28&deg;</text>
-<text x="108" y="26" font-size="10" fill="var(--rosso)">&beta;?</text>
-<text x="55" y="45" font-size="10" fill="var(--rosso)">c?</text>
-</svg>
-<p>$\beta=90^\circ-28^\circ=62^\circ$</p>
-<p>$b=a\tan\beta=8\tan62^\circ\approx15$</p>
-<p>$c=\sqrt{a^2+b^2}\approx17$</p>
-</div>
-
-<div class="problema">
-<span class="et">Esempio 4</span>
-<svg viewBox="0 0 140 100" width="100%" style="max-width:150px">
-<polygon points="15,85 125,85 125,15" fill="none" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<rect x="112" y="72" width="13" height="13" fill="none" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="65" y="98" font-size="11" fill="var(--rosso)">b?</text>
-<text x="130" y="52" font-size="11" fill="var(--rosso)">a?</text>
-<text x="18" y="78" font-size="10" fill="var(--blu)">58&deg;</text>
-<text x="108" y="26" font-size="10" fill="var(--rosso)">&beta;?</text>
-<text x="50" y="45" font-size="10" fill="var(--blu)">c = 28,3</text>
-</svg>
-<p>$\beta=90^\circ-58^\circ=32^\circ$</p>
-<p>$a=c\sin\alpha=28{,}3\sin58^\circ\approx24$</p>
-<p>$b=c\sin\beta=28{,}3\sin32^\circ\approx15$</p>
-</div>
-
-</div>
-
+<p class="eq">$$\beta=90^\circ-58^\circ=32^\circ \qquad a=28{,}3\sin58^\circ\approx24{,}0 \qquad b=28{,}3\sin32^\circ\approx15{,}0$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../07-disequazioni-fratte-e-sistemi-di-disequazioni/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disequazioni fratte e sistemi di disequazioni</span></a><a class="successiva" href="../09-area-di-un-triangolo-e-teorema-della-corda/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Area di un triangolo e teorema della corda</span></a></nav>
 <footer><p>Matematica quarta &middot; Trigonometria &middot; Unità 08</p></footer>
-
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)','dominant-baseline':'central'},a||{}),p);e.textContent=s;return e;}
+/* circonferenza goniometrica di centro (cx,cy) e raggio R, con assi */
+function Circ(p,cx,cy,R,m){m=m||14;
+  el('line',{x1:cx-R-m,y1:cy,x2:cx+R+m,y2:cy,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('line',{x1:cx,y1:cy-R-m,x2:cx,y2:cy+R+m,stroke:'var(--inchiostro)','stroke-width':1},p);
+  el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.5},p);
+  return {P:function(t,k){k=k===undefined?R:k;return [cx+k*Math.cos(t),cy-k*Math.sin(t)];},cx:cx,cy:cy,R:R};}
+function raggio(p,c,t,col){var q=c.P(t);
+  el('line',{x1:c.cx,y1:c.cy,x2:q[0],y2:q[1],stroke:col,'stroke-width':2},p);
+  el('circle',{cx:q[0],cy:q[1],r:4,fill:col},p);return q;}
+window.G={el:el,txt:txt,Circ:Circ,raggio:raggio};
+})();
+</script>
+<script>
+(function(){var G=window.G,PI=Math.PI,R='var(--rosso)',B='var(--blu)',I='var(--inchiostro)',Gr='var(--grigio)';
+function ln(p,x1,y1,x2,y2,col,w,da){var a={x1:x1,y1:y1,x2:x2,y2:y2,stroke:col,'stroke-width':w||1.5};if(da)a['stroke-dasharray']=da;return G.el('line',a,p);}
+function angolo(p,x,y,t0,t1,r,col){var d='',n=20;for(var i=0;i<=n;i++){var t=t0+(t1-t0)*i/n;d+=(i?'L':'M')+(x+r*Math.cos(t)).toFixed(1)+' '+(y-r*Math.sin(t)).toFixed(1);}
+  return G.el('path',{d:d,fill:'none',stroke:col,'stroke-width':1.3},p);}
+function retto(p,x,y,sx,sy,l){G.el('path',{d:'M'+(x+sx*l)+' '+y+' L'+(x+sx*l)+' '+(y+sy*l)+' L'+x+' '+(y+sy*l),fill:'none',stroke:I,'stroke-width':1.2},p);}
+function f3(v){return v.toFixed(3).replace('.',',');}
+/* notazione: alpha in A, angolo retto in C */
+var s=document.getElementById('f-not'), A=[30,140], C=[230,140], Bv=[230,30], al=Math.atan2(110,200);
+G.el('polygon',{points:A+' '+C+' '+Bv,fill:'none',stroke:I,'stroke-width':2},s);
+retto(s,230,140,-1,-1,16);
+angolo(s,30,140,0,al,40,R);G.txt(s,80,129,'α',{'font-size':14,fill:R});
+angolo(s,230,30,-PI/2,-PI/2-(PI/2-al),34,B);G.txt(s,219,75,'β',{'font-size':14,fill:B,'text-anchor':'middle'});
+G.txt(s,206,124,'γ',{'font-size':12});
+G.txt(s,130,153,'b',{'font-size':14,'text-anchor':'middle'});G.txt(s,242,85,'a',{'font-size':14});G.txt(s,120,72,'c',{'font-size':14,'text-anchor':'end'});
+/* primo teorema con cursore */
+var p=document.getElementById('f-primo'), O=[40,160], Rr=150;
+ln(p,15,160,225,160,I,1);ln(p,40,10,40,180,I,1);
+G.el('path',{d:'M'+(40+Rr)+' 160 A '+Rr+' '+Rr+' 0 0 0 40 '+(160-Rr),fill:'none',stroke:Gr,'stroke-width':1,'stroke-dasharray':'4 3'},p);
+var g=G.el('g',{},p), inp=document.getElementById('s-al'), va=document.getElementById('v-al'), le=document.getElementById('l-primo');
+function dis(){var d=parseFloat(inp.value), t=d*PI/180, x=40+Rr*Math.cos(t), y=160-Rr*Math.sin(t);
+  while(g.firstChild)g.removeChild(g.firstChild);
+  ln(g,40,160,x,y,I,2);ln(g,x,160,x,y,R,3);ln(g,40,160,x,160,B,3);
+  G.el('circle',{cx:x,cy:y,r:4,fill:I},g);
+  angolo(g,40,160,0,t,26,I);var ra=Math.max(36,11/Math.sin(t/2));G.txt(g,40+ra*Math.cos(t/2),160-ra*Math.sin(t/2),'α',{'font-size':12,'text-anchor':'middle'});
+  G.txt(g,(40+x)/2-8*Math.sin(t),(160+y)/2-8*Math.cos(t),'c',{'font-size':13,'text-anchor':'middle'});
+  G.txt(g,x+7,(160+y)/2,'a',{'font-size':13,fill:R});
+  G.txt(g,(40+x)/2,173,'b',{'font-size':13,fill:B,'text-anchor':'middle'});
+  va.textContent=d+'°';le.textContent='c = 1 · a = c sin α ≈ '+f3(Math.sin(t))+' · b = c cos α ≈ '+f3(Math.cos(t));}
+inp.addEventListener('input',dis);dis();
+/* secondo teorema: due pannelli */
+var q=document.getElementById('f-secondo');
+/* sinistra: raggio b sull'asse x, tangente verticale */
+var ox=50,oy=160,r=110,ta=Math.atan2(70,110);
+ln(q,25,oy,190,oy,I,1);ln(q,ox,15,ox,180,I,1);
+G.el('path',{d:'M'+(ox+r)+' '+oy+' A '+r+' '+r+' 0 0 0 '+ox+' '+(oy-r),fill:'none',stroke:Gr,'stroke-width':1,'stroke-dasharray':'4 3'},q);
+ln(q,ox+r,oy,ox+r,20,B,1.2,'3 3');
+ln(q,ox,oy,ox+r,oy-70,I,2);ln(q,ox+r,oy,ox+r,oy-70,R,3);ln(q,ox,oy,ox+r,oy,B,3);
+angolo(q,ox,oy,0,ta,28,I);G.txt(q,ox+38,oy-9,'α',{'font-size':12});
+G.txt(q,ox+r/2,oy+13,'b',{'font-size':13,fill:B,'text-anchor':'middle'});G.txt(q,ox+r+7,oy-35,'a',{'font-size':13,fill:R});
+/* destra: raggio a sull'asse y, tangente orizzontale, alfa misurato dall'asse x */
+var px=270,a2=110,b2=60,tb=Math.atan2(a2,b2);
+ln(q,245,oy,420,oy,I,1);ln(q,px,15,px,180,I,1);
+G.el('path',{d:'M'+(px+a2)+' '+oy+' A '+a2+' '+a2+' 0 0 0 '+px+' '+(oy-a2),fill:'none',stroke:Gr,'stroke-width':1,'stroke-dasharray':'4 3'},q);
+ln(q,250,oy-a2,420,oy-a2,R,1.2,'3 3');
+ln(q,px,oy,px+b2,oy-a2,I,2);ln(q,px,oy,px,oy-a2,R,3);ln(q,px,oy-a2,px+b2,oy-a2,B,3);
+angolo(q,px,oy,0,tb,26,I);G.txt(q,px+33,oy-14,'α',{'font-size':12});
+angolo(q,px+b2,oy-a2,PI,PI+tb,20,I);G.txt(q,px+b2-27,oy-a2+13,'α',{'font-size':12,'text-anchor':'middle'});
+G.txt(q,px-7,oy-a2/2,'a',{'font-size':13,fill:R,'text-anchor':'end'});G.txt(q,px+b2/2,oy-a2-11,'b',{'font-size':13,fill:B,'text-anchor':'middle'});
+/* esempi */
+function tri(id,ang,lab){var e=document.getElementById(id), t=ang*PI/180, w=Math.min(120,85/Math.tan(t)), h=w*Math.tan(t), x0=95-w/2, x1=95+w/2, y0=92;
+  G.el('polygon',{points:x0+','+y0+' '+x1+','+y0+' '+x1+','+(y0-h),fill:'none',stroke:I,'stroke-width':1.6},e);retto(e,x1,y0,-1,-1,10);
+  angolo(e,x0,y0,0,t,20,I);
+  G.txt(e,95,y0+12,lab.b[0],{'font-size':11,fill:lab.b[1],'text-anchor':'middle'});
+  G.txt(e,x1+5,y0-h/2+8,lab.a[0],{'font-size':11,fill:lab.a[1]});
+  G.txt(e,95-6*Math.sin(t)-4,y0-h/2-6*Math.cos(t)-4,lab.c[0],{'font-size':11,fill:lab.c[1],'text-anchor':'end'});
+  var ra=Math.max(30,9/Math.sin(t/2));G.txt(e,x0+ra*Math.cos(t/2)+2,y0-ra*Math.sin(t/2),lab.al[0],{'font-size':11,fill:lab.al[1],'text-anchor':'middle'});
+  G.txt(e,x1+5,y0-h+5,lab.be[0],{'font-size':11,fill:lab.be[1]});}
+tri('f-es1',Math.atan(40/110)*180/PI,{b:['b = 110',B],a:['a = 40',B],c:['c ?',R],al:['α ?',R],be:['β ?',R]});
+tri('f-es2',58,{b:['b ?',R],a:['a ?',R],c:['c = 28,3',B],al:['58°',B],be:['β ?',R]});
+})();
+</script>
 </body>
 </html>
