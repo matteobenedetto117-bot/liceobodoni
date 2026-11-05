@@ -5,25 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Combinazioni e coefficienti binomiali — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
-.interattivo label{font-family:var(--sans);font-size:.85rem;display:block;margin:12px 0 4px}
-.interattivo input[type=range]{width:100%}
-.interattivo .esiti{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:flex;gap:28px;flex-wrap:wrap}
-.interattivo .esiti b{color:var(--blu);font-size:1.15rem}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
 </style>
 </head>
 <body>
@@ -33,131 +68,130 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Calcolo combinatorio &middot; Unità 30</p>
   <h1>Combinazioni e coefficienti binomiali</h1>
-  <p class="sommario">Nelle disposizioni l'ordine contava: ABC e BAC erano gruppi diversi. Nelle
-  combinazioni no: interessa solo quali elementi si scelgono, non in che ordine. È il caso di ogni scelta
-  di un gruppo — tre punti per un triangolo, due piloti per due auto — e porta a un numero, il coefficiente
-  binomiale, che tornerà più avanti nel calcolo delle probabilità.</p>
 </header>
+
+<p>Gruppi di $k$ elementi scelti fra $n$, senza che l'ordine conti: quanti sono?</p>
 
 <h2>Combinazioni semplici</h2>
 
-<p>Consideriamo cinque punti $A,B,C,D,E$ su un piano, a tre a tre non allineati, e chiediamoci quanti
-triangoli si possono disegnare collegando tre di questi punti. Scegliendo il primo vertice fra 5, il
-secondo fra i 4 rimasti, il terzo fra i 3 che restano, si ottengono $5\cdot4\cdot3=60$ terne ordinate. Ma
-il triangolo $ABC$ è lo stesso triangolo di $BAC$, $ACB$, $BCA$, $CAB$, $CBA$: sei terne che disegnano la
-stessa figura, tante quante le permutazioni di 3 elementi, $3!=6$. Il numero dei triangoli distinti è
-allora $60/6=10$.</p>
+<p>Triangoli con i vertici fra 5 punti $A$, $B$, $C$, $D$, $E$, a tre a tre non allineati:</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 460 220" width="100%" style="max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cinque punti A, B, C, D, E; il triangolo ABC è evidenziato, gli altri due punti D ed E sono isolati">
-<polygon points="90,150 210,60 260,140" fill="var(--blu-chiaro)" stroke="var(--blu)" stroke-width="1.6"/>
-<circle cx="90" cy="150" r="4" fill="var(--inchiostro)"/>
-<circle cx="210" cy="60" r="4" fill="var(--inchiostro)"/>
-<circle cx="260" cy="140" r="4" fill="var(--inchiostro)"/>
-<circle cx="330" cy="185" r="4" fill="var(--grigio)"/>
-<circle cx="370" cy="130" r="4" fill="var(--grigio)"/>
-<text x="70" y="170" font-size="15" fill="var(--inchiostro)">A</text>
-<text x="200" y="46" font-size="15" fill="var(--inchiostro)">B</text>
-<text x="270" y="128" font-size="15" fill="var(--inchiostro)">C</text>
-<text x="336" y="205" font-size="15" fill="var(--grigio)">D</text>
-<text x="376" y="118" font-size="15" fill="var(--grigio)">E</text>
-<text x="60" y="30" font-size="13" fill="var(--grigio)">ABC, BAC, ACB, BCA, CAB, CBA &#8594; un solo triangolo</text>
-</svg>
-<figcaption>Le sei terne ordinate che usano A, B, C disegnano tutte lo stesso triangolo: contarle come
-distinte moltiplicherebbe per 6 il numero reale delle figure.</figcaption>
-</figure>
+<ul>
+<li>terne ordinate di vertici → $D_{5,3}=5\cdot4\cdot3=60$;</li>
+<li>stesso triangolo per $ABC$, $ACB$, $BAC$, $BCA$, $CAB$, $CBA$ → $3!=6$ terne;</li>
+<li>triangoli distinti → $60/6=10$.</li>
+</ul>
+
+<div class="fig">
+<svg id="fig-tri" viewBox="0 0 400 220" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cinque punti A, B, C, D, E con uno dei dieci triangoli evidenziato"></svg>
+<div class="cursore"><label for="cur-t">n°</label><input id="cur-t" type="range" min="1" max="10" step="1" value="1"><span class="val" id="val-t">1</span></div>
+<p class="val-riga" id="val-tri"></p>
+<p class="did">I 10 triangoli con vertici fra $A$, $B$, $C$, $D$, $E$</p>
+</div>
 
 <div class="def"><span class="et">Combinazioni semplici</span>
-<p>Le combinazioni semplici di $n$ elementi distinti presi a $k$ a $k$ sono i gruppi di $k$ elementi che
-differiscono per almeno un elemento, senza che l'ordine conti. Si ottengono dalle disposizioni dividendo
-per le permutazioni dei $k$ elementi scelti, che altrimenti verrebbero contate più volte:
-$$C_{n,k}=\frac{D_{n,k}}{P_k}=\frac{n(n-1)(n-2)\cdots(n-k+1)}{k!}$$
-Moltiplicando numeratore e denominatore per $(n-k)!$, la stessa quantità si scrive anche
-$$C_{n,k}=\frac{n!}{k!\,(n-k)!}$$</p>
-</div>
-
-<div class="esempio"><span class="et">Esempio</span>
-<p>Una scuderia ha a disposizione 5 vetture da assegnare a 2 piloti. In quanti modi diversi può farlo? Qui
-non conta l'ordine in cui le due auto vengono scelte, solo quali due vengono assegnate:
-$$C_{5,2}=\frac{5\cdot4}{2!}=\frac{5!}{2!\,3!}=10$$</p>
-</div>
+<p>Gruppi di $k$ elementi scelti fra $n$ distinti ($k\le n$), diversi per almeno un elemento; l'ordine non conta:</p>
+<p class="eq">$$C_{n,k}=\frac{D_{n,k}}{P_k}=\frac{n\,(n-1)\cdots(n-k+1)}{k!}=\frac{n!}{k!\,(n-k)!}$$</p></div>
 
 <h2>Coefficienti binomiali</h2>
 
-<p>Il numero $C_{n,k}$ si scrive anche con un simbolo a sé, il coefficiente binomiale, che riprenderemo
-studiando il calcolo delle probabilità.</p>
-
 <div class="def"><span class="et">Coefficiente binomiale</span>
-<p>$$\binom{n}{k}=\frac{n!}{k!\,(n-k)!}\qquad n,k\in\mathbb{N},\ k\le n$$</p>
+<p class="eq">$$\binom{n}{k}=C_{n,k}=\frac{n!}{k!\,(n-k)!}\qquad n,k\in\mathbb{N},\ k\le n$$</p></div>
+
+<p class="eq">$$\binom{n}{0}=\binom{n}{n}=\binom{0}{0}=1$$</p>
+
+<p>Scegliere i $k$ elementi da prendere equivale a scegliere gli $n-k$ da escludere:</p>
+
+<div class="def"><span class="et">Legge delle classi complementari</span>
+<p class="eq">$$\binom{n}{k}=\binom{n}{n-k}$$</p></div>
+
+<div class="fig">
+<svg id="fig-compl" viewBox="0 0 400 76" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="n elementi: k scelti in blu, n − k esclusi in rosso"></svg>
+<div class="cursore"><label for="cur-n">$n$</label><input id="cur-n" type="range" min="2" max="14" step="1" value="10"><span class="val" id="val-n">10</span></div>
+<div class="cursore"><label for="cur-k">$k$</label><input id="cur-k" type="range" min="0" max="10" step="1" value="3"><span class="val" id="val-k">3</span></div>
+<p class="val-riga" id="val-comb"></p>
+<p class="did">Scelti (blu) ed esclusi (rosso)</p>
 </div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>$$\binom{6}{2}=\frac{6!}{2!\,4!}=15$$</p>
-</div>
+<div class="def"><span class="et">Formula di ricorrenza</span>
+<p class="eq">$$\binom{n}{k+1}=\binom{n}{k}\cdot\frac{n-k}{k+1}$$</p>
+<p class="eq">$$\binom{n}{k}\cdot\frac{n-k}{k+1}=\frac{n!\,(n-k)}{k!\,(n-k)!\,(k+1)}=\frac{n!}{(k+1)!\,(n-k-1)!}$$</p></div>
 
-<p>Tre casi si calcolano subito dalla definizione: $\binom{n}{0}=\dfrac{n!}{0!\,n!}=1$,
-$\binom{n}{n}=\dfrac{n!}{n!\,0!}=1$, $\binom{0}{0}=\dfrac{0!}{0!\,0!}=1$.</p>
+<h2>Esempio 1</h2>
 
-<p>Due proprietà si usano spesso per semplificare i calcoli.</p>
+<p>Dati: 5 vetture da assegnare a 2 piloti; conta solo quali vetture si scelgono. Calcolare il numero di scelte.</p>
 
-<div class="nota"><span class="et">Legge delle classi complementari</span>
-<p>$$\binom{n}{k}=\binom{n}{n-k}$$
-Scegliere i $k$ elementi da prendere equivale a scegliere gli $n-k$ da lasciare fuori: le due scritture,
-$\dfrac{n!}{k!(n-k)!}$ e $\dfrac{n!}{(n-k)!\,k!}$, sono lo stesso numero.</p>
-</div>
+<p class="eq">$$C_{5,2}=\frac{5\cdot4}{2!}=\frac{5!}{2!\,3!}=10$$</p>
 
-<div class="nota"><span class="et">Formula di ricorrenza</span>
-<p>$$\binom{n}{k+1}=\binom{n}{k}\cdot\frac{n-k}{k+1}$$
-Si verifica scrivendo $\dbinom{n}{k}\cdot\dfrac{n-k}{k+1}=\dfrac{n!\,(n-k)}{k!\,(n-k)!\,(k+1)}
-=\dfrac{n!}{(k+1)!\,(n-k-1)!}=\dbinom{n}{k+1}$, perché $(n-k)$ diviso $(n-k)!$ lascia $(n-k-1)!$.</p>
-</div>
+<h2>Esempio 2</h2>
 
-<div class="interattivo">
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 4px">La legge delle classi complementari: $\binom{n}{k}$ e $\binom{n}{n-k}$ a confronto</p>
-<label for="n">elementi totali, $n$ = <span id="nval">10</span></label>
-<input type="range" id="n" min="2" max="14" value="10">
-<label for="k">elementi scelti, $k$ = <span id="kval">3</span></label>
-<input type="range" id="k" min="0" max="14" value="3">
-<div class="esiti">
-<div>$\binom{n}{k}=$ <b id="cnk">120</b></div>
-<div>$\binom{n}{n-k}=$ <b id="cnnk">120</b></div>
-</div>
-</div>
-<script>
-(function(){
-  var n=document.getElementById('n'), k=document.getElementById('k');
-  var nval=document.getElementById('nval'), kval=document.getElementById('kval');
-  var cnk=document.getElementById('cnk'), cnnk=document.getElementById('cnnk');
-  function fatt(x){ var r=1; for(var i=2;i<=x;i++){ r*=i; } return r; }
-  function comb(nn,kk){ return fatt(nn)/(fatt(kk)*fatt(nn-kk)); }
-  function aggiorna(){
-    var nn=parseInt(n.value), kk=parseInt(k.value);
-    if(kk>nn){ kk=nn; k.value=nn; }
-    k.max=nn;
-    nval.textContent=nn; kval.textContent=kk;
-    var v=comb(nn,kk);
-    cnk.textContent=v.toLocaleString('it-IT');
-    cnnk.textContent=comb(nn,nn-kk).toLocaleString('it-IT');
-  }
-  n.addEventListener('input',aggiorna); k.addEventListener('input',aggiorna);
-  aggiorna();
-})();
-</script>
+<p>Dati: $\binom{n}{4}=\binom{n}{3}$ (Esame di Stato, P.N.I. 2011, quesito 4). Calcolare $n$.</p>
 
-<div class="esempio"><span class="et">Quesito d'esame — Liceo scientifico, corso sperimentale P.N.I., sessione ordinaria 2011, quesito 4</span>
-<p>Il numero delle combinazioni di $n$ oggetti a 4 a 4 è uguale al numero delle combinazioni degli stessi
-oggetti a 3 a 3. Si trovi $n$.</p>
-<p>Impostiamo $\binom{n}{4}=\binom{n}{3}$, cioè $\dfrac{n!}{4!\,(n-4)!}=\dfrac{n!}{3!\,(n-3)!}$.
-Semplificando $n!$ da entrambi i membri e invertendo:
-$$3!\,(n-3)!=4!\,(n-4)!\quad\Longrightarrow\quad \frac{(n-3)!}{(n-4)!}=\frac{4!}{3!}=4$$
-Il rapporto $\dfrac{(n-3)!}{(n-4)!}$ vale $n-3$, quindi $n-3=4$, da cui $n=7$. Verifica:
-$\binom{7}{4}=35=\binom{7}{3}$.</p>
-</div>
+<p class="eq">$$\frac{n!}{4!\,(n-4)!}=\frac{n!}{3!\,(n-3)!}\ \Rightarrow\ \frac{(n-3)!}{(n-4)!}=\frac{4!}{3!}\ \Rightarrow\ n-3=4\ \Rightarrow\ n=7$$</p>
 
+<p class="eq">$$\binom{7}{4}=35=\binom{7}{3}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../29-permutazioni-e-funzione-fattoriale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Permutazioni e funzione fattoriale</span></a><a class="successiva" href="../31-combinazioni-con-ripetizione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Combinazioni con ripetizione</span></a></nav>
 <footer><p>Matematica quarta &middot; Calcolo combinatorio &middot; Unità 30</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+
+/* cinque punti e i C(5,3) = 10 triangoli, generati in ordine lessicografico */
+var P={A:[70,170],B:[170,40],C:[230,140],D:[300,190],E:[340,90]},N='ABCDE',T=[];
+for(var a=0;a<5;a++)for(var b=a+1;b<5;b++)for(var c=b+1;c<5;c++)T.push(N[a]+N[b]+N[c]);
+var st=document.getElementById('fig-tri'),ct=document.getElementById('cur-t'),vt=document.getElementById('val-t'),vtr=document.getElementById('val-tri');
+var off={A:[-18,16],B:[-5,-10],C:[-4,22],D:[6,18],E:[8,-6]};
+function triangolo(){
+  var t=T[+ct.value-1];
+  while(st.firstChild)st.removeChild(st.firstChild);
+  st.appendChild(el('polygon',{points:t.split('').map(function(v){return P[v].join(',');}).join(' '),fill:'var(--blu-chiaro)',stroke:'var(--blu)','stroke-width':1.6}));
+  N.split('').forEach(function(v){var s=t.indexOf(v)>=0,col=s?'var(--inchiostro)':'var(--grigio)';
+    st.appendChild(el('circle',{cx:P[v][0],cy:P[v][1],r:4,fill:col}));
+    txt(st,P[v][0]+off[v][0],P[v][1]+off[v][1],v,{'font-size':14,fill:col});});
+  vt.textContent=ct.value;
+  vtr.innerHTML='triangolo <b>'+t+'</b> (terne ordinate: '+[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]].map(function(o){return o.map(function(i){return t[i];}).join('');}).join(', ')+')';
+}
+ct.addEventListener('input',triangolo);triangolo();
+var b=st.getBBox(),M=10;st.setAttribute('viewBox',[b.x-M,b.y-M,b.width+2*M,b.height+2*M].map(function(v){return v.toFixed(0);}).join(' '));
+
+/* classi complementari: k scelti, n − k esclusi */
+var svg=document.getElementById('fig-compl'),cn=document.getElementById('cur-n'),ck=document.getElementById('cur-k');
+var vn=document.getElementById('val-n'),vk=document.getElementById('val-k'),vc=document.getElementById('val-comb');
+function comb(n,k){var r=1;for(var i=1;i<=k;i++)r=r*(n-k+i)/i;return Math.round(r);}
+function fmt(x){return x.toLocaleString('it-IT');}
+function disegna(){
+  var n=+cn.value;ck.max=n;if(+ck.value>n)ck.value=n;var k=+ck.value,s=Math.min(28,380/n),r=Math.min(10,s*.38),x0=200-(n-1)*s/2;
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  for(var i=0;i<n;i++){var u=i<k;svg.appendChild(el('circle',{cx:(x0+i*s).toFixed(1),cy:22,r:r.toFixed(1),fill:u?'var(--blu)':'#fdf6f5',stroke:u?'var(--blu)':'var(--rosso)','stroke-width':1.4}));}
+  if(k>0)txt(svg,(x0+(k-1)*s/2).toFixed(1),50,'k = '+k,{'text-anchor':'middle','font-size':14,fill:'var(--blu)'});
+  if(k<n)txt(svg,(x0+(k+n-1)*s/2).toFixed(1),66,'n − k = '+(n-k),{'text-anchor':'middle','font-size':14,fill:'var(--rosso)'});
+  vn.textContent=n;vk.textContent=k;
+  vc.innerHTML='C('+n+', '+k+') = '+fmt(comb(n,k))+' &nbsp;&nbsp; C('+n+', '+(n-k)+') = '+fmt(comb(n,n-k))+' &nbsp; <span class="c-ver">uguali</span>';
+}
+cn.addEventListener('input',disegna);ck.addEventListener('input',disegna);disegna();
+})();
+</script>
 </body>
 </html>
