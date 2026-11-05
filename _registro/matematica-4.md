@@ -258,6 +258,7 @@
   dell'area. Nessun quesito di maturità: ho cercato online ma i risultati trovati riguardano le
   permutazioni con ripetizione (già trattate nell'unità 29), non le combinazioni con ripetizione; il
   tema specifico di questa unità non compare isolato nei quesiti reali della seconda prova.
+- Revisione (05/11/2026, regole 13/10): parole circa 330 → 135 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa e i riquadri .esempio; i tre casi (moneta 2 e 3 lanci, a, b, c a due a due) in elenco caso → conseguenza; definizione e formula in .def con la condizione «k può superare n». Titoletti: «Esempio 1» (scatole), «Esempio 2» (dadi), in forma Dati/Calcolare. Nessun esempio tolto. Nessuna comparsa da togliere. Correzione concettuale: nell'esempio delle scatole precisato «6 oggetti uguali» (con oggetti distinti le distribuzioni sarebbero 4^6 = 4096, non 84). Verifiche Python: C'(2,2) = 3, C'(2,3) = 4, C'(3,2) = 6, C(9,6) = 84, C(9,4) = 126, enumerazioni confermate. Figure: il riquadro interattivo n, k (prima n 2–10, k 1–10, solo valore numerico) trasformato in figura con due cursori (n 2–4, k 1–4) che elenca tutti i gruppi fra a, b, c, d e il valore C'(n,k). Nessuna figura decorativa.
 
 ## Unità 32 — Definizione classica ed eventi contrari
 - Parole: 510 su 3 pagine di traccia (131–133)
