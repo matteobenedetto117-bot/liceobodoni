@@ -5,23 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sfera e piano: posizioni reciproche e piano tangente — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.riquadro{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;display:inline-block}
-ul.casi{padding-left:1.3em;margin:12px 0}
-ul.casi li{margin:8px 0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -31,81 +67,111 @@ ul.casi li{margin:8px 0}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Geometria analitica nello spazio &middot; Unità 27</p>
   <h1>Sfera e piano: posizioni reciproche e piano tangente</h1>
-  <p class="sommario">Un piano rispetto a una sfera può comportarsi in tre modi: tagliarla in un
-  cerchio, sfiorarla in un solo punto o non incontrarla affatto. Il criterio è lo stesso che
-  distingue una retta secante, tangente o esterna a una circonferenza, ma qui la distanza in
-  gioco è quella, già nota, di un punto da un piano nello spazio.</p>
 </header>
 
-<div class="def"><span class="et">Posizione reciproca fra una sfera e un piano</span>
-<p>Data una sfera di centro $C$ e raggio $r$ e un piano $\alpha$, la loro posizione reciproca
-dipende dal confronto fra $r$ e la distanza $d(C,\alpha)$, calcolata con la formula della
-distanza punto-piano:</p>
-<ul class="casi">
-<li>se $d(C,\alpha)&lt;r$, il piano interseca la sfera in un cerchio;</li>
-<li>se $d(C,\alpha)=r$, il piano è <strong>tangente</strong> alla sfera: l'intersezione è un
-solo punto $P$, e il raggio $\overline{PC}$ è perpendicolare ad $\alpha$;</li>
-<li>se $d(C,\alpha)&gt;r$, il piano e la sfera non si intersecano.</li>
+<p>Superficie sferica di centro $C$ e raggio $r$, piano $\alpha$: si confronta la distanza $d(C,\alpha)$ con $r$.</p>
+
+<ul>
+<li>$d(C,\alpha)&lt;r$ → piano secante: taglia la superficie lungo una circonferenza;</li>
+<li>$d(C,\alpha)=r$ → piano tangente in un solo punto $P$, con $\overline{PC}$ perpendicolare ad $\alpha$;</li>
+<li>$d(C,\alpha)&gt;r$ → nessun punto in comune.</li>
 </ul>
+
+<div class="fig">
+<svg id="fig-sp" viewBox="0 0 360 270" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sezione della sfera con un piano per il centro perpendicolare ad alfa: circonferenza di centro C e raggio r, piano alfa visto di taglio a distanza d da C"></svg>
+<div class="cursore"><label for="cur-d">$d$</label><input id="cur-d" type="range" min="0" max="30" step="1" value="12"><span class="val" id="val-d">0,60 r</span></div>
+<p class="val-riga" id="esito-d"></p>
+<p class="did">Sezione per $C$ perpendicolare ad $\alpha$; in rosso l'intersezione</p>
 </div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Consideriamo la sfera di centro $C(0;0;0)$ passante per $P(0;7\sqrt3;7)$. Il raggio è la
-distanza $\overline{PC}$:
-$$r=\overline{PC}=\sqrt{(7\sqrt3)^2+7^2}=\sqrt{196}=14$$
-e l'equazione della sfera è $x^2+y^2+z^2-196=0$. Cerchiamo ora il piano $\alpha$ passante per
-$C(0;0;0)$, $P(0;7\sqrt3;7)$ e $Q(14;0;0)$: imponiamo il passaggio dei tre punti nell'equazione
-generale $ax+by+cz+d=0$:
-$$\begin{cases}d=0\\14a+d=0\\7\sqrt3\,b+7c+d=0\end{cases}\ \Rightarrow\
-\begin{cases}d=0\\a=0\\c=-\sqrt3\,b\end{cases}$$
-Sostituendo si ottiene $by-\sqrt3\,bz=0$, cioè, dividendo per $b$:
-$$\alpha:\ y-\sqrt3\,z=0$$
-Poiché $\alpha$ passa per il centro $C$, la distanza $d(C,\alpha)$ è nulla, dunque minore di
-$r$: il piano è secante e taglia la sfera in un cerchio.</p>
-</div>
+<h2>Piano tangente</h2>
 
-<h2>Piano tangente a una sfera</h2>
+<p>Il piano tangente in $P(x_1;y_1;z_1)$ passa per $P$ e ha $\overrightarrow{PC}$ come vettore normale:</p>
 
-<p>Data una sfera di centro $C(x_0;y_0;z_0)$ e raggio $r$, cerchiamo l'equazione del piano
-tangente in un suo punto $P(x_1;y_1;z_1)$. Per il criterio appena visto, il raggio
-$\overrightarrow{PC}$ deve essere perpendicolare al piano tangente in $P$: il piano cercato è
-allora quello che passa per $P$ e ha $\overrightarrow{PC}$ come vettore normale.</p>
+<div class="def"><span class="et">Piano tangente in P, centro C(x₀;y₀;z₀)</span>
+<p class="eq">$$(x_0-x_1)(x-x_1)+(y_0-y_1)(y-y_1)+(z_0-z_1)(z-z_1)=0$$</p></div>
 
-<figure class="disegno">
-<svg viewBox="0 0 320 240" width="100%" style="max-width:320px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sezione di una sfera con centro C e un punto P sulla sua superficie; la retta tangente a passa per P ed è perpendicolare al raggio PC">
-<defs>
-<marker id="ar27" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-</defs>
-<circle cx="150" cy="140" r="80" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<text x="235" y="120" font-size="13" fill="var(--inchiostro)">sfera</text>
-<circle cx="150" cy="140" r="3.2" fill="var(--inchiostro)"/>
-<text x="132" y="158" font-size="13" fill="var(--inchiostro)">C</text>
-<line x1="150" y1="140" x2="205" y2="65" stroke="var(--rosso)" stroke-width="1.8" marker-end="url(#ar27)"/>
-<text x="128" y="98" font-size="13" fill="var(--rosso)">$\overrightarrow{PC}$</text>
-<circle cx="205" cy="65" r="3.2" fill="var(--blu)"/>
-<text x="212" y="60" font-size="13" fill="var(--blu)">P</text>
-<line x1="150" y1="20" x2="255" y2="105" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<text x="256" y="30" font-size="13" fill="var(--inchiostro)">a</text>
-<text x="150" y="14" font-size="12" fill="var(--grigio)">piano tangente</text>
-</svg>
-<figcaption>Il piano tangente $a$ nel punto $P$ è perpendicolare al raggio $\overrightarrow{PC}$.</figcaption>
-</figure>
+<h2>Esempio 1</h2>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Data la sfera di centro $C(2;2;-1)$ e il suo punto $P(3;0;2)$, troviamo il piano tangente in
-$P$. Il vettore normale è
-$$\overrightarrow{PC}=C-P=(2-3;\,2-0;\,-1-2)=(-1;\,2;\,-3)$$
-Il piano passante per $P$ con questo vettore normale è:
-$$-1(x-3)+2(y-0)-3(z-2)=0$$
-$$-x+2y-3z+9=0$$</p>
-</div>
+<p>Dati: centro $C(0;0;0)$, punto della superficie $P(0;7\sqrt3;7)$, $Q(14;0;0)$. Calcolare $r$, il piano $\alpha$ per $C$, $P$, $Q$ e la sua posizione.</p>
 
+<p class="eq">$$r=\overline{PC}=\sqrt{(7\sqrt3)^2+7^2}=14\ \Rightarrow\ x^2+y^2+z^2-196=0$$</p>
+
+<p class="eq">$$\begin{cases}d=0\\14a+d=0\\7\sqrt3\,b+7c+d=0\end{cases}\Rightarrow\ a=0,\ c=-\sqrt3\,b\ \Rightarrow\ \alpha:\ y-\sqrt3\,z=0$$</p>
+
+<p>$C\in\alpha$, quindi $d(C,\alpha)=0&lt;r$: piano secante.</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: centro $C(2;2;-1)$, punto della superficie $P(3;0;2)$. Scrivere il piano tangente in $P$.</p>
+
+<p class="eq">$$\overrightarrow{PC}=(-1;2;-3)\ \Rightarrow\ -(x-3)+2y-3(z-2)=0\ \Rightarrow\ -x+2y-3z+9=0$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../26-superficie-sferica/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Superficie sferica</span></a><a class="successiva" href="../28-disposizioni-semplici-e-con-ripetizione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disposizioni semplici e con ripetizione</span></a></nav>
 <footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 27</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+var svg=document.getElementById('fig-sp'),cur=document.getElementById('cur-d'),val=document.getElementById('val-d'),esi=document.getElementById('esito-d');
+var cx=180,cy=160,R=90;
+var fondo=el('g',{}),dyn=el('g',{});svg.appendChild(fondo);svg.appendChild(dyn);
+fondo.appendChild(el('circle',{cx:cx,cy:cy,r:R,fill:'var(--blu-chiaro)','fill-opacity':0.5,stroke:'var(--inchiostro)','stroke-width':1.8}));
+/* raggio fisso verso il basso a sinistra */
+var a=Math.PI*0.75,rx=cx+R*Math.cos(a),ry=cy+R*Math.sin(a);
+fondo.appendChild(el('line',{x1:cx,y1:cy,x2:rx.toFixed(1),y2:ry.toFixed(1),stroke:'var(--blu)','stroke-width':1.6}));
+txt(fondo,((cx+rx)/2-14).toFixed(1),((cy+ry)/2-2).toFixed(1),'r',{'font-style':'italic',fill:'var(--blu)'});
+fondo.appendChild(el('circle',{cx:cx,cy:cy,r:3.4,fill:'var(--inchiostro)'}));
+txt(fondo,cx+8,cy+16,'C',{'font-style':'italic'});
+function f2(v){return v.toFixed(2).replace('.',',');}
+function disegna(){
+  var v=+cur.value,d=v/20,y=cy-d*R;
+  while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+  dyn.appendChild(el('line',{x1:40,y1:y.toFixed(1),x2:320,y2:y.toFixed(1),stroke:'var(--inchiostro)','stroke-width':1.6}));
+  txt(dyn,326,(y+5).toFixed(1),'α',{'font-style':'italic'});
+  if(v>2){
+    dyn.appendChild(el('line',{x1:cx,y1:cy,x2:cx,y2:y.toFixed(1),stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4,3'}));
+    dyn.appendChild(el('path',{d:'M'+(cx+8)+','+y.toFixed(1)+' v8 h-8',fill:'none',stroke:'var(--grigio)','stroke-width':1}));
+    txt(dyn,cx+6,((cy+y)/2+12).toFixed(1),'d',{'font-style':'italic',fill:'var(--grigio)'});
+  }
+  var msg;
+  if(v<20){
+    var h=Math.sqrt(R*R-(d*R)*(d*R));
+    dyn.appendChild(el('line',{x1:(cx-h).toFixed(1),y1:y.toFixed(1),x2:(cx+h).toFixed(1),y2:y.toFixed(1),stroke:'var(--rosso)','stroke-width':4}));
+    msg='d &lt; r: piano secante';
+  }else if(v===20){
+    dyn.appendChild(el('circle',{cx:cx,cy:y.toFixed(1),r:4,fill:'var(--rosso)'}));
+    txt(dyn,cx-18,(y-7).toFixed(1),'P',{'font-style':'italic',fill:'var(--rosso)'});
+    msg='d = r: piano <span class="c-ver">tangente</span> in P';
+  }else{
+    msg='d &gt; r: nessun punto in comune';
+  }
+  if(v>2&&v!==20)txt(dyn,cx-18,(y-7).toFixed(1),'H',{'font-style':'italic',fill:'var(--grigio)'});
+  val.textContent=f2(d)+' r';
+  esi.innerHTML=msg;
+}
+cur.addEventListener('input',disegna);disegna();
+})();
+</script>
 </body>
 </html>
