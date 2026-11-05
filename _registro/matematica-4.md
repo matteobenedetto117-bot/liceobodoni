@@ -185,6 +185,7 @@
 - Parole: 264 su 2 pagine di traccia (100–101)
 - Rettifica: nessuna. Verificato con SymPy: dal sistema x+y-3z=0, x-3y+z+4=0 con z=k si ottiene x=2k-1, y=k+1, coincidente con la traccia; sostituendo k=z si torna a x-2z+1=0, y-z-1=0, anch'esso coincidente. Per l'esempio 6 (x-2y+z-1=0, 2x+y-z+1=0) i rapporti fra coefficienti 1/2, -2, -1 non sono uguali, confermando che i piani non sono paralleli.
 - Aggiunta: nessuna.
+- Revisione (05/11/2026, regole 13/10): parole circa 197 → 90 (formule $$ e didascalie escluse; sommario incluso prima; sotto le 100: contenuto in .def, elenco e formule). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, riquadri .esempio e il titoletto «Il sistema di due piani»; sistema in .def con la condizione «a, b, c non proporzionali ad a′, b′, c′»; procedimento verso la forma parametrica e ritorno in tre voci d'elenco; esempi in forma Dati/Verificare-Scrivere con .eq. Titoletti: «Esempio 1», «Forma parametrica» (era «Dalla forma cartesiana alla forma parametrica»), «Esempio 2». Precisazione aggiunta (verificata con SymPy): z = k si può porre se ab′ − a′b ≠ 0, altrimenti si sceglie un'altra variabile. Nessun esempio tolto, nessuna comparsa da togliere, nessuna figura (nessuna presente prima). Nessuna correzione concettuale (soluzione x = 2k − 1, y = k + 1 verificata con SymPy).
 
 ## Unità 23 — Posizione reciproca di due rette
 - Parole: 364 su 3 pagine di traccia (102–104)
