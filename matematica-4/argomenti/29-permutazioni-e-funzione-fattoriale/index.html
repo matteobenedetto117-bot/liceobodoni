@@ -5,25 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Permutazioni e funzione fattoriale — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
-.interattivo label{font-family:var(--sans);font-size:.85rem;display:block;margin:12px 0 4px}
-.interattivo input[type=range]{width:100%}
-.interattivo .esiti{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:flex;gap:28px;flex-wrap:wrap}
-.interattivo .esiti b{color:var(--blu);font-size:1.15rem}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
 </style>
 </head>
 <body>
@@ -33,146 +68,163 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Calcolo combinatorio &middot; Unità 29</p>
   <h1>Permutazioni e funzione fattoriale</h1>
-  <p class="sommario">Quattro oggetti diversi si possono mettere in fila in molti ordini possibili: le
-  permutazioni contano proprio questi ordinamenti. Sono il caso delle disposizioni in cui si usano tutti gli
-  elementi a disposizione, e portano a una scrittura molto compatta, il fattoriale.</p>
 </header>
+
+<p>$n$ elementi distinti messi in fila: in quanti ordini diversi?</p>
 
 <h2>Permutazioni semplici</h2>
 
-<p>Abbiamo quattro penne di colori diversi — bianca, nera, rossa, verde — e vogliamo metterle in fila. Il
-primo posto può andare a una qualsiasi delle quattro; fissato il primo, il secondo si sceglie fra le tre
-rimaste; il terzo fra le due che restano; l'ultimo posto è obbligato. Partendo dalla penna bianca si
-ottengono $3\cdot2\cdot1=6$ file diverse, e lo stesso accade partendo da ciascuna delle altre tre penne:
-$$4\cdot3\cdot2\cdot1=24$$
-raggruppamenti in tutto.</p>
+<p>Quattro penne in fila: bianca $b$, nera $n$, rossa $r$, verde $v$.</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 460 220" width="100%" style="max-width:460px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle file a partire dalla penna bianca: b-n-r-v, b-n-v-r, b-r-n-v, b-r-v-n, b-v-n-r, b-v-r-n, sei ordini in tutto">
-<text x="12" y="18" font-size="12" fill="var(--grigio)">1&#176;</text>
-<text x="130" y="18" font-size="12" fill="var(--grigio)">2&#176;</text>
-<text x="270" y="18" font-size="12" fill="var(--grigio)">3&#176;&#8211;4&#176;</text>
-<text x="14" y="108" font-size="15" fill="var(--blu)">b</text>
-<line x1="24" y1="102" x2="130" y2="32" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="24" y1="102" x2="130" y2="107" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<line x1="24" y1="102" x2="130" y2="182" stroke="var(--inchiostro)" stroke-width="1.2"/>
-<text x="136" y="36" font-size="13">n</text>
-<text x="136" y="111" font-size="13">r</text>
-<text x="136" y="186" font-size="13">v</text>
-<line x1="146" y1="32" x2="270" y2="14" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="146" y1="32" x2="270" y2="54" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="276" y="18" font-size="12">r&#8211;v</text><text x="340" y="18" font-size="12" fill="var(--grigio)">bnrv</text>
-<text x="276" y="58" font-size="12">v&#8211;r</text><text x="340" y="58" font-size="12" fill="var(--grigio)">bnvr</text>
-<line x1="146" y1="107" x2="270" y2="89" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="146" y1="107" x2="270" y2="129" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="276" y="93" font-size="12">n&#8211;v</text><text x="340" y="93" font-size="12" fill="var(--grigio)">brnv</text>
-<text x="276" y="133" font-size="12">v&#8211;n</text><text x="340" y="133" font-size="12" fill="var(--grigio)">brvn</text>
-<line x1="146" y1="182" x2="270" y2="164" stroke="var(--inchiostro)" stroke-width="1"/>
-<line x1="146" y1="182" x2="270" y2="204" stroke="var(--inchiostro)" stroke-width="1"/>
-<text x="276" y="168" font-size="12">n&#8211;r</text><text x="340" y="168" font-size="12" fill="var(--grigio)">bvnr</text>
-<text x="276" y="208" font-size="12">r&#8211;n</text><text x="340" y="208" font-size="12" fill="var(--grigio)">bvrn</text>
-</svg>
-<figcaption>Il ramo che parte dalla penna bianca: 3 scelte per il secondo posto, poi 2 per il terzo, 1 per
-l'ultimo. Lo stesso schema, con gli stessi 6 esiti, si ripete partendo da n, da r o da v.</figcaption>
-</figure>
+<ul>
+<li>1° posto → 4 scelte;</li>
+<li>2° posto → 3 scelte;</li>
+<li>3° posto → 2 scelte;</li>
+<li>4° posto → 1 scelta (obbligata).</li>
+</ul>
+
+<div class="fig">
+<svg id="alb-penne" viewBox="0 0 400 220" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle file che iniziano con la penna bianca: bnrv, bnvr, brnv, brvn, bvnr, bvrn"></svg>
+<p class="did">File con $b$ primo: $3\cdot2\cdot1=6$; lo stesso per $n$, $r$, $v$</p>
+</div>
+
+<p class="eq">$$4\cdot3\cdot2\cdot1=24$$</p>
 
 <div class="def"><span class="et">Permutazioni semplici</span>
-<p>Le permutazioni semplici di $n$ elementi distinti sono tutti i gruppi formati dagli $n$ elementi, che
-differiscono soltanto per il loro ordine:
-$$P_n = n\cdot(n-1)\cdot(n-2)\cdots3\cdot2\cdot1$$
-Il prodotto di tutti gli interi da $n$ a $1$ si scrive $n!$ e si legge «$n$ fattoriale»:
-$$P_n=n!$$</p>
-</div>
+<p>Gruppi formati da tutti gli $n$ elementi distinti, diversi solo per l'ordine:</p>
+<p class="eq">$$P_n=n\,(n-1)\,(n-2)\cdots2\cdot1=n!\qquad 0!=1\ \text{(per convenzione)}$$</p></div>
 
-<p>Per esempio $4!=4\cdot3\cdot2\cdot1=24$ e $7!=7\cdot6\cdot5\cdot4\cdot3\cdot2\cdot1=5040$. Per
-convenzione si pone $0!=1$.</p>
+<p>Moltiplicando e dividendo per i fattori mancanti fino a 1, anche le disposizioni si scrivono col fattoriale:</p>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Quante parole, anche senza significato, si possono ottenere mescolando le lettere della parola CANTO?
-Sono cinque lettere tutte diverse, e contano solo gli ordini:
-$$P_5=5!=5\cdot4\cdot3\cdot2\cdot1=120$$</p>
-</div>
+<p class="eq">$$D_{5,3}=5\cdot4\cdot3=\frac{5\cdot4\cdot3\cdot2\cdot1}{2\cdot1}=\frac{5!}{2!}=60$$</p>
 
-<h2>Disposizioni e funzione fattoriale</h2>
-
-<p>Il fattoriale permette di riscrivere anche le disposizioni. Cercando $D_{5,3}$ come nell'unità
-precedente, i tre fattori a partire da 5 si ottengono moltiplicando e dividendo per $2\cdot1$, i fattori
-mancanti fino a 1:
-$$D_{5,3}=\frac{5\cdot4\cdot3\cdot2\cdot1}{2\cdot1}=\frac{5!}{2!}=60$$
-In generale:
-$$D_{n,k}=\frac{n!}{(n-k)!}$$</p>
+<div class="def"><span class="et">Disposizioni e fattoriale</span>
+<p class="eq">$$D_{n,k}=\frac{n!}{(n-k)!}$$</p></div>
 
 <h2>Permutazioni con ripetizione</h2>
 
-<p>Se alcuni degli elementi da ordinare sono uguali fra loro, non tutti gli ordinamenti sono
-distinguibili.</p>
+<p>Elementi uguali fra loro: scambiarli non cambia il gruppo.</p>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Quanti anagrammi, anche senza significato, si possono formare con le lettere della parola TETTO? Sono
-cinque lettere, e calcolando $P_5=5!=120$ contiamo anche gli scambi fra le tre T, che non cambiano la
-parola scritta.</p>
+<div class="fig">
+<svg id="fig-tetto" viewBox="0 0 400 120" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le sei colorazioni delle tre T della parola EOTTT: tutte la stessa parola"></svg>
+<p class="did">$3!=6$ scambi delle tre T: sempre la parola EOTTT</p>
 </div>
 
-<figure class="disegno">
-<svg viewBox="0 0 460 150" width="100%" style="max-width:460px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sei colorazioni delle tre T uguali nella parola EOTTT, tutte la stessa parola scritta">
-<g font-family="var(--sans)" font-weight="700" font-size="19">
-<text x="10" y="28"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--blu)">T</tspan></text>
-<text x="170" y="28"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--verde)">T</tspan></text>
-<text x="330" y="28"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--blu)">T</tspan></text>
-<text x="10" y="108"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--rosso)">T</tspan></text>
-<text x="170" y="108"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--rosso)">T</tspan><tspan fill="var(--verde)">T</tspan></text>
-<text x="330" y="108"><tspan fill="var(--inchiostro)">EO</tspan><tspan fill="var(--blu)">T</tspan><tspan fill="var(--verde)">T</tspan><tspan fill="var(--rosso)">T</tspan></text>
-</g>
-</svg>
-<figcaption>Le tre T sono uguali: le 6 colorazioni sono $3!$ modi diversi di scambiarle, ma scrivono tutte
-la stessa parola EOTTT.</figcaption>
-</figure>
+<p>Ogni gruppo distinto è contato $k!$ volte, una per ogni scambio dei $k$ elementi uguali:</p>
 
-<div class="nota"><span class="et">Attenzione</span>
-<p>Ogni parola distinta ha $3!=6$ doppioni di sé stessa, uno per ogni modo di scambiare le tre T fra loro.
-Nel conteggio totale bisogna dividere per il numero di questi doppioni:
-$$P_5^{(3)}=\frac{5!}{3!}=\frac{120}{6}=20$$</p>
+<div class="def"><span class="et">Permutazioni con ripetizione</span>
+<p>$n$ elementi, di cui $k$ uguali fra loro (oppure due gruppi di $k$ e di $h$ elementi uguali):</p>
+<p class="eq">$$P_n^{(k)}=\frac{n!}{k!}\qquad\qquad P_n^{(k,h)}=\frac{n!}{k!\,h!}$$</p></div>
+
+<div class="fig">
+<svg id="fig-rip" viewBox="0 0 400 70" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="n caselle, di cui k con lo stesso elemento"></svg>
+<div class="cursore"><label for="cur-n">$n$</label><input id="cur-n" type="range" min="3" max="9" step="1" value="5"><span class="val" id="val-n">5</span></div>
+<div class="cursore"><label for="cur-k">$k$</label><input id="cur-k" type="range" min="1" max="5" step="1" value="3"><span class="val" id="val-k">3</span></div>
+<p class="val-riga" id="val-perm"></p>
+<p class="did">$k$ elementi uguali (in rosso) fra $n$</p>
 </div>
 
-<p>In generale, se in un gruppo di $n$ elementi $k$ sono uguali fra loro:
-$$P_n^{(k)}=\frac{n!}{k!}$$
-e se vi sono due sottogruppi distinti di elementi ripetuti, di $k$ e di $h$ elementi:
-$$P_n^{(k,h)}=\frac{n!}{k!\,h!}$$</p>
+<h2>Esempio 1</h2>
 
-<div class="interattivo">
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 4px">Da $P_n$ a $P_n^{(k)}$: quanto pesano gli elementi ripetuti</p>
-<label for="n">elementi totali, $n$ = <span id="nval">5</span></label>
-<input type="range" id="n" min="3" max="9" value="5">
-<label for="k">elementi ripetuti, $k$ = <span id="kval">3</span></label>
-<input type="range" id="k" min="0" max="9" value="3">
-<div class="esiti">
-<div>senza ripetizioni: $P_n=n!=$ <b id="pn">120</b></div>
-<div>con $k$ elementi uguali: $P_n^{(k)}=n!/k!=$ <b id="pnk">20</b></div>
-</div>
-</div>
-<script>
-(function(){
-  var n=document.getElementById('n'), k=document.getElementById('k');
-  var nval=document.getElementById('nval'), kval=document.getElementById('kval');
-  var pn=document.getElementById('pn'), pnk=document.getElementById('pnk');
-  function fatt(x){ var r=1; for(var i=2;i<=x;i++){ r*=i; } return r; }
-  function aggiorna(){
-    var nn=parseInt(n.value), kk=parseInt(k.value);
-    if(kk>nn){ kk=nn; k.value=nn; }
-    nval.textContent=nn; kval.textContent=kk;
-    var f=fatt(nn);
-    pn.textContent=f.toLocaleString('it-IT');
-    pnk.textContent=(f/fatt(kk)).toLocaleString('it-IT');
-  }
-  n.addEventListener('input',aggiorna); k.addEventListener('input',aggiorna);
-  aggiorna();
-})();
-</script>
+<p>Dati: parola CANTO, 5 lettere diverse. Calcolare il numero di anagrammi, anche senza significato.</p>
 
+<p class="eq">$$P_5=5!=5\cdot4\cdot3\cdot2\cdot1=120$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: parola TETTO, 5 lettere di cui 3 T. Calcolare il numero di anagrammi, anche senza significato.</p>
+
+<p class="eq">$$P_5^{(3)}=\frac{5!}{3!}=\frac{120}{6}=20$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../28-disposizioni-semplici-e-con-ripetizione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disposizioni semplici e con ripetizione</span></a><a class="successiva" href="../30-combinazioni-e-coefficienti-binomiali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Combinazioni e coefficienti binomiali</span></a></nav>
 <footer><p>Matematica quarta &middot; Calcolo combinatorio &middot; Unità 29</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+
+/* albero calcolato: radice, livelli di scelte, foglie con la sequenza */
+function albero(id,radice,figli,titoli){
+  var svg=document.getElementById(id),g=el('g',{});svg.appendChild(g);
+  var foglie=[];
+  function espandi(seq,liv){var c=figli(seq,liv);if(!c.length){foglie.push(seq);return;}c.forEach(function(s){espandi(seq.concat([s]),liv+1);});}
+  espandi(radice?[radice]:[],0);
+  var L=foglie[0].length,top=34,passo=Math.min(24,170/(foglie.length-1)),X=[];
+  for(var i=0;i<=L;i++)X.push(20+i*80);
+  var pos={};
+  foglie.forEach(function(f,i){pos[f.join('')]=top+i*passo;});
+  foglie.forEach(function(f){for(var l=0;l<f.length-1;l++){var k=f.slice(0,l+1).join(''),y=pos[f.join('')];var q=pos['@'+k]=pos['@'+k]||[y,y];q[0]=Math.min(q[0],y);q[1]=Math.max(q[1],y);}});
+  for(var kk in pos)if(kk[0]==='@')pos[kk.slice(1)]=(pos[kk][0]+pos[kk][1])/2;
+  var y0=(top+top+(foglie.length-1)*passo)/2,inizio=radice?0:-1;
+  var off=radice?0:1;titoli.forEach(function(t,i){var x=i<L?X[i+off]:X[L-1+off]+50;txt(g,x,14,t,{'font-size':12,fill:'var(--grigio)'});});
+  var fatti={};
+  foglie.forEach(function(f){
+    for(var l=0;l<f.length;l++){
+      var k=f.slice(0,l+1).join('');if(fatti[k])continue;fatti[k]=1;
+      var x=X[l+(radice?0:1)],y=pos[k];
+      if(l>0||!radice){var kp=f.slice(0,l).join(''),xp=X[l-1+(radice?0:1)],yp=l>0?pos[kp]:y0;
+        g.appendChild(el('line',{x1:xp+12,y1:(yp-4).toFixed(1),x2:x-4,y2:(y-4).toFixed(1),stroke:'var(--inchiostro)','stroke-width':1.1}));}
+      txt(g,x,(y).toFixed(1),f[l],{fill:l===0&&radice?'var(--blu)':'var(--inchiostro)','font-size':14});
+    }
+    txt(g,X[L+(radice?0:1)-1]+50,pos[f.join('')].toFixed(1),f.join(''),{'font-size':12,fill:'var(--grigio)'});
+  });
+  if(!radice)g.appendChild(el('circle',{cx:X[0]+12,cy:(y0-4).toFixed(1),r:3,fill:'var(--inchiostro)'}));
+  var b=svg.getBBox(),M=10;svg.setAttribute('viewBox',[b.x-M,b.y-M,b.width+2*M,b.height+2*M].map(function(v){return v.toFixed(0);}).join(' '));
+}
+
+albero('alb-penne','b',function(s){if(s.length>=4)return [];return ['b','n','r','v'].filter(function(a){return s.indexOf(a)<0;});},['1°','2°','3°','4°','fila']);
+
+/* EOTTT: le 3! permutazioni dei colori delle tre T */
+(function(){
+  var svg=document.getElementById('fig-tetto'),col=['var(--rosso)','var(--verde)','var(--blu)'],perm=[];
+  (function p(a,r){if(!r.length){perm.push(a);return;}r.forEach(function(c,i){p(a.concat([c]),r.slice(0,i).concat(r.slice(i+1)));});})([],col);
+  perm.forEach(function(c,i){
+    var x=10+(i%3)*135,y=40+Math.floor(i/3)*55,t=el('text',{x:x,y:y,'font-family':'var(--sans)','font-weight':700,'font-size':22});
+    var s=el('tspan',{fill:'var(--inchiostro)'});s.textContent='EO';t.appendChild(s);
+    c.forEach(function(cc){var u=el('tspan',{fill:cc});u.textContent='T';t.appendChild(u);});
+    svg.appendChild(t);
+  });
+  var b=svg.getBBox(),M=10;svg.setAttribute('viewBox',[b.x-M,b.y-M,b.width+2*M,b.height+2*M].map(function(v){return v.toFixed(0);}).join(' '));
+})();
+
+/* caselle: n elementi, k uguali */
+var svg=document.getElementById('fig-rip'),cn=document.getElementById('cur-n'),ck=document.getElementById('cur-k');
+var vn=document.getElementById('val-n'),vk=document.getElementById('val-k'),vp=document.getElementById('val-perm');
+function fatt(x){var r=1;for(var i=2;i<=x;i++)r*=i;return r;}
+function fmt(x){return x.toLocaleString('it-IT');}
+function disegna(){
+  var n=+cn.value;ck.max=n;if(+ck.value>n)ck.value=n;var k=+ck.value,w=34,s=40,x0=200-(n*s-6)/2,lett='BCDEFGHI';
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  for(var i=0;i<n;i++){
+    var u=i<k,c=u?'var(--rosso)':'var(--inchiostro)';
+    svg.appendChild(el('rect',{x:(x0+i*s).toFixed(1),y:14,width:w,height:w,rx:4,fill:u?'#fdf6f5':'#fff',stroke:c,'stroke-width':1.4}));
+    txt(svg,(x0+i*s+w/2).toFixed(1),37,u?'A':lett[i-k],{'text-anchor':'middle','font-size':15,'font-weight':700,fill:c});
+  }
+  vn.textContent=n;vk.textContent=k;
+  vp.innerHTML='P<sub>'+n+'</sub> = '+n+'! = '+fmt(fatt(n))+' &nbsp;&nbsp; P<sub>'+n+'</sub><sup>('+k+')</sup> = '+n+'!/'+k+'! = <span class="c-ver">'+fmt(fatt(n)/fatt(k))+'</span>';
+}
+cn.addEventListener('input',disegna);ck.addEventListener('input',disegna);disegna();
+})();
+</script>
 </body>
 </html>
