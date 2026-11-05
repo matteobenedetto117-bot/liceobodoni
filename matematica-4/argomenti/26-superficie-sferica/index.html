@@ -5,21 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Superficie sferica — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.riquadro{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:20px 0;display:inline-block}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -29,88 +67,113 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Geometria analitica nello spazio &middot; Unità 26</p>
   <h1>Superficie sferica</h1>
-  <p class="sommario">Nello spazio il luogo dei punti equidistanti da un punto fissato non è più una
-  circonferenza ma una superficie: la superficie sferica. La sua equazione si ricava esattamente
-  come quella della circonferenza nel piano, traducendo in coordinate la condizione di distanza
-  costante.</p>
 </header>
 
 <div class="def"><span class="et">Definizione</span>
-<p>La superficie sferica di centro $C(x_0;y_0;z_0)$ e raggio $r$ è il luogo geometrico dei punti
-$P(x;y;z)$ dello spazio a distanza $r$ da $C$.</p>
+<p>Superficie sferica di centro $C(x_0;y_0;z_0)$ e raggio $r$: luogo dei punti $P(x;y;z)$ dello spazio a distanza $r$ da $C$.</p></div>
+
+<div class="fig">
+<svg id="fig-sf" viewBox="0 0 360 280" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Superficie sferica di centro C e raggio r negli assi x, y, z, con un punto P e le coordinate del centro"></svg>
+<p class="did">$\overline{PC}=r$ per ogni punto $P$ della superficie</p>
 </div>
 
-<figure class="disegno">
-<svg viewBox="0 0 340 260" width="100%" style="max-width:360px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sistema di assi x, y, z nello spazio con una superficie sferica di centro C e un punto P su di essa, con il raggio r e le proiezioni del centro sugli assi">
-<defs>
-<marker id="ar26" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<!-- assi -->
-<line x1="60" y1="230" x2="60" y2="20" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#ar26)"/>
-<text x="66" y="30" font-size="13" fill="var(--inchiostro)">z</text>
-<line x1="60" y1="230" x2="300" y2="150" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#ar26)"/>
-<text x="292" y="140" font-size="13" fill="var(--inchiostro)">y</text>
-<line x1="60" y1="230" x2="15" y2="255" stroke="var(--inchiostro)" stroke-width="1.6" marker-end="url(#ar26)"/>
-<text x="8" y="252" font-size="13" fill="var(--inchiostro)">x</text>
-<!-- sfera -->
-<ellipse cx="160" cy="130" rx="82" ry="72" fill="none" stroke="var(--inchiostro)" stroke-width="1.8"/>
-<!-- proiezioni del centro -->
-<circle cx="160" cy="130" r="3.2" fill="var(--rosso)"/>
-<text x="150" y="118" font-size="13" fill="var(--rosso)">C</text>
-<line x1="160" y1="130" x2="160" y2="230" stroke="var(--rosso)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="164" y="200" font-size="12" fill="var(--rosso)">z&#8320;</text>
-<line x1="160" y1="230" x2="60" y2="230" stroke="var(--rosso)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="95" y="245" font-size="12" fill="var(--rosso)">x&#8320;</text>
-<line x1="160" y1="230" x2="220" y2="192" stroke="var(--rosso)" stroke-width="1.2" stroke-dasharray="4 3"/>
-<text x="222" y="205" font-size="12" fill="var(--rosso)">y&#8320;</text>
-<!-- punto P e raggio -->
-<circle cx="205" cy="72" r="3.2" fill="var(--blu)"/>
-<text x="212" y="68" font-size="13" fill="var(--blu)">P</text>
-<line x1="160" y1="130" x2="205" y2="72" stroke="var(--blu)" stroke-width="1.8"/>
-<text x="172" y="98" font-size="13" fill="var(--blu)">r</text>
-</svg>
-<figcaption>Il punto generico $P(x;y;z)$ della superficie sferica dista $r$ dal centro
-$C(x_0;y_0;z_0)$, le cui coordinate sono le proiezioni sui tre assi.</figcaption>
-</figure>
+<p>Dalla condizione $\overline{PC}=r$, elevando al quadrato:</p>
 
-<p>Imponiamo che la distanza $\overline{PC}$ sia proprio $r$:
-$$\overline{PC}=r=\sqrt{(x-x_0)^2+(y-y_0)^2+(z-z_0)^2}$$
-Eleviamo al quadrato per eliminare la radice e sviluppiamo i tre quadrati di binomio:
-$$(x-x_0)^2+(y-y_0)^2+(z-z_0)^2=r^2$$
-$$x^2-2xx_0+x_0^2+y^2-2yy_0+y_0^2+z^2-2zz_0+z_0^2=r^2$$
-I termini in $x_0,y_0,z_0$ sono costanti: raccogliamo i coefficienti dei termini lineari ponendo
-$a=-2x_0$, $b=-2y_0$, $c=-2z_0$, $d=x_0^2+y_0^2+z_0^2-r^2$. L'equazione diventa</p>
+<p class="eq">$$(x-x_0)^2+(y-y_0)^2+(z-z_0)^2=r^2$$</p>
 
-<div class="riquadro">$$x^2+y^2+z^2+ax+by+cz+d=0$$</div>
-<p>l'equazione della superficie sferica in forma generale.</p>
+<p>Sviluppando e ponendo $a=-2x_0$, $b=-2y_0$, $c=-2z_0$, $d=x_0^2+y_0^2+z_0^2-r^2$:</p>
 
-<p>Dai coefficienti si torna al centro invertendo le posizioni date sopra:
-$$x_0=-\frac a2,\qquad y_0=-\frac b2,\qquad z_0=-\frac c2\qquad\Rightarrow\qquad
-C\left(-\frac a2;-\frac b2;-\frac c2\right)$$
-Per il raggio, dalla definizione di $d$ ricaviamo $r^2=x_0^2+y_0^2+z_0^2-d$, e sostituendo
-$x_0,y_0,z_0$ in funzione di $a,b,c$:</p>
+<div class="def"><span class="et">Equazione in forma generale</span>
+<p class="eq">$$x^2+y^2+z^2+ax+by+cz+d=0$$</p></div>
 
-<div class="riquadro">$$r=\sqrt{\frac{a^2}4+\frac{b^2}4+\frac{c^2}4-d}$$</div>
+<div class="def"><span class="et">Centro e raggio</span>
+<p class="eq">$$C\left(-\frac a2;-\frac b2;-\frac c2\right)\qquad r=\sqrt{\frac{a^2}4+\frac{b^2}4+\frac{c^2}4-d}$$</p></div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Determiniamo l'equazione della superficie sferica di centro $M(2;-1;1)$ e raggio $3$:
-$$(x-2)^2+(y+1)^2+(z-1)^2=9$$
-Sviluppando i quadrati e portando tutto a sinistra:
-$$x^2+y^2+z^2-4x+2y-2z-3=0$$</p>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>L'equazione rappresenta una superficie sferica solo se $\frac{a^2}4+\frac{b^2}4+\frac{c^2}4-d>0$.</p></div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Data $x^2+y^2+z^2+2x-2y+6z=0$, troviamo centro e raggio: qui $a=2$, $b=-2$, $c=6$, $d=0$.
-$$x_0=-\frac22=-1,\quad y_0=-\frac{-2}2=1,\quad z_0=-\frac62=-3\quad\Rightarrow\quad C(-1;1;-3)$$
-$$r=\sqrt{\frac{2^2}4+\frac{(-2)^2}4+\frac{6^2}4-0}=\sqrt{1+1+9}=\sqrt{11}$$</p>
-</div>
+<h2>Esempio 1</h2>
 
+<p>Dati: centro $M(2;-1;1)$, raggio $3$. Scrivere l'equazione della superficie sferica.</p>
+
+<p class="eq">$$(x-2)^2+(y+1)^2+(z-1)^2=9\ \Rightarrow\ x^2+y^2+z^2-4x+2y-2z-3=0$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $x^2+y^2+z^2+2x-2y+6z=0$. Calcolare centro e raggio.</p>
+
+<p class="eq">$$a=2,\ b=-2,\ c=6,\ d=0\ \Rightarrow\ C(-1;1;-3),\quad r=\sqrt{1+1+9-0}=\sqrt{11}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../25-distanza-punto-retta-e-distanza-fra-rette-sghembe/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Distanza punto-retta e distanza fra rette sghembe</span></a><a class="successiva" href="../27-sfera-e-piano-posizioni-reciproche-e-piano-tangente/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Sfera e piano: posizioni reciproche e piano tangente</span></a></nav>
 <footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 26</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+var svg=document.getElementById('fig-sf'),u=36;
+/* proiezione obliqua: y a destra, z in alto, x verso l'osservatore */
+function p(v){return [u*(v[1]-0.42*v[0]),-u*(v[2]-0.32*v[0])];}
+function f(q){return q[0].toFixed(1)+','+q[1].toFixed(1);}
+var d=el('defs',{}),m=el('marker',{id:'sf-a',markerUnits:'userSpaceOnUse',markerWidth:12,markerHeight:12,refX:8,refY:4,orient:'auto'});
+m.appendChild(el('path',{d:'M0,0 L9,4 L0,8 Z',fill:'var(--inchiostro)'}));d.appendChild(m);svg.appendChild(d);
+var g=el('g',{});svg.appendChild(g);
+function L(A,B,at){var a=p(A),b=p(B);g.appendChild(el('line',Object.assign({x1:a[0].toFixed(1),y1:a[1].toFixed(1),x2:b[0].toFixed(1),y2:b[1].toFixed(1)},at)));}
+var C=[1.5,3.4,2.6],r=1.5;
+/* assi */
+var ax={stroke:'var(--inchiostro)','stroke-width':1.4,'marker-end':'url(#sf-a)'};
+L([0,0,0],[3.6,0,0],ax);L([0,0,0],[0,6.0,0],ax);L([0,0,0],[0,0,4.8],ax);
+var t;t=p([3.6,0,0]);txt(g,(t[0]-14).toFixed(1),(t[1]+4).toFixed(1),'x',{'font-style':'italic'});
+t=p([0,6.0,0]);txt(g,(t[0]-4).toFixed(1),(t[1]+18).toFixed(1),'y',{'font-style':'italic'});
+t=p([0,0,4.8]);txt(g,(t[0]+8).toFixed(1),(t[1]+6).toFixed(1),'z',{'font-style':'italic'});
+/* coordinate del centro */
+var dsh={stroke:'var(--rosso)','stroke-width':1.2,'stroke-dasharray':'4,3'},C0=[C[0],C[1],0];
+L(C,C0,dsh);L(C0,[C[0],0,0],dsh);L(C0,[0,C[1],0],dsh);
+t=p([C[0],0,0]);txt(g,(t[0]-22).toFixed(1),(t[1]+8).toFixed(1),'x₀',{'font-style':'italic','font-size':12,fill:'var(--rosso)'});
+t=p([0,C[1],0]);txt(g,(t[0]+3).toFixed(1),(t[1]-6).toFixed(1),'y₀',{'font-style':'italic','font-size':12,fill:'var(--rosso)'});
+t=p([C[0],C[1],1.05]);txt(g,(t[0]+5).toFixed(1),(t[1]+4).toFixed(1),'z₀',{'font-style':'italic','font-size':12,fill:'var(--rosso)'});
+/* contorno della sfera: inviluppo convesso dei punti proiettati */
+var pts=[];for(var i=0;i<=36;i++)for(var j=0;j<72;j++){var th=Math.PI*i/36,ph=2*Math.PI*j/72;
+  pts.push(p([C[0]+r*Math.sin(th)*Math.cos(ph),C[1]+r*Math.sin(th)*Math.sin(ph),C[2]+r*Math.cos(th)]));}
+pts.sort(function(a,b){return a[0]-b[0]||a[1]-b[1];});
+function cr(o,a,b){return (a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);}
+var lo=[],hi=[];pts.forEach(function(q){while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0)lo.pop();lo.push(q);});
+for(var n=pts.length-1;n>=0;n--){var q=pts[n];while(hi.length>1&&cr(hi[hi.length-2],hi[hi.length-1],q)<=0)hi.pop();hi.push(q);}
+var hull=lo.slice(0,-1).concat(hi.slice(0,-1));
+g.appendChild(el('polygon',{points:hull.map(f).join(' '),fill:'var(--blu-chiaro)','fill-opacity':0.55,stroke:'var(--inchiostro)','stroke-width':1.8}));
+/* equatore */
+var eq=[];for(var j=0;j<=72;j++){var ph=2*Math.PI*j/72;eq.push(p([C[0]+r*Math.cos(ph),C[1]+r*Math.sin(ph),C[2]]));}
+g.appendChild(el('polyline',{points:eq.map(f).join(' '),fill:'none',stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3,3'}));
+/* raggio verso P */
+var P=[C[0],C[1]+r*Math.cos(0.7),C[2]+r*Math.sin(0.7)];
+L(C,P,{stroke:'var(--blu)','stroke-width':2});
+var pc=p(C),pp=p(P),mm=p([(C[0]+P[0])/2,(C[1]+P[1])/2,(C[2]+P[2])/2]);
+g.appendChild(el('circle',{cx:pc[0].toFixed(1),cy:pc[1].toFixed(1),r:3.4,fill:'var(--rosso)'}));
+txt(g,(pc[0]-16).toFixed(1),(pc[1]+4).toFixed(1),'C',{'font-style':'italic',fill:'var(--rosso)'});
+g.appendChild(el('circle',{cx:pp[0].toFixed(1),cy:pp[1].toFixed(1),r:3.4,fill:'var(--blu)'}));
+txt(g,(pp[0]+7).toFixed(1),(pp[1]-5).toFixed(1),'P',{'font-style':'italic',fill:'var(--blu)'});
+txt(g,(mm[0]-6).toFixed(1),(mm[1]-8).toFixed(1),'r',{'font-style':'italic',fill:'var(--blu)'});
+var b=svg.getBBox(),M=12;svg.setAttribute('viewBox',[b.x-M,b.y-M,b.width+2*M,b.height+2*M].map(function(v){return v.toFixed(0);}).join(' '));
+})();
+</script>
 </body>
 </html>
