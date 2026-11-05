@@ -5,18 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Posizione reciproca di due rette — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,70 +67,53 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Geometria analitica nello spazio &middot; Unità 23</p>
   <h1>Posizione reciproca di due rette</h1>
-  <p class="sommario">Nel piano due rette non parallele si incontrano sempre. Nello spazio no:
-  possono anche non avere alcun punto in comune pur non essendo parallele. Confrontando i
-  vettori direzione delle due rette si riconoscono tutti i casi possibili.</p>
 </header>
 
-<h2>Rette parallele</h2>
+<p>Rette $r$ e $s$ con direzioni $\vec v(l;m;n)$ e $\vec w(l';m';n')$:</p>
 
-<p>Consideriamo due rette con vettori direzione $\vec v(l;m;n)$ e $\vec w(l';m';n')$.</p>
+<ul>
+<li>$\vec v=k\vec w$ → parallele (coincidenti se hanno un punto in comune);</li>
+<li>non parallele, con un punto in comune → incidenti;</li>
+<li>non parallele, senza punti in comune → sghembe.</li>
+</ul>
 
-<div class="def"><span class="et">Rette parallele</span>
-$$\vec v=k\,\vec w,\qquad k\in\mathbb R$$
-<p>Se $l',m',n'\neq0$, la condizione si scrive confrontando le componenti:</p>
-$$\dfrac{l}{l'}=\dfrac{m}{m'}=\dfrac{n}{n'}\qquad\text{(condizione di parallelismo)}$$
-</div>
-
-<p>Se due rette parallele hanno un punto in comune, allora sono coincidenti.</p>
-
-<h2>Rette incidenti o sghembe</h2>
-
-<p>Le rette non parallele si distinguono ancora in due casi, a seconda che si incontrino
-oppure no.</p>
-
-<div class="def"><span class="et">Incidenti e sghembe</span>
-<p>Due rette sono <b>incidenti</b> se non sono parallele e hanno un punto in comune.
-Due rette sono <b>sghembe</b> se non sono parallele e non hanno punti in comune.</p>
-</div>
-
-<h2>Rette perpendicolari</h2>
-
-<p>Anche la perpendicolarità si legge sui vettori direzione: basta che il loro prodotto
-scalare sia nullo.</p>
+<div class="def"><span class="et">Condizione di parallelismo</span>
+<p class="eq">$$\vec v=k\,\vec w\qquad\Longleftrightarrow\qquad \frac{l}{l'}=\frac{m}{m'}=\frac{n}{n'}\quad(l',m',n'\neq0)$$</p></div>
 
 <div class="def"><span class="et">Condizione di perpendicolarità</span>
-$$\vec v\cdot\vec w=0\qquad\Longleftrightarrow\qquad ll'+mm'+nn'=0$$
-</div>
+<p class="eq">$$\vec v\cdot\vec w=0\qquad\Longleftrightarrow\qquad ll'+mm'+nn'=0$$</p></div>
 
 <div class="nota"><span class="et">Attenzione</span>
-<p>Due rette perpendicolari non è detto che siano incidenti: potrebbero anche essere sghembe.
-Per verificare se si incontrano davvero occorre controllare se hanno un punto in comune,
-cioè se il sistema delle loro equazioni ammette soluzione.</p>
-</div>
+<p>Perpendicolari non vuol dire incidenti: possono essere sghembe. Si controlla se il sistema delle equazioni ha soluzione.</p></div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Studiamo la posizione reciproca delle rette</p>
-$$r:\begin{cases}x=1+k\\y=-2-k\\z=5+3k\end{cases}\qquad
-s:\begin{cases}x=-3+4t\\y=2-2t\\z=-7-2t\end{cases}$$
-<p>I vettori direzione sono $\vec v(1;-1;3)$ e $\vec w(4;-2;-2)$. Non sono paralleli, perché
-$\dfrac{1}{4}\neq\dfrac{-1}{-2}$. Verifichiamo la perpendicolarità:</p>
-$$\vec v\cdot\vec w=1\cdot4+(-1)\cdot(-2)+3\cdot(-2)=4+2-6=0$$
-<p>Le rette sono perpendicolari. Per sapere se sono anche incidenti risolviamo il sistema
-uguagliando le coordinate di $r$ e $s$:</p>
-$$\begin{cases}1+k=-3+4t\\-2-k=2-2t\\5+3k=-7-2t\end{cases}\ \Longrightarrow\
-\begin{cases}k=4t-4\\k=2t-4\\3k=-2t-12\end{cases}$$
-<p>Dalle prime due equazioni: $4t-4=2t-4$, da cui $t=0$ e $k=-4$. Sostituendo in tutte e
-tre le equazioni di partenza si ottiene lo stesso risultato, quindi il sistema è
-compatibile: le rette sono incidenti, non sghembe. Il punto di intersezione si trova
-sostituendo $t=0$ in $s$ (o $k=-4$ in $r$):</p>
-$$P(-3;2;-7)$$
-</div>
+<h2>Esempio</h2>
 
+<p>Dati: $r:\ x=1+k,\ y=-2-k,\ z=5+3k$; $\ s:\ x=-3+4t,\ y=2-2t,\ z=-7-2t$. Studiare la posizione reciproca.</p>
+
+<p class="eq">$$\vec v(1;-1;3),\ \vec w(4;-2;-2):\quad \frac14\neq\frac{-1}{-2}\ \Rightarrow\ \text{non parallele};\qquad \vec v\cdot\vec w=4+2-6=0\ \Rightarrow\ \text{perpendicolari}$$</p>
+
+<p class="eq">$$\begin{cases}1+k=-3+4t\\-2-k=2-2t\\5+3k=-7-2t\end{cases}\ \Rightarrow\ \begin{cases}k=4t-4\\k=2t-4\end{cases}\ \Rightarrow\ t=0,\ k=-4;\quad 5-12=-7\ \checkmark\ \Rightarrow\ \text{incidenti in }P(-3;2;-7)$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../22-retta-come-intersezione-di-due-piani/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Retta come intersezione di due piani</span></a><a class="successiva" href="../24-posizione-reciproca-di-retta-e-piano/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Posizione reciproca di retta e piano</span></a></nav>
 <footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 23</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

@@ -191,6 +191,7 @@
 - Parole: 364 su 3 pagine di traccia (102–104)
 - Rettifica: nessuna. Verificato con SymPy: per r con v(1;-1;3) e s con w(4;-2;-2), v·w=4+2-6=0 (perpendicolari) e 1/4≠-1/-2 (non parallele); risolvendo il sistema fra le equazioni parametriche di r e s si ottiene k=-4, t=0, verificato in tutte e tre le equazioni, con punto di intersezione P(-3;2;-7): tutto coincidente con la traccia.
 - Aggiunta: nessuna.
+- Revisione (05/11/2026, regole 13/10): parole circa 299 → 97 (formule $$ e didascalie escluse; sommario incluso prima; sotto le 100: contenuto in elenco, .def e formule). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, riquadro .esempio e i titoletti «Rette parallele», «Rette incidenti o sghembe», «Rette perpendicolari»; i quattro casi (parallele/coincidenti, incidenti, sghembe) in elenco caso → conseguenza; parallelismo (con l′, m′, n′ ≠ 0) e perpendicolarità in .def; nota «perpendicolari non vuol dire incidenti» in due frasi; esempio in forma Dati/Studiare con due .eq. Titoletto: «Esempio». Nessun esempio tolto, nessuna comparsa da togliere, nessuna figura (nessuna presente prima). Nessuna correzione concettuale (verificato con SymPy: v·w = 0, k = −4, t = 0, P(−3;2;−7)).
 
 ## Unità 24 — Posizione reciproca di retta e piano
 - Parole: 314 su 2 pagine di traccia (105–106)
