@@ -302,6 +302,7 @@
   Nessun quesito di maturità: i quesiti reali sulla probabilità condizionata compaiono quasi sempre
   insieme al prodotto logico o al teorema di Bayes, argomenti delle unità 35 e 37, quindi non ne ho
   cercato uno per questa unità.
+- Revisione (05/11/2026, regole 13/10): parole circa 390 → 145 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa e i riquadri .esempio; con/senza reimmissione in elenco caso → conseguenza (indipendenti/dipendenti); definizione in .def; derivazione r/k = P(E₁∩E₂)/P(E₁) in una frase di raccordo + .def. Titoletti: «Esempio 1» (palline, risultato diretto 4/8 e verifica con la formula nella stessa .eq), «Esempio 2» (sondaggio nella 5ªB, scritto con C₁₃,₂/C₂₄,₂ come nell'unità 32), in forma Dati/Calcolare. Nessun esempio tolto. Nessuna comparsa da togliere. Correzione concettuale: aggiunta la condizione «con P(E₁) ≠ 0» alla formula (prima mancava). Verifiche Python/frazioni: (12/72)/(3/9) = 1/2 = 4/8; C(13,2)/C(24,2) = 78/276 = 13/46; 425 + 225 = 650, 11 + 13 = 24. Figure: diagramma di Venn ridisegnato da script (E₁ in azzurro come nuovo spazio campione, U tratteggiato in grigio, intersezione tratteggiata in rosso), statico. Nessuna figura decorativa.
 
 ## Unità 35 — Prodotto logico ed eventi indipendenti
 - Parole: 438 su 1,5 pagine di traccia (139 intera, 140 fino a circa metà pagina)
