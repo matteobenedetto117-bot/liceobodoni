@@ -5,20 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Distanza punto-retta e distanza fra rette sghembe — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -28,79 +67,122 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Geometria analitica nello spazio &middot; Unità 25</p>
   <h1>Distanza punto-retta e distanza fra rette sghembe</h1>
-  <p class="sommario">Misuriamo quanto un punto è lontano da una retta e quanto lo sono, fra loro,
-  due rette che non si incontrano e non sono parallele. In entrambi i casi la distanza è la
-  lunghezza di un segmento perpendicolare, e il problema si riduce a trovarne gli estremi.</p>
 </header>
 
 <h2>Distanza di un punto da una retta</h2>
 
-<p>Il punto di $r$ più vicino a $P$ è il piede $H$ della perpendicolare condotta da $P$ a $r$: la
-distanza cercata è la lunghezza del segmento $PH$. Per trovare $H$ costruiamo il piano
-perpendicolare a $r$ e passante per $P$ — un piano il cui vettore normale è proprio il vettore
-direzione di $r$ — e lo intersechiamo con $r$ stessa: il punto di intersezione è $H$.</p>
+<p>Distanza di $P$ da $r$: lunghezza di $PH$, con $H$ piede della perpendicolare condotta da $P$ a $r$.</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 320 210" width="100%" style="max-width:360px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Un punto P, la retta r e il piede della perpendicolare H, con il segmento PH">
-<defs>
-<marker id="ar25" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--inchiostro)"/>
-</marker>
-</defs>
-<line x1="30" y1="170" x2="290" y2="60" stroke="var(--inchiostro)" stroke-width="2" marker-end="url(#ar25)"/>
-<text x="270" y="48" font-size="13" fill="var(--inchiostro)">r</text>
-<circle cx="180" cy="106" r="3.5" fill="var(--blu)"/>
-<text x="186" y="122" font-size="13" fill="var(--blu)">H</text>
-<circle cx="230" cy="40" r="3.5" fill="var(--rosso)"/>
-<text x="238" y="36" font-size="13" fill="var(--rosso)">P</text>
-<line x1="230" y1="40" x2="180" y2="106" stroke="var(--rosso)" stroke-width="2" stroke-dasharray="5 4"/>
-<path d="M188,98 L196,104 L190,112" fill="none" stroke="var(--grigio)" stroke-width="1.4"/>
-</svg>
-<figcaption>La distanza di $P$ da $r$ è la lunghezza del segmento $PH$, dove $H$ è il piede della
-perpendicolare condotta da $P$ a $r$.</figcaption>
-</figure>
-
-<div class="esempio"><span class="et">Esempio</span>
-<p>Calcoliamo la distanza del punto $P(9;-3;0)$ dalla retta $r$ di equazioni parametriche
-$$r:\begin{cases}x=2-k\\y=4k\\z=1+2k\end{cases}\qquad\vec v(-1;4;2)$$
-Il piano passante per $P$ con vettore normale $\vec v$ ha equazione
-$$-1(x-9)+4(y+3)+2(z-0)=0\;\Rightarrow\;-x+4y+2z+21=0$$
-Sostituiamo le equazioni parametriche di $r$ per trovare il punto $H$ in cui $r$ incontra questo
-piano:
-$$-(2-k)+4(4k)+2(1+2k)+21=0\;\Rightarrow\;21k+21=0\;\Rightarrow\;k=-1\;\Rightarrow\;H(3;-4;-1)$$
-La distanza cercata è
-$$\overline{PH}=\sqrt{(9-3)^2+(-3+4)^2+(0+1)^2}=\sqrt{38}$$</p>
+<div class="fig">
+<svg id="fig-pr" viewBox="0 0 360 260" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto P, retta r, piede H della perpendicolare e punto Q mobile lungo r"></svg>
+<div class="cursore"><label for="cur-k">k</label><input id="cur-k" type="range" min="-2.5" max="0.5" step="0.25" value="0"><span class="val" id="val-k">0</span></div>
+<p class="val-riga" id="riga-k">PQ ≈ 7,68 > PH ≈ 6,16</p>
+<p class="did">Esempio 1 nel piano di $P$ e $r$, in vera grandezza; $Q$ punto di $r$ di parametro $k$</p>
 </div>
 
-<h2>Distanza tra due rette sghembe</h2>
+<p>Procedimento:</p>
+<ol>
+<li>piano per $P$ con vettore normale $\vec v$, direzione di $r$;</li>
+<li>$H$ = intersezione del piano con $r$;</li>
+<li>distanza = $\overline{PH}$.</li>
+</ol>
 
-<p>Due rette sghembe non giacciono su uno stesso piano e non hanno punti in comune. Fra tutti i
-segmenti che uniscono un punto dell'una a un punto dell'altra, quello di lunghezza minima è
-perpendicolare a entrambe: è la perpendicolare comune, e la sua lunghezza è la distanza fra le
-due rette. La cerchiamo imponendo che il vettore che unisce un punto generico di ciascuna retta
-sia ortogonale a entrambe le direzioni.</p>
+<h2>Esempio 1</h2>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Consideriamo le rette
-$$r:\begin{cases}x+y+z-3=0\\x=1\end{cases}\qquad s:\begin{cases}x-2y+4z=0\\x-2y-4=0\end{cases}$$
-Riscritte in forma parametrica:
-$$r:\begin{cases}x=1\\y=k\\z=2-k\end{cases}\;\vec v_r(0;1;-1)\qquad
-s:\begin{cases}x=4+2t\\y=t\\z=-1\end{cases}\;\vec v_s(2;1;0)$$
-I vettori direzione non sono né paralleli né perpendicolari, e mettendo a sistema le equazioni di
-$r$ e di $s$ si trova che non hanno soluzione: le due rette sono sghembe.</p>
-<p>Prendiamo un punto generico $R(1;k;2-k)$ su $r$ e un punto generico $S(4+2t;t;-1)$ su $s$.
-Il vettore $\vec{RS}(3+2t;\,t-k;\,k-3)$ deve essere perpendicolare sia a $\vec v_r$ sia a
-$\vec v_s$:
-$$\begin{cases}\vec{RS}\cdot\vec v_r=0\\\vec{RS}\cdot\vec v_s=0\end{cases}\;\Rightarrow\;
-\begin{cases}t-2k+3=0\\5t-k+6=0\end{cases}\;\Rightarrow\;\begin{cases}t=-1\\k=1\end{cases}$$
-da cui $R(1;1;1)$ e $S(2;-1;-1)$. La distanza minima fra $r$ e $s$ è
-$$\overline{RS}=\sqrt{1^2+(-2)^2+(-2)^2}=\sqrt9=3$$</p>
-</div>
+<p>Dati: $P(9;-3;0)$, $\;r:\ x=2-k,\ y=4k,\ z=1+2k$, $\;\vec v(-1;4;2)$. Calcolare la distanza di $P$ da $r$.</p>
 
+<p class="eq">$$-(x-9)+4(y+3)+2z=0\ \Rightarrow\ -x+4y+2z+21=0$$</p>
+
+<p class="eq">$$-(2-k)+16k+2(1+2k)+21=0\ \Rightarrow\ k=-1\ \Rightarrow\ H(3;-4;-1)$$</p>
+
+<p class="eq">$$\overline{PH}=\sqrt{6^2+1^2+1^2}=\sqrt{38}$$</p>
+
+<h2>Distanza fra due rette sghembe</h2>
+
+<p>Rette sghembe: non complanari, nessun punto in comune. Distanza: lunghezza del segmento $RS$ perpendicolare a entrambe (perpendicolare comune).</p>
+
+<div class="def"><span class="et">Perpendicolare comune</span>
+<p>$R$ punto generico di $r$, $S$ punto generico di $s$:</p>
+<p class="eq">$$\begin{cases}\vec{RS}\cdot\vec v_r=0\\\vec{RS}\cdot\vec v_s=0\end{cases}$$</p></div>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $r:\ \begin{cases}x+y+z-3=0\\x=1\end{cases}$, $\;s:\ \begin{cases}x-2y+4z=0\\x-2y-4=0\end{cases}$. Calcolare la distanza fra $r$ e $s$.</p>
+
+<p class="eq">$$r:\begin{cases}x=1\\y=k\\z=2-k\end{cases}\ \vec v_r(0;1;-1)\qquad s:\begin{cases}x=4+2t\\y=t\\z=-1\end{cases}\ \vec v_s(2;1;0)$$</p>
+
+<p>Direzioni non parallele, sistema fra $r$ e $s$ impossibile: rette sghembe.</p>
+
+<p class="eq">$$\vec{RS}(3+2t;\,t-k;\,k-3):\ \begin{cases}t-2k+3=0\\5t-k+6=0\end{cases}\Rightarrow\ k=1,\ t=-1$$</p>
+
+<p class="eq">$$R(1;1;1),\ S(2;-1;-1)\ \Rightarrow\ \overline{RS}=\sqrt{1^2+(-2)^2+(-2)^2}=3$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../24-posizione-reciproca-di-retta-e-piano/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Posizione reciproca di retta e piano</span></a><a class="successiva" href="../26-superficie-sferica/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Superficie sferica</span></a></nav>
 <footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 25</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+var svg=document.getElementById('fig-pr'),u=20,S21=Math.sqrt(21),D=Math.sqrt(38);
+/* disegno nel piano che contiene P e r, in vera grandezza: r orizzontale, H nell'origine */
+function p(k){return [u*(k+1)*S21,0];}
+var g=el('g',{});svg.appendChild(g);
+var A=p(-2.8),B=p(0.8),ph=[0,-u*D],hh=[0,0];
+g.appendChild(el('line',{x1:A[0].toFixed(1),y1:0,x2:B[0].toFixed(1),y2:0,stroke:'var(--inchiostro)','stroke-width':2.2}));
+txt(g,(B[0]+6).toFixed(1),5,'r',{'font-style':'italic','font-size':14});
+g.appendChild(el('polyline',{points:'9,0 9,-9 0,-9',fill:'none',stroke:'var(--grigio)','stroke-width':1.2}));
+g.appendChild(el('line',{x1:0,y1:0,x2:0,y2:ph[1].toFixed(1),stroke:'var(--rosso)','stroke-width':2.4}));
+txt(g,6,(ph[1]/2+4).toFixed(1),'√38',{fill:'var(--rosso)','font-size':12});
+var gq=el('g',{});svg.appendChild(gq);
+var lq=el('line',{stroke:'var(--grigio)','stroke-width':1.6,'stroke-dasharray':'5,4'});gq.appendChild(lq);
+var q=el('circle',{r:3.6,fill:'var(--blu)'});gq.appendChild(q);
+var tq=txt(gq,0,0,'Q',{'font-style':'italic',fill:'var(--blu)'});
+g.appendChild(el('circle',{cx:0,cy:ph[1].toFixed(1),r:3.6,fill:'var(--rosso)'}));
+txt(g,-4,(ph[1]-9).toFixed(1),'P',{'font-style':'italic',fill:'var(--rosso)'});
+g.appendChild(el('circle',{cx:0,cy:0,r:3.6,fill:'var(--inchiostro)'}));
+txt(g,-4,19,'H',{'font-style':'italic'});
+function R(k){return [2-k,4*k,1+2*k];}
+function sub(a,b){return [a[0]-b[0],a[1]-b[1],a[2]-b[2]];}
+function len(a){return Math.hypot(a[0],a[1],a[2]);}
+var P=[9,-3,0];
+var cur=document.getElementById('cur-k'),val=document.getElementById('val-k'),riga=document.getElementById('riga-k');
+function fmt(n,d){return n.toFixed(d).replace('-','−').replace('.',',');}
+function agg(){
+  var k=parseFloat(cur.value),qq=p(k),d=len(sub(P,R(k)));
+  lq.setAttribute('x1',ph[0].toFixed(1));lq.setAttribute('y1',ph[1].toFixed(1));lq.setAttribute('x2',qq[0].toFixed(1));lq.setAttribute('y2',qq[1].toFixed(1));
+  lq.style.display=k==-1?'none':'';
+  q.setAttribute('cx',qq[0].toFixed(1));q.setAttribute('cy',qq[1].toFixed(1));
+  tq.setAttribute('x',(qq[0]-4).toFixed(1));tq.setAttribute('y',(qq[1]+19).toFixed(1));
+  tq.style.display=k==-1?'none':'';
+  val.textContent=fmt(k,2).replace(/,?0+$/,'')||'0';
+  riga.innerHTML=k==-1?'<span class="c-ver">Q = H: PQ = √38 ≈ 6,16, distanza minima</span>':'PQ ≈ '+fmt(d,2)+' > PH ≈ 6,16';
+}
+cur.addEventListener('input',agg);
+var b0=null;for(var kk=-2.5;kk<=0.5;kk+=0.25){cur.value=kk;agg();var b=svg.getBBox();
+  b0=b0?{x0:Math.min(b0.x0,b.x),y0:Math.min(b0.y0,b.y),x1:Math.max(b0.x1,b.x+b.width),y1:Math.max(b0.y1,b.y+b.height)}:{x0:b.x,y0:b.y,x1:b.x+b.width,y1:b.y+b.height};}
+var m=12;svg.setAttribute('viewBox',[b0.x0-m,b0.y0-m,b0.x1-b0.x0+2*m,b0.y1-b0.y0+2*m].map(function(t){return t.toFixed(0);}).join(' '));
+cur.value=0;agg();
+})();
+</script>
 </body>
 </html>
