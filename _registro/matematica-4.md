@@ -287,6 +287,7 @@
   somma logica fra due eventi; i quesiti reali sul tema richiedono quasi sempre probabilità
   condizionata o eventi indipendenti, argomenti delle unità 34-35, quindi non ne ho cercato uno per
   questa unità.
+- Revisione (05/11/2026, regole 13/10): parole circa 160 → 100 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa e il riquadro .esempio; unione e intersezione in elenco caso → conseguenza; insiemi dell'urna in una .eq; formula della somma logica in .def; eventi incompatibili in .def (condizione E₁∩E₂ = ∅ nella formula, frase della nota tolta). Titoletti: solo «Esempio» (P(E₁∪E₂) = 1/2 + 1/2 − 1/6 = 5/6, con il conteggio diretto 5 su 6), in forma Dati/Calcolare. Nessun esempio tolto. Nessuna comparsa da togliere. Nessuna correzione concettuale (Python/frazioni: 3/6 + 3/6 − 1/6 = 5/6 = |{1,2,3,4,6}|/6). Figure: diagramma di Venn ridisegnato da script, con cursore «esito» 1–6 che evidenzia la pallina estratta e indica l'appartenenza a E₁, E₂, E₁∩E₂, E₁∪E₂ («sì» in verde per l'unione). Nessuna figura decorativa.
 
 ## Unità 34 — Probabilità condizionata
 - Parole: 480 su 4 pagine di traccia (135–138)
