@@ -197,6 +197,7 @@
 - Parole: 314 su 2 pagine di traccia (105–106)
 - Rettifica: nessuna. Verificato con SymPy: per il piano x-3y-z+2=0 il vettore normale è (1;-3;-1); la retta per A(4;1;0) con v=(1;-3;-1) dà le parametriche x=4+k, y=1-3k, z=-k, coincidenti con la traccia (verificato anche che A si ottiene per k=0).
 - Aggiunta: nessuna.
+- Revisione (05/11/2026, regole 13/10): parole circa 201 → 86 (formule $$ e didascalie escluse; sommario incluso prima; sotto le 100: contenuto in elenco, .def e formule). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, riquadro .esempio e il titoletto «Le tre posizioni possibili»; tre casi in elenco caso → conseguenza; parallelismo e perpendicolarità (con l, m, n ≠ 0) in .def; esempio in forma Dati/Scrivere con una .eq. Titoletto: «Esempio». Correzione: n·v = 0 indica retta parallela al piano oppure contenuta in esso (aggiunto «contenuta in π se ha un punto in comune con esso»). Nessun esempio tolto, nessuna comparsa da togliere. Ricalcolata con SymPy la retta x = 4 + k, y = 1 − 3k, z = −k. Figura rifatta da script (prima SVG fisso con retta e piano disegnati a occhio, senza relazione fra v e n): piano π in proiezione obliqua con normale n e retta r con direzione v; cursore sull'angolo θ fra r e n (0°–90°, passo 15°) con punto d'intersezione, tratto sotto il piano tratteggiato e scritta verde per perpendicolare (θ = 0°) e parallela (θ = 90°). Nessuna figura decorativa.
 
 ## Unità 25 — Distanza punto-retta e distanza fra rette sghembe
 - Parole: 460 su 3 pagine di traccia (107–109)

@@ -5,23 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Posizione reciproca di retta e piano — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.casi{margin:20px 0;padding-left:0;list-style:none}
-.casi li{margin:14px 0;padding-left:38px;position:relative}
-.casi li b{position:absolute;left:0;color:var(--blu)}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -31,64 +67,118 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Geometria analitica nello spazio &middot; Unità 24</p>
   <h1>Posizione reciproca di retta e piano</h1>
-  <p class="sommario">Una retta e un piano nello spazio possono essere paralleli, incontrarsi in
-  un solo punto, oppure la retta può tagliare il piano ad angolo retto. Come per due rette fra
-  loro, il confronto è fra due vettori: il vettore direzione della retta e il vettore normale
-  del piano.</p>
 </header>
 
-<h2>Le tre posizioni possibili</h2>
+<p>Retta $r$ con direzione $\vec v(l;m;n)$, piano $\pi:\ ax+by+cz+d=0$ con normale $\vec n(a;b;c)$.</p>
 
-<p>Consideriamo una retta con vettore direzione $\vec v(l;m;n)$ e un piano di equazione
-$ax+by+cz+d=0$, con vettore normale $\vec n(a;b;c)$.</p>
+<div class="fig">
+<svg id="fig-rp" viewBox="0 0 360 260" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retta r con direzione v e piano con normale n, al variare dell'angolo fra v e n"></svg>
+<div class="cursore"><label for="cur-t">θ</label><input id="cur-t" type="range" min="0" max="90" step="15" value="45"><span class="val" id="val-t">45°</span></div>
+<p class="val-riga" id="riga-t">incidente</p>
+<p class="did">θ: angolo fra $r$ e $\vec n$</p>
+</div>
 
-<div class="def"><span class="et">Posizione reciproca di una retta e un piano</span>
-<ul class="casi">
-<li><b>1.</b> <b>Paralleli</b> se $\vec n$ e $\vec v$ sono perpendicolari fra loro:
-$$\vec n\cdot\vec v=0,\qquad al+bm+cn=0$$</li>
-<li><b>2.</b> <b>Incidenti</b> se $\vec n$ e $\vec v$ non sono perpendicolari fra loro.</li>
-<li><b>3.</b> <b>Perpendicolari</b> (e quindi anche incidenti) se $\vec n$ e $\vec v$ sono
-paralleli, cioè se $\vec n=k\vec v$ con $l,m,n\neq0$:
-$$\dfrac{a}{l}=\dfrac{b}{m}=\dfrac{c}{n}$$</li>
+<ul>
+<li>$\vec n\cdot\vec v=0$ → $r$ parallela a $\pi$ (contenuta in $\pi$ se ha un punto in comune con esso);</li>
+<li>$\vec n\cdot\vec v\neq0$ → $r$ incidente;</li>
+<li>$\vec n$ parallelo a $\vec v$ → $r$ perpendicolare a $\pi$.</li>
 </ul>
-</div>
 
-<figure class="disegno">
-<svg viewBox="0 0 300 220" width="100%" style="max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Una retta con il suo vettore direzione e un piano con il suo vettore normale">
-<defs>
-<marker id="ar24" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--rosso)"/>
-</marker>
-<marker id="an24" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-<path d="M0,0 L6,3 L0,6 Z" fill="var(--blu)"/>
-</marker>
-</defs>
-<line x1="70" y1="60" x2="270" y2="60" stroke="var(--inchiostro)" stroke-width="2"/>
-<line x1="70" y1="60" x2="130" y2="35" stroke="var(--rosso)" stroke-width="2.4" marker-end="url(#ar24)"/>
-<text x="132" y="30" font-size="13" fill="var(--rosso)">v&#8407;</text>
-<text x="250" y="50" font-size="13" fill="var(--inchiostro)">retta</text>
-<polygon points="30,120 110,95 140,175 60,200" fill="var(--blu-chiaro)" fill-opacity="0.6" stroke="var(--riga)"/>
-<line x1="80" y1="150" x2="80" y2="95" stroke="var(--blu)" stroke-width="2.4" marker-end="url(#an24)"/>
-<text x="86" y="93" font-size="13" fill="var(--blu)">n&#8407;</text>
-<text x="95" y="192" font-size="13" fill="var(--inchiostro)">piano</text>
-</svg>
-<figcaption>Il vettore direzione $\vec v$ della retta e il vettore normale $\vec n$ del piano:
-dal loro confronto si legge la posizione reciproca.</figcaption>
-</figure>
+<div class="def"><span class="et">Condizione di parallelismo</span>
+<p class="eq">$$\vec n\cdot\vec v=0\qquad\Longleftrightarrow\qquad al+bm+cn=0$$</p></div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Scriviamo l'equazione di una retta passante per $A(4;1;0)$ e perpendicolare al piano di
-equazione $x-3y-z+2=0$.</p>
-<p>Il vettore normale del piano è $\vec n(1;-3;-1)$. Poiché la retta dev'essere perpendicolare
-al piano, il suo vettore direzione coincide (a meno di un multiplo) con $\vec n$, quindi
-possiamo scrivere $\vec v(1;-3;-1)$. Le equazioni parametriche della retta sono:</p>
-$$\begin{cases}x=4+k\\y=1-3k\\z=-k\end{cases}$$
-</div>
+<div class="def"><span class="et">Condizione di perpendicolarità</span>
+<p class="eq">$$\vec n=k\,\vec v\qquad\Longleftrightarrow\qquad \frac{a}{l}=\frac{b}{m}=\frac{c}{n}\quad(l,m,n\neq0)$$</p></div>
 
+<h2>Esempio</h2>
+
+<p>Dati: $A(4;1;0)$, $\pi:\ x-3y-z+2=0$. Scrivere la retta per $A$ perpendicolare a $\pi$.</p>
+
+<p class="eq">$$\vec v=\vec n(1;-3;-1)\ \Rightarrow\ \begin{cases}x=4+k\\y=1-3k\\z=-k\end{cases}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../23-posizione-reciproca-di-due-rette/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Posizione reciproca di due rette</span></a><a class="successiva" href="../25-distanza-punto-retta-e-distanza-fra-rette-sghembe/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Distanza punto-retta e distanza fra rette sghembe</span></a></nav>
 <footer><p>Matematica quarta &middot; Geometria analitica nello spazio &middot; Unità 24</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+var svg=document.getElementById('fig-rp'),O=[90,170],u=46;
+/* proiezione obliqua: y a destra, z in alto, x verso l'osservatore */
+function p(x,y,z){return [O[0]+u*(y-0.42*x),O[1]-u*(z-0.32*x)];}
+function f(P){return P[0].toFixed(1)+','+P[1].toFixed(1);}
+var d=el('defs',{}),mk={};
+['inchiostro','rosso','blu'].forEach(function(c){var m=el('marker',{id:'rp-'+c,markerUnits:'userSpaceOnUse',markerWidth:12,markerHeight:12,refX:8,refY:4,orient:'auto'});
+  m.appendChild(el('path',{d:'M0,0 L9,4 L0,8 Z',fill:'var(--'+c+')'}));d.appendChild(m);mk[c]='url(#rp-'+c+')';});
+svg.appendChild(d);
+var gSotto=el('g',{}),gPiano=el('g',{}),gSopra=el('g',{});svg.appendChild(gSotto);svg.appendChild(gPiano);svg.appendChild(gSopra);
+/* piano z = 0 */
+var X0=-1.6,X1=2.4,Y0=-0.9,Y1=4.7;
+gPiano.appendChild(el('polygon',{points:[p(X0,Y0,0),p(X0,Y1,0),p(X1,Y1,0),p(X1,Y0,0)].map(f).join(' '),fill:'var(--blu-chiaro)','fill-opacity':0.75,stroke:'var(--blu)','stroke-width':1}));
+var Pi=p(X1,Y1,0);txt(gPiano,(Pi[0]-20).toFixed(1),(Pi[1]-6).toFixed(1),'π',{'font-style':'italic','font-size':14,fill:'var(--blu)'});
+/* normale n */
+var N0=[1.8,-0.2,0],N1=[1.8,-0.2,0.9],a=p.apply(null,N0),b=p.apply(null,N1);
+gSopra.appendChild(el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:'var(--blu)','stroke-width':2.4,'marker-end':mk.blu}));
+gSopra.appendChild(el('circle',{cx:a[0],cy:a[1],r:2.6,fill:'var(--blu)'}));
+txt(gSopra,(b[0]+8).toFixed(1),(b[1]+10).toFixed(1),'n',{'font-style':'italic','font-weight':700,'font-size':14,fill:'var(--blu)'});
+/* retta r per H, direzione w = (0, sin θ, −cos θ) */
+var H=[-0.6,0.3,1];
+var lSotto=el('line',{stroke:'var(--grigio)','stroke-width':1.6,'stroke-dasharray':'5,4'});gSotto.appendChild(lSotto);
+var lSopra=el('line',{stroke:'var(--inchiostro)','stroke-width':2.4});gSopra.appendChild(lSopra);
+var fv=el('line',{stroke:'var(--rosso)','stroke-width':2.6,'marker-end':mk.rosso});gSopra.appendChild(fv);
+var tv=txt(gSopra,0,0,'v',{'font-style':'italic','font-weight':700,'font-size':14,fill:'var(--rosso)'});
+var tr=txt(gSopra,0,0,'r',{'font-style':'italic','font-size':14});
+var pI=el('circle',{r:3.6,fill:'var(--rosso)'});gSopra.appendChild(pI);
+var cur=document.getElementById('cur-t'),val=document.getElementById('val-t'),riga=document.getElementById('riga-t');
+function pt(t,w){return [H[0],H[1]+t*w[1],H[2]+t*w[2]];}
+function set(l,A,B){l.setAttribute('x1',A[0].toFixed(1));l.setAttribute('y1',A[1].toFixed(1));l.setAttribute('x2',B[0].toFixed(1));l.setAttribute('y2',B[1].toFixed(1));}
+function agg(){
+  var th=parseFloat(cur.value),r=th*Math.PI/180,w=[0,Math.sin(r),-Math.cos(r)];
+  if(th==90)w=[0,1,0];if(th==0)w=[0,0,-1];
+  /* intervallo di t con y in [Y0+0.2, Y1-0.2] e z in [-1.1, 1.9] */
+  var lo=-1e9,hi=1e9;
+  function lim(c,m,M){if(Math.abs(w[c])<1e-9)return;var a=(m-H[c])/w[c],b=(M-H[c])/w[c];lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b));}
+  lim(1,Y0+0.1,Y1-0.1);lim(2,-1.1,1.9);
+  var A=pt(lo,w),B=pt(hi,w);
+  if(w[2]<0){var ti=H[2]/(-w[2]);var I=pt(ti,w);
+    set(lSopra,p.apply(null,A),p.apply(null,I));set(lSotto,p.apply(null,I),p.apply(null,B));lSotto.style.display='';
+    var Q=p.apply(null,I);pI.setAttribute('cx',Q[0].toFixed(1));pI.setAttribute('cy',Q[1].toFixed(1));pI.style.display='';}
+  else{set(lSopra,p.apply(null,A),p.apply(null,B));lSotto.style.display='none';pI.style.display='none';}
+  var Hs=p.apply(null,H),Vs=p.apply(null,pt(0.7,w));set(fv,Hs,Vs);
+  /* etichetta v: dalla parte sinistra/alta della freccia */
+  var mx=(Hs[0]+Vs[0])/2,my=(Hs[1]+Vs[1])/2,dx=Vs[0]-Hs[0],dy=Vs[1]-Hs[1],L=Math.hypot(dx,dy);
+  tv.setAttribute('x',(mx+dy/L*14-4).toFixed(1));tv.setAttribute('y',(my-dx/L*14+5).toFixed(1));
+  var As=p.apply(null,A);tr.setAttribute('x',(As[0]-14).toFixed(1));tr.setAttribute('y',(As[1]+4).toFixed(1));
+  if(th==0){tr.setAttribute('x',(As[0]+8).toFixed(1));tr.setAttribute('y',(As[1]+10).toFixed(1));}
+  val.textContent=th+'°';
+  riga.innerHTML=th==0?'<span class="c-ver">v parallelo a n: perpendicolare</span>':(th==90?'<span class="c-ver">n · v = 0: parallela</span>':'n · v ≠ 0: incidente');
+}
+cur.addEventListener('input',agg);
+/* viewBox che contiene tutte le posizioni */
+var b0=null;[0,15,30,45,60,75,90].forEach(function(t){cur.value=t;agg();var b=svg.getBBox();
+  b0=b0?{x0:Math.min(b0.x0,b.x),y0:Math.min(b0.y0,b.y),x1:Math.max(b0.x1,b.x+b.width),y1:Math.max(b0.y1,b.y+b.height)}:{x0:b.x,y0:b.y,x1:b.x+b.width,y1:b.y+b.height};});
+var m=12;svg.setAttribute('viewBox',[b0.x0-m,b0.y0-m,b0.x1-b0.x0+2*m,b0.y1-b0.y0+2*m].map(function(t){return t.toFixed(0);}).join(' '));
+cur.value=45;agg();
+})();
+</script>
 </body>
 </html>
