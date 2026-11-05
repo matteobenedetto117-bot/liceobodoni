@@ -272,6 +272,7 @@
   classica ed evento contrario soltanto), e i quesiti reali trovati richiedono probabilità condizionata
   o eventi composti, argomenti delle unità 33-34; per coerenza con "nelle unità iniziali è normale che
   non ci sia nessun quesito" non ne ho inserito nessuno.
+- Revisione (05/11/2026, regole 13/10): parole circa 470 → 138 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa e i riquadri .esempio; definizione classica in .def (con la condizione «numero finito di esiti ugualmente possibili»), esempio del dado in una riga + .eq, tre proprietà in elenco caso → conseguenza, evento contrario in .def. Titoletti: «Evento contrario», «Esempio 1» (urna con ordine), «Esempio 2» (urna senza ordine, con la verifica tramite combinazioni), in forma Dati/Calcolare. Nessun esempio tolto (l'esempio del dado resta come applicazione della definizione). Nessuna comparsa da togliere. Nessuna correzione concettuale (Python: D(10,5) = 30240, D(4,2)·D(6,3) = 1440, 1440/30240 = 1/21, 1440·10 = 14400, 14400/30240 = 10/21 = C(4,2)·C(6,3)/C(10,5) = 120/252). Figure: il riquadro interattivo sul dado trasformato in figura con cursore f (sei facce disegnate da script, favorevoli a E in blu, a non E in rosso, P(E) e P(non E) a fianco). Nessuna figura decorativa.
 
 ## Unità 33 — Somma logica di eventi
 - Parole: 247 su 1,5 pagine di traccia (134–135, prima metà)

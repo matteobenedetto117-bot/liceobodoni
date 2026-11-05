@@ -5,23 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Definizione classica ed eventi contrari — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:30px 0}
-.interattivo label{font-family:var(--sans);font-size:.85rem;display:block;margin:12px 0 4px}
-.interattivo input[type=range]{width:100%}
-.interattivo .esiti{font-family:var(--sans);font-size:.92rem;margin-top:14px;display:flex;gap:28px;flex-wrap:wrap}
-.interattivo .esiti b{color:var(--blu);font-size:1.15rem}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
 </style>
 </head>
 <body>
@@ -31,98 +68,100 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Probabilità &middot; Unità 32</p>
   <h1>Definizione classica ed eventi contrari</h1>
-  <p class="sommario">Disposizioni, permutazioni e combinazioni servono ora a rispondere a una domanda
-  diversa: quanto è probabile che un certo evento si verifichi? La definizione classica di probabilità
-  confronta i casi che realizzano l'evento con tutti i casi possibili.</p>
 </header>
 
-<p>Lanciamo un dado non truccato e consideriamo l'evento $E$: esce un numero dispari. L'insieme di tutti
-i risultati possibili è $U=\{1,2,3,4,5,6\}$, e il sottoinsieme dei risultati che realizzano $E$ è
-$\{1,3,5\}$. Se tutti gli esiti sono ugualmente possibili, il rapporto fra il numero di questi ultimi e
-il numero totale degli esiti misura quanto l'evento è probabile.</p>
+<p>Esperimento con un numero finito di esiti ugualmente possibili: quanto è probabile un evento $E$?</p>
 
 <div class="def"><span class="et">Definizione classica di probabilità</span>
-<p>Dato un evento $E$ relativo a un esperimento con un numero finito di esiti ugualmente possibili, la
-probabilità di $E$ è
-$$P(E)=\frac{f}{u}$$
-dove $f$ è il numero dei casi favorevoli, cioè degli esiti che realizzano $E$, e $u$ è il numero dei casi
-possibili, cioè di tutti gli esiti dell'esperimento.</p>
-</div>
+<p class="eq">$$P(E)=\frac{f}{u}$$</p>
+<p>$f$: casi favorevoli (esiti che realizzano $E$); $u$: casi possibili.</p></div>
 
-<p>Nell'esempio del dado, $f=3$ (i risultati 1, 3, 5) e $u=6$, quindi
-$$P(E)=\frac{3}{6}=\frac{1}{2}=50\%$$
-Dalla definizione seguono tre proprietà: $0\le P(E)\le1$; se $f=u$, cioè se l'evento si verifica sempre,
-$P(E)=1$; se $f=0$, cioè se l'evento è impossibile, $P(E)=0$.</p>
+<p>Dado non truccato, $E$ = «esce un numero dispari»: casi possibili $\{1,2,3,4,5,6\}$, favorevoli $\{1,3,5\}$.</p>
+
+<p class="eq">$$P(E)=\frac{3}{6}=\frac{1}{2}=50\%$$</p>
+
+<ul>
+<li>ogni evento → $0\le P(E)\le1$;</li>
+<li>evento certo ($f=u$) → $P(E)=1$;</li>
+<li>evento impossibile ($f=0$) → $P(E)=0$.</li>
+</ul>
 
 <h2>Evento contrario</h2>
 
-<p>Dato un evento $E$, l'evento contrario $\overline{E}$ (si legge anche "non $E$") si verifica quando
-$E$ non si verifica. Nell'esempio del dado, se $E$ è "esce un numero dispari", $\overline{E}$ è "esce un
-numero pari". Poiché i casi favorevoli a $E$ e quelli favorevoli a $\overline{E}$ insieme esauriscono
-tutti i casi possibili senza sovrapporsi,
-$$P(\overline{E})=1-P(E)$$</p>
+<p>$\overline{E}$ si verifica quando $E$ non si verifica; i casi favorevoli a $E$ e a $\overline{E}$ esauriscono i casi possibili senza sovrapporsi:</p>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Un'urna contiene 4 palline bianche e 6 nere. Ne estraiamo 5 consecutivamente, senza rimettere le
-palline nell'urna, distinguendo l'ordine di uscita. Qual è la probabilità dell'evento $E_1$: escono,
-nell'ordine, prima 2 palline bianche e poi 3 nere?</p>
-<p>I casi possibili sono le disposizioni di 10 palline prese 5 a 5:
-$$D_{10,5}=10\cdot9\cdot8\cdot7\cdot6=30240$$
-I casi favorevoli si ottengono disponendo separatamente le 2 bianche fra le 4 disponibili e le 3 nere
-fra le 6 disponibili:
-$$D_{4,2}\cdot D_{6,3}=(4\cdot3)\cdot(6\cdot5\cdot4)=1440$$
-$$P(E_1)=\frac{1440}{30240}=\frac{1}{21}$$</p>
+<div class="def"><span class="et">Evento contrario</span>
+<p class="eq">$$P(\overline{E})=1-P(E)$$</p></div>
+
+<div class="fig">
+<svg id="fig-dado" viewBox="0 0 400 76" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sei facce del dado: favorevoli a E in blu, a non E in rosso"></svg>
+<div class="cursore"><label for="cur-f">$f$</label><input id="cur-f" type="range" min="0" max="6" step="1" value="3"><span class="val" id="val-f">3</span></div>
+<p class="val-riga" id="val-p"></p>
+<p class="did">Facce favorevoli a $E$ (blu) e a $\overline{E}$ (rosso), $u=6$</p>
 </div>
 
-<div class="esempio"><span class="et">Esempio II</span>
-<p>Cambiamo la domanda: qual è la probabilità dell'evento $E_2$, che si verifica se escono comunque 2
-palline bianche e 3 nere, senza che l'ordine conti? I casi possibili restano $D_{10,5}=30240$. Ai casi
-favorevoli di prima vanno ora aggiunti tutti gli ordini in cui le stesse 5 palline (2 uguali fra loro e 3
-uguali fra loro) possono presentarsi, cioè le permutazioni di 5 elementi con due gruppi di ripetuti,
-$5!/(2!\,3!)=10$:
-$$D_{4,2}\cdot D_{6,3}\cdot\frac{5!}{2!\,3!}=1440\cdot10=14400 \qquad
-P(E_2)=\frac{14400}{30240}=\frac{10}{21}$$
-Lo stesso risultato si ottiene più direttamente in termini di combinazioni, dato che per $E_2$ l'ordine
-non conta:
-$$P(E_2)=\frac{D_{4,2}/2!\cdot D_{6,3}/3!}{D_{10,5}/5!}=\frac{C_{4,2}\cdot C_{6,3}}{C_{10,5}}=\frac{6\cdot20}{252}=\frac{10}{21}$$</p>
-</div>
+<h2>Esempio 1</h2>
 
-<div class="interattivo">
-<p style="font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin:0 0 4px">Il lancio di un
-dado: come cambia $P(E)$ al variare del numero di facce favorevoli $f$, su $u=6$ facce possibili</p>
-<label for="f">casi favorevoli, $f$ = <span id="fval">3</span></label>
-<input type="range" id="f" min="0" max="6" value="3">
-<div class="esiti">
-<div>$P(E)=f/6=$ <b id="pe">1/2</b></div>
-<div>$P(\overline{E})=1-P(E)=$ <b id="pne">1/2</b></div>
-</div>
-</div>
-<script>
-(function(){
-  var f=document.getElementById('f'), fval=document.getElementById('fval');
-  var pe=document.getElementById('pe'), pne=document.getElementById('pne');
-  function mcd(a,b){ return b===0? a : mcd(b,a%b); }
-  function frazione(num,den){
-    if(num===0) return '0';
-    var d=mcd(num,den);
-    num/=d; den/=d;
-    return den===1? String(num) : num+'/'+den;
-  }
-  function aggiorna(){
-    var ff=parseInt(f.value);
-    fval.textContent=ff;
-    pe.textContent=frazione(ff,6);
-    pne.textContent=frazione(6-ff,6);
-  }
-  f.addEventListener('input',aggiorna);
-  aggiorna();
-})();
-</script>
+<p>Dati: urna con 4 palline bianche e 6 nere, 5 estrazioni senza reimmissione, conta l'ordine. Calcolare $P(E_1)$, $E_1$ = «prima 2 bianche, poi 3 nere».</p>
 
+<p class="eq">$$P(E_1)=\frac{D_{4,2}\cdot D_{6,3}}{D_{10,5}}=\frac{(4\cdot3)\cdot(6\cdot5\cdot4)}{10\cdot9\cdot8\cdot7\cdot6}=\frac{1440}{30240}=\frac{1}{21}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: stessa urna e stesse estrazioni. Calcolare $P(E_2)$, $E_2$ = «2 bianche e 3 nere, in qualsiasi ordine».</p>
+
+<p class="eq">$$P(E_2)=\frac{D_{4,2}\cdot D_{6,3}\cdot\frac{5!}{2!\,3!}}{D_{10,5}}=\frac{1440\cdot10}{30240}=\frac{10}{21}$$</p>
+
+<p>Con le combinazioni, dato che l'ordine non conta:</p>
+
+<p class="eq">$$P(E_2)=\frac{C_{4,2}\cdot C_{6,3}}{C_{10,5}}=\frac{6\cdot20}{252}=\frac{10}{21}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../31-combinazioni-con-ripetizione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Combinazioni con ripetizione</span></a><a class="successiva" href="../33-somma-logica-di-eventi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Somma logica di eventi</span></a></nav>
 <footer><p>Matematica quarta &middot; Probabilità &middot; Unità 32</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+function comb(n,k){var r=1;for(var i=1;i<=k;i++)r=r*(n-k+i)/i;return Math.round(r);}
+
+var svg=document.getElementById('fig-dado'),cf=document.getElementById('cur-f'),vf=document.getElementById('val-f'),vp=document.getElementById('val-p');
+var PIP={1:[[0,0]],2:[[-1,-1],[1,1]],3:[[-1,-1],[0,0],[1,1]],4:[[-1,-1],[1,-1],[-1,1],[1,1]],5:[[-1,-1],[1,-1],[0,0],[-1,1],[1,1]],6:[[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1]]};
+function mcd(a,b){return b?mcd(b,a%b):a;}
+function fr(a,b){if(a===0)return '0';var d=mcd(a,b);return b/d===1?String(a/d):(a/d)+'/'+(b/d);}
+function disegna(){
+  var f=+cf.value,L=44,s=60,x0=200-2.5*s;
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
+  for(var i=1;i<=6;i++){var u=i<=f,cx=x0+(i-1)*s,cy=30,col=u?'var(--blu)':'var(--rosso)';
+    svg.appendChild(el('rect',{x:cx-L/2,y:cy-L/2,width:L,height:L,rx:7,fill:u?'var(--blu-chiaro)':'#fdf6f5',stroke:col,'stroke-width':1.6}));
+    PIP[i].forEach(function(p){svg.appendChild(el('circle',{cx:cx+p[0]*12,cy:cy+p[1]*12,r:3.6,fill:col}));});}
+  if(f>0)txt(svg,(x0+(f-1)*s/2).toFixed(1),70,'E',{'text-anchor':'middle','font-size':14,fill:'var(--blu)'});
+  if(f<6)txt(svg,(x0+(f+5)*s/2).toFixed(1),70,'non E',{'text-anchor':'middle','font-size':14,fill:'var(--rosso)'});
+  vf.textContent=f;
+  vp.innerHTML='P(E) = '+f+'/6 = <b>'+fr(f,6)+'</b> &nbsp;&nbsp; P(non E) = 1 − P(E) = <b>'+fr(6-f,6)+'</b>';
+}
+cf.addEventListener('input',disegna);disegna();
+
+})();
+</script>
 </body>
 </html>
