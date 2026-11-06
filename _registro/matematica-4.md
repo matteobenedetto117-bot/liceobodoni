@@ -321,6 +321,7 @@
   il teorema delle prove ripetute dell'unità 36 e non è stata inclusa. Verificato con Python/frazioni:
   P(Alberto=0)=(1/3)^3=1/27, P(Barbara=0)=(2/3)^6=64/729, la loro somma è 91/729 e il complementare
   638/729 ≈ 0,875, in accordo con lo svolgimento ufficiale.
+- Revisione (06/11/2026, regole 13/10): parole circa 396 → 156 (formule $$, didascalie ed etichette escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, riquadri .esempio e rimando all'unità 36; prodotto logico, probabilità composta (con P(E₁) ≠ 0) ed eventi indipendenti in tre .def, indipendenti/dipendenti in elenco caso → conseguenza, nota sull'errore tipico in una frase. Titoletti: «Esempio 1», «Esempio 2». Esempi tenuti: re nero da 52 carte (1/26), quesito suppletiva 2017 prima parte (638/729 ≈ 0,875, i due casi «a zero» in elenco); nessun esempio tolto. Nessuna comparsa da togliere. Nessuna correzione concettuale (Python/frazioni). Nessuna figura (nessuna prima).
 
 ## Unità 36 — Prove ripetute e schema di Bernoulli
 - Parole: 403 su 1,5 pagine di traccia (141 intera, 142 fino alla formula generale, prima di "Teorema
