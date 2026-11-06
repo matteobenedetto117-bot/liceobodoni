@@ -341,6 +341,7 @@
   l'istogramma di P(k,n) al variare di k, con due cursori per n e p; evidenzia in rosso il valore di k
   più probabile e permette di verificare a vista i due esempi con moneta (n=10, p=0,5): il massimo cade
   in k=5 (24,6%), mentre la barra per k=4 riproduce il calcolo dell'esempio, 105/512≈20,5%.
+- Revisione (06/11/2026, regole 13/10): parole circa 371 → 103 (formule $$, didascalie ed etichette escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, riquadri .esempio e rimando all'unità precedente; derivazione in due voci d'elenco (probabilità di una sequenza, numero di sequenze), formula in .def con q = 1 − p, nota sull'errore tipico in una frase. Titoletti: «Esempio 1», «Esempio 2». Esempi tenuti: 4 teste e 6 croci su 10 lanci (105/512 ≈ 0,205), 6 esattamente 2 volte su 5 lanci (625/3888 ≈ 0,161). Esempi tolti (regola dei due esempi): 10 teste su 10 lanci → (1/2)¹⁰ = 1/1024; quesito suppletiva 2017 seconda parte, punteggio 4 a 4 → C(6,4)(2/3)⁴(1/3)² = 80/243 ≈ 0,329. Nessuna comparsa da togliere. Nessuna correzione concettuale (Python/frazioni). Figura: istogramma Plotly riscritto in SVG da script, cursori n (2–20) e p (0,05–0,95), barre più probabili in rosso (anche due in caso di parità, es. n = 9, p = 0,5), valore a fianco. Nessuna figura decorativa.
 
 ## Unità 37 — Teorema di Bayes e disintegrazione
 - Parole: 506 su circa 4 pagine di traccia (142, dalla seconda metà dove inizia "Teorema di Bayes",
