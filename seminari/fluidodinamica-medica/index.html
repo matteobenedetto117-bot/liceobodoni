@@ -146,26 +146,23 @@ svg .serif{font-family:var(--serif)}
   <h2>Sci, scarponi o tacchi?</h2>
   <svg class="sc" viewBox="0 0 1400 700">
     <defs>
-      <linearGradient id="gneve" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe9f2"/></linearGradient>
-      <marker id="fp" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8Z" fill="var(--rosso)"/></marker>
+      <linearGradient id="gneve" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d3e2ef"/></linearGradient>
     </defs>
-    <!-- cielo leggero -->
+    <path class="neve" fill="url(#gneve)"/>
+    <path class="neve-bordo" fill="none" stroke="#9fbbd3" stroke-width="3" stroke-linejoin="round"/>
     <g class="omini"></g>
-    <rect x="0" y="400" width="1400" height="200" fill="url(#gneve)"/>
-    <line x1="0" y1="400" x2="1400" y2="400" stroke="#a9c1d6" stroke-width="3"/>
-    <g class="buche"></g>
     <g data-p="1" font-size="24" text-anchor="middle">
-      <text x="233" y="450" class="et-n">affonda poco</text>
-      <text x="700" y="450" class="et-n">affonda un po'</text>
-      <text x="1167" y="450" class="et-n">affonda molto</text>
+      <text x="233" y="490" class="et-n">affonda poco</text>
+      <text x="700" y="490" class="et-n">affonda un po'</text>
+      <text x="1167" y="490" class="et-n">affonda molto</text>
     </g>
     <g data-p="2" font-size="24" text-anchor="middle">
-      <text x="233" y="560">superficie grande</text>
-      <text x="700" y="560">superficie media</text>
-      <text x="1167" y="560">superficie piccola</text>
-      <text x="233" y="590" fill="var(--blu)" font-weight="700">pressione bassa</text>
-      <text x="700" y="590" fill="var(--blu)" font-weight="700">pressione media</text>
-      <text x="1167" y="590" fill="var(--rosso)" font-weight="700">pressione alta</text>
+      <text x="233" y="548">superficie grande</text>
+      <text x="700" y="548">superficie media</text>
+      <text x="1167" y="548">superficie piccola</text>
+      <text x="233" y="578" fill="var(--blu)" font-weight="700">pressione bassa</text>
+      <text x="700" y="578" fill="var(--blu)" font-weight="700">pressione media</text>
+      <text x="1167" y="578" fill="var(--rosso)" font-weight="700">pressione alta</text>
     </g>
     <g data-p="3">
       <rect x="430" y="615" width="540" height="80" rx="14" fill="var(--blu-chiaro)"/>
@@ -781,26 +778,39 @@ svg .serif{font-family:var(--serif)}
 
   /* ---------- neve ---------- */
   (function(){
-    var s=document.getElementById('s-neve'), go=s.querySelector('.omini'), gb=s.querySelector('.buche');
-    var xs=[233,700,1167], prof=[5,28,70], om=[], buche=[];
-    function omino(x,tipo){var g=el('g',{},go), k='var(--inchiostro)';
-      el('circle',{cx:x,cy:212,r:22,fill:'var(--carta)',stroke:k,'stroke-width':6},g);
-      [[x,234,x,320],[x,320,x-22,392],[x,320,x+22,392],[x,250,x-34,300],[x,250,x+34,300]].forEach(function(l){
-        el('line',{x1:l[0],y1:l[1],x2:l[2],y2:l[3],stroke:k,'stroke-width':8,'stroke-linecap':'round'},g);});
-      if(tipo===0){el('rect',{x:x-130,y:392,width:260,height:8,rx:4,fill:'var(--rosso)'},g);}
-      if(tipo===1){el('rect',{x:x-46,y:384,width:44,height:16,rx:5,fill:'#5b4636'},g);el('rect',{x:x+2,y:384,width:44,height:16,rx:5,fill:'#5b4636'},g);}
-      if(tipo===2){[-1,1].forEach(function(sg){var cx=x+sg*22;
-        el('path',{d:'M'+(cx-14)+',386 L'+(cx+12)+',386 L'+(cx+14)+',400 L'+(cx+6)+',400 L'+(cx-10)+',392Z',fill:'var(--rosso)'},g);
-        el('line',{x1:cx-12,y1:388,x2:cx-12,y2:400,stroke:'var(--rosso)','stroke-width':3},g);});}
-      var fr=el('line',{x1:x+70,y1:250,x2:x+70,y2:330,stroke:'var(--rosso)','stroke-width':5,'marker-end':'url(#fp)'},g);
-      var tp=el('text',{x:x+82,y:300,'font-size':22,fill:'var(--rosso)'},g);tp.textContent='peso';
+    var s=document.getElementById('s-neve'), go=s.querySelector('.omini'), nv=s.querySelector('.neve'), nb=s.querySelector('.neve-bordo');
+    var Y=380, xs=[233,700,1167], prof=[6,30,72], semi=[150,58,40], om=[], k='var(--inchiostro)';
+    function omino(x,tipo){var g=el('g',{},go);
+      // corpo: identico per tutti (stesso peso)
+      el('circle',{cx:x,cy:Y-205,r:24,fill:'var(--carta)',stroke:k,'stroke-width':7},g);
+      [[x,Y-181,x,Y-90],[x,Y-90,x-24,Y-14],[x,Y-90,x+24,Y-14],[x,Y-160,x-38,Y-104],[x,Y-160,x+38,Y-104]].forEach(function(l){
+        el('line',{x1:l[0],y1:l[1],x2:l[2],y2:l[3],stroke:k,'stroke-width':9,'stroke-linecap':'round'},g);});
+      if(tipo===0){ // sci lunghi con punta rialzata
+        el('path',{d:'M'+(x-140)+','+(Y-2)+' L'+(x+128)+','+(Y-2)+' Q'+(x+150)+','+(Y-2)+' '+(x+152)+','+(Y-20)+' L'+(x+144)+','+(Y-20)+' Q'+(x+142)+','+(Y-10)+' '+(x+126)+','+(Y-10)+' L'+(x-140)+','+(Y-10)+'Z',fill:'var(--rosso)'},g);
+        [-1,1].forEach(function(sg){el('rect',{x:x+sg*24-13,y:Y-24,width:26,height:15,rx:4,fill:'#5b4636'},g);});}
+      if(tipo===1){ // scarponi
+        [-1,1].forEach(function(sg){var cx=x+sg*30;
+          el('path',{d:'M'+(cx-24)+','+Y+' L'+(cx+28)+','+Y+' Q'+(cx+30)+','+(Y-14)+' '+(cx+14)+','+(Y-16)+' L'+(cx+8)+','+(Y-30)+' L'+(cx-18)+','+(Y-30)+' L'+(cx-24)+','+(Y-14)+'Z',fill:'#5b4636'},g);});}
+      if(tipo===2){ // tacchi a spillo
+        [-1,1].forEach(function(sg){var cx=x+sg*26;
+          el('path',{d:'M'+(cx-16)+','+(Y-26)+' Q'+(cx-4)+','+(Y-30)+' '+(cx+6)+','+(Y-14)+' L'+(cx+22)+','+(Y-4)+' L'+(cx+22)+','+Y+' L'+(cx+8)+','+Y+' L'+(cx-6)+','+(Y-12)+' L'+(cx-14)+','+(Y-14)+'Z',fill:'var(--rosso)'},g);
+          el('rect',{x:cx-17,y:Y-16,width:4,height:16,fill:'var(--rosso)'},g);});}
+      // peso: freccia disegnata a mano, etichetta a fianco
+      var ax=x+80, top=Y-185, bot=Y-95;
+      el('line',{x1:ax,y1:top,x2:ax,y2:bot-16,stroke:'var(--rosso)','stroke-width':6,'stroke-linecap':'round'},g);
+      el('path',{d:'M'+(ax-13)+','+(bot-20)+' L'+(ax+13)+','+(bot-20)+' L'+ax+','+bot+'Z',fill:'var(--rosso)'},g);
+      var tp=el('text',{x:ax+14,y:top+40,'font-size':22,'font-weight':600,fill:'var(--rosso)'},g);tp.textContent='peso';
       return g;}
-    for(var i=0;i<3;i++){om.push(omino(xs[i],i));buche.push(el('ellipse',{cx:xs[i],cy:402,rx:[135,55,40][i],ry:0,fill:'#b9cde0'},gb));}
+    for(var i=0;i<3;i++)om.push(omino(xs[i],i));
+    function superficie(u){var d='M0,'+Y;
+      for(var x=0;x<=1400;x+=4){var y=Y;
+        for(var i=0;i<3;i++){var q=Math.abs(x-xs[i]), w=semi[i], f=q<w?1:(q<w+24?.5+.5*Math.cos(Math.PI*(q-w)/24):0);y+=prof[i]*u*f;}
+        d+=' L'+x+','+y.toFixed(1);}return d;}
     var st={u:0,tu:0,last:0};
     A['s-neve']={passo:function(n,anim){st.tu=n>=1?1:0;if(!anim)st.u=st.tu;},tick:function(t){
       var dt=Math.min(.05,(t-(st.last||t))/1000);st.last=t;st.u=verso(st.u,st.tu,dt,2.2);
-      for(var i=0;i<3;i++){var d=prof[i]*st.u;om[i].setAttribute('transform','translate(0,'+d.toFixed(1)+')');
-        buche[i].setAttribute('ry',(Math.min(d,18)*.6).toFixed(1));}
+      var sp=superficie(st.u);nb.setAttribute('d',sp);nv.setAttribute('d',sp+' L1400,600 L0,600Z');
+      for(var i=0;i<3;i++)om[i].setAttribute('transform','translate(0,'+(prof[i]*st.u).toFixed(1)+')');
     }};
   })();
 
