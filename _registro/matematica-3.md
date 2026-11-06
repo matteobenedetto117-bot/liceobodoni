@@ -3,6 +3,7 @@
 - Parole: 384 su circa 1,5 pagine di traccia (pagina 2 intera + inizio pagina 3, prima che inizi l'unità 2 su iniettive/suriettive)
 - Rettifica: nessuna, il contenuto era corretto così com'era.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti; niente esempi, dimostrazioni o tabelle nuove.
+- Revisione (06/11/2026, regole 13/10): parole circa 259 → 114 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, glossario e frase finale; apertura col problema; funzione e insieme immagine in due .def; partenza/arrivo, immagine, controimmagine in elenco; le due libertà della definizione (elementi di B non raggiunti, immagini ripetute) in una frase. Titoletti: «Insieme immagine», «Esempio» (città → regioni, insieme immagine, in forma Dati/Calcolare). Nessun esempio tolto, nessuna comparsa da togliere. Nessuna correzione concettuale. Figure: i due diagrammi a insiemi (SVG fissi) ridisegnati da script, statici; insieme immagine C tratteggiato in verde. Nessuna figura decorativa.
 
 ## Unità 02 — Funzioni iniettive, suriettive, biunivoche e funzione inversa
 - Parole: 419 su circa 2,5 pagine di traccia (da "Funzioni iniettive, suriettive e biunivoche" a metà pagina 3, fino a fine pagina 5, prima che inizi il campo di esistenza a pagina 6)
