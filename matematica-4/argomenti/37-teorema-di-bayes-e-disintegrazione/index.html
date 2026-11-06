@@ -5,20 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teorema di Bayes e disintegrazione — Matematica quarta</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure.disegno{margin:26px 0;text-align:center}
-figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:10px;max-width:70ch;margin-left:auto;margin-right:auto}
-.esempio{margin:28px 0;padding:18px 20px;background:#fff;border:1px solid var(--riga);border-radius:10px}
-.esempio .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.foglio>.eq+.fig,.foglio>.eq+.def,.foglio>.eq+.nota{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -28,125 +69,110 @@ figure.disegno figcaption{font-family:var(--sans);font-size:.82rem;color:var(--g
   <nav class="briciole"><a href="../../index.html">&larr; Matematica quarta</a></nav>
   <p class="occhiello">Probabilità &middot; Unità 37</p>
   <h1>Teorema di Bayes e disintegrazione</h1>
-  <p class="sommario">Quando un evento può nascere da più cause possibili, il teorema di Bayes permette
-  di risalire alla probabilità di ciascuna causa una volta che l'evento si è verificato. Lo strumento
-  che rende possibile il calcolo è la legge di disintegrazione, che scompone la probabilità di un
-  evento nella somma dei contributi di ogni causa.</p>
 </header>
 
-<p>Consideriamo due urne. L'urna 1 contiene 3 palline bianche e 2 nere; l'urna 2 ne contiene 4 bianche
-e 5 nere. Scegliamo a caso una delle due urne, con probabilità $1/2$ ciascuna, e da questa estraiamo
-una pallina.</p>
+<p>Evento $E$ che può verificarsi in seguito a una fra $m$ cause $E_1,\dots,E_m$, incompatibili e di cui una si verifica sempre: qual è $P(E)$? E, verificato $E$, qual è la probabilità di ciascuna causa?</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 640 320" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle probabilità: dalla radice si sceglie l'urna 1 o l'urna 2 con probabilità 1/2 ciascuna; da ogni urna si estrae una pallina bianca o nera con le rispettive probabilità">
-<line x1="50" y1="160" x2="230" y2="70" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="50" y1="160" x2="230" y2="250" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="240" y1="65" x2="440" y2="25" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="240" y1="75" x2="440" y2="110" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="240" y1="245" x2="440" y2="205" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="240" y1="255" x2="440" y2="290" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="50" cy="160" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="235" cy="70" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="235" cy="250" r="3.5" fill="var(--inchiostro)"/>
-<text x="120" y="100" font-size="14" fill="var(--inchiostro)">1/2</text>
-<text x="120" y="225" font-size="14" fill="var(--inchiostro)">1/2</text>
-<text x="245" y="55" font-size="13" fill="var(--inchiostro)">urna 1</text>
-<text x="245" y="235" font-size="13" fill="var(--inchiostro)">urna 2</text>
-<text x="320" y="35" font-size="13" fill="var(--blu)">3/5</text>
-<text x="320" y="105" font-size="13" fill="var(--inchiostro)">2/5</text>
-<text x="320" y="215" font-size="13" fill="var(--blu)">4/9</text>
-<text x="320" y="285" font-size="13" fill="var(--inchiostro)">5/9</text>
-<text x="450" y="22" font-size="14" fill="var(--blu)">bianca &middot; 1/2&middot;3/5 = 3/10</text>
-<text x="450" y="112" font-size="14" fill="var(--inchiostro)">nera &middot; 1/2&middot;2/5 = 1/5</text>
-<text x="450" y="202" font-size="14" fill="var(--blu)">bianca &middot; 1/2&middot;4/9 = 2/9</text>
-<text x="450" y="292" font-size="14" fill="var(--inchiostro)">nera &middot; 1/2&middot;5/9 = 5/18</text>
-</svg>
-<figcaption>Ogni percorso dalla radice a una foglia ha probabilità pari al prodotto delle probabilità
-incontrate lungo il ramo. I due percorsi evidenziati in blu portano entrambi a «bianca».</figcaption>
-</figure>
+<div class="fig">
+<svg id="alb-urne" viewBox="0 0 560 250" style="width:100%;max-width:560px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle probabilità delle due urne"></svg>
+<p class="did">Percorso: prodotto delle probabilità sui rami. In blu: percorsi verso «bianca».</p>
+</div>
 
-<p>Per ottenere la probabilità di estrarre una pallina bianca sommiamo i due percorsi che vi portano,
-uno per ciascuna urna:
-$$P(\text{bianca})=\frac12\cdot\frac35+\frac12\cdot\frac49=\frac{3}{10}+\frac29=\frac{47}{90}$$
-Allo stesso modo, per la pallina nera:
-$$P(\text{nera})=\frac12\cdot\frac25+\frac12\cdot\frac59=\frac15+\frac{5}{18}=\frac{43}{90}$$
-e infatti $47/90+43/90=1$. Sommare, su tutte le cause possibili, il prodotto fra la probabilità della
-causa e la probabilità dell'evento data quella causa è la <strong>legge di disintegrazione</strong>.</p>
+<p>Si sommano i percorsi che portano a $E$, uno per ciascuna causa:</p>
 
-<p>Ora rovesciamo la domanda: sapendo che è uscita una pallina bianca, qual è la probabilità che
-provenga proprio dall'urna 1? Fra tutti i percorsi che portano a «bianca» (i casi totali), isoliamo
-quello che passa per l'urna 1 (il caso favorevole):
-$$P(\text{urna 1}\mid\text{bianca})=\frac{P(\text{urna 1 e bianca})}{P(\text{bianca})}
-=\frac{3/10}{3/10+2/9}=\frac{27}{47}$$</p>
+<div class="def"><span class="et">Legge di disintegrazione</span>
+<p class="eq">$$P(E)=\sum_{i=1}^m P(E_i)\cdot P(E\mid E_i)$$</p></div>
+
+<p>Il percorso che passa per $E_i$, diviso per la somma di tutti i percorsi che portano a $E$:</p>
 
 <div class="def"><span class="et">Teorema di Bayes</span>
-<p>Se un evento $E$ può verificarsi in seguito a una fra $m$ cause $E_1,E_2,\dots,E_m$ che si escludono
-a vicenda, la probabilità che, essendosi verificato $E$, la causa sia stata proprio $E_i$ è
-$$P(E_i\mid E)=\frac{P(E_i)\cdot P(E\mid E_i)}{P(E)}\qquad\text{con}\qquad
-P(E)=\sum_{i=1}^m P(E_i)\cdot P(E\mid E_i)$$
-Il numeratore è il percorso che porta a $E_i$ e poi a $E$; il denominatore, per la legge di
-disintegrazione, è la somma di tutti i percorsi che portano a $E$, qualunque sia la causa.</p>
-</div>
+<p class="eq">$$P(E_i\mid E)=\frac{P(E_i)\cdot P(E\mid E_i)}{P(E)}$$</p>
+<p>con $P(E)\neq0$.</p></div>
 
 <div class="nota"><span class="et">Errore tipico</span>
-<p>$P(E_i\mid E)$ e $P(E\mid E_i)$ non sono la stessa cosa: la prima risale dall'effetto alla causa, la
-seconda va dalla causa all'effetto. È proprio perché sono diverse che il teorema di Bayes serve a
-qualcosa.</p>
+<p>Confondere $P(E_i\mid E)$ (dall'effetto alla causa) con $P(E\mid E_i)$ (dalla causa all'effetto).</p></div>
+
+<h2>Esempio 1</h2>
+
+<p>Dati: urna 1 con 3 palline bianche e 2 nere, urna 2 con 4 bianche e 5 nere; si sceglie un'urna a caso ($1/2$ ciascuna) e si estrae una pallina. Calcolare $P(\text{bianca})$ e $P(\text{urna 1}\mid\text{bianca})$.</p>
+
+<p class="eq">$$P(\text{bianca})=\frac12\cdot\frac35+\frac12\cdot\frac49=\frac3{10}+\frac29=\frac{47}{90}$$</p>
+
+<p class="eq">$$P(\text{urna 1}\mid\text{bianca})=\frac{3/10}{47/90}=\frac{27}{47}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: malattia nello 0,01% della popolazione; test positivo nel 99,9% dei malati, negativo nel 99,99% dei sani. Calcolare $P(\text{malato}\mid\text{pos})$ e $P(\text{sano}\mid\text{neg})$.</p>
+
+<div class="fig">
+<svg id="alb-test" viewBox="0 0 560 250" style="width:100%;max-width:560px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle probabilità del test diagnostico"></svg>
+<p class="did">In blu: percorsi verso «positivo».</p>
 </div>
 
-<div class="esempio"><span class="et">Esempio</span>
-<p>Un test diagnostico individua una malattia di cui è affetto lo 0,01% della popolazione. Applicato a
-una persona malata, il test dà esito positivo nel 99,9% dei casi; applicato a una persona sana, dà
-esito negativo nel 99,99% dei casi. Se una persona risulta positiva, qual è la probabilità che sia
-davvero malata?</p>
+<p class="eq">$$P(\text{malato}\mid\text{pos})=\frac{999/10^7}{999/10^7+9999/10^8}\approx0{,}4998=49{,}98\%$$</p>
 
-<figure class="disegno">
-<svg viewBox="0 0 640 320" width="100%" style="max-width:600px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Albero delle probabilità del test diagnostico: dalla radice si è malati o sani con probabilità 1/10000 e 9999/10000; da ciascuno il test è positivo o negativo con le rispettive probabilità">
-<line x1="50" y1="160" x2="230" y2="70" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="50" y1="160" x2="230" y2="250" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="240" y1="65" x2="410" y2="25" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="240" y1="75" x2="410" y2="110" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<line x1="240" y1="245" x2="410" y2="205" stroke="var(--blu)" stroke-width="1.6"/>
-<line x1="240" y1="255" x2="410" y2="290" stroke="var(--inchiostro)" stroke-width="1.6"/>
-<circle cx="50" cy="160" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="235" cy="70" r="3.5" fill="var(--inchiostro)"/>
-<circle cx="235" cy="250" r="3.5" fill="var(--inchiostro)"/>
-<text x="95" y="100" font-size="13" fill="var(--inchiostro)">1/10000</text>
-<text x="90" y="225" font-size="13" fill="var(--inchiostro)">9999/10000</text>
-<text x="245" y="55" font-size="13" fill="var(--inchiostro)">malato</text>
-<text x="245" y="235" font-size="13" fill="var(--inchiostro)">sano</text>
-<text x="280" y="35" font-size="13" fill="var(--blu)">999/1000</text>
-<text x="280" y="105" font-size="13" fill="var(--inchiostro)">1/1000</text>
-<text x="280" y="215" font-size="13" fill="var(--blu)">1/10000</text>
-<text x="280" y="285" font-size="13" fill="var(--inchiostro)">9999/10000</text>
-<text x="420" y="22" font-size="13" fill="var(--blu)">pos &middot; 999/10&#8311;</text>
-<text x="420" y="112" font-size="13" fill="var(--inchiostro)">neg &middot; 1/10&#8311;</text>
-<text x="420" y="202" font-size="13" fill="var(--blu)">pos &middot; 9999/10&#8312;</text>
-<text x="420" y="292" font-size="13" fill="var(--inchiostro)">neg &middot; 9999&sup2;/10&#8312;</text>
-</svg>
-<figcaption>Come nell'albero delle urne: i due percorsi in blu sono quelli che portano a «test
-positivo», uno per ciascuna causa (malato o sano).</figcaption>
-</figure>
+<p class="eq">$$P(\text{sano}\mid\text{neg})=\frac{9999^2/10^8}{1/10^7+9999^2/10^8}\approx0{,}9999999$$</p>
 
-<p>Sommando i due percorsi che portano a «positivo» otteniamo il denominatore, poi applichiamo Bayes
-al percorso «malato»:
-$$P(\text{pos})=\frac{1}{10^4}\cdot\frac{999}{10^3}+\frac{9999}{10^4}\cdot\frac{1}{10^4}
-=\frac{999}{10^7}+\frac{9999}{10^8}$$
-$$P(\text{malato}\mid\text{pos})=\frac{999/10^7}{999/10^7+9999/10^8}\approx0{,}4998=49{,}98\%$$
-Meno della metà delle persone positive è davvero malata: la malattia è così rara che pesa più
-dell'accuratezza del test.</p>
-
-<p>Con lo stesso procedimento, applicato ai due percorsi che portano a «negativo», la probabilità di
-essere davvero sani dato un test negativo è
-$$P(\text{sano}\mid\text{neg})=\frac{9999^2/10^8}{1/10^7+9999^2/10^8}\approx0{,}999999=99{,}9999\%$$
-un test negativo è quasi una garanzia di essere sani.</p>
-</div>
-
+<p>Malattia rara: meno della metà dei positivi è malata.</p>
 
 <nav class="nav-unita"><a class="precedente" href="../36-prove-ripetute-e-schema-di-bernoulli/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Prove ripetute e schema di Bernoulli</span></a><a class="successiva" href="../38-definizione-statistica-e-soggettiva/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Definizione statistica e soggettiva</span></a></nav>
 <footer><p>Matematica quarta &middot; Probabilità &middot; Unità 37</p></footer>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(p,x,y,s,a){a=a||{};a.x=x;a.y=y;if(!a['font-family'])a['font-family']='var(--sans)';if(!a['font-size'])a['font-size']=13;if(!a.fill)a.fill='var(--inchiostro)';var t=el('text',a);t.textContent=s;p.appendChild(t);return t;}
+/* d: radice -> due cause (nome, prob), ognuna -> due esiti (nome, prob, prodotto); il primo esito di ogni causa è evidenziato */
+function albero(id,d){
+  var svg=document.getElementById(id); if(!svg)return;
+  var R={x:24,y:125}, C=[{x:190,y:62},{x:190,y:188}], L=[[{x:360,y:25},{x:360,y:95}],[{x:360,y:155},{x:360,y:225}]];
+  var g1=el('g',{}),g2=el('g',{});svg.appendChild(g1);svg.appendChild(g2);
+  function ramo(a,b,p,col,su){
+    g1.appendChild(el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:col,'stroke-width':col==='var(--blu)'?2.2:1.5}));
+    var mx=(a.x+b.x)/2,my=(a.y+b.y)/2,dx=b.x-a.x,dy=b.y-a.y,l=Math.hypot(dx,dy),nx=dy/l,ny=-dx/l;
+    if(!su){nx=-nx;ny=-ny;}
+    var o=a.x<100?17:13;txt(g2,mx+nx*o,my+ny*o+4,p,{'text-anchor':'middle','font-size':12,fill:col});
+  }
+  g1.appendChild(el('circle',{cx:R.x,cy:R.y,r:3.5,fill:'var(--inchiostro)'}));
+  d.forEach(function(c,i){
+    ramo(R,C[i],c.p,'var(--inchiostro)',i===0);
+    c.e.forEach(function(e,j){
+      var col=j===0?'var(--blu)':'var(--inchiostro)';
+      ramo(C[i],L[i][j],e.p,col,j===0);
+      txt(g2,L[i][j].x+8,L[i][j].y+4,e.n+' · '+e.v,{fill:col});
+    });
+    var w=c.n.length*7.2+14;
+    g2.appendChild(el('rect',{x:C[i].x-w/2,y:C[i].y-11,width:w,height:22,rx:6,fill:'#fff',stroke:'var(--riga)'}));
+    txt(g2,C[i].x,C[i].y+4.5,c.n,{'text-anchor':'middle'});
+  });
+}
+albero('alb-urne',[
+ {n:'urna 1',p:'1/2',e:[{n:'bianca',p:'3/5',v:'3/10'},{n:'nera',p:'2/5',v:'1/5'}]},
+ {n:'urna 2',p:'1/2',e:[{n:'bianca',p:'4/9',v:'2/9'},{n:'nera',p:'5/9',v:'5/18'}]}]);
+albero('alb-test',[
+ {n:'malato',p:'1/10⁴',e:[{n:'pos',p:'999/10³',v:'999/10⁷'},{n:'neg',p:'1/10³',v:'1/10⁷'}]},
+ {n:'sano',p:'9999/10⁴',e:[{n:'pos',p:'1/10⁴',v:'9999/10⁸'},{n:'neg',p:'9999/10⁴',v:'9999²/10⁸'}]}]);
+})();
+</script>
 </body>
 </html>

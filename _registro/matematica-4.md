@@ -364,6 +364,7 @@
   quesito sicuramente reale e alla portata di questa sola unità (i quesiti trovati su siti didattici non
   erano riconducibili a una sessione ufficiale verificabile); ho preferito ometterlo piuttosto che
   rischiare un'attribuzione scorretta.
+- Revisione (06/11/2026, regole 13/10): parole circa 420 → 155 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, riquadro .esempio e frasi di commento; apertura con il problema; legge di disintegrazione e teorema di Bayes in due .def, nota sull'errore tipico in una frase. Titoletti: «Esempio 1» (due urne: P(bianca) = 47/90, P(urna 1 | bianca) = 27/47), «Esempio 2» (test diagnostico: P(malato | pos) ≈ 49,98%, P(sano | neg)), in forma Dati/Calcolare; tolto il calcolo di P(nera) = 43/90 (solo controllo della somma). Nessun esempio tolto, nessuna comparsa da togliere. Correzioni: le cause devono essere incompatibili e di cui una si verifica sempre (prima solo «si escludono a vicenda»), aggiunta la condizione P(E) ≠ 0; P(sano | neg) = 99980001/99980011 ≈ 0,9999999 (prima «≈ 0,999999», approssimazione per difetto). Verificato con frazioni Python (1110/2221 ≈ 0,49977). Figure: i due alberi (SVG fissi) ridisegnati da script con i dati, statici, percorsi verso «bianca»/«positivo» in blu. Nessuna figura decorativa.
 
 ## Unità 38 — Definizione statistica e soggettiva
 - Parole: 549 su circa 3,5 pagine di traccia (dalla seconda metà di pagina 146, dove inizia
