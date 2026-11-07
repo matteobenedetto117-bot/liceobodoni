@@ -99,6 +99,7 @@
 - Parole: 178 su 2 pagine di traccia (pagine 33–34)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'identità sinα = 2t/(1+t²) e cosα = (1−t²)/(1+t²) con t = tan(α/2), per sostituzione simbolica a partire dalle formule di duplicazione, ed è confermato l'esempio con tan(α/2)=2, da cui sinα=4/5 e cosα=−3/5.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. La condizione di applicabilità (α ≠ π + 2kπ), scritta in cima a pagina 35 subito prima del titolo dell'unità successiva, è stata inclusa qui perché riguarda esclusivamente le formule parametriche.
+- Revisione (07/11/2026, regole 13/10): parole circa 112 → 44 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, titoletto «Dalla duplicazione a un solo parametro» e prosa; apertura con la domanda; procedimento (duplicazione, denominatore sin² + cos² = 1, divisione per cos²(α/2)) in una frase + due .eq; formule parametriche in .def con la condizione α ≠ π + 2kπ scritta nel riquadro (la nota «Condizione» assorbita lì). Esempio tan(α/2) = 2 tenuto in forma Dati/Calcolare, una .eq; nessuno tolto; nessuna comparsa da togliere. Nessuna correzione concettuale (SymPy delle due identità e dell'esempio 4/5, −3/5). Nessuna figura nella pagina.
 
 ## Unità 18 — Formule di prostaferesi e di Werner
 - Parole: 268 su 4 pagine di traccia (pagine 35–38)
