@@ -5,17 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Funzioni composte — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:14px 18px;margin:24px 0;font-size:.96rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
 </style>
 </head>
 <body>
@@ -25,89 +70,84 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Funzioni &middot; Unità 06</p>
   <h1>Funzioni composte</h1>
-  <p class="sommario">Due funzioni si possono incatenare: il risultato della prima diventa
-  l'ingresso della seconda. Questa operazione, la composizione, è alla base di come si
-  costruiscono funzioni più complesse a partire da funzioni semplici.</p>
 </header>
 
-<h2>Comporre due funzioni</h2>
+<p>Due funzioni $g$ e $f$: come si applicano una dopo l'altra?</p>
 
-<p>Se $g$ manda $x$ in $g(x)$, e $f$ manda quel valore in $f(g(x))$, la funzione composta
-$f\circ g$ è la funzione che fa tutto in un solo passo: prende $x$ e restituisce direttamente
-$f(g(x))$.</p>
-
-<div class="def">
-<span class="et">Definizione</span>
-$$(f\circ g)(x) = f(g(x))$$
-<p style="margin:10px 0 0">Si legge &laquo;$f$ composto $g$&raquo;, ma si applica prima $g$ e
-poi $f$: l'ordine di scrittura è l'opposto dell'ordine di applicazione. Perché $(f\circ g)(x)$
-esista, $x$ deve stare nel dominio di $g$ e il valore $g(x)$ deve stare nel dominio di
-$f$.</p>
-</div>
+<div class="def"><span class="et">Funzione composta</span>
+<p class="eq">$$(f\circ g)(x) = f(g(x))$$</p>
+<p>Si legge «$f$ composto $g$»: si applica prima $g$, poi $f$.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<marker id="fr1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#1f4e79"/></marker>
-<marker id="fr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#2f6b4f"/></marker>
-<marker id="fr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#b3392f"/></marker>
-</defs>
-<ellipse cx="55" cy="120" rx="42" ry="55" fill="none" stroke="#16283d" stroke-width="1.5"/>
-<ellipse cx="210" cy="120" rx="42" ry="55" fill="none" stroke="#16283d" stroke-width="1.5"/>
-<ellipse cx="365" cy="120" rx="42" ry="55" fill="none" stroke="#16283d" stroke-width="1.5"/>
-<text x="45" y="55" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">A</text>
-<text x="200" y="55" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">B</text>
-<text x="355" y="55" font-family="Segoe UI, sans-serif" font-size="14" fill="#16283d">C</text>
-<circle cx="55" cy="120" r="3.5" fill="#16283d"/>
-<circle cx="210" cy="120" r="3.5" fill="#16283d"/>
-<circle cx="365" cy="120" r="3.5" fill="#16283d"/>
-<line x1="63" y1="118" x2="200" y2="118" stroke="#2f6b4f" stroke-width="2" marker-end="url(#fr2)"/>
-<text x="115" y="108" font-family="Segoe UI, sans-serif" font-size="14" fill="#2f6b4f">g</text>
-<line x1="218" y1="118" x2="355" y2="118" stroke="#1f4e79" stroke-width="2" marker-end="url(#fr1)"/>
-<text x="270" y="108" font-family="Segoe UI, sans-serif" font-size="14" fill="#1f4e79">f</text>
-<path d="M55,55 C160,10 260,10 365,55" fill="none" stroke="#b3392f" stroke-width="2" marker-end="url(#fr3)"/>
-<text x="175" y="22" font-family="Segoe UI, sans-serif" font-size="14" fill="#b3392f">f&#8728;g</text>
-<text x="35" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">x</text>
-<text x="190" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">g(x)</text>
-<text x="335" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">f(g(x))</text>
-</svg>
-<p class="did">Il percorso a due tappe, $A\to B$ con $g$ e $B\to C$ con $f$, è lo stesso
-percorso della freccia diretta $A\to C$: sono la stessa funzione, scritta in due modi.</p>
+<svg id="fig-comp" viewBox="0 0 440 210" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Insiemi A, B, C: g da A a B, f da B a C, f composto g da A a C"></svg>
+<p class="did">$A\to B$ con $g$, $B\to C$ con $f$: stesso percorso della freccia diretta $f\circ g$</p>
 </div>
 
-<div class="nota">
-In generale $f\circ g \ne g\circ f$: scambiare l'ordine cambia la funzione che si ottiene,
-come mostrano i due esempi seguenti.
-</div>
+<p>$(f\circ g)(x)$ esiste se:</p>
 
-<h2>Un primo esempio</h2>
+<ul>
+<li>$x$ appartiene al dominio di $g$;</li>
+<li>$g(x)$ appartiene al dominio di $f$.</li>
+</ul>
 
-<p>Con $f(x)=2x+3$ e $g(x)=\dfrac{1}{x}$:</p>
+<div class="nota"><span class="et">Attenzione</span><p>In generale $f\circ g \ne g\circ f$.</p></div>
 
-<p>$$(f\circ g)(x) = f\!\left(\frac1x\right) = 2\cdot\frac1x+3 = \frac{2}{x}+3$$</p>
+<h2>Esempio 1</h2>
 
-<p>$$(g\circ f)(x) = g(2x+3) = \frac{1}{2x+3}$$</p>
+<p>Dati: $f(x)=2x+3$, $g(x)=\dfrac{1}{x}$. Calcolare $f\circ g$ e $g\circ f$.</p>
 
-<p>Le due composte sono espressioni diverse: comporre non è un'operazione commutativa.</p>
+<p class="eq">$$(f\circ g)(x) = f\!\left(\frac1x\right) = \frac{2}{x}+3\qquad (x\ne0)$$</p>
 
-<h2>Un secondo esempio</h2>
+<p class="eq">$$(g\circ f)(x) = g(2x+3) = \frac{1}{2x+3}\qquad \left(x\ne-\tfrac32\right)$$</p>
 
-<p>Con $f(x)=3x^2-2x$ e $g(x)=x-3$, il calcolo di $(f\circ g)(x)$ richiede di sostituire
-$x-3$ al posto di $x$ e sviluppare il quadrato:</p>
+<h2>Esempio 2</h2>
 
-<p>$$(f\circ g)(x) = 3(x-3)^2-2(x-3) = 3(x^2-6x+9)-2x+6 = 3x^2-20x+33$$</p>
+<p>Dati: $f(x)=3x^2-2x$, $g(x)=x-3$. Calcolare $f\circ g$ e $g\circ f$.</p>
 
-<p>Nell'altro ordine la sostituzione è più semplice, perché $g$ si limita a sottrarre 3:</p>
+<p class="eq">$$(f\circ g)(x) = 3(x-3)^2-2(x-3) = 3x^2-18x+27-2x+6 = 3x^2-20x+33$$</p>
 
-<p>$$(g\circ f)(x) = (3x^2-2x)-3 = 3x^2-2x-3$$</p>
-
-<p>Di nuovo due polinomi diversi, a conferma che l'ordine dei fattori della composizione
-conta.</p>
-
+<p class="eq">$$(g\circ f)(x) = (3x^2-2x)-3 = 3x^2-2x-3$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../05-funzioni-definite-a-tratti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Funzioni definite a tratti</span></a><a class="successiva" href="../07-trasformazioni-geometriche-e-grafici-traslazioni/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Trasformazioni geometriche e grafici: traslazioni</span></a></nav>
 <footer><p>Matematica terza &middot; Funzioni &middot; Unità 06</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':13,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+var s=document.getElementById('fig-comp'),d=el('defs',{});s.appendChild(d);
+function mk(id,col){var m=el('marker',{id:id,markerWidth:8,markerHeight:8,refX:6,refY:3,orient:'auto'});m.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z',fill:col}));d.appendChild(m);}
+mk('fg','var(--verde)');mk('ff','var(--blu)');mk('fc','var(--rosso)');
+var cx=[70,220,370],cy=125,rx=46,ry=58,nomi=['A','B','C'],et=['x','g(x)','f(g(x))'];
+cx.forEach(function(c,i){s.appendChild(el('ellipse',{cx:c,cy:cy,rx:rx,ry:ry,fill:'none',stroke:'var(--inchiostro)','stroke-width':2}));
+  txt(s,c,cy+ry+20,nomi[i],{'font-size':17,'font-style':'italic','text-anchor':'middle'});
+  s.appendChild(el('circle',{cx:c,cy:cy,r:3.6,fill:'var(--inchiostro)'}));
+  txt(s,c,cy+22,et[i],{'text-anchor':'middle','font-style':'italic'});});
+function fr(x1,x2,col,id,l){s.appendChild(el('line',{x1:x1+7,y1:cy,x2:x2-10,y2:cy,stroke:col,'stroke-width':1.8,'marker-end':'url(#'+id+')'}));
+  txt(s,(x1+x2)/2,cy-9,l,{'text-anchor':'middle','font-style':'italic',fill:col,'font-size':14});}
+fr(cx[0],cx[1],'var(--verde)','fg','g');fr(cx[1],cx[2],'var(--blu)','ff','f');
+s.appendChild(el('path',{d:'M'+(cx[0]+4)+','+(cy-7)+' C150,10 290,10 '+(cx[2]-5)+','+(cy-9),fill:'none',stroke:'var(--rosso)','stroke-width':1.8,'marker-end':'url(#fc)'}));
+txt(s,220,24,'f∘g',{'text-anchor':'middle','font-style':'italic',fill:'var(--rosso)','font-size':14});
+})();
+</script>
 </body>
 </html>
