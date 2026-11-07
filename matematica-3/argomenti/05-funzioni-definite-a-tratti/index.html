@@ -5,16 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Funzioni definite a tratti — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
 </style>
 </head>
 <body>
@@ -24,79 +70,128 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Funzioni &middot; Unità 05</p>
   <h1>Funzioni definite a tratti</h1>
-  <p class="sommario">Fin qui ogni funzione aveva un'unica formula valida su tutto il dominio.
-  Non è sempre così: a volte la regola cambia a seconda della zona in cui si trova $x$, e la
-  funzione va scritta a pezzi, uno per ciascun intervallo.</p>
 </header>
 
-<h2>La scrittura a tratti</h2>
+<p>Regola diversa su intervalli diversi di $x$: come si scrive la funzione?</p>
 
-<p>Ogni pezzo ha una formula e una condizione su $x$, raccolte da una parentesi graffa:</p>
+<div class="def"><span class="et">Funzione definita a tratti</span>
+<p>Una formula per ogni intervallo, raccolte da una parentesi graffa:</p>
+<p class="eq">$$y=\begin{cases} f_1(x) & \text{se } x \in I_1\\ f_2(x) & \text{se } x \in I_2\\ \ \ \vdots \end{cases}$$</p>
+<p>Intervalli senza sovrapposizioni: ogni $x$ ricade in un solo tratto.</p></div>
 
-<p>$$y=\begin{cases} f_1(x) & \text{se } x \in I_1\\ f_2(x) & \text{se } x \in I_2\\ \ \ \vdots \end{cases}$$</p>
+<h2>Valore assoluto</h2>
 
-<p>Gli intervalli non si sovrappongono, così ogni $x$ ricade in un solo pezzo e $y$ resta
-univoca.</p>
-
-<h2>Il valore assoluto</h2>
-
-<p>L'esempio più semplice è $y=|x|$, che restituisce $x$ se è già positivo o nullo, e il suo
-opposto $-x$ se è negativo:</p>
-
-<p>$$y=|x|=\begin{cases} x & \text{se } x\ge 0\\ -x & \text{se } x&lt;0 \end{cases}$$</p>
+<p class="eq">$$y=|x|=\begin{cases} x & \text{se } x\ge 0\\ -x & \text{se } x&lt;0 \end{cases}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="110" x2="300" y2="110" stroke="#16283d" stroke-width="1.5"/>
-<line x1="160" y1="15" x2="160" y2="205" stroke="#16283d" stroke-width="1.5"/>
-<text x="284" y="103" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">x</text>
-<text x="166" y="26" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">y</text>
-<line x1="160" y1="110" x2="270" y2="20" stroke="#b3392f" stroke-width="2.4"/>
-<line x1="160" y1="110" x2="50" y2="20" stroke="#b3392f" stroke-width="2.4"/>
-<text x="222" y="52" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">y=x  (x&#8805;0)</text>
-<text x="58" y="52" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">y=-x  (x&lt;0)</text>
-</svg>
-<p class="did">Le due condizioni danno due semirette che partono dall'origine: pendenza $1$ a
-destra, pendenza $-1$ a sinistra.</p>
+<svg id="fig-abs" viewBox="0 0 300 190" style="width:100%;max-width:340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico di y = |x|: due semirette dall'origine"></svg>
+<p class="did">Due semirette dall'origine: pendenza $1$ per $x\ge0$, pendenza $-1$ per $x&lt;0$</p>
 </div>
 
-<h2>Un esempio con tre pezzi</h2>
+<h2>Esempio</h2>
 
-<p>Una funzione a tratti può avere più di due pezzi, ciascuno valido sul proprio intervallo:</p>
+<p class="eq">$$y=\begin{cases} 3x & \text{se } x&lt;-5\\ x^2 & \text{se } -5\le x&lt;7\\ \sqrt{x}+8 & \text{se } x\ge 7 \end{cases}$$</p>
 
-<p>$$y=\begin{cases} 3x & \text{se } x&lt;-5\\ x^2 & \text{se } -5\le x&lt;7\\ \sqrt{x}+8 & \text{se } x\ge 7 \end{cases}$$</p>
+<p>Calcolare i valori dei tratti adiacenti agli estremi $x=-5$ e $x=7$.</p>
 
-<h2>Continuità agli estremi dei tratti</h2>
+<p class="eq">$$x=-5:\quad 3\cdot(-5)=-15\ne(-5)^2=25\qquad x=7:\quad 7^2=49\ne\sqrt7+8\approx10{,}6$$</p>
 
-<p>Nel punto dove un pezzo finisce e il successivo comincia, i due valori possono coincidere o
-no. In $x=-5$ il primo pezzo dà $3\cdot(-5)=-15$, mentre il secondo dà $(-5)^2=25$: sono
-diversi, e il grafico presenta un salto. Lo stesso succede in $x=7$, dove il secondo pezzo dà
-$7^2=49$ mentre il terzo dà $\sqrt7+8\approx10{,}6$.</p>
+<ul>
+<li>valori uguali → tratti uniti;</li>
+<li>valori diversi → salto nel grafico.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="152.5" x2="340" y2="152.5" stroke="#16283d" stroke-width="1.5"/>
-<line x1="84" y1="20" x2="84" y2="220" stroke="#dfd9cc" stroke-width="1" stroke-dasharray="3,3"/>
-<line x1="276" y1="20" x2="276" y2="220" stroke="#dfd9cc" stroke-width="1" stroke-dasharray="3,3"/>
-<text x="76" y="234" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">-5</text>
-<text x="270" y="234" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">7</text>
-<polyline points="20,217.6 36,210.4 52,203.1 68,195.9 84,188.7" fill="none" stroke="#b3392f" stroke-width="2.2"/>
-<polyline points="84,92.3 100,114.0 116,130.8 132,142.9 148,150.1 164,152.5 180,150.1 196,142.9 212,130.8 228,114.0 244,92.3 260,65.8 276,34.4" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<polyline points="276,126.9 284,126.6 292,126.4 300,126.2 308,126.0 316,125.8 324,125.6 332,125.4 340,125.2" fill="none" stroke="#2f6b4f" stroke-width="2.2"/>
-<circle cx="84" cy="188.7" r="4.5" fill="#b3392f"/>
-<circle cx="84" cy="92.3" r="4.5" fill="#fff" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="276" cy="34.4" r="4.5" fill="#fff" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="276" cy="126.9" r="4.5" fill="#2f6b4f"/>
-</svg>
-<p class="did">Il pallino pieno è il valore che la funzione assume in quel punto; quello vuoto
-è il valore a cui il pezzo adiacente si avvicina senza raggiungerlo. Nei due punti i valori non
-coincidono: il grafico salta.</p>
+<svg id="fig-tratti" viewBox="0 0 400 260" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico della funzione a tre tratti con i salti in x = -5 e x = 7"></svg>
+<div class="cursore"><label for="cur-x">$x$</label><input id="cur-x" type="range" min="-9" max="11" step="0.5" value="2"><span class="val" id="val-x">2</span></div>
+<p class="val-riga" id="val-p"></p>
+<p class="did">Pallino pieno: valore assunto; pallino vuoto: estremo escluso</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../04-funzioni-pari-e-dispari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Funzioni pari e dispari</span></a><a class="successiva" href="../06-funzioni-composte/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Funzioni composte</span></a></nav>
 <footer><p>Matematica terza &middot; Funzioni &middot; Unità 05</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,x0,x1,y0,y1,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt;
+/* |x| */
+(function(){
+function X(x){return 150+x*30;}function Y(y){return 165-y*30;}
+var P=new Q.Piano({svg:document.getElementById('fig-abs'),w:300,h:190,X:X,Y:Y});P.assi();
+P.curva(function(x){return x;},0,5,{stroke:'var(--blu)'},10);
+P.curva(function(x){return -x;},-5,0,{stroke:'var(--rosso)'},10);
+txt(P.testo,X(2.0),Y(4.1),'y = x',{fill:'var(--blu)'});
+txt(P.testo,X(-2.0),Y(4.1),'y = −x',{fill:'var(--rosso)','text-anchor':'end'});
+})();
+/* tre tratti */
+var f1=function(x){return 3*x;},f2=function(x){return x*x;},f3=function(x){return Math.sqrt(x)+8;};
+function F(x){return x<-5?f1(x):(x<7?f2(x):f3(x));}
+function X(x){return 200+x*17;}function Y(y){return 165-y*3;}
+var P=new Q.Piano({svg:document.getElementById('fig-tratti'),w:400,h:260,X:X,Y:Y});P.assi();
+[-5,7].forEach(function(a){P.sotto.appendChild(el('line',{x1:X(a),y1:10,x2:X(a),y2:250,stroke:'var(--grigio)','stroke-width':1,'stroke-dasharray':'3 4'}));
+  txt(P.testo,X(a)+(a<0?-5:5),Y(0)+15,Q.num(a),{'text-anchor':a<0?'end':'start','font-size':11});});
+P.curva(f1,-12,-5,{stroke:'var(--rosso)'},20);
+P.curva(f2,-5,7,{stroke:'var(--blu)'},120);
+P.curva(f3,7,12,{stroke:'var(--verde)'},40);
+txt(P.testo,X(-8)-4,Y(-16),"3x",{fill:"var(--rosso)","text-anchor":"end"});
+txt(P.testo,X(-1.2),Y(12),'x²',{fill:'var(--blu)','text-anchor':'end'});
+txt(P.testo,X(9.5),Y(10.6)-10,'√x + 8',{fill:'var(--verde)','text-anchor':'middle'});
+function pal(x,y,pieno,col){P.sopra.appendChild(el('circle',{cx:X(x),cy:Y(y),r:4.5,fill:pieno?col:'#fff',stroke:col,'stroke-width':2}));}
+pal(-5,-15,false,'var(--rosso)');pal(-5,25,true,'var(--blu)');
+pal(7,49,false,'var(--blu)');pal(7,Math.sqrt(7)+8,true,'var(--verde)');
+txt(P.testo,X(-5)+8,Y(25)+4,'25',{'font-size':11});
+txt(P.testo,X(-5)+8,Y(-15)+4,'−15',{'font-size':11});
+txt(P.testo,X(7)-8,Y(49)+4,'49',{'font-size':11,'text-anchor':'end'});
+txt(P.testo,X(7)+8,Y(10.65)+16,'10,6',{'font-size':11});
+var pt=el('circle',{r:5,fill:'var(--rosso)',stroke:'#fff','stroke-width':1.5});P.sopra.appendChild(pt);
+var c=document.getElementById('cur-x'),vx=document.getElementById('val-x'),vp=document.getElementById('val-p');
+function agg(){var x=+c.value,y=F(x);vx.textContent=Q.num(x);pt.setAttribute('cx',X(x));pt.setAttribute('cy',Y(y));
+  var t=x<-5?'x &lt; −5 → y = 3x':(x<7?'−5 ≤ x &lt; 7 → y = x²':'x ≥ 7 → y = √x + 8');
+  vp.innerHTML='<span class="c-ver">'+t+'</span> &nbsp;·&nbsp; y = '+Q.num(y);}
+c.addEventListener('input',agg);agg();
+})();
+</script>
 </body>
 </html>
