@@ -5,15 +5,64 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Formule di bisezione — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.nota{background:#fdf6ec;border:1px solid #e8d9b8;border-radius:10px;padding:14px 18px;margin:24px 0;font-size:.95rem}
-.nota .et{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#96702c;display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
 </style>
 </head>
 <body>
@@ -23,80 +72,63 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Formule goniometriche &middot; Unità 16</p>
   <h1>Formule di bisezione</h1>
-  <p class="sommario">Le formule di duplicazione danno seno e coseno del doppio di un
-  angolo. Le formule di bisezione fanno il percorso inverso: esprimono seno, coseno e
-  tangente della metà di un angolo $\alpha$ in funzione del solo $\cos\alpha$.</p>
 </header>
 
-<h2>Coseno della metà</h2>
-<p>Partiamo dalla formula del coseno del doppio, scritta pensando all'angolo di partenza
-come doppio della sua metà, $\alpha=2\cdot\dfrac{\alpha}{2}$:</p>
-$$\cos\alpha=\cos\!\left(2\cdot\frac{\alpha}{2}\right)=2\cos^2\frac{\alpha}{2}-1.$$
-<p>Isoliamo $\cos^2\frac{\alpha}{2}$ e poi estraiamo la radice:</p>
-$$2\cos^2\frac{\alpha}{2}=\cos\alpha+1.$$
-<div class="def">
-<span class="et">Formula</span>
-$$\cos\frac{\alpha}{2}=\pm\sqrt{\frac{1+\cos\alpha}{2}}.$$
-</div>
+<p>Seno, coseno e tangente di $\frac{\alpha}{2}$: come si esprimono in funzione di $\cos\alpha$?</p>
 
-<h2>Seno della metà</h2>
-<p>Con lo stesso angolo, ma partendo dall'altra forma del coseno del doppio,
-$\cos\alpha=1-2\sin^2\frac{\alpha}{2}$, isoliamo allo stesso modo $\sin^2\frac{\alpha}{2}$:</p>
-$$2\sin^2\frac{\alpha}{2}=1-\cos\alpha.$$
-<div class="def">
-<span class="et">Formula</span>
-$$\sin\frac{\alpha}{2}=\pm\sqrt{\frac{1-\cos\alpha}{2}}.$$
-</div>
-<div class="nota">
-<span class="et">Il segno</span>
-La radice dà solo il valore assoluto: il segno da scegliere non dipende da $\alpha$
-ma dal quadrante in cui cade $\dfrac{\alpha}{2}$, cioè va deciso di volta in volta
-guardando dove si trova l'angolo dimezzato.
-</div>
+<p>Formule di duplicazione con $\alpha=2\cdot\frac{\alpha}{2}$:</p>
 
-<h2>Tangente della metà</h2>
-<p>Basta dividere le due formule precedenti, $\tan\frac{\alpha}{2}=
-\sin\frac{\alpha}{2}\big/\cos\frac{\alpha}{2}$:</p>
-$$\tan\frac{\alpha}{2}=\frac{\pm\sqrt{\dfrac{1-\cos\alpha}{2}}}{\pm\sqrt{\dfrac{1+\cos\alpha}{2}}}.$$
-<div class="def">
-<span class="et">Formula</span>
-$$\tan\frac{\alpha}{2}=\pm\sqrt{\frac{1-\cos\alpha}{1+\cos\alpha}}.$$
-</div>
+<p class="eq">$$\cos\alpha=2\cos^2\frac{\alpha}{2}-1\quad\Rightarrow\quad\cos^2\frac{\alpha}{2}=\frac{1+\cos\alpha}{2}$$</p>
 
-<h2>Formule alternative per la tangente</h2>
-<p>Esistono due forme equivalenti che danno $\tan\frac{\alpha}{2}$ senza radice e senza
-il doppio segno, quindi più comode da usare:</p>
-<div class="def">
-<span class="et">Formule</span>
-$$\tan\frac{\alpha}{2}=\frac{\sin\alpha}{1+\cos\alpha}=\frac{1-\cos\alpha}{\sin\alpha}.$$
-</div>
-<p>Dimostriamo la prima. Nella definizione $\tan\frac{\alpha}{2}=
-\dfrac{\sin\frac{\alpha}{2}}{\cos\frac{\alpha}{2}}$ moltiplichiamo numeratore e
-denominatore per $2\cos\frac{\alpha}{2}$:</p>
-$$\tan\frac{\alpha}{2}=\frac{\sin\frac{\alpha}{2}\cdot 2\cos\frac{\alpha}{2}}
-{\cos\frac{\alpha}{2}\cdot 2\cos\frac{\alpha}{2}}=\frac{2\sin\frac{\alpha}{2}\cos\frac{\alpha}{2}}
-{2\cos^2\frac{\alpha}{2}}=\frac{\sin\alpha}{2\cos^2\frac{\alpha}{2}},$$
-<p>dove al numeratore abbiamo riconosciuto la formula di duplicazione del seno. Al
-denominatore basta riprendere $2\cos^2\frac{\alpha}{2}=\cos\alpha+1$, già trovato
-all'inizio:</p>
-$$\tan\frac{\alpha}{2}=\frac{\sin\alpha}{\cos\alpha+1}.$$
-<p>La seconda forma si ottiene allo stesso modo, moltiplicando invece per
-$2\sin\frac{\alpha}{2}$.</p>
+<p class="eq">$$\cos\alpha=1-2\sin^2\frac{\alpha}{2}\quad\Rightarrow\quad\sin^2\frac{\alpha}{2}=\frac{1-\cos\alpha}{2}$$</p>
 
-<h2>Un esempio</h2>
-<p>Calcoliamo $\cos15^\circ$ e $\tan15^\circ$ pensando $15^\circ$ come metà di
-$30^\circ$, di cui conosciamo $\cos30^\circ=\dfrac{\sqrt3}{2}$ e
-$\sin30^\circ=\dfrac12$:</p>
-$$\cos15^\circ=\sqrt{\frac{1+\frac{\sqrt3}{2}}{2}}=\sqrt{\frac{2+\sqrt3}{4}}
-=\frac{\sqrt6+\sqrt2}{4},$$
-$$\tan15^\circ=\frac{\sin30^\circ}{1+\cos30^\circ}=\frac{\frac12}{1+\frac{\sqrt3}{2}}
-=\frac{1}{2+\sqrt3}=2-\sqrt3.$$
-<p>Il segno di $\cos15^\circ$ è positivo perché $15^\circ$ è nel primo quadrante.</p>
+<p>Estraendo la radice; per la tangente, rapporto membro a membro:</p>
 
+<div class="def"><span class="et">Formule di bisezione</span>
+<p class="eq">$$\cos\frac{\alpha}{2}=\pm\sqrt{\frac{1+\cos\alpha}{2}}\qquad\qquad\sin\frac{\alpha}{2}=\pm\sqrt{\frac{1-\cos\alpha}{2}}$$</p>
+<p class="eq">$$\tan\frac{\alpha}{2}=\pm\sqrt{\frac{1-\cos\alpha}{1+\cos\alpha}}\qquad(\alpha\neq\pi+2k\pi)$$</p></div>
+
+<div class="nota"><span class="et">Il segno</span>
+<p>Si sceglie in base al quadrante di $\frac{\alpha}{2}$, non di $\alpha$.</p></div>
+
+<p>Tangente senza radice: numeratore e denominatore moltiplicati per $2\cos\frac{\alpha}{2}$:</p>
+
+<p class="eq">$$\tan\frac{\alpha}{2}=\frac{2\sin\frac{\alpha}{2}\cos\frac{\alpha}{2}}{2\cos^2\frac{\alpha}{2}}=\frac{\sin\alpha}{1+\cos\alpha}$$</p>
+
+<p>Moltiplicando invece per $2\sin\frac{\alpha}{2}$:</p>
+
+<p class="eq">$$\tan\frac{\alpha}{2}=\frac{2\sin^2\frac{\alpha}{2}}{2\sin\frac{\alpha}{2}\cos\frac{\alpha}{2}}=\frac{1-\cos\alpha}{\sin\alpha}$$</p>
+
+<div class="def"><span class="et">Tangente della metà, forme razionali</span>
+<p class="eq">$$\tan\frac{\alpha}{2}=\frac{\sin\alpha}{1+\cos\alpha}=\frac{1-\cos\alpha}{\sin\alpha}$$</p>
+<p>Prima forma: $\alpha\neq\pi+2k\pi$; seconda: $\alpha\neq k\pi$.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: $\cos30^\circ=\frac{\sqrt3}{2}$, $\sin30^\circ=\frac12$. Calcolare $\cos15^\circ$ e $\tan15^\circ$ ($15^\circ$ nel primo quadrante: segno +).</p>
+
+<p class="eq">$$\begin{aligned}\cos15^\circ&=\sqrt{\frac{1+\frac{\sqrt3}{2}}{2}}=\sqrt{\frac{2+\sqrt3}{4}}=\frac{\sqrt6+\sqrt2}{4}\\ \tan15^\circ&=\frac{\sin30^\circ}{1+\cos30^\circ}=\frac{\frac12}{1+\frac{\sqrt3}{2}}=\frac{1}{2+\sqrt3}=2-\sqrt3\end{aligned}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../15-formule-di-duplicazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Formule di duplicazione</span></a><a class="successiva" href="../17-formule-parametriche/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Formule parametriche</span></a></nav>
 <footer><p>Matematica terza &middot; Formule goniometriche &middot; Unità 16</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
