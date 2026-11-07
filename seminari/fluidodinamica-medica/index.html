@@ -369,6 +369,56 @@ svg .serif{font-family:var(--serif)}
 </section>
 
 <!-- ===================== 2 · STENOSI ===================== -->
+<section class="slide" id="s-due-siringhe" data-passi="3">
+  <p class="occhiello">2 &middot; Quando il vaso si restringe</p>
+  <h2>Stessa spinta, ago più sottile</h2>
+  <svg class="sc" viewBox="0 0 1400 700">
+    <g class="sir-a" transform="translate(110,0)">
+      <path class="liq" fill="#cfe3f3"/>
+      <g class="part"></g>
+      <path class="getto" fill="none" stroke="#7fb2da" stroke-width="18" stroke-linecap="round" stroke-dasharray="16,12"/>
+      <path d="M270,65 L700,65 L740,111 L1000,111 M1000,129 L740,129 L700,175 L270,175" fill="none" stroke="var(--inchiostro)" stroke-width="4" stroke-linejoin="round"/>
+      <line x1="262" y1="65" x2="262" y2="175" stroke="var(--inchiostro)" stroke-width="4"/>
+      <line x1="248" y1="57" x2="248" y2="183" stroke="var(--inchiostro)" stroke-width="5"/>
+      <g class="stantuffo">
+        <rect x="-10" y="69" width="10" height="102" fill="#5b6b7c"/>
+        <rect x="-335" y="110" width="325" height="20" fill="#8a97a5"/>
+        <rect x="-350" y="75" width="16" height="90" rx="4" fill="#5b6b7c"/>
+        <line x1="-420" y1="120" x2="-370" y2="120" stroke="var(--rosso)" stroke-width="6"/>
+        <path d="M-374,108 L-374,132 L-354,120Z" fill="var(--rosso)"/>
+        <text x="-406" y="102" font-size="26" font-style="italic" class="serif" fill="var(--rosso)">F</text>
+      </g>
+    </g>
+    <g class="sir-b" transform="translate(110,0)">
+      <path class="liq" fill="#cfe3f3"/>
+      <g class="part"></g>
+      <path class="getto" fill="none" stroke="#7fb2da" stroke-width="6" stroke-linecap="round" stroke-dasharray="16,12"/>
+      <path d="M270,325 L700,325 L740,377 L1000,377 M1000,383 L740,383 L700,435 L270,435" fill="none" stroke="var(--inchiostro)" stroke-width="4" stroke-linejoin="round"/>
+      <line x1="262" y1="325" x2="262" y2="435" stroke="var(--inchiostro)" stroke-width="4"/>
+      <line x1="248" y1="317" x2="248" y2="443" stroke="var(--inchiostro)" stroke-width="5"/>
+      <g class="stantuffo">
+        <rect x="-10" y="329" width="10" height="102" fill="#5b6b7c"/>
+        <rect x="-335" y="370" width="325" height="20" fill="#8a97a5"/>
+        <rect x="-350" y="335" width="16" height="90" rx="4" fill="#5b6b7c"/>
+        <line x1="-420" y1="380" x2="-370" y2="380" stroke="var(--rosso)" stroke-width="6"/>
+        <path d="M-374,368 L-374,392 L-354,380Z" fill="var(--rosso)"/>
+        <text x="-406" y="362" font-size="26" font-style="italic" class="serif" fill="var(--rosso)">F</text>
+      </g>
+    </g>
+    <text x="980" y="96" text-anchor="middle" font-size="24">ago normale</text>
+    <text x="980" y="362" text-anchor="middle" font-size="24">ago sottile</text>
+    <text x="20" y="262" font-size="22" fill="var(--rosso)" font-weight="600">stessa forza</text>
+    <g data-p="2" font-size="25" text-anchor="middle" font-weight="700">
+      <text x="595" y="218" fill="var(--blu)">nel tratto largo il liquido scorre veloce</text>
+      <text x="595" y="478" fill="var(--rosso)">nel tratto largo il liquido scorre lento</text>
+    </g>
+    <g data-p="3">
+      <rect x="160" y="560" width="1080" height="110" rx="14" fill="var(--blu-chiaro)"/>
+      <text x="700" y="607" text-anchor="middle" font-size="27" font-weight="700">Più la strettoia è stretta, più il liquido rallenta anche nel tratto largo:</text>
+      <text x="700" y="646" text-anchor="middle" font-size="24">la strettoia frena tutto il flusso.</text>
+    </g>
+  </svg>
+</section>
 <section class="slide" id="s-stenosi" data-passi="2">
   <p class="occhiello">2 &middot; Quando il vaso si restringe</p>
   <h2>Una strettoia nell'arteria</h2>
@@ -975,6 +1025,31 @@ svg .serif{font-family:var(--serif)}
       else{gj.setAttribute('d','');G.forEach(function(c){c.setAttribute('opacity',0);});}
     }};
   })();
+
+  /* ---------- due siringhe ---------- */
+  (function(){
+    var s=document.getElementById('s-due-siringhe');
+    function crea(cls,cy,hn,per){var g=s.querySelector('.'+cls), o={g:g,cy:cy,hn:hn,per:per,u:0,
+        liq:g.querySelector('.liq'),sta:g.querySelector('.stantuffo'),gt:g.querySelector('.getto'),P:[]};
+      for(var i=0;i<20;i++)o.P.push({x:280+Math.random()*410,f:Math.random(),e:el('circle',{r:4,fill:'#4f8cc0'},g.querySelector('.part'))});
+      return o;}
+    var S=[crea('sir-a',120,9,5),crea('sir-b',380,3,14)], st={on:false,last:0};
+    A['s-due-siringhe']={passo:function(n){st.on=n>=1;if(!st.on)S.forEach(function(o){o.u=0;});},tick:function(t){
+      var dt=dtDi(st,t);
+      S.forEach(function(o){var cy=o.cy,hn=o.hn,v=300/o.per;
+        if(st.on){o.u+=dt/o.per;if(o.u>1)o.u=0;}
+        var px=272+300*o.u;o.sta.setAttribute('transform','translate('+px+',0)');
+        o.liq.setAttribute('d','M'+px+','+(cy-53)+' L699,'+(cy-53)+' L739,'+(cy-hn+1)+' L999,'+(cy-hn+1)+' L999,'+(cy+hn-1)+' L739,'+(cy+hn-1)+' L699,'+(cy+53)+' L'+px+','+(cy+53)+'Z');
+        o.P.forEach(function(p){if(st.on)p.x+=v*dt;if(p.x>694||p.x<px+5)p.x=px+6+Math.random()*(690-px);
+          p.e.setAttribute('cx',p.x.toFixed(1));p.e.setAttribute('cy',(cy-46+92*p.f).toFixed(1));});
+        if(st.on){var L=o.per<8?190:80, dy=o.per<8?50:70;
+          o.gt.setAttribute('d','M1002,'+cy+' Q'+(1002+L*.7)+','+cy+' '+(1002+L)+','+(cy+dy));
+          o.gt.setAttribute('stroke-dashoffset',(-t*(o.per<8?0.5:0.12))%28);}
+        else o.gt.setAttribute('d','');
+      });
+    }};
+  })();
+
 
   /* ---------- stenosi ---------- */
   (function(){
