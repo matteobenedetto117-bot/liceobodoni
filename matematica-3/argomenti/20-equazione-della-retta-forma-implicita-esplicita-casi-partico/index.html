@@ -5,21 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazione della retta: forma implicita, esplicita, casi particolari — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.interattivo .pannelli{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
-.interattivo .controlli{font-family:var(--sans);font-size:.9rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
-.interattivo input[type=range]{flex:1;min-width:200px}
-.interattivo .valori{font-family:var(--sans);font-size:.9rem;color:var(--blu);white-space:nowrap}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -29,212 +74,173 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Piano cartesiano e retta &middot; Unità 20</p>
   <h1>Equazione della retta: forma implicita, esplicita, casi particolari</h1>
-  <p class="sommario">Ogni retta del piano è descritta da un'equazione di primo grado in
-  due incognite. Vediamo come passare dalla forma generale a quella che mette subito in
-  vista pendenza e intercetta, i casi particolari delle rette parallele agli assi, e un
-  metodo rapido per disegnare una retta conoscendo la sua equazione.</p>
 </header>
 
-<h2>Dalla forma implicita alla forma esplicita</h2>
-<p>Un'equazione di primo grado nelle due incognite $x$ e $y$ rappresenta sempre una retta
-del piano cartesiano. Isolando $y$, quando è possibile, si passa a una scrittura che mette
-subito in evidenza la pendenza della retta e il punto in cui incontra l'asse delle
-ordinate.</p>
+<p>Equazione di primo grado in $x$ e $y$: quale retta rappresenta, e come se ne leggono pendenza e intercetta?</p>
 
-<div class="def">
-<span class="et">Forma implicita</span>
-$$ax+by+c=0$$
+<div class="def"><span class="et">Forma implicita</span>
+<p class="eq">$$ax+by+c=0\qquad (a,\,b \text{ non entrambi nulli})$$</p></div>
+
+<p>Se $b\neq0$ si isola $y$:</p>
+
+<p class="eq">$$by=-ax-c\quad\Longrightarrow\quad y=-\frac{a}{b}\,x-\frac{c}{b}$$</p>
+
+<div class="def"><span class="et">Forma esplicita</span>
+<p class="eq">$$y=mx+q\qquad\qquad m=-\frac{a}{b}\qquad q=-\frac{c}{b}$$</p></div>
+
+<ul>
+<li>$m$: coefficiente angolare, pendenza della retta;</li>
+<li>$q$: intercetta (ordinata all'origine), la retta passa per $(0;q)$.</li>
+</ul>
+
+<div class="fig">
+<svg id="fig-mq" class="piano" viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" style="max-width:340px"></svg>
+<div class="cursore"><label for="cur-m">$m$</label><input id="cur-m" type="range" min="-3" max="3" step="0.1" value="1"><span class="val" id="val-m">1</span></div>
+<div class="cursore"><label for="cur-q">$q$</label><input id="cur-q" type="range" min="-4" max="4" step="0.5" value="0"><span class="val" id="val-q">0</span></div>
+<p class="val-riga" id="val-retta"></p>
 </div>
-
-<p>Se $b\neq0$ si può isolare $y$:</p>
-$$by=-ax-c \quad\Longrightarrow\quad y=-\frac{a}{b}\,x-\frac{c}{b}.$$
-
-<div class="def">
-<span class="et">Forma esplicita</span>
-$$y=mx+q,\qquad m=-\frac{a}{b},\quad q=-\frac{c}{b}$$
-</div>
-
-<p>$m$ è il <strong>coefficiente angolare</strong> e misura la pendenza della retta; $q$ è
-l'<strong>intercetta</strong> (o ordinata all'origine), cioè l'ordinata del punto in cui la
-retta taglia l'asse $y$.</p>
 
 <h2>Casi particolari</h2>
-<p>Quando $a=0$ l'equazione implicita si riduce a $by+c=0$, cioè $y=k$: una retta
-orizzontale, parallela all'asse $x$. Come funzione non è né iniettiva né suriettiva, ma è
-pari.</p>
+
+<ul>
+<li>$a=0$ → $y=k$: retta parallela all'asse $x$; funzione pari, né iniettiva né suriettiva;</li>
+<li>$b=0$ → $x=h$: retta parallela all'asse $y$; non è una funzione;</li>
+<li>$y=0$: asse $x$; $\;x=0$: asse $y$;</li>
+<li>$q=0$ → $y=mx$: retta per l'origine, crescente per $m&gt;0$, decrescente per $m&lt;0$;</li>
+<li>$y=mx$ con $m\neq0$: biunivoca e dispari, $f(-x)=-mx=-f(x)$;</li>
+<li>$y=x$: bisettrice del I e III quadrante; $\;y=-x$: del II e IV;</li>
+<li>$y=mx+q$ con $m\neq0$, $q\neq0$: biunivoca, né pari né dispari.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="170" x2="340" y2="170" stroke="#16283d" stroke-width="1.5"/>
-<line x1="60" y1="20" x2="60" y2="195" stroke="#16283d" stroke-width="1.5"/>
-<text x="326" y="185" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">x</text>
-<text x="66" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">y</text>
-<line x1="20" y1="90" x2="340" y2="90" stroke="#b3392f" stroke-width="2.2"/>
-<circle cx="60" cy="90" r="3.5" fill="#b3392f"/>
-<text x="42" y="82" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">k</text>
-<text x="300" y="82" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">y=k</text>
-</svg>
-<p class="did">Retta orizzontale $y=k$, parallela all'asse $x$.</p>
+<div class="pann" style="--n:4">
+<div><svg id="fig-k" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">$y=k$</p></div>
+<div><svg id="fig-h" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">$x=h$</p></div>
+<div><svg id="fig-m" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">$y=mx$</p></div>
+<div><svg id="fig-bis" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Bisettrici</p></div>
 </div>
-
-<p>Quando invece $b=0$ resta $ax+c=0$, cioè $x=h$: una retta verticale, parallela all'asse
-$y$. A un solo valore di $x$ corrispondono tutte le ordinate possibili, quindi questa non è
-una funzione.</p>
-
-<div class="fig">
-<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="170" x2="340" y2="170" stroke="#16283d" stroke-width="1.5"/>
-<line x1="150" y1="20" x2="150" y2="195" stroke="#16283d" stroke-width="1.5"/>
-<text x="326" y="185" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">x</text>
-<text x="156" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">y</text>
-<line x1="240" y1="20" x2="240" y2="195" stroke="#b3392f" stroke-width="2.2"/>
-<circle cx="240" cy="170" r="3.5" fill="#b3392f"/>
-<text x="246" y="185" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">h</text>
-<text x="246" y="40" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">x=h</text>
-</svg>
-<p class="did">Retta verticale $x=h$, parallela all'asse $y$: non è il grafico di una
-funzione.</p>
 </div>
-
-<p>Per $k=0$ e $h=0$ si ottengono i due casi limite: $y=0$ è l'equazione dell'asse $x$,
-$x=0$ quella dell'asse $y$.</p>
-
-<h2>Retta passante per l'origine</h2>
-<p>Quando $q=0$ l'equazione si riduce a $y=mx$: la retta passa per l'origine e ruota
-attorno a essa al variare di $m$. Per $m&gt;0$ la retta è crescente, per $m=0$ coincide con
-l'asse $x$, per $m&lt;0$ è decrescente.</p>
-
-<div class="fig">
-<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="120" x2="340" y2="120" stroke="#16283d" stroke-width="1.5"/>
-<line x1="180" y1="20" x2="180" y2="230" stroke="#16283d" stroke-width="1.5"/>
-<text x="326" y="135" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">x</text>
-<text x="186" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">y</text>
-<line x1="60" y1="200" x2="300" y2="50" stroke="#b3392f" stroke-width="2.2"/>
-<text x="304" y="48" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">m&gt;0</text>
-<line x1="60" y1="120" x2="300" y2="120" stroke="#2f6b4f" stroke-width="2.2"/>
-<text x="304" y="116" font-family="Segoe UI, sans-serif" font-size="13" fill="#2f6b4f">m=0</text>
-<line x1="60" y1="50" x2="300" y2="200" stroke="#1f4e79" stroke-width="2.2"/>
-<text x="304" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#1f4e79">m&lt;0</text>
-</svg>
-<p class="did">Il fascio di rette per l'origine $y=mx$: la pendenza cambia segno di
-rotazione con il segno di $m$.</p>
-</div>
-
-<p>Come funzione, $y=mx$ (con $m\neq0$) è biunivoca: iniettiva e suriettiva. Ed è dispari,
-perché $f(-x)=-mx=-f(x)$.</p>
-
-<p>Due casi ricorrono spesso: per $m=1$, $y=x$ è la bisettrice del primo e terzo
-quadrante; per $m=-1$, $y=-x$ è la bisettrice del secondo e quarto quadrante.</p>
-
-<div class="fig">
-<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="120" x2="340" y2="120" stroke="#16283d" stroke-width="1.5"/>
-<line x1="180" y1="20" x2="180" y2="230" stroke="#16283d" stroke-width="1.5"/>
-<text x="326" y="135" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">x</text>
-<text x="186" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">y</text>
-<line x1="60" y1="200" x2="300" y2="40" stroke="#b3392f" stroke-width="2.2"/>
-<text x="304" y="38" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">y=x</text>
-<line x1="60" y1="40" x2="300" y2="200" stroke="#1f4e79" stroke-width="2.2"/>
-<text x="304" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#1f4e79">y=-x</text>
-</svg>
-<p class="did">Le due bisettrici: $y=x$ (primo e terzo quadrante) e $y=-x$ (secondo e
-quarto quadrante).</p>
-</div>
-
-<h2>Retta generica</h2>
-<p>Con $q\neq0$, $y=mx+q$ resta biunivoca ma non è più né pari né dispari: il suo grafico
-non è simmetrico rispetto all'origine.</p>
 
 <h2>Come disegnare una retta</h2>
-<p>Conoscendo $m$ e $q$ non serve costruire una tabella di valori: basta partire dal punto
-$(0;q)$, dove la retta incontra l'asse $y$, e spostarsi secondo il coefficiente angolare —
-scritto come frazione fra dislivello verticale e spostamento orizzontale — per trovare un
-secondo punto.</p>
+
+<p>Da $(0;q)$ ci si sposta di $\Delta x$ in orizzontale e di $m\,\Delta x$ in verticale: si trova un secondo punto, senza tabella di valori.</p>
+
+<h2>Esempio</h2>
+
+<ul>
+<li>$y=\frac{3}{2}x+1$: da $(0;1)$, $+2$ in orizzontale e $+3$ in verticale → $(2;4)$;</li>
+<li>$y=-\frac{1}{2}x+3$: da $(0;3)$, $+2$ in orizzontale e $-1$ in verticale → $(2;2)$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="10" y1="170" x2="170" y2="170" stroke="#16283d" stroke-width="1.5"/>
-<line x1="40" y1="20" x2="40" y2="190" stroke="#16283d" stroke-width="1.5"/>
-<line x1="40" y1="150" x2="150" y2="40" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="40" cy="150" r="3.5" fill="#b3392f"/>
-<text x="14" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">(0;1)</text>
-<line x1="40" y1="150" x2="112" y2="150" stroke="#1f4e79" stroke-width="1.3" stroke-dasharray="3,2"/>
-<line x1="112" y1="150" x2="112" y2="42" stroke="#2f6b4f" stroke-width="1.3" stroke-dasharray="3,2"/>
-<text x="66" y="164" font-family="Segoe UI, sans-serif" font-size="11" fill="#1f4e79">+2</text>
-<text x="118" y="100" font-family="Segoe UI, sans-serif" font-size="11" fill="#2f6b4f">+3</text>
-<text x="42" y="30" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">y=1,5x+1</text>
-<line x1="200" y1="60" x2="360" y2="60" stroke="#16283d" stroke-width="1.5"/>
-<line x1="230" y1="20" x2="230" y2="190" stroke="#16283d" stroke-width="1.5"/>
-<line x1="230" y1="80" x2="340" y2="135" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="230" cy="80" r="3.5" fill="#b3392f"/>
-<text x="204" y="75" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">(0;3)</text>
-<line x1="230" y1="80" x2="302" y2="80" stroke="#1f4e79" stroke-width="1.3" stroke-dasharray="3,2"/>
-<line x1="302" y1="80" x2="302" y2="108" stroke="#2f6b4f" stroke-width="1.3" stroke-dasharray="3,2"/>
-<text x="256" y="94" font-family="Segoe UI, sans-serif" font-size="11" fill="#1f4e79">+2</text>
-<text x="308" y="98" font-family="Segoe UI, sans-serif" font-size="11" fill="#2f6b4f">-1</text>
-<text x="232" y="30" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">y=-0,5x+3</text>
-</svg>
-<p class="did">Da $(0;q)$ ci si sposta secondo $m$ per trovare un secondo punto, poi si
-traccia la retta.</p>
-</div>
-
-<p>Per $y=\frac{3}{2}x+1$: si parte da $(0;1)$ e, spostandosi di $2$ in orizzontale e $3$
-in verticale, si arriva a $(2;4)$.</p>
-<p>Per $y=-\frac{1}{2}x+3$: si parte da $(0;3)$ e, spostandosi di $2$ in orizzontale e $1$
-in basso, si arriva a $(2;2)$.</p>
-
-<div class="interattivo">
-<p class="did" style="margin-top:0">Muovendo i cursori si vede come $m$ e $q$ cambiano
-pendenza e intercetta della retta $y=mx+q$.</p>
-<div class="pannelli">
-<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" id="u20-piano" style="max-width:300px">
-<line x1="10" y1="120" x2="290" y2="120" stroke="#16283d" stroke-width="1.5"/>
-<line x1="150" y1="10" x2="150" y2="230" stroke="#16283d" stroke-width="1.5"/>
-<text x="276" y="134" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">x</text>
-<text x="156" y="20" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">y</text>
-<line id="u20-retta" x1="10" y1="120" x2="290" y2="120" stroke="#b3392f" stroke-width="2.4"/>
-<circle id="u20-punto" cx="150" cy="120" r="4" fill="#1f4e79"/>
-</svg>
-</div>
-<div class="controlli">
-<label for="u20-m">m</label>
-<input type="range" id="u20-m" min="-3" max="3" step="0.1" value="1">
-<label for="u20-q">q</label>
-<input type="range" id="u20-q" min="-4" max="4" step="0.5" value="0">
-<span class="valori" id="u20-valori">y = 1,0 x + 0,0</span>
+<div class="pann" style="--n:2">
+<div><svg id="fig-d1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">$y=\frac{3}{2}x+1$</p></div>
+<div><svg id="fig-d2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">$y=-\frac{1}{2}x+3$</p></div>
 </div>
 </div>
-<script>
-(function(){
-  var mS = document.getElementById('u20-m');
-  var qS = document.getElementById('u20-q');
-  var retta = document.getElementById('u20-retta');
-  var punto = document.getElementById('u20-punto');
-  var valori = document.getElementById('u20-valori');
-  var ox = 150, oy = 120, scala = 20;
-  function aggiorna(){
-    var m = parseFloat(mS.value), q = parseFloat(qS.value);
-    var xL = -7, xR = 7;
-    var yL = m*xL+q, yR = m*xR+q;
-    retta.setAttribute('x1', ox+xL*scala);
-    retta.setAttribute('y1', oy-yL*scala);
-    retta.setAttribute('x2', ox+xR*scala);
-    retta.setAttribute('y2', oy-yR*scala);
-    punto.setAttribute('cx', ox);
-    punto.setAttribute('cy', oy-q*scala);
-    valori.textContent = 'y = ' + m.toFixed(1) + ' x + ' + q.toFixed(1);
-  }
-  mS.addEventListener('input', aggiorna);
-  qS.addEventListener('input', aggiorna);
-  aggiorna();
-})();
-</script>
-
 
 <nav class="nav-unita"><a class="precedente" href="../19-distanza-fra-due-punti-punto-medio-baricentro/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Distanza fra due punti, punto medio, baricentro</span></a><a class="successiva" href="../21-retta-per-un-punto-rette-parallele-e-perpendicolari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Retta per un punto, rette parallele e perpendicolari</span></a></nav>
 <footer><p>Matematica terza &middot; Piano cartesiano e retta &middot; Unità 20</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var txt=Q.txt;
+function piccolo(id,s){var X=function(x){return 100+s*x;},Y=function(y){return 100-s*y;};
+  var P=new Q.Piano({svg:document.getElementById(id),w:200,h:200,X:X,Y:Y});P.assi();return P;}
+/* casi particolari */
+(function(){
+  var P=piccolo('fig-k',25);P.seg(-5,2,5,2,{stroke:'var(--rosso)'});P.punto(0,2,'var(--rosso)');
+  txt(P.testo,P.X(0)-6,P.Y(2)-6,'k',{'text-anchor':'end',fill:'var(--rosso)','font-style':'italic'});
+  txt(P.testo,P.X(1.2),P.Y(2)-8,'y = k',{fill:'var(--rosso)'});
+  P=piccolo('fig-h',25);P.seg(2,-5,2,5,{stroke:'var(--rosso)'});P.punto(2,0,'var(--rosso)');
+  txt(P.testo,P.X(2)+6,P.Y(0)+16,'h',{fill:'var(--rosso)','font-style':'italic'});
+  txt(P.testo,P.X(2)+6,P.Y(3.4),'x = h',{fill:'var(--rosso)'});
+  P=piccolo('fig-m',25);
+  P.curva(function(x){return .75*x;},-5,5,{stroke:'var(--rosso)'},2);
+  P.curva(function(x){return 0*x;},-5,5,{stroke:'var(--verde)'},2);
+  P.curva(function(x){return -.75*x;},-5,5,{stroke:'var(--blu)'},2);
+  txt(P.testo,190,P.Y(2.6)-4,'m > 0',{'text-anchor':'end',fill:'var(--rosso)'});
+  txt(P.testo,190,P.Y(0)+16,'m = 0',{'text-anchor':'end',fill:'var(--verde)'});
+  txt(P.testo,190,P.Y(-2.6)+14,'m < 0',{'text-anchor':'end',fill:'var(--blu)'});
+  P=piccolo('fig-bis',25);
+  P.curva(function(x){return x;},-5,5,{stroke:'var(--rosso)'},2);
+  P.curva(function(x){return -x;},-5,5,{stroke:'var(--blu)'},2);
+  txt(P.testo,P.X(3.4)-8,P.Y(3.4),'y = x',{'text-anchor':'end',fill:'var(--rosso)'});
+  txt(P.testo,P.X(3.4)-10,P.Y(-3.4)+4,'y = −x',{'text-anchor':'end',fill:'var(--blu)'});
+})();
+/* come disegnare */
+function disegna(id,m,q,dx){var P=piccolo(id,20);
+  P.curva(function(x){return m*x+q;},-6,6,{},2);
+  var tr={'stroke-width':1.6,'stroke-dasharray':'4 3'};
+  P.seg(0,q,dx,q,Object.assign({stroke:'var(--grigio)'},tr));
+  P.seg(dx,q,dx,q+m*dx,Object.assign({stroke:'var(--verde)'},tr));
+  P.punto(0,q,'var(--rosso)');P.punto(dx,q+m*dx,'var(--rosso)');
+  var y2=q+m*dx, su=m>0;
+  txt(P.testo,P.X(dx/2),P.Y(q)+(su?16:-6),'+'+dx,{'text-anchor':'middle',fill:'var(--grigio)'});
+  txt(P.testo,P.X(dx)+6,P.Y((q+y2)/2)+4,(m*dx>0?'+':'−')+Math.abs(m*dx),{fill:'var(--verde)'});
+  txt(P.testo,P.X(0)-6,P.Y(q)+(su?-6:16),'('+0+';'+q+')',{'text-anchor':'end',fill:'var(--rosso)'});
+  txt(P.testo,P.X(dx)-8,P.Y(y2)+(su?-8:18),'('+dx+';'+y2+')',{'text-anchor':'end',fill:'var(--rosso)'});
+}
+disegna('fig-d1',1.5,1,2);disegna('fig-d2',-.5,3,2);
+/* cursori m, q */
+(function(){
+  var X=function(x){return 150+20*x;},Y=function(y){return 120-20*y;};
+  var P=new Q.Piano({svg:document.getElementById('fig-mq'),w:300,h:240,X:X,Y:Y});P.assi();
+  var r=Q.el('path',{fill:'none',stroke:'var(--rosso)','stroke-width':2.4});P.curve.appendChild(r);
+  var pt=P.punto(0,0,'var(--blu)',4.5);
+  var cm=document.getElementById('cur-m'),cq=document.getElementById('cur-q'),vm=document.getElementById('val-m'),vq=document.getElementById('val-q'),vr=document.getElementById('val-retta');
+  function agg(){var m=+cm.value,q=+cq.value;
+    r.setAttribute('d','M'+X(-8)+','+Y(m*-8+q).toFixed(1)+'L'+X(8)+','+Y(m*8+q).toFixed(1));
+    pt.setAttribute('cy',Y(q));vm.textContent=Q.num(m);vq.textContent=Q.num(q);
+    var t=m>0?'crescente':(m<0?'decrescente':'parallela all\'asse x');
+    vr.innerHTML='y = '+Q.num(m)+'x '+(q<0?'− ':'+ ')+Q.num(Math.abs(q))+' &nbsp;·&nbsp; <span class="c-blu">(0; '+Q.num(q)+')</span> &nbsp;·&nbsp; '+(m===0?'<span class="c-ver">'+t+'</span>':t);}
+  cm.addEventListener('input',agg);cq.addEventListener('input',agg);agg();
+})();
+})();
+</script>
 </body>
 </html>
