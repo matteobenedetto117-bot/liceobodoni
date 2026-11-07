@@ -5,20 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Angoli associati — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
-.fig svg{max-width:100%;height:auto;max-height:260px}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.nota{background:#fdf6ec;border:1px solid #e8d9b8;border-radius:10px;padding:14px 18px;margin:24px 0;font-size:.95rem}
-.nota .et{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#96702c;display:block;margin-bottom:6px}
-.griglia2{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-@media (max-width:640px){.griglia2{grid-template-columns:1fr}}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.pann.p7{grid-template-columns:repeat(4,1fr)}
+.pann.p7 svg{max-width:170px}
+@media(max-width:640px){.pann.p7{grid-template-columns:1fr 1fr}}
+.def .eq{overflow-x:auto}
 </style>
 </head>
 <body>
@@ -28,222 +75,112 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Goniometria &middot; Unità 13</p>
   <h1>Angoli associati</h1>
-  <p class="sommario">Conosciamo già seno, coseno, tangente e cotangente di 30&deg;, 45&deg; e
-  60&deg;. Molti altri angoli sono legati a uno di questi da una simmetria della
-  circonferenza goniometrica, e questo permette di scriverne subito le funzioni
-  goniometriche senza calcolarle da capo: bastano otto relazioni.</p>
 </header>
 
-<div class="def">
-<span class="et">Il principio</span>
-<p>Ogni relazione nasce dal punto $B$ associato a un angolo sulla circonferenza
-goniometrica: il coseno è la sua ascissa, il seno la sua ordinata. Trovare gli angoli
-associati equivale a riflettere o ruotare quel punto, e leggerne le nuove coordinate.</p>
-</div>
+<p>Angoli legati ad $\alpha$ da una simmetria della circonferenza goniometrica: come si esprimono le loro funzioni goniometriche tramite quelle di $\alpha$?</p>
 
-<h2>Angoli opposti: $2\pi-\alpha$ e $-\alpha$</h2>
+<p>Il punto di $\alpha$ ha ascissa $\cos\alpha$ e ordinata $\sin\alpha$; ogni angolo associato si ottiene riflettendo o ruotando questo punto:</p>
 
-<div class="griglia2">
 <div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="15" y1="130" x2="245" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="130" y1="15" x2="130" y2="245" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="130" cy="130" r="90" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="130" y1="130" x2="203.7" y2="78.4" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="207" y="72" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<line x1="130" y1="130" x2="203.7" y2="181.6" stroke="#16283d" stroke-width="2"/>
-<circle cx="203.7" cy="181.6" r="3.2" fill="#16283d"/>
-<text x="207" y="196" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">2&#960;&#8722;&#945;</text>
-<line x1="130" y1="130" x2="203.7" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<line x1="203.7" y1="130" x2="203.7" y2="181.6" stroke="#b3392f" stroke-width="2.4"/>
-</svg>
-<p class="did">Il punto di $2\pi-\alpha$ (identico a quello di $-\alpha$, stesso lato
-terminale) è il simmetrico di quello di $\alpha$ rispetto all'asse $x$: stessa ascissa
-(in blu), ordinata opposta (in rosso).</p>
+<div class="pann p7" style="--n:4">
+<div><svg id="as-1" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angolo meno alfa"></svg><p class="did">$-\alpha$, $2\pi-\alpha$: simmetria rispetto all'asse $x$</p></div>
+<div><svg id="as-2" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angolo pi greco meno alfa"></svg><p class="did">$\pi-\alpha$: simmetria rispetto all'asse $y$</p></div>
+<div><svg id="as-3" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angolo pi greco più alfa"></svg><p class="did">$\pi+\alpha$: simmetria rispetto all'origine</p></div>
+<div><svg id="as-4" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angolo pi mezzi meno alfa"></svg><p class="did">$\frac{\pi}{2}-\alpha$: simmetria rispetto alla retta $y=x$</p></div>
+<div><svg id="as-5" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angolo pi mezzi più alfa"></svg><p class="did">$\frac{\pi}{2}+\alpha$: rotazione di un quarto di giro</p></div>
+<div><svg id="as-6" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angolo tre pi mezzi meno alfa"></svg><p class="did">$\frac{3\pi}{2}-\alpha$: simmetria rispetto alla retta $y=-x$</p></div>
+<div><svg id="as-7" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Angolo tre pi mezzi più alfa"></svg><p class="did">$\frac{3\pi}{2}+\alpha$: rotazione di tre quarti di giro</p></div>
 </div>
-<div class="def">
-<span class="et">Formule</span>
-$$\sin(2\pi-\alpha)=-\sin\alpha, \quad \cos(2\pi-\alpha)=\cos\alpha, \quad
-\tan(2\pi-\alpha)=-\tan\alpha, \quad \cot(2\pi-\alpha)=-\cot\alpha.$$
-<p>Le stesse identità valgono, con lo stesso disegno, per $-\alpha$:</p>
-$$\sin(-\alpha)=-\sin\alpha, \quad \cos(-\alpha)=\cos\alpha, \quad
-\tan(-\alpha)=-\tan\alpha, \quad \cot(-\alpha)=-\cot\alpha.$$
-</div>
+<p class="did">$\alpha=35°$ tratteggiato in verde; ascissa <span class="c-ros">$\cos$</span> e ordinata <span class="c-blu">$\sin$</span> dell'angolo associato</p>
 </div>
 
-<h2>Angoli supplementari: $\pi-\alpha$</h2>
+<p>Dalle nuove coordinate si leggono le relazioni:</p>
 
-<div class="griglia2">
-<div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="15" y1="130" x2="245" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="130" y1="15" x2="130" y2="245" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="130" cy="130" r="90" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="130" y1="130" x2="203.7" y2="78.4" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="207" y="72" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<line x1="130" y1="130" x2="56.3" y2="78.4" stroke="#16283d" stroke-width="2"/>
-<circle cx="56.3" cy="78.4" r="3.2" fill="#16283d"/>
-<text x="15" y="68" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">&#960;&#8722;&#945;</text>
-<line x1="130" y1="130" x2="56.3" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<line x1="56.3" y1="130" x2="56.3" y2="78.4" stroke="#b3392f" stroke-width="2.4"/>
-</svg>
-<p class="did">Il punto di $\pi-\alpha$ è il simmetrico di quello di $\alpha$ rispetto
-all'asse $y$: ordinata uguale, ascissa opposta.</p>
-</div>
-<div class="def">
-<span class="et">Formule</span>
-$$\sin(\pi-\alpha)=\sin\alpha, \quad \cos(\pi-\alpha)=-\cos\alpha, \quad
-\tan(\pi-\alpha)=-\tan\alpha, \quad \cot(\pi-\alpha)=-\cot\alpha.$$
-</div>
-</div>
+<div class="def"><span class="et">Angoli associati</span>
+<p class="eq">$$\begin{array}{c|cccc}
+x & \sin x & \cos x & \tan x & \cot x\\ \hline
+-\alpha,\ 2\pi-\alpha & -\sin\alpha & \cos\alpha & -\tan\alpha & -\cot\alpha\\[3pt]
+\pi-\alpha & \sin\alpha & -\cos\alpha & -\tan\alpha & -\cot\alpha\\[3pt]
+\pi+\alpha & -\sin\alpha & -\cos\alpha & \tan\alpha & \cot\alpha\\[3pt]
+\frac{\pi}{2}-\alpha & \cos\alpha & \sin\alpha & \cot\alpha & \tan\alpha\\[3pt]
+\frac{\pi}{2}+\alpha & \cos\alpha & -\sin\alpha & -\cot\alpha & -\tan\alpha\\[3pt]
+\frac{3\pi}{2}-\alpha & -\cos\alpha & -\sin\alpha & \cot\alpha & \tan\alpha\\[3pt]
+\frac{3\pi}{2}+\alpha & -\cos\alpha & \sin\alpha & -\cot\alpha & -\tan\alpha
+\end{array}$$</p>
+<p>Per tangente e cotangente: dove i due membri sono definiti.</p></div>
 
-<h2>$\pi+\alpha$</h2>
-
-<div class="griglia2">
-<div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="15" y1="130" x2="245" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="130" y1="15" x2="130" y2="245" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="130" cy="130" r="90" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="130" y1="130" x2="203.7" y2="78.4" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="207" y="72" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<line x1="130" y1="130" x2="56.3" y2="181.6" stroke="#16283d" stroke-width="2"/>
-<circle cx="56.3" cy="181.6" r="3.2" fill="#16283d"/>
-<text x="15" y="196" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">&#960;+&#945;</text>
-<line x1="130" y1="130" x2="56.3" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<line x1="56.3" y1="130" x2="56.3" y2="181.6" stroke="#b3392f" stroke-width="2.4"/>
-</svg>
-<p class="did">Il punto di $\pi+\alpha$ è il simmetrico di quello di $\alpha$ rispetto
-all'origine (mezzo giro): entrambe le coordinate cambiano segno.</p>
-</div>
-<div class="def">
-<span class="et">Formule</span>
-$$\sin(\pi+\alpha)=-\sin\alpha, \quad \cos(\pi+\alpha)=-\cos\alpha, \quad
-\tan(\pi+\alpha)=\tan\alpha, \quad \cot(\pi+\alpha)=\cot\alpha.$$
-</div>
-</div>
-
-<h2>Angoli complementari: $\dfrac{\pi}{2}-\alpha$</h2>
-
-<div class="griglia2">
-<div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="15" y1="130" x2="245" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="130" y1="15" x2="130" y2="245" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="130" cy="130" r="90" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="130" y1="130" x2="203.7" y2="78.4" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="207" y="72" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<line x1="130" y1="130" x2="181.6" y2="56.3" stroke="#16283d" stroke-width="2"/>
-<circle cx="181.6" cy="56.3" r="3.2" fill="#16283d"/>
-<text x="150" y="46" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">&#960;/2&#8722;&#945;</text>
-<line x1="130" y1="130" x2="181.6" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<line x1="181.6" y1="130" x2="181.6" y2="56.3" stroke="#b3392f" stroke-width="2.4"/>
-</svg>
-<p class="did">Riflettendo il punto di $\alpha$ rispetto alla bisettrice del primo
-quadrante, ascissa e ordinata si scambiano.</p>
-</div>
-<div class="def">
-<span class="et">Formule</span>
-$$\sin\left(\frac{\pi}{2}-\alpha\right)=\cos\alpha, \quad
-\cos\left(\frac{\pi}{2}-\alpha\right)=\sin\alpha, \quad
-\tan\left(\frac{\pi}{2}-\alpha\right)=\cot\alpha, \quad
-\cot\left(\frac{\pi}{2}-\alpha\right)=\tan\alpha.$$
-</div>
-</div>
-
-<h2>$\dfrac{\pi}{2}+\alpha$</h2>
-
-<div class="griglia2">
-<div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="15" y1="130" x2="245" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="130" y1="15" x2="130" y2="245" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="130" cy="130" r="90" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="130" y1="130" x2="203.7" y2="78.4" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="207" y="72" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<line x1="130" y1="130" x2="78.4" y2="56.3" stroke="#16283d" stroke-width="2"/>
-<circle cx="78.4" cy="56.3" r="3.2" fill="#16283d"/>
-<text x="25" y="46" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">&#960;/2+&#945;</text>
-<line x1="130" y1="130" x2="78.4" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<line x1="78.4" y1="130" x2="78.4" y2="56.3" stroke="#b3392f" stroke-width="2.4"/>
-</svg>
-<p class="did">Il punto di $\alpha$ ruota di un quarto di giro: le coordinate si
-scambiano e una cambia segno.</p>
-</div>
-<div class="def">
-<span class="et">Formule</span>
-$$\sin\left(\frac{\pi}{2}+\alpha\right)=\cos\alpha, \quad
-\cos\left(\frac{\pi}{2}+\alpha\right)=-\sin\alpha, \quad
-\tan\left(\frac{\pi}{2}+\alpha\right)=-\cot\alpha, \quad
-\cot\left(\frac{\pi}{2}+\alpha\right)=-\tan\alpha.$$
-</div>
-</div>
-
-<h2>$\dfrac{3\pi}{2}-\alpha$</h2>
-
-<div class="griglia2">
-<div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="15" y1="130" x2="245" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="130" y1="15" x2="130" y2="245" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="130" cy="130" r="90" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="130" y1="130" x2="203.7" y2="78.4" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="207" y="72" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<line x1="130" y1="130" x2="78.4" y2="203.7" stroke="#16283d" stroke-width="2"/>
-<circle cx="78.4" cy="203.7" r="3.2" fill="#16283d"/>
-<text x="15" y="218" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">3&#960;/2&#8722;&#945;</text>
-<line x1="130" y1="130" x2="78.4" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<line x1="78.4" y1="130" x2="78.4" y2="203.7" stroke="#b3392f" stroke-width="2.4"/>
-</svg>
-<p class="did">Entrambe le coordinate risultano negative nella posizione disegnata.</p>
-</div>
-<div class="def">
-<span class="et">Formule</span>
-$$\sin\left(\frac{3\pi}{2}-\alpha\right)=-\cos\alpha, \quad
-\cos\left(\frac{3\pi}{2}-\alpha\right)=-\sin\alpha, \quad
-\tan\left(\frac{3\pi}{2}-\alpha\right)=\cot\alpha, \quad
-\cot\left(\frac{3\pi}{2}-\alpha\right)=\tan\alpha.$$
-</div>
-</div>
-
-<h2>$\dfrac{3\pi}{2}+\alpha$</h2>
-
-<div class="griglia2">
-<div class="fig">
-<svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="15" y1="130" x2="245" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="130" y1="15" x2="130" y2="245" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="130" cy="130" r="90" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="130" y1="130" x2="203.7" y2="78.4" stroke="#2f6b4f" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="207" y="72" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<line x1="130" y1="130" x2="181.6" y2="203.7" stroke="#16283d" stroke-width="2"/>
-<circle cx="181.6" cy="203.7" r="3.2" fill="#16283d"/>
-<text x="150" y="218" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">3&#960;/2+&#945;</text>
-<line x1="130" y1="130" x2="181.6" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<line x1="181.6" y1="130" x2="181.6" y2="203.7" stroke="#b3392f" stroke-width="2.4"/>
-</svg>
-<p class="did">Ascissa positiva, ordinata negativa nella posizione disegnata.</p>
-</div>
-<div class="def">
-<span class="et">Formule</span>
-$$\sin\left(\frac{3\pi}{2}+\alpha\right)=-\cos\alpha, \quad
-\cos\left(\frac{3\pi}{2}+\alpha\right)=\sin\alpha, \quad
-\tan\left(\frac{3\pi}{2}+\alpha\right)=-\cot\alpha, \quad
-\cot\left(\frac{3\pi}{2}+\alpha\right)=-\tan\alpha.$$
-</div>
-</div>
-
-<div class="nota">
-<span class="et">Errore tipico</span>
-<p>Quando si aggiunge o sottrae $\pi/2$ o $3\pi/2$, seno e coseno si scambiano fra loro.
-Quando si aggiunge o sottrae $\pi$ o $2\pi$, restano ciascuno al proprio posto e al più
-cambiano segno. Confondere queste due famiglie è la fonte più comune di errori.</p>
-</div>
-
+<div class="nota"><span class="et">Errore tipico</span>
+<p>Con $\frac{\pi}{2}$ o $\frac{3\pi}{2}$ seno e coseno si scambiano; con $\pi$ o $2\pi$ restano al proprio posto e al più cambiano segno.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../12-angoli-particolari/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Angoli particolari</span></a><a class="successiva" href="../14-formule-di-addizione-e-sottrazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Formule di addizione e sottrazione</span></a></nav>
 <footer><p>Matematica terza &middot; Goniometria &middot; Unità 13</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,x0,x1,y0,y1,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt,A=35*Math.PI/180,c=Math.cos(A),s=Math.sin(A);
+/* mappa (cos α, sin α) -> coordinate del punto associato; bis: retta di simmetria da disegnare */
+var casi=[[c,-s,null],[-c,s,null],[-c,-s,null],[s,c,1],[-s,c,null],[-s,-c,-1],[s,-c,null]];
+function L(g,x1,y1,x2,y2,a){var e=el('line',Object.assign({x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--inchiostro)','stroke-width':1.1},a||{}));g.appendChild(e);return e;}
+casi.forEach(function(q,i){
+  var g=document.getElementById('as-'+(i+1)),O=75,R=55;
+  function X(u){return O+R*u;} function Y(v){return O-R*v;}
+  L(g,8,O,142,O);L(g,O,142,O,8);
+  txt(g,142,O+12,'x',{'font-style':'italic','text-anchor':'end','font-size':11});
+  txt(g,O-5,15,'y',{'font-style':'italic','text-anchor':'end','font-size':11});
+  if(q[2])L(g,X(-1.2),Y(-1.2*q[2]),X(1.2),Y(1.2*q[2]),{stroke:'var(--grigio)','stroke-dasharray':'3 3','stroke-width':1});
+  g.appendChild(el('circle',{cx:O,cy:O,r:R,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.2}));
+  L(g,O,O,X(c),Y(s),{stroke:'var(--verde)','stroke-dasharray':'4 3','stroke-width':1.4});
+  g.appendChild(el('circle',{cx:X(c),cy:Y(s),r:2.2,fill:'var(--verde)'}));
+  txt(g,X(1.13*c)+2,Y(1.13*s)+2,'α',{fill:'var(--verde)','font-size':11});
+  var px=X(q[0]),py=Y(q[1]);
+  L(g,O,O,px,O,{stroke:'var(--rosso)','stroke-width':3});
+  L(g,px,O,px,py,{stroke:'var(--blu)','stroke-width':3});
+  L(g,O,O,px,py,{'stroke-width':1.8});
+  g.appendChild(el('circle',{cx:px,cy:py,r:3,fill:'var(--inchiostro)'}));
+});
+})();
+</script>
 </body>
 </html>
