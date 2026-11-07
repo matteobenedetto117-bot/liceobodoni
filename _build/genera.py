@@ -49,8 +49,8 @@ def hub(classi):
                     '<a class="classe attiva" href="%s/index.html">'
                     '<div class="anno">%s classe</div>'
                     '<div class="nome">%s</div>'
-                    '<span class="stato">%d di %d unità</span></a>'
-                    % (d['percorso'], anno.lower(), materia, fatte, tot))
+                    '<span class="stato">%d unità</span></a>'
+                    % (d['percorso'], anno.lower(), materia, tot))
             else:
                 carte.append(
                     '<div class="classe attesa">'
