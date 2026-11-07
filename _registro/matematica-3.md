@@ -57,6 +57,7 @@
 - Parole: 252 su 1 pagina di traccia (pagina 19)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy l'esempio: da sinα=7/25 con 0<α<π/2 si ricava cos²α=1-49/625=576/625 e cosα=24/25 (radice positiva, primo quadrante).
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti. Il disegno rifà il triangolo rettangolo inscritto già presente nella traccia, con le coordinate ricalcolate perché fosse geometricamente coerente (punto B davvero sulla circonferenza).
+- Revisione (07/11/2026, regole 13/10): parole circa 175 → 51 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, prosa, titoletto «Dal teorema di Pitagora all'identità» e didascalia lunga; apertura con la domanda; (sin α)² + (cos α)² = 1 in .eq; relazione fondamentale in .def con «∀α ∈ ℝ» e la precisazione sin²α = (sin α)²; formule inverse con ± in .eq; nota sul segno dal quadrante. Titoletto: «Esempio» (sin α = 7/25, 0 < α < π/2 → cos α = 24/25, in forma Dati/Calcolare, una sola .eq). Nessun esempio tolto, nessuna comparsa da togliere. Nessuna correzione concettuale (verifica Python: 1 − 49/625 = 576/625, √ = 24/25). Figura: triangolo rettangolo inscritto ricalcolato da script, ora con cursore α da 0° a 360° (triangolo in tutti i quadranti, cateti |sin α| e |cos α|, valori di sin²α, cos²α e somma = 1 in verde). Nessuna figura decorativa.
 
 ## Unità 11 — Tangente, cotangente, secante e cosecante
 - Parole: 491 su 3 pagine di traccia (pagine 20–22)
