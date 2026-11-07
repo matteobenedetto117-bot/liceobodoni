@@ -5,19 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Angoli particolari — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.griglia{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-@media (max-width:640px){.griglia{grid-template-columns:1fr}}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
 </style>
+
 </head>
 <body>
 <div class="foglio">
@@ -26,98 +72,102 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Goniometria &middot; Unità 12</p>
   <h1>Angoli particolari</h1>
-  <p class="sommario">Tre angoli tornano continuamente nei calcoli: 30°, 45° e 60°. Per
-  loro seno, coseno, tangente e cotangente si leggono in modo esatto dal triangolo
-  rettangolo inscritto nella circonferenza goniometrica, senza bisogno della
-  calcolatrice.</p>
 </header>
 
-<h2>30° (&pi;/6)</h2>
+<p>Seno, coseno, tangente e cotangente di 30°, 45° e 60°: quali valori esatti assumono?</p>
 
-<div class="griglia">
 <div class="fig">
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="130" x2="240" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="90" y1="10" x2="90" y2="210" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="90" cy="130" r="60" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="90" y1="130" x2="141.96" y2="100" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="141.96" y1="100" x2="141.96" y2="130" stroke="#b3392f" stroke-width="2.4"/>
-<line x1="90" y1="130" x2="141.96" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<path d="M112,130 A22,22 0 0,0 109.05,119" fill="none" stroke="#2f6b4f" stroke-width="1.3"/>
-<text x="98" y="123" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#960;/6</text>
-<text x="106" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f4e79">cos&#945;</text>
-<text x="146" y="118" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">sin&#945;</text>
-</svg>
-<p class="did">Il cateto adiacente misura cos(&pi;/6), il cateto opposto sin(&pi;/6).</p>
+<div class="pann" style="--n:3">
+<div><svg id="tri-30" viewBox="0 0 150 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo inscritto per alfa = pi/6"></svg><p class="did">$\alpha=\frac{\pi}{6}$: cateto opposto metà dell'ipotenusa</p></div>
+<div><svg id="tri-45" viewBox="0 0 150 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo inscritto per alfa = pi/4"></svg><p class="did">$\alpha=\frac{\pi}{4}$: cateti uguali</p></div>
+<div><svg id="tri-60" viewBox="0 0 150 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo inscritto per alfa = pi/3"></svg><p class="did">$\alpha=\frac{\pi}{3}$: cateti scambiati rispetto a $\frac{\pi}{6}$</p></div>
 </div>
-<div class="def">
-<span class="et">Valori per &pi;/6</span>
-$$\sin\frac{\pi}{6}=\frac12, \qquad \cos\frac{\pi}{6}=\frac{\sqrt3}{2}.$$
-</div>
+<p class="did">Cateti <span class="c-ros">$\cos\alpha$</span> e <span class="c-blu">$\sin\alpha$</span>, ipotenusa 1</p>
 </div>
 
-<p>Da questi due valori si ricavano tangente e cotangente come rapporti:</p>
+<p>Da seno e coseno si ricavano tangente e cotangente, per esempio per $\alpha=\frac{\pi}{6}$:</p>
 
-$$\tan\frac{\pi}{6}=\frac{\sin\frac{\pi}{6}}{\cos\frac{\pi}{6}}=\frac{1/2}{\sqrt3/2}=\frac{1}{\sqrt3}=\frac{\sqrt3}{3},
-\qquad\qquad
-\cot\frac{\pi}{6}=\frac{1}{\tan\frac{\pi}{6}}=\sqrt3.$$
+<p class="eq">$$\tan\frac{\pi}{6}=\frac{1/2}{\sqrt3/2}=\frac{1}{\sqrt3}=\frac{\sqrt3}{3}\qquad\qquad \cot\frac{\pi}{6}=\frac{1}{\tan\frac{\pi}{6}}=\sqrt3$$</p>
 
-<h2>60° (&pi;/3)</h2>
-
-<div class="griglia">
-<div class="fig">
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="130" x2="240" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="90" y1="10" x2="90" y2="210" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="90" cy="130" r="60" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="90" y1="130" x2="120" y2="78.04" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="120" y1="78.04" x2="120" y2="130" stroke="#b3392f" stroke-width="2.4"/>
-<line x1="90" y1="130" x2="120" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<path d="M112,130 A22,22 0 0,0 101,110.95" fill="none" stroke="#2f6b4f" stroke-width="1.3"/>
-<text x="99" y="121" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#960;/3</text>
-<text x="94" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f4e79">cos&#945;</text>
-<text x="124" y="105" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">sin&#945;</text>
-</svg>
-<p class="did">Rispetto a 30°, i cateti si scambiano: qui il cateto opposto è il più
-lungo.</p>
-</div>
-<div class="def">
-<span class="et">Valori per &pi;/3</span>
-$$\sin\frac{\pi}{3}=\frac{\sqrt3}{2}, \quad \cos\frac{\pi}{3}=\frac12, \quad
-\tan\frac{\pi}{3}=\sqrt3, \quad \cot\frac{\pi}{3}=\frac{\sqrt3}{3}.$$
-</div>
-</div>
-
-<h2>45° (&pi;/4)</h2>
-
-<div class="griglia">
-<div class="fig">
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="130" x2="240" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="90" y1="10" x2="90" y2="210" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="90" cy="130" r="60" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="90" y1="130" x2="132.43" y2="87.57" stroke="#2f6b4f" stroke-width="1.8"/>
-<line x1="132.43" y1="87.57" x2="132.43" y2="130" stroke="#b3392f" stroke-width="2.4"/>
-<line x1="90" y1="130" x2="132.43" y2="130" stroke="#1f4e79" stroke-width="2.4"/>
-<path d="M112,130 A22,22 0 0,0 105.56,114.44" fill="none" stroke="#2f6b4f" stroke-width="1.3"/>
-<text x="100" y="122" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#960;/4</text>
-<text x="102" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f4e79">cos&#945;</text>
-<text x="137" y="112" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">sin&#945;</text>
-</svg>
-<p class="did">Il triangolo è isoscele: i due cateti sono uguali, e infatti la
-tangente vale 1.</p>
-</div>
-<div class="def">
-<span class="et">Valori per &pi;/4</span>
-$$\sin\frac{\pi}{4}=\frac{\sqrt2}{2}, \quad \cos\frac{\pi}{4}=\frac{\sqrt2}{2}, \quad
-\tan\frac{\pi}{4}=1, \quad \cot\frac{\pi}{4}=1.$$
-</div>
-</div>
-
+<div class="def"><span class="et">Valori notevoli</span>
+<p class="eq">$$\begin{array}{c|cccc}
+\alpha & \sin\alpha & \cos\alpha & \tan\alpha & \cot\alpha\\ \hline
+\frac{\pi}{6}=30° & \frac12 & \frac{\sqrt3}{2} & \frac{\sqrt3}{3} & \sqrt3\\[4pt]
+\frac{\pi}{4}=45° & \frac{\sqrt2}{2} & \frac{\sqrt2}{2} & 1 & 1\\[4pt]
+\frac{\pi}{3}=60° & \frac{\sqrt3}{2} & \frac12 & \sqrt3 & \frac{\sqrt3}{3}
+\end{array}$$</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../11-tangente-cotangente-secante-e-cosecante/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Tangente, cotangente, secante e cosecante</span></a><a class="successiva" href="../13-angoli-associati/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Angoli associati</span></a></nav>
 <footer><p>Matematica terza &middot; Goniometria &middot; Unità 12</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,x0,x1,y0,y1,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt,PI=Math.PI;
+function pt(cx,cy,r,a){return [cx+r*Math.cos(a),cy-r*Math.sin(a)];}
+function arco(cx,cy,r,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)*20)),p='';
+  for(var j=0;j<=n;j++){var a=a0+(a1-a0)*j/n,q=pt(cx,cy,r,a);p+=(j?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1);}return p;}
+function L(g,x1,y1,x2,y2,a){var e=el('line',Object.assign({x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--inchiostro)','stroke-width':1.2},a||{}));g.appendChild(e);return e;}
+[[30,'π/6'],[45,'π/4'],[60,'π/3']].forEach(function(q){
+  var s=document.getElementById('tri-'+q[0]),ox=22,oy=118,R=100,a=q[0]*PI/180,b=pt(ox,oy,R,a);
+  L(s,8,oy,144,oy);L(s,ox,132,ox,6);
+  txt(s,144,oy+13,'x',{'font-style':'italic','text-anchor':'end','font-size':11});txt(s,ox-5,14,'y',{'font-style':'italic','text-anchor':'end','font-size':11});
+  s.appendChild(el('path',{d:arco(ox,oy,R,0,PI/2),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3}));
+  s.appendChild(el('path',{d:'M'+ox+','+oy+'L'+b[0].toFixed(1)+','+oy+'L'+b[0].toFixed(1)+','+b[1].toFixed(1)+'Z',fill:'var(--blu-chiaro)'}));
+  L(s,ox,oy,b[0],b[1],{'stroke-width':1.8});
+  L(s,ox,oy,b[0],oy,{stroke:'var(--rosso)','stroke-width':3});
+  L(s,b[0],b[1],b[0],oy,{stroke:'var(--blu)','stroke-width':3});
+  s.appendChild(el('circle',{cx:b[0],cy:b[1],r:3,fill:'var(--inchiostro)'}));
+  s.appendChild(el('path',{d:arco(ox,oy,20,0,a),fill:'none',stroke:'var(--verde)','stroke-width':1.5}));
+  var m=pt(ox,oy,24,a/2);txt(s,m[0]+1,m[1]+4,q[1],{fill:'var(--verde)','font-size':10});
+  var h=pt(ox,oy,R/2,a);txt(s,h[0]-6*Math.sin(a)-2,h[1]-6*Math.cos(a)-1,'1',{'font-size':11,'text-anchor':'end'});
+  txt(s,(ox+b[0])/2,oy+13,'cos α',{fill:'var(--rosso)','font-size':10,'text-anchor':'middle'});
+  var my=(b[1]+oy)/2+4;
+  if(q[0]<=45)txt(s,b[0]-4,my,'sin α',{fill:'var(--blu)','font-size':10,'text-anchor':'end'});
+  else txt(s,b[0]+4,my,'sin α',{fill:'var(--blu)','font-size':10});
+});
+})();
+</script>
 </body>
 </html>
