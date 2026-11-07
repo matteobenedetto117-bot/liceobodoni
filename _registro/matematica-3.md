@@ -87,6 +87,7 @@
 - Parole: 215 su 2 pagine di traccia (pagine 29–30)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy le identità sin 2α = 2 sin α cos α, le tre forme equivalenti di cos 2α, e tan 2α = 2 tan α/(1 − tan²α), tramite sviluppo simbolico e verifica numerica su valori casuali; verificato anche l'esempio con α = π/3 (sin 120° = √3/2, cos 120° = −1/2).
 - Aggiunta: un solo esempio numerico con α = 60°, perché in queste due pagine la traccia deriva solo le tre formule senza applicarle a un caso concreto: la regola consente un esempio quando l'unità non ne contiene nessuno.
+- Revisione (07/11/2026, regole 13/10): parole circa 152 → 45 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, i tre titoletti per formula, la spiegazione sulla scelta della forma del coseno e la frase finale di rimando agli angoli associati; apertura con la domanda; ogni derivazione in una .eq con una frase di raccordo; le tre formule riunite in un .def finale «Formule di duplicazione». Esempio unico tenuto («Un esempio» → «Esempio», in forma Dati/Calcolare, una .eq con sin 2π/3 e cos 2π/3); nessuno tolto; nessuna comparsa da togliere. Correzione concettuale: aggiunta la condizione di validità della formula della tangente, α ≠ π/2 + kπ e α ≠ π/4 + kπ/2 (verifica SymPy delle tre identità e dei valori sin 2π/3 = √3/2, cos 2π/3 = −1/2). Nessuna figura nella pagina.
 
 ## Unità 16 — Formule di bisezione
 - Parole: 301 su 2 pagine di traccia (pagine 31–32)
