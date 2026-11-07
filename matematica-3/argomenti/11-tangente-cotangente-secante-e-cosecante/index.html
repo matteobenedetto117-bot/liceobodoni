@@ -5,24 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tangente, cotangente, secante e cosecante — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.nota{background:#fdf6ec;border:1px solid #e8d9b8;border-radius:10px;padding:14px 18px;margin:24px 0;font-size:.95rem}
-.nota .et{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#96702c;display:block;margin-bottom:6px}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.interattivo .pannelli{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
-.interattivo .controlli{font-family:var(--sans);font-size:.9rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
-.interattivo input[type=range]{flex:1;min-width:200px}
-.interattivo .valori{font-family:var(--sans);font-size:.9rem;color:var(--blu);white-space:nowrap}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
 </style>
+
 </head>
 <body>
 <div class="foglio">
@@ -31,205 +72,196 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Goniometria &middot; Unità 11</p>
   <h1>Tangente, cotangente, secante e cosecante</h1>
-  <p class="sommario">Seno e coseno non sono le uniche funzioni goniometriche utili: dai
-  loro rapporti nascono altre quattro funzioni, ciascuna con un proprio dominio, un proprio
-  grafico e una propria lettura sulla circonferenza goniometrica.</p>
 </header>
 
-<h2>Funzione tangente</h2>
+<p>Dai rapporti fra seno e coseno nascono altre quattro funzioni goniometriche: come si definiscono e dove esistono?</p>
 
-<div class="def">
-<span class="et">Tangente</span>
-<p>Dato un angolo $\alpha$, chiamiamo <strong>tangente</strong> di $\alpha$ il rapporto</p>
-$$\tan\alpha=\frac{\sin\alpha}{\cos\alpha}.$$
-<p>Il rapporto non esiste dove $\cos\alpha=0$, cioè dove il denominatore si annulla.</p>
-</div>
+<h2>Tangente</h2>
 
-<p>Sulla circonferenza goniometrica $\tan\alpha$ si legge come la lunghezza del segmento
-staccato sulla retta tangente alla circonferenza nel punto $(1,0)$, tra l'asse $x$ e il
-prolungamento del raggio che porta al punto $B$:</p>
+<div class="def"><span class="et">Tangente</span>
+<p class="eq">$$\tan\alpha=\frac{\sin\alpha}{\cos\alpha}\qquad \cos\alpha\neq0$$</p></div>
+
+<p>Sulla circonferenza goniometrica:</p>
 
 <div class="fig">
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="130" x2="240" y2="130" stroke="#16283d" stroke-width="1.1"/>
-<line x1="90" y1="10" x2="90" y2="210" stroke="#16283d" stroke-width="1.1"/>
-<circle cx="90" cy="130" r="60" fill="none" stroke="#16283d" stroke-width="1.3"/>
-<line x1="90" y1="130" x2="150" y2="61.1" stroke="#1f4e79" stroke-width="1.8"/>
-<line x1="150" y1="130" x2="150" y2="61.1" stroke="#e07b1f" stroke-width="2.4"/>
-<line x1="90" y1="130" x2="150" y2="130" stroke="#1f4e79" stroke-width="2.4" stroke-dasharray="4 3"/>
-<line x1="150" y1="61.1" x2="150" y2="130" stroke="#b3392f" stroke-width="2.4" stroke-dasharray="4 3"/>
-<path d="M112,130 A22,22 0 0,0 105.6,113.8" fill="none" stroke="#2f6b4f" stroke-width="1.3"/>
-<text x="108" y="123" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">&#945;</text>
-<circle cx="150" cy="61.1" r="3" fill="#16283d"/>
-<text x="156" y="58" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">B</text>
-<text x="112" y="145" font-family="Segoe UI, sans-serif" font-size="12" fill="#1f4e79">cos&#945;</text>
-<text x="157" y="100" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">sin&#945;</text>
-<text x="163" y="90" font-family="Segoe UI, sans-serif" font-size="12" fill="#e07b1f">tan&#945;</text>
-</svg>
-<p class="did">Il segmento arancione, staccato sulla tangente alla circonferenza nel
-punto $(1,0)$, misura $\tan\alpha$.</p>
+<svg id="fig-tan" viewBox="0 0 220 220" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Circonferenza goniometrica con il segmento della tangente sulla retta x = 1"></svg>
+<p class="did">$\tan\alpha$ = ordinata di $T$, intersezione della retta $OB$ con la tangente in $A(1,0)$</p>
 </div>
 
-<p>Lo stesso rapporto compare in un triangolo rettangolo qualsiasi: se $a$ e $b$ sono i
-cateti adiacente e opposto all'angolo $\alpha$ e $c$ l'ipotenusa, da $c\cos\alpha=a$ e
-$c\sin\alpha=b$ segue</p>
-$$a\tan\alpha=b,$$
-<p>cioè la tangente è il rapporto fra cateto opposto e cateto adiacente.</p>
+<p>In un triangolo rettangolo, con $a$ cateto adiacente e $b$ cateto opposto ad $\alpha$:</p>
 
-<p>Riportando $\tan\alpha$ per ogni $\alpha$ si ottiene un grafico fatto di rami separati,
-ciascuno crescente, che si ripete uguale ogni $\pi$:</p>
+<p class="eq">$$a\tan\alpha=b\qquad\qquad \tan\alpha=\frac{b}{a}$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg">
-<line x1="10" y1="100" x2="450" y2="100" stroke="#16283d" stroke-width="1.1"/>
-<line x1="230" y1="10" x2="230" y2="190" stroke="#16283d" stroke-width="1.1"/>
-<line x1="90" y1="8" x2="90" y2="192" stroke="#8a93a3" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="370" y1="8" x2="370" y2="192" stroke="#8a93a3" stroke-width="1" stroke-dasharray="3 3"/>
-<path d="M 95,190 C 110,150 120,105 140,100 C 160,95 170,50 175,10" fill="none" stroke="#e07b1f" stroke-width="2"/>
-<path d="M 175,190 C 190,150 200,105 220,100 C 240,95 250,50 255,10" fill="none" stroke="#e07b1f" stroke-width="2"/>
-<path d="M 255,190 C 270,150 280,105 300,100 C 320,95 330,50 335,10" fill="none" stroke="#e07b1f" stroke-width="2"/>
-<path d="M 335,190 C 350,150 360,105 365,100" fill="none" stroke="#e07b1f" stroke-width="2"/>
-<path d="M 95,190 C 90,180 85,150 85,130" fill="none" stroke="#e07b1f" stroke-width="2"/>
-<text x="86" y="204" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">-&#960;/2</text>
-<text x="222" y="204" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">0</text>
-<text x="360" y="204" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">&#960;/2</text>
-<text x="400" y="30" font-family="Segoe UI, sans-serif" font-size="13" fill="#e07b1f">y = tan x</text>
-</svg>
-<p class="did">Ogni ramo ha un asintoto verticale in $\pi/2+k\pi$: la funzione non è mai
-definita lì, perché in quei punti $\cos x=0$.</p>
+<svg id="fig-graf" viewBox="0 0 420 200" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafico di y = tan x con asintoti verticali"></svg>
+<p class="did">$y=\tan x$; asintoti in $x=\frac{\pi}{2}+k\pi$</p>
 </div>
 
-<p>Il dominio è dunque $\mathbb{R}$ privato di quei punti, e l'insieme immagine è tutto
-$\mathbb{R}$, perché su ogni ramo la funzione assume tutti i valori reali:</p>
-$$x\neq\frac{\pi}{2}+k\pi,\ k\in\mathbb{Z}, \qquad\qquad \text{insieme immagine: } \mathbb{R}.$$
+<ul>
+<li>dominio: $x\neq\frac{\pi}{2}+k\pi$, $k\in\mathbb{Z}$;</li>
+<li>insieme immagine: $\mathbb{R}$;</li>
+<li>periodo $\pi$, ogni ramo crescente.</li>
+</ul>
 
-<h2>Secante e cosecante</h2>
+<h2>Secante, cosecante e cotangente</h2>
 
-<p>Le altre due funzioni sono i reciproci di coseno e seno:</p>
+<div class="def"><span class="et">Secante e cosecante</span>
+<p class="eq">$$\sec\alpha=\frac{1}{\cos\alpha}\quad \alpha\neq\frac{\pi}{2}+k\pi\qquad\qquad \csc\alpha=\frac{1}{\sin\alpha}\quad \alpha\neq k\pi$$</p></div>
 
-<div class="def">
-<span class="et">Secante e cosecante</span>
-$$\sec\alpha=\frac{1}{\cos\alpha}, \qquad \csc\alpha=\frac{1}{\sin\alpha}.$$
-<p>Ciascuna esiste dove non si annulla il denominatore da cui dipende:</p>
-$$\sec\alpha:\ \alpha\neq\frac{\pi}{2}+k\pi,\ k\in\mathbb{Z}, \qquad\qquad \csc\alpha:\ \alpha\neq k\pi,\ k\in\mathbb{Z}.$$
+<div class="def"><span class="et">Cotangente</span>
+<p class="eq">$$\cot\alpha=\frac{\cos\alpha}{\sin\alpha}\qquad \alpha\neq k\pi,\ k\in\mathbb{Z}$$</p>
+<p>Insieme immagine $\mathbb{R}$; $\;\cot\alpha=\dfrac{1}{\tan\alpha}$ per $\alpha\neq k\dfrac{\pi}{2}$.</p></div>
+
+<p>Sulla circonferenza, $\cot\alpha$ è l'ascissa del punto $C$ in cui la retta $OB$ incontra la tangente in $(0,1)$:</p>
+
+<div class="fig">
+<div class="pann" style="--n:2">
+<svg id="fig-circ" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Segmenti di tangente e cotangente sulla circonferenza goniometrica"></svg>
+<svg id="fig-punto" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Punto corrispondente sul grafico della tangente"></svg>
 </div>
-
-<h2>Funzione cotangente</h2>
-
-<div class="def">
-<span class="et">Cotangente</span>
-$$\cot\alpha=\frac{\cos\alpha}{\sin\alpha}=\frac{1}{\tan\alpha}.$$
-<p>Il dominio esclude i punti dove $\sin\alpha=0$:</p>
-$$\alpha\neq k\pi,\ k\in\mathbb{Z}, \qquad\qquad \text{insieme immagine: } \mathbb{R}.$$
-</div>
-
-<p>Sulla circonferenza $\cot\alpha$ si legge in modo speculare alla tangente: è il
-segmento staccato sulla tangente alla circonferenza nel punto $(0,1)$, tra l'asse $y$ e
-il prolungamento dello stesso raggio.</p>
-
-<p>Muovi il cursore per vedere insieme, sulla circonferenza, i quattro segmenti e, a
-destra, il punto corrispondente sul grafico della tangente:</p>
-
-<div class="interattivo">
-<div class="pannelli">
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" id="u11-circ" style="max-width:260px">
-<line x1="20" y1="130" x2="240" y2="130" stroke="#16283d" stroke-width="1"/>
-<line x1="90" y1="10" x2="90" y2="210" stroke="#16283d" stroke-width="1"/>
-<circle cx="90" cy="130" r="60" fill="none" stroke="#16283d" stroke-width="1.2"/>
-<line id="u11-tanline" x1="150" y1="10" x2="150" y2="210" stroke="#d9dee6" stroke-width="1"/>
-<line id="u11-cotline" x1="10" y1="70" x2="250" y2="70" stroke="#d9dee6" stroke-width="1"/>
-<line id="u11-raggio" x1="90" y1="130" x2="150" y2="130" stroke="#1f4e79" stroke-width="1.8"/>
-<line id="u11-segsin" x1="150" y1="130" x2="150" y2="130" stroke="#b3392f" stroke-width="2" stroke-dasharray="3 2"/>
-<line id="u11-segcos" x1="90" y1="130" x2="150" y2="130" stroke="#1f4e79" stroke-width="2" stroke-dasharray="3 2"/>
-<line id="u11-segtan" x1="150" y1="130" x2="150" y2="130" stroke="#e07b1f" stroke-width="2.6"/>
-<line id="u11-segcot" x1="90" y1="70" x2="90" y2="70" stroke="#2f6b4f" stroke-width="2.6"/>
-<circle id="u11-puntoB" cx="150" cy="130" r="3.4" fill="#16283d"/>
-<text x="20" y="26" font-family="Segoe UI, sans-serif" font-size="11" fill="#e07b1f">tan&#945;</text>
-<text x="20" y="40" font-family="Segoe UI, sans-serif" font-size="11" fill="#2f6b4f">cot&#945;</text>
-</svg>
-<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" id="u11-graf" style="max-width:260px">
-<line x1="10" y1="110" x2="250" y2="110" stroke="#16283d" stroke-width="1"/>
-<line x1="130" y1="10" x2="130" y2="210" stroke="#16283d" stroke-width="1"/>
-<line x1="40" y1="8" x2="40" y2="212" stroke="#8a93a3" stroke-width="1" stroke-dasharray="3 3"/>
-<line x1="220" y1="8" x2="220" y2="212" stroke="#8a93a3" stroke-width="1" stroke-dasharray="3 3"/>
-<path id="u11-tanpath" fill="none" stroke="#e07b1f" stroke-width="2"/>
-<circle id="u11-dot" r="4" fill="#e07b1f"/>
-<text x="14" y="24" font-family="Segoe UI, sans-serif" font-size="12" fill="#e07b1f">y = tan x</text>
-</svg>
-</div>
-<div class="controlli">
-<label for="u11-slider" style="font-family:var(--sans)">&#945;</label>
-<input type="range" id="u11-slider" min="-1.45" max="1.45" step="0.01" value="0.6">
-<span class="valori" id="u11-valori">&#945; = 0.60 rad &middot; tan&#945; = 0.68 &middot; cot&#945; = 1.46</span>
+<div class="cursore"><label for="cur-a">$\alpha$</label><input id="cur-a" type="range" min="-180" max="180" step="5" value="40"><span class="val" id="val-a">40°</span></div>
+<p class="val-riga" id="valori"></p>
+<div class="did-parti" style="--n:2">
+<p class="did"><span class="c-blu">$\tan\alpha$</span> sulla retta $x=1$, <span class="c-ver">$\cot\alpha$</span> sulla retta $y=1$</p>
+<p class="did">$y=\tan x$</p>
 </div>
 </div>
 
-<div class="nota">
-<span class="et">Attenzione</span>
-<p>Il cursore resta lontano da $\pm\pi/2$ e da $0$: proprio lì tangente e cotangente non
-sono definite, e i segmenti diventerebbero lunghi quanto si vuole.</p>
-</div>
-
+<div class="nota"><span class="et">Attenzione</span>
+<p>Per $\cos\alpha=0$ la retta $OB$ è parallela alla tangente in $(1,0)$: $\tan\alpha$ non esiste.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../10-prima-relazione-fondamentale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Prima relazione fondamentale</span></a><a class="successiva" href="../12-angoli-particolari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Angoli particolari</span></a></nav>
 <footer><p>Matematica terza &middot; Goniometria &middot; Unità 11</p></footer>
-
 </div>
+
 <script>
 (function(){
-  var slider = document.getElementById('u11-slider');
-  var raggio = document.getElementById('u11-raggio');
-  var segsin = document.getElementById('u11-segsin');
-  var segcos = document.getElementById('u11-segcos');
-  var segtan = document.getElementById('u11-segtan');
-  var segcot = document.getElementById('u11-segcot');
-  var puntoB = document.getElementById('u11-puntoB');
-  var tanpath = document.getElementById('u11-tanpath');
-  var dot = document.getElementById('u11-dot');
-  var valori = document.getElementById('u11-valori');
-
-  var cx = 90, cy = 130, r = 60;
-  var gx = 130, gy = 110, gscale = 90, xscale = 100;
-
-  function X(t){ return gx + t*xscale; }
-  function Y(v){ return gy - Math.max(-2.2, Math.min(2.2, v))*gscale; }
-
-  var d = '';
-  for (var t = -1.45; t <= 1.45 + 1e-9; t += 0.03) {
-    var v = Math.tan(t);
-    var seg = (d === '' ? 'M' : 'L');
-    d += seg + X(t).toFixed(2) + ',' + Y(v).toFixed(2) + ' ';
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  tanpath.setAttribute('d', d);
-
-  function aggiorna(){
-    var t = parseFloat(slider.value);
-    var s = Math.sin(t), c = Math.cos(t);
-    var bx = cx + r*c, by = cy - r*s;
-    raggio.setAttribute('x2', bx); raggio.setAttribute('y2', by);
-    puntoB.setAttribute('cx', bx); puntoB.setAttribute('cy', by);
-    segsin.setAttribute('x1', bx); segsin.setAttribute('y1', by);
-    segsin.setAttribute('x2', bx); segsin.setAttribute('y2', cy);
-    segcos.setAttribute('x1', cx); segcos.setAttribute('y1', cy);
-    segcos.setAttribute('x2', bx); segcos.setAttribute('y2', cy);
-
-    var tanv = s/c;
-    var tany = cy - r*tanv;
-    segtan.setAttribute('x1', cx+r); segtan.setAttribute('y1', cy);
-    segtan.setAttribute('x2', cx+r); segtan.setAttribute('y2', tany);
-
-    var cotv = c/s;
-    var cotx = cx + r*cotv;
-    segcot.setAttribute('x1', cx); segcot.setAttribute('y1', cy-r);
-    segcot.setAttribute('x2', cotx); segcot.setAttribute('y2', cy-r);
-
-    var gxp = X(t);
-    dot.setAttribute('cx', gxp); dot.setAttribute('cy', Y(tanv));
-
-    valori.textContent = 'α = ' + t.toFixed(2) + ' rad · tanα = ' + tanv.toFixed(2) + ' · cotα = ' + cotv.toFixed(2);
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,x0,x1,y0,y1,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt,PI=Math.PI;
+function pt(cx,cy,r,a){return [cx+r*Math.cos(a),cy-r*Math.sin(a)];}
+function arco(cx,cy,r,a0,a1){var n=Math.max(2,Math.ceil(Math.abs(a1-a0)*20)),p='';
+  for(var j=0;j<=n;j++){var a=a0+(a1-a0)*j/n,q=pt(cx,cy,r,a);p+=(j?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1);}return p;}
+function L(g,x1,y1,x2,y2,a){var e=el('line',Object.assign({x1:x1,y1:y1,x2:x2,y2:y2,stroke:'var(--inchiostro)','stroke-width':1.2},a||{}));g.appendChild(e);return e;}
+/* --- figura 1: tangente sulla circonferenza (statica, alfa = 50°) --- */
+(function(){
+  var s=document.getElementById('fig-tan'),cx=94,cy=140,R=70,a=50*PI/180,t=Math.tan(a);
+  var Ax=cx+R,Ty=cy-R*t,b=pt(cx,cy,R,a);
+  L(s,8,cy,212,cy);L(s,cx,212,cx,8);
+  txt(s,212,cy+14,'x',{'font-style':'italic','text-anchor':'end'});txt(s,cx-6,16,'y',{'font-style':'italic','text-anchor':'end'});
+  s.appendChild(el('path',{d:arco(cx,cy,R,0,2*PI),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3}));
+  L(s,Ax,212,Ax,8,{stroke:'var(--grigio)','stroke-width':1});
+  L(s,b[0],b[1],Ax,Ty,{stroke:'var(--grigio)','stroke-dasharray':'4 3'});
+  L(s,cx,cy,b[0],b[1],{'stroke-width':1.8});
+  L(s,b[0],b[1],b[0],cy,{stroke:'var(--grigio)','stroke-dasharray':'3 3'});
+  L(s,Ax,cy,Ax,Ty,{stroke:'var(--blu)','stroke-width':3});
+  s.appendChild(el('path',{d:arco(cx,cy,18,0,a),fill:'none',stroke:'var(--verde)','stroke-width':1.5}));
+  var m=pt(cx,cy,27,a/2);txt(s,m[0]-3,m[1]+4,'α',{fill:'var(--verde)'});
+  [[b[0],b[1]],[Ax,Ty],[Ax,cy]].forEach(function(p){s.appendChild(el('circle',{cx:p[0],cy:p[1],r:3,fill:'var(--inchiostro)'}));});
+  txt(s,b[0]-14,b[1]-4,'B');txt(s,Ax+6,Ty+4,'T');txt(s,Ax+6,cy+14,'A');txt(s,cx-12,cy+14,'O');
+  txt(s,Ax+6,(cy+Ty)/2+4,'tan α',{fill:'var(--blu)','font-size':11});
+})();
+/* --- figura 2: grafico di y = tan x --- */
+(function(){
+  var s=document.getElementById('fig-graf'),w=420,h=200,xa=-4.9,xb=4.9,ya=-3,yb=3;
+  var X=function(x){return 10+(x-xa)/(xb-xa)*(w-20);},Y=function(y){return 10+(yb-y)/(yb-ya)*(h-20);};
+  var P=new Q.Piano({svg:s,X:X,Y:Y,w:w,h:h});P.assi();
+  [-1.5,-0.5,0.5,1.5].forEach(function(k){var x=k*PI;L(P.sotto,X(x),6,X(x),h-6,{stroke:'var(--rosso)','stroke-dasharray':'4 3','stroke-width':1});});
+  P.curva(function(x){var y=Math.tan(x);return Math.abs(y)>8?NaN:y;},xa,xb,{},1600);
+  [[-PI,'−π'],[-PI/2,'−π/2'],[PI/2,'π/2'],[PI,'π']].forEach(function(p){
+    L(P.sotto,X(p[0]),Y(0)-3,X(p[0]),Y(0)+3);txt(P.testo,X(p[0])+4,Y(0)+15,p[1],{'font-size':11});});
+  L(P.sotto,X(0)-3,Y(1),X(0)+3,Y(1));txt(P.testo,X(0)-6,Y(1)+4,'1',{'font-size':11,'text-anchor':'end'});
+})();
+/* --- figura 3: tangente e cotangente al variare di alfa --- */
+(function(){
+  var s=document.getElementById('fig-circ'),cx=120,cy=120,R=60;
+  var d=el('defs',{}),cp=el('clipPath',{id:'clip-circ'});cp.appendChild(el('rect',{x:4,y:4,width:232,height:232}));d.appendChild(cp);s.appendChild(d);
+  var g=el('g',{'clip-path':'url(#clip-circ)'});s.appendChild(g);
+  L(g,6,cy,234,cy);L(g,cx,234,cx,6);
+  txt(s,232,cy+14,'x',{'font-style':'italic','text-anchor':'end'});txt(s,cx-6,16,'y',{'font-style':'italic','text-anchor':'end'});
+  g.appendChild(el('path',{d:arco(cx,cy,R,0,2*PI),fill:'none',stroke:'var(--inchiostro)','stroke-width':1.3}));
+  L(g,cx+R,6,cx+R,234,{stroke:'var(--grigio)','stroke-width':1});
+  L(g,6,cy-R,234,cy-R,{stroke:'var(--grigio)','stroke-width':1});
+  var retta=L(g,0,0,0,0,{stroke:'var(--grigio)','stroke-dasharray':'4 3'});
+  var arc=el('path',{fill:'none',stroke:'var(--verde)','stroke-width':1.5});g.appendChild(arc);
+  var rag=L(g,cx,cy,cx,cy,{'stroke-width':1.8});
+  var sT=L(g,cx+R,cy,cx+R,cy,{stroke:'var(--blu)','stroke-width':3});
+  var sC=L(g,cx,cy-R,cx,cy-R,{stroke:'var(--verde)','stroke-width':3});
+  var pB=el('circle',{r:3.2,fill:'var(--inchiostro)'}),pT=el('circle',{r:3.2,fill:'var(--blu)'}),pC=el('circle',{r:3.2,fill:'var(--verde)'});
+  g.appendChild(pB);g.appendChild(pT);g.appendChild(pC);
+  var tB=txt(s,0,0,'B'),tT=txt(s,0,0,'T',{fill:'var(--blu)'}),tC=txt(s,0,0,'C',{fill:'var(--verde)'});
+  /* grafico */
+  var s2=document.getElementById('fig-punto'),w=240,h=240,xa=-3.4,xb=3.4,ya=-3,yb=3;
+  var X=function(x){return 10+(x-xa)/(xb-xa)*(w-20);},Y=function(y){return 10+(yb-y)/(yb-ya)*(h-20);};
+  var P=new Q.Piano({svg:s2,X:X,Y:Y,w:w,h:h});P.assi();
+  [-0.5,0.5].forEach(function(k){L(P.sotto,X(k*PI),6,X(k*PI),h-6,{stroke:'var(--rosso)','stroke-dasharray':'4 3','stroke-width':1});});
+  P.curva(function(x){var y=Math.tan(x);return Math.abs(y)>8?NaN:y;},xa,xb,{},1200);
+  [-PI,PI].forEach(function(x){L(P.sotto,X(x),Y(0)-3,X(x),Y(0)+3);});P.testo.firstChild.setAttribute('y',Y(0)+15);
+  txt(P.testo,X(PI/2)+4,Y(0)+15,'π/2',{'font-size':11});txt(P.testo,X(-PI/2)-4,Y(0)+15,'−π/2',{'font-size':11,'text-anchor':'end'});
+  var dot=el('circle',{r:4.5,fill:'var(--rosso)'});P.sopra.appendChild(dot);
+  var gl=L(P.sotto,0,Y(0),0,Y(0),{stroke:'var(--grigio)','stroke-dasharray':'3 3','stroke-width':1});
+  var c=document.getElementById('cur-a'),v=document.getElementById('val-a'),vr=document.getElementById('valori');
+  function dentro(x,y){return x>12&&x<228&&y>12&&y<228;}
+  function vis(e,on){e.setAttribute('opacity',on?1:0);}
+  function agg(){
+    var gr=+c.value,a=gr*PI/180,sn=Math.sin(a),cs=Math.cos(a);
+    if(Math.abs(sn)<1e-9)sn=0;if(Math.abs(cs)<1e-9)cs=0;
+    var b=pt(cx,cy,R,a),dx=Math.cos(a),dy=-Math.sin(a);
+    retta.setAttribute('x1',cx-400*dx);retta.setAttribute('y1',cy-400*dy);retta.setAttribute('x2',cx+400*dx);retta.setAttribute('y2',cy+400*dy);
+    rag.setAttribute('x2',b[0]);rag.setAttribute('y2',b[1]);pB.setAttribute('cx',b[0]);pB.setAttribute('cy',b[1]);
+    arc.setAttribute('d',gr?arco(cx,cy,16,0,a):'');
+    tB.setAttribute('x',b[0]+(cs>=0?-14:6));tB.setAttribute('y',b[1]+(sn>=0?-5:14));
+    var ht=cs!==0,hc=sn!==0,tv=ht?sn/cs:0,cv=hc?cs/sn:0,Ty=cy-R*tv,Cx=cx+R*cv;
+    sT.setAttribute('y2',ht?Ty:cy);pT.setAttribute('cx',cx+R);pT.setAttribute('cy',Ty);vis(sT,ht);vis(pT,ht);
+    tT.setAttribute('x',cx+R+6);tT.setAttribute('y',Ty+4);vis(tT,ht&&dentro(cx+R+6,Ty)&&Math.abs(Ty-b[1])>12);
+    sC.setAttribute('x2',hc?Cx:cx);pC.setAttribute('cx',Cx);pC.setAttribute('cy',cy-R);vis(sC,hc);vis(pC,hc);
+    tC.setAttribute('x',Cx-4);tC.setAttribute('y',cy-R-7);vis(tC,hc&&dentro(Cx,cy-R-7)&&Math.abs(Cx-b[0])>12);
+    vis(dot,ht&&Math.abs(tv)<=3);dot.setAttribute('cx',X(a));dot.setAttribute('cy',Y(ht?Math.max(-3,Math.min(3,tv)):0));
+    gl.setAttribute('x1',X(a));gl.setAttribute('x2',X(a));gl.setAttribute('y2',Y(ht?Math.max(-3,Math.min(3,tv)):0));vis(gl,ht);
+    v.textContent=gr+'°';
+    vr.innerHTML='<span class="c-blu">tan α = '+(ht?Q.num(tv):'</span><span class="c-ros">non definita')+'</span> · <span class="c-ver">cot α = '+(hc?Q.num(cv):'</span><span class="c-ros">non definita')+'</span>';
   }
-  slider.addEventListener('input', aggiorna);
-  aggiorna();
+  c.addEventListener('input',agg);agg();
+})();
 })();
 </script>
 </body>
