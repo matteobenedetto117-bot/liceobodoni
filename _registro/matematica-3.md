@@ -105,6 +105,7 @@
 - Parole: 268 su 4 pagine di traccia (pagine 35–38)
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy tutte le quattro identità di prostaferesi ottenute da somma/sottrazione delle formule di addizione, le quattro formule finali dopo la sostituzione p=α+β, q=α−β, l'esempio sin(π/4)−sin(π/12)=2cos(π/6)sin(π/12), e le tre formule di Werner.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+- Revisione (07/11/2026, regole 13/10): parole circa 227 → 81 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario, titoletto «Dalla duplicazione a una somma di prodotti», frase sull'origine del nome, nota «Verso opposto» (ripeteva la frase di raccordo) e prosa; apertura con la domanda; relazioni (1)–(4) in due .eq allineate; sostituzione p, q in una frase; prostaferesi e Werner in due .def; tenuti i titoletti «Formule di prostaferesi», «Esempio», «Formule di Werner». Esempio sin π/4 − sin π/12 tenuto, una .eq; nessuno tolto; nessuna comparsa da togliere. Correzione: la formula di Werner per sin α sin β deriva dalla (4), non solo dalle (1) e (3) come diceva il testo (ora «Le (1), (3) e (4)»); SymPy/numerica di tutte le identità e dell'esempio. Nessuna figura nella pagina.
 
 ## Unità 19 — Distanza fra due punti, punto medio, baricentro
 - Parole: 254 su 1,5 pagine di traccia (pagina 39 e prima metà di pagina 40)
