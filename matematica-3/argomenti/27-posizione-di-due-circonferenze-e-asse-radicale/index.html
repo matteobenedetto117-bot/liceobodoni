@@ -5,16 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Posizione di due circonferenze e asse radicale — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.nota{background:var(--blu-chiaro);border:1px solid var(--riga);border-radius:10px;padding:14px 20px;margin:24px 0;font-size:.96rem}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blu);display:block;margin-bottom:6px}
-.metodo{font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rosso);margin:0}
-.figura{margin:28px 0;text-align:center}
-.figura svg{max-width:100%;height:auto}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,133 +74,152 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Circonferenza &middot; Unità 27</p>
   <h1>Posizione di due circonferenze e asse radicale</h1>
-  <p class="sommario">Due circonferenze scritte nella stessa forma generale
-  possono intersecarsi, essere tangenti oppure non toccarsi mai. Confrontando
-  i loro coefficienti, senza disegnare nulla, si arriva a una retta — l'asse
-  radicale — che dice subito come stanno le cose.</p>
 </header>
 
-<div class="figura">
-<svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<g>
-<circle cx="65" cy="85" r="40" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="130" cy="85" r="28" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="94" cy="60" r="2.6" fill="#b3392f"/>
-<circle cx="94" cy="110" r="2.6" fill="#b3392f"/>
-<text x="35" y="150" font-size="12" fill="#16283d">SECANTI</text>
-</g>
-<g transform="translate(150,0)">
-<circle cx="65" cy="85" r="40" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="133" cy="85" r="28" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="105" cy="85" r="2.6" fill="#b3392f"/>
-<text x="45" y="150" font-size="12" fill="#16283d">TANGENTI</text>
-</g>
-<g transform="translate(300,0)">
-<circle cx="90" cy="85" r="42" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="100" cy="70" r="12" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<text x="18" y="150" font-size="12" fill="#16283d">UNA INTERNA ALL'ALTRA</text>
-</g>
-<g transform="translate(500,0)">
-<circle cx="90" cy="85" r="42" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="90" cy="85" r="18" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="90" cy="85" r="1.8" fill="#16283d"/>
-<text x="45" y="150" font-size="12" fill="#16283d">CONCENTRICHE</text>
-</g>
-<g transform="translate(640,0)">
-<circle cx="60" cy="85" r="38" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="150" cy="85" r="24" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<text x="55" y="150" font-size="12" fill="#16283d">ESTERNE</text>
-</g>
-</svg>
+<p>Due circonferenze in forma generale: come sono disposte e quali punti hanno in comune?</p>
+
+<ul>
+<li>secanti → due punti comuni;</li>
+<li>tangenti → un punto comune;</li>
+<li>esterne → nessun punto comune;</li>
+<li>una interna all'altra → nessun punto comune;</li>
+<li>concentriche → stesso centro, nessun punto comune.</li>
+</ul>
+
+<div class="fig">
+<div class="pann" style="--n:5">
+<div><svg id="c-sec" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Secanti</p></div>
+<div><svg id="c-tan" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Tangenti</p></div>
+<div><svg id="c-est" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Esterne</p></div>
+<div><svg id="c-int" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Una interna all'altra</p></div>
+<div><svg id="c-con" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Concentriche</p></div>
+</div>
 </div>
 
-<p>Due circonferenze possono stare l'una rispetto all'altra in cinque
-modi. Per stabilire in quale, non serve tracciarle: basta guardare le loro
-equazioni in forma generale e ragionare come su un sistema.</p>
+<p>Le due equazioni si mettono a sistema:</p>
 
-$$\begin{cases}x^2+y^2+ax+by+c=0\\x^2+y^2+a'x+b'y+c'=0\end{cases}$$
+<p class="eq">$$\begin{cases}x^2+y^2+ax+by+c=0\\x^2+y^2+a'x+b'y+c'=0\end{cases}$$</p>
 
-<p>Se $a=a'$ e $b=b'$ le due circonferenze hanno lo stesso centro, quindi
-sono concentriche; se in più anche $c=c'$ le due equazioni coincidono e
-descrivono la stessa curva. Escluso questo caso, sottraiamo membro a
-membro la seconda equazione dalla prima. I termini $x^2$ e $y^2$ sono
-identici in entrambe e si elidono, e resta un'equazione di primo grado:</p>
+<ul>
+<li>$a=a'$, $b=b'$, $c\ne c'$ → circonferenze concentriche;</li>
+<li>$a=a'$, $b=b'$, $c=c'$ → stessa circonferenza.</li>
+</ul>
 
-$$(a-a')x+(b-b')y+(c-c')=0$$
+<p>Negli altri casi si sottrae membro a membro: $x^2$ e $y^2$ si elidono e resta una retta.</p>
 
-<p>Questa retta si chiama <strong>asse radicale</strong> delle due
-circonferenze.</p>
+<div class="def"><span class="et">Asse radicale</span>
+<p class="eq">$$(a-a')x+(b-b')y+(c-c')=0$$</p></div>
 
-<div class="figura">
-<svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, sans-serif">
-<line x1="240" y1="0" x2="240" y2="240" stroke="#dfd9cc" stroke-width="1"/>
-<line x1="480" y1="0" x2="480" y2="240" stroke="#dfd9cc" stroke-width="1"/>
-<g>
-<circle cx="90" cy="110" r="42" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="150" cy="110" r="28" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<line x1="60" y1="45" x2="180" y2="180" stroke="#b3392f" stroke-width="2.2"/>
-<text x="45" y="205" font-size="13" fill="#16283d">SECANTI</text>
-<text x="20" y="225" font-size="11.5" fill="#4a5a6d">la retta passa per i due punti di intersezione</text>
-</g>
-<g transform="translate(240,0)">
-<circle cx="90" cy="110" r="42" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="158" cy="110" r="28" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<line x1="132" y1="45" x2="132" y2="180" stroke="#b3392f" stroke-width="2.2"/>
-<text x="45" y="205" font-size="13" fill="#16283d">TANGENTI</text>
-<text x="20" y="225" font-size="11.5" fill="#4a5a6d">la retta è tangente nel punto di contatto</text>
-</g>
-<g transform="translate(480,0)">
-<circle cx="80" cy="110" r="36" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="185" cy="110" r="22" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<line x1="140" y1="45" x2="140" y2="180" stroke="#b3392f" stroke-width="2.2"/>
-<text x="55" y="205" font-size="13" fill="#16283d">ESTERNE</text>
-<text x="18" y="225" font-size="11.5" fill="#4a5a6d">la retta esiste anche senza punti di contatto</text>
-</g>
-</svg>
+<div class="fig">
+<div class="pann" style="--n:3">
+<div><svg id="r-sec" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Secanti: passa per i due punti comuni</p></div>
+<div><svg id="r-tan" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Tangenti: tangente comune nel punto di contatto</p></div>
+<div><svg id="r-est" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Esterne: esiste, senza punti comuni</p></div>
+</div>
 </div>
 
-<p>Se le circonferenze sono secanti, l'asse radicale è la retta che passa
-per i due punti in comune; se sono tangenti, è la retta tangente nel punto
-di contatto. Se sono esterne — o una interna all'altra — l'asse radicale
-esiste comunque, anche se le due curve non si toccano mai. Per trovare gli
-eventuali punti di contatto rimettiamo l'equazione dell'asse radicale a
-sistema con una delle due circonferenze:</p>
+<p>I punti comuni sono le soluzioni del sistema fra l'asse radicale e una delle due circonferenze:</p>
 
-$$\begin{cases}x^2+y^2+ax+by+c=0\\(a-a')x+(b-b')y+(c-c')=0\end{cases}$$
+<p class="eq">$$\begin{cases}x^2+y^2+ax+by+c=0\\(a-a')x+(b-b')y+(c-c')=0\end{cases}$$</p>
 
-<p>Il numero di soluzioni del sistema dice subito la posizione reciproca:
-due soluzioni per le secanti, una soluzione per le tangenti, nessuna
-soluzione per le esterne o per una interna all'altra.</p>
+<ul>
+<li>due soluzioni → secanti;</li>
+<li>una soluzione → tangenti;</li>
+<li>nessuna soluzione → esterne o una interna all'altra.</li>
+</ul>
 
-<p class="metodo">Esempio 1</p>
-<p>Troviamo i punti comuni alle circonferenze $x^2+y^2+2x-4y-11=0$ e
-$x^2+y^2+2x-16y+13=0$. Sottraendo membro a membro:</p>
+<h2>Esempio 1</h2>
 
-$$(2x-4y-11)-(2x-16y+13)=0\ \Longrightarrow\ 12y-24=0\ \Longrightarrow\ y=2$$
+<p>Dati: $x^2+y^2+2x-4y-11=0$ e $x^2+y^2+2x-16y+13=0$. Calcolare i punti comuni.</p>
 
-<p>Sostituiamo $y=2$ nella prima circonferenza:</p>
+<p class="eq">$$(2x-4y-11)-(2x-16y+13)=0\;\Longrightarrow\;12y-24=0\;\Longrightarrow\;y=2$$</p>
 
-$$x^2+4+2x-8-11=0\ \Longrightarrow\ x^2+2x-15=0\ \Longrightarrow\ (x+5)(x-3)=0$$
+<p>Sostituendo $y=2$ nella prima:</p>
 
-<p>Le soluzioni sono $x=-5$ e $x=3$: le due circonferenze sono secanti nei
-punti $A=(-5;2)$ e $B=(3;2)$.</p>
+<p class="eq">$$x^2+2x-15=0\;\Longrightarrow\;x=-5\ \lor\ x=3\;\Longrightarrow\;A(-5;2)\quad B(3;2)$$</p>
 
-<p class="metodo">Esempio 2</p>
-<p>Lo stesso procedimento — mettere a sistema una retta con l'equazione di
-una circonferenza — serve anche per trovare dove una circonferenza incontra
-una retta qualunque, non necessariamente un asse radicale. Cerchiamo dove la
-circonferenza $x^2+y^2+8x-6y=0$ interseca l'asse $y$, cioè la retta
-$x=0$:</p>
+<h2>Esempio 2</h2>
 
-$$y^2-6y=0\ \Longrightarrow\ y(y-6)=0\ \Longrightarrow\ y=0\ \lor\ y=6$$
+<p>Dati: $x^2+y^2+8x-6y=0$ e l'asse $y$ ($x=0$). Calcolare i punti comuni.</p>
 
-<p>La circonferenza incontra l'asse $y$ nei punti $A=(0;0)$ e
-$B=(0;6)$.</p>
+<p>Stesso procedimento con una retta qualunque; sostituendo $x=0$:</p>
 
+<p class="eq">$$y^2-6y=0\;\Longrightarrow\;y=0\ \lor\ y=6\;\Longrightarrow\;A(0;0)\quad B(0;6)$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../26-determinare-l-equazione-di-una-circonferenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Determinare l'equazione di una circonferenza</span></a><a class="successiva" href="../28-definizione-fuoco-direttrice-asse-e-vertice/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Definizione, fuoco, direttrice, asse e vertice</span></a></nav>
 <footer><p>Matematica terza &middot; Circonferenza &middot; Unità 27</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el;
+/* due circonferenze: centri (x1,y1), (x2,y2) nel viewBox, raggi r1, r2; asse: disegna l'asse radicale */
+function disegna(id,x1,y1,r1,x2,y2,r2,asse){var s=document.getElementById(id);
+  var cp='k'+id,df=el('defs',{}),c=el('clipPath',{id:cp});c.appendChild(el('rect',{x:4,y:4,width:192,height:152}));df.appendChild(c);s.appendChild(df);
+  var dx=x2-x1,dy=y2-y1,D=Math.hypot(dx,dy);
+  if(asse&&D>0){/* punto dell'asse sulla retta dei centri: potenze uguali */
+    var t=(D*D+r1*r1-r2*r2)/(2*D),hx=x1+t*dx/D,hy=y1+t*dy/D,ux=-dy/D,uy=dx/D,L=200;
+    s.appendChild(el('line',{x1:hx-L*ux,y1:hy-L*uy,x2:hx+L*ux,y2:hy+L*uy,stroke:'var(--rosso)','stroke-width':2,'clip-path':'url(#'+cp+')'}));}
+  [[x1,y1,r1],[x2,y2,r2]].forEach(function(k){
+    s.appendChild(el('circle',{cx:k[0],cy:k[1],r:k[2],fill:'none',stroke:'var(--blu)','stroke-width':2.2}));
+    s.appendChild(el('circle',{cx:k[0],cy:k[1],r:2.4,fill:'var(--inchiostro)'}));});
+  /* punti comuni calcolati */
+  if(D>0&&D<=r1+r2+1e-9&&D>=Math.abs(r1-r2)-1e-9){
+    var a=(D*D+r1*r1-r2*r2)/(2*D),h=Math.sqrt(Math.max(r1*r1-a*a,0)),px=x1+a*dx/D,py=y1+a*dy/D;
+    (h<0.5?[0]:[-h,h]).forEach(function(k){s.appendChild(el('circle',{cx:px-k*dy/D,cy:py+k*dx/D,r:4,fill:'var(--rosso)'}));});}
+}
+disegna('c-sec',78,80,46,136,80,34);
+disegna('c-tan',72,80,44,148,80,32);
+disegna('c-est',60,80,38,152,80,28);
+disegna('c-int',100,80,58,120,58,18);
+disegna('c-con',100,80,58,100,80,26);
+disegna('r-sec',78,80,46,136,80,34,true);
+disegna('r-tan',72,80,44,148,80,32,true);
+disegna('r-est',60,80,38,152,80,28,true);
+})();
+</script>
 </body>
 </html>
