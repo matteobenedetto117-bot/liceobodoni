@@ -153,6 +153,7 @@
 - Parole: 283 su 2 pagine di traccia (pagine 61–62; la pagina 60 chiude l'unità 25 con il quarto metodo delle tangenti, e la pagina 63 apre già l'unità 27 "posizione di due circonferenze")
 - Rettifica: nessuna, il contenuto era corretto così com'era. Verificato con SymPy entrambi gli esempi: primo esempio, centro C=(4;3) e P=(1;2) → sistema -a/2=4, -b/2=3, 1+4+a+2b+c=0 dà a=-8, b=-6, c=15, con r²=10>0; secondo esempio, A=(-8;18), B=(6;20), centro sull'asse y (a=0) → sistema 18b+c=-388, 20b+c=-436 dà b=-24, c=44, con r²=100>0.
 - Aggiunta: nessuna oltre alle parole di collegamento fra i passaggi già presenti.
+- Revisione (08/11/2026, regole 13/10): parole circa 82 → 60 (formule $$ e didascalie escluse; sommario incluso prima). Pagina mai revisionata: impaginazione a quaderno, tolti sommario e prosa dei passaggi; apertura in una frase + .eq dell'equazione generale; la nota «Nota bene» diventa un elenco caso → conseguenza (centro noto → due equazioni, punto → una); Esempio 1 ed Esempio 2 in forma Dati/Calcolare, ciascuno in due .eq. Nessuna correzione concettuale (SymPy dei due sistemi); aggiunto accanto ai risultati il controllo r² = 10 > 0 e r² = 100. Nessuna figura.
 
 ## Unità 27 — Posizione di due circonferenze e asse radicale
 - Parole: 456 su 3 pagine di traccia (pagine 63–65; la pagina 62 chiude l'unità 26 e la pagina 66 apre già l'unità 28 "parabola")
