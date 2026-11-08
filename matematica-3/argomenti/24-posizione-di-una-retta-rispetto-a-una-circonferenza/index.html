@@ -5,16 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Posizione di una retta rispetto a una circonferenza — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -24,98 +74,112 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Circonferenza &middot; Unità 24</p>
   <h1>Posizione di una retta rispetto a una circonferenza</h1>
-  <p class="sommario">Una retta e una circonferenza del piano possono non
-  toccarsi, toccarsi in un solo punto oppure attraversarsi in due punti.
-  Lo stabiliamo confrontando la distanza del centro dalla retta con il
-  raggio, oppure risolvendo il sistema fra le due equazioni.</p>
 </header>
 
-<h2>Tre casi possibili</h2>
-<p>Fissiamo una circonferenza di centro $C$ e raggio $r$, e una retta del
-piano. Il modo più diretto per prevedere come si intersecano è confrontare
-$r$ con la distanza $d$ di $C$ dalla retta: se $d$ è maggiore di $r$ la
-retta resta tutta fuori dal cerchio, ed è <strong>esterna</strong>; se $d$
-è uguale a $r$ la retta tocca la circonferenza in un solo punto, ed è
-<strong>tangente</strong>; se $d$ è minore di $r$ la retta attraversa il
-cerchio, ed è <strong>secante</strong>.</p>
+<p>Retta e circonferenza di centro $C$ e raggio $r$: quanti punti hanno in comune?</p>
+
+<p>Con $d$ distanza del centro $C$ dalla retta:</p>
+
+<ul>
+<li>$d&gt;r$ → retta esterna, nessun punto comune;</li>
+<li>$d=r$ → retta tangente, un punto comune;</li>
+<li>$d&lt;r$ → retta secante, due punti comuni.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg">
-<g>
-<circle cx="110" cy="140" r="42" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="110" cy="140" r="2.5" fill="#16283d"/>
-<line x1="95.1" y1="27.3" x2="222.9" y2="153.3" stroke="#16283d" stroke-width="2"/>
-<line x1="110" y1="140" x2="139.4" y2="110.2" stroke="#1f4e79" stroke-width="2.5"/>
-<line x1="139.4" y1="110.2" x2="159" y2="90.3" stroke="#b3392f" stroke-width="2.5"/>
-<text x="117" y="120" font-family="Segoe UI, sans-serif" font-size="13" fill="#1f4e79">r</text>
-<text x="152" y="93" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">d</text>
-<text x="60" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">ESTERNA</text>
-<text x="82" y="222" font-family="Segoe UI, sans-serif" font-size="13" fill="#4a5a6d">d &gt; r</text>
-</g>
-<g transform="translate(240,0)">
-<circle cx="110" cy="140" r="42" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="110" cy="140" r="2.5" fill="#16283d"/>
-<line x1="75.5" y1="47.18" x2="203.3" y2="173.18" stroke="#16283d" stroke-width="2"/>
-<line x1="110" y1="140" x2="139.4" y2="110.2" stroke="#1f4e79" stroke-width="2.5"/>
-<circle cx="139.4" cy="110.2" r="3" fill="#b3392f"/>
-<text x="112" y="120" font-family="Segoe UI, sans-serif" font-size="13" fill="#1f4e79">r</text>
-<text x="146" y="104" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">d</text>
-<text x="50" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">TANGENTE</text>
-<text x="82" y="222" font-family="Segoe UI, sans-serif" font-size="13" fill="#4a5a6d">d = r</text>
-</g>
-<g transform="translate(480,0)">
-<circle cx="110" cy="140" r="42" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="110" cy="140" r="2.5" fill="#16283d"/>
-<line x1="63.6" y1="59.25" x2="191.4" y2="185.25" stroke="#16283d" stroke-width="2"/>
-<line x1="110" y1="140" x2="127.5" y2="122.25" stroke="#b3392f" stroke-width="2.5"/>
-<line x1="127.5" y1="122.25" x2="139.4" y2="110.2" stroke="#1f4e79" stroke-width="2.5"/>
-<text x="112" y="130" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">d</text>
-<text x="140" y="106" font-family="Segoe UI, sans-serif" font-size="13" fill="#1f4e79">r</text>
-<text x="58" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">SECANTE</text>
-<text x="82" y="222" font-family="Segoe UI, sans-serif" font-size="13" fill="#4a5a6d">d &lt; r</text>
-</g>
-</svg>
-<p class="did">Il raggio $r$ (in blu) e la distanza $d$ del centro dalla
-retta (in rosso), nei tre casi possibili.</p>
+<div class="pann" style="--n:3">
+<div><svg id="p-est" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Esterna: $d&gt;r$</p></div>
+<div><svg id="p-tan" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Tangente: $d=r$</p></div>
+<div><svg id="p-sec" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg"></svg><p class="did">Secante: $d&lt;r$</p></div>
+</div>
 </div>
 
-<h2>Il metodo del sistema</h2>
-<p>Nella pratica conviene mettere a sistema l'equazione della retta e
-quella della circonferenza. Ricavata la $y$ (o la $x$) dalla retta e
-sostituita nell'equazione della circonferenza, si ottiene un'equazione di
-secondo grado in una sola incognita, detta <strong>equazione risolvente</strong>.
-Il segno del suo discriminante $\Delta$ dice quanti punti hanno in comune
-retta e circonferenza, cioè quante soluzioni reali ha il sistema:</p>
+<h2>Metodo del sistema</h2>
 
-<div class="def">
-<span class="et">Discriminante della risolvente</span>
-$$\Delta<0\ \Rightarrow\ \text{retta esterna}\qquad
-\Delta=0\ \Rightarrow\ \text{retta tangente}\qquad
-\Delta>0\ \Rightarrow\ \text{retta secante}$$
-</div>
+<p>Si ricava $y$ (o $x$) dalla retta e si sostituisce nella circonferenza: si ottiene l'equazione risolvente, di secondo grado in una sola incognita.</p>
+
+<div class="def"><span class="et">Discriminante della risolvente</span>
+<p class="eq">$$\Delta&lt;0\ \Rightarrow\ \text{esterna}\qquad\Delta=0\ \Rightarrow\ \text{tangente}\qquad\Delta&gt;0\ \Rightarrow\ \text{secante}$$</p></div>
 
 <h2>Esempio</h2>
-<p>Consideriamo la circonferenza $x^2+y^2+3x-3y-2=0$ e la retta
-$3x-2y+1=0$. Dalla retta ricaviamo $y=\frac32x+\frac12$ e la sostituiamo
-nell'equazione della circonferenza:</p>
 
-$$x^2+\left(\frac32x+\frac12\right)^{\!2}+3x-3\left(\frac32x+\frac12\right)-2=0$$
+<p>Dati: $x^2+y^2+3x-3y-2=0$ e $3x-2y+1=0$. Calcolare i punti comuni.</p>
 
-<p>Svolgendo i quadrati e i prodotti, i termini in $x$ di primo grado si
-elidono a vicenda:</p>
+<p>Dalla retta $y=\frac32x+\frac12$; sostituendo:</p>
 
-$$\frac{13}{4}x^2-\frac{13}{4}=0\ \ \Longrightarrow\ \ x^2-1=0\ \ \Longrightarrow\ \ x=\pm1$$
+<p class="eq">$$x^2+\left(\frac32x+\frac12\right)^{\!2}+3x-3\left(\frac32x+\frac12\right)-2=0\;\Longrightarrow\;\frac{13}{4}x^2-\frac{13}{4}=0$$</p>
 
-<p>Sostituendo i due valori nell'equazione della retta si ottengono le
-ordinate corrispondenti: per $x=1$, $y=2$, punto $A(1;2)$; per $x=-1$,
-$y=-1$, punto $B(-1;-1)$. Il discriminante della risolvente è positivo,
-coerentemente con i due punti di intersezione trovati: la retta è
-secante.</p>
-
+<p class="eq">$$\Delta=\frac{169}{4}&gt;0\ \Rightarrow\ \text{secante}\qquad x=\pm1\;\Longrightarrow\;A(1;2)\quad B(-1;-1)$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../23-dall-equazione-al-grafico-centro-raggio-condizione-di-realta/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Dall'equazione al grafico: centro, raggio, condizione di realtà</span></a><a class="successiva" href="../25-rette-tangenti-a-una-circonferenza-i-quattro-metodi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Rette tangenti a una circonferenza: i quattro metodi</span></a></nav>
 <footer><p>Matematica terza &middot; Circonferenza &middot; Unità 24</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt,R=52,cx=96,cy=104,nx=Math.SQRT1_2,ny=-Math.SQRT1_2,ux=Math.SQRT1_2,uy=Math.SQRT1_2;
+function disegna(id,d){var s=document.getElementById(id);
+  s.appendChild(el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--blu)','stroke-width':2.2}));
+  var hx=cx+d*nx,hy=cy+d*ny,L=150;
+  var cp='c'+id;var df=el('defs',{}),c=el('clipPath',{id:cp});c.appendChild(el('rect',{x:4,y:4,width:192,height:182}));df.appendChild(c);s.appendChild(df);
+  s.appendChild(el('line',{x1:hx-L*ux,y1:hy-L*uy,x2:hx+L*ux,y2:hy+L*uy,stroke:'var(--inchiostro)','stroke-width':2,'clip-path':'url(#'+cp+')'}));
+  /* distanza d: segmento perpendicolare C-H */
+  s.appendChild(el('line',{x1:cx,y1:cy,x2:hx,y2:hy,stroke:'var(--rosso)','stroke-width':1.8,'stroke-dasharray':'4 3'}));
+  var q=7;s.appendChild(el('path',{d:'M'+(hx-q*nx).toFixed(1)+','+(hy-q*ny).toFixed(1)+' l'+(q*ux).toFixed(1)+','+(q*uy).toFixed(1)+' l'+(q*nx).toFixed(1)+','+(q*ny).toFixed(1),fill:'none',stroke:'var(--grigio)','stroke-width':1}));
+  /* raggio r: orizzontale verso sinistra */
+  s.appendChild(el('line',{x1:cx,y1:cy,x2:cx-R,y2:cy,stroke:'var(--blu)','stroke-width':1.8}));
+  txt(s,cx-R/2,cy-6,'r',{fill:'var(--blu)','font-style':'italic','text-anchor':'middle','font-size':13});
+  var dl=d>R?(R+d)/2:d/2;txt(s,cx+dl*nx-11,cy+dl*ny-6,'d',{fill:'var(--rosso)','font-style':'italic','text-anchor':'middle','font-size':13});
+  s.appendChild(el('circle',{cx:cx,cy:cy,r:2.8,fill:'var(--inchiostro)'}));
+  txt(s,cx+4,cy+17,'C',{'text-anchor':'middle'});
+  if(d<=R){var t=Math.sqrt(Math.max(R*R-d*d,0));
+    (t<0.5?[0]:[-t,t]).forEach(function(k){s.appendChild(el('circle',{cx:hx+k*ux,cy:hy+k*uy,r:4,fill:'var(--rosso)'}));});}
+}
+disegna('p-est',80);disegna('p-tan',R);disegna('p-sec',28);
+})();
+</script>
 </body>
 </html>
