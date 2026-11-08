@@ -5,24 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Funzione omografica — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.metodo{font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rosso);margin:0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.interattivo .pannelli{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
-.interattivo .controlli{font-family:var(--sans);font-size:.9rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
-.interattivo input[type=range]{flex:1;min-width:200px}
-.interattivo .valori{font-family:var(--sans);font-size:.9rem;color:var(--blu);white-space:nowrap}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
 </style>
-</head>
 <body>
 <div class="foglio">
 
@@ -30,141 +75,135 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Ellisse e iperbole &middot; Unità 39</p>
   <h1>Funzione omografica</h1>
-  <p class="sommario">Il rapporto fra due espressioni di primo grado in $x$ ha un grafico che conosciamo
-  già: è ancora un'iperbole equilatera riferita ai propri asintoti, soltanto spostata rispetto
-  all'origine. Riconoscerlo permette di leggere centro e asintoti direttamente dai coefficienti, senza
-  rifare ogni volta la divisione.</p>
 </header>
 
-<p>Una funzione omografica è il quoziente fra due espressioni lineari in $x$. Il suo grafico è sempre lo
-stesso tipo di curva della funzione $Y=k/X$: un'iperbole equilatera con gli asintoti paralleli agli
-assi, ma con centro spostato in un punto qualunque del piano invece che nell'origine.</p>
+<p>Quoziente di due espressioni di primo grado in $x$: che grafico ha?</p>
 
-<div class="def">
-<span class="et">Funzione omografica</span>
-$$y=\frac{ax+b}{cx+d}\qquad\qquad c\neq0,\quad ad-bc\neq0$$
-<p style="margin:8px 0 0">$a$, $b$, $c$, $d$ sono numeri reali fissati. La condizione $c\neq0$ evita
-che la funzione si riduca a una retta; la condizione $ad-bc\neq0$ evita che si riduca a una costante.</p>
-</div>
+<div class="def"><span class="et">Funzione omografica</span>
+<p class="eq">$$y=\frac{ax+b}{cx+d}\qquad\qquad c\neq0,\quad ad-bc\neq0$$</p></div>
 
-<p>Il dominio è $x\neq-\dfrac{d}{c}$: l'unico valore che annulla il denominatore. Se fosse $ad-bc=0$,
-cioè $\dfrac{a}{c}=\dfrac{b}{d}$, numeratore e denominatore sarebbero proporzionali e la frazione si
-semplificherebbe in una costante $y=\dfrac{a}{c}$, definita ovunque tranne che nel punto escluso: non
-più un'iperbole, ma una retta orizzontale privata di un punto.</p>
+<ul>
+<li>$c=0$ → retta;</li>
+<li>$ad-bc=0$ → numeratore e denominatore proporzionali: retta $y=\dfrac{a}{c}$ privata di un punto;</li>
+<li>dominio → $x\neq-\dfrac{d}{c}$.</li>
+</ul>
 
-<p>Per ritrovare centro e asintoti basta dividere il numeratore per il denominatore, scrivendo $ax+b$
-come multiplo di $cx+d$ più un resto:</p>
+<p>Dividendo il numeratore per il denominatore:</p>
 
-$$ax+b=\frac{a}{c}(cx+d)+\left(b-\frac{ad}{c}\right)$$
+<p class="eq">$$ax+b=\frac{a}{c}(cx+d)+b-\frac{ad}{c}\qquad\Rightarrow\qquad y=\frac{a}{c}+\frac{bc-ad}{c^2}\cdot\frac{1}{x+\frac{d}{c}}$$</p>
 
-<p>Dividendo tutto per $cx+d$:</p>
+<p>Con $X=x+\dfrac{d}{c}$ e $Y=y-\dfrac{a}{c}$ si ottiene $Y=\dfrac{k}{X}$, $k=\dfrac{bc-ad}{c^2}$: iperbole equilatera riferita agli asintoti, traslata.</p>
 
-$$y=\frac{a}{c}+\frac{bc-ad}{c^2}\cdot\frac{1}{x+\frac{d}{c}}$$
-
-<p>Ponendo $X=x+\dfrac{d}{c}$ e $Y=y-\dfrac{a}{c}$ si ottiene $Y=\dfrac{k}{X}$ con
-$k=\dfrac{bc-ad}{c^2}$: esattamente la forma dell'unità precedente, traslata in modo che il nuovo
-centro cada nel punto $\left(-\dfrac{d}{c};\ \dfrac{a}{c}\right)$.</p>
-
-<div class="def">
-<span class="et">Centro e asintoti</span>
-$$C\left(-\frac{d}{c};\ \frac{a}{c}\right)\qquad x=-\frac{d}{c}\ \text{(verticale)}\qquad
-y=\frac{a}{c}\ \text{(orizzontale)}$$
-</div>
+<div class="def"><span class="et">Centro e asintoti</span>
+<p class="eq">$$C\left(-\frac{d}{c};\ \frac{a}{c}\right)\qquad\quad x=-\frac{d}{c}\qquad\quad y=\frac{a}{c}$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
-<line x1="10" y1="240" x2="330" y2="240" stroke="#16283d" stroke-width="1.3"/>
-<line x1="30" y1="10" x2="30" y2="270" stroke="#16283d" stroke-width="1.3"/>
-<line x1="10" y1="100" x2="330" y2="100" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<line x1="210" y1="10" x2="210" y2="270" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<path d="M 320 22 C 270 45, 235 70, 220 100 C 230 150, 260 220, 320 258" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<path d="M 200 100 C 185 130, 150 175, 60 210" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="210" cy="100" r="2.8" fill="#16283d"/>
-<text x="215" y="94" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">C</text>
-<text x="298" y="272" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">x = -d/c</text>
-<text x="240" y="24" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">y = a/c</text>
-</svg>
-<p class="did">Il grafico è la stessa iperbole equilatera dell'unità precedente, ma con il centro $C$
-spostato nel punto $(-d/c;\,a/c)$: gli assi cartesiani non sono più gli asintoti, che restano invece
-paralleli ad essi.</p>
+<svg id="f-trasl" viewBox="0 0 360 260" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="cur-h">$-\frac{d}{c}$</label><input id="cur-h" type="range" min="-2" max="2" step="0.5" value="1"><span class="val" id="val-h">1</span></div>
+<div class="cursore"><label for="cur-v">$\frac{a}{c}$</label><input id="cur-v" type="range" min="-1.5" max="1.5" step="0.5" value="1"><span class="val" id="val-v">1</span></div>
+<p class="did">$k=1{,}4$: al variare del centro $C$ la curva trasla senza cambiare forma</p>
 </div>
 
-<div class="interattivo">
-<p class="did" style="margin-top:0">Muovendo i cursori si sposta il centro $C$ (cioè $-d/c$ e $a/c$):
-i due rami traslano rigidamente insieme agli asintoti, senza cambiare forma.</p>
-<div class="pannelli">
-<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" id="u39-piano" style="max-width:300px">
-<line x1="10" y1="120" x2="290" y2="120" stroke="#16283d" stroke-width="1.3"/>
-<line x1="150" y1="10" x2="150" y2="230" stroke="#16283d" stroke-width="1.3"/>
-<line id="u39-asv" x1="0" y1="0" x2="0" y2="0" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<line id="u39-aso" x1="0" y1="0" x2="0" y2="0" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<path id="u39-ramo1" d="" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<path id="u39-ramo2" d="" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle id="u39-centro" cx="0" cy="0" r="2.8" fill="#16283d"/>
-</svg>
-</div>
-<div class="controlli">
-<label for="u39-h">-d/c</label>
-<input type="range" id="u39-h" min="-2" max="2" step="0.5" value="0">
-<label for="u39-v">a/c</label>
-<input type="range" id="u39-v" min="-1.5" max="1.5" step="0.5" value="0">
-<span class="valori" id="u39-valori">centro = (0; 0)</span>
-</div>
-</div>
-<script>
-(function(){
-  var hS = document.getElementById('u39-h');
-  var vS = document.getElementById('u39-v');
-  var r1 = document.getElementById('u39-ramo1');
-  var r2 = document.getElementById('u39-ramo2');
-  var asv = document.getElementById('u39-asv');
-  var aso = document.getElementById('u39-aso');
-  var centro = document.getElementById('u39-centro');
-  var valori = document.getElementById('u39-valori');
-  var ox = 150, oy = 120, scale = 34, k = 1.4;
-  function aggiorna(){
-    var h = parseFloat(hS.value), v = parseFloat(vS.value);
-    var cx = ox + h*scale, cy = oy - v*scale;
-    asv.setAttribute('x1', cx); asv.setAttribute('y1', 8);
-    asv.setAttribute('x2', cx); asv.setAttribute('y2', 232);
-    aso.setAttribute('x1', 8); aso.setAttribute('y1', cy);
-    aso.setAttribute('x2', 292); aso.setAttribute('y2', cy);
-    centro.setAttribute('cx', cx); centro.setAttribute('cy', cy);
-    var d1 = '', d2 = '';
-    for (var i = 0; i <= 20; i++){
-      var t = 0.28 + (2.6 - 0.28) * i / 20;
-      var xp1 = cx + t*scale, yp1 = cy - (k/t)*scale;
-      d1 += (i === 0 ? 'M' : ' L') + xp1.toFixed(1) + ',' + yp1.toFixed(1);
-      var xp2 = cx - t*scale, yp2 = cy + (k/t)*scale;
-      d2 += (i === 0 ? 'M' : ' L') + xp2.toFixed(1) + ',' + yp2.toFixed(1);
-    }
-    r1.setAttribute('d', d1);
-    r2.setAttribute('d', d2);
-    valori.textContent = 'centro = (' + h.toFixed(1) + '; ' + v.toFixed(1) + ')';
-  }
-  hS.addEventListener('input', aggiorna);
-  vS.addEventListener('input', aggiorna);
-  aggiorna();
-})();
-</script>
+<h2>Esempio</h2>
 
-<p class="metodo">Esempio</p>
-<p>Data $y=\dfrac{2x+3}{x-1}$: dominio $x\neq1$. Con $a=2$, $b=3$, $c=1$, $d=-1$ si ha
-$-\dfrac{d}{c}=1$ e $\dfrac{a}{c}=2$, quindi centro $C(1;\,2)$ e asintoti $x=1$, $y=2$. Il coefficiente
-$k=\dfrac{bc-ad}{c^2}=\dfrac{3+2}{1}=5$ dà la forma equivalente $y=2+\dfrac{5}{x-1}$, comoda per
-disegnare punto per punto. Per $x=0$ si ottiene il punto $(0;\,-3)$; ponendo $y=0$ si ottiene
-$x=-\dfrac32$, cioè il punto $\left(-\dfrac32;\,0\right)$.</p>
+<p>Dati: $y=\dfrac{2x+3}{x-1}$. Calcolare dominio, centro, asintoti e intersezioni con gli assi.</p>
 
-<div class="avanti">
-<h2>Nella prossima unità</h2>
-<ul>
-<li>Chiudiamo qui coniche e iperbole: dall'unità 40 iniziano potenze, esponenziali e logaritmi.</li>
-</ul>
+<p class="eq">$$a=2,\ b=3,\ c=1,\ d=-1\qquad\Rightarrow\qquad x\neq1,\quad C(1;\,2),\quad x=1,\quad y=2$$</p>
+
+<p class="eq">$$k=\frac{3+2}{1}=5\qquad y=2+\frac{5}{x-1}\qquad (0;\,-3),\quad \left(-\tfrac32;\,0\right)$$</p>
+
+<div class="fig">
+<svg id="f-es" viewBox="0 0 360 300" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">$y=\dfrac{2x+3}{x-1}$: centro $C(1;2)$, asintoti $x=1$ e $y=2$</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../38-iperbole-equilatera-e-iperbole-riferita-agli-asintoti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Iperbole equilatera e iperbole riferita agli asintoti</span></a><a class="successiva" href="../40-potenze-a-esponente-intero-razionale-e-reale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Potenze a esponente intero, razionale e reale</span></a></nav>
 <footer><p>Matematica terza &middot; Ellisse e iperbole &middot; Unità 39</p></footer>
+</div>
 
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt,num=Q.num;
+var TR={stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'6 4'};
+function ramo(p,h,v,k,x0,x1){return p.curva(function(x){var t=x-h;return Math.abs(t)<1e-9?NaN:v+k/t;},x0,x1,{},400);}
+/* figura interattiva: traslazione */
+var svg=document.getElementById('f-trasl');
+var ch=document.getElementById('cur-h'),cv=document.getElementById('cur-v'),vh=document.getElementById('val-h'),vv=document.getElementById('val-v');
+var S=26,K=1.4;
+var p=new Q.Piano({svg:svg,X:function(x){return 180+S*x;},Y:function(y){return 130-S*y;},w:360,h:260});
+p.assi();
+var dyn=el('g',{});p.curve.appendChild(dyn);
+var gC=el('g',{});p.sopra.appendChild(gC);
+function dis(){
+  var h=+ch.value,v=+cv.value;
+  while(dyn.firstChild)dyn.removeChild(dyn.firstChild);
+  while(gC.firstChild)gC.removeChild(gC.firstChild);
+  var a1=el('line',Object.assign({x1:p.X(h),y1:4,x2:p.X(h),y2:256},TR)),a2=el('line',Object.assign({x1:4,y1:p.Y(v),x2:356,y2:p.Y(v)},TR));
+  dyn.appendChild(a1);dyn.appendChild(a2);
+  [[-7.5,h-0.005],[h+0.005,7.5]].forEach(function(r){var e=ramo(p,h,v,K,r[0],r[1]);dyn.appendChild(e);});
+  gC.appendChild(el('circle',{cx:p.X(h),cy:p.Y(v),r:3.5,fill:'var(--inchiostro)'}));
+  var t=el('text',{x:p.X(h)-7,y:p.Y(v)-7,'text-anchor':'end','font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'});t.textContent='C';gC.appendChild(t);
+  vh.textContent=num(h);vv.textContent=num(v);
+}
+ch.addEventListener('input',dis);cv.addEventListener('input',dis);dis();
+
+/* figura dell'esempio: y = 2 + 5/(x-1) */
+var q=new Q.Piano({svg:document.getElementById('f-es'),X:function(x){return 155+25*x;},Y:function(y){return 200-25*y;},w:360,h:300});
+q.assi();
+q.seg(1,-5,1,8.5,TR,q.sotto);q.seg(-7,2,8.5,2,TR,q.sotto);
+ramo(q,1,2,5,-7,0.995);ramo(q,1,2,5,1.005,8.5);
+q.punto(1,2,'var(--inchiostro)',3.5);q.punto(0,-3,'var(--rosso)',3.5);q.punto(-1.5,0,'var(--rosso)',3.5);
+txt(q.testo,q.X(1)+6,q.Y(2)+16,'C');
+txt(q.testo,q.X(1)+5,292,'x = 1',{fill:'var(--rosso)'});
+txt(q.testo,352,q.Y(2)+16,'y = 2',{fill:'var(--rosso)','text-anchor':'end'});
+txt(q.testo,q.X(0)-7,q.Y(-3)+4,'(0; −3)',{fill:'var(--rosso)','text-anchor':'end'});
+txt(q.testo,q.X(-1.5)-5,q.Y(0)+15,'(−3/2; 0)',{fill:'var(--rosso)','text-anchor':'end'});
+})();
+</script>
 </body>
 </html>
