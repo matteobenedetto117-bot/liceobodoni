@@ -5,17 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rette e parabola: posizioni reciproche — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.metodo{font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rosso);margin:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -25,90 +74,128 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Parabola &middot; Unità 30</p>
   <h1>Rette e parabola: posizioni reciproche</h1>
-  <p class="sommario">Una retta del piano può incontrare una parabola in
-  due punti, in un punto soltanto oppure in nessun punto. Lo vediamo prima
-  con tre disegni, poi con il sistema fra le due equazioni.</p>
 </header>
 
-<h2>Tre casi possibili</h2>
-<p>Una retta secante attraversa la parabola in due punti $A$ e $B$; una
-retta tangente la tocca in un unico punto $T$; una retta esterna non ha
-alcun punto in comune con la curva.</p>
+<p>Retta e parabola: quanti punti hanno in comune?</p>
 
 <div class="fig">
-<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg">
-<g>
-<path d="M20.0,234.2 L29.0,261.9 L38.0,286.7 L47.0,308.6 L56.0,327.5 L65.0,343.6 L74.0,356.7 L83.0,366.9 L92.0,374.2 L101.0,378.5 L110.0,380.0 L119.0,378.5 L128.0,374.2 L137.0,366.9 L146.0,356.7 L155.0,343.6 L164.0,327.5 L173.0,308.6 L182.0,286.7 L191.0,261.9 L200.0,234.2" transform="translate(0,-190)" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="20" y1="114.2" x2="200" y2="143.3" stroke="#b3392f" stroke-width="2"/>
-<circle cx="47" cy="118.6" r="3.5" fill="#b3392f"/>
-<text x="30" y="112" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">A</text>
-<circle cx="164" cy="137.5" r="3.5" fill="#b3392f"/>
-<text x="170" y="132" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">B</text>
-<text x="66" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">SECANTE</text>
-</g>
-<g transform="translate(240,0)">
-<path d="M20.0,234.2 L29.0,261.9 L38.0,286.7 L47.0,308.6 L56.0,327.5 L65.0,343.6 L74.0,356.7 L83.0,366.9 L92.0,374.2 L101.0,378.5 L110.0,380.0 L119.0,378.5 L128.0,374.2 L137.0,366.9 L146.0,356.7 L155.0,343.6 L164.0,327.5 L173.0,308.6 L182.0,286.7 L191.0,261.9 L200.0,234.2" transform="translate(0,-190)" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="40" y1="166.6" x2="190" y2="220.6" stroke="#b3392f" stroke-width="2"/>
-<circle cx="100" cy="188.2" r="3.5" fill="#b3392f"/>
-<text x="106" y="183" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">T</text>
-<text x="58" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">TANGENTE</text>
-</g>
-<g transform="translate(480,0)">
-<path d="M20.0,234.2 L29.0,261.9 L38.0,286.7 L47.0,308.6 L56.0,327.5 L65.0,343.6 L74.0,356.7 L83.0,366.9 L92.0,374.2 L101.0,378.5 L110.0,380.0 L119.0,378.5 L128.0,374.2 L137.0,366.9 L146.0,356.7 L155.0,343.6 L164.0,327.5 L173.0,308.6 L182.0,286.7 L191.0,261.9 L200.0,234.2" transform="translate(0,-190)" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="20" y1="200" x2="200" y2="215" stroke="#b3392f" stroke-width="2"/>
-<text x="66" y="205" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">ESTERNA</text>
-</g>
-</svg>
-<p class="did">I tre casi possibili: secante (due punti $A$, $B$), tangente
-(un punto $T$), esterna (nessun punto).</p>
+<div class="pann" style="--n:3">
+<svg id="f-sec" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg"></svg>
+<svg id="f-tan" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg"></svg>
+<svg id="f-est" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="did-parti" style="--n:3">
+<p class="did">Secante</p>
+<p class="did">Tangente</p>
+<p class="did">Esterna</p>
+</div>
 </div>
 
-<h2>Il caso della retta verticale</h2>
-<p>Una retta parallela all'asse della parabola, cioè del tipo $x=k$ con
-$k$ costante, ha sempre un solo punto in comune con la curva: sostituendo
-$x=k$ nell'equazione $y=ax^2+bx+c$ si ottiene direttamente il valore di
-$y$, senza dover risolvere un'equazione di secondo grado.</p>
+<ul>
+<li>retta secante → due punti $A$, $B$;</li>
+<li>retta tangente → un punto $T$;</li>
+<li>retta esterna → nessun punto.</li>
+</ul>
+
+<h2>Retta parallela all'asse</h2>
+
+<p>Retta $x=k$ e parabola $y=ax^2+bx+c$ → sempre un solo punto: sostituendo $x=k$ si ottiene direttamente $y$, senza equazione di secondo grado.</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 230" xmlns="http://www.w3.org/2000/svg">
-<path d="M20.0,44.2 L29.0,71.9 L38.0,96.7 L47.0,118.6 L56.0,137.5 L65.0,153.6 L74.0,166.7 L83.0,176.9 L92.0,184.2 L101.0,188.5 L110.0,190.0 L119.0,188.5 L128.0,184.2 L137.0,176.9 L146.0,166.7 L155.0,153.6 L164.0,137.5 L173.0,118.6 L182.0,96.7 L191.0,71.9 L200.0,44.2" transform="translate(60,0)" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="230" y1="20" x2="230" y2="210" stroke="#b3392f" stroke-width="2"/>
-<circle cx="230" cy="126" r="3.5" fill="#b3392f"/>
-<text x="238" y="122" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">P</text>
-<text x="234" y="222" font-family="Segoe UI, sans-serif" font-size="12" fill="#4a5a6d">x = k</text>
-</svg>
-<p class="did">La retta $x=k$ incontra la parabola in un solo punto $P$,
-qualunque sia $k$.</p>
+<svg id="f-ver" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px"></svg>
+<p class="did">Un solo punto $P$, qualunque sia $k$</p>
 </div>
 
-<h2>Il metodo del sistema</h2>
-<p>Per una retta generica $y=mx+q$ mettiamo a sistema le due equazioni e
-sostituiamo la $y$ della retta in quella della parabola: risulta
-un'equazione di secondo grado in $x$, detta equazione risolvente. Come già
-per la circonferenza, il segno del discriminante $\Delta$ dice quanti
-punti hanno in comune retta e parabola.</p>
+<h2>Metodo del sistema</h2>
 
-<div class="def">
-<span class="et">Discriminante della risolvente</span>
-$$\Delta&gt;0\ \Rightarrow\ \text{retta secante}\qquad
-\Delta=0\ \Rightarrow\ \text{retta tangente}\qquad
-\Delta&lt;0\ \Rightarrow\ \text{retta esterna}$$
-</div>
+<p>Retta $y=mx+q$: sostituendo la $y$ della retta nell'equazione della parabola si ottiene l'equazione risolvente, di secondo grado in $x$.</p>
+
+<p class="eq">$$\begin{cases}y=ax^2+bx+c\\ y=mx+q\end{cases}\ \Longrightarrow\ ax^2+(b-m)x+c-q=0$$</p>
+
+<div class="def"><span class="et">Discriminante della risolvente</span>
+<p class="eq">$$\Delta&gt;0\ \Rightarrow\ \text{secante}\qquad \Delta=0\ \Rightarrow\ \text{tangente}\qquad \Delta&lt;0\ \Rightarrow\ \text{esterna}$$</p></div>
 
 <h2>Esempio</h2>
-<p>Mettiamo a sistema la parabola $y=-\frac12x^2+2x$ e la retta $y=x-4$.
-Sostituendo:</p>
 
-$$-\frac12x^2+2x=x-4\ \ \Longrightarrow\ \ x^2-2x-8=0\ \ \Longrightarrow\ \ (x-4)(x+2)=0$$
+<p>Dati: parabola $y=-\frac12x^2+2x$, retta $y=x-4$. Calcolare i punti comuni.</p>
 
-<p>Le soluzioni sono $x_1=4$ e $x_2=-2$; sostituendo nella retta $y=x-4$
-si trovano le ordinate $y_1=0$ e $y_2=-6$. La retta è secante, con punti
-di intersezione $A=(4;0)$ e $B=(-2;-6)$.</p>
+<p class="eq">$$-\frac12x^2+2x=x-4\ \Longrightarrow\ x^2-2x-8=0\ \Longrightarrow\ (x-4)(x+2)=0$$</p>
 
+<p class="eq">$$x_1=4,\ y_1=0\qquad x_2=-2,\ y_2=-6\qquad A=(4;0),\ B=(-2;-6)\ \text{(secante)}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../29-parabola-con-vertice-nell-origine/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Parabola con vertice nell'origine</span></a><a class="successiva" href="../31-rette-tangenti-a-una-parabola/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Rette tangenti a una parabola</span></a></nav>
 <footer><p>Matematica terza &middot; Parabola &middot; Unità 30</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt;
+/* parabola y = x^2/2 in ogni pannello, unità 30 px */
+var k=30,X=function(x){return 100+k*x;},Y=function(y){return 150-k*y;},f=function(x){return x*x/2;};
+function pannello(id){var p=new Q.Piano({svg:document.getElementById(id),X:X,Y:Y,w:200,h:180});
+  p.curva(f,-3.4,3.4);return p;}
+function retta(p,m,q){p.curva(function(x){return m*x+q;},-3.4,3.4,{stroke:'var(--rosso)','stroke-width':2});}
+/* secante y = x/2 + 3/2: x^2 - x - 3 = 0 */
+var p=pannello('f-sec');retta(p,.5,1.5);
+var xa=(1-Math.sqrt(13))/2,xb=(1+Math.sqrt(13))/2;
+p.punto(xa,f(xa),'var(--rosso)',3.5);p.punto(xb,f(xb),'var(--rosso)',3.5);
+txt(p.testo,X(xa)-10,Y(f(xa))-2,'A',{'font-style':'italic','text-anchor':'end',fill:'var(--rosso)'});
+txt(p.testo,X(xb)+8,Y(f(xb))+14,'B',{'font-style':'italic',fill:'var(--rosso)'});
+/* tangente in (1; 1/2): y = x - 1/2 */
+p=pannello('f-tan');retta(p,1,-.5);p.punto(1,.5,'var(--rosso)',3.5);
+txt(p.testo,X(1)+6,Y(.5)+16,'T',{'font-style':'italic',fill:'var(--rosso)'});
+/* esterna y = x/10 - 1/2: Δ = 1/100 - 1 < 0 */
+p=pannello('f-est');retta(p,.1,-.5);
+/* retta x = k (k = 1,8) */
+p=pannello('f-ver');var xk=1.8;
+p.sopra.appendChild(el('line',{x1:X(xk),y1:8,x2:X(xk),y2:172,stroke:'var(--rosso)','stroke-width':2}));
+p.punto(xk,f(xk),'var(--rosso)',3.5);
+txt(p.testo,X(xk)+8,Y(f(xk))+4,'P',{'font-style':'italic',fill:'var(--rosso)'});
+txt(p.testo,X(xk)-6,170,'x = k',{'text-anchor':'end',fill:'var(--grigio)'});
+})();
+</script>
 </body>
 </html>
