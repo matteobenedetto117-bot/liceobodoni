@@ -5,18 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dall'equazione al grafico: centro, raggio, condizione di realtà — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.nota{background:var(--blu-chiaro);border:1px solid var(--riga);border-radius:10px;padding:14px 18px;margin:24px 0}
-.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blu);display:block;margin-bottom:6px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -26,74 +74,114 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Circonferenza &middot; Unità 23</p>
   <h1>Dall'equazione al grafico: centro, raggio, condizione di realtà</h1>
-  <p class="sommario">Conosciamo l'equazione generale della circonferenza. Ora
-  percorriamo la strada opposta: partendo dai coefficienti che vi compaiono
-  vogliamo ritrovare centro e raggio, e riconoscere i casi in cui quei
-  coefficienti non descrivono una vera circonferenza.</p>
 </header>
 
-<h2>Da coefficienti a centro e raggio</h2>
-<p>Riprendiamo la forma sviluppata vista in precedenza e invertiamo le
-relazioni che legano $a$, $b$, $c$ a $\alpha$, $\beta$, $r$.</p>
+<p>Equazione $x^2+y^2+ax+by+c=0$: come si ritrovano centro e raggio?</p>
 
-$$x^2+y^2+ax+by+c=0$$
+<p>Si invertono le relazioni $a=-2\alpha$, $\;b=-2\beta$, $\;c=\alpha^2+\beta^2-r^2$:</p>
 
-<div class="def">
-<span class="et">Centro e raggio</span>
-$$\alpha=-\frac a2,\qquad \beta=-\frac b2,\qquad C=\left(-\frac a2;\,-\frac b2\right)$$
-$$r=\sqrt{\frac{a^2}{4}+\frac{b^2}{4}-c}$$
-<p style="margin:8px 0 0">Il segno cambia perché nella forma sviluppata era
-$a=-2\alpha$ e $b=-2\beta$; il raggio si ricava dalla stessa relazione che
-dà $c=\alpha^2+\beta^2-r^2$.</p>
-</div>
+<div class="def"><span class="et">Centro e raggio</span>
+<p class="eq">$$C\left(-\frac a2;\,-\frac b2\right)\qquad r=\sqrt{\frac{a^2}{4}+\frac{b^2}{4}-c}$$</p></div>
 
 <h2>Condizione di realtà</h2>
-<p>Il raggio è una radice quadrata, quindi la quantità sotto radice non può
-essere negativa: da qui nasce una condizione sui coefficienti che stabilisce
-se l'equazione rappresenta davvero una circonferenza.</p>
 
-<div class="def">
-<span class="et">Condizione di realtà</span>
-$$\frac{a^2}{4}+\frac{b^2}{4}-c\ \ge\ 0$$
-</div>
+<p>Il radicando decide che cosa rappresenta l'equazione:</p>
 
-<div class="nota">
-<span class="et">Caso degenere</span>
-<p style="margin:0">Se quella quantità è nulla, il raggio è zero: l'equazione
-non descrive più una vera circonferenza, ma un solo punto, il centro stesso.
-Si dice che la circonferenza è degenere.</p>
-</div>
+<ul>
+<li>$\frac{a^2}{4}+\frac{b^2}{4}-c&gt;0$ → circonferenza di raggio $r&gt;0$;</li>
+<li>$\frac{a^2}{4}+\frac{b^2}{4}-c=0$ → circonferenza degenere: solo il centro $C$;</li>
+<li>$\frac{a^2}{4}+\frac{b^2}{4}-c&lt;0$ → nessun punto reale.</li>
+</ul>
+
+<div class="def"><span class="et">Condizione di realtà</span>
+<p class="eq">$$\frac{a^2}{4}+\frac{b^2}{4}-c\ \ge\ 0$$</p></div>
 
 <h2>Esempio</h2>
-<p>Disegniamo la circonferenza di equazione $x^2+y^2-4x+2y-4=0$. Confrontando
-con la forma generale, $a=-4$, $b=2$, $c=-4$.</p>
 
-$$\alpha=-\frac{-4}{2}=2,\qquad \beta=-\frac{2}{2}=-1\ \ \Rightarrow\ \ C=(2;-1)$$
+<p>Dati: $x^2+y^2-4x+2y-4=0$. Calcolare centro e raggio.</p>
 
-$$r=\sqrt{\frac{16}{4}+\frac{4}{4}-(-4)}=\sqrt{4+1+4}=\sqrt9=3$$
+<p class="eq">$$a=-4,\;b=2,\;c=-4\;\Longrightarrow\;C(2;-1)\qquad r=\sqrt{4+1+4}=3$$</p>
 
 <div class="fig">
-<svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">
-<line x1="10" y1="160" x2="310" y2="160" stroke="#16283d" stroke-width="1.5"/>
-<line x1="110" y1="10" x2="110" y2="290" stroke="#16283d" stroke-width="1.5"/>
-<text x="296" y="174" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">x</text>
-<text x="116" y="24" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">y</text>
-<circle cx="110" cy="160" r="2" fill="#16283d"/>
-<text x="98" y="176" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">O</text>
-<circle cx="166" cy="188" r="84" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="166" cy="188" r="3" fill="#b3392f"/>
-<text x="172" y="184" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">C(2;-1)</text>
-<line x1="166" y1="188" x2="250" y2="188" stroke="#b3392f" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="198" y="181" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">r=3</text>
-</svg>
-<p class="did">La circonferenza $x^2+y^2-4x+2y-4=0$: centro $C(2;-1)$ e raggio
-$r=3$.</p>
+<svg id="fig-cr" class="piano" viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg" style="max-width:340px"></svg>
+<div class="cursore"><label for="cur-c">$c$</label><input id="cur-c" type="range" min="-11" max="7" step="1" value="-4"><span class="val" id="val-c">−4</span></div>
+<p class="val-riga" id="val-r"></p>
+<p class="did">$x^2+y^2-4x+2y+c=0$: centro $C(2;-1)$, $\;r^2=5-c$</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../22-definizione-ed-equazione-della-circonferenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Definizione ed equazione della circonferenza</span></a><a class="successiva" href="../24-posizione-di-una-retta-rispetto-a-una-circonferenza/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Posizione di una retta rispetto a una circonferenza</span></a></nav>
 <footer><p>Matematica terza &middot; Circonferenza &middot; Unità 23</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var S=28,X=function(x){return 14+S*(x+2.5);},Y=function(y){return 14+S*(3-y);};
+var P=new Q.Piano({svg:document.getElementById('fig-cr'),w:280,h:260,X:X,Y:Y});P.assi();
+var el=Q.el,txt=Q.txt;
+for(var i=-2;i<=6;i++)if(i)P.sotto.appendChild(el('line',{x1:X(i),y1:Y(0)-3,x2:X(i),y2:Y(0)+3,stroke:'var(--inchiostro)','stroke-width':1}));
+for(var j=-5;j<=3;j++)if(j)P.sotto.appendChild(el('line',{x1:X(0)-3,y1:Y(j),x2:X(0)+3,y2:Y(j),stroke:'var(--inchiostro)','stroke-width':1}));
+txt(P.testo,X(0)-6,Y(0)-6,'O',{'text-anchor':'end'});
+var circ=el('circle',{cx:X(2),cy:Y(-1),r:3*S,fill:'none',stroke:'var(--blu)','stroke-width':2.2});P.curve.appendChild(circ);
+var rag=el('line',{x1:X(2),y1:Y(-1),y2:Y(-1),stroke:'var(--rosso)','stroke-width':1.6,'stroke-dasharray':'4 3'});P.sopra.appendChild(rag);
+var cen=el('circle',{cx:X(2),cy:Y(-1),r:3.5,fill:'var(--rosso)','stroke-width':1.5});P.sopra.appendChild(cen);
+var tC=txt(P.testo,X(2),0,'C(2; −1)',{fill:'var(--rosso)','text-anchor':'middle'});
+var tr=txt(P.testo,0,Y(-1)-6,'r',{fill:'var(--rosso)','font-style':'italic','text-anchor':'middle'});
+var cur=document.getElementById('cur-c'),vc=document.getElementById('val-c'),vr=document.getElementById('val-r');
+function set(e,a){for(var k in a)e.setAttribute(k,a[k]);}
+function eqn(c){return 'x² + y² − 4x + 2y'+(c>0?' + '+c:c<0?' − '+(-c):'')+' = 0';}
+function agg(){var c=+cur.value,r2=5-c,r=r2>0?Math.sqrt(r2):0,R=r*S;
+  set(circ,{r:R,opacity:r2>0?1:0});
+  set(rag,{x2:X(2)+R,opacity:R>20?1:0});set(tr,{x:X(2)+R/2,opacity:R>20?1:0});
+  set(cen,{fill:r2<0?'#fff':'var(--rosso)',stroke:r2<0?'var(--grigio)':'none'});
+  set(tC,{y:R>34?Y(-1)+18:Y(-1)+R+15,fill:r2<0?'var(--grigio)':'var(--rosso)'});
+  vc.textContent=Q.num(c);
+  var st=r2>0?'<span class="c-ver">circonferenza reale</span>':r2===0?'<span class="c-ver">degenere: solo C</span>':'nessun punto reale';
+  vr.innerHTML=eqn(c)+' &nbsp;·&nbsp; r² = 5 − c = '+Q.num(r2)+(r2>=0?' &nbsp;·&nbsp; r = '+Q.num(r):'')+' &nbsp;·&nbsp; '+st;}
+cur.addEventListener('input',agg);agg();
+})();
+</script>
 </body>
 </html>
