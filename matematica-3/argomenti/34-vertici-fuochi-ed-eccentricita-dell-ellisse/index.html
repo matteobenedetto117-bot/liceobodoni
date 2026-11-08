@@ -5,16 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vertici, fuochi ed eccentricità dell'ellisse — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
 </style>
 </head>
 <body>
@@ -24,83 +76,133 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Ellisse e iperbole &middot; Unità 34</p>
   <h1>Vertici, fuochi ed eccentricità dell'ellisse</h1>
-  <p class="sommario">Dalla forma canonica dell'ellisse ricaviamo i quattro vertici, le coordinate dei
-  fuochi in funzione di $a$ e $b$, e l'eccentricità: il numero che misura quanto l'ellisse è schiacciata
-  rispetto a una circonferenza.</p>
 </header>
 
-<h2>Vertici dell'ellisse</h2>
-<p>Nell'equazione $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ poniamo $y=0$: resta $x^2=a^2$, cioè $x=\pm a$.
-Ponendo invece $x=0$ resta $y^2=b^2$, cioè $y=\pm b$. L'ellisse incontra dunque gli assi in quattro punti,
-i <strong>vertici</strong>:</p>
-$$(\pm a;0)\quad\text{sull'asse maggiore,}\qquad (0;\pm b)\quad\text{sull'asse minore.}$$
+<p>Ellisse $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ con fuochi sull'asse $x$ ($a&gt;b$): dove incontra gli assi, dove sono i fuochi, quanto è schiacciata?</p>
 
-<h2>Fuochi in funzione di $a$ e $b$</h2>
-<p>Dalla relazione $b^2=a^2-c^2$, già trovata ricavando l'equazione, otteniamo $c=\sqrt{a^2-b^2}$: i fuochi
-si scrivono così senza dover più portare $c$ come dato a parte.</p>
-$$F_1=\big(\sqrt{a^2-b^2};0\big)\qquad F_2=\big(-\sqrt{a^2-b^2};0\big)$$
+<h2>Vertici</h2>
+
+<ul>
+<li>$y=0$ → $x^2=a^2$ → vertici $(\pm a;0)$ sull'asse maggiore;</li>
+<li>$x=0$ → $y^2=b^2$ → vertici $(0;\pm b)$ sull'asse minore.</li>
+</ul>
+
+<h2>Fuochi</h2>
+
+<p>Da $b^2=a^2-c^2$ si ricava $c$:</p>
+
+<div class="def"><span class="et">Fuochi dell'ellisse</span>
+<p class="eq">$$c=\sqrt{a^2-b^2}\qquad\qquad F_1=\big(-\sqrt{a^2-b^2};0\big)\qquad F_2=\big(\sqrt{a^2-b^2};0\big)$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="140" x2="360" y2="140" stroke="#16283d" stroke-width="1.3"/>
-<line x1="190" y1="30" x2="190" y2="250" stroke="#16283d" stroke-width="1.3"/>
-<ellipse cx="190" cy="140" rx="150" ry="80" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<line x1="190" y1="140" x2="190" y2="60" stroke="#2f6b4f" stroke-width="1.6"/>
-<line x1="190" y1="140" x2="317" y2="140" stroke="#2f6b4f" stroke-width="1.6"/>
-<line x1="190" y1="60" x2="317" y2="140" stroke="#b3392f" stroke-width="1.6" stroke-dasharray="5 4"/>
-<circle cx="190" cy="140" r="3" fill="#16283d"/>
-<circle cx="40" cy="140" r="3" fill="#16283d"/>
-<circle cx="340" cy="140" r="3" fill="#16283d"/>
-<circle cx="190" cy="60" r="3" fill="#16283d"/>
-<circle cx="190" cy="220" r="3" fill="#16283d"/>
-<circle cx="317" cy="140" r="3" fill="#b3392f"/>
-<circle cx="63" cy="140" r="3" fill="#b3392f"/>
-<text x="30" y="132" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">(-a;0)</text>
-<text x="312" y="132" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">(a;0)</text>
-<text x="196" y="50" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">(0;b)</text>
-<text x="196" y="238" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">(0;-b)</text>
-<text x="322" y="132" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">F&#8321;</text>
-<text x="30" y="156" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">F&#8322;</text>
-<text x="198" y="102" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">b</text>
-<text x="245" y="132" font-family="Segoe UI, sans-serif" font-size="12" fill="#2f6b4f">c</text>
-<text x="258" y="92" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">a</text>
-</svg>
-<p class="did">Il triangolo rettangolo di cateti $b$ e $c$ e ipotenusa $a$ dà la relazione
-$a^2=b^2+c^2$, da cui $c=\sqrt{a^2-b^2}$.</p>
+<svg id="f-fuochi" viewBox="0 0 380 250" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">Cateti $b$ e $c$, ipotenusa $a$: $a^2=b^2+c^2$</p>
 </div>
 
 <h2>Eccentricità</h2>
-<p>Si chiama <strong>eccentricità</strong> dell'ellisse il rapporto fra la distanza focale e la lunghezza
-dell'asse maggiore:</p>
 
-<div class="def">
-<span class="et">Eccentricità</span>
-$$e=\frac{c}{a}=\frac{\sqrt{a^2-b^2}}{a}$$
-</div>
+<p>Rapporto fra distanza focale $2c$ e asse maggiore $2a$:</p>
 
-<p>Poiché $0&lt;c&lt;a$, l'eccentricità è sempre compresa fra $0$ e $1$. Più $e$ è vicino a $1$, più $c$ è
-vicino ad $a$ e più l'ellisse è schiacciata; più $e$ è vicino a $0$, più $c$ è piccolo e l'ellisse si
-avvicina a una circonferenza. Nel caso limite $e=0$ si ha $c=0$, quindi $b=a$: l'equazione diventa
-$x^2+y^2=a^2$, la circonferenza di raggio $a$.</p>
+<div class="def"><span class="et">Eccentricità</span>
+<p class="eq">$$e=\frac{c}{a}=\frac{\sqrt{a^2-b^2}}{a}\qquad\qquad 0\le e&lt;1$$</p></div>
+
+<ul>
+<li>$e$ vicina a $1$ → $c$ vicino ad $a$: ellisse schiacciata;</li>
+<li>$e$ vicina a $0$ → $c$ piccolo: ellisse simile a una circonferenza;</li>
+<li>$e=0$ → $c=0$, $b=a$: circonferenza $x^2+y^2=a^2$.</li>
+</ul>
 
 <div class="fig">
-<svg viewBox="0 0 380 190" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="110" cy="80" rx="95" ry="18" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="65" cy="80" r="2.6" fill="#b3392f"/>
-<circle cx="155" cy="80" r="2.6" fill="#b3392f"/>
-<text x="90" y="118" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">e vicino a 1</text>
-<circle cx="300" cy="80" r="55" fill="none" stroke="#1f4e79" stroke-width="2"/>
-<circle cx="300" cy="80" r="2.6" fill="#b3392f"/>
-<text x="278" y="150" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">e = 0 (cerchio)</text>
-</svg>
-<p class="did">A parità di $a$, un'eccentricità vicina a $1$ produce un'ellisse molto allungata; con
-$e=0$ i due fuochi si sovrappongono nel centro e l'ellisse diventa una circonferenza.</p>
+<svg id="f-ecc" viewBox="0 0 300 210" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="cur-e">e</label><input id="cur-e" type="range" min="0" max="0.95" step="0.01" value="0.6"><span class="val" id="val-e">0,6</span></div>
+<p class="val-riga" id="riga-e"></p>
+<p class="did">$a=5$ fisso; fuochi in rosso</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../33-ellisse-come-luogo-geometrico-e-sua-equazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Ellisse come luogo geometrico e sua equazione</span></a><a class="successiva" href="../35-ellisse-e-rette-determinare-l-equazione-di-un-ellisse/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Ellisse e rette; determinare l'equazione di un'ellisse</span></a></nav>
 <footer><p>Matematica terza &middot; Ellisse e iperbole &middot; Unità 34</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt,num=Q.num;
+function ellisse(p,X,Y,a,b){var d='';for(var j=0;j<=240;j++){var t=2*Math.PI*j/240;d+=(j?'L':'M')+X(a*Math.cos(t)).toFixed(1)+','+Y(b*Math.sin(t)).toFixed(1);}
+  var e=el('path',{d:d+'Z',fill:'none',stroke:'var(--blu)','stroke-width':2.2});p.curve.appendChild(e);return e;}
+/* figura 1: vertici, fuochi, triangolo b, c, a (a = 5, b = 3, c = 4) */
+var A=5,B=3,C=4;
+var X=function(x){return 190+28*x;},Y=function(y){return 125-28*y;};
+var p=new Q.Piano({svg:document.getElementById('f-fuochi'),X:X,Y:Y,w:380,h:250});p.assi();
+ellisse(p,X,Y,A,B);
+p.seg(0,0,0,B,{stroke:'var(--verde)','stroke-width':2},p.sopra);
+p.seg(0,0,C,0,{stroke:'var(--verde)','stroke-width':2},p.sopra);
+p.seg(0,B,C,0,{stroke:'var(--rosso)','stroke-width':1.8,'stroke-dasharray':'5 4'},p.sopra);
+[[-A,0],[A,0],[0,B],[0,-B]].forEach(function(v){p.punto(v[0],v[1],'var(--inchiostro)',3.5);});
+p.punto(-C,0,'var(--rosso)',3.5);p.punto(C,0,'var(--rosso)',3.5);
+txt(p.testo,X(-A)-5,Y(0)-7,'(−a;0)',{'text-anchor':'end'});
+txt(p.testo,X(A)+5,Y(0)-7,'(a;0)',{});
+txt(p.testo,X(0)-6,Y(B)-6,'(0;b)',{'text-anchor':'end'});
+txt(p.testo,X(0)+6,Y(-B)+16,'(0;−b)',{});
+txt(p.testo,X(-C),Y(0)+17,'F₁',{'text-anchor':'middle',fill:'var(--rosso)'});
+txt(p.testo,X(C),Y(0)+17,'F₂',{'text-anchor':'middle',fill:'var(--rosso)'});
+txt(p.testo,X(0)-6,Y(B/2)+4,'b',{'text-anchor':'end',fill:'var(--verde)','font-style':'italic'});
+txt(p.testo,X(C/2),Y(0)+16,'c',{'text-anchor':'middle',fill:'var(--verde)','font-style':'italic'});
+txt(p.testo,X(C/2)+10,Y(B/2)-8,'a',{fill:'var(--rosso)','font-style':'italic'});
+/* figura 2: eccentricità, a = 5 fisso */
+var X2=function(x){return 150+18*x;},Y2=function(y){return 105-18*y;};
+var q=new Q.Piano({svg:document.getElementById('f-ecc'),X:X2,Y:Y2,w:300,h:210});
+q.seg(-7.5,0,7.5,0,{stroke:'var(--riga)','stroke-width':1},q.sotto);
+var curva=null,f1=q.punto(0,0,'var(--rosso)',3.5),f2=q.punto(0,0,'var(--rosso)',3.5);q.punto(0,0,'var(--inchiostro)',2.5);
+var cur=document.getElementById('cur-e'),val=document.getElementById('val-e'),riga=document.getElementById('riga-e');
+function agg(){var e=+cur.value,c=5*e,b=5*Math.sqrt(1-e*e);
+  if(curva)curva.remove();curva=ellisse(q,X2,Y2,5,b);
+  f1.setAttribute('cx',X2(-c));f2.setAttribute('cx',X2(c));
+  val.textContent=num(e);
+  riga.innerHTML='c = '+num(c)+'<span class="sep">|</span>b = '+num(b)+(e===0?'<span class="sep">|</span><span class="c-ver">circonferenza</span>':'');}
+cur.addEventListener('input',agg);agg();
+})();
+</script>
 </body>
 </html>
