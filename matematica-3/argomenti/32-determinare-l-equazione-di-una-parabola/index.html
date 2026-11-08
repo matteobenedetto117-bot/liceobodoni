@@ -5,14 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Determinare l'equazione di una parabola — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 18px;margin:20px 0;border-left:4px solid var(--rosso);font-size:.96rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -22,65 +74,61 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Parabola &middot; Unità 32</p>
   <h1>Determinare l'equazione di una parabola</h1>
-  <p class="sommario">Finora abbiamo studiato parabole di cui l'equazione era già nota. Qui affrontiamo il
-  problema inverso: trovare i coefficienti $a$, $b$, $c$ a partire da alcune informazioni sulla curva, come
-  il vertice, il fuoco o un punto di passaggio.</p>
 </header>
 
-<h2>Quante informazioni servono</h2>
-<p>L'equazione $y=ax^2+bx+c$ ha tre coefficienti incogniti: $a$, $b$, $c$. Determinare l'equazione di una
-parabola significa ricavarli, e per farlo servono tre informazioni che permettano di costruire tre equazioni
-distinte.</p>
+<p>Parabola $y=ax^2+bx+c$, $a\ne0$: tre coefficienti incogniti, quindi servono tre equazioni in $a$, $b$, $c$. Ogni informazione ne fornisce:</p>
 
-<div class="def">
-<span class="et">Vertice e fuoco in funzione dei coefficienti</span>
-$$V=\left(-\frac{b}{2a};\,-\frac{\Delta}{4a}\right)\qquad
-F=\left(-\frac{b}{2a};\,\frac{1-\Delta}{4a}\right)$$
-</div>
+<ul>
+<li>punto di passaggio → una equazione;</li>
+<li>vertice → due equazioni, una per coordinata;</li>
+<li>fuoco → due equazioni, una per coordinata.</li>
+</ul>
 
-<p>Conoscere le coordinate del vertice, oppure quelle del fuoco, vale come due informazioni insieme: ciascuna
-delle due coordinate dà un'equazione in $a,b,c$. Una terza condizione, per esempio un punto della parabola,
-fornisce l'equazione mancante e chiude il sistema.</p>
+<p>Vertice e fuoco in funzione dei coefficienti, con $\Delta=b^2-4ac$:</p>
 
-<h2>Esempio 1: punto e fuoco</h2>
-<p>Determiniamo l'equazione della parabola passante per $P=(-1;2)$ e avente fuoco $F=\left(-2;\frac54\right)$.
-Il passaggio per $P$ dà</p>
-$$a(-1)^2+b(-1)+c=2\ \Longrightarrow\ a-b+c=2$$
-<p>Le coordinate del fuoco danno le altre due equazioni:</p>
-$$\begin{cases}a-b+c=2\\[2pt] -\dfrac{b}{2a}=-2\\[6pt] \dfrac{1-\Delta}{4a}=\dfrac54\end{cases}$$
-<p>Dalla seconda equazione, con $a\ne0$, si ricava $b=4a$. Sostituendo $b=4a$ nella prima e nella terza
-equazione (dove $\Delta=b^2-4ac$):</p>
-$$\begin{cases}a-4a+c=2\\[2pt] \dfrac{1-16a^2+4ac}{4a}=\dfrac54\end{cases}
-\ \Longrightarrow\
-\begin{cases}c=3a+2\\[2pt] 1-16a^2+4ac=5a\end{cases}$$
-<p>Sostituendo $c=3a+2$ nella seconda equazione compare solo $a$:</p>
-$$1-16a^2+4a(3a+2)=5a\ \Longrightarrow\ 1-4a^2+3a=0\ \Longrightarrow\ 4a^2-3a-1=0$$
-<p>Il discriminante di questa equazione in $a$ è $\Delta=9+16=25$, quindi</p>
-$$a=\frac{3\pm5}{8}\ \Longrightarrow\ a_1=1,\quad a_2=-\frac14$$
-<p>Da $b=4a$ e $c=3a+2$ si ottengono le due terne di coefficienti, e quindi due parabole che soddisfano
-entrambe le condizioni:</p>
-$$y=x^2+4x+5\qquad\text{e}\qquad y=-\frac14x^2-x+\frac54$$
+<div class="def"><span class="et">Vertice e fuoco</span>
+<p class="eq">$$V=\left(-\frac{b}{2a};\,-\frac{\Delta}{4a}\right)\qquad F=\left(-\frac{b}{2a};\,\frac{1-\Delta}{4a}\right)$$</p></div>
 
-<h2>Esempio 2: punto e vertice</h2>
-<p>Determiniamo l'equazione della parabola con vertice $V=(0;9)$ e passante per $P=(6;5)$. Dalle coordinate
-del vertice:</p>
-$$\begin{cases}-\dfrac{b}{2a}=0\\[6pt] -\dfrac{\Delta}{4a}=9\end{cases}
-\ \Longrightarrow\ b=0,\qquad -\dfrac{-b^2+4ac}{4a}=9$$
-<p>Con $b=0$ la seconda equazione diventa $\dfrac{4ac}{4a}=9$, cioè semplicemente $c=9$. Resta da usare il
-passaggio per $P=(6;5)$:</p>
-$$5=36a+6\cdot0+9\ \Longrightarrow\ 36a=-4\ \Longrightarrow\ a=-\frac19$$
-<p>L'equazione cercata è</p>
-$$y=-\frac19x^2+9$$
+<h2>Esempio 1</h2>
 
-<div class="nota">Quando le due condizioni assegnate sono fuoco e punto, l'incognita $a$ compare al quadrato
-nel sistema (come nell'esempio 1): si trovano in generale <strong>due parabole</strong>. Quando le due
-condizioni sono vertice e punto, $b$ e $c$ si esprimono in modo lineare in $a$ (come nell'esempio 2): resta
-un'unica equazione di primo grado in $a$, e la parabola è <strong>una sola</strong>.</div>
+<p>Dati: punto $P=(-1;2)$, fuoco $F=\left(-2;\frac54\right)$. Calcolare l'equazione della parabola.</p>
 
+<p class="eq">$$\begin{cases}a-b+c=2\\[2pt] -\dfrac{b}{2a}=-2\\[6pt] \dfrac{1-\Delta}{4a}=\dfrac54\end{cases}\ \Longrightarrow\ \begin{cases}c=3a+2\\[2pt] b=4a\\[2pt] 1-16a^2+4ac=5a\end{cases}$$</p>
+
+<p class="eq">$$1-16a^2+4a(3a+2)=5a\ \Longrightarrow\ 4a^2-3a-1=0\ \Longrightarrow\ a_1=1,\ a_2=-\frac14$$</p>
+
+<p class="eq">$$y=x^2+4x+5\qquad\text{e}\qquad y=-\frac14x^2-x+\frac54$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: vertice $V=(0;9)$, punto $P=(6;5)$. Calcolare l'equazione della parabola.</p>
+
+<p class="eq">$$-\frac{b}{2a}=0\ \Longrightarrow\ b=0\qquad \frac{4ac-b^2}{4a}=9\ \Longrightarrow\ c=9$$</p>
+
+<p class="eq">$$5=36a+9\ \Longrightarrow\ a=-\frac19\ \Longrightarrow\ y=-\frac19x^2+9$$</p>
+
+<div class="nota"><p>Fuoco e punto → equazione di secondo grado in $a$: in generale due parabole. Vertice e punto → equazione di primo grado in $a$: una sola parabola.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../31-rette-tangenti-a-una-parabola/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Rette tangenti a una parabola</span></a><a class="successiva" href="../33-ellisse-come-luogo-geometrico-e-sua-equazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Ellisse come luogo geometrico e sua equazione</span></a></nav>
 <footer><p>Matematica terza &middot; Parabola &middot; Unità 32</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
