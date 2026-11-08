@@ -5,22 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Asintoti dell'iperbole — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.metodo{font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--rosso);margin:0}
-.interattivo{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.interattivo .pannelli{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
-.interattivo .controlli{font-family:var(--sans);font-size:.9rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
-.interattivo input[type=range]{flex:1;min-width:200px}
-.interattivo .valori{font-family:var(--sans);font-size:.9rem;color:var(--blu);white-space:nowrap}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
 </style>
 </head>
 <body>
@@ -30,120 +76,128 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Ellisse e iperbole &middot; Unità 37</p>
   <h1>Asintoti dell'iperbole</h1>
-  <p class="sommario">Allontanandosi dal centro, i due rami dell'iperbole si avvicinano sempre di più a
-  due rette che passano per il centro, senza mai toccarle: sono gli asintoti, e permettono di disegnare
-  la curva con precisione anche senza calcolare molti punti.</p>
 </header>
 
-<p>Ricaviamo la $y$ dall'equazione canonica $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$:</p>
+<p>Iperbole $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$: a quali rette si avvicinano i rami quando $|x|$ cresce?</p>
 
-$$y=\pm\frac{b}{a}\sqrt{x^2-a^2}=\pm\frac{b}{a}\,x\sqrt{1-\frac{a^2}{x^2}}$$
+<p>Ricavando $y$ dall'equazione:</p>
 
-<p>Quando $x$ diventa molto grande in valore assoluto, il rapporto $\dfrac{a^2}{x^2}$ diventa
-trascurabile rispetto a 1, e la radice si avvicina sempre di più a 1. Restano allora, come rette a cui
-la curva si avvicina indefinitamente:</p>
+<p class="eq">$$y=\pm\frac{b}{a}\sqrt{x^2-a^2}=\pm\frac{b}{a}\,x\sqrt{1-\frac{a^2}{x^2}}$$</p>
 
-<div class="def">
-<span class="et">Asintoti dell'iperbole</span>
-$$y=\frac{b}{a}\,x\qquad\qquad y=-\frac{b}{a}\,x$$
-<p style="margin:8px 0 0">due rette passanti per il centro, con pendenze $\pm\dfrac{b}{a}$.</p>
-</div>
+<p>Per $|x|$ sempre più grande $\dfrac{a^2}{x^2}$ tende a $0$ e la radice a $1$; i rami si avvicinano, senza toccarle, alle rette:</p>
 
-<p>Un modo pratico per disegnarle è costruire il rettangolo di vertici $(\pm a;\,0)$ e $(0;\,\pm b)$,
-cioè il rettangolo di semilati $a$ e $b$ centrato nell'origine: le sue diagonali, prolungate, sono
-proprio gli asintoti, perché hanno pendenza $\dfrac{b}{a}$.</p>
+<div class="def"><span class="et">Asintoti dell'iperbole</span>
+<p class="eq">$$y=\frac{b}{a}\,x\qquad\qquad y=-\frac{b}{a}\,x$$</p>
+<p>Rette per il centro, pendenze $\pm\dfrac{b}{a}$.</p></div>
+
+<p>Costruzione: rettangolo di vertici $(\pm a;\,\pm b)$; le diagonali, prolungate, sono gli asintoti.</p>
 
 <div class="fig">
-<svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
-<line x1="20" y1="130" x2="320" y2="130" stroke="#16283d" stroke-width="1.3"/>
-<line x1="170" y1="20" x2="170" y2="240" stroke="#16283d" stroke-width="1.3"/>
-<rect x="110" y="70" width="120" height="120" fill="none" stroke="#6d7280" stroke-width="1" stroke-dasharray="4 3"/>
-<line x1="60" y1="230" x2="280" y2="30" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<line x1="60" y1="30" x2="280" y2="230" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<path d="M 205 78 C 190 95, 182 112, 179 130 C 182 148, 190 165, 205 182" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<path d="M 135 78 C 150 95, 158 112, 161 130 C 158 148, 150 165, 135 182" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<circle cx="230" cy="130" r="2.5" fill="#16283d"/>
-<circle cx="110" cy="130" r="2.5" fill="#16283d"/>
-<text x="234" y="126" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">a</text>
-<text x="176" y="66" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">b</text>
-<text x="286" y="26" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">y = (b/a)x</text>
-<text x="240" y="238" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">y = -(b/a)x</text>
-</svg>
-<p class="did">Il rettangolo di semilati $a$ e $b$ ha per diagonali gli asintoti; i due rami
-dell'iperbole restano sempre fra le due coppie di rami del rettangolo, avvicinandosi ad essi via via
-che $x$ cresce.</p>
+<svg id="f-rett" viewBox="0 0 380 260" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">$a=4$, $b=3$: rettangolo di semilati $a$ e $b$, diagonali $y=\pm\frac34 x$</p>
 </div>
 
-<div class="interattivo">
-<p class="did" style="margin-top:0">Muovendo i cursori su $a$ e $b$ si vede come cambiano pendenza del
-rettangolo e degli asintoti, e come i rami dell'iperbole restino sempre più vicini alle diagonali
-tratteggiate man mano che ci si allontana dal centro.</p>
-<div class="pannelli">
-<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" id="u37-piano" style="max-width:300px">
-<line x1="10" y1="120" x2="290" y2="120" stroke="#16283d" stroke-width="1.3"/>
-<line x1="150" y1="10" x2="150" y2="230" stroke="#16283d" stroke-width="1.3"/>
-<line id="u37-as1" x1="0" y1="0" x2="0" y2="0" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<line id="u37-as2" x1="0" y1="0" x2="0" y2="0" stroke="#b3392f" stroke-width="1.3" stroke-dasharray="6 4"/>
-<path id="u37-ramo-dx" d="" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<path id="u37-ramo-sx" d="" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-</svg>
+<div class="fig">
+<svg id="f-ab" viewBox="0 0 320 240" style="width:100%;max-width:400px" xmlns="http://www.w3.org/2000/svg"></svg>
+<div class="cursore"><label for="cur-a">a</label><input id="cur-a" type="range" min="0.5" max="3" step="0.1" value="2"><span class="val" id="val-a"></span></div>
+<div class="cursore"><label for="cur-b">b</label><input id="cur-b" type="range" min="0.5" max="3" step="0.1" value="1.5"><span class="val" id="val-b"></span></div>
+<p class="val-riga" id="riga-ab"></p>
+<p class="did">Pendenza degli asintoti $\dfrac{b}{a}$</p>
 </div>
-<div class="controlli">
-<label for="u37-a">a</label>
-<input type="range" id="u37-a" min="0.5" max="3" step="0.1" value="2">
-<label for="u37-b">b</label>
-<input type="range" id="u37-b" min="0.5" max="3" step="0.1" value="1.5">
-<span class="valori" id="u37-valori">a = 2,0 &nbsp; b = 1,5 &nbsp; pendenza = 0,75</span>
-</div>
-</div>
-<script>
-(function(){
-  var aS = document.getElementById('u37-a');
-  var bS = document.getElementById('u37-b');
-  var ramoDx = document.getElementById('u37-ramo-dx');
-  var ramoSx = document.getElementById('u37-ramo-sx');
-  var as1 = document.getElementById('u37-as1');
-  var as2 = document.getElementById('u37-as2');
-  var valori = document.getElementById('u37-valori');
-  var ox = 150, oy = 120, halfX = 130, halfY = 100;
-  function aggiorna(){
-    var a = parseFloat(aS.value), b = parseFloat(bS.value);
-    var m = b / a;
-    var xmax = a + 4;
-    var ymax = m * Math.sqrt(xmax*xmax - a*a);
-    var scaleX = halfX / (xmax * 1.08);
-    var scaleY = halfY / (ymax * 1.08);
-    as1.setAttribute('x1', ox - xmax*scaleX); as1.setAttribute('y1', oy + m*xmax*scaleY);
-    as1.setAttribute('x2', ox + xmax*scaleX); as1.setAttribute('y2', oy - m*xmax*scaleY);
-    as2.setAttribute('x1', ox - xmax*scaleX); as2.setAttribute('y1', oy - m*xmax*scaleY);
-    as2.setAttribute('x2', ox + xmax*scaleX); as2.setAttribute('y2', oy + m*xmax*scaleY);
-    var dDx = '', dSx = '';
-    for (var i = 0; i <= 24; i++){
-      var x = a + (xmax - a) * i / 24;
-      var y = b * Math.sqrt(x*x - a*a) / a;
-      var sxp = ox + x*scaleX, syp = oy - y*scaleY;
-      dDx += (i === 0 ? 'M' : ' L') + sxp.toFixed(1) + ',' + syp.toFixed(1);
-      var sxn = ox - x*scaleX;
-      dSx += (i === 0 ? 'M' : ' L') + sxn.toFixed(1) + ',' + syp.toFixed(1);
-    }
-    ramoDx.setAttribute('d', dDx);
-    ramoSx.setAttribute('d', dSx);
-    valori.textContent = 'a = ' + a.toFixed(1) + '   b = ' + b.toFixed(1) + '   pendenza = ' + m.toFixed(2);
-  }
-  aS.addEventListener('input', aggiorna);
-  bS.addEventListener('input', aggiorna);
-  aggiorna();
-})();
-</script>
 
-<p class="metodo">Esempio</p>
-<p>Per l'iperbole $\dfrac{x^2}{16}-\dfrac{y^2}{9}=1$ si legge $a=4$, $b=3$: gli asintoti hanno equazione
-$y=\pm\dfrac{3}{4}x$.</p>
+<h2>Esempio</h2>
 
+<p>Dati: $\dfrac{x^2}{16}-\dfrac{y^2}{9}=1$. Calcolare gli asintoti.</p>
+
+<p class="eq">$$a=4,\quad b=3\qquad\Rightarrow\qquad y=\pm\frac{3}{4}\,x$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../36-iperbole-definizione-ed-equazione/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Iperbole: definizione ed equazione</span></a><a class="successiva" href="../38-iperbole-equilatera-e-iperbole-riferita-agli-asintoti/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Iperbole equilatera e iperbole riferita agli asintoti</span></a></nav>
 <footer><p>Matematica terza &middot; Ellisse e iperbole &middot; Unità 37</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt,num=Q.num;
+
+function rami(p,A,B,t0,attr){[1,-1].forEach(function(s){var d='';for(var j=0;j<=200;j++){var t=-t0+2*t0*j/200;
+  d+=(j?'L':'M')+p.X(s*A*Math.cosh(t)).toFixed(1)+','+p.Y(B*Math.sinh(t)).toFixed(1);}
+  var e=el('path',Object.assign({d:d,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));p.curve.appendChild(e);});}
+var TR={stroke:'var(--rosso)','stroke-width':1.4,'stroke-dasharray':'6 4'};
+/* figura 1: a = 4, b = 3 */
+var A=4,B=3,k=22;
+var p=new Q.Piano({svg:document.getElementById('f-rett'),X:function(x){return 190+k*x;},Y:function(y){return 130-k*y;},w:380,h:260});p.assi();
+p.seg(-9,-9*B/A,9,9*B/A,TR);p.seg(-9,9*B/A,9,-9*B/A,TR);
+p.sotto.appendChild(el('rect',{x:p.X(-A),y:p.Y(B),width:2*A*k,height:2*B*k,fill:'none',stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 3'}));
+rami(p,A,B,1.75);
+[[A,0],[-A,0],[0,B],[0,-B]].forEach(function(q){p.punto(q[0],q[1],'var(--inchiostro)',3);});
+txt(p.testo,p.X(A)+5,p.Y(0)+15,'a',{'font-style':'italic'});
+txt(p.testo,p.X(-A)-5,p.Y(0)+15,'−a',{'text-anchor':'end','font-style':'italic'});
+txt(p.testo,p.X(0)+5,p.Y(B)-5,'b',{'font-style':'italic'});
+txt(p.testo,p.X(0)+5,p.Y(-B)+15,'−b',{'font-style':'italic'});
+txt(p.testo,p.X(0)-5,p.Y(0)+15,'O',{'text-anchor':'end'});
+txt(p.testo,p.X(4.4),p.Y(5),'y = ¾x',{'text-anchor':'end',fill:'var(--rosso)'});
+txt(p.testo,p.X(4.4),p.Y(-5)+10,'y = −¾x',{'text-anchor':'end',fill:'var(--rosso)'});
+/* figura 2: cursori su a e b, scala fissa */
+var s2=document.getElementById('f-ab'),h=19;
+var q=new Q.Piano({svg:s2,X:function(x){return 160+h*x;},Y:function(y){return 120-h*y;},w:320,h:240});q.assi();
+var as1=q.seg(0,0,0,0,TR),as2=q.seg(0,0,0,0,TR);
+var ret=el('rect',{fill:'none',stroke:'var(--grigio)','stroke-width':1.2,'stroke-dasharray':'4 3'});q.sotto.appendChild(ret);
+var r1=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':2.2}),r2=el('path',{fill:'none',stroke:'var(--blu)','stroke-width':2.2});q.curve.appendChild(r1);q.curve.appendChild(r2);
+var ca=document.getElementById('cur-a'),cb=document.getElementById('cur-b');
+function agg(){var a=+ca.value,b=+cb.value,m=b/a,L=12;
+  [[as1,1],[as2,-1]].forEach(function(s){s[0].setAttribute('x1',q.X(-L));s[0].setAttribute('y1',q.Y(-s[1]*m*L));s[0].setAttribute('x2',q.X(L));s[0].setAttribute('y2',q.Y(s[1]*m*L));});
+  ret.setAttribute('x',q.X(-a));ret.setAttribute('y',q.Y(b));ret.setAttribute('width',2*a*h);ret.setAttribute('height',2*b*h);
+  var t0=Math.acosh(9/a)+0.01;
+  [[r1,1],[r2,-1]].forEach(function(r){var d='';for(var j=0;j<=200;j++){var t=-t0+2*t0*j/200;
+    d+=(j?'L':'M')+q.X(r[1]*a*Math.cosh(t)).toFixed(1)+','+q.Y(b*Math.sinh(t)).toFixed(1);}r[0].setAttribute('d',d);});
+  document.getElementById('val-a').textContent=num(a);document.getElementById('val-b').textContent=num(b);
+  document.getElementById('riga-ab').innerHTML='asintoti: <span class="c-ver">y = ±'+num(m)+' x</span>';}
+ca.addEventListener('input',agg);cb.addEventListener('input',agg);agg();
+
+})();
+</script>
 </body>
 </html>
