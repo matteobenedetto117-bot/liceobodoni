@@ -5,16 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ellisse e rette; determinare l'equazione di un'ellisse — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
 </style>
 </head>
 <body>
@@ -24,83 +76,129 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Ellisse e iperbole &middot; Unità 35</p>
   <h1>Ellisse e rette; determinare l'equazione di un'ellisse</h1>
-  <p class="sommario">Una retta può essere esterna, tangente o secante rispetto a un'ellisse, esattamente
-  come già visto per circonferenza e parabola. La stessa idea, usata al contrario, permette anche di
-  ricostruire l'equazione di un'ellisse a partire da due condizioni assegnate.</p>
 </header>
 
-<h2>Ellisse e retta</h2>
-<p>Una retta $y=mx+q$ e un'ellisse $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ possono avere due punti in comune,
-uno solo, oppure nessuno.</p>
+<p>Retta $y=mx+q$ ed ellisse $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$: quanti punti in comune?</p>
 
 <div class="fig">
-<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
-<g>
-<ellipse cx="100" cy="115" rx="80" ry="45" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="20" y1="40" x2="200" y2="32" stroke="#b3392f" stroke-width="2"/>
-<text x="62" y="196" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">ESTERNA</text>
-</g>
-<g transform="translate(240,0)">
-<ellipse cx="100" cy="115" rx="80" ry="45" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="20" y1="70" x2="180" y2="70" stroke="#b3392f" stroke-width="2"/>
-<circle cx="100" cy="70" r="3.5" fill="#b3392f"/>
-<text x="106" y="65" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">T</text>
-<text x="58" y="196" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">TANGENTE</text>
-</g>
-<g transform="translate(480,0)">
-<ellipse cx="100" cy="115" rx="80" ry="45" fill="none" stroke="#1f4e79" stroke-width="2.2"/>
-<line x1="15" y1="150" x2="185" y2="80" stroke="#b3392f" stroke-width="2"/>
-<circle cx="34.8" cy="141.1" r="3.5" fill="#b3392f"/>
-<text x="12" y="158" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">A</text>
-<circle cx="165.2" cy="88.9" r="3.5" fill="#b3392f"/>
-<text x="171" y="84" font-family="Segoe UI, sans-serif" font-size="13" fill="#b3392f">B</text>
-<text x="62" y="196" font-family="Segoe UI, sans-serif" font-size="13" fill="#16283d">SECANTE</text>
-</g>
-</svg>
-<p class="did">I tre casi possibili: esterna (nessun punto), tangente (un solo punto $T$), secante (due punti
-$A$, $B$).</p>
+<div class="pann" style="--n:3">
+<svg id="f-caso0" viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg"></svg>
+<svg id="f-caso1" viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg"></svg>
+<svg id="f-caso2" viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div class="did-parti" style="--n:3">
+<p class="did">Esterna: nessun punto</p>
+<p class="did">Tangente: un punto $T$</p>
+<p class="did">Secante: due punti $A$, $B$</p>
+</div>
 </div>
 
-<p>Mettendo a sistema le due equazioni e sostituendo la $y$ della retta in quella dell'ellisse si ottiene
-un'equazione di secondo grado: come già per circonferenza e parabola, il segno del discriminante $\Delta$
-della risolvente stabilisce quale dei tre casi si presenta.</p>
+<p>Si mette a sistema e si sostituisce la $y$ della retta nell'equazione dell'ellisse: si ottiene un'equazione di secondo grado.</p>
 
-<div class="def">
-<span class="et">Discriminante della risolvente</span>
-$$\Delta&gt;0\ \Rightarrow\ \text{retta secante}\qquad
-\Delta=0\ \Rightarrow\ \text{retta tangente}\qquad
-\Delta&lt;0\ \Rightarrow\ \text{retta esterna}$$
-</div>
+<ul>
+<li>$\Delta&gt;0$ → retta secante;</li>
+<li>$\Delta=0$ → retta tangente;</li>
+<li>$\Delta&lt;0$ → retta esterna.</li>
+</ul>
 
-<h2>Esempio</h2>
-<p>Intersechiamo l'ellisse $\dfrac{x^2}{18}+\dfrac{y^2}{9}=1$ con la retta $x+2y-6=0$. Dalla retta ricaviamo
-$x=-2y+6$ e sostituiamo nell'ellisse:</p>
-$$\frac{(-2y+6)^2}{18}+\frac{y^2}{9}=1$$
-<p>Moltiplicando per $18$ si arriva a $6y^2-24y+18=0$, cioè $y^2-4y+3=0$, che si scompone in
-$(y-3)(y-1)=0$: $y_1=3$, $y_2=1$. Tornando a $x=-2y+6$ si trovano $x_1=0$ e $x_2=4$. La retta è secante,
-con punti di intersezione $A=(0;3)$ e $B=(4;1)$.</p>
+<h2>Esempio 1</h2>
+
+<p>Dati: ellisse $\dfrac{x^2}{18}+\dfrac{y^2}{9}=1$, retta $x+2y-6=0$. Calcolare i punti comuni.</p>
+
+<p>Dalla retta $x=-2y+6$; si sostituisce:</p>
+
+<p class="eq">$$\frac{(-2y+6)^2}{18}+\frac{y^2}{9}=1\ \Longrightarrow\ 6y^2-24y+18=0\ \Longrightarrow\ y^2-4y+3=0\ \Longrightarrow\ y_1=3,\ \ y_2=1$$</p>
+
+<p class="eq">$$x=-2y+6\ \Longrightarrow\ x_1=0,\ \ x_2=4\qquad A=(0;3)\quad B=(4;1)\ \ \text{(retta secante)}$$</p>
 
 <h2>Determinare l'equazione di un'ellisse</h2>
-<p>L'equazione $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ ha due parametri incogniti, $a$ e $b$: per
-determinarla servono due informazioni sulla curva, ciascuna delle quali fornisce un'equazione.</p>
 
-<h2>Esempio</h2>
-<p>Determiniamo l'ellisse che passa per $P=\left(\dfrac53\sqrt5;\,2\right)$ e ha eccentricità $\dfrac45$.
-Il passaggio per $P$ dà</p>
-$$\frac{125}{9a^2}+\frac4{b^2}=1$$
-<p>mentre dall'eccentricità, con $c=\sqrt{a^2-b^2}$, si ricava</p>
-$$\frac{\sqrt{a^2-b^2}}{a}=\frac45\ \ \Longrightarrow\ \ a^2-b^2=\frac{16}{25}a^2\ \ \Longrightarrow\ \
-b^2=\frac9{25}a^2$$
-<p>Sostituendo $b^2$ nella prima equazione:</p>
-$$\frac{125}{9a^2}+\frac{4\cdot25}{9a^2}=1\ \ \Longrightarrow\ \ \frac{225}{9a^2}=1\ \ \Longrightarrow\ \
-a^2=25,\quad a=5$$
-<p>Da $b^2=\dfrac9{25}a^2$ segue $b^2=9$, cioè $b=3$. L'ellisse cercata è</p>
-$$\frac{x^2}{25}+\frac{y^2}{9}=1$$
+<p>Incognite $a$ e $b$: servono due condizioni, ciascuna fornisce un'equazione.</p>
 
+<h2>Esempio 2</h2>
+
+<p>Dati: ellisse passante per $P=\left(\dfrac53\sqrt5;\,2\right)$, eccentricità $e=\dfrac45$. Calcolare l'equazione.</p>
+
+<p>Passaggio per $P$:</p>
+
+<p class="eq">$$\frac{125}{9a^2}+\frac4{b^2}=1$$</p>
+
+<p>Eccentricità, con $c=\sqrt{a^2-b^2}$:</p>
+
+<p class="eq">$$\frac{\sqrt{a^2-b^2}}{a}=\frac45\ \Longrightarrow\ a^2-b^2=\frac{16}{25}a^2\ \Longrightarrow\ b^2=\frac9{25}a^2$$</p>
+
+<p>Si sostituisce $b^2$ nella prima equazione:</p>
+
+<p class="eq">$$\frac{125}{9a^2}+\frac{4\cdot25}{9a^2}=1\ \Longrightarrow\ \frac{225}{9a^2}=1\ \Longrightarrow\ a^2=25,\quad b^2=9\qquad\frac{x^2}{25}+\frac{y^2}{9}=1$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../34-vertici-fuochi-ed-eccentricita-dell-ellisse/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Vertici, fuochi ed eccentricità dell'ellisse</span></a><a class="successiva" href="../36-iperbole-definizione-ed-equazione/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Iperbole: definizione ed equazione</span></a></nav>
 <footer><p>Matematica terza &middot; Ellisse e iperbole &middot; Unità 35</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* piano: o={svg,X,Y,w,h} */
+function Piano(o){var s=o.svg,id='cp'+Math.random().toString(36).slice(2,7);
+  var d=el('defs',{}),cp=el('clipPath',{id:id});cp.appendChild(el('rect',{x:4,y:4,width:o.w-8,height:o.h-8}));d.appendChild(cp);s.appendChild(d);
+  this.s=s;this.X=o.X;this.Y=o.Y;this.clip='url(#'+id+')';this.o=o;
+  this.sotto=el('g',{});this.curve=el('g',{'clip-path':this.clip});this.sopra=el('g',{});this.testo=el('g',{});
+  [this.sotto,this.curve,this.sopra,this.testo].forEach(function(g){s.appendChild(g);});}
+Piano.prototype.assi=function(){var o=this.o,X=this.X,Y=this.Y,g=this.sotto;
+  g.appendChild(el('line',{x1:6,y1:Y(0),x2:o.w-6,y2:Y(0),stroke:'var(--inchiostro)','stroke-width':1.2}));
+  g.appendChild(el('line',{x1:X(0),y1:o.h-6,x2:X(0),y2:6,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(this.testo,o.w-8,Y(0)-6,'x',{'font-style':'italic','text-anchor':'end'});
+  txt(this.testo,X(0)-6,16,'y',{'font-style':'italic','text-anchor':'end'});};
+Piano.prototype.curva=function(f,a,b,attr,n){n=n||300;var p='',su=false,X=this.X,Y=this.Y;
+  for(var j=0;j<=n;j++){var x=a+(b-a)*j/n,y=f(x);if(!isFinite(y)){su=false;continue;}
+    p+=(su?'L':'M')+X(x).toFixed(1)+','+Y(y).toFixed(1);su=true;}
+  var e=el('path',Object.assign({d:p,fill:'none',stroke:'var(--blu)','stroke-width':2.2},attr||{}));this.curve.appendChild(e);return e;};
+Piano.prototype.seg=function(x1,y1,x2,y2,attr,g){var e=el('line',Object.assign({x1:this.X(x1),y1:this.Y(y1),x2:this.X(x2),y2:this.Y(y2),stroke:'var(--blu)','stroke-width':2.2},attr||{}));(g||this.curve).appendChild(e);return e;};
+Piano.prototype.punto=function(x,y,col,r){var e=el('circle',{cx:this.X(x),cy:this.Y(y),r:r||4,fill:col||'var(--inchiostro)'});this.sopra.appendChild(e);return e;};
+window.Q={el:el,txt:txt,Piano:Piano,
+  num:function(v){var r=Math.round(v*100)/100;return String(r).replace('.',',').replace('-','−');}};
+})();
+</script>
+<script>
+(function(){
+var el=Q.el,txt=Q.txt;
+/* ellisse x²/18 + y²/9 = 1 e rette y = −x/2 + q: q = 5 (esterna), q = 3√6/2 (tangente), q = 3 (secante, retta dell'esempio 1) */
+var A2=18,B2=9,M=-0.5,QS=[5,3*Math.sqrt(6)/2,3];
+var X=function(x){return 110+16*x;},Y=function(y){return 100-16*y;};
+QS.forEach(function(q,k){
+  var p=new Q.Piano({svg:document.getElementById('f-caso'+k),X:X,Y:Y,w:220,h:170});
+  p.seg(-6.6,0,6.6,0,{stroke:'var(--inchiostro)','stroke-width':1},p.sotto);
+  p.seg(0,-4.2,0,6,{stroke:'var(--inchiostro)','stroke-width':1},p.sotto);
+  var d='';for(var j=0;j<=240;j++){var t=2*Math.PI*j/240;d+=(j?'L':'M')+X(Math.sqrt(A2)*Math.cos(t)).toFixed(1)+','+Y(3*Math.sin(t)).toFixed(1);}
+  p.curve.appendChild(el('path',{d:d+'Z',fill:'none',stroke:'var(--blu)','stroke-width':2.2}));
+  p.curva(function(x){return M*x+q;},-7,7,{stroke:'var(--rosso)','stroke-width':2},2);
+  /* intersezioni: (1/a² + m²/b²)x² + (2mq/b²)x + q²/b² − 1 = 0 */
+  var a=1/A2+M*M/B2,b=2*M*q/B2,c=q*q/B2-1,D=b*b-4*a*c;
+  if(D<-1e-9)return;
+  var r=Math.sqrt(Math.max(0,D)),xs=D>1e-9?[(-b-r)/(2*a),(-b+r)/(2*a)]:[-b/(2*a)],nomi=D>1e-9?['A','B']:['T'];
+  xs.forEach(function(x,i){var y=M*x+q;p.punto(x,y,'var(--rosso)',3.5);
+    txt(p.testo,X(x)+6,Y(y)-8,nomi[i],{fill:'var(--rosso)','font-size':13});});
+});
+})();
+</script>
 </body>
 </html>
