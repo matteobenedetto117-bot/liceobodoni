@@ -38,6 +38,7 @@ questo sul sito pubblico.
 - Aggiunta: nessuna. Il riquadro sul verso della proprietà distributiva della divisione riprende
   la correzione già presente nella traccia stessa (la formula sbagliata è barrata in rosso con
   "NO!").
+- Revisione (09/11/2026, regole 13/10): parole circa 172 → 97 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 03), tolti sommario, tabella e prosa dei riquadri; apertura con una domanda; commutativa e associativa in elenco caso → conseguenza con le formule in due .eq; distributiva e invariantiva in .def con le formule in .eq; riquadro sul verso della divisione ridotto a una .nota di una riga; invariantiva in elenco (sottrazione / divisione); riquadro .caso sostituito dal titoletto «Esempio». Nessuna comparsa da togliere, nessuna figura. Correzione: aggiunta la condizione $c\neq0$ alla distributiva della divisione e all'invariantiva della divisione (prima la condizione «diverso da zero» c'era solo nel testo dell'invariantiva, non nelle formule; la divisione per zero non è definita). Verificato con SymPy: (a+c)−(b+c)=a−b, (ac)/(bc)=a/b, 17−7=(17+3)−(7+3)=10.
 
 ## Unità 05 — Potenze e loro proprietà
 - Parole: circa 610 su 7 pagine di traccia (pagine 6–12)
