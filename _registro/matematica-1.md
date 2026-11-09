@@ -68,6 +68,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 10/8 = 5/4, 11/6 = 55/30, 4/15 = 8/30, mcm(6,15)=30,
   tutti conformi alla traccia.
 - Aggiunta: nessuna.
+- Revisione (09/11/2026, regole 13/10): parole circa 295 → 144 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 07), tolti sommario, prosa delle definizioni e riquadri .caso; apertura in una frase; frazione in .def con esempio in .eq; segno in elenco caso → conseguenza con gli esempi in una .eq; opposte in mezza riga; frazioni equivalenti in .def, riducibile/irriducibile in elenco; titoletto «Riduzione a denominatore comune» con il procedimento in elenco numerato e titoletto «Esempio» (calcolo in due .eq). Nessun esempio eliminato, nessuna comparsa da togliere, nessuna figura. Precisazioni: equivalenza estesa a «moltiplicando o dividendo per uno stesso numero diverso da zero» (la moltiplicazione è il passo usato nella riduzione a denominatore comune); aggiunta la voce «numeratore 0 → frazione uguale a 0» (concordi/discordi valgono per numeri non nulli). Verificato con Python (fractions): 10/8 = 5/4, 11/6 = 55/30, 4/15 = 8/30, mcm(6,15) = 30.
 
 ## Unità 09 — Operazioni con le frazioni
 - Parole: 649 (incl. titolo/nav/footer) su 6 pagine di traccia (pag. 19–24 di matematica-1.pdf;
