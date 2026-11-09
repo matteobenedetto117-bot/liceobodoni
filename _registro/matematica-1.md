@@ -61,7 +61,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con Python: (-2)^5=-32, (-2)^4=+16, 5-2=5+(-2)=3,
   +5:(-5)=-1, +6:(+2)=+3, -2·(-7)=+14, -3·(+5)=-15, tutti conformi alla traccia.
 - Aggiunta: nessuna.
-
+- Revisione (09/11/2026, regole 13/10): parole circa 315 → 110 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 04), tolti sommario e prosa dei riquadri; somma algebrica in .def con formula ed esempio in una .eq; regola dei segni in elenco caso → conseguenza; casi con lo zero in elenco (impossibile e indeterminato con la motivazione in mezza riga), esempi in una .eq; titoletto «Potenze con base negativa» con pari/dispari in elenco; esponenti 0 e 1 in .def (la .nota tolta). Nessun esempio eliminato, nessuna comparsa da togliere, nessuna figura. Correzioni: $a^0=1$ con la condizione $a\neq0$ (prima $a^0=+1$ senza condizione accanto a «$0^0$ non definito»); tolta l'affermazione «con esponente negativo il risultato esce da ℤ», falsa per base ±1 ($(-1)^{-1}=-1$), sostituita da «in ℤ gli esponenti sono naturali». Verificato con Python: (−2)⁵=−32, (−2)⁴=16, 5−2=3, +5:(−5)=−1, +6:(+2)=+3, −2·(−7)=14, −3·(+5)=−15.
 ## Unità 08 — Numeri razionali: frazioni, riduzione, denominatore comune
 - Parole: 390 (incl. titolo/nav/footer) su 2 pagine di traccia (pag. 17–18 di matematica-1.pdf;
   pag. 19, con l'intestazione "Confronto di numeri razionali", apre già l'unità 09).

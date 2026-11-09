@@ -5,16 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Operazioni in Z e potenze con base negativa — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.caso h3{margin:0 0 10px;font-size:1.15rem}
-.nota{background:var(--blu-chiaro);border-radius:10px;padding:16px 20px;margin:24px 0;font-size:.95rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
 </style>
 </head>
 <body>
@@ -24,74 +77,66 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">I numeri &middot; Unità 07</p>
   <h1>Operazioni in Z e potenze con base negativa</h1>
-  <p class="sommario">Con l'insieme $\mathbb{Z}$ le quattro operazioni vanno riscritte: il
-  risultato non dipende più solo dai numeri coinvolti ma anche dal loro segno. La stessa domanda
-  si pone per le potenze, quando la base è negativa.</p>
 </header>
 
-<div class="def">
-<span class="et">Addizione e sottrazione</span>
-<p>In $\mathbb{Z}$ addizione e sottrazione sono la stessa operazione, la <b>somma
-algebrica</b>: sottrarre un numero equivale a sommare il suo opposto.</p>
-</div>
+<p>In $\mathbb{Z}$ il risultato di un'operazione dipende anche dal segno dei numeri.</p>
 
-<div class="caso">
-<h3>Esempio</h3>
-$$5-2=5+(-2)$$
-</div>
+<div class="def"><span class="et">Somma algebrica</span>
+<p>Sottrarre un numero equivale a sommare il suo opposto.</p>
+<p class="eq">$$a-b=a+(-b)\qquad 5-2=5+(-2)=3$$</p></div>
 
-<div class="def">
-<span class="et">Moltiplicazione e divisione</span>
-<p>Moltiplicando o dividendo due numeri, il segno del risultato segue la regola dei segni:
-se i due numeri sono <b>concordi</b> il risultato è sempre positivo, se sono <b>discordi</b> è
-sempre negativo.</p>
-</div>
+<p>Regola dei segni, per moltiplicazione e divisione:</p>
+<ul>
+<li>numeri concordi → risultato positivo;</li>
+<li>numeri discordi → risultato negativo.</li>
+</ul>
 
-<div class="caso">
-<h3>Esempio</h3>
-$$+5:(-5)=-1\qquad +6:(+2)=+3\qquad -2\cdot(-7)=+14\qquad -3\cdot(+5)=-15$$
-</div>
+<p class="eq">$$+5:(-5)=-1\qquad +6:(+2)=+3\qquad -2\cdot(-7)=+14\qquad -3\cdot(+5)=-15$$</p>
 
-<div class="def">
-<span class="et">Casi particolari con lo zero</span>
-<p>Il prodotto con zero è sempre zero, qualunque sia il segno dell'altro fattore, e zero diviso
-un numero diverso da zero fa zero. Ma un numero non nullo diviso zero non ha risultato: non
-esiste alcun numero che, moltiplicato per $0$, dia quel numero, quindi <b>non si può dividere
-per zero</b>. Il caso $0:0$ è diverso: ogni numero moltiplicato per $0$ dà $0$, quindi il
-risultato non è determinabile in modo unico, ed è <b>indeterminato</b>.</p>
-</div>
+<p>Casi con lo zero:</p>
+<ul>
+<li>$a\cdot0=0$ per ogni $a$;</li>
+<li>$0:a=0$ se $a\neq0$;</li>
+<li>$a:0$ con $a\neq0$ → impossibile: nessun numero moltiplicato per $0$ dà $a$;</li>
+<li>$0:0$ → indeterminato: ogni numero moltiplicato per $0$ dà $0$.</li>
+</ul>
 
-<div class="caso">
-<h3>Esempio</h3>
-$$3\cdot 0=0\qquad -8\cdot 0=0\qquad 0:5=0$$
-$$3:0=\text{impossibile}\qquad\qquad 0:0=\text{indeterminato}$$
-</div>
+<p class="eq">$$3\cdot 0=0\qquad -8\cdot 0=0\qquad 0:5=0\qquad 3:0\ \text{impossibile}\qquad 0:0\ \text{indeterminato}$$</p>
 
-<div class="def">
-<span class="et">Potenza con base negativa</span>
-<p>Una potenza con base negativa è comunque il prodotto ripetuto della base per se stessa, e il
-segno del risultato dipende dalla parità dell'esponente: con <b>esponente pari</b> i segni meno
-si accoppiano ed elidono, quindi il risultato è sempre positivo; con <b>esponente dispari</b> ne
-resta uno scoperto, e il risultato mantiene il segno della base.</p>
-</div>
+<h2>Potenze con base negativa</h2>
 
-<div class="caso">
-<h3>Esempio</h3>
-$$(-2)^5=(-2)\cdot(-2)\cdot(-2)\cdot(-2)\cdot(-2)=-2^5=-32$$
-$$(-2)^4=(-2)\cdot(-2)\cdot(-2)\cdot(-2)=+16$$
-</div>
+<ul>
+<li>esponente pari → risultato positivo;</li>
+<li>esponente dispari → risultato con il segno della base.</li>
+</ul>
 
-<div class="nota">
-<p>Anche con base negativa restano valide le due convenzioni già note: $a^0=+1$ e $a^1=a$, come
-in $(+3)^0=1$, $(-2)^0=1$, $(+3)^1=+3$, $(-2)^1=-2$. Il caso $0^0$ resta non definito. Se invece
-l'esponente è negativo, il risultato esce dall'insieme $\mathbb{Z}$: in $\mathbb{Z}$ la potenza è
-definita solo con esponente positivo o nullo.</p>
-</div>
+<p class="eq">$$(-2)^5=(-2)\cdot(-2)\cdot(-2)\cdot(-2)\cdot(-2)=-32$$</p>
+<p class="eq">$$(-2)^4=(-2)\cdot(-2)\cdot(-2)\cdot(-2)=+16$$</p>
 
+<div class="def"><span class="et">Esponente 0 e 1</span>
+<p class="eq">$$a^0=1\ (a\neq0)\qquad a^1=a\qquad (-2)^0=1\qquad (-2)^1=-2$$</p>
+<p>$0^0$ non è definito; in $\mathbb{Z}$ gli esponenti sono naturali.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../06-numeri-interi-opposti-concordi-e-discordi-valore-assoluto/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Numeri interi: opposti, concordi e discordi, valore assoluto</span></a><a class="successiva" href="../08-numeri-razionali-frazioni-riduzione-denominatore-comune/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Numeri razionali: frazioni, riduzione, denominatore comune</span></a></nav>
 <footer><p>Matematica prima &middot; I numeri &middot; Unità 07</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
