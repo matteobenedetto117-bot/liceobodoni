@@ -5,16 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gli insiemi numerici N, Z, Q, R — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg.insiemi{width:100%;max-width:420px;display:block;margin:0 auto}
 </style>
 </head>
 <body>
@@ -24,53 +78,65 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">I numeri &middot; Unità 01</p>
   <h1>Gli insiemi numerici N, Z, Q, R</h1>
-  <p class="sommario">Ogni volta che un'operazione non ha soluzione nell'insieme di numeri usato
-  finora, si passa a un insieme più grande che la contiene: così, per ampliamenti successivi, dai
-  numeri naturali si arriva ai numeri reali.</p>
 </header>
 
-<h2>Quattro insiemi, uno dentro l'altro</h2>
+<p>Quattro insiemi numerici, ciascuno ampliamento del precedente:</p>
 
-<p>$\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$ sono, nell'ordine, i naturali, gli interi,
-i razionali e i reali, e vale la catena di inclusioni $\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}
-\subset\mathbb{R}$.</p>
+<ul>
+<li>$\mathbb{N}$, naturali: $\{0,1,2,3,\dots\}$;</li>
+<li>$\mathbb{Z}$, interi: i naturali e i loro opposti, come $-2$ e $-1$ → sottrazione sempre possibile;</li>
+<li>$\mathbb{Q}$, razionali: le frazioni $\frac{a}{b}$ con $a,b$ interi e $b\neq0$, come $-\frac{2}{5}$ e $\frac{7}{4}$ → divisione per un numero diverso da $0$ sempre possibile;</li>
+<li>$\mathbb{R}$, reali: i razionali e gli irrazionali, numeri non scrivibili come frazione, come $\pi$ e $\sqrt2$.</li>
+</ul>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>$\mathbb{N}=\{0,1,2,3,\dots\}$. $\mathbb{Z}$ aggiunge gli opposti dei naturali, come $-2$ e $-1$.
-$\mathbb{Q}$ è l'insieme delle frazioni $\frac{a}{b}$ con $a,b$ interi e $b\neq0$, come
-$-\frac{2}{5}$ e $\frac{7}{4}$. $\mathbb{R}$ aggiunge i numeri che non si possono scrivere come
-frazione, come $\pi$ e $\sqrt2$: gli irrazionali.</p>
-</div>
+<div class="def"><span class="et">Catena di inclusioni</span>
+<p class="eq">$$\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\mathbb{R}$$</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="330" cy="165" rx="295" ry="140" fill="none" stroke="#16283d" stroke-width="2"/>
-<ellipse cx="300" cy="165" rx="222" ry="108" fill="none" stroke="#16283d" stroke-width="2"/>
-<ellipse cx="270" cy="165" rx="150" ry="78" fill="none" stroke="#16283d" stroke-width="2"/>
-<ellipse cx="240" cy="165" rx="78" ry="48" fill="none" stroke="#16283d" stroke-width="2"/>
-<text x="238" y="150" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="20" font-weight="600" fill="#16283d">N</text>
-<text x="238" y="172" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#4a5a6d">naturali</text>
-<text x="238" y="190" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#16283d">0, 1, 2, …</text>
-<text x="380" y="98" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="20" font-weight="600" fill="#16283d">Z</text>
-<text x="380" y="120" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#4a5a6d">interi</text>
-<text x="380" y="138" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">−2, −1, 0, 1, 2</text>
-<text x="490" y="70" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="20" font-weight="600" fill="#16283d">Q</text>
-<text x="490" y="92" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#4a5a6d">razionali</text>
-<text x="490" y="110" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">−2/5,  7/4</text>
-<text x="580" y="45" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="20" font-weight="600" fill="#16283d">R</text>
-<text x="580" y="67" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#4a5a6d">reali</text>
-<text x="580" y="85" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#b3392f">π,  √2</text>
-</svg>
-<p class="did">Insiemi annidati: ogni numero del cerchio più piccolo appartiene anche a tutti quelli
-che lo contengono. $-2$ e $-1$ sono interi ma non naturali; $-\frac{2}{5}$ e $\frac{7}{4}$ sono
-razionali ma non interi; $\pi$ e $\sqrt2$ sono reali ma non razionali.</p>
+<svg id="f-insiemi" class="insiemi" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">Ogni insieme contiene i precedenti</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../../index.html"><span class="dir">&larr; Indice</span><span class="tit">Matematica — Prima</span></a><a class="successiva" href="../02-espressioni-numeriche-e-ordine-delle-operazioni/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Espressioni numeriche e ordine delle operazioni</span></a></nav>
 <footer><p>Matematica prima &middot; I numeri &middot; Unità 01</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'text-anchor':'middle','font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+var s=document.getElementById('f-insiemi'),W=420,H=250,cy=H/2;
+s.setAttribute('viewBox','0 0 '+W+' '+H);
+/* dal piu interno (N) al piu esterno (R): bordo sinistro a passo 12, bordo destro a passo 90 */
+var ins=[['N','naturali','0, 1, 2, …'],['Z','interi','−2, −1'],['Q','razionali','−2/5, 7/4'],['R','reali','π, √2']];
+var E=ins.map(function(v,k){var j=3-k,l=8+j*12,r=412-j*90;return {cx:(l+r)/2,rx:(r-l)/2,ry:118-j*24,l:l,r:r};});
+E.slice().reverse().forEach(function(e){s.appendChild(el('ellipse',{cx:e.cx,cy:cy,rx:e.rx,ry:e.ry,fill:'none',stroke:'var(--inchiostro)','stroke-width':1.6}));});
+ins.forEach(function(v,k){
+  var x=k===0?E[0].cx:(E[k-1].r+E[k].r)/2;
+  txt(s,x,cy-10,v[0],{'font-size':16,'font-weight':700});
+  txt(s,x,cy+6,v[1],{fill:'var(--grigio)'});
+  txt(s,x,cy+22,v[2],{fill:'var(--rosso)'});
+});
+})();
+</script>
 </body>
 </html>

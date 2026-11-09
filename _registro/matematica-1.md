@@ -13,6 +13,7 @@ questo sul sito pubblico.
   negli esempi scelti nel disegno stesso; l'ho resa esplicita in una riga per rendere leggibile il
   perché della catena di inclusioni. Verificato con SymPy: sqrt(2) e pi hanno is_rational=False,
   -2/5 e 7/4 hanno is_rational=True.
+- Revisione (09/11/2026, regole 13/10): parole circa 106 → 69 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario escluso prima, circa 140 con il sommario). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come matematica-3 unità 50), tolti sommario, titoletto «Quattro insiemi, uno dentro l'altro» e la definizione in prosa; apertura in una frase; i quattro insiemi in elenco con esempi e, per Z e Q, l'operazione resa possibile (caso → conseguenza); catena di inclusioni in .def. Nessuna comparsa da togliere. Correzione della figura: nel vecchio SVG le etichette erano spostate di un insieme verso l'esterno (Z con −2, −1 cadeva nella zona di Q, Q nella zona di R, R fuori da tutte le ellissi), verificato con il calcolo dei punti nelle ellissi. Figura ridisegnata da script: quattro ellissi annidate, ogni etichetta (simbolo, nome, esempi) nella propria fascia, controllata con getBBox; esempi di Z ridotti a −2, −1 (0, 1, 2 sono già in N); didascalia ridotta a una riga. Nessuna correzione al testo: verificato con SymPy che √2 e π non sono razionali, −2/5 e 7/4 sì.
 
 ## Unità 02 — Espressioni numeriche e ordine delle operazioni
 - Parole: 156 su 1,5 pagine di traccia (pag. 3–4)
