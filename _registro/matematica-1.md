@@ -19,6 +19,7 @@ questo sul sito pubblico.
 - Parole: 156 su 1,5 pagine di traccia (pag. 3–4)
 - Rettifica: nessuna, l'esempio numerico è corretto (verificato con SymPy: risultato 51)
 - Aggiunta: nessuna
+- Revisione (09/11/2026, regole 13/10): parole circa 108 → 38 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 01), tolti sommario e prosa dei due riquadri e dell'esempio; ordine delle operazioni in elenco numerato, «stesso livello → da sinistra a destra» in una riga, ordine delle parentesi in .def; esempio con i passaggi in una sola .eq; riquadro .caso sostituito dal titoletto «Esempio». Nessuna comparsa da togliere, nessuna figura. Nessuna correzione: verificato con SymPy che l'espressione vale 51.
 
 ## Unità 03 — Espressioni letterali
 - Parole: 224 su circa 1,3 pagine di traccia (pag. 4 intera più il primo blocco di pag. 5, fino
