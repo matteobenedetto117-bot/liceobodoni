@@ -5,19 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni logaritmiche e condizioni di esistenza — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.svolgimento .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
-figure{margin:20px 0;text-align:center}
-figure svg{max-width:100%;height:auto}
-figcaption{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin-top:6px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg.retta{width:100%;max-width:420px;display:block;margin:0 auto}
+table.segni{border-collapse:collapse;margin:0 auto;font-family:var(--sans);font-size:.85rem;line-height:1.4}
+table.segni td{padding:4px 12px;text-align:center;border-bottom:1px solid var(--riga)}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
+table.segni td.pos{color:var(--blu);font-weight:600}
+table.segni td.neg{color:var(--rosso);font-weight:600}
 </style>
 </head>
 <body>
@@ -27,134 +83,106 @@ figcaption{font-family:var(--sans);font-size:.8rem;color:var(--grigio);margin-to
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Logaritmi &middot; Unità 49</p>
   <h1>Equazioni logaritmiche e condizioni di esistenza</h1>
-  <p class="sommario">Un'equazione logaritmica ha l'incognita nell'argomento di almeno un
-  logaritmo. Prima ancora di risolverla va fissato il dominio in cui ha senso cercare la
-  soluzione, perché il logaritmo esiste solo per argomenti positivi: sono le condizioni di
-  esistenza, e ogni soluzione trovata va confrontata con esse prima di essere accettata.</p>
 </header>
 
-<div class="def">
-<span class="et">Forma e condizioni di esistenza</span>
-<p>Consideriamo le equazioni logaritmiche riconducibili alla forma
-$$\log_a A(x) = \log_a B(x),$$
-con la stessa base $a$ su entrambi i membri. Le condizioni di esistenza (C.E.) richiedono che
-i due argomenti siano positivi:
-$$\begin{cases} A(x)>0 \\ B(x)>0 \end{cases}$$
-Fissate le C.E., due logaritmi con la stessa base sono uguali se e solo se sono uguali i loro
-argomenti (il logaritmo è una funzione iniettiva), quindi
-$$\log_a A(x) = \log_a B(x) \ \Longrightarrow\ A(x)=B(x).$$
-Le soluzioni di quest'ultima equazione algebrica vanno scartate quando non rispettano le
-C.E.</p>
+<p>$\log_a A(x)=\log_a B(x)$: come si risolve e quali soluzioni si accettano?</p>
+
+<div class="def"><span class="et">Condizioni di esistenza (C.E.)</span>
+<p class="eq">$$\begin{cases} A(x)&gt;0 \\ B(x)&gt;0 \end{cases}$$</p></div>
+
+<p>Con le C.E. soddisfatte, il logaritmo è iniettivo:</p>
+
+<div class="def"><span class="et">Uguaglianza degli argomenti ($a&gt;0,\ a\ne1$)</span>
+<p class="eq">$$\log_a A(x)=\log_a B(x)\ \Longrightarrow\ A(x)=B(x)$$</p></div>
+
+<ul>
+<li>soluzione che rispetta le C.E. → accettata;</li>
+<li>soluzione che non le rispetta → scartata.</li>
+</ul>
+
+<p>Notazione: $\log$ in base $10$, $\ln$ in base $e\approx2{,}718$.</p>
+
+<h2>Esempio 1</h2>
+
+<p>Risolvere $\log x+\log(x+3)=\log 2+\log(2x+3)$.</p>
+
+<p class="eq">$$\text{C.E.}:\ \begin{cases} x&gt;0 \\ x+3&gt;0 \\ 2x+3&gt;0\end{cases}\ \Longrightarrow\ \begin{cases} x&gt;0 \\ x&gt;-3 \\ x&gt;-\tfrac32\end{cases}\ \Longrightarrow\ x&gt;0$$</p>
+
+<div class="fig">
+<svg id="f-ce1" class="retta" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">C.E.: $x&gt;0$</p>
 </div>
 
-<p>Nella scrittura degli esempi, $\log$ senza indice di base indica il logaritmo in base
-$10$, mentre $\ln$ indica il logaritmo naturale, in base $e\approx 2{,}718$.</p>
+<p class="eq">$$\log[x(x+3)]=\log[2(2x+3)]\ \Longrightarrow\ x^2-x-6=0\ \Longrightarrow\ x=-2\ \text{(scartata)},\ \ x=3$$</p>
 
-<h2>Un'equazione a base fissata</h2>
+<h2>Esempio 2</h2>
 
-<div class="svolgimento">
-<span class="et">Esempio 1</span>
-<p>$$\log x + \log(x+3) = \log 2 + \log(2x+3)$$</p>
-<p>Le C.E. impongono che tutti e tre gli argomenti siano positivi:
-$$\begin{cases} x>0 \\ x+3>0 \\ 2x+3>0\end{cases} \Longrightarrow \begin{cases} x>0 \\ x>-3
-\\ x>-\tfrac32\end{cases}$$</p>
-<figure>
-<svg viewBox="0 0 420 90" xmlns="http://www.w3.org/2000/svg">
-<g font-family="sans-serif" font-size="13" stroke="#333">
-<line x1="20" y1="55" x2="400" y2="55" stroke-width="1.3"/>
-<circle cx="70" cy="55" r="3" fill="#333"/>
-<circle cx="150" cy="55" r="3" fill="#333"/>
-<circle cx="250" cy="55" r="3" fill="#333"/>
-<text x="60" y="75" fill="#333">&minus;3</text>
-<text x="132" y="75" fill="#333">&minus;3/2</text>
-<text x="246" y="75" fill="#333">0</text>
-<line x1="250" y1="65" x2="400" y2="65" stroke="#b3392f" stroke-width="3"/>
-<text x="300" y="45" fill="#b3392f">x &gt; 0</text>
-</g>
-</svg>
-<figcaption>Intersezione delle tre condizioni: resta solo x &gt; 0.</figcaption>
-</figure>
-<p>Le tre condizioni si intersecano in $x>0$, la più restrittiva. Combinando i logaritmi con
-le proprietà di somma per ciascun membro:
-$$\log[x(x+3)] = \log[2(2x+3)] \ \Longrightarrow\ x(x+3)=2(2x+3)$$
-Svolgendo: $x^2+3x=4x+6$, cioè $x^2-x-6=0$, che si scompone come $(x+2)(x-3)=0$: le soluzioni
-algebriche sono $x=-2$ e $x=3$. Confrontando con la C.E. $x>0$, $x=-2$ va scartata e resta
-$x=3$.</p>
+<p>Risolvere $\log_{\frac12}(x^2-4x)+\log_2(2x)=0$.</p>
+
+<p class="eq">$$\text{C.E.}:\ \begin{cases} x(x-4)&gt;0 \\ 2x&gt;0\end{cases}\ \Longrightarrow\ \begin{cases} x&lt;0\ \vee\ x&gt;4 \\ x&gt;0\end{cases}\ \Longrightarrow\ x&gt;4$$</p>
+
+<div class="fig">
+<svg id="f-ce2" class="retta" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">C.E.: $x&gt;4$</p>
 </div>
 
-<div class="svolgimento">
-<span class="et">Esempio 2</span>
-<p>$$\log_2(3x) - \log_2(x+1) = \log_2(3x+4)$$</p>
-<p>C.E.: $3x>0$, $x+1>0$, $3x+4>0$, cioè $x>0$, $x>-1$, $x>-\tfrac43$, che si intersecano in
-$x>0$. Portando il secondo logaritmo a secondo membro e componendo:
-$$\log_2(3x) = \log_2[(x+1)(3x+4)] \ \Longrightarrow\ 3x=(x+1)(3x+4)$$
-Sviluppando il prodotto, $(x+1)(3x+4)=3x^2+7x+4$, per cui $3x=3x^2+7x+4$ diventa
-$3x^2+4x+4=0$. Il discriminante è $\Delta=4^2-4\cdot3\cdot4=16-48=-32$, negativo: l'equazione
-non ha soluzioni reali, quindi l'equazione logaritmica di partenza non ne ha nessuna.</p>
-</div>
+<p>Cambiamento di base, con $\log_{\frac12}2=-1$:</p>
 
-<h2>Equazioni con incognita ausiliaria</h2>
+<p class="eq">$$\log_2(2x)=\frac{\log_{\frac12}(2x)}{\log_{\frac12}2}=-\log_{\frac12}(2x)$$</p>
 
-<p>Quando lo stesso logaritmo compare più volte, elevato a potenza o moltiplicato per un
-coefficiente, conviene introdurre una nuova incognita al posto del logaritmo, risolvere
-l'equazione che ne risulta, e solo alla fine tornare alla $x$ originaria.</p>
+<p class="eq">$$\log_{\frac12}(x^2-4x)=\log_{\frac12}(2x)\ \Longrightarrow\ x^2-6x=0\ \Longrightarrow\ x=0\ \text{(scartata)},\ \ x=6$$</p>
 
-<div class="svolgimento">
-<span class="et">Esempio 3</span>
-<p>$$(\log_3 x)^2 - 2\log_3 x - 3 = 0, \qquad \text{C.E.}: x>0$$</p>
-<p>Poniamo $t=\log_3 x$: l'equazione diventa $t^2-2t-3=0$, con $\Delta=4+12=16$ e
-$$t_{1,2}=\frac{2\pm4}{2} \ \Longrightarrow\ t_1=3,\ t_2=-1.$$
-Tornando alla $x$: da $\log_3 x=3$ segue $x=3^3=27$; da $\log_3 x=-1$ segue $x=3^{-1}=\tfrac13$.
-Entrambe sono positive, quindi entrambe rispettano la C.E. e sono accettabili.</p>
-</div>
-
-<h2>Equazioni con basi diverse</h2>
-
-<p>Se i logaritmi dell'equazione hanno basi diverse, prima di poter confrontare gli argomenti
-bisogna riportarli tutti alla stessa base, con la formula del cambiamento di base vista
-nell'unità precedente.</p>
-
-<div class="svolgimento">
-<span class="et">Esempio 4</span>
-<p>$$\log_{\frac12}(x^2-4x) + \log_2(2x) = 0$$</p>
-<p>C.E.: $x^2-4x>0$ e $2x>0$. Dalla prima, $x(x-4)>0$ dà $x<0 \ \vee\ x>4$; dalla seconda,
-$x>0$. L'intersezione è $x>4$.</p>
-<figure>
-<svg viewBox="0 0 420 90" xmlns="http://www.w3.org/2000/svg">
-<g font-family="sans-serif" font-size="13" stroke="#333">
-<line x1="20" y1="55" x2="400" y2="55" stroke-width="1.3"/>
-<circle cx="120" cy="55" r="3" fill="#333"/>
-<circle cx="250" cy="55" r="3" fill="#333"/>
-<text x="115" y="75" fill="#333">0</text>
-<text x="245" y="75" fill="#333">4</text>
-<line x1="250" y1="65" x2="400" y2="65" stroke="#b3392f" stroke-width="3"/>
-<text x="300" y="45" fill="#b3392f">x &gt; 4</text>
-</g>
-</svg>
-<figcaption>Intersezione delle due condizioni: resta x &gt; 4.</figcaption>
-</figure>
-<p>Riportiamo $\log_2(2x)$ in base $\tfrac12$ con la formula del cambiamento di base, ricordando
-che $\log_{\frac12}2=-1$:
-$$\log_2(2x) = \frac{\log_{\frac12}(2x)}{\log_{\frac12}2} = \frac{\log_{\frac12}(2x)}{-1} =
--\log_{\frac12}(2x)$$
-Sostituendo, l'equazione diventa $\log_{\frac12}(x^2-4x) - \log_{\frac12}(2x) = 0$, cioè
-$$\log_{\frac12}(x^2-4x) = \log_{\frac12}(2x) \ \Longrightarrow\ x^2-4x=2x \ \Longrightarrow\
-x^2-6x=0 \ \Longrightarrow\ x(x-6)=0.$$
-Le soluzioni algebriche sono $x=0$ e $x=6$. Solo $x=6$ rispetta la C.E. $x>4$.</p>
-</div>
-
-<div class="nota">
-<span class="et">Attenzione</span>
-<p>Ogni soluzione dell'equazione algebrica ottenuta uguagliando gli argomenti va sempre
-confrontata con le C.E. scritte all'inizio: la stessa equazione, senza quel confronto,
-avrebbe accettato $x=-2$ nell'Esempio 1 e $x=0$ nell'Esempio 4, che invece rendono negativo o
-nullo uno degli argomenti di partenza.</p>
-</div>
-
+<div class="nota"><span class="et">Attenzione</span>
+<p>Senza il confronto con le C.E. si accetterebbero $x=-2$ e $x=0$, che rendono negativo o nullo un argomento.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../48-formula-del-cambiamento-di-base/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Formula del cambiamento di base</span></a><a class="successiva" href="../50-disequazioni-logaritmiche/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disequazioni logaritmiche</span></a></nav>
 <footer><p>Matematica terza &middot; Logaritmi &middot; Unità 49</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
+
+<script>
+(function(){
+var NS='http://www.w3.org/2000/svg';
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(g,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-family':'var(--sans)','font-size':12,fill:'var(--inchiostro)'},a||{}));e.textContent=s;g.appendChild(e);return e;}
+/* o={id,X,pti:[[v,etichetta]],righe:[[etichetta,[[a,b],...]]],sol:[[a,b],...]}; b=Infinity o a=-Infinity: fino al bordo */
+window.retta=function(o){
+  var s=document.getElementById(o.id),n=o.righe.length,H=22,y0=18,ya=y0+n*H+8,W=420,xl=112,xr=410;
+  s.setAttribute('viewBox','0 0 '+W+' '+(ya+26));
+  function X(v){return v===Infinity?xr:(v===-Infinity?xl:o.X(v));}
+  o.pti.forEach(function(p){s.appendChild(el('line',{x1:X(p[0]),y1:y0-8,x2:X(p[0]),y2:ya,stroke:'var(--grigio)','stroke-width':.8,'stroke-dasharray':'3,3'}));});
+  function tratto(a,b,y,col,w){s.appendChild(el('line',{x1:X(a),y1:y,x2:X(b),y2:y,stroke:col,'stroke-width':w,'stroke-linecap':'butt'}));
+    [a,b].forEach(function(v){if(isFinite(v))s.appendChild(el('circle',{cx:X(v),cy:y,r:3.6,fill:'#fff',stroke:col,'stroke-width':1.6}));});}
+  o.righe.forEach(function(r,i){var y=y0+i*H;txt(s,8,y+4,r[0]);r[1].forEach(function(t){tratto(t[0],t[1],y,'var(--blu)',2.4);});});
+  s.appendChild(el('line',{x1:xl-6,y1:ya,x2:xr+4,y2:ya,stroke:'var(--inchiostro)','stroke-width':1.2}));
+  txt(s,8,ya+4,o.etSol||'soluzione',{fill:'var(--rosso)','font-weight':600});
+  o.sol.forEach(function(t){tratto(t[0],t[1],ya,'var(--rosso)',4.2);});
+  o.pti.forEach(function(p){txt(s,X(p[0]),ya+20,p[1],{'text-anchor':'middle'});});
+};
+})();
+</script>
+<script>
+retta({id:'f-ce1',X:function(v){return 120+(v+4)*280/5.5;},pti:[[-3,'−3'],[-1.5,'−3/2'],[0,'0']],
+  righe:[['x > 0',[[0,Infinity]]],['x > −3',[[-3,Infinity]]],['x > −3/2',[[-1.5,Infinity]]]],sol:[[0,Infinity]],etSol:'C.E.'});
+retta({id:'f-ce2',X:function(v){return 120+(v+2)*280/8.5;},pti:[[0,'0'],[4,'4']],
+  righe:[['x(x − 4) > 0',[[-Infinity,0],[4,Infinity]]],['2x > 0',[[0,Infinity]]]],sol:[[4,Infinity]],etSol:'C.E.'});
+</script>
 </body>
 </html>
