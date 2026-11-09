@@ -5,22 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dominio delle funzioni del tipo [f(x)]^g(x) — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-table.segni{border-collapse:collapse;margin:22px auto;font-family:var(--sans);font-size:.95rem}
-table.segni td{padding:6px 16px;text-align:center;border-bottom:1px solid var(--riga)}
-table.segni td.etichetta{text-align:left;color:var(--grigio);font-size:.85rem}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+table.segni{border-collapse:collapse;margin:var(--r) auto 0;font-family:var(--sans);font-size:.95rem}
+table.segni td{padding:0 16px;height:var(--r);line-height:var(--r);text-align:center}
+table.segni td.etichetta{text-align:left;color:var(--grigio)}
 table.segni td.pos{color:var(--blu);font-weight:600}
 table.segni td.neg{color:var(--rosso);font-weight:600}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+table.segni tr.intervalli td{color:var(--grigio);font-size:.85rem}
+.foglio>table.segni+p{margin-top:var(--r)}
 </style>
 </head>
 <body>
@@ -30,101 +83,73 @@ table.segni td.neg{color:var(--rosso);font-weight:600}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Esponenziali &middot; Unità 43</p>
   <h1>Dominio delle funzioni del tipo $[f(x)]^{g(x)}$</h1>
-  <p class="sommario">Nella funzione esponenziale $y=a^x$ la base è un numero fissato e positivo.
-  Se al posto di quel numero compare un'espressione in $x$, oppure se anche l'esponente dipende da
-  $x$, il dominio non si legge più a colpo d'occhio: va ricavato imponendo che l'elevamento a
-  potenza abbia senso. Distinguiamo tre casi, a seconda che a variare con $x$ sia la base,
-  l'esponente, o entrambi.</p>
 </header>
+
+<p>Base, esponente o entrambi dipendono da $x$: quando esiste la potenza?</p>
 
 <h2>Base costante, esponente variabile</h2>
 
-<p>Nel primo caso la base resta un numero fissato $a$, mentre l'esponente è un'espressione
-$f(x)$ al posto della semplice $x$. Vale la stessa condizione già nota per la funzione
-esponenziale elementare: basta che la base sia positiva, e ci si mette nel dominio di
-$f(x)$.</p>
+<div class="def"><span class="et">Regola</span>
+<p class="eq">$$y=a^{f(x)}\ \text{esiste se}\ a>0,\ \text{nel dominio di}\ f(x)$$</p></div>
 
-<div class="def">
-<span class="et">Regola</span>
-<p>$y=a^{f(x)}$, con $a\in\mathbb{R}$: la funzione esiste se $a>0$, nel dominio di
-$f(x)$.</p>
-</div>
+<p>Esempi:</p>
 
-<div class="svolgimento">
-<span class="et">Esempi</span>
-<p>$y=3^{\sqrt{x-1}}$: la base $3$ è sempre positiva, basta il dominio dell'esponente:
-$$x-1\ge 0 \quad\Longrightarrow\quad \text{C.E.}: x\ge 1$$</p>
-<p>$y=2^{\frac{x-1}{x}}$: la base $2$ è sempre positiva, basta il dominio dell'esponente:
-$\text{C.E.}: x\ne 0$.</p>
-<p>$y=(-3)^{x^2+1}$: la base è negativa, quindi la condizione $a>0$ non è mai soddisfatta:
-$\text{C.E.}: \nexists\, x\in\mathbb{R}$.</p>
-</div>
+<p class="eq">$$\begin{array}{ll}y=3^{\sqrt{x-1}}: & x-1\ge 0\ \Rightarrow\ \text{C.E.}: x\ge 1\\[4pt] y=2^{\frac{x-1}{x}}: & \text{C.E.}: x\ne 0\\[4pt] y=(-3)^{x^2+1}: & a<0\ \Rightarrow\ \text{C.E.}: \nexists\, x\in\mathbb{R}\end{array}$$</p>
 
 <h2>Base variabile, esponente costante</h2>
 
-<p>Capovolgiamo ora i ruoli: l'esponente è un numero fissato $\alpha$, la base è
-un'espressione $f(x)$. La condizione su $f(x)$ dipende dal segno di $\alpha$. Se $\alpha$ è
-positivo basta che la base non sia negativa, perché $0$ elevato a un esponente positivo resta
-$0$; se $\alpha$ è negativo la base compare a denominatore (un esponente negativo è
-l'inverso di una potenza) e quindi non può annullarsi: deve essere strettamente
-positiva.</p>
+<p>Esponente negativo → la base va a denominatore e non può annullarsi.</p>
 
-<div class="def">
-<span class="et">Regola</span>
-<p>$y=[f(x)]^\alpha$, con $\alpha\in\mathbb{R}$ costante, nel dominio di $f(x)$:</p>
-<p>se $\alpha\in\mathbb{R}^+$, C.E.: $f(x)\ge 0$; &nbsp; se $\alpha\in\mathbb{R}^-$, C.E.:
-$f(x)>0$.</p>
-</div>
+<div class="def"><span class="et">Regola</span>
+<p>$y=[f(x)]^\alpha$, con $\alpha$ costante non intera, nel dominio di $f(x)$:</p>
+<p class="eq">$$\alpha>0\ \Rightarrow\ \text{C.E.}: f(x)\ge 0\qquad\quad \alpha<0\ \Rightarrow\ \text{C.E.}: f(x)>0$$</p></div>
 
-<div class="svolgimento">
-<span class="et">Esempi</span>
-<p>$y=(x^2-1)^{\sqrt2}$: l'esponente $\sqrt2$ è positivo, quindi
-$$x^2-1\ge 0 \quad\Longrightarrow\quad \text{C.E.}: x\le -1 \ \vee\ x\ge 1$$</p>
-<p>$y=(x^2-4)^{-\sqrt2}$: l'esponente è negativo, la base deve essere strettamente positiva:
-$$x^2-4>0 \quad\Longrightarrow\quad \text{C.E.}: x<-2 \ \vee\ x>2$$</p>
-<p>$y=\left(\dfrac{x+3}{x-1}\right)^{\pi}$: l'esponente $\pi$ è positivo, quindi serve
-$\dfrac{x+3}{x-1}\ge 0$. Studiamo il segno di numeratore e denominatore:</p>
+<p>Esempi:</p>
+
+<p class="eq">$$\begin{array}{ll}y=(x^2-1)^{\sqrt2}: & x^2-1\ge 0\ \Rightarrow\ \text{C.E.}: x\le -1\ \vee\ x\ge 1\\[4pt] y=(x^2-4)^{-\sqrt2}: & x^2-4>0\ \Rightarrow\ \text{C.E.}: x<-2\ \vee\ x>2\\[4pt] y=\left(\dfrac{x+3}{x-1}\right)^{\pi}: & \dfrac{x+3}{x-1}\ge 0\end{array}$$</p>
+
 <table class="segni">
 <tr><td class="etichetta">$x+3$</td><td class="neg">&minus;</td><td class="pos">+</td><td class="pos">+</td></tr>
 <tr><td class="etichetta">$x-1$</td><td class="neg">&minus;</td><td class="neg">&minus;</td><td class="pos">+</td></tr>
 <tr><td class="etichetta">quoziente</td><td class="pos">+</td><td class="neg">&minus;</td><td class="pos">+</td></tr>
-<tr><td></td><td>$x&lt;-3$</td><td>$-3&lt;x&lt;1$</td><td>$x&gt;1$</td></tr>
+<tr class="intervalli"><td></td><td>$x&lt;-3$</td><td>$-3&lt;x&lt;1$</td><td>$x&gt;1$</td></tr>
 </table>
-<p>Il quoziente è positivo o nullo per $x\le -3$ (incluso: lì si annulla solo il numeratore)
-oppure per $x>1$ (escluso $x=1$, dove si annulla il denominatore): $\text{C.E.}: x\le -3\
-\vee\ x>1$.</p>
-</div>
 
-<h2>Base ed esponente entrambi variabili</h2>
+<p>$x=-3$ incluso (numeratore nullo), $x=1$ escluso (denominatore nullo):</p>
 
-<p>Il caso più generale è quello in cui sia la base sia l'esponente dipendono da $x$. Qui non
-basta più che la base sia non negativa: deve essere strettamente positiva, perché
-l'esponente $g(x)$ varia con continuità e un valore nullo o negativo della base non
-garantirebbe un risultato reale ben definito per ogni $x$.</p>
+<p class="eq">$$\text{C.E.}: x\le -3\ \vee\ x>1$$</p>
 
-<div class="def">
-<span class="et">Regola</span>
-<p>$y=[f(x)]^{g(x)}$ esiste, nel dominio di $g(x)$, se e solo se $f(x)>0$.</p>
-</div>
+<h2>Base ed esponente variabili</h2>
 
-<div class="svolgimento">
-<span class="et">Esempio</span>
-<p>$y=(4x^2-1)^{\sqrt{x}}$. Vanno imposte insieme il dominio dell'esponente e la positività
-della base:</p>
-<p>$$\begin{cases} x\ge 0 & \text{(dominio di }\sqrt{x}\text{)}\\ 4x^2-1>0 & \text{(base
-positiva)}\end{cases}$$</p>
-<p>La seconda condizione si scompone come differenza di quadrati:
-$$4x^2-1>0 \quad\Longrightarrow\quad (2x-1)(2x+1)>0 \quad\Longrightarrow\quad x<-\tfrac12\
-\vee\ x>\tfrac12$$</p>
-<p>Mettendo a sistema con $x\ge 0$, l'unica parte comune alle due condizioni è
-$x>\tfrac12$:</p>
-<p>$$\text{C.E.}: x>\tfrac12$$</p>
-</div>
+<div class="def"><span class="et">Regola</span>
+<p class="eq">$$y=[f(x)]^{g(x)}\ \text{esiste se}\ f(x)>0,\ \text{nel dominio di}\ g(x)$$</p></div>
 
+<h2>Esempio</h2>
+
+<p>Dati: $y=(4x^2-1)^{\sqrt{x}}$. Calcolare il dominio.</p>
+
+<p class="eq">$$\begin{cases} x\ge 0\\ 4x^2-1>0\end{cases}\ \Rightarrow\ \begin{cases} x\ge 0\\ x<-\tfrac12\ \vee\ x>\tfrac12\end{cases}\ \Rightarrow\ \text{C.E.}: x>\tfrac12$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../42-proprieta-delle-potenze-e-il-numero-e/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Proprietà delle potenze e il numero e</span></a><a class="successiva" href="../44-equazioni-esponenziali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni esponenziali</span></a></nav>
 <footer><p>Matematica terza &middot; Esponenziali &middot; Unità 43</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,.foglio>table.segni,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
