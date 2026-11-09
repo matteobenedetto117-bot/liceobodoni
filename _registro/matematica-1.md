@@ -102,6 +102,7 @@ questo sul sito pubblico.
   di estremi e di medi, inversione su 3:2=6:4, e i tre esempi finali (8:x=15:225 → x=120;
   5:14=x:63 → x=45/2; (x+2):12=10:6 → x=18) — tutti conformi alla traccia.
 - Aggiunta: nessuna.
+- Revisione (09/11/2026, regole 13/10): parole circa 226 → 77 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 09), tolti sommario, prosa delle definizioni e riquadri .caso; proporzione in .def, estremi e medi in elenco; titoletto «Proprietà» con comporre, scomporre, permutare, invertire e proprietà fondamentale in .def, ciascuna con formula ed esempio in .eq; ricerca del termine incognito in due esempi («Esempio 1», «Esempio 2»), ognuno in una .eq. Esempio tolto (più di due): 5:14 = x:63 → x = 45/2. Nessuna comparsa da togliere. Nessuna figura. Precisazione: «termini diversi da zero» nella definizione (servono per scrivere i rapporti e per invertire/permutare). Verificato con Python (fractions) comporre, scomporre, permutare e invertire sugli esempi e 8:x = 15:225 → x = 120, (x+2):12 = 10:6 → x = 18.
 
 ## Unità 12 — Percentuali
 - Parole: 224 (incl. titolo/nav/footer) su 2 pagine di traccia (pag. 29–30 di matematica-1.pdf;

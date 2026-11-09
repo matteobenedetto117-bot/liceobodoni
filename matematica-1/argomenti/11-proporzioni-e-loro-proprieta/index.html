@@ -5,15 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proporzioni e loro proprietà — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.caso h3{margin:0 0 10px;font-size:1.15rem}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -23,94 +78,72 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">I numeri &middot; Unità 11</p>
   <h1>Proporzioni e loro proprietà</h1>
-  <p class="sommario">Sappiamo già confrontare e sommare due frazioni. Ora mettiamo a confronto due
-  rapporti fra loro: quando sono uguali si parla di proporzione. Alcune proprietà permettono di
-  trasformarla senza alterarne il valore, e sono lo strumento per trovare un termine che non
-  conosciamo.</p>
 </header>
 
-<div class="def">
-<span class="et">Proporzione</span>
-<p>Una <b>proporzione</b> è un'uguaglianza tra due rapporti, cioè tra due frazioni equivalenti:</p>
-$$a:b=c:d\qquad\Longleftrightarrow\qquad \dfrac{a}{b}=\dfrac{c}{d}$$
-<p>I quattro numeri si chiamano <b>termini</b> della proporzione. Il primo e il quarto, $a$ e $d$, si
-chiamano <b>estremi</b>; il secondo e il terzo, $b$ e $c$, si chiamano <b>medi</b>.</p>
-</div>
+<p>Uguaglianza fra due rapporti, con termini diversi da zero:</p>
 
-<div class="caso">
-<h3>Esempio</h3>
-$$\dfrac{5}{6}=\dfrac{20}{24}\qquad\Longleftrightarrow\qquad 5:6=20:24$$
-</div>
+<div class="def"><span class="et">Proporzione</span>
+<p class="eq">$$a:b=c:d\qquad\Longleftrightarrow\qquad \dfrac{a}{b}=\dfrac{c}{d}$$</p></div>
 
-<div class="def">
-<span class="et">Proprietà del comporre</span>
-<p>Sommando a ciascun antecedente il proprio conseguente si ottiene ancora una proporzione:</p>
-$$a:b=c:d\ \Longrightarrow\ (a+b):a=(c+d):c \qquad\text{e}\qquad (a+b):b=(c+d):d$$
-</div>
+<ul>
+<li>$a$ e $d$ → estremi;</li>
+<li>$b$ e $c$ → medi.</li>
+</ul>
 
-<div class="caso">
-<h3>Esempio</h3>
-<p>Da $2:5=4:10$, componendo:</p>
-$$(2+5):2=(4+10):4\ \Longrightarrow\ 7:2=14:4\qquad\left(\dfrac{7}{2}=\dfrac{14}{4}\right)$$
-</div>
+<p class="eq">$$\dfrac{5}{6}=\dfrac{20}{24}\qquad\Longleftrightarrow\qquad 5:6=20:24$$</p>
 
-<div class="def">
-<span class="et">Proprietà dello scomporre</span>
-<p>Allo stesso modo, sottraendo da ciascun antecedente il proprio conseguente:</p>
-$$a:b=c:d\ \Longrightarrow\ (a-b):a=(c-d):c \qquad\text{e}\qquad (a-b):b=(c-d):d$$
-</div>
+<h2>Proprietà</h2>
 
-<div class="caso">
-<h3>Esempio</h3>
-<p>Da $5:2=10:4$, scomponendo:</p>
-$$(5-2):2=(10-4):4\ \Longrightarrow\ 3:2=6:4\qquad\left(\dfrac{3}{2}=\dfrac{6}{4}\right)$$
-</div>
+<div class="def"><span class="et">Comporre</span>
+<p>A ogni antecedente si somma il proprio conseguente:</p>
+<p class="eq">$$a:b=c:d\ \Longrightarrow\ (a+b):a=(c+d):c\qquad (a+b):b=(c+d):d$$</p>
+<p class="eq">$$2:5=4:10\ \Longrightarrow\ (2+5):2=(4+10):4\ \Longrightarrow\ 7:2=14:4$$</p></div>
 
-<div class="def">
-<span class="et">Permutare</span>
-<p>Scambiando gli estremi, o scambiando i medi, di una proporzione si ottiene ancora una
-proporzione:</p>
-$$a:b=c:d\ \Longrightarrow\ d:b=c:a\quad\text{(scambio degli estremi)}$$
-$$a:b=c:d\ \Longrightarrow\ a:c=b:d\quad\text{(scambio dei medi)}$$
-<p>Lo scambio dei medi si verifica moltiplicando entrambi i membri di $\dfrac{a}{b}=\dfrac{c}{d}$ per
-$\dfrac{b}{c}$: si ottiene $\dfrac{a}{c}=\dfrac{b}{d}$.</p>
-</div>
+<div class="def"><span class="et">Scomporre</span>
+<p>Da ogni antecedente si sottrae il proprio conseguente:</p>
+<p class="eq">$$a:b=c:d\ \Longrightarrow\ (a-b):a=(c-d):c\qquad (a-b):b=(c-d):d$$</p>
+<p class="eq">$$5:2=10:4\ \Longrightarrow\ (5-2):2=(10-4):4\ \Longrightarrow\ 3:2=6:4$$</p></div>
 
-<div class="def">
-<span class="et">Invertire</span>
-<p>Capovolgendo entrambi i rapporti si ottiene ancora una proporzione:</p>
-$$a:b=c:d\ \Longrightarrow\ b:a=d:c$$
-<p>Basta prendere il reciproco di entrambi i membri di $\dfrac{a}{b}=\dfrac{c}{d}$.</p>
-</div>
+<div class="def"><span class="et">Permutare</span>
+<p class="eq">$$a:b=c:d\ \Longrightarrow\ d:b=c:a\ \text{(estremi)}\qquad a:c=b:d\ \text{(medi)}$$</p>
+<p>Scambio dei medi: si moltiplicano per $\dfrac{b}{c}$ i due membri di $\dfrac{a}{b}=\dfrac{c}{d}$.</p></div>
 
-<div class="caso">
-<h3>Esempio</h3>
-<p>Da $\dfrac{3}{2}=\dfrac{6}{4}$, invertendo:</p>
-$$\dfrac{2}{3}=\dfrac{4}{6}$$
-</div>
+<div class="def"><span class="et">Invertire</span>
+<p class="eq">$$a:b=c:d\ \Longrightarrow\ b:a=d:c$$</p>
+<p class="eq">$$3:2=6:4\ \Longrightarrow\ 2:3=4:6$$</p></div>
 
-<div class="def">
-<span class="et">Proprietà fondamentale</span>
-<p>In ogni proporzione il prodotto degli estremi è uguale al prodotto dei medi:</p>
-$$a:b=c:d\ \Longrightarrow\ a\cdot d=b\cdot c$$
-<p>È questa la proprietà che si usa per trovare un termine incognito, quando gli altri tre sono
-noti.</p>
-</div>
+<div class="def"><span class="et">Proprietà fondamentale</span>
+<p>Prodotto degli estremi uguale al prodotto dei medi:</p>
+<p class="eq">$$a:b=c:d\ \Longrightarrow\ a\cdot d=b\cdot c$$</p></div>
 
-<div class="caso">
-<h3>Esempi</h3>
-<p>$8:x=15:225$. Il termine incognito è un medio, quindi $x\cdot 15=8\cdot 225$:</p>
-$$x=\dfrac{8\cdot 225}{15}=120$$
-<p>$5:14=x:63$:</p>
-$$14\cdot x=5\cdot 63\ \Longrightarrow\ x=\dfrac{5\cdot 63}{14}=\dfrac{45}{2}$$
-<p>$(x+2):12=10:6$:</p>
-$$(x+2)\cdot 6=12\cdot 10\ \Longrightarrow\ x+2=\dfrac{120}{6}=20\ \Longrightarrow\ x=18$$
-</div>
+<p>Serve a trovare un termine incognito, noti gli altri tre.</p>
 
+<h2>Esempio 1</h2>
+<p class="eq">$$8:x=15:225\ \Longrightarrow\ 15\cdot x=8\cdot 225\ \Longrightarrow\ x=\dfrac{8\cdot 225}{15}=120$$</p>
+
+<h2>Esempio 2</h2>
+<p class="eq">$$(x+2):12=10:6\ \Longrightarrow\ (x+2)\cdot 6=12\cdot 10\ \Longrightarrow\ x+2=20\ \Longrightarrow\ x=18$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../10-frazioni-generatrici-dei-numeri-decimali-periodici/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Frazioni generatrici dei numeri decimali periodici</span></a><a class="successiva" href="../12-percentuali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Percentuali</span></a></nav>
 <footer><p>Matematica prima &middot; I numeri &middot; Unità 11</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
