@@ -27,6 +27,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 3(2n+5)+6-4n/2 si semplifica in 4n+21, e 3a+b con
   a=1, b=4 vale 7, come nella traccia.
 - Aggiunta: nessuna.
+- Revisione (09/11/2026, regole 13/10): parole circa 139 → 65 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 01), tolti sommario e prosa; apertura in una frase sul significato delle lettere; definizione in .def con gli esempi $3n+1$ e $3a+b$ (la frase isolata su $3a+b$ assorbita nella definizione); due esempi («Esempio 1» semplificazione, «Esempio 2» valore numerico) con passaggi in .eq. Nessuna comparsa da togliere, nessuna figura. Nessuna correzione: verificato con SymPy 3(2n+5)+6−4n:2 = 4n+21 e 3a+b = 7 per a = 1, b = 4.
 
 ## Unità 04 — Proprietà delle operazioni e proprietà invariantiva
 - Parole: 218 su 2 pagine di traccia (dal blocco "Proprietà delle operazioni in N" a pag. 5,
