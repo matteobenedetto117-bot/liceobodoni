@@ -5,18 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Potenze e loro proprietà — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.caso{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:20px 22px;margin:28px 0}
-.caso h3{margin:0 0 10px;font-size:1.15rem}
-.criteri{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}
-.criteri th,.criteri td{padding:8px 12px;border-bottom:1px solid var(--riga);text-align:left;vertical-align:top}
-.criteri th{font-family:var(--sans);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--grigio)}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
 </style>
 </head>
 <body>
@@ -26,93 +77,84 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">I numeri &middot; Unità 05</p>
   <h1>Potenze e loro proprietà</h1>
-  <p class="sommario">Le potenze compaiono in quasi ogni calcolo, quindi conviene sapere come si
-  comportano quando se ne moltiplicano o dividono due. Le stesse idee di fattore e di divisore
-  portano poi ai numeri primi e alla scomposizione in fattori primi, con cui si trovano in modo
-  sistematico il massimo comun divisore e il minimo comune multiplo fra due numeri.</p>
 </header>
 
-<div class="def">
-<span class="et">Potenze con la stessa base</span>
-<p>Se due potenze hanno la stessa base, nel prodotto gli esponenti si sommano, nel quoziente si
-sottraggono; se una potenza viene a sua volta elevata a potenza, gli esponenti si moltiplicano.</p>
-$$a^m\cdot a^n=a^{m+n}\qquad a^m:a^n=a^{m-n}\qquad (a^m)^n=a^{m\cdot n}$$
-</div>
+<p>Prodotto e quoziente di potenze: quando si possono scrivere come un'unica potenza?</p>
 
-<div class="caso">
-<h3>Esempio</h3>
-$$5^2\cdot5^7=5^9\qquad\qquad 4^6:4^2=4^4\qquad\qquad (2^3)^5=2^{3\cdot5}=2^{15}$$
-</div>
+<div class="def"><span class="et">Potenze con la stessa base</span>
+<p class="eq">$$a^m\cdot a^n=a^{m+n}\qquad a^m:a^n=a^{m-n}\qquad (a^m)^n=a^{m\cdot n}$$</p>
+<p>Nel quoziente: $a\neq0$, $m\geq n$.</p></div>
 
-<div class="def">
-<span class="et">Potenze con lo stesso esponente</span>
-<p>Se invece due potenze hanno lo stesso esponente, nel prodotto e nel quoziente si moltiplicano
-o si dividono le basi, e l'esponente resta lo stesso.</p>
-$$a^m\cdot b^m=(a\cdot b)^m\qquad\qquad a^m:b^m=(a:b)^m$$
-</div>
+<p class="eq">$$5^2\cdot5^7=5^9\qquad 4^6:4^2=4^4\qquad (2^3)^5=2^{3\cdot5}=2^{15}$$</p>
 
-<div class="caso">
-<h3>Esempio</h3>
-$$5^2\cdot7^2=(5\cdot7)^2=35^2\qquad\qquad 4^3:2^3=(4:2)^3=2^3$$
-</div>
+<div class="def"><span class="et">Potenze con lo stesso esponente</span>
+<p class="eq">$$a^m\cdot b^m=(a\cdot b)^m\qquad a^m:b^m=(a:b)^m$$</p>
+<p>Nel quoziente: $b\neq0$.</p></div>
 
-<p>Per calcolare il massimo comun divisore e il minimo comune multiplo fra due numeri conviene
-scomporli nei loro fattori primi: vediamo prima che cos'è un numero primo.</p>
+<p class="eq">$$5^2\cdot7^2=(5\cdot7)^2=35^2\qquad 4^3:2^3=(4:2)^3=2^3$$</p>
 
-<div class="def">
-<span class="et">Numero primo</span>
-<p>Un numero naturale diverso da $0$ e da $1$ è un numero primo se ha come divisori solo se
-stesso e $1$. Il numero $1$ non è considerato un numero primo.</p>
-</div>
+<h2>Numeri primi e scomposizione</h2>
 
-<div class="caso">
-<h3>Scomposizione in fattori primi</h3>
-<p>Dividiamo il numero per il più piccolo fattore primo possibile, poi ripetiamo l'operazione sul
-quoziente ottenuto, finché non arriviamo a $1$.</p>
-$$120:2=60,\ \ 60:2=30,\ \ 30:2=15,\ \ 15:3=5,\ \ 5:5=1\ \ \Rightarrow\ \ 120=2^3\cdot3\cdot5$$
-$$117:3=39,\ \ 39:3=13,\ \ 13:13=1\ \ \Rightarrow\ \ 117=3^2\cdot13$$
-</div>
+<div class="def"><span class="et">Numero primo</span>
+<p>Numero naturale diverso da $0$ e da $1$ che ha come divisori solo $1$ e se stesso.</p></div>
 
-<div class="def">
-<span class="et">Massimo comun divisore e minimo comune multiplo</span>
-<p>Il <b>MCD</b> di due numeri naturali diversi da zero è il più grande fra i loro divisori
-comuni. Il <b>mcm</b> è il più piccolo fra i loro multipli comuni.</p>
-</div>
+<p>Scomposizione in fattori primi: divisioni successive per il più piccolo primo possibile, fino a quoziente $1$.</p>
 
-<div class="caso">
-<h3>Esempio: MCD e mcm di 84 e 112</h3>
-<p>Scomponiamo entrambi i numeri in fattori primi:</p>
-$$84=2^2\cdot3\cdot7\qquad\qquad 112=2^4\cdot7$$
-<p>Per il MCD prendiamo solo i fattori primi comuni, ciascuno con l'esponente più piccolo:</p>
-$$MCD(84,112)=2^2\cdot7=28$$
-<p>Per il mcm prendiamo tutti i fattori primi, comuni e non comuni; quelli comuni si prendono una
-sola volta, con l'esponente più alto:</p>
-$$mcm(84,112)=2^4\cdot3\cdot7=336$$
-</div>
+<p class="eq">$$120:2=60,\ \ 60:2=30,\ \ 30:2=15,\ \ 15:3=5,\ \ 5:5=1\ \Rightarrow\ 120=2^3\cdot3\cdot5$$</p>
+<p class="eq">$$117:3=39,\ \ 39:3=13,\ \ 13:13=1\ \Rightarrow\ 117=3^2\cdot13$$</p>
 
-<p>Per stabilire se un numero è divisibile per un altro senza eseguire la divisione, si possono
-usare questi criteri, che guardano solo le cifre del numero:</p>
+<h2>MCD e mcm</h2>
 
-<table class="criteri">
-<tr><th>Per</th><th>Criterio</th><th>Esempio</th></tr>
-<tr><td>$2$</td><td>l'ultima cifra è pari</td><td>$2477137\underline{2}$</td></tr>
-<tr><td>$3$</td><td>la somma delle cifre è multipla di $3$</td><td>$17132712\to 2+4=24$</td></tr>
-<tr><td>$4$</td><td>le ultime due cifre formano $00$ oppure un multiplo di $4$</td><td>$77724523\underline{16}$</td></tr>
-<tr><td>$5$</td><td>l'ultima cifra è $0$ oppure $5$</td><td>$26845$</td></tr>
-<tr><td>$6$</td><td>il numero è divisibile sia per $2$ sia per $3$</td><td>$3672$: pari, cifre $3+6+7+2=18$</td></tr>
-<tr><td>$7$</td><td>si toglie l'ultima cifra, si sottrae il suo doppio dal numero rimasto: se si
-ottiene $0$ o un multiplo di $7$, lo è anche il numero di partenza</td><td>$98:\ 9-2\cdot8=9-16=-7$</td></tr>
-<tr><td>$8$</td><td>le ultime tre cifre formano $000$ oppure un multiplo di $8$</td><td>$1128$</td></tr>
-<tr><td>$9$</td><td>la somma delle cifre è multipla di $9$</td><td>$2871:\ 2+8+7+1=18$</td></tr>
-<tr><td>$10$</td><td>l'ultima cifra è $0$</td><td>&mdash;</td></tr>
-<tr><td>$11$</td><td>la differenza fra la somma delle cifre di posto pari e quella delle cifre di
-posto dispari (contando da destra) è multipla di $11$</td><td>$35607:\ 16-5=11$</td></tr>
-</table>
+<div class="def"><span class="et">MCD e mcm</span>
+<p>Di due naturali diversi da zero: MCD → il maggiore dei divisori comuni; mcm → il minore dei multipli comuni.</p></div>
 
+<p>Dalla scomposizione in fattori primi:</p>
+<ul>
+<li>MCD → solo i fattori comuni, con l'esponente minore;</li>
+<li>mcm → tutti i fattori, comuni e non comuni, una volta sola con l'esponente maggiore.</li>
+</ul>
+
+<p>Esempio: calcolare MCD e mcm di $84$ e $112$.</p>
+
+<p class="eq">$$84=2^2\cdot3\cdot7\qquad 112=2^4\cdot7$$</p>
+<p class="eq">$$\mathrm{MCD}(84,112)=2^2\cdot7=28\qquad \mathrm{mcm}(84,112)=2^4\cdot3\cdot7=336$$</p>
+
+<h2>Criteri di divisibilità</h2>
+
+<p>Un numero è divisibile per:</p>
+<ul>
+<li>$2$ → ultima cifra pari ($2477137\underline{2}$);</li>
+<li>$3$ → somma delle cifre multipla di $3$ ($17132712$: $1+7+1+3+2+7+1+2=24$);</li>
+<li>$4$ → ultime due cifre $00$ o multiplo di $4$ ($77724523\underline{16}$);</li>
+<li>$5$ → ultima cifra $0$ o $5$ ($26845$);</li>
+<li>$6$ → divisibile per $2$ e per $3$ ($3672$: pari, $3+6+7+2=18$);</li>
+<li>$7$ → numero senza l'ultima cifra, meno il doppio di questa: $0$ o multiplo di $7$ ($98$: $9-2\cdot8=-7$);</li>
+<li>$8$ → ultime tre cifre $000$ o multiplo di $8$ ($1\underline{128}$);</li>
+<li>$9$ → somma delle cifre multipla di $9$ ($2871$: $2+8+7+1=18$);</li>
+<li>$10$ → ultima cifra $0$;</li>
+<li>$11$ → somma delle cifre di posto dispari meno quella delle cifre di posto pari (da destra): $0$ o multiplo di $11$ ($35607$: $16-5=11$).</li>
+</ul>
 
 <nav class="nav-unita"><a class="precedente" href="../04-proprieta-delle-operazioni-e-proprieta-invariantiva/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Proprietà delle operazioni e proprietà invariantiva</span></a><a class="successiva" href="../06-numeri-interi-opposti-concordi-e-discordi-valore-assoluto/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Numeri interi: opposti, concordi e discordi, valore assoluto</span></a></nav>
 <footer><p>Matematica prima &middot; I numeri &middot; Unità 05</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
