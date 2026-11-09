@@ -92,6 +92,7 @@ questo sul sito pubblico.
   con periodo 8; 421/99 = 4,252525... = 4 con periodo 25; 3808/990 = 3,846464... = 3,8 con periodo
   46 — tutti conformi alla traccia.
 - Aggiunta: nessuna.
+- Revisione (09/11/2026, regole 13/10): parole circa 143 → 74 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 09), tolti sommario, prosa della regola e riquadro .caso; regola in .def in due righe (numeratore, denominatore); titoletto «Esempi» con una frase di raccordo e una .eq per ciascuno dei tre esempi (nessun esempio eliminato: sono i tre casi della regola). Nessuna comparsa da togliere. Nessuna figura. Precisazione: aggiunta la riduzione 3808/990 = 1904/495. Verificato con Python (fractions) 233/900 = 0,25(8), 421/99 = 4,(25), 3808/990 = 3,8(46).
 
 ## Unità 11 — Proporzioni e loro proprietà
 - Parole: 322 (incl. titolo/nav/footer) su 3 pagine di traccia (pag. 26–28 di matematica-1.pdf;
