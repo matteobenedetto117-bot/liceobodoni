@@ -5,17 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazioni esponenziali — Matematica terza</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.nota{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.nota{border-left:4px solid var(--rosso);background:#fdf6f5}
-.def .et,.nota .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
 </style>
 </head>
 <body>
@@ -25,87 +76,79 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica terza</a></nav>
   <p class="occhiello">Esponenziali &middot; Unità 44</p>
   <h1>Equazioni esponenziali</h1>
-  <p class="sommario">Un'equazione esponenziale è un'equazione in cui l'incognita compare
-  all'esponente di una potenza. Sappiamo risolverla per via algebrica solo in due situazioni:
-  quando riusciamo a scrivere entrambi i membri come potenze della stessa base, oppure quando
-  l'equazione nasconde un'equazione algebrica in una nuova incognita ausiliaria.</p>
 </header>
 
-<h2>Che cos'è un'equazione esponenziale</h2>
+<p>Incognita all'esponente: come si risolve un'equazione come $a^x=b$?</p>
 
-<p>Un'equazione contiene almeno una potenza con l'incognita all'esponente: $2^x=5$ è
-un'equazione esponenziale, mentre $x^{\sqrt5}=2$ non lo è, perché lì l'incognita è alla base
-e l'esponente è fissato.</p>
+<ul>
+<li>$2^x=5$ → equazione esponenziale;</li>
+<li>$x^{\sqrt5}=2$ → non esponenziale (incognita alla base).</li>
+</ul>
 
-<p>Per l'equazione generale $a^x=b$, con $a>0$, possiamo distinguere subito due casi
-guardando il segno di $b$: se $b\le 0$ l'equazione è impossibile, perché una potenza a base
-positiva è sempre positiva; se $b>0$ l'equazione è determinata e ammette sempre esattamente
-una soluzione, qualunque sia $b$.</p>
+<p>Equazione $a^x=b$, con $a>0$ e $a\ne 1$:</p>
 
-<div class="def">
-<span class="et">Equazione $a^x=b$, con $a>0$</span>
-<p>$b\le 0$: equazione impossibile. &nbsp; $b>0$: equazione determinata, una sola soluzione,
-sempre.</p>
-</div>
+<ul>
+<li>$b\le 0$ → impossibile;</li>
+<li>$b>0$ → una sola soluzione.</li>
+</ul>
 
-<h2>Ricondursi alla stessa base</h2>
+<h2>Stessa base</h2>
 
-<p>Il primo metodo consiste nello scrivere $a$ e $b$ come potenze aventi la stessa base:
-uguagliati i due membri, l'uguaglianza fra le potenze diventa un'uguaglianza fra i soli
-esponenti.</p>
+<p>Si scrivono i due membri come potenze della stessa base e si uguagliano gli esponenti:</p>
 
-<div class="svolgimento">
-<span class="et">Esempi</span>
-<p>$25^x=125$: entrambi i membri sono potenze di $5$,
-$$(5^2)^x=5^3 \quad\Longrightarrow\quad 5^{2x}=5^3 \quad\Longrightarrow\quad 2x=3
-\quad\Longrightarrow\quad x=\frac32$$</p>
-<p>$3^x=\dfrac{\sqrt3}{9}$: riscriviamo il secondo membro come potenza di $3$,
-$$3^x=\frac{3^{1/2}}{3^2}=3^{\frac12-2}=3^{-\frac32} \quad\Longrightarrow\quad
-x=-\frac32$$</p>
-<p>$6\cdot 2^{x+3}=4\cdot 7^x-2^x$: separiamo la potenza $2^{x+3}=2^x\cdot 2^3$ e portiamo
-tutti i termini in $2^x$ da una parte:
-$$6\cdot 2^x\cdot 8=4\cdot 7^x-2^x \quad\Longrightarrow\quad 48\cdot 2^x+2^x=4\cdot 7^x
-\quad\Longrightarrow\quad 49\cdot 2^x=4\cdot 7^x$$</p>
-<p>Ora le due basi sono diverse: dividiamo tutto per $7^x$, così a primo membro compare il
-quoziente delle basi,
-$$49\left(\frac{2}{7}\right)^x=4 \quad\Longrightarrow\quad \left(\frac27\right)^x=\frac{4}{49}
-=\left(\frac27\right)^2 \quad\Longrightarrow\quad x=2$$</p>
-</div>
+<div class="def"><span class="et">Regola</span>
+<p class="eq">$$a^{f(x)}=a^{g(x)}\ \Longleftrightarrow\ f(x)=g(x)\qquad (a>0,\ a\ne 1)$$</p></div>
 
-<h2>Usare un'incognita ausiliaria</h2>
+<h2>Esempio 1</h2>
 
-<p>Il secondo metodo si applica quando, dopo aver riscritto tutte le potenze con la stessa
-base $a$ dell'incognita, l'equazione nella nuova incognita $z=a^x$ diventa un'equazione
-algebrica già nota, di solito di secondo grado.</p>
+<p>Risolvere $6\cdot 2^{x+3}=4\cdot 7^x-2^x$.</p>
 
-<div class="svolgimento">
-<span class="et">Esempio</span>
-<p>$6\cdot 3^x-3^{2-x}=15$. Riscriviamo $3^{2-x}=\dfrac{3^2}{3^x}=\dfrac{9}{3^x}$, così tutta
-l'equazione è espressa tramite la potenza $3^x$:
-$$6\cdot 3^x-\frac{9}{3^x}=15$$</p>
-<p>Dividiamo per $3$ per semplificare i coefficienti e poniamo $z=3^x$, con $z>0$:
-$$2\cdot 3^x-\frac{3}{3^x}=5 \quad\Longrightarrow\quad 2z-\frac3z=5$$</p>
-<p>Moltiplichiamo per $z$ e otteniamo un'equazione di secondo grado:
-$$2z^2-5z-3=0 \qquad \Delta=25+24=49 \qquad z_{1,2}=\frac{5\pm7}{4}
-\quad\Longrightarrow\quad z_1=3,\ z_2=-\frac12$$</p>
-<p>Torniamo all'incognita $x$ sostituendo $z=3^x$ in ciascuna soluzione:
-$$z_1=3: \quad 3^x=3 \quad\Longrightarrow\quad x=1 \qquad\qquad
-z_2=-\frac12: \quad 3^x=-\frac12 \ \ \text{impossibile}$$</p>
-<p>$$x=1$$</p>
-</div>
+<p class="eq">$$6\cdot 2^x\cdot 2^3=4\cdot 7^x-2^x\ \Rightarrow\ 48\cdot 2^x+2^x=4\cdot 7^x\ \Rightarrow\ 49\cdot 2^x=4\cdot 7^x$$</p>
 
-<div class="nota">
-<span class="et">Attenzione</span>
-<p>Una potenza a base positiva è sempre positiva: la soluzione $z_2=-\frac12$, pur essendo
-accettabile per l'equazione di secondo grado in $z$, va sempre scartata perché non esiste
-alcun $x$ con $3^x=-\frac12$. Nel metodo dell'incognita ausiliaria conviene ricordarselo
-prima ancora di tornare a $x$, per non perdere tempo su un ramo impossibile.</p>
-</div>
+<p>Si divide per $7^x$:</p>
 
+<p class="eq">$$\left(\frac27\right)^x=\frac{4}{49}=\left(\frac27\right)^2\ \Rightarrow\ x=2$$</p>
+
+<h2>Incognita ausiliaria</h2>
+
+<p>Tutte le potenze con la stessa base $a$: si pone $z=a^x$ e si risolve l'equazione algebrica in $z$.</p>
+
+<div class="def"><span class="et">Incognita ausiliaria</span>
+<p class="eq">$$z=a^x,\qquad z>0$$</p></div>
+
+<h2>Esempio 2</h2>
+
+<p>Risolvere $6\cdot 3^x-3^{2-x}=15$.</p>
+
+<p class="eq">$$6\cdot 3^x-\frac{9}{3^x}=15\ \Rightarrow\ 2\cdot 3^x-\frac{3}{3^x}=5\ \Rightarrow\ 2z-\frac3z=5\quad (z=3^x)$$</p>
+
+<p class="eq">$$2z^2-5z-3=0\qquad \Delta=49\qquad z_1=3,\ \ z_2=-\frac12$$</p>
+
+<p class="eq">$$3^x=3\ \Rightarrow\ x=1\qquad\qquad 3^x=-\frac12\ \ \text{impossibile}$$</p>
+
+<div class="nota"><span class="et">Attenzione</span>
+<p>$z=a^x$ è sempre positiva: le soluzioni $z\le 0$ si scartano.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../43-dominio-delle-funzioni-del-tipo-f-x-g-x/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Dominio delle funzioni del tipo [f(x)]^g(x)</span></a><a class="successiva" href="../45-disequazioni-esponenziali/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Disequazioni esponenziali</span></a></nav>
 <footer><p>Matematica terza &middot; Esponenziali &middot; Unità 44</p></footer>
-
 </div>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
