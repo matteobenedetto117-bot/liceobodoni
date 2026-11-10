@@ -173,6 +173,7 @@ questo sul sito pubblico.
   nella traccia. Nessun esempio nuovo, nessuna dimostrazione, nessuna tabella di sintesi.
   I due schemi della traccia (il monomio più il monomio nullo, e le graffe sui gradi dei
   tre termini) sono stati ridisegnati in SVG.
+- Revisione (10/11/2026, regole 13/10): parole circa 647 → 190 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 17), tolti sommario, prosa esplicativa, riquadri .esempi e sezione «Nelle prossime unità»; definizioni in .def (grado rispetto a una lettera e grado complessivo in un solo riquadro), esempi di forma normale, binomio/trinomio/quadrinomio e omogeneità in elenco caso → conseguenza; titoletti «Forma normale» e «Grado»; «Errore da evitare» ridotto a .nota di una riga. Nessun esempio eliminato. Nessuna comparsa da togliere. Figure: i due schemi (monomio più monomio nullo; gradi dei termini 5, 2, 6) ridisegnati come SVG da script interno con i colori del foglio. Nessuna correzione concettuale; mantenuta la condizione «ridotto e non nullo». Verificati con SymPy riduzioni, forme normali, gradi (3, 5, 6) e omogeneità (4 e 4; 5 e 3).
 
 ## Unità 19 — Operazioni con i polinomi
 - Parole: 257 su 2 pagine di traccia (47 e prima metà di 48), pari a circa 170 parole per
