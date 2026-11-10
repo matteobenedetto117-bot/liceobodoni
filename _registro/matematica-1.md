@@ -130,6 +130,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: la riduzione $a^2\cdot\frac12\cdot b\cdot 3a^3=\frac32a^5b$
   e il calcolo del grado complessivo $3+1+2=6$ tornano entrambi.
 - Aggiunta: nessuna.
+- Revisione (10/11/2026, regole 13/10): parole circa 296 → 163 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 12), tolti sommario e prosa; monomio, forma normale e grado in .def; esempi e non-esempi in elenco caso → conseguenza; tabella del grado trasformata in elenco + .eq (3+1+2 = 6); riduzione a forma normale sotto «Esempio» in una .eq. Titoletti «Forma normale», «Grado» (accorciati), «Esempio». Nessun esempio eliminato. Nessuna comparsa da togliere. Nessuna figura. Precisazioni: $2a^0=2$ con $a\neq0$; «numero non nullo → grado 0» (coerente con «il monomio nullo non ha grado»). Verificato con SymPy: $\frac32a^5b$, grado 6.
 
 ## Unità 15 — Monomi simili, opposti e uguali
 - Parole: 171 (incl. titolo/nav/footer) su 1 pagina di traccia (pag. 36 di matematica-1.pdf;
@@ -138,6 +139,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 9/3 = 3, quindi $3xy^2$ e $\frac93xy^2$ hanno
   davvero lo stesso coefficiente e sono monomi uguali, come nella traccia.
 - Aggiunta: nessuna.
+- Revisione (10/11/2026, regole 13/10): parole circa 125 → 60 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 12), tolti sommario, prosa e sezione «Nella prossima unità»; le tre definizioni in elenco caso → conseguenza; tabella degli esempi trasformata in elenco sotto «Esempi». Nessun esempio eliminato. Nessuna comparsa da togliere. Nessuna figura. Nessuna correzione concettuale (verificato 9/3 = 3). Da valutare: «simili» definiti con «coefficiente diverso» come nella traccia, mentre di solito simili = stessa parte letterale (opposti e uguali sono casi particolari di simili); lasciato invariato.
 
 ## Unità 16 — Operazioni con i monomi
 - Parole: 472 su 3 pagine di traccia (pagg. 37–39 di matematica-1.pdf; pag. 40 apre
