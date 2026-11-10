@@ -5,21 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MCD e mcm fra monomi — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-.esempi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:20px 0}
-.schema{margin:22px auto;display:block;max-width:100%}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -29,143 +78,101 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Calcolo letterale &middot; Unità 17</p>
   <h1>MCD e mcm fra monomi</h1>
-  <p class="sommario">Fra i numeri interi sappiamo già cercare il massimo comune divisore
-  e il minimo comune multiplo. Anche fra i monomi si può fare la stessa cosa, perché anche
-  fra monomi esistono divisori e multipli. Le due regole si applicano separatamente al
-  coefficiente e alla parte letterale.</p>
 </header>
 
-<h2>Il massimo comune divisore</h2>
+<h2>Massimo comune divisore</h2>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Il <b>massimo comune divisore</b> di due o più monomi è il monomio con il grado massimo
-possibile che è divisore di tutti i monomi dati.</p>
-</div>
+<div class="def"><span class="et">Definizione</span>
+<p>MCD di due o più monomi: monomio di grado massimo che divide tutti i monomi dati.</p></div>
 
-<p>«Divisore di tutti» vuol dire che ciascuno dei monomi dati deve essere divisibile per
-esso: deve contenerne tutte le lettere, ognuna con esponente almeno altrettanto grande.
-Fra tutti i monomi che soddisfano questa condizione si sceglie quello di grado più alto.</p>
-
-<div class="def">
-<span class="et">Regola</span>
-<p>Nel calcolo del MCD di monomi prendiamo:</p>
-<p>&bull; come <b>coefficiente</b>, il numero $1$ se almeno un monomio non ha coefficiente
-intero; altrimenti, se tutti i coefficienti sono interi, il MCD dei loro valori assoluti;</p>
-<p>&bull; come <b>parte letterale</b>, il prodotto delle lettere comuni a tutti i monomi,
-ognuna con l'esponente minimo.</p>
-</div>
-
-<h3>Esempio</h3>
-
-<p>Cerchiamo il MCD di $6a^3b^3c^2$, $\;4a^2b^4c$, $\;12ab^2$. I coefficienti sono interi,
-quindi li scomponiamo in fattori primi: $6=2\cdot 3$, $\;4=2^2$, $\;12=2^2\cdot 3$.
-Incolonniamo poi le lettere, un monomio per riga, in modo che ogni colonna contenga la
-stessa lettera.</p>
-
-<svg class="schema" viewBox="0 0 420 200" width="420" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="17">
-  <text x="30" y="34">2 &#183; 3</text>
-  <text x="30" y="66">2²</text>
-  <text x="30" y="98">2² &#183; 3</text>
-  <line x1="105" y1="14" x2="105" y2="112" stroke="#999" stroke-width="1"/>
-  <text x="130" y="34">a³</text><text x="130" y="66">a²</text><text x="130" y="98">a</text>
-  <line x1="185" y1="14" x2="185" y2="112" stroke="#999" stroke-width="1"/>
-  <text x="210" y="34">b³</text><text x="210" y="66">b⁴</text><text x="210" y="98">b²</text>
-  <line x1="265" y1="14" x2="265" y2="112" stroke="#999" stroke-width="1"/>
-  <text x="290" y="34">c²</text><text x="290" y="66">c</text>
-  <text x="290" y="98" fill="#c0392b" font-size="14">— manca —</text>
-  <line x1="20" y1="118" x2="400" y2="118" stroke="#999" stroke-width="1"/>
-  <text x="30" y="146" fill="#1a5fb4">2</text>
-  <text x="130" y="146" fill="#1a5fb4">a</text>
-  <text x="210" y="146" fill="#1a5fb4">b²</text>
-  <text x="285" y="146" fill="#c0392b" font-size="14">esclusa</text>
-  <text x="30" y="182" font-size="18">MCD = 2ab²</text>
-</svg>
-
-<p>Colonna per colonna: il MCD dei coefficienti è $2$, perché il fattore $2$ compare in
-tutti e tre mentre il $3$ manca in $4$. Della lettera $a$ prendiamo l'esponente minimo, che
-è $1$; della $b$ l'esponente minimo, che è $2$. La lettera $c$ invece non compare nel terzo
-monomio, quindi non è comune a tutti e viene esclusa. Il risultato è</p>
-
-$$\mathrm{MCD}\left(6a^3b^3c^2,\;4a^2b^4c,\;12ab^2\right)=2ab^2.$$
-
-<p>La verifica è immediata: $6a^3b^3c^2:2ab^2=3a^2bc^2$, $\;4a^2b^4c:2ab^2=2ab^2c$,
-$\;12ab^2:2ab^2=6$. Tutte e tre le divisioni danno un monomio, come deve essere.</p>
-
-<h2>Il minimo comune multiplo</h2>
-
-<div class="def">
-<span class="et">Definizione</span>
-<p>Il <b>minimo comune multiplo</b> di due o più monomi è il monomio con il grado minimo
-possibile che è divisibile per tutti i monomi dati.</p>
-</div>
-
-<p>Qui la condizione è rovesciata: non deve essere lui a dividere gli altri, ma gli altri a
-dividere lui. Perciò deve contenere tutte le lettere che compaiono, ciascuna con un
-esponente abbastanza grande da bastare a ogni monomio.</p>
-
-<div class="def">
-<span class="et">Regola</span>
-<p>Nel calcolo del mcm di monomi prendiamo:</p>
-<p>&bull; come <b>coefficiente</b>, il numero $1$ se almeno un monomio non ha coefficiente
-intero; altrimenti il valore assoluto del mcm dei coefficienti;</p>
-<p>&bull; come <b>parte letterale</b>, il prodotto di ciascuna delle lettere presenti in
-almeno uno dei monomi, ognuna presa con l'esponente massimo.</p>
-</div>
-
-<h3>Esempio</h3>
-
-<p>Riprendiamo gli stessi tre monomi $6a^3b^3c^2$, $\;4a^2b^4c$, $\;12ab^2$ e lo stesso
-schema per colonne, cambiando solo il criterio di scelta.</p>
-
-<svg class="schema" viewBox="0 0 420 200" width="420" xmlns="http://www.w3.org/2000/svg"
-     font-family="Georgia, serif" font-size="17">
-  <text x="30" y="34">2 &#183; 3</text>
-  <text x="30" y="66">2²</text>
-  <text x="30" y="98">2² &#183; 3</text>
-  <line x1="105" y1="14" x2="105" y2="112" stroke="#999" stroke-width="1"/>
-  <text x="130" y="34">a³</text><text x="130" y="66">a²</text><text x="130" y="98">a</text>
-  <line x1="185" y1="14" x2="185" y2="112" stroke="#999" stroke-width="1"/>
-  <text x="210" y="34">b³</text><text x="210" y="66">b⁴</text><text x="210" y="98">b²</text>
-  <line x1="265" y1="14" x2="265" y2="112" stroke="#999" stroke-width="1"/>
-  <text x="290" y="34">c²</text><text x="290" y="66">c</text>
-  <line x1="20" y1="118" x2="400" y2="118" stroke="#999" stroke-width="1"/>
-  <text x="30" y="146" fill="#1a5fb4">2² &#183; 3</text>
-  <text x="130" y="146" fill="#1a5fb4">a³</text>
-  <text x="210" y="146" fill="#1a5fb4">b⁴</text>
-  <text x="290" y="146" fill="#1a5fb4">c²</text>
-  <text x="30" y="182" font-size="18">mcm = 12a³b⁴c²</text>
-</svg>
-
-<p>Dei coefficienti prendiamo tutti i fattori primi che compaiono, ciascuno con l'esponente
-più alto: $2^2\cdot 3=12$. Della $a$ l'esponente massimo è $3$, della $b$ è $4$. La $c$
-questa volta entra, perché basta che compaia in almeno un monomio, e vi prendiamo
-l'esponente $2$. Dunque</p>
-
-$$\mathrm{mcm}\left(6a^3b^3c^2,\;4a^2b^4c,\;12ab^2\right)=12a^3b^4c^2.$$
-
-<div class="attenzione">
-<span class="et">Errore da evitare</span>
-<p>Le due regole si somigliano e si scambiano facilmente. Per il MCD si tengono <b>solo</b>
-le lettere comuni a tutti, con l'esponente <b>minimo</b>; per il mcm si tengono <b>tutte</b>
-le lettere che compaiono, con l'esponente <b>massimo</b>. Un modo per non sbagliare è
-guardare il grado: il MCD ha grado $3$ ed è il più piccolo dei due, il mcm ha grado $9$ ed
-è il più grande.</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unità</h2>
 <ul>
-<li>I polinomi, somme di più monomi non simili — unità 18 e 19.</li>
-<li>Il mcm tornerà quando si sommeranno frazioni algebriche: il denominatore comune si
-cerca esattamente con questa regola — unità 40.</li>
+<li>coefficiente → MCD dei valori assoluti, se tutti interi; altrimenti $1$;</li>
+<li>parte letterale → lettere comuni a tutti, ognuna con l'esponente minimo.</li>
 </ul>
+
+<h2>Minimo comune multiplo</h2>
+
+<div class="def"><span class="et">Definizione</span>
+<p>mcm di due o più monomi: monomio di grado minimo divisibile per tutti i monomi dati.</p></div>
+
+<ul>
+<li>coefficiente → mcm dei valori assoluti, se tutti interi; altrimenti $1$;</li>
+<li>parte letterale → tutte le lettere presenti, ognuna con l'esponente massimo.</li>
+</ul>
+
+<div class="nota"><span class="et">Errore da evitare</span>
+<p>MCD: solo lettere comuni, esponente minimo; mcm: tutte le lettere, esponente massimo.</p></div>
+
+<h2>Esempio</h2>
+
+<p>Dati: $6a^3b^3c^2$, $\;4a^2b^4c$, $\;12ab^2$. Calcolare MCD e mcm.</p>
+
+<p>Coefficienti scomposti in fattori primi, lettere incolonnate:</p>
+
+<div class="fig">
+<svg id="fig-mcd" viewBox="0 0 360 186" style="width:100%;max-width:420px" role="img" aria-label="Schema per colonne del MCD"></svg>
+<p class="did">MCD: fattori ed esponenti minimi; $c$ esclusa (manca nel terzo monomio)</p>
 </div>
+
+<p class="eq">$$\mathrm{MCD}\left(6a^3b^3c^2,\;4a^2b^4c,\;12ab^2\right)=2ab^2$$</p>
+
+<p>Verifica:</p>
+
+<p class="eq">$$6a^3b^3c^2:2ab^2=3a^2bc^2 \qquad 4a^2b^4c:2ab^2=2ab^2c \qquad 12ab^2:2ab^2=6$$</p>
+
+<div class="fig">
+<svg id="fig-mcm" viewBox="0 0 360 186" style="width:100%;max-width:420px" role="img" aria-label="Schema per colonne del mcm"></svg>
+<p class="did">mcm: tutti i fattori e tutte le lettere, esponenti massimi</p>
+</div>
+
+<p class="eq">$$\mathrm{mcm}\left(6a^3b^3c^2,\;4a^2b^4c,\;12ab^2\right)=12a^3b^4c^2$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../16-operazioni-con-i-monomi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Operazioni con i monomi</span></a><a class="successiva" href="../18-polinomi-definizione-forma-normale-grado/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Polinomi: definizione, forma normale, grado</span></a></nav>
 <footer><p>Matematica prima &middot; Calcolo letterale &middot; Unità 17</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,st){var t=el('text',{x:x,y:y,'text-anchor':'middle',style:st||'fill:var(--inchiostro);font-size:15px'},p);t.textContent=s;return t;}
+  var righe=[['2·3','a³','b³','c²'],['2²','a²','b⁴','c'],['2²·3','a','b²','']];
+  var colX=[60,150,220,290], sep=[110,185,255];
+  function schema(id,ris,nome,tot){
+    var s=document.getElementById(id); if(!s)return;
+    var g={stroke:'var(--grigio)','stroke-width':1};
+    sep.forEach(function(x){el('line',Object.assign({x1:x,y1:12,x2:x,y2:112},g),s);});
+    el('line',Object.assign({x1:20,y1:120,x2:340,y2:120},g),s);
+    righe.forEach(function(r,i){r.forEach(function(v,j){
+      if(v)txt(s,colX[j],38+i*32,v);
+      else if(nome==='MCD')txt(s,colX[j],38+i*32,'manca','fill:var(--rosso);font-size:12px');
+    });});
+    ris.forEach(function(v,j){
+      if(v)txt(s,colX[j],148,v,'fill:var(--blu);font-size:15px;font-weight:600');
+      else txt(s,colX[j],148,'esclusa','fill:var(--rosso);font-size:12px');
+    });
+    txt(s,180,176,nome+' = '+tot,'fill:var(--inchiostro);font-size:15px;font-weight:600');
+  }
+  schema('fig-mcd',['2','a','b²',''],'MCD','2ab²');
+  schema('fig-mcm',['2²·3','a³','b⁴','c²'],'mcm','12a³b⁴c²');
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
