@@ -111,6 +111,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Verificato con SymPy: 20% di 3600 = 720; 15% di A = 180 → A = 1200; 621 è il
   27% di 2300 — tutti conformi alla traccia.
 - Aggiunta: nessuna.
+- Revisione (10/11/2026, regole 13/10): parole circa 160 → 63 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 11), tolti sommario, prosa, riquadri .caso e .nota azzurra; percentuale in .def; percentuale di un numero in .def con l'esempio 20% di 3600 = 720 in .eq; i tre problemi tipici in elenco caso → conseguenza; «Esempio 1» (15% di A = 180 → A = 1200) ed «Esempio 2» (621 è il 27% di 2300), ciascuno in una .eq. Nessun esempio eliminato (il primo è passato nel riquadro della definizione). Nessuna comparsa da togliere. Nessuna figura. Nessuna correzione concettuale. Verificato con Python (fractions) 720, 1200, 27 e 5/1000 = 0,5%.
 
 ## Unità 13 — Numeri irrazionali e numeri reali
 - Parole: 353 (incl. titolo/nav/footer) su 3 pagine di traccia (pag. 30–32 di matematica-1.pdf;
