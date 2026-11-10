@@ -304,6 +304,7 @@ questo sul sito pubblico.
   dell'unità 27, ma completano la definizione di grado e sono stati inclusi qui. L'unità
   27 parte dal titolo "Risoluzione di equazioni numeriche intere di I grado", più sotto
   nella stessa pagina.
+- Revisione (10/11/2026, regole 13/10): parole circa 448 → 128 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 25), tolti sommario, prosa esplicativa, riquadro .esempi e sezione «Nelle prossime unità»; definizione di equazione in .def, primo/secondo membro in elenco; esempio 4x − 1 = 3x + 1 in forma Dati/Calcolare con regola del cambio di segno in una frase, risoluzione e verifica in due .eq; tipi di equazione in elenco caso → conseguenza (algebriche intere/fratte, trascendenti); forma normale e grado in .def, tre esempi di I, II, III grado in una .eq; «Errore da evitare» in .nota di una riga. Titoletti: «Esempio» (era «Come si risolve»), «Tipi di equazione», «Forma normale e grado»; tolto «Che cos'è un'equazione». Nessun esempio eliminato. Nessuna comparsa da togliere. Verifica Python: x = 2 (entrambi i membri 7), gradi 1, 2, 3 e 3. Nessuna correzione concettuale. Figura: schema della classificazione ridisegnato come SVG da script interno con i colori del foglio, viewBox ristretto al contenuto.
 
 ## Unità 27 — Risoluzione di equazioni numeriche intere di primo grado
 - Parole: 312 su 2 pagine di traccia nominali (pp. 65–66), in pratica circa 1,2 pagine:
