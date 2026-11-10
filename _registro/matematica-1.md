@@ -240,6 +240,7 @@ questo sul sito pubblico.
   giustificato perché l'insieme vuoto sia sottoinsieme di qualsiasi insieme, come nella
   traccia. Nessuna tabella di sintesi.
 - Nota: aggiornato il link "successiva" dell'unità 22, che puntava all'indice.
+- Revisione (10/11/2026, regole 13/10): parole circa 376 → 120 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 21), tolti sommario, prosa esplicativa, riquadro .esempi e sezione «Nelle prossime unità»; insieme vuoto, cardinalità e sottoinsieme in .def, finito/infinito e impropri/propri in elenco caso → conseguenza, «Errore da evitare» ridotto a .nota di una riga; $|V|=5$ in .eq; titoletti «L'insieme vuoto» e «Insiemi finiti e infiniti, cardinalità» tolti, resta «Sottoinsiemi». Resa esplicita nella .def la definizione di $B \subseteq A$ (ogni elemento di $B$ appartiene ad $A$), che la pagina dava solo come lettura del simbolo. Nessun esempio eliminato. Nessuna comparsa da togliere. Figura: insiemi koala–mammiferi–animali ridisegnati come SVG da script interno con i colori del foglio; nomi dentro le rispettive regioni al posto delle frecce. Nessuna correzione concettuale.
 
 ## Unità 24 — Unione, intersezione e differenza
 - Parole: 842 su 5 pagine di traccia (pp. 56–60), circa 168 parole per pagina.
