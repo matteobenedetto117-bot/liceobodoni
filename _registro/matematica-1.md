@@ -152,6 +152,7 @@ questo sul sito pubblico.
   traccia segna con due cerchiature in rosso e un "NO" i due casi non divisibili senza
   dire che cosa vada guardato, ed è la distinzione su cui si sbaglia. Nessun esempio,
   nessuna dimostrazione, nessuna tabella di sintesi aggiunti.
+- Revisione (10/11/2026, regole 13/10): parole circa 554 → 199 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 15), tolti sommario, prosa esplicativa, tabelle .esempi e sezione «Nelle prossime unità»; apertura con elenco caso → conseguenza (quando si può eseguire ciascuna operazione); quattro titoletti (Addizione e sottrazione, Moltiplicazione, Divisione, Potenza) con regole in .def ed esempi in .eq; i due casi non divisibili in elenco, le quattro divisioni eseguibili in una .eq; «Errore da evitare» ridotto a .nota di una riga; $3a+b$ in .nota. Nessun esempio eliminato. Nessuna comparsa da togliere. Nessuna figura. Correzioni: in $6ax:3ab$ il motivo è solo che $b$ manca nel dividendo (tolto «la $x$ non è in $3ab$», irrilevante per la condizione); $(4x^3)^0=1$ con $x\neq0$. Verificati con SymPy tutti i conti (somme, prodotti, sei divisioni, quattro potenze).
 
 ## Unità 17 — MCD e mcm fra monomi
 - Parole: 619 su 3 pagine di traccia (40–42), pari a 206 parole per pagina

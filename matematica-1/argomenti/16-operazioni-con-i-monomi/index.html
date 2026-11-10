@@ -5,24 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Operazioni con i monomi — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-.esempi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:20px 0}
-.esempi table{width:100%;border-collapse:collapse}
-.esempi td{padding:8px 10px;border-bottom:1px solid var(--riga);vertical-align:top}
-.esempi tr:last-child td{border-bottom:none}
-.no{color:#c0392b;font-family:var(--sans);font-size:.8rem;letter-spacing:.08em}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -32,134 +78,93 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Calcolo letterale &middot; Unità 16</p>
   <h1>Operazioni con i monomi</h1>
-  <p class="sommario">Sui monomi si possono fare le quattro operazioni e l'elevamento a
-  potenza, ma non tutte alle stesse condizioni: moltiplicazione e potenza si fanno sempre,
-  addizione e sottrazione soltanto in un caso particolare, la divisione solo quando gli
-  esponenti lo permettono. Vediamo una per una.</p>
 </header>
+
+<p>Operazioni fra monomi: quando si possono eseguire?</p>
+
+<ul>
+<li>addizione e sottrazione → solo fra monomi simili (opposti e uguali compresi);</li>
+<li>moltiplicazione e potenza → sempre;</li>
+<li>divisione → solo se il dividendo è divisibile per il divisore.</li>
+</ul>
 
 <h2>Addizione e sottrazione</h2>
 
-<div class="def">
-<span class="et">Regola</span>
-<p>Possiamo sommare e sottrarre <b>solo monomi simili, opposti o uguali</b>: si sommano i
-coefficienti e si lascia invariata la parte letterale.</p>
-</div>
+<div class="def"><span class="et">Regola</span>
+<p>Si sommano i coefficienti; la parte letterale resta invariata.</p></div>
 
-<p>Il motivo è che la parte letterale fa da etichetta: $9a$, $3a$ e $2a$ contano tutti
-quanti oggetti dello stesso tipo, e quindi si possono mettere insieme. Se le etichette
-sono diverse non c'è niente da raccogliere, e la somma resta indicata così com'è.</p>
+<p class="eq">$$9a+3a+2a=14a \qquad\qquad 7ab-4ab=3ab$$</p>
 
-<div class="esempi">
-<table>
-<tr><td>$9a+3a+2a=14a$</td><td>stessa parte letterale $a$: si sommano i coefficienti
-$9+3+2$</td></tr>
-<tr><td>$3a+b$</td><td><span class="no">non si somma!</span> le parti letterali $a$ e $b$
-sono diverse</td></tr>
-<tr><td>$7ab-4ab=3ab$</td><td>stessa parte letterale $ab$: $7-4=3$</td></tr>
-</table>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>$3a+b$ non si riduce: parti letterali diverse, la somma resta indicata.</p></div>
 
 <h2>Moltiplicazione</h2>
 
-<div class="def">
-<span class="et">Regola</span>
-<p>Si può fare <b>sempre</b>: si moltiplicano fra loro i coefficienti e fra loro le parti
-letterali, sommando gli esponenti delle lettere uguali.</p>
-</div>
+<div class="def"><span class="et">Regola</span>
+<p>Si moltiplicano i coefficienti e le parti letterali, sommando gli esponenti delle lettere uguali.</p></div>
 
-<p>Gli esponenti si sommano per la proprietà delle potenze di uguale base: $x^4\cdot x^3
-= x^{4+3}$. Il risultato va poi riscritto in forma normale, raccogliendo ogni lettera una
-sola volta.</p>
+<p class="eq">$$3x^4\cdot 5x^3=15x^{4+3}=15x^7 \qquad\qquad 3ab\cdot 4bc=12ab^2c$$</p>
 
-<div class="esempi">
-<table>
-<tr><td>$3x^4\cdot 5x^3 = 3\cdot 5\,x^{4+3}=15x^7$</td><td></td></tr>
-<tr><td>$3ab\cdot 4bc = 12\,ab\,bc = 12ab^2c$</td><td>la $b$ compare due volte: si raccoglie
-in $b^2$</td></tr>
-<tr><td>$\left(\dfrac{4}{5}a^2b\right)\cdot\left(-\dfrac{1}{8}bc^2\right)\cdot(-10a)
-= a^3b^2c^2$</td>
-<td>i coefficienti: $\dfrac{4}{5}\cdot\left(-\dfrac{1}{8}\right)\cdot(-10)=\dfrac{40}{40}=1$;
-due segni meno danno segno più</td></tr>
-</table>
-</div>
+<p>Due fattori negativi: segno $+$; coefficiente $\frac45\cdot\frac18\cdot10=1$.</p>
+
+<p class="eq">$$\left(\frac45a^2b\right)\cdot\left(-\frac18bc^2\right)\cdot(-10a)=a^3b^2c^2$$</p>
 
 <h2>Divisione</h2>
 
-<div class="def">
-<span class="et">Condizione di divisibilità</span>
-<p>Se $A$ e $B$ sono due monomi, con $B$ diverso da zero, $A$ è divisibile per $B$ se e
-solo se ha nella parte letterale tutte le lettere di $B$, ognuna con esponente maggiore o
-uguale a quello che compare in $B$.</p>
-</div>
+<div class="def"><span class="et">Condizione di divisibilità</span>
+<p>$A$ è divisibile per $B\neq0$ se e solo se $A$ contiene tutte le lettere di $B$, ognuna con esponente maggiore o uguale a quello in $B$.</p></div>
 
-<p>La condizione serve perché dividere due potenze di uguale base significa sottrarre gli
-esponenti: se l'esponente del divisore fosse il più grande resterebbe un esponente
-negativo, e un monomio non può averne. I coefficienti invece si dividono normalmente, anche
-quando il quoziente è una frazione.</p>
+<p>Si dividono i coefficienti e si sottraggono gli esponenti; lettera con lo stesso esponente → sparisce.</p>
 
-$$4a^5b^4c^2 : \left(-3a^2b^2c^2\right) = -\frac{4}{3}\,a^{3}b^{2}c^{0}
-= -\frac{4}{3}a^3b^2$$
+<p class="eq">$$4a^5b^4c^2 : \left(-3a^2b^2c^2\right) = -\frac43\,a^3b^2c^0 = -\frac43\,a^3b^2$$</p>
 
-<p>L'ultimo passaggio usa $c^0=1$: quando le due lettere hanno lo stesso esponente,
-quella lettera sparisce dal risultato.</p>
-
-<div class="esempi">
-<table>
-<tr><td>$6x^3b^5 : 2x^2b^7$</td><td><span class="no">NO</span> &nbsp; $5 &lt; 7$: l'esponente
-di $b$ nel dividendo è troppo piccolo</td></tr>
-<tr><td>$6ax : 3ab$</td><td><span class="no">NO</span> &nbsp; la $x$ non è in $3ab$ e la
-$b$ non è in $6ax$</td></tr>
-<tr><td>$2x^7 : 3x^2 = \dfrac{2}{3}x^{7-2}=\dfrac{2}{3}x^5$</td><td></td></tr>
-<tr><td>$3a^5b^2x : 6a^5bx = \dfrac{1}{2}b$</td><td>$a$ e $x$ hanno lo stesso esponente e
-spariscono</td></tr>
-<tr><td>$\dfrac{1}{3}cx^2y : (-3xy) = -\dfrac{1}{9}cx$</td><td></td></tr>
-<tr><td>$-\dfrac{2}{3}x^4yz^3 : \left(-\dfrac{1}{9}x^2z^2\right) = 6x^2yz$</td>
-<td>$-\dfrac{2}{3}\cdot(-9)=+6$</td></tr>
-</table>
-</div>
-
-<div class="attenzione">
-<span class="et">Errore da evitare</span>
-<p>La condizione riguarda il dividendo, non il divisore: deve essere $A$ ad avere tutte le
-lettere di $B$. In $6ax : 3ab$ non basta osservare che le due scritture hanno lettere
-diverse — va guardato se al dividendo manca qualcosa che il divisore possiede.</p>
-</div>
-
-<h2>Potenza di un monomio</h2>
-
-<div class="def">
-<span class="et">Regola</span>
-<p>Per calcolare la potenza di un monomio con esponente $n$ (con $n\in\mathbb{N}$, cioè $n$
-appartenente all'insieme dei numeri naturali):</p>
-<p>eleviamo a esponente $n$ il suo coefficiente;</p>
-<p>moltiplichiamo per $n$ ognuno degli esponenti delle sue lettere.</p>
-</div>
-
-<div class="esempi">
-<table>
-<tr><td>$\left(\dfrac{7}{3}a^5b^6\right)^2 = \dfrac{7^2}{3^2}a^{10}b^{12}
-= \dfrac{49}{9}a^{10}b^{12}$</td><td></td></tr>
-<tr><td>$\left(-2x^4y^2\right)^3 = -8x^{12}y^6$</td><td>esponente dispari: il segno meno
-resta</td></tr>
-<tr><td>$\left(4x^3\right)^0 = 4^0x^{3\cdot 0}=1$</td><td></td></tr>
-<tr><td>$\left(11x^4\right)^1 = 11x^4$</td><td></td></tr>
-</table>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unità</h2>
 <ul>
-<li>Il MCD e il mcm fra monomi, che si appoggiano alla condizione di divisibilità vista
-qui — unità 17.</li>
-<li>I polinomi, somme di più monomi non simili: le operazioni fra polinomi si riducono a
-quelle fra monomi — unità 18 e 19.</li>
+<li>$6x^3b^5 : 2x^2b^7$ → non divisibile: esponente di $b$ minore nel dividendo ($5&lt;7$);</li>
+<li>$6ax : 3ab$ → non divisibile: $b$ manca nel dividendo.</li>
 </ul>
-</div>
+
+<p>Divisioni eseguibili:</p>
+
+<p class="eq">$$\begin{gathered}2x^7 : 3x^2=\frac23x^5 \qquad\qquad 3a^5b^2x : 6a^5bx=\frac12b\\[4pt] \frac13cx^2y : (-3xy)=-\frac19cx \qquad\qquad -\frac23x^4yz^3 : \left(-\frac19x^2z^2\right)=6x^2yz\end{gathered}$$</p>
+
+<div class="nota"><span class="et">Errore da evitare</span>
+<p>Conta il dividendo: è $A$ che deve avere tutte le lettere di $B$, non il contrario.</p></div>
+
+<h2>Potenza</h2>
+
+<div class="def"><span class="et">Regola</span>
+<p>Esponente $n\in\mathbb{N}$: coefficiente elevato a $n$, esponente di ogni lettera moltiplicato per $n$.</p></div>
+
+<p class="eq">$$\left(\frac73a^5b^6\right)^2=\frac{7^2}{3^2}a^{10}b^{12}=\frac{49}{9}a^{10}b^{12}$$</p>
+
+<p>Esponente dispari → il segno meno resta:</p>
+
+<p class="eq">$$\left(-2x^4y^2\right)^3=-8x^{12}y^6$$</p>
+
+<p>Esponenti $0$ e $1$:</p>
+
+<p class="eq">$$\left(4x^3\right)^0=1\ \ (x\neq0) \qquad\qquad \left(11x^4\right)^1=11x^4$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../15-monomi-simili-opposti-e-uguali/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Monomi simili, opposti e uguali</span></a><a class="successiva" href="../17-mcd-e-mcm-fra-monomi/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">MCD e mcm fra monomi</span></a></nav>
 <footer><p>Matematica prima &middot; Calcolo letterale &middot; Unità 16</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
