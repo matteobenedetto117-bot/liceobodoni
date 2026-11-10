@@ -5,19 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Equazione determinata, impossibile, indeterminata — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -27,64 +79,55 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Equazioni lineari &middot; Unità 29</p>
   <h1>Equazione determinata, impossibile, indeterminata</h1>
-  <p class="sommario">Applicando i principi di equivalenza non sempre si arriva a una
-  riga della forma $x = \text{numero}$: a volte l'incognita sparisce del tutto. Ecco i
-  tre esiti possibili e come si legge ciascuno.</p>
 </header>
 
-<h2>1. Determinata</h2>
+<p>Ridotta l'equazione con i principi di equivalenza, che cosa resta?</p>
 
-<p>Il caso consueto: resta un solo valore che soddisfa l'uguaglianza.</p>
-
-$$x = \frac{7}{3} \qquad \text{DETERMINATA}$$
-
-<p>Sostituendo $7/3$ al posto di $x$ i due membri danno lo stesso numero, e nessun altro
-valore lo fa.</p>
-
-<h2>2. Impossibile</h2>
-
-$$x + 2 = x + 3$$
-
-<p>I due $x$ stanno a lati opposti e si eliminano. Resta</p>
-
-$$2 = 3 \qquad \text{cioè} \qquad 0 = 1 \qquad \text{IMPOSSIBILE}$$
-
-<p>L'incognita è sparita e l'uguaglianza fra numeri che rimane è falsa. Non è un errore
-di calcolo: nessun valore di $x$ può rendere vera l'uguaglianza di partenza, e
-l'equazione non ha soluzioni.</p>
-
-<h2>3. Indeterminata</h2>
-
-$$2x + 2 = 2x + 6 - 4$$
-
-<p>A destra $6 - 4$ fa $2$, quindi i due membri sono</p>
-
-$$2x + 2 = 2x + 2$$
-
-<p>Si eliminano i due $2x$ e i due $+2$, e resta</p>
-
-$$0 = 0 \qquad \text{INDETERMINATA}$$
-
-<p>Anche qui l'incognita è sparita, ma l'uguaglianza rimasta è vera: i due membri erano
-scritti in modo diverso ed erano la stessa espressione. Qualunque numero si metta al
-posto di $x$ l'uguaglianza regge, quindi le soluzioni sono infinite.</p>
-
-<div class="attenzione">
-<span class="et">Errore da evitare</span>
-<p>$0 = 0$ non vuol dire $x = 0$. Nel primo caso l'incognita è scomparsa e ogni valore va
-bene; nel secondo l'incognita c'è ancora e il valore che va bene è uno solo, lo zero.</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unità</h2>
 <ul>
-<li>Gli stessi tre esiti tornano per le disequazioni lineari, nell'unità 44.</li>
+<li>$x=$ numero (per esempio $x=\tfrac{7}{3}$) → determinata: una sola soluzione;</li>
+<li>uguaglianza falsa fra numeri → impossibile: nessuna soluzione;</li>
+<li>uguaglianza vera fra numeri → indeterminata: ogni $x$ è soluzione.</li>
 </ul>
-</div>
+
+<h2>Esempio 1</h2>
+
+<p>Dati: $x+2=x+3$. Calcolare $x$.</p>
+
+<p>Le due $x$, a lati opposti, si eliminano:</p>
+
+<p class="eq">$$x+2=x+3 \qquad 2=3 \qquad 0=1 \qquad \text{impossibile}$$</p>
+
+<h2>Esempio 2</h2>
+
+<p>Dati: $2x+2=2x+6-4$. Calcolare $x$.</p>
+
+<p>Riduzione a destra, poi si eliminano $2x$ e $+2$:</p>
+
+<p class="eq">$$2x+2=2x+6-4 \qquad 2x+2=2x+2 \qquad 0=0 \qquad \text{indeterminata}$$</p>
+
+<div class="nota"><span class="et">Errore da evitare</span>
+<p>$0=0$ non vuol dire $x=0$: con $0=0$ va bene ogni $x$, con $x=0$ solo lo zero.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../28-principi-di-equivalenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Principi di equivalenza</span></a><a class="successiva" href="../30-polinomi-come-funzioni-e-zeri-di-un-polinomio/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Polinomi come funzioni e zeri di un polinomio</span></a></nav>
 <footer><p>Matematica prima &middot; Equazioni lineari &middot; Unità 29</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>

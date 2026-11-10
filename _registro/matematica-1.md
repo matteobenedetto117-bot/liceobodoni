@@ -365,6 +365,7 @@ questo sul sito pubblico.
   nessuno strumento interattivo, nessun disegno (la traccia non ne ha). Un solo riquadro
   "Errore da evitare", sulla confusione fra 0 = 0 e x = 0, che è lo sbaglio tipico di
   questo punto del programma.
+- Revisione (10/11/2026, regole 13/10): parole circa 227 → 88 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 27), tolti sommario, prosa esplicativa, rimando all'unità 44 e sezione «Nelle prossime unità»; i tre esiti in elenco caso → conseguenza (il caso determinato x = 7/3 è dentro la voce d'elenco); x + 2 = x + 3 e 2x + 2 = 2x + 6 − 4 come «Esempio 1» e «Esempio 2» in forma Dati/Calcolare, ciascuno con una frase e una .eq; «Errore da evitare» (0 = 0 non è x = 0) in .nota di una riga. Titoletti «Determinata», «Impossibile», «Indeterminata» sostituiti da «Esempio 1», «Esempio 2». Nessun esempio eliminato. Nessuna comparsa da togliere. Verifica SymPy: x + 2 = x + 3 senza soluzioni, 2x + 2 = 2x + 6 − 4 soddisfatta da ogni x. Nessuna correzione concettuale. Nessuna figura.
 
 ## Unità 30 — Polinomi come funzioni e zeri di un polinomio
 - Parole: 546 su 2 pagine di traccia (pp. 69–70 di matematica-1.pdf), cioè 273 per
