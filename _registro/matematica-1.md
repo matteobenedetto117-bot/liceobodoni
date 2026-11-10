@@ -190,6 +190,7 @@ questo sul sito pubblico.
   costruito sul secondo esempio della traccia, e lo schema SVG dei quattro prodotti
   $ac,ad,bc,bd$, che rende visibile la regola già scritta nella traccia. Nessun esempio
   nuovo, nessuna dimostrazione, nessuna tabella di sintesi.
+- Revisione (10/11/2026, regole 13/10): parole circa 291 → 76 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 17), tolti sommario, prosa esplicativa, riquadri .esempi e sezione «Nelle prossime unità»; somma algebrica in .def con le due regole in elenco caso → conseguenza; esempi in .eq (formula, passaggi e risultato), tre titoletti (Somma algebrica, Monomio per polinomio, Polinomio per polinomio); «Errore da evitare» ridotto a .nota di una riga. Nessun esempio eliminato. Nessuna comparsa da togliere. Figura: lo schema dei quattro prodotti ridisegnato come SVG da script interno con i colori del foglio. Nessuna correzione concettuale. Verificati con SymPy i quattro calcoli.
 
 ## Unità 20 — Quadrato di binomio e somma per differenza
 - Parole: 437 su 2,5 pagine di traccia (PDF 48–50, metà)

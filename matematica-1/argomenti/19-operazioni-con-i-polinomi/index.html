@@ -5,21 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Operazioni con i polinomi — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-.esempi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:20px 0}
-.schema{margin:22px auto;display:block;max-width:100%}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -29,108 +78,86 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Calcolo letterale &middot; Unità 19</p>
   <h1>Operazioni con i polinomi</h1>
-  <p class="sommario">Sappiamo che cos'è un polinomio e come si riduce in forma normale.
-  Vediamo adesso come si sommano due polinomi e come si moltiplicano: prima un monomio per
-  un polinomio, poi due polinomi fra loro. Sono le operazioni con cui si semplifica quasi
-  ogni espressione letterale.</p>
 </header>
 
 <h2>Somma algebrica</h2>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Dati due polinomi, la loro <b>somma algebrica</b> è la somma algebrica dei termini del
-primo con quelli del secondo.</p>
-</div>
+<div class="def"><span class="et">Definizione</span>
+<p>Somma algebrica di due polinomi: somma algebrica dei termini del primo con quelli del secondo.</p></div>
 
-<p>In pratica si tolgono le parentesi e si riduce in forma normale. Attenzione al segno
-davanti alla seconda parentesi: se è un $-$, tutti i termini che ne escono cambiano segno.</p>
+<ul>
+<li>parentesi tolte → riduzione in forma normale;</li>
+<li>parentesi preceduta da $-$ → tutti i suoi termini cambiano segno.</li>
+</ul>
 
-<div class="esempi">
-<p>$\left(\tfrac{1}{2}y+x^2\right)+\left(-x^2+1+y\right)$</p>
-<p>$=\tfrac{1}{2}y+x^2-x^2+1+y=\tfrac{3}{2}y+1$</p>
-<p>I due termini $x^2$ e $-x^2$ sono opposti e si cancellano; $\tfrac{1}{2}y$ e $y$ sono
-simili e si sommano.</p>
-</div>
+<p class="eq">$$\left(\tfrac{1}{2}y+x^2\right)+\left(-x^2+1+y\right)=\tfrac{1}{2}y+x^2-x^2+1+y=\tfrac{3}{2}y+1$$</p>
 
-<div class="esempi">
-<p>$\left(a^4-3a^2\right)-\left(2a-a^2+\tfrac{3}{4}a^4\right)$</p>
-<p>$=a^4-3a^2-2a+a^2-\tfrac{3}{4}a^4$</p>
-<p>$=\tfrac{1}{4}a^4-2a^2-2a$</p>
-<p>Tutti e tre i termini della seconda parentesi hanno cambiato segno. Poi si sono sommati
-i simili: $a^4-\tfrac{3}{4}a^4=\tfrac{1}{4}a^4$ e $-3a^2+a^2=-2a^2$.</p>
-</div>
+<p class="eq">$$\begin{aligned}\left(a^4-3a^2\right)-\left(2a-a^2+\tfrac{3}{4}a^4\right)&=a^4-3a^2-2a+a^2-\tfrac{3}{4}a^4\\&=\tfrac{1}{4}a^4-2a^2-2a\end{aligned}$$</p>
 
-<div class="attenzione">
-<span class="et">Errore da evitare</span>
-<p>Cambiare il segno solo al primo termine della parentesi preceduta dal $-$. Il segno meno
-va distribuito su <i>tutti</i> i termini: $-\left(2a-a^2+\tfrac{3}{4}a^4\right)$ dà
-$-2a+a^2-\tfrac{3}{4}a^4$, non $-2a-a^2+\tfrac{3}{4}a^4$.</p>
-</div>
+<div class="nota"><span class="et">Errore da evitare</span>
+<p>Il segno cambia a tutti i termini: $-\left(2a-a^2+\tfrac{3}{4}a^4\right)=-2a+a^2-\tfrac{3}{4}a^4$, non $-2a-a^2+\tfrac{3}{4}a^4$.</p></div>
 
-<h2>Moltiplicazione di un monomio per un polinomio</h2>
+<h2>Monomio per polinomio</h2>
 
-<p>Si applica la proprietà distributiva: il monomio moltiplica ciascun termine del
-polinomio.</p>
+<p>Proprietà distributiva: il monomio moltiplica ogni termine del polinomio.</p>
 
-$$a(b+c)=ab+ac$$
+<p class="eq">$$a(b+c)=ab+ac$$</p>
 
-<div class="esempi">
-<p>$(-8ax)\cdot\left(9a-\tfrac{3}{4}x^3\right)$</p>
-<p>$=(-8ax)(9a)+(-8ax)\cdot\left(-\tfrac{3}{4}x^3\right)$</p>
-<p>$=-72a^2x+6ax^4$</p>
-<p>Nel secondo prodotto i segni sono entrambi negativi, quindi il risultato è positivo, e
-$\tfrac{3}{4}\cdot 8=6$.</p>
-</div>
+<p class="eq">$$(-8ax)\left(9a-\tfrac{3}{4}x^3\right)=(-8ax)(9a)+(-8ax)\left(-\tfrac{3}{4}x^3\right)=-72a^2x+6ax^4$$</p>
 
-<h2>Moltiplicazione tra due polinomi</h2>
+<h2>Polinomio per polinomio</h2>
 
 <p>Ogni termine del primo polinomio moltiplica ogni termine del secondo, segni compresi.</p>
 
-$$(a+b)\cdot(c+d)=ac+ad+bc+bd$$
-$$(a+b)\cdot(c-d)=ac-ad+bc-bd$$
-
-<svg class="schema" viewBox="0 0 320 120" width="330" role="img"
-     aria-label="Schema dei quattro prodotti: a per c, a per d, b per c, b per d">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6"
-            markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
-    </marker>
-  </defs>
-  <text x="30" y="30" font-size="19" font-family="serif">a</text>
-  <text x="30" y="95" font-size="19" font-family="serif">b</text>
-  <text x="255" y="30" font-size="19" font-family="serif">c</text>
-  <text x="255" y="95" font-size="19" font-family="serif">d</text>
-  <g stroke="#555" fill="none" marker-end="url(#fr)">
-    <line x1="48" y1="25" x2="245" y2="25"/>
-    <line x1="48" y1="32" x2="245" y2="88"/>
-    <line x1="48" y1="90" x2="245" y2="34"/>
-    <line x1="48" y1="97" x2="245" y2="97"/>
-  </g>
-</svg>
-
-<div class="esempi">
-<p>$(3x+y)\cdot(x-2y)$</p>
-<p>$=3x^2-6xy+xy-2y^2$</p>
-<p>$=3x^2-5xy-2y^2$</p>
-<p>I quattro prodotti sono $3x\cdot x$, $3x\cdot(-2y)$, $y\cdot x$ e $y\cdot(-2y)$. I due
-termini centrali sono simili, e $-6xy+xy=-5xy$.</p>
+<div class="fig">
+<svg id="fig-prod" viewBox="0 0 300 124" style="width:100%;max-width:420px" role="img" aria-label="Schema dei quattro prodotti: a per c, a per d, b per c, b per d"></svg>
+<p class="did">Quattro prodotti: $ac$, $ad$, $bc$, $bd$</p>
 </div>
 
-<div class="avanti">
-<h2>Nelle prossime unità</h2>
-<ul>
-<li>Alcuni prodotti fra polinomi ricorrono così spesso che il loro risultato si impara a
-memoria: sono i prodotti notevoli — unità 20 e 21.</li>
-<li>Il prodotto fra polinomi, letto al rovescio, è la scomposizione in fattori — unità 36
-e seguenti.</li>
-</ul>
-</div>
+<p class="eq">$$(a+b)(c+d)=ac+ad+bc+bd \qquad (a+b)(c-d)=ac-ad+bc-bd$$</p>
+
+<p class="eq">$$(3x+y)(x-2y)=3x^2-6xy+xy-2y^2=3x^2-5xy-2y^2$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../18-polinomi-definizione-forma-normale-grado/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Polinomi: definizione, forma normale, grado</span></a><a class="successiva" href="../20-quadrato-di-binomio-e-somma-per-differenza/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Quadrato di binomio e somma per differenza</span></a></nav>
 <footer><p>Matematica prima &middot; Calcolo letterale &middot; Unità 19</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,st,anc){var t=el('text',{x:x,y:y,'text-anchor':anc||'middle',style:st||'fill:var(--inchiostro);font-size:15px'},p);t.textContent=s;return t;}
+
+  var T='fill:var(--inchiostro);font-size:18px;font-family:Georgia,serif;font-style:italic';
+  var s=document.getElementById('fig-prod');
+  if(s){
+    var dfs=el('defs',{},s), m=el('marker',{id:'fr19',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto'},dfs);
+    el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--blu)'},m);
+    txt(s,50,32,'a',T);txt(s,50,104,'b',T);txt(s,250,32,'c',T);txt(s,250,104,'d',T);
+    var a={stroke:'var(--blu)','stroke-width':1.4,fill:'none','marker-end':'url(#fr19)'};
+    [[64,26,236,26],[64,32,236,92],[64,92,236,32],[64,98,236,98]].forEach(function(l){
+      el('line',Object.assign({x1:l[0],y1:l[1],x2:l[2],y2:l[3]},a),s);
+    });
+  }
+
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
