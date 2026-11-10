@@ -5,29 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Complementare e prodotto cartesiano — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-.esempi{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:20px 0}
-.figura{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:14px 16px;margin:24px 0;text-align:center}
-.figura svg{max-width:100%;height:auto}
-.figura figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px}
-.strumento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.strumento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:10px}
-.strumento label{font-family:var(--sans);font-size:.9rem;margin-right:18px}
-.strumento input[type=range]{vertical-align:middle}
-.strumento .esito{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -37,195 +79,151 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Insiemi &middot; Unità 25</p>
   <h1>Complementare e prodotto cartesiano</h1>
-  <p class="sommario">Quando si toglie un insieme da un altro che lo contiene tutto,
-  quel che resta si chiama complementare. Il prodotto cartesiano invece costruisce: da
-  due insiemi ricava tutte le coppie formate da un elemento del primo e uno del
-  secondo.</p>
 </header>
 
-<h2>Due casi particolari della differenza</h2>
+<p>Differenza $A-B$ in due casi particolari:</p>
 
-<p>Due insiemi si dicono <strong>disgiunti</strong> se non hanno elementi in comune. In
-questo caso togliendo $B$ da $A$ non si toglie niente, perché nessun elemento di $A$ sta
-anche in $B$:</p>
+<ul>
+<li>$A$ e $B$ <strong>disgiunti</strong> (nessun elemento in comune) → $A-B=A$;</li>
+<li>$A \subseteq B$ → $A-B=\varnothing$.</li>
+</ul>
 
-$$A - B = A \qquad \text{se } A \text{ e } B \text{ sono disgiunti}$$
-
-<p>All'estremo opposto, se $A \subseteq B$ ogni elemento di $A$ si trova anche in $B$,
-quindi togliendoli si toglie tutto e non resta nulla:</p>
-
-$$A - B = \varnothing \qquad \text{se } A \subseteq B$$
-
-<figure class="figura">
-<svg viewBox="0 0 440 150" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="A sinistra due insiemi separati, a destra A contenuto dentro B">
-  <ellipse cx="60" cy="78" rx="50" ry="34" fill="#f3d6d6" stroke="#22303f" stroke-width="1.6"/>
-  <ellipse cx="170" cy="78" rx="50" ry="34" fill="#fff" stroke="#22303f" stroke-width="1.6"/>
-  <ellipse cx="350" cy="78" rx="70" ry="44" fill="#fff" stroke="#22303f" stroke-width="1.6"/>
-  <ellipse cx="330" cy="80" rx="28" ry="20" fill="#fff" stroke="#22303f" stroke-width="1.6"/>
-  <g font-family="Georgia, serif" font-size="15" font-style="italic" fill="#22303f">
-    <text x="55" y="80">A</text><text x="165" y="80">B</text>
-    <text x="325" y="84">A</text><text x="404" y="42">B</text>
-  </g>
-  <g font-family="Georgia, serif" font-size="13" fill="#3b5f9e">
-    <text x="62" y="136" text-anchor="middle">A &#8722; B = A</text>
-    <text x="350" y="136" text-anchor="middle">A &#8722; B = &#8709;</text>
-  </g>
-</svg>
-<figcaption>A sinistra insiemi disgiunti, a destra $A$ contenuto in $B$.</figcaption>
-</figure>
-
-<h2>Complementare di un insieme</h2>
-
-<div class="def">
-<span class="et">Definizione</span>
-<p>Dati gli insiemi $A$ e $B$ con $B \subseteq A$, l'insieme complementare di $B$
-rispetto ad $A$ è $A - B$. Lo indichiamo con $\overline{B}_A$.</p>
+<div class="fig">
+<div class="pann" style="--n:2">
+<svg id="fig-disg" viewBox="0 0 240 130" role="img" aria-label="Due insiemi disgiunti A e B, con A colorato"></svg>
+<svg id="fig-cont" viewBox="0 0 240 130" role="img" aria-label="A contenuto in B: nessuna zona colorata"></svg>
+</div>
+<div class="did-parti" style="--n:2">
+<p class="did">Disgiunti: $A-B=A$</p>
+<p class="did">$A \subseteq B$: $A-B=\varnothing$</p>
+</div>
 </div>
 
-<p>Nella scrittura la lettera dice quale insieme viene tolto, il pedice da dove viene
-tolto: lo stesso $B$ ha complementari diversi dentro insiemi diversi.</p>
+<h2>Complementare</h2>
 
-<figure class="figura">
-<svg viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="L'insieme A con dentro B: la parte tratteggiata fuori da B è il complementare">
-  <defs>
-    <pattern id="tr" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(60)">
-      <line x1="0" y1="0" x2="0" y2="12" stroke="#c0392b" stroke-width="1.4"/>
-    </pattern>
-    <clipPath id="cA"><ellipse cx="180" cy="80" rx="130" ry="58"/></clipPath>
-  </defs>
-  <g clip-path="url(#cA)">
-    <rect x="50" y="20" width="260" height="120" fill="url(#tr)"/>
-    <ellipse cx="140" cy="80" rx="42" ry="28" fill="#fff"/>
-  </g>
-  <ellipse cx="180" cy="80" rx="130" ry="58" fill="none" stroke="#22303f" stroke-width="1.8"/>
-  <ellipse cx="140" cy="80" rx="42" ry="28" fill="none" stroke="#22303f" stroke-width="1.6"/>
-  <g font-family="Georgia, serif" font-size="15" font-style="italic" fill="#22303f">
-    <text x="136" y="86">B</text><text x="58" y="20">A</text>
-  </g>
-  <text x="330" y="44" font-family="Georgia, serif" font-size="15" fill="#c0392b">B&#773;</text>
-  <text x="342" y="49" font-family="Georgia, serif" font-size="11" fill="#c0392b">A</text>
-</svg>
-<figcaption>La parte tratteggiata è $\overline{B}_A$, cioè $A-B$.</figcaption>
-</figure>
+<div class="def"><span class="et">Complementare</span>
+<p>Con $B \subseteq A$: $\overline{B}_A=A-B$, complementare di $B$ rispetto ad $A$.</p></div>
+
+<div class="fig">
+<svg id="fig-compl" viewBox="0 0 300 150" style="width:100%;max-width:380px" role="img" aria-label="L'insieme A con dentro B: la parte tratteggiata fuori da B è il complementare"></svg>
+<p class="did">Tratteggiato: $\overline{B}_A=A-B$</p>
+</div>
+
+<div class="nota"><span class="et">Errore da evitare</span>
+<p>$\overline{B}_A$ ha senso solo se $B \subseteq A$.</p></div>
 
 <h2>Prodotto cartesiano</h2>
 
-<p>Il prodotto cartesiano produce elementi nuovi: coppie, formate accostando un
-elemento del primo insieme a uno del secondo.</p>
+<div class="def"><span class="et">Prodotto cartesiano</span>
+<p>$A \times B$: insieme delle coppie <strong>ordinate</strong> $(a;b)$ con $a \in A$ e $b \in B$.</p>
+<p class="eq">$$A \times B = \{(a;b) \mid a \in A \text{ e } b \in B\}$$</p></div>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Dati gli insiemi $A$ e $B$, il prodotto cartesiano $A \times B$ è l'insieme delle
-coppie ordinate $(a;b)$ con $a$ che appartiene ad $A$ e $b$ che appartiene a $B$.</p>
-<p>$$A \times B = \{(a;b) \mid a \in A \text{ e } b \in B\}$$</p>
-</div>
+<ul>
+<li>«$\mid$» → «tali che»;</li>
+<li>coppia ordinata → primo elemento da $A$, secondo da $B$.</li>
+</ul>
 
-<p>La barra verticale si legge «tali che»: a sinistra la forma degli elementi, a destra
-la condizione che devono soddisfare. <em>Ordinata</em> significa che il posto conta:
-il primo elemento della coppia viene sempre da $A$, il secondo sempre da $B$.</p>
+<h2>Esempio</h2>
 
-<div class="esempi">
-<p>Con $A = \{4; 5; 6\}$ e $B = \{1; 2\}$ si accosta ciascun elemento di $A$ a ciascun
-elemento di $B$:</p>
-<p>$$A \times B = \{(4;1), (4;2), (5;1), (5;2), (6;1), (6;2)\}$$</p>
-</div>
+<p>Dati: $A=\{4;5;6\}$, $B=\{1;2\}$. Calcolare $A \times B$.</p>
+
+<p class="eq">$$A \times B = \{(4;1),\,(4;2),\,(5;1),\,(5;2),\,(6;1),\,(6;2)\}$$</p>
 
 <h2>Proprietà</h2>
 
-<p>Il prodotto cartesiano <strong>non è commutativo</strong>: in generale</p>
-
-$$A \times B \neq B \times A$$
-
-<p>perché le coppie sono ordinate, e $(a;b) \neq (b;a)$. Nell'esempio sopra
-$B \times A$ contiene $(1;4)$, che in $A \times B$ non compare.</p>
-
-<p>La <strong>cardinalità</strong> invece si calcola con una moltiplicazione:</p>
-
-$$|A \times B| = |A| \cdot |B|$$
-
-<p>Ogni elemento di $A$ genera tante coppie quanti sono gli elementi di $B$.
-Nell'esempio $|A| = 3$ e $|B| = 2$, quindi $|A \times B| = 3 \cdot 2 = 6$: le coppie
-elencate sono sei.</p>
-
-<div class="strumento">
-<span class="et">Da provare</span>
-<p>Ogni pallino è una coppia: la riga dice da quale elemento di $A$ arriva, la
-colonna da quale elemento di $B$.</p>
-<p>
-<label>|A| = <span id="va">3</span> <input type="range" id="ra" min="1" max="6" value="3"></label>
-<label>|B| = <span id="vb">2</span> <input type="range" id="rb" min="1" max="6" value="2"></label>
-</p>
-<svg id="griglia" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Griglia di punti: una riga per ogni elemento di A, una colonna per ogni elemento di B"></svg>
-<p class="esito" id="esito"></p>
-</div>
-
-<div class="attenzione">
-<span class="et">Errore da evitare</span>
-<p>$\overline{B}_A$ ha senso solo se $B \subseteq A$: non si può parlare di
-complementare di un insieme che sporge fuori da quello di riferimento.</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unità</h2>
 <ul>
-<li>Le equazioni lineari, con cui si cercano i valori che rendono vera un'uguaglianza
-fra due espressioni letterali.</li>
-<li>Le coppie ordinate torneranno come coordinate dei punti del piano, che è il prodotto
-cartesiano di $\mathbb{R}$ per $\mathbb{R}$.</li>
+<li>non commutativo → in generale $A \times B \neq B \times A$ (nell'esempio $(1;4) \in B \times A$, ma $(1;4) \notin A \times B$);</li>
+<li>cardinalità → prodotto delle cardinalità.</li>
 </ul>
+
+<div class="def"><span class="et">Cardinalità del prodotto</span>
+<p class="eq">$$|A \times B| = |A| \cdot |B|$$</p></div>
+
+<p class="eq">$$|A|=3,\ |B|=2 \qquad |A \times B| = 3 \cdot 2 = 6$$</p>
+
+<div class="fig">
+<svg id="griglia" viewBox="0 0 230 210" style="width:100%;max-width:300px" role="img" aria-label="Griglia di punti: una riga per ogni elemento di A, una colonna per ogni elemento di B"></svg>
+<div class="cursore"><label for="ra">|A|</label><input type="range" id="ra" min="1" max="6" value="3"><span class="val" id="va">3</span></div>
+<div class="cursore"><label for="rb">|B|</label><input type="range" id="rb" min="1" max="6" value="2"><span class="val" id="vb">2</span></div>
+<p class="val-riga" id="esito"></p>
+<p class="did">Ogni punto è una coppia: riga → elemento di $A$, colonna → elemento di $B$</p>
 </div>
 
 <nav class="nav-unita"><a class="precedente" href="../24-unione-intersezione-e-differenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Unione, intersezione e differenza</span></a><a class="successiva" href="../26-equazioni-definizioni-forma-normale-grado/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Equazioni: definizioni, forma normale, grado</span></a></nav>
 <footer><p>Matematica prima &middot; Insiemi &middot; Unità 25</p></footer>
 
+</div>
 <script>
 (function(){
-  var NS = 'http://www.w3.org/2000/svg';
-  var svg = document.getElementById('griglia');
-  var ra = document.getElementById('ra'), rb = document.getElementById('rb');
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,st){var t=el('text',{x:x,y:y,'text-anchor':'middle',style:st},p);t.textContent=s;return t;}
+  var L='fill:var(--inchiostro);font-size:16px;font-family:Georgia,serif;font-style:italic';
+  var BORDO='fill:none;stroke:var(--inchiostro);stroke-width:1.6';
+  var ROSSO='fill:var(--rosso);fill-opacity:.3';
+
+  /* disgiunti: A - B = A */
+  var s1=document.getElementById('fig-disg');
+  el('ellipse',{cx:65,cy:65,rx:52,ry:38,style:ROSSO},s1);
+  el('ellipse',{cx:65,cy:65,rx:52,ry:38,style:BORDO},s1);
+  el('ellipse',{cx:178,cy:65,rx:52,ry:38,style:BORDO},s1);
+  txt(s1,65,71,'A',L); txt(s1,178,71,'B',L);
+
+  /* A contenuto in B: A - B vuoto */
+  var s2=document.getElementById('fig-cont');
+  el('ellipse',{cx:120,cy:65,rx:105,ry:55,style:BORDO},s2);
+  el('ellipse',{cx:100,cy:68,rx:38,ry:26,style:BORDO},s2);
+  txt(s2,100,74,'A',L); txt(s2,205,24,'B',L);
+
+  /* complementare: A con dentro B, tratteggiato A - B */
+  var s3=document.getElementById('fig-compl');
+  var d=el('defs',{},s3);
+  var pt=el('pattern',{id:'tratt',width:10,height:10,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},d);
+  el('line',{x1:0,y1:0,x2:0,y2:10,style:'stroke:var(--rosso);stroke-width:1.4'},pt);
+  var cp=el('clipPath',{id:'cA'},d); el('ellipse',{cx:150,cy:75,rx:135,ry:62},cp);
+  var g=el('g',{'clip-path':'url(#cA)'},s3);
+  el('rect',{x:0,y:0,width:300,height:150,style:'fill:url(#tratt)'},g);
+  el('ellipse',{cx:110,cy:78,rx:46,ry:30,style:'fill:#fff'},g);
+  el('ellipse',{cx:150,cy:75,rx:135,ry:62,style:BORDO},s3);
+  el('ellipse',{cx:110,cy:78,rx:46,ry:30,style:BORDO},s3);
+  txt(s3,110,84,'B',L); txt(s3,30,30,'A',L);
+  var t=el('text',{x:222,y:84,'text-anchor':'middle',style:'fill:var(--rosso);font-size:17px;font-family:Georgia,serif;font-style:italic;paint-order:stroke;stroke:#fff;stroke-width:5px'},s3);
+  t.textContent='B'; var ts=el('tspan',{dy:5,style:'font-size:11px'},t); ts.textContent='A';
+  el('line',{x1:214,y1:66,x2:230,y2:66,style:'stroke:var(--rosso);stroke-width:1.4'},s3);
+
+  /* griglia delle coppie */
+  var sv=document.getElementById('griglia'), ra=document.getElementById('ra'), rb=document.getElementById('rb');
+  var T='fill:var(--inchiostro);font-size:13px;font-family:Georgia,serif;font-style:italic';
   function disegna(){
-    var na = +ra.value, nb = +rb.value;
-    document.getElementById('va').textContent = na;
-    document.getElementById('vb').textContent = nb;
-    while (svg.firstChild) svg.removeChild(svg.firstChild);
-    var x0 = 70, y0 = 40, passo = 30;
-    for (var i = 0; i < na; i++) {
-      for (var j = 0; j < nb; j++) {
-        var c = document.createElementNS(NS, 'circle');
-        c.setAttribute('cx', x0 + j * passo);
-        c.setAttribute('cy', y0 + i * passo);
-        c.setAttribute('r', 6);
-        c.setAttribute('fill', '#3b5f9e');
-        svg.appendChild(c);
-      }
-      var t = document.createElementNS(NS, 'text');
-      t.setAttribute('x', 44); t.setAttribute('y', y0 + i * passo + 5);
-      t.setAttribute('font-family', 'Georgia, serif');
-      t.setAttribute('font-size', '13'); t.setAttribute('fill', '#22303f');
-      t.textContent = 'a' + (i + 1);
-      svg.appendChild(t);
+    var na=+ra.value, nb=+rb.value, p=30, x0=60+(6-nb)*p/2, y0=38+(6-na)*p/2;
+    document.getElementById('va').textContent=na; document.getElementById('vb').textContent=nb;
+    while(sv.firstChild)sv.removeChild(sv.firstChild);
+    for(var j=0;j<nb;j++)txt(sv,x0+j*p,y0-20,'b'+(j+1),T);
+    for(var i=0;i<na;i++){
+      txt(sv,x0-30,y0+i*p+5,'a'+(i+1),T);
+      for(var k=0;k<nb;k++)el('circle',{cx:x0+k*p,cy:y0+i*p,r:6,style:'fill:var(--blu)'},sv);
     }
-    for (var j2 = 0; j2 < nb; j2++) {
-      var t2 = document.createElementNS(NS, 'text');
-      t2.setAttribute('x', x0 + j2 * passo); t2.setAttribute('y', 20);
-      t2.setAttribute('text-anchor', 'middle');
-      t2.setAttribute('font-family', 'Georgia, serif');
-      t2.setAttribute('font-size', '13'); t2.setAttribute('fill', '#22303f');
-      t2.textContent = 'b' + (j2 + 1);
-      svg.appendChild(t2);
-    }
-    document.getElementById('esito').textContent =
-      na + ' · ' + nb + ' = ' + (na * nb) + ' coppie.';
+    document.getElementById('esito').textContent=na+' · '+nb+' = '+(na*nb)+(na*nb===1?' coppia':' coppie');
   }
-  ra.addEventListener('input', disegna);
-  rb.addEventListener('input', disegna);
-  disegna();
+  ra.addEventListener('input',disegna); rb.addEventListener('input',disegna); disegna();
 })();
 </script>
-
-</div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
