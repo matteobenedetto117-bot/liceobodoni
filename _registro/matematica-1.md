@@ -226,6 +226,7 @@ questo sul sito pubblico.
   nuovo: restano quelli della traccia (naturali fra 2 e 7, lettere dell'alfabeto, i cinque
   film, $-15 \in \mathbb{Z}$, $\sqrt{3} \notin \mathbb{Q}$, le vocali, i naturali maggiori
   di 3). Nessuna tabella di sintesi, nessuna proprietà anticipata.
+- Revisione (10/11/2026, regole 13/10): parole circa 418 → 149 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 21), tolti sommario, prosa esplicativa, riquadro .esempi e sezione «Nelle prossime unità»; definizione con il criterio oggettivo in .def, esempi di insieme / non insieme in elenco caso → conseguenza, «Da tenere presente» ridotto a .nota di una riga; appartenenza e le tre rappresentazioni in frasi brevi + .eq; titoletti «Appartenenza» e «Rappresentazioni». Nessun esempio eliminato. Nessuna comparsa da togliere. Figura: diagramma di Eulero-Venn delle vocali ridisegnato come SVG da script interno con i colori del foglio. Nessuna correzione concettuale.
 
 ## Unità 23 — Insieme vuoto, cardinalità, sottoinsiemi
 - Parole: 417 su 2 pagine di traccia (pp. 54–55), circa 209 parole per pagina.
