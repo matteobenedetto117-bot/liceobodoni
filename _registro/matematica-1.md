@@ -327,6 +327,7 @@ questo sul sito pubblico.
   termine da eliminare; formulato senza introdurre esempi nuovi. Aggiunta anche, in una
   riga, la divisione finale per 5 come passaggio esplicito: nella traccia il passaggio
   da 5x = 21 a x = 21/5 è indicato solo dalle cancellature a margine.
+- Revisione (10/11/2026, regole 13/10): parole circa 260 → 101 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 25), tolti sommario, prosa esplicativa e sezione «Nelle prossime unità»; metodo in elenco caso → conseguenza (riduzione, trasporto, isolamento); esempio in forma Dati/Calcolare con riduzione, trasporto e isolamento in tre .eq, ciascuna preceduta da una frase breve; «Errore da evitare» in .nota di una riga. Titoletti: solo «Esempio» (tolti «Il metodo», «Spostare i termini», «Isolare l'incognita»). Nessun esempio eliminato. Nessuna comparsa da togliere. Verifica Python: membri ridotti a 7/3x − 1 e 2/3x + 6, x = 21/5, entrambi i membri 44/5. Precisazione: «per uno stesso numero diverso da zero» nell'isolamento (la traccia dice «opportuni valori numerici»). Figura: le due frecce del trasporto ridisegnate come SVG da script interno con i colori del foglio (blu per il termine in x, rosso per il numero).
 
 ## Unità 28 — Principi di equivalenza
 - Parole: 383 su 2 pagine di traccia nominali (pp. 66–67); in pratica circa 1,5 pagine,
