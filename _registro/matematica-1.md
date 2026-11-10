@@ -122,6 +122,7 @@ questo sul sito pubblico.
   = False), e il passaggio $a=2m \Rightarrow 4m^2=2b^2 \Rightarrow 2m^2=b^2$ della dimostrazione
   per assurdo torna algebricamente.
 - Aggiunta: nessuna.
+- Revisione (10/11/2026, regole 13/10): parole circa 256 → 105 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario compreso prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 11), tolto sommario; dimostrazione per assurdo ridotta a ipotesi + due .eq + elenco caso → conseguenza sotto il titoletto «Dimostrazione»; definizioni di numero irrazionale e reale in .def sotto «Numeri reali» (titoletto «Un numero che non è una frazione» tolto). Nessuna comparsa da togliere. Figure ridisegnate come SVG da script interno con i colori del foglio. Correzione: il triangolo aveva l'angolo retto in A e cateti disegnati diversi, mentre didascalia e testo dicono cateti AB = BC = 1 e ipotenusa AC; ridisegnato con angolo retto in B e cateti uguali. Diagramma dei reali: linea divisoria estesa a tutta l'ellisse ed etichetta ℝ spostata fuori (prima era sovrapposta alla linea). Passaggi a = √2 b ⇒ a² = 2b², (2m)² = 2b² ⇒ 2m² = b² verificati.
 
 ## Unità 14 — Monomi: definizione, forma normale, grado
 - Parole: 317 (incl. titolo/nav/footer) su 3 pagine di traccia (pag. 33–35 di matematica-1.pdf;

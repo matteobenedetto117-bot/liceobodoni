@@ -5,18 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Numeri irrazionali e numeri reali — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
 .fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
 .fig svg{max-width:100%;height:auto}
-.fig .did{font-family:var(--sans);font-size:.85rem;color:#4a5a6d;margin:10px 0 0;text-align:left}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -26,82 +78,94 @@
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">I numeri &middot; Unità 13</p>
   <h1>Numeri irrazionali e numeri reali</h1>
-  <p class="sommario">Non tutti i numeri si scrivono come frazione. L'ipotenusa di un semplice
-  triangolo rettangolo basta a mostrarlo, e a farci allargare ancora una volta l'insieme dei
-  numeri con cui lavoriamo.</p>
 </header>
 
-<h2>Un numero che non è una frazione</h2>
+<p>Triangolo rettangolo isoscele con cateti lunghi 1: quanto misura l'ipotenusa?</p>
 
 <div class="fig">
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
-<polygon points="40,180 220,180 40,40" fill="none" stroke="#16283d" stroke-width="2"/>
-<rect x="40" y="160" width="20" height="20" fill="none" stroke="#16283d" stroke-width="1.5"/>
-<text x="20" y="195" font-family="Segoe UI, sans-serif" font-size="15" fill="#16283d">A</text>
-<text x="228" y="195" font-family="Segoe UI, sans-serif" font-size="15" fill="#16283d">B</text>
-<text x="30" y="35" font-family="Segoe UI, sans-serif" font-size="15" fill="#16283d">C</text>
-<text x="130" y="200" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#4a5a6d">1</text>
-<text x="20" y="115" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#4a5a6d">1</text>
-<text x="150" y="100" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#b3392f">√2</text>
-</svg>
-<p class="did">Triangolo rettangolo isoscele con cateti $\overline{AB}=\overline{BC}=1$.</p>
+<svg id="fig-triangolo" viewBox="0 0 260 215" style="width:100%;max-width:300px" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">Cateti $\overline{AB}=\overline{BC}=1$</p>
 </div>
 
-<p>Nel triangolo disegnato sopra, il teorema di Pitagora dà la lunghezza dell'ipotenusa:
-$$\overline{AC}=\sqrt{1^2+1^2}=\sqrt2.$$
-$\sqrt2$ non è un numero razionale, cioè non si può scrivere come frazione $\dfrac{a}{b}$ con
-$a$ e $b$ interi. Lo dimostriamo per assurdo.</p>
+<p>Teorema di Pitagora:</p>
+<p class="eq">$$\overline{AC}=\sqrt{1^2+1^2}=\sqrt2$$</p>
 
-<div class="svolgimento">
-<span class="et">Dimostrazione</span>
-<p>Supponiamo, per assurdo, che sia possibile scrivere
-$$\frac{a}{b}=\sqrt2,$$
-con $a$ e $b$ interi primi tra loro, cioè senza fattori comuni: se ne avessero, basterebbe
-semplificarli. Allora $a=\sqrt2\,b$, e elevando al quadrato entrambi i membri,
-$$a^2=2b^2.$$
-Il secondo membro è pari, quindi anche $a^2$ è pari; ma il quadrato di un numero dispari è
-sempre dispari, dunque anche $a$ è pari. Possiamo scrivere $a=2m$, con $m$ intero qualsiasi.
-Sostituendo,
-$$(2m)^2=2b^2 \ \Longrightarrow\ 4m^2=2b^2 \ \Longrightarrow\ 2m^2=b^2,$$
-e con lo stesso ragionamento di prima, $b^2$ è pari e quindi $b$ è pari. Ma allora $a$ e $b$
-sono entrambi pari, e avrebbero il fattore comune 2: questo contraddice l'ipotesi che fossero
-primi tra loro. L'assurdo nasce dall'aver supposto che $\sqrt2$ si potesse scrivere come
-frazione: quindi non è vero, e $\sqrt2$ è irrazionale.</p>
-</div>
+<p>$\sqrt2$ non si scrive come frazione $\dfrac{a}{b}$ con $a$, $b$ interi: si dimostra per assurdo.</p>
 
-<h2>Numeri irrazionali e numeri reali</h2>
+<h2>Dimostrazione</h2>
+<p>Ipotesi per assurdo: $\sqrt2=\dfrac{a}{b}$, con $a$, $b$ interi primi tra loro.</p>
+<p class="eq">$$a=\sqrt2\,b\ \Longrightarrow\ a^2=2b^2$$</p>
+<ul>
+<li>$a^2$ pari → $a$ pari (il quadrato di un dispari è dispari) → $a=2m$.</li>
+</ul>
+<p class="eq">$$(2m)^2=2b^2\ \Longrightarrow\ 4m^2=2b^2\ \Longrightarrow\ 2m^2=b^2$$</p>
+<ul>
+<li>$b^2$ pari → $b$ pari;</li>
+<li>$a$ e $b$ pari → fattore comune 2: contraddizione.</li>
+</ul>
+<p>Quindi $\sqrt2$ è irrazionale.</p>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Un <b>numero irrazionale</b> è un numero che non si può scrivere come frazione, cioè un
-numero non razionale. I numeri irrazionali sono infiniti e corrispondono ai numeri decimali con
-infinite cifre non periodiche.</p>
-</div>
+<h2>Numeri reali</h2>
+<div class="def"><span class="et">Numero irrazionale</span>
+<p>Numero non razionale: decimale con infinite cifre non periodiche. Gli irrazionali sono infiniti.</p></div>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Un <b>numero reale</b> è un numero razionale oppure irrazionale. Indichiamo con
-$\mathbb{R}$ l'insieme dei numeri reali.</p>
-</div>
+<div class="def"><span class="et">Numero reale</span>
+<p>Numero razionale oppure irrazionale. Insieme dei numeri reali: $\mathbb{R}$.</p></div>
 
 <div class="fig">
-<svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="230" cy="110" rx="220" ry="100" fill="none" stroke="#16283d" stroke-width="2"/>
-<line x1="230" y1="18" x2="230" y2="202" stroke="#16283d" stroke-width="1.5"/>
-<text x="120" y="45" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="17" font-weight="600" fill="#16283d">razionali</text>
-<text x="120" y="110" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#b3392f">−3/5,  1/2,  7/10</text>
-<text x="340" y="45" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="17" font-weight="600" fill="#16283d">irrazionali</text>
-<text x="340" y="110" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#b3392f">√2,  π</text>
-<text x="230" y="198" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="600" fill="#16283d">R</text>
-</svg>
-<p class="did">I numeri reali si dividono in razionali e irrazionali: ogni numero reale sta in
-uno solo dei due gruppi.</p>
+<svg id="fig-reali" viewBox="0 0 460 210" style="width:100%;max-width:420px" xmlns="http://www.w3.org/2000/svg"></svg>
+<p class="did">Ogni numero reale è razionale oppure irrazionale</p>
 </div>
-
 
 <nav class="nav-unita"><a class="precedente" href="../12-percentuali/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Percentuali</span></a><a class="successiva" href="../14-monomi-definizione-forma-normale-grado/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Monomi: definizione, forma normale, grado</span></a></nav>
 <footer><p>Matematica prima &middot; I numeri &middot; Unità 13</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(p,n,a,st){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(st)e.setAttribute('style',st);p.appendChild(e);return e;}
+  function txt(p,x,y,s,st,anc,size,w){var e=el(p,'text',{x:x,y:y,'text-anchor':anc||'middle','font-size':size||14},'fill:'+st+(w?';font-weight:600':''));e.textContent=s;return e;}
+  var INK='var(--inchiostro)',GR='var(--grigio)',RO='var(--rosso)';
+  /* triangolo: angolo retto in B, cateti uguali (140 unità = 1) */
+  var t=document.getElementById('fig-triangolo');
+  var A=[60,180],B=[200,180],C=[200,40],L=B[0]-A[0];
+  el(t,'polygon',{points:A+' '+B+' '+C},'fill:none;stroke:'+INK+';stroke-width:2');
+  el(t,'line',{x1:A[0],y1:A[1],x2:C[0],y2:C[1]},'stroke:'+RO+';stroke-width:3');
+  el(t,'polyline',{points:(B[0]-16)+','+B[1]+' '+(B[0]-16)+','+(B[1]-16)+' '+B[0]+','+(B[1]-16)},'fill:none;stroke:'+INK+';stroke-width:1.5');
+  txt(t,A[0]-12,A[1]+6,'A',INK);txt(t,B[0]+12,B[1]+14,'B',INK);txt(t,C[0]+12,C[1]-4,'C',INK);
+  txt(t,(A[0]+B[0])/2,B[1]+20,'1',GR,'middle',13);
+  txt(t,B[0]+14,(B[1]+C[1])/2+5,'1',GR,'start',13);
+  var mx=(A[0]+C[0])/2,my=(A[1]+C[1])/2,d=16/Math.SQRT2;
+  txt(t,mx-d,my-d,'\u221A2',RO,'middle',14,1);
+  /* diagramma: R diviso in razionali e irrazionali */
+  var r=document.getElementById('fig-reali');
+  var cx=230,cy=110,rx=210,ry=90;
+  el(r,'ellipse',{cx:cx,cy:cy,rx:rx,ry:ry},'fill:none;stroke:'+INK+';stroke-width:2');
+  el(r,'line',{x1:cx,y1:cy-ry,x2:cx,y2:cy+ry},'stroke:'+INK+';stroke-width:1.5');
+  txt(r,24,28,'\u211D',INK,'middle',14,1);
+  txt(r,cx-105,cy-22,'razionali',INK,'middle',14,1);
+  txt(r,cx-105,cy+18,'\u22123/5,  1/2,  7/10',RO,'middle',13);
+  txt(r,cx+105,cy-22,'irrazionali',INK,'middle',14,1);
+  txt(r,cx+105,cy+18,'\u221A2,  \u03C0',RO,'middle',13);
+})();
+</script>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
