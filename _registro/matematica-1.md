@@ -197,6 +197,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna. Tutti i risultati della traccia verificati con SymPy: $(3x^2+5y)^2$, $(2z-a)^2$, $(x+7y)(x-7y)$, $(x+2)(-x+2)$, $(-3+x)(-3-x)$ sono corretti così come scritti.
 - Aggiunta: nessuna. Conservati i due prodotti notevoli, la derivazione per moltiplicazione diretta che la traccia svolge, l'avvertenza "$(A+B)^2 \neq A^2+B^2$" e tutti e cinque gli esempi, nessuno di più.
 - Nota: aggiornato il link "successiva" dell'unità 19, che puntava all'indice.
+- Revisione (10/11/2026, regole 13/10): parole circa 378 → 98 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 19), tolti sommario, prosa esplicativa, riquadri .esempi e sezione «Nelle prossime unità»; derivazioni in .eq, regole in .def (formula + frase), segni in elenco caso → conseguenza, «Errore da evitare» ridotto a .nota di una riga; esempi in .eq con formula, sostituzione e risultato. Nessun esempio eliminato (i tre della somma per differenza sono una riga ciascuno). Nessuna comparsa da togliere. Nessuna figura. Nessuna correzione concettuale. Verificati con SymPy i cinque esempi e le due regole.
 
 ## Unità 21 — Cubo di binomio e quadrato di trinomio
 - Parole: 429 su 1,5 pagine di traccia (PDF 50, metà inferiore, e 51), pari a circa 286
