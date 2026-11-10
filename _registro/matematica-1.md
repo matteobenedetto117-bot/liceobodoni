@@ -213,6 +213,7 @@ questo sul sito pubblico.
   dimostrazione in più, nessuna tabella di sintesi. Conservate entrambe le derivazioni per
   moltiplicazione diretta che la traccia svolge.
 - Nota: aggiornato il link "successiva" dell'unità 20, che puntava all'indice.
+- Revisione (10/11/2026, regole 13/10): parole circa 403 → 102 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 19), tolti sommario, prosa esplicativa, riquadri .esempi e sezione «Nelle prossime unità»; derivazioni in .eq a due righe, regole in .def, segni in elenco caso → conseguenza, «Errore da evitare» ridotto a .nota di una riga. Nessun esempio eliminato (tre del trinomio, una riga ciascuno). Nessuna comparsa da togliere. Figura: griglia dei nove prodotti ridisegnata come SVG da script interno con i colori del foglio (diagonale blu; coppie AB rosso, AC verde, BC grigio). Nessuna correzione concettuale. Verificati con SymPy i cinque esempi e le due regole.
 
 ## Unità 22 — Insiemi: definizione e rappresentazioni
 - Parole: 476 su 2 pagine di traccia (pp. 52–53), circa 238 parole per pagina.
