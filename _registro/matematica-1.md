@@ -449,6 +449,7 @@ questo sul sito pubblico.
   l'errore tipico del raccoglimento totale. Poche righe di commento dove la traccia scrive
   solo il risultato: come si sceglie il fattore da raccogliere (MCD, minimo esponente) e
   perché nell'ultimo esempio va raccolto −3x e non 3x.
+- Revisione (11/11/2026, regole 13/10): parole circa 507 → 156 (testo fra titolo e barra, formule $$ e didascalie escluse; sommario e «Nelle prossime unità» compresi prima). Pagina mai revisionata: impaginazione a quaderno (stile e script di allineamento come l'unità 33); tolti sommario, prosa esplicativa e sezione «Nelle prossime unità» (rimandi alle unità 35 e 36); riducibile/irriducibile in .def; scomposizione completa di y³+2y²−9y−18 in una sola .eq; i quattro raccoglimenti totali in una .eq allineata; scelta del fattore (MCD, esponente minimo, lettera assente) in elenco caso → conseguenza; riquadro «Attenzione» ridotto a .nota «Errore tipico» di una riga (resta 1 in parentesi); procedimento del raccoglimento parziale in tre voci d'elenco; commento sul −3x ridotto a una frase di raccordo. Titoletti: «Raccoglimento totale», «Raccoglimento parziale»; tolto «Scomposizione in fattori» (apertura della pagina). Nessun esempio eliminato. Nessuna comparsa da togliere. Nessuna figura. Nessuna correzione concettuale. Verifica SymPy: tutte e dieci le identità della pagina.
 
 ## Unità 35 — Scomposizione con i prodotti notevoli
 - Parole: 614 su 4 pagine di traccia (81–84 di _fonti/matematica-1.pdf), 154 per pagina.
