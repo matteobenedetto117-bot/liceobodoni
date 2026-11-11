@@ -5,26 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disequazioni determinate, impossibili, indeterminate — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-.esito{font-family:var(--sans);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
-.esito.si{color:#1e7a3c}
-.esito.no{color:#c0392b}
-table.casi{border-collapse:collapse;margin:26px auto;font-family:var(--sans);font-size:.92rem}
-table.casi td{padding:7px 22px;border-bottom:1px solid var(--riga)}
-table.casi td.f{font-family:var(--serif);font-size:1.1rem;text-align:center}
-table.casi tr:last-child td{border-bottom:0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -34,84 +79,64 @@ table.casi tr:last-child td{border-bottom:0}
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Equazioni fratte e disequazioni lineari &middot; Unità 44</p>
   <h1>Disequazioni determinate, impossibili, indeterminate</h1>
-  <p class="sommario">Risolvendo una disequazione intera non sempre si arriva a una condizione
-  su $x$: a volte l'incognita si semplifica e resta una disuguaglianza fra soli numeri. Quello
-  che rimane scritto va allora letto, perché dice se le soluzioni sono infinite o se non ce n'è
-  nessuna.</p>
 </header>
 
-<h2>Soluzioni di disequazioni intere</h2>
+<p>Disequazione intera: che cosa si conclude se, semplificando, l'incognita sparisce?</p>
 
-<p>Risolviamo tre disequazioni e guardiamo che aspetto ha il risultato di ciascuna.</p>
+<ul>
+<li>resta una condizione su $x$ → determinata: soluzioni i numeri che la verificano;</li>
+<li>resta una disuguaglianza numerica falsa → impossibile: nessuna soluzione;</li>
+<li>resta una disuguaglianza numerica vera → indeterminata: ogni $x$ è soluzione.</li>
+</ul>
 
-<div class="svolgimento">
-<span class="et">Primo caso</span>
-$$x-6&gt;3x$$
-$$x-3x&gt;6$$
-$$-2x&gt;6$$
-<p>Dividiamo per $-2$: il coefficiente è negativo, quindi il verso si inverte.</p>
-$$x&lt;-\frac{6}{2}\qquad x&lt;-3$$
-<p>Resta una condizione su $x$, che separa i numeri accettabili da quelli che non lo sono: sono
-soluzioni tutti i numeri minori di $-3$. La disequazione si dice
-<span class="esito si">determinata</span>.</p>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>L'incognita sparita non indica un errore: si legge la disuguaglianza numerica rimasta.</p></div>
 
-<div class="svolgimento">
-<span class="et">Secondo caso</span>
-$$2(x+3)-3x&lt;1-x$$
-$$2x+6-3x&lt;1-x$$
-$$2x-3x+x&lt;-6+1$$
-$$0&lt;-5$$
-<p>I termini in $x$ si sono elisi e resta il confronto fra due numeri, che è falso: zero non è
-minore di $-5$. Nessun valore di $x$ può rendere vera la disequazione, che è quindi
-<span class="esito no">impossibile</span>.</p>
-</div>
+<h2>I simboli $\ge$ e $\le$</h2>
 
-<div class="svolgimento">
-<span class="et">Terzo caso</span>
-$$(x+1)^2-2x&gt;x^2-6$$
-$$x^2+2x+1-2x&gt;x^2-6$$
-$$x^2+2x-2x-x^2&gt;-1-6$$
-$$0&gt;-7$$
-<p>Anche qui l'incognita sparisce, ma la disuguaglianza rimasta è vera. Allora è vera qualunque
-sia $x$: ogni numero è soluzione, e la disequazione si dice
-<span class="esito si">indeterminata</span>.</p>
-</div>
+<p>$\ge$ «maggiore o uguale», $\le$ «minore o uguale»: disuguaglianze verificate anche a termini uguali.</p>
 
-<h2>I simboli</h2>
+<p>Con due numeri uguali il simbolo decide l'esito:</p>
 
-<p>Accanto a $&lt;$ e $&gt;$ si usano i simboli $\ge$, che si legge <em>maggiore o uguale</em>, e
-$\le$, che si legge <em>minore o uguale</em>. Indicano una disuguaglianza che si verifica anche
-se i due termini sono uguali.</p>
+<ul>
+<li>$4\ge 4$ → vera: indeterminata;</li>
+<li>$4&gt;4$ → falsa: impossibile;</li>
+<li>$7\le 7$ → vera: indeterminata;</li>
+<li>$7&lt;7$ → falsa: impossibile.</li>
+</ul>
 
-<p>È questa differenza a decidere la lettura quando l'incognita si semplifica e i due numeri
-rimasti sono uguali fra loro:</p>
+<h2>Esempio 1</h2>
 
-<table class="casi">
-<tr><td class="f">$4\ge 4$</td><td class="esito si">indeterminata</td></tr>
-<tr><td class="f">$4&gt;4$</td><td class="esito no">impossibile</td></tr>
-<tr><td class="f">$7\le 7$</td><td class="esito si">indeterminata</td></tr>
-<tr><td class="f">$7&lt;7$</td><td class="esito no">impossibile</td></tr>
-</table>
+<p>Risolvere $2(x+3)-3x&lt;1-x$.</p>
 
-<div class="attenzione">
-<span class="et">Attenzione</span>
-<p>Quando l'incognita sparisce non si è sbagliato un passaggio: il risultato è la disuguaglianza
-numerica rimasta. Se è vera la disequazione è indeterminata e vanno bene tutti i numeri; se è
-falsa è impossibile e non ne va bene nessuno. Il segno con l'uguale e quello stretto danno esiti
-opposti proprio nel caso di parità.</p>
-</div>
+<p class="eq">$$2x+6-3x&lt;1-x\;\Rightarrow\;2x-3x+x&lt;1-6\;\Rightarrow\;0&lt;-5\qquad\text{falsa: impossibile}$$</p>
 
-<div class="avanti">
-<h2>Che cosa viene dopo</h2>
-<p>Con questa lettura si chiude l'algebra della prima. Il lavoro riprende dalla geometria
-euclidea, che parte da capo: che cosa si può assumere senza dimostrarlo e che cosa invece va
-dimostrato.</p>
-</div>
+<h2>Esempio 2</h2>
+
+<p>Risolvere $(x+1)^2-2x&gt;x^2-6$.</p>
+
+<p class="eq">$$x^2+2x+1-2x&gt;x^2-6\;\Rightarrow\;x^2-x^2&gt;-6-1\;\Rightarrow\;0&gt;-7\qquad\text{vera: indeterminata}$$</p>
 
 <nav class="nav-unita"><a class="precedente" href="../43-disequazioni-lineari-principi-e-verso-della-disuguaglianza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disequazioni lineari: principi e verso della disuguaglianza</span></a><a class="successiva" href="../45-enti-primitivi-definizioni-teoremi-e-postulati/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Enti primitivi, definizioni, teoremi e postulati</span></a></nav>
 <footer><p>Matematica prima &middot; Equazioni fratte e disequazioni lineari &middot; Unità 44</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
