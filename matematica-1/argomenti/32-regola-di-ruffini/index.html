@@ -5,22 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regola di Ruffini — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def,.svolgimento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0}
-.def{border-left:4px solid var(--blu)}
-.def .et,.svolgimento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-figure.schema{margin:26px 0;text-align:center}
-figure.schema svg{max-width:100%;height:auto}
-figure.schema figcaption{font-family:var(--sans);font-size:.82rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -30,157 +79,123 @@ figure.schema figcaption{font-family:var(--sans);font-size:.82rem;color:var(--gr
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Scomposizione di polinomi &middot; Unità 32</p>
   <h1>Regola di Ruffini</h1>
-  <p class="sommario">Quando il divisore è un binomio del tipo $x-2$ o $x+3$, la
-  divisione in colonna si può abbreviare molto: basta far lavorare i soli coefficienti,
-  in uno schema di somme e prodotti. È la regola di Ruffini.</p>
 </header>
 
-<h2>Come funziona lo schema</h2>
+<p>Divisione per un binomio $x-a$: lo schema di Ruffini usa i soli coefficienti.</p>
 
-<p>Eseguiamo la divisione</p>
+<p class="eq">$$\left(1-5x^2-6x+3x^3\right):(x-2)\;\to\;\left(3x^3-5x^2-6x+1\right):(x-2)$$</p>
 
-$$\left(1 - 5x^2 - 6x + 3x^3\right) : (x-2)$$
+<ol>
+<li>dividendo ordinato per potenze decrescenti: coefficienti in alto, termine noto oltre la barra;</li>
+<li>a sinistra $a$, termine noto del divisore cambiato di segno: $x-2\to2$;</li>
+<li>si abbassa il primo coefficiente;</li>
+<li>ogni risultato per $a$ → riga di mezzo, colonna successiva; poi somma in colonna.</li>
+</ol>
 
-<p>Prima di tutto ordiniamo i monomi del dividendo secondo le potenze decrescenti,
-perché lo schema legge i coefficienti in quell'ordine:</p>
-
-$$\left(3x^3 - 5x^2 - 6x + 1\right) : (x-2)$$
-
-<p>Nella riga in alto si scrivono i coefficienti $3,\,-5,\,-6$ e, dopo la barra
-verticale, il termine noto $1$. A sinistra si scrive il numero del divisore
-<em>cambiato di segno</em>: il divisore è $x-2$, quindi si scrive $2$.</p>
-
-<figure class="schema">
-<svg viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Schema di Ruffini per la divisione di 3x^3-5x^2-6x+1 per x-2">
-  <defs>
-    <marker id="fr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#2c6fb5"/>
-    </marker>
-  </defs>
-  <g stroke="#333" stroke-width="1.6">
-    <line x1="122" y1="22" x2="122" y2="152"/>
-    <line x1="352" y1="22" x2="352" y2="200"/>
-    <line x1="58"  y1="152" x2="466" y2="152"/>
-  </g>
-  <g font-family="Georgia,serif" font-size="21" text-anchor="middle" fill="#111">
-    <text x="155" y="58">3</text><text x="235" y="58">&#8722;5</text>
-    <text x="305" y="58">&#8722;6</text><text x="405" y="58">1</text>
-    <text x="90"  y="120">2</text>
-    <text x="235" y="120">6</text><text x="305" y="120">2</text><text x="405" y="120">&#8722;8</text>
-    <text x="155" y="188">3</text><text x="235" y="188">1</text>
-    <text x="305" y="188">&#8722;4</text><text x="405" y="188">&#8722;7</text>
-  </g>
-  <g stroke="#2c6fb5" stroke-width="1.4" fill="none" marker-end="url(#fr)">
-    <path d="M160 178 C190 168 210 140 228 126"/>
-    <path d="M240 178 C270 168 285 140 298 126"/>
-    <path d="M310 178 C340 168 358 140 398 126"/>
-  </g>
-  <g stroke="#2e8b57" stroke-width="1.4" fill="none" marker-end="url(#fr)" opacity=".9">
-    <path d="M155 64 L155 170" stroke="#2e8b57"/>
-  </g>
-  <g font-family="system-ui,sans-serif" font-size="12.5" fill="#666" text-anchor="middle">
-    <text x="155" y="212">x&#178;</text><text x="235" y="212">x</text><text x="305" y="212">x&#8304;</text>
-    <text x="405" y="212">resto</text>
-    <text x="90" y="145">&#8592; segno cambiato</text>
-  </g>
-</svg>
-<figcaption>Si abbassa il primo coefficiente; ogni numero della riga di mezzo è il
-prodotto (frecce blu) del $2$ per il risultato appena ottenuto, e ogni numero in basso è
-la somma della colonna.</figcaption>
-</figure>
-
-<p>I numeri della riga in basso sono i coefficienti del quoziente, e l'ultimo, oltre
-la barra, è il resto. Il dividendo ha grado $3$, quindi il quoziente ha grado $2$:</p>
-
-$$3x^2 + x - 4 \qquad R: -7$$
-
-<div class="def">
-<span class="et">Quando si può usare</span>
-<p>La regola di Ruffini si può usare <strong>soltanto</strong> se il divisore è del
-tipo $x + a$ oppure $x - a$, con $a$ numero reale. Il quoziente è un polinomio di
-grado inferiore di uno rispetto al dividendo (grado $3 \to$ grado $2$, grado $4 \to$
-grado $3$, e così via), e il resto è sempre un monomio di grado $0$, cioè un numero.</p>
+<div class="fig">
+<svg id="fig-r1" class="piano" role="img" aria-label="Schema di Ruffini: 3, −5, −6, 1 diviso per x − 2; quoziente 3, 1, −4; resto −7"></svg>
+<p class="did">Frecce blu: prodotti per 2; riga in basso: somme</p>
 </div>
 
-<h2>Un secondo esempio</h2>
+<p>Riga in basso: coefficienti del quoziente; ultimo numero: resto.</p>
 
-<p>Nella divisione $\left(3x^3 + 7x^2 - 8\right) : (x+2)$ manca il termine di primo
-grado: al suo posto va scritto il coefficiente $0$, altrimenti le colonne si spostano.
-Il divisore è $x+2$, quindi a sinistra si scrive $-2$.</p>
+<p class="eq">$$Q=3x^2+x-4 \qquad\qquad R=-7$$</p>
 
-<figure class="schema">
-<svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Schema di Ruffini per 3x^3+7x^2-8 diviso x+2">
-  <g stroke="#333" stroke-width="1.6">
-    <line x1="122" y1="22" x2="122" y2="142"/>
-    <line x1="352" y1="22" x2="352" y2="190"/>
-    <line x1="58"  y1="142" x2="466" y2="142"/>
-  </g>
-  <g font-family="Georgia,serif" font-size="21" text-anchor="middle" fill="#111">
-    <text x="155" y="55">3</text><text x="235" y="55">7</text>
-    <text x="305" y="55">0</text><text x="405" y="55">&#8722;8</text>
-    <text x="90"  y="112">&#8722;2</text>
-    <text x="235" y="112">&#8722;6</text><text x="305" y="112">&#8722;2</text><text x="405" y="112">4</text>
-    <text x="155" y="178">3</text><text x="235" y="178">1</text>
-    <text x="305" y="178">&#8722;2</text><text x="405" y="178">&#8722;4</text>
-  </g>
-</svg>
-</figure>
+<div class="def"><span class="et">Quando si applica</span>
+<p>Divisore $x-a$ oppure $x+a$, con $a$ numero reale.</p></div>
 
-$$3x^2 + x - 2 \qquad R: -4$$
-
-<h2>Divisore del tipo $ax+b$</h2>
-
-<p>Se il divisore ha un coefficiente davanti alla $x$, come in
-$\left(3x^3 - 2x^2 + 2\right) : (3x+1)$, si dividono dividendo e divisore per quel
-coefficiente, qui $3$, riportando il divisore alla forma $x + a$:</p>
-
-$$\left(x^3 - \tfrac{2}{3}x^2 + \tfrac{2}{3}\right) : \left(x + \tfrac{1}{3}\right)$$
-
-<figure class="schema">
-<svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Schema di Ruffini con coefficienti frazionari">
-  <g stroke="#333" stroke-width="1.6">
-    <line x1="122" y1="22" x2="122" y2="142"/>
-    <line x1="352" y1="22" x2="352" y2="190"/>
-    <line x1="58"  y1="142" x2="466" y2="142"/>
-  </g>
-  <g font-family="Georgia,serif" font-size="20" text-anchor="middle" fill="#111">
-    <text x="155" y="55">1</text><text x="235" y="55">&#8722;2/3</text>
-    <text x="305" y="55">0</text><text x="405" y="55">2/3</text>
-    <text x="90"  y="112">&#8722;1/3</text>
-    <text x="235" y="112">&#8722;1/3</text><text x="305" y="112">1/3</text><text x="405" y="112">&#8722;1/9</text>
-    <text x="155" y="178">1</text><text x="235" y="178">&#8722;1</text>
-    <text x="305" y="178">1/3</text><text x="405" y="178">5/9</text>
-  </g>
-</svg>
-</figure>
-
-<p>Il quoziente si legge come sempre nella riga in basso:</p>
-
-$$x^2 - x + \tfrac{1}{3} \qquad R: \tfrac{5}{3}$$
-
-<div class="attenzione">
-<span class="et">Attenzione</span>
-<p>Dividere per $3$ lascia il quoziente invariato, ma rimpicciolisce il resto dello
-stesso fattore: il $\tfrac{5}{9}$ in fondo allo schema è il resto della divisione ridotta,
-e per avere quello della divisione di partenza va rimoltiplicato per $3$.</p>
-</div>
-
-<div class="avanti">
-<h2>Nelle prossime unità</h2>
 <ul>
-<li>Il resto si può ottenere senza fare i conti, perché è il valore $P(a)$: teorema
-del resto, unità 33.</li>
-<li>Quando il resto è nullo il polinomio si spezza in due fattori, ed è così che Ruffini
-diventa un metodo di scomposizione — unità 33 e 36.</li>
+<li>quoziente → grado del dividendo diminuito di $1$;</li>
+<li>resto → un numero (grado $0$).</li>
 </ul>
+
+<h2>Esempio</h2>
+
+<p>Dati: $\left(3x^3+7x^2-8\right):(x+2)$. Calcolare quoziente e resto.</p>
+
+<p>Termine in $x$ mancante → coefficiente $0$; divisore $x+2$ → a sinistra $-2$.</p>
+
+<div class="fig">
+<svg id="fig-r2" class="piano" role="img" aria-label="Schema di Ruffini: 3, 7, 0, −8 diviso per x + 2; quoziente 3, 1, −2; resto −4"></svg>
+<p class="did">Quoziente $3x^2+x-2$, resto $-4$</p>
 </div>
+
+<p class="eq">$$Q=3x^2+x-2 \qquad\qquad R=-4$$</p>
+
+<h2>Divisore $ax+b$</h2>
+
+<p>Dividendo e divisore si dividono per il coefficiente di $x$:</p>
+
+<p class="eq">$$\left(3x^3-2x^2+2\right):(3x+1)\;\to\;\left(x^3-\tfrac23x^2+\tfrac23\right):\left(x+\tfrac13\right)$$</p>
+
+<div class="fig">
+<svg id="fig-r3" class="piano" role="img" aria-label="Schema di Ruffini con coefficienti frazionari: quoziente 1, −1, 1/3; resto della divisione ridotta 5/9"></svg>
+<p class="did">Resto della divisione ridotta: $\tfrac59$</p>
+</div>
+
+<p class="eq">$$Q=x^2-x+\tfrac13 \qquad\qquad R=3\cdot\tfrac59=\tfrac53$$</p>
+
+<div class="nota"><span class="et">Errore tipico</span>
+<p>Il quoziente non cambia, il resto sì: quello dello schema va moltiplicato per $3$.</p></div>
 
 <nav class="nav-unita"><a class="precedente" href="../31-divisione-fra-polinomi/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Divisione fra polinomi</span></a><a class="successiva" href="../33-teorema-del-resto-e-teorema-di-ruffini/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Teorema del resto e teorema di Ruffini</span></a></nav>
 <footer><p>Matematica prima &middot; Scomposizione di polinomi &middot; Unità 32</p></footer>
 
 </div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function txt(p,x,y,s,a){var e=el('text',Object.assign({x:x,y:y,'font-size':19,'font-family':'serif','text-anchor':'middle'},a||{}),p);e.textContent=s;return e;}
+  var SUP={0:'⁰',1:'',2:'²',3:'³',4:'⁴'};
+  /* schema di Ruffini: a sinistra a, in alto i coefficienti, in mezzo i prodotti, in basso le somme */
+  window.ruffini=function(id,o){
+    var svg=document.getElementById(id), n=o.top.length, W=o.w||64, x0=78, xa=40;
+    var y1=34,y2=80,y3=130,yl=98, xr=x0+W*(n-1), xe=x0+W*n+6;
+    function cx(j){return x0+W*j+W/2;}
+    svg.setAttribute('viewBox','0 0 '+(xe+14)+' '+(o.frecce?172:168));
+    var g={stroke:'var(--inchiostro)','stroke-width':1.6};
+    el('line',Object.assign({x1:x0,y1:10,x2:x0,y2:yl},g),svg);
+    el('line',Object.assign({x1:xr,y1:10,x2:xr,y2:y3+12},g),svg);
+    el('line',Object.assign({x1:12,y1:yl,x2:xe,y2:yl},g),svg);
+    txt(svg,xa,y2,o.a,{fill:'var(--blu)','font-weight':600});
+    o.top.forEach(function(s,j){txt(svg,cx(j),y1,s);});
+    o.mid.forEach(function(s,j){if(s)txt(svg,cx(j),y2,s);});
+    o.bot.forEach(function(s,j){txt(svg,cx(j),y3,s,{fill:j===n-1?'var(--verde)':'var(--rosso)','font-weight':600});});
+    var lab={'font-family':'var(--sans)','font-size':12,fill:'var(--grigio)'};
+    for(var j=0;j<n-1;j++){var d=n-2-j;txt(svg,cx(j),y3+30,d===0?'x⁰':'x'+SUP[d],lab);}
+    txt(svg,cx(n-1),y3+30,'resto',Object.assign({},lab,{fill:'var(--verde)'}));
+    if(o.frecce){
+      var defs=el('defs',{},svg), m=el('marker',{id:id+'-fr',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:6,markerHeight:6,orient:'auto'},defs);
+      el('path',{d:'M0 0 L10 5 L0 10 z',fill:'var(--blu)'},m);
+      for(var j=0;j<n-1;j++){var xs=cx(j)+10,ys=y3-18,xt=cx(j+1)-12,yt=y2+6;
+        el('path',{d:'M'+xs+' '+ys+' Q'+(xs+12)+' '+(yt+4)+' '+xt+' '+yt,fill:'none',stroke:'var(--blu)','stroke-width':1.4,'marker-end':'url(#'+id+'-fr)'},svg);}
+    }
+  };
+})();
+</script>
+<script>
+ruffini('fig-r1',{a:'2',frecce:true,top:['3','−5','−6','1'],mid:['','6','2','−8'],bot:['3','1','−4','−7']});
+ruffini('fig-r2',{a:'−2',top:['3','7','0','−8'],mid:['','−6','−2','4'],bot:['3','1','−2','−4']});
+ruffini('fig-r3',{a:'−1/3',w:70,top:['1','−2/3','0','2/3'],mid:['','−1/3','1/3','−1/9'],bot:['1','−1','1/3','5/9']});
+</script>
+
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
