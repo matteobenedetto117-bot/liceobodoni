@@ -5,27 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Angoli opposti al vertice e figure congruenti — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;
-  border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-figure.dis{margin:28px 0;text-align:center}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.strumento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:26px 0;text-align:center}
-.strumento .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:10px;text-align:left}
-.strumento .comandi{font-family:var(--sans);font-size:.9rem;margin-top:10px}
-.strumento input[type=range]{width:min(320px,80%);vertical-align:middle}
-.strumento svg{max-width:100%;height:auto}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -35,98 +79,86 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigi
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Figure, segmenti e angoli &middot; Unità 49</p>
   <h1>Angoli opposti al vertice e figure congruenti</h1>
-  <p class="sommario">Due rette che si incrociano formano quattro angoli, e quelli che si
-  fronteggiano hanno un nome proprio. Poi la parola più importante della geometria: che cosa
-  significa che due figure sono uguali.</p>
 </header>
+
+<p>Due rette incidenti formano quattro angoli; due figure in posizioni diverse: quando si possono sovrapporre?</p>
 
 <h2>Angoli opposti al vertice</h2>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Due angoli si dicono <strong>opposti al vertice</strong> quando i lati dell'uno sono i
-prolungamenti dei lati dell'altro: stesso vertice, nessun lato in comune.</p>
-</div>
+<div class="def"><span class="et">Definizione</span>
+<p><strong>Angoli opposti al vertice</strong>: i lati dell'uno sono i prolungamenti dei lati dell'altro.</p></div>
 
-<figure class="dis">
-<svg viewBox="0 0 470 200" width="470" height="200" role="img"
-     aria-label="Due rette incidenti in un punto; l'angolo alfa a sinistra dell'incrocio e l'angolo beta a destra sono opposti al vertice">
-  <line x1="40" y1="35" x2="380" y2="165" stroke="#333" stroke-width="1.8"/>
-  <line x1="40" y1="165" x2="380" y2="35" stroke="#333" stroke-width="1.8"/>
-  <circle cx="210" cy="100" r="4" fill="#333"/>
-  <path d="M155,121 A59,59 0 0 1 155,79" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <text x="128" y="106" font-family="Georgia, serif" font-size="17" fill="#c0392b">&#945;</text>
-  <path d="M265,79 A59,59 0 0 1 265,121" fill="none" stroke="#2a63c8" stroke-width="2"/>
-  <text x="278" y="106" font-family="Georgia, serif" font-size="17" fill="#2a63c8">&#946;</text>
-  <text x="396" y="98" font-family="Helvetica, Arial, sans-serif" font-size="14">angoli opposti<tspan x="396" dy="18">al vertice</tspan></text>
-</svg>
-<figcaption>$\alpha$ e $\beta$ sono opposti al vertice, e sono congruenti. Anche gli altri
-due lo sono fra loro.</figcaption>
-</figure>
+<div class="fig">
+<svg id="f-opp" viewBox="0 0 360 190" style="width:100%;max-width:380px" role="img" aria-label="Due rette incidenti; gli angoli alfa e beta sono opposti al vertice"></svg>
+<p class="did">$\alpha$ e $\beta$ opposti al vertice: congruenti (così anche gli altri due)</p>
+</div>
 
 <h2>Figure congruenti</h2>
 
-<p>Se due rette sono <strong>uguali</strong>, si corrispondono punto per punto: sono la stessa
-retta, tracciata due volte.</p>
+<ul>
+<li>figure <strong>uguali</strong> → la stessa figura: si corrispondono punto per punto;</li>
+<li>figure <strong>congruenti</strong> → figure distinte, sovrapponibili con un movimento rigido.</li>
+</ul>
 
-<figure class="dis">
-<svg viewBox="0 0 470 110" width="470" height="110" role="img"
-     aria-label="Due rette r e s perfettamente sovrapposte, tracciate una sopra l'altra in rosso e in verde">
-  <line x1="40" y1="70" x2="410" y2="42" stroke="#c0392b" stroke-width="3"/>
-  <line x1="40" y1="66" x2="410" y2="38" stroke="#1a7f37" stroke-width="3"/>
-  <text x="418" y="40" font-family="Georgia, serif" font-size="16" fill="#1a7f37">s</text>
-  <text x="418" y="62" font-family="Georgia, serif" font-size="16" fill="#c0392b">r</text>
-  <text x="90" y="100" font-family="Helvetica, Arial, sans-serif" font-size="14">rette sovrapposte: si corrispondono punto per punto</text>
-</svg>
-<figcaption>Sono disegnate appena staccate solo per poterle distinguere.</figcaption>
-</figure>
-
-<p>Due figure, però, stanno quasi sempre in posti diversi del piano, e interessa sapere se
-hanno la stessa forma e la stessa estensione. Serve allora una parola diversa.</p>
-
-<div class="def">
-<span class="et">Definizione</span>
-<p>Due figure sono <strong>congruenti</strong> quando, attraverso un <em>movimento rigido</em>
-— una rotazione seguita da una traslazione — è possibile portare l'una sull'altra facendole
-coincidere punto per punto.</p>
+<div class="fig">
+<svg id="f-rette" viewBox="0 0 400 80" style="width:100%;max-width:400px" role="img" aria-label="Due rette r ed s sovrapposte"></svg>
+<p class="did">Rette $r$ e $s$ sovrapposte (disegnate appena staccate)</p>
 </div>
 
-<p>Rigido significa che la figura non si deforma: lunghezze e angoli restano quelli di
-partenza, cambia soltanto la posizione.</p>
+<div class="def"><span class="et">Definizione</span>
+<p><strong>Figure congruenti</strong>: con un <em>movimento rigido</em> (rotazione + traslazione) si possono far coincidere punto per punto. Si scrive $\overline{AB} \cong \overline{DE}$.</p></div>
 
-<div class="strumento">
-<span class="et">Muovi il triangolo</span>
-<svg viewBox="0 0 560 240" width="560" height="240" role="img"
-     aria-label="Il triangolo ABC a sinistra e il triangolo DEF a destra; un cursore fa ruotare e traslare DEF fino a sovrapporlo ad ABC">
-  <polygon points="60,160 95,80 210,158" fill="none" stroke="#333" stroke-width="2"/>
-  <circle cx="60" cy="160" r="3.6" fill="#333"/><text x="42" y="172" font-family="Georgia, serif" font-size="15">A</text>
-  <circle cx="95" cy="80" r="3.6" fill="#333"/><text x="88" y="70" font-family="Georgia, serif" font-size="15">B</text>
-  <circle cx="210" cy="158" r="3.6" fill="#333"/><text x="216" y="170" font-family="Georgia, serif" font-size="15">C</text>
-  <polygon id="mob49" points="489.0,138.1 428.7,201.3 347.3,88.6" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <text id="lD49" x="495.0" y="138.1" font-family="Georgia, serif" font-size="15" fill="#c0392b">D</text>
-  <text id="lE49" x="434.7" y="214.3" font-family="Georgia, serif" font-size="15" fill="#c0392b">E</text>
-  <text id="lF49" x="341.3" y="80.6" font-family="Georgia, serif" font-size="15" fill="#c0392b">F</text>
-  <text x="70" y="215" font-family="Helvetica, Arial, sans-serif" font-size="14">triangolo ABC</text>
-  <text x="380" y="235" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c0392b">triangolo DEF</text>
-</svg>
-<p class="comandi"><label for="ra49">movimento</label>
-<input id="ra49" type="range" min="0" max="100" value="0" step="1">
-<span id="va49">0%</span></p>
-<p class="comandi">$DEF$ ruota e trasla senza deformarsi, finché ogni suo vertice cade su un
-vertice di $ABC$.</p>
+<p>Movimento rigido: la figura non si deforma, lunghezze e angoli restano invariati.</p>
+
+<div class="fig">
+<svg id="f-tri" viewBox="30 45 490 210" style="width:100%;max-width:520px" role="img" aria-label="Il triangolo DEF ruota e trasla fino a sovrapporsi al triangolo ABC"></svg>
+<div class="cursore"><label for="cur-tri">movimento</label><input id="cur-tri" type="range" min="0" max="100" step="1" value="0"><span class="val" id="val-tri">0%</span></div>
+<p class="val-riga" id="esito-tri">DEF e ABC in posizioni diverse</p>
+<p class="did">$DEF$ ruota e trasla senza deformarsi fino a coincidere con $ABC$</p>
 </div>
 
-<div class="attenzione">
-<span class="et">Attenzione</span>
-<p>«Uguali» e «congruenti» non dicono la stessa cosa: due figure uguali sono la stessa figura,
-due congruenti sono distinte ma sovrapponibili. Si scrive $\overline{AB} \cong \overline{DE}$.</p>
-</div>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(s,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);s.appendChild(e);return e;}
+  function txt(s,x,y,t,c,an){var e=el(s,'text',{x:x,y:y,'text-anchor':an||'middle','font-size':14,style:'font-style:italic;fill:'+(c||'var(--inchiostro)')});e.textContent=t;return e;}
+  function pt(s,x,y,c){el(s,'circle',{cx:x,cy:y,r:3.8,style:'fill:'+(c||'var(--inchiostro)')});}
+  function seg(s,x1,y1,x2,y2,c,w,extra){var a={x1:x1,y1:y1,x2:x2,y2:y2,'stroke-width':w||1.8,style:'stroke:'+(c||'var(--inchiostro)')};for(var k in extra||{})a[k]=extra[k];return el(s,'line',a);}
+  function P(cx,cy,r,g){var t=g*Math.PI/180;return [cx+r*Math.cos(t),cy-r*Math.sin(t)];}
+  function arco(s,cx,cy,r,g1,g2,c,w){var a=P(cx,cy,r,g1),b=P(cx,cy,r,g2),l=(g2-g1)>180?1:0;return el(s,'path',{d:'M'+a[0].toFixed(2)+','+a[1].toFixed(2)+' A'+r+','+r+' 0 '+l+' 0 '+b[0].toFixed(2)+','+b[1].toFixed(2),'stroke-width':w||2,style:'fill:none;stroke:'+c});}
+  function settore(s,cx,cy,r,g1,g2,c){var d='M'+cx+','+cy;for(var g=g1;g<=g2+1e-9;g+=(g2-g1)/90){var q=P(cx,cy,r,g);d+=' L'+q[0].toFixed(2)+','+q[1].toFixed(2);}return el(s,'path',{d:d+' Z',style:'fill:'+c+';stroke:none'});}
+  /* angoli opposti al vertice */
+  var s=document.getElementById('f-opp'),O=[180,95];
+  [30,-30].forEach(function(g){var a=P(O[0],O[1],170,g),b=P(O[0],O[1],170,g+180);seg(s,a[0],a[1],b[0],b[1]);});
+  pt(s,O[0],O[1]);
+  arco(s,O[0],O[1],50,150,210,'var(--rosso)');arco(s,O[0],O[1],50,-30,30,'var(--blu)');
+  txt(s,O[0]-68,O[1]+5,'α','var(--rosso)');txt(s,O[0]+68,O[1]+5,'β','var(--blu)');
+  /* rette sovrapposte */
+  s=document.getElementById('f-rette');
+  seg(s,20,58,370,30,'var(--rosso)',3);seg(s,20,53,370,25,'var(--verde)',3);
+  txt(s,384,30,'s','var(--verde)');txt(s,384,50,'r','var(--rosso)');
+  /* triangoli */
+  s=document.getElementById('f-tri');
+  var A=[60,160],B=[95,80],C=[210,158],V=[A,B,C],G=[(A[0]+B[0]+C[0])/3,(A[1]+B[1]+C[1])/3];
+  var TH=200*Math.PI/180,T=[300,10];
+  el(s,'polygon',{points:V.map(function(q){return q.join(',');}).join(' '),'stroke-width':2,style:'fill:var(--blu-chiaro);stroke:var(--inchiostro)'});
+  function fuori(q,d,rot){var dx=q[0]-G[0],dy=q[1]-G[1],n=Math.hypot(dx,dy),c=Math.cos(rot),sn=Math.sin(rot);return [(c*dx-sn*dy)/n*d,(sn*dx+c*dy)/n*d];}
+  ['A','B','C'].forEach(function(t,i){pt(s,V[i][0],V[i][1]);var o=fuori(V[i],17,-0.45);txt(s,V[i][0]+o[0],V[i][1]+o[1]+5,t);});
+  var mob=el(s,'polygon',{points:'','stroke-width':2,style:'fill:none;stroke:var(--rosso)'});
+  var et=['D','E','F'].map(function(t){return txt(s,0,0,t,'var(--rosso)');});
+  var cur=document.getElementById('cur-tri'),val=document.getElementById('val-tri'),es=document.getElementById('esito-tri');
+  function pos(q,u){var a=TH*u,c=Math.cos(a),sn=Math.sin(a),dx=q[0]-G[0],dy=q[1]-G[1];return [G[0]+c*dx-sn*dy+T[0]*u,G[1]+sn*dx+c*dy+T[1]*u];}
+  function agg(){
+    var v=+cur.value,u=1-v/100,p=V.map(function(q){return pos(q,u);});
+    mob.setAttribute('points',p.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' '));
+    for(var i=0;i<3;i++){var o=fuori(V[i],17,TH*u+0.45);et[i].setAttribute('x',(p[i][0]+o[0]).toFixed(1));et[i].setAttribute('y',(p[i][1]+o[1]+5).toFixed(1));}
+    val.textContent=v+'%';
+    es.innerHTML=v===100?'<span class="c-ver">DEF coincide con ABC: congruenti</span>':(v===0?'DEF e ABC in posizioni diverse':'DEF in movimento: lati e angoli invariati');
+  }
+  cur.addEventListener('input',agg);agg();
 
-<div class="avanti">
-<h2>Come si prosegue</h2>
-<p>La congruenza è il metro con cui d'ora in poi si confrontano segmenti e angoli. Prima di
-usarla si completa il vocabolario delle figure piane, con linee, poligonali e poligoni.</p>
-</div>
+})();
+</script>
 
 <nav class="nav-unita"><a class="precedente" href="../48-semirette-segmenti-semipiani-e-angoli/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Semirette, segmenti, semipiani e angoli</span></a><a class="successiva" href="../50-linee-poligonali-e-poligoni/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Linee, poligonali e poligoni</span></a></nav>
 <footer><p>Matematica prima &middot; Figure, segmenti e angoli &middot; Unità 49</p></footer>
@@ -134,29 +166,19 @@ usarla si completa il vocabolario delle figure piane, con linee, poligonali e po
 </div>
 <script>
 (function(){
-  var A=[60,160], B=[95,80], C=[210,158];
-  var G=[(A[0]+B[0]+C[0])/3,(A[1]+B[1]+C[1])/3];
-  var TH=200*Math.PI/180, T=[300,10];
-  var mob=document.getElementById('mob49'), ra=document.getElementById('ra49'),
-      va=document.getElementById('va49');
-  var et=[document.getElementById('lD49'),document.getElementById('lE49'),document.getElementById('lF49')];
-  var off=[[6,0],[6,13],[-6,-8]];
-  function pos(P,u){
-    var a=TH*u, c=Math.cos(a), s=Math.sin(a);
-    var dx=P[0]-G[0], dy=P[1]-G[1];
-    return [G[0]+c*dx-s*dy+T[0]*u, G[1]+s*dx+c*dy+T[1]*u];
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  function agg(){
-    var v=+ra.value, u=1-v/100;
-    var p=[pos(A,u),pos(B,u),pos(C,u)];
-    mob.setAttribute('points',p.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' '));
-    for(var i=0;i<3;i++){
-      et[i].setAttribute('x',(p[i][0]+off[i][0]).toFixed(1));
-      et[i].setAttribute('y',(p[i][1]+off[i][1]).toFixed(1));
-    }
-    va.textContent=v+'%';
-  }
-  ra.addEventListener('input',agg); agg();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
