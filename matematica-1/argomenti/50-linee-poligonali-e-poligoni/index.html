@@ -5,22 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Linee, poligonali e poligoni — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;
-  border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-figure.dis{margin:28px 0;text-align:center}
-figure.dis svg{max-width:100%;height:auto}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -30,181 +79,154 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigi
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Figure, segmenti e angoli &middot; Unità 50</p>
   <h1>Linee, poligonali e poligoni</h1>
-  <p class="sommario">Prima dei triangoli serve il vocabolario delle figure piane: che cos'è una
-  linea, quando si chiama poligonale e a quali condizioni racchiude un poligono. Sono le parole
-  con cui verranno enunciati tutti i teoremi che seguono.</p>
 </header>
 
-<h2>Linee</h2>
+<p>Un punto si muove con continuità sul piano e traccia una linea. Due criteri, indipendenti fra loro:</p>
 
-<p>Una linea è il segno lasciato da un punto che si muove con continuità sul piano. Per
-classificarla si guardano due cose soltanto: se il punto torna là dove era partito, e se durante
-il percorso attraversa un tratto già tracciato.</p>
+<ul>
+<li>punto finale coincidente con quello iniziale → linea <strong>chiusa</strong>; altrimenti <strong>aperta</strong>;</li>
+<li>almeno un punto in cui la linea si attraversa → linea <strong>intrecciata</strong>.</li>
+</ul>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Una linea è <strong>chiusa</strong> se il punto finale coincide con quello iniziale,
-<strong>aperta</strong> in caso contrario. È <strong>intrecciata</strong> se ha almeno un punto
-in cui si attraversa da sola. Le due classificazioni sono indipendenti, perciò si combinano.</p>
+<div class="fig">
+<svg id="f-linee" viewBox="0 0 660 140" style="width:100%;max-width:620px" role="img" aria-label="Quattro linee curve: aperta, chiusa, intrecciata aperta e intrecciata chiusa"></svg>
+<div class="did-parti" style="--n:4;max-width:620px;margin:6px auto 0">
+<p class="did">Aperta</p>
+<p class="did">Chiusa</p>
+<p class="did">Intrecciata aperta</p>
+<p class="did">Intrecciata chiusa</p>
+</div>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 660 170" width="660" height="170" role="img"
-     aria-label="Quattro linee curve: aperta, chiusa, intrecciata aperta e intrecciata chiusa">
-  <g fill="none" stroke="#333" stroke-width="2">
-    <path d="M25,105 C35,45 80,35 100,70 C118,102 135,50 160,58"/>
-    <path d="M205,100 C195,50 240,30 270,52 C305,28 330,75 300,105 C275,130 215,135 205,100 Z"/>
-    <path d="M385,130 C350,110 360,55 405,52 C445,49 455,90 425,96 C400,101 395,65 430,55 C465,45 490,80 480,118"/>
-    <path d="M540,60 C505,35 500,90 545,92 C590,94 640,50 625,95 C612,133 555,128 540,60 Z"/>
-  </g>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
-    <text x="92" y="158">aperta</text>
-    <text x="255" y="158">chiusa</text>
-    <text x="428" y="152">intrecciata</text><text x="428" y="166">aperta</text>
-    <text x="578" y="152">intrecciata</text><text x="578" y="166">chiusa</text>
-  </g>
-</svg>
-<figcaption>Le quattro combinazioni possibili.</figcaption>
-</figure>
+<div class="def"><span class="et">Definizione</span>
+<p><strong>Circonferenza</strong> di centro $C$ e raggio $r$: insieme dei punti del piano la cui distanza da $C$ è congruente a $r$.</p></div>
 
-<h2>Circonferenza</h2>
-
-<p>Fra le linee chiuse ce n'è una che ricorre così spesso da avere un nome proprio e una
-definizione che la individua senza ambiguità.</p>
-
-<div class="def">
-<span class="et">Definizione</span>
-<p>Dati un punto $C$ del piano e un segmento $r$, la <strong>circonferenza</strong> di centro $C$
-e raggio $r$ è l'insieme dei punti del piano la cui distanza da $C$ è congruente a $r$.</p>
+<div class="fig">
+<svg id="f-circ" viewBox="40 10 200 160" style="width:100%;max-width:240px" role="img" aria-label="Circonferenza di centro C con il raggio r fino a un punto R"></svg>
+<p class="did">Ogni punto $R$ dista $r$ da $C$</p>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 320 180" width="320" height="180" role="img"
-     aria-label="Circonferenza di centro C con il raggio r tracciato fino a un punto R della linea">
-  <circle cx="140" cy="90" r="68" fill="none" stroke="#333" stroke-width="2"/>
-  <line x1="140" y1="90" x2="188" y2="42" stroke="#2a63c8" stroke-width="2"/>
-  <circle cx="140" cy="90" r="3.6" fill="#333"/>
-  <circle cx="188" cy="42" r="3.6" fill="#2a63c8"/>
-  <text x="128" y="106" font-family="Georgia, serif" font-size="16">C</text>
-  <text x="196" y="38" font-family="Georgia, serif" font-size="16" fill="#2a63c8">R</text>
-  <text x="152" y="60" font-family="Georgia, serif" font-size="16" fill="#2a63c8">r</text>
-</svg>
-<figcaption>Ogni punto $R$ della linea dista da $C$ quanto il raggio $r$.</figcaption>
-</figure>
+<h2>Poligonali e poligoni</h2>
 
-<h2>Poligonali</h2>
+<div class="def"><span class="et">Definizione</span>
+<p><strong>Poligonale</strong> (o spezzata): successione di segmenti, ciascuno consecutivo al successivo. Segmenti → <strong>lati</strong>; estremi → <strong>vertici</strong>.</p></div>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Una <strong>poligonale</strong>, detta anche <strong>spezzata</strong>, è una linea formata da
-una successione di segmenti consecutivi: ciascun segmento ha un estremo in comune con il
-successivo. I segmenti si chiamano <strong>lati</strong>, i loro estremi <strong>vertici</strong>.</p>
+<div class="fig">
+<svg id="f-pol" viewBox="0 20 660 130" style="width:100%;max-width:620px" role="img" aria-label="Quattro poligonali: aperta, chiusa, intrecciata aperta e intrecciata chiusa"></svg>
+<div class="did-parti" style="--n:4;max-width:620px;margin:6px auto 0">
+<p class="did">Aperta</p>
+<p class="did">Chiusa</p>
+<p class="did">Intrecciata aperta</p>
+<p class="did">Intrecciata chiusa</p>
+</div>
 </div>
 
-<p>Essendo linee, anche le poligonali si dicono aperte o chiuse, intrecciate o no, con lo stesso
-criterio di prima.</p>
+<div class="def"><span class="et">Definizione</span>
+<p><strong>Poligono</strong>: insieme dei punti di una poligonale chiusa e non intrecciata e dei suoi punti interni.</p></div>
 
-<figure class="dis">
-<svg viewBox="0 0 660 200" width="660" height="200" role="img"
-     aria-label="Quattro poligonali: aperta ABCD, chiusa ABCD, intrecciata aperta e intrecciata chiusa">
-  <g fill="none" stroke="#333" stroke-width="2">
-    <polyline points="22,130 60,45 130,80 132,132"/>
-    <polygon points="192,120 225,55 300,58 268,125"/>
-    <polyline points="355,60 470,132 360,132 450,55 470,100"/>
-    <polygon points="528,48 646,132 528,132 646,48"/>
-  </g>
-  <g font-family="Georgia, serif" font-size="14" fill="#333">
-    <text x="10" y="144">A</text><text x="54" y="36">B</text><text x="136" y="74">C</text><text x="136" y="146">D</text>
-    <text x="180" y="132">A</text><text x="219" y="46">B</text><text x="306" y="52">C</text><text x="272" y="140">D</text>
-  </g>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="13" text-anchor="middle" fill="#333">
-    <text x="78" y="182">aperta</text>
-    <text x="246" y="182">chiusa</text>
-    <text x="415" y="176">intrecciata</text><text x="415" y="190">aperta</text>
-    <text x="588" y="176">intrecciata</text><text x="588" y="190">chiusa</text>
-  </g>
-</svg>
-<figcaption>Le stesse quattro possibilità, con i lati al posto delle curve.</figcaption>
-</figure>
-
-<h2>Poligono</h2>
-
-<div class="def">
-<span class="et">Definizione</span>
-<p>Un <strong>poligono</strong> è l'insieme dei punti di una poligonale chiusa e non intrecciata
-e di tutti i suoi punti interni.</p>
+<div class="fig">
+<svg id="f-poligono" viewBox="30 15 470 235" style="width:100%;max-width:480px" role="img" aria-label="Poligono ABCDE con vertice, lato, diagonale, angolo interno e angolo esterno"></svg>
+<p class="did">Poligono $ABCDE$: diagonale $AC$; in $B$ angolo interno (verde) ed esterno (rosso)</p>
 </div>
 
-<p>Servono entrambe le condizioni: la poligonale deve chiudersi, altrimenti non c'è un «dentro»,
-e non deve intrecciarsi, altrimenti non si saprebbe quali punti considerare interni. I vertici e
-i lati della poligonale diventano vertici e lati del poligono.</p>
+<ul>
+<li><strong>diagonale</strong> → segmento che unisce due vertici non consecutivi;</li>
+<li><strong>angolo interno</strong> → formato dai due lati che si incontrano nel vertice;</li>
+<li><strong>angolo esterno</strong> → formato da un lato e dal prolungamento dell'altro.</li>
+</ul>
 
-<figure class="dis">
-<svg viewBox="0 0 560 250" width="560" height="250" role="img"
-     aria-label="Poligono ABCDE con indicati un vertice, un lato, una diagonale, un angolo interno e il corrispondente angolo esterno">
-  <polygon points="300,95 235,195 115,150 140,58 235,35" fill="#f4f7fb" stroke="#333" stroke-width="2"/>
-  <line x1="300" y1="95" x2="115" y2="150" stroke="#333" stroke-width="1.6" stroke-dasharray="6 4"/>
-  <line x1="235" y1="195" x2="355" y2="240" stroke="#c0392b" stroke-width="1.4" stroke-dasharray="5 4"/>
-  <path d="M257.7,159.8 A42,42 0 0 0 196.3,180.5" fill="none" stroke="#1a7f37" stroke-width="2"/>
-  <path d="M257.7,159.8 A42,42 0 0 1 274.3,209.7" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <g fill="#333">
-    <circle cx="300" cy="95" r="3.6"/><circle cx="235" cy="195" r="3.6"/>
-    <circle cx="115" cy="150" r="3.6"/><circle cx="140" cy="58" r="3.6"/><circle cx="235" cy="35" r="3.6"/>
-  </g>
-  <g font-family="Georgia, serif" font-size="15" fill="#333">
-    <text x="308" y="92">A</text><text x="228" y="214">B</text>
-    <text x="98" y="156">C</text><text x="124" y="50">D</text><text x="230" y="26">E</text>
-  </g>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="13">
-    <text x="330" y="60" fill="#333">vertice</text>
-    <line x1="328" y1="56" x2="306" y2="88" stroke="#333" stroke-width="1"/>
-    <text x="330" y="140" fill="#333">lato</text>
-    <line x1="328" y1="136" x2="272" y2="142" stroke="#333" stroke-width="1"/>
-    <text x="330" y="176" fill="#333">diagonale</text>
-    <line x1="328" y1="172" x2="212" y2="124" stroke="#333" stroke-width="1"/>
-    <text x="42" y="212" fill="#1a7f37">angolo interno</text>
-    <line x1="128" y1="208" x2="200" y2="184" stroke="#1a7f37" stroke-width="1"/>
-    <text x="376" y="198" fill="#c0392b">angolo esterno</text>
-    <line x1="374" y1="194" x2="290" y2="202" stroke="#c0392b" stroke-width="1"/>
-  </g>
-</svg>
-<figcaption>Nel poligono $ABCDE$, la diagonale unisce i due vertici non consecutivi $A$ e $C$.</figcaption>
-</figure>
-
-<p>Una <strong>diagonale</strong> è il segmento che unisce due vertici non consecutivi. L'<strong>angolo
-interno</strong> di un vertice è quello formato dai due lati che vi si incontrano; l'<strong>angolo
-esterno</strong> è formato da uno dei due lati e dal prolungamento dell'altro. Poiché sono angoli
-adiacenti, la loro somma è un angolo piatto:</p>
+<p>Angolo interno ed esterno sono adiacenti:</p>
 
 <p class="eq">$$\widehat{\text{interno}} + \widehat{\text{esterno}} = 180^\circ$$</p>
 
-<p>Se in un vertice l'angolo interno misura $110^\circ$, l'angolo esterno che gli sta accanto
-misura dunque $180^\circ - 110^\circ = 70^\circ$.</p>
-
-<h2>Poligoni con un nome</h2>
-
 <ul>
-<li>Un poligono con tutti i lati congruenti si dice <strong>equilatero</strong>.</li>
-<li>Un poligono con tutti gli angoli congruenti si dice <strong>equiangolo</strong>.</li>
-<li>Un poligono equilatero ed equiangolo si dice <strong>regolare</strong>.</li>
+<li>tutti i lati congruenti → poligono <strong>equilatero</strong>;</li>
+<li>tutti gli angoli congruenti → poligono <strong>equiangolo</strong>;</li>
+<li>equilatero ed equiangolo → poligono <strong>regolare</strong>.</li>
 </ul>
 
-<div class="attenzione">
-<span class="et">Attenzione</span>
-<p>Le prime due condizioni sono indipendenti: esistono poligoni con tutti i lati congruenti e
-angoli diversi fra loro. Per dire che un poligono è regolare occorre verificarle entrambe.</p>
-</div>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Equilatero ed equiangolo sono condizioni indipendenti: per «regolare» servono entrambe.</p></div>
 
-<div class="avanti">
-<h2>Come si prosegue</h2>
-<p>Con questo vocabolario si può cominciare a operare sulle figure: sommare e sottrarre segmenti
-e angoli, costruirne multipli e sottomultipli, e individuare il punto medio di un segmento e la
-bisettrice di un angolo.</p>
-</div>
+<h2>Esempio</h2>
+
+<p>Dati: angolo interno di $110^\circ$. Calcolare l'angolo esterno nello stesso vertice.</p>
+
+<p class="eq">$$\widehat{\text{esterno}} = 180^\circ - 110^\circ = 70^\circ$$</p>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(s,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);s.appendChild(e);return e;}
+  function txt(s,x,y,t,c,an,fs,it){var e=el(s,'text',{x:x,y:y,'text-anchor':an||'middle','font-size':fs||14,style:(it===false?'':'font-style:italic;')+'fill:'+(c||'var(--inchiostro)')});e.textContent=t;return e;}
+  function pt(s,x,y,c){el(s,'circle',{cx:x,cy:y,r:3.6,style:'fill:'+(c||'var(--inchiostro)')});}
+  function seg(s,a,b,c,w,dash){var o={x1:a[0],y1:a[1],x2:b[0],y2:b[1],'stroke-width':w||1.8,style:'stroke:'+(c||'var(--inchiostro)')};if(dash)o['stroke-dasharray']=dash;return el(s,'line',o);}
+  function linea(s,d,c,w){return el(s,'path',{d:d,'stroke-width':w||2,style:'fill:none;stroke:'+(c||'var(--inchiostro)')});}
+  function pts(a){return a.map(function(q){return q.join(',');}).join(' ');}
+  /* linee */
+  var s=document.getElementById('f-linee');
+  ['M25,105 C35,45 80,35 100,70 C118,102 135,50 160,58',
+   'M205,100 C195,50 240,30 270,52 C305,28 330,75 300,105 C275,130 215,135 205,100 Z',
+   'M385,130 C350,110 360,55 405,52 C445,49 455,90 425,96 C400,101 395,65 430,55 C465,45 490,80 480,118',
+   'M540,60 C505,35 500,90 545,92 C590,94 640,50 625,95 C612,133 555,128 540,60 Z'].forEach(function(d){linea(s,d,'var(--blu)');});
+  /* circonferenza */
+  s=document.getElementById('f-circ');
+  var C=[140,90],r=68,g=Math.PI/4,R=[C[0]+r*Math.cos(g),C[1]-r*Math.sin(g)];
+  el(s,'circle',{cx:C[0],cy:C[1],r:r,'stroke-width':2,style:'fill:none;stroke:var(--inchiostro)'});
+  seg(s,C,R,'var(--blu)',2);pt(s,C[0],C[1]);pt(s,R[0],R[1],'var(--blu)');
+  txt(s,C[0]-10,C[1]+18,'C');txt(s,R[0]+10,R[1]-8,'R','var(--blu)');txt(s,(C[0]+R[0])/2-10,(C[1]+R[1])/2-6,'r','var(--blu)');
+  /* poligonali */
+  s=document.getElementById('f-pol');
+  var p1=[[22,130],[60,45],[130,80],[132,132]],p2=[[192,120],[225,55],[300,58],[268,125]];
+  el(s,'polyline',{points:pts(p1),'stroke-width':2,style:'fill:none;stroke:var(--blu)'});
+  el(s,'polygon',{points:pts(p2),'stroke-width':2,style:'fill:none;stroke:var(--blu)'});
+  el(s,'polyline',{points:'355,60 470,132 360,132 450,55 470,100','stroke-width':2,style:'fill:none;stroke:var(--blu)'});
+  el(s,'polygon',{points:'528,48 646,132 528,132 646,48','stroke-width':2,style:'fill:none;stroke:var(--blu)'});
+  var o1=[[-10,14],[-4,-9],[12,-4],[10,14]],o2=[[-12,10],[-4,-9],[10,-6],[6,16]];
+  'ABCD'.split('').forEach(function(t,i){pt(s,p1[i][0],p1[i][1]);txt(s,p1[i][0]+o1[i][0],p1[i][1]+o1[i][1],t);pt(s,p2[i][0],p2[i][1]);txt(s,p2[i][0]+o2[i][0],p2[i][1]+o2[i][1],t);});
+  /* poligono */
+  s=document.getElementById('f-poligono');
+  var A=[300,95],B=[235,195],Cc=[115,150],D=[140,58],E=[235,35],V=[A,B,Cc,D,E];
+  el(s,'polygon',{points:pts(V),'stroke-width':2,style:'fill:var(--blu-chiaro);stroke:var(--inchiostro)'});
+  seg(s,A,Cc,'var(--inchiostro)',1.6,'6 4');
+  var u=[B[0]-Cc[0],B[1]-Cc[1]],nu=Math.hypot(u[0],u[1]),X=[B[0]+u[0]/nu*80,B[1]+u[1]/nu*80];
+  seg(s,B,X,'var(--rosso)',1.4,'5 4');
+  function ang(q){return Math.atan2(q[1]-B[1],q[0]-B[0]);}
+  function arco(a1,a2,rr,c){var p=[B[0]+rr*Math.cos(a1),B[1]+rr*Math.sin(a1)],q=[B[0]+rr*Math.cos(a2),B[1]+rr*Math.sin(a2)];var d=a2-a1;while(d<0)d+=2*Math.PI;return linea(s,'M'+p[0].toFixed(1)+','+p[1].toFixed(1)+' A'+rr+','+rr+' 0 '+(d>Math.PI?1:0)+' 1 '+q[0].toFixed(1)+','+q[1].toFixed(1),c,2.4);}
+  /* in coordinate SVG (y in giù) gli angoli crescono in senso orario */
+  arco(ang(Cc),ang(A),36,'var(--verde)');arco(ang(A),ang(X),44,'var(--rosso)');
+  V.forEach(function(q){pt(s,q[0],q[1]);});
+  var lb=[[10,18],[-6,20],[-14,6],[-12,-8],[-4,-10]];
+  'ABCDE'.split('').forEach(function(t,i){txt(s,V[i][0]+lb[i][0],V[i][1]+lb[i][1],t);});
+  function rich(t,x,y,q,c,an){txt(s,x,y,t,c||'var(--grigio)',an||'start',12,false);var dx=an==='end'?4:-4;seg(s,[x+dx,y-4],q,c||'var(--grigio)',1);}
+  rich('vertice',340,62,[306,90]);
+  rich('lato',350,140,[270,143]);
+  rich('diagonale',90,105,[160,128],null,'end');
+  rich('angolo interno',140,232,[214,192],'var(--verde)','end');
+  rich('angolo esterno',330,244,[279,183],'var(--rosso)');
+})();
+</script>
 
 <nav class="nav-unita"><a class="precedente" href="../49-angoli-opposti-al-vertice-e-figure-congruenti/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Angoli opposti al vertice e figure congruenti</span></a><a class="successiva" href="../51-operazioni-con-segmenti-e-angoli/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Operazioni con segmenti e angoli</span></a></nav>
 <footer><p>Matematica prima &middot; Figure, segmenti e angoli &middot; Unità 50</p></footer>
 
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
