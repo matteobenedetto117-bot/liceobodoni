@@ -5,26 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Operazioni con segmenti e angoli — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;
-  border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-figure.dis{margin:28px 0;text-align:center}
-figure.dis svg{max-width:100%;height:auto}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.strumento{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:18px 20px;margin:28px 0}
-.strumento h3{font-family:var(--sans);font-size:.95rem;margin:0 0 10px}
-.strumento .riga{font-family:var(--sans);font-size:.88rem;color:var(--grigio);margin-top:10px}
-.strumento input[type=range]{width:100%}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -34,272 +79,169 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigi
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Figure, segmenti e angoli &middot; Unità 51</p>
   <h1>Operazioni con segmenti e angoli</h1>
-  <p class="sommario">Segmenti e angoli si possono sommare, sottrarre, moltiplicare per un numero
-  intero e dividere in parti uguali, esattamente come si fa con i numeri. Da queste operazioni
-  nascono due figure che torneranno in quasi ogni dimostrazione: il punto medio di un segmento e
-  la bisettrice di un angolo.</p>
 </header>
 
-<h2>Addizione e sottrazione di segmenti</h2>
+<p>Segmenti e angoli si sommano, si sottraggono, si moltiplicano e si dividono in parti congruenti.</p>
 
-<p>Per sommare due segmenti li si dispone adiacenti, cioè uno di seguito all'altro sulla stessa
-retta: la somma è il segmento che va dal primo estremo libero all'ultimo.</p>
+<h2>Addizione e sottrazione</h2>
 
-<figure class="dis">
-<svg viewBox="0 0 420 130" width="420" height="130" role="img"
-     aria-label="Segmento AC con il punto B interno che lo divide in AB e BC">
-  <line x1="80" y1="50" x2="330" y2="50" stroke="#333" stroke-width="2"/>
-  <g fill="#333">
-    <circle cx="80" cy="50" r="4"/><circle cx="205" cy="50" r="4"/><circle cx="330" cy="50" r="4"/>
-  </g>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">
-    <text x="80" y="38">A</text><text x="205" y="38">B</text><text x="330" y="38">C</text>
-    <text x="142" y="82" fill="#c0392b">AB</text>
-    <text x="267" y="82" fill="#1f6feb">BC</text>
-    <text x="205" y="118">AC</text>
-  </g>
-  <g fill="none" stroke-width="2">
-    <path d="M80,66 L80,72 L205,72 L205,66" stroke="#c0392b"/>
-    <path d="M205,66 L205,72 L330,72 L330,66" stroke="#1f6feb"/>
-    <path d="M80,96 L80,102 L330,102 L330,96" stroke="#333"/>
-  </g>
-</svg>
-<figcaption>I segmenti AB e BC sono adiacenti: hanno in comune soltanto l'estremo B.</figcaption>
-</figure>
+<ul>
+<li>segmenti <strong>adiacenti</strong> (sulla stessa retta, un solo estremo in comune) → somma: dal primo estremo libero all'ultimo;</li>
+<li>angoli <strong>consecutivi</strong> (vertice e un lato in comune) → somma: angolo formato dai due lati non comuni.</li>
+</ul>
 
-<p>Dalla stessa figura si leggono anche le due sottrazioni, perché togliere una parte lascia
-l'altra:</p>
-
-$$\overline{AB}+\overline{BC}=\overline{AC}\qquad
-\overline{AC}-\overline{AB}=\overline{BC}\qquad
-\overline{AC}-\overline{BC}=\overline{AB}$$
-
-<div class="attenzione">
-<span class="et">Attenzione</span>
-<p>La sottrazione $\overline{AC}-\overline{AB}$ ha senso soltanto se AB non è più lungo di AC:
-non esiste un segmento «negativo». Vale la stessa limitazione per gli angoli.</p>
+<div class="fig">
+<svg id="f-seg" viewBox="40 15 330 105" style="width:100%;max-width:380px" role="img" aria-label="Segmento AC con il punto B interno che lo divide in AB e BC"></svg>
+<p class="did">$AB$ e $BC$ adiacenti: in comune solo $B$</p>
 </div>
 
-<h2>Addizione e sottrazione di angoli</h2>
+<p class="eq">$$\overline{AB}+\overline{BC}=\overline{AC}\qquad \overline{AC}-\overline{AB}=\overline{BC}\qquad \overline{AC}-\overline{BC}=\overline{AB}$$</p>
 
-<p>Per gli angoli si procede nello stesso modo: si dispongono consecutivi, con il vertice e un
-lato in comune, e la somma è l'angolo formato dai due lati esterni.</p>
+<div class="fig">
+<svg id="f-ang" viewBox="50 15 240 250" style="width:100%;max-width:300px" role="img" aria-label="Due angoli consecutivi alfa e beta e il loro angolo somma gamma"></svg>
+<p class="did">$\alpha$ e $\beta$ consecutivi; $\gamma$ angolo somma</p>
+</div>
 
-<figure class="dis">
-<svg viewBox="0 0 420 240" width="420" height="240" role="img"
-     aria-label="Due angoli consecutivi alfa e beta con lo stesso vertice; il loro angolo somma gamma">
-  <g stroke="#333" stroke-width="2" fill="none">
-    <line x1="70" y1="175" x2="222.34" y2="37.83"/>
-    <line x1="70" y1="175" x2="268.91" y2="125.41"/>
-    <line x1="70" y1="175" x2="260.07" y2="251.79"/>
-  </g>
-  <circle cx="70" cy="175" r="4" fill="#333"/>
-  <path d="M122.02,128.16 A70,70 0 0 1 137.92,158.07" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-  <path d="M137.92,158.07 A70,70 0 0 1 134.9,201.22" fill="none" stroke="#1f6feb" stroke-width="2.5"/>
-  <path d="M153.23,100.06 A112,112 0 0 1 173.84,216.96" fill="none" stroke="#1a7f37" stroke-width="2.5"/>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#333">
-    <text x="130" y="148" fill="#c0392b">&#945;</text>
-    <text x="137" y="188" fill="#1f6feb">&#946;</text>
-    <text x="187" y="162" fill="#1a7f37">&#947;</text>
-  </g>
-</svg>
-<figcaption>Gli angoli &#945; e &#946; sono consecutivi; &#947; è il loro angolo somma.</figcaption>
-</figure>
+<p class="eq">$$\alpha+\beta=\gamma\qquad \gamma-\alpha=\beta\qquad \gamma-\beta=\alpha$$</p>
 
-$$\alpha+\beta=\gamma\qquad \gamma-\alpha=\beta\qquad \gamma-\beta=\alpha$$
+<div class="nota"><span class="et">Attenzione</span>
+<p>Si sottrae solo se il sottraendo non supera il minuendo: non esistono segmenti o angoli negativi.</p></div>
 
 <h2>Multipli e sottomultipli</h2>
 
-<p>Sommare un segmento a se stesso $n$ volte dà il suo multiplo secondo $n$; il cammino inverso,
-dividerlo in $n$ parti congruenti, dà il sottomultiplo. Le due scritture dicono la stessa
-relazione fra i due segmenti, lette dai due lati.</p>
+<p>Un segmento sommato a se stesso $n$ volte dà il multiplo; diviso in $n$ parti congruenti dà il sottomultiplo:</p>
 
-<figure class="dis">
-<svg viewBox="0 0 420 200" width="420" height="200" role="img"
-     aria-label="Un segmento AB e un segmento CD lungo tre volte AB, diviso in tre parti uguali; poi un segmento AB diviso in tre parti e un segmento CD lungo un terzo di AB">
-  <g stroke="#333" stroke-width="2"><line x1="60" y1="40" x2="120" y2="40"/></g>
-  <g fill="#333"><circle cx="60" cy="40" r="3.5"/><circle cx="120" cy="40" r="3.5"/></g>
-  <g stroke="#333" stroke-width="2">
-    <line x1="60" y1="90" x2="240" y2="90"/>
-    <line x1="120" y1="83" x2="120" y2="97"/><line x1="180" y1="83" x2="180" y2="97"/>
-  </g>
-  <g fill="#333"><circle cx="60" cy="90" r="3.5"/><circle cx="240" cy="90" r="3.5"/></g>
-  <g stroke="#333" stroke-width="2">
-    <line x1="60" y1="150" x2="150" y2="150"/>
-    <line x1="90" y1="143" x2="90" y2="157"/><line x1="120" y1="143" x2="120" y2="157"/>
-  </g>
-  <g fill="#333"><circle cx="60" cy="150" r="3.5"/><circle cx="150" cy="150" r="3.5"/></g>
-  <g stroke="#333" stroke-width="2"><line x1="60" y1="185" x2="90" y2="185"/></g>
-  <g fill="#333"><circle cx="60" cy="185" r="3.5"/><circle cx="90" cy="185" r="3.5"/></g>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#333">
-    <text x="46" y="45" text-anchor="end">A</text><text x="128" y="45">B</text>
-    <text x="46" y="95" text-anchor="end">C</text><text x="248" y="95">D</text>
-    <text x="46" y="155" text-anchor="end">A</text><text x="158" y="155">B</text>
-    <text x="46" y="190" text-anchor="end">C</text><text x="98" y="190">D</text>
-    <text x="290" y="70">CD = 3 &middot; AB</text>
-    <text x="290" y="172">CD = &#8531; &middot; AB</text>
-  </g>
-</svg>
-</figure>
+<p class="eq">$$\overline{CD}=3\cdot\overline{AB}\quad\Longleftrightarrow\quad \overline{AB}=\tfrac13\cdot\overline{CD}$$</p>
 
-<p>Lo stesso vale per gli angoli, con i sottomultipli ottenuti dividendo l'ampiezza in parti
-congruenti attorno al vertice comune.</p>
+<div class="fig">
+<div class="pann" style="--n:2">
+<div><svg id="f-mul1" viewBox="20 10 250 90" role="img" aria-label="CD uguale a tre volte AB"></svg><p class="did">$\overline{CD}=3\cdot\overline{AB}$</p></div>
+<div><svg id="f-mul2" viewBox="20 10 250 90" role="img" aria-label="CD uguale a un terzo di AB"></svg><p class="did">$\overline{CD}=\tfrac13\cdot\overline{AB}$</p></div>
+</div>
+</div>
 
-<figure class="dis">
-<svg viewBox="0 0 420 290" width="420" height="290" role="img"
-     aria-label="Un angolo alfa e un angolo beta uguale a tre volte alfa, suddiviso in tre angoli congruenti; poi un angolo alfa ampio e un angolo beta uguale a meta di alfa">
-  <g stroke="#333" stroke-width="2" fill="none">
-    <line x1="30" y1="60" x2="157.61" y2="35.19"/><line x1="30" y1="60" x2="157.61" y2="84.81"/>
-  </g>
-  <circle cx="30" cy="60" r="3.5" fill="#333"/>
-  <path d="M83.99,70.49 A55,55 0 0 0 83.99,49.51" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-  <text x="96" y="65" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c0392b">&#945;</text>
-  <g stroke="#333" stroke-width="2" fill="none">
-    <line x1="250" y1="115" x2="357.35" y2="45.29"/>
-    <line x1="250" y1="115" x2="375.65" y2="90.58"/>
-    <line x1="250" y1="115" x2="375.65" y2="139.42"/>
-    <line x1="250" y1="115" x2="357.35" y2="184.71"/>
-  </g>
-  <circle cx="250" cy="115" r="3.5" fill="#333"/>
-  <g fill="none" stroke="#c0392b" stroke-width="2">
-    <path d="M296.13,144.96 A55,55 0 0 0 303.99,125.49"/>
-    <path d="M303.99,125.49 A55,55 0 0 0 303.99,104.51"/>
-    <path d="M303.99,104.51 A55,55 0 0 0 296.13,85.04"/>
-  </g>
-  <path d="M325.48,164.02 A90,90 0 0 0 325.48,65.98" fill="none" stroke="#1a7f37" stroke-width="2.5"/>
-  <text x="344" y="120" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1a7f37">&#946;</text>
-  <text x="178" y="60" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#333">&#946; = 3&#945;</text>
-  <g stroke="#333" stroke-width="2" fill="none">
-    <line x1="30" y1="190" x2="115.8" y2="118.01"/><line x1="30" y1="190" x2="115.8" y2="261.99"/>
-  </g>
-  <circle cx="30" cy="190" r="3.5" fill="#333"/>
-  <path d="M75.96,228.57 A60,60 0 0 0 75.96,151.43" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-  <text x="92" y="195" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c0392b">&#945;</text>
-  <g stroke="#333" stroke-width="2" fill="none">
-    <line x1="250" y1="190" x2="381.56" y2="142.12"/><line x1="250" y1="190" x2="381.56" y2="237.88"/>
-  </g>
-  <circle cx="250" cy="190" r="3.5" fill="#333"/>
-  <path d="M306.38,210.52 A60,60 0 0 0 306.38,169.48" fill="none" stroke="#1a7f37" stroke-width="2.5"/>
-  <text x="322" y="195" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1a7f37">&#946;</text>
-  <text x="178" y="190" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#333">&#946; = &#189;&#945;</text>
-</svg>
-</figure>
+<p>Per gli angoli, stesso procedimento attorno al vertice.</p>
+
+<div class="fig">
+<div class="pann" style="--n:2">
+<div><svg id="f-ma1" viewBox="0 0 260 170" role="img" aria-label="Angolo beta uguale a tre volte alfa"></svg><p class="did">$\beta=3\alpha$</p></div>
+<div><svg id="f-ma2" viewBox="0 0 260 170" role="img" aria-label="Angolo beta uguale a metà di alfa"></svg><p class="did">$\beta=\tfrac12\alpha$</p></div>
+</div>
+</div>
 
 <h2>Punto medio e bisettrice</h2>
 
-<p>Il sottomultiplo secondo 2 è il caso che si incontra più spesso, e per questo le due figure che
-lo realizzano hanno un nome proprio.</p>
+<div class="def"><span class="et">Definizione</span>
+<p><strong>Punto medio</strong> di un segmento: punto che lo divide in due segmenti congruenti.</p></div>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Il <strong>punto medio</strong> di un segmento è il punto che lo divide in due segmenti
-congruenti.</p>
+<div class="fig">
+<svg id="f-medio" viewBox="30 5 360 75" style="width:100%;max-width:420px" role="img" aria-label="Segmento AB con un punto P mobile"></svg>
+<div class="cursore"><label for="cur-p">P</label><input id="cur-p" type="range" min="1" max="99" step="1" value="30"><span class="val" id="val-p">30%</span></div>
+<p class="val-riga" id="esito-p"></p>
+<p class="did">Una sola posizione di $P$ rende congruenti $AP$ e $PB$</p>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 420 100" width="420" height="100" role="img"
-     aria-label="Segmento AB con il punto medio M e i due tratti AM e MB segnati come congruenti">
-  <line x1="90" y1="45" x2="330" y2="45" stroke="#333" stroke-width="2"/>
-  <g fill="#333"><circle cx="90" cy="45" r="4"/><circle cx="210" cy="45" r="4"/><circle cx="330" cy="45" r="4"/></g>
-  <g stroke="#c0392b" stroke-width="2">
-    <line x1="150" y1="37" x2="150" y2="53"/><line x1="270" y1="37" x2="270" y2="53"/>
-  </g>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#333">
-    <text x="90" y="33">A</text><text x="210" y="72">M</text><text x="330" y="33">B</text>
-    <text x="370" y="50">AM = MB</text>
-  </g>
-</svg>
-</figure>
+<div class="def"><span class="et">Definizione</span>
+<p><strong>Bisettrice</strong> di un angolo: semiretta che lo divide in due angoli congruenti.</p></div>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>La <strong>bisettrice</strong> di un angolo è la semiretta che lo divide in due angoli
-congruenti.</p>
+<div class="fig">
+<svg id="f-bis" viewBox="40 0 260 200" style="width:100%;max-width:300px" role="img" aria-label="Angolo di vertice V con lati a e b e la bisettrice c"></svg>
+<p class="did">$c$ bisettrice dell'angolo $\widehat{aVb}$</p>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 420 220" width="420" height="220" role="img"
-     aria-label="Angolo di vertice V con lati a e b e la semiretta c che lo divide in due angoli congruenti">
-  <g stroke="#333" stroke-width="2" fill="none">
-    <line x1="70" y1="170" x2="213.86" y2="10.22"/>
-    <line x1="70" y1="170" x2="282.91" y2="199.92"/>
-  </g>
-  <line x1="70" y1="170" x2="272.03" y2="96.47" stroke="#1a7f37" stroke-width="2"/>
-  <circle cx="70" cy="170" r="4" fill="#333"/>
-  <g fill="none" stroke="#c0392b" stroke-width="2.5">
-    <path d="M111.49,123.93 A62,62 0 0 1 128.26,148.79"/>
-    <path d="M155.16,181.97 A86,86 0 0 0 150.81,140.59"/>
-  </g>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#333">
-    <text x="222" y="14">a</text><text x="291" y="205">b</text>
-    <text x="280" y="92" fill="#1a7f37">c</text>
-    <text x="58" y="185" text-anchor="end">V</text>
-    <text x="196" y="112" fill="#1a7f37">bisettrice</text>
-  </g>
-</svg>
-</figure>
+<div class="nota"><span class="et">Attenzione</span>
+<p>La bisettrice è una semiretta, non una retta.</p></div>
 
-<div class="attenzione">
-<span class="et">Attenzione</span>
-<p>La bisettrice è una <em>semiretta</em>, non una retta: parte dal vertice e attraversa
-l'angolo. Una retta per il vertice conterrebbe anche la semiretta opposta, che sta fuori
-dall'angolo.</p>
-</div>
+<h2>Esempio 1</h2>
 
-<div class="strumento">
-<h3>Il punto medio è uno solo</h3>
-<p class="riga">Muovi P lungo AB: i due tratti cambiano sempre in senso opposto, e una sola
-posizione li rende congruenti.</p>
-<svg viewBox="0 0 420 90" width="420" height="90" role="img" aria-label="Segmento AB con un punto P mobile">
-  <line x1="60" y1="40" x2="360" y2="40" stroke="#333" stroke-width="2"/>
-  <g fill="#333"><circle cx="60" cy="40" r="4"/><circle cx="360" cy="40" r="4"/></g>
-  <line id="sx" x1="60" y1="40" x2="210" y2="40" stroke="#c0392b" stroke-width="5"/>
-  <line id="dx" x1="210" y1="40" x2="360" y2="40" stroke="#1f6feb" stroke-width="5"/>
-  <circle id="pp" cx="210" cy="40" r="6" fill="#1a7f37"/>
-  <g font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#333">
-    <text x="60" y="26" text-anchor="middle">A</text>
-    <text x="360" y="26" text-anchor="middle">B</text>
-    <text id="pl" x="210" y="68" text-anchor="middle" fill="#1a7f37">P</text>
-  </g>
-</svg>
-<input id="cur" type="range" min="1" max="99" value="50" step="1">
-<p class="riga" id="ris"></p>
-</div>
+<p>Dati: $B$ fra $A$ e $C$, $\overline{AB}=5$ cm, $\overline{BC}=7$ cm. Calcolare $\overline{AC}$ e la posizione del punto medio $M$ di $AC$.</p>
 
-<h2>Un esempio</h2>
+<p class="eq">$$\overline{AC}=5\ \text{cm}+7\ \text{cm}=12\ \text{cm}\qquad \overline{AM}=\overline{MC}=12\ \text{cm}:2=6\ \text{cm}$$</p>
 
-<p>Su una retta il punto B sta fra A e C, con $\overline{AB}=5$ cm e $\overline{BC}=7$ cm. Allora
-$\overline{AC}=5+7=12$ cm, e il punto medio M di AC dà $\overline{AM}=\overline{MC}=6$ cm: M non
-coincide con B, perché i due tratti di partenza non erano congruenti. Se invece un angolo
-$\gamma=72°$ viene tagliato dalla sua bisettrice, i due angoli che ne risultano misurano
-$72°:2=36°$ ciascuno.</p>
+<h2>Esempio 2</h2>
 
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Dividere un angolo piatto o un angolo giro in due parti porta subito alle relazioni fra coppie
-di angoli: è l'unità 52, sugli angoli complementari, supplementari ed esplementari. Il punto medio
-e la bisettrice ricompaiono poi come strumenti di lavoro nelle dimostrazioni sui triangoli, dalle
-mediane dell'unità 54 al triangolo isoscele dell'unità 57.</p>
-</div>
+<p>Dati: $\gamma=72^\circ$. Calcolare i due angoli formati dalla bisettrice.</p>
 
+<p class="eq">$$72^\circ:2=36^\circ$$</p>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(s,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);s.appendChild(e);return e;}
+  function txt(s,x,y,t,c,an,fs){var e=el(s,'text',{x:x,y:y,'text-anchor':an||'middle','font-size':fs||14,style:'font-style:italic;fill:'+(c||'var(--inchiostro)')});e.textContent=t;return e;}
+  function pt(s,x,y,c){return el(s,'circle',{cx:x,cy:y,r:3.6,style:'fill:'+(c||'var(--inchiostro)')});}
+  function seg(s,x1,y1,x2,y2,c,w){return el(s,'line',{x1:x1,y1:y1,x2:x2,y2:y2,'stroke-width':w||1.8,style:'stroke:'+(c||'var(--inchiostro)')});}
+  function P(O,r,g){var t=g*Math.PI/180;return [O[0]+r*Math.cos(t),O[1]-r*Math.sin(t)];}
+  function arco(s,O,r,g1,g2,c,w){var a=P(O,r,g1),b=P(O,r,g2);return el(s,'path',{d:'M'+a[0].toFixed(2)+','+a[1].toFixed(2)+' A'+r+','+r+' 0 '+((g2-g1)>180?1:0)+' 0 '+b[0].toFixed(2)+','+b[1].toFixed(2),'stroke-width':w||2.2,style:'fill:none;stroke:'+c});}
+  function lato(s,O,L,g,c){var q=P(O,L,g);seg(s,O[0],O[1],q[0],q[1],c);return q;}
+  function graffa(s,x1,x2,y,c){el(s,'path',{d:'M'+x1+','+(y-6)+' L'+x1+','+y+' L'+x2+','+y+' L'+x2+','+(y-6),'stroke-width':2,style:'fill:none;stroke:'+c});}
+  /* addizione di segmenti */
+  var s=document.getElementById('f-seg');
+  seg(s,80,45,330,45,'var(--inchiostro)',2);
+  [[80,'A'],[205,'B'],[330,'C']].forEach(function(q){pt(s,q[0],45);txt(s,q[0],33,q[1]);});
+  graffa(s,80,203,68,'var(--rosso)');graffa(s,207,330,68,'var(--blu)');graffa(s,80,330,98,'var(--inchiostro)');
+  txt(s,142,86,'AB','var(--rosso)','middle',13);txt(s,268,86,'BC','var(--blu)','middle',13);txt(s,205,116,'AC','var(--inchiostro)','middle',13);
+  /* addizione di angoli: alfa 28, beta 36 */
+  s=document.getElementById('f-ang');var O=[70,175],g0=-22,ga=28,gb=36;
+  lato(s,O,205,g0);lato(s,O,205,g0+gb);lato(s,O,205,g0+gb+ga);pt(s,O[0],O[1]);
+  arco(s,O,62,g0+gb,g0+gb+ga,'var(--rosso)');arco(s,O,62,g0,g0+gb,'var(--blu)');arco(s,O,108,g0,g0+ga+gb,'var(--verde)');
+  var q=P(O,78,g0+gb+ga/2);txt(s,q[0],q[1]+5,'α','var(--rosso)');q=P(O,78,g0+gb/2);txt(s,q[0],q[1]+5,'β','var(--blu)');q=P(O,124,g0+(ga+gb)/2);txt(s,q[0],q[1]+5,'γ','var(--verde)');
+  /* multipli di segmenti */
+  function multi(id,lA,lC,n,tacche){var s=document.getElementById(id);
+    seg(s,60,35,60+lA,35,'var(--blu)',2.4);pt(s,60,35);pt(s,60+lA,35);txt(s,48,40,'A');txt(s,72+lA,40,'B');
+    seg(s,60,80,60+lC,80,'var(--rosso)',2.4);pt(s,60,80);pt(s,60+lC,80);txt(s,48,85,'C');txt(s,72+lC,85,'D');
+    var L=tacche==='A'?lA:lC,y=tacche==='A'?35:80;for(var i=1;i<n;i++){var x=60+L*i/n;seg(s,x,y-7,x,y+7,'var(--inchiostro)',1.6);}}
+  multi('f-mul1',60,180,3,'C');multi('f-mul2',180,60,3,'A');
+  /* multipli di angoli */
+  s=document.getElementById('f-ma1');O=[40,95];var a=22;
+  for(var i=0;i<=3;i++)lato(s,O,190,-1.5*a+i*a);pt(s,O[0],O[1]);
+  for(i=0;i<3;i++)arco(s,O,58,-1.5*a+i*a,-1.5*a+(i+1)*a,'var(--rosso)',2);
+  arco(s,O,96,-1.5*a,1.5*a,'var(--verde)');q=P(O,110,0);txt(s,q[0],q[1]+5,'β','var(--verde)');q=P(O,72,0);txt(s,q[0],q[1]+5,'α','var(--rosso)',null,12);
+  s=document.getElementById('f-ma2');O=[40,95];a=80;
+  lato(s,O,190,-a/2);lato(s,O,190,a/2);lato(s,O,190,0,'var(--grigio)');pt(s,O[0],O[1]);
+  arco(s,O,96,-a/2,a/2,'var(--rosso)');arco(s,O,58,0,a/2,'var(--verde)');
+  q=P(O,110,-a/4);txt(s,q[0],q[1]+5,'α','var(--rosso)');q=P(O,72,a/4);txt(s,q[0],q[1]+5,'β','var(--verde)');
+  /* punto medio con cursore */
+  s=document.getElementById('f-medio');var xa=60,xb=360,y=40;
+  seg(s,xa,y,xb,y,'var(--inchiostro)',2);
+  var sx=seg(s,xa,y,xa,y,'var(--rosso)',5),dx=seg(s,xa,y,xb,y,'var(--blu)',5);
+  pt(s,xa,y);pt(s,xb,y);txt(s,xa,y-14,'A');txt(s,xb,y-14,'B');
+  var pp=pt(s,0,y,'var(--verde)');pp.setAttribute('r',6);var pl=txt(s,0,y+28,'P','var(--verde)');
+  var cur=document.getElementById('cur-p'),val=document.getElementById('val-p'),es=document.getElementById('esito-p');
+  function agg(){var v=+cur.value,x=xa+(xb-xa)*v/100;
+    sx.setAttribute('x2',x);dx.setAttribute('x1',x);pp.setAttribute('cx',x);pl.setAttribute('x',x);
+    pl.textContent=v===50?'M':'P';val.textContent=v+'%';
+    es.innerHTML='AP = '+v+'% di AB<span class="sep">·</span>PB = '+(100-v)+'% di AB'+(v===50?'<span class="sep">·</span><span class="c-ver">P è il punto medio M</span>':'');}
+  cur.addEventListener('input',agg);agg();
+  /* bisettrice: angolo di 56 gradi */
+  s=document.getElementById('f-bis');O=[70,170];
+  var qa=lato(s,O,210,-8+56),qb=lato(s,O,210,-8);var qc=P(O,210,20);seg(s,O[0],O[1],qc[0],qc[1],'var(--verde)',2.2);pt(s,O[0],O[1]);
+  arco(s,O,62,20,48,'var(--rosso)');arco(s,O,74,-8,20,'var(--rosso)');
+  var m1=P(O,62,34),m2=P(O,74,6);
+  [[m1,34],[m2,6]].forEach(function(z){var t=z[1]*Math.PI/180,dxn=Math.cos(t),dyn=-Math.sin(t);seg(s,z[0][0]-5*dxn,z[0][1]-5*dyn,z[0][0]+5*dxn,z[0][1]+5*dyn,'var(--rosso)',1.6);});
+  txt(s,qa[0]+8,qa[1]+14,'a');txt(s,qb[0]+4,qb[1]-8,'b');txt(s,qc[0]+4,qc[1]-8,'c','var(--verde)');txt(s,O[0]-12,O[1]+6,'V');
+})();
+</script>
 
 <nav class="nav-unita"><a class="precedente" href="../50-linee-poligonali-e-poligoni/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Linee, poligonali e poligoni</span></a><a class="successiva" href="../52-angoli-complementari-supplementari-ed-esplementari/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Angoli complementari, supplementari ed esplementari</span></a></nav>
+<footer><p>Matematica prima &middot; Figure, segmenti e angoli &middot; Unità 51</p></footer>
+
 </div>
 <script>
 (function(){
-  var cur=document.getElementById('cur'), sx=document.getElementById('sx'),
-      dx=document.getElementById('dx'), pp=document.getElementById('pp'),
-      pl=document.getElementById('pl'), ris=document.getElementById('ris');
-  var xa=60, xb=360, L=xb-xa;
-  function agg(){
-    var t=+cur.value/100, x=xa+L*t;
-    sx.setAttribute('x2',x); dx.setAttribute('x1',x);
-    pp.setAttribute('cx',x); pl.setAttribute('x',x);
-    var a=Math.round(t*100), b=100-a;
-    ris.textContent='AP = '+a+'% di AB · PB = '+b+'% di AB'
-      + (a===b ? ' → P è il punto medio' : '');
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
   }
-  cur.addEventListener('input',agg); agg();
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
 })();
 </script>
 </body>
