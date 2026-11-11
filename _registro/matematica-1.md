@@ -488,6 +488,7 @@ questo sul sito pubblico.
 - Parole: 405 su 2 pagine di traccia
 - Rettifica: a pagina 89 la traccia scrive che per determinare le condizioni di esistenza «troviamo i valori che annullano la frazione e li scartiamo»; i valori da scartare sono quelli che annullano il *denominatore*. Corretto nella pagina senza segnalarlo al lettore (la formulazione giusta compare del resto già nella riga precedente della traccia stessa).
 - Aggiunta: nessuna. Enunciati, esempi e riquadro d'avvertenza corrispondono al contenuto della traccia; il riquadro «Attenzione» esplicita in parole la cancellatura in rosso con cui la traccia scarta x=3 dagli zeri.
+- Revisione (11/11/2026, regole 13/10): parole circa 260 → 99 (stesso criterio). Pagina mai revisionata: impaginazione a quaderno; tolti sommario, prosa e sezione «Nelle prossime unità»; titoletto «Definizione» tolto, restano «Condizioni di esistenza», «Zeri», «Esempio»; definizioni in .def di una riga; i due esempi di C.E. ($\frac{3x+1}{x-4}$, $\frac{5a}{a^2-1}$) raccolti in una .eq allineata; esempio degli zeri in una .eq allineata (C.E., zeri del numeratore con x=3 escluso, risultato); «Attenzione» ridotto a .nota «Errore tipico» di una riga. Nessuna comparsa, nessuna figura. Nessuna correzione concettuale (verificati con SymPy scomposizioni, C.E. e zeri).
 
 ## Unità 39 — Semplificazione di frazioni algebriche
 - Parole: 247 su 1 pagina di traccia (p. 91)
