@@ -628,6 +628,7 @@ questo sul sito pubblico.
   Nessuna tabella di confronto fra i criteri, nessuno strumento interattivo. L'unico riquadro di
   avvertenza riguarda il significato di «adiacenti al lato», che è il punto su cui il criterio
   viene applicato a sproposito.
+- Revisione (12/11/2026, regole 13/10): parole circa 399 → 146. Pagina mai revisionata: impaginazione a quaderno; tolti sommario, paragrafo introduttivo di confronto col primo criterio, titoletto «L'enunciato», spiegazione in prosa di «adiacenti» (ora due voci caso → conseguenza), paragrafo conclusivo in prosa dell'esempio e sezione «Dove si riprende» (rimandi alle unità 58 e 59). Ipotesi e tesi su una riga; tabella di dimostrazione sostituita da elenco numerato (motivazione fra parentesi, C.V.D.), come nell'unità 55; «Attenzione» ridotta a una riga in .nota. Esempio unico tenuto. Nessuna comparsa. Nessuna nuova correzione concettuale; nell'esempio esplicitato «C su OA, D su OB» (già implicito nella figura), e resta la rettifica registrata (angoli in O congruenti perché OP è bisettrice). Figure: due disegni ridisegnati da script interno con i colori del sito (copia A′B′C′ ruotata, lato con tacca e angoli adiacenti con arco singolo e doppio; C e D calcolati come intersezione dei lati con le semirette da P a 96,7° da PO, aggiunte le etichette A e B sui lati); nessuna interattività aggiunta. Aggiunto il piè di pagina mancante.
 
 ## Unità 57 — Triangolo isoscele: proprietà e teorema diretto
 - Parole: 498 su 2 pagine di traccia (24–25 di geometria-1.pdf)
