@@ -680,6 +680,7 @@ questo sul sito pubblico.
 - Rettifica: nessuna; la catena di uguaglianze della traccia è corretta, verificata con SymPy.
 - Aggiunta: la sola verifica numerica della formula (n = 5 dà 540°, n = 3 restituisce 180°),
   perché nell'unità la traccia non contiene alcun esempio svolto.
+- Revisione (12/11/2026, regole 13/10): parole circa 263 → 92. Pagina mai revisionata: impaginazione a quaderno; tolti sommario, paragrafo introduttivo, titoletti «La decomposizione» e «Il conto», prosa di commento e sezione «Dove si riprende» (rimandi all'unità 65 e alla seconda). Apertura a domanda; decomposizione in elenco caso → conseguenza; S, C e catena di uguaglianze in tre .eq con una frase di raccordo ciascuna; formula finale in .def; esempio (n = 5 → 540°, controllo n = 3 → 180°) in una .eq. Nessuna comparsa, nessuna correzione ((n − 2)·180° verificata). Figura: pentagono ridisegnato da script (vertici regolari calcolati, archi degli angoli interni, angolo giro in verde, etichetta 360° spostata fuori dal segmento OB su cui prima si sovrapponeva); nessuna interattività aggiunta. Aggiunto il piè di pagina mancante.
 
 ## Unità 65 — Teorema di Talete
 - Parole: 457 su 1,5 pagine di traccia (p. 37 di geometria-1.pdf per intero e il quarto superiore di p. 38, dove la dimostrazione si chiude)
