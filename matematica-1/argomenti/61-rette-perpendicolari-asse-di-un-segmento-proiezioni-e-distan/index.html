@@ -5,22 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rette perpendicolari, asse di un segmento, proiezioni e distanza — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;
-  border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-figure.dis{margin:28px 0;text-align:center}
-figure.dis svg{max-width:100%;height:auto}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -30,156 +79,137 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigi
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Rette perpendicolari e parallele &middot; Unità 61</p>
   <h1>Rette perpendicolari, asse di un segmento, proiezioni e distanza</h1>
-  <p class="sommario">Che cosa vuol dire che due rette sono perpendicolari, e le tre costruzioni
-  che ne discendono: l'asse di un segmento, la proiezione ortogonale, la distanza di un punto da
-  una retta.</p>
 </header>
 
-<p>Finora due rette che si incontravano formavano angoli qualsiasi. Ora guardiamo il caso
-particolare in cui quegli angoli sono retti: è la situazione più usata di tutta la geometria,
-perché permette di misurare distanze in modo non ambiguo.</p>
+<p>Due rette incidenti formano quattro angoli: che cosa succede se sono retti?</p>
 
-<h2>Rette perpendicolari</h2>
+<div class="def"><span class="et">Rette perpendicolari</span>
+<p>Due rette incidenti sono <strong>perpendicolari</strong> se formano quattro angoli retti: $r \perp s$.</p></div>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>Due rette incidenti si dicono <strong>perpendicolari</strong> quando formano quattro angoli
-retti. Si scrive $r \perp s$.</p>
+<p>Basta un angolo retto: gli altri sono opposti al vertice o adiacenti a esso.</p>
+
+<div class="fig">
+<svg id="f-perp" viewBox="40 20 360 175" style="width:100%;max-width:400px" role="img" aria-label="Due rette perpendicolari r e s che formano quattro angoli retti"></svg>
+<p class="did">$r \perp s$: quattro angoli retti</p>
 </div>
-
-<p>Basta che uno dei quattro angoli sia retto: gli altri lo sono di conseguenza, perché sono a due
-a due opposti al vertice oppure adiacenti a un angolo retto.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Due rette incidenti perpendicolari che formano quattro angoli retti di 90 gradi">
-  <line x1="70" y1="55" x2="370" y2="155" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="187" y1="204" x2="253" y2="6" stroke="#1b1b1b" stroke-width="2"/>
-  <g stroke="#c0392b" stroke-width="2" fill="none">
-    <polyline points="237.1,110.7 231.4,127.8 214.3,122.1"/>
-    <polyline points="237.1,110.7 242.8,93.6 225.7,87.9"/>
-    <polyline points="202.9,99.3 208.6,82.2 225.7,87.9"/>
-    <polyline points="202.9,99.3 197.2,116.4 214.3,122.1"/>
-  </g>
-  <text x="240" y="146" font-size="13" fill="#c0392b" text-anchor="middle">90°</text>
-  <text x="258" y="92" font-size="13" fill="#c0392b" text-anchor="middle">90°</text>
-  <text x="200" y="74" font-size="13" fill="#c0392b" text-anchor="middle">90°</text>
-  <text x="182" y="128" font-size="13" fill="#c0392b" text-anchor="middle">90°</text>
-  <text x="378" y="166" font-size="15">r</text>
-  <text x="258" y="18" font-size="15">s</text>
-</svg>
-<figcaption>Quattro angoli retti: è questo che rende le due rette perpendicolari.</figcaption>
-</figure>
 
 <h2>Asse di un segmento</h2>
 
-<div class="def">
-<span class="et">Definizione</span>
-<p>L'<strong>asse</strong> di un segmento è la retta perpendicolare al segmento e passante per il
-suo punto medio.</p>
+<div class="def"><span class="et">Asse</span>
+<p>L'<strong>asse</strong> di un segmento è la retta perpendicolare al segmento e passante per il suo punto medio.</p></div>
+
+<p>Due condizioni, che individuano un solo asse:</p>
+<ul>
+<li>perpendicolare al segmento → direzione;</li>
+<li>passante per il punto medio → posizione.</li>
+</ul>
+
+<div class="fig">
+<svg id="f-asse" viewBox="100 25 260 180" style="width:100%;max-width:320px" role="img" aria-label="Segmento AB con il punto medio M e l'asse, retta perpendicolare ad AB per M"></svg>
+<p class="did">$AM \cong MB$; asse per $M$, perpendicolare ad $AB$</p>
 </div>
 
-<p>Le condizioni sono due e servono entrambe: la perpendicolarità fissa la direzione, il passaggio
-per il punto medio fissa la posizione. Per un dato segmento esiste quindi un asse solo.</p>
+<h2>Proiezione e distanza</h2>
 
-<figure class="dis">
-<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Segmento AB con il suo punto medio M e l'asse, retta perpendicolare per M">
-  <line x1="170" y1="45" x2="270" y2="185" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="108" y1="195" x2="332" y2="35" stroke="#1b1b1b" stroke-width="2"
-        stroke-dasharray="7 6"/>
-  <circle cx="170" cy="45" r="4" fill="#1b1b1b"/>
-  <circle cx="270" cy="185" r="4" fill="#1b1b1b"/>
-  <circle cx="220" cy="115" r="4.5" fill="#c0392b"/>
-  <g stroke="#c0392b" stroke-width="2" fill="none">
-    <line x1="189.3" y1="84.1" x2="200.7" y2="75.9"/>
-    <line x1="239.3" y1="154.1" x2="250.7" y2="145.9"/>
-    <polyline points="228.1,126.4 239.5,118.3 231.4,106.9"/>
-  </g>
-  <text x="153" y="40" font-size="15">A</text>
-  <text x="278" y="196" font-size="15">B</text>
-  <text x="199" y="131" font-size="14" fill="#c0392b">M</text>
-  <text x="296" y="48" font-size="14" fill="#1b1b1b">asse</text>
-</svg>
-<figcaption>I due trattini indicano che $AM$ e $MB$ sono congruenti: $M$ è il punto medio.</figcaption>
-</figure>
+<p>Da un punto $P$ esterno alla retta $r$ si traccia la perpendicolare a $r$, che la incontra in $H$.</p>
 
-<h2>Proiezioni ortogonali e distanza</h2>
+<div class="def"><span class="et">Proiezione ortogonale e distanza</span>
+<p>$H$: <strong>proiezione ortogonale</strong> di $P$ su $r$. Lunghezza di $PH$: <strong>distanza</strong> di $P$ da $r$.</p></div>
 
-<p>Dato un punto $P$ fuori da una retta $r$, tracciamo da $P$ la perpendicolare a $r$: essa
-incontra $r$ in un punto $H$.</p>
-
-<div class="def">
-<span class="et">Definizioni</span>
-<p>Il punto $H$ è la <strong>proiezione ortogonale</strong> di $P$ sulla retta $r$. La lunghezza
-del segmento $PH$ è la <strong>distanza</strong> di $P$ da $r$.</p>
+<div class="fig">
+<svg id="f-dist" viewBox="100 25 310 160" style="width:100%;max-width:380px" role="img" aria-label="Punto P esterno alla retta r e segmento PH perpendicolare a r, con H su r"></svg>
+<p class="did">Proiezione: il punto $H$; distanza: la lunghezza di $PH$</p>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Punto P esterno alla retta r, segmento perpendicolare PH con H su r">
-  <line x1="120" y1="170" x2="390" y2="55" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="215" y1="45" x2="245.5" y2="116.6" stroke="#2c6fbb" stroke-width="2.5"/>
-  <circle cx="215" cy="45" r="4" fill="#1b1b1b"/>
-  <circle cx="245.5" cy="116.6" r="4.5" fill="#c0392b"/>
-  <polyline points="240,103.7 227.1,109.2 232.6,122.1" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <text x="206" y="35" font-size="15">P</text>
-  <text x="250" y="135" font-size="14" fill="#c0392b">H</text>
-  <text x="398" y="52" font-size="15">r</text>
-  <text x="70" y="80" font-size="13" fill="#2c6fbb">distanza di P da r</text>
-  <text x="70" y="98" font-size="13" fill="#2c6fbb">(lunghezza di PH)</text>
-</svg>
-<figcaption>Un punto, $H$; una lunghezza, $PH$: due oggetti diversi che nascono dalla stessa
-costruzione.</figcaption>
-</figure>
+<div class="nota"><span class="et">Da non confondere</span>
+<p>La proiezione di un punto è un punto, la distanza è una lunghezza.</p></div>
 
-<div class="attenzione">
-<span class="et">Da non confondere</span>
-<p>La proiezione è un <em>punto</em> (o un segmento, nel caso qui sotto), la distanza è una
-<em>lunghezza</em>. Alla domanda «qual è la distanza di $P$ da $r$?» non si risponde con $H$.</p>
+<p>Per un segmento si proiettano i due estremi.</p>
+
+<div class="def"><span class="et">Proiezione di un segmento</span>
+<p>La proiezione di $AB$ su $r$ è il segmento $HK$, con $H$ e $K$ proiezioni di $A$ e $B$.</p></div>
+
+<div class="fig">
+<svg id="f-seg" viewBox="40 35 340 130" style="width:100%;max-width:380px" role="img" aria-label="Segmento AB sopra la retta r e la sua proiezione HK sulla retta"></svg>
+<p class="did">In rosso la proiezione $HK$ di $AB$ su $r$</p>
 </div>
 
-<p>La stessa costruzione si applica a un segmento: si proietta ciascuno dei suoi estremi.</p>
-
-<div class="def">
-<span class="et">Definizione</span>
-<p>La <strong>proiezione</strong> del segmento $AB$ sulla retta $r$ è il segmento $HK$ che ha per
-estremi le proiezioni $H$ di $A$ e $K$ di $B$.</p>
-</div>
-
-<figure class="dis">
-<svg viewBox="0 0 440 190" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Segmento AB sopra la retta r e la sua proiezione HK sulla retta">
-  <line x1="55" y1="130" x2="390" y2="130" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="120" y1="130" x2="245" y2="130" stroke="#c0392b" stroke-width="4"/>
-  <line x1="120" y1="95" x2="245" y2="55" stroke="#2c6fbb" stroke-width="2.5"/>
-  <line x1="120" y1="95" x2="120" y2="130" stroke="#1b1b1b" stroke-width="1.5"
-        stroke-dasharray="5 4"/>
-  <line x1="245" y1="55" x2="245" y2="130" stroke="#1b1b1b" stroke-width="1.5"
-        stroke-dasharray="5 4"/>
-  <circle cx="120" cy="95" r="4" fill="#2c6fbb"/>
-  <circle cx="245" cy="55" r="4" fill="#2c6fbb"/>
-  <circle cx="120" cy="130" r="4.5" fill="#c0392b"/>
-  <circle cx="245" cy="130" r="4.5" fill="#c0392b"/>
-  <text x="104" y="92" font-size="15" fill="#2c6fbb">A</text>
-  <text x="252" y="48" font-size="15" fill="#2c6fbb">B</text>
-  <text x="114" y="151" font-size="14" fill="#c0392b">H</text>
-  <text x="240" y="151" font-size="14" fill="#c0392b">K</text>
-  <text x="352" y="120" font-size="15">r</text>
-</svg>
-<figcaption>In rosso la proiezione $HK$ di $AB$ su $r$.</figcaption>
-</figure>
-
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>La perpendicolarità è il primo dei due modi in cui due rette possono stare in una posizione
-notevole; il secondo è il parallelismo, che studiamo nell'unità 62 con gli angoli formati da una
-trasversale. Le proiezioni e la distanza tornano poi nel confronto fra le altezze e i lati di un
-triangolo.</p>
-</div>
-
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(s,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);s.appendChild(e);return e;}
+  function txt(s,x,y,t,c,an,fs){var e=el(s,'text',{x:x,y:y,'text-anchor':an||'middle','font-size':fs||14,style:'font-style:italic;fill:'+(c||'var(--grigio)')});e.textContent=t;return e;}
+  function seg(s,a,b,c,w,da){var l=el(s,'line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],'stroke-width':w||2,'stroke-linecap':'round',style:'stroke:'+(c||'var(--inchiostro)')});if(da)l.setAttribute('stroke-dasharray',da);return l;}
+  function tri(s,T){el(s,'polygon',{points:T.map(function(p){return p.join(',');}).join(' '),'stroke-width':2,style:'fill:none;stroke:var(--inchiostro)'});}
+  function punto(s,P,c,r){el(s,'circle',{cx:P[0],cy:P[1],r:r||3.5,style:'fill:'+(c||'var(--inchiostro)')});}
+  function dir(V,P){return Math.atan2(-(P[1]-V[1]),P[0]-V[0])*180/Math.PI;}
+  function Pp(V,r,g){var t=g*Math.PI/180;return [V[0]+r*Math.cos(t),V[1]-r*Math.sin(t)];}
+  function arco(s,V,P,Q,r,c){var a=dir(V,P),b=dir(V,Q),d=((b-a)%360+360)%360;if(d>180){var t=a;a=b;b=t;d=360-d;}
+    var p=Pp(V,r,a),q=Pp(V,r,b);el(s,'path',{d:'M'+p[0].toFixed(2)+','+p[1].toFixed(2)+' A'+r+','+r+' 0 0 0 '+q[0].toFixed(2)+','+q[1].toFixed(2),'stroke-width':2,style:'fill:none;stroke:'+c});return a+d/2;}
+  function angolo(s,V,P,Q,r,c,t){var g=arco(s,V,P,Q,r,c),L=Pp(V,r+12,g);txt(s,L[0],L[1]+5,t,c,'middle',14);}
+  function tacche(s,a,b,n,c){var m=[(a[0]+b[0])/2,(a[1]+b[1])/2],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    for(var i=0;i<n;i++){var o=(i-(n-1)/2)*5,q=[m[0]+o*ux,m[1]+o*uy];seg(s,[q[0]-6*uy,q[1]+6*ux],[q[0]+6*uy,q[1]-6*ux],c,2);}}
+  function unit(a,b){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);return [dx/L,dy/L];}
+  function retto(s,V,u,v,k,c){var p=[V[0]+k*u[0],V[1]+k*u[1]],q=[V[0]+k*(u[0]+v[0]),V[1]+k*(u[1]+v[1])],w=[V[0]+k*v[0],V[1]+k*v[1]];
+    el(s,'polyline',{points:[p,q,w].map(function(z){return z[0].toFixed(2)+','+z[1].toFixed(2);}).join(' '),'stroke-width':1.8,style:'fill:none;stroke:'+(c||'var(--rosso)')});}
+  function nome(s,P,G,t,d,c){var dx=P[0]-G[0],dy=P[1]-G[1],n=Math.hypot(dx,dy);txt(s,P[0]+(d||14)*dx/n,P[1]+(d||14)*dy/n+5,t,c);}
+  function nomi(s,T,N){var G=[(T[0][0]+T[1][0]+T[2][0])/3,(T[0][1]+T[1][1]+T[2][1])/3];T.forEach(function(p,i){nome(s,p,G,N[i]);});}
+  /* rette perpendicolari */
+  var s=document.getElementById('f-perp');
+  var O=[220,108],a=18*Math.PI/180,u=[Math.cos(a),Math.sin(a)],v=[-Math.sin(a),Math.cos(a)];
+  function lungo(d,k){return [O[0]+k*d[0],O[1]+k*d[1]];}
+  seg(s,lungo(u,-165),lungo(u,165));seg(s,lungo(v,-82),lungo(v,82));
+  [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(function(e){var p=[e[0]*u[0],e[0]*u[1]],q=[e[1]*v[0],e[1]*v[1]];retto(s,O,p,q,11);
+    var L=[O[0]+40*(p[0]+q[0])/Math.SQRT2,O[1]+40*(p[1]+q[1])/Math.SQRT2+4];txt(s,L[0],L[1],'90°','var(--rosso)','middle',12);});
+  var Er=lungo(u,165),Es=lungo(v,-82);txt(s,Er[0]+4,Er[1]+20,'r');txt(s,Es[0]+14,Es[1]+8,'s');
+  /* asse */
+  s=document.getElementById('f-asse');
+  var A=[175,45],B=[265,185],M=[(A[0]+B[0])/2,(A[1]+B[1])/2],w=unit(A,B),n=[w[1],-w[0]];
+  seg(s,[M[0]-110*n[0],M[1]-110*n[1]],[M[0]+110*n[0],M[1]+110*n[1]],'var(--blu)',2,'7 6');
+  seg(s,A,B);punto(s,A);punto(s,B);punto(s,M,'var(--rosso)',4);
+  tacche(s,A,M,1,'var(--rosso)');tacche(s,M,B,1,'var(--rosso)');
+  retto(s,M,w,n,12);
+  txt(s,A[0]-12,A[1]+2,'A');txt(s,B[0]+12,B[1]+8,'B');txt(s,M[0]+6,M[1]-14,'M','var(--rosso)');
+  var Ea=[M[0]+110*n[0],M[1]+110*n[1]];txt(s,Ea[0]+6,Ea[1]+5,'asse','var(--blu)','start',13);
+  /* proiezione e distanza */
+  s=document.getElementById('f-dist');
+  var R1=[115,170],R2=[395,55],d=unit(R1,R2),P=[220,45];
+  var t=(P[0]-R1[0])*d[0]+(P[1]-R1[1])*d[1],H=[R1[0]+t*d[0],R1[1]+t*d[1]];
+  seg(s,R1,R2);seg(s,P,H,'var(--blu)',2.5);retto(s,H,[-d[0],-d[1]],unit(H,P),12);
+  punto(s,P);punto(s,H,'var(--rosso)',4);
+  txt(s,P[0]-10,P[1]-6,'P');txt(s,H[0]+12,H[1]+18,'H','var(--rosso)');txt(s,R2[0]-6,R2[1]-10,'r');
+  /* proiezione di un segmento */
+  s=document.getElementById('f-seg');
+  var y=130,A2=[120,95],B2=[245,55],H2=[120,y],K2=[245,y];
+  seg(s,[55,y],[365,y]);seg(s,H2,K2,'var(--rosso)',4);
+  seg(s,A2,H2,'var(--inchiostro)',1.5,'5 4');seg(s,B2,K2,'var(--inchiostro)',1.5,'5 4');
+  retto(s,H2,[1,0],[0,-1],10,'var(--grigio)');retto(s,K2,[-1,0],[0,-1],10,'var(--grigio)');
+  seg(s,A2,B2,'var(--blu)',2.5);punto(s,A2,'var(--blu)',4);punto(s,B2,'var(--blu)',4);punto(s,H2,'var(--rosso)',4);punto(s,K2,'var(--rosso)',4);
+  txt(s,A2[0]-14,A2[1]+2,'A','var(--blu)');txt(s,B2[0]+14,B2[1]-2,'B','var(--blu)');
+  txt(s,H2[0],y+22,'H','var(--rosso)');txt(s,K2[0],y+22,'K','var(--rosso)');txt(s,360,y-10,'r');
+})();
+</script>
 
 <nav class="nav-unita"><a class="precedente" href="../60-disuguaglianze-nei-triangoli/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Disuguaglianze nei triangoli</span></a><a class="successiva" href="../62-rette-parallele-tagliate-da-una-trasversale/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Rette parallele tagliate da una trasversale</span></a></nav>
+<footer><p>Matematica prima &middot; Rette perpendicolari e parallele &middot; Unità 61</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
