@@ -574,6 +574,7 @@ questo sul sito pubblico.
 - Parole: 254 su 1 pagina di traccia
 - Rettifica: nessuna; la traccia è corretta.
 - Aggiunta: un esempio numerico (α = 35°) e uno strumento interattivo con le tre relazioni, perché la traccia non contiene nessun esempio e la regola consente di aggiungerne uno solo in questo caso.
+- Revisione (12/11/2026, regole 13/10): parole circa 254 → 65. Pagina mai revisionata: impaginazione a quaderno; tolti sommario, frasi di raccordo sotto le definizioni, titoletti «Complementari», «Supplementari», «Esplementari» e sezione «Dove si riprende» (rimandi alle unità 62 e 63); le tre definizioni in un elenco caso → conseguenza (somma retta/piatta/giro), formule per differenza in una .eq, «Attenzione» in .nota di una riga con le condizioni di esistenza (complementare solo per α < 90°, supplementare solo per α < 180°, prese dallo strumento). Esempio tenuto (α = 35° → 55°, 145°, 325°) in una .eq. Nessuna comparsa. Nessuna correzione concettuale (differenze verificate a calcolo). Figure: i tre disegni ridisegnati da script interno come tre pannelli della stessa figura con i colori del sito; lo strumento «Le tre relazioni a confronto» è diventato il cursore α (15°–345°) che muove i tre pannelli, con «β non esiste» quando la relazione non ha senso; etichette collocate nel settore libero più ampio. Aggiunto il piè di pagina mancante.
 
 ## Unità 53 — Triangoli: definizioni e classificazioni
 - Parole: 466 su 1,5 pagine di traccia (pagina 17 intera e la prima fascia della 18)
