@@ -640,6 +640,7 @@ questo sul sito pubblico.
 - Parole: 305 su 1,2 pagine di traccia (metà inferiore di p. 25 e terzo superiore di p. 26 di geometria-1.pdf)
 - Rettifica: nessuna. La traccia enuncia il teorema inverso con ipotesi e tesi e non lo dimostra: la pagina lascia l'enunciato senza dimostrazione, come a lezione.
 - Aggiunta: nessun contenuto nuovo. Un solo riquadro di avvertenza, sulla differenza fra un teorema e il suo inverso: serve perché la traccia mette l'inverso subito dopo il diretto senza dire che sono due risultati distinti, ed è l'errore tipico su cui si inciampa qui.
+- Revisione (12/11/2026, regole 13/10): parole circa 263 → 125. Pagina mai revisionata: impaginazione a quaderno; tolti sommario, paragrafo introduttivo, paragrafo di raccordo e sezione «Dove si riprende» (rimandi alle unità 59, 60, 61). Tenuti i titoletti «Teorema inverso» (accorciato da «Il teorema inverso») e «Bisettrice, mediana e altezza» (accorciato), perché la pagina tratta due risultati distinti. Ipotesi e tesi su una riga; tabella di dimostrazione e paragrafo sull'angolo retto sostituiti da tre voci caso → conseguenza; «Attenzione» ridotta a una riga in .nota. Nessuna comparsa. Nessuna correzione concettuale; precisato «relative alla base» nell'enunciato finale. Figure: le due figure ridisegnate da script (P calcolato col teorema della bisettrice, segno dell'angolo retto in P); nessuna interattività aggiunta. Aggiunto il piè di pagina mancante.
 
 ## Unità 59 — Terzo criterio di congruenza
 - Parole: 359 su 2 pagine di traccia (27–28 di geometria-1.pdf)
