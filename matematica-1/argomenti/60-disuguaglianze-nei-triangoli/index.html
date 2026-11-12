@@ -5,24 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disuguaglianze nei triangoli — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;
-  border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-figure.dis{margin:28px 0;text-align:center}
-figure.dis svg{max-width:100%;height:auto}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-.it{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--grigio);margin:18px 0 4px}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -32,159 +79,149 @@ figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigi
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
   <p class="occhiello">Triangoli &middot; Unità 60</p>
   <h1>Disuguaglianze nei triangoli</h1>
-  <p class="sommario">L'ordine interno a un triangolo solo: quale angolo è più grande, quale lato,
-  e quali terne di lunghezze un triangolo le può avere.</p>
 </header>
 
-<p>Con i criteri di congruenza sappiamo dire quando due triangoli sono uguali. Qui la domanda
-cambia: dentro un unico triangolo, come sono ordinati fra loro gli angoli e come i lati. Le
-risposte sono disuguaglianze.</p>
+<p>In un solo triangolo: come sono ordinati fra loro angoli e lati?</p>
 
-<h2>Angoli esterni e angoli interni</h2>
+<h2>Angolo esterno</h2>
 
-<p>Un angolo esterno è quello che si forma prolungando un lato oltre un vertice: è adiacente
-all'angolo interno di quel vertice, e i due altri angoli interni si dicono <em>non
-adiacenti</em>.</p>
-
-<div class="def">
-<span class="et">Teorema</span>
-<p>In un triangolo, un angolo esterno è maggiore di ognuno degli angoli interni che non gli sono
-adiacenti.</p>
+<div class="fig">
+<svg id="f-est" viewBox="15 25 375 160" style="width:100%;max-width:420px" role="img" aria-label="Triangolo ABC con il lato AB prolungato oltre B e l'angolo esterno delta in B"></svg>
+<p class="did">$\delta$ adiacente a $\beta$; $\alpha$ e $\gamma$ non adiacenti</p>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Triangolo ABC con il lato AB prolungato oltre B e l'angolo esterno delta in B">
-  <polygon points="45,75 285,90 150,165" fill="none" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="285" y1="90" x2="405" y2="97" stroke="#1b1b1b" stroke-width="2" stroke-dasharray="1 0"/>
-  <path d="M 81,77 A 38 38 0 0 1 73,98" fill="none" stroke="#1a9850" stroke-width="2"/>
-  <path d="M 256,88 A 32 32 0 0 1 267,110" fill="none" stroke="#1b1b1b" stroke-width="2"/>
-  <path d="M 173,152 A 28 28 0 0 0 177,130" fill="none" stroke="#2c6fbb" stroke-width="2"/>
-  <path d="M 325,92 A 42 42 0 0 0 301,118" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <text x="31" y="68" font-size="15">A</text>
-  <text x="283" y="80" font-size="15">B</text>
-  <text x="145" y="185" font-size="15">C</text>
-  <text x="88" y="96" font-size="15" fill="#1a9850">&#945;</text>
-  <text x="247" y="112" font-size="15">&#946;</text>
-  <text x="180" y="146" font-size="15" fill="#2c6fbb">&#947;</text>
-  <text x="312" y="118" font-size="15" fill="#c0392b">&#948;</text>
-</svg>
-<figcaption>$\delta$ è adiacente a $\beta$; gli angoli non adiacenti sono $\alpha$ e
-$\gamma$.</figcaption>
-</figure>
+<div class="def"><span class="et">Teorema dell'angolo esterno</span>
+<p>Un angolo esterno è maggiore di ciascuno dei due angoli interni non adiacenti.</p>
+<p class="eq">$$\delta > \alpha \qquad\qquad \delta > \gamma$$</p></div>
 
-<p class="it">Tesi</p>
-<p>$\delta &gt; \gamma$ &nbsp;&middot;&nbsp; $\delta &gt; \alpha$</p>
-
-<p>Di conseguenza possiamo ricavare le seguenti proprietà:</p>
-
+<p>Conseguenze:</p>
 <ul>
-<li>in un triangolo la somma di due angoli interni è sempre minore di un angolo piatto;</li>
-<li>almeno due angoli di un triangolo devono essere acuti;</li>
-<li>in un triangolo isoscele gli angoli alla base sono sempre acuti.</li>
+<li>somma di due angoli interni → minore di un angolo piatto;</li>
+<li>almeno due angoli acuti;</li>
+<li>triangolo isoscele → angoli alla base acuti.</li>
 </ul>
 
-<div class="attenzione">
-<span class="et">Attenzione</span>
-<p>Il teorema confronta l'angolo esterno con i due interni <em>non</em> adiacenti. Con l'angolo
-interno del suo stesso vertice non c'è nulla da confrontare: quelli sono adiacenti, e la loro somma
-è un angolo piatto.</p>
+<div class="nota"><span class="et">Attenzione</span>
+<p>Si confronta con gli interni non adiacenti: con quello adiacente l'angolo esterno forma un angolo piatto.</p></div>
+
+<h2>Lati e angoli opposti</h2>
+
+<div class="def"><span class="et">Teorema</span>
+<p>A lato maggiore si oppone angolo maggiore, e viceversa.</p></div>
+
+<div class="fig">
+<svg id="f-opp" viewBox="25 30 340 145" style="width:100%;max-width:400px" role="img" aria-label="Triangolo con angoli alfa, beta, gamma e i lati opposti a, b, c"></svg>
+<p class="did">Ogni lato ha la lettera dell'angolo opposto</p>
 </div>
 
-<h2>Lato maggiore e angolo maggiore</h2>
-
-<p>In un triangolo, a lato maggiore è opposto angolo maggiore e viceversa. L'ordine dei lati e
-quello degli angoli sono lo stesso ordine, letto su elementi opposti.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Triangolo con angoli alfa beta gamma e i lati opposti a b c">
-  <polygon points="60,155 115,60 350,155" fill="none" stroke="#1b1b1b" stroke-width="2"/>
-  <path d="M 92,150 A 34 34 0 0 1 101,124" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <path d="M 111,93 A 32 32 0 0 0 139,86" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <path d="M 320,152 A 32 32 0 0 0 327,137" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <text x="97" y="144" font-size="15" fill="#c0392b">&#945;</text>
-  <text x="115" y="82" font-size="15" fill="#c0392b">&#946;</text>
-  <text x="309" y="148" font-size="15" fill="#c0392b">&#947;</text>
-  <text x="70" y="104" font-size="15" fill="#c0392b">c</text>
-  <text x="240" y="98" font-size="15" fill="#c0392b">a</text>
-  <text x="200" y="177" font-size="15" fill="#c0392b">b</text>
-</svg>
-<figcaption>Ogni lato porta la lettera minuscola dell'angolo che gli sta opposto.</figcaption>
-</figure>
-
-<p>$b &gt; c \iff \beta &gt; \gamma$</p>
-<p>$a &gt; c \iff \alpha &gt; \gamma$</p>
-<p>$b &gt; a \iff \beta &gt; \alpha$</p>
-
-<p>La doppia freccia vale nei due sensi: da una disuguaglianza fra lati si passa a quella fra gli
-angoli opposti, e viceversa.</p>
+<p class="eq">$$b > c \iff \beta > \gamma \qquad a > c \iff \alpha > \gamma \qquad b > a \iff \beta > \alpha$$</p>
 
 <h2>Disuguaglianze triangolari</h2>
 
-<p>In ogni triangolo, ogni lato è</p>
-
+<p>Ogni lato è:</p>
 <ul>
 <li>minore della somma degli altri due;</li>
 <li>maggiore della loro differenza.</li>
 </ul>
 
-<figure class="dis">
-<svg viewBox="0 0 440 190" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Triangolo ABC con il vertice B in alto">
-  <polygon points="60,150 300,150 180,55" fill="none" stroke="#1b1b1b" stroke-width="2"/>
-  <text x="45" y="169" font-size="15">A</text>
-  <text x="175" y="45" font-size="15">B</text>
-  <text x="302" y="169" font-size="15">C</text>
-</svg>
-<figcaption>Le due relazioni scritte per il lato $AB$ valgono allo stesso modo per gli altri
-due.</figcaption>
-</figure>
+<div class="fig">
+<svg id="f-tri" viewBox="35 30 290 145" style="width:100%;max-width:340px" role="img" aria-label="Triangolo ABC con il vertice B in alto"></svg>
+<p class="did">Lo stesso vale per $AC$ e $BC$</p>
+</div>
 
-<p>$AB &lt; AC + BC$</p>
-<p>$AB &gt; AC - BC$</p>
+<p class="eq">$$AB < AC + BC \qquad\qquad AB > AC - BC$$</p>
 
-<p>La prima disuguaglianza triangolare ci dice che la via più breve per passare da un punto $A$ a un
-punto $B$ è una linea retta: ogni percorso che passi per un terzo punto è più lungo.</p>
+<p>Dalla prima: il segmento $AB$ è più corto di ogni spezzata da $A$ a $B$.</p>
 
-<figure class="dis">
-<svg viewBox="0 0 440 130" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Il segmento AB confrontato con un percorso spezzato da A a B che passa per un terzo punto">
-  <line x1="90" y1="45" x2="340" y2="45" stroke="#1b1b1b" stroke-width="2"/>
-  <polyline points="90,45 215,105 340,45" fill="none" stroke="#c0392b" stroke-width="2"/>
-  <circle cx="90" cy="45" r="3.5" fill="#1b1b1b"/>
-  <circle cx="340" cy="45" r="3.5" fill="#1b1b1b"/>
-  <text x="74" y="38" font-size="15">A</text>
-  <text x="346" y="38" font-size="15">B</text>
-</svg>
-<figcaption>In nero il segmento, in rosso una via che passa altrove: è sempre più
-lunga.</figcaption>
-</figure>
+<div class="fig">
+<svg id="f-via" viewBox="65 20 300 100" style="width:100%;max-width:360px" role="img" aria-label="Il segmento AB confrontato con una spezzata da A a B che passa per un terzo punto"></svg>
+<p class="did">Segmento (nero) e spezzata (rossa)</p>
+</div>
 
-<p>La seconda ci dice le condizioni che devono avere i lati per poter costruire un triangolo: tre
-lunghezze date non vanno sempre bene.</p>
+<p>Insieme, le due disuguaglianze dicono quali tre lunghezze possono essere i lati di un triangolo.</p>
 
 <h2>Esempio</h2>
 
-<p>Due lati misurano $7$ e $4$. Quanto può misurare il terzo lato $x$?</p>
+<p>Dati: due lati di misura $7$ e $4$. Calcolare i valori possibili del terzo lato $x$.</p>
 
-<p>La prima disuguaglianza chiede $x &lt; 7 + 4$, la seconda $x &gt; 7 - 4$, quindi</p>
+<p class="eq">$$7 - 4 < x < 7 + 4 \quad\Rightarrow\quad 3 < x < 11$$</p>
 
-<p>$$3 &lt; x &lt; 11.$$</p>
+<ul>
+<li>$x = 6$ → triangolo;</li>
+<li>$x = 12$ → nessun triangolo: $7 + 4 = 11 < 12$;</li>
+<li>$x = 2$ → nessun triangolo: $4 + 2 = 6 < 7$.</li>
+</ul>
 
-<p>Il valore $x = 6$ va bene. Non vanno bene $x = 12$, perché i due lati corti messi in fila
-misurano $11$ e non arrivano a chiudere la figura, né $x = 2$, perché allora sarebbe il lato $7$ a
-superare la somma degli altri due.</p>
-
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>Il teorema dell'angolo esterno torna nell'unità 63 in una forma più forte: l'angolo esterno è
-esattamente la somma dei due interni non adiacenti, e da lì si ottiene che la somma degli angoli
-interni è un angolo piatto. Prima servono le rette perpendicolari e parallele, dall'unità 61.</p>
-</div>
-
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(s,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);s.appendChild(e);return e;}
+  function txt(s,x,y,t,c,an,fs){var e=el(s,'text',{x:x,y:y,'text-anchor':an||'middle','font-size':fs||14,style:'font-style:italic;fill:'+(c||'var(--grigio)')});e.textContent=t;return e;}
+  function seg(s,a,b,c,w,da){var l=el(s,'line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],'stroke-width':w||2,'stroke-linecap':'round',style:'stroke:'+(c||'var(--inchiostro)')});if(da)l.setAttribute('stroke-dasharray',da);return l;}
+  function tri(s,T){el(s,'polygon',{points:T.map(function(p){return p.join(',');}).join(' '),'stroke-width':2,style:'fill:none;stroke:var(--inchiostro)'});}
+  function punto(s,P,c,r){el(s,'circle',{cx:P[0],cy:P[1],r:r||3.5,style:'fill:'+(c||'var(--inchiostro)')});}
+  function dir(V,P){return Math.atan2(-(P[1]-V[1]),P[0]-V[0])*180/Math.PI;}
+  function Pp(V,r,g){var t=g*Math.PI/180;return [V[0]+r*Math.cos(t),V[1]-r*Math.sin(t)];}
+  function arco(s,V,P,Q,r,c){var a=dir(V,P),b=dir(V,Q),d=((b-a)%360+360)%360;if(d>180){var t=a;a=b;b=t;d=360-d;}
+    var p=Pp(V,r,a),q=Pp(V,r,b);el(s,'path',{d:'M'+p[0].toFixed(2)+','+p[1].toFixed(2)+' A'+r+','+r+' 0 0 0 '+q[0].toFixed(2)+','+q[1].toFixed(2),'stroke-width':2,style:'fill:none;stroke:'+c});return a+d/2;}
+  function angolo(s,V,P,Q,r,c,t){var g=arco(s,V,P,Q,r,c),L=Pp(V,r+12,g);txt(s,L[0],L[1]+5,t,c,'middle',14);}
+  function tacche(s,a,b,n,c){var m=[(a[0]+b[0])/2,(a[1]+b[1])/2],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    for(var i=0;i<n;i++){var o=(i-(n-1)/2)*5,q=[m[0]+o*ux,m[1]+o*uy];seg(s,[q[0]-6*uy,q[1]+6*ux],[q[0]+6*uy,q[1]-6*ux],c,2);}}
+  function unit(a,b){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);return [dx/L,dy/L];}
+  function retto(s,V,u,v,k,c){var p=[V[0]+k*u[0],V[1]+k*u[1]],q=[V[0]+k*(u[0]+v[0]),V[1]+k*(u[1]+v[1])],w=[V[0]+k*v[0],V[1]+k*v[1]];
+    el(s,'polyline',{points:[p,q,w].map(function(z){return z[0].toFixed(2)+','+z[1].toFixed(2);}).join(' '),'stroke-width':1.8,style:'fill:none;stroke:'+(c||'var(--rosso)')});}
+  function nome(s,P,G,t,d,c){var dx=P[0]-G[0],dy=P[1]-G[1],n=Math.hypot(dx,dy);txt(s,P[0]+(d||14)*dx/n,P[1]+(d||14)*dy/n+5,t,c);}
+  function nomi(s,T,N){var G=[(T[0][0]+T[1][0]+T[2][0])/3,(T[0][1]+T[1][1]+T[2][1])/3];T.forEach(function(p,i){nome(s,p,G,N[i]);});}
+  /* angolo esterno */
+  var s=document.getElementById('f-est');
+  var A=[40,150],B=[250,150],C=[120,50],D=[375,150];
+  seg(s,B,D,'var(--inchiostro)',2,'7 5');tri(s,[A,B,C]);
+  angolo(s,A,B,C,30,'var(--verde)','α');
+  angolo(s,C,A,B,26,'var(--blu)','γ');
+  angolo(s,B,A,C,24,'var(--grigio)','β');
+  angolo(s,B,C,D,40,'var(--rosso)','δ');
+  txt(s,A[0]-10,A[1]+16,'A');txt(s,B[0],B[1]+20,'B');txt(s,C[0],C[1]-10,'C');
+  /* lati e angoli opposti */
+  s=document.getElementById('f-opp');
+  var Pa=[50,150],Pb=[105,55],Pg=[340,150],G=[(50+105+340)/3,(150+55+150)/3];
+  tri(s,[Pa,Pb,Pg]);
+  angolo(s,Pa,Pb,Pg,26,'var(--rosso)','α');
+  angolo(s,Pb,Pa,Pg,24,'var(--rosso)','β');
+  angolo(s,Pg,Pa,Pb,44,'var(--rosso)','γ');
+  function lato(P,Q,t){nome(s,[(P[0]+Q[0])/2,(P[1]+Q[1])/2],G,t,14,'var(--blu)');}
+  lato(Pb,Pg,'a');lato(Pa,Pg,'b');lato(Pa,Pb,'c');
+  /* disuguaglianze triangolari */
+  s=document.getElementById('f-tri');
+  var T=[[60,150],[180,55],[300,150]];tri(s,T);nomi(s,T,['A','B','C']);
+  /* la via più breve */
+  s=document.getElementById('f-via');
+  var P=[90,45],Q=[340,45],R=[215,100];
+  el(s,'polyline',{points:[P,R,Q].map(function(z){return z.join(',');}).join(' '),'stroke-width':2,style:'fill:none;stroke:var(--rosso)'});
+  seg(s,P,Q,'var(--inchiostro)',2);punto(s,P);punto(s,Q);
+  txt(s,P[0]-12,P[1]+5,'A','var(--grigio)','end');txt(s,Q[0]+12,Q[1]+5,'B','var(--grigio)','start');
+})();
+</script>
 
 <nav class="nav-unita"><a class="precedente" href="../59-terzo-criterio-di-congruenza/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Terzo criterio di congruenza</span></a><a class="successiva" href="../61-rette-perpendicolari-asse-di-un-segmento-proiezioni-e-distan/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Rette perpendicolari, asse di un segmento, proiezioni e distanza</span></a></nav>
+<footer><p>Matematica prima &middot; Triangoli &middot; Unità 60</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
