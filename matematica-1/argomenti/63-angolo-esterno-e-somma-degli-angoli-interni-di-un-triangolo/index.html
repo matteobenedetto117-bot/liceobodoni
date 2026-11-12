@@ -3,26 +3,73 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Angolo esterno e somma degli angoli interni di un triangolo &mdash; Matematica prima</title>
+<title>Angolo esterno e somma degli angoli interni di un triangolo — Matematica prima</title>
 <link rel="stylesheet" href="../../../assets/stile.css">
-<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]},startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){if(window.allineaQuaderno)allineaQuaderno();});}}};</script>
 <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
-.def{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 20px;margin:24px 0;
-  border-left:4px solid var(--blu)}
-.def .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--grigio);display:block;margin-bottom:8px}
-.attenzione{background:#fff;border:1px solid var(--riga);border-left:4px solid #c0392b;
-  border-radius:10px;padding:14px 20px;margin:22px 0}
-.attenzione .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;
-  text-transform:uppercase;color:#c0392b;display:block;margin-bottom:8px}
-figure.dis{margin:28px 0;text-align:center}
-figure.dis svg{max-width:100%;height:auto}
-figure.dis figcaption{font-family:var(--sans);font-size:.85rem;color:var(--grigio);margin-top:8px}
-ol.passi{margin:18px 0 18px 0;padding-left:22px}
-ol.passi li{margin:10px 0}
-.avanti{margin-top:46px;padding-top:20px;border-top:1px solid var(--riga)}
-.avanti h2{font-size:1.2rem;margin-top:0}
+html{font-size:165%}
+/* quaderno: righe ogni --r, testo allineato alle righe */
+:root{--r:1.8rem}
+body{line-height:var(--r);background-image:linear-gradient(to bottom,transparent 1.3rem,var(--riga) 1.3rem,var(--riga) calc(1.3rem + 1px),transparent calc(1.3rem + 1px));background-size:100% var(--r);background-attachment:scroll}
+.foglio p,.foglio h1,.foglio h2,.foglio nav.briciole,.occhiello{margin-top:0;margin-bottom:0}
+h1{font-size:2.4rem;line-height:calc(2*var(--r))}
+h2{font-size:1.45rem;line-height:var(--r)}
+.occhiello,nav.briciole{line-height:var(--r)}
+header.testata{padding:0;margin:0;border-bottom:0}
+.foglio>p+p{margin-top:var(--r)}
+.foglio h2,.foglio h2:first-of-type{margin-top:var(--r)}
+.foglio,header.testata{display:flex;flex-direction:column}
+.nota,.def{display:flow-root}
+header.testata{padding-top:var(--r)}
+h1{position:relative;top:.5rem}
+.foglio>.fig,.foglio>.nota,.foglio>.def{margin:var(--r) 0 0}
+.foglio>.fig+p,.foglio>.nota+p,.foglio>.def+p{margin-top:var(--r)}
+.nota,.def{padding:0 18px}
+.nota p,.def p{padding-bottom:calc(var(--r)*.5);line-height:var(--r)}
+.nota{background:#fdf6f5;border:1px solid var(--riga);border-left:4px solid var(--rosso);border-radius:10px}
+.def{background:#fff;border:1px solid var(--riga);border-left:4px solid var(--blu);border-radius:10px}
+.def .et,.nota .et{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);display:block;line-height:var(--r);padding-top:calc(var(--r)*.5)}
+.def .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.foglio>ul,.foglio>ol{margin:var(--r) 0 0;padding-left:1.4rem}
+.foglio>ul+p,.foglio>ol+p,.foglio>.eq+p{margin-top:var(--r)}
+.foglio li{line-height:var(--r);margin:0}
+.fig{background:#fff;border:1px solid var(--riga);border-radius:10px;padding:16px 18px;margin:24px 0;text-align:center}
+.fig svg{max-width:100%;height:auto}
+.fig .did{font-family:var(--sans);font-size:.9rem;color:var(--grigio);margin:10px 0 0;line-height:1.4}
+.foglio>.eq{margin-top:var(--r);text-align:center}
+.eq mjx-container{margin:0!important}
+.foglio>.eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;font-size:1.1rem}
+.cursore{display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--sans);font-size:.9rem;margin-top:8px;line-height:1.4}
+.cursore input{width:min(320px,60%)}
+.cursore .val{font-variant-numeric:tabular-nums;color:var(--blu);font-weight:600;min-width:3.5em;text-align:left}
+.did-parti{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px;margin-top:6px}
+.did-parti .did{margin:0}
+@media(max-width:640px){.did-parti{grid-template-columns:1fr}}
+.foglio li ul{margin:0;padding-left:1.4rem}
+.fig .did+.did{margin-top:4px}
+.pann{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:16px}
+.pann svg{width:100%}
+@media(max-width:640px){.pann{grid-template-columns:1fr}}
+.c-blu{color:var(--blu)}.c-ros{color:var(--rosso)}
+.cursore label{min-width:1.5em;text-align:right}
+
+.val-riga{font-family:var(--sans);font-size:.9rem;line-height:1.4;margin-top:4px;color:var(--grigio)}
+.c-ver{color:var(--verde);font-weight:600}
+
+.foglio>h2+.fig{margin-top:var(--r)}
+.cursore+.cursore{margin-top:2px}
+.pann .did{margin-top:4px}
+.pann svg{max-width:240px;display:block;margin:0 auto}
+.nota .eq{background:var(--blu-chiaro);border-radius:10px;padding:calc(var(--r)*.5) 22px;text-align:center;font-size:1.1rem;margin:0 0 calc(var(--r)*.5)}
+.eq{overflow-x:auto;overflow-y:hidden}
+.fig svg.piano{width:100%;max-width:420px}
+.foglio>.fig+h2{margin-top:var(--r)}
+
+.val-riga .sep{margin:0 .6em;color:var(--riga)}
+
+svg text{font-family:var(--sans)}
+.foglio>.fig .did{margin-top:6px}
 </style>
 </head>
 <body>
@@ -30,169 +77,114 @@ ol.passi li{margin:10px 0}
 
 <header class="testata">
   <nav class="briciole"><a href="../../index.html">&larr; Matematica prima</a></nav>
-  <p class="occhiello">Rette perpendicolari e parallele &middot; Unit&agrave; 63</p>
+  <p class="occhiello">Rette perpendicolari e parallele &middot; Unità 63</p>
   <h1>Angolo esterno e somma degli angoli interni di un triangolo</h1>
-  <p class="sommario">Il teorema che lega ogni angolo esterno ai due interni lontani da esso, e
-  il risultato che se ne ricava in tre righe: i tre angoli di un triangolo, messi insieme,
-  formano sempre un angolo piatto.</p>
 </header>
 
-<p>Prolungando un lato di un triangolo oltre un vertice si ottiene un angolo che sta fuori dalla
-figura: l'angolo esterno in quel vertice. Il teorema delle rette parallele permette di legarlo
-agli angoli interni, e da quel legame si ricava in poche righe il risultato pi&ugrave; usato di
-tutta la geometria del piano.</p>
+<p>Prolungando $AB$ oltre $B$ si ottiene l'angolo esterno $\delta$: che relazione ha con gli angoli interni?</p>
 
-<h2>Il teorema dell'angolo esterno</h2>
+<h2>Angolo esterno</h2>
 
-<div class="def">
-<span class="et">Teorema</span>
-<p>In un triangolo, ogni angolo esterno &egrave; congruente alla somma degli angoli interni non
-adiacenti.</p>
-<p style="text-align:center;margin-bottom:0">$\delta \cong \alpha + \gamma$</p>
+<div class="def"><span class="et">Teorema dell'angolo esterno</span>
+<p>In un triangolo ogni angolo esterno è congruente alla somma dei due angoli interni non adiacenti.</p>
+<p class="eq">$$\delta \cong \alpha + \gamma$$</p></div>
+
+<div class="fig">
+<svg id="f-est" viewBox="70 70 520 300" style="width:100%;max-width:420px" role="img" aria-label="Triangolo ABC con l'angolo esterno delta in B, ottenuto prolungando il lato AB"></svg>
+<p class="did">$\delta$ fra $BC$ e il prolungamento di $AB$; interni non adiacenti: $\alpha$, $\gamma$</p>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo ABC con l'angolo esterno delta in B, ottenuto prolungando il lato AB">
-  <line x1="120" y1="110" x2="400" y2="150" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="400" y1="150" x2="250" y2="330" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="250" y1="330" x2="120" y2="110" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="400" y1="150" x2="680" y2="190" stroke="#1b1b1b" stroke-width="2" stroke-dasharray="7 6"/>
-  <polyline points="140.3,144.4 141.4,143.8 142.4,143.2 143.3,142.5 144.3,141.8 145.2,141.0 146.2,140.3 147.0,139.5 147.9,138.6 148.8,137.8 149.6,136.9 150.4,136.0 151.1,135.1 151.9,134.2 152.6,133.2 153.2,132.2 153.9,131.2 154.5,130.2 155.1,129.2 155.7,128.1 156.2,127.0 156.7,126.0 157.1,124.9 157.6,123.7 158.0,122.6 158.3,121.5 158.6,120.3 158.9,119.2 159.2,118.0 159.4,116.8 159.6,115.7" fill="none" stroke="#1a7a43" stroke-width="2.5"/>
-  <text x="173.2" y="151.6" font-size="19" font-weight="700" fill="#1a7a43" text-anchor="middle">&#945;</text>
-  <polyline points="275.6,299.3 274.3,298.2 273.0,297.3 271.6,296.4 270.3,295.5 268.8,294.7 267.4,294.0 265.9,293.3 264.4,292.7 262.8,292.1 261.3,291.6 259.7,291.2 258.1,290.8 256.5,290.5 254.8,290.3 253.2,290.1 251.6,290.0 249.9,290.0 248.3,290.0 246.7,290.1 245.0,290.3 243.4,290.5 241.8,290.8 240.2,291.2 238.6,291.6 237.1,292.1 235.5,292.7 234.0,293.3 232.5,294.0 231.1,294.8 229.7,295.6" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-  <text x="255.1" y="272.2" font-size="19" font-weight="700" fill="#c0392b" text-anchor="middle">&#947;</text>
-  <polyline points="370.6,185.3 373.1,187.3 375.8,189.1 378.7,190.8 381.6,192.2 384.6,193.4 387.7,194.3 390.9,195.1 394.1,195.6 397.3,195.9 400.6,196.0 403.9,195.8 407.1,195.5 410.3,194.8 413.4,194.0 416.5,192.9 419.5,191.7 422.4,190.2 425.2,188.5 427.8,186.6 430.4,184.6 432.7,182.3 434.9,179.9 437.0,177.4 438.8,174.7 440.5,171.9 441.9,169.0 443.1,166.0 444.2,162.9 445.0,159.7 445.5,156.5" fill="none" stroke="#2c6fbb" stroke-width="2.5"/>
-  <text x="425.1" y="221.3" font-size="19" font-weight="700" fill="#2c6fbb" text-anchor="middle">&#948;</text>
-  <circle cx="120" cy="110" r="4" fill="#1b1b1b"/>
-  <text x="100" y="104" font-size="19" font-weight="700" text-anchor="middle">A</text>
-  <circle cx="400" cy="150" r="4" fill="#1b1b1b"/>
-  <text x="406" y="134" font-size="19" font-weight="700" text-anchor="middle">B</text>
-  <circle cx="250" cy="330" r="4" fill="#1b1b1b"/>
-  <text x="250" y="362" font-size="19" font-weight="700" text-anchor="middle">C</text>
-</svg>
-<figcaption>L'angolo esterno $\delta$ nasce prolungando $AB$ oltre $B$: sta fra il lato $BC$ e
-il prolungamento. Gli angoli interni non adiacenti sono $\alpha$ e $\gamma$.</figcaption>
-</figure>
+<div class="nota"><span class="et">Da non confondere</span>
+<p>Non adiacenti: gli angoli degli altri due vertici; l'angolo interno in $B$ non compare.</p></div>
 
-<div class="attenzione">
-<span class="et">Da non confondere</span>
-<p>Gli angoli interni non adiacenti sono quelli degli <em>altri due</em> vertici. L'angolo
-interno in $B$ &mdash; l'unico che tocca $\delta$ &mdash; nel teorema non compare.</p>
+<p>Dimostrazione: da $B$ si traccia $r \parallel AC$, che divide $\delta$ in $\delta_1$ (verso $BC$) e $\delta_2$ (verso il prolungamento).</p>
+
+<div class="fig">
+<svg id="f-dim" viewBox="70 20 520 370" style="width:100%;max-width:420px" role="img" aria-label="Stessa figura con la retta r condotta da B parallela ad AC, che divide l'angolo esterno in delta uno e delta due"></svg>
+<p class="did">$r \parallel AC$: $\delta = \delta_1 + \delta_2$</p>
 </div>
 
-<h3>Dimostrazione</h3>
-
-<p>Tracciamo da $B$ la retta $r$ parallela ad $AC$. Passando per il vertice, essa taglia in due
-l'angolo esterno: chiamiamo $\delta_1$ la parte vicina a $BC$ e $\delta_2$ quella vicina al
-prolungamento.</p>
-
-<figure class="dis">
-<svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stessa figura con la retta r condotta da B parallela ad AC, che divide l'angolo esterno in delta uno e delta due">
-  <line x1="120" y1="110" x2="400" y2="150" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="400" y1="150" x2="250" y2="330" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="250" y1="330" x2="120" y2="110" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="400" y1="150" x2="680" y2="190" stroke="#1b1b1b" stroke-width="2" stroke-dasharray="7 6"/>
-  <line x1="328.5" y1="29" x2="536.5" y2="381" stroke="#1a7a43" stroke-width="2"/>
-  <text x="544.5" y="379" font-size="17" fill="#1a7a43">r</text>
-  <polyline points="140.3,144.4 141.4,143.8 142.4,143.2 143.3,142.5 144.3,141.8 145.2,141.0 146.2,140.3 147.0,139.5 147.9,138.6 148.8,137.8 149.6,136.9 150.4,136.0 151.1,135.1 151.9,134.2 152.6,133.2 153.2,132.2 153.9,131.2 154.5,130.2 155.1,129.2 155.7,128.1 156.2,127.0 156.7,126.0 157.1,124.9 157.6,123.7 158.0,122.6 158.3,121.5 158.6,120.3 158.9,119.2 159.2,118.0 159.4,116.8 159.6,115.7" fill="none" stroke="#1a7a43" stroke-width="2.5"/>
-  <text x="173.2" y="151.6" font-size="19" font-weight="700" fill="#1a7a43" text-anchor="middle">&#945;</text>
-  <polyline points="275.6,299.3 274.3,298.2 273.0,297.3 271.6,296.4 270.3,295.5 268.8,294.7 267.4,294.0 265.9,293.3 264.4,292.7 262.8,292.1 261.3,291.6 259.7,291.2 258.1,290.8 256.5,290.5 254.8,290.3 253.2,290.1 251.6,290.0 249.9,290.0 248.3,290.0 246.7,290.1 245.0,290.3 243.4,290.5 241.8,290.8 240.2,291.2 238.6,291.6 237.1,292.1 235.5,292.7 234.0,293.3 232.5,294.0 231.1,294.8 229.7,295.6" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-  <text x="255.1" y="272.2" font-size="19" font-weight="700" fill="#c0392b" text-anchor="middle">&#947;</text>
-  <polyline points="374.4,180.7 375.7,181.8 377.0,182.7 378.4,183.6 379.7,184.5 381.2,185.3 382.6,186.0 384.1,186.7 385.6,187.3 387.2,187.9 388.7,188.4 390.3,188.8 391.9,189.2 393.5,189.5 395.2,189.7 396.8,189.9 398.4,190.0 400.1,190.0 401.7,190.0 403.3,189.9 405.0,189.7 406.6,189.5 408.2,189.2 409.8,188.8 411.4,188.4 412.9,187.9 414.5,187.3 416.0,186.7 417.5,186.0 418.9,185.2 420.3,184.4" fill="none" stroke="#2c6fbb" stroke-width="2.5"/>
-  <text x="395.0" y="217.8" font-size="19" font-weight="700" fill="#2c6fbb" text-anchor="middle">&#948;<tspan font-size='13' dy='5'>1</tspan></text>
-  <polyline points="432.6,205.1 434.2,204.1 435.8,203.1 437.4,202.0 438.9,200.8 440.4,199.6 441.9,198.4 443.3,197.2 444.7,195.8 446.0,194.5 447.3,193.1 448.6,191.7 449.8,190.2 451.0,188.7 452.1,187.2 453.2,185.6 454.2,184.0 455.2,182.3 456.2,180.7 457.1,179.0 457.9,177.3 458.7,175.5 459.4,173.8 460.1,172.0 460.7,170.2 461.3,168.4 461.8,166.5 462.3,164.7 462.7,162.8 463.1,160.9 463.4,159.1" fill="none" stroke="#2c6fbb" stroke-width="2.5"/>
-  <text x="469.8" y="202.7" font-size="19" font-weight="700" fill="#2c6fbb" text-anchor="middle">&#948;<tspan font-size='13' dy='5'>2</tspan></text>
-  <circle cx="120" cy="110" r="4" fill="#1b1b1b"/>
-  <text x="100" y="104" font-size="19" font-weight="700" text-anchor="middle">A</text>
-  <circle cx="400" cy="150" r="4" fill="#1b1b1b"/>
-  <text x="406" y="134" font-size="19" font-weight="700" text-anchor="middle">B</text>
-  <circle cx="250" cy="330" r="4" fill="#1b1b1b"/>
-  <text x="250" y="362" font-size="19" font-weight="700" text-anchor="middle">C</text>
-</svg>
-<figcaption>La retta $r$, parallela ad $AC$, divide l'angolo esterno: $\delta = \delta_1 +
-\delta_2$.</figcaption>
-</figure>
-
-<p>Ora le due rette parallele $r$ e $AC$ sono tagliate da due trasversali: il lato $AB$ con il
-suo prolungamento, e il lato $BC$. Su ciascuna si applica il teorema delle rette parallele.</p>
-
-<ol class="passi">
-<li>$\alpha \cong \delta_2$, perch&eacute; sono angoli corrispondenti rispetto alla trasversale
-$AB$;</li>
-<li>$\gamma \cong \delta_1$, perch&eacute; sono angoli alterni interni rispetto alla trasversale
-$BC$.</li>
+<ol>
+<li>$\alpha \cong \delta_2$: corrispondenti, trasversale $AB$;</li>
+<li>$\gamma \cong \delta_1$: alterni interni, trasversale $BC$;</li>
+<li>sommando: $\delta \cong \delta_1 + \delta_2 \cong \gamma + \alpha$. C.V.D.</li>
 </ol>
 
-<p>Sommando le due congruenze:</p>
+<h2>Somma degli angoli interni</h2>
 
-<p style="text-align:center">$\delta \cong \delta_1 + \delta_2 \cong \gamma + \alpha$</p>
+<div class="def"><span class="et">Teorema</span>
+<p>In un triangolo la somma degli angoli interni è un angolo piatto.</p>
+<p class="eq">$$\alpha + \beta + \gamma = 180°$$</p></div>
 
-<p>che &egrave; la tesi.</p>
-
-<h2>La somma degli angoli interni</h2>
-
-<div class="def">
-<span class="et">Teorema</span>
-<p>In un triangolo la somma degli angoli interni &egrave; congruente a un angolo piatto:</p>
-<p style="text-align:center;margin-bottom:0">$\alpha + \beta + \gamma = 180&deg;$</p>
+<div class="fig">
+<svg id="f-somma" viewBox="70 70 520 300" style="width:100%;max-width:420px" role="img" aria-label="Triangolo ABC con i tre angoli interni alfa, beta, gamma e l'angolo esterno delta in B"></svg>
+<p class="did">$\beta$ e $\delta$ adiacenti in $B$</p>
 </div>
 
-<figure class="dis">
-<svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangolo ABC con i tre angoli interni alfa, beta, gamma e l'angolo esterno delta in B">
-  <line x1="120" y1="110" x2="400" y2="150" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="400" y1="150" x2="250" y2="330" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="250" y1="330" x2="120" y2="110" stroke="#1b1b1b" stroke-width="2"/>
-  <line x1="400" y1="150" x2="680" y2="190" stroke="#1b1b1b" stroke-width="2" stroke-dasharray="7 6"/>
-  <polyline points="140.3,144.4 141.4,143.8 142.4,143.2 143.3,142.5 144.3,141.8 145.2,141.0 146.2,140.3 147.0,139.5 147.9,138.6 148.8,137.8 149.6,136.9 150.4,136.0 151.1,135.1 151.9,134.2 152.6,133.2 153.2,132.2 153.9,131.2 154.5,130.2 155.1,129.2 155.7,128.1 156.2,127.0 156.7,126.0 157.1,124.9 157.6,123.7 158.0,122.6 158.3,121.5 158.6,120.3 158.9,119.2 159.2,118.0 159.4,116.8 159.6,115.7" fill="none" stroke="#1a7a43" stroke-width="2.5"/>
-  <text x="173.2" y="151.6" font-size="19" font-weight="700" fill="#1a7a43" text-anchor="middle">&#945;</text>
-  <polyline points="275.6,299.3 274.3,298.2 273.0,297.3 271.6,296.4 270.3,295.5 268.8,294.7 267.4,294.0 265.9,293.3 264.4,292.7 262.8,292.1 261.3,291.6 259.7,291.2 258.1,290.8 256.5,290.5 254.8,290.3 253.2,290.1 251.6,290.0 249.9,290.0 248.3,290.0 246.7,290.1 245.0,290.3 243.4,290.5 241.8,290.8 240.2,291.2 238.6,291.6 237.1,292.1 235.5,292.7 234.0,293.3 232.5,294.0 231.1,294.8 229.7,295.6" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-  <text x="255.1" y="272.2" font-size="19" font-weight="700" fill="#c0392b" text-anchor="middle">&#947;</text>
-  <polyline points="366.3,145.2 366.2,146.3 366.1,147.5 366.0,148.6 366.0,149.8 366.0,150.9 366.1,152.1 366.2,153.2 366.3,154.4 366.5,155.5 366.7,156.7 366.9,157.8 367.2,158.9 367.5,160.0 367.9,161.1 368.3,162.2 368.7,163.3 369.2,164.3 369.7,165.4 370.2,166.4 370.8,167.4 371.4,168.4 372.0,169.3 372.7,170.3 373.4,171.2 374.1,172.1 374.9,172.9 375.7,173.8 376.5,174.6 377.4,175.4 378.2,176.1" fill="none" stroke="#8e44ad" stroke-width="2.5"/>
-  <text x="349.6" y="175.4" font-size="19" font-weight="700" fill="#8e44ad" text-anchor="middle">&#946;</text>
-  <polyline points="370.6,185.3 373.1,187.3 375.8,189.1 378.7,190.8 381.6,192.2 384.6,193.4 387.7,194.3 390.9,195.1 394.1,195.6 397.3,195.9 400.6,196.0 403.9,195.8 407.1,195.5 410.3,194.8 413.4,194.0 416.5,192.9 419.5,191.7 422.4,190.2 425.2,188.5 427.8,186.6 430.4,184.6 432.7,182.3 434.9,179.9 437.0,177.4 438.8,174.7 440.5,171.9 441.9,169.0 443.1,166.0 444.2,162.9 445.0,159.7 445.5,156.5" fill="none" stroke="#2c6fbb" stroke-width="2.5"/>
-  <text x="425.1" y="221.3" font-size="19" font-weight="700" fill="#2c6fbb" text-anchor="middle">&#948;</text>
-  <circle cx="120" cy="110" r="4" fill="#1b1b1b"/>
-  <text x="100" y="104" font-size="19" font-weight="700" text-anchor="middle">A</text>
-  <circle cx="400" cy="150" r="4" fill="#1b1b1b"/>
-  <text x="406" y="134" font-size="19" font-weight="700" text-anchor="middle">B</text>
-  <circle cx="250" cy="330" r="4" fill="#1b1b1b"/>
-  <text x="250" y="362" font-size="19" font-weight="700" text-anchor="middle">C</text>
-</svg>
-<figcaption>Nel vertice $B$ convivono l'angolo interno $\beta$ e l'angolo esterno $\delta$: il
-teorema nasce dal loro rapporto.</figcaption>
-</figure>
+<ol>
+<li>$\delta + \beta = 180°$: angoli adiacenti;</li>
+<li>$\delta \cong \alpha + \gamma$: teorema dell'angolo esterno;</li>
+<li>sostituendo: $\alpha + \beta + \gamma = 180°$. C.V.D.</li>
+</ol>
 
-<h3>Dimostrazione</h3>
+<h2>Esempio</h2>
 
-<p>In $B$ l'angolo esterno $\delta$ e l'angolo interno $\beta$ sono adiacenti: hanno il lato
-$BC$ in comune e gli altri due lati opposti, quindi insieme formano un angolo piatto.</p>
+<p>Dati: $\alpha = 42°$, $\gamma = 63°$. Calcolare $\delta$ e $\beta$.</p>
+<p class="eq">$$\delta = 42° + 63° = 105° \qquad \beta = 180° - 105° = 75°$$</p>
 
-<p style="text-align:center">$\delta + \beta = 180&deg;$</p>
-
-<p>Per il teorema dell'angolo esterno appena dimostrato, per&ograve;, $\delta \cong \alpha +
-\gamma$. Sostituendo:</p>
-
-<p style="text-align:center">$\alpha + \gamma + \beta = 180&deg;$</p>
-
-<p>La somma degli angoli interni di un triangolo &egrave; dunque sempre $180&deg;$, comunque sia
-fatto il triangolo.</p>
-
-<h3>Un caso concreto</h3>
-
-<p>In un triangolo si misurano $\alpha = 42&deg;$ e $\gamma = 63&deg;$. L'angolo esterno in $B$
-vale allora $\delta = 42&deg; + 63&deg; = 105&deg;$, e l'angolo interno $\beta$, adiacente a
-$\delta$, vale $180&deg; - 105&deg; = 75&deg;$. Come verifica, $42&deg; + 75&deg; + 63&deg; =
-180&deg;$.</p>
-
-<div class="avanti">
-<h2>Dove si riprende</h2>
-<p>La somma degli angoli interni del triangolo &egrave; il mattone dell'unit&agrave; 64, dove un
-poligono convesso viene decomposto in triangoli per ricavare la somma dei suoi angoli. Il
-parallelismo usato qui torna nell'unit&agrave; 65, con il teorema di Talete.</p>
-</div>
-
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(s,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);s.appendChild(e);return e;}
+  function txt(s,x,y,t,c,an,fs){var e=el(s,'text',{x:x,y:y,'text-anchor':an||'middle','font-size':fs||14,style:'font-style:italic;fill:'+(c||'var(--grigio)')});e.textContent=t;return e;}
+  function seg(s,a,b,c,w,da){var l=el(s,'line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],'stroke-width':w||2,'stroke-linecap':'round',style:'stroke:'+(c||'var(--inchiostro)')});if(da)l.setAttribute('stroke-dasharray',da);return l;}
+  function tri(s,T){el(s,'polygon',{points:T.map(function(p){return p.join(',');}).join(' '),'stroke-width':2,style:'fill:none;stroke:var(--inchiostro)'});}
+  function punto(s,P,c,r){el(s,'circle',{cx:P[0],cy:P[1],r:r||3.5,style:'fill:'+(c||'var(--inchiostro)')});}
+  function dir(V,P){return Math.atan2(-(P[1]-V[1]),P[0]-V[0])*180/Math.PI;}
+  function Pp(V,r,g){var t=g*Math.PI/180;return [V[0]+r*Math.cos(t),V[1]-r*Math.sin(t)];}
+  function arco(s,V,P,Q,r,c){var a=dir(V,P),b=dir(V,Q),d=((b-a)%360+360)%360;if(d>180){var t=a;a=b;b=t;d=360-d;}
+    var p=Pp(V,r,a),q=Pp(V,r,b);el(s,'path',{d:'M'+p[0].toFixed(2)+','+p[1].toFixed(2)+' A'+r+','+r+' 0 0 0 '+q[0].toFixed(2)+','+q[1].toFixed(2),'stroke-width':2,style:'fill:none;stroke:'+c});return a+d/2;}
+  function angolo(s,V,P,Q,r,c,t){var g=arco(s,V,P,Q,r,c),L=Pp(V,r+12,g);txt(s,L[0],L[1]+5,t,c,'middle',14);}
+  function tacche(s,a,b,n,c){var m=[(a[0]+b[0])/2,(a[1]+b[1])/2],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    for(var i=0;i<n;i++){var o=(i-(n-1)/2)*5,q=[m[0]+o*ux,m[1]+o*uy];seg(s,[q[0]-6*uy,q[1]+6*ux],[q[0]+6*uy,q[1]-6*ux],c,2);}}
+  function unit(a,b){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);return [dx/L,dy/L];}
+  function retto(s,V,u,v,k,c){var p=[V[0]+k*u[0],V[1]+k*u[1]],q=[V[0]+k*(u[0]+v[0]),V[1]+k*(u[1]+v[1])],w=[V[0]+k*v[0],V[1]+k*v[1]];
+    el(s,'polyline',{points:[p,q,w].map(function(z){return z[0].toFixed(2)+','+z[1].toFixed(2);}).join(' '),'stroke-width':1.8,style:'fill:none;stroke:'+(c||'var(--rosso)')});}
+  function nome(s,P,G,t,d,c){var dx=P[0]-G[0],dy=P[1]-G[1],n=Math.hypot(dx,dy);txt(s,P[0]+(d||14)*dx/n,P[1]+(d||14)*dy/n+5,t,c);}
+  function nomi(s,T,N){var G=[(T[0][0]+T[1][0]+T[2][0])/3,(T[0][1]+T[1][1]+T[2][1])/3];T.forEach(function(p,i){nome(s,p,G,N[i]);});}
+  var A=[120,110],B=[400,150],C=[250,330],u=unit(A,B),E=[B[0]+170*u[0],B[1]+170*u[1]];
+  function base(s){seg(s,B,E,'var(--inchiostro)',2,'7 6');tri(s,[A,B,C]);
+    angolo(s,A,B,C,30,'var(--verde)','α');angolo(s,C,A,B,30,'var(--rosso)','γ');
+    [A,B,C].forEach(function(P){punto(s,P);});var G=[(A[0]+B[0]+C[0])/3,(A[1]+B[1]+C[1])/3];nome(s,A,G,'A');nome(s,C,G,'C');txt(s,B[0]+12,B[1]-12,'B');}
+  var s=document.getElementById('f-est');base(s);angolo(s,B,C,E,36,'var(--blu)','δ');
+  s=document.getElementById('f-dim');
+  var w=unit(A,C),R1=[B[0]-130*w[0],B[1]-130*w[1]],R2=[B[0]+230*w[0],B[1]+230*w[1]];
+  seg(s,R1,R2,'var(--grigio)',2);txt(s,R2[0]+12,R2[1]+2,'r');
+  base(s);angolo(s,B,C,R2,36,'var(--blu)','δ₁');angolo(s,B,R2,E,52,'var(--blu)','δ₂');
+  s=document.getElementById('f-somma');base(s);angolo(s,B,C,E,36,'var(--blu)','δ');angolo(s,B,A,C,30,'var(--inchiostro)','β');
+})();
+</script>
 
 <nav class="nav-unita"><a class="precedente" href="../62-rette-parallele-tagliate-da-una-trasversale/index.html"><span class="dir">&larr; Precedente</span><span class="tit">Rette parallele tagliate da una trasversale</span></a><a class="successiva" href="../64-somma-degli-angoli-di-un-poligono-convesso/index.html"><span class="dir">Successiva &rarr;</span><span class="tit">Somma degli angoli di un poligono convesso</span></a></nav>
+<footer><p>Matematica prima &middot; Rette perpendicolari e parallele &middot; Unità 63</p></footer>
+
 </div>
+<script>
+(function(){
+  var sel='.foglio h1,.foglio h2,.foglio>p,.foglio>ul,.foglio>ol,.foglio nav.briciole,.def,.nota,.fig,nav.nav-unita';
+  function allinea(){
+    var R=parseFloat(getComputedStyle(document.documentElement).fontSize)*1.8;
+    var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.fig')||e.classList.contains('fig');});
+    els.forEach(function(e){e.style.marginTop='';});
+    els.forEach(function(e){
+      var top=e.getBoundingClientRect().top+window.scrollY, d=Math.ceil(top/R-0.02)*R-top;
+      if(d>0.5)e.style.marginTop=((parseFloat(getComputedStyle(e).marginTop)||0)+d)+'px';
+    });
+  }
+  window.allineaQuaderno=allinea;
+  window.addEventListener('load',allinea);window.addEventListener('resize',allinea);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(allinea);
+})();
+</script>
 </body>
 </html>
